@@ -1,12 +1,14 @@
 # encoding: utf-8
 
 import ncatpy
-from ncatpy import logging, BotAPI
+from ncatpy import logging
 from ncatpy.message import GroupMessage, PrivateMessage
 from ncatpy.plugins.TodayWaifu import TodayWaifu
+from ncatpy.plugins.Jrrp import JRRP
 
 _log = logging.get_logger()
 today_waifu = TodayWaifu()
+jrrp = JRRP()
 
 
 class MyClient(ncatpy.Client):
@@ -14,6 +16,7 @@ class MyClient(ncatpy.Client):
         _log.info(f"收到群消息，ID: {message.user_id}，内容：{message.raw_message}")
 
         await today_waifu.handle_message(input=message)
+        await jrrp.handle_jrrp(input=message)
 
         if message.message.text and "zmd" in message.message.text.text:
             # 通过http发送消息

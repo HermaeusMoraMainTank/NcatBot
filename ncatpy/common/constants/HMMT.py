@@ -15,9 +15,6 @@ class HMMT:
     ALICE_KEYWORD2 = "alice "
     LALAFELL_KEYWORD_SUBSTRING = 3
     ALICE_KEYWORD_SUBSTRING = 6
-    JRRP_KEYWORD1 = "jrrp"
-    JRRP_KEYWORD2 = "JRRP"
-    JRRP_KEYWORD3 = "今日人品"
     BOBO_KEYWORD1 = "bobo"
     BOBO_KEYWORD2 = "啵啵"
     SAY_KEY = "说"
