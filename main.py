@@ -3,13 +3,14 @@
 import ncatpy
 from ncatpy import logging
 from ncatpy.message import GroupMessage, PrivateMessage
+from ncatpy.plugins.HttpCat import HttpCat
 from ncatpy.plugins.TodayWaifu import TodayWaifu
 from ncatpy.plugins.Jrrp import JRRP
 
 _log = logging.get_logger()
 today_waifu = TodayWaifu()
 jrrp = JRRP()
-
+http_cat = HttpCat()
 
 class MyClient(ncatpy.Client):
     async def on_group_message(self, message: GroupMessage):
@@ -17,6 +18,7 @@ class MyClient(ncatpy.Client):
 
         await today_waifu.handle_message(input=message)
         await jrrp.handle_jrrp(input=message)
+        await http_cat.http_cat(input=message)
 
         if message.message.text and "zmd" in message.message.text.text:
             # 通过http发送消息
