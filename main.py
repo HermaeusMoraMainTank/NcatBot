@@ -16,11 +16,12 @@ class MyClient(ncatpy.Client):
     async def on_group_message(self, message: GroupMessage):
         _log.info(f"收到群消息，ID: {message.user_id}，内容：{message.raw_message}")
 
+
         await today_waifu.handle_message(input=message)
         await jrrp.handle_jrrp(input=message)
         await http_cat.http_cat(input=message)
 
-        if message.message.text and "zmd" in message.message.text.text:
+        if message.raw_message and "zmd" in message.raw_message:
             # 通过http发送消息
             t = await message.add_text("zmd是色猪").reply()
             _log.info(t)

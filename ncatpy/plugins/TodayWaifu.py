@@ -53,10 +53,10 @@ class TodayWaifu:
         return selected_wife
 
     async def handle_message(self, input: GroupMessage):
-        if not input.message.text:
+        if not input.message:
             return
         """处理消息"""
-        message = input.message.text.text
+        message = input.message[0].get("data", {}).get("text", "")
         user_id = input.sender.user_id
         group_id = input.group_id
 
@@ -77,7 +77,6 @@ class TodayWaifu:
 
             user_to_wife_map = self.user_to_wife_map_by_group.setdefault(group_id, {})
             allocated_wives = self.allocated_wives_by_group.setdefault(group_id, set())
-
 
             # 检查当前用户是否已经有老婆
             if user_id in user_to_wife_map:
@@ -109,29 +108,32 @@ class TodayWaifu:
             await (input.add_at(user_id).add_text(f"你今天的群友老婆是：").add_image(avatar_url)
                    .add_text(f" {new_wife.nickname}({new_wife.user_id})")).reply()
 
-        if input.message.at:
-            if input.raw_message.startswith("换") and input.raw_message.endswith("的老婆") and user_id == HMMT.HMMT_ID:
-                print(2)
-                # 提取目标群友的用户名
-                target_username = input.message.at.qq
-                target_user_id = int(target_username)
+        if input.raw_message.startswith("换") and input.raw_message.endswith("的老婆") and user_id == HMMT.HMMT_ID:
+            target_user_id = 0
 
-                user_to_wife_map = self.user_to_wife_map_by_group.setdefault(group_id, {})
-                if target_user_id not in user_to_wife_map:
-                    await input.add_text(f"{target_username} 没有老婆，无法更换。").reply()
-                    return
+            for isAt in input.message:
+                if isAt.get("type") == "at":
+                    target_user_id = isAt.get("data").get("qq")
 
-                target_wife_id = user_to_wife_map[target_user_id]
+            target = await input.get_group_member_info(group_id=group_id, user_id=target_user_id)
+            target_username = target.get("data").get("nickname")
 
-                allocated_wives = self.allocated_wives_by_group.setdefault(group_id, set())
+            user_to_wife_map = self.user_to_wife_map_by_group.setdefault(group_id, {})
+            if target_user_id not in user_to_wife_map:
+                await input.add_text(f"{target_username} 没有老婆，无法更换。").reply()
+                return
 
-                allocated_wives.remove(target_wife_id)
-                user_to_wife_map.pop(target_user_id)
-                new_wife = await self.get_random_wife(input, group_id)
-                user_to_wife_map[target_user_id] = new_wife.user_id
+            target_wife_id = user_to_wife_map[target_user_id]
 
-                await input.add_text(f"@{input.sender.nickname} 成功更换了 {target_username} 的老婆。").reply()
-                await input.add_at(target_user_id).add_text(f"你的老婆被 {input.sender.nickname} 更换了。").reply()
+            allocated_wives = self.allocated_wives_by_group.setdefault(group_id, set())
+
+            allocated_wives.remove(target_wife_id)
+            user_to_wife_map.pop(target_user_id)
+            new_wife = await self.get_random_wife(input, group_id)
+            user_to_wife_map[target_user_id] = new_wife.user_id
+
+            await input.add_text(f"@{input.sender.nickname} 成功更换了 {target_username} 的老婆。").reply()
+            await input.add_at(target_user_id).add_text(f"你的老婆被 {input.sender.nickname} 更换了。").reply()
 
         if message == "换一个老婆" and user_id == HMMT.HMMT_ID:
             user_to_wife_map = self.user_to_wife_map_by_group.setdefault(group_id, {})
