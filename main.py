@@ -5,7 +5,9 @@ import random
 from ncatpy import logging
 from ncatpy.message import GroupMessage, PrivateMessage
 from ncatpy.plugins.CrazyThursday import CrazyThursday
+from ncatpy.plugins.Daily3Min import Daily3Min
 from ncatpy.plugins.HttpCat import HttpCat
+from ncatpy.plugins.Moyu import Moyu
 from ncatpy.plugins.TodayWaifu import TodayWaifu
 from ncatpy.plugins.Jrrp import JRRP
 
@@ -14,6 +16,8 @@ today_waifu = TodayWaifu()
 jrrp = JRRP()
 http_cat = HttpCat()
 crazy_thursday = CrazyThursday()
+daily_3_min = Daily3Min()
+moyu = Moyu()
 
 
 class MyClient(ncatpy.Client):
@@ -24,7 +28,8 @@ class MyClient(ncatpy.Client):
         await jrrp.handle_jrrp(input=message)
         await http_cat.http_cat(input=message)
         await crazy_thursday.handle_crazy_thursday(input=message)
-
+        await daily_3_min.handle_daily3min(input=message)
+        await moyu.handle_moyu(input=message)
 
         if message.user_id == 2214784017:
             if random.random() < 0.25:
