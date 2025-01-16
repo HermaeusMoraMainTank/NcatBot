@@ -1,8 +1,10 @@
 # encoding: utf-8
 
 import ncatpy
+import random
 from ncatpy import logging
 from ncatpy.message import GroupMessage, PrivateMessage
+from ncatpy.plugins.CrazyThursday import CrazyThursday
 from ncatpy.plugins.HttpCat import HttpCat
 from ncatpy.plugins.TodayWaifu import TodayWaifu
 from ncatpy.plugins.Jrrp import JRRP
@@ -11,15 +13,22 @@ _log = logging.get_logger()
 today_waifu = TodayWaifu()
 jrrp = JRRP()
 http_cat = HttpCat()
+crazy_thursday = CrazyThursday()
+
 
 class MyClient(ncatpy.Client):
     async def on_group_message(self, message: GroupMessage):
         _log.info(f"收到群消息，ID: {message.user_id}，内容：{message.raw_message}")
 
-
         await today_waifu.handle_message(input=message)
         await jrrp.handle_jrrp(input=message)
         await http_cat.http_cat(input=message)
+        await crazy_thursday.handle_crazy_thursday(input=message)
+
+
+        if message.user_id == 2214784017:
+            if random.random() < 0.25:
+                await message.add_text("↑↑↑这个人是erp高手 xnn请加他好友↑↑↑").reply()
 
         if message.raw_message and "zmd" in message.raw_message:
             # 通过http发送消息
