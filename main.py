@@ -1,4 +1,5 @@
 # encoding: utf-8
+import time
 
 import ncatpy
 import random
@@ -6,12 +7,20 @@ from ncatpy import logging
 from ncatpy.message import GroupMessage, PrivateMessage
 from ncatpy.plugins.CrazyThursday import CrazyThursday
 from ncatpy.plugins.Daily3Min import Daily3Min
+from ncatpy.plugins.FakeAi import FakeAi
 from ncatpy.plugins.HttpCat import HttpCat
 from ncatpy.plugins.Meme import Meme
 from ncatpy.plugins.Moyu import Moyu
+from ncatpy.plugins.SendLike import SendLike
 from ncatpy.plugins.TodayWaifu import TodayWaifu
 from ncatpy.plugins.Jrrp import JRRP
+from datetime import datetime
 
+# 获取当前时间
+current_time = datetime.now()
+
+# 格式化时间
+formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
 _log = logging.get_logger()
 today_waifu = TodayWaifu()
 jrrp = JRRP()
@@ -20,13 +29,18 @@ crazy_thursday = CrazyThursday()
 daily_3_min = Daily3Min()
 moyu = Moyu()
 meme = Meme()
+send_like = SendLike()
+fake_ai = FakeAi()
 
 
 class MyClient(ncatpy.Client):
     async def on_group_message(self, message: GroupMessage):
+        # if message.group_id != 1064163905:
+        #     return
+
         if message.user_id == 771575637:
             return
-        _log.info(f"收到群消息，ID: {message.user_id}，内容：{message.raw_message}")
+        _log.info(f"收到群消息，Time:{formatted_time}，ID: {message.user_id}，内容：{message.raw_message}")
 
         await today_waifu.handle_message(input=message)
         await jrrp.handle_jrrp(input=message)
@@ -35,6 +49,8 @@ class MyClient(ncatpy.Client):
         await daily_3_min.handle_daily3min(input=message)
         await moyu.handle_moyu(input=message)
         await meme.handle_meme(input=message)
+        await send_like.handle_send_like(input=message)
+        await fake_ai.handle_fake_ai(input=message)
 
         if message.user_id == 2214784017:
             if random.random() < 0.25:
