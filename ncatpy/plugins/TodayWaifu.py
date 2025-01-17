@@ -69,11 +69,9 @@ class TodayWaifu:
         if message == "今日老婆":
             random_value = random.random()
             if 0.05 <= random_value <= 0.15:
-                await input.add_text("今*老婆").reply()
-                return
+                return await input.add_text("今*老婆").reply()
             if random_value < 0.05:
-                await input.add_text("你快醒醒 你没有老婆").reply()
-                return
+                return await input.add_text("你快醒醒 你没有老婆").reply()
 
             user_to_wife_map = self.user_to_wife_map_by_group.setdefault(group_id, {})
             allocated_wives = self.allocated_wives_by_group.setdefault(group_id, set())
@@ -90,12 +88,10 @@ class TodayWaifu:
 
                         avatar_url = common_util.get_avatar(wife_info.user_id)
 
-                        await (input.add_at(user_id).add_text(f"你今天的群友老婆是：").add_image(avatar_url)
-                               .add_text(f" {wife_info.nickname}({wife_info.user_id})")).reply()
-                        return
+                        return await (input.add_at(user_id).add_text(f"你今天的群友老婆是：").add_image(avatar_url)
+                                      .add_text(f" {wife_info.nickname}({wife_info.user_id})")).reply()
                 else:
-                    await input.add_text("获取老婆信息失败，请稍后再试。").reply()
-                    return
+                    return await input.add_text("获取老婆信息失败，请稍后再试。").reply()
 
             new_wife = await self.get_random_wife(input, group_id)
 
@@ -105,8 +101,8 @@ class TodayWaifu:
             avatar_url = common_util.get_avatar(new_wife.user_id)
 
             # 发送消息
-            await (input.add_at(user_id).add_text(f"你今天的群友老婆是：").add_image(avatar_url)
-                   .add_text(f" {new_wife.nickname}({new_wife.user_id})")).reply()
+            return await (input.add_at(user_id).add_text(f"你今天的群友老婆是：").add_image(avatar_url)
+                          .add_text(f" {new_wife.nickname}({new_wife.user_id})")).reply()
 
         if input.raw_message.startswith("换") and input.raw_message.endswith("的老婆") and user_id == HMMT.HMMT_ID:
             target_user_id = 0
@@ -120,8 +116,7 @@ class TodayWaifu:
 
             user_to_wife_map = self.user_to_wife_map_by_group.setdefault(group_id, {})
             if target_user_id not in user_to_wife_map:
-                await input.add_text(f"{target_username} 没有老婆，无法更换。").reply()
-                return
+                return await input.add_text(f"{target_username} 没有老婆，无法更换。").reply()
 
             target_wife_id = user_to_wife_map[target_user_id]
 
@@ -133,15 +128,14 @@ class TodayWaifu:
             user_to_wife_map[target_user_id] = new_wife.user_id
 
             await input.add_text(f"@{input.sender.nickname} 成功更换了 {target_username} 的老婆。").reply()
-            await input.add_at(target_user_id).add_text(f"你的老婆被 {input.sender.nickname} 更换了。").reply()
+            return await input.add_at(target_user_id).add_text(f"你的老婆被 {input.sender.nickname} 更换了。").reply()
 
         if message == "换一个老婆" and user_id == HMMT.HMMT_ID:
             user_to_wife_map = self.user_to_wife_map_by_group.setdefault(group_id, {})
             allocated_wives = self.allocated_wives_by_group.setdefault(group_id, set())
 
             if user_id not in user_to_wife_map:
-                await input.add_text("你还没有老婆，无法换一个老婆。").reply()
-                return
+                return await input.add_text("你还没有老婆，无法换一个老婆。").reply()
 
             current_wife_id = user_to_wife_map[user_id]
 
@@ -152,10 +146,10 @@ class TodayWaifu:
 
             new_wife = await self.get_random_wife(input, group_id)
             if new_wife is None:
-                await input.add_text("无法获取新的老婆，请稍后再试。").reply()
-                return
+                return await input.add_text("无法获取新的老婆，请稍后再试。").reply()
 
             user_to_wife_map[user_id] = new_wife.user_id
             allocated_wives.add(new_wife.user_id)
 
-            await input.add_text(f"@{input.sender.nickname} 成功更换了老婆，你的新老婆是：{new_wife.nickname}").reply()
+            return await input.add_text(
+                f"@{input.sender.nickname} 成功更换了老婆，你的新老婆是：{new_wife.nickname}").reply()

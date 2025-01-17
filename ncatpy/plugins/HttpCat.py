@@ -33,7 +33,7 @@ class HttpCat:
         status_code = int(message_content)
         if status_code in HTTP_STATUS_CODES:
             image_url = self.get_image_url(status_code)
-            await input.add_image(image_url).reply()
+            return await input.add_image(image_url).reply()
 
     def get_image_url(self, status_code):
         """
