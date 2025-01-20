@@ -4,11 +4,12 @@ import time
 import ncatpy
 import random
 from ncatpy import logging
-from ncatpy.message import GroupMessage, PrivateMessage
+from ncatpy.message import GroupMessage, PrivateMessage, NoticeMessage
 from ncatpy.plugins.CrazyThursday import CrazyThursday
 from ncatpy.plugins.Daily3Min import Daily3Min
 from ncatpy.plugins.FakeAi import FakeAi
 from ncatpy.plugins.HttpCat import HttpCat
+from ncatpy.plugins.Lottery import Lottery
 from ncatpy.plugins.Meme import Meme
 from ncatpy.plugins.Moyu import Moyu
 from ncatpy.plugins.RussianRoulette import RussianRoulette
@@ -36,6 +37,7 @@ send_like = SendLike()
 fake_ai = FakeAi()
 russian_roulette = RussianRoulette()
 status = Status()
+lottery = Lottery()
 
 
 class MyClient(ncatpy.Client):
@@ -58,6 +60,7 @@ class MyClient(ncatpy.Client):
         await fake_ai.handle_fake_ai(input=message)
         await russian_roulette.handle_message(input=message)
         await status.handle_status(input=message)
+        await lottery.handle_lottery(input=message)
 
         if message.user_id == 2214784017:
             if random.random() < 0.25:
@@ -70,6 +73,10 @@ class MyClient(ncatpy.Client):
 
     async def on_private_message(self, message: PrivateMessage):
         _log.info(f"收到私聊消息，ID: {message.user_id}，{message.message}")
+
+
+    async def on_notice(self, message: NoticeMessage):
+        _log.info(f"监听到事件，{message}")
 
 
 if __name__ == "__main__":
