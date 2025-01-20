@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from ncatpy.message import GroupMessage
 import json
 import os
-import requests
+import httpx
 # 定义数据类
 @dataclass
 class Item:
@@ -65,9 +65,7 @@ class Universalis:
             return 0
     def getdata(self,word,id):
         geturl=self.Apiurl+self.word[word]+"/"+str(id)+"?"+"listings=5"
-        log.debug(geturl)
-        res=requests.get(geturl)
-        print(geturl)
+        res=httpx.get(geturl)
         if res.status_code==200:
             data=res.json()
             return data
