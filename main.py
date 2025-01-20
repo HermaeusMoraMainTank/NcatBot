@@ -15,7 +15,9 @@ from ncatpy.plugins.RussianRoulette import RussianRoulette
 from ncatpy.plugins.SendLike import SendLike
 from ncatpy.plugins.TodayWaifu import TodayWaifu
 from ncatpy.plugins.Jrrp import JRRP
+from ncatpy.plugins.Status import Status
 from datetime import datetime
+
 
 # 获取当前时间
 current_time = datetime.now()
@@ -33,6 +35,7 @@ meme = Meme()
 send_like = SendLike()
 fake_ai = FakeAi()
 russian_roulette = RussianRoulette()
+status = Status()
 
 
 class MyClient(ncatpy.Client):
@@ -54,6 +57,7 @@ class MyClient(ncatpy.Client):
         await send_like.handle_send_like(input=message)
         await fake_ai.handle_fake_ai(input=message)
         await russian_roulette.handle_message(input=message)
+        await status.handle_status(input=message)
 
         if message.user_id == 2214784017:
             if random.random() < 0.25:

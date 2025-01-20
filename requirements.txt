@@ -1,5 +1,6 @@
-websockets~=13.1
-requests~=2.32.3
-aiohttp~=3.10.11
-PyYAML~=6.0.2
-httpx~=0.28.1
+aiohttp==3.10.11
+httpx==0.28.1
+psutil==5.9.0
+PyYAML==6.0.2
+PyYAML==6.0.2
+websockets==13.1
