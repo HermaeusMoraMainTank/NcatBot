@@ -17,8 +17,9 @@ from ncatpy.plugins.SendLike import SendLike
 from ncatpy.plugins.TodayWaifu import TodayWaifu
 from ncatpy.plugins.Jrrp import JRRP
 from ncatpy.plugins.Status import Status
+from ncatpy.plugins.Universalis import Universalis
 from datetime import datetime
-
+import os
 
 # 获取当前时间
 current_time = datetime.now()
@@ -38,6 +39,7 @@ fake_ai = FakeAi()
 russian_roulette = RussianRoulette()
 status = Status()
 lottery = Lottery()
+universalis=Universalis()
 
 
 class MyClient(ncatpy.Client):
@@ -61,7 +63,7 @@ class MyClient(ncatpy.Client):
         await russian_roulette.handle_message(input=message)
         await status.handle_status(input=message)
         await lottery.handle_lottery(input=message)
-
+        await universalis.handle_Universalis(input=message)
         if message.user_id == 2214784017:
             if random.random() < 0.25:
                 await message.add_text("↑↑↑这个人是erp高手 xnn请加他好友↑↑↑").reply()
@@ -82,7 +84,6 @@ class MyClient(ncatpy.Client):
 if __name__ == "__main__":
     # 1. 通过预设置的类型，设置需要监听的事件通道
     # intents = ncatpy.Intents.public() # 可以订阅public，包括了私聊和群聊
-
     # 2. 通过kwargs，设置需要监听的事件通道
     intents = ncatpy.Intents().all()
     client = MyClient(intents=intents)
