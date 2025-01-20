@@ -11,6 +11,7 @@ from ncatpy.plugins.FakeAi import FakeAi
 from ncatpy.plugins.HttpCat import HttpCat
 from ncatpy.plugins.Meme import Meme
 from ncatpy.plugins.Moyu import Moyu
+from ncatpy.plugins.RussianRoulette import RussianRoulette
 from ncatpy.plugins.SendLike import SendLike
 from ncatpy.plugins.TodayWaifu import TodayWaifu
 from ncatpy.plugins.Jrrp import JRRP
@@ -31,6 +32,7 @@ moyu = Moyu()
 meme = Meme()
 send_like = SendLike()
 fake_ai = FakeAi()
+russian_roulette = RussianRoulette()
 
 
 class MyClient(ncatpy.Client):
@@ -51,6 +53,7 @@ class MyClient(ncatpy.Client):
         await meme.handle_meme(input=message)
         await send_like.handle_send_like(input=message)
         await fake_ai.handle_fake_ai(input=message)
+        await russian_roulette.handle_message(input=message)
 
         if message.user_id == 2214784017:
             if random.random() < 0.25:
