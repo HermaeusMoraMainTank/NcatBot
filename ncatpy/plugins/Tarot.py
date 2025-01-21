@@ -130,7 +130,7 @@ class Tarot:
             with Image.open(file) as img:
                 rotated_img = img.rotate(180)
                 # 创建临时文件
-                temp_file = Path("temp") / f"rotated"
+                temp_file = Path("temp") / f"rotated_{file.name}"
                 temp_file.parent.mkdir(exist_ok=True)  # 确保临时文件夹存在
                 rotated_img.save(temp_file, format="JPEG")
                 return str(temp_file.resolve())  # 返回临时文件的绝对路径
