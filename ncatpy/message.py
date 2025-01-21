@@ -80,8 +80,23 @@ class PrivateMessage(BaseMessage):
 
 
 class NoticeMessage(BaseMessage):
+    __slots__=("self_id","notice_type","sub_type","target_id","user_id","group_id","raw_info")
+    def __init__(self, message):
+        super().__init__(message)
+        self.user_id=message.get("user_id",None)
+        self.self_id=message.get("self_id",None)
+        self.notice_type=message.get("notice_type",None)
+        self.sub_type=message.get("sub_type",None)
+        self.target_id=message.get("target_id",None)
+        self.group_id=message.get("group_id",None)
+        self.raw_info=message.get("raw_info",None)
     def __repr__(self):
-        return str(self.__dict__)
+        return str({items: str(getattr(self, items)) for items in self.__slots__})
+    async def reply(self, reply=False):
+        if(self.group_id!=None):
+            return await self.send_group_msg(self.group_id, clear_message=True)
+        else:
+            return await self.send_private_msg(self.user_id,clear_message=True)
     
 class RequestMessage(BaseMessage):
     def __repr__(self):
