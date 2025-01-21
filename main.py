@@ -14,6 +14,7 @@ from ncatpy.plugins.Meme import Meme
 from ncatpy.plugins.Moyu import Moyu
 from ncatpy.plugins.RussianRoulette import RussianRoulette
 from ncatpy.plugins.SendLike import SendLike
+from ncatpy.plugins.Tarot import Tarot
 from ncatpy.plugins.TodayWaifu import TodayWaifu
 from ncatpy.plugins.Jrrp import JRRP
 from ncatpy.plugins.Status import Status
@@ -40,6 +41,7 @@ russian_roulette = RussianRoulette()
 status = Status()
 lottery = Lottery()
 universalis=Universalis()
+tarot = Tarot()
 
 
 class MyClient(ncatpy.Client):
@@ -64,6 +66,9 @@ class MyClient(ncatpy.Client):
         await status.handle_status(input=message)
         await lottery.handle_lottery(input=message)
         await universalis.handle_universalis(input=message)
+        await tarot.handle_tarot(input=message)
+
+
         if message.user_id == 2214784017:
             if random.random() < 0.25:
                 await message.add_text("↑↑↑这个人是erp高手 xnn请加他好友↑↑↑").reply()
