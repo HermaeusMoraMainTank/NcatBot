@@ -63,7 +63,7 @@ class MyClient(ncatpy.Client):
         await russian_roulette.handle_message(input=message)
         await status.handle_status(input=message)
         await lottery.handle_lottery(input=message)
-        await universalis.handle_Universalis(input=message)
+        await universalis.handle_universalis(input=message)
         if message.user_id == 2214784017:
             if random.random() < 0.25:
                 await message.add_text("↑↑↑这个人是erp高手 xnn请加他好友↑↑↑").reply()
