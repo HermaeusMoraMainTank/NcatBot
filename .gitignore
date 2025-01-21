@@ -163,3 +163,4 @@ cython_debug/
 
 # Developper tests
 tests/
+/temp/

@@ -69,14 +69,14 @@ class MyClient(ncatpy.Client):
         await tarot.handle_tarot(input=message)
 
 
-        if message.user_id == 2214784017:
-            if random.random() < 0.25:
-                await message.add_text("↑↑↑这个人是erp高手 xnn请加他好友↑↑↑").reply()
-
-        if message.raw_message and "zmd" in message.raw_message:
-            # 通过http发送消息
-            t = await message.add_text("zmd是色猪").reply()
-            _log.info(t)
+        # if message.user_id == 2214784017:
+        #     if random.random() < 0.25:
+        #         await message.add_text("↑↑↑这个人是erp高手 xnn请加他好友↑↑↑").reply()
+        #
+        # if message.raw_message and "zmd" in message.raw_message:
+        #     # 通过http发送消息
+        #     t = await message.add_text("zmd是色猪").reply()
+        #     _log.info(t)
 
     async def on_private_message(self, message: PrivateMessage):
         _log.info(f"收到私聊消息，ID: {message.user_id}，{message.message}")
