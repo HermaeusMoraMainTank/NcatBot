@@ -19,6 +19,7 @@ from ncatpy.plugins.TodayWaifu import TodayWaifu
 from ncatpy.plugins.Jrrp import JRRP
 from ncatpy.plugins.Status import Status
 from ncatpy.plugins.Universalis import Universalis
+from ncatpy.plugins.NudgeEvent import NudgeEvent
 from datetime import datetime
 import os
 
@@ -42,6 +43,7 @@ status = Status()
 lottery = Lottery()
 universalis=Universalis()
 tarot = Tarot()
+nudgeEvent=NudgeEvent()
 
 
 class MyClient(ncatpy.Client):
@@ -52,7 +54,6 @@ class MyClient(ncatpy.Client):
         if message.user_id == 771575637:
             return
         _log.info(f"收到群消息，Time:{formatted_time}，ID: {message.user_id}，内容：{message.raw_message}")
-
         await today_waifu.handle_message(input=message)
         await jrrp.handle_jrrp(input=message)
         await http_cat.http_cat(input=message)
@@ -84,7 +85,7 @@ class MyClient(ncatpy.Client):
 
     async def on_notice(self, message: NoticeMessage):
         _log.info(f"监听到事件，{message}")
-
+        await nudgeEvent.handle_NudgeEvent(input=message)
 
 if __name__ == "__main__":
     # 1. 通过预设置的类型，设置需要监听的事件通道
