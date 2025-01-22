@@ -80,7 +80,7 @@ class PrivateMessage(BaseMessage):
 
 
 class NoticeMessage(BaseMessage):
-    __slots__=("self_id","notice_type","sub_type","target_id","user_id","group_id","raw_info")
+    __slots__=("self_id","notice_type","sub_type","target_id","user_id","group_id","raw_info","message_id","notice_type")
     def __init__(self, message):
         super().__init__(message)
         self.user_id=message.get("user_id",None)
@@ -90,6 +90,8 @@ class NoticeMessage(BaseMessage):
         self.target_id=message.get("target_id",None)
         self.group_id=message.get("group_id",None)
         self.raw_info=message.get("raw_info",None)
+        self.message_id=message.get("message_id",None)
+        self.notice_type=message.get("notice_type",None)
     def __repr__(self):
         return str({items: str(getattr(self, items)) for items in self.__slots__})
     async def reply(self, reply=False):
