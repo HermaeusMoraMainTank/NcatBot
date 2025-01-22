@@ -20,6 +20,7 @@ from ncatpy.plugins.Jrrp import JRRP
 from ncatpy.plugins.Status import Status
 from ncatpy.plugins.Universalis import Universalis
 from ncatpy.plugins.NudgeEvent import NudgeEvent
+from ncatpy.plugins.Group_recall  import Group_recall
 from datetime import datetime
 import os
 
@@ -44,7 +45,7 @@ lottery = Lottery()
 universalis=Universalis()
 tarot = Tarot()
 nudgeEvent=NudgeEvent()
-
+group_recall=Group_recall()
 
 class MyClient(ncatpy.Client):
     async def on_group_message(self, message: GroupMessage):
@@ -68,7 +69,7 @@ class MyClient(ncatpy.Client):
         await lottery.handle_lottery(input=message)
         await universalis.handle_universalis(input=message)
         await tarot.handle_tarot(input=message)
-
+        await group_recall.handle_Group(input=message)
 
         # if message.user_id == 2214784017:
         #     if random.random() < 0.25:
@@ -86,6 +87,7 @@ class MyClient(ncatpy.Client):
     async def on_notice(self, message: NoticeMessage):
         _log.info(f"监听到事件，{message}")
         await nudgeEvent.handle_NudgeEvent(input=message)
+        await group_recall.handle_notice(input=message)
 
 if __name__ == "__main__":
     # 1. 通过预设置的类型，设置需要监听的事件通道
