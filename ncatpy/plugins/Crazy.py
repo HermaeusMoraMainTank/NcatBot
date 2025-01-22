@@ -1,9 +1,11 @@
 from ncatpy.message import GroupMessage
 import random
+
+
 class Crazy:
     def __init__(self):
-        self.key=["发病","告白"]
-        self.msglist=[
+        self.key = ["发病", "告白"]
+        self.msglist = [
             "α 阿尔法， β 贝塔， γ 伽玛，δ 德尔塔， ε 伊普西隆， ζ 泽塔， η 伊塔， θ 西塔， ι 约塔， κ 卡帕， λ 兰姆达，μ 米欧 ，ν 纽， ξ 克西， ο 欧米克隆， π 派， ρ 柔 ，σ 西格玛， τ 陶 ，υ 玉普西隆， φ 弗爱， χ 凯， ψ 普赛     ♡ target_name🤤🤤🌹🌹",
             "target_name，天台上的风🌀🌀🌀很大，今天的风🌬🌬格外凛冽🥶🥶，我看着灯红㊙️酒绿的繁华都市🏢🏛眼皮跳了无数下😵😵，积攒着怒意🤬🤬的双臂💪🏻💪🏻猛挥砸碎了108个窗户😱😱，摔烂了38个5G高档高速高质量手机📱📱📱，玻璃渣刺破了我的衣襟👗👗，碎掉的是这颗对你永远不变的心❤️❤️❤️。你带走我吧🥺🥺🥺没有你怎么活啊🥺",
             "target_name，你失忆了，你是我老婆\n我们相识即一见钟情，相恋十年有余，第四年同居，两年后定下终身，得到我们两家长辈的祝福，结为秦晋之好，然天有不测风云，你被奸人所害，只因嫉妒我们夫妻幸福美满，家庭甜蜜和睦，后尔又为人所拐，一直杳无音讯 今日我特发此贴，正是望你知道真相，希望你知道，看到此贴的你，正是我消失了的妻子，请速来联系我，让我们一家团聚!拯救我这个破碎的家庭，和我这颗千疮百孔的心！",
@@ -212,27 +214,26 @@ class Crazy:
             "本人不懂二次元，对于你们这种痴迷于虚拟角色的行为，我很是不理解，我感觉应该分清现实和虚拟，他们好看归好看，但终究不是真实存在的，我们要活在现实，而不是盯着纸片人，我的生活很充实，今天是我和target_name的婚礼，大家记得带点彩礼",
         ]
         pass
-    async def handle_crazy(self,input=GroupMessage):
-        iscrazy=False
-        isat=False
-        atTarget=0
+
+    async def handle_crazy(self, input=GroupMessage):
+        is_crazy = False
+        is_at = False
+        at_target = 0
         for k in input.message:
-            if k["type"]=="at":
-                isat=True
-                atTarget=k["data"]["qq"]
-            if k["type"]=="text":
-                if k["data"]["text"]in self.key:
-                    iscrazy=True
-        if (iscrazy==False):
+            if k["type"] == "at":
+                is_at = True
+                at_target = k["data"]["qq"]
+            if k["type"] == "text":
+                if k["data"]["text"] in self.key:
+                    is_crazy = True
+        if (is_crazy == False):
             return
-        if(isat==False):
-            target_name=input.sender.card if input.sender.card!=''else input.sender.nickname
-            target_name+='('+str(input.sender.user_id)+')'
+        if (is_at == False):
+            target_name = input.sender.card if input.sender.card != '' else input.sender.nickname
         else:
-            info=await input.get_group_member_info(input.group_id,user_id=atTarget)
-            target_name=info["data"]["card"] if info["data"]["card"]!=''else info["data"]["nickname"]
-            target_name+=str(atTarget)
-        i=random.randint(0,len(self.msglist)) #随机数
-        msg=self.msglist[i].replace("target_name",target_name)
+            info = await input.get_group_member_info(input.group_id, user_id=at_target)
+            target_name = info["data"]["card"] if info["data"]["card"] != '' else info["data"]["nickname"]
+        i = random.randint(0, len(self.msglist))  # 随机数
+        msg = self.msglist[i].replace("target_name", target_name)
         input.add_text(msg)
         await input.reply()
