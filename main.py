@@ -8,6 +8,7 @@ from ncatpy.message import GroupMessage, PrivateMessage, NoticeMessage
 from ncatpy.plugins.CrazyThursday import CrazyThursday
 from ncatpy.plugins.Daily3Min import Daily3Min
 from ncatpy.plugins.FakeAi import FakeAi
+from ncatpy.plugins.GroupRecall import GroupRecall
 from ncatpy.plugins.HttpCat import HttpCat
 from ncatpy.plugins.Lottery import Lottery
 from ncatpy.plugins.Meme import Meme
@@ -20,7 +21,6 @@ from ncatpy.plugins.Jrrp import JRRP
 from ncatpy.plugins.Status import Status
 from ncatpy.plugins.Universalis import Universalis
 from ncatpy.plugins.NudgeEvent import NudgeEvent
-from ncatpy.plugins.Group_recall  import Group_recall
 from datetime import datetime
 import os
 
@@ -42,10 +42,11 @@ fake_ai = FakeAi()
 russian_roulette = RussianRoulette()
 status = Status()
 lottery = Lottery()
-universalis=Universalis()
+universalis = Universalis()
 tarot = Tarot()
-nudgeEvent=NudgeEvent()
-group_recall=Group_recall()
+nudgeEvent = NudgeEvent()
+group_recall = GroupRecall()
+
 
 class MyClient(ncatpy.Client):
     async def on_group_message(self, message: GroupMessage):
@@ -69,25 +70,24 @@ class MyClient(ncatpy.Client):
         await lottery.handle_lottery(input=message)
         await universalis.handle_universalis(input=message)
         await tarot.handle_tarot(input=message)
-        await group_recall.handle_Group(input=message)
+        await group_recall.handle_group(input=message)
 
         # if message.user_id == 2214784017:
         #     if random.random() < 0.25:
         #         await message.add_text("↑↑↑这个人是erp高手 xnn请加他好友↑↑↑").reply()
         #
         # if message.raw_message and "zmd" in message.raw_message:
-        #     # 通过http发送消息
         #     t = await message.add_text("zmd是色猪").reply()
         #     _log.info(t)
 
     async def on_private_message(self, message: PrivateMessage):
         _log.info(f"收到私聊消息，ID: {message.user_id}，{message.message}")
 
-
     async def on_notice(self, message: NoticeMessage):
         _log.info(f"监听到事件，{message}")
-        await nudgeEvent.handle_NudgeEvent(input=message)
-        await group_recall.handle_notice(input=message)
+        await nudgeEvent.handle_nudge(input=message)
+        # await group_recall.handle_notice(input=message)
+
 
 if __name__ == "__main__":
     # 1. 通过预设置的类型，设置需要监听的事件通道
