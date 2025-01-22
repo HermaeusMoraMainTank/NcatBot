@@ -224,7 +224,7 @@ class Crazy:
                 is_at = True
                 at_target = k["data"]["qq"]
             if k["type"] == "text":
-                if k["data"]["text"] in self.key:
+                if k["data"]["text"].replace(" ", "") in self.key:
                     is_crazy = True
         if (is_crazy == False):
             return
