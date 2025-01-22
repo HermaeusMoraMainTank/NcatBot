@@ -19,6 +19,7 @@ class Meme:
             '嗨': 'https://api.xingzhige.com/API/FortuneCat/?qq=',
             '甩': 'https://api.xingzhige.com/API/DanceChickenLeg/?qq=',
             '打': 'https://api.xingzhige.com/API/pound/?qq=',
+            '爬':'https://api.xingzhige.com/API/pa/?qq='
         }
 
         for action, url in action_urls.items():
