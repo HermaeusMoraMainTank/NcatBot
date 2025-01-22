@@ -21,6 +21,7 @@ from ncatpy.plugins.Jrrp import JRRP
 from ncatpy.plugins.Status import Status
 from ncatpy.plugins.Universalis import Universalis
 from ncatpy.plugins.NudgeEvent import NudgeEvent
+from ncatpy.plugins.Crazy import Crazy
 from datetime import datetime
 import os
 
@@ -46,6 +47,7 @@ universalis = Universalis()
 tarot = Tarot()
 nudgeEvent = NudgeEvent()
 group_recall = GroupRecall()
+crazy=Crazy()
 
 
 class MyClient(ncatpy.Client):
@@ -71,6 +73,7 @@ class MyClient(ncatpy.Client):
         await universalis.handle_universalis(input=message)
         await tarot.handle_tarot(input=message)
         await group_recall.handle_group(input=message)
+        await crazy.handle_crazy(input=message)
 
         # if message.user_id == 2214784017:
         #     if random.random() < 0.25:
