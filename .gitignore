@@ -164,3 +164,4 @@ cython_debug/
 # Developper tests
 tests/
 /temp/
+/data/image/ff14/logs/

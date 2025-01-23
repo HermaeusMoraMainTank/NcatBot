@@ -7,6 +7,7 @@ from ncatpy import logging
 from ncatpy.message import GroupMessage, PrivateMessage, NoticeMessage
 from ncatpy.plugins.CrazyThursday import CrazyThursday
 from ncatpy.plugins.Daily3Min import Daily3Min
+from ncatpy.plugins.FF14LogsInfo import FF14LogsInfo
 from ncatpy.plugins.FakeAi import FakeAi
 from ncatpy.plugins.GroupRecall import GroupRecall
 from ncatpy.plugins.HttpCat import HttpCat
@@ -47,7 +48,8 @@ universalis = Universalis()
 tarot = Tarot()
 nudgeEvent = NudgeEvent()
 group_recall = GroupRecall()
-crazy=Crazy()
+crazy = Crazy()
+ff14_logs_info = FF14LogsInfo()
 
 
 class MyClient(ncatpy.Client):
@@ -74,6 +76,7 @@ class MyClient(ncatpy.Client):
         await tarot.handle_tarot(input=message)
         await group_recall.handle_group(input=message)
         await crazy.handle_crazy(input=message)
+        await ff14_logs_info.handle_ff14_logs_info(input=message)
 
         # if message.user_id == 2214784017:
         #     if random.random() < 0.25:
