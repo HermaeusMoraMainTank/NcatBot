@@ -165,3 +165,4 @@ cython_debug/
 tests/
 /temp/
 /data/image/ff14/logs/
+ncatpy/plugins/FF14_INFO.java

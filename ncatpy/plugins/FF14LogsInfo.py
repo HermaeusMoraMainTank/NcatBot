@@ -5,8 +5,11 @@ from datetime import datetime
 from typing import List, Optional
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
+import urllib3
 
 from ncatpy.message import GroupMessage
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 class FF14LogsInfo:
@@ -15,7 +18,7 @@ class FF14LogsInfo:
     JSON_PAYLOAD = {
         "client_id": "9ae4db97-1f1b-4123-82d4-32aff00d3283",
         "client_secret": "rAeNnp3Z1VFxYI92TcpBLggKPM3wtkmK9FxZX2C1",
-        "grant_type": "client_credentials"
+        "grant_type": "client_credentials",
     }
     TOKEN_FILE_PATH = "data/json/access_token.json"
     URL = "https://cn.fflogs.com/api/v2/client"
@@ -30,7 +33,7 @@ class FF14LogsInfo:
             self.Zone(62, "阿卡狄亚竞技场 轻量级", 101),
             self.Zone(53, "欧米茄绝境验证战", 100),
             self.Zone(45, "幻想龙诗绝境战", 100),
-            self.Zone(43, "绝境战（旧版本）", 100)
+            self.Zone(43, "绝境战（旧版本）", 100),
         ]
         self.init()
 
@@ -41,8 +44,15 @@ class FF14LogsInfo:
             self.difficulty = difficulty
 
     class RankingInfo:
-        def __init__(self, encounter_id: int, encounter_name: str, rank_percent: float, total_kills: int, spec: str,
-                     best_amount: float):
+        def __init__(
+            self,
+            encounter_id: int,
+            encounter_name: str,
+            rank_percent: float,
+            total_kills: int,
+            spec: str,
+            best_amount: float,
+        ):
             self.encounter_id = encounter_id
             self.encounter_name = encounter_name
             self.rank_percent = rank_percent
@@ -98,10 +108,12 @@ class FF14LogsInfo:
             "Authorization": f"Bearer {self.api_token}",
             "Content-Type": "application/json",
             "Accept": "*/*",
-            "User-Agent": "Apifox/1.0.0 (https://apifox.com)"
+            "User-Agent": "Apifox/1.0.0 (https://apifox.com)",
         }
         try:
-            response = requests.post(self.URL, json={"query": graphql_query}, headers=headers)
+            response = requests.post(
+                self.URL, json={"query": graphql_query}, headers=headers
+            )
             response.raise_for_status()
             return response.text
         except Exception as e:
@@ -111,8 +123,13 @@ class FF14LogsInfo:
     def parse_response_data(self, response_data: str) -> List[RankingInfo]:
         ranking_info_list = []
         data = json.loads(response_data)
-        rankings = data.get("data", {}).get("characterData", {}).get("character", {}).get("zoneRankings", {}).get(
-            "rankings", [])
+        rankings = (
+            data.get("data", {})
+            .get("characterData", {})
+            .get("character", {})
+            .get("zoneRankings", {})
+            .get("rankings", [])
+        )
         for ranking in rankings:
             encounter_id = ranking.get("encounter", {}).get("id")
             encounter_name = ranking.get("encounter", {}).get("name")
@@ -121,12 +138,20 @@ class FF14LogsInfo:
             spec = ranking.get("spec")
             best_amount = ranking.get("bestAmount")
             if rank_percent is not None:
-                ranking_info = self.RankingInfo(encounter_id, encounter_name, rank_percent, total_kills, spec,
-                                                best_amount)
+                ranking_info = self.RankingInfo(
+                    encounter_id,
+                    encounter_name,
+                    rank_percent,
+                    total_kills,
+                    spec,
+                    best_amount,
+                )
                 ranking_info_list.append(ranking_info)
         return ranking_info_list
 
-    def generate_image(self, username: str, server: str, ranking_info_list: List[RankingInfo]) -> str:
+    def generate_image(
+        self, username: str, server: str, ranking_info_list: List[RankingInfo]
+    ) -> str:
         width = 660
         height = 170 + len(ranking_info_list) * 80
         image = Image.new("RGB", (width, height), "black")
@@ -159,24 +184,44 @@ class FF14LogsInfo:
         image.save(file_path)
         return file_path
 
-    def draw_ranking_info(self, draw: ImageDraw.Draw, ranking_info: RankingInfo, y_offset: int,
-                          font: ImageFont.FreeTypeFont, image: Image.Image):
+    def draw_ranking_info(
+        self,
+        draw: ImageDraw.Draw,
+        ranking_info: RankingInfo,
+        y_offset: int,
+        font: ImageFont.FreeTypeFont,
+        image: Image.Image,
+    ):
         # 绘制 Boss 图标和名字
         try:
-            boss_icon = Image.open(BytesIO(requests.get(ranking_info.get_boss_url()).content))
+            boss_icon = Image.open(
+                BytesIO(requests.get(ranking_info.get_boss_url()).content)
+            )
             boss_icon = boss_icon.resize((64, 64))
             image.paste(boss_icon, (10, y_offset + 8))
-            draw.text((84, y_offset + 20), ranking_info.encounter_name, fill=(180, 189, 255), font=font)
+            draw.text(
+                (84, y_offset + 20),
+                ranking_info.encounter_name,
+                fill=(180, 189, 255),
+                font=font,
+            )
         except Exception as e:
             print(f"Error drawing boss icon: {e}")
 
         # 绘制 rankPercent
         rank_color = self.get_rank_color(ranking_info.rank_percent)
-        draw.text((290, y_offset + 20), str(int(ranking_info.rank_percent)), fill=rank_color, font=font)
+        draw.text(
+            (290, y_offset + 20),
+            str(int(ranking_info.rank_percent)),
+            fill=rank_color,
+            font=font,
+        )
 
         # 绘制 Job 图标
         try:
-            job_icon = Image.open(BytesIO(requests.get(ranking_info.get_job_icon_url()).content))
+            job_icon = Image.open(
+                BytesIO(requests.get(ranking_info.get_job_icon_url()).content)
+            )
             job_icon = job_icon.resize((32, 32))
             # 确保图标背景透明
             if job_icon.mode != "RGBA":
@@ -187,13 +232,25 @@ class FF14LogsInfo:
             transparent_icon.paste(job_icon, (0, 0), job_icon)  # 将图标粘贴到透明背景上
 
             # 绘制职业图标
-            image.paste(transparent_icon, (320, y_offset + 20), transparent_icon)  # 使用透明背景
+            image.paste(
+                transparent_icon, (320, y_offset + 20), transparent_icon
+            )  # 使用透明背景
         except Exception as e:
             print(f"Error drawing job icon: {e}")
 
         # 绘制 totalKills 和 bestAmount
-        draw.text((610, y_offset + 20), str(ranking_info.total_kills), fill=(225, 242, 245), font=font)
-        draw.text((450, y_offset + 20), f"{ranking_info.best_amount:.2f}", fill=(180, 189, 255), font=font)
+        draw.text(
+            (610, y_offset + 20),
+            str(ranking_info.total_kills),
+            fill=(225, 242, 245),
+            font=font,
+        )
+        draw.text(
+            (450, y_offset + 20),
+            f"{ranking_info.best_amount:.2f}",
+            fill=(180, 189, 255),
+            font=font,
+        )
 
     def get_rank_color(self, rank: float) -> tuple:
         if rank == -1:
@@ -237,6 +294,10 @@ class FF14LogsInfo:
         if not combined_ranking_infos:
             await input.add_text("搜索不到该玩家或已隐藏").reply()
         else:
-            image_path = self.generate_image(character_name, server, combined_ranking_infos)
-            await input.add_text("提醒:请谨慎使用该功能，用户使用引起其他玩家不快将会被禁止使用该功能。").reply()
+            image_path = self.generate_image(
+                character_name, server, combined_ranking_infos
+            )
+            await input.add_text(
+                "提醒:请谨慎使用该功能，用户使用引起其他玩家不快将会被禁止使用该功能。"
+            ).reply()
             await input.add_image(image_path).reply()

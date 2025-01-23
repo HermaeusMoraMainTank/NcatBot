@@ -23,6 +23,7 @@ from ncatpy.plugins.Status import Status
 from ncatpy.plugins.Universalis import Universalis
 from ncatpy.plugins.NudgeEvent import NudgeEvent
 from ncatpy.plugins.Crazy import Crazy
+from ncatpy.plugins.FF14RisingStoneInfo import FF14RisingStoneInfo
 from datetime import datetime
 import os
 
@@ -50,7 +51,7 @@ nudgeEvent = NudgeEvent()
 group_recall = GroupRecall()
 crazy = Crazy()
 ff14_logs_info = FF14LogsInfo()
-
+ff14_rising_stone_info = FF14RisingStoneInfo()
 
 class MyClient(ncatpy.Client):
     async def on_group_message(self, message: GroupMessage):
@@ -77,6 +78,7 @@ class MyClient(ncatpy.Client):
         await group_recall.handle_group(input=message)
         await crazy.handle_crazy(input=message)
         await ff14_logs_info.handle_ff14_logs_info(input=message)
+        await ff14_rising_stone_info.handle_ff14_rising_stone_info(input=message)
 
         # if message.user_id == 2214784017:
         #     if random.random() < 0.25:

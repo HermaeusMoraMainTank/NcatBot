@@ -27,6 +27,6 @@ class HMMT:
     DEFAULT_IMAGE_SCALE_SAVE_PATH = "data/image/scale"
     IMAGE_SCALE_PREFIX = "scale_"
     V_PATH = "data/image/vtuber/"
-    USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+    USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
     LALAFELL_GROUP_ID = 853963912
     HMMT_GROUP_ID = 1064163905
