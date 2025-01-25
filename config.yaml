@@ -1,24 +1,10 @@
 ws:
-  protocol: ws
+  Protocol: ws
   ip: 127.0.0.1
   port: 3001
-  token:
 
 http:
-  protocol: http
+  Protocol: http
   ip: 127.0.0.1
   port: 4000
   sync: true
-  token:
-
-ai:
-  base_url:
-  api_key:
-  model:
-  personality:
-
-qq:
-  bot: 3555202423
-  user: 273421673
-
-nap_cat:

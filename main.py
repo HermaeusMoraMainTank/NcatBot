@@ -53,49 +53,54 @@ crazy = Crazy()
 ff14_logs_info = FF14LogsInfo()
 ff14_rising_stone_info = FF14RisingStoneInfo()
 
+class MyClient(ncatpy.Client):
+    async def on_group_message(self, message: GroupMessage):
+        # if message.group_id != 1064163905:
+        #     return
 
-bot = BotClient()
+        if message.user_id == 771575637:
+            return
+        _log.info(f"收到群消息，Time:{formatted_time}，ID: {message.user_id}，内容：{message.raw_message}")
+        await today_waifu.handle_message(input=message)
+        await jrrp.handle_jrrp(input=message)
+        await http_cat.http_cat(input=message)
+        await crazy_thursday.handle_crazy_thursday(input=message)
+        await daily_3_min.handle_daily3min(input=message)
+        await moyu.handle_moyu(input=message)
+        await meme.handle_meme(input=message)
+        await send_like.handle_send_like(input=message)
+        await fake_ai.handle_fake_ai(input=message)
+        await russian_roulette.handle_message(input=message)
+        await status.handle_status(input=message)
+        await lottery.handle_lottery(input=message)
+        await universalis.handle_universalis(input=message)
+        await tarot.handle_tarot(input=message)
+        await group_recall.handle_group(input=message)
+        await crazy.handle_crazy(input=message)
+        await ff14_logs_info.handle_ff14_logs_info(input=message)
+        await ff14_rising_stone_info.handle_ff14_rising_stone_info(input=message)
 
-@bot.group_event
-async def on_group_message(msg:GroupMessage):
-    if msg.user_id == 771575637:
-        return
-    _log.info(f"收到群消息，Time:{formatted_time}，ID: {msg.user_id}，内容：{msg.raw_message}")
-    await today_waifu.handle_message(input=msg)
-    await jrrp.handle_jrrp(input=msg)
-    await http_cat.http_cat(input=msg)
-    await crazy_thursday.handle_crazy_thursday(input=msg)
-    await daily_3_min.handle_daily3min(input=msg)
-    await moyu.handle_moyu(input=msg)
-    await meme.handle_meme(input=msg)
-    await send_like.handle_send_like(input=msg)
-    await fake_ai.handle_fake_ai(input=msg)
-    await russian_roulette.handle_message(input=msg)
-    await status.handle_status(input=msg)
-    await lottery.handle_lottery(input=msg)
-    await universalis.handle_universalis(input=msg)
-    await tarot.handle_tarot(input=msg)
-    await group_recall.handle_group(input=msg)
-    await crazy.handle_crazy(input=msg)
-    await ff14_logs_info.handle_ff14_logs_info(input=msg)
-    await ff14_rising_stone_info.handle_ff14_rising_stone_info(input=msg)
+        # if message.user_id == 2214784017:
+        #     if random.random() < 0.25:
+        #         await message.add_text("↑↑↑这个人是erp高手 xnn请加他好友↑↑↑").reply()
+        #
+        # if message.raw_message and "zmd" in message.raw_message:
+        #     t = await message.add_text("zmd是色猪").reply()
+        #     _log.info(t)
 
+    async def on_private_message(self, message: PrivateMessage):
+        _log.info(f"收到私聊消息，ID: {message.user_id}，{message.message}")
 
-@bot.private_event
-async def on_private_message(msg:PrivateMessage):
-    _log.info(f"收到私聊消息，ID: {msg.user_id}，{msg.message}")
-
-@bot.notice_event
-async def on_notice(msg):
-    _log.info(f"监听到事件，{msg}")
-    await nudgeEvent.handle_nudge(input=msg)
-    # await group_recall.handle_notice(input=message)
-@bot.request_event
-async def on_request(msg):
-    print(msg)
-
-bot.run(reload=True)
-
-
+    async def on_notice(self, message: NoticeMessage):
+        _log.info(f"监听到事件，{message}")
+        await nudgeEvent.handle_nudge(input=message)
+        # await group_recall.handle_notice(input=message)
 
 
+if __name__ == "__main__":
+    # 1. 通过预设置的类型，设置需要监听的事件通道
+    # intents = ncatpy.Intents.public() # 可以订阅public，包括了私聊和群聊
+    # 2. 通过kwargs，设置需要监听的事件通道
+    intents = ncatpy.Intents().all()
+    client = MyClient(intents=intents)
+    client.run()

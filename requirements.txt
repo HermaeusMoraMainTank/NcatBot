@@ -1,9 +1,7 @@
 aiohttp==3.10.11
+httpx==0.28.1
 Pillow==11.1.0
-websockets~=13.1
-PyYAML~=6.0.2
-httpx~=0.28.1
-psutil~=6.1.1
-openai~=1.59.9
-requests~=2.32.3
-tqdm~=4.67.1
+psutil==5.9.0
+PyYAML==6.0.2
+PyYAML==6.0.2
+websockets==13.1
