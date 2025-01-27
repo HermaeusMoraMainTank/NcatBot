@@ -9,6 +9,7 @@ from ncatpy.plugins.CrazyThursday import CrazyThursday
 from ncatpy.plugins.Daily3Min import Daily3Min
 from ncatpy.plugins.FF14LogsInfo import FF14LogsInfo
 from ncatpy.plugins.FakeAi import FakeAi
+from ncatpy.plugins.Fortune import Fortune
 from ncatpy.plugins.GroupRecall import GroupRecall
 from ncatpy.plugins.HttpCat import HttpCat
 from ncatpy.plugins.Lottery import Lottery
@@ -52,6 +53,7 @@ group_recall = GroupRecall()
 crazy = Crazy()
 ff14_logs_info = FF14LogsInfo()
 ff14_rising_stone_info = FF14RisingStoneInfo()
+fortune = Fortune()
 
 class MyClient(ncatpy.Client):
     async def on_group_message(self, message: GroupMessage):
@@ -79,6 +81,7 @@ class MyClient(ncatpy.Client):
         await crazy.handle_crazy(input=message)
         await ff14_logs_info.handle_ff14_logs_info(input=message)
         await ff14_rising_stone_info.handle_ff14_rising_stone_info(input=message)
+        await fortune.handle_fortune(input=message)
 
         # if message.user_id == 2214784017:
         #     if random.random() < 0.25:

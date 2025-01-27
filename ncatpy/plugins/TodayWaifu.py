@@ -109,7 +109,7 @@ class TodayWaifu:
 
             for isAt in input.message:
                 if isAt.get("type") == "at":
-                    target_user_id = isAt.get("data").get("qq")
+                    target_user_id = int(isAt.get("data").get("qq"))
 
             target = await input.get_group_member_info(group_id=group_id, user_id=target_user_id)
             target_username = target.get("data").get("nickname")
