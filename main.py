@@ -12,6 +12,7 @@ from ncatpy.plugins.FakeAi import FakeAi
 from ncatpy.plugins.Fortune import Fortune
 from ncatpy.plugins.GroupRecall import GroupRecall
 from ncatpy.plugins.HttpCat import HttpCat
+from ncatpy.plugins.Lalafell import Lalafell
 from ncatpy.plugins.Lottery import Lottery
 from ncatpy.plugins.Meme import Meme
 from ncatpy.plugins.Moyu import Moyu
@@ -32,7 +33,6 @@ import os
 current_time = datetime.now()
 
 # 格式化时间
-formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
 _log = logging.get_logger()
 today_waifu = TodayWaifu()
 jrrp = JRRP()
@@ -54,6 +54,7 @@ crazy = Crazy()
 ff14_logs_info = FF14LogsInfo()
 ff14_rising_stone_info = FF14RisingStoneInfo()
 fortune = Fortune()
+lalafell = Lalafell()
 
 class MyClient(ncatpy.Client):
     async def on_group_message(self, message: GroupMessage):
@@ -62,7 +63,8 @@ class MyClient(ncatpy.Client):
 
         if message.user_id == 771575637:
             return
-        _log.info(f"收到群消息，Time:{formatted_time}，ID: {message.user_id}，内容：{message.raw_message}")
+        _log.info(
+            f"收到群消息，Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}，ID: {message.user_id}，内容：{message.raw_message}")
         await today_waifu.handle_message(input=message)
         await jrrp.handle_jrrp(input=message)
         await http_cat.http_cat(input=message)
@@ -82,6 +84,7 @@ class MyClient(ncatpy.Client):
         await ff14_logs_info.handle_ff14_logs_info(input=message)
         await ff14_rising_stone_info.handle_ff14_rising_stone_info(input=message)
         await fortune.handle_fortune(input=message)
+        await lalafell.handle_lalafell(input=message)
 
         # if message.user_id == 2214784017:
         #     if random.random() < 0.25:
