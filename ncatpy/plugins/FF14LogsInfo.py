@@ -1,15 +1,13 @@
 import os
 import json
-import requests
+import httpx
 from datetime import datetime
 from typing import List, Optional
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
-import urllib3
 
 from ncatpy.message import GroupMessage
 
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 class FF14LogsInfo:
@@ -73,7 +71,7 @@ class FF14LogsInfo:
 
     def retrieve_and_save_access_token(self):
         try:
-            response = requests.post(self.TOKEN_ENDPOINT, json=self.JSON_PAYLOAD)
+            response = httpx.post(self.TOKEN_ENDPOINT, json=self.JSON_PAYLOAD)
             response.raise_for_status()
             access_token = response.json().get("access_token")
             if access_token:
@@ -111,7 +109,7 @@ class FF14LogsInfo:
             "User-Agent": "Apifox/1.0.0 (https://apifox.com)",
         }
         try:
-            response = requests.post(
+            response = httpx.post(
                 self.URL, json={"query": graphql_query}, headers=headers
             )
             response.raise_for_status()
@@ -195,7 +193,7 @@ class FF14LogsInfo:
         # 绘制 Boss 图标和名字
         try:
             boss_icon = Image.open(
-                BytesIO(requests.get(ranking_info.get_boss_url()).content)
+                BytesIO(httpx.get(ranking_info.get_boss_url()).content)
             )
             boss_icon = boss_icon.resize((64, 64))
             image.paste(boss_icon, (10, y_offset + 8))
@@ -220,7 +218,7 @@ class FF14LogsInfo:
         # 绘制 Job 图标
         try:
             job_icon = Image.open(
-                BytesIO(requests.get(ranking_info.get_job_icon_url()).content)
+                BytesIO(httpx.get(ranking_info.get_job_icon_url()).content)
             )
             job_icon = job_icon.resize((32, 32))
             # 确保图标背景透明
