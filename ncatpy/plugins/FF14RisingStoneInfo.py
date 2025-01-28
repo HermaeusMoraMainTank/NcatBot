@@ -62,6 +62,7 @@ class FF14RisingStoneInfo:
     }
 
     DOUDAOCHAI_SERVERS = {"水晶塔", "银泪湖", "太阳海岸", "伊修加德", "红茶川"}
+    RACE=["人族","精灵族","拉拉菲尔族","猫魅族","鲁加族","敖龙族","硌狮族","维埃拉族"]
 
     def __init__(self):
         self.init_job_icons()
@@ -239,9 +240,9 @@ class FF14RisingStoneInfo:
             for a in achievements
             if a.get("medal_type") not in ["职业满级", "剧情通关"]
         ]
-        height = max(170 + len(filtered_achievements) * 60, height)
-
-        # 创建渐变背景
+        height +=len(filtered_achievements)+1* 60
+        print(height)
+        # 创建背景
         image = Image.new("RGB", (width, height), "white")
         draw = ImageDraw.Draw(image)
         self.draw_gradient_background(image, width, height)
@@ -254,8 +255,7 @@ class FF14RisingStoneInfo:
             return ""
 
         # 绘制基本信息区域
-        self.draw_rounded_rectangle(draw, (10, 10, 790, 250), 30, (220, 220, 220, 100))
-
+        self.draw_rounded_rectangle(draw, (10, 10, 790, 250), 0, (228, 231, 240))
         # 绘制头像
         avatar_url = user_data.get("avatar")
         if avatar_url:
@@ -289,11 +289,16 @@ class FF14RisingStoneInfo:
         )
 
         # 绘制详细信息区域
-        self.draw_rounded_rectangle(draw, (10, 270, 790, 455), 30, (220, 220, 220, 100))
+        self.draw_rounded_rectangle(draw, (10, 270, 790, 465), 0, (228, 231, 240))
 
+        #种族要特殊处理
+        if int(character_detail.get('race', 20))!=20:
+            race=self.RACE[int(character_detail.get('race', 20))-1]
+        else:
+            race="未知"
         # 左侧信息
         info_left = [
-            ("种族", f"{character_detail.get('race', '未知')}"),
+            ("种族", f"{race}"),
             ("性别", "男" if character_detail.get("gender") == "0" else "女"),
             ("部队", f"{character_detail.get('guild_name', '无')}"),
             ("创角时间", character_detail.get("create_time", "未知")),
@@ -313,6 +318,7 @@ class FF14RisingStoneInfo:
 
         y = 290
         for label, value in info_left:
+            print(label, value)
             self.draw_info_pair(draw, small_font, 20, y, 360, label, value)
             y += 30
 
@@ -322,7 +328,7 @@ class FF14RisingStoneInfo:
             y += 30
 
         # 绘制职业等级区域
-        self.draw_rounded_rectangle(draw, (10, 470, 790, 770), 30, (220, 220, 220, 100))
+        self.draw_rounded_rectangle(draw, (10, 470, 790, 805), 0, (228, 231, 240))
         draw.text((20, 480), "职业等级", fill="black", font=font)
 
         # 绘制职业图标和等级
@@ -332,20 +338,15 @@ class FF14RisingStoneInfo:
         }
 
         # 绘制战斗职业
-        self.draw_battle_jobs(draw, small_font, career_levels)
+        self.draw_battle_jobs(image,draw, small_font, career_levels)
 
         # 绘制生产采集职业
-        self.draw_crafting_jobs(draw, small_font, career_levels)
+        self.draw_crafting_jobs(image,draw, small_font, career_levels)
 
         # 绘制成就区域
         if filtered_achievements:
-            self.draw_rounded_rectangle(
-                draw,
-                (10, 790, 790, 790 + len(filtered_achievements) * 60),
-                30,
-                (220, 220, 220, 100),
-            )
-            draw.text((20, 800), "特殊成就", fill="black", font=font)
+            self.draw_rounded_rectangle(draw,(10, 860, 790,860+(len(filtered_achievements)* 60)),0, (228, 231, 240),)
+            draw.text((20, 830), "特殊成就", fill="black", font=font)
             self.draw_achievements(draw, small_font, filtered_achievements)
 
         # 保存图片
@@ -387,13 +388,10 @@ class FF14RisingStoneInfo:
         value: str,
     ):
         """绘制标签值对"""
-        draw.text((x, y), f"{label}：", fill="black", font=font)
-        text_width = font.getlength(f"{label}：")
-        draw.text(
-            (x + width - font.getlength(value)), y, value, fill="black", font=font
-        )
+        draw.text((x, y), f"{label}：","black",font)
+        draw.text(((x+390)-font.getlength(f"{value}："),y),f"{value}","black",font)
 
-    def draw_battle_jobs(self, draw: ImageDraw, font: ImageFont, career_levels: Dict):
+    def draw_battle_jobs(self,image, draw: ImageDraw, font: ImageFont, career_levels: Dict):
         """绘制战斗职业图标和等级"""
         # 坦克
         tanks = [
@@ -407,7 +405,7 @@ class FF14RisingStoneInfo:
         for job_key, job_name in tanks:
             if job_key in self.job_icons:
                 icon = self.job_icons[job_key].resize((50, 50))
-                Image.Image.paste(icon, (x, y))
+                image.paste(icon, (x, y),mask=None)
                 level = career_levels.get(job_name, "0")
                 self.draw_centered_text(draw, font, level, x, y + 60, 50)
             x += 55
@@ -425,7 +423,7 @@ class FF14RisingStoneInfo:
         for job_key, job_name in melee_dps:
             if job_key in self.job_icons:
                 icon = self.job_icons[job_key].resize((50, 50))
-                Image.Image.paste(icon, (x, y))
+                image.paste(icon, (x, y))
                 level = career_levels.get(job_name, "0")
                 self.draw_centered_text(draw, font, level, x, y + 60, 50)
             x += 55
@@ -436,7 +434,7 @@ class FF14RisingStoneInfo:
         for job_key, job_name in ranged:
             if job_key in self.job_icons:
                 icon = self.job_icons[job_key].resize((50, 50))
-                Image.Image.paste(icon, (x, y))
+                image.paste(icon, (x, y))
                 level = career_levels.get(job_name, "0")
                 self.draw_centered_text(draw, font, level, x, y + 60, 50)
             x += 55
@@ -453,7 +451,7 @@ class FF14RisingStoneInfo:
         for job_key, job_name in healers:
             if job_key in self.job_icons:
                 icon = self.job_icons[job_key].resize((50, 50))
-                Image.Image.paste(icon, (x, y))
+                image.paste(icon, (x, y))
                 level = career_levels.get(job_name, "0")
                 self.draw_centered_text(draw, font, level, x, y + 60, 50)
             x += 55
@@ -470,12 +468,12 @@ class FF14RisingStoneInfo:
         for job_key, job_name in casters:
             if job_key in self.job_icons:
                 icon = self.job_icons[job_key].resize((50, 50))
-                Image.Image.paste(icon, (x, y))
+                image.paste(icon, (x, y))
                 level = career_levels.get(job_name, "0")
                 self.draw_centered_text(draw, font, level, x, y + 60, 50)
             x += 55
 
-    def draw_crafting_jobs(self, draw: ImageDraw, font: ImageFont, career_levels: Dict):
+    def draw_crafting_jobs(self,image, draw: ImageDraw, font: ImageFont, career_levels: Dict):
         """绘制生产采集职业图标和等级"""
         crafters = [
             ("sjob0", "刻木匠"),
@@ -492,7 +490,7 @@ class FF14RisingStoneInfo:
         for job_key, job_name in crafters:
             if job_key in self.job_icons:
                 icon = self.job_icons[job_key].resize((50, 50))
-                Image.Image.paste(icon, (x, y))
+                image.paste(icon, (x, y),mask=None)
                 level = career_levels.get(job_name, "0")
                 self.draw_centered_text(draw, font, level, x, y + 60, 50)
             x += 55
@@ -502,7 +500,7 @@ class FF14RisingStoneInfo:
         for job_key, job_name in gatherers:
             if job_key in self.job_icons:
                 icon = self.job_icons[job_key].resize((50, 50))
-                Image.Image.paste(icon, (x, y))
+                image.paste(icon, (x, y),mask=None)
                 level = career_levels.get(job_name, "0")
                 self.draw_centered_text(draw, font, level, x, y + 60, 50)
             x += 55
@@ -518,7 +516,7 @@ class FF14RisingStoneInfo:
         self, draw: ImageDraw, font: ImageFont, achievements: List[Dict]
     ):
         """绘制成就信息"""
-        y = 850
+        y = 870
         for achievement in achievements:
             achieve_name = f"成就名: {achievement.get('achieve_name', '')}"
             achieve_time = f"完成时间: {achievement.get('achieve_time', '')}"
@@ -561,7 +559,6 @@ class FF14RisingStoneInfo:
             user_info = self.get_user_info(filtered_players[0].get("uuid"), cookie)
             if user_info and user_info.get("code") == 10000:
                 image_path = self.generate_image(user_info.get("data", {}))
-                print(image_path)
                 await input.add_image(image_path).reply()
             else:
                 await input.add_text("获取玩家信息失败").reply()
