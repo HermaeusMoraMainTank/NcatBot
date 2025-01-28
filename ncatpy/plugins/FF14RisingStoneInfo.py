@@ -1,5 +1,5 @@
 import os
-import requests
+import httpx
 from datetime import datetime
 from typing import List, Optional, Dict
 from PIL import Image, ImageDraw, ImageFont
@@ -137,7 +137,7 @@ class FF14RisingStoneInfo:
             "accept-encoding": "gzip, deflate, br, zstd",
             "accept-language": "zh-CN,zh;q=0.9",
             "cache-control": "max-age=0",
-            "cookie": cookie,
+            "Cookie": cookie,
             "sec-ch-ua": '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
             "sec-ch-ua-mobile": "?0",
             "sec-ch-ua-platform": '"Windows"',
@@ -145,11 +145,12 @@ class FF14RisingStoneInfo:
             "sec-fetch-mode": "navigate",
             "sec-fetch-site": "none",
             "sec-fetch-user": "?1",
-            "upgrade-insecure-requests": "1",
+            "upgrade-insecure-httpx": "1",
+            "priority":"u=1, i"
         }
 
         try:
-            session = requests.Session()
+            session = httpx.Client(verify=False)
 
             # 打印请求信息
             print("\n=== Request Info ===")
@@ -199,29 +200,24 @@ class FF14RisingStoneInfo:
     def get_user_info(self, uuid: str, cookie: str) -> Optional[Dict]:
         """获取用户详细信息"""
         try:
-            headers = {
-                "User-Agent": HMMT.USER_AGENT,
-                "Cookie": cookie,
-                "Host": "apiff14risingstones.web.sdo.com",
-            }
-
-            session = requests.Session()
-            # 先访问玩家页面
-            session.get(
-                f"https://ff14risingstones.web.sdo.com/pc/player/{uuid}",
-                headers={
-                    "User-Agent": HMMT.USER_AGENT,
-                    "Cookie": cookie,
-                    "Host": "apiff14risingstones.web.sdo.com",
-                },
-            )
-
+            session = httpx.Client(verify=False)
             # 然后获取详细信息
             response = session.get(
                 f"{self.API_URL_USER_INFO}?uuid={uuid}&page=1&limit=30",
-                headers=headers,
-                timeout=10,
+                headers={
+                    "authority": "apiff14risingstones.web.sdo.com",
+                    "scheme": "https",
+                    "sec-ch-ua-platform": '"Windows"',
+                    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0",
+                    "accept": "application/json, text/plain, */*",
+                    "sec-ch-ua": '"Not A(Brand";v="8", "Chromium";v="132", "Microsoft Edge";v="132"',
+                    "sec-ch-ua-mobile": "?0",
+                    "origin": "https://ff14risingstones.web.sdo.com",
+                    "referer": "https://ff14risingstones.web.sdo.com/",
+                    "cookie": cookie
+                },
             )
+            print(response.json())
             response.raise_for_status()
             return response.json()
         except Exception as e:
@@ -264,7 +260,7 @@ class FF14RisingStoneInfo:
         avatar_url = user_data.get("avatar")
         if avatar_url:
             try:
-                avatar_image = Image.open(BytesIO(requests.get(avatar_url).content))
+                avatar_image = Image.open(BytesIO(httpx.get(avatar_url).content))
                 avatar_image = avatar_image.resize((200, 200))
                 # 创建圆角蒙版
                 mask = Image.new("L", (200, 200), 0)
@@ -565,6 +561,7 @@ class FF14RisingStoneInfo:
             user_info = self.get_user_info(filtered_players[0].get("uuid"), cookie)
             if user_info and user_info.get("code") == 10000:
                 image_path = self.generate_image(user_info.get("data", {}))
+                print(image_path)
                 await input.add_image(image_path).reply()
             else:
                 await input.add_text("获取玩家信息失败").reply()
