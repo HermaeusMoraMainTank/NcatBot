@@ -1,10 +1,13 @@
 import os
+from random import random
+import textwrap
 import httpx
 from datetime import datetime
 from typing import List, Optional, Dict
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 from io import BytesIO
 
+from curl_cffi import requests  # 替换为 curl_cffi 的 requests
 from ncatpy.common.constants.HMMT import HMMT
 from ncatpy.message import GroupMessage
 
@@ -15,7 +18,7 @@ class FF14RisingStoneInfo:
     API_URL_USER_INFO = (
         "https://apiff14risingstones.web.sdo.com/api/home/userInfo/getUserInfo"
     )
-    FONT_PATH = "data/font/FZMiaoWuK.TTF"
+    FONT_PATH = "data/font/sakura.ttf"
 
     # 服务器映射
     SERVER_ALIAS = {
@@ -62,7 +65,7 @@ class FF14RisingStoneInfo:
     }
 
     DOUDAOCHAI_SERVERS = {"水晶塔", "银泪湖", "太阳海岸", "伊修加德", "红茶川"}
-    RACE=["人族","精灵族","拉拉菲尔族","猫魅族","鲁加族","敖龙族","硌狮族","维埃拉族"]
+    RACE = ["人族", "精灵族", "拉拉菲尔族", "猫魅族", "鲁加族", "敖龙族", "硌狮族", "维埃拉族"]
 
     def __init__(self):
         self.init_job_icons()
@@ -134,49 +137,31 @@ class FF14RisingStoneInfo:
         headers = {
             "User-Agent": HMMT.USER_AGENT,
             "Host": "apiff14risingstones.web.sdo.com",
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+            "accept": "application/json, text/plain, */*",
             "accept-encoding": "gzip, deflate, br, zstd",
             "accept-language": "zh-CN,zh;q=0.9",
             "cache-control": "max-age=0",
             "Cookie": cookie,
-            "sec-ch-ua": '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+            "origin": "https://ff14risingstones.web.sdo.com",
+            "priority": "u=1, i",
+            "referer": "https://ff14risingstones.web.sdo.com/",
+            "sec-ch-ua": '"Not A(Brand";v="8", "Chromium";v="132", "Google Chrome";v="132"',
             "sec-ch-ua-mobile": "?0",
             "sec-ch-ua-platform": '"Windows"',
-            "sec-fetch-dest": "document",
-            "sec-fetch-mode": "navigate",
-            "sec-fetch-site": "none",
-            "sec-fetch-user": "?1",
-            "upgrade-insecure-httpx": "1",
-            "priority":"u=1, i"
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "same-site",
         }
 
         try:
-            session = httpx.Client(verify=False)
-
-            # 打印请求信息
-            print("\n=== Request Info ===")
-            print(f"URL: {self.API_URL_SEARCH}")
-            print(f"Method: GET")
-            print(f"Params: {params}")
-            print("Headers:")
-            for key, value in headers.items():
-                print(f"  {key}: {value}")
-
-            response = session.get(
+            # 使用 curl_cffi 发送请求，模拟 Chrome 的 TLS 指纹
+            response = requests.get(
                 self.API_URL_SEARCH,
                 params=params,
                 headers=headers,
                 timeout=10,
+                impersonate="chrome110",  # 模拟 Chrome 110 的 TLS 指纹
             )
-
-            # 打印响应信息
-            print("\n=== Response Info ===")
-            print(f"Status Code: {response.status_code}")
-            print("Response Headers:")
-            for key, value in response.headers.items():
-                print(f"  {key}: {value}")
-            print(f"Response URL: {response.url}")
-            print(f"Response Content: {response.text[:500]}...")  # 只打印前500个字符
 
             response.raise_for_status()
             result = response.json()
@@ -201,24 +186,23 @@ class FF14RisingStoneInfo:
     def get_user_info(self, uuid: str, cookie: str) -> Optional[Dict]:
         """获取用户详细信息"""
         try:
-            session = httpx.Client(verify=False)
-            # 然后获取详细信息
-            response = session.get(
+            # 使用 curl_cffi 发送请求，模拟 Chrome 的 TLS 指纹
+            response = requests.get(
                 f"{self.API_URL_USER_INFO}?uuid={uuid}&page=1&limit=30",
                 headers={
                     "authority": "apiff14risingstones.web.sdo.com",
                     "scheme": "https",
                     "sec-ch-ua-platform": '"Windows"',
-                    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0",
                     "accept": "application/json, text/plain, */*",
                     "sec-ch-ua": '"Not A(Brand";v="8", "Chromium";v="132", "Microsoft Edge";v="132"',
                     "sec-ch-ua-mobile": "?0",
                     "origin": "https://ff14risingstones.web.sdo.com",
                     "referer": "https://ff14risingstones.web.sdo.com/",
-                    "cookie": cookie
+                    "cookie": cookie,
+                    "User-Agent": HMMT.USER_AGENT,
                 },
+                impersonate="chrome110",  # 模拟 Chrome 110 的 TLS 指纹
             )
-            print(response.json())
             response.raise_for_status()
             return response.json()
         except Exception as e:
@@ -240,11 +224,11 @@ class FF14RisingStoneInfo:
             for a in achievements
             if a.get("medal_type") not in ["职业满级", "剧情通关"]
         ]
-        height +=len(filtered_achievements)+1* 60
-        print(height)
+        height += (len(filtered_achievements)) * 60
         # 创建背景
         image = Image.new("RGB", (width, height), "white")
         draw = ImageDraw.Draw(image)
+
         self.draw_gradient_background(image, width, height)
 
         try:
@@ -254,8 +238,6 @@ class FF14RisingStoneInfo:
             print(f"加载字体失败: {e}")
             return ""
 
-        # 绘制基本信息区域
-        self.draw_rounded_rectangle(draw, (10, 10, 790, 250), 0, (228, 231, 240))
         # 绘制头像
         avatar_url = user_data.get("avatar")
         if avatar_url:
@@ -276,26 +258,38 @@ class FF14RisingStoneInfo:
 
         # 绘制基本文字信息
         draw.text(
-            (230, 30),
+            (220, 10),
             character_detail.get("character_name", ""),
             fill="black",
             font=font,
         )
         draw.text(
-            (230, 80),
+            (220, 40),
             f"服务器：{user_data.get('area_name')} {user_data.get('group_name')}",
             fill="black",
             font=small_font,
         )
+        # 简介换行处理
+        profile_text = f"简介：{user_data.get('profile', '')}"
+        wrapped_profile = textwrap.fill(profile_text, width=24)  # 调整宽度以适应你的设计
+        draw.multiline_text(
+            (220, 65),
+            wrapped_profile,
+            fill="black",
+            font=small_font,
+            spacing=5,  # 行间距
+            align='left'
+        )
 
         # 绘制详细信息区域
-        self.draw_rounded_rectangle(draw, (10, 270, 790, 465), 0, (228, 231, 240))
+        self.draw_rounded_rectangle(draw, (10, 280, 790, 475), 20, (228, 231, 240, 64))
+        draw.text((20, 240), "详细信息：", fill="black", font=font)
 
-        #种族要特殊处理
-        if int(character_detail.get('race', 20))!=20:
-            race=self.RACE[int(character_detail.get('race', 20))-1]
+        # 种族要特殊处理
+        if int(character_detail.get('race', 20)) != 20:
+            race = self.RACE[int(character_detail.get('race', 20)) - 1]
         else:
-            race="未知"
+            race = "未知"
         # 左侧信息
         info_left = [
             ("种族", f"{race}"),
@@ -318,7 +312,6 @@ class FF14RisingStoneInfo:
 
         y = 290
         for label, value in info_left:
-            print(label, value)
             self.draw_info_pair(draw, small_font, 20, y, 360, label, value)
             y += 30
 
@@ -328,8 +321,8 @@ class FF14RisingStoneInfo:
             y += 30
 
         # 绘制职业等级区域
-        self.draw_rounded_rectangle(draw, (10, 470, 790, 805), 0, (228, 231, 240))
-        draw.text((20, 480), "职业等级", fill="black", font=font)
+        self.draw_rounded_rectangle(draw, (10, 560, 790, 855), 20, (228, 231, 240, 64))
+        draw.text((20, 520), "职业等级：", fill="black", font=font)
 
         # 绘制职业图标和等级
         career_levels = {
@@ -338,15 +331,16 @@ class FF14RisingStoneInfo:
         }
 
         # 绘制战斗职业
-        self.draw_battle_jobs(image,draw, small_font, career_levels)
+        self.draw_battle_jobs(image, draw, small_font, career_levels)
 
         # 绘制生产采集职业
-        self.draw_crafting_jobs(image,draw, small_font, career_levels)
+        self.draw_crafting_jobs(image, draw, small_font, career_levels)
 
         # 绘制成就区域
         if filtered_achievements:
-            self.draw_rounded_rectangle(draw,(10, 860, 790,860+(len(filtered_achievements)* 60)),0, (228, 231, 240),)
-            draw.text((20, 830), "特殊成就", fill="black", font=font)
+            self.draw_rounded_rectangle(draw, (10, 950, 790, 930 + (len(filtered_achievements) * 60)), 20,
+                                        (228, 231, 240, 64), )
+            draw.text((20, 910), "特殊成就：", fill="black", font=font)
             self.draw_achievements(draw, small_font, filtered_achievements)
 
         # 保存图片
@@ -366,10 +360,11 @@ class FF14RisingStoneInfo:
                 image.putpixel((x, y), (r, g, b))
 
     def draw_rounded_rectangle(
-        self, draw: ImageDraw, xy: tuple, radius: int, fill: tuple
+            self, draw: ImageDraw, xy: tuple, radius: int, fill: tuple
     ):
         """绘制圆角矩形"""
         x1, y1, x2, y2 = xy
+        fill = (*fill[:3], 64) if len(fill) == 3 else fill
         draw.rectangle([x1 + radius, y1, x2 - radius, y2], fill=fill)
         draw.rectangle([x1, y1 + radius, x2, y2 - radius], fill=fill)
         draw.pieslice([x1, y1, x1 + radius * 2, y1 + radius * 2], 180, 270, fill=fill)
@@ -378,20 +373,20 @@ class FF14RisingStoneInfo:
         draw.pieslice([x2 - radius * 2, y2 - radius * 2, x2, y2], 0, 90, fill=fill)
 
     def draw_info_pair(
-        self,
-        draw: ImageDraw,
-        font: ImageFont,
-        x: int,
-        y: int,
-        width: int,
-        label: str,
-        value: str,
+            self,
+            draw: ImageDraw,
+            font: ImageFont,
+            x: int,
+            y: int,
+            width: int,
+            label: str,
+            value: str,
     ):
         """绘制标签值对"""
-        draw.text((x, y), f"{label}：","black",font)
-        draw.text(((x+390)-font.getlength(f"{value}："),y),f"{value}","black",font)
+        draw.text((x, y), f"{label}：", "black", font)
+        draw.text(((x + 390) - font.getlength(f"{value}："), y), f"{value}", "black", font)
 
-    def draw_battle_jobs(self,image, draw: ImageDraw, font: ImageFont, career_levels: Dict):
+    def draw_battle_jobs(self, image, draw: ImageDraw, font: ImageFont, career_levels: Dict):
         """绘制战斗职业图标和等级"""
         # 坦克
         tanks = [
@@ -401,11 +396,13 @@ class FF14RisingStoneInfo:
             ("GNB", "绝枪战士"),
         ]
         x = 20
-        y = 520
+        y = 570
         for job_key, job_name in tanks:
             if job_key in self.job_icons:
-                icon = self.job_icons[job_key].resize((50, 50))
-                image.paste(icon, (x, y),mask=None)
+                icon = self.job_icons[job_key].convert("RGBA")
+                icon = icon.resize(
+                    (50, 50))
+                image.paste(icon, (x, y), mask=icon)
                 level = career_levels.get(job_name, "0")
                 self.draw_centered_text(draw, font, level, x, y + 60, 50)
             x += 55
@@ -422,8 +419,10 @@ class FF14RisingStoneInfo:
         x = 20 + 55 * 4 + 15
         for job_key, job_name in melee_dps:
             if job_key in self.job_icons:
-                icon = self.job_icons[job_key].resize((50, 50))
-                image.paste(icon, (x, y))
+                icon = self.job_icons[job_key].convert("RGBA")
+                icon = icon.resize(
+                    (50, 50))
+                image.paste(icon, (x, y), mask=icon)
                 level = career_levels.get(job_name, "0")
                 self.draw_centered_text(draw, font, level, x, y + 60, 50)
             x += 55
@@ -433,8 +432,10 @@ class FF14RisingStoneInfo:
         x = 20 + 55 * 10 + 30
         for job_key, job_name in ranged:
             if job_key in self.job_icons:
-                icon = self.job_icons[job_key].resize((50, 50))
-                image.paste(icon, (x, y))
+                icon = self.job_icons[job_key].convert("RGBA")
+                icon = icon.resize(
+                    (50, 50))
+                image.paste(icon, (x, y), mask=icon)
                 level = career_levels.get(job_name, "0")
                 self.draw_centered_text(draw, font, level, x, y + 60, 50)
             x += 55
@@ -447,11 +448,13 @@ class FF14RisingStoneInfo:
             ("SGE", "贤者"),
         ]
         x = 20
-        y = 620
+        y = 670
         for job_key, job_name in healers:
             if job_key in self.job_icons:
-                icon = self.job_icons[job_key].resize((50, 50))
-                image.paste(icon, (x, y))
+                icon = self.job_icons[job_key].convert("RGBA")
+                icon = icon.resize(
+                    (50, 50))
+                image.paste(icon, (x, y), mask=icon)
                 level = career_levels.get(job_name, "0")
                 self.draw_centered_text(draw, font, level, x, y + 60, 50)
             x += 55
@@ -467,13 +470,15 @@ class FF14RisingStoneInfo:
         x = 20 + 55 * 4 + 15
         for job_key, job_name in casters:
             if job_key in self.job_icons:
-                icon = self.job_icons[job_key].resize((50, 50))
-                image.paste(icon, (x, y))
+                icon = self.job_icons[job_key].convert("RGBA")
+                icon = icon.resize(
+                    (50, 50))
+                image.paste(icon, (x, y), mask=icon)
                 level = career_levels.get(job_name, "0")
                 self.draw_centered_text(draw, font, level, x, y + 60, 50)
             x += 55
 
-    def draw_crafting_jobs(self,image, draw: ImageDraw, font: ImageFont, career_levels: Dict):
+    def draw_crafting_jobs(self, image, draw: ImageDraw, font: ImageFont, career_levels: Dict):
         """绘制生产采集职业图标和等级"""
         crafters = [
             ("sjob0", "刻木匠"),
@@ -486,11 +491,13 @@ class FF14RisingStoneInfo:
             ("sjob7", "烹调师"),
         ]
         x = 20
-        y = 720
+        y = 770
         for job_key, job_name in crafters:
             if job_key in self.job_icons:
-                icon = self.job_icons[job_key].resize((50, 50))
-                image.paste(icon, (x, y),mask=None)
+                icon = self.job_icons[job_key].convert("RGBA")
+                icon = icon.resize(
+                    (50, 50))
+                image.paste(icon, (x, y), mask=icon)
                 level = career_levels.get(job_name, "0")
                 self.draw_centered_text(draw, font, level, x, y + 60, 50)
             x += 55
@@ -499,24 +506,26 @@ class FF14RisingStoneInfo:
         x = 20 + 55 * 8 + 15
         for job_key, job_name in gatherers:
             if job_key in self.job_icons:
-                icon = self.job_icons[job_key].resize((50, 50))
-                image.paste(icon, (x, y),mask=None)
+                icon = self.job_icons[job_key].convert("RGBA")
+                icon = icon.resize(
+                    (50, 50))
+                image.paste(icon, (x, y), mask=icon)
                 level = career_levels.get(job_name, "0")
                 self.draw_centered_text(draw, font, level, x, y + 60, 50)
             x += 55
 
     def draw_centered_text(
-        self, draw: ImageDraw, font: ImageFont, text: str, x: int, y: int, width: int
+            self, draw: ImageDraw, font: ImageFont, text: str, x: int, y: int, width: int
     ):
         """绘制居中文字"""
         text_width = font.getlength(str(text))
         draw.text((x + (width - text_width) / 2, y), str(text), fill="black", font=font)
 
     def draw_achievements(
-        self, draw: ImageDraw, font: ImageFont, achievements: List[Dict]
+            self, draw: ImageDraw, font: ImageFont, achievements: List[Dict]
     ):
         """绘制成就信息"""
-        y = 870
+        y = 950
         for achievement in achievements:
             achieve_name = f"成就名: {achievement.get('achieve_name', '')}"
             achieve_time = f"完成时间: {achievement.get('achieve_time', '')}"
