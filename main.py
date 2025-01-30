@@ -64,7 +64,7 @@ class MyClient(ncatpy.Client):
         if message.user_id == 771575637:
             return
         _log.info(
-            f"收到群消息，Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}，ID: {message.user_id}，内容：{message.raw_message}")
+            f"收到群消息，Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}，群ID：{message.group_id}，ID: {message.user_id}，内容：{message.raw_message}")
         await today_waifu.handle_message(input=message)
         await jrrp.handle_jrrp(input=message)
         await http_cat.http_cat(input=message)

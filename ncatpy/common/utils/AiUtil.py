@@ -11,7 +11,6 @@ class AiUtil:
     @staticmethod
     async def search_deepseek(keyword: str, prompt: str) -> str:
         _log.info(keyword)
-        _log.info(prompt)
 
         # 请求 URL 和 API Key
         url = "https://api.deepseek.com/chat/completions"

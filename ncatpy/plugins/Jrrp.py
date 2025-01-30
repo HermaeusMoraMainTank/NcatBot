@@ -1,6 +1,5 @@
 import hashlib
 import logging
-from datetime import date
 
 from ncatpy.common.constants.HMMT import HMMT
 from ncatpy.common.utils.CommonUtil import CommonUtil

@@ -1,3 +1,5 @@
+import datetime
+import logging
 import os
 import random
 from ncatpy.message import GroupMessage
@@ -5,6 +7,9 @@ from ncatpy.message import GroupMessage
 KEYWORD1 = "母肥"
 KEYWORD2 = "母肥 "
 PATH = "F:\\oobabooga_windows\\lalafell"  # 替换为实际图片目录
+
+log = logging.getLogger(__name__)
+
 
 class Lalafell:
     def __init__(self):
@@ -23,11 +28,13 @@ class Lalafell:
 
             if count <= 3:
                 for _ in range(count):
+                    log.info(f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {image_files}")
                     await input.add_image(random.choice(image_files)).reply()
             else:
                 await input.add_text("别太贪心").reply()
         elif message == KEYWORD1:
             image_files = self.get_image_files(PATH)
+            log.info(f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {image_files}")
             await input.add_image(random.choice(image_files)).reply()
 
     @staticmethod

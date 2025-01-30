@@ -9,7 +9,6 @@ from io import BytesIO
 from ncatpy.message import GroupMessage
 
 
-
 class FF14LogsInfo:
     # 常量定义
     TOKEN_ENDPOINT = "https://cn.fflogs.com/oauth/token"
