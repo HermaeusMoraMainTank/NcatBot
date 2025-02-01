@@ -1,7 +1,8 @@
+from pyexpat.errors import messages
 
 import ncatpy
 from ncatpy import logging
-from ncatpy.message import GroupMessage, PrivateMessage, NoticeMessage
+from ncatpy.message import GroupMessage, PrivateMessage, NoticeMessage, BaseMessage
 from ncatpy.plugins.CrazyThursday import CrazyThursday
 from ncatpy.plugins.Daily3Min import Daily3Min
 from ncatpy.plugins.FF14LogsInfo import FF14LogsInfo
@@ -106,3 +107,4 @@ if __name__ == "__main__":
     intents = ncatpy.Intents().all()
     client = MyClient(intents=intents)
     client.run()
+    print("a")

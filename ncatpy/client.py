@@ -52,6 +52,8 @@ class Client:
         elif event_type == "meta_event":
             if data.get('meta_event_type') == "lifecycle":
                 _log.info(f"[ncatpy] 机器人 {data.get('self_id')} 已启动!")
+                await message.PrivateMessage(data).add_text("已启动").send_private_msg(1271701079,clear_message=True)
+                await message.PrivateMessage(data).add_text("已启动").send_private_msg(273421673, clear_message=True)
             elif data.get('meta_event_type') == "heartbeat":
                 _log.debug(f"[ncatpy] 收到心跳包: {data}")
         else:
