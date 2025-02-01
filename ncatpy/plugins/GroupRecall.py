@@ -1,3 +1,4 @@
+import asyncio
 import logging
 from ncatpy.message import GroupMessage
 from ncatpy.message import NoticeMessage
@@ -11,16 +12,14 @@ class GroupRecall:
     def __init__(self):
         self.msgMap = {}  # 初始化字典，用于存储消息
         self.expiration_time = 3600 * 24  # 消息保存时间为一天
-        self.cleanup_thread = threading.Thread(target=self.clean_task, daemon=True)
-        self.cleanup_thread.start()  # 启动定时清理线程
-        pass
+        self.loop = asyncio.get_event_loop()  # 获取事件循环
+        self.loop.create_task(self.clean_task())  # 创建并启动定时清理任务
 
     async def clean_task(self):  # 定时清理任务
         while True:
             log.debug(f"消息储存量: {len(self.msgMap)}")  # 打印当前消息存储量
-            time.sleep(60)  # 每分钟执行一次清理
+            await asyncio.sleep(60)  # 每分钟执行一次清理
             await self.clean()
-            pass
 
     async def clean(self):
         """清理过期消息"""
