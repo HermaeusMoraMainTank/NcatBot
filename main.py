@@ -26,6 +26,7 @@ from ncatpy.plugins.Universalis import Universalis
 from ncatpy.plugins.NudgeEvent import NudgeEvent
 from ncatpy.plugins.Crazy import Crazy
 from ncatpy.plugins.FF14RisingStoneInfo import FF14RisingStoneInfo
+from ncatpy.plugins.Reboot import Reboot
 from datetime import datetime
 import os
 
@@ -55,7 +56,7 @@ ff14_logs_info = FF14LogsInfo()
 ff14_rising_stone_info = FF14RisingStoneInfo()
 fortune = Fortune()
 lalafell = Lalafell()
-
+reboot = Reboot()
 class MyClient(ncatpy.Client):
     async def on_group_message(self, message: GroupMessage):
         # if message.group_id != 1064163905:
@@ -96,6 +97,7 @@ class MyClient(ncatpy.Client):
 
     async def on_private_message(self, message: PrivateMessage):
         _log.info(f"收到私聊消息，ID: {message.user_id}，{message.message}")
+        await reboot.Reboot(input=message)
 
     async def on_notice(self, message: NoticeMessage):
         _log.info(f"监听到事件，{message}")
