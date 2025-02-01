@@ -52,8 +52,10 @@ class Client:
         elif event_type == "meta_event":
             if data.get('meta_event_type') == "lifecycle":
                 _log.info(f"[ncatpy] 机器人 {data.get('self_id')} 已启动!")
-                await message.PrivateMessage(data).add_text("已启动").send_private_msg(1271701079,clear_message=True)
-                await message.PrivateMessage(data).add_text("已启动").send_private_msg(273421673, clear_message=True)
+                tag_name = get_current_commit_hash()
+                if tag_name:
+                    await message.PrivateMessage(data).add_text("已启动，commit hash="+tag_name).send_private_msg(1271701079,clear_message=True)
+                    await message.PrivateMessage(data).add_text("已启动，commit hash="+tag_name).send_private_msg(273421673,clear_message=True)
             elif data.get('meta_event_type') == "heartbeat":
                 _log.debug(f"[ncatpy] 收到心跳包: {data}")
         else:
@@ -76,3 +78,15 @@ class Client:
         loop = asyncio.get_event_loop()
         self._websocket = BotWebSocket(self)
         loop.run_until_complete(self._websocket.ws_connect())
+import subprocess
+def get_current_commit_hash():
+    try:
+        result = subprocess.run(['git', 'rev-parse', 'HEAD'],
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE,
+                                text=True,
+                                check=True)
+        return result.stdout.strip()  # 返回当前提交哈希
+    except subprocess.CalledProcessError as e:
+        print(f"Error: {e.stderr.strip()}")
+        return None
