@@ -1,8 +1,5 @@
-# encoding: utf-8
-import time
 
 import ncatpy
-import random
 from ncatpy import logging
 from ncatpy.message import GroupMessage, PrivateMessage, NoticeMessage
 from ncatpy.plugins.CrazyThursday import CrazyThursday
@@ -28,10 +25,6 @@ from ncatpy.plugins.Crazy import Crazy
 from ncatpy.plugins.FF14RisingStoneInfo import FF14RisingStoneInfo
 from ncatpy.plugins.Reboot import Reboot
 from datetime import datetime
-import os
-
-# 获取当前时间
-current_time = datetime.now()
 
 # 格式化时间
 _log = logging.get_logger()
@@ -64,6 +57,7 @@ class MyClient(ncatpy.Client):
 
         if message.user_id == 771575637:
             return
+
         _log.info(
             f"收到群消息，Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}，群ID：{message.group_id}，ID: {message.user_id}，内容：{message.raw_message}")
         await today_waifu.handle_message(input=message)

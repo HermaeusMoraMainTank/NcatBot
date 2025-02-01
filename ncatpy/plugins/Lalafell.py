@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import logging
 import os
 import random
@@ -28,14 +28,16 @@ class Lalafell:
 
             if count <= 3:
                 for _ in range(count):
-                    log.info(f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {image_files}")
-                    await input.add_image(random.choice(image_files)).reply()
+                    file = random.choice(image_files)
+                    log.info(f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {file}")
+                    await input.add_image(file).reply()
             else:
                 await input.add_text("别太贪心").reply()
         elif message == KEYWORD1:
             image_files = self.get_image_files(PATH)
-            log.info(f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {image_files}")
-            await input.add_image(random.choice(image_files)).reply()
+            file = random.choice(image_files)
+            log.info(f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {file}")
+            await input.add_image(file).reply()
 
     @staticmethod
     def get_image_files(folder_path):
