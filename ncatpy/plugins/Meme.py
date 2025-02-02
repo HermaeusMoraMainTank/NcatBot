@@ -19,11 +19,11 @@ class Meme:
             '嗨': 'https://api.xingzhige.com/API/FortuneCat/?qq=',
             '甩': 'https://api.xingzhige.com/API/DanceChickenLeg/?qq=',
             '打': 'https://api.xingzhige.com/API/pound/?qq=',
-            '爬':'https://api.xingzhige.com/API/pa/?qq='
+            '爬': 'https://api.xingzhige.com/API/pa/?qq='
         }
 
         for action, url in action_urls.items():
-            if input.raw_message.startswith(action):
+            if input.message[0]["type"] == "text" and input.message[0]["data"]["text"] == action:
                 for isAt in input.message:
                     if isAt.get('type') == 'at':
                         return await input.add_image(url + str(isAt.get('data').get('qq'))).reply()
