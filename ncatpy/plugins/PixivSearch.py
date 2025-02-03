@@ -36,6 +36,8 @@ class PixivSearch:
 
         if commands[0] == "搜索图片":
             keyword = commands[1]
+            if keyword in ["物述有栖", "nijisanji", "vtuber", "虚拟主播", "mononobe alice", "r18"]:
+                return
             page = last_page.get(keyword, 1)
             if keyword in last_page:
                 page = random.randint(1, last_page[keyword])
@@ -80,7 +82,6 @@ class PixivSearch:
             "sec-fetch-user": "?1",
             "upgrade-insecure-requests": "1",
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0",
-            "Host": "www.pixiv.net"
         }
 
         response = requests.get(url, headers=headers)
