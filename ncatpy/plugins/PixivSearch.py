@@ -11,7 +11,6 @@ last_page = {}
 dir_path = Path("data/image/pixiv")
 
 
-
 class PixivSearch:
     def __init__(self):
         pass
@@ -40,6 +39,7 @@ class PixivSearch:
 
             search_result, err = self.search_pixiv(keyword, False, page)
             if err:
+                print(err)
                 return
 
             if not search_result.get("body", {}).get("illustManga", {}).get("data"):
@@ -89,10 +89,12 @@ class PixivSearch:
         return ""
 
     def search_pixiv(self, keyword, r18=False, page=1):
-        keyword_encoded = quote(keyword)  # 对关键字进行 URL 编码
-        base_url = f"https://www.pixiv.net/ajax/search/artworks/{keyword_encoded}"
+        excluded_tags = ["AI", "vtuber", "nijisanji", "r18"]  # 要排除的标签
+        excluded_str = " ".join([f"-{tag}" for tag in excluded_tags])
+        search_keyword = f"{keyword} {excluded_str}".strip()
+
         params = {
-            "word": keyword,
+            "word": search_keyword,
             "order": "date_d",
             "mode": "r18" if r18 else "safe",
             "p": page,
@@ -102,6 +104,8 @@ class PixivSearch:
             "lang": "zh",
             "version": "1514cd4826094c32a804b4de6def5f2209963922"
         }
+        base_url = f"https://www.pixiv.net/ajax/search/artworks/{quote(search_keyword)}"
+
         url = base_url + "?" + urlencode(params)
 
         headers = {
@@ -111,7 +115,7 @@ class PixivSearch:
             "Cache-Control": "max-age=0",
             "Cookie": "first_visit_datetime_pc=2024-10-27%2021%3A31%3A40; p_ab_id=2; p_ab_id_2=4; p_ab_d_id=692958056; yuid_b=QHl0dBI; c_type=25; privacy_policy_notification=0; a_type=0; b_type=1; PHPSESSID=40581705_rQmgRA1guZzvkWGVwysacRwWo2CcGh2C; device_token=6a83fbbbdb3dc55a762744511e49b9ca; _ga_MZ1NL4PHH0=GS1.1.1736429551.2.0.1736429573.0.0.0; privacy_policy_agreement=0; login_ever=yes; _gcl_au=1.1.987029509.1737216645; _gid=GA1.2.1484901853.1738498405; __cf_bm=wMi5L6y00VipuLNbBY4G3Ja9g2f6biFursX0W7PuHkc-1738505887-1.0.1.1-_xQv41W7vDvhF05MPgEFnO7ItcAQ1OugaUdT.AvsAHrszai3AgG5kY1Dw64jwjgUG7NvrcafLaTTMTGARgmrPLbDBsXaYtGvKzFo3wj.MVY; cf_clearance=AvLy6nioY1GkLeyqwVqEsTXh.a1IuxMKDRhK5bLXiqg-1738506871-1.2.1.1-O69GPQCbokRrCNUjwW.bSqjjdomkxW.e6ilk_BiRv__BXHX2lZPDwIM9py0OvU9Dy3Er5bDbS0385oZWusSUCmp4zh8AZzAeS2BsYKrTp0xduZn_phVENKu1lgfUimi2J3MCgCxTstdfMn_ESkWGwENXSor_Y_BQOLJ594BWls1rWo4aXvlxhQP2lmIzrCfUQD_C_sUONQCNGt.LiHPR8jAmNthvcqnusCY9y29bJaSnjf1gx_I3NS43vm1ARv1Is_pM4lmQ_pXt4HFlT8VjU8p1uIQoK4qrI4igi_OOfWQ; _gat_UA-1830249-3=1; _ga=GA1.1.1094039263.1730032302; _ga_75BBYNYN9J=GS1.1.1738505888.4.1.1738506875.0.0.0",
             "Priority": "u=1, i",
-            "Referer": f"https://www.pixiv.net/tags/{keyword_encoded}/artworks?mode=r18&s_mode=s_tag",
+            "Referer": f"https://www.pixiv.net/tags/{quote(search_keyword)}/artworks",
             "Sec-CH-UA": '"Not A(Brand";v="8", "Chromium";v="132", "Microsoft Edge";v="132"',
             "Sec-CH-UA-Mobile": "?0",
             "Sec-CH-UA-Platform": '"Windows"',
