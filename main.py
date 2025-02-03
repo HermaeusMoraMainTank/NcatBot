@@ -14,6 +14,7 @@ from ncatpy.plugins.Lalafell import Lalafell
 from ncatpy.plugins.Lottery import Lottery
 from ncatpy.plugins.Meme import Meme
 from ncatpy.plugins.Moyu import Moyu
+from ncatpy.plugins.PixivSearch import PixivSearch
 from ncatpy.plugins.RussianRoulette import RussianRoulette
 from ncatpy.plugins.SendLike import SendLike
 from ncatpy.plugins.Tarot import Tarot
@@ -51,6 +52,10 @@ ff14_rising_stone_info = FF14RisingStoneInfo()
 fortune = Fortune()
 lalafell = Lalafell()
 reboot = Reboot()
+pixiv_search = PixivSearch()
+
+
+
 class MyClient(ncatpy.Client):
     async def on_group_message(self, message: GroupMessage):
         # if message.group_id != 1064163905:
@@ -81,6 +86,7 @@ class MyClient(ncatpy.Client):
         await ff14_rising_stone_info.handle_ff14_rising_stone_info(input=message)
         await fortune.handle_fortune(input=message)
         await lalafell.handle_lalafell(input=message)
+        await pixiv_search.handle_pixiv_search(input=message)
 
         # if message.user_id == 2214784017:
         #     if random.random() < 0.25:
