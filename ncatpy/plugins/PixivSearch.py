@@ -10,12 +10,6 @@ from ncatpy.message import GroupMessage
 last_page = {}
 dir_path = Path("data/image/pixiv")
 
-# 初始化目录
-if not dir_path.exists():
-    dir_path.mkdir(parents=True, exist_ok=True)
-    print(f"Directory created successfully: {dir_path}")
-else:
-    print(f"Directory already exists: {dir_path}")
 
 
 class PixivSearch:
@@ -62,7 +56,6 @@ class PixivSearch:
 
             image_url = illusion_detail["body"]["urls"]["original"]
             image_path = self.download_image(image_url)
-            print(image_path)
             if image_path:
                 await input.add_image(image_path).reply()
 
@@ -85,7 +78,6 @@ class PixivSearch:
         }
 
         response = requests.get(url, headers=headers)
-        print(response)
         if response.status_code == 200:
             image_data = response.content
             if len(image_data) > 1000:
