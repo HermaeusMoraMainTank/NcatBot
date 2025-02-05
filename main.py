@@ -1,3 +1,5 @@
+import os
+
 from pyexpat.errors import messages
 
 import ncatpy
@@ -14,6 +16,7 @@ from ncatpy.plugins.Lalafell import Lalafell
 from ncatpy.plugins.Lottery import Lottery
 from ncatpy.plugins.Meme import Meme
 from ncatpy.plugins.Moyu import Moyu
+from ncatpy.plugins.Pet import Pet
 from ncatpy.plugins.PixivSearch import PixivSearch
 from ncatpy.plugins.RussianRoulette import RussianRoulette
 from ncatpy.plugins.SendLike import SendLike
@@ -53,7 +56,7 @@ fortune = Fortune()
 lalafell = Lalafell()
 reboot = Reboot()
 pixiv_search = PixivSearch()
-
+pet=Pet()
 
 
 class MyClient(ncatpy.Client):
@@ -66,27 +69,28 @@ class MyClient(ncatpy.Client):
 
         _log.info(
             f"收到群消息，Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}，群ID：{message.group_id}，ID: {message.user_id}，内容：{message.raw_message}")
-        await today_waifu.handle_message(input=message)
-        await jrrp.handle_jrrp(input=message)
-        await http_cat.http_cat(input=message)
-        await crazy_thursday.handle_crazy_thursday(input=message)
-        await daily_3_min.handle_daily3min(input=message)
-        await moyu.handle_moyu(input=message)
-        await meme.handle_meme(input=message)
-        await send_like.handle_send_like(input=message)
-        await fake_ai.handle_fake_ai(input=message)
-        await russian_roulette.handle_message(input=message)
-        await status.handle_status(input=message)
-        await lottery.handle_lottery(input=message)
-        await universalis.handle_universalis(input=message)
-        await tarot.handle_tarot(input=message)
-        await group_recall.handle_group(input=message)
-        await crazy.handle_crazy(input=message)
-        await ff14_logs_info.handle_ff14_logs_info(input=message)
-        await ff14_rising_stone_info.handle_ff14_rising_stone_info(input=message)
-        await fortune.handle_fortune(input=message)
-        await lalafell.handle_lalafell(input=message)
-        await pixiv_search.handle_pixiv_search(input=message)
+        # await today_waifu.handle_message(input=message)
+        # await jrrp.handle_jrrp(input=message)
+        # await http_cat.http_cat(input=message)
+        # await crazy_thursday.handle_crazy_thursday(input=message)
+        # await daily_3_min.handle_daily3min(input=message)
+        # await moyu.handle_moyu(input=message)
+        # await meme.handle_meme(input=message)
+        # await send_like.handle_send_like(input=message)
+        # await fake_ai.handle_fake_ai(input=message)
+        # await russian_roulette.handle_message(input=message)
+        # await status.handle_status(input=message)
+        # await lottery.handle_lottery(input=message)
+        # await universalis.handle_universalis(input=message)
+        # await tarot.handle_tarot(input=message)
+        # await group_recall.handle_group(input=message)
+        # await crazy.handle_crazy(input=message)
+        # await ff14_logs_info.handle_ff14_logs_info(input=message)
+        # await ff14_rising_stone_info.handle_ff14_rising_stone_info(input=message)
+        # await fortune.handle_fortune(input=message)
+        # await lalafell.handle_lalafell(input=message)
+        # await pixiv_search.handle_pixiv_search(input=message)
+        await pet.handle_Pet(input=message)
 
         # if message.user_id == 2214784017:
         #     if random.random() < 0.25:
@@ -113,4 +117,3 @@ if __name__ == "__main__":
     intents = ncatpy.Intents().all()
     client = MyClient(intents=intents)
     client.run()
-    print("a")
