@@ -25,7 +25,7 @@ class NudgeEvent:
         ]
 
     async def handle_nudge(self, input: NoticeMessage):
-        if (input.target_id == 3213478871 or input.target_id == 3555202423) and input.sub_type == "poke":
+        if (input.target_id ==input.self_id) and input.sub_type == "poke":  #替换为自己
             userinfo = await input.get_group_member_info(input.group_id, input.user_id)
             if userinfo["data"]["card"] != "":
                 username = userinfo["data"]["card"]
@@ -33,4 +33,5 @@ class NudgeEvent:
                 username = userinfo["data"]["nickname"]
             input.add_at(input.user_id)
             i = random.randint(0, len(self.nudge))
+            input.add_reply(input.message_id)
             await input.add_text(self.nudge[i].replace("userName", username)).reply()
