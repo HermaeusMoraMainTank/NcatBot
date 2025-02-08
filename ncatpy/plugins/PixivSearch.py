@@ -89,7 +89,7 @@ class PixivSearch:
         return ""
 
     def search_pixiv(self, keyword, r18=False, page=1):
-        excluded_tags = ["AI", "vtuber", "nijisanji", "r18"]  # 要排除的标签
+        excluded_tags = ["ai", "r18"]  # 要排除的标签
         excluded_str = " ".join([f"-{tag}" for tag in excluded_tags])
         search_keyword = f"{keyword} {excluded_str}".strip()
 
