@@ -29,7 +29,7 @@ class PixivSearch:
 
         if commands[0] == "搜索图片":
             keyword = commands[1]
-            if keyword in ["物述有栖", "nijisanji", "vtuber", "虚拟主播", "mononobe alice", "r18"]:
+            if keyword in ["物述有栖", "mononobe alice", "r18"]:
                 return
             page = last_page.get(keyword, 1)
             if keyword in last_page:
