@@ -28,6 +28,8 @@ from ncatpy.plugins.NudgeEvent import NudgeEvent
 from ncatpy.plugins.Crazy import Crazy
 from ncatpy.plugins.FF14RisingStoneInfo import FF14RisingStoneInfo
 from ncatpy.plugins.Reboot import Reboot
+
+from ncatpy.plugins.Choujiang import Choujiang
 from datetime import datetime
 
 # 格式化时间
@@ -55,6 +57,7 @@ lalafell = Lalafell()
 reboot = Reboot()
 pixiv_search = PixivSearch()
 # meme = Meme()
+choujiang = Choujiang()
 
 
 class MyClient(ncatpy.Client):
@@ -87,6 +90,7 @@ class MyClient(ncatpy.Client):
         await fortune.handle_fortune(input=message)
         await lalafell.handle_lalafell(input=message)
         await pixiv_search.handle_pixiv_search(input=message)
+        await choujiang.handle_choujiang(input=message)
 
     async def on_private_message(self, message: PrivateMessage):
         _log.info(f"收到私聊消息，ID: {message.user_id}，{message.message}")
