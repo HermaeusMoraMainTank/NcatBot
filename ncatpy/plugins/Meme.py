@@ -1,12 +1,11 @@
-﻿import hashlib
+﻿import json
+import requests  # 使用 requests 代替 httpx
+from typing import List, Optional
 from dataclasses import dataclass
 from dataclasses_json import dataclass_json
-from typing import List, Optional
-import json
-import httpx
-import os
+from pathlib import Path
+import tempfile
 
-from ncatpy.common.utils.CommonUtil import CommonUtil
 from ncatpy.message import GroupMessage
 
 
@@ -18,7 +17,7 @@ class ParamsType:
     min_texts: int
     max_texts: int
     default_texts: List[str]
-    args_type: Optional[None]  # 如果 args_type 可能会有其他类型，可以适当修改
+    args_type: Optional[None]
 
 
 @dataclass_json
@@ -29,74 +28,152 @@ class DataStructure:
     keywords: List[str]
     shortcuts: List[str]
     tags: List[str]
-    date_created: str  # 如果需要日期对象，可以使用 datetime.date
-    date_modified: str  # 同上
+    date_created: str
+    date_modified: str
 
 
 class Meme:
     def __init__(self):
-        pass
-        self.baseurl = "http://127.0.0.1:2233"
+        self.baseurl = "http://127.0.0.1:2233/memes"
         self.keylist = []
         self.keywordslist: dict[str, DataStructure] = {}
-        self.client = httpx.Client(base_url=self.baseurl)
-        self.get_key_list()
-        self.get_key_info()
+        self.client = requests.Session()  # 使用 requests 的 Session
+        self.get_meme_list()
+        self.load_meme_data()
 
-    def get_key_list(self):
-        res = self.client.get("/memes/keys")
-        self.keylist = json.loads(res.text)
+    def load_meme_data(self):
+        try:
+            with open("data/json/memeKeys.json", "r") as file:
+                meme_data = json.load(file)
+                self.keywordslist = {keyword: DataStructure.from_dict(data) for data in meme_data for keyword in
+                                     data["keywords"]}
+        except Exception as e:
+            print(f"Failed to load meme data: {e}")
 
     async def handle_meme(self, input: GroupMessage):
+        # if input.raw_message == "meme":
+        #     meme = requests.post(f"{self.baseurl}/render_list/")
+        #
+        #     await meme
+
         if input.message[0]["type"] == "text":
             com = input.message[0]["data"]["text"].strip()  # 去除空格
             coms = str(com).split(" ")  #
             if coms[0] in self.keywordslist:
-                print(self.keywordslist[coms[0]])
-                if self.keywordslist[coms[0]].params_type.max_images == 1 and self.keywordslist[
-                    coms[0]].params_type.max_texts == 0:  # 这里只有一张图片
-                    if len(input.message) == 1:  # 传自己的头像
-                        me = CommonUtil.get_avatar(input.user_id)
-                        files = [("images", me)]
-                        path = self.get_img(self.keywordslist[coms[0]].key, data=None, flie=files)
-                        input.add_image(path)
-                        print(path)
-                        await input.reply()
-                        return
-                    if len(input.message) == 2:  # 传@别人的头像
-                        if input.message[1]["type"] != "at":
-                            return
-                        Target = CommonUtil.get_avatar(input.messages[1]["data"]["qq"])
-                        files = [("images", Target)]
-                        path = self.get_img(self.keywordslist[coms[0]].key, data=None, flie=files)
-                        input.add_image(path)
-                        await input.reply()
-                        return
-                        pass
-                    pass
-                if self.keywordslist[coms[0]].params_type.max_images == 2 and self.keywordslist[
-                    coms[0]].params_type.max_texts == 0:
-                    if input.message[1]["type"] != "at":
-                        return
-                    me = CommonUtil.get_avatar(input.user_id)
-                    Target = CommonUtil.get_avatar(input.messages[1]["data"]["qq"])
-                    pass
+                meme_config = self.keywordslist[coms[0]]
+                params_type = meme_config.params_type
+                if len(coms) > 1 and coms[1] == "info":
+                    await self.send_meme_info(input, meme_config)
+                    return
 
-    def get_key_info(self):
-        for item in self.keylist:
-            res = self.client.get(f"/memes/{item}/info")
-            data = DataStructure.from_json(res.text)
-            for item in data.keywords:
-                if data.params_type.args_type != None or data.params_type.max_images > 2 or data.params_type.max_texts > 3:
-                    continue
-                self.keywordslist[item] = data
+                avatar_files = self.collect_avatar_files(input, params_type.min_images, params_type.max_images)
+                texts = self.collect_texts(input, len(coms) > 1 and input.message[1]["type"] == "at")
 
-    def get_img(self, url, data, file):
-        res = self.client.post("/memes/" + url + "/", data=data, files=file, timeout=1000)
-        if res.status_code == 200:
-            md5_hash = hashlib.md5()
-            md5_hash.update(res.text.encode('utf-8'))
-            with open(os.getcwd() + md5_hash.hexdigest() + ".jpg", "wb") as f:
-                f.write(res.content)
-                return os.getcwd() + md5_hash.hexdigest() + ".jpg"
-        return ""
+                if len(avatar_files) < params_type.min_images or len(avatar_files) > params_type.max_images:
+                    return
+                if len(texts) < params_type.min_texts or len(texts) > params_type.max_texts:
+                    return
+
+                await self.send_meme_request(input, meme_config.key, avatar_files, texts)
+
+    async def send_meme_info(self, input: GroupMessage, meme_config: DataStructure):
+        info_message = f"关键词: {meme_config.key}\n" \
+                       f"最少图片数量: {meme_config.params_type.min_images}\n" \
+                       f"最多图片数量: {meme_config.params_type.max_images}\n" \
+                       f"最少文字数量: {meme_config.params_type.min_texts}\n" \
+                       f"最多文字数量: {meme_config.params_type.max_texts}"
+        await input.add_text(info_message).reply()
+
+    def collect_avatar_files(self, input: GroupMessage, min_images: int, max_images: int) -> List[Path]:
+        """收集头像 URL，下载头像文件并返回文件路径列表"""
+        avatar_urls = []
+        for message in input.message:
+            if message["type"] == "at":
+                target_id = message["data"]["qq"]
+                avatar_urls.append(f"http://q1.qlogo.cn/g?b=qq&nk={target_id}&s=640")
+        while len(avatar_urls) < min_images:
+            avatar_urls.insert(0, f"http://q1.qlogo.cn/g?b=qq&nk={input.user_id}&s=640")
+        if len(avatar_urls) > max_images:
+            avatar_urls = avatar_urls[:max_images]
+
+        # 下载头像文件
+        avatar_files = []
+        for url in avatar_urls:
+            try:
+                response = requests.get(url)
+                if response.status_code == 200:
+                    # 使用临时文件保存头像
+                    with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as tmp_file:
+                        tmp_file.write(response.content)
+                        avatar_files.append(Path(tmp_file.name))
+            except Exception as e:
+                print(f"Failed to download avatar from {url}: {e}")
+        return avatar_files
+
+    def collect_texts(self, input: GroupMessage, has_at: bool) -> List[str]:
+        texts = []
+        for i in range(1, len(input.message)):
+            message = input.message[i]
+            if has_at and message["type"] == "at":
+                continue
+            if message["type"] == "plain":
+                texts.extend(message["data"]["text"].split())
+        return texts
+
+    async def send_meme_request(self, input: GroupMessage, meme_key: str, avatar_files: List[Path], texts: List[str]):
+        """发送 meme 请求，上传头像文件和文本"""
+        api_url = f"{self.baseurl}/{meme_key}/"
+
+        # 使用内存中的文件内容而不是文件对象，避免文件提前关闭
+        files = []
+        for file in avatar_files:
+            with open(file, "rb") as f:
+                file_content = f.read()  # 读取文件内容到内存
+                files.append(("images", (file.name, file_content, "image/jpeg")))
+
+        data = {"texts": texts, "args": json.dumps({"circle": True})}
+
+        try:
+            response = requests.post(api_url, files=files, data=data)
+            print(response)
+            print(response.content)
+            if response.status_code == 200:
+                # 将生成的 meme 图片添加到消息中
+                input.add_image(response.content)
+                await input.reply()
+        finally:
+            # 删除临时头像文件时确保文件已关闭
+            for file in avatar_files:
+                file.unlink()
+
+    def get_meme_list(self):
+        """获取 meme 列表并保存到文件"""
+        response = self.client.get(f"{self.baseurl}/keys")
+        if response.status_code == 200:
+            meme_keys = response.json()
+            meme_data = []
+            for key in meme_keys:
+                info_response = self.client.get(f"{self.baseurl}/{key}/info")
+                if info_response.status_code == 200:
+                    meme_data.append(info_response.json())
+            with open("data/json/memeKeys.json", "w") as file:
+                json.dump(meme_data, file, indent=4)
+            print("Meme list saved to data/json/memeKeys.json")
+        else:
+            print("Failed to fetch meme keys")
+
+    def get_meme_image(self, meme_key: str, avatar_files: List[Path], texts: List[str]) -> Optional[bytes]:
+        """获取生成的 meme 图片"""
+        api_url = f"{self.baseurl}/{meme_key}/"
+        files = [("images", (file.name, open(file, "rb"), "image/jpeg")) for file in avatar_files]
+        data = {"texts": texts, "args": json.dumps({"circle": True})}
+        response = self.client.post(api_url, files=files, data=data)
+        if response.status_code == 200:
+            return response.content
+        return None
+
+
+if __name__ == "__main__":
+    meme = Meme()
+    # 获取 meme 列表并保存到文件
+    meme.get_meme_list()

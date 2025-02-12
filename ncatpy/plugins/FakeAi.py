@@ -137,7 +137,6 @@ async def send_typing_response(input: GroupMessage, answer: str) -> None:
     # 按照逗号和句号分隔句子
     sentences = [s.strip() for s in content.split("，。") if s.strip()]
 
-    # 定义匹配 [mirai:at:name] 的正则表达式
     import re
     at_pattern = re.compile(r"\[CQ:at,qq=([\w\u4e00-\u9fff]+)]")
     group_id = input.group_id

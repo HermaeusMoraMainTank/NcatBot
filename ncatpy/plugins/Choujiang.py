@@ -14,7 +14,7 @@ class Choujiang:
             await input.set_group_ban(input.group_id,input.user_id,120)
             input.add_reply(input.message_id)
             #intput.add_image("")
-            input.add_text("恭喜你中奖了,奖励你一张肥肥图\n")
+            input.add_text("啊哈哈哈，你中奖啦~\n")
             input.add_text(f"当前概率 {len(self.map[input.group_id]['list']) / 200 * 100}%")
 
             await input.reply(input.group_id)

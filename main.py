@@ -47,8 +47,6 @@ status = Status()
 lottery = Lottery()
 universalis = Universalis()
 tarot = Tarot()
-nudgeEvent = NudgeEvent()
-group_recall = GroupRecall()
 crazy = Crazy()
 ff14_logs_info = FF14LogsInfo()
 ff14_rising_stone_info = FF14RisingStoneInfo()
@@ -56,8 +54,12 @@ fortune = Fortune()
 lalafell = Lalafell()
 reboot = Reboot()
 pixiv_search = PixivSearch()
-# meme = Meme()
 choujiang = Choujiang()
+meme = Meme()
+
+nudge_event = NudgeEvent()
+group_recall = GroupRecall()
+
 
 
 class MyClient(ncatpy.Client):
@@ -77,7 +79,7 @@ class MyClient(ncatpy.Client):
         await daily_3_min.handle_daily3min(input=message)
         await moyu.handle_moyu(input=message)
         await send_like.handle_send_like(input=message)
-        # await fake_ai.handle_fake_ai(input=message)
+        await fake_ai.handle_fake_ai(input=message)
         await russian_roulette.handle_message(input=message)
         await status.handle_status(input=message)
         await lottery.handle_lottery(input=message)
@@ -90,7 +92,8 @@ class MyClient(ncatpy.Client):
         await fortune.handle_fortune(input=message)
         await lalafell.handle_lalafell(input=message)
         await pixiv_search.handle_pixiv_search(input=message)
-        await choujiang.handle_choujiang(input=message)
+        # await choujiang.handle_choujiang(input=message)
+        await meme.handle_meme(input=message)
 
     async def on_private_message(self, message: PrivateMessage):
         _log.info(f"收到私聊消息，ID: {message.user_id}，{message.message}")
@@ -98,7 +101,7 @@ class MyClient(ncatpy.Client):
 
     async def on_notice(self, message: NoticeMessage):
         _log.info(f"监听到事件，{message}")
-        await nudgeEvent.handle_nudge(input=message)
+        await nudge_event.handle_nudge(input=message)
         # await group_recall.handle_notice(input=message)
 
 
