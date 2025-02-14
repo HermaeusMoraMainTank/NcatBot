@@ -1,4 +1,6 @@
+import json
 import os
+from pathlib import Path
 
 from pyexpat.errors import messages
 
@@ -55,18 +57,55 @@ lalafell = Lalafell()
 reboot = Reboot()
 pixiv_search = PixivSearch()
 choujiang = Choujiang()
-meme = Meme()
+# meme = Meme()
 
 nudge_event = NudgeEvent()
 group_recall = GroupRecall()
+class Ban:
+    def __init__(self):
+        self.adminid=[1271701079,273421673]
+        self.conlist=["ban","unban"]
+        self.bandata ={11:[22]}
+        self.dir_path = Path("data/json")
+        self.initdata()
 
-
-
+    def chackban(self, input:GroupMessage):
+        if input.group_id not in self.bandata:
+            self.bandata[input.group_id] = []  #如果群数据不存在 创建一个
+        if input.user_id in self.adminid:
+            if len(input.message)==2:
+                if input.message[0].get("data").get("text").strip()== "ban" and input.message[1].get("data").get("qq")!=None:
+                    if not (input.message[1].get("data").get("qq") in self.bandata[input.group_id]):
+                        self.bandata[input.group_id].append(input.message[1].get("data").get("qq"))
+                        self.writedata()
+                if input.message[0].get("data").get("text").strip()== "unban" and input.message[1].get("data").get("qq")!=None:
+                    if input.message[1].get("data").get("qq") in self.bandata[input.group_id]:
+                        self.bandata[input.group_id].remove(input.message[1].get("data").get("qq"))
+                        self.writedata()
+        if str(input.user_id) in self.bandata[input.group_id]:
+            print("返回1")
+            return True
+        print("返回0")
+        return False
+        pass
+    def initdata(self):
+        if os.path.isfile(f"{self.dir_path}/bandata.json"):
+            with open(f"{self.dir_path}/bandata.json") as f:
+                self.bandata = json.load(f)
+                return
+        else:
+            with open(f"{self.dir_path}/bandata.json", "w") as f:
+                json.dump(self.bandata, f)
+    def writedata(self):
+        with open(f"{self.dir_path}/bandata.json", "w") as f:
+            json.dump(self.bandata, f)
+b=Ban()
 class MyClient(ncatpy.Client):
     async def on_group_message(self, message: GroupMessage):
         # if message.group_id != 1064163905:
         #     return
-
+        if b.chackban(input=message):
+            return
         if message.user_id == 771575637:
             return
 
@@ -93,7 +132,7 @@ class MyClient(ncatpy.Client):
         await lalafell.handle_lalafell(input=message)
         await pixiv_search.handle_pixiv_search(input=message)
         # await choujiang.handle_choujiang(input=message)
-        await meme.handle_meme(input=message)
+        # await meme.handle_meme(input=message)
 
     async def on_private_message(self, message: PrivateMessage):
         _log.info(f"收到私聊消息，ID: {message.user_id}，{message.message}")
