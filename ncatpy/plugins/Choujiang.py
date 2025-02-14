@@ -31,7 +31,8 @@ class Choujiang:
             # 禁言用户
             await input.set_group_ban(input.group_id, input.user_id, ban_time)
             input.add_reply(input.message_id)
-            input.add_text(f"啊哈哈哈，你中奖啦~ 禁言时间 {ban_time}秒！\n")
+            input.add_image("data/image/ba/haha.jpg")
+            input.add_text(f"啊哈哈哈，你中奖啦~\n")
             input.add_text(f"当前概率 {current_probability * 100:.2f}%")
 
             await input.reply(input.group_id)
