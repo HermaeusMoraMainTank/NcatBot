@@ -57,7 +57,7 @@ lalafell = Lalafell()
 reboot = Reboot()
 pixiv_search = PixivSearch()
 choujiang = Choujiang()
-# meme = Meme()
+meme = Meme()
 
 nudge_event = NudgeEvent()
 group_recall = GroupRecall()
@@ -131,8 +131,9 @@ class MyClient(ncatpy.Client):
         await fortune.handle_fortune(input=message)
         await lalafell.handle_lalafell(input=message)
         await pixiv_search.handle_pixiv_search(input=message)
-        # await choujiang.handle_choujiang(input=message)
-        # await meme.handle_meme(input=message)
+        await choujiang.handle_choujiang(input=message)
+        await meme.handle_meme(input=message)
+
 
     async def on_private_message(self, message: PrivateMessage):
         _log.info(f"收到私聊消息，ID: {message.user_id}，{message.message}")
