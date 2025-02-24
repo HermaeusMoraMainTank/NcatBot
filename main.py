@@ -2,7 +2,6 @@ import json
 import os
 from pathlib import Path
 
-from pyexpat.errors import messages
 
 import ncatpy
 from ncatpy import logging
@@ -83,9 +82,7 @@ class Ban:
                         self.bandata[input.group_id].remove(input.message[1].get("data").get("qq"))
                         self.writedata()
         if str(input.user_id) in self.bandata[input.group_id]:
-            print("返回1")
             return True
-        print("返回0")
         return False
         pass
     def initdata(self):
@@ -132,7 +129,7 @@ class MyClient(ncatpy.Client):
         await lalafell.handle_lalafell(input=message)
         await pixiv_search.handle_pixiv_search(input=message)
         await choujiang.handle_choujiang(input=message)
-        await meme.handle_meme(input=message)
+        # await meme.handle_meme(input=message)
 
 
     async def on_private_message(self, message: PrivateMessage):
