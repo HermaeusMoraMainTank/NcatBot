@@ -36,7 +36,7 @@ class AiUtil:
                     messages=[{'role': 'system', 'content': prompt},
                               {'role': 'user', 'content': keyword}],
                     max_tokens=2048,
-                    temperature=0.6,
+                    temperature=1.2,
                     stream=False
                 )
 

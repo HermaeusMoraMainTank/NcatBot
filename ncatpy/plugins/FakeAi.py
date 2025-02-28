@@ -214,11 +214,12 @@ def check_cd(group_id: int) -> bool:
 
 
 def load_yaml_data(group_id) -> Dict:
-    # if group_id == 853963912:
-    #     with open("ncatpy/data/yml/lanqingv2.yml", "r", encoding="utf-8") as file:
-    #         return yaml.safe_load(file)
-    with open("data/yml/lanqingv1.yml", "r", encoding="utf-8") as file:
-        return yaml.safe_load(file)
+    if group_id == 730698039:
+        with open("data/yml/lanqingv2.yml", "r", encoding="utf-8") as file:
+            return yaml.safe_load(file)
+    else:
+        with open("data/yml/lanqingv1.yml", "r", encoding="utf-8") as file:
+            return yaml.safe_load(file)
 
 
 def replace_time_in_system(yaml_data: Dict) -> None:
