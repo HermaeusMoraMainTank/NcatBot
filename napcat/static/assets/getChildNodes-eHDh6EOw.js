@@ -1,0 +1,1 @@
+function c(e,f){return typeof f.getChildren=="function"?f.getChildren(e.key):e.childNodes}function a(e){return n(e,0)}function n(e,f){if(f<0)return;let t=0;for(let r of e){if(t===f)return r;t++}}function u(e){let f;for(let t of e)f=t;return f}export{a as $,c as a,n as b,u as c};
