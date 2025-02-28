@@ -1,3 +1,4 @@
+from datetime import datetime
 from ncatbot.core.client import BotClient
 from ncatbot.core.message import GroupMessage, PrivateMessage
 from ncatbot.utils.config import config
@@ -13,8 +14,10 @@ bot = BotClient()
 
 
 @bot.group_event()
-async def on_group_message(msg: GroupMessage):
-    _log.info(msg)
+async def on_group_message(message: GroupMessage):
+    _log.info(
+        f"收到群消息，Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}，群ID：{message.group_id}，ID: {message.user_id}，内容：{message.raw_message}")
+
 
 
 @bot.private_event()
