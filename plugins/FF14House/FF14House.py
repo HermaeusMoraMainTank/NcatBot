@@ -3,17 +3,21 @@ from datetime import datetime
 import requests
 import os
 import math
-from ncatbot.core.message import GroupMessage, MessageChain, Reply
+from ncatbot.core.message import GroupMessage
+from ncatbot.core.element import Image as ImageElement, MessageChain, Reply
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
+from ncatbot.plugin.compatible import CompatibleEnrollment
 
 bot = CompatibleEnrollment
+
+
 class FF14House(BasePlugin):
+    name = "FF14House"  # 插件名称
+    version = "1.0"  # 插件版本
     FONT_PATH = "data/font/FZMiaoWuK.TTF"
     CITY_IMAGE_PATH = "data/image/ff14/city/city.jpg"
 
-    def __init__(self):
-        self.area_map = {
+    area_map = {
             "-1": "所有区域",
             "0": "海雾村",
             "1": "薰衣草苗圃",
@@ -22,43 +26,43 @@ class FF14House(BasePlugin):
             "4": "穹顶皓天",
         }
 
-        # 反向映射，用于根据名称查找ID
-        self.area_name_to_id = {v: k for k, v in self.area_map.items()}
+    # 反向映射，用于根据名称查找ID
+    area_name_to_id = {v: k for k, v in area_map.items()}
 
-        self.team_map = {"0": "不限", "1": "部队", "2": "个人"}
+    team_map = {"0": "不限", "1": "部队", "2": "个人"}
 
-        self.server_map = {
-            "红玉海": 1167,
-            "神意之地": 1081,
-            "拉诺西亚": 1042,
-            "幻影群岛": 1044,
-            "萌芽池": 1060,
-            "宇宙和音": 1173,
-            "沃仙曦染": 1174,
-            "晨曦王座": 1175,
-            "白银乡": 1172,
-            "白金幻象": 1076,
-            "神拳痕": 1171,
-            "潮风亭": 1170,
-            "旅人栈桥": 1113,
-            "拂晓之间": 1121,
-            "龙巢神殿": 1166,
-            "梦羽宝境": 1176,
-            "紫水栈桥": 1043,
-            "延夏": 1169,
-            "静语庄园": 1106,
-            "摩杜纳": 1045,
-            "海猫茶屋": 1177,
-            "柔风海湾": 1178,
-            "琥珀原": 1179,
-            "水晶塔": 1192,
-            "银泪湖": 1183,
-            "太阳海岸": 1180,
-            "伊修加德": 1186,
-            "红茶川": 1201,
+    server_map = {
+        "红玉海": 1167,
+        "神意之地": 1081,
+        "拉诺西亚": 1042,
+        "幻影群岛": 1044,
+        "萌芽池": 1060,
+        "宇宙和音": 1173,
+        "沃仙曦染": 1174,
+        "晨曦王座": 1175,
+        "白银乡": 1172,
+        "白金幻象": 1076,
+        "神拳痕": 1171,
+        "潮风亭": 1170,
+        "旅人栈桥": 1113,
+        "拂晓之间": 1121,
+        "龙巢神殿": 1166,
+        "梦羽宝境": 1176,
+        "紫水栈桥": 1043,
+        "延夏": 1169,
+        "静语庄园": 1106,
+        "摩杜纳": 1045,
+        "海猫茶屋": 1177,
+        "柔风海湾": 1178,
+        "琥珀原": 1179,
+        "水晶塔": 1192,
+        "银泪湖": 1183,
+        "太阳海岸": 1180,
+        "伊修加德": 1186,
+        "红茶川": 1201,
         }
 
-        self.usage_instructions = """指令使用方法：
+    usage_instructions = """指令使用方法：
 1. 必填参数：
    - <server>：服务器名称（如"拂晓之间"）
    - <size>：房屋大小（S, M, L）
@@ -393,12 +397,18 @@ class FF14House(BasePlugin):
             image.save("house_data.png")
 
             # 发送图像
-            await self.api.post_group_msg(group_id=input.group_id, rtf=MessageChain(
-                [
-                    Image("house_data.png"),
-                    Reply(input.message_id),
-                ]
-            ))
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                rtf=MessageChain(
+                    [
+                        ImageElement("house_data.png"),
+                        Reply(input.message_id),
+                    ]
+                ),
+            )
 
         except Exception as e:
-            await self.api.post_group_msg(group_id=input.group_id, text=f"查询房屋信息时出错了喵: {str(e)}\n\n{self.usage_instructions}")
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                text=f"查询房屋信息时出错了喵: {str(e)}\n\n{self.usage_instructions}",
+            )

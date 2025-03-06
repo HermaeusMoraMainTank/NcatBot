@@ -2,9 +2,10 @@ import logging
 import random
 from typing import Dict
 
-from ncatbot.core.message import GroupMessage, Image, MessageChain, Text
+from ncatbot.core.message import GroupMessage
+from ncatbot.core.element import Image, MessageChain, Text
+from ncatbot.plugin.compatible import CompatibleEnrollment
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
 
 log = logging.getLogger(__name__)
 
@@ -12,12 +13,15 @@ bot = CompatibleEnrollment
 
 
 class RussianRoulette(BasePlugin):
+    name = "RussianRoulette"  # 插件名称
+    version = "1.0"  # 插件版本
     CLIP_SIZE = 6  # 弹夹大小
     DAMAGE_TIME = 60  # 伤害时间（秒）
     MALFUNCTION_PROBABILITY = 0.03  # 炸膛概率
     FILE_PATH = "data/txt/RussianRoulette.txt"
 
-    def __init__(self):
+    def setup(self):
+        """插件初始化设置"""
         self.trigger_position_map: Dict[int, int] = {}  # 记录每个群聊的扳机位置
         self.bullet_position_map: Dict[int, int] = {}  # 记录每个群聊的子弹位置
         self.kill_count = 0  # 击杀用户数
@@ -73,19 +77,27 @@ class RussianRoulette(BasePlugin):
 
         # 判断是否触发特殊情况
         if trigger_position == self.CLIP_SIZE - 1:
-            await self.api.post_group_msg(group_id=input.group_id, rtf=MessageChain(
-                [
-                    Text(f"{user_name}很清楚这是必死之局。"),
-                ]
-            ))
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                rtf=MessageChain(
+                    [
+                        Text(f"{user_name}很清楚这是必死之局。"),
+                    ]
+                ),
+            )
 
         # 检查是否炸膛
         if random.random() < self.MALFUNCTION_PROBABILITY:
-            await self.api.post_group_msg(group_id=input.group_id, rtf=MessageChain(
-                [
-                    Text("左轮手枪突然炸膛了...\n" + bot_name + "换了一把新的手枪。"),
-                ]
-            ))
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                rtf=MessageChain(
+                    [
+                        Text(
+                            "左轮手枪突然炸膛了...\n" + bot_name + "换了一把新的手枪。"
+                        ),
+                    ]
+                ),
+            )
             await self.reload(group_id)  # 使用 await 调用异步方法
             return False
 
@@ -100,11 +112,16 @@ class RussianRoulette(BasePlugin):
             self.save_kill_count()
 
             # 输出用户死亡信息
-            await self.api.post_group_msg(group_id=input.group_id, rtf=MessageChain(
-                [
-                    Text(f"{user_name}的目光逐渐变得呆滞，他向后摔倒在地，看上去像是从来没有活过似的。\n{bot_name}枪下不幸的冤魂已有 {self.kill_count} 条，但她仍然重新装上了子弹。"),
-                ]
-            ))
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                rtf=MessageChain(
+                    [
+                        Text(
+                            f"{user_name}的目光逐渐变得呆滞，他向后摔倒在地，看上去像是从来没有活过似的。\n{bot_name}枪下不幸的冤魂已有 {self.kill_count} 条，但她仍然重新装上了子弹。"
+                        ),
+                    ]
+                ),
+            )
             await self.reload(group_id)  # 使用 await 调用异步方法
 
             random_number = random.randint(0, 99)
@@ -117,12 +134,15 @@ class RussianRoulette(BasePlugin):
                     if random_image_index == 0
                     else "data/image/RussianRoulette/开枪.gif"
                 )
-                await self.api.post_group_msg(group_id=input.group_id, rtf=MessageChain(
-                    [
-                        Image(image_path),
-                        Text(f"{bot_name}打出了暴击！"),
-                    ]
-                ))
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    rtf=MessageChain(
+                        [
+                            Image(image_path),
+                            Text(f"{bot_name}打出了暴击！"),
+                        ]
+                    ),
+                )
                 try:
                     await input.set_group_ban(
                         group_id=group_id,
@@ -146,11 +166,16 @@ class RussianRoulette(BasePlugin):
                 return True
 
         else:
-            await self.api.post_group_msg(group_id=input.group_id, rtf=MessageChain(
-                [
-                    Text(f"{user_name}侥幸活过了一轮，但他终究难逃死亡的结局，每个人都会死。\n{bot_name}的左轮手枪还剩 {remaining_bullets} 发。"),
-                ]
-            ))
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                rtf=MessageChain(
+                    [
+                        Text(
+                            f"{user_name}侥幸活过了一轮，但他终究难逃死亡的结局，每个人都会死。\n{bot_name}的左轮手枪还剩 {remaining_bullets} 发。"
+                        ),
+                    ]
+                ),
+            )
             # 更新扳机位置
             self.trigger_position_map[group_id] = (
                 trigger_position + 1

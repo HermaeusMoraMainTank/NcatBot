@@ -6,17 +6,12 @@ from typing import List, Dict
 from PIL import Image, ImageDraw, ImageFont
 import json
 
-from ncatbot.core.message import (
-    GroupMessage,
-    MessageChain,
-    Image as MessageImage,
-    At,
-    Text,
-)
+from common.constants.HMMT import HMMT
+from ncatbot.core.element import At, MessageChain, Text
+from ncatbot.core.message import GroupMessage
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
+from ncatbot.plugin.compatible import CompatibleEnrollment
 
-from NcatBot.common.constants import HMMT
 
 bot = CompatibleEnrollment
 
@@ -46,6 +41,9 @@ LUCK_DESC_LIST = [
 
 
 class Fortune(BasePlugin):
+    name = "Fortune"  # 插件名称
+    version = "1.0"  # 插件版本
+
     # 记录用户最后一次调用的日期
     last_invocation_date_by_user: Dict[int, date] = {}
     last_reset_date: date = date.today()  # 记录上一次重置的日期
@@ -62,7 +60,7 @@ class Fortune(BasePlugin):
             fortune_image = image_files[luck_value % len(image_files)]
             image_path = self.get_file_path("image", "amm", fortune_image)
             message = MessageChain(
-                [Text("✨今日运势✨\n"), At(sender_id), MessageImage(image_path)]
+                [Text("✨今日运势✨\n"), At(sender_id), Image(image_path)]
             )
             await self.api.post_group_msg(group_id=input.group_id, rtf=message)
 
@@ -75,7 +73,9 @@ class Fortune(BasePlugin):
                 self.last_invocation_date_by_user.clear()
 
             # 检查用户是否已经调用过
-            last_invocation_date = self.last_invocation_date_by_user.get(sender_id, date.min)
+            last_invocation_date = self.last_invocation_date_by_user.get(
+                sender_id, date.min
+            )
             if current_date == last_invocation_date:
                 message = MessageChain([Text("你今天已经获取过运势了，请明天再来吧。")])
                 await self.api.post_group_msg(group_id=input.group_id, rtf=message)
@@ -87,7 +87,7 @@ class Fortune(BasePlugin):
                 output_path = self.get_file_path("image", "fortune", "output.png")
                 pic.save(output_path)
                 message = MessageChain(
-                    [Text("✨今日运势✨\n"), At(sender_id), MessageImage(output_path)]
+                    [Text("✨今日运势✨\n"), At(sender_id), Image(output_path)]
                 )
                 await self.api.post_group_msg(group_id=input.group_id, rtf=message)
             except Exception as e:

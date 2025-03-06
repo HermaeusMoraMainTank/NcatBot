@@ -48,13 +48,13 @@ class BasePlugin:
         self.event_bus = event_bus
         self.lock = asyncio.Lock()  # 创建一个异步锁对象
         self.work_path = Path(PERSISTENT_DIR) / self.name
-        self._data_file = UniversalLoader(self.work_path / f"{self.name}.json")
+        # self._data_file = UniversalLoader(self.work_path / f"{self.name}.json")
         self._event_handlers = []
         
-        try: # 加载持久化数据
-            self.data = self._data_file.load()
-        except LoadError as e:
-            self.data = self._data_file
+        # try: # 加载持久化数据
+        #     self.data = self._data_file.load()
+        # except LoadError as e:
+        #     self.data = self._data_file
         
         try:
             self.work_path.mkdir(parents=True)

@@ -1,23 +1,26 @@
 import os
-from random import random
 import textwrap
 import httpx
 from datetime import datetime
 from typing import List, Optional, Dict
-from PIL import Image, ImageDraw, ImageFont, ImageEnhance
+from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 
 from curl_cffi import requests  # 替换为 curl_cffi 的 requests
-from common.constants import HMMT
-from ncatbot.core.message import GroupMessage, MessageChain, Reply
+from common.constants.HMMT import HMMT
+from ncatbot.core.message import GroupMessage
+from ncatbot.core.element import Image as ImageElement, MessageChain, Reply
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
+from ncatbot.plugin.compatible import CompatibleEnrollment
 
 
 bot = CompatibleEnrollment
 
 
 class FF14RisingStoneInfo(BasePlugin):
+    name = "FF14RisingStoneInfo"  # 插件名称
+    version = "1.0"  # 插件版本
+
     # API endpoints
     API_URL_SEARCH = "https://apiff14risingstones.web.sdo.com/api/common/search"
     API_URL_USER_INFO = (
@@ -81,49 +84,45 @@ class FF14RisingStoneInfo(BasePlugin):
         "维埃拉族",
     ]
 
-    def __init__(self):
-        self.init_job_icons()
+    """初始化职业图标"""
+    job_list = [
+        "AST",
+        "BLM",
+        "BLU",
+        "BRD",
+        "DNC",
+        "DRG",
+        "DRK",
+        "GNB",
+        "MCH",
+        "MNK",
+        "NIN",
+        "PCT",
+        "PLD",
+        "RDM",
+        "RPR",
+        "SAM",
+        "SCH",
+        "SGE",
+        "SMN",
+        "VPR",
+        "WAR",
+        "WHM",
+    ]
 
-    def init_job_icons(self):
-        """初始化职业图标"""
-        job_list = [
-            "AST",
-            "BLM",
-            "BLU",
-            "BRD",
-            "DNC",
-            "DRG",
-            "DRK",
-            "GNB",
-            "MCH",
-            "MNK",
-            "NIN",
-            "PCT",
-            "PLD",
-            "RDM",
-            "RPR",
-            "SAM",
-            "SCH",
-            "SGE",
-            "SMN",
-            "VPR",
-            "WAR",
-            "WHM",
-        ]
-
-        self.job_icons = {}
-        for job in job_list:
-            try:
-                icon_path = f"data/image/ff14/icon/{job}.png"
-                self.job_icons[job] = Image.open(icon_path)
-            except Exception as e:
-                print(f"Error loading job icon {job}: {e}")
+    job_icons = {}
+    for job in job_list:
+        try:
+            icon_path = f"data/image/ff14/icon/{job}.png"
+            job_icons[job] = Image.open(icon_path)
+        except Exception as e:
+            print(f"Error loading job icon {job}: {e}")
 
         # 加载生产采集职业图标
         for i in range(11):
             try:
                 icon_path = f"data/image/ff14/icon/sjob{i}.png"
-                self.job_icons[f"sjob{i}"] = Image.open(icon_path)
+                job_icons[f"sjob{i}"] = Image.open(icon_path)
             except Exception as e:
                 print(f"Error loading sjob icon {i}: {e}")
 
@@ -568,7 +567,9 @@ class FF14RisingStoneInfo(BasePlugin):
 
         cookie = self.read_cookie_from_file()
         if not cookie:
-            await self.api.post_group_msg(group_id=input.group_id, text="Cookie获取失败")
+            await self.api.post_group_msg(
+                group_id=input.group_id, text="Cookie获取失败"
+            )
             return
 
         players = self.search_player(character_name, cookie)
@@ -583,19 +584,26 @@ class FF14RisingStoneInfo(BasePlugin):
             filtered_players = players
 
         if len(filtered_players) == 0:
-            await self.api.post_group_msg(group_id=input.group_id, text="未找到匹配的玩家")
+            await self.api.post_group_msg(
+                group_id=input.group_id, text="未找到匹配的玩家"
+            )
         elif len(filtered_players) == 1:
             user_info = self.get_user_info(filtered_players[0].get("uuid"), cookie)
             if user_info and user_info.get("code") == 10000:
                 image_path = self.generate_image(user_info.get("data", {}))
-                await self.api.post_group_msg(group_id=input.group_id, rtf=MessageChain(
-                    [
-                        Image(image_path),
-                        Reply(input.message_id),
-                    ]
-                ))
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    rtf=MessageChain(
+                        [
+                            ImageElement(image_path),
+                            Reply(input.message_id),
+                        ]
+                    ),
+                )
             else:
-                await self.api.post_group_msg(group_id=input.group_id, text="获取玩家信息失败")
+                await self.api.post_group_msg(
+                    group_id=input.group_id, text="获取玩家信息失败"
+                )
         else:
             response = "找到多个玩家:\n" + "\n".join(
                 f"角色名: {p.get('character_name')} 区服: {p.get('group_name')}"

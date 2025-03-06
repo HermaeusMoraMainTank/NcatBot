@@ -5,20 +5,24 @@ from datetime import datetime
 
 from ncatbot.core.message import GroupMessage
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
+from ncatbot.plugin.compatible import CompatibleEnrollment
 
-from NcatBot.common.constants import HMMT
+from common.constants.HMMT import HMMT
 
 bot = CompatibleEnrollment
 
 
 class Status(BasePlugin):
+    name = "Status"  # 插件名称
+    version = "1.0"  # 插件版本
     START_TIME = time.time()  # 程序启动时间
 
     @bot.group_event()
     async def handle_status(self, input: GroupMessage) -> None:
         if input.raw_message == "状态" and input.user_id == HMMT.HMMT_ID:
-            await self.api.post_group_msg(group_id=input.group_id, text=self.get_system_status())
+            await self.api.post_group_msg(
+                group_id=input.group_id, text=self.get_system_status()
+            )
 
     def format_uptime(self, uptime_seconds):
         """格式化运行时长"""

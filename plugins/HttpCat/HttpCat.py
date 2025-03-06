@@ -1,6 +1,7 @@
-from ncatbot.core.message import GroupMessage, Image, MessageChain, Reply
+from ncatbot.core.message import GroupMessage
+from ncatbot.core.element import Image, MessageChain, Reply
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
+from ncatbot.plugin.compatible import CompatibleEnrollment
 
 bot = CompatibleEnrollment
 
@@ -86,6 +87,9 @@ HTTP_STATUS_CODES = {
 
 
 class HttpCat(BasePlugin):
+    name = "HttpCat"  # 插件名称
+    version = "1.0"  # 插件版本
+
     @bot.group_event()
     async def http_cat(self, input: GroupMessage):
         """
@@ -98,12 +102,15 @@ class HttpCat(BasePlugin):
         status_code = int(message_content)
         if status_code in HTTP_STATUS_CODES:
             image_url = self.get_image_url(status_code)
-            return await self.api.post_group_msg(group_id=input.group_id, rtf=MessageChain(
-                [
-                    Image(image_url),
-                    Reply(input.message_id),
-                ]
-            ))
+            return await self.api.post_group_msg(
+                group_id=input.group_id,
+                rtf=MessageChain(
+                    [
+                        Image(image_url),
+                        Reply(input.message_id),
+                    ]
+                ),
+            )
 
     def get_image_url(self, status_code):
         """

@@ -2,9 +2,10 @@ from datetime import datetime
 import logging
 import os
 import random
-from ncatbot.core.message import GroupMessage, Image, MessageChain
+from ncatbot.core.message import GroupMessage
+from ncatbot.core.element import Image, MessageChain
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
+from ncatbot.plugin.compatible import CompatibleEnrollment
 
 bot = CompatibleEnrollment
 
@@ -16,6 +17,9 @@ log = logging.getLogger(__name__)
 
 
 class Lalafell(BasePlugin):
+    name = "Lalafell"  # 插件名称
+    version = "1.0"  # 插件版本
+
     @bot.group_event()
     async def handle_lalafell(self, input: GroupMessage):
         message = input.raw_message
@@ -34,22 +38,28 @@ class Lalafell(BasePlugin):
                     log.info(
                         f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {file}"
                     )
-                    await self.api.post_group_msg(group_id=input.group_id, rtf=MessageChain(
-                        [
-                            Image(file),
-                        ]
-                    ))
+                    await self.api.post_group_msg(
+                        group_id=input.group_id,
+                        rtf=MessageChain(
+                            [
+                                Image(file),
+                            ]
+                        ),
+                    )
             else:
                 await self.api.post_group_msg(group_id=input.group_id, text="别太贪心")
         elif message == KEYWORD1:
             image_files = self.get_image_files(PATH)
             file = random.choice(image_files)
             log.info(f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {file}")
-            await self.api.post_group_msg(group_id=input.group_id, rtf=MessageChain(
-                [
-                    Image(file),
-                ]
-            ))
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                rtf=MessageChain(
+                    [
+                        Image(file),
+                    ]
+                ),
+            )
 
     @staticmethod
     def get_image_files(folder_path):

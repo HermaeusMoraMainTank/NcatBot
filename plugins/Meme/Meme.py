@@ -6,9 +6,10 @@ from dataclasses_json import dataclass_json
 from pathlib import Path
 import tempfile
 
-from ncatbot.core.message import GroupMessage, Image, MessageChain
+from ncatbot.core.message import GroupMessage
+from ncatbot.core.element import Image, MessageChain
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
+from ncatbot.plugin.compatible import CompatibleEnrollment
 
 bot = CompatibleEnrollment
 
@@ -37,13 +38,15 @@ class DataStructure:
 
 
 class Meme(BasePlugin):
+    name = "Meme"  # 插件名称
+    version = "1.0"  # 插件版本
     baseurl = "http://127.0.0.1:2233/memes"
     keylist = []
     keywordslist: dict[str, DataStructure] = {}
     client = requests.Session()  # 使用 requests 的 Session
 
-    def __init__(self):
-        super().__init__()
+    def setup(self):
+        """插件初始化设置"""
         self.get_meme_list()
         self.load_meme_data()
 
@@ -173,11 +176,14 @@ class Meme(BasePlugin):
             print(response.content)
             if response.status_code == 200:
                 # 将生成的 meme 图片添加到消息中
-                await self.api.post_group_msg(group_id=input.group_id, rtf=MessageChain(
-                    [
-                        Image(response.content),
-                    ]
-                ))
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    rtf=MessageChain(
+                        [
+                            Image(response.content),
+                        ]
+                    ),
+                )
         finally:
             # 删除临时头像文件时确保文件已关闭
             for file in avatar_files:

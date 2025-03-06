@@ -1,11 +1,13 @@
 import aiohttp
 import asyncio
 import json
+from openai import OpenAI
 
-from ncatpy import logging
+from ncatbot.utils.logger import get_log
 
 # 日志配置
-_log = logging.get_logger()
+_log = get_log()
+
 
 class AiUtil:
     @staticmethod
@@ -19,61 +21,46 @@ class AiUtil:
         url = "https://api.lkeap.cloud.tencent.com/v1"
         api_key = "sk-AWmHgm8yzHqY8OhEMA35lC9MZ3ueNn6KndFil9fPbON865zx"
 
-        url = "https://dashscope.aliyuncs.com/compatible-mode/v1"
-        api_key = "sk-869c983ef74c4678b63c934478339b25"
+        # OpenAI 配置
+        client = OpenAI(
+            api_key="sk-869c983ef74c4678b63c934478339b25",
+            base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+        )
 
-        # 构建请求体
-        system_message = {"role": "system", "content": prompt}
-        user_message = {"role": "user", "content": keyword}
-        messages = [system_message, user_message]
+        retry_count = 3  # 最大重试次数
+        delay = 2  # 重试延迟时间（秒）
 
-        request_body = {
-            # "model": "deepseek-chat",
-            "model": "deepseek-v3",
-            "messages": messages,
-            "max_tokens": 2048,
-            "temperature": 0.6,
-            "stream": False,
-        }
+        while retry_count > 0:
+            try:
+                completion = client.chat.completions.create(
+                    model="deepseek-v3",  # 你可以选择你需要的模型
+                    messages=[
+                        {"role": "system", "content": prompt},
+                        {"role": "user", "content": keyword},
+                    ],
+                    max_tokens=2048,
+                    temperature=1.2,
+                    stream=False,
+                )
 
-        # 设置请求头
-        headers = {
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-        }
+                # 获取返回的内容
+                return_content = completion.choices[0].message.content
+                _log.info(f"响应内容: {return_content}")
+                return return_content
 
-        # 重试次数
-        retry_count = 3
+            except aiohttp.ClientError as e:  # 捕捉网络请求的异常
+                _log.error(f"请求异常: {e}")
+                retry_count -= 1
+                if retry_count > 0:
+                    _log.info(f"重试 {3 - retry_count} 次...")
+                    await asyncio.sleep(delay)  # 延迟重试
 
-        async with aiohttp.ClientSession() as session:
-            while retry_count > 0:
-                try:
-                    # 发送 POST 请求
-                    async with session.post(
-                            url, headers=headers, json=request_body, timeout=aiohttp.ClientTimeout(total=30)
-                    ) as response:
-                        if response.status == 200:
-                            # 解析响应
-                            response_body = await response.text()
-                            _log.info(f"响应结果: {response_body}")
-
-                            json_response = json.loads(response_body)
-                            choices = json_response["choices"]
-                            return_content = choices[0]["message"]["content"]
-
-                            return return_content
-                        else:
-                            # 处理失败响应
-                            error_body = await response.text()
-                            _log.info(f"请求失败，状态码: {response.status}")
-                            _log.info(f"错误信息: {error_body}")
-                            retry_count -= 1
-                except Exception as e:
-                    # 处理异常
-                    _log.error(f"请求异常: {e}")
-                    retry_count -= 1
+            except Exception as e:  # 捕捉其他异常
+                _log.error(f"未知异常: {e}")
+                break  # 若是未知异常，直接中止重试
 
         # 重试次数用尽后返回 None
+        _log.error("重试次数已用尽，返回 None")
         return None
 
 

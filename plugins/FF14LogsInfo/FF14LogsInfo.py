@@ -6,13 +6,24 @@ from typing import List, Optional
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 
-from ncatbot.core.message import GroupMessage, MessageChain, Reply
+from ncatbot.core.message import GroupMessage
+from ncatbot.core.element import Image as ImageElement, MessageChain, Reply
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
+from ncatbot.plugin.compatible import CompatibleEnrollment
 
 bot = CompatibleEnrollment
 
+class Zone:
+    def __init__(self, id: int, name: str, difficulty: int):
+        self.id = id
+        self.name = name
+        self.difficulty = difficulty
+
+
 class FF14LogsInfo(BasePlugin):
+    name = "FF14LogsInfo"  # 插件名称
+    version = "1.0"  # 插件版本
+
     # 常量定义
     TOKEN_ENDPOINT = "https://cn.fflogs.com/oauth/token"
     JSON_PAYLOAD = {
@@ -24,25 +35,17 @@ class FF14LogsInfo(BasePlugin):
     URL = "https://cn.fflogs.com/api/v2/client"
     FONT_PATH = "data/font/FZMiaoWuK.TTF"
 
-    def __init__(self):
-        self.api_token = ""
-        self.zones = [
-            self.Zone(54, "万魔殿 荒天之狱", 101),
-            self.Zone(49, "万魔殿 炼净之狱", 101),
-            self.Zone(44, "万魔殿 边境之狱", 101),
-            self.Zone(62, "阿卡狄亚竞技场 轻量级", 101),
-            self.Zone(53, "欧米茄绝境验证战", 100),
-            self.Zone(45, "幻想龙诗绝境战", 100),
-            self.Zone(43, "绝境战（旧版本）", 100),
-        ]
-        self.init()
-
-    class Zone:
-        def __init__(self, id: int, name: str, difficulty: int):
-            self.id = id
-            self.name = name
-            self.difficulty = difficulty
-
+    api_token = ""
+    zones = [
+        Zone(54, "万魔殿 荒天之狱", 101),
+        Zone(49, "万魔殿 炼净之狱", 101),
+        Zone(44, "万魔殿 边境之狱", 101),
+        Zone(62, "阿卡狄亚竞技场 轻量级", 101),
+        Zone(53, "欧米茄绝境验证战", 100),
+        Zone(45, "幻想龙诗绝境战", 100),
+        Zone(43, "绝境战（旧版本）", 100),
+    ]
+    
     class RankingInfo:
         def __init__(
             self,
@@ -293,15 +296,23 @@ class FF14LogsInfo(BasePlugin):
                         print(f"Error parsing data: {e}")
 
         if not combined_ranking_infos:
-            await self.api.post_group_msg(group_id=input.group_id, text="搜索不到该玩家或已隐藏")
+            await self.api.post_group_msg(
+                group_id=input.group_id, text="搜索不到该玩家或已隐藏"
+            )
         else:
             image_path = self.generate_image(
                 character_name, server, combined_ranking_infos
             )
-            await self.api.post_group_msg(group_id=input.group_id, text="提醒:请谨慎使用该功能，用户使用引起其他玩家不快将会被禁止使用该功能。")
-            await self.api.post_group_msg(group_id=input.group_id, rtf=MessageChain(
-                [
-                    Image(image_path),
-                    Reply(input.message_id),
-                ]
-            ))
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                text="提醒:请谨慎使用该功能，用户使用引起其他玩家不快将会被禁止使用该功能。",
+            )
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                rtf=MessageChain(
+                    [
+                        ImageElement(image_path),
+                        Reply(input.message_id),
+                    ]
+                ),
+            )

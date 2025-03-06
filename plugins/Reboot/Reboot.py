@@ -3,24 +3,30 @@ import sys
 import time
 import subprocess
 
-from ncatbot.core.message import MessageChain, PrivateMessage, Text
+from ncatbot.core.element import MessageChain, Text
+from ncatbot.core.message import PrivateMessage
+from ncatbot.plugin.compatible import CompatibleEnrollment
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
 
 bot = CompatibleEnrollment
 
 
 class Reboot(BasePlugin):
+    name = "Reboot"  # 插件名称
+    version = "1.0"  # 插件版本
     admin = [1271701079, 273421673]
 
     @bot.group_event()
     async def Reboot(self, input: PrivateMessage):
         if input.raw_message == "重启" and input.user_id in self.admin:
-            await self.api.post_private_msg(user_id=input.user_id, rtf=MessageChain(
-                [
-                    Text("重启了"),
-                ]
-            ))
+            await self.api.post_private_msg(
+                user_id=input.user_id,
+                rtf=MessageChain(
+                    [
+                        Text("重启了"),
+                    ]
+                ),
+            )
             subprocess.Popen(
                 "git fetch origin",
                 stdout=subprocess.PIPE,

@@ -1,13 +1,16 @@
 ﻿import random
 
-from ncatbot.core.message import GroupMessage, MessageChain, Image, Reply
+from ncatbot.core.element import Image, MessageChain, Reply
+from ncatbot.core.message import GroupMessage
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
+from ncatbot.plugin.compatible import CompatibleEnrollment
 
 bot = CompatibleEnrollment
 
 
 class Choujiang(BasePlugin):
+    name = "Choujiang"  # 插件名称
+    version = "1.0"  # 插件版本
     # 使用字典存储每个群组的抽奖状态
     map = {}
 

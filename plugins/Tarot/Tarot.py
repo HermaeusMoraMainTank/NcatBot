@@ -1,4 +1,3 @@
-import io
 import logging
 import random
 from datetime import datetime
@@ -8,11 +7,12 @@ from typing import List, Set
 import yaml
 from PIL import Image
 
-from ncatbot.core.message import At, GroupMessage, MessageChain, Reply, Text
+from ncatbot.core.element import At, MessageChain, Reply, Text
+from ncatbot.core.message import GroupMessage
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
+from ncatbot.plugin.compatible import CompatibleEnrollment
 
-from NcatBot.common.constants import HMMT
+from common.constants.HMMT import HMMT
 
 bot = CompatibleEnrollment
 
@@ -30,6 +30,8 @@ class TarotCard:
 
 # 塔罗牌逻辑处理类
 class Tarot(BasePlugin):
+    name = "Tarot"  # 插件名称
+    version = "1.0"  # 插件版本
     tarot_libraries = [
         "data/image/Tarot/Tarot3",
         "data/image/Tarot/Tarot5",
@@ -60,13 +62,16 @@ class Tarot(BasePlugin):
                     ]
                     if files:
                         image = random.choice(files)
-                        await self.api.post_group_msg(group_id=input.group_id, rtf=MessageChain(
-                            [
-                                At(input.user_id),
-                                Image(str(image.resolve())),
-                                Reply(input.message_id),
-                            ]
-                        ))
+                        await self.api.post_group_msg(
+                            group_id=input.group_id,
+                            rtf=MessageChain(
+                                [
+                                    At(input.user_id),
+                                    Image(str(image.resolve())),
+                                    Reply(input.message_id),
+                                ]
+                            ),
+                        )
                         return
 
             random_tarots = self.get_random_tarots(1)
@@ -76,15 +81,18 @@ class Tarot(BasePlugin):
                 log.info(
                     f"Selected tarot card: {card.name}, orientation: {'正位' if i == 0 else '逆位'}"
                 )
-                await self.api.post_group_msg(group_id=input.group_id, rtf=MessageChain(
-                    [
-                        At(input.user_id),
-                        Text("\n"),
-                        Text(self.get_tarot_message(card, i)),
-                        Image(image_bytes),
-                        Reply(input.message_id),
-                    ]
-                ))
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    rtf=MessageChain(
+                        [
+                            At(input.user_id),
+                            Text("\n"),
+                            Text(self.get_tarot_message(card, i)),
+                            Image(image_bytes),
+                            Reply(input.message_id),
+                        ]
+                    ),
+                )
 
     def get_tarot_message(self, tarot: TarotCard, i: int) -> str:
         description = "正位\n" + tarot.positive if i == 0 else "逆位\n" + tarot.negative

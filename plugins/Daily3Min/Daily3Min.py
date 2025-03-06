@@ -1,11 +1,15 @@
-from ncatbot.core.message import GroupMessage, Image, MessageChain, Reply
+from ncatbot.core.message import GroupMessage
+from ncatbot.core.element import Image, MessageChain, Reply
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
+from ncatbot.plugin.compatible import CompatibleEnrollment
 
 bot = CompatibleEnrollment
 
 
 class Daily3Min(BasePlugin):
+    name = "Daily3Min"  # 插件名称
+    version = "1.0"  # 插件版本
+
     @bot.group_event()
     async def handle_daily3min(self, input: GroupMessage):
         if input.raw_message in [

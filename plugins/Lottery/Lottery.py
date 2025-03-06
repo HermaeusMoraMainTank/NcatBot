@@ -4,9 +4,10 @@ import random
 import os
 from typing import Dict, List
 
-from ncatbot.core.message import GroupMessage, Image, MessageChain
+from ncatbot.core.message import GroupMessage
+from ncatbot.core.element import Image, MessageChain
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
+from ncatbot.plugin.compatible import CompatibleEnrollment
 
 bot = CompatibleEnrollment
 
@@ -14,6 +15,8 @@ log = logging.getLogger(__name__)
 
 
 class Lottery(BasePlugin):
+    name = "Lottery"  # 插件名称
+    version = "1.0"  # 插件版本
     MAX_PARTICIPANTS = 5  # 每局最大参与人数
     FULL_GROUP_PUNISH_ALL_PROBABILITY = 0.25  # 全体禁言概率
     MIN_MUTE_MINUTES = 1  # 最小禁言时间
@@ -22,8 +25,8 @@ class Lottery(BasePlugin):
     group_participants: Dict[int, List[int]] = {}  # 记录每个群的参与者
     total_awards = 0  # 奖品总数
 
-    def __init__(self):
-        super().__init__()
+    def setup(self):
+        """插件初始化设置"""
         self.load_total_awards()
 
     def load_total_awards(self):
@@ -61,16 +64,24 @@ class Lottery(BasePlugin):
         participants = self.group_participants[group_id]
 
         if user_id in participants:
-            await self.api.post_group_msg(group_id=input.group_id, text=f"{input.sender.nickname}，你已经加入了本次大乐透！")
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                text=f"{input.sender.nickname}，你已经加入了本次大乐透！",
+            )
             return
 
         participants.append(user_id)
         if len(participants) >= self.MAX_PARTICIPANTS:
-            await self.api.post_group_msg(group_id=input.group_id, text="人够了！人够了！让我们开始吧！")
+            await self.api.post_group_msg(
+                group_id=input.group_id, text="人够了！人够了！让我们开始吧！"
+            )
             await self.trigger_lottery(input, group_id)
             return
 
-        await self.api.post_group_msg(group_id=input.group_id, text=f"好了，好了！{input.sender.nickname} 加入了这次的大乐透！当前参与人数：{len(participants)}/{self.MAX_PARTICIPANTS}")
+        await self.api.post_group_msg(
+            group_id=input.group_id,
+            text=f"好了，好了！{input.sender.nickname} 加入了这次的大乐透！当前参与人数：{len(participants)}/{self.MAX_PARTICIPANTS}",
+        )
 
     async def trigger_lottery(self, input: GroupMessage, group_id: int):
         """触发大乐透逻辑"""
@@ -91,15 +102,21 @@ class Lottery(BasePlugin):
         """全场禁言逻辑"""
         image_path = "data/image/Lottery/103543.gif"
         if os.path.exists(image_path):
-            await self.api.post_group_msg(group_id=input.group_id, rtf=MessageChain(
-                [
-                    Image(image_path),
-                ]
-            ))
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                rtf=MessageChain(
+                    [
+                        Image(image_path),
+                    ]
+                ),
+            )
 
         await self.api.post_group_msg(group_id=input.group_id, text="恭喜这位……")
         await asyncio.sleep(3)
-        await self.api.post_group_msg(group_id=input.group_id, text=f"没有玩家取得本次大乐透的优胜！\n小小赛娜达成了清场！")
+        await self.api.post_group_msg(
+            group_id=input.group_id,
+            text=f"没有玩家取得本次大乐透的优胜！\n小小赛娜达成了清场！",
+        )
 
         for user_id in participants:
             await self.mute_user(input, user_id, self.random_mute_duration())
@@ -107,7 +124,10 @@ class Lottery(BasePlugin):
         self.total_awards += len(participants)
         self.save_total_awards()
 
-        await self.api.post_group_msg(group_id=input.group_id, text=f"时至今日，大乐透已经送出了 {self.total_awards} 份奖品！")
+        await self.api.post_group_msg(
+            group_id=input.group_id,
+            text=f"时至今日，大乐透已经送出了 {self.total_awards} 份奖品！",
+        )
 
     async def handle_single_winner(self, input: GroupMessage, participants: List[int]):
         """单人禁言逻辑"""
@@ -119,9 +139,12 @@ class Lottery(BasePlugin):
 
         self.total_awards += 1
         self.save_total_awards()
-        await self.api.post_group_msg(group_id=input.group_id, text=f"恭喜这位 {user_name} 取得了本次大乐透的优胜！\n"
+        await self.api.post_group_msg(
+            group_id=input.group_id,
+            text=f"恭喜这位 {user_name} 取得了本次大乐透的优胜！\n"
             f"奖品是……禁言 {mute_duration} 分钟！恭喜！\n"
-            f"时至今日，大乐透已经送出了 {self.total_awards} 份奖品！")
+            f"时至今日，大乐透已经送出了 {self.total_awards} 份奖品！",
+        )
 
     def random_mute_duration(self):
         """随机生成禁言时间"""

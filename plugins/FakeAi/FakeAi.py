@@ -1,17 +1,17 @@
 import asyncio
 import json
 import random
-from collections import deque
 from datetime import datetime
 from typing import Dict, List, Optional
 
 import yaml
-from common.entity import GroupMember
-from common.utils import AiUtil
+from common.entity.GroupMember import GroupMember
+from common.utils.AiUtil import AiUtil
+from ncatbot.core.element import At, MessageChain, Text
+from ncatbot.plugin.compatible import CompatibleEnrollment
 from ncatbot.utils.logger import get_log
-from ncatbot.core.message import GroupMessage, MessageChain, Text, At
+from ncatbot.core.message import GroupMessage
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
 
 _log = get_log()
 bot = CompatibleEnrollment
@@ -32,7 +32,7 @@ group_ids = [
 ]
 
 
-class ReplyCache():
+class ReplyCache:
     def __init__(self, max_size: int = 10):
         self.replies = []
         self.max_size = max_size
@@ -70,6 +70,9 @@ class GlobalReplyCacheManager:
 
 
 class FakeAi(BasePlugin):
+    name = "FakeAi"  # 插件名称
+    version = "1.0"  # 插件版本
+
     @bot.group_event()
     async def handle_fake_ai(self, input: GroupMessage) -> None:
         group_id = input.group_id
@@ -84,7 +87,7 @@ class FakeAi(BasePlugin):
             ):
                 answer = await answer_ai(group_id, group_reply_caches)
                 _log.info(answer)
-                await send_typing_response(input, answer)
+                await send_typing_response(self, input, answer)
                 return
 
         if "[CQ:at,qq=3555202423]" in input.raw_message:
@@ -98,7 +101,7 @@ class FakeAi(BasePlugin):
             reply_cache.add_reply(reply_json)
             answer = await answer_ai(group_id, group_reply_caches)
             _log.info(answer)
-            await send_typing_response(input, answer)
+            await send_typing_response(self, input, answer)
             return
 
         # 获取或创建对应群的 ReplyCache
@@ -126,10 +129,10 @@ class FakeAi(BasePlugin):
         reply_cache.add_reply(answer)
         if not answer or answer.strip() == "" or answer == '""':
             return
-        await send_typing_response(input, answer)
+        await send_typing_response(self, input, answer)
 
 
-async def send_typing_response(input: GroupMessage, answer: str) -> None:
+async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -> None:
     try:
         replace = json.loads(answer.replace("{{", "{").replace("}}", "}"))
         content = replace.get("content", "")
@@ -144,7 +147,7 @@ async def send_typing_response(input: GroupMessage, answer: str) -> None:
 
     at_pattern = re.compile(r"\[CQ:at,qq=([\w\u4e00-\u9fff]+)]")
     group_id = input.group_id
-    members_response = await input.get_group_member_list(group_id=group_id)
+    members_response = await self.api.get_group_member_list(group_id=group_id)
 
     members = [GroupMember(member) for member in members_response.get("data", [])]
 
@@ -157,7 +160,7 @@ async def send_typing_response(input: GroupMessage, answer: str) -> None:
             # 处理 @ 之前的文本
             text_before_at = sentence[last_match_end : match.start()].strip()
             if text_before_at:
-                message.append(Text(text_before_at))
+                message.chain.append(Text(text_before_at))
 
             at_content = match.group(1)
 
@@ -170,21 +173,21 @@ async def send_typing_response(input: GroupMessage, answer: str) -> None:
 
             if user_id and any(member.user_id == user_id for member in members):
                 # 添加 @ 的用户
-                message.append(At(user_id))
+                message.chain.append(At(user_id))
 
             last_match_end = match.end()
 
         # 处理 @ 之后的文本
         text_after_last_at = sentence[last_match_end:].strip()
         if text_after_last_at:
-            message.append(Text(text_after_last_at))
+            message.chain.append(Text(text_after_last_at))
 
         # 模拟打字的延时，根据句子的字符数设置延时
         delay = len(sentence) * 0.1  # 每个字符延时 0.1 秒
         await asyncio.sleep(delay)
 
         # 发送消息
-        await input.api.post_group_msg(group_id=input.group_id, rtf=message)
+        await self.api.post_group_msg(group_id=input.group_id, rtf=message)
 
 
 def find_user_id_by_name(name: str, group_id: int) -> Optional[int]:

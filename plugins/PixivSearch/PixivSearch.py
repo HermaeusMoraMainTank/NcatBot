@@ -4,11 +4,12 @@ import requests
 from urllib.parse import urlencode, quote
 from pathlib import Path
 
-from ncatbot.core.message import GroupMessage, Image, MessageChain
+from common.constants.HMMT import HMMT
+from ncatbot.core.message import GroupMessage
+from ncatbot.core.element import Image, MessageChain, Text
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
+from ncatbot.plugin.compatible import CompatibleEnrollment
 
-from NcatBot.common.constants import HMMT
 
 last_page = {}
 dir_path = Path("data/image/pixiv")
@@ -17,8 +18,8 @@ bot = CompatibleEnrollment
 
 
 class PixivSearch(BasePlugin):
-    def __init__(self):
-        pass
+    name = "PixivSearch"  # 插件名称
+    version = "1.0"  # 插件版本
 
     @bot.group_event()
     async def handle_pixiv_search(self, input: GroupMessage):
@@ -28,9 +29,22 @@ class PixivSearch(BasePlugin):
 
         if len(commands) == 3 and commands[2].lower() == "r18":
             if input.user_id == 1271701079 or input.user_id == 273421673:
-                await input.add_text("等一下").reply()
-                return
-            await input.add_text("你搜牛魔的r18，这里是qq群").reply()
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    rtf=MessageChain(
+                        [
+                            Text("等一下"),
+                        ]
+                    ),
+                )
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                rtf=MessageChain(
+                    [
+                        Text("你搜牛魔的r18，这里是qq群"),
+                    ]
+                ),
+            )
             return
 
         if commands[0] == "搜索图片":
@@ -65,11 +79,14 @@ class PixivSearch(BasePlugin):
             image_url = illusion_detail["body"]["urls"]["original"]
             image_path = self.download_image(image_url)
             if image_path:
-                await self.api.post_group_msg(group_id=input.group_id, rtf=MessageChain(
-                    [
-                        Image(image_path),
-                    ]
-                ))
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    rtf=MessageChain(
+                        [
+                            Image(image_path),
+                        ]
+                    ),
+                )
 
     def download_image(self, url):
         headers = {

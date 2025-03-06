@@ -1,13 +1,11 @@
 import hashlib
-import logging
-
+from common.constants.HMMT import HMMT
+from common.utils.CommonUtil import CommonUtil
 from ncatbot.core.message import GroupMessage
 from ncatbot.utils.logger import get_log
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.event import CompatibleEnrollment
+from ncatbot.plugin.compatible import CompatibleEnrollment
 
-from NcatBot.common.constants import HMMT
-from NcatBot.common.utils import CommonUtil
 
 # 日志配置
 _log = get_log()
@@ -15,7 +13,10 @@ _log = get_log()
 bot = CompatibleEnrollment
 
 
-class JRRP(BasePlugin):
+class Jrrp(BasePlugin):
+    name = "Jrrp"  # 插件名称
+    version = "1.0"  # 插件版本
+
     @bot.group_event()
     async def handle_jrrp(self, input: GroupMessage):
         """
@@ -25,8 +26,10 @@ class JRRP(BasePlugin):
             sender = input.sender
             _log.info(f"JRRP request from {sender.nickname} ({sender.user_id})")
             if sender.user_id in [HMMT.HMMT_ID, 1042081663, 864772045]:
-
-                await self.api.post_group_msg(group_id=input.group_id, text=f"{sender.nickname} 的今日人品是：101。")
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    text=f"{sender.nickname} 的今日人品是：101。",
+                )
                 return
             # 计算今日人品值
             message_digest = hashlib.sha256()
@@ -38,20 +41,47 @@ class JRRP(BasePlugin):
 
             # 根据人品值返回不同的消息
             if luck_value == 0:
-                await self.api.post_group_msg(group_id=input.group_id, text=f"{sender.nickname} 的今日人品是：{luck_value}。怎，怎么会这样……")
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    text=f"{sender.nickname} 的今日人品是：{luck_value}。怎，怎么会这样……",
+                )
             elif 0 < luck_value <= 20:
-                await self.api.post_group_msg(group_id=input.group_id, text=f"{sender.nickname} 的今日人品是：{luck_value}。推荐闷头睡大觉。")
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    text=f"{sender.nickname} 的今日人品是：{luck_value}。推荐闷头睡大觉。",
+                )
             elif 20 < luck_value <= 40:
-                await self.api.post_group_msg(group_id=input.group_id, text=f"{sender.nickname} 的今日人品是：{luck_value}。也许今天适合摆烂。")
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    text=f"{sender.nickname} 的今日人品是：{luck_value}。也许今天适合摆烂。",
+                )
             elif 40 < luck_value <= 60 and luck_value != 42:
-                await self.api.post_group_msg(group_id=input.group_id, text=f"{sender.nickname} 的今日人品是：{luck_value}。又是平凡的一天。")
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    text=f"{sender.nickname} 的今日人品是：{luck_value}。又是平凡的一天。",
+                )
             elif 60 < luck_value <= 80 and luck_value != 77:
-                await self.api.post_group_msg(group_id=input.group_id, text=f"{sender.nickname} 的今日人品是：{luck_value}。太阳当空照，花儿对你笑。")
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    text=f"{sender.nickname} 的今日人品是：{luck_value}。太阳当空照，花儿对你笑。",
+                )
             elif 80 < luck_value < 100:
-                await self.api.post_group_msg(group_id=input.group_id, text=f"{sender.nickname} 的今日人品是：{luck_value}。出门可能捡到{luck_value}块钱。")
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    text=f"{sender.nickname} 的今日人品是：{luck_value}。出门可能捡到{luck_value}块钱。",
+                )
             elif luck_value == 42:
-                await self.api.post_group_msg(group_id=input.group_id, text=f"{sender.nickname} 的今日人品是：{luck_value}。感觉可以参透宇宙的真理。")
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    text=f"{sender.nickname} 的今日人品是：{luck_value}。感觉可以参透宇宙的真理。",
+                )
             elif luck_value == 77:
-                await self.api.post_group_msg(group_id=input.group_id, text=f"{sender.nickname} 的今日人品是：{luck_value}。要不要去抽一发卡试试呢……")
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    text=f"{sender.nickname} 的今日人品是：{luck_value}。要不要去抽一发卡试试呢……",
+                )
             elif luck_value == 100:
-                await self.api.post_group_msg(group_id=input.group_id, text=f"{sender.nickname} 的今日人品是：{luck_value}。买彩票可能会中大奖哦！")
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    text=f"{sender.nickname} 的今日人品是：{luck_value}。买彩票可能会中大奖哦！",
+                )

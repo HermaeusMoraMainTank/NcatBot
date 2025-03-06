@@ -129,7 +129,8 @@ class BotClient:
     def _run(self):
         try:
             asyncio.run(self.run_async())
-        except Exception:
+        except Exception as e:
+            _log.info(e)
             _log.info("插件卸载中...")
             asyncio.run(self.plugin_sys._unload_all())
             _log.info("正常退出")
