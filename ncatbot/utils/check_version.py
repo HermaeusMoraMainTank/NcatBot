@@ -24,7 +24,7 @@ def get_local_package_version(package_name):
             stderr=subprocess.PIPE,
             text=True,
             encoding="utf-8",
-            check=True
+            check=True,
         )
         # 如果命令成功执行，结果包含包的版本信息
         for line in result.stdout.splitlines():

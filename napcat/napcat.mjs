@@ -1,4 +1,4 @@
-import { r as requireMs$1, g as getAugmentedNamespace, c as commonjsGlobal, a as requireInherits_browser, b as getDefaultExportFromCjs, f as fileTypeFromFile, i as imageSize } from './index-COHQOgyX.js';
+import { r as requireMs$1, g as getAugmentedNamespace, c as commonjsGlobal, a as requireInherits_browser, b as getDefaultExportFromCjs, f as fileTypeFromFile, i as imageSize } from './index-D2cgwBzG.js';
 import require$$0$4 from 'util';
 import * as os from 'os';
 import os__default from 'os';
@@ -20,8 +20,10 @@ import https from 'node:https';
 import http from 'node:http';
 import * as crypto$1 from 'crypto';
 import crypto__default, { randomUUID, createHash as createHash$1, createHmac } from 'crypto';
-import Piscina from 'piscina';
 import { isSilk, isWav, getDuration, getWavFileInfo, decode } from 'silk-wasm';
+import urlParse, { fileURLToPath } from 'url';
+import { Worker } from 'worker_threads';
+import { fileURLToPath as fileURLToPath$1 } from 'node:url';
 import fs$1, { readFileSync, existsSync } from 'node:fs';
 import * as crypto from 'node:crypto';
 import crypto__default$1, { createHash } from 'node:crypto';
@@ -32,7 +34,6 @@ import stream__default from 'node:stream';
 import assert$1 from 'node:assert';
 import * as zlib from 'node:zlib';
 import zlib__default from 'node:zlib';
-import urlParse, { fileURLToPath } from 'url';
 import { WebSocket, WebSocketServer } from 'ws';
 import EventEmitter from 'node:events';
 import require$$1$4 from 'node:child_process';
@@ -40,9 +41,7 @@ import require$$4$2 from 'node:process';
 import express, { Router } from 'express';
 import { Socket, isIP } from 'net';
 import { fork } from 'child_process';
-import { Worker } from 'worker_threads';
 import { C as ConoutWorkerMessage, g as getWorkerPipeName } from './conout-D9oph_Le.js';
-import { fileURLToPath as fileURLToPath$1 } from 'node:url';
 import * as tty from 'tty';
 import require$$1$5, { PassThrough } from 'stream';
 import require$$0$8 from 'constants';
@@ -18627,57 +18626,54 @@ async function uriToLocalFile(dir, uri, filename = randomUUID(), headers) {
 
 const defaultVideoThumbB64 = "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";
 
-async function getWorkerPath$1() {
-  return new URL(
-    /* @vite-ignore */
-    "./ffmpeg-worker.mjs",
-    import.meta.url
-  ).href;
+async function runTask(workerScript, taskData) {
+  let worker = new Worker(workerScript);
+  try {
+    return await new Promise((resolve, reject) => {
+      worker.on("message", (result) => {
+        resolve(result);
+      });
+      worker.on("error", (error) => {
+        reject(new Error(`Worker error: ${error.message}`));
+      });
+      worker.on("exit", (code) => {
+        if (code !== 0) {
+          reject(new Error(`Worker stopped with exit code ${code}`));
+        }
+      });
+      worker.postMessage(taskData);
+    });
+  } catch (error) {
+    throw new Error(`Failed to run task: ${error.message}`);
+  } finally {
+    worker.terminate();
+  }
+}
+
+function getWorkerPath$1() {
+  return path__default.join(path__default.dirname(fileURLToPath(import.meta.url)), "./ffmpeg-worker.mjs");
 }
 class FFmpegService {
   static async extractThumbnail(videoPath, thumbnailPath) {
-    const piscina = new Piscina({
-      filename: await getWorkerPath$1()
-    });
-    await piscina.run({ method: "extractThumbnail", args: [videoPath, thumbnailPath] });
-    await piscina.destroy();
+    await runTask(getWorkerPath$1(), { method: "extractThumbnail", args: [videoPath, thumbnailPath] });
   }
   static async convertFile(inputFile, outputFile, format) {
-    const piscina = new Piscina({
-      filename: await getWorkerPath$1()
-    });
-    await piscina.run({ method: "convertFile", args: [inputFile, outputFile, format] });
-    await piscina.destroy();
+    await runTask(getWorkerPath$1(), { method: "convertFile", args: [inputFile, outputFile, format] });
   }
   static async convert(filePath, pcmPath) {
-    const piscina = new Piscina({
-      filename: await getWorkerPath$1()
-    });
-    const result = await piscina.run({ method: "convert", args: [filePath, pcmPath] });
-    await piscina.destroy();
+    const result = await runTask(getWorkerPath$1(), { method: "convert", args: [filePath, pcmPath] });
     return result;
   }
   static async getVideoInfo(videoPath, thumbnailPath) {
-    const piscina = new Piscina({
-      filename: await getWorkerPath$1()
-    });
-    const result = await piscina.run({ method: "getVideoInfo", args: [videoPath, thumbnailPath] });
-    await piscina.destroy();
+    const result = await await runTask(getWorkerPath$1(), { method: "getVideoInfo", args: [videoPath, thumbnailPath] });
     return result;
   }
 }
 
 const ALLOW_SAMPLE_RATE = [8e3, 12e3, 16e3, 24e3, 32e3, 44100, 48e3];
-async function getWorkerPath() {
-  return new URL(
-    /* @vite-ignore */
-    "./audio-worker.mjs",
-    import.meta.url
-  ).href;
+function getWorkerPath() {
+  return path$1.join(path$1.dirname(fileURLToPath$1(import.meta.url)), "audio-worker.mjs");
 }
-const piscina = new Piscina({
-  filename: await getWorkerPath()
-});
 async function guessDuration(pttPath, logger) {
   const pttFileInfo = await fsProm.stat(pttPath);
   const duration = Math.max(1, Math.floor(pttFileInfo.size / 1024 / 3));
@@ -18699,7 +18695,7 @@ async function encodeSilk(filePath, TEMP_DIR, logger) {
       logger.log(`语音文件${filePath}需要转换成silk`);
       const pcmPath = `${pttPath}.pcm`;
       const { input, sampleRate } = isWav(file) ? await handleWavFile(file, filePath, pcmPath) : { input: await FFmpegService.convert(filePath, pcmPath), sampleRate: 24e3 };
-      const silk = await piscina.run({ input, sampleRate });
+      const silk = await runTask(getWorkerPath(), { input, sampleRate });
       fsProm.unlink(pcmPath).catch((e) => logger.logError("删除临时文件失败", pcmPath, e));
       await fsProm.writeFile(pttPath, Buffer.from(silk.data));
       logger.log(`语音文件${filePath}转换成功!`, pttPath, "时长:", silk.duration);
@@ -18753,7 +18749,10 @@ class NTQQFileApi {
     this.core = core;
     this.rkeyManager = new RkeyManager(
       [
-        "https://rkey.napneko.icu/rkeys"
+        "https://ss.xingzhige.com/music_card/rkey",
+        // 国内
+        "https://secret-service.bietiaop.com/rkeys"
+        //国内
       ],
       this.context.logger
     );
@@ -19557,6 +19556,13 @@ class NTQQGroupApi {
     }
     return this.groupMemberCache.get(groupCode);
   }
+  async refreshGroupMemberCachePartial(groupCode, uid) {
+    const member = await this.getGroupMemberEx(groupCode, uid, true);
+    if (member) {
+      this.groupMemberCache.get(groupCode)?.set(uid, member);
+    }
+    return member;
+  }
   async getGroupMember(groupCode, memberUinOrUid) {
     const groupCodeStr = groupCode.toString();
     const memberUinOrUidStr = memberUinOrUid.toString();
@@ -19908,6 +19914,19 @@ class NTQQMsgApi {
       isReverseOrder: false,
       isIncludeCurrent: true,
       pageLimit: 100
+    });
+  }
+  async queryFirstMsgBySender(peer, SendersUid) {
+    console.log(peer, SendersUid);
+    return await this.context.session.getMsgService().queryMsgsWithFilterEx("0", "0", "0", {
+      chatInfo: peer,
+      filterMsgType: [],
+      filterSendersUid: SendersUid,
+      filterMsgToTime: "0",
+      filterMsgFromTime: "0",
+      isReverseOrder: true,
+      isIncludeCurrent: true,
+      pageLimit: 2e4
     });
   }
   async setMsgRead(peer) {
@@ -20699,6 +20718,11 @@ const offset = {
   "3.2.15-31363-arm64": {"send":"71BFD48","recv":"71C3580"},
   "6.9.65-31363-x64": {"send":"4720E80","recv":"47236EC"},
   "6.9.65-31363-arm64": {"send":"422CEF8","recv":"422F710"},
+  "9.9.18-32690-x64": {"send":"39F9630","recv":"39FDE30"},
+  "3.2.16-32690-x64": {"send":"A5E24C0","recv":"A5E5EE0"},
+  "3.2.16-32690-arm64": {"send":"7226630","recv":"7229F60"},
+  "3.2.16-32721-x64": {"send":"A5E24C0","recv":"A5E5EE0"},
+  "3.2.16-32721-arm64": {"send":"7226630","recv":"7229F60"},
 };
 
 /**
@@ -28387,7 +28411,7 @@ class NativePacketClient extends IPacketClient {
         const callback = this.cb.get(trace_id2 + "recv");
         callback?.({ seq, cmd, hex_data });
       }
-    });
+    }, this.napcore.config.o3HookMode == 1);
     this.available = true;
   }
   sendCommandImpl(cmd, data, trace_id) {
@@ -28976,7 +29000,7 @@ class PacketClientSession {
   }
 }
 
-const napCatVersion = "4.5.23";
+const napCatVersion = "4.6.4";
 
 const typedOffset = offset;
 class NTQQPacketApi {
@@ -39116,7 +39140,7 @@ function IndexFromMappedResult(type, mappedResult, options) {
 }
 
 // prettier-ignore
-function FromRest$7(types, key) {
+function FromRest$6(types, key) {
     return types.map(type => IndexFromPropertyKey(type, key));
 }
 // prettier-ignore
@@ -39125,7 +39149,7 @@ function FromIntersectRest(types) {
 }
 // prettier-ignore
 function FromIntersect$7(types, key) {
-    return (IntersectEvaluated(FromIntersectRest(FromRest$7(types, key))));
+    return (IntersectEvaluated(FromIntersectRest(FromRest$6(types, key))));
 }
 // prettier-ignore
 function FromUnionRest(types) {
@@ -39135,7 +39159,7 @@ function FromUnionRest(types) {
 }
 // prettier-ignore
 function FromUnion$7(types, key) {
-    return (UnionEvaluated(FromUnionRest(FromRest$7(types, key))));
+    return (UnionEvaluated(FromUnionRest(FromRest$6(types, key))));
 }
 // prettier-ignore
 function FromTuple$4(types, key) {
@@ -39309,7 +39333,7 @@ function FromMappedKey$3(K, P) {
     return FromMappedResult$9(K, R);
 }
 // prettier-ignore
-function FromRest$6(K, T) {
+function FromRest$5(K, T) {
     return T.map(L => FromSchemaType(K, L));
 }
 // prettier-ignore
@@ -39331,13 +39355,13 @@ function FromSchemaType(K, T) {
             IsMappedResult$1(T) ? FromMappedResult$9(K, T.properties) :
                 IsMappedKey$1(T) ? FromMappedKey$3(K, T.keys) :
                     // unevaluated types
-                    IsConstructor$1(T) ? Constructor(FromRest$6(K, T.parameters), FromSchemaType(K, T.returns), options) :
-                        IsFunction$1(T) ? Function$1(FromRest$6(K, T.parameters), FromSchemaType(K, T.returns), options) :
+                    IsConstructor$1(T) ? Constructor(FromRest$5(K, T.parameters), FromSchemaType(K, T.returns), options) :
+                        IsFunction$1(T) ? Function$1(FromRest$5(K, T.parameters), FromSchemaType(K, T.returns), options) :
                             IsAsyncIterator$1(T) ? AsyncIterator(FromSchemaType(K, T.items), options) :
                                 IsIterator$1(T) ? Iterator(FromSchemaType(K, T.items), options) :
-                                    IsIntersect$1(T) ? Intersect(FromRest$6(K, T.allOf), options) :
-                                        IsUnion$1(T) ? Union(FromRest$6(K, T.anyOf), options) :
-                                            IsTuple$1(T) ? Tuple(FromRest$6(K, T.items ?? []), options) :
+                                    IsIntersect$1(T) ? Intersect(FromRest$5(K, T.allOf), options) :
+                                        IsUnion$1(T) ? Union(FromRest$5(K, T.anyOf), options) :
+                                            IsTuple$1(T) ? Tuple(FromRest$5(K, T.items ?? []), options) :
                                                 IsObject$1(T) ? Object$1(FromProperties$g(K, T.properties), options) :
                                                     IsArray$1(T) ? Array$1(FromSchemaType(K, T.items), options) :
                                                         IsPromise$1(T) ? Promise$1(FromSchemaType(K, T.item), options) :
@@ -39465,18 +39489,18 @@ function FromRef$3($ref) {
 }
 // prettier-ignore
 function FromIntersect$6(types) {
-    return Intersect(FromRest$5(types));
+    return Intersect(FromRest$4(types));
 }
 // prettier-ignore
 function FromUnion$6(types) {
-    return Union(FromRest$5(types));
+    return Union(FromRest$4(types));
 }
 // prettier-ignore
 function FromPromise$2(type) {
     return Awaited(type);
 }
 // prettier-ignore
-function FromRest$5(types) {
+function FromRest$4(types) {
     return types.map(type => Awaited(type));
 }
 /** `[JavaScript]` Constructs a type by recursively unwrapping Promise types */
@@ -39485,7 +39509,7 @@ function Awaited(type, options) {
 }
 
 // prettier-ignore
-function FromRest$4(types) {
+function FromRest$3(types) {
     const result = [];
     for (const L of types)
         result.push(KeyOfPropertyKeys(L));
@@ -39493,13 +39517,13 @@ function FromRest$4(types) {
 }
 // prettier-ignore
 function FromIntersect$5(types) {
-    const propertyKeysArray = FromRest$4(types);
+    const propertyKeysArray = FromRest$3(types);
     const propertyKeys = SetUnionMany(propertyKeysArray);
     return propertyKeys;
 }
 // prettier-ignore
 function FromUnion$5(types) {
-    const propertyKeysArray = FromRest$4(types);
+    const propertyKeysArray = FromRest$3(types);
     const propertyKeys = SetIntersectMany(propertyKeysArray);
     return propertyKeys;
 }
@@ -40558,31 +40582,31 @@ function RecordValue(type) {
 
 // prettier-ignore
 function FromConstructor$1(args, type) {
-    type.parameters = FromTypes(args, type.parameters);
+    type.parameters = FromTypes$1(args, type.parameters);
     type.returns = FromType$1(args, type.returns);
     return type;
 }
 // prettier-ignore
 function FromFunction$1(args, type) {
-    type.parameters = FromTypes(args, type.parameters);
+    type.parameters = FromTypes$1(args, type.parameters);
     type.returns = FromType$1(args, type.returns);
     return type;
 }
 // prettier-ignore
 function FromIntersect$3(args, type) {
-    type.allOf = FromTypes(args, type.allOf);
+    type.allOf = FromTypes$1(args, type.allOf);
     return type;
 }
 // prettier-ignore
 function FromUnion$3(args, type) {
-    type.anyOf = FromTypes(args, type.anyOf);
+    type.anyOf = FromTypes$1(args, type.anyOf);
     return type;
 }
 // prettier-ignore
 function FromTuple$1(args, type) {
     if (IsUndefined$3(type.items))
         return type;
-    type.items = FromTypes(args, type.items);
+    type.items = FromTypes$1(args, type.items);
     return type;
 }
 // prettier-ignore
@@ -40638,7 +40662,7 @@ function FromProperties$8(args, properties) {
     }, {});
 }
 // prettier-ignore
-function FromTypes(args, types) {
+function FromTypes$1(args, types) {
     return types.map(type => FromType$1(args, type));
 }
 // prettier-ignore
@@ -40717,7 +40741,7 @@ function FromTemplateLiteral(schema, mode, options) {
         return { ...schema, pattern: FromLiteralValue(schema.pattern, mode) };
     const strings = [...TemplateLiteralExpressionGenerate(expression)];
     const literals = strings.map((value) => Literal(value));
-    const mapped = FromRest$3(literals, mode);
+    const mapped = FromRest$2(literals, mode);
     const union = Union(mapped);
     return TemplateLiteral([union], options);
 }
@@ -40730,7 +40754,7 @@ function FromLiteralValue(value, mode) {
                     value) : value.toString());
 }
 // prettier-ignore
-function FromRest$3(T, M) {
+function FromRest$2(T, M) {
     return T.map(L => Intrinsic(L, M));
 }
 /** Applies an intrinsic string manipulation to the given type. */
@@ -40741,7 +40765,7 @@ function Intrinsic(schema, mode, options = {}) {
     IsMappedKey$1(schema) ? IntrinsicFromMappedKey(schema, mode, options) :
         // Standard-Inference
         IsTemplateLiteral$1(schema) ? FromTemplateLiteral(schema, mode, options) :
-            IsUnion$1(schema) ? Union(FromRest$3(schema.anyOf, mode), options) :
+            IsUnion$1(schema) ? Union(FromRest$2(schema.anyOf, mode), options) :
                 IsLiteral$1(schema) ? Literal(FromLiteralValue(schema.const, mode), options) :
                     // Default Type
                     CreateType(schema, options));
@@ -40966,7 +40990,7 @@ function FromObject$2(type) {
     return Object$1(properties, options);
 }
 // prettier-ignore
-function FromRest$2(types) {
+function FromRest$1(types) {
     return types.map(type => PartialResolve(type));
 }
 // ------------------------------------------------------------------
@@ -40978,8 +41002,8 @@ function PartialResolve(type) {
     // Mappable
     IsComputed$1(type) ? FromComputed$2(type.target, type.parameters) :
         IsRef$1(type) ? FromRef$1(type.$ref) :
-            IsIntersect$1(type) ? Intersect(FromRest$2(type.allOf)) :
-                IsUnion$1(type) ? Union(FromRest$2(type.anyOf)) :
+            IsIntersect$1(type) ? Intersect(FromRest$1(type.allOf)) :
+                IsUnion$1(type) ? Union(FromRest$1(type.anyOf)) :
                     IsObject$1(type) ? FromObject$2(type) :
                         // Intrinsic
                         IsBigInt$1(type) ? type :
@@ -41044,7 +41068,7 @@ function FromObject$1(type) {
     return Object$1(properties, options);
 }
 // prettier-ignore
-function FromRest$1(types) {
+function FromRest(types) {
     return types.map(type => RequiredResolve(type));
 }
 // ------------------------------------------------------------------
@@ -41056,8 +41080,8 @@ function RequiredResolve(type) {
     // Mappable
     IsComputed$1(type) ? FromComputed$1(type.target, type.parameters) :
         IsRef$1(type) ? FromRef(type.$ref) :
-            IsIntersect$1(type) ? Intersect(FromRest$1(type.allOf)) :
-                IsUnion$1(type) ? Union(FromRest$1(type.anyOf)) :
+            IsIntersect$1(type) ? Intersect(FromRest(type.allOf)) :
+                IsUnion$1(type) ? Union(FromRest(type.anyOf)) :
                     IsObject$1(type) ? FromObject$1(type) :
                         // Intrinsic
                         IsBigInt$1(type) ? type :
@@ -41101,18 +41125,18 @@ function RequiredFromMappedResult(R, options) {
 }
 
 // prettier-ignore
-function DerefParameters(moduleProperties, types) {
+function DereferenceParameters(moduleProperties, types) {
     return types.map((type) => {
         return IsRef$1(type)
-            ? Deref(moduleProperties, type.$ref)
+            ? Dereference(moduleProperties, type.$ref)
             : FromType(moduleProperties, type);
     });
 }
 // prettier-ignore
-function Deref(moduleProperties, ref) {
+function Dereference(moduleProperties, ref) {
     return (ref in moduleProperties
         ? IsRef$1(moduleProperties[ref])
-            ? Deref(moduleProperties, moduleProperties[ref].$ref)
+            ? Dereference(moduleProperties, moduleProperties[ref].$ref)
             : FromType(moduleProperties, moduleProperties[ref])
         : Never());
 }
@@ -41146,7 +41170,7 @@ function FromRequired(parameters) {
 }
 // prettier-ignore
 function FromComputed(moduleProperties, target, parameters) {
-    const dereferenced = DerefParameters(moduleProperties, parameters);
+    const dereferenced = DereferenceParameters(moduleProperties, parameters);
     return (target === 'Awaited' ? FromAwaited(dereferenced) :
         target === 'Index' ? FromIndex(dereferenced) :
             target === 'KeyOf' ? FromKeyOf(dereferenced) :
@@ -41155,6 +41179,26 @@ function FromComputed(moduleProperties, target, parameters) {
                         target === 'Pick' ? FromPick(dereferenced) :
                             target === 'Required' ? FromRequired(dereferenced) :
                                 Never());
+}
+function FromArray(moduleProperties, type) {
+    return Array$1(FromType(moduleProperties, type));
+}
+function FromAsyncIterator(moduleProperties, type) {
+    return AsyncIterator(FromType(moduleProperties, type));
+}
+// prettier-ignore
+function FromConstructor(moduleProperties, parameters, instanceType) {
+    return Constructor(FromTypes(moduleProperties, parameters), FromType(moduleProperties, instanceType));
+}
+// prettier-ignore
+function FromFunction(moduleProperties, parameters, returnType) {
+    return Function$1(FromTypes(moduleProperties, parameters), FromType(moduleProperties, returnType));
+}
+function FromIntersect(moduleProperties, types) {
+    return Intersect(FromTypes(moduleProperties, types));
+}
+function FromIterator(moduleProperties, type) {
+    return Iterator(FromType(moduleProperties, type));
 }
 function FromObject(moduleProperties, properties) {
     return Object$1(globalThis.Object.keys(properties).reduce((result, key) => {
@@ -41169,53 +41213,41 @@ function FromRecord(moduleProperties, type) {
     return result;
 }
 // prettier-ignore
-function FromConstructor(moduleProperties, parameters, instanceType) {
-    return Constructor(FromRest(moduleProperties, parameters), FromType(moduleProperties, instanceType));
-}
-// prettier-ignore
-function FromFunction(moduleProperties, parameters, returnType) {
-    return Function$1(FromRest(moduleProperties, parameters), FromType(moduleProperties, returnType));
+function FromTransform(moduleProperties, transform) {
+    return (IsRef$1(transform))
+        ? { ...Dereference(moduleProperties, transform.$ref), [TransformKind]: transform[TransformKind] }
+        : transform;
 }
 function FromTuple(moduleProperties, types) {
-    return Tuple(FromRest(moduleProperties, types));
-}
-function FromIntersect(moduleProperties, types) {
-    return Intersect(FromRest(moduleProperties, types));
+    return Tuple(FromTypes(moduleProperties, types));
 }
 function FromUnion(moduleProperties, types) {
-    return Union(FromRest(moduleProperties, types));
+    return Union(FromTypes(moduleProperties, types));
 }
-function FromArray(moduleProperties, type) {
-    return Array$1(FromType(moduleProperties, type));
-}
-function FromAsyncIterator(moduleProperties, type) {
-    return AsyncIterator(FromType(moduleProperties, type));
-}
-function FromIterator(moduleProperties, type) {
-    return Iterator(FromType(moduleProperties, type));
-}
-function FromRest(moduleProperties, types) {
+function FromTypes(moduleProperties, types) {
     return types.map((type) => FromType(moduleProperties, type));
 }
 // prettier-ignore
 function FromType(moduleProperties, type) {
     return (
-    // Modifier Unwrap - Reapplied via CreateType Options
+    // Modifiers
     IsOptional$1(type) ? CreateType(FromType(moduleProperties, Discard(type, [OptionalKind])), type) :
         IsReadonly(type) ? CreateType(FromType(moduleProperties, Discard(type, [ReadonlyKind])), type) :
-            // Traveral
-            IsArray$1(type) ? CreateType(FromArray(moduleProperties, type.items), type) :
-                IsAsyncIterator$1(type) ? CreateType(FromAsyncIterator(moduleProperties, type.items), type) :
-                    IsComputed$1(type) ? CreateType(FromComputed(moduleProperties, type.target, type.parameters)) :
-                        IsConstructor$1(type) ? CreateType(FromConstructor(moduleProperties, type.parameters, type.returns), type) :
-                            IsFunction$1(type) ? CreateType(FromFunction(moduleProperties, type.parameters, type.returns), type) :
-                                IsIntersect$1(type) ? CreateType(FromIntersect(moduleProperties, type.allOf), type) :
-                                    IsIterator$1(type) ? CreateType(FromIterator(moduleProperties, type.items), type) :
-                                        IsObject$1(type) ? CreateType(FromObject(moduleProperties, type.properties), type) :
-                                            IsRecord$1(type) ? CreateType(FromRecord(moduleProperties, type)) :
-                                                IsTuple$1(type) ? CreateType(FromTuple(moduleProperties, type.items || []), type) :
-                                                    IsUnion$1(type) ? CreateType(FromUnion(moduleProperties, type.anyOf), type) :
-                                                        type);
+            // Transform
+            IsTransform$1(type) ? CreateType(FromTransform(moduleProperties, type), type) :
+                // Types
+                IsArray$1(type) ? CreateType(FromArray(moduleProperties, type.items), type) :
+                    IsAsyncIterator$1(type) ? CreateType(FromAsyncIterator(moduleProperties, type.items), type) :
+                        IsComputed$1(type) ? CreateType(FromComputed(moduleProperties, type.target, type.parameters)) :
+                            IsConstructor$1(type) ? CreateType(FromConstructor(moduleProperties, type.parameters, type.returns), type) :
+                                IsFunction$1(type) ? CreateType(FromFunction(moduleProperties, type.parameters, type.returns), type) :
+                                    IsIntersect$1(type) ? CreateType(FromIntersect(moduleProperties, type.allOf), type) :
+                                        IsIterator$1(type) ? CreateType(FromIterator(moduleProperties, type.items), type) :
+                                            IsObject$1(type) ? CreateType(FromObject(moduleProperties, type.properties), type) :
+                                                IsRecord$1(type) ? CreateType(FromRecord(moduleProperties, type)) :
+                                                    IsTuple$1(type) ? CreateType(FromTuple(moduleProperties, type.items || []), type) :
+                                                        IsUnion$1(type) ? CreateType(FromUnion(moduleProperties, type.anyOf), type) :
+                                                            type);
 }
 // prettier-ignore
 function ComputeType(moduleProperties, key) {
@@ -41433,7 +41465,8 @@ const NapcatConfigSchema = Type.Object({
   fileLogLevel: Type.String({ default: "debug" }),
   consoleLogLevel: Type.String({ default: "info" }),
   packetBackend: Type.String({ default: "auto" }),
-  packetServer: Type.String({ default: "" })
+  packetServer: Type.String({ default: "" }),
+  o3HookMode: Type.Number({ default: 0 })
 });
 class NapCatConfigLoader extends ConfigBase {
   constructor(core, configPath, schema) {
@@ -42178,7 +42211,7 @@ function rawMessageToText(msg, recursiveLevel = 0) {
       tokens.push(`群聊 [${msg.peerName}(${msg.peerUin})]`);
     }
     if (msg.senderUin !== "0") {
-      tokens.push(`[${msg.sendMemberName ?? msg.sendRemarkName ?? msg.sendNickName}(${msg.senderUin})]`);
+      tokens.push(`[${msg.sendMemberName || msg.sendRemarkName || msg.sendNickName}(${msg.senderUin})]`);
     }
   } else if (msg.chatType == ChatType.KCHATTYPEDATALINE) {
     tokens.push("移动设备");
@@ -42360,6 +42393,10 @@ const AppidTable = {
   "3.2.15-31363": {"appid":537266535,"qua":"V1_LNX_NQ_3.2.15_31363_GW_B"},
   "6.9.65-31363": {"appid":537266524,"qua":"V1_MAC_NQ_6.9.65_31363_GW_B"},
   "9.9.17-31363": {"appid":537266500,"qua":"V1_WIN_NQ_9.9.17_31363_GW_B"},
+  "3.2.16-32690": {"appid":537271229,"qua":"V1_LNX_NQ_3.2.16_32690_GW_B"},
+  "9.9.18-32690": {"appid":537271194,"qua":"V1_WIN_NQ_9.9.18_32690_GW_B"},
+  "6.9.66-32690": {"appid":537271218,"qua":"V1_MAC_NQ_6.9.66_32690_GW_B"},
+  "3.2.16-32721": {"appid":537271229,"qua":"V1_LNX_NQ_3.2.16_32721_GW_B"},
 };
 
 class QQBasicInfoWrapper {
@@ -47690,6 +47727,7 @@ class OB11HeartbeatEvent extends OB11BaseMetaEvent {
 const ActionName = {
   NapCat_GetPrivateFileUrl: "get_private_file_url",
   ClickInlineKeyboardButton: "click_inline_keyboard_button",
+  GetUnidirectionalFriendList: "get_unidirectional_friend_list",
   // onebot 11
   SendPrivateMsg: "send_private_msg",
   SendGroupMsg: "send_group_msg",
@@ -53779,80 +53817,72 @@ function requireStrnum () {
 	if (hasRequiredStrnum) return strnum;
 	hasRequiredStrnum = 1;
 	const hexRegex = /^[-+]?0x[a-fA-F0-9]+$/;
-	const numRegex = /^([\-\+])?(0*)(\.[0-9]+([eE]\-?[0-9]+)?|[0-9]+(\.[0-9]+([eE]\-?[0-9]+)?)?)$/;
-	// const octRegex = /0x[a-z0-9]+/;
+	const numRegex = /^([\-\+])?(0*)([0-9]*(\.[0-9]*)?)$/;
+	// const octRegex = /^0x[a-z0-9]+/;
 	// const binRegex = /0x[a-z0-9]+/;
 
-
-	//polyfill
-	if (!Number.parseInt && window.parseInt) {
-	    Number.parseInt = window.parseInt;
-	}
-	if (!Number.parseFloat && window.parseFloat) {
-	    Number.parseFloat = window.parseFloat;
-	}
-
-	  
+	 
 	const consider = {
 	    hex :  true,
+	    // oct: false,
 	    leadingZeros: true,
 	    decimalPoint: "\.",
-	    eNotation: true
+	    eNotation: true,
 	    //skipLike: /regex/
 	};
 
 	function toNumber(str, options = {}){
-	    // const options = Object.assign({}, consider);
-	    // if(opt.leadingZeros === false){
-	    //     options.leadingZeros = false;
-	    // }else if(opt.hex === false){
-	    //     options.hex = false;
-	    // }
-
 	    options = Object.assign({}, consider, options );
 	    if(!str || typeof str !== "string" ) return str;
 	    
 	    let trimmedStr  = str.trim();
-	    // if(trimmedStr === "0.0") return 0;
-	    // else if(trimmedStr === "+0.0") return 0;
-	    // else if(trimmedStr === "-0.0") return -0;
-
+	    
 	    if(options.skipLike !== undefined && options.skipLike.test(trimmedStr)) return str;
+	    else if(str==="0") return 0;
 	    else if (options.hex && hexRegex.test(trimmedStr)) {
-	        return Number.parseInt(trimmedStr, 16);
-	    // } else if (options.parseOct && octRegex.test(str)) {
+	        return parse_int(trimmedStr, 16);
+	    // }else if (options.oct && octRegex.test(str)) {
 	    //     return Number.parseInt(val, 8);
+	    }else if (trimmedStr.search(/[eE]/)!== -1) { //eNotation
+	        const notation = trimmedStr.match(/^([-\+])?(0*)([0-9]*(\.[0-9]*)?[eE][-\+]?[0-9]+)$/); 
+	        // +00.123 => [ , '+', '00', '.123', ..
+	        if(notation){
+	            // console.log(notation)
+	            if(options.leadingZeros){ //accept with leading zeros
+	                trimmedStr = (notation[1] || "") + notation[3];
+	            }else {
+	                if(notation[2] === "0" && notation[3][0]=== ".");else {
+	                    return str;
+	                }
+	            }
+	            return options.eNotation ? Number(trimmedStr) : str;
+	        }else {
+	            return str;
+	        }
 	    // }else if (options.parseBin && binRegex.test(str)) {
 	    //     return Number.parseInt(val, 2);
 	    }else {
 	        //separate negative sign, leading zeros, and rest number
 	        const match = numRegex.exec(trimmedStr);
+	        // +00.123 => [ , '+', '00', '.123', ..
 	        if(match){
 	            const sign = match[1];
 	            const leadingZeros = match[2];
 	            let numTrimmedByZeros = trimZeros(match[3]); //complete num without leading zeros
 	            //trim ending zeros for floating number
 	            
-	            const eNotation = match[4] || match[6];
 	            if(!options.leadingZeros && leadingZeros.length > 0 && sign && trimmedStr[2] !== ".") return str; //-0123
 	            else if(!options.leadingZeros && leadingZeros.length > 0 && !sign && trimmedStr[1] !== ".") return str; //0123
+	            else if(options.leadingZeros && leadingZeros===str) return 0; //00
+	            
 	            else {//no leading zeros or leading zeros are allowed
 	                const num = Number(trimmedStr);
 	                const numStr = "" + num;
+
 	                if(numStr.search(/[eE]/) !== -1){ //given number is long and parsed to eNotation
 	                    if(options.eNotation) return num;
 	                    else return str;
-	                }else if(eNotation){ //given number has enotation
-	                    if(options.eNotation) return num;
-	                    else return str;
 	                }else if(trimmedStr.indexOf(".") !== -1){ //floating number
-	                    // const decimalPart = match[5].substr(1);
-	                    // const intPart = trimmedStr.substr(0,trimmedStr.indexOf("."));
-
-	                    
-	                    // const p = numStr.indexOf(".");
-	                    // const givenIntPart = numStr.substr(0,p);
-	                    // const givenDecPart = numStr.substr(p+1);
 	                    if(numStr === "0" && (numTrimmedByZeros === "") ) return num; //0.0
 	                    else if(numStr === numTrimmedByZeros) return num; //0.456. 0.79000
 	                    else if( sign && numStr === "-"+numTrimmedByZeros) return num;
@@ -53860,26 +53890,11 @@ function requireStrnum () {
 	                }
 	                
 	                if(leadingZeros){
-	                    // if(numTrimmedByZeros === numStr){
-	                    //     if(options.leadingZeros) return num;
-	                    //     else return str;
-	                    // }else return str;
-	                    if(numTrimmedByZeros === numStr) return num;
-	                    else if(sign+numTrimmedByZeros === numStr) return num;
-	                    else return str;
+	                    return (numTrimmedByZeros === numStr) || (sign+numTrimmedByZeros === numStr) ? num : str
+	                }else  {
+	                    return (trimmedStr === numStr) || (trimmedStr === sign+numStr) ? num : str
 	                }
-
-	                if(trimmedStr === numStr) return num;
-	                else if(trimmedStr === sign+numStr) return num;
-	                // else{
-	                //     //number with +/- sign
-	                //     trimmedStr.test(/[-+][0-9]);
-
-	                // }
-	                return str;
 	            }
-	            // else if(!eNotation && trimmedStr && trimmedStr !== Number(trimmedStr) ) return str;
-	            
 	        }else { //non-numeric string
 	            return str;
 	        }
@@ -53901,6 +53916,15 @@ function requireStrnum () {
 	    }
 	    return numStr;
 	}
+
+	function parse_int(numStr, base){
+	    //polyfill
+	    if(parseInt) return parseInt(numStr, base);
+	    else if(Number.parseInt) return Number.parseInt(numStr, base);
+	    else if(window && window.parseInt) return window.parseInt(numStr, base);
+	    else throw new Error("parseInt, Number.parseInt, window.parseInt are not supported")
+	}
+
 	strnum = toNumber;
 	return strnum;
 }
@@ -55386,6 +55410,7 @@ class OneBotGroupApi {
         duration = -1;
       }
     }
+    await this.core.apis.GroupApi.refreshGroupMemberCachePartial(GroupCode, memberUid);
     const adminUin = (await this.core.apis.GroupApi.getGroupMember(GroupCode, adminUid))?.uin;
     if (memberUin && adminUin) {
       return new OB11GroupBanEvent(
@@ -55439,11 +55464,15 @@ class OneBotGroupApi {
   async parseCardChangedEvent(msg) {
     if (msg.senderUin && msg.senderUin !== "0") {
       const member = await this.core.apis.GroupApi.getGroupMember(msg.peerUid, msg.senderUin);
+      await this.core.apis.GroupApi.refreshGroupMemberCachePartial(msg.peerUid, msg.senderUid);
       if (member && member.cardName !== msg.sendMemberName) {
         const newCardName = msg.sendMemberName ?? "";
         const event = new OB11GroupCardEvent(this.core, parseInt(msg.peerUid), parseInt(msg.senderUin), newCardName, member.cardName);
         member.cardName = newCardName;
         return event;
+      }
+      if (member && member.nick !== msg.sendNickName) {
+        await this.core.apis.GroupApi.refreshGroupMemberCachePartial(msg.peerUid, msg.senderUid);
       }
     }
     return void 0;
@@ -56190,7 +56219,8 @@ class OneBotMsgApi {
         type: OB11MessageDataType.voice,
         data: {
           file: fileCode,
-          file_size: element.fileSize
+          file_size: element.fileSize,
+          path: element.filePath
         }
       };
     },
@@ -57706,6 +57736,8 @@ class SetGroupBan extends OneBotAction {
   async _handle(payload) {
     const uid = await this.core.apis.UserApi.getUidByUinV2(payload.user_id.toString());
     if (!uid) throw new Error("uid error");
+    let member_role = (await this.core.apis.GroupApi.getGroupMemberEx(payload.group_id.toString(), uid, true))?.role;
+    if (member_role === 4) throw new Error("cannot ban owner");
     let ret = await this.core.apis.GroupApi.banMember(
       payload.group_id.toString(),
       [{ uid, timeStamp: +payload.duration }]
@@ -59198,7 +59230,7 @@ class GetRkey extends GetPacketStatusDepends {
 const SchemaData$j = Type.Object({
   group_id: Type.Union([Type.Number(), Type.String()]),
   user_id: Type.Union([Type.Number(), Type.String()]),
-  special_title: Type.String()
+  special_title: Type.String({ default: "" })
 });
 class SetSpecialTittle extends GetPacketStatusDepends {
   actionName = ActionName.SetSpecialTittle;
@@ -59730,6 +59762,234 @@ class GetPrivateFileUrl extends GetPacketStatusDepends {
   }
 }
 
+var A = Object.defineProperty;
+var j = (r, e, t) => e in r ? A(r, e, { enumerable: true, configurable: true, writable: true, value: t }) : r[e] = t;
+var f = (r, e, t) => j(r, typeof e != "symbol" ? e + "" : e, t);
+class s {
+  constructor(e, t, a, p) {
+    f(this, "_value");
+    f(this, "_fieldId");
+    f(this, "_opt");
+    f(this, "_callback");
+    this._value = t, this._fieldId = e, this._opt = a, this._callback = p;
+  }
+  get value() {
+    return this._value;
+  }
+  set value(e) {
+    this._value = e;
+  }
+  getTypeName() {
+    return this.constructor.name;
+  }
+  getFieldId() {
+    return this._fieldId;
+  }
+  getField(e) {
+    return L(e, this);
+  }
+}
+class T extends s {
+  getTypeName() {
+    return "StringWrapper";
+  }
+}
+class S extends s {
+  getTypeName() {
+    return "UInt32Wrapper";
+  }
+}
+const n = {
+  UInt32Wrapper: "UInt32Wrapper",
+  Int32Wrapper: "Int32Wrapper",
+  Int64Wrapper: "Int64Wrapper",
+  UInt64Wrapper: "UInt64Wrapper",
+  StringWrapper: "StringWrapper",
+  ArrayWrapper: "ArrayWrapper",
+  BoolWrapper: "BoolWrapper",
+  BytesWrapper: "BytesWrapper",
+  DoubleWrapper: "DoubleWrapper",
+  FloatWrapper: "FloatWrapper",
+  Fixed64Wrapper: "Fixed64Wrapper",
+  Fixed32Wrapper: "Fixed32Wrapper",
+  SFixed32Wrapper: "SFixed32Wrapper",
+  SFixed64Wrapper: "SFixed64Wrapper",
+  SInt32Wrapper: "SInt32Wrapper",
+  SInt64Wrapper: "SInt64Wrapper",
+  UnknownWrapper: "UnknownWrapper"
+}, M = {
+  [n.UInt32Wrapper]: ScalarType.UINT32,
+  [n.Int32Wrapper]: ScalarType.INT32,
+  [n.Int64Wrapper]: ScalarType.INT64,
+  [n.UInt64Wrapper]: ScalarType.UINT64,
+  [n.StringWrapper]: ScalarType.STRING,
+  [n.BytesWrapper]: ScalarType.BYTES,
+  [n.BoolWrapper]: ScalarType.BOOL,
+  [n.DoubleWrapper]: ScalarType.DOUBLE,
+  [n.FloatWrapper]: ScalarType.FLOAT,
+  [n.Fixed64Wrapper]: ScalarType.FIXED64,
+  [n.Fixed32Wrapper]: ScalarType.FIXED32,
+  [n.SFixed32Wrapper]: ScalarType.SFIXED32,
+  [n.SFixed64Wrapper]: ScalarType.SFIXED64,
+  [n.SInt32Wrapper]: ScalarType.SINT32,
+  [n.SInt64Wrapper]: ScalarType.SINT64,
+  [n.UnknownWrapper]: ScalarType.BYTES
+};
+function x(r) {
+  return M[r] || ScalarType.BYTES;
+}
+function Z(r = 0, e = false, t = "") {
+  return new T(r, t, e);
+}
+function ee(r = 0, e = false, t = 0) {
+  return new S(r, t, e);
+}
+function L(r, e) {
+  var c;
+  const t = e.getTypeName(), a = e.getFieldId(), p = e._opt;
+  if (t === n.ArrayWrapper) {
+    const i = (c = e._callback) == null ? void 0 : c.call(e);
+    if (i instanceof l)
+      return {
+        no: a,
+        name: r,
+        kind: "message",
+        T: () => new MessageType(r, i.generateFields()),
+        opt: p || false,
+        repeat: RepeatType.PACKED
+      };
+    if (i instanceof s) {
+      const u = i.getTypeName();
+      return {
+        no: a,
+        name: r,
+        kind: "scalar",
+        T: x(u),
+        opt: p || false,
+        repeat: u === n.StringWrapper || u === n.BytesWrapper ? RepeatType.UNPACKED : RepeatType.PACKED
+      };
+    }
+    throw new Error("ArrayWrapper item type error");
+  }
+  return {
+    no: a,
+    name: r,
+    kind: "scalar",
+    T: x(t),
+    opt: p || false,
+    repeat: RepeatType.NO
+  };
+}
+class l {
+  constructor() {
+    f(this, "_fieldId", 0);
+  }
+  //默认标记类
+  generateFields() {
+    const e = [];
+    for (const t of Object.keys(this)) {
+      const a = "_" + t, p = this[a];
+      p instanceof s && e.push(p.getField(t)), p instanceof l && e.push({
+        no: p._fieldId,
+        name: t,
+        kind: "message",
+        T: () => new MessageType(a, p.generateFields()),
+        repeat: RepeatType.NO,
+        opt: false
+      });
+    }
+    return e;
+  }
+  assignFields(e) {
+    for (const t of Object.keys(this)) {
+      const a = "_" + t;
+      let p = this[a];
+      if (p instanceof s) {
+        const c = e[t];
+        c !== void 0 && (p.value = c);
+      } else if (p instanceof l) {
+        const c = e[t];
+        c !== void 0 && p.assignFields(c);
+      } else {
+        const c = e[t];
+        c !== void 0 && (this[a] = c);
+      }
+    }
+  }
+  toObject() {
+    const e = {};
+    for (const t of Object.keys(this)) {
+      const a = "_" + t, p = this[a];
+      p && (p instanceof s && (e[t] = p.value), p instanceof l && (e[t] = p.toObject()));
+    }
+    return e;
+  }
+  encode() {
+    return new MessageType("message", this.generateFields()).toBinary(this.toObject());
+  }
+  decode(e) {
+    const t = new MessageType("message", this.generateFields()).fromBinary(e);
+    return Object.assign(this, t), this;
+  }
+  then(e) {
+    e(this);
+  }
+}
+function g(r) {
+  return new Proxy(r, {
+    set(e, t, a) {
+      return e[t] instanceof s ? (e[t].value = a, true) : (e[t] = a, true);
+    },
+    get(e, t) {
+      if (typeof t == "string" && t.startsWith("_")) {
+        const p = t.slice(1);
+        if (e[p])
+          return e[p];
+      }
+      const a = e[t];
+      return a instanceof s ? a.value : a;
+    }
+  });
+}
+function X(r, e) {
+  const t = g(new r());
+  return t._fieldId = typeof r == "number" ? r : 0, t;
+}
+
+class GetUnidirectionalFriendList extends OneBotAction {
+  actionName = ActionName.GetUnidirectionalFriendList;
+  async pack_data(data) {
+    return X(class extends l {
+      type = ee(2, false, 0);
+      data = Z(3, false, data);
+    }).encode();
+  }
+  async _handle() {
+    const self_id = this.core.selfInfo.uin;
+    const req_json = {
+      uint64_uin: self_id,
+      uint64_top: 0,
+      uint32_req_num: 99,
+      bytes_cookies: ""
+    };
+    const packed_data = await this.pack_data(JSON.stringify(req_json));
+    const data = Buffer.from(packed_data).toString("hex");
+    const rsq = { cmd: "MQUpdateSvc_com_qq_ti.web.OidbSvc.0xe17_0", data };
+    const rsp_data = await this.core.apis.PacketApi.pkt.operation.sendPacket(rsq, true);
+    const block_json = X(class extends l {
+      data = Z(4);
+    }).decode(rsp_data);
+    const block_list = JSON.parse(block_json.data).rpt_block_list;
+    return block_list.map((block) => ({
+      uin: block.uint64_uin,
+      uid: block.str_uid,
+      nick_name: Buffer.from(block.bytes_nick, "base64").toString(),
+      age: block.uint32_age,
+      source: Buffer.from(block.bytes_source, "base64").toString()
+    }));
+  }
+}
+
 function createActionMap(obContext, core) {
   const actionHandlers = [
     new GetGroupInfoEx(obContext, core),
@@ -59847,7 +60107,8 @@ function createActionMap(obContext, core) {
     new GetGroupSystemMsg(obContext, core),
     new BotExit(obContext, core),
     new ClickInlineKeyboardButton(obContext, core),
-    new GetPrivateFileUrl(obContext, core)
+    new GetPrivateFileUrl(obContext, core),
+    new GetUnidirectionalFriendList(obContext, core)
   ];
   const _map = /* @__PURE__ */ new Map();
   actionHandlers.forEach((h) => {
@@ -59863,10 +60124,10 @@ function createActionMap(obContext, core) {
 
 const name = "napcat";
 const type = "module";
-const version = "4.5.23";
+const version = "4.6.4";
 const scripts = {"build:universal":"npm run build:webui && vite build --mode universal || exit 1","build:framework":"npm run build:webui && vite build --mode framework || exit 1","build:shell":"npm run build:webui && vite build --mode shell || exit 1","build:webui":"cd napcat.webui && npm run build","dev:universal":"vite build --mode universal","dev:framework":"vite build --mode framework","dev:shell":"vite build --mode shell","dev:webui":"cd napcat.webui && npm run dev","lint":"eslint --fix src/**/*.{js,ts,vue}","depend":"cd dist && npm install --omit=dev","dev:depend":"npm i && cd napcat.webui && npm i"};
-const devDependencies = {"@babel/preset-typescript":"^7.24.7","@eslint/compat":"^1.2.2","@eslint/eslintrc":"^3.1.0","@eslint/js":"^9.14.0","@ffmpeg.wasm/main":"^0.13.1","@homebridge/node-pty-prebuilt-multiarch":"^0.12.0-beta.5","@log4js-node/log4js-api":"^1.0.2","@napneko/nap-proto-core":"^0.0.4","@rollup/plugin-node-resolve":"^16.0.0","@rollup/plugin-typescript":"^12.1.2","@sinclair/typebox":"^0.34.9","@types/cors":"^2.8.17","@types/express":"^5.0.0","@types/multer":"^1.4.12","@types/node":"^22.0.1","@types/on-finished":"^2.3.4","@types/qrcode-terminal":"^0.12.2","@types/react-color":"^3.0.13","@types/type-is":"^1.6.7","@types/ws":"^8.5.12","@typescript-eslint/eslint-plugin":"^8.3.0","@typescript-eslint/parser":"^8.3.0","ajv":"^8.13.0","async-mutex":"^0.5.0","commander":"^13.0.0","cors":"^2.8.5","esbuild":"0.25.0","eslint":"^9.14.0","eslint-import-resolver-typescript":"^3.6.1","eslint-plugin-import":"^2.29.1","express-rate-limit":"^7.5.0","fast-xml-parser":"^4.3.6","file-type":"^20.0.0","globals":"^15.12.0","image-size":"^1.1.1","json5":"^2.2.3","multer":"^1.4.5-lts.1","typescript":"^5.3.3","typescript-eslint":"^8.13.0","vite":"^6.0.1","vite-plugin-cp":"^4.0.8","vite-tsconfig-paths":"^5.1.0","winston":"^3.17.0"};
-const dependencies = {"@ffmpeg.wasm/core-mt":"^0.13.2","compressing":"^1.10.1","express":"^5.0.0","piscina":"^4.7.0","silk-wasm":"^3.6.1","ws":"^8.18.0"};
+const devDependencies = {"@babel/preset-typescript":"^7.24.7","@eslint/compat":"^1.2.2","@eslint/eslintrc":"^3.1.0","@eslint/js":"^9.14.0","@ffmpeg.wasm/main":"^0.13.1","@homebridge/node-pty-prebuilt-multiarch":"^0.12.0-beta.5","@log4js-node/log4js-api":"^1.0.2","@napneko/nap-proto-core":"^0.0.4","@rollup/plugin-node-resolve":"^16.0.0","@rollup/plugin-typescript":"^12.1.2","@sinclair/typebox":"^0.34.9","@types/cors":"^2.8.17","@types/express":"^5.0.0","@types/multer":"^1.4.12","@types/node":"^22.0.1","@types/on-finished":"^2.3.4","@types/qrcode-terminal":"^0.12.2","@types/react-color":"^3.0.13","@types/type-is":"^1.6.7","@types/ws":"^8.5.12","@typescript-eslint/eslint-plugin":"^8.3.0","@typescript-eslint/parser":"^8.3.0","ajv":"^8.13.0","async-mutex":"^0.5.0","commander":"^13.0.0","cors":"^2.8.5","esbuild":"0.25.0","eslint":"^9.14.0","eslint-import-resolver-typescript":"^3.6.1","eslint-plugin-import":"^2.29.1","express-rate-limit":"^7.5.0","fast-xml-parser":"^4.3.6","file-type":"^20.0.0","globals":"^16.0.0","image-size":"^1.1.1","json5":"^2.2.3","multer":"^1.4.5-lts.1","typescript":"^5.3.3","typescript-eslint":"^8.13.0","vite":"^6.0.1","vite-plugin-cp":"^4.0.8","vite-tsconfig-paths":"^5.1.0","napcat.protobuf":"^1.1.3","winston":"^3.17.0","compressing":"^1.10.1"};
+const dependencies = {"@ffmpeg.wasm/core-mt":"^0.13.2","express":"^5.0.0","silk-wasm":"^3.6.1","ws":"^8.18.0"};
 const packageJson = {
   name,
   "private": true,
@@ -60013,7 +60274,7 @@ class Store {
   incr(key) {
     const current = this.get(key);
     if (current === null) {
-      this.set(key, 1);
+      this.set(key, 1, 60);
       return 1;
     }
     let numericValue;
@@ -60028,7 +60289,7 @@ class Store {
       throw new Error("ERR value is not an integer");
     }
     const newValue = numericValue + 1;
-    this.set(key, newValue);
+    this.set(key, newValue, 60);
     return newValue;
   }
 }
