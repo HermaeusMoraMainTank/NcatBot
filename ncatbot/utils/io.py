@@ -3,13 +3,19 @@ import base64
 import json
 import os
 import pickle
-import warnings
 import xml.etree.ElementTree as ET
+import zipfile
 from configparser import ConfigParser
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 import httpx
+import requests
+from tqdm import tqdm
+
+from ncatbot.utils.logger import get_log
+
+_log = get_log()
 
 
 def read_file(file_path) -> any:
@@ -46,24 +52,45 @@ def convert_uploadable_object(i, message_type):
         return {"type": message_type, "data": {"file": f"file:///{i}"}}
 
 
-"""
-通用文件加载器
+def download_file(url, file_name):
+    """下载文件"""
+    try:
+        r = requests.get(url, stream=True)
+        total_size = int(r.headers.get("content-length", 0))
+        progress_bar = tqdm(
+            total=total_size,
+            unit="iB",
+            unit_scale=True,
+            desc=f"Downloading {file_name}",
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]",
+            colour="green",
+            dynamic_ncols=True,
+            smoothing=0.3,
+            mininterval=0.1,
+            maxinterval=1.0,
+        )
+        with open(file_name, "wb") as f:
+            for data in r.iter_content(chunk_size=1024):
+                progress_bar.update(len(data))
+                f.write(data)
+        progress_bar.close()
+    except Exception as e:
+        _log.error(f"从 {url} 下载 {file_name} 失败")
+        _log.error("错误信息:", e)
+        return
 
-支持格式：JSON/TOML/YAML/INI/XML/PROPERTIES(/PICKLE[需手动开启])
-支持同步/异步操作，自动检测文件类型，异步锁保护异步操作
-注意:
-    1.UniversalLoader 并不是一个专门用于处理纯列表的工具
-    2.读取未知来源的pickle文件可能导致任意代码执行漏洞请手动开启支持
-    3.创建UniversalLoader实例后不会立刻读取文件，请手动调用load或者aload读取文件
 
-Raises:
-    FileTypeUnknownError:       当文件类型无法识别时抛出
-    FileNotFoundError:          当文件路径无效或文件不存在时抛出
-    LoadError:                  当加载文件时发生错误时抛出
-    SaveError:                  当保存文件时发生错误时抛出
-    ModuleNotInstalledError:    当所需模块未安装时抛出
-    ValueError:                 当手动开启pickle支持时抛出
-"""
+def unzip_file(file_name, exact_path, remove=False):
+    try:
+        with zipfile.ZipFile(file_name, "r") as zip_ref:
+            zip_ref.extractall(exact_path)
+            _log.info(f"解压 {file_name} 成功")
+        if remove:
+            os.remove(file_name)
+    except Exception:
+        _log.error(f"解压 {file_name} 失败")
+        return
+
 
 # ---------------------
 # region 模块可用性检测区块
@@ -78,7 +105,7 @@ try:
 
     TOML_AVAILABLE = True
 except ImportError:
-    warnings.warn("toml 模块未安装。TOML 功能将被禁用。", ImportWarning)
+    pass  # 非关键依赖，静默处理
 
 # 异步文件操作模块检测
 AIOFILES_AVAILABLE = False
@@ -89,7 +116,7 @@ try:
     _open_file = aiofiles.open  # type: ignore
 except ImportError:
     _open_file = open
-    warnings.warn("aiofiles 模块未安装。异步功能将被禁用。", ImportWarning)
+    pass  # 非关键依赖，静默处理
 
 # YAML 模块检测
 YAML_AVAILABLE = False
@@ -153,22 +180,36 @@ class ModuleNotInstalledError(UniversalLoaderError):
 
 
 class UniversalLoader:
-    def __init__(
-        self, file_path: Optional[Path | str], file_type: Optional[str] = None
-    ) -> None:
+    def __init__(self, file_path: Union[str, Path], file_type: Optional[str] = None):
         """
-        初始化通用加载器
+        通用文件加载器
+
+        支持格式：JSON/TOML/YAML/INI/XML/PROPERTIES(/PICKLE[需手动开启])\n
+        支持同步/异步操作，自动检测文件类型，异步锁保护异步操作\n
+        注意:\n
+            1.UniversalLoader 并不是一个专门用于处理纯列表的工具\n
+            2.读取未知来源的pickle文件可能导致任意代码执行漏洞请手动开启支持\n
+            3.创建UniversalLoader实例后不会立刻读取文件，请手动调用load或者aload读取文件\n\n
+
         :param file_path: 文件路径
         :param file_type: 可选参数，手动指定文件类型（覆盖自动检测）
+
+        Raises:
+            FileTypeUnknownError:       当文件类型无法识别时抛出
+            FileNotFoundError:          当文件路径无效或文件不存在时抛出
+            LoadError:                  当加载文件时发生错误时抛出
+            SaveError:                  当保存文件时发生错误时抛出
+            ModuleNotInstalledError:    当所需模块未安装时抛出
+            ValueError:                 当未手动开启pickle支持时抛出
         """
-        self.file_path = file_path
+        # 统一路径为 Path 类型
+        self.file_path: Path = Path(file_path).resolve()  # 获取绝对路径
         self.data: Dict[str, Any] = {}
         self.file_type = file_type.lower() if file_type else self._detect_file_type()
-        # 异步锁保护异步操作
         self._async_lock = asyncio.Lock()
 
     def _detect_file_type(self) -> str:
-        """通过文件路径检测文件类型"""
+        """通过文件扩展名检测文件类型"""
         file_type_map = {
             "json": "json",
             "toml": "toml",
@@ -179,19 +220,12 @@ class UniversalLoader:
             "properties": "properties",
             "pickle": "pickle",
         }
-        # 提取文件扩展名并转换为小写
-        if isinstance(self.file_path, str):
-            ext = (
-                self.file_path.lower().rsplit(".", 1)[-1]
-                if "." in self.file_path
-                else ""
-            )
-            file_type = file_type_map.get(ext, None)
-            if not file_type:
-                raise FileTypeUnknownError(f"无法识别的文件格式：{self.file_path}")
-            return file_type
-        else:
-            return self.file_path.suffix[1:]
+        # 使用 Path 的 suffix 属性获取扩展名
+        ext = self.file_path.suffix.lower().lstrip(".") if self.file_path.suffix else ""
+        file_type = file_type_map.get(ext, None)
+        if not file_type:
+            raise FileTypeUnknownError(f"无法识别的文件格式：{self.file_path}")
+        return file_type
 
     # ---------------------
     # region文件存在性检查方法
@@ -199,14 +233,12 @@ class UniversalLoader:
 
     def _check_file_exists(self) -> None:
         """同步检查文件是否存在"""
-        if not os.path.isfile(self.file_path):
+        if not os.path.isfile(str(self.file_path)):
             raise FileNotFoundError(f"文件路径无效或不是文件: {self.file_path}")
 
     async def _async_check_file_exists(self) -> None:
         """异步检查文件存在性（通过线程池执行）"""
         await asyncio.to_thread(self._check_file_exists)
-
-    # endregion
 
     # ---------------------
     # region 核心数据操作方法
@@ -218,33 +250,36 @@ class UniversalLoader:
         try:
             self.data = self._load_data_sync()
         except Exception as e:
-            # 保留原始异常信息以便调试
             raise LoadError(f"加载文件时出错: {e}") from e
         return self
 
     async def aload(self) -> "UniversalLoader":
         """异步加载数据（带锁保护）"""
         await self._async_check_file_exists()
-        async with self._async_lock:  # 加锁
+        async with self._async_lock:
             try:
                 self.data = await self._load_data_async()
             except Exception as e:
                 raise LoadError(f"异步加载文件时出错: {e}") from e
         return self
 
-    def save(self, save_path: Optional[str] = None) -> "UniversalLoader":
+    def save(self, save_path: Optional[Union[str, Path]] = None) -> "UniversalLoader":
         """同步保存数据"""
+        save_path = Path(save_path).resolve() if save_path else self.file_path
         try:
-            self._save_data_sync(save_path)
+            self._save_data_sync(str(save_path))  # 暂时传递字符串
         except Exception as e:
             raise SaveError(f"保存文件时出错: {e}") from e
         return self
 
-    async def asave(self, save_path: Optional[str] = None) -> "UniversalLoader":
+    async def asave(
+        self, save_path: Optional[Union[str, Path]] = None
+    ) -> "UniversalLoader":
         """异步保存数据（带锁保护）"""
-        async with self._async_lock:  # 加锁
+        save_path = Path(save_path).resolve() if save_path else self.file_path
+        async with self._async_lock:
             try:
-                await self._save_data_async(save_path)
+                await self._save_data_async(str(save_path))  # 异步保存时传递字符串
             except Exception as e:
                 raise SaveError(f"异步保存文件时出错: {e}") from e
         return self
@@ -288,6 +323,47 @@ class UniversalLoader:
         """获取所有键值对"""
         return self.data.items()
 
+    def update(self, *args, **kwargs):
+        """用给定的字典或键值对更新数据（类似 dict.update）"""
+        self.data.update(*args, **kwargs)
+
+    def pop(self, key, default=None):
+        """删除指定键并返回其对应的值；如果键不存在，则返回默认值"""
+        return self.data.pop(key, default)
+
+    def popitem(self):
+        """随机删除一个键值对并返回 (key, value) 元组"""
+        return self.data.popitem()
+
+    def clear(self):
+        """清空所有数据"""
+        self.data.clear()
+
+    def setdefault(self, key, default=None):
+        """如果键不存在，则将键的值设为default并返回该值，否则返回原有值"""
+        return self.data.setdefault(key, default)
+
+    def __contains__(self, key):
+        """判断数据中是否包含指定键"""
+        return key in self.data
+
+    def __iter__(self):
+        """返回数据字典的迭代器"""
+        return iter(self.data)
+
+    def __len__(self):
+        """返回数据的键数目"""
+        return len(self.data)
+
+    def __enter__(self) -> "UniversalLoader":
+        """进入with环境"""
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        """退出with环境"""
+        if self.data:
+            self.save()
+
     # endregion
 
     # ---------------------
@@ -314,7 +390,7 @@ class UniversalLoader:
                 raise ModuleNotInstalledError(
                     "请安装 PyYAML 模块以支持 YAML 文件（pip install PyYAML）"
                 )
-            with open(self.file_path, "r", encoding="utf-8") as f:
+            with open(self.file_path, "r") as f:
                 return yaml.safe_load(f) or {}  # 处理空文件情况
 
         elif self.file_type == "ini":

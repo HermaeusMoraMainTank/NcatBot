@@ -1,3 +1,6 @@
+import datetime
+import time
+
 import yaml
 
 from ncatbot.utils.logger import get_log
@@ -11,13 +14,21 @@ class SetConfig:
         self.bt_uin = "123456"
         self.ws_uri = "localhost:3001"
         self.token = ""
+        self.webui_token = ""  # webui 令牌, 自动读取, 无需设置
+        self.webui_port = ""  # webui 端口, 自动读取, 无需设置
 
     def __str__(self):
         return (
             f"\n--Configuration--\n"
-            f"BOT QQ 号: {self.bt_uin}\n"
-            f"WebSocket URI: {self.ws_uri}\n"
-            f"Token: {self.token}"
+            f"[BotQQ]: {self.bt_uin}\n"
+            f"[Wsuri]: {self.ws_uri}\n"
+            f"[Token]: {self.token}"
+            f"\n--{datetime.datetime.now().strftime('%m/%d---%H:%M')}--"
+        )
+
+    def is_localhost(self):
+        return (
+            self.ws_uri.find("localhost") != -1 or self.ws_uri.find("127.0.0.1") != -1
         )
 
     def load_config(self, path):
@@ -43,7 +54,7 @@ class SetConfig:
             self.ws_ip = parts[0]
             self.ws_port = parts[1]
             self.token = config["token"]
-            self.bot_uin = config["bt_uin"]
+            self.bt_uin = config["bt_uin"]
             self.standerize_uri()
         except KeyError as e:
             raise KeyError(f"[setting] 缺少配置项，请检查！详情:{e}")
@@ -56,6 +67,11 @@ class SetConfig:
         self._updated = True
         self.ws_uri = ws_uri
         self.standerize_uri()
+        if not self.is_localhost():
+            _log.info(
+                f'请注意, 当前配置的 ws_uri="{ws_uri}" 不是本地地址, 请确保远端 napcat 服务正确配置.'
+            )
+            time.sleep(1)
 
     def set_bot_uin(self, uin: str):
         self._updated = True

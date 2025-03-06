@@ -2,29 +2,27 @@ import asyncio
 import json
 import os
 import platform
+import shutil
 import time
 import urllib
-import urllib.parse
 
-from ncatbot.conn.connect import Websocket
-from ncatbot.conn.wsroute import check_websocket
+from ncatbot.conn import LoginHandler, Websocket, check_websocket
 from ncatbot.core.api import BotAPI
-from ncatbot.core.launcher import start_qq
+from ncatbot.core.launcher import start_napcat
 from ncatbot.core.message import GroupMessage, PrivateMessage
-from ncatbot.plugin.loader import Event, PluginLoader
-from ncatbot.utils.check_version import check_version
+from ncatbot.plugin import Event, EventBus, PluginLoader
 from ncatbot.utils.config import config
-from ncatbot.utils.github_helper import get_proxy_url, get_version
+from ncatbot.utils.env_checker import check_linux_permissions, check_version
 from ncatbot.utils.literals import (
-    INSTALL_CHECK_PATH,
-    NAPCAT_DIR,
+    LINUX_NAPCAT_DIR,
     OFFICIAL_GROUP_MESSAGE_EVENT,
     OFFICIAL_NOTICE_EVENT,
     OFFICIAL_PRIVATE_MESSAGE_EVENT,
     OFFICIAL_REQUEST_EVENT,
+    WINDOWS_NAPCAT_DIR,
 )
 from ncatbot.utils.logger import get_log
-from ncatbot.utils.napcat_helper import download_napcat
+from ncatbot.utils.tp_helper import download_napcat, get_version
 
 _log = get_log()
 
@@ -32,24 +30,24 @@ _log = get_log()
 class BotClient:
     def __init__(self, plugins_path="plugins"):
         if not config._updated:
-            _log.warning("没有主动设置配置项, 配置项将使用默认值")
-            time.sleep(0.8)
+            _log.info("没有主动设置配置项, 配置项将使用默认值")
         _log.info(config)
-        time.sleep(1.6)
 
         self.api = BotAPI()
+        self._subscribe_group_message_types = []
+        self._subscribe_private_message_types = []
         self._group_event_handlers = []
         self._private_event_handlers = []
         self._notice_event_handlers = []
         self._request_event_handlers = []
         self.plugins_path = plugins_path
-        self.plugin_sys = PluginLoader()
+        self.plugin_sys = PluginLoader(EventBus(), self.api)
 
     async def handle_group_event(self, msg: dict):
         msg = GroupMessage(msg)
         _log.debug(msg)
         for handler, types in self._group_event_handlers:
-            if types is None or any(i["type"] in types for i in msg["message"]):
+            if types is None or any(i["type"] in types for i in msg.message):
                 await handler(msg)
         await self.plugin_sys.event_bus.publish_async(
             Event(OFFICIAL_GROUP_MESSAGE_EVENT, msg)
@@ -59,7 +57,7 @@ class BotClient:
         msg = PrivateMessage(msg)
         _log.debug(msg)
         for handler, types in self._private_event_handlers:
-            if types is None or any(i["type"] in types for i in msg["message"]):
+            if types is None or any(i["type"] in types for i in msg.message):
                 await handler(msg)
         await self.plugin_sys.event_bus.publish_async(
             Event(OFFICIAL_PRIVATE_MESSAGE_EVENT, msg)
@@ -80,6 +78,8 @@ class BotClient:
         )
 
     def group_event(self, types=None):
+        self._subscribe_group_message_types = types
+
         def decorator(func):
             self._group_event_handlers.append((func, types))
             return func
@@ -87,6 +87,8 @@ class BotClient:
         return decorator
 
     def private_event(self, types=None):
+        self._subscribe_private_message_types = types
+
         def decorator(func):
             self._private_event_handlers.append((func, types))
             return func
@@ -102,9 +104,36 @@ class BotClient:
         return func
 
     async def run_async(self):
+        def info_subscribe_message_types():
+            subsribe_group_message_types = (
+                "全部消息类型"
+                if self._subscribe_group_message_types is None
+                else self._subscribe_group_message_types
+            )
+            subsribe_private_message_types = (
+                "全部消息类型"
+                if self._subscribe_private_message_types is None
+                else self._subscribe_private_message_types
+            )
+            _log.info(f"已订阅消息类型:[群聊]->{subsribe_group_message_types}")
+            _log.info(f"已订阅消息类型:[私聊]->{subsribe_private_message_types}")
+
+        info_subscribe_message_types()
         websocket_server = Websocket(self)
-        await self.plugin_sys.load_plugin(self.api)
+        await self.plugin_sys.load_plugins()
         await websocket_server.on_connect()
+
+    def napcat_server_ok(self):
+        return asyncio.run(check_websocket(config.ws_uri))
+
+    def _run(self):
+        try:
+            asyncio.run(self.run_async())
+        except Exception:
+            _log.info("插件卸载中...")
+            asyncio.run(self.plugin_sys._unload_all())
+            _log.info("正常退出")
+            exit(0)
 
     def run(self, reload=False, debug=False):
         """
@@ -117,149 +146,187 @@ class BotClient:
         Returns:
             None
         """
-        if not debug:
-            # 检查版本和安装方式
-            version_ok = check_version()
-            if not version_ok:
-                exit(0)
-
-        if reload:
-            try:
-                asyncio.run(self.run_async())
-            except KeyboardInterrupt:
-                _log.info("正常退出")
-                exit(0)
-            return
-
-        base_path = os.getcwd()
-
-        # 检查和安装napcat
         if platform.system() == "Linux":
-            napcat_dir = "/opt/QQ/resources/app/app_launcher/napcat"
+            napcat_dir = LINUX_NAPCAT_DIR
+        elif platform.system() == "Windows":
+            napcat_dir = WINDOWS_NAPCAT_DIR
         else:
-            napcat_dir = NAPCAT_DIR
-
-        if platform.system() == "Darwin":
-            _log.error("暂不支持 MacOS 系统")
+            _log.error("暂不支持 Windows/Linux 之外的系统")
             exit(1)
 
-        if not os.path.exists(napcat_dir):
-            if not download_napcat("install", base_path):
+        def check_permission():
+            if check_linux_permissions("root") != "root":
+                _log.error("请使用 root 权限运行 ncatbot")
                 exit(1)
-            with open(
-                os.path.join(napcat_dir, INSTALL_CHECK_PATH), "w", encoding="utf-8"
-            ) as f:
-                f.write("installed")
-        else:
-            # 检查 napcat 版本更新
-            with open(
-                os.path.join(napcat_dir, "package.json"), "r", encoding="utf-8"
-            ) as f:
-                version = json.load(f)["version"]
-            _log.info(f"当前 napcat 版本: {version}")
-            _log.info("正在检查更新...")
-            github_version = get_version(get_proxy_url())
-            if version != github_version:
-                _log.info(f"发现新版本: {github_version}")
-                if not download_napcat("update", base_path):
-                    _log.info(f"跳过 napcat {version} 更新")
+
+        def check_ncatbot_install():
+            """检查 ncatbot 版本, 以及是否正确安装"""
+            if not debug:
+                # 检查版本和安装方式
+                version_ok = check_version()
+                if not version_ok:
+                    exit(0)
             else:
-                _log.info("当前 napcat 已是最新版本")
+                _log.info("调试模式, 跳过 ncatbot 安装检查")
 
-        # 启动QQ并等待连接
-        if not start_qq(config, platform.system()):
-            exit(1)
-
-        # WebUI配置和连接等待逻辑...
-        ws_enable = False if config.ws_uri == "" else True
-        if platform.system() == "Linux":
-            config_path = "/opt/QQ/resources/app/app_launcher/napcat/config"
-            if not os.path.exists(config_path):
-                os.makedirs(config_path)
-            os.chdir(config_path)
-        else:
-            os.chdir(os.path.join(NAPCAT_DIR, "config"))
-        expected_data = {
-            "network": {
-                "websocketServers": [
-                    {
-                        "name": "WsServer",
-                        "enable": ws_enable,
-                        "host": str(urllib.parse.urlparse(config.ws_uri).hostname),
-                        "port": int(urllib.parse.urlparse(config.ws_uri).port),
-                        "messagePostFormat": "array",
-                        "reportSelfMessage": False,
-                        "token": (
-                            str(config.token) if config.token is not None else ""
-                        ),
-                        "enableForcePushEvent": True,
-                        "debug": False,
-                        "heartInterval": 30000,
-                    }
-                ],
-            },
-            "musicSignUrl": "",
-            "enableLocalFile2Url": False,
-            "parseMultMsg": False,
-        }
-        with open(
-            "onebot11_" + str(config.bt_uin) + ".json", "w", encoding="utf-8"
-        ) as f:
-            json.dump(expected_data, f, indent=4, ensure_ascii=False)
-        os.chdir("../") and os.system(
-            f"copy quickLoginExample.bat {config.bt_uin}_quickLogin.bat"
-        )
-        if platform.system() == "Linux":
-            webui_config_path = (
-                "/opt/QQ/resources/app/app_launcher/napcat/config/webui.json"
-            )
-        else:
-            webui_config_path = os.path.join(os.getcwd(), "config", "webui.json")
-
-        webui_url = "无法读取WebUI配置"
-        token = ""  # 默认token值
-        try:
-            with open(webui_config_path, "r") as f:
-                webui_config = json.load(f)
-                host = (
-                    "127.0.0.1"
-                    if webui_config.get("host") == "0.0.0.0"
-                    else webui_config.get("host")
+        def ncatbot_quick_start():
+            """在能够链接上 napcat 服务器时跳过检查直接启动"""
+            if self.napcat_server_ok():
+                _log.info(f"napcat 服务器 {config.ws_uri} 在线, 连接中...")
+                self._run()
+            elif not config.is_localhost():
+                _log.error("napcat 服务器没有配置在本地, 无法连接服务器, 自动退出")
+                _log.error(f'服务器参数: uri="{config.ws_uri}", token="{config.token}"')
+                _log.info(
+                    """可能的错误原因:
+                          1. napcat webui 中服务器类型错误, 应该为 "WebSocket 服务器", 而非 "WebSocket 客户端"
+                          2. napcat webui 中服务器配置了但没有启用, 请确保勾选了启用服务器"
+                          3. napcat webui 中服务器 host 没有设置为监听全部地址, 应该将 host 改为 0.0.0.0
+                          4. 检查以上配置后, 在 webui 中使用 error 信息中的的服务器参数, \"接口调试\"选择\"WebSocket\"尝试连接.
+                          5. webui 中连接成功后再尝试启动 ncatbot
+                          """
                 )
-                port = webui_config.get("port", 6099)
-                token = webui_config.get("token", "")
-                webui_url = f"http://{host}:{port}/webui?token={token}"
-        except FileNotFoundError:
-            _log.error("无法读取WebUI配置")
+                exit(1)
+            elif reload:
+                _log.info("napcat 服务器未启动, 且开启了重加载模式, 运行失败")
+                exit(1)
+            _log.info("napcat 服务器离线")
 
-        _log.info(
-            "NapCatQQ 客户端已启动，如果是第一次启动，请至 WebUI 完成 QQ 登录和其他设置；否则请继续操作"
-        )
-        _log.info(f"WebUI 地址: {webui_url}, token: {token}（如需要）")
-        if token == "napcat" or token == "":
-            _log.warning(
-                "检测到当前 token 为默认初始 token ，如暴露在公网，请登录后立刻在 WebUI 中修改 token"
-            )
-        _log.info("登录完成后请勿修改 NapCat 网络配置")
-        _log.info("确认登录成功后，按回车键继续")
-        input("")
-        _log.info("正在连接 WebSocket 服务器...\n")
+        def check_install_napcat():
+            """检查是否已经安装 napcat 客户端, 如果没有, 安装 napcat"""
+            if not os.path.exists(napcat_dir):
+                if not download_napcat("install"):
+                    exit(1)
+            else:
+                # 检查 napcat 版本更新
+                with open(
+                    os.path.join(napcat_dir, "package.json"), "r", encoding="utf-8"
+                ) as f:
+                    version = json.load(f)["version"]
+                    _log.info(f"当前 napcat 版本: {version}, 正在检查更新...")
 
-        MAX_TIME_EXPIRE = time.time() + 60
+                github_version = get_version()
+                if version != github_version:
+                    _log.info(
+                        f"发现新版本: {github_version}, 是否要更新 napcat 客户端？"
+                    )
+                    if not download_napcat("update"):
+                        _log.info(f"跳过 napcat {version} 更新")
+                else:
+                    _log.info("当前 napcat 已是最新版本")
 
-        while (asyncio.run(check_websocket(config.ws_uri))) is False:
+        def config_napcat():
+            """配置 napcat 服务器"""
+
+            def config_onebot11():
+                expected_data = {
+                    "network": {
+                        "websocketServers": [
+                            {
+                                "name": "WsServer",
+                                "enable": True,
+                                "host": str(
+                                    urllib.parse.urlparse(config.ws_uri).hostname
+                                ),
+                                "port": int(urllib.parse.urlparse(config.ws_uri).port),
+                                "messagePostFormat": "array",
+                                "reportSelfMessage": False,
+                                "token": (
+                                    str(config.token)
+                                    if config.token is not None
+                                    else ""
+                                ),
+                                "enableForcePushEvent": True,
+                                "debug": False,
+                                "heartInterval": 30000,
+                            }
+                        ],
+                    },
+                    "musicSignUrl": "",
+                    "enableLocalFile2Url": False,
+                    "parseMultMsg": False,
+                }
+                try:
+                    with open(
+                        os.path.join(
+                            napcat_dir,
+                            "config",
+                            "onebot11_" + str(config.bt_uin) + ".json",
+                        ),
+                        "w",
+                        encoding="utf-8",
+                    ) as f:
+                        json.dump(expected_data, f, indent=4, ensure_ascii=False)
+                except Exception as e:
+                    _log.error("配置 onebot 失败: " + str(e))
+                    if not check_permission():
+                        _log.info("请使用 root 权限运行 ncatbot")
+                        exit(1)
+
+            def config_quick_login():
+                ori = os.path.join(napcat_dir, "quickLoginExample.bat")
+                dst = os.path.join(napcat_dir, f"{config.bt_uin}_quickLogin.bat")
+                shutil.copy(ori, dst)
+
+            def read_webui_config():
+                # 确定 webui 路径
+                webui_config_path = os.path.join(napcat_dir, "config", "webui.json")
+                try:
+                    with open(webui_config_path, "r") as f:
+                        webui_config = json.load(f)
+                        port = webui_config.get("port", 6099)
+                        token = webui_config.get("token", "")
+                        config.webui_token = token
+                        config.webui_port = port
+                    _log.info("Token: " + token + ", Webui port: " + str(port))
+
+                except FileNotFoundError:
+                    _log.error("无法读取 WebUI 配置, 将使用默认配置")
+
+            config_onebot11()
+            config_quick_login()
+            read_webui_config()
+
+        def connect_napcat():
+            """启动并尝试连接 napcat 直到成功"""
+
+            def info_windows():
+                _log.info("1. 请允许终端修改计算机, 并在弹出的另一个终端扫码登录")
+                _log.info(f"2. 确认 QQ 号 {config.bt_uin} 是否正确")
+                _log.info(f"3. websocket url 是否正确: {config.ws_uri}")
+
+            def info_linux():
+                _log.info(f"1. websocket url 是否正确: {config.ws_uri}")
+
+            def info(quit=False):
+                _log.info("连接 napcat websocket 服务器超时, 请检查以下内容:")
+                if platform.system() == "Windows":
+                    info_windows()
+                else:
+                    info_linux()
+                if quit:
+                    exit(1)
+
+            start_napcat(config, platform.system())  # 启动 napcat
+            if platform.system() == "Linux":
+                LoginHandler().login()
+
+            MAX_TIME_EXPIRE = time.time() + 60
+            INFO_TIME_EXPIRE = time.time() + 20
             _log.info("正在连接 napcat websocket 服务器...")
-            time.sleep(2)
-            if time.time() > MAX_TIME_EXPIRE:
-                _log.info("连接 napcat websocket 服务器超时, 请检查以下内容")
-                _log.info("1. 检查 QQ 号是否正确填写")
-                _log.info("2. 检查网络是否正常")
-                exit(0)
+            while not self.napcat_server_ok():
+                time.sleep(2)
+                if time.time() > MAX_TIME_EXPIRE:
+                    info(True)
+                if time.time() > INFO_TIME_EXPIRE:
+                    info()
+                    INFO_TIME_EXPIRE += 100
 
-        _log.info("连接 napcat websocket 服务器成功!")
+            _log.info("连接 napcat websocket 服务器成功!")
 
-        try:
-            asyncio.run(self.run_async())
-        except KeyboardInterrupt:
-            _log.info("正常退出")
-            exit(0)
+        check_ncatbot_install()  # 检查 ncatbot 安装方式
+        ncatbot_quick_start()  # 能够成功连接 napcat 时快速启动
+        check_install_napcat()  # 检查和安装 napcat
+        config_napcat()  # 配置 napcat
+        connect_napcat()  # 启动并连接 napcat
+        self._run()

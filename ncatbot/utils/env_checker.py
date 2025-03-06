@@ -17,20 +17,19 @@ def get_local_package_version(package_name):
     :return: 本地版本（字符串）或 None（如果包未安装）
     """
     try:
-        # 改用 python -m pip，并添加encoding参数
+        # 指定 encoding 参数为 'utf-8'
         result = subprocess.run(
-            [sys.executable, "-m", "pip", "show", package_name],
+            [sys.executable, "-m", "pip", "list"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
-            encoding="utf-8",
-            check=True,
         )
-        # 如果命令成功执行，结果包含包的版本信息
         for line in result.stdout.splitlines():
-            if line.startswith("Version:"):
-                return line.split(" ")[1]
-        return None  # 如果没有找到版本信息
+            if line.startswith("ncatbot"):
+                parts = line.split()  # 使用 split() 方法分割字符串，去除多余空格
+                formatted_line = f"{parts[0]}: {parts[1]}"
+                return formatted_line.split(": ")[1]
+        return None  # 如果没有找到版本信息或命令执行失败
     except subprocess.CalledProcessError:
         return None  # pip 命令执行失败，包可能未安装
 
@@ -137,5 +136,85 @@ def check_version():
         return False
 
 
-if __name__ == "__main__":
-    check_version()
+def check_linux_permissions(range: str = "all"):
+    """检查Linux的root权限和包管理器
+
+    Args:
+        range (str): root, all
+
+    Returns:
+        str: root, package_manager, package_installer
+    """
+    try:
+        result = subprocess.run(
+            ["sudo", "whoami"],
+            check=True,
+            text=True,
+            capture_output=True,
+        )
+        if result.stdout.strip() != "root":
+            _log.error("当前用户不是root用户, 请使用sudo运行")
+            exit(0)
+    except subprocess.CalledProcessError as e:
+        _log.error(f"sudo 命令执行失败, 请检查错误: {e}")
+        exit(0)
+    except FileNotFoundError:
+        _log.error("sudo 命令不存在, 请检查错误")
+        exit(0)
+    if range == "root":
+        return "root"
+    try:
+        subprocess.run(
+            ["apt-get", "--version"],
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        package_manager = "apt-get"
+    except subprocess.CalledProcessError as e:
+        _log.error(f"apt-get 命令执行失败, 请检查错误: {e}")
+        exit(0)
+    except FileNotFoundError:
+        try:
+            subprocess.run(
+                ["dnf", "--version"],
+                check=True,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+            package_manager = "dnf"
+        except subprocess.CalledProcessError as e:
+            _log.error(f"dnf 命令执行失败, 请检查错误: {e}")
+            exit(0)
+        except FileNotFoundError:
+            _log.error("高级包管理器检查失败, 目前仅支持apt-get/dnf")
+            exit(0)
+    _log.info(f"当前高级包管理器: {package_manager}")
+    try:
+        subprocess.run(
+            ["dpkg", "--version"],
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        package_installer = "dpkg"
+    except subprocess.CalledProcessError as e:
+        _log.error(f"dpkg 命令执行失败, 请检查错误: {e}")
+        exit(0)
+    except FileNotFoundError:
+        try:
+            subprocess.run(
+                ["rpm", "--version"],
+                check=True,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+            package_installer = "rpm"
+        except subprocess.CalledProcessError as e:
+            _log.error(f"rpm 命令执行失败, 请检查错误: {e}")
+            exit(0)
+        except FileNotFoundError:
+            _log.error("基础包管理器检查失败, 目前仅支持dpkg/rpm")
+            exit(0)
+    _log.info(f"当前基础包管理器: {package_installer}")
+    return package_manager, package_installer

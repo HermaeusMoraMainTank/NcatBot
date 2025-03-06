@@ -1,5 +1,15 @@
-NAPCAT_DIR = "napcat"
-INSTALL_CHECK_PATH = "install.success"
+WINDOWS_NAPCAT_DIR = "napcat"
+LINUX_NAPCAT_DIR = "/opt/QQ/resources/app/app_launcher/napcat"
+
+INSTALL_SCRIPT_URL = (
+    "https://nclatest.znin.net/NapNeko/NapCat-Installer/main/script/install.sh"
+)
+NAPCAT_CLI_URL = (
+    "https://nclatest.znin.net/NapNeko/NapCat-Installer/main/script/napcat_cli"
+)
+
+NAPCAT_CLI_PATH = LINUX_NAPCAT_DIR + "/napcat_cli"
+
 REQUEST_SUCCESS = "ok"
 
 OFFICIAL_GROUP_MESSAGE_EVENT = "ncatbot.group_message_event"
@@ -60,3 +70,9 @@ class Status:
     熬夜中 = {"status": 10, "ext_status": 1032, "battery_status": 0}
     追剧中 = {"status": 10, "ext_status": 1021, "battery_status": 0}
     我的电量 = {"status": 10, "ext_status": 1000, "battery_status": 0}
+
+
+EVENT_QUEUE_MAX_SIZE = 64  # 事件队列最大长度
+PLUGINS_DIR = "plugins"  # 插件目录
+META_CONFIG_PATH = None  # 元数据，所有插件一份(只读)
+PERSISTENT_DIR = "data"  # 插件私有数据目录
