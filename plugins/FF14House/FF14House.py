@@ -1,14 +1,17 @@
 from PIL import Image, ImageDraw, ImageFont
 from datetime import datetime
-import requests
+import aiohttp
 import os
 import math
 from ncatbot.core.message import GroupMessage
 from ncatbot.core.element import Image as ImageElement, MessageChain, Reply
 from ncatbot.plugin.base_plugin import BasePlugin
 from ncatbot.plugin.compatible import CompatibleEnrollment
+import json
+from ncatbot.utils.logger import get_log
 
 bot = CompatibleEnrollment
+_log = get_log()
 
 
 class FF14House(BasePlugin):
@@ -18,13 +21,13 @@ class FF14House(BasePlugin):
     CITY_IMAGE_PATH = "data/image/ff14/city/city.jpg"
 
     area_map = {
-            "-1": "所有区域",
-            "0": "海雾村",
-            "1": "薰衣草苗圃",
-            "2": "高脚孤丘",
-            "3": "白银乡",
-            "4": "穹顶皓天",
-        }
+        "-1": "所有区域",
+        "0": "海雾村",
+        "1": "薰衣草苗圃",
+        "2": "高脚孤丘",
+        "3": "白银乡",
+        "4": "穹顶皓天",
+    }
 
     # 反向映射，用于根据名称查找ID
     area_name_to_id = {v: k for k, v in area_map.items()}
@@ -60,7 +63,7 @@ class FF14House(BasePlugin):
         "太阳海岸": 1180,
         "伊修加德": 1186,
         "红茶川": 1201,
-        }
+    }
 
     usage_instructions = """指令使用方法：
 1. 必填参数：
@@ -104,13 +107,15 @@ class FF14House(BasePlugin):
         """将时间戳转为可读格式"""
         return datetime.fromtimestamp(timestamp).strftime("%Y-%m-%d %H:%M:%S")
 
-    def get_house_data(
+    async def get_house_data(
         self, server: str, size: str, team: str = None, area: str = None
     ):
         """获取房屋数据"""
+        _log.info(f"获取房屋数据: {server}, {size}, {team}, {area}")
         server_id = self.server_map.get(server)
         if not server_id:
             raise ValueError(f"未找到名为 {server} 的服务器，请检查输入。")
+        _log.info(f"服务器ID: {server_id}")
 
         size_id = {"S": 0, "M": 1, "L": 2, "s": 0, "m": 1, "l": 2}.get(size)
         if size_id is None:
@@ -134,16 +139,26 @@ class FF14House(BasePlugin):
             else:
                 raise ValueError(f"未找到名为 {team} 的房屋类型，请输入 部队 或 个人")
 
-        url = f"https://househelper.ffxiv.cyou/api/sales?server={server_id}"
-        response = requests.get(
-            url,
-            headers={"User-Agent": "蓝晴bot 2.0.0 / 武术有栖 <273421673@qq.com>"},
-        )
+        # 构建URL，确保server_id是字符串
+        url = f"https://househelper.ffxiv.cyou/api/sales?server={str(server_id)}"
 
-        if response.status_code != 200:
-            raise ValueError(f"API 请求失败，状态码: {response.status_code}")
+        # 添加请求头，确保正确处理中文
+        headers = {
+            "User-Agent": "蓝晴bot 2.0.0 / 武术有栖 <273421673@qq.com>",
+            "Accept": "application/json",
+            "Accept-Charset": "utf-8",
+            "Content-Type": "application/json; charset=utf-8",
+        }
 
-        data = response.json()
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url, headers=headers) as response:
+                    response.raise_for_status()
+                    data = await response.json()
+        except aiohttp.ClientError as e:
+            raise ValueError(f"请求失败: {str(e)}")
+        except json.JSONDecodeError as e:
+            raise ValueError(f"解析响应数据失败: {str(e)}")
 
         # 筛选符合条件的数据
         filtered_data = [
@@ -386,7 +401,7 @@ class FF14House(BasePlugin):
                     return
 
             # 获取房屋数据
-            house_data = self.get_house_data(server, size, team, area)
+            house_data = await self.get_house_data(server, size, team, area)
 
             if not house_data:
                 await input.add_text("未找到符合条件的房屋信息。").reply()
@@ -394,7 +409,9 @@ class FF14House(BasePlugin):
 
             # 绘制房屋数据图像
             image = self.draw_house_data(house_data)
-            image.save("house_data.png")
+            # 使用二进制模式保存图片
+            with open("house_data.png", "wb") as f:
+                image.save(f, "PNG")
 
             # 发送图像
             await self.api.post_group_msg(
@@ -408,7 +425,10 @@ class FF14House(BasePlugin):
             )
 
         except Exception as e:
+            error_message = (
+                f"查询房屋信息时出错了喵: {str(e)}\n\n{self.usage_instructions}"
+            )
             await self.api.post_group_msg(
                 group_id=input.group_id,
-                text=f"查询房屋信息时出错了喵: {str(e)}\n\n{self.usage_instructions}",
+                text=error_message,
             )
