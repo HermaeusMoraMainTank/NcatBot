@@ -8,13 +8,12 @@
 # @Copyright (c) 2025 by Fish-LP, MIT License
 # -------------------------
 import asyncio
-import os
 from pathlib import Path
-from typing import Any, Awaitable, Callable, Dict, List
+from typing import Any, Awaitable, Callable, List
 
 from ncatbot.core import BotAPI
-from ncatbot.plugin.custom_err import PluginLoadError
 from ncatbot.plugin.event import Event, EventBus
+from ncatbot.utils.change_dir import ChangeDir
 from ncatbot.utils.io import (
     FileTypeUnknownError,
     LoadError,
@@ -22,7 +21,9 @@ from ncatbot.utils.io import (
     UniversalLoader,
 )
 from ncatbot.utils.literals import PERSISTENT_DIR
-from ncatbot.utils.ChangeDir import ChangeDir
+from ncatbot.utils.logger import get_log
+
+_log = get_log()
 
 
 class BasePlugin:
@@ -37,31 +38,40 @@ class BasePlugin:
     def __init__(self, event_bus: EventBus, **kwd):
         # 如果需要传入内容，不需要特殊表明，使用 key = var 传入即可(在上方标注数据类型)
         # kwd会自动作为属性添加到类中
-        if not self.name: raise ValueError('缺失插件名称')
-        if not self.version: raise ValueError('缺失插件版本号')
+        if not self.name:
+            raise ValueError("缺失插件名称")
+        if not self.version:
+            raise ValueError("缺失插件版本号")
         if kwd:
             for k, v in kwd.items():
                 setattr(self, k, v)
-        
-        if not self.dependencies: self.dependencies = {}
-        
+
+        if not self.dependencies:
+            self.dependencies = {}
+
         self.event_bus = event_bus
         self.lock = asyncio.Lock()  # 创建一个异步锁对象
         self.work_path = Path(PERSISTENT_DIR) / self.name
-        # self._data_file = UniversalLoader(self.work_path / f"{self.name}.json")
+        self._data_file = UniversalLoader(self.work_path / f"{self.name}.json")
         self._event_handlers = []
-        
-        # try: # 加载持久化数据
-        #     self.data = self._data_file.load()
-        # except LoadError as e:
-        #     self.data = self._data_file
-        
+
+        try:  # 加载持久化数据
+            self.data = self._data_file.load()
+        except FileNotFoundError:
+            _log.debug(f"持久化数据文件不存在: {self.name}.json, 数据将被重置")
+            self.data = {}
+        except LoadError:
+            self.data = self._data_file
+        except Exception as e:
+            _log.error(f"加载持久化数据时出错: {e}")
+            raise RuntimeError(self.name, "加载持久化数据时出错")
+
         try:
             self.work_path.mkdir(parents=True)
             self.first_load = True
         except FileExistsError:
             self.first_load = False
-        
+
         self.work_space = ChangeDir(self.work_path, create_missing=True)
         # 由于支持注册非类函数，且os.chdir管理混乱所以不强制切换路径
         # 使用以下代码进入私有目录
