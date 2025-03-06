@@ -189,6 +189,14 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
         # 发送消息
         await self.api.post_group_msg(group_id=input.group_id, rtf=message)
 
+    # 将AI的回复加入到reply_cache中
+    reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
+    reply_json = json.dumps(
+        {"name": "蓝晴", "id": "0", "content": content},
+        ensure_ascii=False,
+    )
+    reply_cache.add_reply(reply_json)
+
 
 def find_user_id_by_name(name: str, group_id: int) -> Optional[int]:
     # 获取对应群的历史记录

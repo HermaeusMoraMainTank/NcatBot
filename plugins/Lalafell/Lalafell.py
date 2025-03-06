@@ -11,7 +11,7 @@ bot = CompatibleEnrollment
 
 KEYWORD1 = "母肥"
 KEYWORD2 = "母肥 "
-PATH = "F:\\oobabooga_windows\\lalafell"  # 替换为实际图片目录
+PATH = "C:\\Users\\27342\\Downloads\\lalafell\\lalafell"  # 替换为实际图片目录
 
 log = logging.getLogger(__name__)
 
