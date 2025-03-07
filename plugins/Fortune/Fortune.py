@@ -3,11 +3,11 @@ import random
 import hashlib
 from datetime import datetime, date
 from typing import List, Dict
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image as PILImage, ImageDraw, ImageFont
 import json
 
 from common.constants.HMMT import HMMT
-from ncatbot.core.element import At, MessageChain, Text
+from ncatbot.core.element import At, MessageChain, Text, Image
 from ncatbot.core.message import GroupMessage
 from ncatbot.plugin.base_plugin import BasePlugin
 from ncatbot.plugin.compatible import CompatibleEnrollment
@@ -105,8 +105,8 @@ class Fortune(BasePlugin):
                 if isAt.get("type") == "at":
                     target_user_id = int(isAt.get("data").get("qq"))
 
-            target = await input.get_group_member_info(
-                group_id=input.group_id, user_id=target_user_id
+            target = await self.api.get_group_member_info(
+                group_id=input.group_id, user_id=target_user_id, no_cache=True
             )
             target_username = target.get("data").get("nickname")
             if target_user_id == 0:
@@ -142,7 +142,7 @@ class Fortune(BasePlugin):
         luck_value = abs(int.from_bytes(digest, byteorder="big")) % 6
         return luck_value
 
-    def drawing_pic(self) -> Image.Image:
+    def drawing_pic(self) -> PILImage.Image:
         """生成运势图片"""
         font_title_path = self.get_file_path("font", "Mamelon.otf")
         font_text_path = self.get_file_path("font", "sakura.ttf")
@@ -150,7 +150,7 @@ class Fortune(BasePlugin):
         luck_desc = self.get_random_luck_desc()
         base_img_path = self.get_random_base_map(luck_desc)
 
-        img = Image.open(base_img_path)
+        img = PILImage.open(base_img_path)
         draw = ImageDraw.Draw(img)
 
         # 绘制标题

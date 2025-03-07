@@ -7,7 +7,7 @@ from typing import List, Set
 import yaml
 from PIL import Image
 
-from ncatbot.core.element import At, MessageChain, Reply, Text
+from ncatbot.core.element import At, MessageChain, Reply, Text, Image as ImageElement
 from ncatbot.core.message import GroupMessage
 from ncatbot.plugin.base_plugin import BasePlugin
 from ncatbot.plugin.compatible import CompatibleEnrollment
@@ -67,7 +67,7 @@ class Tarot(BasePlugin):
                             rtf=MessageChain(
                                 [
                                     At(input.user_id),
-                                    Image(str(image.resolve())),
+                                    ImageElement(str(image.resolve())),
                                     Reply(input.message_id),
                                 ]
                             ),
@@ -88,7 +88,7 @@ class Tarot(BasePlugin):
                             At(input.user_id),
                             Text("\n"),
                             Text(self.get_tarot_message(card, i)),
-                            Image(image_bytes),
+                            ImageElement(image_bytes),
                             Reply(input.message_id),
                         ]
                     ),

@@ -238,7 +238,7 @@ class Crazy(BasePlugin):
                 input.sender.card if input.sender.card != "" else input.sender.nickname
             )
         else:
-            info = await input.get_group_member_info(input.group_id, user_id=at_target)
+            info = await self.api.get_group_member_info(input.group_id, user_id=at_target,no_cache=True)
             target_name = (
                 info["data"]["card"]
                 if info["data"]["card"] != ""

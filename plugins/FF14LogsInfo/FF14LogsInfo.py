@@ -13,6 +13,7 @@ from ncatbot.plugin.compatible import CompatibleEnrollment
 
 bot = CompatibleEnrollment
 
+
 class Zone:
     def __init__(self, id: int, name: str, difficulty: int):
         self.id = id
@@ -45,7 +46,7 @@ class FF14LogsInfo(BasePlugin):
         Zone(45, "幻想龙诗绝境战", 100),
         Zone(43, "绝境战（旧版本）", 100),
     ]
-    
+
     class RankingInfo:
         def __init__(
             self,
@@ -72,23 +73,53 @@ class FF14LogsInfo(BasePlugin):
             return f"https://assets.rpglogs.com/img/ff/icons/{self.spec}.png"
 
     def init(self):
+        # 首先尝试从文件读取 token
+        if os.path.exists(self.TOKEN_FILE_PATH):
+            try:
+                with open(self.TOKEN_FILE_PATH, "r", encoding="utf-8") as file:
+                    token_data = json.loads(file.read())
+                    self.api_token = token_data.get("access_token")
+                    if self.api_token:
+                        print("Successfully loaded token from file")
+                        return
+            except Exception as e:
+                print(f"Error reading token file: {e}")
+
+        # 如果文件不存在或读取失败，重新获取 token
         self.retrieve_and_save_access_token()
 
     def retrieve_and_save_access_token(self):
         try:
+            print("Attempting to retrieve new access token...")
             response = httpx.post(self.TOKEN_ENDPOINT, json=self.JSON_PAYLOAD)
             response.raise_for_status()
-            access_token = response.json().get("access_token")
-            if access_token:
-                self.save_access_token_to_file(response.text)
-                self.api_token = access_token
+            token_data = response.json()
+            access_token = token_data.get("access_token")
+
+            if not access_token:
+                print("No access token in response")
+                print(f"Response content: {response.text}")
+                return
+
+            print("Successfully retrieved new access token")
+            self.save_access_token_to_file(response.text)
+            self.api_token = access_token
+        except httpx.HTTPError as e:
+            print(f"HTTP error while retrieving access token: {e}")
+            print(
+                f"Response content: {e.response.text if hasattr(e, 'response') else 'No response content'}"
+            )
         except Exception as e:
-            print(f"Error retrieving access token: {e}")
+            print(f"Unexpected error while retrieving access token: {e}")
 
     def save_access_token_to_file(self, access_token_json: str):
-        os.makedirs(os.path.dirname(self.TOKEN_FILE_PATH), exist_ok=True)
-        with open(self.TOKEN_FILE_PATH, "w", encoding="utf-8") as file:
-            file.write(access_token_json)
+        try:
+            os.makedirs(os.path.dirname(self.TOKEN_FILE_PATH), exist_ok=True)
+            with open(self.TOKEN_FILE_PATH, "w", encoding="utf-8") as file:
+                file.write(access_token_json)
+            print(f"Successfully saved token to {self.TOKEN_FILE_PATH}")
+        except Exception as e:
+            print(f"Error saving token to file: {e}")
 
     def get_difficulty(self, zone_id: int) -> int:
         for zone in self.zones:
@@ -97,6 +128,13 @@ class FF14LogsInfo(BasePlugin):
         return 0
 
     def get_data(self, name: str, server: str, zone_id: int) -> Optional[str]:
+        # 确保有有效的 token
+        if not self.api_token:
+            self.retrieve_and_save_access_token()
+            if not self.api_token:
+                print("Failed to obtain access token")
+                return None
+
         difficulty = self.get_difficulty(zone_id)
         graphql_query = f"""
         query hmmt {{

@@ -7,8 +7,11 @@ import httpx
 from typing import Dict, Optional, Tuple
 from datetime import datetime
 from difflib import SequenceMatcher
+from ncatbot.plugin.compatible import CompatibleEnrollment
 
 from ncatbot.plugin.base_plugin import BasePlugin
+
+bot = CompatibleEnrollment
 
 
 # 定义数据类
@@ -24,6 +27,12 @@ log = logging.getLogger(__name__)
 class Universalis(BasePlugin):
     name = "Universalis"  # 插件名称
     version = "1.0"  # 插件版本
+
+    async def on_load(self):
+        # 插件加载时执行的操作
+        print(f"{self.name} 插件已加载")
+        print(f"插件版本: {self.version}")
+        self.setup()
 
     def setup(self):
         """插件初始化设置"""
@@ -96,6 +105,7 @@ class Universalis(BasePlugin):
         # API 基础 URL
         self.api_url = "https://universalis.app/api/v2/"
 
+    @bot.group_event()
     async def handle_universalis(self, input: GroupMessage):
         """
         处理物价查询

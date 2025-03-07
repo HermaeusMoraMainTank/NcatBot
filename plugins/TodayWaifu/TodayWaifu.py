@@ -3,9 +3,9 @@ from datetime import date
 from typing import Dict, Set
 
 from common.constants.HMMT import HMMT
-from common.entity import GroupMember
-from common.utils import CommonUtil
-from ncatbot.core.element import At, Image, MessageChain, Text
+from common.entity.GroupMember import GroupMember
+from common.utils.CommonUtil import CommonUtil
+from ncatbot.core.element import At, Image as ImageElement, MessageChain, Text
 from ncatbot.core.message import GroupMessage
 from ncatbot.plugin.compatible import CompatibleEnrollment
 from ncatbot.plugin.base_plugin import BasePlugin
@@ -41,7 +41,7 @@ class TodayWaifu(BasePlugin):
             or members_response.get("retcode") != 0
         ):
             return await self.api.get_group_member_info(
-                group_id=group_id, user_id=HMMT.BOT_ID
+                group_id=group_id, user_id=HMMT.BOT_ID,no_cache=True
             )
 
         members = [GroupMember(member) for member in members_response.get("data", [])]
@@ -54,7 +54,7 @@ class TodayWaifu(BasePlugin):
 
         if not filtered_members:
             bot_member_info = await self.api.get_group_member_info(
-                group_id=group_id, user_id=HMMT.BOT_ID
+                group_id=group_id, user_id=HMMT.BOT_ID,no_cache=True
             )
             if isinstance(bot_member_info, dict):  # 如果返回的是字典
                 return GroupMember(bot_member_info)  # 转换为 GroupMember 对象
@@ -98,7 +98,7 @@ class TodayWaifu(BasePlugin):
             if user_id in user_to_wife_map:
                 wife_id = user_to_wife_map[user_id]
                 wife_info = await self.api.get_group_member_info(
-                    group_id=group_id, user_id=wife_id
+                    group_id=group_id, user_id=wife_id,no_cache=True
                 )
 
                 if isinstance(wife_info, dict) and wife_info.get("status") == "ok":
@@ -116,7 +116,7 @@ class TodayWaifu(BasePlugin):
                                 [
                                     At(user_id),
                                     Text("你今天的群友老婆是："),
-                                    Image(avatar_url),
+                                    ImageElement(avatar_url),
                                     Text(f" {wife_info.nickname}({wife_info.user_id})"),
                                 ]
                             ),
@@ -140,7 +140,7 @@ class TodayWaifu(BasePlugin):
                     [
                         At(user_id),
                         Text("你今天的群友老婆是："),
-                        Image(avatar_url),
+                        ImageElement(avatar_url),
                         Text(f" {new_wife.nickname}({new_wife.user_id})"),
                     ]
                 ),
@@ -158,7 +158,7 @@ class TodayWaifu(BasePlugin):
                     target_user_id = int(isAt.get("data").get("qq"))
 
             target = await self.api.get_group_member_info(
-                group_id=group_id, user_id=target_user_id
+                group_id=group_id, user_id=target_user_id,no_cache=True
             )
             target_username = target.get("data").get("nickname")
 
