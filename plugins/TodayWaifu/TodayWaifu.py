@@ -41,7 +41,7 @@ class TodayWaifu(BasePlugin):
             or members_response.get("retcode") != 0
         ):
             return await self.api.get_group_member_info(
-                group_id=group_id, user_id=HMMT.BOT_ID,no_cache=True
+                group_id=group_id, user_id=HMMT.BOT_ID, no_cache=True
             )
 
         members = [GroupMember(member) for member in members_response.get("data", [])]
@@ -54,7 +54,7 @@ class TodayWaifu(BasePlugin):
 
         if not filtered_members:
             bot_member_info = await self.api.get_group_member_info(
-                group_id=group_id, user_id=HMMT.BOT_ID,no_cache=True
+                group_id=group_id, user_id=HMMT.BOT_ID, no_cache=True
             )
             if isinstance(bot_member_info, dict):  # 如果返回的是字典
                 return GroupMember(bot_member_info)  # 转换为 GroupMember 对象
@@ -98,7 +98,7 @@ class TodayWaifu(BasePlugin):
             if user_id in user_to_wife_map:
                 wife_id = user_to_wife_map[user_id]
                 wife_info = await self.api.get_group_member_info(
-                    group_id=group_id, user_id=wife_id,no_cache=True
+                    group_id=group_id, user_id=wife_id, no_cache=True
                 )
 
                 if isinstance(wife_info, dict) and wife_info.get("status") == "ok":
@@ -158,7 +158,7 @@ class TodayWaifu(BasePlugin):
                     target_user_id = int(isAt.get("data").get("qq"))
 
             target = await self.api.get_group_member_info(
-                group_id=group_id, user_id=target_user_id,no_cache=True
+                group_id=group_id, user_id=target_user_id, no_cache=True
             )
             target_username = target.get("data").get("nickname")
 
@@ -180,14 +180,19 @@ class TodayWaifu(BasePlugin):
 
             await self.api.post_group_msg(
                 group_id=input.group_id,
-                text=f"@{input.sender.nickname} 成功更换了 {target_username} 的老婆。",
+                rtf=MessageChain(
+                    [
+                        At(input.sender.user_id),
+                        Text(f" 成功更换了 {target_username} 的老婆。"),
+                    ]
+                ),
             )
             return await self.api.post_group_msg(
                 group_id=input.group_id,
                 rtf=MessageChain(
                     [
                         At(target_user_id),
-                        Text(f"你的老婆被 {input.sender.nickname} 更换了。"),
+                        Text(f" 你的老婆被 {input.sender.nickname} 更换了。"),
                     ]
                 ),
             )
@@ -222,9 +227,7 @@ class TodayWaifu(BasePlugin):
                 rtf=MessageChain(
                     [
                         At(user_id),
-                        Text(
-                            f"@{input.sender.nickname} 成功更换了老婆，你的新老婆是：{new_wife.nickname}"
-                        ),
+                        Text(f" 成功更换了老婆，你的新老婆是：{new_wife.nickname}"),
                     ]
                 ),
             )

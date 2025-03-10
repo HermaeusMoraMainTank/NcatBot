@@ -185,3 +185,6 @@ logs/
 napcat/
 plugin.py
 temp/
+data/image/pixiv
+data/image/ff14/userInfo
+data/image/fortune

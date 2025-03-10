@@ -15,7 +15,7 @@ bot = BotClient()
 @bot.group_event()
 async def on_group_message(message: GroupMessage):
     _log.info(
-        f"收到群消息，Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}，群ID：{message.group_id}，ID: {message.user_id}，内容：{message.raw_message}")
+        f"收到群消息，Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}，群ID：{message.group_id}，ID: {message.user_id}，昵称：{message.sender.nickname}，内容：{message.raw_message}")
 
 
 
