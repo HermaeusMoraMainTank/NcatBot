@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="referrer" content="never">
+    <link rel="icon" href="favicon.ico">
+    <script>
+      performance.mark('JS_WILL_LOAD');
+    </script>
+  <link href="app://./renderer/css/commonNodeModule-tencent-qq-msg-editor.ff46175a.css" rel="stylesheet"><link href="app://./renderer/css/commonNodeModule-ckeditor-ckeditor5-ui.0d21bf8c.css" rel="stylesheet"><link href="app://./renderer/css/commonNodeModule-ckeditor-ckeditor5-widget.7c6f72d6.css" rel="stylesheet"><link href="app://./renderer/css/51038.0c20ac3d.css" rel="stylesheet"><link href="app://./renderer/css/9667.e2c11114.css" rel="stylesheet"><link href="app://./renderer/css/app.561ba413.css" rel="stylesheet"></head>
+  <body>
+    <noscript>
+      <strong>We're sorry but Webpack App doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <style>
+      .font-preload {
+        position: fixed;
+        pointer-events: none;
+        visibility: hidden;
+        font-weight: 400;
+      }
+    </style>
+    <div class="font-preload">腾讯QQ <span style="font-weight: 500;">腾讯QQ</span></div>
+    <div id="drag-area"></div>
+    <div id="app" style="height: 100%"></div>
+    <div id="loading"></div>
+  <script>
+          const macroTask_r_vendorsXvue = setTimeout(() => {
+            clearTimeout(macroTask_r_vendorsXvue);
+            window.electron.load('r_vendorsXvue');
+          }, 0);
+</script><script>
+          const macroTask_r_polyfill = setTimeout(() => {
+            clearTimeout(macroTask_r_polyfill);
+            window.electron.load('r_polyfill');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXlodashXes = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXlodashXes);
+            window.electron.load('r_commonNodeModuleXlodashXes');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXtencentXqqXutils = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXtencentXqqXutils);
+            window.electron.load('r_commonNodeModuleXtencentXqqXutils');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXdayjs = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXdayjs);
+            window.electron.load('r_commonNodeModuleXdayjs');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXtencentXqqXmsgXeditor = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXtencentXqqXmsgXeditor);
+            window.electron.load('r_commonNodeModuleXtencentXqqXmsgXeditor');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXcolorXconvert = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXcolorXconvert);
+            window.electron.load('r_commonNodeModuleXcolorXconvert');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXcolor = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXcolor);
+            window.electron.load('r_commonNodeModuleXcolor');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXcolorXstring = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXcolorXstring);
+            window.electron.load('r_commonNodeModuleXcolorXstring');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXcolorXname = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXcolorXname);
+            window.electron.load('r_commonNodeModuleXcolorXname');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXbase64Xjs = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXbase64Xjs);
+            window.electron.load('r_commonNodeModuleXbase64Xjs');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXaxios = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXaxios);
+            window.electron.load('r_commonNodeModuleXaxios');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXclickXoutsideXvue3 = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXclickXoutsideXvue3);
+            window.electron.load('r_commonNodeModuleXclickXoutsideXvue3');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXqs = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXqs);
+            window.electron.load('r_commonNodeModuleXqs');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXgetXintrinsic = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXgetXintrinsic);
+            window.electron.load('r_commonNodeModuleXgetXintrinsic');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXobjectXinspect = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXobjectXinspect);
+            window.electron.load('r_commonNodeModuleXobjectXinspect');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXhasXsymbols = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXhasXsymbols);
+            window.electron.load('r_commonNodeModuleXhasXsymbols');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXsideXchannel = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXsideXchannel);
+            window.electron.load('r_commonNodeModuleXsideXchannel');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXdefineXdataXproperty = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXdefineXdataXproperty);
+            window.electron.load('r_commonNodeModuleXdefineXdataXproperty');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXfunctionXbind = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXfunctionXbind);
+            window.electron.load('r_commonNodeModuleXfunctionXbind');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXckeditorXckeditor5Xutils = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXckeditorXckeditor5Xutils);
+            window.electron.load('r_commonNodeModuleXckeditorXckeditor5Xutils');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXtencentXoceanusXqq = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXtencentXoceanusXqq);
+            window.electron.load('r_commonNodeModuleXtencentXoceanusXqq');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXentities = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXentities);
+            window.electron.load('r_commonNodeModuleXentities');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXhe = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXhe);
+            window.electron.load('r_commonNodeModuleXhe');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXhtmlXtoXtext = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXhtmlXtoXtext);
+            window.electron.load('r_commonNodeModuleXhtmlXtoXtext');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXhtmlparser2 = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXhtmlparser2);
+            window.electron.load('r_commonNodeModuleXhtmlparser2');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXselderee = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXselderee);
+            window.electron.load('r_commonNodeModuleXselderee');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXdomutils = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXdomutils);
+            window.electron.load('r_commonNodeModuleXdomutils');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXparseley = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXparseley);
+            window.electron.load('r_commonNodeModuleXparseley');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXdomhandler = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXdomhandler);
+            window.electron.load('r_commonNodeModuleXdomhandler');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXnearley = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXnearley);
+            window.electron.load('r_commonNodeModuleXnearley');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXmoo = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXmoo);
+            window.electron.load('r_commonNodeModuleXmoo');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXdomXserializer = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXdomXserializer);
+            window.electron.load('r_commonNodeModuleXdomXserializer');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXdeepmerge = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXdeepmerge);
+            window.electron.load('r_commonNodeModuleXdeepmerge');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXjsbi = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXjsbi);
+            window.electron.load('r_commonNodeModuleXjsbi');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXckeditorXckeditor5Xengine = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXckeditorXckeditor5Xengine);
+            window.electron.load('r_commonNodeModuleXckeditorXckeditor5Xengine');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXckeditorXckeditor5Xui = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXckeditorXckeditor5Xui);
+            window.electron.load('r_commonNodeModuleXckeditorXckeditor5Xui');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXckeditorXckeditor5Xwidget = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXckeditorXckeditor5Xwidget);
+            window.electron.load('r_commonNodeModuleXckeditorXckeditor5Xwidget');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXckeditorXckeditor5Xcore = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXckeditorXckeditor5Xcore);
+            window.electron.load('r_commonNodeModuleXckeditorXckeditor5Xcore');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXckeditorXckeditor5Xtyping = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXckeditorXckeditor5Xtyping);
+            window.electron.load('r_commonNodeModuleXckeditorXckeditor5Xtyping');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXckeditorXckeditor5Xclipboard = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXckeditorXckeditor5Xclipboard);
+            window.electron.load('r_commonNodeModuleXckeditorXckeditor5Xclipboard');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXckeditorXckeditor5Xwatchdog = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXckeditorXckeditor5Xwatchdog);
+            window.electron.load('r_commonNodeModuleXckeditorXckeditor5Xwatchdog');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXckeditorXckeditor5Xundo = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXckeditorXckeditor5Xundo);
+            window.electron.load('r_commonNodeModuleXckeditorXckeditor5Xundo');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXckeditorXckeditor5XeditorXclassic = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXckeditorXckeditor5XeditorXclassic);
+            window.electron.load('r_commonNodeModuleXckeditorXckeditor5XeditorXclassic');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXckeditorXckeditor5Xenter = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXckeditorXckeditor5Xenter);
+            window.electron.load('r_commonNodeModuleXckeditorXckeditor5Xenter');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXckeditorXckeditor5Xparagraph = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXckeditorXckeditor5Xparagraph);
+            window.electron.load('r_commonNodeModuleXckeditorXckeditor5Xparagraph');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXckeditorXckeditor5XselectXall = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXckeditorXckeditor5XselectXall);
+            window.electron.load('r_commonNodeModuleXckeditorXckeditor5XselectXall');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXckeditor5 = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXckeditor5);
+            window.electron.load('r_commonNodeModuleXckeditor5');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXtencentXpcqqXkit = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXtencentXpcqqXkit);
+            window.electron.load('r_commonNodeModuleXtencentXpcqqXkit');
+          }, 0);
+</script><script>
+          const macroTask_r_commonNodeModuleXseldereeXpluginXhtmlparser2 = setTimeout(() => {
+            clearTimeout(macroTask_r_commonNodeModuleXseldereeXpluginXhtmlparser2);
+            window.electron.load('r_commonNodeModuleXseldereeXpluginXhtmlparser2');
+          }, 0);
+</script><script>
+          const macroTask_r_63501 = setTimeout(() => {
+            clearTimeout(macroTask_r_63501);
+            window.electron.load('r_63501');
+          }, 0);
+</script><script>
+          const macroTask_r_22262 = setTimeout(() => {
+            clearTimeout(macroTask_r_22262);
+            window.electron.load('r_22262');
+          }, 0);
+</script><script>
+          const macroTask_r_51038 = setTimeout(() => {
+            clearTimeout(macroTask_r_51038);
+            window.electron.load('r_51038');
+          }, 0);
+</script><script>
+          const macroTask_r_59179 = setTimeout(() => {
+            clearTimeout(macroTask_r_59179);
+            window.electron.load('r_59179');
+          }, 0);
+</script><script>
+          const macroTask_r_68335 = setTimeout(() => {
+            clearTimeout(macroTask_r_68335);
+            window.electron.load('r_68335');
+          }, 0);
+</script><script>
+          const macroTask_r_92464 = setTimeout(() => {
+            clearTimeout(macroTask_r_92464);
+            window.electron.load('r_92464');
+          }, 0);
+</script><script>
+          const macroTask_r_37133 = setTimeout(() => {
+            clearTimeout(macroTask_r_37133);
+            window.electron.load('r_37133');
+          }, 0);
+</script><script>
+          const macroTask_r_50959 = setTimeout(() => {
+            clearTimeout(macroTask_r_50959);
+            window.electron.load('r_50959');
+          }, 0);
+</script><script>
+          const macroTask_r_93940 = setTimeout(() => {
+            clearTimeout(macroTask_r_93940);
+            window.electron.load('r_93940');
+          }, 0);
+</script><script>
+          const macroTask_r_48428 = setTimeout(() => {
+            clearTimeout(macroTask_r_48428);
+            window.electron.load('r_48428');
+          }, 0);
+</script><script>
+          const macroTask_r_73755 = setTimeout(() => {
+            clearTimeout(macroTask_r_73755);
+            window.electron.load('r_73755');
+          }, 0);
+</script><script>
+          const macroTask_r_67878 = setTimeout(() => {
+            clearTimeout(macroTask_r_67878);
+            window.electron.load('r_67878');
+          }, 0);
+</script><script>
+          const macroTask_r_69420 = setTimeout(() => {
+            clearTimeout(macroTask_r_69420);
+            window.electron.load('r_69420');
+          }, 0);
+</script><script>
+          const macroTask_r_68046 = setTimeout(() => {
+            clearTimeout(macroTask_r_68046);
+            window.electron.load('r_68046');
+          }, 0);
+</script><script>
+          const macroTask_r_46143 = setTimeout(() => {
+            clearTimeout(macroTask_r_46143);
+            window.electron.load('r_46143');
+          }, 0);
+</script><script>
+          const macroTask_r_36740 = setTimeout(() => {
+            clearTimeout(macroTask_r_36740);
+            window.electron.load('r_36740');
+          }, 0);
+</script><script>
+          const macroTask_r_36451 = setTimeout(() => {
+            clearTimeout(macroTask_r_36451);
+            window.electron.load('r_36451');
+          }, 0);
+</script><script>
+          const macroTask_r_19468 = setTimeout(() => {
+            clearTimeout(macroTask_r_19468);
+            window.electron.load('r_19468');
+          }, 0);
+</script><script>
+          const macroTask_r_87209 = setTimeout(() => {
+            clearTimeout(macroTask_r_87209);
+            window.electron.load('r_87209');
+          }, 0);
+</script><script>
+          const macroTask_r_app = setTimeout(() => {
+            clearTimeout(macroTask_r_app);
+            window.electron.load('r_app');
+          }, 0);
+</script></body>
+  <script>
+    performance.mark('JS_LOAD_END');
+  </script>
+</html>

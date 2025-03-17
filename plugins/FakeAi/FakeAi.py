@@ -1,6 +1,7 @@
 import asyncio
 import json
 import random
+import re
 from datetime import datetime
 from typing import Dict, List, Optional
 
@@ -140,10 +141,13 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
         _log.error(f"解析 JSON 失败: {e}")
         return
 
-    # 按照逗号和句号分隔句子
-    sentences = [s.strip() for s in content.split("，。") if s.strip()]
+    # 使用正则表达式按照标点符号分割句子
+    punctuation_pattern = r"[。！？!?]+"
+    sentences = [s.strip() for s in re.split(punctuation_pattern, content) if s.strip()]
 
-    import re
+    # 如果没有标点符号分割出的句子，就把整个内容作为一个句子
+    if not sentences:
+        sentences = [content.strip()]
 
     at_pattern = re.compile(r"\[CQ:at,qq=([\w\u4e00-\u9fff]+)]")
     group_id = input.group_id
@@ -151,10 +155,9 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
 
     members = [GroupMember(member) for member in members_response.get("data", [])]
 
-    message = MessageChain([])
-
     # 遍历句子
     for sentence in sentences:
+        message = MessageChain([])  # 为每个句子创建新的MessageChain
         last_match_end = 0
         for match in at_pattern.finditer(sentence):
             # 处理 @ 之前的文本

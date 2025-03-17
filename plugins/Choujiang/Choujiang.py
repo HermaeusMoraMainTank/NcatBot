@@ -14,7 +14,7 @@ class Choujiang(BasePlugin):
     # 使用字典存储每个群组的抽奖状态
     map = {}
 
-    @bot.group_event()
+    # @bot.group_event()
     async def handle_choujiang(self, input: GroupMessage):
         group_id = input.group_id
         if group_id != 853963912:
