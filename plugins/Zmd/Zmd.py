@@ -22,6 +22,8 @@ class Zmd(BasePlugin):
 
     @bot.group_event()
     async def handle_zmd(self, input: GroupMessage):
+        if input.sender.user_id != 273421673:
+            return
         message = input.raw_message
 
         if message.startswith(KEYWORD2):
