@@ -367,9 +367,10 @@ class FF14House(BasePlugin):
             server = message_parts[1]
             size = message_parts[2].upper()
             if size in ["s", "S"]:
-                await input.add_text(
-                    "s房数据过多，请在https://househelper.ffxiv.cyou/#/上进行查看"
-                ).reply()
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    text="s房数据过多，请在https://househelper.ffxiv.cyou/#/上进行查看",
+                )
                 return
             team = None
             area = None
@@ -381,30 +382,45 @@ class FF14House(BasePlugin):
                 elif param in self.area_map.values():
                     area = param
                 else:
-                    await input.add_text(f"无效的参数: {param}").reply()
+                    await self.api.post_group_msg(
+                        group_id=input.group_id,
+                        text=f"无效的参数: {param}",
+                    )
                     return
 
             if len(message_parts) > 4:
                 param = message_parts[4]
                 if param in ["部队", "个人"]:
                     if team:
-                        await input.add_text(f"重复的房屋类型参数: {param}").reply()
+                        await self.api.post_group_msg(
+                            group_id=input.group_id,
+                            text=f"重复的房屋类型参数: {param}",
+                        )
                         return
                     team = param
                 elif param in self.area_map.values():
                     if area:
-                        await input.add_text(f"重复的区域名称参数: {param}").reply()
+                        await self.api.post_group_msg(
+                            group_id=input.group_id,
+                            text=f"重复的区域名称参数: {param}",
+                        )
                         return
                     area = param
                 else:
-                    await input.add_text(f"无效的参数: {param}").reply()
+                    await self.api.post_group_msg(
+                        group_id=input.group_id,
+                        text=f"无效的参数: {param}",
+                    )
                     return
 
             # 获取房屋数据
             house_data = await self.get_house_data(server, size, team, area)
 
             if not house_data:
-                await input.add_text("未找到符合条件的房屋信息。").reply()
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    text="未找到符合条件的房屋信息。",
+                )
                 return
 
             # 绘制房屋数据图像

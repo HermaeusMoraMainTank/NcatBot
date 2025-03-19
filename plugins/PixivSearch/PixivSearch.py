@@ -51,8 +51,9 @@ class PixivSearch(BasePlugin):
             keyword = commands[1]
             if keyword in ["物述有栖", "mononobe alice", "r18"]:
                 return
-            if keyword in ["珂莱塔", "cartethyia"]:
-                keyword = "钟离"
+            if input.sender.user_id == 1506123340:
+                if random.randint(1, 5) == 1:
+                    keyword = "莉耶芙"
             page = last_page.get(keyword, 1)
             if keyword in last_page:
                 page = random.randint(1, last_page[keyword])
