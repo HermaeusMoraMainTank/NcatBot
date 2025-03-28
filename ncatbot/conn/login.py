@@ -11,6 +11,7 @@ _log = get_log()
 
 
 def show_qrcode(barcode_url):
+    _log.info(f"二维码指代的 url 地址: {barcode_url}")
     qr = qrcode.QRCode()
     qr.add_data(barcode_url)
     qr.print_ascii(invert=True)
@@ -26,13 +27,19 @@ class LoginHandler:
             + str(config.webui_port)
         )
         while True:
+            EXPIRE = time.time() + 10
             try:
                 content = requests.post(
                     self.host + "/api/auth/login", json={"token": config.webui_token}
                 ).json()
                 break
             except Exception:
-                pass
+                time.sleep(1)
+                if time.time() > EXPIRE:
+                    _log.error("连接 WebUI 失败")
+                    _log.info("请开放 webui 端口 (默认 6099)")
+                    _log.info(f"请开放 websocket 端口 {config.ws_port}")
+                    exit(1)
 
         self.header = {
             "Authorization": "Bearer " + content["data"]["Credential"],
@@ -50,14 +57,16 @@ class LoginHandler:
     def check_login_statu(self):
         # 检查 QQ 是否登录
         return requests.post(
-            self.host + "/api/QQLogin/CheckLoginStatus", headers=self.header
+            self.host + "/api/QQLogin/CheckLoginStatus", headers=self.header, timeout=5
         ).json()["data"]["isLogin"]
 
     def check_online_statu(self):
         # 检查 QQ 是否在线
         return (
             requests.post(
-                self.host + "/api/QQLogin/GetQQLoginInfo", headers=self.header
+                self.host + "/api/QQLogin/GetQQLoginInfo",
+                headers=self.header,
+                timeout=5,
             )
             .json()["data"]
             .get("online", False)
@@ -83,7 +92,7 @@ class LoginHandler:
             val = requests.post(
                 self.host + "/api/QQLogin/CheckLoginStatus", headers=self.header
             ).json()["data"]["qrcodeurl"]
-            if val is not None:
+            if val is not None and val != "":
                 return val
 
         _log.error("获取二维码失败")

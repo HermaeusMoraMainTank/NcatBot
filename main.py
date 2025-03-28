@@ -5,7 +5,9 @@ from ncatbot.utils.logger import get_log
 
 _log = get_log()
 
+
 config.set_bot_uin("3555202423")  # 设置 bot qq 号 (必填)
+config.set_root("273421673")  # 设置 bot 超级管理员账号 (建议填写)
 config.set_ws_uri("ws://localhost:3001")  # 设置 napcat websocket server 地址
 config.set_token("")  # 设置 token (napcat 服务器的 token)
 
@@ -27,4 +29,4 @@ async def on_private_message(msg: PrivateMessage):
 
 
 if __name__ == "__main__":
-    bot.run(reload=False)
+    bot.run()

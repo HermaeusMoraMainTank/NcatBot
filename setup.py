@@ -35,8 +35,11 @@ setup(
         "Pygments~=2.19.1",
         "pyppeteer~=2.0.0",
         "pyyaml~=6.0.2",
-        "packaging~=24.2.0",
+        "packaging~=24.0.0",
         "qrcode~=8.0",
         "qrcode-terminal~=0.8",
+        "gitpython~=3.1.44",
+        "schedule~=1.2.2",
+        "Deprecated~=1.2.12",
     ],
 )

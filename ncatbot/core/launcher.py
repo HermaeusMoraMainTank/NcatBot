@@ -4,6 +4,7 @@ import platform
 import subprocess
 import time
 
+from ncatbot.utils.config import config
 from ncatbot.utils.literals import LINUX_NAPCAT_DIR, WINDOWS_NAPCAT_DIR
 from ncatbot.utils.logger import get_log
 
@@ -58,6 +59,8 @@ def start_napcat_linux(qq):
         ["sudo", "bash", "napcat", "start", str(qq)], stdout=subprocess.PIPE
     )
     process.wait()
+    if process.returncode != 0:
+        _log.error("启动 napcat 失败，请检查日志，ncatbot cli 可能没有被正确安装")
 
 
 def stop_napcat_linux(qq):
@@ -105,7 +108,8 @@ def start_napcat(config_data, system_type: str = "Windows"):
         try:
             # 启动并注册清理函数
             start_napcat_linux(config_data.bt_uin)
-            atexit.register(lambda: stop_napcat_linux(config_data.bt_uin))
+            if config.stop_napcat:
+                atexit.register(lambda: stop_napcat_linux(config_data.bt_uin))
         except Exception as e:
             _log.error(f"pgrep 命令执行失败, 无法判断 QQ 是否启动, 请检查错误: {e}")
             exit(1)

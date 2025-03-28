@@ -4,13 +4,12 @@ import os
 import platform
 import shutil
 import time
-import urllib
+from urllib.parse import urlparse
 
 from ncatbot.conn import LoginHandler, Websocket, check_websocket
 from ncatbot.core.api import BotAPI
 from ncatbot.core.launcher import start_napcat
 from ncatbot.core.message import GroupMessage, PrivateMessage
-from ncatbot.plugin import Event, EventBus, PluginLoader
 from ncatbot.utils.config import config
 from ncatbot.utils.env_checker import check_linux_permissions, check_version
 from ncatbot.utils.literals import (
@@ -29,10 +28,17 @@ _log = get_log()
 
 class BotClient:
     def __init__(self, plugins_path="plugins"):
-        if not config._updated:
-            _log.info("没有主动设置配置项, 配置项将使用默认值")
-        _log.info(config)
+        def check_config():
+            if not config._updated:
+                _log.info("没有主动设置配置项, 配置项将使用默认值")
+            if config.bt_uin is config.default_bt_uin:
+                _log.error("请设置正确的 Bot QQ 号")
+                exit(1)
+            if config.root is config.default_root:
+                _log.warning("建议设置好 root 账号保证权限功能能够正常使用")
+            _log.info(config)
 
+        check_config()
         self.api = BotAPI()
         self._subscribe_group_message_types = []
         self._subscribe_private_message_types = []
@@ -41,38 +47,52 @@ class BotClient:
         self._notice_event_handlers = []
         self._request_event_handlers = []
         self.plugins_path = plugins_path
-        self.plugin_sys = PluginLoader(EventBus(), self.api)
+        from ncatbot.plugin import EventBus, PluginLoader
+
+        self.plugin_sys = PluginLoader(EventBus())
 
     async def handle_group_event(self, msg: dict):
-        msg = GroupMessage(msg)
+        msg: GroupMessage = GroupMessage(msg)
         _log.debug(msg)
         for handler, types in self._group_event_handlers:
             if types is None or any(i["type"] in types for i in msg.message):
                 await handler(msg)
+        from ncatbot.plugin.event import Event, EventSource
+
         await self.plugin_sys.event_bus.publish_async(
-            Event(OFFICIAL_GROUP_MESSAGE_EVENT, msg)
+            Event(
+                OFFICIAL_GROUP_MESSAGE_EVENT,
+                msg,
+                EventSource(msg.user_id, msg.group_id),
+            )
         )
 
     async def handle_private_event(self, msg: dict):
-        msg = PrivateMessage(msg)
+        msg: PrivateMessage = PrivateMessage(msg)
         _log.debug(msg)
         for handler, types in self._private_event_handlers:
             if types is None or any(i["type"] in types for i in msg.message):
                 await handler(msg)
+        from ncatbot.plugin.event import Event, EventSource
+
         await self.plugin_sys.event_bus.publish_async(
-            Event(OFFICIAL_PRIVATE_MESSAGE_EVENT, msg)
+            Event(OFFICIAL_PRIVATE_MESSAGE_EVENT, msg, EventSource(msg.user_id, "root"))
         )
 
     async def handle_notice_event(self, msg: dict):
         _log.debug(msg)
         for handler in self._notice_event_handlers:
             await handler(msg)
+        from ncatbot.plugin import Event
+
         await self.plugin_sys.event_bus.publish_async(Event(OFFICIAL_NOTICE_EVENT, msg))
 
     async def handle_request_event(self, msg: dict):
         _log.debug(msg)
         for handler in self._request_event_handlers:
             await handler(msg)
+        from ncatbot.plugin import Event
+
         await self.plugin_sys.event_bus.publish_async(
             Event(OFFICIAL_REQUEST_EVENT, msg)
         )
@@ -118,10 +138,31 @@ class BotClient:
             _log.info(f"已订阅消息类型:[群聊]->{subsribe_group_message_types}")
             _log.info(f"已订阅消息类型:[私聊]->{subsribe_private_message_types}")
 
+        async def time_schedule_heartbeat():
+            while True:
+                await asyncio.sleep(5)
+                self.plugin_sys.time_task_scheduler.step()
+
         info_subscribe_message_types()
         websocket_server = Websocket(self)
-        await self.plugin_sys.load_plugins()
-        await websocket_server.on_connect()
+        await self.plugin_sys.load_plugins(api=self.api)
+        while True:
+            try:
+                asyncio.create_task(time_schedule_heartbeat())
+                await websocket_server.on_connect()
+            except Exception:
+                _log.info("正在尝试重连服务器...")
+                EXPIER = time.time() + 300
+                interval = 1
+                while not (await check_websocket(config.ws_uri)):
+                    _log.info(f"正在尝试重连服务器...第 {interval} s")
+                    time.sleep(interval)
+                    interval *= 2
+                    if time.time() > EXPIER:
+                        _log.error("重连服务器超时, 退出程序")
+                        exit(1)
+
+            _log.info("重连服务器成功")
 
     def napcat_server_ok(self):
         return asyncio.run(check_websocket(config.ws_uri))
@@ -129,21 +170,23 @@ class BotClient:
     def _run(self):
         try:
             asyncio.run(self.run_async())
-        except Exception as e:
-            _log.info(e)
+        except asyncio.CancelledError:
+            pass
+        except Exception:
+            pass
+        finally:
             _log.info("插件卸载中...")
-            asyncio.run(self.plugin_sys._unload_all())
+            self.plugin_sys.unload_all()
             _log.info("正常退出")
             exit(0)
 
-    def run(self, reload=False, debug=False):
+    def run(self, debug=False, *args, **kwargs):
         """
         启动 Bot 客户端
 
         Args:
-            reload: 是否同时启动 NapCat , 默认为 False
             debug: 是否开启调试模式, 默认为 False, 用户不应该修改此参数
-
+            **kwargs: 保持弃用参数的兼容性
         Returns:
             None
         """
@@ -188,7 +231,7 @@ class BotClient:
                           """
                 )
                 exit(1)
-            elif reload:
+            elif kwargs.get("reload", False):
                 _log.info("napcat 服务器未启动, 且开启了重加载模式, 运行失败")
                 exit(1)
             _log.info("napcat 服务器离线")
@@ -226,10 +269,8 @@ class BotClient:
                             {
                                 "name": "WsServer",
                                 "enable": True,
-                                "host": str(
-                                    urllib.parse.urlparse(config.ws_uri).hostname
-                                ),
-                                "port": int(urllib.parse.urlparse(config.ws_uri).port),
+                                "host": str(urlparse(config.ws_uri).hostname),
+                                "port": int(urlparse(config.ws_uri).port),
                                 "messagePostFormat": "array",
                                 "reportSelfMessage": False,
                                 "token": (
@@ -316,7 +357,7 @@ class BotClient:
             INFO_TIME_EXPIRE = time.time() + 20
             _log.info("正在连接 napcat websocket 服务器...")
             while not self.napcat_server_ok():
-                time.sleep(2)
+                time.sleep(0.5)
                 if time.time() > MAX_TIME_EXPIRE:
                     info(True)
                 if time.time() > INFO_TIME_EXPIRE:
