@@ -29,9 +29,6 @@ class Universalis(BasePlugin):
     version = "1.0"  # 插件版本
 
     async def on_load(self):
-        # 插件加载时执行的操作
-        print(f"{self.name} 插件已加载")
-        print(f"插件版本: {self.version}")
         self.setup()
 
     def setup(self):

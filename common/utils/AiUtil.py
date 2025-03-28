@@ -15,16 +15,20 @@ class AiUtil:
         _log.info(keyword)
 
         # 请求 URL 和 API Key
-        url = "https://api.deepseek.com/chat/completions"
-        api_key = "sk-08b905b8cf4d4d27a9c04dba8f1ade70"
 
         url = "https://api.lkeap.cloud.tencent.com/v1"
         api_key = "sk-AWmHgm8yzHqY8OhEMA35lC9MZ3ueNn6KndFil9fPbON865zx"
 
+        url = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+        api_key = "sk-869c983ef74c4678b63c934478339b25"
+
+        url = "https://api.deepseek.com"
+        api_key = "sk-08b905b8cf4d4d27a9c04dba8f1ade70"
+
         # OpenAI 配置
         client = OpenAI(
-            api_key="sk-869c983ef74c4678b63c934478339b25",
-            base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+            api_key=api_key,
+            base_url=url,
         )
 
         retry_count = 3  # 最大重试次数
@@ -33,7 +37,8 @@ class AiUtil:
         while retry_count > 0:
             try:
                 completion = client.chat.completions.create(
-                    model="deepseek-v3",  # 你可以选择你需要的模型
+                    # model="deepseek-v3",  # 你可以选择你需要的模型
+                    model="deepseek-chat",  # 你可以选择你需要的模型
                     messages=[
                         {"role": "system", "content": prompt},
                         {"role": "user", "content": keyword},

@@ -22,7 +22,7 @@ class Zmd(BasePlugin):
 
     @bot.group_event()
     async def handle_zmd(self, input: GroupMessage):
-        if input.sender.user_id != 273421673:
+        if input.sender.user_id not in [273421673, 635773721]:
             return
         message = input.raw_message
 

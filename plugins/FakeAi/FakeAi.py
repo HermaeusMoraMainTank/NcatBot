@@ -177,6 +177,7 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
             if user_id and any(member.user_id == user_id for member in members):
                 # 添加 @ 的用户
                 message.chain.append(At(user_id))
+                message.chain.append(Text(" "))
 
             last_match_end = match.end()
 

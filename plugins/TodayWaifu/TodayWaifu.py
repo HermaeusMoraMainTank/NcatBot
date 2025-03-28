@@ -139,7 +139,7 @@ class TodayWaifu(BasePlugin):
                 rtf=MessageChain(
                     [
                         At(user_id),
-                        Text("你今天的群友老婆是："),
+                        Text(" 你今天的群友老婆是："),
                         ImageElement(avatar_url),
                         Text(f" {new_wife.nickname}({new_wife.user_id})"),
                     ]

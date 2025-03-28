@@ -7,13 +7,13 @@
             "min_texts": 2,
             "max_texts": 2,
             "default_texts": [
-                "\u6211\u53bb",
-                "\u6d1b\u5929\u4f9d"
+                "我去",
+                "洛天依"
             ],
             "args_type": null
         },
         "keywords": [
-            "5000\u5146"
+            "5000兆"
         ],
         "shortcuts": [],
         "tags": [],
@@ -64,13 +64,13 @@
                         },
                         "time": {
                             "default": "",
-                            "description": "\u6307\u5b9a\u65f6\u95f4",
+                            "description": "指定时间",
                             "title": "Time",
                             "type": "string"
                         },
                         "name": {
                             "default": "",
-                            "description": "\u6307\u5b9a\u540d\u5b57",
+                            "description": "指定名字",
                             "title": "Name",
                             "type": "string"
                         }
@@ -96,7 +96,7 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u6307\u5b9a\u65f6\u95f4",
+                        "help_text": "指定时间",
                         "compact": false
                     },
                     {
@@ -115,14 +115,14 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u6307\u5b9a\u540d\u5b57",
+                        "help_text": "指定名字",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u6212\u5bfc"
+            "戒导"
         ],
         "shortcuts": [],
         "tags": [],
@@ -137,12 +137,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u8868\u60c5\u5305\u5236\u4f5c"
+                "表情包制作"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u9006\u8f6c\u88c1\u5224\u6c14\u6ce1"
+            "逆转裁判气泡"
         ],
         "shortcuts": [],
         "tags": [],
@@ -157,12 +157,12 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u8d70\uff0c\u8ddf\u6211\u53bb\u4e8c\u6b21\u5143\u5427"
+                "走，跟我去二次元吧"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u4e8c\u6b21\u5143\u5165\u53e3"
+            "二次元入口"
         ],
         "shortcuts": [],
         "tags": [],
@@ -180,8 +180,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u4e0a\u763e",
-            "\u6bd2\u763e\u53d1\u4f5c"
+            "上瘾",
+            "毒瘾发作"
         ],
         "shortcuts": [],
         "tags": [],
@@ -199,8 +199,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u6dfb\u4e71",
-            "\u7ed9\u793e\u4f1a\u6dfb\u4e71"
+            "添乱",
+            "给社会添乱"
         ],
         "shortcuts": [],
         "tags": [],
@@ -218,7 +218,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u4e00\u6837"
+            "一样"
         ],
         "shortcuts": [],
         "tags": [],
@@ -269,7 +269,7 @@
                         },
                         "message": {
                             "default": "",
-                            "description": "\u4e8c\u7ef4\u7801\u5185\u5bb9",
+                            "description": "二维码内容",
                             "title": "Message",
                             "type": "string"
                         }
@@ -295,14 +295,14 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u4e8c\u7ef4\u7801\u5185\u5bb9",
+                        "help_text": "二维码内容",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u652f\u4ed8\u5b9d\u652f\u4ed8"
+            "支付宝支付"
         ],
         "shortcuts": [],
         "tags": [],
@@ -353,7 +353,7 @@
                         },
                         "mode": {
                             "default": "normal",
-                            "description": "\u751f\u6210\u6a21\u5f0f\uff0c\u5305\u542b normal\u3001loop\u3001circle",
+                            "description": "生成模式，包含 normal、loop、circle",
                             "enum": [
                                 "normal",
                                 "loop",
@@ -396,13 +396,13 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u751f\u6210\u6a21\u5f0f\uff0c\u5305\u542b normal\u3001loop\u3001circle",
+                        "help_text": "生成模式，包含 normal、loop、circle",
                         "compact": false
                     },
                     {
                         "names": [
                             "--circle",
-                            "\u5957\u5a03"
+                            "套娃"
                         ],
                         "args": null,
                         "dest": "mode",
@@ -411,13 +411,13 @@
                             "type": 0,
                             "value": "circle"
                         },
-                        "help_text": "\u5957\u5a03\u6a21\u5f0f",
+                        "help_text": "套娃模式",
                         "compact": false
                     },
                     {
                         "names": [
                             "--loop",
-                            "\u5faa\u73af"
+                            "循环"
                         ],
                         "args": null,
                         "dest": "mode",
@@ -426,18 +426,18 @@
                             "type": 0,
                             "value": "loop"
                         },
-                        "help_text": "\u5faa\u73af\u6a21\u5f0f",
+                        "help_text": "循环模式",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u4e00\u76f4"
+            "一直"
         ],
         "shortcuts": [
             {
-                "key": "\u4e00\u76f4\u4e00\u76f4",
+                "key": "一直一直",
                 "args": [
                     "--loop"
                 ],
@@ -459,7 +459,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u6211\u6c38\u8fdc\u559c\u6b22"
+            "我永远喜欢"
         ],
         "shortcuts": [],
         "tags": [],
@@ -477,7 +477,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u9632\u8bf1\u62d0"
+            "防诱拐"
         ],
         "shortcuts": [],
         "tags": [],
@@ -492,17 +492,17 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u963f\u5c3c\u4e9a\u559c\u6b22\u8fd9\u4e2a"
+                "阿尼亚喜欢这个"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u963f\u5c3c\u4e9a\u559c\u6b22"
+            "阿尼亚喜欢"
         ],
         "shortcuts": [],
         "tags": [
-            "\u963f\u5c3c\u4e9a\u00b7\u798f\u6770",
-            "\u95f4\u8c0d\u8fc7\u5bb6\u5bb6"
+            "间谍过家家",
+            "阿尼亚·福杰"
         ],
         "date_created": "2022-05-10T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -518,7 +518,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u9f13\u638c"
+            "鼓掌"
         ],
         "shortcuts": [],
         "tags": [],
@@ -536,13 +536,13 @@
             "args_type": null
         },
         "keywords": [
-            "\u963f\u7f57\u5a1c\u6254"
+            "阿罗娜扔"
         ],
         "shortcuts": [],
         "tags": [
-            "\u963f\u7f57\u5a1c",
-            "\u851a\u84dd\u6863\u6848",
-            "\u78a7\u84dd\u6863\u6848"
+            "蔚蓝档案",
+            "碧蓝档案",
+            "阿罗娜"
         ],
         "date_created": "2024-12-10T00:00:00",
         "date_modified": "2024-12-10T00:00:00"
@@ -555,12 +555,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u5b66\u7684\u662f\u673a\u68b0"
+                "学的是机械"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u5347\u5929"
+            "升天"
         ],
         "shortcuts": [],
         "tags": [],
@@ -578,7 +578,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u95ee\u95ee"
+            "问问"
         ],
         "shortcuts": [],
         "tags": [],
@@ -689,13 +689,13 @@
             }
         },
         "keywords": [
-            "\u4e9a\u6258\u8389\u6795\u5934"
+            "亚托莉枕头"
         ],
         "shortcuts": [],
         "tags": [
-            "\u4e9a\u6258\u8389",
+            "亚托莉",
             "ATRI",
-            "\u841d\u535c\u5b50"
+            "萝卜子"
         ],
         "date_created": "2024-08-12T00:00:00",
         "date_modified": "2024-08-15T00:00:00"
@@ -711,8 +711,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u7ee7\u7eed\u5e72\u6d3b",
-            "\u6253\u5de5\u4eba"
+            "继续干活",
+            "打工人"
         ],
         "shortcuts": [],
         "tags": [],
@@ -727,12 +727,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u559c\u62a5"
+                "喜报"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u60b2\u62a5"
+            "悲报"
         ],
         "shortcuts": [],
         "tags": [],
@@ -744,10 +744,10 @@
         "params_type": {
             "min_images": 0,
             "max_images": 0,
-            "min_texts": 0,
+            "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u90a3\u6211\u95ee\u4f60"
+                "那我问你"
             ],
             "args_type": {
                 "args_model": {
@@ -785,13 +785,13 @@
                         },
                         "character": {
                             "default": 0,
-                            "description": "\u89d2\u8272\u7f16\u53f7\uff1a1\u3001\u5fc3\u5948\uff0c2\u3001\u7231\u4e3d\u4e1d\uff0c3\u3001\u6cc9\u5948\uff0c4\u3001key\uff0c5\u3001\u739b\u4e3d\uff0c6\u3001\u6fd1\u540d\uff0c7\u3001\u4f18\u9999",
+                            "description": "角色编号：1、心奈，2、爱丽丝，3、泉奈，4、key，5、玛丽，6、濑名，7、优香",
                             "title": "Character",
                             "type": "integer"
                         },
                         "position": {
                             "default": "random",
-                            "description": "\u6d88\u606f\u6846\u7684\u4f4d\u7f6e\uff0c\u5305\u542b left\u3001right\u3001random",
+                            "description": "消息框的位置，包含 left、right、random",
                             "enum": [
                                 "left",
                                 "right",
@@ -858,7 +858,7 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u89d2\u8272\u7f16\u53f7\uff1a1\u3001\u5fc3\u5948\uff0c2\u3001\u7231\u4e3d\u4e1d\uff0c3\u3001\u6cc9\u5948\uff0c4\u3001key\uff0c5\u3001\u739b\u4e3d\uff0c6\u3001\u6fd1\u540d\uff0c7\u3001\u4f18\u9999",
+                        "help_text": "角色编号：1、心奈，2、爱丽丝，3、泉奈，4、key，5、玛丽，6、濑名，7、优香",
                         "compact": false
                     },
                     {
@@ -877,13 +877,13 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u6d88\u606f\u6846\u7684\u4f4d\u7f6e\uff0c\u5305\u542b left\u3001right\u3001random",
+                        "help_text": "消息框的位置，包含 left、right、random",
                         "compact": false
                     },
                     {
                         "names": [
                             "--left",
-                            "\u5de6"
+                            "左"
                         ],
                         "args": null,
                         "dest": "position",
@@ -898,7 +898,7 @@
                     {
                         "names": [
                             "--right",
-                            "\u53f3"
+                            "右"
                         ],
                         "args": null,
                         "dest": "position",
@@ -914,11 +914,11 @@
             }
         },
         "keywords": [
-            "ba\u8bf4"
+            "ba说"
         ],
         "shortcuts": [
             {
-                "key": "\u5fc3\u5948\u8bf4",
+                "key": "心奈说",
                 "args": [
                     "--character",
                     "1"
@@ -926,7 +926,7 @@
                 "humanized": null
             },
             {
-                "key": "\u7231\u4e3d\u4e1d\u8bf4",
+                "key": "爱丽丝说",
                 "args": [
                     "--character",
                     "2"
@@ -934,7 +934,7 @@
                 "humanized": null
             },
             {
-                "key": "\u6cc9\u5948\u8bf4",
+                "key": "泉奈说",
                 "args": [
                     "--character",
                     "3"
@@ -942,7 +942,7 @@
                 "humanized": null
             },
             {
-                "key": "key\u8bf4",
+                "key": "key说",
                 "args": [
                     "--character",
                     "4"
@@ -950,7 +950,7 @@
                 "humanized": null
             },
             {
-                "key": "\u739b\u4e3d\u8bf4",
+                "key": "玛丽说",
                 "args": [
                     "--character",
                     "5"
@@ -958,7 +958,7 @@
                 "humanized": null
             },
             {
-                "key": "\u6fd1\u540d\u8bf4",
+                "key": "濑名说",
                 "args": [
                     "--character",
                     "6"
@@ -966,7 +966,7 @@
                 "humanized": null
             },
             {
-                "key": "\u4f18\u9999\u8bf4",
+                "key": "优香说",
                 "args": [
                     "--character",
                     "7"
@@ -975,18 +975,18 @@
             }
         ],
         "tags": [
-            "\u6625\u539f\u5fc3\u5948",
-            "\u65e9\u6fd1\u4f18\u9999",
-            "\u5fcd\u5fcd",
+            "天童爱丽丝",
+            "春原心菜",
+            "忍忍",
+            "冰室濑名",
+            "久田泉奈",
+            "邮箱",
+            "碧蓝档案",
             "key",
-            "\u851a\u84dd\u6863\u6848",
-            "\u6625\u539f\u5fc3\u83dc",
-            "\u4f0a\u843d\u739b\u4e3d",
-            "\u78a7\u84dd\u6863\u6848",
-            "\u90ae\u7bb1",
-            "\u5929\u7ae5\u7231\u4e3d\u4e1d",
-            "\u4e45\u7530\u6cc9\u5948",
-            "\u51b0\u5ba4\u6fd1\u540d"
+            "春原心奈",
+            "早濑优香",
+            "蔚蓝档案",
+            "伊落玛丽"
         ],
         "date_created": "2024-12-12T00:00:00",
         "date_modified": "2025-01-19T00:00:00"
@@ -999,12 +999,12 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u600e\u4e48\u8bf4\u8bdd\u7684\u4f60"
+                "怎么说话的你"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u62cd\u5934"
+            "拍头"
         ],
         "shortcuts": [],
         "tags": [],
@@ -1022,13 +1022,13 @@
             "args_type": null
         },
         "keywords": [
-            "\u63cd"
+            "揍"
         ],
         "shortcuts": [],
         "tags": [
-            "\u6770\u745e",
-            "\u6c64\u59c6",
-            "\u732b\u548c\u8001\u9f20"
+            "杰瑞",
+            "汤姆",
+            "猫和老鼠"
         ],
         "date_created": "2024-04-09T00:00:00",
         "date_modified": "2024-04-09T00:00:00"
@@ -1044,7 +1044,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u5543"
+            "啃"
         ],
         "shortcuts": [],
         "tags": [],
@@ -1059,17 +1059,17 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u50bb\u903c"
+                "傻逼"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u771f\u5bfb\u6328\u9a82"
+            "真寻挨骂"
         ],
         "shortcuts": [],
         "tags": [
-            "\u522b\u5f53\u6b27\u5c3c\u9171\u4e86",
-            "\u7eea\u5c71\u771f\u5bfb"
+            "别当欧尼酱了",
+            "绪山真寻"
         ],
         "date_created": "2024-08-26T00:00:00",
         "date_modified": "2024-08-26T00:00:00"
@@ -1085,7 +1085,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u9ad8\u8840\u538b"
+            "高血压"
         ],
         "shortcuts": [],
         "tags": [],
@@ -1106,13 +1106,13 @@
             "args_type": null
         },
         "keywords": [
-            "\u851a\u84dd\u6863\u6848\u6807\u9898",
+            "蔚蓝档案标题",
             "batitle"
         ],
         "shortcuts": [],
         "tags": [
-            "\u851a\u84dd\u6863\u6848",
-            "\u78a7\u84dd\u6863\u6848"
+            "蔚蓝档案",
+            "碧蓝档案"
         ],
         "date_created": "2023-10-14T00:00:00",
         "date_modified": "2024-11-02T00:00:00"
@@ -1128,14 +1128,14 @@
             "args_type": null
         },
         "keywords": [
-            "\u6ce2\u5947\u624b\u7a3f"
+            "波奇手稿"
         ],
         "shortcuts": [],
         "tags": [
-            "\u6ce2\u5947\u9171",
-            "\u540e\u85e4\u72ec",
-            "\u540e\u85e4\u4e00\u91cc",
-            "\u5b64\u72ec\u6447\u6eda"
+            "后藤一里",
+            "波奇酱",
+            "后藤独",
+            "孤独摇滚"
         ],
         "date_created": "2022-11-29T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -1148,19 +1148,19 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "V\u621150"
+                "V我50"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u5e03\u6d1b\u59ae\u5a05\u4e3e\u724c",
-            "\u5927\u9e2d\u9e2d\u4e3e\u724c"
+            "布洛妮娅举牌",
+            "大鸭鸭举牌"
         ],
         "shortcuts": [],
         "tags": [
-            "\u5e03\u6d1b\u59ae\u5a05\u00b7\u624e\u4f0a\u5207\u514b",
-            "\u7c73\u54c8\u6e38",
-            "\u5d29\u574f3"
+            "崩坏3",
+            "布洛妮娅·扎伊切克",
+            "米哈游"
         ],
         "date_created": "2022-10-27T00:00:00",
         "date_modified": "2023-03-30T00:00:00"
@@ -1209,7 +1209,7 @@
                         },
                         "position": {
                             "default": "right",
-                            "description": "\u5976\u8336\u7684\u4f4d\u7f6e\uff0c\u5305\u542b right\u3001left\u3001both",
+                            "description": "奶茶的位置，包含 right、left、both",
                             "enum": [
                                 "right",
                                 "left",
@@ -1253,13 +1253,13 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u5976\u8336\u7684\u4f4d\u7f6e\uff0c\u5305\u542b right\u3001left\u3001both",
+                        "help_text": "奶茶的位置，包含 right、left、both",
                         "compact": false
                     },
                     {
                         "names": [
                             "--right",
-                            "\u53f3\u624b"
+                            "右手"
                         ],
                         "args": null,
                         "dest": "position",
@@ -1274,7 +1274,7 @@
                     {
                         "names": [
                             "--left",
-                            "\u5de6\u624b"
+                            "左手"
                         ],
                         "args": null,
                         "dest": "position",
@@ -1289,7 +1289,7 @@
                     {
                         "names": [
                             "--both",
-                            "\u53cc\u624b"
+                            "双手"
                         ],
                         "args": null,
                         "dest": "position",
@@ -1305,7 +1305,7 @@
             }
         },
         "keywords": [
-            "\u5976\u8336"
+            "奶茶"
         ],
         "shortcuts": [],
         "tags": [],
@@ -1323,7 +1323,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u9047\u5230\u56f0\u96be\u8bf7\u62e8\u6253"
+            "遇到困难请拨打"
         ],
         "shortcuts": [],
         "tags": [],
@@ -1341,12 +1341,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u5496\u6ce2\u753b"
+            "咖波画"
         ],
         "shortcuts": [],
         "tags": [
-            "\u732b\u732b\u866b",
-            "\u5496\u6ce2"
+            "猫猫虫",
+            "咖波"
         ],
         "date_created": "2023-03-31T00:00:00",
         "date_modified": "2023-04-28T00:00:00"
@@ -1362,12 +1362,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u5496\u6ce2\u6307"
+            "咖波指"
         ],
         "shortcuts": [],
         "tags": [
-            "\u732b\u732b\u866b",
-            "\u5496\u6ce2"
+            "猫猫虫",
+            "咖波"
         ],
         "date_created": "2024-10-24T00:00:00",
         "date_modified": "2024-10-24T00:00:00"
@@ -1383,12 +1383,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u5496\u6ce2\u6495"
+            "咖波撕"
         ],
         "shortcuts": [],
         "tags": [
-            "\u732b\u732b\u866b",
-            "\u5496\u6ce2"
+            "猫猫虫",
+            "咖波"
         ],
         "date_created": "2023-04-17T00:00:00",
         "date_modified": "2023-04-28T00:00:00"
@@ -1404,13 +1404,13 @@
             "args_type": null
         },
         "keywords": [
-            "\u5496\u6ce2\u8e6d",
-            "\u5496\u6ce2\u8d34"
+            "咖波蹭",
+            "咖波贴"
         ],
         "shortcuts": [],
         "tags": [
-            "\u732b\u732b\u866b",
-            "\u5496\u6ce2"
+            "猫猫虫",
+            "咖波"
         ],
         "date_created": "2022-11-29T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -1423,17 +1423,17 @@
             "min_texts": 1,
             "max_texts": 10,
             "default_texts": [
-                "\u5bc4"
+                "寄"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u5496\u6ce2\u8bf4"
+            "咖波说"
         ],
         "shortcuts": [],
         "tags": [
-            "\u732b\u732b\u866b",
-            "\u5496\u6ce2"
+            "猫猫虫",
+            "咖波"
         ],
         "date_created": "2023-03-28T00:00:00",
         "date_modified": "2023-03-30T00:00:00"
@@ -1449,12 +1449,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u5496\u6ce2\u7096"
+            "咖波炖"
         ],
         "shortcuts": [],
         "tags": [
-            "\u732b\u732b\u866b",
-            "\u5496\u6ce2"
+            "猫猫虫",
+            "咖波"
         ],
         "date_created": "2024-08-23T00:00:00",
         "date_modified": "2024-08-23T00:00:00"
@@ -1470,13 +1470,13 @@
             "args_type": null
         },
         "keywords": [
-            "\u5496\u6ce2\u649e",
-            "\u5496\u6ce2\u5934\u69cc"
+            "咖波撞",
+            "咖波头槌"
         ],
         "shortcuts": [],
         "tags": [
-            "\u732b\u732b\u866b",
-            "\u5496\u6ce2"
+            "猫猫虫",
+            "咖波"
         ],
         "date_created": "2023-03-28T00:00:00",
         "date_modified": "2023-03-28T00:00:00"
@@ -1492,14 +1492,14 @@
             "args_type": null
         },
         "keywords": [
-            "\u8230\u957f"
+            "舰长"
         ],
         "shortcuts": [],
         "tags": [
-            "\u8230\u957f",
-            "\u4f11\u4f2f\u5229\u5b89\u53f7",
-            "\u7c73\u54c8\u6e38",
-            "\u5d29\u574f3"
+            "崩坏3",
+            "舰长",
+            "休伯利安号",
+            "米哈游"
         ],
         "date_created": "2022-10-09T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -1512,20 +1512,20 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u5fc3\u810f\u75c5 \u9ad8\u8840\u538b \u5fc3\u5f8b\u4e0d\u9f50 \u5fc3\u808c\u6897\u585e \u5931\u7720 \u8131\u53d1 \u547c\u5438\u56f0\u96be \u80f8\u95f7\u6c14\u77ed \u7f3a\u6c27 \u8e81\u90c1 \u7126\u8651 \u8111\u4f9b\u8840\u4e0d\u8db3 \u5fc3\u614c\u5fc3\u60b8 \u5fc3\u8111\u8840\u7ba1\u70b8\u88c2"
+                "心脏病 高血压 心律不齐 心肌梗塞 失眠 脱发 呼吸困难 胸闷气短 缺氧 躁郁 焦虑 脑供血不足 心慌心悸 心脑血管炸裂"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u8fd9\u4e2a\u5f15\u8d77\u7684"
+            "这个引起的"
         ],
         "shortcuts": [
             {
-                "key": "\u4f60\u7684(?P<text>.+?)(?:\u4e3b\u8981)?\u90fd?\u662f\u7531?\u8fd9\u4e2a\u5f15\u8d77\u7684",
+                "key": "你的(?P<text>.+?)(?:主要)?都?是由?这个引起的",
                 "args": [
                     "{text}"
                 ],
-                "humanized": "\u4f60\u7684xx\u4e3b\u8981\u90fd\u662f\u7531\u8fd9\u4e2a\u5f15\u8d77\u7684"
+                "humanized": "你的xx主要都是由这个引起的"
             }
         ],
         "tags": [],
@@ -1540,9 +1540,9 @@
             "min_texts": 3,
             "max_texts": 4,
             "default_texts": [
-                "\u5c0f\u738b",
-                "\u4f18\u79c0\u5b66\u751f",
-                "\u4e00\u5e74\u4e00\u73ed"
+                "小王",
+                "优秀学生",
+                "一年一班"
             ],
             "args_type": {
                 "args_model": {
@@ -1580,7 +1580,7 @@
                         },
                         "time": {
                             "default": "",
-                            "description": "\u6307\u5b9a\u65f6\u95f4",
+                            "description": "指定时间",
                             "title": "Time",
                             "type": "string"
                         }
@@ -1606,15 +1606,15 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u6307\u5b9a\u65f6\u95f4",
+                        "help_text": "指定时间",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u5956\u72b6",
-            "\u8bc1\u4e66"
+            "奖状",
+            "证书"
         ],
         "shortcuts": [],
         "tags": [],
@@ -1632,7 +1632,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u5b57\u7b26\u753b"
+            "字符画"
         ],
         "shortcuts": [],
         "tags": [],
@@ -1650,8 +1650,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u8ffd\u5217\u8f66",
-            "\u8ffd\u706b\u8f66"
+            "追列车",
+            "追火车"
         ],
         "shortcuts": [],
         "tags": [],
@@ -1669,7 +1669,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u56fd\u65d7"
+            "国旗"
         ],
         "shortcuts": [],
         "tags": [],
@@ -1687,7 +1687,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u9f20\u9f20\u6413"
+            "鼠鼠搓"
         ],
         "shortcuts": [],
         "tags": [],
@@ -1738,7 +1738,7 @@
                         },
                         "person": {
                             "default": false,
-                            "description": "\u662f\u5426\u4f7f\u7528\u7237\u7237\u5934\u8f6e\u5ed3",
+                            "description": "是否使用爷爷头轮廓",
                             "title": "Person",
                             "type": "boolean"
                         }
@@ -1760,7 +1760,7 @@
                     {
                         "names": [
                             "--person",
-                            "\u7237"
+                            "爷"
                         ],
                         "args": null,
                         "dest": null,
@@ -1769,14 +1769,14 @@
                             "type": 0,
                             "value": true
                         },
-                        "help_text": "\u662f\u5426\u4f7f\u7528\u7237\u7237\u5934\u8f6e\u5ed3",
+                        "help_text": "是否使用爷爷头轮廓",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u5c0f\u4e11"
+            "小丑"
         ],
         "shortcuts": [],
         "tags": [],
@@ -1827,7 +1827,7 @@
                         },
                         "mode": {
                             "default": "front",
-                            "description": "\u5c0f\u4e11\u5728\u524d/\u540e\uff0cfront/behind",
+                            "description": "小丑在前/后，front/behind",
                             "enum": [
                                 "front",
                                 "behind"
@@ -1865,13 +1865,13 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u5c0f\u4e11\u5728\u524d/\u540e\uff0cfront/behind",
+                        "help_text": "小丑在前/后，front/behind",
                         "compact": false
                     },
                     {
                         "names": [
                             "--front",
-                            "\u524d"
+                            "前"
                         ],
                         "args": null,
                         "dest": "mode",
@@ -1880,13 +1880,13 @@
                             "type": 0,
                             "value": "front"
                         },
-                        "help_text": "\u5c0f\u4e11\u5728\u524d",
+                        "help_text": "小丑在前",
                         "compact": false
                     },
                     {
                         "names": [
                             "--behind",
-                            "\u540e"
+                            "后"
                         ],
                         "args": null,
                         "dest": "mode",
@@ -1895,14 +1895,14 @@
                             "type": 0,
                             "value": "behind"
                         },
-                        "help_text": "\u5c0f\u4e11\u5728\u540e",
+                        "help_text": "小丑在后",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u5c0f\u4e11\u9762\u5177"
+            "小丑面具"
         ],
         "shortcuts": [],
         "tags": [],
@@ -1920,7 +1920,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u8ff7\u60d1"
+            "迷惑"
         ],
         "shortcuts": [],
         "tags": [],
@@ -1938,7 +1938,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u5151\u6362\u5238"
+            "兑换券"
         ],
         "shortcuts": [],
         "tags": [],
@@ -1956,7 +1956,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u6342\u8138"
+            "捂脸"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2007,7 +2007,7 @@
                         },
                         "number": {
                             "default": 0,
-                            "description": "\u56fe\u7247\u7f16\u53f7\uff0c\u8303\u56f4\u4e3a 1~92",
+                            "description": "图片编号，范围为 1~92",
                             "title": "Number",
                             "type": "integer"
                         }
@@ -2033,14 +2033,14 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u56fe\u7247\u7f16\u53f7\uff0c\u8303\u56f4\u4e3a 1~92",
+                        "help_text": "图片编号，范围为 1~92",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u722c"
+            "爬"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2058,7 +2058,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u7fa4\u9752"
+            "群青"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2076,8 +2076,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u767d\u5929\u9ed1\u591c",
-            "\u767d\u5929\u665a\u4e0a"
+            "白天黑夜",
+            "白天晚上"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2095,7 +2095,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u50cf\u6837\u7684\u4eb2\u4eb2"
+            "像样的亲亲"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2110,14 +2110,14 @@
             "min_texts": 1,
             "max_texts": 2,
             "default_texts": [
-                "\u6551\u547d\u554a"
+                "救命啊"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u5165\u5178",
-            "\u5178\u4e2d\u5178",
-            "\u9ed1\u767d\u8349\u56fe"
+            "入典",
+            "典中典",
+            "黑白草图"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2135,8 +2135,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u6050\u9f99",
-            "\u5c0f\u6050\u9f99"
+            "恐龙",
+            "小恐龙"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2154,11 +2154,11 @@
             "args_type": null
         },
         "keywords": [
-            "\u6ce8\u610f\u529b\u6da3\u6563"
+            "注意力涣散"
         ],
         "shortcuts": [],
         "tags": [
-            "\u660e\u65e5\u65b9\u821f"
+            "明日方舟"
         ],
         "date_created": "2022-04-20T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -2174,8 +2174,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u79bb\u5a5a\u534f\u8bae",
-            "\u79bb\u5a5a\u7533\u8bf7"
+            "离婚协议",
+            "离婚申请"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2226,7 +2226,7 @@
                         },
                         "circle": {
                             "default": false,
-                            "description": "\u662f\u5426\u5c06\u56fe\u7247\u53d8\u4e3a\u5706\u5f62",
+                            "description": "是否将图片变为圆形",
                             "title": "Circle",
                             "type": "boolean"
                         }
@@ -2248,7 +2248,7 @@
                     {
                         "names": [
                             "--circle",
-                            "\u5706"
+                            "圆"
                         ],
                         "args": null,
                         "dest": null,
@@ -2257,14 +2257,14 @@
                             "type": 0,
                             "value": true
                         },
-                        "help_text": "\u662f\u5426\u5c06\u56fe\u7247\u53d8\u4e3a\u5706\u5f62",
+                        "help_text": "是否将图片变为圆形",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u72d7\u90fd\u4e0d\u73a9"
+            "狗都不玩"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2282,7 +2282,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u7ba1\u4eba\u75f4"
+            "管人痴"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2300,7 +2300,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u4e0d\u8981\u9760\u8fd1"
+            "不要靠近"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2315,17 +2315,17 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u4e16\u754c\u6bc1\u706d"
+                "世界毁灭"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u4e0d\u8981\u6309"
+            "不要按"
         ],
         "shortcuts": [],
         "tags": [],
         "date_created": "2021-05-04T00:00:00",
-        "date_modified": "2025-02-13T16:03:20.791892"
+        "date_modified": "2025-03-28T15:42:58.084453"
     },
     {
         "key": "dont_touch",
@@ -2338,7 +2338,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u522b\u78b0"
+            "别碰"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2376,7 +2376,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u5403"
+            "吃"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2394,7 +2394,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u7687\u5e1d\u9f99\u56fe"
+            "皇帝龙图"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2412,11 +2412,11 @@
             "args_type": null
         },
         "keywords": [
-            "\u610f\u82e5\u601d\u955c"
+            "意若思镜"
         ],
         "shortcuts": [],
         "tags": [
-            "\u54c8\u5229\u00b7\u6ce2\u7279"
+            "哈利·波特"
         ],
         "date_created": "2024-08-31T00:00:00",
         "date_modified": "2024-08-31T00:00:00"
@@ -2432,7 +2432,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u7070\u98de\u70df\u706d"
+            "灰飞烟灭"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2447,13 +2447,13 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u6d1b\u5929\u4f9d"
+                "洛天依"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u72c2\u7231",
-            "\u72c2\u7c89"
+            "狂爱",
+            "狂粉"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2468,13 +2468,13 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u6b64\u5904\u6dfb\u52a0\u6587\u5b57"
+                "此处添加文字"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u95ed\u5634",
-            "\u6211\u7238\u7238"
+            "闭嘴",
+            "我爸爸"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2492,8 +2492,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u51fb\u5251",
-            "\ud83e\udd3a"
+            "击剑",
+            "🤺"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2511,13 +2511,13 @@
             "args_type": null
         },
         "keywords": [
-            "\u6211\u6253\u5bbf\u50a9",
-            "\u6211\u6253\u5bbf\u50a9\u5417"
+            "我打宿傩",
+            "我打宿傩吗"
         ],
         "shortcuts": [],
         "tags": [
-            "\u5492\u672f\u56de\u6218",
-            "\u4e24\u9762\u5bbf\u50a9"
+            "两面宿傩",
+            "咒术回战"
         ],
         "date_created": "2024-04-03T00:00:00",
         "date_modified": "2024-05-25T00:00:00"
@@ -2533,15 +2533,15 @@
             "args_type": null
         },
         "keywords": [
-            "\u6ee1\u8111\u5b50"
+            "满脑子"
         ],
         "shortcuts": [
             {
-                "key": "\u6ee1\u8111\u5b50\u90fd\u662f(?P<name>\\S+)",
+                "key": "满脑子都是(?P<name>\\S+)",
                 "args": [
                     "{name}"
                 ],
-                "humanized": "\u6ee1\u8111\u5b50\u90fd\u662fxx"
+                "humanized": "满脑子都是xx"
             }
         ],
         "tags": [],
@@ -2556,15 +2556,15 @@
             "min_texts": 4,
             "max_texts": 4,
             "default_texts": [
-                "\u6211\u4eec\u8981\u98de\u5411\u4f55\u65b9",
-                "\u6211\u6253\u7b97\u5f85\u4f1a\u53bb\u7801\u5934\u6574\u70b9\u85af\u6761",
-                "\u6211\u8bf4\u7684\u662f\u5f52\u6839\u7ed3\u5e95\uff0c\u6d3b\u7740\u662f\u4e3a\u4e86\u4ec0\u4e48",
-                "\u4e3a\u4e86\u5f85\u4f1a\u53bb\u7801\u5934\u6574\u70b9\u85af\u6761"
+                "我们要飞向何方",
+                "我打算待会去码头整点薯条",
+                "我说的是归根结底，活着是为了什么",
+                "为了待会去码头整点薯条"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u6574\u70b9\u85af\u6761"
+            "整点薯条"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2579,7 +2579,7 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u6211\u8d85\u7231\u4f60"
+                "我超爱你"
             ],
             "args_type": {
                 "args_model": {
@@ -2617,7 +2617,7 @@
                         },
                         "number": {
                             "default": 0,
-                            "description": "\u56fe\u7247\u7f16\u53f7\uff0c\u8303\u56f4\u4e3a 1~21",
+                            "description": "图片编号，范围为 1~21",
                             "title": "Number",
                             "type": "integer"
                         }
@@ -2643,20 +2643,20 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u56fe\u7247\u7f16\u53f7\uff0c\u8303\u56f4\u4e3a 1~21",
+                        "help_text": "图片编号，范围为 1~21",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u6d41\u8424\u4e3e\u724c"
+            "流萤举牌"
         ],
         "shortcuts": [],
         "tags": [
-            "\u7c73\u54c8\u6e38",
-            "\u5d29\u574f\uff1a\u661f\u7a79\u94c1\u9053",
-            "\u6d41\u8424"
+            "米哈游",
+            "流萤",
+            "崩坏：星穹铁道"
         ],
         "date_created": "2024-05-05T00:00:00",
         "date_modified": "2024-05-06T00:00:00"
@@ -2669,12 +2669,12 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u95ea\u778e\u4f60\u4eec\u7684\u72d7\u773c"
+                "闪瞎你们的狗眼"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u95ea\u778e"
+            "闪瞎"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2692,12 +2692,33 @@
             "args_type": null
         },
         "keywords": [
-            "\u7ea2\u6e29"
+            "红温"
         ],
         "shortcuts": [],
         "tags": [],
         "date_created": "2024-09-03T00:00:00",
         "date_modified": "2024-09-03T00:00:00"
+    },
+    {
+        "key": "fogging",
+        "params_type": {
+            "min_images": 1,
+            "max_images": 1,
+            "min_texts": 0,
+            "max_texts": 1,
+            "default_texts": [
+                "兄弟，回南了"
+            ],
+            "args_type": null
+        },
+        "keywords": [
+            "回南天",
+            "水雾"
+        ],
+        "shortcuts": [],
+        "tags": [],
+        "date_created": "2025-03-16T00:00:00",
+        "date_modified": "2025-03-16T00:00:00"
     },
     {
         "key": "follow",
@@ -2710,7 +2731,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u5173\u6ce8"
+            "关注"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2725,17 +2746,17 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u6240\u8c13\u7684\u7537\u4eba\u554a\uff0c\u53ea\u8981\u9001\u4ed6\u4eec\u8fd9\u79cd\u4e1c\u897f\u5c31\u4f1a\u5f88\u5f00\u5fc3"
+                "所谓的男人啊，只要送他们这种东西就会很开心"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u8299\u8389\u83b2\u62ff"
+            "芙莉莲拿"
         ],
         "shortcuts": [],
         "tags": [
-            "\u8299\u8389\u83b2",
-            "\u846c\u9001\u7684\u8299\u8389\u83b2"
+            "葬送的芙莉莲",
+            "芙莉莲"
         ],
         "date_created": "2024-01-18T00:00:00",
         "date_modified": "2024-08-09T00:00:00"
@@ -2751,7 +2772,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u54c8\u54c8\u955c"
+            "哈哈镜"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2769,8 +2790,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u5783\u573e",
-            "\u5783\u573e\u6876"
+            "垃圾",
+            "垃圾桶"
         ],
         "shortcuts": [],
         "tags": [],
@@ -2821,7 +2842,7 @@
                         },
                         "character": {
                             "default": 0,
-                            "description": "\u89d2\u8272\u7f16\u53f7\uff1a1\u3001\u516b\u91cd\u795e\u5b50\uff0c2\u3001\u80e1\u6843\uff0c3\u3001\u59ae\u9732\uff0c4\u3001\u53ef\u8389\uff0c5\u3001\u523b\u6674\uff0c6\u3001\u949f\u79bb",
+                            "description": "角色编号：1、八重神子，2、胡桃，3、妮露，4、可莉，5、刻晴，6、钟离",
                             "title": "Character",
                             "type": "integer"
                         }
@@ -2860,7 +2881,7 @@
                         "names": [
                             "-c",
                             "--character",
-                            "\u89d2\u8272"
+                            "角色"
                         ],
                         "args": [
                             {
@@ -2873,26 +2894,26 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u89d2\u8272\u7f16\u53f7\uff1a1\u3001\u516b\u91cd\u795e\u5b50\uff0c2\u3001\u80e1\u6843\uff0c3\u3001\u59ae\u9732\uff0c4\u3001\u53ef\u8389\uff0c5\u3001\u523b\u6674\uff0c6\u3001\u949f\u79bb",
+                        "help_text": "角色编号：1、八重神子，2、胡桃，3、妮露，4、可莉，5、刻晴，6、钟离",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u539f\u795e\u5403"
+            "原神吃"
         ],
         "shortcuts": [
             {
-                "key": "(?:\u516b\u91cd\u795e\u5b50|\u795e\u5b50|\u516b\u91cd)\u5403",
+                "key": "(?:八重神子|神子|八重)吃",
                 "args": [
                     "--character",
                     "1"
                 ],
-                "humanized": "\u516b\u91cd\u795e\u5b50\u5403"
+                "humanized": "八重神子吃"
             },
             {
-                "key": "\u80e1\u6843\u5403",
+                "key": "胡桃吃",
                 "args": [
                     "--character",
                     "2"
@@ -2900,7 +2921,7 @@
                 "humanized": null
             },
             {
-                "key": "\u59ae\u9732\u5403",
+                "key": "妮露吃",
                 "args": [
                     "--character",
                     "3"
@@ -2908,7 +2929,7 @@
                 "humanized": null
             },
             {
-                "key": "\u53ef\u8389\u5403",
+                "key": "可莉吃",
                 "args": [
                     "--character",
                     "4"
@@ -2916,7 +2937,7 @@
                 "humanized": null
             },
             {
-                "key": "\u523b\u6674\u5403",
+                "key": "刻晴吃",
                 "args": [
                     "--character",
                     "5"
@@ -2924,7 +2945,7 @@
                 "humanized": null
             },
             {
-                "key": "\u949f\u79bb\u5403",
+                "key": "钟离吃",
                 "args": [
                     "--character",
                     "6"
@@ -2933,14 +2954,14 @@
             }
         ],
         "tags": [
-            "\u7c73\u54c8\u6e38",
-            "\u80e1\u6843",
-            "\u949f\u79bb",
-            "\u59ae\u9732",
-            "\u523b\u6674",
-            "\u516b\u91cd\u795e\u5b50",
-            "\u539f\u795e",
-            "\u53ef\u8389"
+            "米哈游",
+            "刻晴",
+            "原神",
+            "八重神子",
+            "妮露",
+            "可莉",
+            "钟离",
+            "胡桃"
         ],
         "date_created": "2024-08-06T00:00:00",
         "date_modified": "2024-08-10T00:00:00"
@@ -2953,20 +2974,20 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u539f\u795e\uff0c\u542f\u52a8\uff01"
+                "原神，启动！"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u539f\u795e\u542f\u52a8"
+            "原神启动"
         ],
         "shortcuts": [
             {
-                "key": "(?P<text>\\S+\u542f\u52a8[!\uff01]?)",
+                "key": "(?P<text>\\S+启动[!！]?)",
                 "args": [
                     "{text}"
                 ],
-                "humanized": "xx\u542f\u52a8"
+                "humanized": "xx启动"
             }
         ],
         "tags": [],
@@ -2981,15 +3002,15 @@
             "min_texts": 4,
             "max_texts": 4,
             "default_texts": [
-                "\u6211\u5c31\u662f\u997f\u6b7b",
-                "\u6b7b\u5916\u8fb9 \u4ece\u8fd9\u91cc\u8df3\u4e0b\u53bb",
-                "\u4e0d\u4f1a\u5403\u4f60\u4eec\u4e00\u70b9\u4e1c\u897f",
-                "\u771f\u9999"
+                "我就是饿死",
+                "死外边 从这里跳下去",
+                "不会吃你们一点东西",
+                "真香"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u738b\u5883\u6cfd"
+            "王境泽"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3004,20 +3025,20 @@
             "min_texts": 9,
             "max_texts": 9,
             "default_texts": [
-                "\u597d\u554a",
-                "\u5c31\u7b97\u4f60\u662f\u4e00\u6d41\u5de5\u7a0b\u5e08",
-                "\u5c31\u7b97\u4f60\u51fa\u62a5\u544a\u518d\u5b8c\u7f8e",
-                "\u6211\u53eb\u4f60\u6539\u62a5\u544a\u4f60\u5c31\u8981\u6539",
-                "\u6bd5\u7adf\u6211\u662f\u5ba2\u6237",
-                "\u5ba2\u6237\u4e86\u4e0d\u8d77\u554a",
-                "Sorry \u5ba2\u6237\u771f\u7684\u4e86\u4e0d\u8d77",
-                "\u4ee5\u540e\u53eb\u4ed6\u5929\u5929\u6539\u62a5\u544a",
-                "\u5929\u5929\u6539 \u5929\u5929\u6539"
+                "好啊",
+                "就算你是一流工程师",
+                "就算你出报告再完美",
+                "我叫你改报告你就要改",
+                "毕竟我是客户",
+                "客户了不起啊",
+                "Sorry 客户真的了不起",
+                "以后叫他天天改报告",
+                "天天改 天天改"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u4e3a\u6240\u6b32\u4e3a"
+            "为所欲为"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3032,14 +3053,14 @@
             "min_texts": 3,
             "max_texts": 3,
             "default_texts": [
-                "\u4f60\u90a3\u53eb\u559c\u6b22\u5417\uff1f",
-                "\u4f60\u90a3\u662f\u998b\u5979\u8eab\u5b50",
-                "\u4f60\u4e0b\u8d31\uff01"
+                "你那叫喜欢吗？",
+                "你那是馋她身子",
+                "你下贱！"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u998b\u8eab\u5b50"
+            "馋身子"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3054,17 +3075,17 @@
             "min_texts": 6,
             "max_texts": 6,
             "default_texts": [
-                "\u6ca1\u6709\u94b1\u554a \u80af\u5b9a\u8981\u505a\u7684\u554a",
-                "\u4e0d\u505a\u7684\u8bdd\u6ca1\u6709\u94b1\u7528",
-                "\u90a3\u4f60\u4e0d\u4f1a\u53bb\u6253\u5de5\u554a",
-                "\u6709\u624b\u6709\u811a\u7684",
-                "\u6253\u5de5\u662f\u4e0d\u53ef\u80fd\u6253\u5de5\u7684",
-                "\u8fd9\u8f88\u5b50\u4e0d\u53ef\u80fd\u6253\u5de5\u7684"
+                "没有钱啊 肯定要做的啊",
+                "不做的话没有钱用",
+                "那你不会去打工啊",
+                "有手有脚的",
+                "打工是不可能打工的",
+                "这辈子不可能打工的"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u5207\u683c\u74e6\u62c9"
+            "切格瓦拉"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3079,15 +3100,15 @@
             "min_texts": 4,
             "max_texts": 4,
             "default_texts": [
-                "\u6211\u8bdd\u8bf4\u5b8c\u4e86",
-                "\u8c01\u8d5e\u6210",
-                "\u8c01\u53cd\u5bf9",
-                "\u6211\u53cd\u5bf9"
+                "我话说完了",
+                "谁赞成",
+                "谁反对",
+                "我反对"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u8c01\u53cd\u5bf9"
+            "谁反对"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3102,15 +3123,15 @@
             "min_texts": 4,
             "max_texts": 4,
             "default_texts": [
-                "\u54e6\uff5e",
-                "\uff08\u98de\u6251\uff09",
-                "\u4e00\u76f4\u60f3\u770b\u4f60\u8fd9\u5e45\u8868\u60c5",
-                "\u8fd9\u5e45\u5ac9\u5992\u6211\u7684\u8868\u60c5"
+                "哦～",
+                "（飞扑）",
+                "一直想看你这幅表情",
+                "这幅嫉妒我的表情"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u5047\u9762\u9a91\u58eb"
+            "假面骑士"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3125,14 +3146,14 @@
             "min_texts": 3,
             "max_texts": 3,
             "default_texts": [
-                "\u54df \u4e91\u5d3d\u673a\u5668\u4eba",
-                "\u4eca\u5929\u6389\u7ebf\u4e86\u6ca1",
-                "\u6765\u7ed9\u4ed6\u5f39\u4e2a\u7248\u672c\u8fc7\u4f4e"
+                "哟 云崽机器人",
+                "今天掉线了没",
+                "来给他弹个版本过低"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u4e4c\u9e26\u54e5"
+            "乌鸦哥"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3147,15 +3168,15 @@
             "min_texts": 4,
             "max_texts": 4,
             "default_texts": [
-                "\u5e73\u65f6\u4f60\u6253\u7535\u5b50\u6e38\u620f\u5417",
-                "\u5076\u5c14",
-                "\u661f\u9645\u8fd8\u662f\u9b54\u517d",
-                "\u8fde\u8fde\u770b"
+                "平时你打电子游戏吗",
+                "偶尔",
+                "星际还是魔兽",
+                "连连看"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u66fe\u5c0f\u8d24"
+            "曾小贤"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3170,14 +3191,14 @@
             "min_texts": 3,
             "max_texts": 3,
             "default_texts": [
-                "\u5916\u754c\u90fd\u8bf4\u6211\u4eec\u538b\u529b\u5927",
-                "\u6211\u89c9\u5f97\u5427\u538b\u529b\u4e5f\u6ca1\u6709\u90a3\u4e48\u5927",
-                "\u4e3b\u8981\u662f28\u5c81\u4e86\u8fd8\u6ca1\u5ab3\u5987\u513f"
+                "外界都说我们压力大",
+                "我觉得吧压力也没有那么大",
+                "主要是28岁了还没媳妇儿"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u538b\u529b\u5927\u7237"
+            "压力大爷"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3192,14 +3213,14 @@
             "min_texts": 3,
             "max_texts": 3,
             "default_texts": [
-                "\u65e2\u7136\u8ffd\u6c42\u523a\u6fc0",
-                "\u5c31\u8d2f\u5f7b\u5230\u5e95\u4e86",
-                "\u4f60\u597d\u9a9a\u554a"
+                "既然追求刺激",
+                "就贯彻到底了",
+                "你好骚啊"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u4f60\u597d\u9a9a\u554a"
+            "你好骚啊"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3214,15 +3235,15 @@
             "min_texts": 4,
             "max_texts": 4,
             "default_texts": [
-                "\u7a7f\u897f\u88c5\u6253\u9886\u5e26",
-                "\u62ff\u5927\u54e5\u5927\u6709\u4ec0\u4e48\u7528",
-                "\u8ddf\u7740\u8fd9\u6837\u7684\u5927\u54e5",
-                "\u98df\u5c4e\u5566\u4f60"
+                "穿西装打领带",
+                "拿大哥大有什么用",
+                "跟着这样的大哥",
+                "食屎啦你"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u98df\u5c4e\u5566\u4f60"
+            "食屎啦你"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3237,15 +3258,15 @@
             "min_texts": 4,
             "max_texts": 4,
             "default_texts": [
-                "\u4e94\u5e74",
-                "\u4f60\u77e5\u9053\u6211\u8fd9\u4e94\u5e74\u662f\u600e\u4e48\u8fc7\u7684\u5417",
-                "\u6211\u6bcf\u5929\u8eb2\u5728\u5bb6\u91cc\u73a9\u8d2a\u73a9\u84dd\u6708",
-                "\u4f60\u77e5\u9053\u6709\u591a\u597d\u73a9\u5417"
+                "五年",
+                "你知道我这五年是怎么过的吗",
+                "我每天躲在家里玩贪玩蓝月",
+                "你知道有多好玩吗"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u4e94\u5e74\u600e\u4e48\u8fc7\u7684"
+            "五年怎么过的"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3260,15 +3281,15 @@
             "min_texts": 4,
             "max_texts": 4,
             "default_texts": [
-                "\u7f8e\u56fd\u524d\u4e94\u661f\u4e0a\u5c06\u9ea6\u514b\u963f\u745f",
-                "\u66fe\u8fd9\u6837\u8bc4\u4ef7\u9053",
-                "\u5982\u679c\u8ba9\u6211\u53bb\u963b\u6b62xxx",
-                "\u90a3\u4e48\u6211\u5b81\u613f\u53bb\u963b\u6b62\u4e0a\u5e1d"
+                "美国前五星上将麦克阿瑟",
+                "曾这样评价道",
+                "如果让我去阻止xxx",
+                "那么我宁愿去阻止上帝"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u9ea6\u514b\u963f\u745f\u8bf4"
+            "麦克阿瑟说"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3283,12 +3304,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u60b2\u62a5"
+                "悲报"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u559c\u62a5"
+            "喜报"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3326,7 +3347,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u8c37\u6b4c\u9a8c\u8bc1\u7801"
+            "谷歌验证码"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3344,7 +3365,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u7329\u7329\u6254"
+            "猩猩扔"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3395,7 +3416,7 @@
                         },
                         "direction": {
                             "default": "left",
-                            "description": "\u9b3c\u755c\u5bf9\u79f0\u65b9\u5411\uff0c\u5305\u542b left\u3001right\u3001top\u3001bottom",
+                            "description": "鬼畜对称方向，包含 left、right、top、bottom",
                             "enum": [
                                 "left",
                                 "right",
@@ -3444,13 +3465,13 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u9b3c\u755c\u5bf9\u79f0\u65b9\u5411\uff0c\u5305\u542b left\u3001right\u3001top\u3001bottom",
+                        "help_text": "鬼畜对称方向，包含 left、right、top、bottom",
                         "compact": false
                     },
                     {
                         "names": [
                             "--left",
-                            "\u5de6"
+                            "左"
                         ],
                         "args": null,
                         "dest": "direction",
@@ -3465,7 +3486,7 @@
                     {
                         "names": [
                             "--right",
-                            "\u53f3"
+                            "右"
                         ],
                         "args": null,
                         "dest": "direction",
@@ -3480,7 +3501,7 @@
                     {
                         "names": [
                             "--top",
-                            "\u4e0a"
+                            "上"
                         ],
                         "args": null,
                         "dest": "direction",
@@ -3495,7 +3516,7 @@
                     {
                         "names": [
                             "--bottom",
-                            "\u4e0b"
+                            "下"
                         ],
                         "args": null,
                         "dest": "direction",
@@ -3511,7 +3532,7 @@
             }
         },
         "keywords": [
-            "\u9b3c\u755c"
+            "鬼畜"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3562,7 +3583,7 @@
                         },
                         "position": {
                             "default": "left",
-                            "description": "\u67aa\u7684\u4f4d\u7f6e\uff0c\u5305\u542b left\u3001right\u3001both",
+                            "description": "枪的位置，包含 left、right、both",
                             "enum": [
                                 "left",
                                 "right",
@@ -3606,13 +3627,13 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u67aa\u7684\u4f4d\u7f6e\uff0c\u5305\u542b left\u3001right\u3001both",
+                        "help_text": "枪的位置，包含 left、right、both",
                         "compact": false
                     },
                     {
                         "names": [
                             "--left",
-                            "\u5de6\u624b"
+                            "左手"
                         ],
                         "args": null,
                         "dest": "position",
@@ -3627,7 +3648,7 @@
                     {
                         "names": [
                             "--right",
-                            "\u53f3\u624b"
+                            "右手"
                         ],
                         "args": null,
                         "dest": "position",
@@ -3642,7 +3663,7 @@
                     {
                         "names": [
                             "--both",
-                            "\u53cc\u624b"
+                            "双手"
                         ],
                         "args": null,
                         "dest": "position",
@@ -3658,7 +3679,7 @@
             }
         },
         "keywords": [
-            "\u624b\u67aa"
+            "手枪"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3676,7 +3697,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u9524"
+            "锤"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3694,11 +3715,11 @@
             "args_type": null
         },
         "keywords": [
-            "\u51c9\u5bab\u6625\u65e5\u4e3e"
+            "凉宫春日举"
         ],
         "shortcuts": [],
         "tags": [
-            "\u51c9\u5bab\u6625\u65e5"
+            "凉宫春日"
         ],
         "date_created": "2024-11-13T00:00:00",
         "date_modified": "2024-11-13T00:00:00"
@@ -3711,31 +3732,31 @@
             "min_texts": 2,
             "max_texts": 2,
             "default_texts": [
-                "\u9ad8\u60c5\u5546",
-                "\u4f4e\u60c5\u5546"
+                "高情商",
+                "低情商"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u9ad8\u4f4e\u60c5\u5546",
-            "\u4f4e\u9ad8\u60c5\u5546"
+            "高低情商",
+            "低高情商"
         ],
         "shortcuts": [
             {
-                "key": "\u4f4e\u60c5\u5546[\\s:\uff1a]*(?P<low>\\S+)\\s*\u9ad8\u60c5\u5546[\\s:\uff1a]*(?P<high>\\S+)",
+                "key": "低情商[\\s:：]*(?P<low>\\S+)\\s*高情商[\\s:：]*(?P<high>\\S+)",
                 "args": [
                     "{low}",
                     "{high}"
                 ],
-                "humanized": "\u4f4e\u60c5\u5546xx\u9ad8\u60c5\u5546xx"
+                "humanized": "低情商xx高情商xx"
             },
             {
-                "key": "\u9ad8\u60c5\u5546[\\s:\uff1a]*(?P<high>\\S+)\\s*\u4f4e\u60c5\u5546[\\s:\uff1a]*(?P<low>\\S+)",
+                "key": "高情商[\\s:：]*(?P<high>\\S+)\\s*低情商[\\s:：]*(?P<low>\\S+)",
                 "args": [
                     "{low}",
                     "{high}"
                 ],
-                "humanized": "\u9ad8\u60c5\u5546xx\u4f4e\u60c5\u5546xx"
+                "humanized": "高情商xx低情商xx"
             }
         ],
         "tags": [],
@@ -3753,8 +3774,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u6253\u7a7f",
-            "\u6253\u7a7f\u5c4f\u5e55"
+            "打穿",
+            "打穿屏幕"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3769,12 +3790,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u7fa4\u53cb\u4e0d\u53d1\u6da9\u56fe"
+                "群友不发涩图"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u8bb0\u4ec7"
+            "记仇"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3792,7 +3813,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u62b1\u7d27"
+            "抱紧"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3810,8 +3831,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u62b1",
-            "\u62b1\u62b1"
+            "抱",
+            "抱抱"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3829,7 +3850,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u62b1\u5927\u817f"
+            "抱大腿"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3847,13 +3868,13 @@
             "args_type": null
         },
         "keywords": [
-            "\u80e1\u6843\u5543"
+            "胡桃啃"
         ],
         "shortcuts": [],
         "tags": [
-            "\u7c73\u54c8\u6e38",
-            "\u80e1\u6843",
-            "\u539f\u795e"
+            "胡桃",
+            "原神",
+            "米哈游"
         ],
         "date_created": "2022-11-29T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -3866,12 +3887,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u6211\u53d1\u6da9\u56fe\u88ab\u6293\u8d77\u6765\u4e86"
+                "我发涩图被抓起来了"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u5750\u7262"
+            "坐牢"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3886,12 +3907,12 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u4f60\u521a\u624d\u8bf4\u7684\u8bdd\u4e0d\u662f\u5f88\u793c\u8c8c\uff01"
+                "你刚才说的话不是很礼貌！"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u4e0d\u6587\u660e"
+            "不文明"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3934,12 +3955,12 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u91c7\u8bbf\u5927\u4f6c\u7ecf\u9a8c"
+                "采访大佬经验"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u91c7\u8bbf"
+            "采访"
         ],
         "shortcuts": [],
         "tags": [],
@@ -3957,12 +3978,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u6770\u745e\u76ef"
+            "杰瑞盯"
         ],
         "shortcuts": [],
         "tags": [
-            "\u6770\u745e",
-            "\u732b\u548c\u8001\u9f20"
+            "杰瑞",
+            "猫和老鼠"
         ],
         "date_created": "2024-08-09T00:00:00",
         "date_modified": "2024-08-09T00:00:00"
@@ -4011,7 +4032,7 @@
                         },
                         "circle": {
                             "default": false,
-                            "description": "\u662f\u5426\u5c06\u56fe\u7247\u53d8\u4e3a\u5706\u5f62",
+                            "description": "是否将图片变为圆形",
                             "title": "Circle",
                             "type": "boolean"
                         }
@@ -4033,7 +4054,7 @@
                     {
                         "names": [
                             "--circle",
-                            "\u5706"
+                            "圆"
                         ],
                         "args": null,
                         "dest": null,
@@ -4042,14 +4063,14 @@
                             "type": 0,
                             "value": true
                         },
-                        "help_text": "\u662f\u5426\u5c06\u56fe\u7247\u53d8\u4e3a\u5706\u5f62",
+                        "help_text": "是否将图片变为圆形",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u6025\u6025\u56fd\u738b"
+            "急急国王"
         ],
         "shortcuts": [],
         "tags": [],
@@ -4064,7 +4085,7 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u6c50\u6c50"
+                "汐汐"
             ],
             "args_type": {
                 "args_model": {
@@ -4102,7 +4123,7 @@
                         },
                         "number": {
                             "default": 0,
-                            "description": "\u56fe\u7247\u7f16\u53f7\uff0c\u8303\u56f4\u4e3a 1~13",
+                            "description": "图片编号，范围为 1~13",
                             "title": "Number",
                             "type": "integer"
                         }
@@ -4128,20 +4149,20 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u56fe\u7247\u7f16\u53f7\uff0c\u8303\u56f4\u4e3a 1~13",
+                        "help_text": "图片编号，范围为 1~13",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u6c50\u6c50",
-            "\u4eca\u6c50"
+            "汐汐",
+            "今汐"
         ],
         "shortcuts": [],
         "tags": [
-            "\u4eca\u6c50",
-            "\u9e23\u6f6e"
+            "今汐",
+            "鸣潮"
         ],
         "date_created": "2024-12-07T00:00:00",
         "date_modified": "2024-12-07T00:00:00"
@@ -4157,7 +4178,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u557e\u557e"
+            "啾啾"
         ],
         "shortcuts": [],
         "tags": [],
@@ -4175,7 +4196,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u8df3"
+            "跳"
         ],
         "shortcuts": [],
         "tags": [],
@@ -4226,7 +4247,7 @@
                         },
                         "circle": {
                             "default": false,
-                            "description": "\u662f\u5426\u5c06\u56fe\u7247\u53d8\u4e3a\u5706\u5f62",
+                            "description": "是否将图片变为圆形",
                             "title": "Circle",
                             "type": "boolean"
                         }
@@ -4248,7 +4269,7 @@
                     {
                         "names": [
                             "--circle",
-                            "\u5706"
+                            "圆"
                         ],
                         "args": null,
                         "dest": null,
@@ -4257,15 +4278,15 @@
                             "type": 0,
                             "value": true
                         },
-                        "help_text": "\u662f\u5426\u5c06\u56fe\u7247\u53d8\u4e3a\u5706\u5f62",
+                        "help_text": "是否将图片变为圆形",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u4e07\u82b1\u7b52",
-            "\u4e07\u82b1\u955c"
+            "万花筒",
+            "万花镜"
         ],
         "shortcuts": [],
         "tags": [],
@@ -4283,12 +4304,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u51ef\u9732\u6307"
+            "凯露指"
         ],
         "shortcuts": [],
         "tags": [
-            "\u51ef\u9732",
-            "\u516c\u4e3b\u8fde\u7ed3"
+            "公主连结",
+            "凯露"
         ],
         "date_created": "2022-11-16T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -4301,12 +4322,12 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u5982\u4f55\u63d0\u9ad8\u793e\u4ea4\u8d28\u91cf : \n\u8fdc\u79bb\u4ee5\u4e0b\u5934\u50cf\u7684\u4eba"
+                "如何提高社交质量 : \n远离以下头像的人"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u8fdc\u79bb"
+            "远离"
         ],
         "shortcuts": [],
         "tags": [],
@@ -4357,7 +4378,7 @@
                         },
                         "number": {
                             "default": 0,
-                            "description": "\u56fe\u7247\u7f16\u53f7\uff0c1-\u963f\u7f57\u5a1c\uff0c2-\u666e\u62c9\u5a1c",
+                            "description": "图片编号，1-阿罗娜，2-普拉娜",
                             "title": "Number",
                             "type": "integer"
                         }
@@ -4383,21 +4404,21 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u56fe\u7247\u7f16\u53f7\uff0c1-\u963f\u7f57\u5a1c\uff0c2-\u666e\u62c9\u5a1c",
+                        "help_text": "图片编号，1-阿罗娜，2-普拉娜",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u538b\u5c81\u94b1\u4e0d\u8981\u4ea4\u7ed9"
+            "压岁钱不要交给"
         ],
         "shortcuts": [],
         "tags": [
-            "\u963f\u7f57\u5a1c",
-            "\u666e\u62c9\u5a1c",
-            "\u851a\u84dd\u6863\u6848",
-            "\u78a7\u84dd\u6863\u6848"
+            "普拉娜",
+            "碧蓝档案",
+            "阿罗娜",
+            "蔚蓝档案"
         ],
         "date_created": "2024-12-29T00:00:00",
         "date_modified": "2024-12-31T00:00:00"
@@ -4413,7 +4434,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u8e22\u7403"
+            "踢球"
         ],
         "shortcuts": [],
         "tags": [],
@@ -4464,7 +4485,7 @@
                         },
                         "circle": {
                             "default": false,
-                            "description": "\u662f\u5426\u5c06\u56fe\u7247\u53d8\u4e3a\u5706\u5f62",
+                            "description": "是否将图片变为圆形",
                             "title": "Circle",
                             "type": "boolean"
                         }
@@ -4486,7 +4507,7 @@
                     {
                         "names": [
                             "--circle",
-                            "\u5706"
+                            "圆"
                         ],
                         "args": null,
                         "dest": null,
@@ -4495,19 +4516,19 @@
                             "type": 0,
                             "value": true
                         },
-                        "help_text": "\u662f\u5426\u5c06\u56fe\u7247\u53d8\u4e3a\u5706\u5f62",
+                        "help_text": "是否将图片变为圆形",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u5361\u6bd4\u9524",
-            "\u5361\u6bd4\u91cd\u9524"
+            "卡比锤",
+            "卡比重锤"
         ],
         "shortcuts": [],
         "tags": [
-            "\u661f\u4e4b\u5361\u6bd4"
+            "星之卡比"
         ],
         "date_created": "2022-11-08T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -4523,8 +4544,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u4eb2",
-            "\u4eb2\u4eb2"
+            "亲",
+            "亲亲"
         ],
         "shortcuts": [],
         "tags": [],
@@ -4542,13 +4563,13 @@
             "args_type": null
         },
         "keywords": [
-            "\u53ef\u8389\u5403"
+            "可莉吃"
         ],
         "shortcuts": [],
         "tags": [
-            "\u7c73\u54c8\u6e38",
-            "\u53ef\u8389",
-            "\u539f\u795e"
+            "原神",
+            "可莉",
+            "米哈游"
         ],
         "date_created": "2022-11-29T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -4564,13 +4585,13 @@
             "args_type": null
         },
         "keywords": [
-            "\u6572"
+            "敲"
         ],
         "shortcuts": [],
         "tags": [
+            "鲨鲨",
             "Gawr Gura",
-            "\u9ca8\u9ca8",
-            "\u5676\u545c\u00b7\u53e4\u62c9"
+            "噶呜·古拉"
         ],
         "date_created": "2022-04-14T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -4583,7 +4604,7 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u6ee1\u5206"
+                "满分"
             ],
             "args_type": {
                 "args_model": {
@@ -4621,7 +4642,7 @@
                         },
                         "number": {
                             "default": 0,
-                            "description": "\u56fe\u7247\u7f16\u53f7\uff0c\u8303\u56f4\u4e3a 1~12",
+                            "description": "图片编号，范围为 1~12",
                             "title": "Number",
                             "type": "integer"
                         }
@@ -4647,21 +4668,21 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u56fe\u7247\u7f16\u53f7\uff0c\u8303\u56f4\u4e3a 1~12",
+                        "help_text": "图片编号，范围为 1~12",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u5fc3\u5948\u5370\u7ae0"
+            "心奈印章"
         ],
         "shortcuts": [],
         "tags": [
-            "\u851a\u84dd\u6863\u6848",
-            "\u6625\u539f\u5fc3\u83dc",
-            "\u6625\u539f\u5fc3\u5948",
-            "\u78a7\u84dd\u6863\u6848"
+            "蔚蓝档案",
+            "碧蓝档案",
+            "春原心奈",
+            "春原心菜"
         ],
         "date_created": "2024-11-05T00:00:00",
         "date_modified": "2024-11-22T00:00:00"
@@ -4677,12 +4698,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u6cc9\u6b64\u65b9\u770b"
+            "泉此方看"
         ],
         "shortcuts": [],
         "tags": [
-            "\u5e78\u8fd0\u661f",
-            "\u6cc9\u6b64\u65b9"
+            "泉此方",
+            "幸运星"
         ],
         "date_created": "2024-08-18T00:00:00",
         "date_modified": "2024-08-19T00:00:00"
@@ -4695,12 +4716,12 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u5077\u5b66\u7fa4\u53cb\u6570\u7406\u57fa\u7840"
+                "偷学群友数理基础"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u5077\u5b66"
+            "偷学"
         ],
         "shortcuts": [],
         "tags": [],
@@ -4751,7 +4772,7 @@
                         },
                         "direction": {
                             "default": "left_right",
-                            "description": "\u8dd1\u52a8\u65b9\u5411\uff0c\u5305\u542b left_right\u3001right_left",
+                            "description": "跑动方向，包含 left_right、right_left",
                             "enum": [
                                 "left_right",
                                 "right_left"
@@ -4790,13 +4811,13 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u8dd1\u52a8\u65b9\u5411\uff0c\u5305\u542b left_right\u3001right_left",
+                        "help_text": "跑动方向，包含 left_right、right_left",
                         "compact": false
                     },
                     {
                         "names": [
                             "--left_right",
-                            "\u5de6\u53f3"
+                            "左右"
                         ],
                         "args": null,
                         "dest": "direction",
@@ -4811,7 +4832,7 @@
                     {
                         "names": [
                             "--right_left",
-                            "\u53f3\u5de6"
+                            "右左"
                         ],
                         "args": null,
                         "dest": "direction",
@@ -4827,7 +4848,7 @@
             }
         },
         "keywords": [
-            "\u5de6\u53f3\u6a2a\u8df3"
+            "左右横跳"
         ],
         "shortcuts": [],
         "tags": [],
@@ -4845,7 +4866,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u8ba9\u6211\u8fdb\u53bb"
+            "让我进去"
         ],
         "shortcuts": [],
         "tags": [],
@@ -4863,8 +4884,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u8214\u7cd6",
-            "\u8214\u68d2\u68d2\u7cd6"
+            "舔糖",
+            "舔棒棒糖"
         ],
         "shortcuts": [],
         "tags": [],
@@ -4882,7 +4903,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u7b49\u4ef7\u65e0\u7a77\u5c0f"
+            "等价无穷小"
         ],
         "shortcuts": [],
         "tags": [],
@@ -4900,7 +4921,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u542c\u97f3\u4e50"
+            "听音乐"
         ],
         "shortcuts": [],
         "tags": [],
@@ -4918,7 +4939,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u5c0f\u5929\u4f7f"
+            "小天使"
         ],
         "shortcuts": [],
         "tags": [],
@@ -4936,7 +4957,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u52a0\u8f7d\u4e2d"
+            "加载中"
         ],
         "shortcuts": [],
         "tags": [],
@@ -4951,7 +4972,7 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u53ef\u6076...\u88ab\u4eba\u770b\u6241\u4e86"
+                "可恶...被人看扁了"
             ],
             "args_type": {
                 "args_model": {
@@ -4989,7 +5010,7 @@
                         },
                         "ratio": {
                             "default": 2,
-                            "description": "\u56fe\u7247\u201c\u538b\u6241\u201d\u6bd4\u4f8b\uff0c\u9ed8\u8ba4\u4e3a 2",
+                            "description": "图片“压扁”比例，默认为 2",
                             "title": "Ratio",
                             "type": "integer"
                         }
@@ -5015,14 +5036,14 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u56fe\u7247\u201c\u538b\u6241\u201d\u6bd4\u4f8b\uff0c\u9ed8\u8ba4\u4e3a 2",
+                        "help_text": "图片“压扁”比例，默认为 2",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u770b\u6241"
+            "看扁"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5037,12 +5058,12 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u670b\u53cb\n\u5148\u770b\u770b\u8fd9\u4e2a\u56fe\u6807\u518d\u8bf4\u8bdd"
+                "朋友\n先看看这个图标再说话"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u770b\u56fe\u6807"
+            "看图标"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5093,7 +5114,7 @@
                         },
                         "direction": {
                             "default": "top",
-                            "description": "\u5faa\u73af\u65b9\u5411\uff0c\u5305\u542b left\u3001right\u3001top\u3001bottom",
+                            "description": "循环方向，包含 left、right、top、bottom",
                             "enum": [
                                 "left",
                                 "right",
@@ -5142,13 +5163,13 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u5faa\u73af\u65b9\u5411\uff0c\u5305\u542b left\u3001right\u3001top\u3001bottom",
+                        "help_text": "循环方向，包含 left、right、top、bottom",
                         "compact": false
                     },
                     {
                         "names": [
                             "--left",
-                            "\u5de6"
+                            "左"
                         ],
                         "args": null,
                         "dest": "direction",
@@ -5163,7 +5184,7 @@
                     {
                         "names": [
                             "--right",
-                            "\u53f3"
+                            "右"
                         ],
                         "args": null,
                         "dest": "direction",
@@ -5178,7 +5199,7 @@
                     {
                         "names": [
                             "--top",
-                            "\u4e0a"
+                            "上"
                         ],
                         "args": null,
                         "dest": "direction",
@@ -5193,7 +5214,7 @@
                     {
                         "names": [
                             "--bottom",
-                            "\u4e0b"
+                            "下"
                         ],
                         "args": null,
                         "dest": "direction",
@@ -5209,7 +5230,7 @@
             }
         },
         "keywords": [
-            "\u5faa\u73af"
+            "循环"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5227,13 +5248,13 @@
             "args_type": null
         },
         "keywords": [
-            "\u5bfb\u72d7\u542f\u4e8b"
+            "寻狗启事"
         ],
         "shortcuts": [],
         "tags": [
-            "\u795e\u91cc\u7eeb\u534e",
-            "\u7c73\u54c8\u6e38",
-            "\u539f\u795e"
+            "神里绫华",
+            "原神",
+            "米哈游"
         ],
         "date_created": "2024-01-19T00:00:00",
         "date_modified": "2024-01-20T00:00:00"
@@ -5249,12 +5270,33 @@
             "args_type": null
         },
         "keywords": [
-            "\u6c38\u8fdc\u7231\u4f60"
+            "永远爱你"
         ],
         "shortcuts": [],
         "tags": [],
         "date_created": "2022-03-13T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
+    },
+    {
+        "key": "luotianyi_need",
+        "params_type": {
+            "min_images": 1,
+            "max_images": 1,
+            "min_texts": 0,
+            "max_texts": 0,
+            "default_texts": [],
+            "args_type": null
+        },
+        "keywords": [
+            "洛天依要",
+            "天依要"
+        ],
+        "shortcuts": [],
+        "tags": [
+            "洛天依"
+        ],
+        "date_created": "2025-02-11T00:00:00",
+        "date_modified": "2025-02-11T00:00:00"
     },
     {
         "key": "luotianyi_say",
@@ -5264,17 +5306,17 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u597d\u60f3\u53bb\u6d77\u8fb9\u554a\uff5e"
+                "好想去海边啊～"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u6d1b\u5929\u4f9d\u8bf4",
-            "\u5929\u4f9d\u8bf4"
+            "洛天依说",
+            "天依说"
         ],
         "shortcuts": [],
         "tags": [
-            "\u6d1b\u5929\u4f9d"
+            "洛天依"
         ],
         "date_created": "2025-01-07T00:00:00",
         "date_modified": "2025-01-07T00:00:00"
@@ -5287,12 +5329,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u53c8\u4e0d\u662f\u4e0d\u80fd\u7528"
+                "又不是不能用"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u7f57\u6c38\u6d69\u8bf4"
+            "罗永浩说"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5307,13 +5349,13 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u6211\u6ca1\u6709\u8bf4\u8fc7\u8fd9\u53e5\u8bdd"
+                "我没有说过这句话"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u9c81\u8fc5\u8bf4",
-            "\u9c81\u8fc5\u8bf4\u8fc7"
+            "鲁迅说",
+            "鲁迅说过"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5331,12 +5373,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u771f\u5bfb\u770b\u4e66"
+            "真寻看书"
         ],
         "shortcuts": [],
         "tags": [
-            "\u522b\u5f53\u6b27\u5c3c\u9171\u4e86",
-            "\u7eea\u5c71\u771f\u5bfb"
+            "别当欧尼酱了",
+            "绪山真寻"
         ],
         "date_created": "2024-08-18T00:00:00",
         "date_modified": "2024-08-18T00:00:00"
@@ -5352,11 +5394,11 @@
             "args_type": null
         },
         "keywords": [
-            "\u65c5\u884c\u4f19\u4f34\u89c9\u9192"
+            "旅行伙伴觉醒"
         ],
         "shortcuts": [],
         "tags": [
-            "\u821e\u840c"
+            "舞萌"
         ],
         "date_created": "2023-07-19T00:00:00",
         "date_modified": "2023-07-19T00:00:00"
@@ -5372,11 +5414,11 @@
             "args_type": null
         },
         "keywords": [
-            "\u65c5\u884c\u4f19\u4f34\u52a0\u5165"
+            "旅行伙伴加入"
         ],
         "shortcuts": [],
         "tags": [
-            "\u821e\u840c"
+            "舞萌"
         ],
         "date_created": "2023-07-19T00:00:00",
         "date_modified": "2023-07-19T00:00:00"
@@ -5392,7 +5434,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u4ea4\u4e2a\u670b\u53cb"
+            "交个朋友"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5410,8 +5452,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u7ed3\u5a5a\u7533\u8bf7",
-            "\u7ed3\u5a5a\u767b\u8bb0"
+            "结婚申请",
+            "结婚登记"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5426,12 +5468,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u6211\u8981\u5bf9\u8c61"
+                "我要对象"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u6d41\u661f"
+            "流星"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5449,7 +5491,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u7c73\u54c8\u6e38"
+            "米哈游"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5500,7 +5542,7 @@
                         },
                         "black": {
                             "default": false,
-                            "description": "\u662f\u5426\u5c06\u56fe\u7247\u53d8\u4e3a\u9ed1\u767d",
+                            "description": "是否将图片变为黑白",
                             "title": "Black",
                             "type": "boolean"
                         }
@@ -5522,7 +5564,7 @@
                     {
                         "names": [
                             "--black",
-                            "\u9ed1\u767d"
+                            "黑白"
                         ],
                         "args": null,
                         "dest": null,
@@ -5531,14 +5573,14 @@
                             "type": 0,
                             "value": true
                         },
-                        "help_text": "\u662f\u5426\u5c06\u56fe\u7247\u53d8\u4e3a\u9ed1\u767d",
+                        "help_text": "是否将图片变为黑白",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u4e0a\u9999"
+            "上香"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5553,12 +5595,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u4f60\u7684\u5047\u671f\u4f59\u989d\u4e0d\u8db3"
+                "你的假期余额不足"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u4f4e\u8bed"
+            "低语"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5573,7 +5615,7 @@
             "min_texts": 1,
             "max_texts": 10,
             "default_texts": [
-                "\u8ba9\u6211\u5eb7\u5eb7"
+                "让我康康"
             ],
             "args_type": {
                 "args_model": {
@@ -5611,7 +5653,7 @@
                         },
                         "name": {
                             "default": "",
-                            "description": "\u6307\u5b9a\u540d\u5b57",
+                            "description": "指定名字",
                             "title": "Name",
                             "type": "string"
                         }
@@ -5637,14 +5679,14 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u6307\u5b9a\u540d\u5b57",
+                        "help_text": "指定名字",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u6211\u670b\u53cb\u8bf4"
+            "我朋友说"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5662,12 +5704,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u6211\u7684\u610f\u89c1\u5982\u4e0b",
-            "\u6211\u7684\u610f\u89c1\u662f"
+            "我的意见如下",
+            "我的意见是"
         ],
         "shortcuts": [],
         "tags": [
-            "\u4e1c\u65b9Project"
+            "东方Project"
         ],
         "date_created": "2024-07-14T00:00:00",
         "date_modified": "2024-07-14T00:00:00"
@@ -5715,14 +5757,14 @@
                             "type": "array"
                         },
                         "pronoun": {
-                            "default": "\u6211",
-                            "description": "\u4eba\u79f0\u4ee3\u8bcd\uff0c\u9ed8\u8ba4\u4e3a\u201c\u6211\u201d",
+                            "default": "我",
+                            "description": "人称代词，默认为“我”",
                             "title": "Pronoun",
                             "type": "string"
                         },
                         "name": {
-                            "default": "\u8001\u5a46",
-                            "description": "\u79f0\u547c\uff0c\u9ed8\u8ba4\u4e3a\u201c\u8001\u5a46\u201d",
+                            "default": "老婆",
+                            "description": "称呼，默认为“老婆”",
                             "title": "Name",
                             "type": "string"
                         }
@@ -5748,7 +5790,7 @@
                         "dest": "pronoun",
                         "default": null,
                         "action": null,
-                        "help_text": "\u4eba\u79f0\u4ee3\u8bcd\uff0c\u9ed8\u8ba4\u4e3a\u201c\u6211\u201d",
+                        "help_text": "人称代词，默认为“我”",
                         "compact": false
                     },
                     {
@@ -5767,15 +5809,15 @@
                         "dest": "name",
                         "default": null,
                         "action": null,
-                        "help_text": "\u79f0\u547c\uff0c\u9ed8\u8ba4\u4e3a\u201c\u8001\u5a46\u201d",
+                        "help_text": "称呼，默认为“老婆”",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u6211\u8001\u5a46",
-            "\u8fd9\u662f\u6211\u8001\u5a46"
+            "我老婆",
+            "这是我老婆"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5793,15 +5835,15 @@
             "args_type": null
         },
         "keywords": [
-            "\u7eb3\u897f\u59b2\u5543",
-            "\u8349\u795e\u5543"
+            "纳西妲啃",
+            "草神啃"
         ],
         "shortcuts": [],
         "tags": [
-            "\u7eb3\u897f\u59b2",
-            "\u8349\u795e",
-            "\u7c73\u54c8\u6e38",
-            "\u539f\u795e"
+            "草神",
+            "原神",
+            "纳西妲",
+            "米哈游"
         ],
         "date_created": "2023-06-23T00:00:00",
         "date_modified": "2024-08-10T00:00:00"
@@ -5817,8 +5859,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u4e9a\u6587\u5316\u53d6\u540d\u673a",
-            "\u4e9a\u540d"
+            "亚文化取名机",
+            "亚名"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5836,8 +5878,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u9700\u8981",
-            "\u4f60\u53ef\u80fd\u9700\u8981"
+            "需要",
+            "你可能需要"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5852,17 +5894,17 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "V\u621150"
+                "V我50"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u732b\u7fbd\u96eb\u4e3e\u724c",
-            "\u732b\u732b\u4e3e\u724c"
+            "猫羽雫举牌",
+            "猫猫举牌"
         ],
         "shortcuts": [],
         "tags": [
-            "\u732b\u7fbd\u96eb"
+            "猫羽雫"
         ],
         "date_created": "2023-03-30T00:00:00",
         "date_modified": "2023-03-30T00:00:00"
@@ -5875,13 +5917,13 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u4f60\u53ef\u5c11\u770b\u70b9\u4e8c\u6b21\u5143\u5427"
+                "你可少看点二次元吧"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u4f0a\u5730\u77e5\u8679\u590f\u4e3e\u724c",
-            "\u8679\u590f\u4e3e\u724c"
+            "伊地知虹夏举牌",
+            "虹夏举牌"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5896,13 +5938,13 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u65e0\u5185\u9b3c\uff0c\u7ee7\u7eed\u4ea4\u6613"
+                "无内鬼，继续交易"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u8bfa\u57fa\u4e9a",
-            "\u6709\u5185\u9b3c"
+            "诺基亚",
+            "有内鬼"
         ],
         "shortcuts": [],
         "tags": [],
@@ -5917,7 +5959,7 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u60f3\u73a9\u539f\u795e"
+                "想玩原神"
             ],
             "args_type": {
                 "args_model": {
@@ -5955,13 +5997,13 @@
                         },
                         "time": {
                             "default": "",
-                            "description": "\u6307\u5b9a\u65f6\u95f4",
+                            "description": "指定时间",
                             "title": "Time",
                             "type": "string"
                         },
                         "name": {
                             "default": "",
-                            "description": "\u6307\u5b9a\u540d\u5b57",
+                            "description": "指定名字",
                             "title": "Name",
                             "type": "string"
                         }
@@ -5987,7 +6029,7 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u6307\u5b9a\u65f6\u95f4",
+                        "help_text": "指定时间",
                         "compact": false
                     },
                     {
@@ -6006,14 +6048,14 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u6307\u5b9a\u540d\u5b57",
+                        "help_text": "指定名字",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u8bf7\u5047\u6761"
+            "请假条"
         ],
         "shortcuts": [],
         "tags": [],
@@ -6028,12 +6070,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u5f00\u94f6\u8db4\u4e0d\u558a\u6211\u662f\u5427"
+                "开银趴不喊我是吧"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u4e0d\u558a\u6211"
+            "不喊我"
         ],
         "shortcuts": [],
         "tags": [],
@@ -6051,7 +6093,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u65e0\u54cd\u5e94"
+            "无响应"
         ],
         "shortcuts": [],
         "tags": [],
@@ -6066,24 +6108,24 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u7f51\u53cb"
+                "网友"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u6211\u63a8\u7684\u7f51\u53cb"
+            "我推的网友"
         ],
         "shortcuts": [
             {
-                "key": "\u6211\u63a8\u7684(?P<name>\\S+)",
+                "key": "我推的(?P<name>\\S+)",
                 "args": [
                     "{name}"
                 ],
-                "humanized": "\u6211\u63a8\u7684xx"
+                "humanized": "我推的xx"
             }
         ],
         "tags": [
-            "\u6211\u63a8\u7684\u5b69\u5b50"
+            "我推的孩子"
         ],
         "date_created": "2023-06-01T00:00:00",
         "date_modified": "2023-06-23T00:00:00"
@@ -6137,7 +6179,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u52a0\u73ed"
+            "加班"
         ],
         "shortcuts": [],
         "tags": [],
@@ -6157,8 +6199,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u5973\u795e\u5f02\u95fb\u5f555\u9884\u544a\u4fe1",
-            "P5\u9884\u544a\u4fe1"
+            "女神异闻录5预告信",
+            "P5预告信"
         ],
         "shortcuts": [],
         "tags": [],
@@ -6176,7 +6218,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u8fd9\u50cf\u753b\u5417"
+            "这像画吗"
         ],
         "shortcuts": [],
         "tags": [],
@@ -6194,13 +6236,13 @@
             "args_type": null
         },
         "keywords": [
-            "\u5c0f\u753b\u5bb6"
+            "小画家"
         ],
         "shortcuts": [],
         "tags": [
-            "\u7c73\u54c8\u6e38",
-            "\u683c\u857e\u4fee",
-            "\u5d29\u574f3"
+            "崩坏3",
+            "格蕾修",
+            "米哈游"
         ],
         "date_created": "2022-06-04T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -6213,7 +6255,7 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u6211\u8981\u73a9\u539f\u795e"
+                "我要玩原神"
             ],
             "args_type": {
                 "args_model": {
@@ -6251,7 +6293,7 @@
                         },
                         "name": {
                             "default": "",
-                            "description": "\u9f99\u56fe\u540d\u5b57",
+                            "description": "龙图名字",
                             "title": "Name",
                             "type": "string"
                         }
@@ -6277,24 +6319,24 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u9f99\u56fe\u540d\u5b57",
+                        "help_text": "龙图名字",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u718a\u732b\u9f99\u56fe"
+            "熊猫龙图"
         ],
         "shortcuts": [
             {
-                "key": "(?P<name>\\S{1,10})\u9f99[\\s:\uff1a]+(?P<text>\\S+)",
+                "key": "(?P<name>\\S{1,10})龙[\\s:：]+(?P<text>\\S+)",
                 "args": [
                     "--name",
-                    "{name}\u9f99",
+                    "{name}龙",
                     "{text}"
                 ],
-                "humanized": "xx\u9f99\uff1axx"
+                "humanized": "xx龙：xx"
             }
         ],
         "tags": [],
@@ -6309,13 +6351,13 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u4f60\u5199!"
+                "你写!"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u63a8\u9505",
-            "\u7529\u9505"
+            "推锅",
+            "甩锅"
         ],
         "shortcuts": [],
         "tags": [],
@@ -6333,7 +6375,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u62cd"
+            "拍"
         ],
         "shortcuts": [],
         "tags": [],
@@ -6351,11 +6393,11 @@
             "args_type": null
         },
         "keywords": [
-            "\u4f69\u4f69\u4e3e"
+            "佩佩举"
         ],
         "shortcuts": [],
         "tags": [
-            "\u660e\u65e5\u65b9\u821f"
+            "明日方舟"
         ],
         "date_created": "2024-08-18T00:00:00",
         "date_modified": "2024-08-18T00:00:00"
@@ -6371,7 +6413,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u5b8c\u7f8e"
+            "完美"
         ],
         "shortcuts": [],
         "tags": [],
@@ -6422,7 +6464,7 @@
                         },
                         "circle": {
                             "default": false,
-                            "description": "\u662f\u5426\u5c06\u56fe\u7247\u53d8\u4e3a\u5706\u5f62",
+                            "description": "是否将图片变为圆形",
                             "title": "Circle",
                             "type": "boolean"
                         }
@@ -6444,7 +6486,7 @@
                     {
                         "names": [
                             "--circle",
-                            "\u5706"
+                            "圆"
                         ],
                         "args": null,
                         "dest": null,
@@ -6453,16 +6495,16 @@
                             "type": 0,
                             "value": true
                         },
-                        "help_text": "\u662f\u5426\u5c06\u56fe\u7247\u53d8\u4e3a\u5706\u5f62",
+                        "help_text": "是否将图片变为圆形",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u6478",
-            "\u6478\u6478",
-            "\u6478\u5934",
+            "摸",
+            "摸摸",
+            "摸头",
             "rua"
         ],
         "shortcuts": [],
@@ -6481,8 +6523,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u634f",
-            "\u634f\u8138"
+            "捏",
+            "捏脸"
         ],
         "shortcuts": [],
         "tags": [],
@@ -6533,7 +6575,7 @@
                         },
                         "number": {
                             "default": 10,
-                            "description": "\u50cf\u7d20\u5316\u5927\u5c0f\uff0c\u9ed8\u8ba4\u4e3a 10",
+                            "description": "像素化大小，默认为 10",
                             "title": "Number",
                             "type": "integer"
                         }
@@ -6559,14 +6601,14 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u50cf\u7d20\u5316\u5927\u5c0f\uff0c\u9ed8\u8ba4\u4e3a 10",
+                        "help_text": "像素化大小，默认为 10",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u50cf\u7d20\u5316"
+            "像素化"
         ],
         "shortcuts": [],
         "tags": [],
@@ -6617,13 +6659,13 @@
                         },
                         "character": {
                             "default": 0,
-                            "description": "\u89d2\u8272\u7f16\u53f7\uff1a1\u3001\u7231\u8389\uff0c2\u3001\u5f70\u4eba\uff0c3\u3001\u674f\uff0c4\u3001\u68a6\uff0c5\u3001\u7ed8\u540d\uff0c6\u3001\u9065\uff0c7\u3001\u7a57\u6ce2\uff0c8\u3001\u4e00\u6b4c\uff0c9\u3001KAITO\uff0c10\u3001\u594f\uff0c11\u3001\u5fc3\u7fbd\uff0c12\u3001\u8fde\uff0c13\u3001\u6d41\u6b4c\uff0c14\u3001\u771f\u51ac\uff0c15\u3001MEIKO\uff0c16\u3001\u521d\u97f3\u672a\u6765\uff0c17\u3001\u5b9e\u4e43\u7406\uff0c18\u3001\u745e\u5e0c\uff0c19\u3001\u5b81\u5b81\uff0c20\u3001\u94c3\uff0c21\u3001\u7c7b\uff0c22\u3001\u54b2\u5e0c\uff0c23\u3001\u5fd7\u6b65\uff0c24\u3001\u96eb\uff0c25\u3001\u51ac\u5f25\uff0c26\u3001\u53f8",
+                            "description": "角色编号：1、爱莉，2、彰人，3、杏，4、梦，5、绘名，6、遥，7、穗波，8、一歌，9、KAITO，10、奏，11、心羽，12、连，13、流歌，14、真冬，15、MEIKO，16、初音未来，17、实乃理，18、瑞希，19、宁宁，20、铃，21、类，22、咲希，23、志步，24、雫，25、冬弥，26、司",
                             "title": "Character",
                             "type": "integer"
                         },
                         "number": {
                             "default": 0,
-                            "description": "\u56fe\u7247\u7f16\u53f7",
+                            "description": "图片编号",
                             "title": "Number",
                             "type": "integer"
                         }
@@ -6768,7 +6810,7 @@
                         "names": [
                             "-c",
                             "--character",
-                            "\u89d2\u8272\u7f16\u53f7"
+                            "角色编号"
                         ],
                         "args": [
                             {
@@ -6781,14 +6823,14 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u89d2\u8272\u7f16\u53f7\uff1a1\u3001\u7231\u8389\uff0c2\u3001\u5f70\u4eba\uff0c3\u3001\u674f\uff0c4\u3001\u68a6\uff0c5\u3001\u7ed8\u540d\uff0c6\u3001\u9065\uff0c7\u3001\u7a57\u6ce2\uff0c8\u3001\u4e00\u6b4c\uff0c9\u3001KAITO\uff0c10\u3001\u594f\uff0c11\u3001\u5fc3\u7fbd\uff0c12\u3001\u8fde\uff0c13\u3001\u6d41\u6b4c\uff0c14\u3001\u771f\u51ac\uff0c15\u3001MEIKO\uff0c16\u3001\u521d\u97f3\u672a\u6765\uff0c17\u3001\u5b9e\u4e43\u7406\uff0c18\u3001\u745e\u5e0c\uff0c19\u3001\u5b81\u5b81\uff0c20\u3001\u94c3\uff0c21\u3001\u7c7b\uff0c22\u3001\u54b2\u5e0c\uff0c23\u3001\u5fd7\u6b65\uff0c24\u3001\u96eb\uff0c25\u3001\u51ac\u5f25\uff0c26\u3001\u53f8",
+                        "help_text": "角色编号：1、爱莉，2、彰人，3、杏，4、梦，5、绘名，6、遥，7、穗波，8、一歌，9、KAITO，10、奏，11、心羽，12、连，13、流歌，14、真冬，15、MEIKO，16、初音未来，17、实乃理，18、瑞希，19、宁宁，20、铃，21、类，22、咲希，23、志步，24、雫，25、冬弥，26、司",
                         "compact": false
                     },
                     {
                         "names": [
                             "-n",
                             "--number",
-                            "\u56fe\u7247\u7f16\u53f7"
+                            "图片编号"
                         ],
                         "args": [
                             {
@@ -6801,7 +6843,7 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u56fe\u7247\u7f16\u53f7",
+                        "help_text": "图片编号",
                         "compact": false
                     }
                 ]
@@ -6809,75 +6851,75 @@
         },
         "keywords": [
             "pjsk",
-            "\u4e16\u754c\u8ba1\u5212"
+            "世界计划"
         ],
         "shortcuts": [
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u7231\u8389|airi)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?爱莉|airi)",
                 "args": [
                     "--character",
                     "1"
                 ],
-                "humanized": "pjsk\u7231\u8389"
+                "humanized": "pjsk爱莉"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u5f70\u4eba|akito)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?彰人|akito)",
                 "args": [
                     "--character",
                     "2"
                 ],
-                "humanized": "pjsk\u5f70\u4eba"
+                "humanized": "pjsk彰人"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u674f|an)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?杏|an)",
                 "args": [
                     "--character",
                     "3"
                 ],
-                "humanized": "pjsk\u674f"
+                "humanized": "pjsk杏"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u68a6|emu)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?梦|emu)",
                 "args": [
                     "--character",
                     "4"
                 ],
-                "humanized": "pjsk\u68a6"
+                "humanized": "pjsk梦"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u7ed8\u540d|ena)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?绘名|ena)",
                 "args": [
                     "--character",
                     "5"
                 ],
-                "humanized": "pjsk\u7ed8\u540d"
+                "humanized": "pjsk绘名"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u9065|haruka)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?遥|haruka)",
                 "args": [
                     "--character",
                     "6"
                 ],
-                "humanized": "pjsk\u9065"
+                "humanized": "pjsk遥"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u7a57\u6ce2|honami)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?穗波|honami)",
                 "args": [
                     "--character",
                     "7"
                 ],
-                "humanized": "pjsk\u7a57\u6ce2"
+                "humanized": "pjsk穗波"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u4e00\u6b4c|ichika)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?一歌|ichika)",
                 "args": [
                     "--character",
                     "8"
                 ],
-                "humanized": "pjsk\u4e00\u6b4c"
+                "humanized": "pjsk一歌"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?KAITO|kaito)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?KAITO|kaito)",
                 "args": [
                     "--character",
                     "9"
@@ -6885,47 +6927,47 @@
                 "humanized": "pjskKAITO"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u594f|kanade)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?奏|kanade)",
                 "args": [
                     "--character",
                     "10"
                 ],
-                "humanized": "pjsk\u594f"
+                "humanized": "pjsk奏"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u5fc3\u7fbd|kohane)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?心羽|kohane)",
                 "args": [
                     "--character",
                     "11"
                 ],
-                "humanized": "pjsk\u5fc3\u7fbd"
+                "humanized": "pjsk心羽"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u8fde|len)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?连|len)",
                 "args": [
                     "--character",
                     "12"
                 ],
-                "humanized": "pjsk\u8fde"
+                "humanized": "pjsk连"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u6d41\u6b4c|luka)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?流歌|luka)",
                 "args": [
                     "--character",
                     "13"
                 ],
-                "humanized": "pjsk\u6d41\u6b4c"
+                "humanized": "pjsk流歌"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u771f\u51ac|mafuyu)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?真冬|mafuyu)",
                 "args": [
                     "--character",
                     "14"
                 ],
-                "humanized": "pjsk\u771f\u51ac"
+                "humanized": "pjsk真冬"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?MEIKO|meiko)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?MEIKO|meiko)",
                 "args": [
                     "--character",
                     "15"
@@ -6933,96 +6975,96 @@
                 "humanized": "pjskMEIKO"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u521d\u97f3\u672a\u6765|miku)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?初音未来|miku)",
                 "args": [
                     "--character",
                     "16"
                 ],
-                "humanized": "pjsk\u521d\u97f3\u672a\u6765"
+                "humanized": "pjsk初音未来"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u5b9e\u4e43\u7406|minori)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?实乃理|minori)",
                 "args": [
                     "--character",
                     "17"
                 ],
-                "humanized": "pjsk\u5b9e\u4e43\u7406"
+                "humanized": "pjsk实乃理"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u745e\u5e0c|mizuki)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?瑞希|mizuki)",
                 "args": [
                     "--character",
                     "18"
                 ],
-                "humanized": "pjsk\u745e\u5e0c"
+                "humanized": "pjsk瑞希"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u5b81\u5b81|nene)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?宁宁|nene)",
                 "args": [
                     "--character",
                     "19"
                 ],
-                "humanized": "pjsk\u5b81\u5b81"
+                "humanized": "pjsk宁宁"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u94c3|rin)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?铃|rin)",
                 "args": [
                     "--character",
                     "20"
                 ],
-                "humanized": "pjsk\u94c3"
+                "humanized": "pjsk铃"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u7c7b|rui)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?类|rui)",
                 "args": [
                     "--character",
                     "21"
                 ],
-                "humanized": "pjsk\u7c7b"
+                "humanized": "pjsk类"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u54b2\u5e0c|saki)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?咲希|saki)",
                 "args": [
                     "--character",
                     "22"
                 ],
-                "humanized": "pjsk\u54b2\u5e0c"
+                "humanized": "pjsk咲希"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u5fd7\u6b65|shiho)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?志步|shiho)",
                 "args": [
                     "--character",
                     "23"
                 ],
-                "humanized": "pjsk\u5fd7\u6b65"
+                "humanized": "pjsk志步"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u96eb|shizuku)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?雫|shizuku)",
                 "args": [
                     "--character",
                     "24"
                 ],
-                "humanized": "pjsk\u96eb"
+                "humanized": "pjsk雫"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u51ac\u5f25|touya)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?冬弥|touya)",
                 "args": [
                     "--character",
                     "25"
                 ],
-                "humanized": "pjsk\u51ac\u5f25"
+                "humanized": "pjsk冬弥"
             },
             {
-                "key": "(:?pjsk|\u4e16\u754c\u8ba1\u5212)[_-]?(:?\u53f8|tsukasa)",
+                "key": "(:?pjsk|世界计划)[_-]?(:?司|tsukasa)",
                 "args": [
                     "--character",
                     "26"
                 ],
-                "humanized": "pjsk\u53f8"
+                "humanized": "pjsk司"
             }
         ],
         "tags": [
-            "\u4e16\u754c\u8ba1\u5212"
+            "世界计划"
         ],
         "date_created": "2024-12-19T00:00:00",
         "date_modified": "2024-12-19T00:00:00"
@@ -7038,14 +7080,14 @@
             "args_type": null
         },
         "keywords": [
-            "\u666e\u62c9\u5a1c\u5403",
-            "\u666e\u62c9\u5a1c\u8214"
+            "普拉娜吃",
+            "普拉娜舔"
         ],
         "shortcuts": [],
         "tags": [
-            "\u851a\u84dd\u6863\u6848",
-            "\u666e\u62c9\u5a1c",
-            "\u78a7\u84dd\u6863\u6848"
+            "普拉娜",
+            "蔚蓝档案",
+            "碧蓝档案"
         ],
         "date_created": "2024-11-21T00:00:00",
         "date_modified": "2024-11-21T00:00:00"
@@ -7061,13 +7103,13 @@
             "args_type": null
         },
         "keywords": [
-            "\u9876",
-            "\u73a9"
+            "顶",
+            "玩"
         ],
         "shortcuts": [],
         "tags": [
-            "\u732b\u732b\u866b",
-            "\u5496\u6ce2"
+            "猫猫虫",
+            "咖波"
         ],
         "date_created": "2021-10-09T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -7080,12 +7122,12 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u6765\u73a9\u4f11\u95f2\u6e38\u620f\u554a"
+                "来玩休闲游戏啊"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u73a9\u6e38\u620f"
+            "玩游戏"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7103,12 +7145,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u4e00\u8d77\u73a9"
+            "一起玩"
         ],
         "shortcuts": [],
         "tags": [
-            "\u851a\u84dd\u6863\u6848",
-            "\u78a7\u84dd\u6863\u6848"
+            "蔚蓝档案",
+            "碧蓝档案"
         ],
         "date_created": "2024-07-26T00:00:00",
         "date_modified": "2024-07-26T00:00:00"
@@ -7121,12 +7163,12 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u5e73\u5b89\u540d\u3059\u307f\u308c"
+                "平安名すみれ"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u51fa\u8b66"
+            "出警"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7144,7 +7186,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u8b66\u5bdf"
+            "警察"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7184,7 +7226,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u571f\u8c46"
+            "土豆"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7202,7 +7244,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u6363"
+            "捣"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7220,7 +7262,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u6253\u5370"
+            "打印"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7238,8 +7280,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u8214",
-            "\u8214\u5c4f",
+            "舔",
+            "舔屏",
             "prpr"
         ],
         "shortcuts": [],
@@ -7255,13 +7297,13 @@
             "min_texts": 2,
             "max_texts": 2,
             "default_texts": [
-                "\u6765\u4efd",
-                "\u6da9\u56fe"
+                "来份",
+                "涩图"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u53ef\u8fbe\u9e2d"
+            "可达鸭"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7279,7 +7321,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u6253\u62f3"
+            "打拳"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7297,8 +7339,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u56db\u68f1\u9525",
-            "\u91d1\u5b57\u5854"
+            "四棱锥",
+            "金字塔"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7316,7 +7358,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u4e3e"
+            "举"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7331,12 +7373,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u5927\u4f6c\u5e26\u5e26\u6211"
+                "大佬带带我"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u4e3e\u724c"
+            "举牌"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7351,17 +7393,36 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u30a8\u30ed\u672c"
+                "エロ本"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u770b\u4e66"
+            "看书"
         ],
         "shortcuts": [],
         "tags": [],
         "date_created": "2022-08-22T00:00:00",
         "date_modified": "2023-10-25T00:00:00"
+    },
+    {
+        "key": "remote_control",
+        "params_type": {
+            "min_images": 1,
+            "max_images": 1,
+            "min_texts": 0,
+            "max_texts": 0,
+            "default_texts": [],
+            "args_type": null
+        },
+        "keywords": [
+            "遥控",
+            "控制"
+        ],
+        "shortcuts": [],
+        "tags": [],
+        "date_created": "2025-03-04T00:00:00",
+        "date_modified": "2025-03-24T00:00:00"
     },
     {
         "key": "repeat",
@@ -7371,12 +7432,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u6551\u547d\u554a"
+                "救命啊"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u590d\u8bfb"
+            "复读"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7394,7 +7455,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u6495"
+            "撕"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7412,7 +7473,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u6012\u6495"
+            "怒撕"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7430,8 +7491,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u8bc8\u5c38",
-            "\u79fd\u571f\u8f6c\u751f"
+            "诈尸",
+            "秽土转生"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7449,7 +7510,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u6eda"
+            "滚"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7467,7 +7528,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u4e09\u7ef4\u65cb\u8f6c"
+            "三维旋转"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7485,10 +7546,10 @@
             "args_type": null
         },
         "keywords": [
-            "\u8d34",
-            "\u8d34\u8d34",
-            "\u8e6d",
-            "\u8e6d\u8e6d"
+            "贴",
+            "贴贴",
+            "蹭",
+            "蹭蹭"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7503,12 +7564,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u5feb\u8dd1"
+                "快跑"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u5feb\u8dd1"
+            "快跑"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7526,11 +7587,11 @@
             "args_type": null
         },
         "keywords": [
-            "\u5feb\u9003"
+            "快逃"
         ],
         "shortcuts": [],
         "tags": [
-            "\u521d\u97f3\u672a\u6765"
+            "初音未来"
         ],
         "date_created": "2024-07-23T00:00:00",
         "date_modified": "2024-07-23T00:00:00"
@@ -7543,12 +7604,12 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u4f60\u7ed9\u6211\u7684\u5b89\u5168\u611f\n\u8fdc\u4e0d\u53ca{ta}\u7684\u4e07\u5206\u4e4b\u4e00"
+                "你给我的安全感\n远不及{ta}的万分之一"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u5b89\u5168\u611f"
+            "安全感"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7566,7 +7627,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u50ac\u7720app"
+            "催眠app"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7581,12 +7642,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u8c22\u8c22\u53c2\u4e0e"
+                "谢谢参与"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u522e\u522e\u4e50"
+            "刮刮乐"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7604,7 +7665,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u6320\u5934"
+            "挠头"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7619,12 +7680,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u4f60\u4eec\u8bf4\u8bdd\u554a"
+                "你们说话啊"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u6eda\u5c4f"
+            "滚屏"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7642,12 +7703,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u4e16\u754c\u7b2c\u4e00\u53ef\u7231"
+            "世界第一可爱"
         ],
         "shortcuts": [],
         "tags": [
-            "\u5b66\u56ed\u5076\u50cf\u5927\u5e08",
-            "\u85e4\u7530\u7434\u97f3"
+            "藤田琴音",
+            "学园偶像大师"
         ],
         "date_created": "2024-12-04T00:00:00",
         "date_modified": "2024-12-04T00:00:00"
@@ -7663,7 +7724,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u6643\u8111"
+            "晃脑"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7681,13 +7742,13 @@
             "args_type": null
         },
         "keywords": [
-            "\u767d\u5b50\u8214"
+            "白子舔"
         ],
         "shortcuts": [],
         "tags": [
-            "\u851a\u84dd\u6863\u6848",
-            "\u7802\u72fc\u767d\u5b50",
-            "\u78a7\u84dd\u6863\u6848"
+            "蔚蓝档案",
+            "砂狼白子",
+            "碧蓝档案"
         ],
         "date_created": "2024-08-10T00:00:00",
         "date_modified": "2024-08-10T00:00:00"
@@ -7703,7 +7764,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u9707\u60ca"
+            "震惊"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7718,12 +7779,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u4f60\u4e0d\u8981\u518d\u8bf4\u4e86"
+                "你不要再说了"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u522b\u8bf4\u4e86"
+            "别说了"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7741,8 +7802,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u5750\u5f97\u4f4f",
-            "\u5750\u7684\u4f4f"
+            "坐得住",
+            "坐的住"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7760,7 +7821,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u4e00\u5df4\u638c"
+            "一巴掌"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7775,17 +7836,17 @@
             "min_texts": 6,
             "max_texts": 6,
             "default_texts": [
-                "\u6211\u4eec\u662f\u8c01\uff1f",
-                "\u6d59\u5927\u4eba\uff01",
-                "\u5230\u6d59\u5927\u6765\u505a\u4ec0\u4e48\uff1f",
-                "\u6df7\uff01",
-                "\u5c06\u6765\u6bd5\u4e1a\u540e\u8981\u505a\u4ec0\u4e48\u6837\u7684\u4eba\uff1f",
-                "\u6df7\u6df7\uff01"
+                "我们是谁？",
+                "浙大人！",
+                "到浙大来做什么？",
+                "混！",
+                "将来毕业后要做什么样的人？",
+                "混混！"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u53e3\u53f7"
+            "口号"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7803,7 +7864,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u7838"
+            "砸"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7821,7 +7882,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u5356\u6389\u4e86"
+            "卖掉了"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7839,15 +7900,15 @@
             "args_type": null
         },
         "keywords": [
-            "\u65e0\u8bed"
+            "无语"
         ],
         "shortcuts": [
             {
-                "key": "(?P<text>\u5178\u578b\u7684\\S+\u601d\u7ef4)",
+                "key": "(?P<text>典型的\\S+思维)",
                 "args": [
                     "{text}"
                 ],
-                "humanized": "\u5178\u578b\u7684xx\u601d\u7ef4"
+                "humanized": "典型的xx思维"
             }
         ],
         "tags": [],
@@ -7865,7 +7926,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u76ef\u7740\u4f60"
+            "盯着你"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7880,7 +7941,7 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u9ed1\u795e\u8bdd\uff1a\u609f\u7a7a"
+                "黑神话：悟空"
             ],
             "args_type": {
                 "args_model": {
@@ -7918,7 +7979,7 @@
                         },
                         "name": {
                             "default": "",
-                            "description": "\u6307\u5b9a\u540d\u5b57",
+                            "description": "指定名字",
                             "title": "Name",
                             "type": "string"
                         }
@@ -7944,24 +8005,24 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u6307\u5b9a\u540d\u5b57",
+                        "help_text": "指定名字",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "steam\u6d88\u606f"
+            "steam消息"
         ],
         "shortcuts": [
             {
-                "key": "(?P<name>\\S+)\u6b63\u5728\u73a9(?P<game>\\S+)",
+                "key": "(?P<name>\\S+)正在玩(?P<game>\\S+)",
                 "args": [
                     "--name",
                     "{name}",
                     "{game}"
                 ],
-                "humanized": "xx\u6b63\u5728\u73a9xx"
+                "humanized": "xx正在玩xx"
             }
         ],
         "tags": [],
@@ -7979,7 +8040,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u8e29"
+            "踩"
         ],
         "shortcuts": [],
         "tags": [],
@@ -7997,7 +8058,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u7096"
+            "炖"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8015,7 +8076,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u79d1\u76ee\u4e09"
+            "科目三"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8033,8 +8094,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u5438",
-            "\u55e6"
+            "吸",
+            "嗦"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8052,7 +8113,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u7cbe\u795e\u652f\u67f1"
+            "精神支柱"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8070,8 +8131,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u56de\u65cb\u8f6c",
-            "\u65cb\u98ce\u8f6c"
+            "回旋转",
+            "旋风转"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8122,7 +8183,7 @@
                         },
                         "direction": {
                             "default": "left",
-                            "description": "\u5bf9\u79f0\u65b9\u5411\uff0c\u5305\u542b left\u3001right\u3001top\u3001bottom",
+                            "description": "对称方向，包含 left、right、top、bottom",
                             "enum": [
                                 "left",
                                 "right",
@@ -8171,13 +8232,13 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u5bf9\u79f0\u65b9\u5411\uff0c\u5305\u542b left\u3001right\u3001top\u3001bottom",
+                        "help_text": "对称方向，包含 left、right、top、bottom",
                         "compact": false
                     },
                     {
                         "names": [
                             "--left",
-                            "\u5de6"
+                            "左"
                         ],
                         "args": null,
                         "dest": "direction",
@@ -8192,7 +8253,7 @@
                     {
                         "names": [
                             "--right",
-                            "\u53f3"
+                            "右"
                         ],
                         "args": null,
                         "dest": "direction",
@@ -8207,7 +8268,7 @@
                     {
                         "names": [
                             "--top",
-                            "\u4e0a"
+                            "上"
                         ],
                         "args": null,
                         "dest": "direction",
@@ -8222,7 +8283,7 @@
                     {
                         "names": [
                             "--bottom",
-                            "\u4e0b"
+                            "下"
                         ],
                         "args": null,
                         "dest": "direction",
@@ -8238,7 +8299,7 @@
             }
         },
         "keywords": [
-            "\u5bf9\u79f0"
+            "对称"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8256,12 +8317,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u5510\u53ef\u53ef\u4e3e\u724c"
+            "唐可可举牌"
         ],
         "shortcuts": [],
         "tags": [
             "LoveLive!Superstar!!",
-            "\u5510\u53ef\u53ef"
+            "唐可可"
         ],
         "date_created": "2022-10-01T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -8277,7 +8338,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u5632\u8bbd"
+            "嘲讽"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8292,18 +8353,18 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u6211\u8001\u5a46"
+                "我老婆"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u8bb2\u8bfe",
-            "\u6572\u9ed1\u677f"
+            "讲课",
+            "敲黑板"
         ],
         "shortcuts": [],
         "tags": [
-            "\u4e95\u4e4b\u4e0a\u6cf7\u5948",
-            "\u8389\u53ef\u4e3d\u4e1d"
+            "井之上泷奈",
+            "莉可丽丝"
         ],
         "date_created": "2022-08-16T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -8319,13 +8380,13 @@
             "args_type": null
         },
         "keywords": [
-            "\u62ff\u634f",
-            "\u620f\u5f04"
+            "拿捏",
+            "戏弄"
         ],
         "shortcuts": [],
         "tags": [
-            "\u851a\u84dd\u6863\u6848",
-            "\u78a7\u84dd\u6863\u6848"
+            "蔚蓝档案",
+            "碧蓝档案"
         ],
         "date_created": "2023-06-27T00:00:00",
         "date_modified": "2023-06-27T00:00:00"
@@ -8341,7 +8402,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u671b\u8fdc\u955c"
+            "望远镜"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8356,12 +8417,12 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u7b28\u86cb"
+                "笨蛋"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u4f53\u6e29\u67aa"
+            "体温枪"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8379,7 +8440,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u60f3\u4ec0\u4e48"
+            "想什么"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8394,13 +8455,13 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u8fd9\u662f\u5341\u4e8c\u751f\u8096\u4e2d\u7684\u9e21"
+                "这是十二生肖中的鸡"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u8fd9\u662f\u9e21",
-            "\ud83d\udc14"
+            "这是鸡",
+            "🐔"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8418,8 +8479,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u4e22",
-            "\u6254"
+            "丢",
+            "扔"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8437,8 +8498,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u629b",
-            "\u63b7"
+            "抛",
+            "掷"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8456,7 +8517,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u6376"
+            "捶"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8474,12 +8535,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u6376\u7206",
-            "\u7206\u6376"
+            "捶爆",
+            "爆捶"
         ],
         "shortcuts": [],
         "tags": [
-            "\u660e\u65e5\u65b9\u821f"
+            "明日方舟"
         ],
         "date_created": "2023-03-31T00:00:00",
         "date_modified": "2023-03-31T00:00:00"
@@ -8495,8 +8556,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u7d27\u8d34",
-            "\u7d27\u7d27\u8d34\u7740"
+            "紧贴",
+            "紧紧贴着"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8511,12 +8572,12 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u8bf4\u5b8c\u4e86\u5417\uff1f\u8be5\u8d70\u4e86"
+                "说完了吗？该走了"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u8be5\u8d70\u4e86"
+            "该走了"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8531,12 +8592,12 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u4e00\u8d77\u73a9{name}\u5427\uff01"
+                "一起玩{name}吧！"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u4e00\u8d77"
+            "一起"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8554,8 +8615,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u4e0a\u575f",
-            "\u575f\u524d\u6bd4\u8036"
+            "上坟",
+            "坟前比耶"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8573,12 +8634,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u6c64\u59c6\u5632\u7b11"
+            "汤姆嘲笑"
         ],
         "shortcuts": [],
         "tags": [
-            "\u6c64\u59c6",
-            "\u732b\u548c\u8001\u9f20"
+            "汤姆",
+            "猫和老鼠"
         ],
         "date_created": "2024-01-19T00:00:00",
         "date_modified": "2024-01-19T00:00:00"
@@ -8591,12 +8652,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u8fd0\u8425"
+                "运营"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u9876\u5c16"
+            "顶尖"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8614,7 +8675,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u604d\u60da"
+            "恍惚"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8632,7 +8693,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u8f6c"
+            "转"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8650,7 +8711,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u6413"
+            "搓"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8665,13 +8726,13 @@
             "min_texts": 1,
             "max_texts": 10,
             "default_texts": [
-                "\u5728\u6b64\u5904\u6dfb\u52a0\u6587\u5b57"
+                "在此处添加文字"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u4e07\u80fd\u8868\u60c5",
-            "\u7a7a\u767d\u8868\u60c5"
+            "万能表情",
+            "空白表情"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8686,12 +8747,12 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u6211\u770b\u4f60\u4eec\u662f\u53cd\u4e86\uff01"
+                "我看你们是反了！"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u53cd\u4e86"
+            "反了"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8709,7 +8770,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u9707\u52a8"
+            "震动"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8724,20 +8785,20 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u597d"
+                "好"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u597d\u8d77\u6765\u4e86"
+            "好起来了"
         ],
         "shortcuts": [
             {
-                "key": "(?P<text>\\S{1,4})\\s+\u8d77\u6765\u4e86",
+                "key": "(?P<text>\\S{1,4})\\s+起来了",
                 "args": [
                     "{text}"
                 ],
-                "humanized": "xx \u8d77\u6765\u4e86"
+                "humanized": "xx 起来了"
             }
         ],
         "tags": [],
@@ -8755,12 +8816,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u5899\u7eb8"
+            "墙纸"
         ],
         "shortcuts": [],
         "tags": [
-            "\u745e\u514b\u548c\u83ab\u8482",
-            "\u745e\u514b\u00b7\u6851\u5207\u65af"
+            "瑞克和莫蒂",
+            "瑞克·桑切斯"
         ],
         "date_created": "2022-03-09T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -8776,12 +8837,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u80e1\u6843\u5e73\u677f"
+            "胡桃平板"
         ],
         "shortcuts": [],
         "tags": [
-            "\u8389\u53ef\u4e3d\u4e1d",
-            "\u80e1\u6843"
+            "胡桃",
+            "莉可丽丝"
         ],
         "date_created": "2022-08-07T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -8797,12 +8858,12 @@
             "args_type": null
         },
         "keywords": [
-            "\u80e1\u6843\u653e\u5927"
+            "胡桃放大"
         ],
         "shortcuts": [],
         "tags": [
-            "\u8389\u53ef\u4e3d\u4e1d",
-            "\u80e1\u6843"
+            "胡桃",
+            "莉可丽丝"
         ],
         "date_created": "2022-10-01T00:00:00",
         "date_modified": "2023-02-14T00:00:00"
@@ -8818,7 +8879,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u6d17\u8863\u673a"
+            "洗衣机"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8836,7 +8897,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u6ce2\u7eb9"
+            "波纹"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8887,7 +8948,7 @@
                         },
                         "message": {
                             "default": "",
-                            "description": "\u4e8c\u7ef4\u7801\u5185\u5bb9",
+                            "description": "二维码内容",
                             "title": "Message",
                             "type": "string"
                         }
@@ -8913,14 +8974,14 @@
                         "dest": null,
                         "default": null,
                         "action": null,
-                        "help_text": "\u4e8c\u7ef4\u7801\u5185\u5bb9",
+                        "help_text": "二维码内容",
                         "compact": false
                     }
                 ]
             }
         },
         "keywords": [
-            "\u5fae\u4fe1\u652f\u4ed8"
+            "微信支付"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8935,12 +8996,12 @@
             "min_texts": 0,
             "max_texts": 1,
             "default_texts": [
-                "\u4eca\u5e74520"
+                "今年520"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u6700\u60f3\u8981\u7684\u4e1c\u897f"
+            "最想要的东西"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8958,7 +9019,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u6211\u60f3\u4e0a\u7684"
+            "我想上的"
         ],
         "shortcuts": [],
         "tags": [],
@@ -8976,11 +9037,11 @@
             "args_type": null
         },
         "keywords": [
-            "\u4e3a\u4ec0\u4e48@\u6211"
+            "为什么@我"
         ],
         "shortcuts": [],
         "tags": [
-            "\u4e1c\u65b9Project"
+            "东方Project"
         ],
         "date_created": "2022-04-14T00:00:00",
         "date_modified": "2023-05-03T00:00:00"
@@ -8996,7 +9057,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u4e3a\u4ec0\u4e48\u8981\u6709\u624b"
+            "为什么要有手"
         ],
         "shortcuts": [],
         "tags": [],
@@ -9014,7 +9075,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u98ce\u8f66\u8f6c"
+            "风车转"
         ],
         "shortcuts": [],
         "tags": [],
@@ -9029,12 +9090,12 @@
             "min_texts": 1,
             "max_texts": 1,
             "default_texts": [
-                "\u6211\u8981\u5bf9\u8c61"
+                "我要对象"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u8bb8\u613f\u5931\u8d25"
+            "许愿失败"
         ],
         "shortcuts": [],
         "tags": [],
@@ -9052,7 +9113,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u6728\u9c7c"
+            "木鱼"
         ],
         "shortcuts": [],
         "tags": [],
@@ -9070,8 +9131,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u819c",
-            "\u819c\u62dc"
+            "膜",
+            "膜拜"
         ],
         "shortcuts": [],
         "tags": [],
@@ -9086,22 +9147,22 @@
             "min_texts": 2,
             "max_texts": 2,
             "default_texts": [
-                "\u4e0d\u4e70\u534e\u4e3a\u4e0d\u662f",
-                "\u4eba"
+                "不买华为不是",
+                "人"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u5434\u4eac\u4e2d\u56fd"
+            "吴京中国"
         ],
         "shortcuts": [
             {
-                "key": "\u5434\u4eac[\\s:\uff1a]*(?P<left>\\S*)\u4e2d\u56fd(?P<right>\\S*)",
+                "key": "吴京[\\s:：]*(?P<left>\\S*)中国(?P<right>\\S*)",
                 "args": [
                     "{left}",
                     "{right}"
                 ],
-                "humanized": "\u5434\u4eacxx\u4e2d\u56fdxx"
+                "humanized": "吴京xx中国xx"
             }
         ],
         "tags": [],
@@ -9116,19 +9177,19 @@
             "min_texts": 8,
             "max_texts": 8,
             "default_texts": [
-                "\u6930\u5b50\u7279\u4ea7\u5728\u6d77\u5357",
-                "\u6b63\u5b97",
-                "\u6930\u6811",
-                "29\u5e74",
-                "\u575a\u6301\u5728\u6d77\u5357\u5c9b",
-                "\u7528\u65b0\u9c9c\u6930\u5b50\u8089",
-                "\u9c9c\u69a8",
-                "\u4e0d\u7528\u6930\u6d46\n\u4e0d\u52a0\u9999\u7cbe\u5f53\u751f\u69a8"
+                "椰子特产在海南",
+                "正宗",
+                "椰树",
+                "29年",
+                "坚持在海南岛",
+                "用新鲜椰子肉",
+                "鲜榨",
+                "不用椰浆\n不加香精当生榨"
             ],
             "args_type": null
         },
         "keywords": [
-            "\u6930\u6811\u6930\u6c41"
+            "椰树椰汁"
         ],
         "shortcuts": [],
         "tags": [],
@@ -9146,7 +9207,7 @@
             "args_type": null
         },
         "keywords": [
-            "\u4f60\u7684\u8de8\u5e74"
+            "你的跨年"
         ],
         "shortcuts": [],
         "tags": [],
@@ -9186,8 +9247,8 @@
             "args_type": null
         },
         "keywords": [
-            "\u81f4\u7535",
-            "\u4f60\u5e94\u8be5\u81f4\u7535"
+            "致电",
+            "你应该致电"
         ],
         "shortcuts": [],
         "tags": [],
