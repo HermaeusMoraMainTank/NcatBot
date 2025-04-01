@@ -177,8 +177,17 @@ class Meme(BasePlugin):
                 )
 
     async def send_meme_info(self, input: GroupMessage, meme_config: DataStructure):
+        # 找到触发这个 meme 的关键词
+        trigger_keyword = next(
+            (
+                keyword
+                for keyword, data in self.keywordslist.items()
+                if data.key == meme_config.key
+            ),
+            meme_config.key,
+        )
         info_message = (
-            f"关键词: {meme_config.key}\n"
+            f"触发关键词: {trigger_keyword}\n"
             f"最少图片数量: {meme_config.params_type.min_images}\n"
             f"最多图片数量: {meme_config.params_type.max_images}\n"
             f"最少文字数量: {meme_config.params_type.min_texts}\n"
