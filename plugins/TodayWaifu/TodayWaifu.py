@@ -90,6 +90,17 @@ class TodayWaifu(BasePlugin):
                 return await self.api.post_group_msg(
                     group_id=input.group_id, text="你快醒醒 你没有老婆"
                 )
+            # if user_id in [3398902282, 2653506350]:
+            #     return await self.api.post_group_msg(
+            #         group_id=input.group_id,
+            #         rtf=MessageChain(
+            #             [
+            #                 At(user_id),
+            #                 Text("你今天的群友老婆是："),
+            #                 ImageElement("data\image\特殊要求\孙笑川.png"),
+            #             ]
+            #         ),
+            #     )
 
             user_to_wife_map = self.user_to_wife_map_by_group.setdefault(group_id, {})
             allocated_wives = self.allocated_wives_by_group.setdefault(group_id, set())

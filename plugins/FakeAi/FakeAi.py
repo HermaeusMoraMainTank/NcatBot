@@ -135,71 +135,80 @@ class FakeAi(BasePlugin):
 
 async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -> None:
     try:
-        replace = json.loads(answer.replace("{{", "{").replace("}}", "}"))
-        content = replace.get("content", "")
+        # 尝试解析 JSON
+        try:
+            replace = json.loads(answer.replace("{{", "{").replace("}}", "}"))
+            content = replace.get("content", "")
+        except json.JSONDecodeError:
+            # 如果不是 JSON 格式，直接使用原始内容
+            content = answer
+
+        # 使用正则表达式按照标点符号分割句子
+        punctuation_pattern = r"[。！？!?]+"
+        sentences = [
+            s.strip() for s in re.split(punctuation_pattern, content) if s.strip()
+        ]
+
+        # 如果没有标点符号分割出的句子，就把整个内容作为一个句子
+        if not sentences:
+            sentences = [content.strip()]
+
+        at_pattern = re.compile(r"\[CQ:at,qq=([\w\u4e00-\u9fff]+)]")
+        group_id = input.group_id
+        members_response = await self.api.get_group_member_list(group_id=group_id)
+        members = [GroupMember(member) for member in members_response.get("data", [])]
+
+        # 遍历句子
+        for sentence in sentences:
+            message = MessageChain([])  # 为每个句子创建新的MessageChain
+            last_match_end = 0
+
+            # 处理 CQ 码格式的 @ 消息
+            for match in at_pattern.finditer(sentence):
+                # 处理 @ 之前的文本
+                text_before_at = sentence[last_match_end : match.start()].strip()
+                if text_before_at:
+                    message.chain.append(Text(text_before_at))
+
+                at_content = match.group(1)
+                try:
+                    # 尝试解析为 ID
+                    user_id = int(at_content)
+                except ValueError:
+                    # 如果无法解析为 ID，从历史记录中查找对应的 ID
+                    user_id = find_user_id_by_name(at_content, input.group_id)
+
+                if user_id and any(member.user_id == user_id for member in members):
+                    # 添加 @ 的用户
+                    message.chain.append(At(user_id))
+                    message.chain.append(Text(" "))
+
+                last_match_end = match.end()
+
+            # 处理 @ 之后的文本
+            text_after_last_at = sentence[last_match_end:].strip()
+            if text_after_last_at:
+                message.chain.append(Text(text_after_last_at))
+
+            # 模拟打字的延时，根据句子的字符数设置延时
+            delay = len(sentence) * 0.1  # 每个字符延时 0.1 秒
+            await asyncio.sleep(delay)
+
+            # 发送消息
+            if message.chain:  # 确保消息链不为空
+                await self.api.post_group_msg(group_id=input.group_id, rtf=message)
+
+        # 将AI的回复加入到reply_cache中
+        reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
+        reply_json = json.dumps(
+            {"name": "蓝晴", "id": "0", "content": content},
+            ensure_ascii=False,
+        )
+        reply_cache.add_reply(reply_json)
+
     except Exception as e:
-        _log.error(f"解析 JSON 失败: {e}")
+        _log.error(f"发送消息时发生错误: {e}")
         return
-
-    # 使用正则表达式按照标点符号分割句子
-    punctuation_pattern = r"[。！？!?]+"
-    sentences = [s.strip() for s in re.split(punctuation_pattern, content) if s.strip()]
-
-    # 如果没有标点符号分割出的句子，就把整个内容作为一个句子
-    if not sentences:
-        sentences = [content.strip()]
-
-    at_pattern = re.compile(r"\[CQ:at,qq=([\w\u4e00-\u9fff]+)]")
-    group_id = input.group_id
-    members_response = await self.api.get_group_member_list(group_id=group_id)
-
-    members = [GroupMember(member) for member in members_response.get("data", [])]
-
-    # 遍历句子
-    for sentence in sentences:
-        message = MessageChain([])  # 为每个句子创建新的MessageChain
-        last_match_end = 0
-        for match in at_pattern.finditer(sentence):
-            # 处理 @ 之前的文本
-            text_before_at = sentence[last_match_end : match.start()].strip()
-            if text_before_at:
-                message.chain.append(Text(text_before_at))
-
-            at_content = match.group(1)
-
-            try:
-                # 尝试解析为 ID
-                user_id = int(at_content)
-            except ValueError:
-                # 如果无法解析为 ID，从历史记录中查找对应的 ID
-                user_id = find_user_id_by_name(at_content, input.group_id)
-
-            if user_id and any(member.user_id == user_id for member in members):
-                # 添加 @ 的用户
-                message.chain.append(At(user_id))
-                message.chain.append(Text(" "))
-
-            last_match_end = match.end()
-
-        # 处理 @ 之后的文本
-        text_after_last_at = sentence[last_match_end:].strip()
-        if text_after_last_at:
-            message.chain.append(Text(text_after_last_at))
-
-        # 模拟打字的延时，根据句子的字符数设置延时
-        delay = len(sentence) * 0.1  # 每个字符延时 0.1 秒
-        await asyncio.sleep(delay)
-
-        # 发送消息
-        await self.api.post_group_msg(group_id=input.group_id, rtf=message)
-
-    # 将AI的回复加入到reply_cache中
-    reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
-    reply_json = json.dumps(
-        {"name": "蓝晴", "id": "0", "content": content},
-        ensure_ascii=False,
-    )
-    reply_cache.add_reply(reply_json)
 
 
 def find_user_id_by_name(name: str, group_id: int) -> Optional[int]:

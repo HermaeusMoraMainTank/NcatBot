@@ -63,6 +63,16 @@ class Fortune(BasePlugin):
                 [Text("✨今日运势✨\n"), At(sender_id), Image(image_path)]
             )
             await self.api.post_group_msg(group_id=input.group_id, rtf=message)
+            
+        elif message == "今日doro":
+            luck_value = self.calculate_luck_value(sender_id)
+            image_files = os.listdir(self.get_file_path("image", "doro结局"))
+            fortune_image = image_files[luck_value % len(image_files)]
+            image_path = self.get_file_path("image", "doro结局", fortune_image)
+            message = MessageChain(
+                [Text("✨今日doro结局✨\n"), At(sender_id), Image(image_path)]
+            )
+            await self.api.post_group_msg(group_id=input.group_id, rtf=message)
 
         elif message == "今日运势":
             current_date = date.today()
