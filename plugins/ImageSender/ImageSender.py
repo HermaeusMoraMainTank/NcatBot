@@ -26,7 +26,7 @@ class ImageSender(BasePlugin):
         },
         "zmd": {
             "path": "data/image/zmd",
-            "allowed_users": [273421673, 635773721],
+            "allowed_users": [273421673, 635773721, 510337095, 3420347160, 1508864751],
         },
         "doro": {
             "path": "data/image/doro",
@@ -35,6 +35,10 @@ class ImageSender(BasePlugin):
         "柴郡": {
             "path": "data/image/cheshire",
             "allowed_users": None,
+        },
+        "llm": {
+            "path": "data/image/llm",
+            "allowed_users": [273421673, 2779893879, 361432025],
         },
     }
 

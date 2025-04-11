@@ -34,7 +34,7 @@ group_ids = [
 
 
 class ReplyCache:
-    def __init__(self, max_size: int = 10):
+    def __init__(self, max_size: int = 20):
         self.replies = []
         self.max_size = max_size
 
