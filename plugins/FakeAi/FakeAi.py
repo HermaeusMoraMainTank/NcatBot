@@ -9,10 +9,9 @@ import yaml
 from common.entity.GroupMember import GroupMember
 from common.utils.AiUtil import AiUtil
 from ncatbot.core.element import At, MessageChain, Text
-from ncatbot.plugin.compatible import CompatibleEnrollment
+from ncatbot.plugin import CompatibleEnrollment, BasePlugin
 from ncatbot.utils.logger import get_log
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin.base_plugin import BasePlugin
 
 _log = get_log()
 bot = CompatibleEnrollment

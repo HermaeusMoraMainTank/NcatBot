@@ -7,8 +7,8 @@ from common.entity.GroupMember import GroupMember
 from common.utils.CommonUtil import CommonUtil
 from ncatbot.core.element import At, Image as ImageElement, MessageChain, Text
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin.compatible import CompatibleEnrollment
-from ncatbot.plugin.base_plugin import BasePlugin
+from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+
 
 from ncatbot.utils.logger import get_log
 

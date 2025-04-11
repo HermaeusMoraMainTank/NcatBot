@@ -8,8 +8,8 @@ from io import BytesIO
 
 from ncatbot.core.message import GroupMessage
 from ncatbot.core.element import Image as ImageElement, MessageChain, Reply
-from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.compatible import CompatibleEnrollment
+from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+
 
 bot = CompatibleEnrollment
 

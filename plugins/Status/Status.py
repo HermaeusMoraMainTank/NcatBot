@@ -5,7 +5,7 @@ from datetime import datetime
 
 from ncatbot.core.message import GroupMessage
 from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.compatible import CompatibleEnrollment
+from ncatbot.plugin import CompatibleEnrollment
 
 from common.constants.HMMT import HMMT
 

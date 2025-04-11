@@ -9,8 +9,7 @@ import json
 from common.constants.HMMT import HMMT
 from ncatbot.core.element import At, MessageChain, Text, Image
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.compatible import CompatibleEnrollment
+from ncatbot.plugin import CompatibleEnrollment, BasePlugin
 
 
 bot = CompatibleEnrollment

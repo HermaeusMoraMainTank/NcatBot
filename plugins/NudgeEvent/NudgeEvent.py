@@ -1,7 +1,6 @@
 # import random
 # from ncatbot.core.element import At, MessageChain, Reply, Text
-# from ncatbot.plugin.compatible import CompatibleEnrollment
-# from ncatbot.plugin.base_plugin import BasePlugin
+# from ncatbot.plugin import CompatibleEnrollment, BasePlugin
 
 # bot = CompatibleEnrollment
 

@@ -5,8 +5,8 @@ import os
 import math
 from ncatbot.core.message import GroupMessage
 from ncatbot.core.element import Image as ImageElement, MessageChain, Reply
-from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.compatible import CompatibleEnrollment
+from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+
 import json
 from ncatbot.utils.logger import get_log
 

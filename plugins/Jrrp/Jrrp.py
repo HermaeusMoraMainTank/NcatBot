@@ -3,8 +3,7 @@ from common.constants.HMMT import HMMT
 from common.utils.CommonUtil import CommonUtil
 from ncatbot.core.message import GroupMessage
 from ncatbot.utils.logger import get_log
-from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.compatible import CompatibleEnrollment
+from ncatbot.plugin import CompatibleEnrollment, BasePlugin
 
 
 # 日志配置

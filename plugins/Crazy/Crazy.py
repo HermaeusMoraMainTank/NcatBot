@@ -1,7 +1,6 @@
 from ncatbot.core.message import GroupMessage
 from ncatbot.core.element import MessageChain, Text
-from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.compatible import CompatibleEnrollment
+from ncatbot.plugin import CompatibleEnrollment, BasePlugin
 import random
 
 bot = CompatibleEnrollment

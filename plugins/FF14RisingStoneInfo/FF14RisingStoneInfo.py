@@ -10,8 +10,7 @@ from curl_cffi import requests  # 替换为 curl_cffi 的 requests
 from common.constants.HMMT import HMMT
 from ncatbot.core.message import GroupMessage
 from ncatbot.core.element import Image as ImageElement, MessageChain, Reply
-from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.compatible import CompatibleEnrollment
+from ncatbot.plugin import CompatibleEnrollment, BasePlugin
 
 
 bot = CompatibleEnrollment

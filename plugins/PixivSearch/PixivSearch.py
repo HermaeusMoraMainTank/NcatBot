@@ -7,8 +7,7 @@ from pathlib import Path
 from common.constants.HMMT import HMMT
 from ncatbot.core.message import GroupMessage
 from ncatbot.core.element import Image, MessageChain, Text
-from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin.compatible import CompatibleEnrollment
+from ncatbot.plugin import CompatibleEnrollment, BasePlugin
 
 
 last_page = {}

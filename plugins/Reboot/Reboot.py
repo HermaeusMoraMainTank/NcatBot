@@ -5,8 +5,8 @@ import subprocess
 
 from ncatbot.core.element import MessageChain, Text
 from ncatbot.core.message import PrivateMessage
-from ncatbot.plugin.compatible import CompatibleEnrollment
-from ncatbot.plugin.base_plugin import BasePlugin
+from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+
 
 bot = CompatibleEnrollment
 

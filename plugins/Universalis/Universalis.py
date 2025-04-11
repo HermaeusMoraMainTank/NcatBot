@@ -7,9 +7,8 @@ import httpx
 from typing import Dict, Optional, Tuple
 from datetime import datetime
 from difflib import SequenceMatcher
-from ncatbot.plugin.compatible import CompatibleEnrollment
+from ncatbot.plugin import CompatibleEnrollment, BasePlugin
 
-from ncatbot.plugin.base_plugin import BasePlugin
 
 bot = CompatibleEnrollment
 
