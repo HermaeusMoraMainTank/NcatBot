@@ -165,7 +165,7 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
             # 处理 CQ 码格式的 @ 消息
             for match in at_pattern.finditer(sentence):
                 # 处理 @ 之前的文本
-                text_before_at = sentence[last_match_end : match.start()].strip()
+                text_before_at = sentence[last_match_end : match.start()]
                 if text_before_at:
                     message.chain.append(Text(text_before_at))
 
@@ -180,12 +180,12 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
                 if user_id and any(member.user_id == user_id for member in members):
                     # 添加 @ 的用户
                     message.chain.append(At(user_id))
-                    message.chain.append(Text(" "))
+                    message.chain.append(Text("      "))
 
                 last_match_end = match.end()
 
             # 处理 @ 之后的文本
-            text_after_last_at = sentence[last_match_end:].strip()
+            text_after_last_at = sentence[last_match_end:]
             if text_after_last_at:
                 message.chain.append(Text(text_after_last_at))
 
