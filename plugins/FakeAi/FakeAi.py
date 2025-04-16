@@ -251,8 +251,11 @@ def load_yaml_data(group_id) -> Dict:
 def replace_time_in_system(yaml_data: Dict) -> None:
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     system_content = yaml_data.get("system", "")
+    input_content = yaml_data.get("input", "")
     if system_content:
         yaml_data["system"] = system_content.replace("{time}", current_time)
+    if input_content:
+        yaml_data["input"] = input_content.replace("{time}", current_time)
 
 
 def update_yaml_with_replies(yaml_data: Dict, reply_cache: ReplyCache) -> Dict:
@@ -274,6 +277,28 @@ def replace_placeholder(data: Dict, placeholder: str, new_value: str) -> None:
             replace_placeholder(value, placeholder, new_value)
 
 
+def remove_thinking_process(response: str) -> str:
+    """移除回复中的思考过程和注释部分"""
+    if not response:
+        return response
+
+    # 移除以 // 开头的行
+    lines = response.split("\n")
+    filtered_lines = [line for line in lines if not line.strip().startswith("//")]
+
+    # 检查是否有"思考过程："这样的标记
+    thinking_markers = ["思考过程：", "思考过程:", "// 思考过程", "思考：", "思考:"]
+    for marker in thinking_markers:
+        if marker in response:
+            # 找到标记的位置
+            marker_index = response.find(marker)
+            # 截取标记之前的内容
+            before_marker = response[:marker_index].strip()
+            return before_marker
+
+    return "\n".join(filtered_lines)
+
+
 async def answer_ai(group_id: int, group_reply_caches: Dict[int, ReplyCache]) -> str:
     # 加载 YAML 数据
     yaml_data = load_yaml_data(group_id)
@@ -283,4 +308,54 @@ async def answer_ai(group_id: int, group_reply_caches: Dict[int, ReplyCache]) ->
     # 调用 AIUtil 的 search_deepseek 方法
     keyword = yaml_data.get("input", "")
     prompt = yaml_data.get("system", "")
-    return await AiUtil.search_deepseek(keyword, prompt)
+    response = await AiUtil.search_deepseek(keyword, prompt)
+
+    # 首先移除思考过程
+    response = remove_thinking_process(response)
+
+    # 过滤掉思考过程（以 // 开头的内容）
+    if response:
+        # 先尝试直接解析为 JSON
+        try:
+            import json
+
+            # 检查是否是有效的 JSON 字符串
+            parsed = json.loads(response)
+            if isinstance(parsed, dict) and all(
+                k in parsed for k in ["name", "id", "content"]
+            ):
+                # 已经是干净的 JSON 格式，直接返回原始响应
+                return response
+        except json.JSONDecodeError:
+            pass
+
+        # 使用正则表达式提取 JSON 部分
+        import re
+
+        # 匹配标准的 JSON 格式，处理内容中可能有转义引号的情况
+        json_pattern = r'(\{"name":"[^"]+","id":"[^"]+","content":"(?:[^"\\]|\\.)*"\})'
+        match = re.search(json_pattern, response)
+        if match:
+            # 只返回匹配到的 JSON 部分
+            return match.group(1)
+
+        # 如果上面的匹配失败，尝试一种更宽松的模式
+        json_start = response.find('{"name":"')
+        if json_start != -1:
+            # 找到 JSON 开始的位置，然后尝试找最后的 }
+            json_end = response.find("}", json_start)
+            if json_end != -1:
+                # 提取可能的 JSON 部分
+                possible_json = response[json_start : json_end + 1]
+                # 验证提取的内容是否是有效的 JSON
+                try:
+                    parsed = json.loads(possible_json)
+                    if isinstance(parsed, dict) and all(
+                        k in parsed for k in ["name", "id", "content"]
+                    ):
+                        return possible_json
+                except:
+                    pass
+
+    # 如果无法提取有效的 JSON，返回原始响应
+    return response
