@@ -15,7 +15,6 @@ class AiUtil:
         _log.info(keyword)
 
         # 请求 URL 和 API Key
-
         url = "https://api.lkeap.cloud.tencent.com/v1"
         api_key = "sk-AWmHgm8yzHqY8OhEMA35lC9MZ3ueNn6KndFil9fPbON865zx"
 
@@ -29,6 +28,7 @@ class AiUtil:
         client = OpenAI(
             api_key=api_key,
             base_url=url,
+            timeout=30.0,  # 设置超时时间为30秒
         )
 
         retry_count = 3  # 最大重试次数
@@ -37,8 +37,7 @@ class AiUtil:
         while retry_count > 0:
             try:
                 completion = client.chat.completions.create(
-                    # model="deepseek-v3",  # 你可以选择你需要的模型
-                    model="deepseek-chat",  # 你可以选择你需要的模型
+                    model="deepseek-chat",
                     messages=[
                         {"role": "system", "content": prompt},
                         {"role": "user", "content": keyword},
@@ -46,12 +45,20 @@ class AiUtil:
                     max_tokens=2048,
                     temperature=1.2,
                     stream=False,
+                    timeout=20.0,  # 为单个请求设置超时时间
                 )
 
                 # 获取返回的内容
                 return_content = completion.choices[0].message.content
                 _log.info(f"响应内容: {return_content}")
                 return return_content
+
+            except asyncio.TimeoutError as e:
+                _log.error(f"请求超时: {e}")
+                retry_count -= 1
+                if retry_count > 0:
+                    _log.info(f"重试 {3 - retry_count} 次...")
+                    await asyncio.sleep(delay)
 
             except aiohttp.ClientError as e:  # 捕捉网络请求的异常
                 _log.error(f"请求异常: {e}")
@@ -67,16 +74,3 @@ class AiUtil:
         # 重试次数用尽后返回 None
         _log.error("重试次数已用尽，返回 None")
         return None
-
-
-# 示例调用
-async def main():
-    keyword = "Python 异步编程"
-    prompt = "你是一个编程助手，请帮助用户解决问题。"
-    result = await AiUtil.search_deepseek(keyword, prompt)
-    print(result)
-
-
-# 运行示例
-if __name__ == "__main__":
-    asyncio.run(main())
