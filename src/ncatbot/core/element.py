@@ -135,6 +135,7 @@ class Image(Element):
         self.path = path
 
     def to_dict(self) -> dict:
+        return {"type": "image", "data": {"path": self.path}}
         return convert_uploadable_object(self.path, "image")
 
 
