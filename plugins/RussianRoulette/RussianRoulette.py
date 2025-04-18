@@ -19,12 +19,14 @@ class RussianRoulette(BasePlugin):
     MALFUNCTION_PROBABILITY = 0.03  # 炸膛概率
     FILE_PATH = "data/txt/RussianRoulette.txt"
 
-    def setup(self):
-        """插件初始化设置"""
+    async def on_load(self):
+        """异步加载插件"""
+        log.info(f"开始加载 {self.name} 插件 v{self.version}")
         self.trigger_position_map: Dict[int, int] = {}  # 记录每个群聊的扳机位置
         self.bullet_position_map: Dict[int, int] = {}  # 记录每个群聊的子弹位置
         self.kill_count = 0  # 击杀用户数
         self.load_kill_count()
+        log.info(f"{self.name} 插件加载完成")
 
     @bot.group_event()
     async def handle_russian_roulette(self, input: GroupMessage):

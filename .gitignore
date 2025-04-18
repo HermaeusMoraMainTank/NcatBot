@@ -195,6 +195,7 @@ temp/
 data/image/pixiv
 data/image/ff14/userInfo
 data/image/fortune
+data/image/emoji_stats
 package.zip
 resource.o
 number.txt
