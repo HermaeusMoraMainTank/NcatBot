@@ -579,6 +579,25 @@ class FF14RisingStoneInfo(BasePlugin):
         # 根据服务器筛选玩家
         if server:
             filtered_players = [p for p in players if p.get("group_name") == server]
+            # 如果指定了区服，直接选择第一个匹配的玩家
+            if filtered_players:
+                user_info = self.get_user_info(filtered_players[0].get("uuid"), cookie)
+                if user_info and user_info.get("code") == 10000:
+                    image_path = self.generate_image(user_info.get("data", {}))
+                    await self.api.post_group_msg(
+                        group_id=input.group_id,
+                        rtf=MessageChain(
+                            [
+                                ImageElement(image_path),
+                                Reply(input.message_id),
+                            ]
+                        ),
+                    )
+                else:
+                    await self.api.post_group_msg(
+                        group_id=input.group_id, text="获取玩家信息失败"
+                    )
+                return
         else:
             filtered_players = players
 

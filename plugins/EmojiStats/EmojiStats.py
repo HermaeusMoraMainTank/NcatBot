@@ -448,6 +448,13 @@ class EmojiStatsPlugin(BasePlugin):
         time_range = message_parts[1]
         target = message_parts[2]
 
+        # 检查是否有艾特消息
+        target_user_id = input.user_id  # 默认为发送者
+        for msg in input.message:
+            if msg["type"] == "at":
+                target_user_id = int(msg["data"]["qq"])
+                break
+
         # 获取时间范围对应的天数
         days_map = {"今日": 1, "本周": 7, "本月": 30}
         days = days_map.get(time_range)
@@ -459,12 +466,13 @@ class EmojiStatsPlugin(BasePlugin):
             await input.reply("无效的统计对象，请使用：群组、个人")
             return
 
-        await self._show_stats(input, days, target)
+        await self._show_stats(input, days, target, target_user_id)
 
-    async def _show_stats(self, input: GroupMessage, days: int, target: str) -> None:
+    async def _show_stats(
+        self, input: GroupMessage, days: int, target: str, target_user_id: int
+    ) -> None:
         """显示统计信息"""
         group_id = input.group_id
-        user_id = input.user_id
 
         # 创建消息链
         message = MessageChain([])
@@ -481,9 +489,40 @@ class EmojiStatsPlugin(BasePlugin):
             # 添加消息元素
             message.chain.append(Text("=== 群组表情包统计 ===\n"))
             message.chain.append(Text(f"最近{days}天发送表情包: {total_count}次\n\n"))
-            message.chain.append(Text("最受欢迎表情包TOP3:\n"))
 
-            # 添加表情包信息
+            # 添加发送次数最多的用户统计
+            message.chain.append(Text("发送表情包最多的用户TOP3:\n"))
+            user_counts = {}
+            for user_id, user_stats in self.user_count.get(group_id, {}).items():
+                user_total = sum(self._get_time_range_stats(user_stats, days).values())
+                if user_total > 0:
+                    user_counts[user_id] = user_total
+
+            # 按发送次数排序
+            sorted_users = sorted(
+                user_counts.items(), key=lambda x: x[1], reverse=True
+            )[:3]
+            for i, (user_id, count) in enumerate(sorted_users, 1):
+                try:
+                    user_info = await self.api.get_group_member_info(
+                        group_id=group_id, user_id=user_id, no_cache=True
+                    )
+                    if isinstance(user_info, dict) and user_info.get("status") == "ok":
+                        user_data = user_info.get("data", {})
+                        if user_data:
+                            nickname = user_data.get("nickname", str(user_id))
+                            message.chain.append(Text(f"{i}. {nickname}: {count}次\n"))
+                        else:
+                            message.chain.append(Text(f"{i}. {user_id}: {count}次\n"))
+                    else:
+                        message.chain.append(Text(f"{i}. {user_id}: {count}次\n"))
+                except Exception as e:
+                    _log.error(f"获取用户信息失败: {e}")
+                    message.chain.append(Text(f"{i}. {user_id}: {count}次\n"))
+            message.chain.append(Text("\n"))
+
+            # 添加最受欢迎表情包统计
+            message.chain.append(Text("最受欢迎表情包TOP3:\n"))
             for i, emoji in enumerate(top_emojis, 1):
                 message.chain.append(Text(f"{i}. 使用次数: {emoji.count}\n"))
                 message.chain.append(Image(emoji.cache_path))
@@ -492,18 +531,18 @@ class EmojiStatsPlugin(BasePlugin):
         else:  # 个人统计
             # 获取用户最受欢迎表情包
             top_emojis = self._get_top_emojis(
-                self.user_stats.get(group_id, {}).get(user_id, {})
+                self.user_stats.get(group_id, {}).get(target_user_id, {})
             )
             # 获取用户发送次数统计
             count_stats = self._get_time_range_stats(
-                self.user_count.get(group_id, {}).get(user_id, {}), days
+                self.user_count.get(group_id, {}).get(target_user_id, {}), days
             )
             total_count = sum(count_stats.values())
 
             # 添加消息元素
             message.chain.append(Text("=== 个人表情包统计 ===\n"))
             message.chain.append(Text(f"最近{days}天发送表情包: {total_count}次\n\n"))
-            message.chain.append(Text("你最常使用的表情包TOP3:\n"))
+            message.chain.append(Text("最常使用的表情包TOP3:\n"))
 
             # 添加表情包信息
             for i, emoji in enumerate(top_emojis, 1):
