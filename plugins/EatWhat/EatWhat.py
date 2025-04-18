@@ -1,9 +1,8 @@
-import asyncio
 import os
 import random
 import re
 from datetime import datetime, date
-from typing import Dict, Optional, Tuple
+from typing import Dict, Tuple
 from dataclasses import dataclass
 
 from ncatbot.core.element import At, MessageChain, Text, Image
@@ -52,7 +51,6 @@ class EatWhat(BasePlugin):
     async def handle_eat_what(self, input: GroupMessage) -> None:
         """处理群消息"""
         content = input.raw_message.strip()
-        user_id = input.user_id
 
         # 定义操作映射
         operations = {

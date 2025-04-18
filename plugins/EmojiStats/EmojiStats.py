@@ -6,7 +6,6 @@ import urllib3
 from datetime import datetime, date, timedelta
 from typing import Dict, List, Optional
 from dataclasses import dataclass
-from pathlib import Path
 
 from ncatbot.core.element import MessageChain, Text, Image
 from ncatbot.plugin import CompatibleEnrollment, BasePlugin

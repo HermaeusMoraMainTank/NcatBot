@@ -184,12 +184,12 @@ class FF14RisingStoneInfo(BasePlugin):
                 print(f"API返回错误：{result.get('msg')}")
                 return []
         except Exception as e:
-            print(f"\n=== Error Info ===")
+            print("\n=== Error Info ===")
             print(f"Error Type: {type(e).__name__}")
             print(f"Error Message: {str(e)}")
             if hasattr(e, "response"):
                 print(f"Response Status: {e.response.status_code}")
-                print(f"Response Headers:")
+                print("Response Headers:")
                 for key, value in e.response.headers.items():
                     print(f"  {key}: {value}")
                 print(f"Response Text: {e.response.text}")

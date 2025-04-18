@@ -1,6 +1,5 @@
 import aiohttp
 import asyncio
-import json
 from openai import OpenAI
 
 from ncatbot.utils.logger import get_log
