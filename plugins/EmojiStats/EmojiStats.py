@@ -32,15 +32,19 @@ class DateTimeEncoder(json.JSONEncoder):
 class EmojiStats:
     url: str
     cache_path: str
-    count: int = 0
+    daily_counts: Dict[str, int] = None  # 按日期统计的使用次数
     last_used: datetime = datetime.now()
+
+    def __post_init__(self):
+        if self.daily_counts is None:
+            self.daily_counts = {}
 
     def to_dict(self) -> dict:
         """将对象转换为字典，处理 datetime 对象"""
         return {
             "url": self.url,
             "cache_path": self.cache_path,
-            "count": self.count,
+            "daily_counts": self.daily_counts,
             "last_used": self.last_used.isoformat(),
         }
 
@@ -52,12 +56,9 @@ class EmojiStats:
             raise ValueError("缺少必需的字段")
 
         # 处理可选字段
-        count = data.get("count", 0)
-        if isinstance(count, str):
-            try:
-                count = int(count)
-            except ValueError:
-                count = 0
+        daily_counts = data.get("daily_counts", {})
+        if not isinstance(daily_counts, dict):
+            daily_counts = {}
 
         last_used = data.get("last_used")
         if isinstance(last_used, str):
@@ -71,9 +72,28 @@ class EmojiStats:
         return cls(
             url=data["url"],
             cache_path=data["cache_path"],
-            count=count,
+            daily_counts=daily_counts,
             last_used=last_used,
         )
+
+    def get_count(self, days: int = None) -> int:
+        """获取指定天数内的使用次数"""
+        if days is None:
+            return sum(self.daily_counts.values())
+
+        end_date = date.today()
+        start_date = end_date - timedelta(days=days - 1)
+        return sum(
+            count
+            for date_str, count in self.daily_counts.items()
+            if start_date <= date.fromisoformat(date_str) <= end_date
+        )
+
+    def increment_count(self, date_str: str):
+        """增加指定日期的使用次数"""
+        if date_str not in self.daily_counts:
+            self.daily_counts[date_str] = 0
+        self.daily_counts[date_str] += 1
 
 
 class EmojiStatsPlugin(BasePlugin):
@@ -330,12 +350,13 @@ class EmojiStatsPlugin(BasePlugin):
         group_id = input.group_id
         user_id = input.user_id
         now = datetime.now()
+        today = now.date().isoformat()
 
         # 检查图片是否已经存在于统计中
         for emoji in self.group_stats.get(group_id, {}).values():
             if emoji.url == image_url:
                 # 更新群组统计
-                emoji.count += 1
+                emoji.increment_count(today)
                 emoji.last_used = now
 
                 # 更新用户统计
@@ -345,24 +366,25 @@ class EmojiStatsPlugin(BasePlugin):
                     self.user_stats[group_id][user_id] = {}
                 if emoji.cache_path not in self.user_stats[group_id][user_id]:
                     self.user_stats[group_id][user_id][emoji.cache_path] = emoji
-                self.user_stats[group_id][user_id][emoji.cache_path].count += 1
+                self.user_stats[group_id][user_id][emoji.cache_path].increment_count(
+                    today
+                )
                 self.user_stats[group_id][user_id][emoji.cache_path].last_used = now
 
                 # 更新发送次数统计
-                today = now.date().isoformat()
                 if group_id not in self.group_count:
                     self.group_count[group_id] = {}
-                self.group_count[group_id][today] = (
-                    self.group_count[group_id].get(today, 0) + 1
-                )
+                if today not in self.group_count[group_id]:
+                    self.group_count[group_id][today] = 0
+                self.group_count[group_id][today] += 1
 
                 if group_id not in self.user_count:
                     self.user_count[group_id] = {}
                 if user_id not in self.user_count[group_id]:
                     self.user_count[group_id][user_id] = {}
-                self.user_count[group_id][user_id][today] = (
-                    self.user_count[group_id][user_id].get(today, 0) + 1
-                )
+                if today not in self.user_count[group_id][user_id]:
+                    self.user_count[group_id][user_id][today] = 0
+                self.user_count[group_id][user_id][today] += 1
 
                 # 保存数据
                 self._save_data()
@@ -383,7 +405,7 @@ class EmojiStatsPlugin(BasePlugin):
             self.group_stats[group_id][cache_key] = EmojiStats(
                 url=image_url, cache_path=cache_path
             )
-        self.group_stats[group_id][cache_key].count += 1
+        self.group_stats[group_id][cache_key].increment_count(today)
         self.group_stats[group_id][cache_key].last_used = now
 
         # 更新用户统计
@@ -395,38 +417,41 @@ class EmojiStatsPlugin(BasePlugin):
             self.user_stats[group_id][user_id][cache_key] = EmojiStats(
                 url=image_url, cache_path=cache_path
             )
-        self.user_stats[group_id][user_id][cache_key].count += 1
+        self.user_stats[group_id][user_id][cache_key].increment_count(today)
         self.user_stats[group_id][user_id][cache_key].last_used = now
 
         # 更新发送次数统计
-        today = now.date().isoformat()
         if group_id not in self.group_count:
             self.group_count[group_id] = {}
-        self.group_count[group_id][today] = self.group_count[group_id].get(today, 0) + 1
+        if today not in self.group_count[group_id]:
+            self.group_count[group_id][today] = 0
+        self.group_count[group_id][today] += 1
 
         if group_id not in self.user_count:
             self.user_count[group_id] = {}
         if user_id not in self.user_count[group_id]:
             self.user_count[group_id][user_id] = {}
-        self.user_count[group_id][user_id][today] = (
-            self.user_count[group_id][user_id].get(today, 0) + 1
-        )
+        if today not in self.user_count[group_id][user_id]:
+            self.user_count[group_id][user_id][today] = 0
+        self.user_count[group_id][user_id][today] += 1
 
         # 保存数据
         self._save_data()
 
     def _get_top_emojis(
-        self, stats: Dict[str, EmojiStats], limit: int = 3
+        self, stats: Dict[str, EmojiStats], days: int = None
     ) -> List[EmojiStats]:
         """获取最受欢迎的表情包"""
         # 按使用次数排序
-        sorted_emojis = sorted(stats.values(), key=lambda x: x.count, reverse=True)
-        return sorted_emojis[:limit]
+        sorted_emojis = sorted(
+            stats.values(), key=lambda x: x.get_count(days), reverse=True
+        )
+        return sorted_emojis[:3]
 
     def _get_time_range_stats(self, stats: Dict[str, int], days: int) -> Dict[str, int]:
         """获取指定时间范围内的统计"""
         end_date = date.today()
-        start_date = end_date - timedelta(days=days)
+        start_date = end_date - timedelta(days=days - 1)  # 包含今天，所以减 days-1
         return {
             date_str: count
             for date_str, count in stats.items()
@@ -478,7 +503,7 @@ class EmojiStatsPlugin(BasePlugin):
 
         if target == "群组":
             # 获取群组最受欢迎表情包
-            top_emojis = self._get_top_emojis(self.group_stats.get(group_id, {}))
+            top_emojis = self._get_top_emojis(self.group_stats.get(group_id, {}), days)
             # 获取群组发送次数统计
             count_stats = self._get_time_range_stats(
                 self.group_count.get(group_id, {}), days
@@ -493,7 +518,9 @@ class EmojiStatsPlugin(BasePlugin):
             message.chain.append(Text("发送表情包最多的用户TOP3:\n"))
             user_counts = {}
             for user_id, user_stats in self.user_count.get(group_id, {}).items():
-                user_total = sum(self._get_time_range_stats(user_stats, days).values())
+                # 获取用户在指定时间范围内的发送次数
+                user_time_stats = self._get_time_range_stats(user_stats, days)
+                user_total = sum(user_time_stats.values())
                 if user_total > 0:
                     user_counts[user_id] = user_total
 
@@ -523,14 +550,16 @@ class EmojiStatsPlugin(BasePlugin):
             # 添加最受欢迎表情包统计
             message.chain.append(Text("最受欢迎表情包TOP3:\n"))
             for i, emoji in enumerate(top_emojis, 1):
-                message.chain.append(Text(f"{i}. 使用次数: {emoji.count}\n"))
+                message.chain.append(
+                    Text(f"{i}. 使用次数: {emoji.get_count(days)}次\n")
+                )
                 message.chain.append(Image(emoji.cache_path))
                 message.chain.append(Text("\n"))
 
         else:  # 个人统计
             # 获取用户最受欢迎表情包
             top_emojis = self._get_top_emojis(
-                self.user_stats.get(group_id, {}).get(target_user_id, {})
+                self.user_stats.get(group_id, {}).get(target_user_id, {}), days
             )
             # 获取用户发送次数统计
             count_stats = self._get_time_range_stats(
@@ -545,7 +574,9 @@ class EmojiStatsPlugin(BasePlugin):
 
             # 添加表情包信息
             for i, emoji in enumerate(top_emojis, 1):
-                message.chain.append(Text(f"{i}. 使用次数: {emoji.count}\n"))
+                message.chain.append(
+                    Text(f"{i}. 使用次数: {emoji.get_count(days)}次\n")
+                )
                 message.chain.append(Image(emoji.cache_path))
                 message.chain.append(Text("\n"))
 
