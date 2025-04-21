@@ -11,21 +11,26 @@ _log = get_log()
 
 
 class TodayAnime(BasePlugin):
-    name = 'TodayAnime'
-    description = '今日番剧'
-    version = '1.0'
+    name = "TodayAnime"
+    description = "今日番剧"
+    version = "1.0"
     author = "xww"
     apiurl = "https://api.bgm.tv/calendar"
     weekday_map = {
-        "Monday": "星期一", "Tuesday": "星期二", "Wednesday": "星期三",
-        "Thursday": "星期四", "Friday": "星期五", "Saturday": "星期六", "Sunday": "星期日"
+        "Monday": "星期一",
+        "Tuesday": "星期二",
+        "Wednesday": "星期三",
+        "Thursday": "星期四",
+        "Friday": "星期五",
+        "Saturday": "星期六",
+        "Sunday": "星期日",
     }
 
     @bot.group_event()
     async def handle_TodayAnime_like(self, input: GroupMessage):
         if input.raw_message != "今日番剧":
             return
-        data =await self.fetch_today_anime()
+        data = await self.fetch_today_anime()
         if data == None:
             _log.error("data搜索数据为空")
             return
@@ -36,7 +41,7 @@ class TodayAnime(BasePlugin):
         refdata = []
         for i in todaydata:
             refdata.append(Text(f"番剧名称:{i.get('title')}"))
-            refdata.append(Image(i.get('image')))
+            refdata.append(Image(i.get("image")))
             refdata.append(Text(f"更新时间:{i.get('air_date')}\n"))
         await self.api.post_group_msg(
             group_id=input.group_id,
@@ -57,13 +62,13 @@ class TodayAnime(BasePlugin):
         today_cn = self.weekday_map.get(today, "")
         today_anime = []
         for weekday in data:
-            if weekday["weekday"]['cn'] == today_cn:
+            if weekday["weekday"]["cn"] == today_cn:
                 for item in weekday["items"]:
                     image_url = item["images"]["large"]
                     anime_info = {
                         "title": item.get("name_cn", item["name"]),
                         "image": image_url,
-                        "air_date": item["air_date"]
+                        "air_date": item["air_date"],
                     }
                     today_anime.append(anime_info)
         return today_anime

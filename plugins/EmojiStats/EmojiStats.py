@@ -365,7 +365,10 @@ class EmojiStatsPlugin(BasePlugin):
                 if user_id not in self.user_stats[group_id]:
                     self.user_stats[group_id][user_id] = {}
                 if emoji.cache_path not in self.user_stats[group_id][user_id]:
-                    self.user_stats[group_id][user_id][emoji.cache_path] = emoji
+                    # 创建新的emoji对象，而不是直接使用群组的emoji对象
+                    self.user_stats[group_id][user_id][emoji.cache_path] = EmojiStats(
+                        url=emoji.url, cache_path=emoji.cache_path
+                    )
                 self.user_stats[group_id][user_id][emoji.cache_path].increment_count(
                     today
                 )
