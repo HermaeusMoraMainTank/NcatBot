@@ -41,7 +41,7 @@ class TodayAnime(BasePlugin):
         refdata = []
         for i in todaydata:
             refdata.append(Text(f"番剧名称:{i.get('title')}"))
-            refdata.append(Image(i.get("image")))
+            refdata.append(self.toimg((i.get('image'))))
             refdata.append(Text(f"更新时间:{i.get('air_date')}\n"))
         await self.api.post_group_msg(
             group_id=input.group_id,
@@ -72,3 +72,5 @@ class TodayAnime(BasePlugin):
                     }
                     today_anime.append(anime_info)
         return today_anime
+    def toimg(self, url):
+        return {"type": "image", "data":{"file":url}}
