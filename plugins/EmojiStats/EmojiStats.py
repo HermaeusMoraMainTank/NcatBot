@@ -444,7 +444,9 @@ class EmojiStatsPlugin(BasePlugin):
         """获取最受欢迎的表情包"""
         # 按使用次数排序
         sorted_emojis = sorted(
-            stats.values(), key=lambda x: x.get_count(days), reverse=True
+            [emoji for emoji in stats.values() if emoji.get_count(days) > 0],
+            key=lambda x: x.get_count(days),
+            reverse=True,
         )
         return sorted_emojis[:3]
 
