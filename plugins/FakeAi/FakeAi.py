@@ -20,6 +20,7 @@ bot = CompatibleEnrollment
 trigger_interval = 600  # 每小时最多触发一次（秒）
 group_reply_caches: Dict[int, "ReplyCache"] = {}  # 存储每个群的 ReplyCache
 last_trigger_times: Dict[int, datetime] = {}  # 存储每个群的上次触发时间
+user_trigger_times: Dict[int, datetime] = {}  # 存储每个用户的上次触发时间
 group_ids = [
     719518427,  # oob
     626192977,  # e7
@@ -91,6 +92,10 @@ class FakeAi(BasePlugin):
                 return
 
         if "[CQ:at,qq=3555202423]" in input.raw_message:
+            # 检查用户CD（除了273421673用户）
+            if sender_id != 273421673 and not check_user_cd(sender_id):
+                return
+
             reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
 
             # 创建 JSON 格式的字符串并添加到 replyCache 中
@@ -102,6 +107,10 @@ class FakeAi(BasePlugin):
             answer = await answer_ai(group_id, group_reply_caches)
             _log.info(answer)
             await send_typing_response(self, input, answer)
+
+            # 更新用户触发时间
+            if sender_id != 273421673:
+                user_trigger_times[sender_id] = datetime.now()
             return
 
         # 获取或创建对应群的 ReplyCache
@@ -237,6 +246,17 @@ def check_cd(group_id: int) -> bool:
     remaining_time = trigger_interval - (now - last_trigger_time).total_seconds()
 
     # CD 冷却完成
+    return remaining_time <= 0
+
+
+def check_user_cd(user_id: int) -> bool:
+    """检查用户CD是否冷却完成"""
+    last_trigger_time = user_trigger_times.get(user_id)
+    if not last_trigger_time:
+        return True  # 如果没有记录，则表示冷却完成
+
+    now = datetime.now()
+    remaining_time = trigger_interval - (now - last_trigger_time).total_seconds()
     return remaining_time <= 0
 
 

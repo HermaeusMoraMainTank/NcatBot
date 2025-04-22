@@ -101,8 +101,8 @@ class EmojiStatsPlugin(BasePlugin):
     version = "1.0"
 
     # 数据存储路径
-    DATA_FILE = "data/json/emoji_stats.json"
-    CACHE_DIR = "data/image/emoji_stats"
+    DATA_FILE = os.path.join("data", "json", "emoji_stats.json")
+    CACHE_DIR = os.path.join("data", "image", "emoji_stats")
 
     # 统计数据
     group_stats: Dict[int, Dict[str, EmojiStats]] = {}  # 群组表情包统计
@@ -463,6 +463,15 @@ class EmojiStatsPlugin(BasePlugin):
             if start_date <= date.fromisoformat(date_str) <= end_date
         }
 
+    def _number_to_counter(self, number: int) -> List[Image]:
+        """将数字转换为计数器图片形式"""
+        result = []
+        for digit in str(number):
+            result.append(
+                Image(os.path.join("data", "image", "number", f"{digit}.gif"))
+            )
+        return result
+
     @bot.group_event()
     async def handle_emoji_stats(self, input: GroupMessage) -> None:
         """处理表情包统计命令"""
@@ -517,7 +526,12 @@ class EmojiStatsPlugin(BasePlugin):
 
             # 添加消息元素
             message.chain.append(Text("=== 群组表情包统计 ===\n"))
-            message.chain.append(Text(f"最近{days}天发送表情包: {total_count}次\n\n"))
+            message.chain.append(Text("最近"))
+            message.chain.append(Text(str(days)))
+            message.chain.append(Text("天发送表情包数量:\n"))
+            for img in self._number_to_counter(total_count):
+                message.chain.append(img)
+            message.chain.append(Text("\n\n"))
 
             # 添加发送次数最多的用户统计
             message.chain.append(Text("发送表情包最多的用户TOP3:\n"))
@@ -574,7 +588,12 @@ class EmojiStatsPlugin(BasePlugin):
 
             # 添加消息元素
             message.chain.append(Text("=== 个人表情包统计 ===\n"))
-            message.chain.append(Text(f"最近{days}天发送表情包: {total_count}次\n\n"))
+            message.chain.append(Text("最近"))
+            message.chain.append(Text(str(days)))
+            message.chain.append(Text("天发送表情包数量:\n"))
+            for img in self._number_to_counter(total_count):
+                message.chain.append(img)
+            message.chain.append(Text("\n\n"))
             message.chain.append(Text("最常使用的表情包TOP3:\n"))
 
             # 添加表情包信息
