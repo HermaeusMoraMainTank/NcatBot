@@ -21,8 +21,9 @@ BLESSINGS = [
     "真是天作之合！",
     "愿你们永远快乐！",
     "真是令人羡慕的一对！",
-    "祝福你们的美好未来！"
+    "祝福你们的美好未来！",
 ]
+
 
 class TodayWaifu(BasePlugin):
     name = "TodayWaifu"  # 插件名称
@@ -135,8 +136,11 @@ class TodayWaifu(BasePlugin):
                                     At(user_id),
                                     Text("你今天的群友老婆是："),
                                     ImageElement(avatar_url),
-                                    Text(f" {wife_info.nickname}({wife_info.user_id})\n"),
-                                    Text(f"{BLESSINGS[random.randint(0,len(BLESSINGS))]}"),
+                                    Text(f" {wife_info.nickname}({wife_info.user_id})"),
+                                    Text("\n"),
+                                    Text(
+                                        f"{BLESSINGS[random.randint(0, len(BLESSINGS))]}"
+                                    ),
                                 ]
                             ),
                         )
@@ -161,6 +165,7 @@ class TodayWaifu(BasePlugin):
                         Text(" 你今天的群友老婆是："),
                         ImageElement(avatar_url),
                         Text(f" {new_wife.nickname}({new_wife.user_id})"),
+                        Text("\n"),
                         Text(f"{BLESSINGS[random.randint(0, len(BLESSINGS))]}"),
                     ]
                 ),

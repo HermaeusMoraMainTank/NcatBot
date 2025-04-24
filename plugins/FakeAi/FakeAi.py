@@ -82,10 +82,12 @@ class FakeAi(BasePlugin):
         content = input.message
         # 判断是否是功能测试的指令
         if input.raw_message == "蓝晴说话":
-            if (
-                sender_id in [1064163905, 1141419351, 1506123340, 273421673]
-                or group_id == 719518427
-            ):
+            if sender_id in [
+                1064163905,
+                1141419351,
+                1506123340,
+                273421673,
+            ] or group_id in [719518427, 853963912]:
                 answer = await answer_ai(group_id, group_reply_caches)
                 _log.info(answer)
                 await send_typing_response(self, input, answer)

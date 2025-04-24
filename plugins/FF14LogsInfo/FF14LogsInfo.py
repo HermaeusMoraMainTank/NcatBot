@@ -35,16 +35,25 @@ class FF14LogsInfo(BasePlugin):
     TOKEN_FILE_PATH = "data/json/access_token.json"
     URL = "https://cn.fflogs.com/api/v2/client"
     FONT_PATH = "data/font/FZMiaoWuK.TTF"
+    BOSS_ICON_CACHE_DIR = "data/image/ff14/boss_icons"
+    JOB_ICON_CACHE_DIR = "data/image/ff14/job_icons"
+
+    # 创建缓存目录
+    os.makedirs(BOSS_ICON_CACHE_DIR, exist_ok=True)
+    os.makedirs(JOB_ICON_CACHE_DIR, exist_ok=True)
 
     api_token = ""
     zones = [
-        Zone(54, "万魔殿 荒天之狱", 101),
-        Zone(49, "万魔殿 炼净之狱", 101),
-        Zone(44, "万魔殿 边境之狱", 101),
+        # Zone(54, "万魔殿 荒天之狱", 101),
+        # Zone(49, "万魔殿 炼净之狱", 101),
+        # Zone(44, "万魔殿 边境之狱", 101),
         Zone(62, "阿卡狄亚竞技场 轻量级", 101),
         Zone(53, "欧米茄绝境验证战", 100),
         Zone(45, "幻想龙诗绝境战", 100),
         Zone(43, "绝境战（旧版本）", 100),
+        Zone(64, "幻巧战", 100),
+        Zone(65, "绝伊甸", 100),
+        Zone(66, "灭云妈", 100),
     ]
 
     class RankingInfo:
@@ -193,7 +202,7 @@ class FF14LogsInfo(BasePlugin):
     def generate_image(
         self, username: str, server: str, ranking_info_list: List[RankingInfo]
     ) -> str:
-        width = 660
+        width = 720  # 增加宽度以适应新的布局
         height = 170 + len(ranking_info_list) * 80
         image = Image.new("RGB", (width, height), "black")
         draw = ImageDraw.Draw(image)
@@ -208,9 +217,9 @@ class FF14LogsInfo(BasePlugin):
         # 绘制标题
         draw.text((10, 60), f"{username} - {server}", fill="white", font=font)
         draw.text((20, 130), "Boss", fill=(180, 189, 255), font=font)
-        draw.text((290, 130), "Best", fill=(180, 189, 255), font=font)
-        draw.text((410, 130), "Highest RDPS", fill=(180, 189, 255), font=font)
-        draw.text((590, 130), "Kills", fill=(180, 189, 255), font=font)
+        draw.text((350, 130), "Best", fill=(180, 189, 255), font=font)
+        draw.text((470, 130), "Highest RDPS", fill=(180, 189, 255), font=font)
+        draw.text((620, 130), "Kills", fill=(180, 189, 255), font=font)
 
         # 绘制每个 RankingInfo
         y_offset = 160
@@ -225,6 +234,33 @@ class FF14LogsInfo(BasePlugin):
         image.save(file_path)
         return file_path
 
+    def get_cached_image(self, url: str, cache_dir: str) -> Image.Image:
+        # 从URL中提取文件名
+        file_name = url.split("/")[-1].split("?")[0]
+        cache_path = os.path.normpath(os.path.join(cache_dir, file_name))
+
+        # 确保缓存目录存在
+        os.makedirs(os.path.dirname(cache_path), exist_ok=True)
+
+        # 检查缓存是否存在
+        if os.path.exists(cache_path):
+            try:
+                return Image.open(cache_path)
+            except Exception as e:
+                print(f"Error loading cached image: {e}")
+
+        # 如果缓存不存在或加载失败，从网络获取
+        try:
+            response = httpx.get(url)
+            response.raise_for_status()
+            image = Image.open(BytesIO(response.content))
+            # 保存到缓存
+            image.save(cache_path)
+            return image
+        except Exception as e:
+            print(f"Error downloading image: {e}")
+            raise
+
     def draw_ranking_info(
         self,
         draw: ImageDraw.Draw,
@@ -235,8 +271,8 @@ class FF14LogsInfo(BasePlugin):
     ):
         # 绘制 Boss 图标和名字
         try:
-            boss_icon = Image.open(
-                BytesIO(httpx.get(ranking_info.get_boss_url()).content)
+            boss_icon = self.get_cached_image(
+                ranking_info.get_boss_url(), self.BOSS_ICON_CACHE_DIR
             )
             boss_icon = boss_icon.resize((64, 64))
             image.paste(boss_icon, (10, y_offset + 8))
@@ -252,7 +288,7 @@ class FF14LogsInfo(BasePlugin):
         # 绘制 rankPercent
         rank_color = self.get_rank_color(ranking_info.rank_percent)
         draw.text(
-            (290, y_offset + 20),
+            (350, y_offset + 20),
             str(int(ranking_info.rank_percent)),
             fill=rank_color,
             font=font,
@@ -260,8 +296,8 @@ class FF14LogsInfo(BasePlugin):
 
         # 绘制 Job 图标
         try:
-            job_icon = Image.open(
-                BytesIO(httpx.get(ranking_info.get_job_icon_url()).content)
+            job_icon = self.get_cached_image(
+                ranking_info.get_job_icon_url(), self.JOB_ICON_CACHE_DIR
             )
             job_icon = job_icon.resize((32, 32))
             # 确保图标背景透明
@@ -274,20 +310,20 @@ class FF14LogsInfo(BasePlugin):
 
             # 绘制职业图标
             image.paste(
-                transparent_icon, (320, y_offset + 20), transparent_icon
+                transparent_icon, (380, y_offset + 20), transparent_icon
             )  # 使用透明背景
         except Exception as e:
             print(f"Error drawing job icon: {e}")
 
         # 绘制 totalKills 和 bestAmount
         draw.text(
-            (610, y_offset + 20),
+            (640, y_offset + 20),
             str(ranking_info.total_kills),
             fill=(225, 242, 245),
             font=font,
         )
         draw.text(
-            (450, y_offset + 20),
+            (510, y_offset + 20),
             f"{ranking_info.best_amount:.2f}",
             fill=(180, 189, 255),
             font=font,
@@ -324,14 +360,13 @@ class FF14LogsInfo(BasePlugin):
 
         combined_ranking_infos = []
         for zone in self.zones:
-            if zone.name == "阿卡狄亚竞技场 轻量级":
-                data = self.get_data(character_name, server, zone.id)
-                if data:
-                    try:
-                        ranking_infos = self.parse_response_data(data)
-                        combined_ranking_infos.extend(ranking_infos)
-                    except Exception as e:
-                        print(f"Error parsing data: {e}")
+            data = self.get_data(character_name, server, zone.id)
+            if data:
+                try:
+                    ranking_infos = self.parse_response_data(data)
+                    combined_ranking_infos.extend(ranking_infos)
+                except Exception as e:
+                    print(f"Error parsing data: {e}")
 
         if not combined_ranking_infos:
             await self.api.post_group_msg(
