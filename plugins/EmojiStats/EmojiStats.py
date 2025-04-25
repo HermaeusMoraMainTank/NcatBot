@@ -365,10 +365,15 @@ class EmojiStatsPlugin(BasePlugin):
                 if user_id not in self.user_stats[group_id]:
                     self.user_stats[group_id][user_id] = {}
                 if emoji.cache_path not in self.user_stats[group_id][user_id]:
-                    # 创建新的emoji对象，而不是直接使用群组的emoji对象
+                    # 创建新的emoji对象，确保与群组统计完全独立
                     self.user_stats[group_id][user_id][emoji.cache_path] = EmojiStats(
                         url=emoji.url, cache_path=emoji.cache_path
                     )
+                    # 初始化用户统计的daily_counts
+                    self.user_stats[group_id][user_id][
+                        emoji.cache_path
+                    ].daily_counts = {}
+                # 只增加当天的使用次数
                 self.user_stats[group_id][user_id][emoji.cache_path].increment_count(
                     today
                 )
