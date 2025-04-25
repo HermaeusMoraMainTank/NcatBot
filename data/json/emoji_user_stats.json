@@ -1,0 +1,60 @@
+{
+  "user_stats": {
+    "853963912": {
+      "273421673": {
+        "016ccb37f1d9c992e97d01b3f3b30b43.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSOq9aBngyWkMPE_Aqzr6tOR0VO6Bi6nAIg_wook_f-qNTyjAMyBHByb2RQgL2jAVoQ6rio8azGG89B1ORtf-v4q3oCPZw&rkey=CAQSKAB6JWENi5LMx3hSem9LeZQ9dPBkW4B-QEC3JKrsCgAtjt7Xyr5gOQs",
+          "cache_path": "data\\image\\emoji_stats\\016ccb37f1d9c992e97d01b3f3b30b43.jpg",
+          "daily_counts": {
+            "2025-04-25": 1
+          },
+          "last_used": "2025-04-25T15:27:43.483028"
+        },
+        "95b78db1b1c56dd02e4520ad982e9cc3.jpg": {
+          "url": "https://gxh.vip.qq.com/club/item/parcel/item/d4/d48a5dfec1de237730ae630bb2ec0189/raw300.gif",
+          "cache_path": "data\\image\\emoji_stats\\95b78db1b1c56dd02e4520ad982e9cc3.jpg",
+          "daily_counts": {
+            "2025-04-25": 1
+          },
+          "last_used": "2025-04-25T15:27:48.011568"
+        }
+      },
+      "10123121": {
+        "e0432cf9d4aa592dc2c23a920d878b05.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRwBpR7vfTG3zWjKfE3n67cIv96dRidzQwg_wooxvCWs9TyjAMyBHByb2RQgL2jAVoQUOQQu-fHUMf3sd3132Ux9XoClrg&rkey=CAQSKAB6JWENi5LMx3hSem9LeZQ9dPBkW4B-QEC3JKrsCgAtjt7Xyr5gOQs",
+          "cache_path": "data\\image\\emoji_stats\\e0432cf9d4aa592dc2c23a920d878b05.jpg",
+          "daily_counts": {
+            "2025-04-25": 1
+          },
+          "last_used": "2025-04-25T15:28:05.218387"
+        },
+        "data\\image\\emoji_stats\\95b78db1b1c56dd02e4520ad982e9cc3.jpg": {
+          "url": "https://gxh.vip.qq.com/club/item/parcel/item/d4/d48a5dfec1de237730ae630bb2ec0189/raw300.gif",
+          "cache_path": "data\\image\\emoji_stats\\95b78db1b1c56dd02e4520ad982e9cc3.jpg",
+          "daily_counts": {
+            "2025-04-25": 1
+          },
+          "last_used": "2025-04-25T15:28:06.120252"
+        },
+        "df5f54fc17a49a9d8ec2fc5407d25107.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQbnmtOUIS--pRDm8lYhXWVgRsihRiB5QQg_wooy_qxtNTyjAMyBHByb2RQgL2jAVoQ4ZF3Wqd9YoUjBqLmuSmSO3oCB7k&rkey=CAQSKAB6JWENi5LMx3hSem9LeZQ9dPBkW4B-QEC3JKrsCgAtjt7Xyr5gOQs",
+          "cache_path": "data\\image\\emoji_stats\\df5f54fc17a49a9d8ec2fc5407d25107.jpg",
+          "daily_counts": {
+            "2025-04-25": 1
+          },
+          "last_used": "2025-04-25T15:28:08.307981"
+        }
+      }
+    }
+  },
+  "user_count": {
+    "853963912": {
+      "273421673": {
+        "2025-04-25": 2
+      },
+      "10123121": {
+        "2025-04-25": 3
+      }
+    }
+  }
+}

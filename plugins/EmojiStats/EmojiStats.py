@@ -101,7 +101,8 @@ class EmojiStatsPlugin(BasePlugin):
     version = "1.0"
 
     # 数据存储路径
-    DATA_FILE = os.path.join("data", "json", "emoji_stats.json")
+    GROUP_DATA_FILE = os.path.join("data", "json", "emoji_group_stats.json")
+    USER_DATA_FILE = os.path.join("data", "json", "emoji_user_stats.json")
     CACHE_DIR = os.path.join("data", "image", "emoji_stats")
 
     # 统计数据
@@ -138,24 +139,14 @@ class EmojiStatsPlugin(BasePlugin):
         """加载保存的数据"""
         try:
             # 确保目录存在
-            os.makedirs(os.path.dirname(self.DATA_FILE), exist_ok=True)
+            os.makedirs(os.path.dirname(self.GROUP_DATA_FILE), exist_ok=True)
+            os.makedirs(os.path.dirname(self.USER_DATA_FILE), exist_ok=True)
 
-            # 如果文件不存在，初始化空数据
-            if not os.path.exists(self.DATA_FILE):
-                _log.info("数据文件不存在，创建新文件")
-                self._save_data()
-                return
-
-            # 尝试不同的编码方式读取文件
-            encodings = ["utf-8", "gbk", "gb2312", "gb18030"]
-            for encoding in encodings:
+            # 加载群组数据
+            if os.path.exists(self.GROUP_DATA_FILE):
                 try:
-                    _log.info(f"尝试使用 {encoding} 编码读取文件")
-                    with open(self.DATA_FILE, "r", encoding=encoding) as f:
-                        content = f.read()
-                        _log.info(f"文件内容: {content[:100]}...")  # 只打印前100个字符
-                        data = json.loads(content)
-
+                    with open(self.GROUP_DATA_FILE, "r", encoding="utf-8") as f:
+                        data = json.loads(f.read())
                         # 加载群组统计
                         self.group_stats = {}
                         for k, v in data.get("group_stats", {}).items():
@@ -174,6 +165,30 @@ class EmojiStatsPlugin(BasePlugin):
                                 _log.error(f"加载群组数据失败: {e}")
                                 continue
 
+                        # 加载群组计数
+                        self.group_count = {}
+                        for k, v in data.get("group_count", {}).items():
+                            try:
+                                group_id = int(k)
+                                self.group_count[group_id] = {}
+                                for k2, v2 in v.items():
+                                    try:
+                                        self.group_count[group_id][k2] = int(v2)
+                                    except Exception as e:
+                                        _log.error(f"加载群组计数数据失败: {e}")
+                                        continue
+                            except Exception as e:
+                                _log.error(f"加载群组数据失败: {e}")
+                                continue
+                except Exception as e:
+                    _log.error(f"加载群组数据失败: {e}")
+                    self._save_group_data()
+
+            # 加载用户数据
+            if os.path.exists(self.USER_DATA_FILE):
+                try:
+                    with open(self.USER_DATA_FILE, "r", encoding="utf-8") as f:
+                        data = json.loads(f.read())
                         # 加载用户统计
                         self.user_stats = {}
                         for k, v in data.get("user_stats", {}).items():
@@ -196,22 +211,6 @@ class EmojiStatsPlugin(BasePlugin):
                                                 continue
                                     except Exception as e:
                                         _log.error(f"加载用户数据失败: {e}")
-                                        continue
-                            except Exception as e:
-                                _log.error(f"加载群组数据失败: {e}")
-                                continue
-
-                        # 加载群组计数
-                        self.group_count = {}
-                        for k, v in data.get("group_count", {}).items():
-                            try:
-                                group_id = int(k)
-                                self.group_count[group_id] = {}
-                                for k2, v2 in v.items():
-                                    try:
-                                        self.group_count[group_id][k2] = int(v2)
-                                    except Exception as e:
-                                        _log.error(f"加载群组计数数据失败: {e}")
                                         continue
                             except Exception as e:
                                 _log.error(f"加载群组数据失败: {e}")
@@ -241,68 +240,59 @@ class EmojiStatsPlugin(BasePlugin):
                             except Exception as e:
                                 _log.error(f"加载群组数据失败: {e}")
                                 continue
-
-                        _log.info("数据加载成功")
-                        return  # 如果成功读取，直接返回
-                except UnicodeDecodeError as e:
-                    _log.error(f"使用 {encoding} 编码读取失败: {e}")
-                    continue
-                except json.JSONDecodeError as e:
-                    _log.error(f"JSON解析失败: {e}")
-                    continue
                 except Exception as e:
-                    _log.error(f"加载数据时发生错误: {e}")
-                    continue
-
-            # 如果所有编码都失败，创建新的空文件
-            _log.warning("无法读取数据文件，将创建新的空文件")
-            self._save_data()
+                    _log.error(f"加载用户数据失败: {e}")
+                    self._save_user_data()
 
         except Exception as e:
             _log.error(f"加载数据失败: {e}")
-            # 如果发生其他错误，也创建新的空文件
-            self._save_data()
+            self._save_group_data()
+            self._save_user_data()
 
-    def _save_data(self):
-        """保存数据"""
+    def _save_group_data(self):
+        """保存群组数据"""
         try:
-            # 确保目录存在
-            os.makedirs(os.path.dirname(self.DATA_FILE), exist_ok=True)
-
-            # 准备要保存的数据
             data = {
                 "group_stats": {
-                    str(k): {
-                        k2: v2.to_dict()  # 使用自定义的 to_dict 方法
-                        for k2, v2 in v.items()
-                    }
+                    str(k): {k2: v2.to_dict() for k2, v2 in v.items()}
                     for k, v in self.group_stats.items()
                 },
+                "group_count": {str(k): v for k, v in self.group_count.items()},
+            }
+            with open(self.GROUP_DATA_FILE, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2, cls=DateTimeEncoder)
+            _log.info("群组数据保存成功")
+        except Exception as e:
+            _log.error(f"保存群组数据失败: {e}")
+            raise
+
+    def _save_user_data(self):
+        """保存用户数据"""
+        try:
+            data = {
                 "user_stats": {
                     str(k): {
-                        str(k2): {
-                            k3: v3.to_dict()  # 使用自定义的 to_dict 方法
-                            for k3, v3 in v2.items()
-                        }
+                        str(k2): {k3: v3.to_dict() for k3, v3 in v2.items()}
                         for k2, v2 in v.items()
                     }
                     for k, v in self.user_stats.items()
                 },
-                "group_count": {str(k): v for k, v in self.group_count.items()},
                 "user_count": {
                     str(k): {str(k2): v2 for k2, v2 in v.items()}
                     for k, v in self.user_count.items()
                 },
             }
-
-            # 保存数据，使用自定义的 JSON 编码器
-            with open(self.DATA_FILE, "w", encoding="utf-8") as f:
+            with open(self.USER_DATA_FILE, "w", encoding="utf-8") as f:
                 json.dump(data, f, ensure_ascii=False, indent=2, cls=DateTimeEncoder)
-            _log.info("数据保存成功")
-
+            _log.info("用户数据保存成功")
         except Exception as e:
-            _log.error(f"保存数据失败: {e}")
-            raise  # 重新抛出异常，让调用者知道保存失败
+            _log.error(f"保存用户数据失败: {e}")
+            raise
+
+    def _save_data(self):
+        """保存所有数据"""
+        self._save_group_data()
+        self._save_user_data()
 
     async def _download_and_cache_image(self, image_url: str) -> Optional[str]:
         """下载并缓存图片，返回缓存路径"""
