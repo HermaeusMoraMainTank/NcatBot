@@ -206,15 +206,8 @@ class UptimePlugin(BasePlugin):
         draw.text((x + 20, y_title), title, fill=COLOR_TITLE, font=font_title)
         bbox = draw.textbbox((0, 0), title, font=font_title)
         title_height = bbox[3] - bbox[1]
-        # "当前无限时奖励"标题
-        y_reward = y_title + title_height + 12
-        draw.text(
-            (x + 20, y_reward), "当前无限时奖励", fill=COLOR_LABEL, font=font_label
-        )
-        bbox = draw.textbbox((0, 0), "当前无限时奖励", font=font_label)
-        reward_height = bbox[3] - bbox[1]
         # 时间部分卡片
-        y_timeblock = y_reward + reward_height + 10  # 再往上一点
+        y_timeblock = y_title + title_height + 20  # 直接接在标题下面
         timeblock_left = x + 10
         timeblock_right = x + CARD_WIDTH - 10
         draw.rounded_rectangle(
@@ -334,14 +327,14 @@ class UptimePlugin(BasePlugin):
             font=font_small,
         )
         # boss图片
-        y_boss = y_timeblock + 120 + 10  # 奖励记录整体上移20像素
+        y_boss = y_timeblock + 120 + 5  # 再往上移一点
         try:
             boss_img = Image.open(BOSS_IMAGE_PATH).resize((CARD_WIDTH - 40, 60))
             img.paste(boss_img, (x + 20, y_boss))
         except Exception:
             pass
         # 最近奖励记录
-        y_record = y_boss + 60 + 10  # 奖励记录整体上移20像素
+        y_record = y_boss + 60 + 5  # 再往上移一点
         draw.text((x + 20, y_record), "最近奖励记录", fill=COLOR_LABEL, font=font_label)
         starts = data.get("last_bonus_starts", []) if data else []
         ends = data.get("last_bonus_ends", []) if data else []
