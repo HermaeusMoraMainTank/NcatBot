@@ -26,7 +26,14 @@ class ImageSender(BasePlugin):
         },
         "zmd": {
             "path": "data/image/zmd",
-            "allowed_users": [273421673, 635773721, 510337095, 3420347160, 1508864751],
+            "allowed_users": [
+                273421673,
+                635773721,
+                510337095,
+                3420347160,
+                1508864751,
+                10123121,
+            ],
         },
         "doro": {
             "path": "data/image/doro",
