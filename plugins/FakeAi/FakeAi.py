@@ -21,6 +21,8 @@ trigger_interval = 600  # 每小时最多触发一次（秒）
 group_reply_caches: Dict[int, "ReplyCache"] = {}  # 存储每个群的 ReplyCache
 last_trigger_times: Dict[int, datetime] = {}  # 存储每个群的上次触发时间
 user_trigger_times: Dict[int, datetime] = {}  # 存储每个用户的上次触发时间
+enable_group_cd = True  # 群聊冷却开关
+enable_user_cd = False  # 用户冷却开关
 group_ids = [
     719518427,  # oob
     626192977,  # e7
@@ -240,6 +242,8 @@ def find_user_id_by_name(name: str, group_id: int) -> Optional[int]:
 
 
 def check_cd(group_id: int) -> bool:
+    if not enable_group_cd:
+        return True  # 如果群聊冷却被禁用，直接返回True
     last_trigger_time = last_trigger_times.get(group_id)
     if not last_trigger_time:
         return True  # 如果没有记录，则表示冷却完成
@@ -253,6 +257,8 @@ def check_cd(group_id: int) -> bool:
 
 def check_user_cd(user_id: int) -> bool:
     """检查用户CD是否冷却完成"""
+    if not enable_user_cd:
+        return True  # 如果用户冷却被禁用，直接返回True
     last_trigger_time = user_trigger_times.get(user_id)
     if not last_trigger_time:
         return True  # 如果没有记录，则表示冷却完成
@@ -263,9 +269,9 @@ def check_user_cd(user_id: int) -> bool:
 
 
 def load_yaml_data(group_id) -> Dict:
-    # if group_id == 853963912:
-    #     with open("ncatpy/data/yml/lanqingv2.yml", "r", encoding="utf-8") as file:
-    #         return yaml.safe_load(file)
+    if group_id == 719518427:
+        with open("data/yml/lanqingv1_ai.yml", "r", encoding="utf-8") as file:
+            return yaml.safe_load(file)
     with open("data/yml/lanqingv1.yml", "r", encoding="utf-8") as file:
         return yaml.safe_load(file)
 

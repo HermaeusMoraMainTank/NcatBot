@@ -21,10 +21,15 @@ class ImageSender(BasePlugin):
     # 命令配置
     commands = {
         "母肥": {
+            "triggers": ["母肥", "肥肥"],
             "path": "C:\\Users\\27342\\Downloads\\lalafell\\lalafell",
             "allowed_users": None,
         },
         "zmd": {
+            "triggers": [
+                "zmd",
+                "迷茫的时候 不如听听zmd说的话",
+            ],
             "path": "data/image/zmd",
             "allowed_users": [
                 273421673,
@@ -33,17 +38,21 @@ class ImageSender(BasePlugin):
                 3420347160,
                 1508864751,
                 10123121,
+                1607928177,
             ],
         },
         "doro": {
+            "triggers": ["doro"],
             "path": "data/image/doro",
             "allowed_users": None,
         },
         "柴郡": {
+            "triggers": ["柴郡"],
             "path": "data/image/cheshire",
             "allowed_users": None,
         },
         "llm": {
+            "triggers": ["llm", "迷茫的时候 不如听听llm说的话"],
             "path": "data/image/llm",
             "allowed_users": [273421673, 2779893879, 361432025],
         },
@@ -55,54 +64,56 @@ class ImageSender(BasePlugin):
 
         # 检查消息是否以任何命令开头
         for command, config in self.commands.items():
-            if message.startswith(command):
-                # 检查全局权限
-                if (
-                    self.allowed_users
-                    and input.sender.user_id not in self.allowed_users
-                ):
-                    return
-
-                # 检查命令特定权限
-                if (
-                    config["allowed_users"]
-                    and input.sender.user_id not in config["allowed_users"]
-                ):
-                    return
-
-                # 处理带数量的情况
-                if message.startswith(command + " "):
-                    trimmed_message = message[len(command) + 1 :].strip()
-                    if not trimmed_message.isdigit():
+            for trigger in config["triggers"]:
+                if message.startswith(trigger):
+                    # 检查全局权限
+                    if (
+                        self.allowed_users
+                        and input.sender.user_id not in self.allowed_users
+                    ):
                         return
 
-                    count = int(trimmed_message)
-                    image_files = self.get_image_files(config["path"])
+                    # 检查命令特定权限
+                    if (
+                        config["allowed_users"]
+                        and input.sender.user_id not in config["allowed_users"]
+                    ):
+                        return
 
-                    if count <= self.max_count:
-                        for _ in range(count):
-                            file = random.choice(image_files)
-                            log.info(
-                                f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {file}"
-                            )
+                    # 处理带数量的情况
+                    if message.startswith(trigger + " "):
+                        trimmed_message = message[len(trigger) + 1 :].strip()
+                        if not trimmed_message.isdigit():
+                            return
+
+                        count = int(trimmed_message)
+                        image_files = self.get_image_files(config["path"])
+
+                        if count <= self.max_count:
+                            for _ in range(count):
+                                file = random.choice(image_files)
+                                log.info(
+                                    f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {file}"
+                                )
+                                await self.api.post_group_msg(
+                                    group_id=input.group_id,
+                                    rtf=MessageChain([Image(file)]),
+                                )
+                        else:
                             await self.api.post_group_msg(
-                                group_id=input.group_id, rtf=MessageChain([Image(file)])
+                                group_id=input.group_id, text="别太贪心"
                             )
-                    else:
-                        await self.api.post_group_msg(
-                            group_id=input.group_id, text="别太贪心"
+                    # 处理单个图片的情况
+                    elif message == trigger:
+                        image_files = self.get_image_files(config["path"])
+                        file = random.choice(image_files)
+                        log.info(
+                            f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {file}"
                         )
-                # 处理单个图片的情况
-                elif message == command:
-                    image_files = self.get_image_files(config["path"])
-                    file = random.choice(image_files)
-                    log.info(
-                        f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {file}"
-                    )
-                    await self.api.post_group_msg(
-                        group_id=input.group_id, rtf=MessageChain([Image(file)])
-                    )
-                return
+                        await self.api.post_group_msg(
+                            group_id=input.group_id, rtf=MessageChain([Image(file)])
+                        )
+                    return
 
     @staticmethod
     def get_image_files(folder_path):

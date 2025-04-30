@@ -223,10 +223,8 @@ class UptimePlugin(BasePlugin):
         if starts:
             last_start = self._to_bj_time(starts[0])
             if isinstance(last_start, datetime):
-                # 冷却开始时间固定为下一个17:00
-                cd_start = (last_start + timedelta(days=1)).replace(
-                    hour=17, minute=0, second=0, microsecond=0
-                )
+                # 冷却开始时间为上次奖励开始时间+24小时
+                cd_start = last_start + timedelta(hours=24)
                 # 强制开启时间为上次奖励开始时间+48小时
                 force_end = last_start + timedelta(hours=48)
             else:
@@ -250,20 +248,27 @@ class UptimePlugin(BasePlugin):
             # 如果在奖励时间内，直接显示冷却结束时间
             cd_end = cd_start
         else:
-            # 如果不在奖励时间，显示下一个判定时间点
-            next_judge_hours = [5, 11, 17, 23]  # 按照时间顺序排列
-            next_judge = None
-            for hour in next_judge_hours:
-                candidate = now.replace(hour=hour, minute=0, second=0, microsecond=0)
-                if candidate > now:
-                    next_judge = candidate
-                    break
-            if next_judge is None:
-                next_judge = (now + timedelta(days=1)).replace(
-                    hour=5, minute=0, second=0, microsecond=0
-                )
-            cd_end = next_judge
-            show_next_judge = True
+            # 如果不在奖励时间，检查是否在冷却期内
+            if now < cd_start:
+                # 在冷却期内，显示冷却结束时间
+                cd_end = cd_start
+            else:
+                # 不在冷却期，显示下一个判定时间点
+                next_judge_hours = [5, 11, 17, 23]  # 按照时间顺序排列
+                next_judge = None
+                for hour in next_judge_hours:
+                    candidate = now.replace(
+                        hour=hour, minute=0, second=0, microsecond=0
+                    )
+                    if candidate > now:
+                        next_judge = candidate
+                        break
+                if next_judge is None:
+                    next_judge = (now + timedelta(days=1)).replace(
+                        hour=5, minute=0, second=0, microsecond=0
+                    )
+                cd_end = next_judge
+                show_next_judge = True
 
         # 如果强制开启时间已过，显示下一个判定时间点
         if force_end <= now:
