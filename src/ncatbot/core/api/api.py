@@ -133,7 +133,13 @@ class BotAPI(SYNC_API_MIXIN):
         message_content, reports, news = [], [], []
         for msg in messages:
             report = (
+<<<<<<< HEAD
                 (await self.get_msg(str(msg)))["data"] if isinstance(msg, str) else msg
+=======
+                (await self.get_msg(str(msg)))["data"]
+                if isinstance(msg, (str, int))
+                else msg
+>>>>>>> upstream/main
             )
             reports.append(report)
             node = await self._message_node_construct(report)
@@ -150,7 +156,11 @@ class BotAPI(SYNC_API_MIXIN):
                 "source": "空的聊天记录",
                 "summary": "没有可查看的转发消息",
                 "news": [],
+<<<<<<< HEAD
                 "prompt": "聊天记录",
+=======
+                "prompt": "[聊天记录]",
+>>>>>>> upstream/main
             }
 
         last_report = reports[-1]
@@ -175,7 +185,11 @@ class BotAPI(SYNC_API_MIXIN):
             "source": f"{target}的聊天记录",
             "summary": f"查看{len(message_content)}条转发消息",
             "news": news,
+<<<<<<< HEAD
             "prompt": "聊天记录",
+=======
+            "prompt": "[聊天记录]",
+>>>>>>> upstream/main
         }
         return result
 

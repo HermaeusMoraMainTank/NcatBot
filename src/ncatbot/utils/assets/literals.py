@@ -12,15 +12,18 @@ NAPCAT_CLI_URL = (
 )
 PYPI_URL = "https://mirrors.aliyun.com/pypi/simple/"
 
-NAPCAT_CLI_PATH = LINUX_NAPCAT_DIR + "/napcat_cli"
+NAPCAT_CLI_PATH = f"{LINUX_NAPCAT_DIR}/napcat_cli"
 
 REQUEST_SUCCESS = "ok"
+NAPCAT_WEBUI_SALT = "napcat"
 
 OFFICIAL_GROUP_MESSAGE_EVENT = "ncatbot.group_message_event"
 OFFICIAL_PRIVATE_MESSAGE_EVENT = "ncatbot.private_message_event"
 OFFICIAL_REQUEST_EVENT = "ncatbot.request_event"
 OFFICIAL_NOTICE_EVENT = "ncatbot.notice_event"
 OFFICIAL_STARTUP_EVENT = "ncatbot.startup_event"
+OFFICIAL_SHUTDOWN_EVENT = "ncatbot.shutdown_event"
+OFFICIAL_HEARTBEAT_EVENT = "ncatbot.heartbeat_event"
 
 PLUGIN_BROKEN_MARK = "插件已损坏"
 
@@ -98,6 +101,7 @@ META_CONFIG_PATH = None  # 元数据，所有插件一份(只读)
 PERSISTENT_DIR = "data"  # 插件私有数据目录
 
 __all__ = [
+    "NAPCAT_WEBUI_SALT",
     "WINDOWS_NAPCAT_DIR",
     "LINUX_NAPCAT_DIR",
     "INSTALL_SCRIPT_URL",
@@ -110,6 +114,8 @@ __all__ = [
     "OFFICIAL_REQUEST_EVENT",
     "OFFICIAL_NOTICE_EVENT",
     "OFFICIAL_STARTUP_EVENT",
+    "OFFICIAL_SHUTDOWN_EVENT",
+    "OFFICIAL_HEARTBEAT_EVENT",
     "PLUGIN_BROKEN_MARK",
     "STATUS_ONLINE",
     "STATUS_Q_ME",

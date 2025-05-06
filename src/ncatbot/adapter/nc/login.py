@@ -1,3 +1,4 @@
+import hashlib
 import platform
 import time
 import traceback
@@ -7,7 +8,7 @@ import requests
 from requests.exceptions import ConnectionError
 from urllib3.exceptions import NewConnectionError
 
-from ncatbot.utils import config, get_log
+from ncatbot.utils import NAPCAT_WEBUI_SALT, config, get_log
 
 LOG = get_log("adapter.nc.login")
 main_handler = None
@@ -42,16 +43,20 @@ class LoginError(Exception):
 class LoginHandler:
     # 登录处理器
     def __init__(self):
-        MAX_TIME_EXPIER = time.time() + 30
+        MAX_TIME_EXPIER = time.time() + 15
         self.base_uri = config.webui_uri
         while True:
             try:
-                time.sleep(0.2)
+                time.sleep(0.02)
+                hashed_token = hashlib.sha256(
+                    f"{config.webui_token}.{NAPCAT_WEBUI_SALT}".encode()
+                ).hexdigest()
                 content = requests.post(
                     self.base_uri + "/api/auth/login",
-                    json={"token": config.webui_token},
-                    timeout=10,
+                    json={"hash": hashed_token},
+                    timeout=5,
                 ).json()
+                time.sleep(0.02)
                 self.header = {
                     "Authorization": "Bearer " + content["data"]["Credential"],
                 }
@@ -65,7 +70,27 @@ class LoginHandler:
                         "如果你修改了natcat的网页端开放端口（不是websocket），请修改启动参数：webui_uri='ws://xxxxx:xxxx'"
                     )
                 LOG.info("开放防火墙的 WebUI 端口 (默认 6099)")
-                exit(1)
+                raise Exception("连接 WebUI 失败")
+            except KeyError:
+                if time.time() > MAX_TIME_EXPIER:
+                    # 尝试老版本 NapCat 登录
+                    try:
+                        content = requests.post(
+                            self.base_uri + "/api/auth/login",
+                            json={"token": config.webui_token},
+                            timeout=5,
+                        ).json()
+                        time.sleep(0.2)
+                        self.header = {
+                            "Authorization": "Bearer " + content["data"]["Credential"],
+                        }
+                        LOG.debug("成功连接到 WEBUI")
+                        return
+                    except Exception:
+                        LOG.error(
+                            "授权操作超时, 连接 WebUI 成功但无法获取授权信息, 可以使用 bot.run(enable_webui_interaction=False) 跳过鉴权"
+                        )
+                        raise Exception("连接 WebUI 失败")
             except (ConnectionError, NewConnectionError):
                 if platform.system() == "Windows":
                     if time.time() > MAX_TIME_EXPIER:
@@ -73,13 +98,13 @@ class LoginHandler:
                         LOG.info(
                             "请检查 Windows 安全中心, 查看是否有拦截了 NapCat 启动程序的日志"
                         )
-                        exit(1)
+                        raise Exception("连接 WebUI 失败")
                 elif platform.system() == "Linux":
                     if time.time() > MAX_TIME_EXPIER:
                         LOG.error(
                             "错误 LoginHandler.__init__ ConnectionError, 请保留日志并联系开发团队"
                         )
-                        exit(1)
+                        raise Exception("连接 WebUI 失败")
                 else:
                     LOG.error("不支持的操作系统, 请自行检查并适配")
             except Exception as e:
@@ -88,7 +113,7 @@ class LoginHandler:
                         f"未知错误 LoginHandler.__init__ {e}, 请保留日志并联系开发团队"
                     )
                     LOG.info(traceback.format_exc())
-                    exit(1)
+                    raise Exception("连接 WebUI 失败")
 
     def get_quick_login(self):
         # 获取快速登录列表
@@ -119,18 +144,22 @@ class LoginHandler:
 
     def get_online_qq(self):
         """获取当前在线的 QQ 号, 如果无 QQ 在线, 则返回 None"""
-        try:
-            data = requests.post(
-                self.base_uri + "/api/QQLogin/GetQQLoginInfo",
-                headers=self.header,
-                timeout=5,
-            ).json()["data"]
-            offline = not data.get("online", False)
-            uin = data.get("uin", None)
-            return None if offline else str(uin)
-        except TimeoutError:
-            LOG.warning("检查在线状态超时, 默认不在线")
-            return False
+        for _ in range(5):
+            try:
+                data = requests.post(
+                    self.base_uri + "/api/QQLogin/GetQQLoginInfo",
+                    headers=self.header,
+                    timeout=5,
+                ).json()["data"]
+                offline = not data.get("online", False)
+                uin = data.get("uin", None)
+                if not offline:
+                    return str(uin)
+            except TimeoutError:
+                LOG.warning("检查在线状态超时, 默认不在线")
+                return False
+            time.sleep(0.05)
+        return None
 
     def check_online_statu(self):
         # 检查 QQ 是否在线
@@ -173,8 +202,10 @@ class LoginHandler:
             except TimeoutError:
                 pass
 
-        LOG.error("获取二维码失败, 请执行 `napcat stop` 后重启引导程序.")
-        exit(1)
+        LOG.error(
+            f"获取二维码失败, 请执行 `napcat stop; napcat start {config.bt_uin}` 后重启引导程序."
+        )
+        raise Exception("获取二维码失败")
 
     def login(self):
         def _login():
@@ -193,17 +224,17 @@ class LoginHandler:
                                 LOG.error(
                                     "登录超时, 请重新操作, 如果无法扫码, 请在 webui 登录"
                                 )
-                                exit(0)
+                                raise TimeoutError("登录超时")
                             if time.time() > WARN_EXPIRE:
                                 LOG.warning("二维码即将失效, 请尽快扫码登录")
                                 WARN_EXPIRE += 60
                         LOG.info("登录成功")
                     except Exception as e:
                         LOG.error(f"生成 ASCII 二维码时出错: {e}")
-                        exit(1)
+                        raise Exception("登录失败")
                 else:
                     LOG.error("未找到二维码图片, 请在 webui 尝试扫码登录")
-                    exit(1)
+                    raise Exception("登录失败")
 
         if not self.check_online_statu():
             LOG.info("未登录 QQ, 尝试登录")
@@ -225,7 +256,8 @@ def is_qq_equal(uin, other):
 
 
 def online_qq_is_bot():
-    online_qq = get_handler().get_online_qq()
+    handler = get_handler(reset=True)
+    online_qq = handler.get_online_qq()
 
     if online_qq is not None and not is_qq_equal(online_qq, config.bt_uin):
         LOG.warning(

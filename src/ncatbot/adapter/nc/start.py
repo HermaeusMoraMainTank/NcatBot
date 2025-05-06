@@ -29,22 +29,28 @@ def start_napcat_linux():
     # Linux启动逻辑
     try:
         # 启动并注册清理函数
+        if os.path.exists("napcat"):
+            LOG.error(
+                "工作目录下存在 napcat 目录, Linux 启动时不应该在工作目录下存在 napcat 目录"
+            )
+            raise FileExistsError("工作目录下存在 napcat 目录")
         process = subprocess.Popen(
             ["sudo", "bash", "napcat", "start", str(config.bt_uin)],
             stdout=subprocess.PIPE,
         )
         process.wait()
         if process.returncode != 0:
-            LOG.error("启动 napcat 失败，请检查日志，ncatbot cli 可能没有被正确安装")
+            LOG.error("启动 napcat 失败，请检查日志，napcat cli 可能没有被正确安装")
+            raise FileNotFoundError("napcat cli 可能没有被正确安装")
         if config.stop_napcat:
             atexit.register(lambda: stop_napcat_linux(config.bt_uin))
     except Exception as e:
         LOG.error(f"pgrep 命令执行失败, 无法判断 QQ 是否启动, 请检查错误: {e}")
-        exit(1)
+        raise e
 
     if not is_napcat_running_linux():
         LOG.error("napcat 启动失败，请检查日志")
-        exit(1)
+        raise Exception("napcat 启动失败")
     else:
         time.sleep(0.5)
         LOG.info("napcat 启动成功")
@@ -101,7 +107,7 @@ def start_napcat_windows():
 
     if not os.path.exists(launcher_path):
         LOG.error(f"找不到启动文件: {launcher_path}")
-        exit(1)
+        raise FileNotFoundError(f"找不到启动文件: {launcher_path}")
 
     LOG.info(f"正在启动QQ, 启动器路径: {launcher_path}")
     subprocess.Popen(
@@ -115,7 +121,8 @@ def start_napcat_windows():
 
 def stop_napcat_windows():
     """暂未实现"""
-    pass
+    LOG.error("暂未实现 Windows 停止 NapCat 服务, 请手动关闭 NapCat 服务")
+    raise NotImplementedError("暂未实现 Windows 停止 NapCat 服务")
 
 
 def is_napcat_running():
@@ -161,10 +168,10 @@ def config_napcat():
                     {
                         "name": "WsServer",
                         "enable": True,
-                        "host": str(urlparse(config.ws_uri).hostname),
+                        "host": config.ws_listen_ip,
                         "port": int(urlparse(config.ws_uri).port),
                         "messagePostFormat": "array",
-                        "reportSelfMessage": False,
+                        "reportSelfMessage": config.report_self_message,
                         "token": (
                             str(config.ws_token) if config.ws_token is not None else ""
                         ),
@@ -193,7 +200,7 @@ def config_napcat():
             LOG.error("配置 onebot 失败: " + str(e))
             if not check_permission():
                 LOG.info("请使用 root 权限运行 ncatbot")
-                exit(1)
+                raise Exception("请使用 root 权限运行 ncatbot")
 
     def config_quick_login():
         ori = os.path.join(napcat_dir, "quickLoginExample.bat")
@@ -213,7 +220,7 @@ def config_napcat():
             LOG.info("Token: " + token + ", Webui port: " + str(port))
 
         except FileNotFoundError:
-            LOG.error("无法读取 WebUI 配置, 将使用默认配置")
+            LOG.warning("无法读取 WebUI 配置, 将使用默认配置")
 
     config_onebot11()
     config_quick_login()
