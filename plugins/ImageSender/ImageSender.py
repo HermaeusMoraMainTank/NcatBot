@@ -39,6 +39,7 @@ class ImageSender(BasePlugin):
                 1508864751,
                 10123121,
                 1607928177,
+                2779893879,
             ],
         },
         "doro": {

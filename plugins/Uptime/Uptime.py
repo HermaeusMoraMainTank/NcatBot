@@ -63,6 +63,9 @@ IMG_HEIGHT = CARD_HEIGHT + CARD_MARGIN * 2
 # 北京时区
 BEIJING_TZ = timezone(timedelta(hours=8))
 
+# 时间部分卡片高度
+TIMEBLOCK_HEIGHT = 180  # 原110，增大以容纳多行
+
 
 def get_standard_time(dt):
     """将时间调整到最近的标准时间点"""
@@ -73,6 +76,15 @@ def get_standard_time(dt):
             closest_hour = standard_hour
         else:
             break
+
+    # 如果没有找到当天的标准时间点，则使用前一天的最后一个时间点
+    if hour < STANDARD_TIMES[0] or (
+        closest_hour == STANDARD_TIMES[-1] and hour > closest_hour
+    ):
+        if hour < STANDARD_TIMES[0]:
+            closest_hour = STANDARD_TIMES[-1]
+            dt = dt - timedelta(days=1)
+
     return dt.replace(hour=closest_hour, minute=0, second=0, microsecond=0)
 
 
@@ -91,9 +103,40 @@ def get_standard_duration(start_time, end_time):
     """计算标准化的持续时间"""
     if not isinstance(start_time, datetime) or not isinstance(end_time, datetime):
         return "-"
+
+    # 计算实际持续时间（小时）
     diff_hours = (end_time - start_time).total_seconds() / 3600
+
+    # 找到最接近的标准持续时间
     closest_duration = min(POSSIBLE_DURATIONS, key=lambda x: abs(x - diff_hours))
-    return f"{closest_duration}小时"
+
+    # 计算标准化的结束时间
+    standard_end = start_time + timedelta(hours=closest_duration)
+
+    return f"{closest_duration}小时", standard_end
+
+
+def format_time_for_display(dt):
+    """格式化时间显示"""
+    if not isinstance(dt, datetime):
+        return "-"
+    return dt.strftime("%m月%d日%H:%M")
+
+
+def calculate_possible_end_times(start_time):
+    """计算可能的结束时间点"""
+    if not isinstance(start_time, datetime):
+        return []
+
+    now = datetime.now(BEIJING_TZ)
+    possible_ends = []
+
+    for duration in POSSIBLE_DURATIONS:
+        end_time = start_time + timedelta(hours=duration)
+        if end_time > now:  # 只显示未结束的时间点
+            possible_ends.append({"duration": duration, "time": end_time})
+
+    return possible_ends
 
 
 class UptimePlugin(BasePlugin):
@@ -270,12 +313,15 @@ class UptimePlugin(BasePlugin):
         timeblock_left = x + 10
         timeblock_right = x + CARD_WIDTH - 10
         draw.rounded_rectangle(
-            [timeblock_left, y_timeblock, timeblock_right, y_timeblock + 110],
+            [
+                timeblock_left,
+                y_timeblock,
+                timeblock_right,
+                y_timeblock + TIMEBLOCK_HEIGHT,
+            ],
             radius=16,
             fill=(80, 50, 80),
         )
-        # 冷却结束和强制开启时间（右对齐且不溢出）
-        now = datetime.now(BEIJING_TZ)
         # 取上次奖励开始时间
         starts = data.get("last_bonus_starts", []) if data else []
         is_uptime = data.get("is_uptime") if data else False
@@ -285,91 +331,139 @@ class UptimePlugin(BasePlugin):
             if isinstance(last_start, datetime):
                 # 标准化开始时间
                 last_start = get_standard_time(last_start)
-                # 冷却开始时间为上次奖励开始时间+24小时
-                cd_start = last_start + timedelta(hours=COOLDOWN_HOURS)
-                # 强制开启时间为上次奖励开始时间+48小时
-                force_end = last_start + timedelta(hours=HARD_LIMIT_HOURS)
+
+                if is_uptime:
+                    # 如果在奖励时间内，显示可能的结束时间点
+                    possible_ends = calculate_possible_end_times(last_start)
+                    if possible_ends:
+                        # 显示每个可能的结束时间点
+                        for i, end_info in enumerate(possible_ends):
+                            y_offset = y_timeblock + 10 + i * 24  # 更紧凑的行距
+                            draw.text(
+                                (x + 20, y_offset),
+                                f"{end_info['duration']}小时结束:",
+                                fill=COLOR_LABEL,
+                                font=font_small,  # 用小字体
+                            )
+                            time_left = end_info["time"] - datetime.now(BEIJING_TZ)
+                            time_str = self._format_timedelta(time_left)
+                            draw.text(
+                                (x + 110, y_offset),
+                                time_str,
+                                fill=COLOR_TIME,
+                                font=font_small,
+                            )
+                            time_str = end_info["time"].strftime("%m-%d %H:%M")
+                            draw.text(
+                                (x + 200, y_offset),
+                                time_str,
+                                fill=COLOR_TIME,
+                                font=font_small,
+                            )
+                    else:
+                        # 如果没有未结束的时间点，显示即将结束
+                        draw.text(
+                            (x + 20, y_timeblock + 10),
+                            "奖励即将结束",
+                            fill=COLOR_LABEL,
+                            font=font_normal,
+                        )
+                else:
+                    # 如果不在奖励时间，显示冷却和强制开启时间
+                    # 冷却开始时间为上次奖励开始时间+24小时
+                    cd_start = last_start + timedelta(hours=COOLDOWN_HOURS)
+                    # 强制开启时间为上次奖励开始时间+48小时
+                    force_end = last_start + timedelta(hours=HARD_LIMIT_HOURS)
+
+                    # 判断是否显示下次判定
+                    show_next_judge = False
+                    now = datetime.now(BEIJING_TZ)
+                    if now < cd_start:
+                        # 在冷却期内，显示冷却结束时间
+                        cd_end = cd_start
+                    else:
+                        # 不在冷却期，显示下一个判定时间点
+                        cd_end = get_next_standard_time(now)
+                        show_next_judge = True
+
+                    # 如果强制开启时间已过，显示下一个判定时间点
+                    if force_end <= now:
+                        force_end = get_next_standard_time(now)
+
+                    cd_left = cd_end - now
+                    force_left = force_end - now
+                    cd_str = self._format_timedelta(cd_left)
+                    force_str = self._format_timedelta(force_left)
+                    cd_date = cd_end.strftime("%m-%d %H:%M")
+                    force_date = force_end.strftime("%m-%d %H:%M")
+
+                    # 冷却结束
+                    label_x = x + 30
+                    timeblock_max_right = timeblock_right - 10
+                    # 冷却结束倒计时
+                    bbox = draw.textbbox((0, 0), cd_str, font=font_label)
+                    cd_str_w = bbox[2] - bbox[0]
+                    bbox = draw.textbbox((0, 0), cd_date, font=font_small)
+                    cd_date_w = bbox[2] - bbox[0]
+                    cd_str_x = timeblock_max_right - max(cd_str_w, cd_date_w)
+                    draw.text(
+                        (label_x, y_timeblock + 10),
+                        "下次判定:" if show_next_judge else "冷却结束:",
+                        fill=COLOR_LABEL,
+                        font=font_normal,
+                    )
+                    draw.text(
+                        (cd_str_x, y_timeblock + 2),
+                        cd_str,
+                        fill=COLOR_TIME,
+                        font=font_label,
+                    )
+                    draw.text(
+                        (cd_str_x, y_timeblock + 28),
+                        cd_date,
+                        fill=COLOR_TIME,
+                        font=font_small,
+                    )
+                    # 强制开启
+                    bbox = draw.textbbox((0, 0), force_str, font=font_label)
+                    force_str_w = bbox[2] - bbox[0]
+                    bbox = draw.textbbox((0, 0), force_date, font=font_small)
+                    force_date_w = bbox[2] - bbox[0]
+                    force_str_x = timeblock_max_right - max(force_str_w, force_date_w)
+                    draw.text(
+                        (label_x, y_timeblock + 58),
+                        f"强制开启:",
+                        fill=COLOR_LABEL,
+                        font=font_normal,
+                    )
+                    draw.text(
+                        (force_str_x, y_timeblock + 50),
+                        force_str,
+                        fill=COLOR_TIME,
+                        font=font_label,
+                    )
+                    draw.text(
+                        (force_str_x, y_timeblock + 76),
+                        force_date,
+                        fill=COLOR_TIME,
+                        font=font_small,
+                    )
             else:
-                cd_start = (now + timedelta(days=1)).replace(
-                    hour=17, minute=0, second=0, microsecond=0
-                )
-                force_end = (now + timedelta(days=2)).replace(
-                    hour=17, minute=0, second=0, microsecond=0
+                # 处理无效的开始时间
+                draw.text(
+                    (x + 20, y_timeblock + 10),
+                    "无法获取时间信息",
+                    fill=COLOR_ERROR,
+                    font=font_normal,
                 )
         else:
-            cd_start = (now + timedelta(days=1)).replace(
-                hour=17, minute=0, second=0, microsecond=0
+            # 没有历史记录
+            draw.text(
+                (x + 20, y_timeblock + 10),
+                "暂无历史记录",
+                fill=COLOR_ERROR,
+                font=font_normal,
             )
-            force_end = (now + timedelta(days=2)).replace(
-                hour=17, minute=0, second=0, microsecond=0
-            )
-
-        # 判断是否显示下次判定
-        show_next_judge = False
-        if is_uptime:
-            # 如果在奖励时间内，直接显示冷却结束时间
-            cd_end = cd_start
-        else:
-            # 如果不在奖励时间，检查是否在冷却期内
-            if now < cd_start:
-                # 在冷却期内，显示冷却结束时间
-                cd_end = cd_start
-            else:
-                # 不在冷却期，显示下一个判定时间点
-                cd_end = get_next_standard_time(now)
-                show_next_judge = True
-
-        # 如果强制开启时间已过，显示下一个判定时间点
-        if force_end <= now:
-            force_end = get_next_standard_time(now)
-
-        cd_left = cd_end - now
-        force_left = force_end - now
-        cd_str = self._format_timedelta(cd_left)
-        force_str = self._format_timedelta(force_left)
-        cd_date = cd_end.strftime("%m-%d %H:%M")
-        force_date = force_end.strftime("%m-%d %H:%M")
-
-        # 冷却结束
-        label_x = x + 30
-        timeblock_max_right = timeblock_right - 10
-        # 冷却结束倒计时
-        bbox = draw.textbbox((0, 0), cd_str, font=font_label)
-        cd_str_w = bbox[2] - bbox[0]
-        bbox = draw.textbbox((0, 0), cd_date, font=font_small)
-        cd_date_w = bbox[2] - bbox[0]
-        cd_str_x = timeblock_max_right - max(cd_str_w, cd_date_w)
-        draw.text(
-            (label_x, y_timeblock + 10),
-            "下次判定:" if show_next_judge else "冷却结束:",
-            fill=COLOR_LABEL,
-            font=font_normal,
-        )
-        draw.text((cd_str_x, y_timeblock + 2), cd_str, fill=COLOR_TIME, font=font_label)
-        draw.text(
-            (cd_str_x, y_timeblock + 28), cd_date, fill=COLOR_TIME, font=font_small
-        )
-        # 强制开启
-        bbox = draw.textbbox((0, 0), force_str, font=font_label)
-        force_str_w = bbox[2] - bbox[0]
-        bbox = draw.textbbox((0, 0), force_date, font=font_small)
-        force_date_w = bbox[2] - bbox[0]
-        force_str_x = timeblock_max_right - max(force_str_w, force_date_w)
-        draw.text(
-            (label_x, y_timeblock + 58),
-            f"强制开启:",
-            fill=COLOR_LABEL,
-            font=font_normal,
-        )
-        draw.text(
-            (force_str_x, y_timeblock + 50), force_str, fill=COLOR_TIME, font=font_label
-        )
-        draw.text(
-            (force_str_x, y_timeblock + 76),
-            force_date,
-            fill=COLOR_TIME,
-            font=font_small,
-        )
         # boss图片
         y_boss = y_timeblock + 120 + 5  # 再往上移一点
         try:
@@ -386,8 +480,9 @@ class UptimePlugin(BasePlugin):
             # 取最新的奖励记录
             st = self._to_bj_time(starts[0])
             if isinstance(st, datetime):
+                # 标准化开始时间
                 st = get_standard_time(st)
-                st_str = st.strftime("%m月%d日%H:%M")
+                st_str = format_time_for_display(st)
                 # 三行分布
                 y_row1 = y_record + 30
                 y_row2 = y_record + 70
@@ -416,9 +511,8 @@ class UptimePlugin(BasePlugin):
                     # 如果不在奖励时间，显示结束时间
                     ed = self._to_bj_time(ends[0]) if ends else "-"
                     if isinstance(ed, datetime):
-                        ed = get_standard_time(ed)
-                        ed_str = ed.strftime("%m月%d日%H:%M")
-                        duration = get_standard_duration(st, ed)
+                        duration, standard_end = get_standard_duration(st, ed)
+                        ed_str = format_time_for_display(standard_end)
                     else:
                         ed_str = "-"
                         duration = "-"
