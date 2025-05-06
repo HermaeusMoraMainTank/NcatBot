@@ -23,6 +23,44 @@ last_trigger_times: Dict[int, datetime] = {}  # 存储每个群的上次触发�
 user_trigger_times: Dict[int, datetime] = {}  # 存储每个用户的上次触发时间
 enable_group_cd = True  # 群聊冷却开关
 enable_user_cd = False  # 用户冷却开关
+enable_callback = True  # 回调功能开关
+callback_timeout = 30  # 回调超时时间（秒）
+
+
+# 回调状态管理
+class CallbackState:
+    def __init__(self):
+        self.waiting_users: Dict[
+            int, Dict
+        ] = {}  # {user_id: {"group_id": group_id, "start_time": datetime}}
+
+    def add_waiting_user(self, user_id: int, group_id: int) -> None:
+        self.waiting_users[user_id] = {
+            "group_id": group_id,
+            "start_time": datetime.now(),
+        }
+
+    def remove_waiting_user(self, user_id: int) -> None:
+        if user_id in self.waiting_users:
+            del self.waiting_users[user_id]
+
+    def is_waiting(self, user_id: int) -> bool:
+        return user_id in self.waiting_users
+
+    def get_waiting_info(self, user_id: int) -> Optional[Dict]:
+        return self.waiting_users.get(user_id)
+
+    def check_timeout(self, user_id: int) -> bool:
+        if user_id not in self.waiting_users:
+            return False
+        wait_time = (
+            datetime.now() - self.waiting_users[user_id]["start_time"]
+        ).total_seconds()
+        return wait_time > callback_timeout
+
+
+callback_state = CallbackState()
+
 group_ids = [
     719518427,  # oob
     626192977,  # e7
@@ -82,6 +120,37 @@ class FakeAi(BasePlugin):
         sender_id = input.user_id
         sender_name = input.sender.nickname
         content = input.message
+        is_at_message = "[CQ:at,qq=3555202423]" in input.raw_message
+
+        # 检查是否是等待回调的用户
+        if enable_callback and callback_state.is_waiting(sender_id):
+            # 检查是否超时
+            if callback_state.check_timeout(sender_id):
+                callback_state.remove_waiting_user(sender_id)
+                return
+
+            # 获取等待信息
+            wait_info = callback_state.get_waiting_info(sender_id)
+            if wait_info and wait_info["group_id"] == group_id:
+                # 如果是艾特消息，不触发回调（避免连续艾特导致的重复触发）
+                if is_at_message:
+                    callback_state.remove_waiting_user(sender_id)
+                    return
+
+                # 移除等待状态
+                callback_state.remove_waiting_user(sender_id)
+                # 直接回复，不检查CD
+                reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
+                reply_json = json.dumps(
+                    {"name": sender_name, "id": sender_id, "content": content},
+                    ensure_ascii=False,
+                )
+                reply_cache.add_reply(reply_json)
+                answer = await answer_ai(group_id, group_reply_caches)
+                _log.info(answer)
+                await send_typing_response(self, input, answer)
+                return
+
         # 判断是否是功能测试的指令
         if input.raw_message == "蓝晴说话":
             if sender_id in [
@@ -95,7 +164,7 @@ class FakeAi(BasePlugin):
                 await send_typing_response(self, input, answer)
                 return
 
-        if "[CQ:at,qq=3555202423]" in input.raw_message:
+        if is_at_message:
             # 检查用户CD（除了273421673用户）
             if sender_id != 273421673 and not check_user_cd(sender_id):
                 return
@@ -111,6 +180,10 @@ class FakeAi(BasePlugin):
             answer = await answer_ai(group_id, group_reply_caches)
             _log.info(answer)
             await send_typing_response(self, input, answer)
+
+            # 如果启用了回调功能，添加用户到等待列表
+            if enable_callback:
+                callback_state.add_waiting_user(sender_id, group_id)
 
             # 更新用户触发时间
             if sender_id != 273421673:
@@ -144,6 +217,10 @@ class FakeAi(BasePlugin):
             return
         await send_typing_response(self, input, answer)
 
+        # 如果启用了回调功能，添加用户到等待列表
+        if enable_callback:
+            callback_state.add_waiting_user(sender_id, group_id)
+
 
 async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -> None:
     try:
@@ -155,15 +232,83 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
             # 如果不是 JSON 格式，直接使用原始内容
             content = answer
 
-        # 使用正则表达式按照标点符号分割句子
-        punctuation_pattern = r"[。！？!?]+"
-        sentences = [
-            s.strip() for s in re.split(punctuation_pattern, content) if s.strip()
-        ]
+        # 使用正则表达式分割句子
+        # 保留问号和感叹号，不保留句号和逗号
+        keep_punctuation_pattern = r"([！？!?]+)"  # 需要保留的标点
+        remove_punctuation_pattern = r"[。，,\.]+"  # 需要移除的标点
 
-        # 如果没有标点符号分割出的句子，就把整个内容作为一个句子
+        # 先按需要保留的标点分割
+        parts = re.split(keep_punctuation_pattern, content)
+        sentences = []
+
+        for i in range(0, len(parts), 2):
+            if i + 1 < len(parts):
+                # 将句子和需要保留的标点组合在一起
+                sentence = (parts[i] + parts[i + 1]).strip()
+                if sentence:
+                    # 保护CQ码中的标点
+                    cq_codes = []
+
+                    def save_cq(match):
+                        cq_codes.append(match.group(0))
+                        return f"__CQ_CODE_{len(cq_codes) - 1}__"
+
+                    # 保存所有CQ码
+                    sentence = re.sub(r"\[CQ:[^\]]+\]", save_cq, sentence)
+
+                    # 移除不需要保留的标点
+                    sentence = re.sub(remove_punctuation_pattern, "", sentence)
+
+                    # 恢复CQ码
+                    for idx, cq_code in enumerate(cq_codes):
+                        sentence = sentence.replace(f"__CQ_CODE_{idx}__", cq_code)
+
+                    if sentence:
+                        sentences.append(sentence)
+            else:
+                # 处理最后一个部分
+                if parts[i].strip():
+                    # 保护CQ码中的标点
+                    cq_codes = []
+
+                    def save_cq(match):
+                        cq_codes.append(match.group(0))
+                        return f"__CQ_CODE_{len(cq_codes) - 1}__"
+
+                    # 保存所有CQ码
+                    sentence = re.sub(r"\[CQ:[^\]]+\]", save_cq, parts[i].strip())
+
+                    # 移除不需要保留的标点
+                    sentence = re.sub(remove_punctuation_pattern, "", sentence)
+
+                    # 恢复CQ码
+                    for idx, cq_code in enumerate(cq_codes):
+                        sentence = sentence.replace(f"__CQ_CODE_{idx}__", cq_code)
+
+                    if sentence:
+                        sentences.append(sentence)
+
+        # 如果没有分割出的句子，就把整个内容作为一个句子
         if not sentences:
-            sentences = [content.strip()]
+            # 保护CQ码中的标点
+            cq_codes = []
+
+            def save_cq(match):
+                cq_codes.append(match.group(0))
+                return f"__CQ_CODE_{len(cq_codes) - 1}__"
+
+            # 保存所有CQ码
+            content = re.sub(r"\[CQ:[^\]]+\]", save_cq, content.strip())
+
+            # 移除不需要保留的标点
+            content = re.sub(remove_punctuation_pattern, "", content)
+
+            # 恢复CQ码
+            for idx, cq_code in enumerate(cq_codes):
+                content = content.replace(f"__CQ_CODE_{idx}__", cq_code)
+
+            if content:
+                sentences = [content]
 
         at_pattern = re.compile(r"\[CQ:at,qq=([\w\u4e00-\u9fff]+)]")
         group_id = input.group_id
@@ -269,9 +414,9 @@ def check_user_cd(user_id: int) -> bool:
 
 
 def load_yaml_data(group_id) -> Dict:
-    if group_id == 719518427:
-        with open("data/yml/lanqingv1_ai.yml", "r", encoding="utf-8") as file:
-            return yaml.safe_load(file)
+    # if group_id == 719518427:
+    #     with open("data/yml/lanqingv1_ai.yml", "r", encoding="utf-8") as file:
+    #         return yaml.safe_load(file)
     with open("data/yml/lanqingv1.yml", "r", encoding="utf-8") as file:
         return yaml.safe_load(file)
 

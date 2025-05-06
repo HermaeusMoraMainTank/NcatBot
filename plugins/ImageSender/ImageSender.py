@@ -56,6 +56,11 @@ class ImageSender(BasePlugin):
             "path": "data/image/llm",
             "allowed_users": [273421673, 2779893879, 361432025],
         },
+        "耄耋": {
+            "triggers": ["耄耋"],
+            "path": "data/image/耄耋",
+            "allowed_users": None,
+        },
     }
 
     @bot.group_event()
@@ -121,6 +126,6 @@ class ImageSender(BasePlugin):
             return [
                 os.path.join(folder_path, f)
                 for f in os.listdir(folder_path)
-                if f.lower().endswith((".jpg", ".png", ".jpeg"))
+                if f.lower().endswith((".jpg", ".png", ".jpeg", ".gif"))
             ]
         return []

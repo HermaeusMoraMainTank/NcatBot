@@ -9,6 +9,16 @@ from ncatbot.core.message import GroupMessage
 
 bot = CompatibleEnrollment
 
+# 标准判定时间点 (北京时间)
+STANDARD_TIMES = [5, 11, 17, 23]
+
+# 可能的持续时间 (小时)
+POSSIBLE_DURATIONS = [3, 6, 9, 12]
+
+# 冷却时间和硬上限（小时）
+COOLDOWN_HOURS = 24
+HARD_LIMIT_HOURS = 48
+
 # 数据中心列表
 DATA_CENTERS = [
     ("猫小胖", "猫小胖"),
@@ -54,6 +64,38 @@ IMG_HEIGHT = CARD_HEIGHT + CARD_MARGIN * 2
 BEIJING_TZ = timezone(timedelta(hours=8))
 
 
+def get_standard_time(dt):
+    """将时间调整到最近的标准时间点"""
+    hour = dt.hour
+    closest_hour = STANDARD_TIMES[0]
+    for standard_hour in STANDARD_TIMES:
+        if hour >= standard_hour:
+            closest_hour = standard_hour
+        else:
+            break
+    return dt.replace(hour=closest_hour, minute=0, second=0, microsecond=0)
+
+
+def get_next_standard_time(dt):
+    """获取下一个标准时间点"""
+    hour = dt.hour
+    for standard_hour in STANDARD_TIMES:
+        if hour < standard_hour:
+            return dt.replace(hour=standard_hour, minute=0, second=0, microsecond=0)
+    # 如果当天没有下一个时间点，返回明天的第一个时间点
+    next_day = dt + timedelta(days=1)
+    return next_day.replace(hour=STANDARD_TIMES[0], minute=0, second=0, microsecond=0)
+
+
+def get_standard_duration(start_time, end_time):
+    """计算标准化的持续时间"""
+    if not isinstance(start_time, datetime) or not isinstance(end_time, datetime):
+        return "-"
+    diff_hours = (end_time - start_time).total_seconds() / 3600
+    closest_duration = min(POSSIBLE_DURATIONS, key=lambda x: abs(x - diff_hours))
+    return f"{closest_duration}小时"
+
+
 class UptimePlugin(BasePlugin):
     name = "uptime"
     version = "1.0"
@@ -73,19 +115,27 @@ class UptimePlugin(BasePlugin):
                 if resp.status_code == 200:
                     results[dc_name] = resp.json()
                 else:
-                    results[dc_name] = None
-            except Exception:
-                results[dc_name] = None
-        # 绘图
-        img = self._draw_status_img(results)
-        # 保存为本地文件
-        img.save("uptime.png", format="PNG")
-        # 发送图片
-        await self.api.post_group_msg(
-            group_id=input.group_id,
-            rtf=MessageChain([BotImage("uptime.png")]),
-            reply=input.message_id,
-        )
+                    results[dc_name] = {"error": f"API返回错误: {resp.status_code}"}
+            except Exception as e:
+                results[dc_name] = {"error": f"请求失败: {str(e)}"}
+
+        try:
+            # 绘图
+            img = self._draw_status_img(results)
+            # 保存为本地文件
+            img.save("uptime.png", format="PNG")
+            # 发送图片
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                rtf=MessageChain([BotImage("uptime.png")]),
+                reply=input.message_id,
+            )
+        except Exception as e:
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                rtf=MessageChain([Text(f"处理请求时发生错误: {str(e)}")]),
+                reply=input.message_id,
+            )
 
     def _draw_status_img(self, results):
         # 加载字体
@@ -102,8 +152,11 @@ class UptimePlugin(BasePlugin):
         # 猫小胖卡片
         x0 = CARD_MARGIN
         y0 = CARD_MARGIN
-        if results.get("猫小胖") is None:
-            self._draw_error_card(draw, font_label, font_normal, x0, y0, "猫小胖")
+        if results.get("猫小胖") is None or "error" in results.get("猫小胖", {}):
+            error_msg = results.get("猫小胖", {}).get("error", "未知错误")
+            self._draw_error_card(
+                draw, font_label, font_normal, x0, y0, "猫小胖", error_msg
+            )
         else:
             self._draw_dc_card(
                 img,
@@ -121,8 +174,11 @@ class UptimePlugin(BasePlugin):
         for idx, dc_name in enumerate(["莫古力", "陆行鸟", "豆豆柴"]):
             x = CARD_MARGIN + CARD_WIDTH * (idx + 1) + CARD_MARGIN * (idx + 1)
             y = CARD_MARGIN
-            if results.get(dc_name) is None:
-                self._draw_error_card(draw, font_label, font_normal, x, y, dc_name)
+            if results.get(dc_name) is None or "error" in results.get(dc_name, {}):
+                error_msg = results.get(dc_name, {}).get("error", "未知错误")
+                self._draw_error_card(
+                    draw, font_label, font_normal, x, y, dc_name, error_msg
+                )
             else:
                 self._draw_dc_card(
                     img,
@@ -138,7 +194,9 @@ class UptimePlugin(BasePlugin):
                 )
         return img
 
-    def _draw_error_card(self, draw, font_label, font_normal, x, y, title):
+    def _draw_error_card(
+        self, draw, font_label, font_normal, x, y, title, error_msg="未知错误"
+    ):
         # 错误卡片
         draw.rounded_rectangle(
             [x, y, x + ERROR_CARD_WIDTH, y + ERROR_CARD_HEIGHT],
@@ -152,9 +210,10 @@ class UptimePlugin(BasePlugin):
         draw.text(
             (x + 20, y + 120), "获取数据失败:", fill=COLOR_ERROR, font=font_normal
         )
-        draw.text(
-            (x + 20, y + 160), "Failed to fetch", fill=COLOR_ERROR, font=font_normal
-        )
+        # 如果错误信息太长，进行截断
+        if len(error_msg) > 20:
+            error_msg = error_msg[:17] + "..."
+        draw.text((x + 20, y + 160), error_msg, fill=COLOR_ERROR, font=font_normal)
 
     def _draw_dc_card(
         self,
@@ -220,13 +279,16 @@ class UptimePlugin(BasePlugin):
         # 取上次奖励开始时间
         starts = data.get("last_bonus_starts", []) if data else []
         is_uptime = data.get("is_uptime") if data else False
+
         if starts:
             last_start = self._to_bj_time(starts[0])
             if isinstance(last_start, datetime):
+                # 标准化开始时间
+                last_start = get_standard_time(last_start)
                 # 冷却开始时间为上次奖励开始时间+24小时
-                cd_start = last_start + timedelta(hours=24)
+                cd_start = last_start + timedelta(hours=COOLDOWN_HOURS)
                 # 强制开启时间为上次奖励开始时间+48小时
-                force_end = last_start + timedelta(hours=48)
+                force_end = last_start + timedelta(hours=HARD_LIMIT_HOURS)
             else:
                 cd_start = (now + timedelta(days=1)).replace(
                     hour=17, minute=0, second=0, microsecond=0
@@ -254,36 +316,12 @@ class UptimePlugin(BasePlugin):
                 cd_end = cd_start
             else:
                 # 不在冷却期，显示下一个判定时间点
-                next_judge_hours = [5, 11, 17, 23]  # 按照时间顺序排列
-                next_judge = None
-                for hour in next_judge_hours:
-                    candidate = now.replace(
-                        hour=hour, minute=0, second=0, microsecond=0
-                    )
-                    if candidate > now:
-                        next_judge = candidate
-                        break
-                if next_judge is None:
-                    next_judge = (now + timedelta(days=1)).replace(
-                        hour=5, minute=0, second=0, microsecond=0
-                    )
-                cd_end = next_judge
+                cd_end = get_next_standard_time(now)
                 show_next_judge = True
 
         # 如果强制开启时间已过，显示下一个判定时间点
         if force_end <= now:
-            next_judge_hours = [5, 11, 17, 23]  # 按照时间顺序排列
-            next_judge = None
-            for hour in next_judge_hours:
-                candidate = now.replace(hour=hour, minute=0, second=0, microsecond=0)
-                if candidate > now:
-                    next_judge = candidate
-                    break
-            if next_judge is None:
-                next_judge = (now + timedelta(days=1)).replace(
-                    hour=5, minute=0, second=0, microsecond=0
-                )
-            force_end = next_judge
+            force_end = get_next_standard_time(now)
 
         cd_left = cd_end - now
         force_left = force_end - now
@@ -291,6 +329,7 @@ class UptimePlugin(BasePlugin):
         force_str = self._format_timedelta(force_left)
         cd_date = cd_end.strftime("%m-%d %H:%M")
         force_date = force_end.strftime("%m-%d %H:%M")
+
         # 冷却结束
         label_x = x + 30
         timeblock_max_right = timeblock_right - 10
@@ -347,6 +386,7 @@ class UptimePlugin(BasePlugin):
             # 取最新的奖励记录
             st = self._to_bj_time(starts[0])
             if isinstance(st, datetime):
+                st = get_standard_time(st)
                 st_str = st.strftime("%m月%d日%H:%M")
                 # 三行分布
                 y_row1 = y_record + 30
@@ -375,12 +415,13 @@ class UptimePlugin(BasePlugin):
                 else:
                     # 如果不在奖励时间，显示结束时间
                     ed = self._to_bj_time(ends[0]) if ends else "-"
-                    ed_str = (
-                        ed.strftime("%m月%d日%H:%M")
-                        if isinstance(ed, datetime)
-                        else "-"
-                    )
-                    duration = self._format_duration(st, ed)
+                    if isinstance(ed, datetime):
+                        ed = get_standard_time(ed)
+                        ed_str = ed.strftime("%m月%d日%H:%M")
+                        duration = get_standard_duration(st, ed)
+                    else:
+                        ed_str = "-"
+                        duration = "-"
                     draw.text(
                         (x + 20, y_row2),
                         f"结束时间 {ed_str}",
