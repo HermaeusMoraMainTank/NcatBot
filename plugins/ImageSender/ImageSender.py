@@ -49,6 +49,7 @@ class ImageSender(BasePlugin):
                 10123121,
                 1607928177,
                 2779893879,
+                837089951,
             ],
         },
         "doro": {
@@ -64,12 +65,22 @@ class ImageSender(BasePlugin):
         "llm": {
             "triggers": ["llm", "迷茫的时候 不如听听llm说的话"],
             "path": "data/image/llm",
-            "allowed_users": [273421673, 2779893879, 361432025],
+            "allowed_users": [273421673, 2779893879, 361432025, 837089951],
         },
         "耄耋": {
             "triggers": ["耄耋"],
             "path": "data/image/耄耋",
             "allowed_users": None,
+        },
+        "咲夜saki": {
+            "triggers": [
+                "咲夜saki",
+                "迷茫的时候 不如听听咲夜saki说的话",
+                "xysk",
+                "xtxy",
+            ],
+            "path": "data/image/咲夜saki",
+            "allowed_users": [273421673, 635773721, 1506123340, 10123121, 1508864751],
         },
     }
 
