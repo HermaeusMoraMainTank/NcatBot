@@ -1,6 +1,7 @@
 import hashlib
 import random
 import requests
+import logging
 from urllib.parse import urlencode, quote
 from pathlib import Path
 
@@ -14,11 +15,17 @@ last_page = {}
 dir_path = Path("data/image/pixiv")
 
 bot = CompatibleEnrollment
+log = logging.getLogger(__name__)
 
 
 class PixivSearch(BasePlugin):
     name = "PixivSearch"  # 插件名称
     version = "1.0"  # 插件版本
+
+    async def on_load(self):
+        """异步加载插件"""
+        log.info(f"开始加载 {self.name} 插件 v{self.version}")
+        log.info(f"{self.name} 插件加载完成")
 
     @bot.group_event()
     async def handle_pixiv_search(self, input: GroupMessage):

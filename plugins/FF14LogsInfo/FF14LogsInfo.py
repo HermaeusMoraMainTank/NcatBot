@@ -1,6 +1,7 @@
 import os
 import json
 import httpx
+import logging
 from datetime import datetime
 from typing import List, Optional
 from PIL import Image, ImageDraw, ImageFont
@@ -12,6 +13,7 @@ from ncatbot.plugin import CompatibleEnrollment, BasePlugin
 
 
 bot = CompatibleEnrollment
+log = logging.getLogger(__name__)
 
 
 class Zone:
@@ -354,7 +356,11 @@ class FF14LogsInfo(BasePlugin):
 
         character_name = message_parts[1]
         server = message_parts[2]
-        if character_name == "武术有栖" and server == "延夏" and input.user_id != 273421673:
+        if (
+            character_name == "武术有栖"
+            and server == "延夏"
+            and input.user_id != 273421673
+        ):
             await self.api.post_group_msg(group_id=input.group_id, text="?")
             return
 
@@ -389,3 +395,8 @@ class FF14LogsInfo(BasePlugin):
                     ]
                 ),
             )
+
+    async def on_load(self):
+        """异步加载插件"""
+        log.info(f"开始加载 {self.name} 插件 v{self.version}")
+        log.info(f"{self.name} 插件加载完成")

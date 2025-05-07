@@ -1,6 +1,7 @@
 import os
 import random
 import hashlib
+import logging
 from datetime import datetime, date
 from typing import List, Dict
 from PIL import Image as PILImage, ImageDraw, ImageFont
@@ -13,6 +14,7 @@ from ncatbot.plugin import CompatibleEnrollment, BasePlugin
 
 
 bot = CompatibleEnrollment
+log = logging.getLogger(__name__)
 
 # 常量
 LUCK_DESC_LIST = [
@@ -48,6 +50,11 @@ class Fortune(BasePlugin):
     last_reset_date: date = date.today()  # 记录上一次重置的日期
     data_dir = "data"
 
+    async def on_load(self):
+        """异步加载插件"""
+        log.info(f"开始加载 {self.name} 插件 v{self.version}")
+        log.info(f"{self.name} 插件加载完成")
+
     @bot.group_event()
     async def handle_fortune(self, input: GroupMessage):
         message = input.raw_message
@@ -62,7 +69,7 @@ class Fortune(BasePlugin):
                 [Text("✨今日运势✨\n"), At(sender_id), Image(image_path)]
             )
             await self.api.post_group_msg(group_id=input.group_id, rtf=message)
-            
+
         elif message == "今日doro":
             luck_value = self.calculate_luck_value(sender_id)
             image_files = os.listdir(self.get_file_path("image", "doro结局"))

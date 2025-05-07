@@ -15,6 +15,15 @@ class ImageSender(BasePlugin):
     name = "ImageSender"  # 插件名称
     version = "1.0"  # 插件版本
 
+    async def on_load(self):
+        """异步加载插件"""
+        log.info(f"开始加载 {self.name} 插件 v{self.version}")
+        # 检查所有图片目录是否存在
+        for cmd in self.commands.values():
+            if not os.path.exists(cmd["path"]):
+                log.warning(f"图片目录不存在: {cmd['path']}")
+        log.info(f"{self.name} 插件加载完成")
+
     max_count = 3  # 最大发送数量
     allowed_users = None  # 全局允许的用户ID列表，None表示所有用户都可以使用
 

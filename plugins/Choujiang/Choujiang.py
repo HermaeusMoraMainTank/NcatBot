@@ -1,4 +1,5 @@
 ﻿import random
+import logging
 
 from ncatbot.core.element import Image, MessageChain, Reply
 from ncatbot.core.message import GroupMessage
@@ -6,6 +7,7 @@ from ncatbot.plugin import CompatibleEnrollment, BasePlugin
 
 
 bot = CompatibleEnrollment
+log = logging.getLogger(__name__)
 
 
 class Choujiang(BasePlugin):
@@ -13,6 +15,12 @@ class Choujiang(BasePlugin):
     version = "1.0"  # 插件版本
     # 使用字典存储每个群组的抽奖状态
     map = {}
+
+    async def on_load(self):
+        """异步加载插件"""
+        log.info(f"开始加载 {self.name} 插件 v{self.version}")
+        self.map = {}  # 初始化抽奖数据
+        log.info(f"{self.name} 插件加载完成")
 
     # @bot.group_event()
     async def handle_choujiang(self, input: GroupMessage):

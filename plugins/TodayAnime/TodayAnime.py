@@ -26,6 +26,11 @@ class TodayAnime(BasePlugin):
         "Sunday": "星期日",
     }
 
+    async def on_load(self):
+        """异步加载插件"""
+        _log.info(f"开始加载 {self.name} 插件 v{self.version}")
+        _log.info(f"{self.name} 插件加载完成")
+
     @bot.group_event()
     async def handle_TodayAnime_like(self, input: GroupMessage):
         if input.raw_message != "今日番剧":
@@ -41,7 +46,7 @@ class TodayAnime(BasePlugin):
         refdata = []
         for i in todaydata:
             refdata.append(Text(f"番剧名称:{i.get('title')}"))
-            refdata.append(self.toimg((i.get('image'))))
+            refdata.append(self.toimg((i.get("image"))))
             refdata.append(Text(f"更新时间:{i.get('air_date')}\n"))
         await self.api.post_group_msg(
             group_id=input.group_id,
@@ -72,5 +77,6 @@ class TodayAnime(BasePlugin):
                     }
                     today_anime.append(anime_info)
         return today_anime
+
     def toimg(self, url):
-        return {"type": "image", "data":{"file":url}}
+        return {"type": "image", "data": {"file": url}}
