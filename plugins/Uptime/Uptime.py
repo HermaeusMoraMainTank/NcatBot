@@ -70,7 +70,9 @@ TIMEBLOCK_HEIGHT = 180  # 原110，增大以容纳多行
 def get_standard_time(dt):
     """将时间调整到最近的标准时间点"""
     hour = dt.hour
-    closest_hour = STANDARD_TIMES[0]
+    closest_hour = None
+
+    # 找到最接近的标准时间点
     for standard_hour in STANDARD_TIMES:
         if hour >= standard_hour:
             closest_hour = standard_hour
@@ -78,12 +80,9 @@ def get_standard_time(dt):
             break
 
     # 如果没有找到当天的标准时间点，则使用前一天的最后一个时间点
-    if hour < STANDARD_TIMES[0] or (
-        closest_hour == STANDARD_TIMES[-1] and hour > closest_hour
-    ):
-        if hour < STANDARD_TIMES[0]:
-            closest_hour = STANDARD_TIMES[-1]
-            dt = dt - timedelta(days=1)
+    if closest_hour is None:
+        closest_hour = STANDARD_TIMES[-1]
+        dt = dt - timedelta(days=1)
 
     return dt.replace(hour=closest_hour, minute=0, second=0, microsecond=0)
 
@@ -378,11 +377,15 @@ class UptimePlugin(BasePlugin):
                     # 判断是否显示下次判定
                     show_next_judge = False
                     now = datetime.now(BEIJING_TZ)
-                    if now < cd_start:
-                        # 在冷却期内，显示冷却结束时间
+
+                    # 计算奖励结束时间（假设最短持续时间3小时）
+                    reward_end = last_start + timedelta(hours=3)
+
+                    if now < reward_end:
+                        # 如果还在奖励时间内，显示冷却结束时间
                         cd_end = cd_start
                     else:
-                        # 不在冷却期，显示下一个判定时间点
+                        # 如果奖励时间已结束，显示下一个判定时间点
                         cd_end = get_next_standard_time(now)
                         show_next_judge = True
 

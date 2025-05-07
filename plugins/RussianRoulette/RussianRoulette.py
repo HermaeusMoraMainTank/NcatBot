@@ -15,7 +15,7 @@ class RussianRoulette(BasePlugin):
     name = "RussianRoulette"  # 插件名称
     version = "1.0"  # 插件版本
     CLIP_SIZE = 6  # 弹夹大小
-    DAMAGE_TIME = 60  # 伤害时间（秒）
+    DAMAGE_TIME = 1  # 伤害时间（分钟）
     MALFUNCTION_PROBABILITY = 0.03  # 炸膛概率
     FILE_PATH = "data/txt/RussianRoulette.txt"
 
@@ -145,24 +145,26 @@ class RussianRoulette(BasePlugin):
                     ),
                 )
                 try:
-                    await input.set_group_ban(
+                    await self.api.set_group_ban(
                         group_id=group_id,
                         user_id=input.user_id,
-                        duration=self.DAMAGE_TIME * 2,
+                        duration=self.DAMAGE_TIME * 2 * 60,
                     )
                     return True
                 except Exception as e:
-                    log.info(f"无法禁言 {input.sender.id} {input.sender.nickname}")
+                    log.info(f"无法禁言 {input.user_id} {input.sender.nickname}")
                     log.info(str(e))
                     return True
 
             try:
-                await input.set_group_ban(
-                    group_id=group_id, user_id=input.user_id, duration=self.DAMAGE_TIME
+                await self.api.set_group_ban(
+                    group_id=group_id,
+                    user_id=input.user_id,
+                    duration=self.DAMAGE_TIME * 60,
                 )
                 return True
             except Exception as e:
-                log.info(f"无法禁言 {input.sender.id} {input.sender.nickname}")
+                log.info(f"无法禁言 {input.user_id} {input.sender.nickname}")
                 log.info(str(e))
                 return True
 

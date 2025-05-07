@@ -139,7 +139,7 @@ class TodayWaifu(BasePlugin):
                                     Text(f" {wife_info.nickname}({wife_info.user_id})"),
                                     Text("\n"),
                                     Text(
-                                        f"{BLESSINGS[random.randint(0, len(BLESSINGS))]}"
+                                        f"{BLESSINGS[random.randint(0, len(BLESSINGS) - 1)]}"
                                     ),
                                 ]
                             ),
@@ -166,7 +166,7 @@ class TodayWaifu(BasePlugin):
                         ImageElement(avatar_url),
                         Text(f" {new_wife.nickname}({new_wife.user_id})"),
                         Text("\n"),
-                        Text(f"{BLESSINGS[random.randint(0, len(BLESSINGS))]}"),
+                        Text(f"{BLESSINGS[random.randint(0, len(BLESSINGS) - 1)]}"),
                     ]
                 ),
             )

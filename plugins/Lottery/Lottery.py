@@ -23,6 +23,7 @@ class Lottery(BasePlugin):
     MAX_MUTE_MINUTES = 10  # 最大禁言时间
     FILE_PATH = "data/txt/LotteryAwards.txt"  # 奖品记录文件路径
     group_participants: Dict[int, List[int]] = {}  # 记录每个群的参与者
+    group_user_names: Dict[int, Dict[int, str]] = {}  # 记录每个群的用户ID和昵称映射
     total_awards = 0  # 奖品总数
 
     def setup(self):
@@ -60,8 +61,10 @@ class Lottery(BasePlugin):
 
         if group_id not in self.group_participants:
             self.group_participants[group_id] = []
+            self.group_user_names[group_id] = {}
 
         participants = self.group_participants[group_id]
+        user_names = self.group_user_names[group_id]
 
         if user_id in participants:
             await self.api.post_group_msg(
@@ -71,6 +74,7 @@ class Lottery(BasePlugin):
             return
 
         participants.append(user_id)
+        user_names[user_id] = input.sender.nickname  # 保存用户昵称
         if len(participants) >= self.MAX_PARTICIPANTS:
             await self.api.post_group_msg(
                 group_id=input.group_id, text="人够了！人够了！让我们开始吧！"
@@ -113,6 +117,7 @@ class Lottery(BasePlugin):
 
         await self.api.post_group_msg(group_id=input.group_id, text="恭喜这位……")
         await asyncio.sleep(3)
+
         await self.api.post_group_msg(
             group_id=input.group_id,
             text=f"没有玩家取得本次大乐透的优胜！\n小小赛娜达成了清场！",
@@ -129,22 +134,37 @@ class Lottery(BasePlugin):
             text=f"时至今日，大乐透已经送出了 {self.total_awards} 份奖品！",
         )
 
+        # 清理用户名字映射
+        self.group_user_names[input.group_id].clear()
+
     async def handle_single_winner(self, input: GroupMessage, participants: List[int]):
         """单人禁言逻辑"""
         unlucky_user = random.choice(participants)
         mute_duration = self.random_mute_duration()
-        user_name = input.sender.nickname
+        user_names = self.group_user_names[input.group_id]
+        winner_name = user_names[unlucky_user]
 
+        # 先发送中奖消息
+        await self.api.post_group_msg(
+            group_id=input.group_id,
+            text=f"恭喜 {winner_name} 取得了本次大乐透的优胜！\n"
+            f"奖品是……禁言 {mute_duration} 分钟！恭喜！",
+        )
+
+        # 执行禁言
         await self.mute_user(input, unlucky_user, mute_duration)
 
         self.total_awards += 1
         self.save_total_awards()
+
+        # 发送统计消息
         await self.api.post_group_msg(
             group_id=input.group_id,
-            text=f"恭喜这位 {user_name} 取得了本次大乐透的优胜！\n"
-            f"奖品是……禁言 {mute_duration} 分钟！恭喜！\n"
-            f"时至今日，大乐透已经送出了 {self.total_awards} 份奖品！",
+            text=f"时至今日，大乐透已经送出了 {self.total_awards} 份奖品！",
         )
+
+        # 清理用户名字映射
+        self.group_user_names[input.group_id].clear()
 
     def random_mute_duration(self):
         """随机生成禁言时间"""
