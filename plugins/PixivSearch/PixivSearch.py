@@ -55,7 +55,14 @@ class PixivSearch(BasePlugin):
 
         if commands[0] == "搜索图片":
             keyword = commands[1]
-            if keyword in ["物述有栖", "mononobe alice", "r18"]:
+            if keyword in [
+                "物述有栖",
+                "mononobe alice",
+                "r18",
+                "r18g",
+                "alice",
+                "アリス",
+            ]:
                 return
 
             page = last_page.get(keyword, 1)
