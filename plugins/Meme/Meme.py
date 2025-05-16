@@ -70,6 +70,9 @@ class Meme(BasePlugin):
             logger.error(f"无法连接到 Meme 服务: {e}")
             return
 
+        # 获取并保存 meme 列表
+        await self.get_meme_list()
+
         await self.load_meme_data()
         logger.info(f"{self.name} 插件加载完成")
 

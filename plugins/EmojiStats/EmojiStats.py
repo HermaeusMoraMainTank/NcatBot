@@ -6,6 +6,8 @@ import urllib3
 from datetime import datetime, date, timedelta
 from typing import Dict, List, Optional
 from dataclasses import dataclass
+from PIL import Image as PILImage
+import io
 
 from ncatbot.core.element import MessageChain, Text, Image
 from ncatbot.plugin import CompatibleEnrollment, BasePlugin
@@ -119,6 +121,7 @@ class EmojiStatsPlugin(BasePlugin):
    - 今日
    - 本周
    - 本月
+   - 全部
    
    统计对象可选：
    - 群组
@@ -127,6 +130,7 @@ class EmojiStatsPlugin(BasePlugin):
 示例：
 - 表情包统计 今日 群组
 - 表情包统计 本周 个人
+- 表情包统计 全部 群组
 """
 
     async def on_load(self):
@@ -450,6 +454,10 @@ class EmojiStatsPlugin(BasePlugin):
 
     def _get_time_range_stats(self, stats: Dict[str, int], days: int) -> Dict[str, int]:
         """获取指定时间范围内的统计"""
+        if days is None:
+            # 如果是全部时间，直接返回所有统计数据
+            return stats
+
         end_date = date.today()
         start_date = end_date - timedelta(days=days - 1)  # 包含今天，所以减 days-1
         return {
@@ -459,13 +467,81 @@ class EmojiStatsPlugin(BasePlugin):
         }
 
     def _number_to_counter(self, number: int) -> List[Image]:
-        """将数字转换为计数器图片形式"""
-        result = []
+        """将数字转换为计数器图片形式，并横向合并为一张图片，保持GIF动画效果"""
+        # 获取所有数字图片
+        digit_images = []
         for digit in str(number):
-            result.append(
-                Image(os.path.join("data", "image", "number", f"{digit}.gif"))
-            )
-        return result
+            digit_path = os.path.join("data", "image", "number", f"{digit}.gif")
+            if os.path.exists(digit_path):
+                digit_images.append(PILImage.open(digit_path))
+
+        if not digit_images:
+            return []
+
+        # 获取所有帧
+        frames = []
+        durations = []
+
+        # 获取每个GIF的帧数
+        frame_counts = [img.n_frames for img in digit_images]
+        max_frames = max(frame_counts)
+
+        # 预处理：将所有GIF的帧提取到列表中
+        digit_frames = []
+        for img in digit_images:
+            frames_list = []
+            for i in range(img.n_frames):
+                img.seek(i)
+                # 确保每一帧都是完整的图像
+                frame = img.copy()
+                if frame.mode == "P":
+                    frame = frame.convert("RGBA")
+                frames_list.append(frame)
+            # 如果帧数不足，复制最后一帧
+            while len(frames_list) < max_frames:
+                frames_list.append(frames_list[-1].copy())
+            digit_frames.append(frames_list)
+
+        # 处理每一帧
+        for frame_idx in range(max_frames):
+            # 计算总宽度和最大高度
+            total_width = sum(frame_list[0].width for frame_list in digit_frames)
+            max_height = max(frame_list[0].height for frame_list in digit_frames)
+
+            # 创建新帧，使用完全透明的背景
+            frame = PILImage.new("RGBA", (total_width, max_height), (0, 0, 0, 0))
+
+            # 横向粘贴每个数字的当前帧
+            x_offset = 0
+            for digit_frame_list in digit_frames:
+                current_frame = digit_frame_list[frame_idx]
+                # 确保当前帧是RGBA模式
+                if current_frame.mode != "RGBA":
+                    current_frame = current_frame.convert("RGBA")
+                # 使用alpha_composite来确保正确的透明度处理
+                frame.paste(current_frame, (x_offset, 0), current_frame)
+                x_offset += current_frame.width
+
+            frames.append(frame)
+            # 使用第一个GIF的持续时间
+            durations.append(digit_images[0].info.get("duration", 100))
+
+        # 保存到临时文件
+        temp_path = os.path.join("data", "image", "temp", f"combined_{number}.gif")
+        os.makedirs(os.path.dirname(temp_path), exist_ok=True)
+
+        # 保存为GIF，保持动画效果
+        frames[0].save(
+            temp_path,
+            save_all=True,
+            append_images=frames[1:],
+            duration=durations,
+            loop=0,
+            optimize=False,
+            disposal=2,  # 确保每一帧都完全清除
+        )
+
+        return [Image(temp_path)]
 
     @bot.group_event()
     async def handle_emoji_stats(self, input: GroupMessage) -> None:
@@ -489,10 +565,10 @@ class EmojiStatsPlugin(BasePlugin):
                 break
 
         # 获取时间范围对应的天数
-        days_map = {"今日": 1, "本周": 7, "本月": 30}
+        days_map = {"今日": 1, "本周": 7, "本月": 30, "全部": None}
         days = days_map.get(time_range)
-        if not days:
-            await input.reply("无效的时间范围，请使用：今日、本周、本月")
+        if days is None and time_range != "全部":
+            await input.reply("无效的时间范围，请使用：今日、本周、本月、全部")
             return
 
         if target not in ["群组", "个人"]:
@@ -505,105 +581,153 @@ class EmojiStatsPlugin(BasePlugin):
         self, input: GroupMessage, days: int, target: str, target_user_id: int
     ) -> None:
         """显示统计信息"""
-        group_id = input.group_id
+        try:
+            group_id = input.group_id
 
-        # 创建消息链
-        message = MessageChain([])
+            # 创建消息链
+            message = MessageChain([])
 
-        if target == "群组":
-            # 获取群组最受欢迎表情包
-            top_emojis = self._get_top_emojis(self.group_stats.get(group_id, {}), days)
-            # 获取群组发送次数统计
-            count_stats = self._get_time_range_stats(
-                self.group_count.get(group_id, {}), days
-            )
-            total_count = sum(count_stats.values())
+            if target == "群组":
+                # 获取群组最受欢迎表情包
+                top_emojis = self._get_top_emojis(
+                    self.group_stats.get(group_id, {}), days
+                )
+                # 获取群组发送次数统计
+                count_stats = self._get_time_range_stats(
+                    self.group_count.get(group_id, {}), days
+                )
+                total_count = sum(count_stats.values())
 
-            # 添加消息元素
-            message.chain.append(Text("=== 群组表情包统计 ===\n"))
-            message.chain.append(Text("最近"))
-            message.chain.append(Text(str(days)))
-            message.chain.append(Text("天发送表情包数量:\n"))
-            for img in self._number_to_counter(total_count):
-                message.chain.append(img)
-            message.chain.append(Text("\n\n"))
+                # 添加消息元素
+                message.chain.append(Text("=== 群组表情包统计 ===\n"))
+                message.chain.append(Text("最近"))
+                if days is None:
+                    message.chain.append(Text("全部时间"))
+                else:
+                    message.chain.append(Text(str(days)))
+                    message.chain.append(Text("天"))
+                message.chain.append(Text("发送表情包数量:\n"))
+                for img in self._number_to_counter(total_count):
+                    message.chain.append(img)
+                message.chain.append(Text("\n\n"))
 
-            # 添加发送次数最多的用户统计
-            message.chain.append(Text("发送表情包最多的用户TOP3:\n"))
-            user_counts = {}
-            for user_id, user_stats in self.user_count.get(group_id, {}).items():
-                # 获取用户在指定时间范围内的发送次数
-                user_time_stats = self._get_time_range_stats(user_stats, days)
-                user_total = sum(user_time_stats.values())
-                if user_total > 0:
-                    user_counts[user_id] = user_total
+                # 添加发送次数最多的用户统计
+                message.chain.append(Text("发送表情包最多的用户TOP3:\n"))
+                user_counts = {}
+                for user_id, user_stats in self.user_count.get(group_id, {}).items():
+                    # 获取用户在指定时间范围内的发送次数
+                    user_time_stats = self._get_time_range_stats(user_stats, days)
+                    user_total = sum(user_time_stats.values())
+                    if user_total > 0:
+                        user_counts[user_id] = user_total
 
-            # 按发送次数排序
-            sorted_users = sorted(
-                user_counts.items(), key=lambda x: x[1], reverse=True
-            )[:3]
-            for i, (user_id, count) in enumerate(sorted_users, 1):
-                try:
-                    user_info = await self.api.get_group_member_info(
-                        group_id=group_id, user_id=user_id, no_cache=True
-                    )
-                    if isinstance(user_info, dict) and user_info.get("status") == "ok":
-                        user_data = user_info.get("data", {})
-                        if user_data:
-                            nickname = user_data.get("nickname", str(user_id))
-                            message.chain.append(Text(f"{i}. {nickname}: {count}次\n"))
+                # 按发送次数排序
+                sorted_users = sorted(
+                    user_counts.items(), key=lambda x: x[1], reverse=True
+                )[:3]
+                for i, (user_id, count) in enumerate(sorted_users, 1):
+                    try:
+                        user_info = await self.api.get_group_member_info(
+                            group_id=group_id, user_id=user_id, no_cache=True
+                        )
+                        if (
+                            isinstance(user_info, dict)
+                            and user_info.get("status") == "ok"
+                        ):
+                            user_data = user_info.get("data", {})
+                            if user_data:
+                                nickname = user_data.get("nickname", str(user_id))
+                                message.chain.append(
+                                    Text(f"{i}. {nickname}: {count}次\n")
+                                )
+                            else:
+                                message.chain.append(
+                                    Text(f"{i}. {user_id}: {count}次\n")
+                                )
                         else:
                             message.chain.append(Text(f"{i}. {user_id}: {count}次\n"))
-                    else:
+                    except Exception as e:
+                        _log.error(f"获取用户信息失败: {e}")
                         message.chain.append(Text(f"{i}. {user_id}: {count}次\n"))
-                except Exception as e:
-                    _log.error(f"获取用户信息失败: {e}")
-                    message.chain.append(Text(f"{i}. {user_id}: {count}次\n"))
-            message.chain.append(Text("\n"))
-
-            # 添加最受欢迎表情包统计
-            message.chain.append(Text("最受欢迎表情包TOP3:\n"))
-            for i, emoji in enumerate(top_emojis, 1):
-                message.chain.append(
-                    Text(f"{i}. 使用次数: {emoji.get_count(days)}次\n")
-                )
-                message.chain.append(Image(emoji.cache_path))
                 message.chain.append(Text("\n"))
 
-        else:  # 个人统计
-            # 获取用户最受欢迎表情包
-            top_emojis = self._get_top_emojis(
-                self.user_stats.get(group_id, {}).get(target_user_id, {}), days
-            )
-            # 获取用户发送次数统计
-            count_stats = self._get_time_range_stats(
-                self.user_count.get(group_id, {}).get(target_user_id, {}), days
-            )
-            total_count = sum(count_stats.values())
+                # 添加最受欢迎表情包统计
+                message.chain.append(Text("最受欢迎表情包TOP3:\n"))
+                for i, emoji in enumerate(top_emojis, 1):
+                    try:
+                        message.chain.append(
+                            Text(f"{i}. 使用次数: {emoji.get_count(days)}次\n")
+                        )
+                        if os.path.exists(emoji.cache_path):
+                            message.chain.append(Image(emoji.cache_path))
+                        else:
+                            _log.error(f"表情包图片不存在: {emoji.cache_path}")
+                            message.chain.append(Text("[图片已失效]\n"))
+                        message.chain.append(Text("\n"))
+                    except Exception as e:
+                        _log.error(f"添加表情包图片失败: {e}")
+                        message.chain.append(Text(f"{i}. [图片加载失败]\n"))
 
-            # 添加消息元素
-            message.chain.append(Text("=== 个人表情包统计 ===\n"))
-            message.chain.append(Text("最近"))
-            message.chain.append(Text(str(days)))
-            message.chain.append(Text("天发送表情包数量:\n"))
-            for img in self._number_to_counter(total_count):
-                message.chain.append(img)
-            message.chain.append(Text("\n\n"))
-            message.chain.append(Text("最常使用的表情包TOP3:\n"))
-
-            # 添加表情包信息
-            for i, emoji in enumerate(top_emojis, 1):
-                message.chain.append(
-                    Text(f"{i}. 使用次数: {emoji.get_count(days)}次\n")
+            else:  # 个人统计
+                # 获取用户最受欢迎表情包
+                top_emojis = self._get_top_emojis(
+                    self.user_stats.get(group_id, {}).get(target_user_id, {}), days
                 )
-                message.chain.append(Image(emoji.cache_path))
-                message.chain.append(Text("\n"))
+                # 获取用户发送次数统计
+                count_stats = self._get_time_range_stats(
+                    self.user_count.get(group_id, {}).get(target_user_id, {}), days
+                )
+                total_count = sum(count_stats.values())
 
-        # 如果没有任何表情包，添加提示信息
-        if not top_emojis:
-            message.chain.append(Text("暂无表情包使用记录\n"))
+                # 添加消息元素
+                message.chain.append(Text("=== 个人表情包统计 ===\n"))
+                message.chain.append(Text("最近"))
+                if days is None:
+                    message.chain.append(Text("全部时间"))
+                else:
+                    message.chain.append(Text(str(days)))
+                    message.chain.append(Text("天"))
+                message.chain.append(Text("发送表情包数量:\n"))
+                for img in self._number_to_counter(total_count):
+                    message.chain.append(img)
+                message.chain.append(Text("\n\n"))
+                message.chain.append(Text("最常使用的表情包TOP3:\n"))
 
-        # 发送消息
-        await self.api.post_group_msg(
-            group_id=group_id, rtf=message, reply=input.message_id
-        )
+                # 添加表情包信息
+                for i, emoji in enumerate(top_emojis, 1):
+                    try:
+                        message.chain.append(
+                            Text(f"{i}. 使用次数: {emoji.get_count(days)}次\n")
+                        )
+                        if os.path.exists(emoji.cache_path):
+                            message.chain.append(Image(emoji.cache_path))
+                        else:
+                            _log.error(f"表情包图片不存在: {emoji.cache_path}")
+                            message.chain.append(Text("[图片已失效]\n"))
+                        message.chain.append(Text("\n"))
+                    except Exception as e:
+                        _log.error(f"添加表情包图片失败: {e}")
+                        message.chain.append(Text(f"{i}. [图片加载失败]\n"))
+
+            # 如果没有任何表情包，添加提示信息
+            if not top_emojis:
+                message.chain.append(Text("暂无表情包使用记录\n"))
+
+            # 发送消息
+            try:
+                await self.api.post_group_msg(
+                    group_id=group_id, rtf=message, reply=input.message_id
+                )
+            except Exception as e:
+                _log.error(f"发送消息失败: {e}")
+                # 尝试发送纯文本消息
+                error_message = MessageChain([Text("统计信息发送失败，请稍后重试")])
+                await self.api.post_group_msg(
+                    group_id=group_id, rtf=error_message, reply=input.message_id
+                )
+        except Exception as e:
+            _log.error(f"处理统计信息时发生错误: {e}")
+            error_message = MessageChain([Text("处理统计信息时发生错误，请稍后重试")])
+            await self.api.post_group_msg(
+                group_id=input.group_id, rtf=error_message, reply=input.message_id
+            )
