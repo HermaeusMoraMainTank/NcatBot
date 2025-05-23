@@ -80,7 +80,14 @@ class ImageSender(BasePlugin):
                 "xtxy",
             ],
             "path": "data/image/咲夜saki",
-            "allowed_users": [273421673, 635773721, 1506123340, 10123121, 1508864751],
+            "allowed_users": [
+                273421673,
+                635773721,
+                1506123340,
+                10123121,
+                1508864751,
+                2034756660,
+            ],
         },
     }
 
@@ -116,14 +123,22 @@ class ImageSender(BasePlugin):
                         image_files = self.get_image_files(config["path"])
 
                         if count <= self.max_count:
+                            # 收集所有要发送的图片
+                            selected_files = []
                             for _ in range(count):
                                 file = random.choice(image_files)
                                 log.info(
                                     f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {file}"
                                 )
+                                selected_files.append(file)
+
+                            # 一次性发送所有图片
+                            if selected_files:
                                 await self.api.post_group_msg(
                                     group_id=input.group_id,
-                                    rtf=MessageChain([Image(file)]),
+                                    rtf=MessageChain(
+                                        [Image(file) for file in selected_files]
+                                    ),
                                 )
                         else:
                             await self.api.post_group_msg(

@@ -60,4 +60,6 @@ class CrazyThursday(BasePlugin):
     @bot.group_event()
     async def handle_crazy_thursday(self, input: GroupMessage):
         if input.raw_message in ["疯狂星期四", "KFC", "星期四"]:
-            await self.api.post_group_msg(group_id=input.group_id, text=(random.choice(CRAZY_MESSAGES)))
+            await self.api.post_group_msg(
+                group_id=input.group_id, text=(random.choice(CRAZY_MESSAGES))
+            )
