@@ -173,7 +173,7 @@ class TodayWaifu(BasePlugin):
 
         if (
             input.raw_message.startswith("换")
-            and input.raw_message.endswith("的老婆")
+            and "的老婆" in input.raw_message
             and user_id == HMMT.HMMT_ID
         ):
             target_user_id = None
