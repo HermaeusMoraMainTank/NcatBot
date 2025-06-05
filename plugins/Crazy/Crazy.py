@@ -5,6 +5,7 @@ import random
 
 bot = CompatibleEnrollment
 
+
 class Crazy(BasePlugin):
     name = "Crazy"  # 插件名称
     version = "1.0"  # 插件版本
@@ -222,27 +223,40 @@ class Crazy(BasePlugin):
         is_crazy = False
         is_at = False
         at_target = 0
+        custom_name = None
+
         for k in input.message:
             if k["type"] == "at":
                 is_at = True
                 at_target = k["data"]["qq"]
             if k["type"] == "text":
-                if k["data"]["text"].replace(" ", "") in self.key:
+                text = k["data"]["text"].strip()
+                if text in self.key:
                     is_crazy = True
+                elif text.startswith("发病 "):  # 检查是否以"发病 "开头
+                    is_crazy = True
+                    custom_name = text[2:].strip()  # 获取"发病 "后面的字符串
+
         if is_crazy is False:
             return
-        if is_at is False:
+
+        if custom_name:  # 如果存在自定义名称，使用它
+            target_name = custom_name
+        elif is_at is False:  # 如果没有@，使用发送者的名称
             target_name = (
                 input.sender.card if input.sender.card != "" else input.sender.nickname
             )
-        else:
-            info = await self.api.get_group_member_info(input.group_id, user_id=at_target,no_cache=True)
+        else:  # 如果有@，使用被@者的名称
+            info = await self.api.get_group_member_info(
+                input.group_id, user_id=at_target, no_cache=True
+            )
             target_name = (
                 info["data"]["card"]
                 if info["data"]["card"] != ""
                 else info["data"]["nickname"]
             )
-        i = random.randint(0, len(self.msglist))  # 随机数
+
+        i = random.randint(0, len(self.msglist) - 1)  # 随机数
         msg = self.msglist[i].replace("target_name", target_name)
         message = MessageChain([Text(msg)])
         await self.api.post_group_msg(group_id=input.group_id, rtf=message)

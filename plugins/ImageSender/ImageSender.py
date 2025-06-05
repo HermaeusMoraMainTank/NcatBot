@@ -89,6 +89,11 @@ class ImageSender(BasePlugin):
                 2034756660,
             ],
         },
+        "alice": {
+            "triggers": ["alice"],
+            "path": "data/image/alice",
+            "allowed_users": None,
+        },
     }
 
     @bot.group_event()

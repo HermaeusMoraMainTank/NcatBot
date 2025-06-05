@@ -118,7 +118,7 @@ class RussianRoulette(BasePlugin):
                 rtf=MessageChain(
                     [
                         Text(
-                            f"{user_name}的目光逐渐变得呆滞，他向后摔倒在地，看上去像是从来没有活过似的。\n{bot_name}枪下不幸的冤魂已有 {self.kill_count} 条，但她仍然重新装上了子弹。"
+                            f"{user_name}的目光逐渐变得呆滞，他向后摔倒在地，看上去像是从来没有活过似的。\n{bot_name}枪下不幸的冤魂已有 {self.kill_count} 条，但他仍然重新装上了子弹。"
                         ),
                     ]
                 ),

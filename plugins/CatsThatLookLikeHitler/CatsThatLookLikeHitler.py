@@ -28,7 +28,6 @@ class CatsThatLookLikeHitler(BasePlugin):
 
         random_number = random.randint(1, MAX_NUMBER)
         image_url = f"{BASE_URL}{random_number}.jpg"
-
         return await self.api.post_group_msg(
             group_id=input.group_id,
             rtf=MessageChain(

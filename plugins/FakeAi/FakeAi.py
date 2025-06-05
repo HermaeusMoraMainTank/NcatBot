@@ -142,7 +142,12 @@ class FakeAi(BasePlugin):
                 # 直接回复，不检查CD
                 reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
                 reply_json = json.dumps(
-                    {"name": sender_name, "id": sender_id, "content": content},
+                    {
+                        "name": sender_name,
+                        "id": sender_id,
+                        "content": content,
+                        "group_nickname": input.sender.card or sender_name,
+                    },
                     ensure_ascii=False,
                 )
                 reply_cache.add_reply(reply_json)
@@ -173,7 +178,12 @@ class FakeAi(BasePlugin):
 
             # 创建 JSON 格式的字符串并添加到 replyCache 中
             reply_json = json.dumps(
-                {"name": sender_name, "id": sender_id, "content": content},
+                {
+                    "name": sender_name,
+                    "id": sender_id,
+                    "content": content,
+                    "group_nickname": input.sender.card or sender_name,
+                },
                 ensure_ascii=False,
             )
             reply_cache.add_reply(reply_json)
@@ -195,7 +205,12 @@ class FakeAi(BasePlugin):
 
         # 创建 JSON 格式的字符串并添加到 replyCache 中
         reply_json = json.dumps(
-            {"name": sender_name, "id": sender_id, "content": content},
+            {
+                "name": sender_name,
+                "id": sender_id,
+                "content": content,
+                "group_nickname": input.sender.card or sender_name,
+            },
             ensure_ascii=False,
         )
         reply_cache.add_reply(reply_json)

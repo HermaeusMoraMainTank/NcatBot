@@ -55,6 +55,8 @@ class Meme(BasePlugin):
     keywordslist: dict[str, DataStructure] = {}
     timeout = 30  # 设置超时时间为30秒
     session = requests.Session()  # 使用 Session 来复用连接
+    banlist = ["10123121"]  # 添加 banlist
+    SPECIAL_USER_ID = "273421673"  # 特殊用户ID
 
     async def on_load(self):
         """异步加载插件"""
@@ -92,6 +94,10 @@ class Meme(BasePlugin):
 
     @bot.group_event()
     async def handle_meme(self, input: GroupMessage):
+        # 检查发送者是否在 banlist 中
+        if str(input.user_id) in self.banlist:
+            return
+
         if input.raw_message == "meme":
             try:
                 # 从 memeKeys.json 读取数据
@@ -148,6 +154,14 @@ class Meme(BasePlugin):
             coms = str(com).split(" ")
 
             if coms[0] in self.keywordslist:
+                # 检查消息中是否有被 ban 的用户
+                for message in input.message:
+                    if (
+                        message["type"] == "at"
+                        and str(message["data"]["qq"]) in self.banlist
+                    ):
+                        return
+
                 meme_config = self.keywordslist[coms[0]]
                 params_type = meme_config.params_type
 
@@ -203,12 +217,23 @@ class Meme(BasePlugin):
     ) -> List[Path]:
         """收集头像 URL，下载头像文件并返回文件路径列表"""
         avatar_urls = []
+        current_user_id = str(input.user_id)
+
         for message in input.message:
             if message["type"] == "at":
                 target_id = message["data"]["qq"]
+                # 如果目标ID是特殊用户ID，且当前用户不是特殊用户，则替换为当前用户ID
+                if (
+                    target_id == self.SPECIAL_USER_ID
+                    and current_user_id != self.SPECIAL_USER_ID
+                ):
+                    target_id = current_user_id
                 avatar_urls.append(f"http://q1.qlogo.cn/g?b=qq&nk={target_id}&s=640")
+
         while len(avatar_urls) < min_images:
-            avatar_urls.insert(0, f"http://q1.qlogo.cn/g?b=qq&nk={input.user_id}&s=640")
+            avatar_urls.insert(
+                0, f"http://q1.qlogo.cn/g?b=qq&nk={current_user_id}&s=640"
+            )
         if len(avatar_urls) > max_images:
             avatar_urls = avatar_urls[:max_images]
 

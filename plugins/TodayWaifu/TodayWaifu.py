@@ -176,28 +176,98 @@ class TodayWaifu(BasePlugin):
             and input.raw_message.endswith("的老婆")
             and user_id == HMMT.HMMT_ID
         ):
-            target_user_id = 0
+            target_user_id = None
+            new_wife_id = None
+            at_count = 0
 
             for isAt in input.message:
                 if isAt.get("type") == "at":
-                    target_user_id = int(isAt.get("data").get("qq"))
+                    if at_count == 0:
+                        target_user_id = int(isAt.get("data").get("qq"))
+                    elif at_count == 1:
+                        new_wife_id = int(isAt.get("data").get("qq"))
+                    at_count += 1
 
-            target = await self.api.get_group_member_info(
+            if not target_user_id:
+                return await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    text="请艾特要更换老婆的用户。",
+                )
+
+            # 获取目标用户信息
+            target_info = await self.api.get_group_member_info(
                 group_id=group_id, user_id=target_user_id, no_cache=True
             )
-            target_username = target.get("data").get("nickname")
+            if not isinstance(target_info, dict) or target_info.get("status") != "ok":
+                return await self.api.post_group_msg(
+                    group_id=input.group_id, text="获取目标用户信息失败，请稍后再试。"
+                )
+            target_data = target_info.get("data", {})
+            if not target_data:
+                return await self.api.post_group_msg(
+                    group_id=input.group_id, text="获取目标用户信息失败，请稍后再试。"
+                )
+            target_member = GroupMember(target_data)
 
             user_to_wife_map = self.user_to_wife_map_by_group.setdefault(group_id, {})
+            allocated_wives = self.allocated_wives_by_group.setdefault(group_id, set())
+
+            # 如果指定了新老婆
+            if new_wife_id:
+                # 获取新老婆信息
+                new_wife_info = await self.api.get_group_member_info(
+                    group_id=group_id, user_id=new_wife_id, no_cache=True
+                )
+                if (
+                    not isinstance(new_wife_info, dict)
+                    or new_wife_info.get("status") != "ok"
+                ):
+                    return await self.api.post_group_msg(
+                        group_id=input.group_id, text="获取新老婆信息失败，请稍后再试。"
+                    )
+                new_wife_data = new_wife_info.get("data", {})
+                if not new_wife_data:
+                    return await self.api.post_group_msg(
+                        group_id=input.group_id, text="获取新老婆信息失败，请稍后再试。"
+                    )
+                new_wife_member = GroupMember(new_wife_data)
+
+                # 如果目标用户已经有老婆，从已分配集合中移除
+                if target_user_id in user_to_wife_map:
+                    old_wife_id = user_to_wife_map[target_user_id]
+                    allocated_wives.discard(old_wife_id)
+
+                # 如果新老婆已经被分配给其他人，从原分配中移除
+                for uid, wife_id in user_to_wife_map.items():
+                    if wife_id == new_wife_id:
+                        allocated_wives.discard(wife_id)
+                        user_to_wife_map.pop(uid)
+                        break
+
+                # 设置新的老婆
+                user_to_wife_map[target_user_id] = new_wife_id
+                allocated_wives.add(new_wife_id)
+
+                return await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    rtf=MessageChain(
+                        [
+                            At(user_id),
+                            Text(
+                                f" 成功将 {target_member.nickname} 的老婆更换为 {new_wife_member.nickname}"
+                            ),
+                        ]
+                    ),
+                )
+
+            # 如果没有指定新老婆，使用随机分配
             if target_user_id not in user_to_wife_map:
                 return await self.api.post_group_msg(
                     group_id=input.group_id,
-                    text=f"{target_username} 没有老婆，无法更换。",
+                    text=f"{target_member.nickname} 没有老婆，无法更换。",
                 )
 
             target_wife_id = user_to_wife_map[target_user_id]
-
-            allocated_wives = self.allocated_wives_by_group.setdefault(group_id, set())
-
             allocated_wives.remove(target_wife_id)
             user_to_wife_map.pop(target_user_id)
             new_wife = await self.get_random_wife(input, group_id)
@@ -208,7 +278,7 @@ class TodayWaifu(BasePlugin):
                 rtf=MessageChain(
                     [
                         At(input.sender.user_id),
-                        Text(f" 成功更换了 {target_username} 的老婆。"),
+                        Text(f" 成功更换了 {target_member.nickname} 的老婆。"),
                     ]
                 ),
             )
@@ -226,6 +296,60 @@ class TodayWaifu(BasePlugin):
             user_to_wife_map = self.user_to_wife_map_by_group.setdefault(group_id, {})
             allocated_wives = self.allocated_wives_by_group.setdefault(group_id, set())
 
+            # 检查是否有艾特消息
+            target_user_id = None
+            for msg in input.message:
+                if msg.get("type") == "at":
+                    target_user_id = int(msg.get("data").get("qq"))
+                    break
+
+            if target_user_id:
+                # 如果被艾特的人是发送者自己，返回错误信息
+                if target_user_id == user_id:
+                    return await self.api.post_group_msg(
+                        group_id=input.group_id, text="不能选择自己作为老婆！"
+                    )
+
+                # 获取被艾特用户的信息
+                target_info = await self.api.get_group_member_info(
+                    group_id=group_id, user_id=target_user_id, no_cache=True
+                )
+                if isinstance(target_info, dict) and target_info.get("status") == "ok":
+                    target_data = target_info.get("data", {})
+                    if target_data:
+                        target_member = GroupMember(target_data)
+
+                        # 如果目标用户已经在其他用户的分配中，从原分配中移除
+                        for uid, wife_id in user_to_wife_map.items():
+                            if wife_id == target_user_id:
+                                allocated_wives.discard(wife_id)
+                                user_to_wife_map.pop(uid)
+                                break
+
+                        # 如果当前用户已有老婆，从已分配集合中移除
+                        if user_id in user_to_wife_map:
+                            allocated_wives.discard(user_to_wife_map[user_id])
+
+                        # 设置新的老婆
+                        user_to_wife_map[user_id] = target_user_id
+                        allocated_wives.add(target_user_id)
+
+                        return await self.api.post_group_msg(
+                            group_id=input.group_id,
+                            rtf=MessageChain(
+                                [
+                                    At(user_id),
+                                    Text(
+                                        f" 成功更换了老婆，你的新老婆是：{target_member.nickname}"
+                                    ),
+                                ]
+                            ),
+                        )
+                return await self.api.post_group_msg(
+                    group_id=input.group_id, text="获取目标用户信息失败，请稍后再试。"
+                )
+
+            # 原有的随机抽取逻辑
             if user_id not in user_to_wife_map:
                 return await self.api.post_group_msg(
                     group_id=input.group_id, text="你还没有老婆，无法换一个老婆。"
