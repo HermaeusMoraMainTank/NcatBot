@@ -98,7 +98,7 @@ class QQMusicCardSender(BasePlugin):
     @bot.group_event()
     async def handle_music_card(self, input: GroupMessage):
         message = input.raw_message.strip()
-        if message.startswith("点歌 "):
+        if message.startswith("qq点歌 "):
             keyword = message[3:].strip()
             music_api = QQMusicAPI()
             song_info = music_api.search_song(keyword)

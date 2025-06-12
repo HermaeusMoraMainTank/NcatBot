@@ -6,19 +6,28 @@ import urllib3
 from datetime import datetime, date, timedelta
 from typing import Dict, List, Optional
 from dataclasses import dataclass
-from PIL import Image as PILImage
+from PIL import Image as PILImage, ImageDraw
 import io
+import matplotlib.pyplot as plt
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+import numpy as np
+from matplotlib.font_manager import FontProperties
+import re
 
 from ncatbot.core.element import MessageChain, Text, Image
 from ncatbot.plugin import CompatibleEnrollment, BasePlugin
 from ncatbot.utils.logger import get_log
 from ncatbot.core.message import GroupMessage
+from common.utils.CommonUtil import CommonUtil
 
 # 禁用 SSL 警告
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 _log = get_log()
 bot = CompatibleEnrollment
+
+# 设置 matplotlib 字体
+CommonUtil.set_matplotlib_font()
 
 
 class DateTimeEncoder(json.JSONEncoder):
@@ -543,6 +552,299 @@ class EmojiStatsPlugin(BasePlugin):
 
         return [Image(temp_path)]
 
+    def split_emoji(self, text):
+        emoji_pattern = re.compile(
+            "["
+            "\U0001f600-\U0001f64f"
+            "\U0001f300-\U0001f5ff"
+            "\U0001f680-\U0001f6ff"
+            "\U0001f1e0-\U0001f1ff"
+            "\U00002700-\U000027bf"
+            "\U0001f900-\U0001f9ff"
+            "\U00002600-\U000026ff"
+            "\U00002b50"
+            "\U0000231a"
+            "]+",
+            flags=re.UNICODE,
+        )
+        result = []
+        last = 0
+        for m in emoji_pattern.finditer(text):
+            if m.start() > last:
+                result.append(("text", text[last : m.start()]))
+            result.append(("emoji", m.group()))
+            last = m.end()
+        if last < len(text):
+            result.append(("text", text[last:]))
+        return result
+
+    def _generate_top_emojis_barh(self, emoji_stats, top_n=10, days=None):
+        plt.clf()
+        top_items = sorted(emoji_stats, key=lambda x: x.get_count(days), reverse=True)[
+            :top_n
+        ]
+        counts = [e.get_count(days) for e in top_items]
+        paths = [e.cache_path for e in top_items]
+        names = [f"表情{i + 1}" for i in range(len(top_items))]
+        fig, ax = plt.subplots(figsize=(10, 0.8 * len(names) + 1))
+        color_palette = [
+            "#f7c873",
+            "#f7a8b8",
+            "#a3c9f7",
+            "#b8a3f7",
+            "#f7e3a3",
+            "#a3f7d3",
+            "#f7a3e3",
+            "#a3f7f7",
+            "#f7b8a3",
+            "#d3a3f7",
+        ]
+        bar_colors = color_palette[: len(names)]
+        bars = ax.barh(
+            range(len(names)),
+            counts,
+            color=bar_colors,
+            edgecolor="#fff",
+            height=0.65,
+            zorder=2,
+        )
+        ax.set_yticks(range(len(names)))
+        ax.set_yticklabels(names, fontsize=15, fontweight="bold", color="#444")
+        ax.set_xlabel("使用次数", fontsize=14, fontweight="bold")
+        ax.set_title(
+            "表情包TOP10", fontsize=18, fontweight="bold", color="#6c63ff", pad=15
+        )
+        ax.invert_yaxis()
+        ax.set_facecolor("#f7f7fa")
+        fig.patch.set_facecolor("#f7f7fa")
+        ax.xaxis.grid(True, linestyle="--", color="#ccc", alpha=0.5, zorder=1)
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+        ax.spines["left"].set_visible(False)
+        ax.spines["bottom"].set_color("#aaa")
+
+        def circle_crop(img, size=44):
+            img = img.resize((size, size), PILImage.LANCZOS).convert("RGBA")
+            mask = PILImage.new("L", (size, size), 0)
+            draw = ImageDraw.Draw(mask)
+            draw.ellipse((0, 0, size, size), fill=255)
+            img.putalpha(mask)
+            return img
+
+        def default_avatar(size=44):
+            img = PILImage.new("RGBA", (size, size), (200, 200, 200, 255))
+            draw = ImageDraw.Draw(img)
+            draw.ellipse(
+                (0, 0, size - 1, size - 1),
+                fill=(220, 220, 220, 255),
+                outline=(180, 180, 180, 255),
+                width=2,
+            )
+            return img
+
+        for i, path in enumerate(paths):
+            try:
+                emoji = PILImage.open(path).convert("RGBA")
+                emoji = circle_crop(emoji)
+            except Exception:
+                emoji = default_avatar()
+            imagebox = OffsetImage(emoji, zoom=1)
+            ab = AnnotationBbox(
+                imagebox,
+                (-max(counts) * 0.04, i),
+                frameon=False,
+                box_alignment=(0.5, 0.5),
+                pad=0.1,
+            )
+            ax.add_artist(ab)
+        for i, bar in enumerate(bars):
+            ax.text(
+                bar.get_width() + 1,
+                bar.get_y() + bar.get_height() / 2,
+                f"{counts[i]}",
+                va="center",
+                fontsize=15,
+                fontweight="bold",
+                color="#6c63ff",
+                zorder=3,
+            )
+        plt.tight_layout(rect=[0.08, 0, 1, 1])
+        path = os.path.join(
+            "data",
+            "image",
+            "temp",
+            f"top_emojis_{datetime.now().strftime('%Y%m%d%H%M%S')}.png",
+        )
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        plt.savefig(path, bbox_inches="tight")
+        plt.close()
+        return path
+
+    def _generate_top_users_barh(self, user_counts, user_names, top_n=10):
+        plt.clf()
+        top_items = sorted(user_counts.items(), key=lambda x: x[1], reverse=True)[
+            :top_n
+        ]
+        names = [user_names.get(uid, str(uid)) for uid, _ in top_items]
+        counts = [cnt for _, cnt in top_items]
+        user_ids = [uid for uid, _ in top_items]
+        fig, ax = plt.subplots(figsize=(10, 0.8 * len(names) + 1))
+        color_palette = [
+            "#f7c873",
+            "#f7a8b8",
+            "#a3c9f7",
+            "#b8a3f7",
+            "#f7e3a3",
+            "#a3f7d3",
+            "#f7a3e3",
+            "#a3f7f7",
+            "#f7b8a3",
+            "#d3a3f7",
+        ]
+        bar_colors = color_palette[: len(names)]
+        bars = ax.barh(
+            range(len(names)),
+            counts,
+            color=bar_colors,
+            edgecolor="#fff",
+            height=0.65,
+            zorder=2,
+        )
+        ax.set_yticks(range(len(names)))
+        ax.set_yticklabels([""] * len(names))  # 清空y轴标签
+        ax.set_xlabel("发送表情包次数", fontsize=14, fontweight="bold")
+        ax.set_title(
+            "表情包发送TOP10", fontsize=18, fontweight="bold", color="#6c63ff", pad=15
+        )
+        ax.invert_yaxis()
+        ax.set_facecolor("#f7f7fa")
+        fig.patch.set_facecolor("#f7f7fa")
+        ax.xaxis.grid(True, linestyle="--", color="#ccc", alpha=0.5, zorder=1)
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+        ax.spines["left"].set_visible(False)
+        ax.spines["bottom"].set_color("#aaa")
+
+        cn_font = FontProperties(
+            fname="C:/Windows/Fonts/msyh.ttc", size=15, weight="bold"
+        )
+        emoji_font = FontProperties(fname="C:/Windows/Fonts/seguiemj.ttf", size=15)
+
+        def circle_crop(img, size=44):
+            img = img.resize((size, size), PILImage.LANCZOS).convert("RGBA")
+            mask = PILImage.new("L", (size, size), 0)
+            draw = ImageDraw.Draw(mask)
+            draw.ellipse((0, 0, size, size), fill=255)
+            img.putalpha(mask)
+            return img
+
+        def default_avatar(size=44):
+            img = PILImage.new("RGBA", (size, size), (200, 200, 200, 255))
+            draw = ImageDraw.Draw(img)
+            draw.ellipse(
+                (0, 0, size - 1, size - 1),
+                fill=(220, 220, 220, 255),
+                outline=(180, 180, 180, 255),
+                width=2,
+            )
+            return img
+
+        # 头像更靠左
+        avatar_x = -max(counts) * 0.12 if counts else -1
+        # 昵称紧贴柱子
+        name_x = 0
+
+        # 头像
+        for i, user_id in enumerate(user_ids):
+            try:
+                avatar_path = CommonUtil.get_avatar(user_id)
+                avatar = PILImage.open(avatar_path).convert("RGBA")
+                avatar = circle_crop(avatar)
+            except Exception as e:
+                print(f"头像异常: {user_id} {e}")
+                avatar = default_avatar()
+            imagebox = OffsetImage(avatar, zoom=2.0)
+            ab = AnnotationBbox(
+                imagebox,
+                (avatar_x, i),
+                frameon=False,
+                box_alignment=(0.5, 0.5),
+                pad=0.1,
+                zorder=20,
+            )
+            ax.add_artist(ab)
+
+        # 渲染y轴标签（支持emoji混排）
+        for i, name in enumerate(names):
+            x = name_x
+            for part_type, part in self.split_emoji(name):
+                if part_type == "text":
+                    ax.text(
+                        x,
+                        i,
+                        part,
+                        va="center",
+                        ha="left",
+                        fontproperties=cn_font,
+                        color="#444",
+                        zorder=12,
+                    )
+                    x += len(part) * 0.18 * max(counts) / 10 if counts else 0.2
+                else:
+                    ax.text(
+                        x,
+                        i,
+                        part,
+                        va="center",
+                        ha="left",
+                        fontproperties=emoji_font,
+                        color="#444",
+                        zorder=13,
+                    )
+                    x += len(part) * 0.18 * max(counts) / 10 if counts else 0.2
+
+        # 在 plt.savefig 之前获取柱子的像素坐标和高度
+        fig.canvas.draw()
+        bar_pixel_boxes = []
+        renderer = fig.canvas.get_renderer()
+        for bar in bars:
+            bbox = bar.get_window_extent(renderer)
+            l, b, r, t = map(int, bbox.bounds)
+            bar_pixel_boxes.append((l, b, r, t))
+
+        plt.tight_layout(rect=[0.08, 0, 1, 1])
+        plt.subplots_adjust(left=0.18)
+        path = os.path.join(
+            "data",
+            "image",
+            "temp",
+            f"top_users_{datetime.now().strftime('%Y%m%d%H%M%S')}.png",
+        )
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        plt.savefig(path, bbox_inches="tight")
+        plt.close()
+
+        # 用 PIL 贴头像（精确布局）
+        avatar_size = 46.2
+        avatar_x = 118
+        top_margin = 86
+        bar_height = 45
+        bar_gap = 28.2
+        img = PILImage.open(path).convert("RGBA")
+        for i, user_id in enumerate(user_ids):
+            try:
+                avatar_path = CommonUtil.get_avatar(user_id)
+                avatar = PILImage.open(avatar_path).convert("RGBA")
+                avatar = avatar.resize(
+                    (int(round(avatar_size)), int(round(avatar_size))), PILImage.LANCZOS
+                )
+                avatar_y = top_margin + i * (bar_height + bar_gap)
+                img.paste(avatar, (int(round(avatar_x)), int(round(avatar_y))), avatar)
+            except Exception as e:
+                print(f"头像PIL粘贴异常: {user_id} {e}")
+        img.save(path)
+        return path
+
     @bot.group_event()
     async def handle_emoji_stats(self, input: GroupMessage) -> None:
         """处理表情包统计命令"""
@@ -583,22 +885,13 @@ class EmojiStatsPlugin(BasePlugin):
         """显示统计信息"""
         try:
             group_id = input.group_id
-
-            # 创建消息链
             message = MessageChain([])
-
             if target == "群组":
-                # 获取群组最受欢迎表情包
-                top_emojis = self._get_top_emojis(
-                    self.group_stats.get(group_id, {}), days
-                )
-                # 获取群组发送次数统计
+                # 1. 总数
                 count_stats = self._get_time_range_stats(
                     self.group_count.get(group_id, {}), days
                 )
                 total_count = sum(count_stats.values())
-
-                # 添加消息元素
                 message.chain.append(Text("=== 群组表情包统计 ===\n"))
                 message.chain.append(Text("最近"))
                 if days is None:
@@ -610,22 +903,19 @@ class EmojiStatsPlugin(BasePlugin):
                 for img in self._number_to_counter(total_count):
                     message.chain.append(img)
                 message.chain.append(Text("\n\n"))
-
-                # 添加发送次数最多的用户统计
-                message.chain.append(Text("发送表情包最多的用户TOP3:\n"))
+                # 2. 发表情包最多的10个用户
                 user_counts = {}
                 for user_id, user_stats in self.user_count.get(group_id, {}).items():
-                    # 获取用户在指定时间范围内的发送次数
                     user_time_stats = self._get_time_range_stats(user_stats, days)
                     user_total = sum(user_time_stats.values())
                     if user_total > 0:
                         user_counts[user_id] = user_total
-
-                # 按发送次数排序
-                sorted_users = sorted(
+                # 只取前十
+                top_users = sorted(
                     user_counts.items(), key=lambda x: x[1], reverse=True
-                )[:3]
-                for i, (user_id, count) in enumerate(sorted_users, 1):
+                )[:10]
+                user_names = {}
+                for user_id, _ in top_users:
                     try:
                         user_info = await self.api.get_group_member_info(
                             group_id=group_id, user_id=user_id, no_cache=True
@@ -635,23 +925,26 @@ class EmojiStatsPlugin(BasePlugin):
                             and user_info.get("status") == "ok"
                         ):
                             user_data = user_info.get("data", {})
-                            if user_data:
-                                nickname = user_data.get("nickname", str(user_id))
-                                message.chain.append(
-                                    Text(f"{i}. {nickname}: {count}次\n")
-                                )
-                            else:
-                                message.chain.append(
-                                    Text(f"{i}. {user_id}: {count}次\n")
-                                )
+                            nickname = user_data.get("nickname", str(user_id))
+                            user_names[user_id] = nickname
                         else:
-                            message.chain.append(Text(f"{i}. {user_id}: {count}次\n"))
-                    except Exception as e:
-                        _log.error(f"获取用户信息失败: {e}")
-                        message.chain.append(Text(f"{i}. {user_id}: {count}次\n"))
-                message.chain.append(Text("\n"))
-
-                # 添加最受欢迎表情包统计
+                            continue
+                    except Exception:
+                        continue
+                if top_users:
+                    # 头像和昵称只传前十
+                    bar_path = self._generate_top_users_barh(
+                        dict(top_users), user_names, top_n=10
+                    )
+                    message.chain.append(Text("发表情包最多的用户TOP10：\n"))
+                    message.chain.append(Image(bar_path))
+                    message.chain.append(Text("\n"))
+                else:
+                    message.chain.append(Text("暂无用户表情包数据\n"))
+                # 3. 最受欢迎的3个表情包
+                top_emojis = self._get_top_emojis(
+                    self.group_stats.get(group_id, {}), days
+                )[:3]
                 message.chain.append(Text("最受欢迎表情包TOP3:\n"))
                 for i, emoji in enumerate(top_emojis, 1):
                     try:
@@ -667,8 +960,7 @@ class EmojiStatsPlugin(BasePlugin):
                     except Exception as e:
                         _log.error(f"添加表情包图片失败: {e}")
                         message.chain.append(Text(f"{i}. [图片加载失败]\n"))
-
-            else:  # 个人统计
+            else:
                 # 获取用户最受欢迎表情包
                 top_emojis = self._get_top_emojis(
                     self.user_stats.get(group_id, {}).get(target_user_id, {}), days
@@ -708,10 +1000,6 @@ class EmojiStatsPlugin(BasePlugin):
                     except Exception as e:
                         _log.error(f"添加表情包图片失败: {e}")
                         message.chain.append(Text(f"{i}. [图片加载失败]\n"))
-
-            # 如果没有任何表情包，添加提示信息
-            if not top_emojis:
-                message.chain.append(Text("暂无表情包使用记录\n"))
 
             # 发送消息
             try:

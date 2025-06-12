@@ -94,6 +94,11 @@ class ImageSender(BasePlugin):
             "path": "data/image/alice",
             "allowed_users": None,
         },
+        "kipfel": {
+            "triggers": ["kipfel"],
+            "path": "data/image/kipfel",
+            "allowed_users": None,
+        },
     }
 
     @bot.group_event()

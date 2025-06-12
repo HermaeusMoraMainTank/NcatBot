@@ -53,26 +53,36 @@ class Tarot(BasePlugin):
                 probability += 0.5
 
             if random.random() < probability:
-                folder = Path("data/image/Tarot/TarotNeuro")
+                folder = Path("data/image/Tarot/Blacksouls")
                 if folder.exists() and folder.is_dir():
                     files = [
                         f
                         for f in folder.iterdir()
-                        if f.suffix.lower() in [".png", ".jpg"]
+                        if f.suffix.lower() in [".png", ".jpg", ".jpeg"]
                     ]
                     if files:
                         image = random.choice(files)
-                        await self.api.post_group_msg(
-                            group_id=input.group_id,
-                            rtf=MessageChain(
-                                [
-                                    At(input.user_id),
-                                    ImageElement(str(image.resolve())),
-                                    Reply(input.message_id),
-                                ]
-                            ),
+                        # 获取对应的塔罗牌数据
+                        blacksouls_tarot = self.load_blacksouls_tarot_data()
+                        tarot_name = image.stem
+                        tarot_data = next(
+                            (t for t in blacksouls_tarot if t.image_name == image.name),
+                            None,
                         )
-                        return
+
+                        if tarot_data:
+                            await self.api.post_group_msg(
+                                group_id=input.group_id,
+                                rtf=MessageChain(
+                                    [
+                                        At(input.user_id),
+                                        Text(f"\n{tarot_data.positive}"),
+                                        ImageElement(str(image.resolve())),
+                                        Reply(input.message_id),
+                                    ]
+                                ),
+                            )
+                            return
 
             random_tarots = self.get_random_tarots(1)
             for card in random_tarots:
@@ -105,6 +115,21 @@ class Tarot(BasePlugin):
         return TarotConstant.FORMAT2.replace("%牌名%", tarot.name).replace(
             "%描述%", description
         )
+
+    def load_blacksouls_tarot_data(self) -> List[TarotCard]:
+        tarot_list = []
+        try:
+            with open("data/yml/blacksouls_tarot.yml", "r", encoding="utf-8") as f:
+                yaml_data = yaml.safe_load(f)
+                tarot_data = yaml_data.get("tarot", [])
+                for t in tarot_data:
+                    tarot = TarotCard(
+                        t["name"], t["positive"], t["negative"], t["imageName"]
+                    )
+                    tarot_list.append(tarot)
+        except Exception as e:
+            log.error(f"Failed to load blacksouls tarot data: {e}")
+        return tarot_list
 
     def load_tarot_data(self) -> List[TarotCard]:
         tarot_list = []

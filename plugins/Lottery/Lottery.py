@@ -53,6 +53,8 @@ class Lottery(BasePlugin):
         """处理大乐透指令"""
         if input.raw_message.startswith("大乐透"):
             await self.join_lottery(input)
+        elif input.raw_message == "开始大乐透":
+            await self.start_lottery(input)
 
     async def join_lottery(self, input: GroupMessage):
         """玩家加入大乐透"""
@@ -86,6 +88,39 @@ class Lottery(BasePlugin):
             group_id=input.group_id,
             text=f"好了，好了！{input.sender.nickname} 加入了这次的大乐透！当前参与人数：{len(participants)}/{self.MAX_PARTICIPANTS}",
         )
+
+    async def start_lottery(self, input: GroupMessage):
+        """开始大乐透"""
+        group_id = input.group_id
+        user_id = input.user_id
+
+        if group_id not in self.group_participants:
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                text="还没有人参加大乐透，无法开始！",
+            )
+            return
+
+        participants = self.group_participants[group_id]
+        if user_id not in participants:
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                text="只有参加大乐透的成员才能开始大乐透！",
+            )
+            return
+
+        if len(participants) < 2:
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                text="参与人数太少，至少需要2人才能开始大乐透！",
+            )
+            return
+
+        await self.api.post_group_msg(
+            group_id=input.group_id,
+            text=f"好的，让我们开始吧！当前参与人数：{len(participants)}",
+        )
+        await self.trigger_lottery(input, group_id)
 
     async def trigger_lottery(self, input: GroupMessage, group_id: int):
         """触发大乐透逻辑"""

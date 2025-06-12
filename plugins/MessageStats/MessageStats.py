@@ -7,6 +7,13 @@ from dataclasses import dataclass
 from PIL import Image as PILImage
 import matplotlib.pyplot as plt
 import matplotlib
+import requests
+from common.utils.CommonUtil import CommonUtil
+from io import BytesIO
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+from PIL import ImageDraw
+import numpy as np
+import re
 
 matplotlib.use("Agg")  # 使用Agg后端，避免需要GUI
 import io
@@ -20,6 +27,9 @@ from ncatbot.core.message import GroupMessage
 
 _log = get_log()
 bot = CompatibleEnrollment
+
+# 设置 matplotlib 字体
+CommonUtil.set_matplotlib_font()
 
 # 设置中文字体
 plt.rcParams["font.sans-serif"] = [
@@ -106,9 +116,10 @@ class MessageStats:
             self.daily_counts[date_str] = 0
         self.daily_counts[date_str] += 1
 
-        if hour not in self.hourly_counts:
-            self.hourly_counts[hour] = 0
-        self.hourly_counts[hour] += 1
+        hour_str = str(hour)
+        if hour_str not in self.hourly_counts:
+            self.hourly_counts[hour_str] = 0
+        self.hourly_counts[hour_str] += 1
 
 
 class MessageStatsPlugin(BasePlugin):
@@ -373,7 +384,7 @@ class MessageStatsPlugin(BasePlugin):
             if days == 1:  # 今日
                 # 获取24小时数据
                 hours = list(range(24))
-                counts = [stats.hourly_counts.get(hour, 0) for hour in hours]
+                counts = [stats.hourly_counts.get(str(hour), 0) for hour in hours]
 
                 plt.bar(hours, counts, alpha=0.6, color="skyblue")
                 plt.plot(hours, counts, "r-", linewidth=2)
@@ -474,6 +485,212 @@ class MessageStatsPlugin(BasePlugin):
             plt.close()
             return None
 
+    def _generate_top_users_barh(self, user_counts, user_names, top_n=10):
+        plt.clf()
+        # 只取前十
+        top_items = sorted(user_counts.items(), key=lambda x: x[1], reverse=True)[
+            :top_n
+        ]
+        names = [user_names.get(uid, str(uid)) for uid, _ in top_items]
+        counts = [cnt for _, cnt in top_items]
+        user_ids = [uid for uid, _ in top_items]
+        fig, ax = plt.subplots(figsize=(10, 0.8 * len(names) + 1))
+        color_palette = [
+            "#f7c873",
+            "#f7a8b8",
+            "#a3c9f7",
+            "#b8a3f7",
+            "#f7e3a3",
+            "#a3f7d3",
+            "#f7a3e3",
+            "#a3f7f7",
+            "#f7b8a3",
+            "#d3a3f7",
+        ]
+        bar_colors = color_palette[: len(names)]
+        bars = ax.barh(
+            range(len(names)),
+            counts,
+            color=bar_colors,
+            edgecolor="#fff",
+            height=0.65,
+            zorder=2,
+        )
+        ax.set_yticks(range(len(names)))
+        ax.set_yticklabels([""] * len(names))  # 清空y轴标签
+        ax.set_xlabel("发言次数", fontsize=14, fontweight="bold")
+        ax.set_title(
+            "发言TOP10", fontsize=18, fontweight="bold", color="#6c63ff", pad=15
+        )
+        ax.invert_yaxis()
+        ax.set_facecolor("#f7f7fa")
+        fig.patch.set_facecolor("#f7f7fa")
+        ax.xaxis.grid(True, linestyle="--", color="#ccc", alpha=0.5, zorder=1)
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+        ax.spines["left"].set_visible(False)
+        ax.spines["bottom"].set_color("#aaa")
+
+        # 添加数值标签
+        for i, bar in enumerate(bars):
+            width = bar.get_width()
+            ax.text(
+                width + 1,
+                bar.get_y() + bar.get_height() / 2,
+                f"{counts[i]}",
+                va="center",
+                fontsize=15,
+                fontweight="bold",
+                color="#6c63ff",
+                zorder=3,
+            )
+
+        cn_font = FontProperties(
+            fname="C:/Windows/Fonts/msyh.ttc", size=15, weight="bold"
+        )
+        emoji_font = FontProperties(fname="C:/Windows/Fonts/seguiemj.ttf", size=15)
+
+        def circle_crop(img, size=44):
+            img = img.resize((size, size), PILImage.LANCZOS).convert("RGBA")
+            mask = PILImage.new("L", (size, size), 0)
+            draw = ImageDraw.Draw(mask)
+            draw.ellipse((0, 0, size, size), fill=255)
+            img.putalpha(mask)
+            return img
+
+        def default_avatar(size=44):
+            img = PILImage.new("RGBA", (size, size), (200, 200, 200, 255))
+            draw = ImageDraw.Draw(img)
+            draw.ellipse(
+                (0, 0, size - 1, size - 1),
+                fill=(220, 220, 220, 255),
+                outline=(180, 180, 180, 255),
+                width=2,
+            )
+            return img
+
+        # 头像更靠左
+        avatar_x = -max(counts) * 0.12 if counts else -1
+        # 昵称紧贴柱子
+        name_x = 0
+
+        # 头像 AnnotationBbox 预览
+        for i, user_id in enumerate(user_ids):
+            try:
+                avatar_path = CommonUtil.get_avatar(user_id)
+                avatar = PILImage.open(avatar_path).convert("RGBA")
+                avatar = circle_crop(avatar)
+            except Exception as e:
+                print(f"头像异常: {user_id} {e}")
+                avatar = default_avatar()
+            imagebox = OffsetImage(avatar, zoom=2.0)
+            ab = AnnotationBbox(
+                imagebox,
+                (avatar_x, i),
+                frameon=False,
+                box_alignment=(0.5, 0.5),
+                pad=0.1,
+                zorder=20,
+            )
+            ax.add_artist(ab)
+
+        # 渲染y轴标签（支持emoji混排）
+        for i, name in enumerate(names):
+            x = name_x
+            for part_type, part in self.split_emoji(name):
+                if part_type == "text":
+                    ax.text(
+                        x,
+                        i,
+                        part,
+                        va="center",
+                        ha="left",
+                        fontproperties=cn_font,
+                        color="#444",
+                        zorder=12,
+                    )
+                    x += len(part) * 0.18 * max(counts) / 10 if counts else 0.2
+                else:
+                    ax.text(
+                        x,
+                        i,
+                        part,
+                        va="center",
+                        ha="left",
+                        fontproperties=emoji_font,
+                        color="#444",
+                        zorder=13,
+                    )
+                    x += len(part) * 0.18 * max(counts) / 10 if counts else 0.2
+
+        # 在 plt.savefig 之前获取柱子的像素坐标和高度
+        fig.canvas.draw()
+        bar_pixel_boxes = []
+        renderer = fig.canvas.get_renderer()
+        for bar in bars:
+            bbox = bar.get_window_extent(renderer)
+            l, b, r, t = map(int, bbox.bounds)
+            bar_pixel_boxes.append((l, b, r, t))
+
+        plt.tight_layout(rect=[0.08, 0, 1, 1])
+        plt.subplots_adjust(left=0.18)
+        path = os.path.join(
+            "data",
+            "image",
+            "temp",
+            f"top_users_{datetime.now().strftime('%Y%m%d%H%M%S')}.png",
+        )
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        plt.savefig(path, bbox_inches="tight")
+        plt.close()
+
+        # 用 PIL 贴头像（精确布局）
+        avatar_size = 46.2
+        avatar_x = 118
+        top_margin = 86
+        bar_height = 45
+        bar_gap = 28.2
+        img = PILImage.open(path).convert("RGBA")
+        for i, user_id in enumerate(user_ids):
+            try:
+                avatar_path = CommonUtil.get_avatar(user_id)
+                avatar = PILImage.open(avatar_path).convert("RGBA")
+                avatar = avatar.resize(
+                    (int(round(avatar_size)), int(round(avatar_size))), PILImage.LANCZOS
+                )
+                avatar_y = top_margin + i * (bar_height + bar_gap)
+                img.paste(avatar, (int(round(avatar_x)), int(round(avatar_y))), avatar)
+            except Exception as e:
+                print(f"头像PIL粘贴异常: {user_id} {e}")
+        img.save(path)
+        return path
+
+    def split_emoji(self, text):
+        emoji_pattern = re.compile(
+            "["
+            "\U0001f600-\U0001f64f"
+            "\U0001f300-\U0001f5ff"
+            "\U0001f680-\U0001f6ff"
+            "\U0001f1e0-\U0001f1ff"
+            "\U00002700-\U000027bf"
+            "\U0001f900-\U0001f9ff"
+            "\U00002600-\U000026ff"
+            "\U00002b50"
+            "\U0000231a"
+            "]+",
+            flags=re.UNICODE,
+        )
+        result = []
+        last = 0
+        for m in emoji_pattern.finditer(text):
+            if m.start() > last:
+                result.append(("text", text[last : m.start()]))
+            result.append(("emoji", m.group()))
+            last = m.end()
+        if last < len(text):
+            result.append(("text", text[last:]))
+        return result
+
     @bot.group_event()
     async def handle_message_stats(self, input: GroupMessage) -> None:
         """处理发言统计命令"""
@@ -516,22 +733,14 @@ class MessageStatsPlugin(BasePlugin):
         """显示统计信息"""
         try:
             group_id = input.group_id
-
-            # 创建消息链
             message = MessageChain([])
-
             if target == "群组":
-                # 获取群组统计
                 group_stat = self.group_stats.get(group_id)
                 if not group_stat:
                     await input.reply("暂无群组发言统计")
                     return
-
-                # 获取群组发言次数统计
                 count_stats = self._get_time_range_stats(group_stat, days)
                 total_count = sum(count_stats.values())
-
-                # 添加消息元素
                 message.chain.append(Text("=== 群组发言统计 ===\n"))
                 message.chain.append(Text("最近"))
                 if days is None:
@@ -543,53 +752,43 @@ class MessageStatsPlugin(BasePlugin):
                 for img in self._number_to_counter(total_count):
                     message.chain.append(img)
                 message.chain.append(Text("\n\n"))
-
-                # 添加发言时间分布图
                 plot_path = self._generate_time_distribution_plot(group_stat, days)
                 if plot_path:
                     message.chain.append(Image(plot_path))
                 message.chain.append(Text("\n"))
-
-                # 添加发言最多的用户统计
-                message.chain.append(Text("发言最多的用户TOP3:\n"))
+                # TOP10横向柱状图
                 user_counts = {}
+                user_names = {}
                 for user_id, user_stat in self.user_stats.get(group_id, {}).items():
-                    # 获取用户在指定时间范围内的发言次数
                     user_time_stats = self._get_time_range_stats(user_stat, days)
                     user_total = sum(user_time_stats.values())
                     if user_total > 0:
                         user_counts[user_id] = user_total
-
-                # 按发言次数排序
-                sorted_users = sorted(
-                    user_counts.items(), key=lambda x: x[1], reverse=True
-                )[:3]
-                for i, (user_id, count) in enumerate(sorted_users, 1):
-                    try:
-                        user_info = await self.api.get_group_member_info(
-                            group_id=group_id, user_id=user_id, no_cache=True
-                        )
-                        if (
-                            isinstance(user_info, dict)
-                            and user_info.get("status") == "ok"
-                        ):
-                            user_data = user_info.get("data", {})
-                            if user_data:
+                        try:
+                            user_info = await self.api.get_group_member_info(
+                                group_id=group_id, user_id=user_id, no_cache=True
+                            )
+                            if (
+                                isinstance(user_info, dict)
+                                and user_info.get("status") == "ok"
+                            ):
+                                user_data = user_info.get("data", {})
                                 nickname = user_data.get("nickname", str(user_id))
-                                message.chain.append(
-                                    Text(f"{i}. {nickname}: {count}次\n")
-                                )
+                                user_names[user_id] = nickname
                             else:
-                                message.chain.append(
-                                    Text(f"{i}. {user_id}: {count}次\n")
-                                )
-                        else:
-                            message.chain.append(Text(f"{i}. {user_id}: {count}次\n"))
-                    except Exception as e:
-                        _log.error(f"获取用户信息失败: {e}")
-                        message.chain.append(Text(f"{i}. {user_id}: {count}次\n"))
-
-            else:  # 个人统计
+                                user_names[user_id] = str(user_id)
+                        except Exception:
+                            user_names[user_id] = str(user_id)
+                if user_counts:
+                    bar_path = self._generate_top_users_barh(
+                        user_counts, user_names, top_n=10
+                    )
+                    message.chain.append(Text("发言最多的用户TOP10：\n"))
+                    message.chain.append(Image(bar_path))
+                    message.chain.append(Text("\n"))
+                else:
+                    message.chain.append(Text("暂无用户发言数据\n"))
+            else:
                 # 获取用户统计
                 user_stat = self.user_stats.get(group_id, {}).get(target_user_id)
                 if not user_stat:
