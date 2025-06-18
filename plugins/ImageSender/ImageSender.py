@@ -87,6 +87,7 @@ class ImageSender(BasePlugin):
                 10123121,
                 1508864751,
                 2034756660,
+                1824159516,
             ],
         },
         "alice": {
@@ -97,6 +98,11 @@ class ImageSender(BasePlugin):
         "kipfel": {
             "triggers": ["kipfel"],
             "path": "data/image/kipfel",
+            "allowed_users": None,
+        },
+        "darkdog": {
+            "triggers": ["darkdog"],
+            "path": "data/image/darkdog",
             "allowed_users": None,
         },
     }

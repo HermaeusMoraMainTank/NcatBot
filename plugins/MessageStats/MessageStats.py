@@ -730,108 +730,124 @@ class MessageStatsPlugin(BasePlugin):
     async def _show_stats(
         self, input: GroupMessage, days: int, target: str, target_user_id: int
     ) -> None:
-        """显示统计信息"""
-        try:
-            group_id = input.group_id
+        """显示统计数据"""
+        # 发送初始响应
+        await self.api.post_group_msg(
+            input.group_id, rtf=MessageChain([Text("正在生成统计图表，请稍候...")])
+        )
+
+        if target == "群组":
+            stats = self.group_stats.get(input.group_id)
+            if not stats:
+                await self.api.post_group_msg(
+                    input.group_id,
+                    rtf=MessageChain([Text("暂无群组统计数据")]),
+                )
+                return
+
+            # 获取时间范围内的统计数据
+            time_range_stats = self._get_time_range_stats(stats, days)
+            total_count = sum(time_range_stats.values())
             message = MessageChain([])
-            if target == "群组":
-                group_stat = self.group_stats.get(group_id)
-                if not group_stat:
-                    await input.reply("暂无群组发言统计")
-                    return
-                count_stats = self._get_time_range_stats(group_stat, days)
-                total_count = sum(count_stats.values())
-                message.chain.append(Text("=== 群组发言统计 ===\n"))
-                message.chain.append(Text("最近"))
-                if days is None:
-                    message.chain.append(Text("全部时间"))
-                else:
-                    message.chain.append(Text(str(days)))
-                    message.chain.append(Text("天"))
-                message.chain.append(Text("发言数量:\n"))
-                for img in self._number_to_counter(total_count):
-                    message.chain.append(img)
-                message.chain.append(Text("\n\n"))
-                plot_path = self._generate_time_distribution_plot(group_stat, days)
-                if plot_path:
-                    message.chain.append(Image(plot_path))
-                message.chain.append(Text("\n"))
-                # TOP10横向柱状图
-                user_counts = {}
-                user_names = {}
-                for user_id, user_stat in self.user_stats.get(group_id, {}).items():
-                    user_time_stats = self._get_time_range_stats(user_stat, days)
-                    user_total = sum(user_time_stats.values())
-                    if user_total > 0:
-                        user_counts[user_id] = user_total
-                        try:
-                            user_info = await self.api.get_group_member_info(
-                                group_id=group_id, user_id=user_id, no_cache=True
-                            )
-                            if (
-                                isinstance(user_info, dict)
-                                and user_info.get("status") == "ok"
-                            ):
-                                user_data = user_info.get("data", {})
-                                nickname = user_data.get("nickname", str(user_id))
-                                user_names[user_id] = nickname
-                            else:
-                                user_names[user_id] = str(user_id)
-                        except Exception:
-                            user_names[user_id] = str(user_id)
-                if user_counts:
-                    bar_path = self._generate_top_users_barh(
-                        user_counts, user_names, top_n=10
-                    )
-                    message.chain.append(Text("发言最多的用户TOP10：\n"))
-                    message.chain.append(Image(bar_path))
-                    message.chain.append(Text("\n"))
-                else:
-                    message.chain.append(Text("暂无用户发言数据\n"))
+            message.chain.append(Text("=== 群组发言统计 ===\n"))
+            message.chain.append(Text("最近"))
+            if days is None:
+                message.chain.append(Text("全部时间"))
             else:
-                # 获取用户统计
-                user_stat = self.user_stats.get(group_id, {}).get(target_user_id)
-                if not user_stat:
-                    await input.reply("暂无个人发言统计")
-                    return
-
-                # 获取用户发言次数统计
-                count_stats = self._get_time_range_stats(user_stat, days)
-                total_count = sum(count_stats.values())
-
-                # 添加消息元素
-                message.chain.append(Text("=== 个人发言统计 ===\n"))
-                message.chain.append(Text("最近"))
-                if days is None:
-                    message.chain.append(Text("全部时间"))
-                else:
-                    message.chain.append(Text(str(days)))
-                    message.chain.append(Text("天"))
-                message.chain.append(Text("发言数量:\n"))
-                for img in self._number_to_counter(total_count):
-                    message.chain.append(img)
-                message.chain.append(Text("\n\n"))
-
-                # 添加发言时间分布图
-                plot_path = self._generate_time_distribution_plot(user_stat, days)
-                if plot_path:
-                    message.chain.append(Image(plot_path))
+                message.chain.append(Text(str(days)))
+                message.chain.append(Text("天"))
+            message.chain.append(Text("发言数量:\n"))
+            for img in self._number_to_counter(total_count):
+                message.chain.append(img)
+            message.chain.append(Text("\n\n"))
+            plot_path = self._generate_time_distribution_plot(stats, days)
+            if plot_path:
+                message.chain.append(Image(plot_path))
+            message.chain.append(Text("\n"))
+            # TOP10横向柱状图
+            user_counts = {}
+            user_names = {}
+            for user_id, user_stat in self.user_stats.get(input.group_id, {}).items():
+                user_time_stats = self._get_time_range_stats(user_stat, days)
+                user_total = sum(user_time_stats.values())
+                if user_total > 0:
+                    user_counts[user_id] = user_total
+                    try:
+                        user_info = await self.api.get_group_member_info(
+                            group_id=input.group_id, user_id=user_id, no_cache=True
+                        )
+                        if (
+                            isinstance(user_info, dict)
+                            and user_info.get("status") == "ok"
+                        ):
+                            user_data = user_info.get("data", {})
+                            nickname = user_data.get("nickname", str(user_id))
+                            user_names[user_id] = nickname
+                        else:
+                            user_names[user_id] = str(user_id)
+                    except Exception:
+                        user_names[user_id] = str(user_id)
+            if user_counts:
+                bar_path = self._generate_top_users_barh(
+                    user_counts, user_names, top_n=10
+                )
+                message.chain.append(Text("发言最多的用户TOP10：\n"))
+                message.chain.append(Image(bar_path))
+                message.chain.append(Text("\n"))
+            else:
+                message.chain.append(Text("暂无用户发言数据\n"))
 
             # 发送消息
             try:
                 await self.api.post_group_msg(
-                    group_id=group_id, rtf=message, reply=input.message_id
+                    input.group_id, rtf=message, reply=input.message_id
                 )
             except Exception as e:
                 _log.error(f"发送消息失败: {e}")
                 # 尝试发送纯文本消息
                 error_message = MessageChain([Text("统计信息发送失败，请稍后重试")])
                 await self.api.post_group_msg(
-                    group_id=group_id, rtf=error_message, reply=input.message_id
+                    input.group_id, rtf=error_message, reply=input.message_id
                 )
-        except Exception as e:
-            _log.error(f"处理统计信息时发生错误: {e}")
-            error_message = MessageChain([Text("处理统计信息时发生错误，请稍后重试")])
-            await self.api.post_group_msg(
-                group_id=input.group_id, rtf=error_message, reply=input.message_id
-            )
+        else:
+            # 获取用户统计
+            user_stat = self.user_stats.get(input.group_id, {}).get(target_user_id)
+            if not user_stat:
+                await input.reply("暂无个人发言统计")
+                return
+
+            # 获取用户发言次数统计
+            count_stats = self._get_time_range_stats(user_stat, days)
+            total_count = sum(count_stats.values())
+
+            # 添加消息元素
+            message = MessageChain([])
+            message.chain.append(Text("=== 个人发言统计 ===\n"))
+            message.chain.append(Text("最近"))
+            if days is None:
+                message.chain.append(Text("全部时间"))
+            else:
+                message.chain.append(Text(str(days)))
+                message.chain.append(Text("天"))
+            message.chain.append(Text("发言数量:\n"))
+            for img in self._number_to_counter(total_count):
+                message.chain.append(img)
+            message.chain.append(Text("\n\n"))
+
+            # 添加发言时间分布图
+            plot_path = self._generate_time_distribution_plot(user_stat, days)
+            if plot_path:
+                message.chain.append(Image(plot_path))
+
+            # 发送消息
+            try:
+                await self.api.post_group_msg(
+                    input.group_id, rtf=message, reply=input.message_id
+                )
+            except Exception as e:
+                _log.error(f"发送消息失败: {e}")
+                # 尝试发送纯文本消息
+                error_message = MessageChain([Text("统计信息发送失败，请稍后重试")])
+                await self.api.post_group_msg(
+                    input.group_id, rtf=error_message, reply=input.message_id
+                )

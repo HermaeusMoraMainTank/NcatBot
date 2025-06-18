@@ -114,8 +114,34 @@ class FakeAi(BasePlugin):
     name = "FakeAi"  # 插件名称
     version = "1.0"  # 插件版本
 
+    # 添加排除插件列表
+    excluded_plugins = ["NetEaseCloudMusic", "VrChatInfo"]  # 在这里添加不需要触发FakeAi的插件名称
+
+    async def _is_from_excluded_plugin(self, input: GroupMessage) -> bool:
+        """检查消息是否来自排除的插件"""
+        # 检查是否是回复消息
+        if input.message and len(input.message) > 1:
+            for msg in input.message:
+                if msg["type"] == "reply":
+                    # 检查被回复的消息是否包含特定文本
+                    try:
+                        reply_id = msg["data"]["id"]
+                        msg_info = await self.api.get_msg(reply_id)
+                        if msg_info.get("status") == "ok":
+                            raw_message = msg_info["data"]["raw_message"]
+                            if "请回复数字选择要播放的歌曲" in raw_message or "请回复数字选择要查看的玩家" in raw_message:
+                                return True
+                    except Exception as e:
+                        _log.error(f"检查回复消息时发生错误: {str(e)}")
+                        continue
+        return False
+
     @bot.group_event()
     async def handle_fake_ai(self, input: GroupMessage) -> None:
+        # 检查消息是否来自排除的插件
+        if await self._is_from_excluded_plugin(input):
+            return
+
         group_id = input.group_id
         sender_id = input.user_id
         sender_name = input.sender.nickname

@@ -17,6 +17,18 @@ bot = BotClient()
 
 @bot.group_event()
 async def on_group_message(message: GroupMessage):
+    if "四个字" in message.raw_message and message.user_id == 635773721:
+        await bot.api.post_group_msg(message.group_id, text="飞舞白墨")
+        
+    if "四个字" in message.raw_message and message.user_id == 1508864751:
+        await bot.api.post_group_msg(message.group_id, text="色猪一头(zmd)")
+
+    if "没有人喜欢我" in message.raw_message:
+        await bot.api.post_group_msg(message.group_id, text="我喜欢你饱饱")
+
+    if "消失了" in message.raw_message:
+        await bot.api.post_group_msg(message.group_id, text="别消失")
+
     # 替换 &amp; 为 &
     processed_message = message.raw_message.replace("&amp;", "&")
     _log.info(
