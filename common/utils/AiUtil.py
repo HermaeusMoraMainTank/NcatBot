@@ -21,7 +21,7 @@ class AiUtil:
         api_key = "sk-869c983ef74c4678b63c934478339b25"
 
         url = "https://api.deepseek.com"
-        api_key = "sk-08b905b8cf4d4d27a9c04dba8f1ade70"
+        api_key = "sk-b13e5ef0d21942b0819728c345f1295a"
 
         # OpenAI 配置
         client = OpenAI(

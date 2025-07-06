@@ -115,7 +115,10 @@ class FakeAi(BasePlugin):
     version = "1.0"  # 插件版本
 
     # 添加排除插件列表
-    excluded_plugins = ["NetEaseCloudMusic", "VrChatInfo"]  # 在这里添加不需要触发FakeAi的插件名称
+    excluded_plugins = [
+        "NetEaseCloudMusic",
+        "VrChatInfo",
+    ]  # 在这里添加不需要触发FakeAi的插件名称
 
     async def _is_from_excluded_plugin(self, input: GroupMessage) -> bool:
         """检查消息是否来自排除的插件"""
@@ -129,7 +132,10 @@ class FakeAi(BasePlugin):
                         msg_info = await self.api.get_msg(reply_id)
                         if msg_info.get("status") == "ok":
                             raw_message = msg_info["data"]["raw_message"]
-                            if "请回复数字选择要播放的歌曲" in raw_message or "请回复数字选择要查看的玩家" in raw_message:
+                            if (
+                                "请回复数字选择要播放的歌曲" in raw_message
+                                or "请回复数字选择要查看的玩家" in raw_message
+                            ):
                                 return True
                     except Exception as e:
                         _log.error(f"检查回复消息时发生错误: {str(e)}")
@@ -274,17 +280,18 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
             content = answer
 
         # 使用正则表达式分割句子
-        # 保留问号和感叹号，不保留句号和逗号
-        keep_punctuation_pattern = r"([！？!?]+)"  # 需要保留的标点
-        remove_punctuation_pattern = r"[。，,\.]+"  # 需要移除的标点
+        # 先用句号、问号、感叹号分割，将逗号替换为空格，然后去掉句号
+        sentence_split_pattern = r"([。！？!?]+)"  # 用于分割句子的标点
+        comma_replace_pattern = r"[，]+"  # 需要替换为空格的中文逗号
+        period_remove_pattern = r"[。]+"  # 需要移除的句号
 
-        # 先按需要保留的标点分割
-        parts = re.split(keep_punctuation_pattern, content)
+        # 先按句号、问号、感叹号分割
+        parts = re.split(sentence_split_pattern, content)
         sentences = []
 
         for i in range(0, len(parts), 2):
             if i + 1 < len(parts):
-                # 将句子和需要保留的标点组合在一起
+                # 将句子和标点组合在一起
                 sentence = (parts[i] + parts[i + 1]).strip()
                 if sentence:
                     # 保护CQ码中的标点
@@ -297,8 +304,11 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
                     # 保存所有CQ码
                     sentence = re.sub(r"\[CQ:[^\]]+\]", save_cq, sentence)
 
-                    # 移除不需要保留的标点
-                    sentence = re.sub(remove_punctuation_pattern, "", sentence)
+                    # 将中文逗号替换为空格
+                    sentence = re.sub(comma_replace_pattern, " ", sentence)
+
+                    # 移除句号，但保留问号和感叹号
+                    sentence = re.sub(period_remove_pattern, "", sentence)
 
                     # 恢复CQ码
                     for idx, cq_code in enumerate(cq_codes):
@@ -319,8 +329,11 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
                     # 保存所有CQ码
                     sentence = re.sub(r"\[CQ:[^\]]+\]", save_cq, parts[i].strip())
 
-                    # 移除不需要保留的标点
-                    sentence = re.sub(remove_punctuation_pattern, "", sentence)
+                    # 将中文逗号替换为空格
+                    sentence = re.sub(comma_replace_pattern, " ", sentence)
+
+                    # 移除句号，但保留问号和感叹号
+                    sentence = re.sub(period_remove_pattern, "", sentence)
 
                     # 恢复CQ码
                     for idx, cq_code in enumerate(cq_codes):
@@ -342,7 +355,8 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
             content = re.sub(r"\[CQ:[^\]]+\]", save_cq, content.strip())
 
             # 移除不需要保留的标点
-            content = re.sub(remove_punctuation_pattern, "", content)
+            content = re.sub(comma_replace_pattern, " ", content)
+            content = re.sub(period_remove_pattern, "", content)
 
             # 恢复CQ码
             for idx, cq_code in enumerate(cq_codes):

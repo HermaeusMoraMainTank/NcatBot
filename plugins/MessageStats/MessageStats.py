@@ -1,6 +1,8 @@
 import os
 import json
 import hashlib
+import shutil
+import tempfile
 from datetime import datetime, date, timedelta
 from typing import Dict, List, Optional
 from dataclasses import dataclass
@@ -14,6 +16,8 @@ from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from PIL import ImageDraw
 import numpy as np
 import re
+import threading
+import time
 
 matplotlib.use("Agg")  # 使用Agg后端，避免需要GUI
 import io
@@ -134,6 +138,12 @@ class MessageStatsPlugin(BasePlugin):
     group_stats: Dict[int, MessageStats] = {}  # 群组发言统计
     user_stats: Dict[int, Dict[int, MessageStats]] = {}  # 用户发言统计
 
+    # 数据保存控制
+    _save_lock = threading.Lock()
+    _last_save_time = 0
+    _save_interval = 30  # 30秒内只保存一次
+    _pending_save = False
+
     # 使用说明
     usage_instructions = """发言统计指令：
 1. 查看统计：发言统计 [时间范围] [统计对象]
@@ -160,6 +170,47 @@ class MessageStatsPlugin(BasePlugin):
         self._load_data()
         _log.info(f"{self.name} 插件加载完成")
 
+    def _atomic_save(self, data: dict, file_path: str) -> bool:
+        """原子性保存数据，确保数据不丢失"""
+        try:
+            # 创建临时文件
+            temp_dir = os.path.dirname(file_path)
+            temp_file = tempfile.NamedTemporaryFile(
+                mode="w", dir=temp_dir, suffix=".tmp", delete=False, encoding="utf-8"
+            )
+
+            # 写入临时文件
+            json.dump(
+                data, temp_file, ensure_ascii=False, indent=2, cls=DateTimeEncoder
+            )
+            temp_file.flush()
+            os.fsync(temp_file.fileno())  # 强制写入磁盘
+            temp_file.close()
+
+            # 创建备份文件
+            backup_path = file_path + ".backup"
+            if os.path.exists(file_path):
+                shutil.copy2(file_path, backup_path)
+
+            # 原子性移动文件
+            shutil.move(temp_file.name, file_path)
+
+            # 删除备份文件（如果新文件写入成功）
+            if os.path.exists(backup_path):
+                os.remove(backup_path)
+
+            return True
+
+        except Exception as e:
+            _log.error(f"原子性保存失败: {e}")
+            # 清理临时文件
+            if "temp_file" in locals() and os.path.exists(temp_file.name):
+                try:
+                    os.remove(temp_file.name)
+                except:
+                    pass
+            return False
+
     def _load_data(self):
         """加载保存的数据"""
         try:
@@ -183,6 +234,16 @@ class MessageStatsPlugin(BasePlugin):
                                 continue
                 except Exception as e:
                     _log.error(f"加载群组数据失败: {e}")
+                    # 尝试从备份文件恢复
+                    backup_path = self.GROUP_DATA_FILE + ".backup"
+                    if os.path.exists(backup_path):
+                        try:
+                            shutil.copy2(backup_path, self.GROUP_DATA_FILE)
+                            _log.info("从备份文件恢复群组数据")
+                            self._load_data()  # 重新加载
+                            return
+                        except Exception as backup_e:
+                            _log.error(f"从备份文件恢复失败: {backup_e}")
                     self._save_group_data()
 
             # 加载用户数据
@@ -210,6 +271,16 @@ class MessageStatsPlugin(BasePlugin):
                                 continue
                 except Exception as e:
                     _log.error(f"加载用户数据失败: {e}")
+                    # 尝试从备份文件恢复
+                    backup_path = self.USER_DATA_FILE + ".backup"
+                    if os.path.exists(backup_path):
+                        try:
+                            shutil.copy2(backup_path, self.USER_DATA_FILE)
+                            _log.info("从备份文件恢复用户数据")
+                            self._load_data()  # 重新加载
+                            return
+                        except Exception as backup_e:
+                            _log.error(f"从备份文件恢复失败: {backup_e}")
                     self._save_user_data()
 
         except Exception as e:
@@ -225,11 +296,12 @@ class MessageStatsPlugin(BasePlugin):
                     str(k): v.to_dict() for k, v in self.group_stats.items()
                 }
             }
-            with open(self.GROUP_DATA_FILE, "w", encoding="utf-8") as f:
-                json.dump(data, f, ensure_ascii=False, indent=2, cls=DateTimeEncoder)
+            if self._atomic_save(data, self.GROUP_DATA_FILE):
+                _log.debug("群组数据保存成功")
+            else:
+                _log.error("群组数据保存失败")
         except Exception as e:
             _log.error(f"保存群组数据失败: {e}")
-            raise
 
     def _save_user_data(self):
         """保存用户数据"""
@@ -240,16 +312,99 @@ class MessageStatsPlugin(BasePlugin):
                     for k, v in self.user_stats.items()
                 }
             }
-            with open(self.USER_DATA_FILE, "w", encoding="utf-8") as f:
-                json.dump(data, f, ensure_ascii=False, indent=2, cls=DateTimeEncoder)
+            if self._atomic_save(data, self.USER_DATA_FILE):
+                _log.debug("用户数据保存成功")
+            else:
+                _log.error("用户数据保存失败")
         except Exception as e:
             _log.error(f"保存用户数据失败: {e}")
-            raise
 
     def _save_data(self):
-        """保存所有数据"""
-        self._save_group_data()
-        self._save_user_data()
+        """保存所有数据（带频率控制）"""
+        with self._save_lock:
+            current_time = time.time()
+
+            # 如果距离上次保存时间太短，标记为待保存
+            if current_time - self._last_save_time < self._save_interval:
+                self._pending_save = True
+                return
+
+            # 执行保存
+            self._save_group_data()
+            self._save_user_data()
+            self._last_save_time = current_time
+            self._pending_save = False
+
+    def _schedule_save(self):
+        """调度保存任务"""
+
+        def delayed_save():
+            time.sleep(self._save_interval)
+            with self._save_lock:
+                if self._pending_save:
+                    self._save_group_data()
+                    self._save_user_data()
+                    self._pending_save = False
+
+        # 在后台线程中执行延迟保存
+        save_thread = threading.Thread(target=delayed_save, daemon=True)
+        save_thread.start()
+
+    def cleanup_old_backups(self, max_age_days: int = 7):
+        """清理旧的备份文件"""
+        try:
+            current_time = time.time()
+            max_age_seconds = max_age_days * 24 * 3600
+
+            backup_files = [
+                self.GROUP_DATA_FILE + ".backup",
+                self.USER_DATA_FILE + ".backup",
+            ]
+
+            for backup_file in backup_files:
+                if os.path.exists(backup_file):
+                    file_age = current_time - os.path.getmtime(backup_file)
+                    if file_age > max_age_seconds:
+                        os.remove(backup_file)
+                        _log.info(f"清理旧备份文件: {backup_file}")
+        except Exception as e:
+            _log.error(f"清理备份文件失败: {e}")
+
+    def force_save(self):
+        """强制保存所有数据"""
+        with self._save_lock:
+            self._save_group_data()
+            self._save_user_data()
+            self._last_save_time = time.time()
+            self._pending_save = False
+            _log.debug("强制保存数据完成")
+
+    def get_data_status(self) -> dict:
+        """获取数据状态信息"""
+        try:
+            status = {
+                "group_stats_count": len(self.group_stats),
+                "user_stats_count": sum(
+                    len(users) for users in self.user_stats.values()
+                ),
+                "last_save_time": self._last_save_time,
+                "pending_save": self._pending_save,
+                "group_file_exists": os.path.exists(self.GROUP_DATA_FILE),
+                "user_file_exists": os.path.exists(self.USER_DATA_FILE),
+                "group_backup_exists": os.path.exists(self.GROUP_DATA_FILE + ".backup"),
+                "user_backup_exists": os.path.exists(self.USER_DATA_FILE + ".backup"),
+            }
+
+            # 获取文件大小信息
+            if os.path.exists(self.GROUP_DATA_FILE):
+                status["group_file_size"] = os.path.getsize(self.GROUP_DATA_FILE)
+            if os.path.exists(self.USER_DATA_FILE):
+                status["user_file_size"] = os.path.getsize(self.USER_DATA_FILE)
+
+            return status
+        except Exception as e:
+            _log.error(f"获取数据状态失败: {e}")
+            return {"error": str(e)}
 
     @bot.group_event()
     async def handle_message(self, input: GroupMessage) -> None:
@@ -274,8 +429,11 @@ class MessageStatsPlugin(BasePlugin):
         self.user_stats[group_id][user_id].increment_count(today, hour)
         self.user_stats[group_id][user_id].last_message = now
 
-        # 保存数据
+        # 使用新的保存机制
         self._save_data()
+        # 如果有待保存的数据，调度延迟保存
+        if self._pending_save:
+            self._schedule_save()
 
     def _get_time_range_stats(self, stats: MessageStats, days: int) -> Dict[str, int]:
         """获取指定时间范围内的统计"""

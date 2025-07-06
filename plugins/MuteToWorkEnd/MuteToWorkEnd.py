@@ -13,17 +13,33 @@ class MuteToWorkEnd(BasePlugin):
     version = "1.0"
     WORK_END_HOUR = 19
     WORK_END_MINUTE = 30
-    ADMIN_QQ = 273421673  # 管理员QQ号
+
+    async def is_admin_or_owner(self, group_id: int, user_id: int) -> bool:
+        """检查用户是否为群主或管理员"""
+        try:
+            member_info = await self.api.get_group_member_info(
+                group_id=group_id, user_id=user_id, no_cache=True
+            )
+            if isinstance(member_info, dict) and member_info.get("status") == "ok":
+                member_data = member_info.get("data", {})
+                if member_data:
+                    member = GroupMember(member_data)
+                    # onebot协议中role字段的值：owner(群主), admin(管理员), member(普通成员)
+                    return member.role in ["owner", "admin"]
+            return False
+        except Exception as e:
+            log.error(f"获取用户权限信息失败: {e}")
+            return False
 
     @bot.group_event()
     async def handle_mute_to_work_end(self, input: GroupMessage):
         """处理禁言到下班时间的指令"""
         if input.raw_message.strip().startswith("禁言到下班"):
             # 检查权限
-            if input.user_id != self.ADMIN_QQ:
+            if not await self.is_admin_or_owner(input.group_id, input.user_id):
                 await self.api.post_group_msg(
                     group_id=input.group_id,
-                    text="只有管理员才能使用此命令",
+                    text="只有群主或管理员才能使用此命令",
                     reply=input.message_id,
                 )
                 return

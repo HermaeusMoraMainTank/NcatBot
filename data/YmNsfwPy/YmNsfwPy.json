@@ -1,0 +1,19 @@
+{
+    "config": {},
+    "global_config": {
+        "admin_users": "273421673",
+        "nsfwpy_type": "i3"
+    },
+    "groups": {
+        "853963912": true,
+        "626192977": true
+    },
+    "group_notifiers": {
+        "853963912": [],
+        "626192977": []
+    },
+    "group_admins": {},
+    "group_thresholds": {
+        "853963912": "0.85"
+    }
+}
