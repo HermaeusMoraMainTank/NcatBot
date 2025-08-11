@@ -8,21 +8,13 @@ from common.utils.CommonUtil import CommonUtil
 from ncatbot.core.element import At, Image as ImageElement, MessageChain, Text
 from ncatbot.core.message import GroupMessage
 from ncatbot.plugin import CompatibleEnrollment, BasePlugin
-
+from .special_group_handler import SpecialGroupHandler
 
 from ncatbot.utils.logger import get_log
 
 bot = CompatibleEnrollment
 
 _log = get_log()
-BLESSINGS = [
-    "可喜可贺！",
-    "祝你们幸福！",
-    "真是天作之合！",
-    "愿你们永远快乐！",
-    "真是令人羡慕的一对！",
-    "祝福你们的美好未来！",
-]
 
 
 class TodayWaifu(BasePlugin):
@@ -54,9 +46,15 @@ class TodayWaifu(BasePlugin):
 
         members = [GroupMember(member) for member in members_response.get("data", [])]
 
+        # 应用特殊群组过滤逻辑
+        filtered_members = SpecialGroupHandler.filter_special_members(
+            members, input.user_id
+        )
+
+        # 进一步过滤已分配的和自己
         filtered_members = [
             member
-            for member in members
+            for member in filtered_members
             if member.user_id not in allocated_wives and member.user_id != input.user_id
         ]
 
@@ -137,10 +135,6 @@ class TodayWaifu(BasePlugin):
                                     Text("你今天的群友老婆是："),
                                     ImageElement(avatar_url),
                                     Text(f" {wife_info.nickname}({wife_info.user_id})"),
-                                    Text("\n"),
-                                    Text(
-                                        f"{BLESSINGS[random.randint(0, len(BLESSINGS) - 1)]}"
-                                    ),
                                 ]
                             ),
                         )
@@ -148,6 +142,40 @@ class TodayWaifu(BasePlugin):
                     return await self.api.post_group_msg(
                         group_id=input.group_id, text="获取老婆信息失败，请稍后再试。"
                     )
+
+            # 特殊群组逻辑：如果用户是特殊用户，直接分配默认伴侣
+            if SpecialGroupHandler.should_use_special_logic(group_id, user_id):
+                special_partner_id = SpecialGroupHandler.get_special_partner(user_id)
+                if special_partner_id:
+                    # 检查伴侣是否在群组中
+                    partner_info = await self.api.get_group_member_info(
+                        group_id=group_id, user_id=special_partner_id, no_cache=True
+                    )
+                    if (
+                        isinstance(partner_info, dict)
+                        and partner_info.get("status") == "ok"
+                    ):
+                        partner_data = partner_info.get("data", {})
+                        if partner_data:
+                            partner_member = GroupMember(partner_data)
+                            user_to_wife_map[user_id] = partner_member.user_id
+                            allocated_wives.add(partner_member.user_id)
+
+                            avatar_url = CommonUtil.get_avatar(partner_member.user_id)
+
+                            return await self.api.post_group_msg(
+                                group_id=input.group_id,
+                                rtf=MessageChain(
+                                    [
+                                        At(user_id),
+                                        Text(" 你今天的群友老婆是："),
+                                        ImageElement(avatar_url),
+                                        Text(
+                                            f" {partner_member.nickname}({partner_member.user_id})"
+                                        ),
+                                    ]
+                                ),
+                            )
 
             new_wife = await self.get_random_wife(input, group_id)
 
@@ -165,8 +193,6 @@ class TodayWaifu(BasePlugin):
                         Text(" 你今天的群友老婆是："),
                         ImageElement(avatar_url),
                         Text(f" {new_wife.nickname}({new_wife.user_id})"),
-                        Text("\n"),
-                        Text(f"{BLESSINGS[random.randint(0, len(BLESSINGS) - 1)]}"),
                     ]
                 ),
             )

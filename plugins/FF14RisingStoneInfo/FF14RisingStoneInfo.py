@@ -306,11 +306,14 @@ class FF14RisingStoneInfo(BasePlugin):
             race = "未知"
         # 左侧信息
         info_left = [
-            ("种族", f"{race}"),
-            ("性别", "男" if character_detail.get("gender") == "0" else "女"),
+            (
+                "种族性别",
+                f"{race} {'男' if character_detail.get('gender') == '0' else '女'}",
+            ),
             ("部队", f"{character_detail.get('guild_name', '无')}"),
             ("创角时间", character_detail.get("create_time", "未知")),
             ("最近登录", character_detail.get("last_login_time", "未知")),
+            ("累计游戏时长", character_detail.get("play_time", "未知")),
             ("房屋信息", character_detail.get("house_info", "无")),
         ]
 

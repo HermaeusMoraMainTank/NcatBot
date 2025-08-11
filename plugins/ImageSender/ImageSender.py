@@ -2,6 +2,11 @@ from datetime import datetime
 import logging
 import os
 import random
+import re
+import requests
+import html
+import hashlib
+from urllib.parse import urlparse
 from ncatbot.core.message import GroupMessage
 from ncatbot.core.element import Image, MessageChain
 from ncatbot.plugin import CompatibleEnrollment, BasePlugin
@@ -105,11 +110,26 @@ class ImageSender(BasePlugin):
             "path": "data/image/darkdog",
             "allowed_users": None,
         },
+        "ybxa": {
+            "triggers": ["ybxa"],
+            "path": "data/image/ybxa",
+            "allowed_users": [273421673, 1310043427, 1079454672],
+        },
+        "blb": {
+            "triggers": ["blb", "菠萝包"],
+            "path": "data/image/blb",
+            "allowed_users": None,
+        },
     }
 
     @bot.group_event()
     async def handle_image(self, input: GroupMessage):
         message = input.raw_message.strip()
+
+        # 处理上传功能
+        if message.startswith("上传 "):
+            await self.handle_upload(input, message)
+            return
 
         # 检查消息是否以任何命令开头
         for command, config in self.commands.items():
@@ -127,6 +147,11 @@ class ImageSender(BasePlugin):
                         config["allowed_users"]
                         and input.sender.user_id not in config["allowed_users"]
                     ):
+                        return
+
+                    # 处理 count 查询
+                    if message.startswith(trigger + " count"):
+                        await self.handle_count_query(input, command, config)
                         return
 
                     # 处理带数量的情况
@@ -171,6 +196,162 @@ class ImageSender(BasePlugin):
                             group_id=input.group_id, rtf=MessageChain([Image(file)])
                         )
                     return
+
+    async def handle_count_query(self, input: GroupMessage, command: str, config: dict):
+        """处理 count 查询请求"""
+        image_files = self.get_image_files(config["path"])
+        image_count = len(image_files)
+
+        # 构建权限信息
+        if config["allowed_users"]:
+            allowed_users_text = (
+                f"允许用户: {', '.join(map(str, config['allowed_users']))}"
+            )
+            upload_permission_text = f"上传权限: 仅限允许用户"
+        else:
+            allowed_users_text = "允许用户: 所有用户"
+            upload_permission_text = "上传权限: 所有用户"
+
+        # 构建响应消息
+        response = f"关键词: {command}\n"
+        response += f"图片数量: {image_count}\n"
+        response += f"{allowed_users_text}\n"
+        response += f"{upload_permission_text}\n"
+        response += f"最大发送数量: {self.max_count}"
+
+        await self.api.post_group_msg(group_id=input.group_id, text=response)
+
+    async def handle_upload(self, input: GroupMessage, message: str):
+        """处理图片上传请求"""
+        # 解析上传命令格式：上传 关键词[CQ:image,file=...,url=...]
+        # 先提取关键词（支持没有空格的情况）
+        keyword_match = re.match(r"上传\s*(\w+)", message)
+        if not keyword_match:
+            await self.api.post_group_msg(
+                group_id=input.group_id, text="上传格式错误！请使用：上传 关键词[图片]"
+            )
+            return
+
+        keyword = keyword_match.group(1)
+
+        # 然后提取所有的图片标签（支持包含额外字段的情况）
+        image_pattern = r"\[CQ:image,.*?file=([^,]+),.*?url=([^\]]+)\]"
+        image_matches = re.findall(image_pattern, message)
+
+        if not image_matches:
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                text="未找到图片信息！请使用：上传 关键词[图片]",
+            )
+            return
+
+        # 处理每个匹配的图片
+        success_count = 0
+        failed_count = 0
+        duplicate_count = 0
+        user_id = input.sender.user_id
+
+        # 查找对应的命令配置
+        command_config = None
+        for cmd_name, config in self.commands.items():
+            if cmd_name == keyword:
+                command_config = config
+                break
+
+        if not command_config:
+            await self.api.post_group_msg(
+                group_id=input.group_id, text=f"未知的关键词：{keyword}"
+            )
+            return
+
+        # 检查该关键词的上传权限（基于allowed_users）
+        if (
+            command_config["allowed_users"]
+            and user_id not in command_config["allowed_users"]
+        ):
+            await self.api.post_group_msg(
+                group_id=input.group_id, text="您没有上传权限！"
+            )
+            return
+
+        for filename, url in image_matches:
+            # 下载并保存图片
+            result, status = await self.download_and_save_image(
+                url, filename, command_config["path"], user_id
+            )
+
+            if result:
+                success_count += 1
+                log.info(f"用户 {user_id} 成功上传图片到 {keyword}: {filename}")
+            elif status == "duplicate":
+                duplicate_count += 1
+                log.info(f"用户 {user_id} 上传的图片已存在于 {keyword}: {filename}")
+            else:
+                failed_count += 1
+
+        # 发送上传结果
+        result_message = f"上传完成！成功: {success_count} 张，重复: {duplicate_count} 张，失败: {failed_count} 张"
+        await self.api.post_group_msg(group_id=input.group_id, text=result_message)
+
+    async def download_and_save_image(
+        self, url: str, filename: str, target_path: str, user_id: int
+    ) -> tuple[bool, str]:
+        """下载并保存图片到指定路径，返回(是否成功, 状态信息)"""
+        try:
+            # 确保目标目录存在
+            os.makedirs(target_path, exist_ok=True)
+
+            # 解码HTML实体（如 &amp; -> &）
+            decoded_url = html.unescape(url)
+
+            # 设置请求头，模拟浏览器
+            headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+                "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+                "Referer": "https://multimedia.nt.qq.com.cn/",
+            }
+
+            # 下载图片
+            response = requests.get(decoded_url, headers=headers, timeout=30)
+            response.raise_for_status()
+
+            # 计算图片内容的MD5哈希值
+            image_content = response.content
+            image_hash = hashlib.md5(image_content).hexdigest()
+
+            # 检查是否已存在相同内容的图片
+            existing_files = self.get_image_files(target_path)
+            for existing_file in existing_files:
+                try:
+                    with open(existing_file, "rb") as f:
+                        existing_content = f.read()
+                        existing_hash = hashlib.md5(existing_content).hexdigest()
+                        if existing_hash == image_hash:
+                            log.info(f"图片已存在，跳过上传: {existing_file}")
+                            return False, "duplicate"  # 返回重复状态
+                except Exception as e:
+                    log.warning(f"读取现有文件失败 {existing_file}: {e}")
+                    continue
+
+            # 生成带时间戳和用户ID的文件名
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            name, ext = os.path.splitext(filename)
+            new_filename = f"{user_id}_{timestamp}_{name}{ext}"
+
+            # 构建完整的文件路径
+            file_path = os.path.join(target_path, new_filename)
+
+            # 保存图片
+            with open(file_path, "wb") as f:
+                f.write(image_content)
+
+            log.info(f"图片已保存到: {file_path}")
+            return True, "success"
+
+        except Exception as e:
+            log.error(f"下载图片失败 {url}: {str(e)}")
+            return False, "failed"
 
     @staticmethod
     def get_image_files(folder_path):

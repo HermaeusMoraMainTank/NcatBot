@@ -50,12 +50,13 @@ class FF14LogsInfo(BasePlugin):
         # Zone(49, "万魔殿 炼净之狱", 101),
         # Zone(44, "万魔殿 边境之狱", 101),
         Zone(62, "阿卡狄亚竞技场 轻量级", 101),
+        Zone(68, "阿卡狄亚竞技场 中量级", 101),
         Zone(53, "欧米茄绝境验证战", 100),
         Zone(45, "幻想龙诗绝境战", 100),
         Zone(43, "绝境战（旧版本）", 100),
         Zone(64, "幻巧战", 100),
         Zone(65, "绝伊甸", 100),
-        Zone(66, "灭云妈", 100),
+        # Zone(66, "灭云妈", 100),
     ]
 
     class RankingInfo:
@@ -172,7 +173,9 @@ class FF14LogsInfo(BasePlugin):
             print(f"Error fetching data: {e}")
             return None
 
-    def parse_response_data(self, response_data: str) -> List[RankingInfo]:
+    def parse_response_data(
+        self, response_data: str, character_name: str = ""
+    ) -> List[RankingInfo]:
         ranking_info_list = []
         data = json.loads(response_data)
         rankings = (
@@ -190,6 +193,14 @@ class FF14LogsInfo(BasePlugin):
             spec = ranking.get("spec")
             best_amount = ranking.get("bestAmount")
             if rank_percent is not None:
+                # 特殊处理：武术有栖的rankPercent设置为0
+                # 注释掉下面这段代码可以取消特殊处理
+                if character_name == "武术有栖":
+                    rank_percent = -1
+                    total_kills = 999
+                    best_amount = 999999
+                # 特殊处理结束
+
                 ranking_info = self.RankingInfo(
                     encounter_id,
                     encounter_name,
@@ -369,7 +380,7 @@ class FF14LogsInfo(BasePlugin):
             data = self.get_data(character_name, server, zone.id)
             if data:
                 try:
-                    ranking_infos = self.parse_response_data(data)
+                    ranking_infos = self.parse_response_data(data, character_name)
                     combined_ranking_infos.extend(ranking_infos)
                 except Exception as e:
                     print(f"Error parsing data: {e}")
