@@ -26,16 +26,32 @@ class Lottery(BasePlugin):
     group_user_names: Dict[int, Dict[int, str]] = {}  # 记录每个群的用户ID和昵称映射
     total_awards = 0  # 奖品总数
 
-    def setup(self):
+    async def on_load(self):
         """插件初始化设置"""
         self.load_total_awards()
+        log.debug(f"Initial total_awards after loading: {self.total_awards}")
 
     def load_total_awards(self):
         """加载奖品总数"""
         try:
-            with open(self.FILE_PATH, "r") as file:
-                line = file.readline()
-                self.total_awards = int(line.strip()) if line.strip() else 0
+            # 确保目录存在
+            os.makedirs(os.path.dirname(self.FILE_PATH), exist_ok=True)
+
+            if os.path.exists(self.FILE_PATH):
+                with open(self.FILE_PATH, "r", encoding="utf-8") as file:
+                    line = file.readline()
+                    if line.strip():
+                        self.total_awards = int(line.strip())
+                        log.info(f"成功加载大乐透奖品总数: {self.total_awards}")
+                        log.debug(
+                            f"Initial total_awards after loading: {self.total_awards}"
+                        )
+                    else:
+                        self.total_awards = 0
+                        log.info("奖品总数文件为空，初始化为 0")
+            else:
+                self.total_awards = 0
+                log.info("奖品总数文件不存在，初始化为 0")
         except (IOError, ValueError) as e:
             self.total_awards = 0
             log.warning(f"无法加载奖品总数，初始化为 0: {e}")
@@ -43,10 +59,15 @@ class Lottery(BasePlugin):
     def save_total_awards(self):
         """保存奖品总数"""
         try:
-            with open(self.FILE_PATH, "w") as file:
+            # 确保目录存在
+            os.makedirs(os.path.dirname(self.FILE_PATH), exist_ok=True)
+
+            with open(self.FILE_PATH, "w", encoding="utf-8") as file:
                 file.write(str(self.total_awards))
+            log.debug(f"total_awards before saving: {self.total_awards}")
+            log.debug(f"total_awards after saving: {self.total_awards}")
         except IOError as e:
-            log.warning(f"无法保存奖品总数: {e}")
+            log.error(f"无法保存奖品总数: {e}")
 
     @bot.group_event()
     async def handle_lottery(self, input: GroupMessage):

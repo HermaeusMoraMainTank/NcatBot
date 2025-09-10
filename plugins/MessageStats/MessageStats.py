@@ -1,6 +1,5 @@
 import os
 import json
-import hashlib
 import shutil
 import tempfile
 from datetime import datetime, date, timedelta
@@ -9,9 +8,7 @@ from dataclasses import dataclass
 from PIL import Image as PILImage
 import matplotlib.pyplot as plt
 import matplotlib
-import requests
 from common.utils.CommonUtil import CommonUtil
-from io import BytesIO
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from PIL import ImageDraw
 import numpy as np

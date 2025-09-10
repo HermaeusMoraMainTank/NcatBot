@@ -6,10 +6,10 @@ import re
 import requests
 import html
 import hashlib
-from urllib.parse import urlparse
 from ncatbot.core.message import GroupMessage
 from ncatbot.core.element import Image, MessageChain
 from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+import asyncio
 
 
 bot = CompatibleEnrollment
@@ -25,8 +25,11 @@ class ImageSender(BasePlugin):
         log.info(f"开始加载 {self.name} 插件 v{self.version}")
         # 检查所有图片目录是否存在
         for cmd in self.commands.values():
-            if not os.path.exists(cmd["path"]):
-                log.warning(f"图片目录不存在: {cmd['path']}")
+            # 获取当前工作目录的绝对路径
+            current_dir = os.getcwd()
+            full_path = os.path.join(current_dir, cmd["path"])
+            if not os.path.exists(full_path):
+                log.warning(f"图片目录不存在: {full_path}")
         log.info(f"{self.name} 插件加载完成")
 
     max_count = 3  # 最大发送数量
@@ -38,6 +41,7 @@ class ImageSender(BasePlugin):
             "triggers": ["母肥", "肥肥"],
             "path": "C:\\Users\\27342\\Downloads\\lalafell\\lalafell",
             "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
         "zmd": {
             "triggers": [
@@ -56,28 +60,33 @@ class ImageSender(BasePlugin):
                 2779893879,
                 837089951,
             ],
+            "recall_time": None,  # 撤回时间（秒）
         },
         "doro": {
             "triggers": ["doro"],
             "path": "data/image/doro",
             "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
         "柴郡": {
             "triggers": ["柴郡"],
             "path": "data/image/cheshire",
             "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
         "llm": {
             "triggers": ["llm", "迷茫的时候 不如听听llm说的话"],
             "path": "data/image/llm",
             "allowed_users": [273421673, 2779893879, 361432025, 837089951],
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
         "耄耋": {
             "triggers": ["耄耋"],
             "path": "data/image/耄耋",
             "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
-        "咲夜saki": {
+        "xysk": {
             "triggers": [
                 "咲夜saki",
                 "迷茫的时候 不如听听咲夜saki说的话",
@@ -94,31 +103,61 @@ class ImageSender(BasePlugin):
                 2034756660,
                 1824159516,
             ],
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
         "alice": {
             "triggers": ["alice"],
             "path": "data/image/alice",
             "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
         "kipfel": {
             "triggers": ["kipfel"],
             "path": "data/image/kipfel",
             "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
         "darkdog": {
             "triggers": ["darkdog"],
             "path": "data/image/darkdog",
             "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
+        },
+        "whitecat": {
+            "triggers": ["whitecat"],
+            "path": "data/image/whitecat",
+            "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
         "ybxa": {
             "triggers": ["ybxa"],
             "path": "data/image/ybxa",
             "allowed_users": [273421673, 1310043427, 1079454672],
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
         "blb": {
             "triggers": ["blb", "菠萝包"],
             "path": "data/image/blb",
             "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
+        },
+        "色图zmd": {
+            "triggers": ["色图zmd"],
+            "path": "data/image/zmd色图",
+            "allowed_users": [273421673, 635773721],
+            "recall_time": 1,  # 撤回时间（秒）
+        },
+        "猪": {
+            "triggers": ["猪"],
+            "path": "data/image/猪",
+            "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
+        },
+        "xqs": {
+            "triggers": ["xqs"],
+            "path": "data/image/xqs",
+            "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
     }
 
@@ -175,12 +214,28 @@ class ImageSender(BasePlugin):
 
                             # 一次性发送所有图片
                             if selected_files:
-                                await self.api.post_group_msg(
+                                response = await self.api.post_group_msg(
                                     group_id=input.group_id,
                                     rtf=MessageChain(
                                         [Image(file) for file in selected_files]
                                     ),
                                 )
+                                log.info(
+                                    f"发送消息响应: {response}"
+                                )  # 输出完整的响应内容
+                                # 获取返回的消息 ID
+                                last_message_id = response.get("data", {}).get(
+                                    "message_id"
+                                )
+                                log.info(f"发送消息 ID: {last_message_id}")  # 添加日志
+                                # 撤回消息
+                                if config["recall_time"] and last_message_id:
+                                    log.info(
+                                        f"将在 {config['recall_time']} 秒后撤回消息 ID: {last_message_id}"
+                                    )  # 添加日志
+                                    await self.recall_message(
+                                        last_message_id, config["recall_time"]
+                                    )
                         else:
                             await self.api.post_group_msg(
                                 group_id=input.group_id, text="别太贪心"
@@ -192,9 +247,21 @@ class ImageSender(BasePlugin):
                         log.info(
                             f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {file}"
                         )
-                        await self.api.post_group_msg(
+                        response = await self.api.post_group_msg(
                             group_id=input.group_id, rtf=MessageChain([Image(file)])
                         )
+                        log.info(f"发送消息响应: {response}")  # 输出完整的响应内容
+                        # 获取返回的消息 ID
+                        last_message_id = response.get("data", {}).get("message_id")
+                        log.info(f"发送消息 ID: {last_message_id}")  # 添加日志
+                        # 撤回消息
+                        if config["recall_time"] and last_message_id:
+                            log.info(
+                                f"将在 {config['recall_time']} 秒后撤回消息 ID: {last_message_id}"
+                            )  # 添加日志
+                            await self.recall_message(
+                                last_message_id, config["recall_time"]
+                            )
                     return
 
     async def handle_count_query(self, input: GroupMessage, command: str, config: dict):
@@ -204,9 +271,14 @@ class ImageSender(BasePlugin):
 
         # 构建权限信息
         if config["allowed_users"]:
-            allowed_users_text = (
-                f"允许用户: {', '.join(map(str, config['allowed_users']))}"
-            )
+            # 特殊处理：如果是色图zmd命令，在允许用户列表中添加506531786（仅显示，不影响实际权限）
+            if command == "色图zmd":
+                display_users = config["allowed_users"] + [10123121]
+                allowed_users_text = f"允许用户: {', '.join(map(str, display_users))}"
+            else:
+                allowed_users_text = (
+                    f"允许用户: {', '.join(map(str, config['allowed_users']))}"
+                )
             upload_permission_text = f"上传权限: 仅限允许用户"
         else:
             allowed_users_text = "允许用户: 所有用户"
@@ -218,6 +290,10 @@ class ImageSender(BasePlugin):
         response += f"{allowed_users_text}\n"
         response += f"{upload_permission_text}\n"
         response += f"最大发送数量: {self.max_count}"
+        response += f"\n是否撤回: {'是' if config['recall_time'] else '否'}"
+        response += (
+            f"\n撤回时长: {config['recall_time']} 秒" if config["recall_time"] else ""
+        )
 
         await self.api.post_group_msg(group_id=input.group_id, text=response)
 
@@ -298,6 +374,11 @@ class ImageSender(BasePlugin):
     ) -> tuple[bool, str]:
         """下载并保存图片到指定路径，返回(是否成功, 状态信息)"""
         try:
+            # 如果路径不是绝对路径，则转换为绝对路径
+            if not os.path.isabs(target_path):
+                current_dir = os.getcwd()
+                target_path = os.path.join(current_dir, target_path)
+
             # 确保目标目录存在
             os.makedirs(target_path, exist_ok=True)
 
@@ -355,6 +436,11 @@ class ImageSender(BasePlugin):
 
     @staticmethod
     def get_image_files(folder_path):
+        # 如果路径不是绝对路径，则转换为绝对路径
+        if not os.path.isabs(folder_path):
+            current_dir = os.getcwd()
+            folder_path = os.path.join(current_dir, folder_path)
+
         if os.path.isdir(folder_path):
             return [
                 os.path.join(folder_path, f)
@@ -362,3 +448,12 @@ class ImageSender(BasePlugin):
                 if f.lower().endswith((".jpg", ".png", ".jpeg", ".gif"))
             ]
         return []
+
+    async def recall_message(self, message_id: int, recall_time: int):
+        """
+        撤回消息
+        """
+        await asyncio.sleep(recall_time)
+        log.info(f"正在撤回消息 ID: {message_id}")  # 添加日志
+        # 撤回指定的消息
+        await self.api.delete_msg(message_id)
