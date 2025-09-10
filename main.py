@@ -1,7 +1,6 @@
 from datetime import datetime
 from ncatbot.core import BotClient, GroupMessage, PrivateMessage
-from ncatbot.utils.logger import get_log
-from ncatbot.utils.config import config
+from ncatbot.utils import config, get_log
 
 _log = get_log()
 
@@ -34,6 +33,7 @@ async def on_group_message(message: GroupMessage):
     _log.info(
         f"收到群消息，Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}，群ID：{message.group_id}，ID: {message.user_id}，昵称：{message.sender.nickname}，内容：{processed_message}"
     )
+
 
 
 @bot.private_event()

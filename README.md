@@ -90,3 +90,70 @@ NcatBot 是基于 onebot11协议 的 Python SDK, 它提供了一套方便易用�
 </a>
 
 </div>
+
+### 用户使用
+
+针对没有计算机基础的用户群体, 可以直接下载我们的**一键安装包**安装 NcatBot 运行时环境, 并使用他人发布的插件.
+
+[阅读文档了解更多](https://docs.ncatbot.xyz/guide/onestepi/)
+
+### 开发者使用
+
+请**认真阅读**[文档](https://docs.ncatbot.xyz/). 文档中包含详细的**开发指南**和**示例项目及其解析**.
+
+[插件仓库地址](https://github.com/ncatbot/NcatBot-Plugins).
+
+
+## 欢迎来玩
+
+[是 QQ 群哦喵~](https://qm.qq.com/q/L6XGXYqL86)
+
+## 获取帮助
+
+- 遇到任何困难时, 请先按照以下顺序尝试自己解决:
+
+  1. **仔细阅读**[文档](https://docs.ncatbot.xyz/).
+  2. 询问 [DeepSeek](https://chat.deepseek.com), [Kimi](https://kimi.ai) 等人工智能.
+  3. 搜索本项目的 [Issue 列表](https://github.com/liyihao1110/ncatbot/issues).
+- 如果以上方法都无法解决你的问题, 那么:
+
+  可以[进群](https://qm.qq.com/q/L6XGXYqL86)提问.
+
+## 联系我们
+
+作者: [最可爱的木子喵~](https://gitee.com/li-yihao0328)
+
+邮箱: <lyh_02@foxmail.com>
+
+
+## 使用限制
+
+1. **严禁将本项目以任何形式用于传播 反动、暴力、淫秽 信息，违者将追究法律责任**.
+2. 将本项目以**任何形式**用于**盈利性用途**时，必须取得项目开发组(本仓库 Collaborators 和 Owner)的**书面授权**.
+
+
+## 致谢
+
+感谢 [NapCat](https://github.com/NapNeko/NapCatQQ) 提供底层接口 | [IppClub](https://github.com/IppClub) 的宣传支持 | [Fcatbot](https://github.com/Fish-LP/Fcatbot) 提供代码和灵感.
+
+感谢 [扶摇互联](https://www.fyyun.net/) | [林枫云](https://www.dkdun.cn/) 提供服务器支持.
+
+## 参与贡献
+欢迎通过 Issue 或 Pull Request 参与项目开发！请先阅读 [贡献指南](CONTRIBUTING.md)。
+
+如果你在使用过程中遇到任何问题，欢迎在 [GitHub Issues](https://github.com/liyihao1110/ncatbot/issues) 中反馈。感谢你的支持！
+
+
+<div align="center">
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=liyihao1110/ncatbot&type=Date)](https://www.star-history.com/#liyihao1110/ncatbot&Date)
+
+## 贡献者们
+
+<a href="https://github.com/liyihao1110/ncatbot/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=liyihao1110/ncatbot" />
+</a>
+
+</div>
