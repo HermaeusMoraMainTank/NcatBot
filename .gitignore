@@ -190,6 +190,11 @@ test
 .Spotlight-V100
 System Volume Information/IndexerVolumeGuid
 .vscode/
+# 项目自定义
+verify_docs/
+test/
+test3xx/
+plugins/
 logs/
 napcat/
 plugin.py
