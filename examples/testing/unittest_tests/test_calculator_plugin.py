@@ -86,13 +86,6 @@ class NcatBotTestCase(AsyncTestCase):
             if isinstance(seg, dict) and seg.get("type") == "text":
                 text += seg.get("data", {}).get("text", "")
         return text
-    
-    def get_plugin(self, plugin_class):
-        """获取已加载的插件实例"""
-        for plugin in self.client.get_registered_plugins():
-            if isinstance(plugin, plugin_class):
-                return plugin
-        raise ValueError(f"插件 {plugin_class.__name__} 未找到")
 
 
 class TestCalculatorPlugin(NcatBotTestCase):
@@ -102,7 +95,7 @@ class TestCalculatorPlugin(NcatBotTestCase):
     
     def setUp(self):
         super().setUp()
-        self.plugin = self.get_plugin(CalculatorPlugin)
+        self.plugin = self.client.get_plugin(CalculatorPlugin)
     
     def test_plugin_metadata(self):
         """测试插件元数据"""
@@ -152,6 +145,8 @@ class TestCalculatorPlugin(NcatBotTestCase):
         """测试统计功能"""
         async def _test():
             # 执行几次计算
+            self.client.get_plugin(CalculatorPlugin).calculation_count = 0
+
             await self.helper.send_private_message("/calc 1 + 1")
             self.helper.get_latest_reply()  # 清除回复
             

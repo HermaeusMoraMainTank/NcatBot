@@ -3,7 +3,12 @@ import copy
 import inspect
 import traceback
 import threading
-from typing import Callable, Optional, Type, Literal, Union, TypedDict, Unpack
+from typing import Callable, Optional, Type, Literal, Union, TypedDict, Unpack, List, TypeVar, TYPE_CHECKING
+
+T = TypeVar('T')
+
+if TYPE_CHECKING:
+    from ncatbot.plugin_system import BasePlugin
 
 from ncatbot.core.adapter.adapter import Adapter
 from ncatbot.core.api.api import BotAPI
@@ -243,8 +248,10 @@ class BotClient:
         for key, value in kwargs.items():
             if key not in legal_args:
                 raise NcatBotError(f"非法参数: {key}")
-            if value is None:
+            elif value is None:
                 continue
+            else:
+                ncatbot_config.update_value(key, value)
         
         ncatbot_config.validate_config()
             
@@ -266,6 +273,15 @@ class BotClient:
                 self.bot_exit()
                 raise
     
+    def get_registered_plugins(self) -> List['BasePlugin']:
+        return list(self.plugin_loader.plugins.values())
+    
+    def get_plugin(self, type: Type[T]) -> T:
+        for plugin in self.get_registered_plugins():
+            if isinstance(plugin, type):
+                return plugin
+        raise ValueError(f"插件 {type.__name__} 未找到")
+
     # 兼容 3xx 版本
     group_event = on_group_message
     private_event = on_private_message

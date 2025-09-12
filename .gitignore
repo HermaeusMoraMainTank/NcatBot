@@ -194,7 +194,7 @@ System Volume Information/IndexerVolumeGuid
 verify_docs/
 test/
 test3xx/
-plugins/
+/plugins/
 logs/
 napcat/
 plugin.py

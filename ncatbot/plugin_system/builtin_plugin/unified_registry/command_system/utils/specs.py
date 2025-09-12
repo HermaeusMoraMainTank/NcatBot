@@ -5,7 +5,21 @@
 
 from dataclasses import dataclass, field
 from typing import Callable, Any, List, Optional, Dict, Type
+import inspect
 
+class FuncSpec:
+    def __init__(self, func: Callable):
+        self.func = func
+        self.aliases = getattr(func, "__aliases__", [])
+        
+        # 生成 metadata 以便代码更易于理解
+        self.func_name = func.__name__
+        self.func_module = func.__module__
+        self.func_qualname = func.__qualname__
+        self.signature = inspect.signature(func)
+        self.param_list = list(self.signature.parameters.values())
+        self.param_names = [param.name for param in self.param_list]
+        self.param_annotations = [param.annotation for param in self.param_list]
 
 @dataclass
 class OptionSpec:
@@ -76,8 +90,8 @@ class CommandSpec:
 
     def get_kw_binding(self, option: str) -> dict:
         for value in self.options:
-            if value.name == option:
-                return {option: True}
+            if value.name == option or value.short_name == option:
+                return {value.name: True}
         for value in self.option_groups:
             if option in value.choices:
                 return {value.name: option}
