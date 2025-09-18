@@ -5,16 +5,16 @@ import os
 from typing import Dict, List
 
 from ncatbot.core.message import GroupMessage
-from ncatbot.core.element import Image, MessageChain
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
-
-
-bot = CompatibleEnrollment
+from ncatbot.core import Image, MessageChain
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 log = logging.getLogger(__name__)
 
 
-class Lottery(BasePlugin):
+class Lottery(NcatBotPlugin):
     name = "Lottery"  # 插件名称
     version = "1.0"  # 插件版本
     MAX_PARTICIPANTS = 5  # 每局最大参与人数
@@ -69,7 +69,7 @@ class Lottery(BasePlugin):
         except IOError as e:
             log.error(f"无法保存奖品总数: {e}")
 
-    @bot.group_event()
+    @group_only
     async def handle_lottery(self, input: GroupMessage):
         """处理大乐透指令"""
         if input.raw_message.startswith("大乐透"):
@@ -80,7 +80,7 @@ class Lottery(BasePlugin):
     async def join_lottery(self, input: GroupMessage):
         """玩家加入大乐透"""
         group_id = input.group_id
-        user_id = input.user_id
+        user_id = input.sender.user_id
 
         if group_id not in self.group_participants:
             self.group_participants[group_id] = []
@@ -113,7 +113,7 @@ class Lottery(BasePlugin):
     async def start_lottery(self, input: GroupMessage):
         """开始大乐透"""
         group_id = input.group_id
-        user_id = input.user_id
+        user_id = input.sender.user_id
 
         if group_id not in self.group_participants:
             await self.api.post_group_msg(

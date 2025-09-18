@@ -7,18 +7,20 @@ from pathlib import Path
 
 from common.constants.HMMT import HMMT
 from ncatbot.core.message import GroupMessage
-from ncatbot.core.element import Image, MessageChain, Text
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.core import Image, MessageChain, Text
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 
 last_page = {}
 dir_path = Path("data/image/pixiv")
 
-bot = CompatibleEnrollment
 log = logging.getLogger(__name__)
 
 
-class PixivSearch(BasePlugin):
+class PixivSearch(NcatBotPlugin):
     name = "PixivSearch"  # 插件名称
     version = "1.0"  # 插件版本
 
@@ -27,14 +29,17 @@ class PixivSearch(BasePlugin):
         log.info(f"开始加载 {self.name} 插件 v{self.version}")
         log.info(f"{self.name} 插件加载完成")
 
-    @bot.group_event()
+    @group_only
     async def handle_pixiv_search(self, input: GroupMessage):
         commands = input.raw_message.split()
         if len(commands) < 2:
             return
 
         if len(commands) == 3 and commands[2].lower() == "r18":
-            if input.user_id == 1271701079 or input.user_id == 273421673:
+            if (
+                input.sender.user_id == "1271701079"
+                or input.sender.user_id == "273421673"
+            ):
                 await self.api.post_group_msg(
                     group_id=input.group_id,
                     rtf=MessageChain(
@@ -115,7 +120,7 @@ class PixivSearch(BasePlugin):
             "sec-fetch-site": "cross-site",
             "sec-fetch-user": "?1",
             "upgrade-insecure-requests": "1",
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0",
+            "User-Agent": HMMT.USER_AGENT,
         }
 
         response = requests.get(url, headers=headers)

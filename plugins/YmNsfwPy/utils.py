@@ -4,9 +4,8 @@ from PIL import Image
 from io import BytesIO
 from nsfwpy import NSFW
 from ncatbot.utils.logger import get_log
-from ncatbot.core.message import GroupMessage
-from ncatbot.plugin import CompatibleEnrollment
-from ncatbot.core.element import (
+from ncatbot.core import GroupMessage
+from ncatbot.core import (
     MessageChain,
     Text,
     At,
@@ -77,8 +76,8 @@ async def nsfwc(message: GroupMessage, bot_plugin) -> None:
     _nsfw_config._current_group_id = message.group_id
 
     for msg in message.message:
-        if msg["type"] == "image":
-            file_url = f"http{msg['data']['url'][5::]}"
+        if hasattr(msg, "type") and msg.type == "image":
+            file_url = f"http{msg.data.get('url', '')[5::]}"
             try:
                 async with httpx.AsyncClient(
                     verify=False, http2=False, trust_env=False, timeout=3

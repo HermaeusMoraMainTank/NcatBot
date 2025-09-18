@@ -21,13 +21,15 @@ import io
 import numpy as np
 from matplotlib.font_manager import FontProperties
 
-from ncatbot.core.element import MessageChain, Text, Image
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.core import MessageChain, Text, Image
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 from ncatbot.utils.logger import get_log
 from ncatbot.core.message import GroupMessage
 
 _log = get_log()
-bot = CompatibleEnrollment
 
 # 设置 matplotlib 字体
 CommonUtil.set_matplotlib_font()
@@ -123,7 +125,7 @@ class MessageStats:
         self.hourly_counts[hour_str] += 1
 
 
-class MessageStatsPlugin(BasePlugin):
+class MessageStatsPlugin(NcatBotPlugin):
     name = "MessageStats"
     version = "1.0"
 
@@ -403,11 +405,11 @@ class MessageStatsPlugin(BasePlugin):
             _log.error(f"获取数据状态失败: {e}")
             return {"error": str(e)}
 
-    @bot.group_event()
+    @group_only
     async def handle_message(self, input: GroupMessage) -> None:
         """处理群消息"""
         group_id = input.group_id
-        user_id = input.user_id
+        user_id = input.sender.user_id
         now = datetime.now()
         today = now.date().isoformat()
         hour = now.hour
@@ -846,7 +848,7 @@ class MessageStatsPlugin(BasePlugin):
             result.append(("text", text[last:]))
         return result
 
-    @bot.group_event()
+    @group_only
     async def handle_message_stats(self, input: GroupMessage) -> None:
         """处理发言统计命令"""
         message = input.raw_message.strip()
@@ -863,10 +865,10 @@ class MessageStatsPlugin(BasePlugin):
         target = message_parts[2]
 
         # 检查是否有艾特消息
-        target_user_id = input.user_id  # 默认为发送者
+        target_user_id = input.sender.user_id  # 默认为发送者
         for msg in input.message:
-            if msg["type"] == "at":
-                target_user_id = int(msg["data"]["qq"])
+            if hasattr(msg, "msg_seg_type") and msg.msg_seg_type == "at":
+                target_user_id = int(msg.qq)
                 break
 
         # 获取时间范围对应的天数
@@ -903,22 +905,22 @@ class MessageStatsPlugin(BasePlugin):
             # 获取时间范围内的统计数据
             time_range_stats = self._get_time_range_stats(stats, days)
             total_count = sum(time_range_stats.values())
-            message = MessageChain([])
-            message.chain.append(Text("=== 群组发言统计 ===\n"))
-            message.chain.append(Text("最近"))
+            message_elements = []
+            message_elements.append(Text("=== 群组发言统计 ===\n"))
+            message_elements.append(Text("最近"))
             if days is None:
-                message.chain.append(Text("全部时间"))
+                message_elements.append(Text("全部时间"))
             else:
-                message.chain.append(Text(str(days)))
-                message.chain.append(Text("天"))
-            message.chain.append(Text("发言数量:\n"))
+                message_elements.append(Text(str(days)))
+                message_elements.append(Text("天"))
+            message_elements.append(Text("发言数量:\n"))
             for img in self._number_to_counter(total_count):
-                message.chain.append(img)
-            message.chain.append(Text("\n\n"))
+                message_elements.append(img)
+            message_elements.append(Text("\n\n"))
             plot_path = self._generate_time_distribution_plot(stats, days)
             if plot_path:
-                message.chain.append(Image(plot_path))
-            message.chain.append(Text("\n"))
+                message_elements.append(Image(plot_path))
+            message_elements.append(Text("\n"))
             # TOP10横向柱状图
             user_counts = {}
             user_names = {}
@@ -946,14 +948,15 @@ class MessageStatsPlugin(BasePlugin):
                 bar_path = self._generate_top_users_barh(
                     user_counts, user_names, top_n=10
                 )
-                message.chain.append(Text("发言最多的用户TOP10：\n"))
-                message.chain.append(Image(bar_path))
-                message.chain.append(Text("\n"))
+                message_elements.append(Text("发言最多的用户TOP10：\n"))
+                message_elements.append(Image(bar_path))
+                message_elements.append(Text("\n"))
             else:
-                message.chain.append(Text("暂无用户发言数据\n"))
+                message_elements.append(Text("暂无用户发言数据\n"))
 
             # 发送消息
             try:
+                message = MessageChain(message_elements)
                 await self.api.post_group_msg(
                     input.group_id, rtf=message, reply=input.message_id
                 )
@@ -976,26 +979,27 @@ class MessageStatsPlugin(BasePlugin):
             total_count = sum(count_stats.values())
 
             # 添加消息元素
-            message = MessageChain([])
-            message.chain.append(Text("=== 个人发言统计 ===\n"))
-            message.chain.append(Text("最近"))
+            message_elements = []
+            message_elements.append(Text("=== 个人发言统计 ===\n"))
+            message_elements.append(Text("最近"))
             if days is None:
-                message.chain.append(Text("全部时间"))
+                message_elements.append(Text("全部时间"))
             else:
-                message.chain.append(Text(str(days)))
-                message.chain.append(Text("天"))
-            message.chain.append(Text("发言数量:\n"))
+                message_elements.append(Text(str(days)))
+                message_elements.append(Text("天"))
+            message_elements.append(Text("发言数量:\n"))
             for img in self._number_to_counter(total_count):
-                message.chain.append(img)
-            message.chain.append(Text("\n\n"))
+                message_elements.append(img)
+            message_elements.append(Text("\n\n"))
 
             # 添加发言时间分布图
             plot_path = self._generate_time_distribution_plot(user_stat, days)
             if plot_path:
-                message.chain.append(Image(plot_path))
+                message_elements.append(Image(plot_path))
 
             # 发送消息
             try:
+                message = MessageChain(message_elements)
                 await self.api.post_group_msg(
                     input.group_id, rtf=message, reply=input.message_id
                 )

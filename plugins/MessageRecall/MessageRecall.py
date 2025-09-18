@@ -1,12 +1,14 @@
-from ncatbot.plugin import BasePlugin, CompatibleEnrollment
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 from ncatbot.core.message import GroupMessage
 from ncatbot.utils.logger import get_log
 
 _log = get_log()
-bot = CompatibleEnrollment
 
 
-class MessageRecall(BasePlugin):
+class MessageRecall(NcatBotPlugin):
     name = "MessageRecall"
     version = "1.0"
 
@@ -28,7 +30,7 @@ class MessageRecall(BasePlugin):
         _log.info(f"正在撤回消息 ID: {message_id}")  # 添加日志
         await self.api.delete_msg(message_id)
 
-    @bot.group_event()
+    @group_only
     async def handle_message_recall(self, msg: GroupMessage):
         """
         处理群聊消息，自动撤回包含敏感内容的消息

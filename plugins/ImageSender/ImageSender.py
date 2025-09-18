@@ -7,16 +7,19 @@ import requests
 import html
 import hashlib
 from ncatbot.core.message import GroupMessage
-from ncatbot.core.element import Image, MessageChain
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.core import Image, MessageChain
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 import asyncio
+from common.constants.HMMT import HMMT
 
 
-bot = CompatibleEnrollment
 log = logging.getLogger(__name__)
 
 
-class ImageSender(BasePlugin):
+class ImageSender(NcatBotPlugin):
     name = "ImageSender"  # 插件名称
     version = "1.0"  # 插件版本
 
@@ -50,15 +53,15 @@ class ImageSender(BasePlugin):
             ],
             "path": "data/image/zmd",
             "allowed_users": [
-                273421673,
-                635773721,
-                510337095,
-                3420347160,
-                1508864751,
-                10123121,
-                1607928177,
-                2779893879,
-                837089951,
+                "273421673",
+                "635773721",
+                "510337095",
+                "3420347160",
+                "1508864751",
+                "10123121",
+                "1607928177",
+                "2779893879",
+                "837089951",
             ],
             "recall_time": None,  # 撤回时间（秒）
         },
@@ -77,7 +80,7 @@ class ImageSender(BasePlugin):
         "llm": {
             "triggers": ["llm", "迷茫的时候 不如听听llm说的话"],
             "path": "data/image/llm",
-            "allowed_users": [273421673, 2779893879, 361432025, 837089951],
+            "allowed_users": ["273421673", "2779893879", "361432025", "837089951"],
             "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
         "耄耋": {
@@ -95,13 +98,13 @@ class ImageSender(BasePlugin):
             ],
             "path": "data/image/咲夜saki",
             "allowed_users": [
-                273421673,
-                635773721,
-                1506123340,
-                10123121,
-                1508864751,
-                2034756660,
-                1824159516,
+                "273421673",
+                "635773721",
+                "1506123340",
+                "10123121",
+                "1508864751",
+                "2034756660",
+                "1824159516",
             ],
             "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
@@ -132,7 +135,7 @@ class ImageSender(BasePlugin):
         "ybxa": {
             "triggers": ["ybxa"],
             "path": "data/image/ybxa",
-            "allowed_users": [273421673, 1310043427, 1079454672],
+            "allowed_users": ["273421673", "1310043427", "1079454672"],
             "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
         "blb": {
@@ -144,7 +147,7 @@ class ImageSender(BasePlugin):
         "色图zmd": {
             "triggers": ["色图zmd"],
             "path": "data/image/zmd色图",
-            "allowed_users": [273421673, 635773721],
+            "allowed_users": ["273421673", "635773721", "1508864751"],
             "recall_time": 1,  # 撤回时间（秒）
         },
         "猪": {
@@ -161,7 +164,7 @@ class ImageSender(BasePlugin):
         },
     }
 
-    @bot.group_event()
+    @group_only
     async def handle_image(self, input: GroupMessage):
         message = input.raw_message.strip()
 
@@ -220,13 +223,8 @@ class ImageSender(BasePlugin):
                                         [Image(file) for file in selected_files]
                                     ),
                                 )
-                                log.info(
-                                    f"发送消息响应: {response}"
-                                )  # 输出完整的响应内容
-                                # 获取返回的消息 ID
-                                last_message_id = response.get("data", {}).get(
-                                    "message_id"
-                                )
+                                # 响应直接就是消息ID
+                                last_message_id = response
                                 log.info(f"发送消息 ID: {last_message_id}")  # 添加日志
                                 # 撤回消息
                                 if config["recall_time"] and last_message_id:
@@ -243,6 +241,14 @@ class ImageSender(BasePlugin):
                     # 处理单个图片的情况
                     elif message == trigger:
                         image_files = self.get_image_files(config["path"])
+
+                        if not image_files:
+                            await self.api.post_group_msg(
+                                group_id=input.group_id,
+                                text=f"路径 {config['path']} 中没有找到图片文件！",
+                            )
+                            return
+
                         file = random.choice(image_files)
                         log.info(
                             f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {file}"
@@ -250,9 +256,8 @@ class ImageSender(BasePlugin):
                         response = await self.api.post_group_msg(
                             group_id=input.group_id, rtf=MessageChain([Image(file)])
                         )
-                        log.info(f"发送消息响应: {response}")  # 输出完整的响应内容
-                        # 获取返回的消息 ID
-                        last_message_id = response.get("data", {}).get("message_id")
+                        # 响应直接就是消息ID
+                        last_message_id = response
                         log.info(f"发送消息 ID: {last_message_id}")  # 添加日志
                         # 撤回消息
                         if config["recall_time"] and last_message_id:
@@ -273,13 +278,13 @@ class ImageSender(BasePlugin):
         if config["allowed_users"]:
             # 特殊处理：如果是色图zmd命令，在允许用户列表中添加506531786（仅显示，不影响实际权限）
             if command == "色图zmd":
-                display_users = config["allowed_users"] + [10123121]
+                display_users = config["allowed_users"] + ["10123121"]
                 allowed_users_text = f"允许用户: {', '.join(map(str, display_users))}"
             else:
                 allowed_users_text = (
                     f"允许用户: {', '.join(map(str, config['allowed_users']))}"
                 )
-            upload_permission_text = f"上传权限: 仅限允许用户"
+            upload_permission_text = "上传权限: 仅限允许用户"
         else:
             allowed_users_text = "允许用户: 所有用户"
             upload_permission_text = "上传权限: 所有用户"
@@ -387,7 +392,7 @@ class ImageSender(BasePlugin):
 
             # 设置请求头，模拟浏览器
             headers = {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "User-Agent": HMMT.USER_AGENT,
                 "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
                 "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
                 "Referer": "https://multimedia.nt.qq.com.cn/",

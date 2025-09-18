@@ -3,24 +3,24 @@ import sys
 import time
 import subprocess
 
-from ncatbot.core.element import MessageChain, Text
+from ncatbot.core import MessageChain, Text
 from ncatbot.core.message import PrivateMessage
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 
-bot = CompatibleEnrollment
-
-
-class Reboot(BasePlugin):
+class Reboot(NcatBotPlugin):
     name = "Reboot"  # 插件名称
     version = "1.0"  # 插件版本
-    admin = [1271701079, 273421673]
+    admin = ["1271701079", "273421673"]
 
-    @bot.group_event()
+    @group_only
     async def Reboot(self, input: PrivateMessage):
-        if input.raw_message == "重启" and input.user_id in self.admin:
+        if input.raw_message == "重启" and input.sender.user_id in self.admin:
             await self.api.post_private_msg(
-                user_id=input.user_id,
+                user_id=input.sender.user_id,
                 rtf=MessageChain(
                     [
                         Text("重启了"),

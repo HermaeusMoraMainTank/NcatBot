@@ -4,15 +4,17 @@ import os
 import json
 import base64
 from ncatbot.core.message import GroupMessage
-from ncatbot.core.element import MessageChain, Record
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.core import MessageChain, Record
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 
-bot = CompatibleEnrollment
 log = logging.getLogger(__name__)
 
 
-class MusicSender(BasePlugin):
+class MusicSender(NcatBotPlugin):
     name = "MusicSender"  # 插件名称
     version = "1.0"  # 插件版本
 
@@ -50,7 +52,7 @@ class MusicSender(BasePlugin):
             log.error(f"读取音频文件失败: {str(e)}")
             return None
 
-    @bot.group_event()
+    @group_only
     async def handle_music(self, input: GroupMessage):
         message = input.raw_message.strip()
 
@@ -61,7 +63,7 @@ class MusicSender(BasePlugin):
                     # 检查全局权限
                     if (
                         config["allowed_users"]
-                        and input.sender.user_id not in config["allowed_users"]
+                        and int(input.sender.user_id) not in config["allowed_users"]
                     ):
                         return
 

@@ -4,7 +4,10 @@ import logging
 from typing import List, Dict
 
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 
 # 配置日志
@@ -16,8 +19,6 @@ formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(messag
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
-bot = CompatibleEnrollment
-
 
 class MissionVersion:
     def __init__(self, version: str, quests: List[str]):
@@ -25,7 +26,7 @@ class MissionVersion:
         self.quests = quests
 
 
-class FF14Mission(BasePlugin):
+class FF14Mission(NcatBotPlugin):
     name = "FF14Mission"  # 插件名称
     version = "1.0"  # 插件版本
     mission_data: List[MissionVersion] = []
@@ -80,7 +81,7 @@ class FF14Mission(BasePlugin):
 
         return "\n".join(result)
 
-    @bot.group_event()
+    @group_only
     async def handle_mission_query(self, input: GroupMessage):
         """处理FF14主线任务查询"""
         message = input.raw_message

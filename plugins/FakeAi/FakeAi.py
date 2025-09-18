@@ -6,15 +6,17 @@ from datetime import datetime
 from typing import Dict, List, Optional
 
 import yaml
-from common.entity.GroupMember import GroupMember
 from common.utils.AiUtil import AiUtil
-from ncatbot.core.element import At, MessageChain, Text
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from common.utils.CommonUtil import CommonUtil
+from ncatbot.core import At, MessageChain, Text
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 from ncatbot.utils.logger import get_log
 from ncatbot.core.message import GroupMessage
 
 _log = get_log()
-bot = CompatibleEnrollment
 
 # 全局变量
 trigger_interval = 600  # 每小时最多触发一次（秒）
@@ -31,26 +33,26 @@ callback_timeout = 30  # 回调超时时间（秒）
 class CallbackState:
     def __init__(self):
         self.waiting_users: Dict[
-            int, Dict
+            str, Dict
         ] = {}  # {user_id: {"group_id": group_id, "start_time": datetime}}
 
-    def add_waiting_user(self, user_id: int, group_id: int) -> None:
+    def add_waiting_user(self, user_id: str, group_id: int) -> None:
         self.waiting_users[user_id] = {
             "group_id": group_id,
             "start_time": datetime.now(),
         }
 
-    def remove_waiting_user(self, user_id: int) -> None:
+    def remove_waiting_user(self, user_id: str) -> None:
         if user_id in self.waiting_users:
             del self.waiting_users[user_id]
 
-    def is_waiting(self, user_id: int) -> bool:
+    def is_waiting(self, user_id: str) -> bool:
         return user_id in self.waiting_users
 
-    def get_waiting_info(self, user_id: int) -> Optional[Dict]:
+    def get_waiting_info(self, user_id: str) -> Optional[Dict]:
         return self.waiting_users.get(user_id)
 
-    def check_timeout(self, user_id: int) -> bool:
+    def check_timeout(self, user_id: str) -> bool:
         if user_id not in self.waiting_users:
             return False
         wait_time = (
@@ -110,7 +112,7 @@ class GlobalReplyCacheManager:
         return cache.get_replies()
 
 
-class FakeAi(BasePlugin):
+class FakeAi(NcatBotPlugin):
     name = "FakeAi"  # 插件名称
     version = "1.0"  # 插件版本
 
@@ -125,10 +127,10 @@ class FakeAi(BasePlugin):
         # 检查是否是回复消息
         if input.message and len(input.message) > 1:
             for msg in input.message:
-                if msg["type"] == "reply":
+                if hasattr(msg, "type") and msg.type == "reply":
                     # 检查被回复的消息是否包含特定文本
                     try:
-                        reply_id = msg["data"]["id"]
+                        reply_id = msg.data.get("id")
                         msg_info = await self.api.get_msg(reply_id)
                         if msg_info.get("status") == "ok":
                             raw_message = msg_info["data"]["raw_message"]
@@ -142,16 +144,48 @@ class FakeAi(BasePlugin):
                         continue
         return False
 
-    @bot.group_event()
+    @group_only
     async def handle_fake_ai(self, input: GroupMessage) -> None:
         # 检查消息是否来自排除的插件
         if await self._is_from_excluded_plugin(input):
             return
 
         group_id = input.group_id
-        sender_id = input.user_id
+        sender_id = input.sender.user_id
         sender_name = input.sender.nickname
-        content = input.message
+
+        # 将 MessageArray 转换为可序列化的格式
+        content = []
+        for msg_segment in input.message:
+            if hasattr(msg_segment, "text"):
+                content.append({"type": "text", "data": {"text": msg_segment.text}})
+            elif (
+                hasattr(msg_segment, "msg_seg_type")
+                and msg_segment.msg_seg_type == "at"
+            ):
+                content.append({"type": "at", "data": {"qq": msg_segment.qq}})
+            elif (
+                hasattr(msg_segment, "msg_seg_type")
+                and msg_segment.msg_seg_type == "image"
+            ):
+                content.append(
+                    {
+                        "type": "image",
+                        "data": {
+                            "url": getattr(msg_segment, "url", ""),
+                            "file": getattr(msg_segment, "file", ""),
+                            "summary": getattr(msg_segment, "summary", ""),
+                        },
+                    }
+                )
+            else:
+                # 尝试处理其他类型的消息
+                if (
+                    hasattr(msg_segment, "data")
+                    and "image" in str(msg_segment.data).lower()
+                ):
+                    content.append({"type": "image", "data": {"raw": str(msg_segment)}})
+
         is_at_message = "[CQ:at,qq=3555202423]" in input.raw_message
 
         # 检查是否是等待回调的用户
@@ -191,10 +225,10 @@ class FakeAi(BasePlugin):
         # 判断是否是功能测试的指令
         if input.raw_message == "蓝晴说话":
             if sender_id in [
-                1064163905,
-                1141419351,
-                1506123340,
-                273421673,
+                "1064163905",
+                "1141419351",
+                "1506123340",
+                "273421673",
             ] or group_id in [719518427, 853963912]:
                 answer = await answer_ai(group_id, group_reply_caches)
                 _log.info(answer)
@@ -203,7 +237,7 @@ class FakeAi(BasePlugin):
 
         if is_at_message:
             # 检查用户CD（除了273421673用户）
-            if sender_id != 273421673 and not check_user_cd(sender_id):
+            if sender_id != "273421673" and not check_user_cd(sender_id):
                 return
 
             reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
@@ -228,7 +262,7 @@ class FakeAi(BasePlugin):
                 callback_state.add_waiting_user(sender_id, group_id)
 
             # 更新用户触发时间
-            if sender_id != 273421673:
+            if sender_id != "273421673":
                 user_trigger_times[sender_id] = datetime.now()
             return
 
@@ -306,6 +340,8 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
 
                     # 将中文逗号替换为空格
                     sentence = re.sub(comma_replace_pattern, " ", sentence)
+                    # 将多个连续空格替换为单个空格
+                    sentence = re.sub(r"\s+", " ", sentence)
 
                     # 移除句号，但保留问号和感叹号
                     sentence = re.sub(period_remove_pattern, "", sentence)
@@ -331,6 +367,8 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
 
                     # 将中文逗号替换为空格
                     sentence = re.sub(comma_replace_pattern, " ", sentence)
+                    # 将多个连续空格替换为单个空格
+                    sentence = re.sub(r"\s+", " ", sentence)
 
                     # 移除句号，但保留问号和感叹号
                     sentence = re.sub(period_remove_pattern, "", sentence)
@@ -356,6 +394,8 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
 
             # 移除不需要保留的标点
             content = re.sub(comma_replace_pattern, " ", content)
+            # 将多个连续空格替换为单个空格
+            content = re.sub(r"\s+", " ", content)
             content = re.sub(period_remove_pattern, "", content)
 
             # 恢复CQ码
@@ -368,19 +408,19 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
         at_pattern = re.compile(r"\[CQ:at,qq=([\w\u4e00-\u9fff]+)]")
         group_id = input.group_id
         members_response = await self.api.get_group_member_list(group_id=group_id)
-        members = [GroupMember(member) for member in members_response.get("data", [])]
+        members = CommonUtil.parse_group_member_list(members_response)
 
         # 遍历句子
         for sentence in sentences:
-            message = MessageChain([])  # 为每个句子创建新的MessageChain
+            message_elements = []  # 为每个句子创建新的消息元素列表
             last_match_end = 0
 
             # 处理 CQ 码格式的 @ 消息
             for match in at_pattern.finditer(sentence):
                 # 处理 @ 之前的文本
-                text_before_at = sentence[last_match_end : match.start()]
+                text_before_at = sentence[last_match_end : match.start()].strip()
                 if text_before_at:
-                    message.chain.append(Text(text_before_at))
+                    message_elements.append(Text(text_before_at))
 
                 at_content = match.group(1)
                 try:
@@ -390,24 +430,27 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
                     # 如果无法解析为 ID，从历史记录中查找对应的 ID
                     user_id = find_user_id_by_name(at_content, input.group_id)
 
-                if user_id and any(member.user_id == user_id for member in members):
+                if user_id and any(
+                    member.user_id == str(user_id) for member in members
+                ):
                     # 添加 @ 的用户
-                    message.chain.append(At(user_id))
-                    message.chain.append(Text(" "))
+                    message_elements.append(At(user_id))
+                    message_elements.append(Text(" "))
 
                 last_match_end = match.end()
 
             # 处理 @ 之后的文本
-            text_after_last_at = sentence[last_match_end:]
+            text_after_last_at = sentence[last_match_end:].strip()
             if text_after_last_at:
-                message.chain.append(Text(text_after_last_at))
+                message_elements.append(Text(text_after_last_at))
 
             # 模拟打字的延时，根据句子的字符数设置延时
             delay = len(sentence) * 0.1  # 每个字符延时 0.1 秒
             await asyncio.sleep(delay)
 
             # 发送消息
-            if message.chain:  # 确保消息链不为空
+            if message_elements:  # 确保消息链不为空
+                message = MessageChain(message_elements)
                 await self.api.post_group_msg(group_id=input.group_id, rtf=message)
 
         # 将AI的回复加入到reply_cache中
@@ -450,21 +493,25 @@ def check_cd(group_id: int) -> bool:
 
     now = datetime.now()
     remaining_time = trigger_interval - (now - last_trigger_time).total_seconds()
+    _log.info(f"群CD检查: {group_id}, 剩余时间: {remaining_time:.2f}秒")
 
     # CD 冷却完成
     return remaining_time <= 0
 
 
-def check_user_cd(user_id: int) -> bool:
+def check_user_cd(user_id: str) -> bool:
     """检查用户CD是否冷却完成"""
     if not enable_user_cd:
+        _log.info(f"用户CD被禁用，直接通过: {user_id}")
         return True  # 如果用户冷却被禁用，直接返回True
     last_trigger_time = user_trigger_times.get(user_id)
     if not last_trigger_time:
+        _log.info(f"用户首次触发，CD通过: {user_id}")
         return True  # 如果没有记录，则表示冷却完成
 
     now = datetime.now()
     remaining_time = trigger_interval - (now - last_trigger_time).total_seconds()
+    _log.info(f"用户CD检查: {user_id}, 剩余时间: {remaining_time:.2f}秒")
     return remaining_time <= 0
 
 

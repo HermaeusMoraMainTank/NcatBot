@@ -262,16 +262,16 @@ class BotClient:
         
         run_coroutine(self.plugin_loader.load_plugins)
         
-        if self.mock_mode: # MockMixin 中提供
-            self.mock_start()
-        else:
-            # 启动服务（仅在非 mock 模式下）
-            lanuch_napcat_service()
-            try:
-                asyncio.run(self.adapter.connect_websocket())
-            except NcatBotConnectionError as e:
-                self.bot_exit()
-                raise
+        # if self.mock_mode: # MockMixin 中提供
+        #     self.mock_start()
+        # else:
+        # 启动服务（仅在非 mock 模式下）
+        lanuch_napcat_service()
+        try:
+            asyncio.run(self.adapter.connect_websocket())
+        except NcatBotConnectionError as e:
+            self.bot_exit()
+            raise
     
     def get_registered_plugins(self) -> List['BasePlugin']:
         return list(self.plugin_loader.plugins.values())

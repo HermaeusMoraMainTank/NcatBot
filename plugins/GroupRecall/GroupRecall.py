@@ -1,6 +1,6 @@
 # import asyncio
 # from ncatbot.core.message import GroupMessage
-# from ncatbot.core.element import MessageChain, Text
+# from ncatbot.core import MessageChain, Text
 # from ncatbot.utils.logger import get_log
 # from ncatbot.plugin import CompatibleEnrollment, BasePlugin
 # import time

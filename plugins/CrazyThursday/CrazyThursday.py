@@ -1,10 +1,11 @@
 import random
 
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
-
-bot = CompatibleEnrollment
 
 CRAZY_MESSAGES = [
     "大家好，我是秦始皇，其实我并没有死，我在西安有100000吨黄金，今天肯德基疯狂星期四，我现在需要有人来请我吃29.9块钱8只蛋挞。我明天直接带部队复活，让你统领三军! ​​​",
@@ -53,11 +54,11 @@ CRAZY_MESSAGES = [
 ]
 
 
-class CrazyThursday(BasePlugin):
+class CrazyThursday(NcatBotPlugin):
     name = "CrazyThursday"  # 插件名称
     version = "1.0"  # 插件版本
 
-    @bot.group_event()
+    @group_only
     async def handle_crazy_thursday(self, input: GroupMessage):
         if input.raw_message in ["疯狂星期四", "KFC", "星期四"]:
             await self.api.post_group_msg(

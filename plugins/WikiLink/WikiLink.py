@@ -3,12 +3,13 @@ import ast
 import html
 import urllib.parse
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
-bot = CompatibleEnrollment
 
-
-class WikiLink(BasePlugin):
+class WikiLink(NcatBotPlugin):
     name = "WikiLink"
     version = "1.0"
 
@@ -33,6 +34,7 @@ class WikiLink(BasePlugin):
 - {{Infobox}} -> https://zh.wikipedia.org/wiki/Template:Infobox
 - {{:en:Infobox}} -> https://en.wikipedia.org/wiki/Template:Infobox
 """
+
     def parse_raw_message(self, raw: str) -> str:
         """处理原始消息文本"""
         raw = html.unescape(raw)
@@ -81,7 +83,7 @@ class WikiLink(BasePlugin):
 
         return ""
 
-    @bot.group_event()
+    @group_only
     async def handle_wiki_link(self, input: GroupMessage):
         """处理群消息"""
         message_parts = input.raw_message.split(" ")

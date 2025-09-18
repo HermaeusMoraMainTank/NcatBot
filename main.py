@@ -7,7 +7,7 @@ _log = get_log()
 config.set_bot_uin("3555202423")  # 设置 bot qq 号 (必填)
 config.set_root("273421673")  # 设置 bot 超级管理员账号 (建议填写)
 config.set_ws_uri("ws://127.0.0.1:3001")  # 设置 napcat websocket server 地址
-config.set_ws_token("")  # 设置 token (websocket 的 token)
+config.set_ws_token("napcat")  # 设置 token (websocket 的 token)
 config.set_webui_uri("http://127.0.0.1:6099")  # 设置 napcat webui 地址
 config.set_webui_token("napcat")  # 设置 token (webui 的 token)
 
@@ -33,7 +33,6 @@ async def on_group_message(message: GroupMessage):
     _log.info(
         f"收到群消息，Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}，群ID：{message.group_id}，ID: {message.user_id}，昵称：{message.sender.nickname}，内容：{processed_message}"
     )
-
 
 
 @bot.private_event()

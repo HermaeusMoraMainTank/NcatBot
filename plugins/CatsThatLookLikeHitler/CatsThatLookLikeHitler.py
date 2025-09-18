@@ -1,10 +1,12 @@
 from ncatbot.core.message import GroupMessage
-from ncatbot.core.element import Image, MessageChain, Reply
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.core import Image, MessageChain, Reply
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 import random
 
-bot = CompatibleEnrollment
 
 BASE_URL = "http://www.catsthatlooklikehitler.com/kitler/pics/kitler"
 MAX_NUMBER = 8848
@@ -13,11 +15,11 @@ MAX_NUMBER = 8848
 TRIGGER_WORDS = {"希儿", "希特勒", "Sieg Heil", "siegheil", "胜利万岁", "sieg", "Sieg"}
 
 
-class CatsThatLookLikeHitler(BasePlugin):
+class CatsThatLookLikeHitler(NcatBotPlugin):
     name = "CatsThatLookLikeHitler"  # 插件名称
     version = "1.0"  # 插件版本
 
-    @bot.group_event()
+    @group_only
     async def hitler_cat(self, input: GroupMessage):
         """
         处理希特勒猫图片功能

@@ -4,22 +4,22 @@ import psutil
 from datetime import datetime
 
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin.base_plugin import BasePlugin
-from ncatbot.plugin import CompatibleEnrollment
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 from common.constants.HMMT import HMMT
 
-bot = CompatibleEnrollment
 
-
-class Status(BasePlugin):
+class Status(NcatBotPlugin):
     name = "Status"  # 插件名称
     version = "1.0"  # 插件版本
     START_TIME = time.time()  # 程序启动时间
 
-    @bot.group_event()
+    @group_only
     async def handle_status(self, input: GroupMessage) -> None:
-        if input.raw_message == "状态" and input.user_id == HMMT.HMMT_ID:
+        if input.raw_message == "状态" and input.sender.user_id == HMMT.HMMT_ID:
             await self.api.post_group_msg(
                 group_id=input.group_id, text=self.get_system_status()
             )

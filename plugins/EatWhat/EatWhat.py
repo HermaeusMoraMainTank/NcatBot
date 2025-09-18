@@ -5,13 +5,15 @@ from datetime import datetime, date
 from typing import Dict, Tuple
 from dataclasses import dataclass
 
-from ncatbot.core.element import At, MessageChain, Text, Image
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.core import At, MessageChain, Text, Image
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 from ncatbot.utils.logger import get_log
 from ncatbot.core.message import GroupMessage
 
 _log = get_log()
-bot = CompatibleEnrollment
 
 # 定义时间词和餐次词
 time_words = r"(今|明|后)?(天|日|晚)?"
@@ -25,7 +27,7 @@ class UserOperation:
     reset_time: date = date.today()
 
 
-class EatWhat(BasePlugin):
+class EatWhat(NcatBotPlugin):
     name = "EatWhat"  # 插件名称
     version = "1.0"  # 插件版本
 
@@ -47,7 +49,7 @@ class EatWhat(BasePlugin):
         "你在等我给你发好吃的？做梦哦！你都吃那么多了，不许再吃了！ヽ(≧Д≦)ノ",
     ]
 
-    @bot.group_event()
+    @group_only
     async def handle_eat_what(self, input: GroupMessage) -> None:
         """处理群消息"""
         content = input.raw_message.strip()
@@ -114,7 +116,7 @@ class EatWhat(BasePlugin):
 
     async def _process_operation(self, input: GroupMessage, is_drink: bool) -> None:
         """处理吃/喝操作的核心逻辑"""
-        user_id = input.user_id
+        user_id = input.sender.user_id
         operation_type = "drink" if is_drink else "eat"
 
         # 检查CD
@@ -173,7 +175,7 @@ class EatWhat(BasePlugin):
             action = "喝" if is_drink else "吃"
             message = MessageChain(
                 [
-                    At(input.user_id),
+                    At(input.sender.user_id),
                     Text(f"\n蓝晴建议你{action}:\n⭐{image_name}⭐\n"),
                     Image(image_path),
                 ]

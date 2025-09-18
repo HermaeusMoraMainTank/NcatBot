@@ -7,14 +7,16 @@ from typing import List, Set
 import yaml
 from PIL import Image
 
-from ncatbot.core.element import At, MessageChain, Reply, Text, Image as ImageElement
+from ncatbot.core import At, MessageChain, Reply, Text, Image as ImageElement
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 
 from common.constants.HMMT import HMMT
 
-bot = CompatibleEnrollment
 
 log = logging.getLogger(__name__)
 
@@ -29,7 +31,7 @@ class TarotCard:
 
 
 # 塔罗牌逻辑处理类
-class Tarot(BasePlugin):
+class Tarot(NcatBotPlugin):
     name = "Tarot"  # 插件名称
     version = "1.0"  # 插件版本
     tarot_libraries = [
@@ -44,12 +46,12 @@ class Tarot(BasePlugin):
     ]
     current_library_index = 0  # 初始化索引为0
 
-    @bot.group_event()
+    @group_only
     async def handle_tarot(self, input: GroupMessage):
         message = input.raw_message
         if message == "占卜":
             probability = 0.05  # 触发概率为5%
-            if input.user_id == HMMT.HMMT_ID:
+            if input.sender.user_id == HMMT.HMMT_ID:
                 probability += 0.5
 
             if random.random() < probability:
@@ -75,7 +77,7 @@ class Tarot(BasePlugin):
                                 group_id=input.group_id,
                                 rtf=MessageChain(
                                     [
-                                        At(input.user_id),
+                                        At(input.sender.user_id),
                                         Text(f"\n{tarot_data.positive}"),
                                         ImageElement(str(image.resolve())),
                                         Reply(input.message_id),
@@ -95,7 +97,7 @@ class Tarot(BasePlugin):
                     group_id=input.group_id,
                     rtf=MessageChain(
                         [
-                            At(input.user_id),
+                            At(input.sender.user_id),
                             Text("\n"),
                             Text(self.get_tarot_message(card, i)),
                             ImageElement(image_bytes),

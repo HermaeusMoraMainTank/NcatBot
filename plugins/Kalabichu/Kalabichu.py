@@ -1,10 +1,11 @@
 import random
 
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
-
-bot = CompatibleEnrollment
 
 KALABIQIU_MESSAGES = [
     "啊啊啊啊啊喵~红温了喵~红温了喵~红温了喵~捅似你们这群小笨蛋喵~捅似你们这群小笨蛋喵~捅似你们这群小笨蛋喵~",
@@ -744,11 +745,11 @@ KALABIQIU_MESSAGES = [
 ]
 
 
-class Kalabiqiu(BasePlugin):
+class Kalabiqiu(NcatBotPlugin):
     name = "Kalabiqiu"  # 插件名称
     version = "1.0"  # 插件版本
 
-    @bot.group_event()
+    @group_only
     async def handle_kalabiqiu(self, input: GroupMessage):
         if input.raw_message in ["卡拉彼丘", "卡丘", "kalabiqiu", "喵"]:
             await self.api.post_group_msg(

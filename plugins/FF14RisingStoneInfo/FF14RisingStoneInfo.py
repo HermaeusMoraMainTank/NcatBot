@@ -9,14 +9,14 @@ from io import BytesIO
 from curl_cffi import requests  # 替换为 curl_cffi 的 requests
 from common.constants.HMMT import HMMT
 from ncatbot.core.message import GroupMessage
-from ncatbot.core.element import Image as ImageElement, MessageChain, Reply
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.core import Image as ImageElement, MessageChain, Reply
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 
-bot = CompatibleEnrollment
-
-
-class FF14RisingStoneInfo(BasePlugin):
+class FF14RisingStoneInfo(NcatBotPlugin):
     name = "FF14RisingStoneInfo"  # 插件名称
     version = "1.0"  # 插件版本
 
@@ -553,7 +553,7 @@ class FF14RisingStoneInfo(BasePlugin):
             draw.text((420, y), achieve_time, fill="black", font=font)
             y += 60
 
-    @bot.group_event()
+    @group_only
     async def handle_ff14_rising_stone(self, input: GroupMessage):
         """处理查询命令"""
         message_parts = input.raw_message.split(" ")

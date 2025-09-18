@@ -1,4 +1,2290 @@
 {
-  "user_stats": {},
-  "user_count": {}
+  "user_stats": {
+    "853963912": {
+      "2523148917": {
+        "1bd9019b53951ba8c7d69130a39ab77b.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSbeYgTV-6pawLxL89cyjFkJCIxkRi28wEg_woowdavz6_hjwMyBHByb2RQgL2jAVoQrlSMMWiK8VZMJdSFmJkdRXoCUGuCAQJuag&rkey=CAESMKC7OQBKiag0QENjbamQY92gFGRnJ44marEzssc-mTigIt4vzyk3DLcUMDd6HbfmiQ",
+          "cache_path": "data\\image\\emoji_stats\\1bd9019b53951ba8c7d69130a39ab77b.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T11:30:36.481154"
+        }
+      }
+    },
+    "746834360": {
+      "741549566": {
+        "11b56672c9fa21fec470be80cf40a7ca.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhS84MR0fZBHR1shr_-G9aamgYL4shjEqEwg_woohsbV767hjwMyBHByb2RQgL2jAVoQjK775d2vnZwlXMubBnO7LnoCEqaCAQJneg&rkey=CAESMKC7OQBKiag0QENjbamQY92gFGRnJ44marEzssc-mTigIt4vzyk3DLcUMDd6HbfmiQ",
+          "cache_path": "data\\image\\emoji_stats\\11b56672c9fa21fec470be80cf40a7ca.jpg",
+          "daily_counts": {
+            "2025-09-18": 2
+          },
+          "last_used": "2025-09-18T11:29:48.278436"
+        },
+        "b796e6ac5863efc97beff98bf83db5e5.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQpjcnQD1qVPVAyYPD7bc8sGjQrcRjv4Tog_woot7v5ja_hjwMyBHByb2RQgL2jAVoQzjeUPvCmgR1_78cVPXvBRHoCAxCCAQJneg&rkey=CAESMKC7OQBKiag0QENjbamQY92gFGRnJ44marEzssc-mTigIt4vzyk3DLcUMDd6HbfmiQ",
+          "cache_path": "data\\image\\emoji_stats\\b796e6ac5863efc97beff98bf83db5e5.jpg",
+          "daily_counts": {
+            "2025-09-18": 3
+          },
+          "last_used": "2025-09-18T11:31:24.028493"
+        }
+      },
+      "1979813690": {
+        "4a26708b94db5c53742e58b6f522d16e.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhS9uuakw0V9JtW1BI0QH9Ac7Wj-Mhjg1Q0g_woogZ-Tia_hjwMyBHByb2RQgL2jAVoQ3eRmVJjSsjERl8t3GGurdHoCmPiCAQJneg&rkey=CAESMKC7OQBKiag0QENjbamQY92gFGRnJ44marEzssc-mTigIt4vzyk3DLcUMDd6HbfmiQ",
+          "cache_path": "data\\image\\emoji_stats\\4a26708b94db5c53742e58b6f522d16e.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T11:28:08.985256"
+        },
+        "0ad22aeab87ae6525eaa33361d520709.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhS11AjcfaYlwilERKCTkeXpV_nK3xiw2wQg_woowqyZtK_hjwMyBHByb2RQgL2jAVoQx3htMhZui7wgwERXuxuWTnoCrJCCAQJneg&rkey=CAESMKC7OQBKiag0QENjbamQY92gFGRnJ44marEzssc-mTigIt4vzyk3DLcUMDd6HbfmiQ",
+          "cache_path": "data\\image\\emoji_stats\\0ad22aeab87ae6525eaa33361d520709.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T11:29:39.318691"
+        }
+      },
+      "1175368714": {
+        "f8300be90415aeb13f77dfa665e8e5fe.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRwL1809vs9d_9BjpdW0DGSI4aTuxjB1yMg_woo4s2Vuq_hjwMyBHByb2RQgL2jAVoQ02lk7spZeWs2S9WzB1r5m3oCnWSCAQJneg&rkey=CAESMKC7OQBKiag0QENjbamQY92gFGRnJ44marEzssc-mTigIt4vzyk3DLcUMDd6HbfmiQ",
+          "cache_path": "data\\image\\emoji_stats\\f8300be90415aeb13f77dfa665e8e5fe.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T11:29:52.317511"
+        }
+      }
+    },
+    "626192977": {
+      "376579332": {
+        "1cc6221d50d5e9ccab68d57083d936b8.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSB_FxLStrb3cCwn0TAE8Ot56qOYhjq3i0g_woowtPrirDhjwMyBHByb2RQgL2jAVoQ9PA4zP4maNn6we3lnWZ39XoCEVOCAQJuag&rkey=CAESMKC7OQBKiag0QENjbamQY92gFGRnJ44marEzssc-mTigIt4vzyk3DLcUMDd6HbfmiQ",
+          "cache_path": "data\\image\\emoji_stats\\1cc6221d50d5e9ccab68d57083d936b8.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T11:32:41.172493"
+        }
+      }
+    },
+    "585479130": {
+      "1602143838": {
+        "7b2a846394178e9b726a08acb08c10de.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQK5s5wsvqp1FgZg4t4_wtAOzBuFBjXgQQg_wooueSRwK_hjwMyBHByb2RQgL2jAVoQ05nhSOb5mrHPjYi4GGquEXoC-OKCAQJneg&rkey=CAESMKC7OQBKiag0QENjbamQY92gFGRnJ44marEzssc-mTigIt4vzyk3DLcUMDd6HbfmiQ",
+          "cache_path": "data\\image\\emoji_stats\\7b2a846394178e9b726a08acb08c10de.jpg",
+          "daily_counts": {
+            "2025-09-18": 3
+          },
+          "last_used": "2025-09-18T11:30:20.404186"
+        }
+      }
+    },
+    "719518427": {
+      "534256344": {
+        "af9a9d34dbeb89aef9bc79cd7ae67084.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhT2c0DF7LmY44zHfkS2ZV3XpRwFdBjN5mIg_woo0peIy6zhjwMyBHByb2RQgL2jAVoQJJ2pa36DxEA4sQDUIKzwWHoC9tKCAQJuag&rkey=CAESMKC7OQBKiag0QENjbamQY92gFGRnJ44marEzssc-mTigIt4vzyk3DLcUMDd6HbfmiQ",
+          "cache_path": "data\\image\\emoji_stats\\af9a9d34dbeb89aef9bc79cd7ae67084.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T11:17:02.331908"
+        }
+      }
+    },
+    "812078719": {
+      "562871744": {
+        "05910f0da163c3a5519319ccb6b7ed38.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQ6fRTYNER0WzzmAAylPBF5pZBOXBjerd4BIP8KKI3GxvKM3Y8DMgRwcm9kUIC9owFaEJDolFY53eIh2uWZHE7UazN6AgJAggECZ3o&rkey=CAISMEADbcbcBc1t8-woL4J1zdhQxSdc53KW7UZAtObndpoHq9SjiNZkQSuqMofwOjmDgg",
+          "cache_path": "data\\image\\emoji_stats\\05910f0da163c3a5519319ccb6b7ed38.jpg",
+          "daily_counts": {
+            "2025-09-16": 1,
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T16:38:29.560852"
+        }
+      },
+      "715171276": {
+        "46947b0034a770a2aec2ee454834bbd7.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTX7prRWTCEWrvmuSBOKdqOE_8vSBi2eSD_CiiM-4b4ld2PAzIEcHJvZFCAvaMBWhCIZ8uSuqhqdddrajlUCs_1egL694IBAmd6&rkey=CAISMEADbcbcBc1t8-woL4J1zdhQxSdc53KW7UZAtObndpoHq9SjiNZkQSuqMofwOjmDgg",
+          "cache_path": "data\\image\\emoji_stats\\46947b0034a770a2aec2ee454834bbd7.jpg",
+          "daily_counts": {
+            "2025-09-16": 2
+          },
+          "last_used": "2025-09-16T19:44:14.991943"
+        }
+      },
+      "649169116": {
+        "b0359da7db0027a49e65746dc279e7ec.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhT9_n6Qwxf6bWLeaNlFDgKMq1R9oxjUDyD_CiiL9KGbrt2PAzIEcHJvZFCAvaMBWhCRbihDw8cN0y98T4nhoHb7egLQ7oIBAmd6&rkey=CAQSMCrQtXuF6HOn9aj29hc3UeP_sx2eweEX9f0zQtX2GtkDoiZZkBCC4MkZkG9IKBHIcg",
+          "cache_path": "data\\image\\emoji_stats\\b0359da7db0027a49e65746dc279e7ec.jpg",
+          "daily_counts": {
+            "2025-09-16": 2
+          },
+          "last_used": "2025-09-16T21:15:09.150662"
+        },
+        "e4a3ed17f8a9dd795ab251475aaf246e.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQxkzHne9mGGk5Hy1cAus9O9udUcRjqEyD_CijotcyCtN-PAzIEcHJvZFCAvaMBWhBhNzjSgCeYDRfFO9Q7pFYaegIq8YIBAmd6&rkey=CAISMKNbiQFfCdf9uWEZ8ONki0bNvx5rbV8L_DD5WBeKJ_ftAJ3cq8SKYqCMJck9VTkwoQ",
+          "cache_path": "data\\image\\emoji_stats\\e4a3ed17f8a9dd795ab251475aaf246e.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T16:44:58.537168"
+        }
+      }
+    },
+    "700644107": {
+      "1102844500": {
+        "a8411c7b5e359de20878ec8d43550300.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQEm0d1Fw3ILkEmdlatyIvl2ZniohiktQcg_wooudGFt4TdjwMyBHByb2RQgL2jAVoQVhi0q4yxiw4mrtRUB3Xl_XoCwrmCAQJneg&rkey=CAESMG8t4_0cPC5il3MheRVTGp5I6UjgKXmE8CuDh3dZpSUFMDHdggWgLibsB8xWvqJdgw",
+          "cache_path": "data\\image\\emoji_stats\\a8411c7b5e359de20878ec8d43550300.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T18:06:45.871976"
+        }
+      },
+      "779084137": {
+        "b19aa93676a82b112711ffb7255a8a9e.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSl27Z4XKKWU9_82iw3CyOgKrAldRibxegCIP8KKK6wqMGO3Y8DMgRwcm9kUIC9owFaECfk2a4-fzHuH6FsLYRIx756Ag9fggECbmo&rkey=CAISMEADbcbcBc1t8-woL4J1zdhQxSdc53KW7UZAtObndpoHq9SjiNZkQSuqMofwOjmDgg",
+          "cache_path": "data\\image\\emoji_stats\\b19aa93676a82b112711ffb7255a8a9e.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T18:51:51.120583"
+        },
+        "56eecd58cac3b6593f83998c9f30eb4b.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSCCGvB7MW0F3-vwb8nVut1Q8iPexjBDyD_CijO7tiPmd2PAzIEcHJvZFCAvaMBWhCMW9tEUTOofh_Y9v28x86legIKfIIBAm5q&rkey=CAISMEADbcbcBc1t8-woL4J1zdhQxSdc53KW7UZAtObndpoHq9SjiNZkQSuqMofwOjmDgg",
+          "cache_path": "data\\image\\emoji_stats\\56eecd58cac3b6593f83998c9f30eb4b.jpg",
+          "daily_counts": {
+            "2025-09-16": 1,
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T11:02:04.746048"
+        },
+        "ea4bcc57e3aa021a561e3fd04a285a88.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRWFLhH6dKDQeOYzSG89LaXa-dHIBiGsgwg_wooltyKuZ7djwMyBHByb2RQgL2jAVoQKPwPTL7edRfyAyj2vPdkJnoC-KeCAQJuag&rkey=CAESMMK-UBmVbq8eNTZs4mf9P5Xm9jCLddz8I474HJ9GaESRoT9GJSxTxI0bQ_w_LSMHPw",
+          "cache_path": "data\\image\\emoji_stats\\ea4bcc57e3aa021a561e3fd04a285a88.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T20:03:08.559626"
+        },
+        "ba657a1a620d19326337de36ee9d9d9e.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQQOgUCx_1KH0dgzTAi0MzLXtEGbRijjxMg_wooqtnP7-fejwMyBHByb2RQgL2jAVoQ4OC4okKIjM_4NIbFcG2sBXoC-fiCAQJuag&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\ba657a1a620d19326337de36ee9d9d9e.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T11:04:24.103526"
+        }
+      },
+      "939912032": {
+        "969e94ec88cf444d75fef35b75145c95.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRU-0ff0wQ4N6KAaiLcW7B5NosaqxirngYg_woo-P6s15XdjwMyBHByb2RQgL2jAVoQSla__xiMPqk66gy7w91xYHoCX2eCAQJneg&rkey=CAISMEADbcbcBc1t8-woL4J1zdhQxSdc53KW7UZAtObndpoHq9SjiNZkQSuqMofwOjmDgg",
+          "cache_path": "data\\image\\emoji_stats\\969e94ec88cf444d75fef35b75145c95.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T19:23:56.044892"
+        },
+        "27c01550fb55d85b534573b8cedcde7c.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQvQKNKejV6PRaFTBHpZMpuq74LYBiA6Agg_woo-OG2wpndjwMyBHByb2RQgL2jAVoQIFYZR5TEm3ueub7GqIP6cHoCjT2CAQJneg&rkey=CAISMEADbcbcBc1t8-woL4J1zdhQxSdc53KW7UZAtObndpoHq9SjiNZkQSuqMofwOjmDgg",
+          "cache_path": "data\\image\\emoji_stats\\27c01550fb55d85b534573b8cedcde7c.jpg",
+          "daily_counts": {
+            "2025-09-16": 1,
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T16:45:10.002694"
+        },
+        "dbf047cc917f75782bc11076e9b23247.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSvKH8CPkFgXiaT5TozVrgEO7exPxjgjQUg_wootZvsqeHejwMyBHByb2RQgL2jAVoQevp5NinzyDGmNs8HLAyuBXoCEOaCAQJneg&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\dbf047cc917f75782bc11076e9b23247.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:35:10.227547"
+        },
+        "f1b03584b7bb8bc3f2e1d833e5506646.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRgIWniBLDPE5vpez_GaJQjYTxCeRjpOyD_Ciisva31596PAzIEcHJvZFCAvaMBWhAt9_77se_rjCgEVD22ppGhegLwj4IBAmd6&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\f1b03584b7bb8bc3f2e1d833e5506646.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T11:04:31.768227"
+        },
+        "ad19c003d386987bcb06e945ecb9f596.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhR_3AEf6bwjZtAv5aJ2rSl-DQ6v5xjv8fQDIP8KKJ_lnrni348DMgRwcm9kUIC9owFaENCUb3epniGvQ0Ll9txrhSN6AkGvggECZ3o&rkey=CAMSMJvuFZGmd9yBsdY6x6yD8mrNv6Wtku9msP7TYwXVdXXV1q3LCtlBMhqw2F3cvdnMMg",
+          "cache_path": "data\\image\\emoji_stats\\ad19c003d386987bcb06e945ecb9f596.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T20:12:42.629979"
+        }
+      },
+      "1016703577": {
+        "1cad23e532af2a94e023751d39d36ebb.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQ6ASiVvjJnyoIcSEiAwd753x6gEBjblwIg_woozPHz2ZbdjwMyBHByb2RQgL2jAVoQd9YEovFLPC_AejsihsiD63oC__CCAQJuag&rkey=CAISMEADbcbcBc1t8-woL4J1zdhQxSdc53KW7UZAtObndpoHq9SjiNZkQSuqMofwOjmDgg",
+          "cache_path": "data\\image\\emoji_stats\\1cad23e532af2a94e023751d39d36ebb.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T19:28:30.035002"
+        }
+      },
+      "460085985": {
+        "d6a85e51341faabdbdee93d1781a7301.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSZ2upqzylSWMYu02yYV5aCbNtcrhjWsgMg_woo67fN-qjdjwMyBHByb2RQgL2jAVoQbcW6LQ28hF8tFIFVCM9PoXoCpi6CAQJuag&rkey=CAQSMCrQtXuF6HOn9aj29hc3UeP_sx2eweEX9f0zQtX2GtkDoiZZkBCC4MkZkG9IKBHIcg",
+          "cache_path": "data\\image\\emoji_stats\\d6a85e51341faabdbdee93d1781a7301.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T20:50:10.786511"
+        },
+        "01cc10c434ef8167d024fa7143dbea85.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTmBfBC_ghBwJiXBeze4SD4fcc5ZRizxhsg_woos43DpqndjwMyBHByb2RQgL2jAVoQaSgXs9Rj-P0RU2gqw-LseHoCxWGCAQJuag&rkey=CAQSMCrQtXuF6HOn9aj29hc3UeP_sx2eweEX9f0zQtX2GtkDoiZZkBCC4MkZkG9IKBHIcg",
+          "cache_path": "data\\image\\emoji_stats\\01cc10c434ef8167d024fa7143dbea85.jpg",
+          "daily_counts": {
+            "2025-09-16": 1,
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T15:17:36.002902"
+        },
+        "9becf35edff123f923ae376888edccca.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTAtn7MK7XAU6K3E14HEb5cVcsdrhjsqgUg_woojKy_9Z7fjwMyBHByb2RQgL2jAVoQi_M4F1lXKEe9sM-02foX8XoCiEiCAQJuag&rkey=CAESMLsiyhxB_ID4MG2ZIJJahNoaX8-w7doplDLuUcZgs5M_4V9DKglIQ5e9hR34MwPrLQ",
+          "cache_path": "data\\image\\emoji_stats\\9becf35edff123f923ae376888edccca.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T15:10:33.682766"
+        }
+      },
+      "1095190230": {
+        "a2108517332f9fd55906aee8baa8d684.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSobxUHACsLjAdsmZDGxlID66ambhiwpAEg_woozK2dpc7djwMyBHByb2RQgL2jAVoQHZiSIZrrjQmHNC1a1ALWJXoC-u-CAQJuag&rkey=CAESMJRlY1t-_hyyKdoD2wzsc9rtVT63EdYry4b7sDrZ58brUDFcP4SrAMfV5qg28MabOQ",
+          "cache_path": "data\\image\\emoji_stats\\a2108517332f9fd55906aee8baa8d684.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T23:37:11.766441"
+        }
+      },
+      "857285446": {
+        "ad636bbf65473805df19026588008050.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRrGiVvnxlyCpfh3cik64-wUsGV8xizkQcg_woo966w3OXejwMyBHByb2RQgL2jAVoQQDTZ4y5hMWyLKU0cZxDxqnoCBAGCAQJuag&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\ad636bbf65473805df19026588008050.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:54:39.962969"
+        },
+        "f1b03584b7bb8bc3f2e1d833e5506646.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRgIWniBLDPE5vpez_GaJQjYTxCeRjpOyD_Cijj4q7m596PAzIEcHJvZFCAvaMBWhCv7R4vtc2z1x0k4hs2boIaegJxUoIBAm5q&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\f1b03584b7bb8bc3f2e1d833e5506646.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T11:03:57.877421"
+        }
+      },
+      "616572768": {
+        "5dc0bf66e27eab25a82e9a47cfc5c411.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQnM78AbkdFFsawXRmpWDZt9dogphjx3AIg_woomLWf3OjejwMyBHByb2RQgL2jAVoQjKt6woJqL9udCo_g4ySTM3oCyPmCAQJneg&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\5dc0bf66e27eab25a82e9a47cfc5c411.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T11:08:05.042289"
+        }
+      },
+      "844199053": {
+        "b43f5ee20820c4b26dc5a2aadb3012aa.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRFjeguGOn0-d4sh7D5qzXllz7apxj2ESD_CiiMrtnV_t6PAzIEcHJvZFCAvaMBWhAJnaeVfUxbZCAMq04l9I60egIcOIIBAm5q&rkey=CAISMBsK2sAKTu_hB7Sq7DMufV4UaXw6q_49Hnu_X6Od7IAWRfAhBmMXUTDepwc3CZzY1A",
+          "cache_path": "data\\image\\emoji_stats\\b43f5ee20820c4b26dc5a2aadb3012aa.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T12:46:17.005569"
+        },
+        "19436045a0d3abd413e5f89116017b60.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSOcBx0jHPbAbvh3azvauGWwuYR_BjyEiD_CiiZx_HZmeCPAzIEcHJvZFCAvaMBWhDG3VDpUdd2zR66E-Gzj8Z2egImW4IBAm5q&rkey=CAQSMO-mALHeGub7vG3M1mHu5bgw1e5Yfo7vOo6VhMNiEuYbapDbu9jABb1MSTTVh1D-dw",
+          "cache_path": "data\\image\\emoji_stats\\19436045a0d3abd413e5f89116017b60.jpg",
+          "daily_counts": {
+            "2025-09-18": 2
+          },
+          "last_used": "2025-09-18T00:26:22.534749"
+        }
+      },
+      "3155296729": {
+        "6c6cdb347d4277bdb86ff9970ff2e6ec.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTqnwmoxsH2s_I5ByPWq2hYaJhjGxiWygIg_woohOaC_IngjwMyBHByb2RQgL2jAVoQOG5cLeDb_RPNZHUmqacfK3oC1IuCAQJuag&rkey=CAQSMFJUzvYWl53DM8PnX3suCLgIGMjZmuRaSmLrNAbbCV2MOuxbzyDkhX9cGCSNKCnWTw",
+          "cache_path": "data\\image\\emoji_stats\\6c6cdb347d4277bdb86ff9970ff2e6ec.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T23:09:30.233488"
+        },
+        "6d2641cdf8a512fe406d0aad0a2c8383.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTmJxlNz1slpkLwJ-Lgpx-ROUPzCRjSowcg_woos5GLgYrgjwMyBHByb2RQgL2jAVoQmdVwtkNKiPsoKv-V_DqkFHoC-OiCAQJuag&rkey=CAQSMFJUzvYWl53DM8PnX3suCLgIGMjZmuRaSmLrNAbbCV2MOuxbzyDkhX9cGCSNKCnWTw",
+          "cache_path": "data\\image\\emoji_stats\\6d2641cdf8a512fe406d0aad0a2c8383.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T23:09:40.804317"
+        }
+      }
+    },
+    "678640722": {
+      "632861256": {
+        "cd31ed0ae49d4a70de4e5e6a20b1cdb0.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSWC2T_7HGk-B-8ROTbrZ6i-ejcpBi-xgIg_woox9afxILdjwMyBHByb2RQgL2jAVoQm1l2YboGaMC6cOIehOLAE3oCK7aCAQJuag&rkey=CAESMG8t4_0cPC5il3MheRVTGp5I6UjgKXmE8CuDh3dZpSUFMDHdggWgLibsB8xWvqJdgw",
+          "cache_path": "data\\image\\emoji_stats\\cd31ed0ae49d4a70de4e5e6a20b1cdb0.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T17:58:15.578427"
+        },
+        "39893e3ced959f09fa59e78704d46eb1.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTf1ouqOgAzuGLRLFn85PoXYavNvxjR8AYg_woo7NLQ8oXdjwMyBHByb2RQgL2jAVoQO9dyWjhwAKBnu-rDZPxupHoCzeiCAQJuag&rkey=CAESMG8t4_0cPC5il3MheRVTGp5I6UjgKXmE8CuDh3dZpSUFMDHdggWgLibsB8xWvqJdgw",
+          "cache_path": "data\\image\\emoji_stats\\39893e3ced959f09fa59e78704d46eb1.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T18:13:18.127718"
+        },
+        "f2bf118993b5acf5f97466641b9f756a.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTrj3qF6hf0Eo8ug50TVeUIcSWCjRiZogkg_woolvvyn4bdjwMyBHByb2RQgL2jAVoQ6bmsGUa5B6AzW0qsLQhtznoCQY-CAQJuag&rkey=CAESMG8t4_0cPC5il3MheRVTGp5I6UjgKXmE8CuDh3dZpSUFMDHdggWgLibsB8xWvqJdgw",
+          "cache_path": "data\\image\\emoji_stats\\f2bf118993b5acf5f97466641b9f756a.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T18:14:53.601630"
+        },
+        "4fbf33ecf9152713652d57955986c7f2.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQpKB2wYXV_eoDvJ5C11iGT-eYClRj1vwUg_woo5NP3s4bdjwMyBHByb2RQgL2jAVoQEiHowK7o_Pi8HuzQf2DhqXoCHdmCAQJuag&rkey=CAESMG8t4_0cPC5il3MheRVTGp5I6UjgKXmE8CuDh3dZpSUFMDHdggWgLibsB8xWvqJdgw",
+          "cache_path": "data\\image\\emoji_stats\\4fbf33ecf9152713652d57955986c7f2.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T18:15:35.201250"
+        },
+        "36a5cc60856ea2e2fc3c17bebf14b955.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQCQWpTIdhjcRcjpUYq8lDbNibmSxjQwwEg_woow-m484bdjwMyBHByb2RQgL2jAVoQtd_ODmeSEnHIeiKAosW7CnoCi-qCAQJuag&rkey=CAESMG8t4_0cPC5il3MheRVTGp5I6UjgKXmE8CuDh3dZpSUFMDHdggWgLibsB8xWvqJdgw",
+          "cache_path": "data\\image\\emoji_stats\\36a5cc60856ea2e2fc3c17bebf14b955.jpg",
+          "daily_counts": {
+            "2025-09-16": 1,
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T18:10:35.170024"
+        },
+        "6a207d70c1b1af72982dfcc631e13b58.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQ1h0Gz6plCgZcIXk-v8eM-XY3fMhjqqQYg_wootvDm8IjdjwMyBHByb2RQgL2jAVoQL2wVJYU1vf4gv3wtwUEY_XoCiZmCAQJuag&rkey=CAESMG8t4_0cPC5il3MheRVTGp5I6UjgKXmE8CuDh3dZpSUFMDHdggWgLibsB8xWvqJdgw",
+          "cache_path": "data\\image\\emoji_stats\\6a207d70c1b1af72982dfcc631e13b58.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T18:26:39.636300"
+        },
+        "de8a3d42c07b0bdd8e78e6c8c1a37868.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTyMRt8F2_byHbabbyBs75FmwQ-4BiWiAEg_wooyeyK14ndjwMyBHByb2RQgL2jAVoQGSYdlfBwMqexTVxLc_enS3oCxwaCAQJuag&rkey=CAESMG8t4_0cPC5il3MheRVTGp5I6UjgKXmE8CuDh3dZpSUFMDHdggWgLibsB8xWvqJdgw",
+          "cache_path": "data\\image\\emoji_stats\\de8a3d42c07b0bdd8e78e6c8c1a37868.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T18:30:14.272075"
+        },
+        "daf3147068796f3ea09964d26ee56907.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRdfTelfYIW-zbtO0DHJG2g8hmMeRjNnwcg_wooj-eRmqvejwMyBHByb2RQgL2jAVoQQ9YhtxnWrOXJfCSVdleGMnoCVz2CAQJuag&rkey=CAMSMIjDGx33BXlM0Pr3v8zXqiyEMdrbBqoCvSEqcIGr7VOaaopPfpDTX7QJACujbRymYQ",
+          "cache_path": "data\\image\\emoji_stats\\daf3147068796f3ea09964d26ee56907.jpg",
+          "daily_counts": {
+            "2025-09-17": 1,
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T09:43:33.731056"
+        },
+        "74bed5c14fb252f6d9d7922f4e22c543.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRe9-OQw7GTWezU4oQmUr549prZAxjR-Acg_woo2YXHs8PfjwMyBHByb2RQgL2jAVoQr8Arzg8SMGEH2g4jbKqiAXoCivuCAQJuag&rkey=CAMSMPJVpevNVbgxWVe-rS8l6g9EAtu1RwK6jgRYTY-5aDduAs5conJSWVEKc7ewJtq_0A",
+          "cache_path": "data\\image\\emoji_stats\\74bed5c14fb252f6d9d7922f4e22c543.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T17:53:48.245786"
+        },
+        "9a498c856913248d79a04d62dbfcbadb.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRIK2Ui29f0PvyOaVzYAE4Yo6sHPBip9QYg_woo8rfOhezgjwMyBHByb2RQgL2jAVoQUS74QaDCNznVwwpsYpEdunoC43qCAQJuag&rkey=CAISMAvS53AB-QqyR3kvUxmwXiP2erGXrjVNOKxeN6fRYcYrQvuGdsQarUYpHMGOj4kvuA",
+          "cache_path": "data\\image\\emoji_stats\\9a498c856913248d79a04d62dbfcbadb.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T06:28:16.747511"
+        },
+        "c0643b1b9670e3812d4928ea50cdcf86.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRJweXIEsNpjmE_PnzrCvtijC85WBiaygcg_woo5PHrtZbhjwMyBHByb2RQgL2jAVoQ2mWAYxXymyK73NYk-mCgLnoC-p-CAQJuag&rkey=CAMSMLpxQWtfgiBIEu7HBFN3NfpxKfMax2kATFWzDJYlqvYA0NWJc5RQRa_hNc6_09B63w",
+          "cache_path": "data\\image\\emoji_stats\\c0643b1b9670e3812d4928ea50cdcf86.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T09:37:52.177785"
+        }
+      },
+      "864772045": {
+        "c5ac08aa435b02b999a04a3d6c7ceb2b.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQwZ3rJ4aMYyI-WD1e3_osIfZT5PRi43QIg_woow62wmYjdjwMyBHByb2RQgL2jAVoQc9XPfY4kQOPouWG5djKhhXoCog2CAQJneg&rkey=CAESMG8t4_0cPC5il3MheRVTGp5I6UjgKXmE8CuDh3dZpSUFMDHdggWgLibsB8xWvqJdgw",
+          "cache_path": "data\\image\\emoji_stats\\c5ac08aa435b02b999a04a3d6c7ceb2b.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T18:23:36.489346"
+        },
+        "23fa859573a58825c908086bd4961dd0.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQ34L0GKeUX9114Za4R1TMJ0MKpWRjRbCD_CiiavsLOnd-PAzIEcHJvZFCAvaMBWhBS7PvekRZ-zEGumGQs0e0OegLKUIIBAmd6&rkey=CAESMLsiyhxB_ID4MG2ZIJJahNoaX8-w7doplDLuUcZgs5M_4V9DKglIQ5e9hR34MwPrLQ",
+          "cache_path": "data\\image\\emoji_stats\\23fa859573a58825c908086bd4961dd0.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T15:04:43.143061"
+        },
+        "657d3a76a3336d2485f320980ebd68f4.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSm4-tQv2wJPcEJjqEYwh-YJbiFIxioDiD_Ciipn4LGut-PAzIEcHJvZFCAvaMBWhDCSJKleQNbvs5HK3c14UvXegLtWIIBAmd6&rkey=CAMSMPJVpevNVbgxWVe-rS8l6g9EAtu1RwK6jgRYTY-5aDduAs5conJSWVEKc7ewJtq_0A",
+          "cache_path": "data\\image\\emoji_stats\\657d3a76a3336d2485f320980ebd68f4.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T17:14:10.200902"
+        },
+        "ffb7a5d2047cca19707308dc0db8c808.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSBkRBpsBKysqLduJySFD9Pn_XvMxjUyzkg_woo8Liz-ZvhjwMyBHByb2RQgL2jAVoQkuOnBkzjdxTatdtZZWzIsXoCcbWCAQJneg&rkey=CAMSMLpxQWtfgiBIEu7HBFN3NfpxKfMax2kATFWzDJYlqvYA0NWJc5RQRa_hNc6_09B63w",
+          "cache_path": "data\\image\\emoji_stats\\ffb7a5d2047cca19707308dc0db8c808.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T10:02:35.645689"
+        },
+        "91b099afdab98ab87c21a38a45b960ab.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRbMOs6QmmHpx4zPvQ1pXuryuS0nRjo_Aog_wooiqPHmKDhjwMyBHByb2RQgL2jAVoQehIc0o2rO_SagIIhxrhRrHoClOGCAQJneg&rkey=CAMSMK_YQg_-W1tkdoXE1M_aVYaEVyGXf4fFV8IB8hI-igkl45v7HJXENfxvlBN2Jq3hdA",
+          "cache_path": "data\\image\\emoji_stats\\91b099afdab98ab87c21a38a45b960ab.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T10:21:34.908004"
+        }
+      },
+      "391173332": {
+        "8f91c3f56f296605b80e01fe4bbffa86.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhR9f9e54UJPX3usqut9oSDASDMUlxjtGyD_CiiPkaT9id2PAzIEcHJvZFCAvaMBWhBUy3QlHgTLvFLuO1q2Pe9megKmg4IBAmd6&rkey=CAESMG8t4_0cPC5il3MheRVTGp5I6UjgKXmE8CuDh3dZpSUFMDHdggWgLibsB8xWvqJdgw",
+          "cache_path": "data\\image\\emoji_stats\\8f91c3f56f296605b80e01fe4bbffa86.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T18:31:55.368430"
+        },
+        "bbb1503f3d69c92ede571a19105df92e.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSLTsaTzABj4Lmq_uKLva6es8ejzBjBKSD_Ciiq0KuSit-PAzIEcHJvZFCAvaMBWhA0yD23WLGlz3yolEWov3cXegJ9kIIBAm5q&rkey=CAISMLB5InD9FCX3oKQ5YeMFVlv9xoXLHyrCWtu9s8oJfsHfulhZhWC23ekTAGODoMO8Tw",
+          "cache_path": "data\\image\\emoji_stats\\bbb1503f3d69c92ede571a19105df92e.jpg",
+          "daily_counts": {
+            "2025-09-17": 2
+          },
+          "last_used": "2025-09-17T17:10:08.256215"
+        },
+        "171af6001befedf81a7a5dab57081800.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSh1_jcxpq9dm2B1lT60nDBXxMnWxi-fiD_CijO1den8OCPAzIEcHJvZFCAvaMBWhArLgwZRaXi73PJWis80J77egIPrIIBAm5q&rkey=CAISMAvS53AB-QqyR3kvUxmwXiP2erGXrjVNOKxeN6fRYcYrQvuGdsQarUYpHMGOj4kvuA",
+          "cache_path": "data\\image\\emoji_stats\\171af6001befedf81a7a5dab57081800.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T06:47:21.671963"
+        },
+        "a0518108ebe7b5b840a6b68afed047ce.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQp0iYtgrgjVqblwRReSTiOFCikDBjAxBYg_wooh92RvZvhjwMyBHByb2RQgL2jAVoQ3-VDpqjkPXmRU2hgd-MKanoCvHyCAQJuag&rkey=CAMSMLpxQWtfgiBIEu7HBFN3NfpxKfMax2kATFWzDJYlqvYA0NWJc5RQRa_hNc6_09B63w",
+          "cache_path": "data\\image\\emoji_stats\\a0518108ebe7b5b840a6b68afed047ce.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T10:00:29.533519"
+        }
+      },
+      "1874264047": {
+        "97f928c1ac31fe89104e2beabcf59d78.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQ2VBw-J_TZuiRuWfK1si8L6w5BKBjCqxkg_wooteSkgLjdjwMyBHByb2RQgL2jAVoQmeSghKkG5VraIjeA40sbhHoCCviCAQJuag&rkey=CAESME4K6HocmQAetQSNTIUvEGDGOKp93c-EygUkhLH0xTjAVJZgH_316xtJ8GQDB0oQhQ",
+          "cache_path": "data\\image\\emoji_stats\\97f928c1ac31fe89104e2beabcf59d78.jpg",
+          "daily_counts": {
+            "2025-09-16": 2,
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T08:23:17.994906"
+        },
+        "c061906e9c7c4bf387101ad4e8d8e661.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRA5D6n3Lj5Ph-NClnZGDGbrjdTlBjB02Ig_woox43I98bejwMyBHByb2RQgL2jAVoQXI46a54c2Gp7sCY7A9ZVAXoCe0OCAQJuag&rkey=CAESMFpYm-0ECtC5cRDWZpywBmaLz29NQM8UYV-GvH7aN8p2pXdw1ptfuDyh7ud93Z6xfw",
+          "cache_path": "data\\image\\emoji_stats\\c061906e9c7c4bf387101ad4e8d8e661.jpg",
+          "daily_counts": {
+            "2025-09-17": 4
+          },
+          "last_used": "2025-09-17T17:27:27.096099"
+        }
+      },
+      "942781037": {
+        "cf28ca78fad67a5c45d69baeb2119614.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQPvy1QCH91MCqt-fUit0iQRiQ57Bj1rI8CIP8KKPv3wJ_C3Y8DMgRwcm9kUIC9owFaEGJM3hZ5l20luZtpjU-FwSB6AgPUggECbmo&rkey=CAMSMIx-HKBWA0jic49eMLbl1fyokFnd4XlnonUbSafkSFHQNG-HQMXpMlT7nOwxAQhRzA",
+          "cache_path": "data\\image\\emoji_stats\\cf28ca78fad67a5c45d69baeb2119614.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T22:43:19.077948"
+        },
+        "ffb7a5d2047cca19707308dc0db8c808.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSBkRBpsBKysqLduJySFD9Pn_XvMxjUyzkg_woohf25sb7ejwMyBHByb2RQgL2jAVoQssJfez8bSWBrLVHGLk9LsXoCNeuCAQJuag&rkey=CAESMHJ7kNbUCXQdwR4FMpQ7dOzq3Urdbql91T1DBBRt0jrwtBnGW192CJd8hEOzkL5rTA",
+          "cache_path": "data\\image\\emoji_stats\\ffb7a5d2047cca19707308dc0db8c808.jpg",
+          "daily_counts": {
+            "2025-09-17": 4,
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T10:01:59.468005"
+        },
+        "9dec1d45d6fcbb11cb153beed9047d51.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQMuyYwWm9Dr9ijBT3BHwLA_qkDHhjw5hUg_wooxpv02JbhjwMyBHByb2RQgL2jAVoQP5iebfsz-xcc8d8Nzh3LVXoCS2KCAQJuag&rkey=CAMSMLpxQWtfgiBIEu7HBFN3NfpxKfMax2kATFWzDJYlqvYA0NWJc5RQRa_hNc6_09B63w",
+          "cache_path": "data\\image\\emoji_stats\\9dec1d45d6fcbb11cb153beed9047d51.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T09:39:05.582607"
+        },
+        "a0518108ebe7b5b840a6b68afed047ce.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQp0iYtgrgjVqblwRReSTiOFCikDBjAxBYg_wookdzOgJvhjwMyBHByb2RQgL2jAVoQaDK-sD9zlbW_zWsJgjAhQ3oCixGCAQJuag&rkey=CAMSMLpxQWtfgiBIEu7HBFN3NfpxKfMax2kATFWzDJYlqvYA0NWJc5RQRa_hNc6_09B63w",
+          "cache_path": "data\\image\\emoji_stats\\a0518108ebe7b5b840a6b68afed047ce.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T09:58:22.450704"
+        }
+      },
+      "370615667": {
+        "debefa1ff5718bb9aea2693e26b5f972.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTjVfem7P72sFghoFuL3ws8P_5iOxjixDUg_woo07WI4LzejwMyBHByb2RQgL2jAVoQI5fm5-kQmz2gvRiqr3IInnoCXV2CAQJuag&rkey=CAESMHJ7kNbUCXQdwR4FMpQ7dOzq3Urdbql91T1DBBRt0jrwtBnGW192CJd8hEOzkL5rTA",
+          "cache_path": "data\\image\\emoji_stats\\debefa1ff5718bb9aea2693e26b5f972.jpg",
+          "daily_counts": {
+            "2025-09-17": 2
+          },
+          "last_used": "2025-09-17T08:56:13.950738"
+        },
+        "c061906e9c7c4bf387101ad4e8d8e661.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRA5D6n3Lj5Ph-NClnZGDGbrjdTlBjB02Ig_woom96Ovr3ejwMyBHByb2RQgL2jAVoQbaG8C0eDlajsiM_ZZz-Fr3oCE4yCAQJuag&rkey=CAESMHJ7kNbUCXQdwR4FMpQ7dOzq3Urdbql91T1DBBRt0jrwtBnGW192CJd8hEOzkL5rTA",
+          "cache_path": "data\\image\\emoji_stats\\c061906e9c7c4bf387101ad4e8d8e661.jpg",
+          "daily_counts": {
+            "2025-09-17": 2
+          },
+          "last_used": "2025-09-17T08:23:31.908845"
+        },
+        "70956b823d66b3c7635663381b6c8169.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSwGU4w5fuOAFjZnXiPbtzHS1S30xiixQkg_woo5sf0wr3ejwMyBHByb2RQgL2jAVoQoJXA5cQU1CSU--BaDBM673oChy6CAQJuag&rkey=CAESMHJ7kNbUCXQdwR4FMpQ7dOzq3Urdbql91T1DBBRt0jrwtBnGW192CJd8hEOzkL5rTA",
+          "cache_path": "data\\image\\emoji_stats\\70956b823d66b3c7635663381b6c8169.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T07:54:49.320076"
+        },
+        "346bbbb8ed746d125a88d8ebed63e60d.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTvJDgjhzdBjmbuN7NJjg1pn4HM4RiU2B8g_woo2drI3NTejwMyBHByb2RQgL2jAVoQvKuxsiOmnrnoo_mdgIhmU3oCQjmCAQJuag&rkey=CAISMCpjfkdd4F72MvWy-8whPQfxblyXq4RdLMrqZjMrM2lrkjTjNZo-PfcOd5uyHvEmyw",
+          "cache_path": "data\\image\\emoji_stats\\346bbbb8ed746d125a88d8ebed63e60d.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T09:38:37.243863"
+        }
+      },
+      "262229759": {
+        "548d6b5b5500a308faec54df8175ad86.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRmD8KjKgLRkcx_byaZ4PyFJAtBOBiHkwEg_woolZbw1r3ejwMyBHByb2RQgL2jAVoQw6ky8ZHQgjLSi6V8kv06iXoCyI6CAQJneg&rkey=CAESMHJ7kNbUCXQdwR4FMpQ7dOzq3Urdbql91T1DBBRt0jrwtBnGW192CJd8hEOzkL5rTA",
+          "cache_path": "data\\image\\emoji_stats\\548d6b5b5500a308faec54df8175ad86.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T07:55:31.289077"
+        },
+        "ccd287f855634f2e9d0686212ea1fc16.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQy4DH5SOle8u28VQ1l6eFrg0qULRjhzwIg_wooyO78vZzfjwMyBHByb2RQgL2jAVoQpSOnSnnW0kaZXQbtAj9T4noCQ82CAQJneg&rkey=CAESMLsiyhxB_ID4MG2ZIJJahNoaX8-w7doplDLuUcZgs5M_4V9DKglIQ5e9hR34MwPrLQ",
+          "cache_path": "data\\image\\emoji_stats\\ccd287f855634f2e9d0686212ea1fc16.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T14:59:40.513170"
+        },
+        "23fa859573a58825c908086bd4961dd0.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQ34L0GKeUX9114Za4R1TMJ0MKpWRjRbCD_CijStObfnN-PAzIEcHJvZFCAvaMBWhD763Ho6XWOG7D9kgONLrAtegLexIIBAmd6&rkey=CAESMLsiyhxB_ID4MG2ZIJJahNoaX8-w7doplDLuUcZgs5M_4V9DKglIQ5e9hR34MwPrLQ",
+          "cache_path": "data\\image\\emoji_stats\\23fa859573a58825c908086bd4961dd0.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T15:00:51.314441"
+        }
+      },
+      "1741809231": {
+        "657d3a76a3336d2485f320980ebd68f4.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSm4-tQv2wJPcEJjqEYwh-YJbiFIxioDiD_CijI9dSfud-PAzIEcHJvZFCAvaMBWhBsav9_GEtgt_fR0YyOn-xCegLpOoIBAm5q&rkey=CAMSMPJVpevNVbgxWVe-rS8l6g9EAtu1RwK6jgRYTY-5aDduAs5conJSWVEKc7ewJtq_0A",
+          "cache_path": "data\\image\\emoji_stats\\657d3a76a3336d2485f320980ebd68f4.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T17:08:21.613560"
+        }
+      },
+      "835823635": {
+        "7cd07f1ee26f7c4a283217908a981640.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRz4vfLybapCgCeDM0dMQM2wV7_AxjyIiD_CijelbbR_OCPAzIEcHJvZFCAvaMBWhAt_Hgb2oRDL0uqKParYKIsegJKyYIBAm5q&rkey=CAQSMElJqVDzPD10lbdPXx7KCIJgZFvZARRNlbqIR46OAE86LzFydnXFsyB3DPqrH6jiDg",
+          "cache_path": "data\\image\\emoji_stats\\7cd07f1ee26f7c4a283217908a981640.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T07:42:30.544603"
+        }
+      },
+      "3152008483": {
+        "913b0ac10d28a9dc18fd3d6a3a920253.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSskD3qaJNK5xD_dD180Ux3VoruxBjr8Vkg_woo64rL4IXhjwMyBHByb2RQgL2jAVoQIEwAC6NvJONqPM3ohcGxK3oCJjqCAQJneg&rkey=CAISMJ2F5L110VphqwxulmG1YIJcVj4CJYDIf0o2CL5_j_2rBQDfO_f3oM_j26ll8mf6eQ",
+          "cache_path": "data\\image\\emoji_stats\\913b0ac10d28a9dc18fd3d6a3a920253.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T08:23:18.285281"
+        }
+      },
+      "1057901286": {
+        "690125b9632351a5a5260651b21e9b83.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQrpINlP4tDayySdJXu0jE21U3hHhiFZiD_CijZ6qD4m-GPAzIEcHJvZFCAvaMBWhBWrqpu5Fb-ylURewnQ2S_xegLPfYIBAm5q&rkey=CAMSMLpxQWtfgiBIEu7HBFN3NfpxKfMax2kATFWzDJYlqvYA0NWJc5RQRa_hNc6_09B63w",
+          "cache_path": "data\\image\\emoji_stats\\690125b9632351a5a5260651b21e9b83.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T10:02:33.543440"
+        }
+      }
+    },
+    "971599245": {
+      "1500973063": {
+        "6e56f499c7025916fd75e91c893e2738.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQ0gGOCyOs5r07cZWD-gZ8YDFe9FRip6AIg_woo9u-2wvvcjwMyBHByb2RQgL2jAVoQJjjw_W5Na6_xuqfLsJg2CnoCt8WCAQJneg&rkey=CAMSMGQ6DOKEkoaMnfrrrBlHaN_reIfEmxQrIiFsPFddxZFNgtO6hgx9z2xU_OQ639j1Pg",
+          "cache_path": "data\\image\\emoji_stats\\6e56f499c7025916fd75e91c893e2738.jpg",
+          "daily_counts": {
+            "2025-09-16": 3,
+            "2025-09-17": 13,
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T01:01:34.119026"
+        },
+        "472d84f17f59bc959dd12dbf51175976.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTvY1LfPrS7NhKVhkA6rdHy8lxD5RihNCD_Cij4n86ysd-PAzIEcHJvZFCAvaMBWhDKxKmDYm2CwRMcYMUD-5VtegKiLYIBAmd6&rkey=CAISMKNbiQFfCdf9uWEZ8ONki0bNvx5rbV8L_DD5WBeKJ_ftAJ3cq8SKYqCMJck9VTkwoQ",
+          "cache_path": "data\\image\\emoji_stats\\472d84f17f59bc959dd12dbf51175976.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T16:33:13.335142"
+        },
+        "c90b5ada4ce4e8af598a010167bae3dc.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRWGtJuoHpiYUOlMTu2206WNcK9hRjulAEg_woovb6SuMDfjwMyBHByb2RQgL2jAVoQ9g-diqrwNqFy1A5SoiTEDnoCDBaCAQJneg&rkey=CAMSMPJVpevNVbgxWVe-rS8l6g9EAtu1RwK6jgRYTY-5aDduAs5conJSWVEKc7ewJtq_0A",
+          "cache_path": "data\\image\\emoji_stats\\c90b5ada4ce4e8af598a010167bae3dc.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T17:40:31.750949"
+        },
+        "238eae2799f9edbb308fb1d366585d2a.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhR6K0jlNwnqWnaohTnYMhUeMjTPERi9ih8g_woo_qWV4svfjwMyBHByb2RQgL2jAVoQFRQ7PA20N51SvneY7j9z-XoCBHmCAQJneg&rkey=CAESMIHOXdWyMAB9gCQQ08VwdGVr5Snh_VDYPJW5SerG0-uoTzWQpKvshw1HfOzZiPV9Hw",
+          "cache_path": "data\\image\\emoji_stats\\238eae2799f9edbb308fb1d366585d2a.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T18:31:12.677716"
+        },
+        "25ca4459b6c4315534b5f95062da4b60.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQj2xnAB568h_taQ2IUj_eXEePM0hjMw5sEIP8KKNL-3MzU348DMgRwcm9kUIC9owFaEMl_8L9kPbRJSqTfdfG-Ipt6AoqMggECZ3o&rkey=CAESMMDq3OJk_SPlnSxkhmEeFTOPhCaoZTcTg9XFkgtpM7PC_GrRpb06IDieSgKX7MrTCg",
+          "cache_path": "data\\image\\emoji_stats\\25ca4459b6c4315534b5f95062da4b60.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T19:10:43.750145"
+        },
+        "4deb92a782e83761e4bf9489aa97f930.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhT4PQAHE9agFPfKE9nuzecORz9-MhjQkCEg_woo3ZnQ8LngjwMyBHByb2RQgL2jAVoQDK3xMH1phQhqIRTFfyL2L3oCZjiCAQJneg&rkey=CAISMIIl3rb9Rl8o9XXHlzP7s7okh7jcqOdztgUotZJ8NjGPph970NMDkLaaa_Qn0ZP_Gw",
+          "cache_path": "data\\image\\emoji_stats\\4deb92a782e83761e4bf9489aa97f930.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T02:43:50.912100"
+        }
+      },
+      "2210805169": {
+        "d545bed346b72d4b8d2f2d29b88e2b51.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSYour0iIwXNKVNWWpIu7dfqKNBtBjogwkg_woo3PLEl97ejwMyBHByb2RQgL2jAVoQ86AGpc6HPHgxHGhfZgbURnoCWhWCAQJneg&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\d545bed346b72d4b8d2f2d29b88e2b51.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:20:56.487074"
+        },
+        "5ad24c4602e03a4ccfa44f51c12fd331.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRRJsZNV2VdpDZ_ll6MzO1QAbn1QxixsBEg_woo2rX1p_XejwMyBHByb2RQgL2jAVoQVMImkks8h9ZsQXxRvEwzFXoCVq-CAQJneg&rkey=CAQSMPmYTxY6F1egJvqu56KIxe9vZFrOS2q9lqJJrGBdqbSvnw_x9ByoOj8gyZ081Kxo0w",
+          "cache_path": "data\\image\\emoji_stats\\5ad24c4602e03a4ccfa44f51c12fd331.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T12:04:24.786152"
+        },
+        "c53174991306323556b54e47081a872e.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSoRJVGDTlSJEFh7jhIIcQZ8F_3uhjPoL0EIP8KKP2m97r13o8DMgRwcm9kUIC9owFaEC0o_jHexh9Ak02nigaXK8J6AoeDggECZ3o&rkey=CAQSMPmYTxY6F1egJvqu56KIxe9vZFrOS2q9lqJJrGBdqbSvnw_x9ByoOj8gyZ081Kxo0w",
+          "cache_path": "data\\image\\emoji_stats\\c53174991306323556b54e47081a872e.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T12:05:05.033107"
+        }
+      },
+      "734271190": {
+        "18ae1ca52e4323677d46ff81f857b318.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRmZk1Zg0n6CPfciBZSK99K147wpRiueyD_Cijk8--M396PAzIEcHJvZFCAvaMBWhCI7QJC7tmDCke_XmpOAXX-egKRIYIBAmd6&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\18ae1ca52e4323677d46ff81f857b318.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:25:02.706639"
+        },
+        "2817602c327429018bb836cbbfae4256.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRQV3VOQtBHECtReSGrYiQtbZPn5RjlrDUg_woorZ6J0N_ejwMyBHByb2RQgL2jAVoQ4q7_kiIOgtiTSAug2okaaXoC7qGCAQJneg&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\2817602c327429018bb836cbbfae4256.jpg",
+          "daily_counts": {
+            "2025-09-17": 2
+          },
+          "last_used": "2025-09-17T18:28:51.031385"
+        },
+        "114a00f0976c6d7caf01a8d1af04c14d.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSPcZWDOGov3W5Ee2Q6QZLKMz5IVxi97QQg_wooyZnQiuDejwMyBHByb2RQgL2jAVoQ_mesAwKegg7tSQHFxOu-KHoC4XyCAQJneg&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\114a00f0976c6d7caf01a8d1af04c14d.jpg",
+          "daily_counts": {
+            "2025-09-17": 7
+          },
+          "last_used": "2025-09-17T12:05:27.056986"
+        },
+        "ea5df82390878ca561cdc6b05fb6cb2c.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQzhlUnOVr0lkJlFU0sX8V20z1RWxidyhgg_woo-YuZr-DejwMyBHByb2RQgL2jAVoQpLdKSqmjk4UPbOJz53GZG3oCmyCCAQJneg&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\ea5df82390878ca561cdc6b05fb6cb2c.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:30:43.028333"
+        },
+        "0037199fcbceb01d31383712fd84aa25.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhR-tnWVcanS0u1j2PQl0MqimEpakRjj6QQg_woonI_w2eDejwMyBHByb2RQgL2jAVoQpeqpQfMeiTIv-1ON8AxhonoCD3OCAQJneg&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\0037199fcbceb01d31383712fd84aa25.jpg",
+          "daily_counts": {
+            "2025-09-17": 2
+          },
+          "last_used": "2025-09-17T18:32:52.845722"
+        },
+        "89458c614d2422b7c55ae79d18943261.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSuVVfzizo1FdjvgC0UVTw1GVP_XBjdrwMg_woolfOLlOHejwMyBHByb2RQgL2jAVoQwJXsjEzSbreRekIbdfciSnoCq6CCAQJneg&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\89458c614d2422b7c55ae79d18943261.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:34:14.760126"
+        },
+        "beb7732c6582a439070c9071aa8204c7.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhR95UTPaeXlxtsNsLXq4ULrIG4eCxiupgIg_wooiKzSleHejwMyBHByb2RQgL2jAVoQV4gcYYU68dK9ylqREvpRTXoCsBOCAQJneg&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\beb7732c6582a439070c9071aa8204c7.jpg",
+          "daily_counts": {
+            "2025-09-17": 2
+          },
+          "last_used": "2025-09-17T10:35:10.137778"
+        },
+        "808c89e57283b6d511361156f63974d2.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhS5GKPToBr7T4LVt2e55mSjxwdiDRji5wIg_wooxMmqqeXejwMyBHByb2RQgL2jAVoQonlSyQT7PUEbRcwNnuBTYXoC-E-CAQJneg&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\808c89e57283b6d511361156f63974d2.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:52:52.871568"
+        },
+        "353dd21c8317d65527141c79bf35feb8.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQLtdDA6duD-4fD2sRP-tZVbl9pmBjtxQQg_wookbrzwozfjwMyBHByb2RQgL2jAVoQuyOAWDuU1wyxzTVZvR3AxHoCaQyCAQJneg&rkey=CAISMLB5InD9FCX3oKQ5YeMFVlv9xoXLHyrCWtu9s8oJfsHfulhZhWC23ekTAGODoMO8Tw",
+          "cache_path": "data\\image\\emoji_stats\\353dd21c8317d65527141c79bf35feb8.jpg",
+          "daily_counts": {
+            "2025-09-17": 4
+          },
+          "last_used": "2025-09-17T18:58:40.137538"
+        },
+        "25ca4459b6c4315534b5f95062da4b60.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQj2xnAB568h_taQ2IUj_eXEePM0hjMw5sEIP8KKKDMpoGW348DMgRwcm9kUIC9owFaEGVopiEiWQ1JLlNIRHeHPHh6Ao9VggECZ3o&rkey=CAESMFsKc_U0HzsdRCxRxususZMn8HuBUN5Ddr9DologE6doXQ7H8i-KkM8-6yxlvbMZyw",
+          "cache_path": "data\\image\\emoji_stats\\25ca4459b6c4315534b5f95062da4b60.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T14:30:42.621657"
+        },
+        "36db5158883cd716194e4d05b7011baf.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSHh9a2ImwZVh8c_thQ-DMdCU2HFRjgiAgg_woohKCkxKrfjwMyBHByb2RQgL2jAVoQVufNRKFiUwH4oPsaXeEK3HoCduCCAQJneg&rkey=CAISMKNbiQFfCdf9uWEZ8ONki0bNvx5rbV8L_DD5WBeKJ_ftAJ3cq8SKYqCMJck9VTkwoQ",
+          "cache_path": "data\\image\\emoji_stats\\36db5158883cd716194e4d05b7011baf.jpg",
+          "daily_counts": {
+            "2025-09-17": 2
+          },
+          "last_used": "2025-09-17T16:21:34.348551"
+        },
+        "59a1d5c8b2ac9297357f3fac85e70787.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRl4BuPGLlucFkqNVnAJHtDufLIVxjj9AQg_woojuPOr6zfjwMyBHByb2RQgL2jAVoQk3IkmjpxhLvpxcWM1xiyZ3oCbWiCAQJneg&rkey=CAISMKNbiQFfCdf9uWEZ8ONki0bNvx5rbV8L_DD5WBeKJ_ftAJ3cq8SKYqCMJck9VTkwoQ",
+          "cache_path": "data\\image\\emoji_stats\\59a1d5c8b2ac9297357f3fac85e70787.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T16:10:44.985501"
+        },
+        "7c8d3a7ecb42265ea521a4b2b909fc6a.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhT0F092qjWL74n4fbz3cXJkNQnFXBj2sAEg_woo7aLf09HfjwMyBHByb2RQgL2jAVoQxgXwQ0-LL5Q6PcCTHkZKR3oClqmCAQJneg&rkey=CAESMIHOXdWyMAB9gCQQ08VwdGVr5Snh_VDYPJW5SerG0-uoTzWQpKvshw1HfOzZiPV9Hw",
+          "cache_path": "data\\image\\emoji_stats\\7c8d3a7ecb42265ea521a4b2b909fc6a.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T18:57:32.923831"
+        }
+      },
+      "969286467": {
+        "5954b8b5ca054a5b5e12e8ce297db080.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRYYwA4wDb7uJonbmoiYA61890HXBjSbyD_Ciinkbr-396PAzIEcHJvZFCAvaMBWhA3JBVicQee5xCRj-AKmN7qegLhrIIBAmd6&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\5954b8b5ca054a5b5e12e8ce297db080.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:29:00.887489"
+        },
+        "7389e3cf74ae48d5dda672056720f98c.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTbivb3q4fTHwcH82YlD3_FRK1sShj9uAUg_woo682E4fXejwMyBHByb2RQgL2jAVoQSEk43wBiXQ2aIk_U4kGFCnoC1_iCAQJneg&rkey=CAQSMPmYTxY6F1egJvqu56KIxe9vZFrOS2q9lqJJrGBdqbSvnw_x9ByoOj8gyZ081Kxo0w",
+          "cache_path": "data\\image\\emoji_stats\\7389e3cf74ae48d5dda672056720f98c.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T12:06:24.675130"
+        },
+        "353dd21c8317d65527141c79bf35feb8.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQLtdDA6duD-4fD2sRP-tZVbl9pmBjtxQQg_woo8s2F2__ejwMyBHByb2RQgL2jAVoQhkMg462crdXwUgaY6MmDPnoCa6mCAQJneg&rkey=CAISMBsK2sAKTu_hB7Sq7DMufV4UaXw6q_49Hnu_X6Od7IAWRfAhBmMXUTDepwc3CZzY1A",
+          "cache_path": "data\\image\\emoji_stats\\353dd21c8317d65527141c79bf35feb8.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T12:50:56.887895"
+        }
+      },
+      "2845045390": {
+        "d61516d2a32ed08f27c87cf2b41173e7.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRgldC_X0bpp542LiiWsqeMrfy1xBi53FQg_woozeaGp-DejwMyBHByb2RQgL2jAVoQH4NSRLZLgdpaX_VOddDes3oC9cmCAQJneg&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\d61516d2a32ed08f27c87cf2b41173e7.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:30:26.381743"
+        },
+        "b0a5fcd8fadbd4f98d9ef6ba59492bf7.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQT3ohvo91MmOIQZr94mCwnFy4_NRiUljMg_wooxN_YrODejwMyBHByb2RQgL2jAVoQYtElPuXNoJkuAjaZfQmdenoCnTiCAQJneg&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\b0a5fcd8fadbd4f98d9ef6ba59492bf7.jpg",
+          "daily_counts": {
+            "2025-09-17": 3
+          },
+          "last_used": "2025-09-17T10:43:52.694991"
+        },
+        "d8e2eded0f5fa8cf6488891c34610c44.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTvLC32H7ztgsdih7HZlrvPrRCIHBjpkQYg_woohpvG8eDejwMyBHByb2RQgL2jAVoQJ8ShGXP6qCa2Es3Q-S-ysXoCQWWCAQJneg&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\d8e2eded0f5fa8cf6488891c34610c44.jpg",
+          "daily_counts": {
+            "2025-09-17": 2
+          },
+          "last_used": "2025-09-17T10:33:57.020038"
+        },
+        "1bcb824ef66744a29c603e994809c696.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhReb4hhyCOg90MmFYbrpuwBVKbF0BjLhBcg_woosu72hfPejwMyBHByb2RQgL2jAVoQzIzIIcungsDjvMN2jkWBxnoChxKCAQJneg&rkey=CAQSMPmYTxY6F1egJvqu56KIxe9vZFrOS2q9lqJJrGBdqbSvnw_x9ByoOj8gyZ081Kxo0w",
+          "cache_path": "data\\image\\emoji_stats\\1bcb824ef66744a29c603e994809c696.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T11:54:16.843052"
+        }
+      },
+      "1214928577": {
+        "d4403dc7727c981ae0823ecc398b46aa.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSSCwjTdN4oAwqfvn3LzwFnlOQQ0hiPywEg_woox_jJnOLejwMyBHByb2RQgL2jAVoQrFsGkoxLhMUu0d1VzX0nnXoCF6OCAQJneg&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\d4403dc7727c981ae0823ecc398b46aa.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:39:00.937044"
+        },
+        "f752d49a6534cc52001eb0d7ba867bd9.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSMT0U2Ln3OcmMm6rFqVnhziC4Q2xiv-wgg_woo7ovXuOXejwMyBHByb2RQgL2jAVoQEAbe5GwC_BvP7ezu2s8e_HoC0jKCAQJneg&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\f752d49a6534cc52001eb0d7ba867bd9.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:53:24.917770"
+        },
+        "6e56f499c7025916fd75e91c893e2738.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQ0gGOCyOs5r07cZWD-gZ8YDFe9FRip6AIg_woo7v-AifbejwMyBHByb2RQgL2jAVoQbdXQCtfS3wOXraW9RDdx3XoCF0aCAQJneg&rkey=CAQSMPmYTxY6F1egJvqu56KIxe9vZFrOS2q9lqJJrGBdqbSvnw_x9ByoOj8gyZ081Kxo0w",
+          "cache_path": "data\\image\\emoji_stats\\6e56f499c7025916fd75e91c893e2738.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T12:07:48.399095"
+        }
+      },
+      "351383618": {
+        "25ca4459b6c4315534b5f95062da4b60.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQj2xnAB568h_taQ2IUj_eXEePM0hjMw5sEIP8KKPyhxIvk3o8DMgRwcm9kUIC9owFaEIMTMcvzWx0NXZvo2bsFF0t6AjOhggECZ3o&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\25ca4459b6c4315534b5f95062da4b60.jpg",
+          "daily_counts": {
+            "2025-09-17": 4
+          },
+          "last_used": "2025-09-17T19:10:03.602724"
+        },
+        "90d24f621671809a502f73e4bf6d25e5.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTAuAGZBcVs5v4iJHyIWre2sufyyhiEqRUg_woomMyYjYrfjwMyBHByb2RQgL2jAVoQ4A7gzNvQVvSrKgsV3zAjSXoCGjOCAQJneg&rkey=CAISMLB5InD9FCX3oKQ5YeMFVlv9xoXLHyrCWtu9s8oJfsHfulhZhWC23ekTAGODoMO8Tw",
+          "cache_path": "data\\image\\emoji_stats\\90d24f621671809a502f73e4bf6d25e5.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T13:37:26.240144"
+        }
+      },
+      "2764071169": {
+        "29eb9c7ed807fab6736021ad2621e5fc.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTtCluFnxEnqYDeh88lLFoupt0n8Rj81QMg_woo6tf8rebejwMyBHByb2RQgL2jAVoQ1jABFzw7z_0iZT0DGKj3RXoC0VSCAQJneg&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\29eb9c7ed807fab6736021ad2621e5fc.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:57:30.868557"
+        },
+        "a916b1d8b65ef9b9fdad93b4c270fcfe.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSuKVvpPqHmYS15tGskdF8sxUl9tRirWyD_Ciizl-uG-d6PAzIEcHJvZFCAvaMBWhDjQRtnbVtTEnyzYkGzbP3SegIGbIIBAmd6&rkey=CAISMBsK2sAKTu_hB7Sq7DMufV4UaXw6q_49Hnu_X6Od7IAWRfAhBmMXUTDepwc3CZzY1A",
+          "cache_path": "data\\image\\emoji_stats\\a916b1d8b65ef9b9fdad93b4c270fcfe.jpg",
+          "daily_counts": {
+            "2025-09-17": 2
+          },
+          "last_used": "2025-09-17T23:11:46.815380"
+        },
+        "400c200aec3c377d40b99a81026954b2.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSTX9Xdg4N0FadLEl-BhgAHtifKKBitxQIg_wook_a7mvnejwMyBHByb2RQgL2jAVoQPhwSnJpLWlHilSR8Bnru0XoCwUKCAQJneg&rkey=CAISMBsK2sAKTu_hB7Sq7DMufV4UaXw6q_49Hnu_X6Od7IAWRfAhBmMXUTDepwc3CZzY1A",
+          "cache_path": "data\\image\\emoji_stats\\400c200aec3c377d40b99a81026954b2.jpg",
+          "daily_counts": {
+            "2025-09-17": 1,
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T10:35:12.579724"
+        },
+        "85658feac5ea70efa560aaddfb060a63.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSf9Tgva4ei41Ia8MqH7Q5zA4feORip1Rkg_woozoWJ6KrfjwMyBHByb2RQgL2jAVoQn4EAyPFXnv1yoqHauyktbXoC4AWCAQJneg&rkey=CAISMKNbiQFfCdf9uWEZ8ONki0bNvx5rbV8L_DD5WBeKJ_ftAJ3cq8SKYqCMJck9VTkwoQ",
+          "cache_path": "data\\image\\emoji_stats\\85658feac5ea70efa560aaddfb060a63.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T16:03:46.587407"
+        },
+        "7be55f285d35428046fa24de2a9d061c.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRzU4BXmpkje6JA2HXZp4dT-Ocdphj391Eg_wooye_nltTfjwMyBHByb2RQgL2jAVoQtewmvnPQum9YOCmd8QUfmXoCYyGCAQJneg&rkey=CAESMMDq3OJk_SPlnSxkhmEeFTOPhCaoZTcTg9XFkgtpM7PC_GrRpb06IDieSgKX7MrTCg",
+          "cache_path": "data\\image\\emoji_stats\\7be55f285d35428046fa24de2a9d061c.jpg",
+          "daily_counts": {
+            "2025-09-17": 2
+          },
+          "last_used": "2025-09-17T19:09:19.612703"
+        },
+        "d98602785d1f1debe166d25349418af5.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQ_q2S-DOqxKZgFnD18n9eSP1Uglxj1ECD_CiiQ3oSL99-PAzIEcHJvZFCAvaMBWhDoo6_UOhB31HA9hTA1MT_megIkr4IBAmd6&rkey=CAESMOUdaUVmDi22LveSDS5I_QgXD8WUKGDSFEJKN9S6u83er75GxzcVv3ElA28HmDmerg",
+          "cache_path": "data\\image\\emoji_stats\\d98602785d1f1debe166d25349418af5.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T21:45:00.831940"
+        },
+        "a63aba619317101944f537d6fcc7115a.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTSMuTiN6HMAeBmibf7ehk0POUR1RibhT8g_woou4OB3IbgjwMyBHByb2RQgL2jAVoQi4rwTXvP6_R20FjZNw2AsXoC-l-CAQJneg&rkey=CAQSMFJUzvYWl53DM8PnX3suCLgIGMjZmuRaSmLrNAbbCV2MOuxbzyDkhX9cGCSNKCnWTw",
+          "cache_path": "data\\image\\emoji_stats\\a63aba619317101944f537d6fcc7115a.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T22:54:57.288972"
+        }
+      },
+      "273421673": {
+        "400c200aec3c377d40b99a81026954b2.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSTX9Xdg4N0FadLEl-BhgAHtifKKBitxQIg_wootu6I9dLfjwMyBHByb2RQgL2jAVoQ9TH8jeX6oxUMPK8fqu7XNnoCINSCAQJneg&rkey=CAESMMDq3OJk_SPlnSxkhmEeFTOPhCaoZTcTg9XFkgtpM7PC_GrRpb06IDieSgKX7MrTCg",
+          "cache_path": "data\\image\\emoji_stats\\400c200aec3c377d40b99a81026954b2.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T19:03:11.020039"
+        }
+      },
+      "1214375192": {
+        "008ccc41f3f63f8a4a312b3d414c29fe.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRt0dRElyrojPqEtG_mo0z3xy0spBjfPCD_CiieyYrqh-CPAzIEcHJvZFCAvaMBWhA7OQzX9nYXtjG0-BamOVFeegJFqYIBAmd6&rkey=CAQSMFJUzvYWl53DM8PnX3suCLgIGMjZmuRaSmLrNAbbCV2MOuxbzyDkhX9cGCSNKCnWTw",
+          "cache_path": "data\\image\\emoji_stats\\008ccc41f3f63f8a4a312b3d414c29fe.jpg",
+          "daily_counts": {
+            "2025-09-17": 2
+          },
+          "last_used": "2025-09-17T23:17:06.721695"
+        }
+      },
+      "2256729125": {
+        "a916b1d8b65ef9b9fdad93b4c270fcfe.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSuKVvpPqHmYS15tGskdF8sxUl9tRirWyD_Ciiyq4e4i-GPAzIEcHJvZFCAvaMBWhBwHh7SV2cpHMVY6zFKh65IegL8RYIBAmd6&rkey=CAISMJ2F5L110VphqwxulmG1YIJcVj4CJYDIf0o2CL5_j_2rBQDfO_f3oM_j26ll8mf6eQ",
+          "cache_path": "data\\image\\emoji_stats\\a916b1d8b65ef9b9fdad93b4c270fcfe.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T08:48:43.939689"
+        },
+        "341bfdc05b37019b0c2f9a4fb375bfb0.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRkqsgDe-yAfMGJiLV10TQPOnTwbxja_Qog_wooiPLXz4vhjwMyBHByb2RQgL2jAVoQYw5-3toCMjDcge2YMcmq9noCaiuCAQJneg&rkey=CAISMJ2F5L110VphqwxulmG1YIJcVj4CJYDIf0o2CL5_j_2rBQDfO_f3oM_j26ll8mf6eQ",
+          "cache_path": "data\\image\\emoji_stats\\341bfdc05b37019b0c2f9a4fb375bfb0.jpg",
+          "daily_counts": {
+            "2025-09-18": 2
+          },
+          "last_used": "2025-09-18T10:18:17.619179"
+        }
+      },
+      "582347572": {
+        "d9f2a33d6be7a65dc5a2d6db302b004b.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRZPumwZjZx6IxfoYnLQP-H0UAgaBjWzhwg_woo2vT8uqLhjwMyBHByb2RQgL2jAVoQNBdPOexXa1F3UuB03UN90HoC4xGCAQJneg&rkey=CAMSMK_YQg_-W1tkdoXE1M_aVYaEVyGXf4fFV8IB8hI-igkl45v7HJXENfxvlBN2Jq3hdA",
+          "cache_path": "data\\image\\emoji_stats\\d9f2a33d6be7a65dc5a2d6db302b004b.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T10:31:43.957054"
+        }
+      }
+    },
+    "901851661": {
+      "2518749797": {
+        "d319ae33668193e495e9c149267535e6.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQA1DgpZU2jLJAvaEn3fu3bEamnQxjLhSsg_woo9dL_ycndjwMyBHByb2RQgL2jAVoQdBLLdgavJvBtwP0K4UcoAHoCfMqCAQJneg&rkey=CAMSMIx-HKBWA0jic49eMLbl1fyokFnd4XlnonUbSafkSFHQNG-HQMXpMlT7nOwxAQhRzA",
+          "cache_path": "data\\image\\emoji_stats\\d319ae33668193e495e9c149267535e6.jpg",
+          "daily_counts": {
+            "2025-09-16": 2,
+            "2025-09-17": 14
+          },
+          "last_used": "2025-09-17T18:38:03.499307"
+        },
+        "eb2471a6f7a93ddfecad60b940d9a1f8.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhS76sZFRN6xbQYJuwwehnAML8VXXBiVihwg_woogNSA7MrdjwMyBHByb2RQgL2jAVoQ9tqjKQJtsJekv5x4C2tzJXoCI8CCAQJneg&rkey=CAMSMIx-HKBWA0jic49eMLbl1fyokFnd4XlnonUbSafkSFHQNG-HQMXpMlT7nOwxAQhRzA",
+          "cache_path": "data\\image\\emoji_stats\\eb2471a6f7a93ddfecad60b940d9a1f8.jpg",
+          "daily_counts": {
+            "2025-09-16": 2,
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T18:46:25.675233"
+        },
+        "8aa0adbc8d782d4eac669bf372e3340d.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSioI9SC3fu9Cdb9FdyuX9swCBx5Rj2gQEg_woow8KBxa7gjwMyBHByb2RQgL2jAVoQ0bnYGpbr87xPvtbwzKW-0XoClS2CAQJneg&rkey=CAISMIIl3rb9Rl8o9XXHlzP7s7okh7jcqOdztgUotZJ8NjGPph970NMDkLaaa_Qn0ZP_Gw",
+          "cache_path": "data\\image\\emoji_stats\\8aa0adbc8d782d4eac669bf372e3340d.jpg",
+          "daily_counts": {
+            "2025-09-18": 2
+          },
+          "last_used": "2025-09-18T02:11:22.416827"
+        }
+      },
+      "1820536974": {
+        "9f0482e4df954cecde484a98d56e31cc.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRCn2uROA2JQLd5VQJsUNvfpdRdLBizoDAg_woojefz6cXejwMyBHByb2RQgL2jAVoQipTpXXpCYMBkRYpeChl3X3oCWWKCAQJneg&rkey=CAESMFpYm-0ECtC5cRDWZpywBmaLz29NQM8UYV-GvH7aN8p2pXdw1ptfuDyh7ud93Z6xfw",
+          "cache_path": "data\\image\\emoji_stats\\9f0482e4df954cecde484a98d56e31cc.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T08:31:59.080950"
+        },
+        "bdc539371caff6d2c0f1cd7b006013ce.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhToiVy8wjr4qv78QjAal4YLBVZzexiLlEMg_woorb2SstfejwMyBHByb2RQgL2jAVoQaquBxXpBYdFCYSolV0G8pnoCogSCAQJuag&rkey=CAISMCpjfkdd4F72MvWy-8whPQfxblyXq4RdLMrqZjMrM2lrkjTjNZo-PfcOd5uyHvEmyw",
+          "cache_path": "data\\image\\emoji_stats\\bdc539371caff6d2c0f1cd7b006013ce.jpg",
+          "daily_counts": {
+            "2025-09-17": 2
+          },
+          "last_used": "2025-09-17T16:40:04.328378"
+        },
+        "3ed9859ac1b6850d09578c0c62778b37.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSi4hoIoPydiwprKHS9dSXJNC_oYBjlsAQg_wootsHb59jejwMyBHByb2RQgL2jAVoQUnGwec4mSxCzbIA_8-73y3oC8vaCAQJneg&rkey=CAISMCpjfkdd4F72MvWy-8whPQfxblyXq4RdLMrqZjMrM2lrkjTjNZo-PfcOd5uyHvEmyw",
+          "cache_path": "data\\image\\emoji_stats\\3ed9859ac1b6850d09578c0c62778b37.jpg",
+          "daily_counts": {
+            "2025-09-17": 6
+          },
+          "last_used": "2025-09-17T17:55:10.686385"
+        },
+        "a6d2338266321d162481415a62b558db.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTcUa96WpW6U4qUKDLe1I2Ss13gbhiI5AIg_woosY7O86zfjwMyBHByb2RQgL2jAVoQUKxHYvsC-c2Ia83PLGoAFnoC-bSCAQJuag&rkey=CAISMKNbiQFfCdf9uWEZ8ONki0bNvx5rbV8L_DD5WBeKJ_ftAJ3cq8SKYqCMJck9VTkwoQ",
+          "cache_path": "data\\image\\emoji_stats\\a6d2338266321d162481415a62b558db.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T16:13:08.088652"
+        },
+        "1e69a85d1b48293b3c5192cce5765d5b.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRw5-IdQ9gcAxRTQdpxL_bYCRaJuRiptjwg_woorPevnK3fjwMyBHByb2RQgL2jAVoQqrLixhQ9BiGXU-WjORPWYXoCEQyCAQJneg&rkey=CAISMKNbiQFfCdf9uWEZ8ONki0bNvx5rbV8L_DD5WBeKJ_ftAJ3cq8SKYqCMJck9VTkwoQ",
+          "cache_path": "data\\image\\emoji_stats\\1e69a85d1b48293b3c5192cce5765d5b.jpg",
+          "daily_counts": {
+            "2025-09-17": 2
+          },
+          "last_used": "2025-09-17T17:31:44.569447"
+        },
+        "35c2f98700b80b84edce0745b77c0e25.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTKtPBbonbNv6TiMQQLCr0YSRo5yRjebCD_Cijf_JCswt-PAzIEcHJvZFCAvaMBWhALitsrZnpHHOyr7NaemUOxegLKSoIBAm5q&rkey=CAMSMPJVpevNVbgxWVe-rS8l6g9EAtu1RwK6jgRYTY-5aDduAs5conJSWVEKc7ewJtq_0A",
+          "cache_path": "data\\image\\emoji_stats\\35c2f98700b80b84edce0745b77c0e25.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T17:49:03.398782"
+        }
+      },
+      "2243216588": {
+        "fd69609b2c7059714e477ad530ea60a1.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhR8nkH1mWn2UBD4nQGMZuKxz9c0YBitlhUg_woorOqehoffjwMyBHByb2RQgL2jAVoQPbuDJqkXKjn0rY4P4jBhLXoCMN2CAQJuag&rkey=CAISMLB5InD9FCX3oKQ5YeMFVlv9xoXLHyrCWtu9s8oJfsHfulhZhWC23ekTAGODoMO8Tw",
+          "cache_path": "data\\image\\emoji_stats\\fd69609b2c7059714e477ad530ea60a1.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T13:23:46.811695"
+        },
+        "7f6aa47e1ac5c655b2a1fa1a55af34c9.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTHZH-XHQ0TXvg8zJm_ERHf-CDUuBjT-W4g_woolomJiKjhjwMyBHByb2RQgL2jAVoQUKzAC-BlIAnPEg8TMPgTIXoCX3iCAQJneg&rkey=CAMSMK_YQg_-W1tkdoXE1M_aVYaEVyGXf4fFV8IB8hI-igkl45v7HJXENfxvlBN2Jq3hdA",
+          "cache_path": "data\\image\\emoji_stats\\7f6aa47e1ac5c655b2a1fa1a55af34c9.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T10:56:48.294093"
+        }
+      }
+    },
+    "817304322": {
+      "915436336": {
+        "d88dce2fda65a78fa03a3fe47f374bb9.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQN_fbmN-Zw4bat9wmL06_B1FB3LxibpQEg_wooh4nOqoLdjwMyBHByb2RQgL2jAVoQ5NXDEkF8_nKQCOloX28xw3oCr0iCAQJuag&rkey=CAESMG8t4_0cPC5il3MheRVTGp5I6UjgKXmE8CuDh3dZpSUFMDHdggWgLibsB8xWvqJdgw",
+          "cache_path": "data\\image\\emoji_stats\\d88dce2fda65a78fa03a3fe47f374bb9.jpg",
+          "daily_counts": {
+            "2025-09-16": 2,
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T09:46:51.406502"
+        },
+        "f93077e78de18ab2e667cb55e9c94007.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQUeWl2pxP8pVlKeExnwRVyiyE2WRiGyQMg_woovcDwrNbejwMyBHByb2RQgL2jAVoQZxsDRJj-qs6jpOK_eXVMvXoCM46CAQJuag&rkey=CAISMCpjfkdd4F72MvWy-8whPQfxblyXq4RdLMrqZjMrM2lrkjTjNZo-PfcOd5uyHvEmyw",
+          "cache_path": "data\\image\\emoji_stats\\f93077e78de18ab2e667cb55e9c94007.jpg",
+          "daily_counts": {
+            "2025-09-17": 2
+          },
+          "last_used": "2025-09-17T10:00:25.817538"
+        },
+        "39ec7c2bcfd5e8dae59f04196d4910f7.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSms4tFhNxUTv2aE-icXfNe3tl2aBju9wYg_woorteK2v_ejwMyBHByb2RQgL2jAVoQaRQSxXdZHEUO3Wf5z-fhYXoCgtSCAQJuag&rkey=CAISMBsK2sAKTu_hB7Sq7DMufV4UaXw6q_49Hnu_X6Od7IAWRfAhBmMXUTDepwc3CZzY1A",
+          "cache_path": "data\\image\\emoji_stats\\39ec7c2bcfd5e8dae59f04196d4910f7.jpg",
+          "daily_counts": {
+            "2025-09-17": 3
+          },
+          "last_used": "2025-09-17T19:57:28.524866"
+        }
+      },
+      "494111722": {
+        "9bc6d2e113444f81d2096e1df1b44994.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhThWZHamrzpK3FUkibfX2KLHLx3MxiY9FIg_woo6PnBz4LdjwMyBHByb2RQgL2jAVoQNIXahbiaSaw_VqC1QaGPUHoCyv6CAQJneg&rkey=CAESMG8t4_0cPC5il3MheRVTGp5I6UjgKXmE8CuDh3dZpSUFMDHdggWgLibsB8xWvqJdgw",
+          "cache_path": "data\\image\\emoji_stats\\9bc6d2e113444f81d2096e1df1b44994.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T17:58:43.484250"
+        }
+      },
+      "2754403707": {
+        "19cc4a624c8faa8fa691cfd99a4569f4.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQ9wXtqHWJiAgT71VLTQjrpaDPr2Rj_DCD_Cii51r2did2PAzIEcHJvZFCAvaMBWhDesaRZmXNsP5KWFcA-Q3PoegLS4IIBAmd6&rkey=CAESMG8t4_0cPC5il3MheRVTGp5I6UjgKXmE8CuDh3dZpSUFMDHdggWgLibsB8xWvqJdgw",
+          "cache_path": "data\\image\\emoji_stats\\19cc4a624c8faa8fa691cfd99a4569f4.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T18:28:13.324704"
+        },
+        "d4067533bf7d212f40bc66044fd662ce.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQd3COD-6s7P3CVwkndJyYPVxhf-hiDmiAg_woo5Jzdy47djwMyBHByb2RQgL2jAVoQnU1vksKAjghBnjauXIdPb3oCj7mCAQJneg&rkey=CAISMEADbcbcBc1t8-woL4J1zdhQxSdc53KW7UZAtObndpoHq9SjiNZkQSuqMofwOjmDgg",
+          "cache_path": "data\\image\\emoji_stats\\d4067533bf7d212f40bc66044fd662ce.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T18:52:12.666682"
+        },
+        "fffd68adcb41379047eb4380d766f209.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQ4j0uORVcYxBHcziVsk5uC2BqGYhi9iwEg_woopPSDit7djwMyBHByb2RQgL2jAVoQbdNVJec577vjN467YiNdpXoCpWCCAQJneg&rkey=CAESMMegyoI6-4MOrURyfhlvpkOgI9S7Aw2CdB-amztFcT8LmsVq0XGqtvcZQsE3qOCi3A",
+          "cache_path": "data\\image\\emoji_stats\\fffd68adcb41379047eb4380d766f209.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T00:47:48.658316"
+        },
+        "e91f6499d7d82dee1863e90ba2c50abd.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRlHqcdSVC44rcM4iCyIXaFq9k6ZRjC4QEg_woop5LHyejdjwMyBHByb2RQgL2jAVoQDIMklLNuAf6-QJJ7IxwGe3oCpP-CAQJneg&rkey=CAESMIxoxl8ioQ1odxW6X07DRTeLmTPXThRDl5jV_bP5-kuFVUvw4HYuuh7G0wztyOA3Sg",
+          "cache_path": "data\\image\\emoji_stats\\e91f6499d7d82dee1863e90ba2c50abd.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T01:34:46.251017"
+        },
+        "f3d09a0e225615606c4d33ca4606e26d.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhR2cOeQ5W2S9Ua88lzweN1DuyPtCxiOuAEg_woo9NG07ejdjwMyBHByb2RQgL2jAVoQ_gR0S-osBJZ02ykiFhcwmXoCjc6CAQJneg&rkey=CAESMIxoxl8ioQ1odxW6X07DRTeLmTPXThRDl5jV_bP5-kuFVUvw4HYuuh7G0wztyOA3Sg",
+          "cache_path": "data\\image\\emoji_stats\\f3d09a0e225615606c4d33ca4606e26d.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T01:36:02.167786"
+        },
+        "8ae4991f4a074f6b0acdc0c9bcbcb52c.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSWRc2lBjWrpYxofh7LeySXz3-xtBjejx8g_wooqZrgiI7fjwMyBHByb2RQgL2jAVoQ1z3EDrWi_XxNXQQWsqDdInoCAbGCAQJneg&rkey=CAISMLB5InD9FCX3oKQ5YeMFVlv9xoXLHyrCWtu9s8oJfsHfulhZhWC23ekTAGODoMO8Tw",
+          "cache_path": "data\\image\\emoji_stats\\8ae4991f4a074f6b0acdc0c9bcbcb52c.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T13:55:10.552979"
+        }
+      },
+      "1607928177": {
+        "ca65436ff2a8db58520f5a45c2412958.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhS4tJP7Mb7MBjSdYuONF22AUmVhzRjKyAQg_woo-eyzzI7djwMyBHByb2RQgL2jAVoQimJqGT3zH62e0qPMGlm_xHoCJYaCAQJneg&rkey=CAISMEADbcbcBc1t8-woL4J1zdhQxSdc53KW7UZAtObndpoHq9SjiNZkQSuqMofwOjmDgg",
+          "cache_path": "data\\image\\emoji_stats\\ca65436ff2a8db58520f5a45c2412958.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T18:52:14.055450"
+        },
+        "05bf6d4c65797045222f7c9359d6ae43.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhR84IisqNkgbTfGt4Yi3T3cbWh2dRittR0g_wool6P0_tXfjwMyBHByb2RQgL2jAVoQmaaPYbR_rteetetuYWYOVnoC8eiCAQJneg&rkey=CAESMMDq3OJk_SPlnSxkhmEeFTOPhCaoZTcTg9XFkgtpM7PC_GrRpb06IDieSgKX7MrTCg",
+          "cache_path": "data\\image\\emoji_stats\\05bf6d4c65797045222f7c9359d6ae43.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T19:16:57.624699"
+        }
+      },
+      "3398902282": {
+        "01b1f3bbe3bcd5dae67576378604cad2.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRYDDYzsInfEEt3-HNgo-Hz-3AllxiPhRAg_woow8G57ZzdjwMyBHByb2RQgL2jAVoQb46GX5GxMKs_oxXfztbiIXoCN56CAQJuag&rkey=CAESMMK-UBmVbq8eNTZs4mf9P5Xm9jCLddz8I474HJ9GaESRoT9GJSxTxI0bQ_w_LSMHPw",
+          "cache_path": "data\\image\\emoji_stats\\01b1f3bbe3bcd5dae67576378604cad2.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T19:56:01.365602"
+        },
+        "3de9b285ac931f5f26dbab9291df94b2.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSequvF1Ro3s7N5854kPRoXJUBujxjBiQMg_woo6ZTojPnejwMyBHByb2RQgL2jAVoQj8yLcEoKEit1wJdMy7yf9noC_FaCAQJuag&rkey=CAISMBsK2sAKTu_hB7Sq7DMufV4UaXw6q_49Hnu_X6Od7IAWRfAhBmMXUTDepwc3CZzY1A",
+          "cache_path": "data\\image\\emoji_stats\\3de9b285ac931f5f26dbab9291df94b2.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T12:21:21.730016"
+        }
+      },
+      "2034756660": {
+        "2f0ce5712c81722baed39974ea50b986.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQ_y9vJksaKMUeUVrs_7E3e9KGl6BjcJSD_CijRsIaJud2PAzIEcHJvZFCAvaMBWhAX7Etwmjts-MsmP6drxw_DegIrJIIBAm5q&rkey=CAESME4K6HocmQAetQSNTIUvEGDGOKp93c-EygUkhLH0xTjAVJZgH_316xtJ8GQDB0oQhQ",
+          "cache_path": "data\\image\\emoji_stats\\2f0ce5712c81722baed39974ea50b986.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T22:02:15.698830"
+        },
+        "165b65c0b0f0a2e2ce173091e48295d5.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRw4tPmEMFa7LAu7tq-zEU9fUBbFxjgGiD_CijCjZOG6d2PAzIEcHJvZFCAvaMBWhCvCeUIxQ4EXwEvghZt7fNsegKQM4IBAm5q&rkey=CAESMIxoxl8ioQ1odxW6X07DRTeLmTPXThRDl5jV_bP5-kuFVUvw4HYuuh7G0wztyOA3Sg",
+          "cache_path": "data\\image\\emoji_stats\\165b65c0b0f0a2e2ce173091e48295d5.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T01:36:53.138127"
+        }
+      },
+      "972096153": {
+        "e3e5494601120dafa2a43a7c05ce4c67.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhStHIEEvmkgPYmgHJ6YGT2gwerY5xjimgQg_woo7fDA777ejwMyBHByb2RQgL2jAVoQocKx0D2n5Ddam-nAQ320nnoC-LiCAQJuag&rkey=CAESMHJ7kNbUCXQdwR4FMpQ7dOzq3Urdbql91T1DBBRt0jrwtBnGW192CJd8hEOzkL5rTA",
+          "cache_path": "data\\image\\emoji_stats\\e3e5494601120dafa2a43a7c05ce4c67.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T08:00:51.586261"
+        },
+        "b4dc7e6e5830fe045aac4323fdaed2cb.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQ15g9kNcRnZIyXNx59Am5uyMJ9eBiOCSD_CiiTlf-u396PAzIEcHJvZFCAvaMBWhA2pmYNKNNgMCSabOq5J-PkegKwXIIBAm5q&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\b4dc7e6e5830fe045aac4323fdaed2cb.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:26:14.442208"
+        }
+      },
+      "875354745": {
+        "e3e5494601120dafa2a43a7c05ce4c67.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhStHIEEvmkgPYmgHJ6YGT2gwerY5xjimgQg_woou7yQ_b7ejwMyBHByb2RQgL2jAVoQcdgPR3xXCmaY2Xy0Lkz2nHoCBfCCAQJuag&rkey=CAESMHJ7kNbUCXQdwR4FMpQ7dOzq3Urdbql91T1DBBRt0jrwtBnGW192CJd8hEOzkL5rTA",
+          "cache_path": "data\\image\\emoji_stats\\e3e5494601120dafa2a43a7c05ce4c67.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T08:01:19.705740"
+        }
+      },
+      "1813520078": {
+        "594032d03ebe57fe5bd52ee36e56c70a.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTDKe2HR7znkKT4ztFoofyUkZXHsximmQIg_woowK-y4tjejwMyBHByb2RQgL2jAVoQIPpaq3ZrH3jhq2hft9r8qnoCZOuCAQJneg&rkey=CAISMCpjfkdd4F72MvWy-8whPQfxblyXq4RdLMrqZjMrM2lrkjTjNZo-PfcOd5uyHvEmyw",
+          "cache_path": "data\\image\\emoji_stats\\594032d03ebe57fe5bd52ee36e56c70a.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T09:56:43.010239"
+        },
+        "135c67ae164ebadd3226fbf01fa29228.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQVqluybwdwOEaOrmumTx8POhnTwhi7xRcg_wooiP_ni_PfjwMyBHByb2RQgL2jAVoQnQD9vh4HT9ea952TsLzNunoCy_qCAQJneg&rkey=CAESMOUdaUVmDi22LveSDS5I_QgXD8WUKGDSFEJKN9S6u83er75GxzcVv3ElA28HmDmerg",
+          "cache_path": "data\\image\\emoji_stats\\135c67ae164ebadd3226fbf01fa29228.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T21:27:08.702006"
+        }
+      },
+      "1506123340": {
+        "3991c0e00586ecee83d9bdec6e68bc3f.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQSi2Sn3KcTBRT6e8T9amjC3fh47xiRhDIg_woohP21jd7fjwMyBHByb2RQgL2jAVoQMH3czaDhl1maZO46l8H6JXoCM0qCAQJneg&rkey=CAESMMDq3OJk_SPlnSxkhmEeFTOPhCaoZTcTg9XFkgtpM7PC_GrRpb06IDieSgKX7MrTCg",
+          "cache_path": "data\\image\\emoji_stats\\3991c0e00586ecee83d9bdec6e68bc3f.jpg",
+          "daily_counts": {
+            "2025-09-17": 2
+          },
+          "last_used": "2025-09-17T19:53:50.528330"
+        }
+      }
+    },
+    "730698039": {
+      "945364538": {
+        "0edd77edadaeab586ea7e63babf5e688.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQ_md3dUo2Wt6_2izD-15O0HwnbORjCox8g_wooxryI_arhjwMyBHByb2RQgL2jAVoQbvX3BlIGHzvlnsDTIbWbeXoC1muCAQJneg&rkey=CAMSMK_YQg_-W1tkdoXE1M_aVYaEVyGXf4fFV8IB8hI-igkl45v7HJXENfxvlBN2Jq3hdA",
+          "cache_path": "data\\image\\emoji_stats\\0edd77edadaeab586ea7e63babf5e688.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T11:09:49.960963"
+        }
+      }
+    },
+    "580781801": {
+      "2498552575": {
+        "5865e5a75ba6e4d8eeb339c6ce422cee.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQpfUIMucveN_3hEvB4M74VzIWsAxjj9wYg_wootv_-jKrdjwMyBHByb2RQgL2jAVoQMk2WibZIx-aRmN7-zy8Vg3oCg-mCAQJuag&rkey=CAQSMCrQtXuF6HOn9aj29hc3UeP_sx2eweEX9f0zQtX2GtkDoiZZkBCC4MkZkG9IKBHIcg",
+          "cache_path": "data\\image\\emoji_stats\\5865e5a75ba6e4d8eeb339c6ce422cee.jpg",
+          "daily_counts": {
+            "2025-09-16": 2
+          },
+          "last_used": "2025-09-16T21:43:16.900481"
+        },
+        "a053f61abc01dc2764c5884b10a75af9.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRT1isyxyEdpSDLoNYF5BOq02VvtBivpgYg_woo1NjAmKrdjwMyBHByb2RQgL2jAVoQyPt_bwUJTT0nfoafk2U_hXoC4uSCAQJuag&rkey=CAQSMCrQtXuF6HOn9aj29hc3UeP_sx2eweEX9f0zQtX2GtkDoiZZkBCC4MkZkG9IKBHIcg",
+          "cache_path": "data\\image\\emoji_stats\\a053f61abc01dc2764c5884b10a75af9.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T20:55:41.466228"
+        },
+        "1cda2d9c74c952a0d650c371c4c66995.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTyyPbsZDwzFjRFEOM3mva_STd9Phi2rAUg_woorKrSzq_djwMyBHByb2RQgL2jAVoQ8EKno-TtP43ksIihP1RGWnoCmwWCAQJuag&rkey=CAQSMCrQtXuF6HOn9aj29hc3UeP_sx2eweEX9f0zQtX2GtkDoiZZkBCC4MkZkG9IKBHIcg",
+          "cache_path": "data\\image\\emoji_stats\\1cda2d9c74c952a0d650c371c4c66995.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T21:19:57.425274"
+        },
+        "c88cf4f932c375a3f09f86b9a17f8805.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTVCNnLodR1UdbgxzEIkybBsddWFxjQyzsg_wooyMPwwdrejwMyBHByb2RQgL2jAVoQnwGI3l_N6R9oJn3g2-Pse3oCn6mCAQJuag&rkey=CAISMCpjfkdd4F72MvWy-8whPQfxblyXq4RdLMrqZjMrM2lrkjTjNZo-PfcOd5uyHvEmyw",
+          "cache_path": "data\\image\\emoji_stats\\c88cf4f932c375a3f09f86b9a17f8805.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:04:32.289228"
+        },
+        "b98a5e653d93eb38053179fed42dd209.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQp57uKNKqbYXCPwqhayFjEKGFQMRjrqQQg_woowfHA5s7fjwMyBHByb2RQgL2jAVoQ9ihQ_3KGa4xQwgGRTG_A0HoCb4yCAQJuag&rkey=CAESMIHOXdWyMAB9gCQQ08VwdGVr5Snh_VDYPJW5SerG0-uoTzWQpKvshw1HfOzZiPV9Hw",
+          "cache_path": "data\\image\\emoji_stats\\b98a5e653d93eb38053179fed42dd209.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T18:44:47.413337"
+        }
+      },
+      "726499528": {
+        "0baf7f408068a2f3ab4af9c5f7207b6e.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRxbI4ijWPxUswvDpaF7TVlrqi_8Ri50A0g_woopIr18ardjwMyBHByb2RQgL2jAVoQlxwT8eSePcrPnQgaPBakkHoC6_6CAQJneg&rkey=CAQSMCrQtXuF6HOn9aj29hc3UeP_sx2eweEX9f0zQtX2GtkDoiZZkBCC4MkZkG9IKBHIcg",
+          "cache_path": "data\\image\\emoji_stats\\0baf7f408068a2f3ab4af9c5f7207b6e.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T20:58:48.680137"
+        }
+      },
+      "273421673": {
+        "c511aa3924e9a5db87d335806135f2d3.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSH4bU80vPtj1AhsiOZ9S2O5gvpUBiq0gYg_wooivjm-6rdjwMyBHByb2RQgL2jAVoQ7MVyJ8CrMKuZAEcJ8UcY7noCbACCAQJneg&rkey=CAQSMCrQtXuF6HOn9aj29hc3UeP_sx2eweEX9f0zQtX2GtkDoiZZkBCC4MkZkG9IKBHIcg",
+          "cache_path": "data\\image\\emoji_stats\\c511aa3924e9a5db87d335806135f2d3.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T20:59:24.937809"
+        },
+        "75529552bcb2e0240570046c9d0674f4.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSvsh6aTHwTGslxZnX_mVY7XrwVVBiakgYg_woosMT4s9rejwMyBHByb2RQgL2jAVoQS9Fo3YyL0QJky5oqc5isgXoCepiCAQJneg&rkey=CAISMCpjfkdd4F72MvWy-8whPQfxblyXq4RdLMrqZjMrM2lrkjTjNZo-PfcOd5uyHvEmyw",
+          "cache_path": "data\\image\\emoji_stats\\75529552bcb2e0240570046c9d0674f4.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:04:02.663112"
+        },
+        "54ec7b8bbc926f57b5b790ea38a81f27.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRZhu-c-3U0fRFet51esafP3vWVUxi85AQg_woo0YSju5vhjwMyBHByb2RQgL2jAVoQcLBMmgcA61beyxXSEBWfDHoClAmCAQJneg&rkey=CAMSMLpxQWtfgiBIEu7HBFN3NfpxKfMax2kATFWzDJYlqvYA0NWJc5RQRa_hNc6_09B63w",
+          "cache_path": "data\\image\\emoji_stats\\54ec7b8bbc926f57b5b790ea38a81f27.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T10:00:25.765666"
+        }
+      },
+      "787114519": {
+        "4ee5aab217b56acfe44a6b7b8c33e0c7.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhR3lNbNacmJRiXNvAeXXKqIc5wlShiDxx0g_wookbrkjavdjwMyBHByb2RQgL2jAVoQWLrbBDuElqqHEPeJGmT1inoC1OuCAQJneg&rkey=CAQSMCrQtXuF6HOn9aj29hc3UeP_sx2eweEX9f0zQtX2GtkDoiZZkBCC4MkZkG9IKBHIcg",
+          "cache_path": "data\\image\\emoji_stats\\4ee5aab217b56acfe44a6b7b8c33e0c7.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T20:59:47.634400"
+        }
+      },
+      "2528823583": {
+        "0357dd39fbba00ff500388e7f4d846fd.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSiUzZasQkbE-wx7vWAqb_SAlUgXhiCwQQg_woojr_OyNrejwMyBHByb2RQgL2jAVoQY12l3b_frZpO9UsQe4fdSHoC5u6CAQJuag&rkey=CAISMCpjfkdd4F72MvWy-8whPQfxblyXq4RdLMrqZjMrM2lrkjTjNZo-PfcOd5uyHvEmyw",
+          "cache_path": "data\\image\\emoji_stats\\0357dd39fbba00ff500388e7f4d846fd.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:04:46.122761"
+        }
+      },
+      "1519325944": {
+        "75529552bcb2e0240570046c9d0674f4.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSvsh6aTHwTGslxZnX_mVY7XrwVVBiakgYg_woog7-B3drejwMyBHByb2RQgL2jAVoQHGsDZkn83UpoW-k8oqXnOnoCDhOCAQJneg&rkey=CAISMCpjfkdd4F72MvWy-8whPQfxblyXq4RdLMrqZjMrM2lrkjTjNZo-PfcOd5uyHvEmyw",
+          "cache_path": "data\\image\\emoji_stats\\75529552bcb2e0240570046c9d0674f4.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:05:28.588491"
+        },
+        "bad9ba0c5c4e623678b560d8e7a496e4.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhR8EvsfrM47xuHVh1i9qj6JtB5SzRiclpcBIP8KKJqRi8ed348DMgRwcm9kUIC9owFaENdRlIwgr6z6wB1b0OReUi56Av3lggECbmo&rkey=CAESMLsiyhxB_ID4MG2ZIJJahNoaX8-w7doplDLuUcZgs5M_4V9DKglIQ5e9hR34MwPrLQ",
+          "cache_path": "data\\image\\emoji_stats\\bad9ba0c5c4e623678b560d8e7a496e4.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T15:04:28.289197"
+        },
+        "612937595d796b67d3b1169b7d95908a.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTXiaq7MxI2t8hoJLd_p024P8_5SRigqEEg_woohcjxgc_fjwMyBHByb2RQgL2jAVoQstL3usaxkNnAH-h4s-LSLHoC3CGCAQJuag&rkey=CAESMIHOXdWyMAB9gCQQ08VwdGVr5Snh_VDYPJW5SerG0-uoTzWQpKvshw1HfOzZiPV9Hw",
+          "cache_path": "data\\image\\emoji_stats\\612937595d796b67d3b1169b7d95908a.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T18:45:45.091291"
+        }
+      },
+      "1282137325": {
+        "bad9ba0c5c4e623678b560d8e7a496e4.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhR8EvsfrM47xuHVh1i9qj6JtB5SzRiclpcBIP8KKLSk0qGG348DMgRwcm9kUIC9owFaEHAqi71VNM1KRoWq36D4ONx6AoLnggECbmo&rkey=CAISMLB5InD9FCX3oKQ5YeMFVlv9xoXLHyrCWtu9s8oJfsHfulhZhWC23ekTAGODoMO8Tw",
+          "cache_path": "data\\image\\emoji_stats\\bad9ba0c5c4e623678b560d8e7a496e4.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T13:20:15.701737"
+        },
+        "612937595d796b67d3b1169b7d95908a.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTXiaq7MxI2t8hoJLd_p024P8_5SRigqEEg_woolJGF5MPfjwMyBHByb2RQgL2jAVoQxxbGAiUhzIYQ8Q8g26zrcnoCoXKCAQJuag&rkey=CAMSMPJVpevNVbgxWVe-rS8l6g9EAtu1RwK6jgRYTY-5aDduAs5conJSWVEKc7ewJtq_0A",
+          "cache_path": "data\\image\\emoji_stats\\612937595d796b67d3b1169b7d95908a.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T17:55:29.422295"
+        }
+      },
+      "1362480326": {
+        "84c96224ce70da8b81b291237d7fb2b8.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTPXCGholQuzpPXmRJpYt8MKpiFkhjKiTkg_woorYWQyu7fjwMyBHByb2RQgL2jAVoQ3QGlGequBqb4ch3Rpoi3wnoCO1qCAQJuag&rkey=CAESMOUdaUVmDi22LveSDS5I_QgXD8WUKGDSFEJKN9S6u83er75GxzcVv3ElA28HmDmerg",
+          "cache_path": "data\\image\\emoji_stats\\84c96224ce70da8b81b291237d7fb2b8.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T21:06:57.769683"
+        }
+      },
+      "505571318": {
+        "48f7662f0f32238211a4b68e3f538e7f.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSs6_VL2HKOeRhJGwKXgzpNwsC39xjQDyD_CijLrqvljuGPAzIEcHJvZFCAvaMBWhC7M1JyWv3IzDpoq-V_lYnYegJwnoIBAmd6&rkey=CAISMJ2F5L110VphqwxulmG1YIJcVj4CJYDIf0o2CL5_j_2rBQDfO_f3oM_j26ll8mf6eQ",
+          "cache_path": "data\\image\\emoji_stats\\48f7662f0f32238211a4b68e3f538e7f.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T09:03:43.950314"
+        }
+      },
+      "771575637": {
+        "4c3cb6215aa2168d237549c7076d486f.jpg": {
+          "url": "https://gchat.qpic.cn/gchatpic_new/0/0-0-4C3CB6215AA2168D237549C7076D486F/0",
+          "cache_path": "data\\image\\emoji_stats\\4c3cb6215aa2168d237549c7076d486f.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T09:10:02.255154"
+        },
+        "6eb912193f15ab2e1d46bc9f34e5e983.jpg": {
+          "url": "https://gchat.qpic.cn/gchatpic_new/0/0-0-6EB912193F15AB2E1D46BC9F34E5E983/0",
+          "cache_path": "data\\image\\emoji_stats\\6eb912193f15ab2e1d46bc9f34e5e983.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T09:48:13.030623"
+        },
+        "5dfa62f173a8fb4925ed82bb992fc7c1.jpg": {
+          "url": "https://gchat.qpic.cn/gchatpic_new/0/0-0-5DFA62F173A8FB4925ED82BB992FC7C1/0",
+          "cache_path": "data\\image\\emoji_stats\\5dfa62f173a8fb4925ed82bb992fc7c1.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T09:48:15.729962"
+        }
+      }
+    },
+    "703227283": {
+      "2794856173": {
+        "227937eab36140cea52d5055f5584dc7.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSRMrYiTQYd7g8yWqlxZL5N3_UUOBit9S8g_woopcOe9NzfjwMyBHByb2RQgL2jAVoQVaKVoZQnzWrQBdgUmuC0l3oCHaiCAQJneg&rkey=CAESMMDq3OJk_SPlnSxkhmEeFTOPhCaoZTcTg9XFkgtpM7PC_GrRpb06IDieSgKX7MrTCg",
+          "cache_path": "data\\image\\emoji_stats\\227937eab36140cea52d5055f5584dc7.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T19:47:53.718523"
+        }
+      },
+      "2214994869": {
+        "d25253b2ffce7f8b9c86c913638c86e5.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRJ482g4enL8PXn8pZaiHIpbgE4vxjVgwEg_woots-Cov3fjwMyBHByb2RQgL2jAVoQ5MsN4nPoxx23YNw1BVyc1HoCHm-CAQJneg&rkey=CAQSMBF8YbT4pu38z3P2lY8sVsAhTI3KYvxSyqNqBcnMSDnAd6jDPStdypsxlokXDw_Czw",
+          "cache_path": "data\\image\\emoji_stats\\d25253b2ffce7f8b9c86c913638c86e5.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T22:12:39.884249"
+        }
+      },
+      "2081127113": {
+        "9a5c6b6f6e6da65df516d6dccd1691a2.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRy50OsZkce3VuCEi71VnnTuxw9VBjTnjog_woow8OR2IbgjwMyBHByb2RQgL2jAVoQMcZEeYYZk-ZRuvY0gEmByHoCfKSCAQJneg&rkey=CAQSMFJUzvYWl53DM8PnX3suCLgIGMjZmuRaSmLrNAbbCV2MOuxbzyDkhX9cGCSNKCnWTw",
+          "cache_path": "data\\image\\emoji_stats\\9a5c6b6f6e6da65df516d6dccd1691a2.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T22:54:55.323022"
+        }
+      }
+    },
+    "2150946207": {
+      "3423462135": {
+        "7d6c76c79930c408b3f8b3c03aec3594.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRIujJWgR7QNFlRZipVc6WGHRlXRBi_2z8g_wooppLxk7HdjwMyBHByb2RQgL2jAVoQJAk1V6iOqSFgbSyVHtkQKHoCYhSCAQJuag&rkey=CAQSMCrQtXuF6HOn9aj29hc3UeP_sx2eweEX9f0zQtX2GtkDoiZZkBCC4MkZkG9IKBHIcg",
+          "cache_path": "data\\image\\emoji_stats\\7d6c76c79930c408b3f8b3c03aec3594.jpg",
+          "daily_counts": {
+            "2025-09-16": 1
+          },
+          "last_used": "2025-09-16T21:26:51.098096"
+        },
+        "97a808df6564de6cace3a6d64b32693d.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhS_pI3kry616bB2c0TPQ2p3IZWuTxjIvOIHIP8KKKC456HB348DMgRwcm9kUIC9owFaEMRjiRc7305xSdmPpx-gU6R6Aq4pggECbmo&rkey=CAMSMPJVpevNVbgxWVe-rS8l6g9EAtu1RwK6jgRYTY-5aDduAs5conJSWVEKc7ewJtq_0A",
+          "cache_path": "data\\image\\emoji_stats\\97a808df6564de6cace3a6d64b32693d.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T17:44:13.764070"
+        }
+      },
+      "425799870": {
+        "1bd890aac2501b60d21004145f619efb.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTC8o_TZEKblmJWM6NXHe7vIv2P6RiCPSD_CijZrr238t6PAzIEcHJvZFCAvaMBWhBFMtC88rkeexfw4XmeVdpSegI0boIBAm5q&rkey=CAQSMPmYTxY6F1egJvqu56KIxe9vZFrOS2q9lqJJrGBdqbSvnw_x9ByoOj8gyZ081Kxo0w",
+          "cache_path": "data\\image\\emoji_stats\\1bd890aac2501b60d21004145f619efb.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T11:51:32.401916"
+        }
+      },
+      "1014167381": {
+        "395f213c861f862d3eb1072eab8fbf6e.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQSBgn4OwUYfI9PxxodZUEXudBr5Rj1zi8g_woovb2xzvTejwMyBHByb2RQgL2jAVoQ0lN1qAY1PB-xISZn-vdM3XoCyguCAQJuag&rkey=CAQSMPmYTxY6F1egJvqu56KIxe9vZFrOS2q9lqJJrGBdqbSvnw_x9ByoOj8gyZ081Kxo0w",
+          "cache_path": "data\\image\\emoji_stats\\395f213c861f862d3eb1072eab8fbf6e.jpg",
+          "daily_counts": {
+            "2025-09-17": 2
+          },
+          "last_used": "2025-09-17T14:08:40.765865"
+        }
+      },
+      "2667011422": {
+        "b81713038f96ba34373ee17265cef0f8.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQFzq4xvgtDgZmPJeZkkaRYmii5TRjCFyD_CiiEtbj5wd-PAzIEcHJvZFCAvaMBWhBGJXBiuVoctgvgTtcP7D80egLa24IBAm5q&rkey=CAMSMPJVpevNVbgxWVe-rS8l6g9EAtu1RwK6jgRYTY-5aDduAs5conJSWVEKc7ewJtq_0A",
+          "cache_path": "data\\image\\emoji_stats\\b81713038f96ba34373ee17265cef0f8.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T17:47:17.318798"
+        }
+      },
+      "252353516": {
+        "fda958a87b54c919387efd718a5a6aeb.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQ9wv4MAFRp87xAxVDb54M-PV5fJhjTxxYg_woox8To-ffgjwMyBHByb2RQgL2jAVoQc3lB2VlUrGjQJF00FSsUK3oCXB6CAQJneg&rkey=CAQSMElJqVDzPD10lbdPXx7KCIJgZFvZARRNlbqIR46OAE86LzFydnXFsyB3DPqrH6jiDg",
+          "cache_path": "data\\image\\emoji_stats\\fda958a87b54c919387efd718a5a6aeb.jpg",
+          "daily_counts": {
+            "2025-09-18": 1
+          },
+          "last_used": "2025-09-18T07:21:33.123353"
+        }
+      }
+    },
+    "174376170": {
+      "280935903": {
+        "2ad29ea9bc76ede920ce71caf9f38561.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSumB95EMb1CbqwZsc8QNzmK9dMGhit-zsg_wooztqTpdrajwMyBHByb2RQgL2jAVoQwPAtw5I4DgZ8nchLyvJb0XoCs5CCAQJneg&rkey=CAISMLy82eQraTNhHjIq21IKdUzRccRPrpiCfNZN9M9zKB6CeNoRLg-fVyDacVTgKwTkOQ",
+          "cache_path": "data\\image\\emoji_stats\\2ad29ea9bc76ede920ce71caf9f38561.jpg",
+          "daily_counts": {
+            "2025-09-15": 1
+          },
+          "last_used": "2025-09-15T19:52:52.551674"
+        }
+      }
+    },
+    "960856592": {
+      "1072888951": {
+        "e69e5e7dc7a9e83f5edfd809c2f44c7f.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTibHZQI72DJMxoRlc7ZiDXNZ6mghjPrQQg_woomdPE0fLUjwMyBHByb2RQgL2jAVoQ9cxPuDP8yZnzBYfFPYa0EXoCWfeCAQJneg&rkey=CAESMHJNXR6JUwqMwZ71MI62L70sVBjGkJTCum06VC0ROpo7H-IMN03YuEgM18GKyNH0Rg",
+          "cache_path": "data\\image\\emoji_stats\\e69e5e7dc7a9e83f5edfd809c2f44c7f.jpg",
+          "daily_counts": {
+            "2025-09-13": 1
+          },
+          "last_used": "2025-09-13T12:25:49.471959"
+        }
+      },
+      "917571406": {
+        "910068df4a41022dbf17af6bd1aeb9fa.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQ8WlZ4WBCHxxKqyAgne5k2074mnhiQgwEg_wootIOEuLbYjwMyBHByb2RQgL2jAVoQK0LPfTfAJ21gNbKVFdi8-HoCfV-CAQJneg&rkey=CAISMMf9M3S_TYbeWtYSKiWSAYPCPr0D3HNTbdNhg3HHP_Cpbd8N2Wx6VgXgU7L0RzvW9g",
+          "cache_path": "data\\image\\emoji_stats\\910068df4a41022dbf17af6bd1aeb9fa.jpg",
+          "daily_counts": {
+            "2025-09-14": 1
+          },
+          "last_used": "2025-09-14T22:07:08.575903"
+        },
+        "4a342a6aecdd64d52413dd02ce1b13b6.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhR1z8ZC6i4zwxFIWAkzF0FwpYpuPBjKxhQg_woonb6qm7zYjwMyBHByb2RQgL2jAVoQ_sNMjvhfhSIUQzbPXDsB6XoC5aSCAQJneg&rkey=CAESMKlAtzCjJLznfb_omCLcjt7vCFZUjfx5Mgat9_d_u1Ry3EmtpDe-jGVB3V0OlNe2jA",
+          "cache_path": "data\\image\\emoji_stats\\4a342a6aecdd64d52413dd02ce1b13b6.jpg",
+          "daily_counts": {
+            "2025-09-14": 1
+          },
+          "last_used": "2025-09-14T22:32:58.882017"
+        }
+      },
+      "1604515048": {
+        "9d48f802a87827a8a791ec4e0e26687c.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQk16JmbPE8pafTmZZJzNHhPQB-GhjQdSD_CijMjPS_t9iPAzIEcHJvZFCAvaMBWhAlncCFcPQmKwDxunaAZEwjegIzUoIBAmd6&rkey=CAESMKlAtzCjJLznfb_omCLcjt7vCFZUjfx5Mgat9_d_u1Ry3EmtpDe-jGVB3V0OlNe2jA",
+          "cache_path": "data\\image\\emoji_stats\\9d48f802a87827a8a791ec4e0e26687c.jpg",
+          "daily_counts": {
+            "2025-09-14": 1
+          },
+          "last_used": "2025-09-14T22:11:53.638599"
+        }
+      }
+    },
+    "413538947": {
+      "406505552": {
+        "e7aabfba95988a0149581e0f5635ee6a.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQWNad6NYRkSG4512ZX2bsDcjpX3hjE7zog_woo8L_p2tvejwMyBHByb2RQgL2jAVoQncUbVQFZoA5k9cRW_JFkPHoCiQKCAQJuag&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\e7aabfba95988a0149581e0f5635ee6a.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:09:52.559109"
+        },
+        "5e0c7928593f5649cc20c2b55bfdf7bb.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhT7ExpHOnJrZNctPPM0_2zHv8HcsBjm5g8g_woo15aonPLfjwMyBHByb2RQgL2jAVoQZS96DJfueblAr61N-F55inoCcbmCAQJuag&rkey=CAESMOUdaUVmDi22LveSDS5I_QgXD8WUKGDSFEJKN9S6u83er75GxzcVv3ElA28HmDmerg",
+          "cache_path": "data\\image\\emoji_stats\\5e0c7928593f5649cc20c2b55bfdf7bb.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T21:23:14.803074"
+        }
+      },
+      "337235305": {
+        "f4334c2cde9e09488cdcb254aed642ed.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTtUAAr1PQBVe_AxDb968sMsqTZOxj8hwMg_woo3NvWmNzejwMyBHByb2RQgL2jAVoQ8xL4_qSG5JoVWkaFGBHvJ3oCCLuCAQJuag&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\f4334c2cde9e09488cdcb254aed642ed.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:12:02.324074"
+        },
+        "c954ec429aebd95749d2d6a70bc47bbd.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhS4adesU67iGROVEoLCfpv8YMcIMRiL3K4BIP8KKOWdxIrd3o8DMgRwcm9kUIC9owFaENIptUk7jY4LKwRL_nqb4zl6AgvqggECbmo&rkey=CAISMLIw2D20KKs3yFwbojpL3NY2q3Y5ldABC9ESK5NcDYv_-0_rjb-0EcY24FCAJgxs1Q",
+          "cache_path": "data\\image\\emoji_stats\\c954ec429aebd95749d2d6a70bc47bbd.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T10:16:00.962604"
+        }
+      },
+      "1786818658": {
+        "f46006f3a9406a6cdb34031fa195b7a3.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRJ1-hp5KLKKXRiHbvIQB5E8Ch-yBjA1gIg_wooxKWc5NPfjwMyBHByb2RQgL2jAVoQG-S826E8YedgBSL_XtEkQXoCXXWCAQJuag&rkey=CAESMMDq3OJk_SPlnSxkhmEeFTOPhCaoZTcTg9XFkgtpM7PC_GrRpb06IDieSgKX7MrTCg",
+          "cache_path": "data\\image\\emoji_stats\\f46006f3a9406a6cdb34031fa195b7a3.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T19:07:04.553353"
+        },
+        "b8df7d30a65aa9bb6e1830bf50d44398.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQSleWfTe2yJ7brphXyk7B1Za1MeBjUugEg_woonInaseLfjwMyBHByb2RQgL2jAVoQixuLFvsBGKaenCYOs6ulkHoCSUWCAQJneg&rkey=CAMSMJvuFZGmd9yBsdY6x6yD8mrNv6Wtku9msP7TYwXVdXXV1q3LCtlBMhqw2F3cvdnMMg",
+          "cache_path": "data\\image\\emoji_stats\\b8df7d30a65aa9bb6e1830bf50d44398.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T20:12:24.719876"
+        },
+        "7ee79e127dd4d30f72b5ede415b97815.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhT6HhoM9aVfzE7KvH5u2eHfNAHZ-RjbQiD_CijozpDR49-PAzIEcHJvZFCAvaMBWhB-K-5-5HJvz7F0tgft1NpkegJTtIIBAmd6&rkey=CAMSMJvuFZGmd9yBsdY6x6yD8mrNv6Wtku9msP7TYwXVdXXV1q3LCtlBMhqw2F3cvdnMMg",
+          "cache_path": "data\\image\\emoji_stats\\7ee79e127dd4d30f72b5ede415b97815.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T20:17:59.152536"
+        },
+        "5e0c7928593f5649cc20c2b55bfdf7bb.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhT7ExpHOnJrZNctPPM0_2zHv8HcsBjm5g8g_woo_IHvr_LfjwMyBHByb2RQgL2jAVoQ_rVPI9q-eaKDfzkTEh9KhXoCAWSCAQJneg&rkey=CAESMOUdaUVmDi22LveSDS5I_QgXD8WUKGDSFEJKN9S6u83er75GxzcVv3ElA28HmDmerg",
+          "cache_path": "data\\image\\emoji_stats\\5e0c7928593f5649cc20c2b55bfdf7bb.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T21:23:55.826680"
+        }
+      },
+      "632282641": {
+        "7be55f285d35428046fa24de2a9d061c.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRzU4BXmpkje6JA2HXZp4dT-Ocdphj391Eg_woovqXX0NzfjwMyBHByb2RQgL2jAVoQcSKwAl-pC_YVdjd3LkLEIHoCiN2CAQJuag&rkey=CAESMMDq3OJk_SPlnSxkhmEeFTOPhCaoZTcTg9XFkgtpM7PC_GrRpb06IDieSgKX7MrTCg",
+          "cache_path": "data\\image\\emoji_stats\\7be55f285d35428046fa24de2a9d061c.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T19:46:39.291164"
+        }
+      },
+      "1054080494": {
+        "7ee79e127dd4d30f72b5ede415b97815.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhT6HhoM9aVfzE7KvH5u2eHfNAHZ-RjbQiD_CijapdDd49-PAzIEcHJvZFCAvaMBWhA1iWZMk5Gj2lFYGOga418HegLanYIBAm5q&rkey=CAMSMJvuFZGmd9yBsdY6x6yD8mrNv6Wtku9msP7TYwXVdXXV1q3LCtlBMhqw2F3cvdnMMg",
+          "cache_path": "data\\image\\emoji_stats\\7ee79e127dd4d30f72b5ede415b97815.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T20:18:25.475648"
+        }
+      },
+      "1135339201": {
+        "dceab321b77736e35c09ccd861cf3d14.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTXoHOCD1uIW-kCfdH_BjIdBz7PBBjs5mUg_wooxpf1g__fjwMyBHByb2RQgL2jAVoQchAtJ_KlPWsZ1qLlbZ8ghnoCb1mCAQJneg&rkey=CAQSMBF8YbT4pu38z3P2lY8sVsAhTI3KYvxSyqNqBcnMSDnAd6jDPStdypsxlokXDw_Czw",
+          "cache_path": "data\\image\\emoji_stats\\dceab321b77736e35c09ccd861cf3d14.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T22:20:38.152030"
+        }
+      }
+    },
+    "594529103": {
+      "1208663425": {
+        "2b03df7c239791f92c4c830e278e2b34.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTgXyOufKbgbGb8dEbxBLZBtvzMaxi0EiD_Cij5lt3EyN-PAzIEcHJvZFCAvaMBWhCpOOLgYJnQtXNJ6Y7F3aZ6egJINYIBAm5q&rkey=CAESMIHOXdWyMAB9gCQQ08VwdGVr5Snh_VDYPJW5SerG0-uoTzWQpKvshw1HfOzZiPV9Hw",
+          "cache_path": "data\\image\\emoji_stats\\2b03df7c239791f92c4c830e278e2b34.jpg",
+          "daily_counts": {
+            "2025-09-17": 3
+          },
+          "last_used": "2025-09-17T18:25:34.586412"
+        }
+      },
+      "273421673": {
+        "2b03df7c239791f92c4c830e278e2b34.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTgXyOufKbgbGb8dEbxBLZBtvzMaxi0EiD_CiiYwL_jyd-PAzIEcHJvZFCAvaMBWhCGbLLAETFoMn9ZVZ-Mert-egJuBoIBAmd6&rkey=CAESMIHOXdWyMAB9gCQQ08VwdGVr5Snh_VDYPJW5SerG0-uoTzWQpKvshw1HfOzZiPV9Hw",
+          "cache_path": "data\\image\\emoji_stats\\2b03df7c239791f92c4c830e278e2b34.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T18:22:35.743601"
+        },
+        "2b7057f5ed8dbcfb41684f6cbd7bc639.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQRxWXFJ_7nmDDvxbbritLt0hbx6Bi1uAQg_woo-6rv6crfjwMyBHByb2RQgL2jAVoQkAJHcY5Kop9BjYRGsw_rUHoCYuGCAQJneg&rkey=CAESMIHOXdWyMAB9gCQQ08VwdGVr5Snh_VDYPJW5SerG0-uoTzWQpKvshw1HfOzZiPV9Hw",
+          "cache_path": "data\\image\\emoji_stats\\2b7057f5ed8dbcfb41684f6cbd7bc639.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T18:27:00.460399"
+        },
+        "9b64e5d77feb3f1e6ab7cf273c8cfd88.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSTQiuPbIq9ZEjeQOt2R6OsnXqp3hiTuAQg_wootdrJ_-LfjwMyBHByb2RQgL2jAVoQ2Asa7lpsypuAaRx_nuh9xHoCPsyCAQJneg&rkey=CAMSMJvuFZGmd9yBsdY6x6yD8mrNv6Wtku9msP7TYwXVdXXV1q3LCtlBMhqw2F3cvdnMMg",
+          "cache_path": "data\\image\\emoji_stats\\9b64e5d77feb3f1e6ab7cf273c8cfd88.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T20:15:08.089105"
+        }
+      },
+      "1093003249": {
+        "e944ebed8b226b88907f19e5529ec666.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSEpiSy-uKg-46xUukoXpuYCH8e8RjPHyD_CijIpffr0N-PAzIEcHJvZFCAvaMBWhCHqCfTWczf1w6GwLYVs1j1egJ0wYIBAmd6&rkey=CAESMIHOXdWyMAB9gCQQ08VwdGVr5Snh_VDYPJW5SerG0-uoTzWQpKvshw1HfOzZiPV9Hw",
+          "cache_path": "data\\image\\emoji_stats\\e944ebed8b226b88907f19e5529ec666.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T18:53:54.998897"
+        }
+      },
+      "1848519332": {
+        "b737fb435cf911c037c5864586922f94.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTjaTb5i9FPWg2EK4lSKE6DaXUHNxjslsIBIP8KKJOrr-3Q348DMgRwcm9kUIC9owFaEG01JU2rqO_XVGECOT363A16As22ggECZ3o&rkey=CAESMIHOXdWyMAB9gCQQ08VwdGVr5Snh_VDYPJW5SerG0-uoTzWQpKvshw1HfOzZiPV9Hw",
+          "cache_path": "data\\image\\emoji_stats\\b737fb435cf911c037c5864586922f94.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T18:53:58.412527"
+        },
+        "120ada67c5c35cbaeccd7fb3b31c4835.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSh0qLInzIFc3DcZTm73f0g_z3hSRi1ESD_Cij-1oKU0d-PAzIEcHJvZFCAvaMBWhCNwSh3pjbLnLUrv_lBu7xDegKvqIIBAmd6&rkey=CAESMIHOXdWyMAB9gCQQ08VwdGVr5Snh_VDYPJW5SerG0-uoTzWQpKvshw1HfOzZiPV9Hw",
+          "cache_path": "data\\image\\emoji_stats\\120ada67c5c35cbaeccd7fb3b31c4835.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T18:55:19.417510"
+        },
+        "1b066fde2f3a60742db7f59f613cb8ec.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhS2dtTJAzklIMyp5Y53FjhnkNVaeRiODCD_Cijsr5jT1N-PAzIEcHJvZFCAvaMBWhCJTgf2boowy9tjRTAnQd-5egL20IIBAmd6&rkey=CAESMMDq3OJk_SPlnSxkhmEeFTOPhCaoZTcTg9XFkgtpM7PC_GrRpb06IDieSgKX7MrTCg",
+          "cache_path": "data\\image\\emoji_stats\\1b066fde2f3a60742db7f59f613cb8ec.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T19:10:56.772984"
+        },
+        "a1a61328b5acd3ed6a27da2cd7adeaa9.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQZuo9EmGHNd523_bFjAbuyM31llBiJIyD_Cijzn6XG1d-PAzIEcHJvZFCAvaMBWhC4uYrtuKcT31Zh-xqBPdv7egLeDYIBAmd6&rkey=CAESMMDq3OJk_SPlnSxkhmEeFTOPhCaoZTcTg9XFkgtpM7PC_GrRpb06IDieSgKX7MrTCg",
+          "cache_path": "data\\image\\emoji_stats\\a1a61328b5acd3ed6a27da2cd7adeaa9.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T19:14:58.240587"
+        },
+        "5e1c9540e6870691d4351ffa4261e4f2.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSHToxwxQJAivX0kOGcrcXhsP2r0hiJqCEg_wooiJya7tXfjwMyBHByb2RQgL2jAVoQN5dmkGuOMSQMcEFKu9iwpXoCD1WCAQJneg&rkey=CAESMMDq3OJk_SPlnSxkhmEeFTOPhCaoZTcTg9XFkgtpM7PC_GrRpb06IDieSgKX7MrTCg",
+          "cache_path": "data\\image\\emoji_stats\\5e1c9540e6870691d4351ffa4261e4f2.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T19:16:22.184764"
+        }
+      },
+      "2663646956": {
+        "4d3b340a099fe6d4151e6b770f5446c7.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhR8i0AK1kGgacZXEziJrGtGysuIbxi8OyD_Ciiwz6qO0d-PAzIEcHJvZFCAvaMBWhDYoNjIqTtopoOHu-OHR0d3egKxfIIBAmd6&rkey=CAESMIHOXdWyMAB9gCQQ08VwdGVr5Snh_VDYPJW5SerG0-uoTzWQpKvshw1HfOzZiPV9Hw",
+          "cache_path": "data\\image\\emoji_stats\\4d3b340a099fe6d4151e6b770f5446c7.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T18:55:07.443071"
+        }
+      }
+    },
+    "1032460837": {
+      "1977604074": {
+        "9864ad51839a9a096f549da6f3d5c280.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSjE4seKVy6JSKDFC2Kx3lifI2XnRjEmQQg_woo6Z6bsM7fjwMyBHByb2RQgL2jAVoQoE_Cr3HJgDgQ5as0F4OXgHoCjUOCAQJneg&rkey=CAESMIHOXdWyMAB9gCQQ08VwdGVr5Snh_VDYPJW5SerG0-uoTzWQpKvshw1HfOzZiPV9Hw",
+          "cache_path": "data\\image\\emoji_stats\\9864ad51839a9a096f549da6f3d5c280.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T18:42:53.301218"
+        },
+        "cd43e7822694d37cbf3b0a3171dc8f93.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhT4TLDj__iHuRuVBgxGaCeMDoF70BiWPyD_Ciitx82siOCPAzIEcHJvZFCAvaMBWhB_0FDWqdAg3Ddk7vn5f_z-egKSVIIBAmd6&rkey=CAQSMFJUzvYWl53DM8PnX3suCLgIGMjZmuRaSmLrNAbbCV2MOuxbzyDkhX9cGCSNKCnWTw",
+          "cache_path": "data\\image\\emoji_stats\\cd43e7822694d37cbf3b0a3171dc8f93.jpg",
+          "daily_counts": {
+            "2025-09-17": 1
+          },
+          "last_used": "2025-09-17T23:02:14.614210"
+        }
+      }
+    },
+    "1064163905": {
+      "3213478871": {
+        "e6d1619a50df8f8405713c98a6c8a21a.jpg": {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSrkYUOqEleHEVsMBPyGAW59EkDKBjyxAYg_woo69yU5qbajwMyBHByb2RQgL2jAVoQgMTMt7anWzTtW0Ei84btvHoCISSCAQJneg&rkey=CAMSMLidUN-BtYAr_0RanaMW_Z6YleUNX-9iSjcJ3sa2LyMPbyEPTVgsFaYMjvf4UjY8jw",
+          "cache_path": "data\\image\\emoji_stats\\e6d1619a50df8f8405713c98a6c8a21a.jpg",
+          "daily_counts": {
+            "2025-09-15": 1
+          },
+          "last_used": "2025-09-15T16:02:30.153610"
+        }
+      }
+    }
+  },
+  "user_count": {
+    "853963912": {
+      "2523148917": {
+        "2025-09-18": 1
+      }
+    },
+    "746834360": {
+      "741549566": {
+        "2025-09-18": 5
+      },
+      "1979813690": {
+        "2025-09-18": 2
+      },
+      "1175368714": {
+        "2025-09-18": 1
+      }
+    },
+    "626192977": {
+      "376579332": {
+        "2025-09-18": 1
+      }
+    },
+    "585479130": {
+      "1602143838": {
+        "2025-09-18": 3
+      }
+    },
+    "719518427": {
+      "534256344": {
+        "2025-09-18": 1
+      }
+    },
+    "812078719": {
+      "562871744": {
+        "2025-09-16": 1,
+        "2025-09-17": 1
+      },
+      "715171276": {
+        "2025-09-16": 2
+      },
+      "649169116": {
+        "2025-09-16": 2,
+        "2025-09-17": 1
+      }
+    },
+    "700644107": {
+      "1102844500": {
+        "2025-09-16": 1
+      },
+      "779084137": {
+        "2025-09-16": 3,
+        "2025-09-17": 2
+      },
+      "939912032": {
+        "2025-09-16": 2,
+        "2025-09-17": 4
+      },
+      "1016703577": {
+        "2025-09-16": 1
+      },
+      "460085985": {
+        "2025-09-16": 2,
+        "2025-09-17": 2
+      },
+      "1095190230": {
+        "2025-09-16": 1
+      },
+      "857285446": {
+        "2025-09-17": 2
+      },
+      "616572768": {
+        "2025-09-17": 1
+      },
+      "844199053": {
+        "2025-09-17": 1,
+        "2025-09-18": 2
+      },
+      "3155296729": {
+        "2025-09-17": 2
+      }
+    },
+    "678640722": {
+      "632861256": {
+        "2025-09-16": 7,
+        "2025-09-17": 3,
+        "2025-09-18": 3
+      },
+      "864772045": {
+        "2025-09-16": 1,
+        "2025-09-17": 2,
+        "2025-09-18": 2
+      },
+      "391173332": {
+        "2025-09-16": 1,
+        "2025-09-17": 2,
+        "2025-09-18": 2
+      },
+      "1874264047": {
+        "2025-09-16": 2,
+        "2025-09-17": 5
+      },
+      "942781037": {
+        "2025-09-16": 1,
+        "2025-09-17": 4,
+        "2025-09-18": 3
+      },
+      "370615667": {
+        "2025-09-17": 6
+      },
+      "262229759": {
+        "2025-09-17": 3
+      },
+      "1741809231": {
+        "2025-09-17": 1
+      },
+      "835823635": {
+        "2025-09-18": 1
+      },
+      "3152008483": {
+        "2025-09-18": 1
+      },
+      "1057901286": {
+        "2025-09-18": 1
+      }
+    },
+    "971599245": {
+      "1500973063": {
+        "2025-09-16": 3,
+        "2025-09-17": 17,
+        "2025-09-18": 2
+      },
+      "2210805169": {
+        "2025-09-17": 3
+      },
+      "734271190": {
+        "2025-09-17": 26
+      },
+      "969286467": {
+        "2025-09-17": 3
+      },
+      "2845045390": {
+        "2025-09-17": 7
+      },
+      "1214928577": {
+        "2025-09-17": 3
+      },
+      "351383618": {
+        "2025-09-17": 5
+      },
+      "2764071169": {
+        "2025-09-17": 9,
+        "2025-09-18": 1
+      },
+      "273421673": {
+        "2025-09-17": 1
+      },
+      "1214375192": {
+        "2025-09-17": 2
+      },
+      "2256729125": {
+        "2025-09-18": 3
+      },
+      "582347572": {
+        "2025-09-18": 1
+      }
+    },
+    "901851661": {
+      "2518749797": {
+        "2025-09-16": 4,
+        "2025-09-17": 15,
+        "2025-09-18": 2
+      },
+      "1820536974": {
+        "2025-09-17": 13
+      },
+      "2243216588": {
+        "2025-09-17": 1,
+        "2025-09-18": 1
+      }
+    },
+    "817304322": {
+      "915436336": {
+        "2025-09-16": 2,
+        "2025-09-17": 6
+      },
+      "494111722": {
+        "2025-09-16": 1
+      },
+      "2754403707": {
+        "2025-09-16": 2,
+        "2025-09-17": 4
+      },
+      "1607928177": {
+        "2025-09-16": 1,
+        "2025-09-17": 1
+      },
+      "3398902282": {
+        "2025-09-16": 1,
+        "2025-09-17": 1
+      },
+      "2034756660": {
+        "2025-09-16": 1,
+        "2025-09-17": 1
+      },
+      "972096153": {
+        "2025-09-17": 2
+      },
+      "875354745": {
+        "2025-09-17": 1
+      },
+      "1813520078": {
+        "2025-09-17": 2
+      },
+      "1506123340": {
+        "2025-09-17": 2
+      }
+    },
+    "730698039": {
+      "945364538": {
+        "2025-09-18": 1
+      }
+    },
+    "580781801": {
+      "2498552575": {
+        "2025-09-16": 4,
+        "2025-09-17": 2
+      },
+      "726499528": {
+        "2025-09-16": 1
+      },
+      "273421673": {
+        "2025-09-16": 1,
+        "2025-09-17": 1,
+        "2025-09-18": 1
+      },
+      "787114519": {
+        "2025-09-16": 1
+      },
+      "2528823583": {
+        "2025-09-17": 1
+      },
+      "1519325944": {
+        "2025-09-17": 3
+      },
+      "1282137325": {
+        "2025-09-17": 2
+      },
+      "1362480326": {
+        "2025-09-17": 1
+      },
+      "505571318": {
+        "2025-09-18": 1
+      },
+      "771575637": {
+        "2025-09-18": 3
+      }
+    },
+    "703227283": {
+      "2794856173": {
+        "2025-09-17": 1
+      },
+      "2214994869": {
+        "2025-09-17": 1
+      },
+      "2081127113": {
+        "2025-09-17": 1
+      }
+    },
+    "2150946207": {
+      "3423462135": {
+        "2025-09-16": 1,
+        "2025-09-17": 1
+      },
+      "425799870": {
+        "2025-09-17": 1
+      },
+      "1014167381": {
+        "2025-09-17": 2
+      },
+      "2667011422": {
+        "2025-09-17": 1
+      },
+      "252353516": {
+        "2025-09-18": 1
+      }
+    },
+    "174376170": {
+      "280935903": {
+        "2025-09-15": 1
+      }
+    },
+    "960856592": {
+      "1072888951": {
+        "2025-09-13": 1
+      },
+      "917571406": {
+        "2025-09-14": 2
+      },
+      "1604515048": {
+        "2025-09-14": 1
+      }
+    },
+    "413538947": {
+      "406505552": {
+        "2025-09-17": 2
+      },
+      "337235305": {
+        "2025-09-17": 2
+      },
+      "1786818658": {
+        "2025-09-17": 4
+      },
+      "632282641": {
+        "2025-09-17": 1
+      },
+      "1054080494": {
+        "2025-09-17": 1
+      },
+      "1135339201": {
+        "2025-09-17": 1
+      }
+    },
+    "594529103": {
+      "1208663425": {
+        "2025-09-17": 3
+      },
+      "273421673": {
+        "2025-09-17": 3
+      },
+      "1093003249": {
+        "2025-09-17": 1
+      },
+      "1848519332": {
+        "2025-09-17": 5
+      },
+      "2663646956": {
+        "2025-09-17": 1
+      }
+    },
+    "1032460837": {
+      "1977604074": {
+        "2025-09-17": 2
+      }
+    },
+    "1064163905": {
+      "3213478871": {
+        "2025-09-15": 1
+      }
+    }
+  }
 }

@@ -4,10 +4,11 @@ import logging
 from typing import Dict, Any
 from common.constants.HMMT import HMMT
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
-from ncatbot.utils.config import config
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
-bot = CompatibleEnrollment
 logger = logging.getLogger("QQMusicSender")
 
 
@@ -71,7 +72,7 @@ class QQMusicAPI:
             return ""
 
 
-class QQMusicCardSender(BasePlugin):
+class QQMusicCardSender(NcatBotPlugin):
     name = "QQMusicCardSender"
     version = "1.0"
 
@@ -95,7 +96,7 @@ class QQMusicCardSender(BasePlugin):
             logger.error(f"发送失败: {str(e)}")
             return False
 
-    @bot.group_event()
+    @group_only
     async def handle_music_card(self, input: GroupMessage):
         message = input.raw_message.strip()
         if message.startswith("qq点歌 "):

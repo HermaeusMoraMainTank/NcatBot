@@ -6,12 +6,14 @@ from PIL import Image, ImageDraw, ImageFont
 import io
 import base64
 from ncatbot.core.message import GroupMessage
-from ncatbot.core.element import Image as BotImage, MessageChain, Text, At
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.core import Image as BotImage, MessageChain, Text, At
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 from .commands import COMMANDS, CATEGORY_NAMES, CATEGORY_COMMANDS
 import asyncio
 
-bot = CompatibleEnrollment
 log = logging.getLogger(__name__)
 
 # 用户调用频率限制
@@ -35,7 +37,7 @@ def update_user_call_time(user_id: int) -> None:
     user_last_call_times[user_id] = datetime.now()
 
 
-class MoehuImageSender(BasePlugin):
+class MoehuImageSender(NcatBotPlugin):
     name = "MoehuImageSender"  # 插件名称
     version = "1.0"  # 插件版本
     commands = COMMANDS  # 命令配置
@@ -167,7 +169,7 @@ class MoehuImageSender(BasePlugin):
             log.error(f"禁言用户失败: {e}")
             return False
 
-    @bot.group_event()
+    @group_only
     async def handle_image(self, input: GroupMessage):
         message = input.raw_message.strip()
         user_id = input.sender.user_id

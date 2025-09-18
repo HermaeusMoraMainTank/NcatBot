@@ -10,17 +10,18 @@ from io import BytesIO
 from curl_cffi import requests
 from common.constants.HMMT import HMMT
 from ncatbot.core.message import GroupMessage
-from ncatbot.core.element import Image as ImageElement, MessageChain, Reply, Text
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
-
-bot = CompatibleEnrollment
+from ncatbot.core import Image as ImageElement, MessageChain, Reply, Text
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 # 用于存储搜索结果的字典
 # 格式: {(group_id, user_id): [user_data, ...]}
 search_results: Dict[Tuple[int, int], List[Dict]] = {}
 
 
-class VrChatInfo(BasePlugin):
+class VrChatInfo(NcatBotPlugin):
     name = "VrChatInfo"  # 插件名称
     version = "1.0"  # 插件版本
 
@@ -574,7 +575,7 @@ class VrChatInfo(BasePlugin):
             for x in range(width):
                 image.putpixel((x, y), (r, g, b))
 
-    @bot.group_event()
+    @group_only
     async def handle_vrchat_search(self, input: GroupMessage):
         """处理查询命令"""
         message = input.raw_message.strip()
@@ -585,8 +586,8 @@ class VrChatInfo(BasePlugin):
                 # 获取被回复的消息ID
                 reply_id = None
                 for msg in input.message:
-                    if msg["type"] == "reply":
-                        reply_id = msg["data"]["id"]
+                    if hasattr(msg, "type") and msg.type == "reply":
+                        reply_id = msg.data.get("id")
                         break
 
                 if reply_id:
@@ -604,7 +605,7 @@ class VrChatInfo(BasePlugin):
                             number_match = re.match(r"^\s*(\d+)", clean_message)
                             if number_match:
                                 number = int(number_match.group(1))
-                                key = (input.group_id, input.user_id)
+                                key = (input.group_id, input.sender.user_id)
 
                                 if key in search_results:
                                     if 0 <= number - 1 < len(search_results[key]):
@@ -713,7 +714,7 @@ class VrChatInfo(BasePlugin):
             return
 
         # 存储搜索结果
-        search_results[(input.group_id, input.user_id)] = users
+        search_results[(input.group_id, input.sender.user_id)] = users
 
         # 生成并发送搜索结果图片
         image_path = self.create_search_result_image(users)

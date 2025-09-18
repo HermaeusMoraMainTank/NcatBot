@@ -8,12 +8,14 @@ from PIL import Image as PILImage, ImageDraw, ImageFont
 import json
 
 from common.constants.HMMT import HMMT
-from ncatbot.core.element import At, MessageChain, Text, Image
+from ncatbot.core import At, MessageChain, Text, Image
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 
-bot = CompatibleEnrollment
 log = logging.getLogger(__name__)
 
 # 常量
@@ -41,7 +43,7 @@ LUCK_DESC_LIST = [
 ]
 
 
-class Fortune(BasePlugin):
+class Fortune(NcatBotPlugin):
     name = "Fortune"  # 插件名称
     version = "1.0"  # 插件版本
 
@@ -55,10 +57,10 @@ class Fortune(BasePlugin):
         log.info(f"开始加载 {self.name} 插件 v{self.version}")
         log.info(f"{self.name} 插件加载完成")
 
-    @bot.group_event()
+    @group_only
     async def handle_fortune(self, input: GroupMessage):
         message = input.raw_message
-        sender_id = input.user_id
+        sender_id = input.sender.user_id
 
         if message == "运势":
             luck_value = self.calculate_luck_value(sender_id)
@@ -118,8 +120,8 @@ class Fortune(BasePlugin):
             and sender_id == HMMT.HMMT_ID
         ):
             for isAt in input.message:
-                if isAt.get("type") == "at":
-                    target_user_id = int(isAt.get("data").get("qq"))
+                if hasattr(isAt, "msg_seg_type") and isAt.msg_seg_type == "at":
+                    target_user_id = int(isAt.qq)
 
             target = await self.api.get_group_member_info(
                 group_id=input.group_id, user_id=target_user_id, no_cache=True

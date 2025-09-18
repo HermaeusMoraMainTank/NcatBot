@@ -8,8 +8,11 @@ from pathlib import Path
 import tempfile
 
 from ncatbot.core.message import GroupMessage
-from ncatbot.core.element import Image, MessageChain
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.core import Image, MessageChain
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 
 # 配置日志
@@ -20,8 +23,6 @@ handler.setLevel(logging.INFO)
 formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 handler.setFormatter(formatter)
 logger.addHandler(handler)
-
-bot = CompatibleEnrollment
 
 
 @dataclass_json
@@ -47,7 +48,7 @@ class DataStructure:
     date_modified: str
 
 
-class Meme(BasePlugin):
+class Meme(NcatBotPlugin):
     name = "Meme"
     version = "1.0"
     baseurl = "http://127.0.0.1:2233/memes"
@@ -92,10 +93,10 @@ class Meme(BasePlugin):
         except Exception as e:
             logger.error(f"加载 meme 数据失败: {e}", exc_info=True)
 
-    @bot.group_event()
+    @group_only
     async def handle_meme(self, input: GroupMessage):
         # 检查发送者是否在 banlist 中
-        if str(input.user_id) in self.banlist:
+        if str(input.sender.user_id) in self.banlist:
             return
 
         if input.raw_message == "meme":
@@ -149,18 +150,26 @@ class Meme(BasePlugin):
                 logger.error(f"请求 meme 列表时发生错误: {e}", exc_info=True)
             return
 
-        if input.message[0]["type"] == "text":
-            com = input.message[0]["data"]["text"].strip()
+        # 适配新的 MessageArray 结构
+        message_text = ""
+        for msg_segment in input.message:
+            if hasattr(msg_segment, "text"):
+                message_text = msg_segment.text
+                break
+
+        if message_text:
+            com = message_text.strip()
             coms = str(com).split(" ")
 
             if coms[0] in self.keywordslist:
                 # 检查消息中是否有被 ban 的用户
                 for message in input.message:
                     if (
-                        message["type"] == "at"
-                        and str(message["data"]["qq"]) in self.banlist
+                        hasattr(message, "msg_seg_type")
+                        and message.msg_seg_type == "at"
                     ):
-                        return
+                        if str(message.qq) in self.banlist:
+                            return
 
                 meme_config = self.keywordslist[coms[0]]
                 params_type = meme_config.params_type
@@ -173,7 +182,10 @@ class Meme(BasePlugin):
                     input, params_type.min_images, params_type.max_images
                 )
                 # 检查是否有 @ 消息
-                has_at = any(msg["type"] == "at" for msg in input.message)
+                has_at = any(
+                    hasattr(msg, "msg_seg_type") and msg.msg_seg_type == "at"
+                    for msg in input.message
+                )
                 texts = self.collect_texts(input, has_at)
 
                 if (
@@ -217,11 +229,11 @@ class Meme(BasePlugin):
     ) -> List[Path]:
         """收集头像 URL，下载头像文件并返回文件路径列表"""
         avatar_urls = []
-        current_user_id = str(input.user_id)
+        current_user_id = str(input.sender.user_id)
 
         for message in input.message:
-            if message["type"] == "at":
-                target_id = message["data"]["qq"]
+            if hasattr(message, "msg_seg_type") and message.msg_seg_type == "at":
+                target_id = str(message.qq)  # 确保是字符串类型
                 # 如果目标ID是特殊用户ID，且当前用户不是特殊用户，则替换为当前用户ID
                 if (
                     target_id == self.SPECIAL_USER_ID
@@ -260,20 +272,32 @@ class Meme(BasePlugin):
             return texts
 
         # 处理第一个消息（命令）中的文本
-        if input.message[0]["type"] == "text":
-            command_text = input.message[0]["data"]["text"].strip()
+        first_message_text = ""
+        for msg_segment in input.message:
+            if hasattr(msg_segment, "text"):
+                first_message_text = msg_segment.text
+                break
+
+        if first_message_text:
+            command_text = first_message_text.strip()
             # 分割命令，跳过第一个（关键词）
             parts = command_text.split(" ", 1)
             if len(parts) > 1:
                 texts.extend(parts[1].split())
 
         # 处理其他消息
-        for i in range(1, len(input.message)):
-            message = input.message[i]
-            if has_at and message["type"] == "at":
+        for i, message in enumerate(input.message):
+            if i == 0:  # 跳过第一个消息段（通常是命令）
                 continue
-            if message["type"] == "plain":
-                texts.extend(message["data"]["text"].split())
+            if (
+                has_at
+                and hasattr(message, "msg_seg_type")
+                and message.msg_seg_type == "at"
+            ):
+                continue
+            if hasattr(message, "msg_seg_type") and message.msg_seg_type == "text":
+                if hasattr(message, "text"):
+                    texts.extend(message.text.split())
         return texts
 
     async def send_meme_request(

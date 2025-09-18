@@ -4,17 +4,19 @@ import aiohttp
 import os
 import math
 from ncatbot.core.message import GroupMessage
-from ncatbot.core.element import Image as ImageElement, MessageChain, Reply
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.core import Image as ImageElement, MessageChain, Reply
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 import json
 from ncatbot.utils.logger import get_log
 
-bot = CompatibleEnrollment
 _log = get_log()
 
 
-class FF14House(BasePlugin):
+class FF14House(NcatBotPlugin):
     name = "FF14House"  # 插件名称
     version = "1.0"  # 插件版本
     FONT_PATH = "data/font/FZMiaoWuK.TTF"
@@ -355,7 +357,7 @@ class FF14House(BasePlugin):
 
         return image
 
-    @bot.group_event()
+    @group_only
     async def handle_ff14house(self, input: GroupMessage):
         message_parts = input.raw_message.split(" ")
         if message_parts[0] != "搜索房屋":

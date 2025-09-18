@@ -3,15 +3,16 @@ import random
 from typing import Dict
 
 from ncatbot.core.message import GroupMessage
-from ncatbot.core.element import Image, MessageChain, Text
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.core import Image, MessageChain, Text
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 log = logging.getLogger(__name__)
 
-bot = CompatibleEnrollment
 
-
-class RussianRoulette(BasePlugin):
+class RussianRoulette(NcatBotPlugin):
     name = "RussianRoulette"  # 插件名称
     version = "1.0"  # 插件版本
     CLIP_SIZE = 6  # 弹夹大小
@@ -28,7 +29,7 @@ class RussianRoulette(BasePlugin):
         self.load_kill_count()
         log.info(f"{self.name} 插件加载完成")
 
-    @bot.group_event()
+    @group_only
     async def handle_russian_roulette(self, input: GroupMessage):
         message = input.raw_message
         if message.startswith("轮盘赌"):
@@ -147,24 +148,24 @@ class RussianRoulette(BasePlugin):
                 try:
                     await self.api.set_group_ban(
                         group_id=group_id,
-                        user_id=input.user_id,
+                        user_id=input.sender.user_id,
                         duration=self.DAMAGE_TIME * 2 * 60,
                     )
                     return True
                 except Exception as e:
-                    log.info(f"无法禁言 {input.user_id} {input.sender.nickname}")
+                    log.info(f"无法禁言 {input.sender.user_id} {input.sender.nickname}")
                     log.info(str(e))
                     return True
 
             try:
                 await self.api.set_group_ban(
                     group_id=group_id,
-                    user_id=input.user_id,
+                    user_id=input.sender.user_id,
                     duration=self.DAMAGE_TIME * 60,
                 )
                 return True
             except Exception as e:
-                log.info(f"无法禁言 {input.user_id} {input.sender.nickname}")
+                log.info(f"无法禁言 {input.sender.user_id} {input.sender.nickname}")
                 log.info(str(e))
                 return True
 

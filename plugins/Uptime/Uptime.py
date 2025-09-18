@@ -3,11 +3,13 @@ import io
 import requests
 from datetime import datetime, timedelta, timezone
 from PIL import Image, ImageDraw, ImageFont
-from ncatbot.plugin import BasePlugin, CompatibleEnrollment
-from ncatbot.core.element import MessageChain, Image as BotImage, Text
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
+from ncatbot.core import MessageChain, Image as BotImage, Text
 from ncatbot.core.message import GroupMessage
 
-bot = CompatibleEnrollment
 
 # 标准判定时间点 (北京时间)
 STANDARD_TIMES = [5, 11, 17, 23]
@@ -138,11 +140,11 @@ def calculate_possible_end_times(start_time):
     return possible_ends
 
 
-class UptimePlugin(BasePlugin):
+class UptimePlugin(NcatBotPlugin):
     name = "uptime"
     version = "1.0"
 
-    @bot.group_event()
+    @group_only
     async def handle_uptime(self, input: GroupMessage):
         message = input.raw_message.strip()
         if not message.startswith("灭云"):

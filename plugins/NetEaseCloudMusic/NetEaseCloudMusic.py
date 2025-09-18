@@ -1,5 +1,8 @@
 from ncatbot.core import GroupMessage, MessageChain, Text, Record, Image
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 from ncatbot.utils.logger import get_log
 import json
 from PIL import Image as PILImage, ImageDraw, ImageFont
@@ -14,7 +17,6 @@ from common.constants.HMMT import HMMT
 import re
 
 _log = get_log()
-bot = CompatibleEnrollment
 
 # 用于存储搜索结果的字典
 # 格式: {(group_id, user_id): [(song_id, song_name, artist_name), ...]}
@@ -28,7 +30,7 @@ EXPONENT_HEX = "010001"
 CSRF_TOKEN = "7d327f98beb7cb91ebc9ad1fd50f4d19"
 
 
-class NetEaseCloudMusic(BasePlugin):
+class NetEaseCloudMusic(NcatBotPlugin):
     name = "NetEaseCloudMusic"
     version = "1.0"
 
@@ -159,7 +161,7 @@ class NetEaseCloudMusic(BasePlugin):
             _log.error(traceback.format_exc())
             raise
 
-    @bot.group_event()
+    @group_only
     async def handle_music(self, input: GroupMessage):
         """处理音乐相关命令"""
         message = input.raw_message.strip()
@@ -172,8 +174,8 @@ class NetEaseCloudMusic(BasePlugin):
                 # 获取被回复的消息ID
                 reply_id = None
                 for msg in input.message:
-                    if msg["type"] == "reply":
-                        reply_id = msg["data"]["id"]
+                    if hasattr(msg, "type") and msg.type == "reply":
+                        reply_id = msg.data.get("id")
                         break
 
                 if reply_id:
@@ -191,7 +193,7 @@ class NetEaseCloudMusic(BasePlugin):
                             number_match = re.match(r"^\s*(\d+)", clean_message)
                             if number_match:
                                 number = number_match.group(1)
-                                key = (input.group_id, input.user_id)
+                                key = (input.group_id, input.sender.user_id)
 
                                 if key in search_results:
                                     try:
@@ -277,7 +279,7 @@ class NetEaseCloudMusic(BasePlugin):
                 songs.append((song["id"], song["name"], song["ar"][0]["name"]))
 
             # 存储搜索结果
-            search_results[(input.group_id, input.user_id)] = songs
+            search_results[(input.group_id, input.sender.user_id)] = songs
 
             # 生成并发送图片
             image_data = self.create_search_result_image(songs)

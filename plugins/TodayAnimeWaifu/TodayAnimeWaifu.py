@@ -6,13 +6,15 @@ from typing import Dict, Set
 from common.constants.HMMT import HMMT
 from common.entity.GroupMember import GroupMember
 from common.utils.CommonUtil import CommonUtil
-from ncatbot.core.element import At, Image as ImageElement, MessageChain, Text
+from ncatbot.core import At, Image as ImageElement, MessageChain, Text
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 from ncatbot.utils.logger import get_log
 
-bot = CompatibleEnrollment
 
 _log = get_log()
 
@@ -21,10 +23,9 @@ ANIME_WAIFU_IMG_DIR = r"D:\IDEA\wife\img1"
 ANIME_WAIFU_IMG_DIR_3 = r"D:\IDEA\wife\img3"
 
 # 特殊用户ID
-SPECIAL_USER_ID = 273421673
 
 
-class TodayAnimeWaifu(BasePlugin):
+class TodayAnimeWaifu(NcatBotPlugin):
     name = "TodayAnimeWaifu"  # 插件名称
     version = "1.0"  # 插件版本
 
@@ -76,7 +77,7 @@ class TodayAnimeWaifu(BasePlugin):
         )
 
         # 特殊用户100%进入img3
-        if user_id == SPECIAL_USER_ID:
+        if user_id == HMMT.HMMT_ID:
             # 过滤掉已分配的特殊二次元老婆
             available_waifus_3 = [
                 waifu
@@ -180,12 +181,18 @@ class TodayAnimeWaifu(BasePlugin):
         name = os.path.splitext(filename)[0]
         return name
 
-    @bot.group_event()
+    @group_only
     async def handle_message(self, input: GroupMessage):
         if not input.message:
             return
         """处理消息"""
-        message = input.message[0].get("data", {}).get("text", "")
+
+        # 适配新的 MessageArray 结构
+        message = ""
+        for msg_segment in input.message:
+            if hasattr(msg_segment, "text"):
+                message = msg_segment.text
+                break
         user_id = input.sender.user_id
         group_id = input.group_id
 
@@ -280,16 +287,16 @@ class TodayAnimeWaifu(BasePlugin):
         if (
             input.raw_message.startswith("换")
             and "的二次元老婆" in input.raw_message
-            and (user_id == HMMT.HMMT_ID or user_id == 3860435136)
+            and (user_id == HMMT.HMMT_ID or user_id == "3860435136")
         ):
             target_user_id = None
             new_waifu_filename = None
             at_count = 0
 
             for isAt in input.message:
-                if isAt.get("type") == "at":
+                if hasattr(isAt, "msg_seg_type") and isAt.msg_seg_type == "at":
                     if at_count == 0:
-                        target_user_id = int(isAt.get("data").get("qq"))
+                        target_user_id = int(isAt.qq)
                     elif at_count == 1:
                         # 这里可以扩展为指定特定的二次元老婆
                         pass
@@ -382,8 +389,8 @@ class TodayAnimeWaifu(BasePlugin):
             # 检查是否有艾特消息
             target_user_id = None
             for msg in input.message:
-                if msg.get("type") == "at":
-                    target_user_id = int(msg.get("data").get("qq"))
+                if hasattr(msg, "msg_seg_type") and msg.msg_seg_type == "at":
+                    target_user_id = int(msg.qq)
                     break
 
             if target_user_id:

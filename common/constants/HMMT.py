@@ -1,6 +1,6 @@
 class HMMT:
-    HMMT_ID = 273421673
-    BOT_ID = 3555202423
+    HMMT_ID = "273421673"
+    BOT_ID = "3555202423"
     IMAGE_PATH = "F:\\oobabooga_windows\\lalafell\\"
     IMAGE_PATH1 = "F:\\oobabooga_windows\\test\\"
     ALICE_IMAGE_PATH = "data/image/alice/"
@@ -28,5 +28,5 @@ class HMMT:
     IMAGE_SCALE_PREFIX = "scale_"
     V_PATH = "data/image/vtuber/"
     USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
-    LALAFELL_GROUP_ID = 853963912
-    HMMT_GROUP_ID = 1064163905
+    LALAFELL_GROUP_ID = "853963912"
+    HMMT_GROUP_ID = "1064163905"

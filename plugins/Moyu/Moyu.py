@@ -1,17 +1,16 @@
 from ncatbot.core.message import GroupMessage
-from ncatbot.core.element import Image, MessageChain
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.core import Image, MessageChain
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 
-bot = CompatibleEnrollment
-
-
-class Moyu(BasePlugin):
+class Moyu(NcatBotPlugin):
     name = "Moyu"  # 插件名称
     version = "1.0"  # 插件版本
 
-
-    @bot.group_event()
+    @group_only
     async def handle_moyu(self, input: GroupMessage):
         if input.raw_message in ["摸鱼", "moyu"]:
             return await self.api.post_group_msg(

@@ -1,22 +1,22 @@
 import hashlib
 from common.constants.HMMT import HMMT
 from common.utils.CommonUtil import CommonUtil
-from ncatbot.core.message import GroupMessage
+from ncatbot.core import GroupMessage
 from ncatbot.utils.logger import get_log
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
-
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 # 日志配置
 _log = get_log()
 
-bot = CompatibleEnrollment
 
-
-class Jrrp(BasePlugin):
+class Jrrp(NcatBotPlugin):
     name = "Jrrp"  # 插件名称
     version = "1.0"  # 插件版本
 
-    @bot.group_event()
+    @group_only
     async def handle_jrrp(self, input: GroupMessage):
         """
         处理今日人品（JRRP）功能
@@ -24,7 +24,7 @@ class Jrrp(BasePlugin):
         if input.raw_message in ["jrrp", "今日人品"]:
             sender = input.sender
             _log.info(f"JRRP request from {sender.nickname} ({sender.user_id})")
-            if sender.user_id in [HMMT.HMMT_ID, 1042081663, 864772045]:
+            if sender.user_id in [HMMT.HMMT_ID, "1042081663", "864772045"]:
                 await self.api.post_group_msg(
                     group_id=input.group_id,
                     text=f"{sender.nickname} 的今日人品是：101。",

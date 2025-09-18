@@ -1,14 +1,16 @@
 import logging
 from datetime import datetime, timedelta
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 from common.entity.GroupMember import GroupMember
 
-bot = CompatibleEnrollment
 log = logging.getLogger(__name__)
 
 
-class MuteToWorkEnd(BasePlugin):
+class MuteToWorkEnd(NcatBotPlugin):
     name = "MuteToWorkEnd"
     version = "1.0"
     WORK_END_HOUR = 19
@@ -31,12 +33,12 @@ class MuteToWorkEnd(BasePlugin):
             log.error(f"获取用户权限信息失败: {e}")
             return False
 
-    @bot.group_event()
+    @group_only
     async def handle_mute_to_work_end(self, input: GroupMessage):
         """处理禁言到下班时间的指令"""
         if input.raw_message.strip().startswith("禁言到下班"):
             # 检查权限
-            if not await self.is_admin_or_owner(input.group_id, input.user_id):
+            if not await self.is_admin_or_owner(input.group_id, input.sender.user_id):
                 await self.api.post_group_msg(
                     group_id=input.group_id,
                     text="只有群主或管理员才能使用此命令",

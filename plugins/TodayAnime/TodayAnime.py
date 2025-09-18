@@ -3,14 +3,16 @@ import aiohttp
 
 from ncatbot.core import MessageChain, Text, Image
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 from ncatbot.utils import get_log
 
-bot = CompatibleEnrollment
 _log = get_log()
 
 
-class TodayAnime(BasePlugin):
+class TodayAnime(NcatBotPlugin):
     name = "TodayAnime"
     description = "今日番剧"
     version = "1.0"
@@ -31,7 +33,7 @@ class TodayAnime(BasePlugin):
         _log.info(f"开始加载 {self.name} 插件 v{self.version}")
         _log.info(f"{self.name} 插件加载完成")
 
-    @bot.group_event()
+    @group_only
     async def handle_TodayAnime_like(self, input: GroupMessage):
         if input.raw_message != "今日番剧":
             return

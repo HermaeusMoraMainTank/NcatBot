@@ -1,19 +1,21 @@
-from ncatbot.plugin import BasePlugin, CompatibleEnrollment
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 from ncatbot.core.request import Request
 from ncatbot.core.message import GroupMessage, PrivateMessage
-from ncatbot.core.element import At, MessageChain, Text
+from ncatbot.core import At, MessageChain, Text
 from ncatbot.utils.logger import get_log
 import html
 
 _log = get_log()
-bot = CompatibleEnrollment
 
 
-class AdminNotify(BasePlugin):
+class AdminNotify(NcatBotPlugin):
     name = "AdminNotify"
     version = "1.0"
 
-    ADMIN_ID = 273421673  # 管理员ID
+    ADMIN_ID = "273421673"  # 管理员ID
 
     @bot.request_event()
     async def on_request_event(self, msg: Request):
@@ -70,7 +72,7 @@ class AdminNotify(BasePlugin):
                 return await msg.reply("已接受好友请求")
 
     # 管理员处理群聊请求
-    @bot.group_event()
+    @group_only
     async def handle_group_request(self, msg: GroupMessage):
         if msg.user_id == self.ADMIN_ID:
             if (

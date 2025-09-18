@@ -1,16 +1,15 @@
 ﻿import random
 import logging
 
-from ncatbot.core.element import Image, MessageChain, Reply
+from ncatbot.core import Image, MessageChain, Reply
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
 
 
-bot = CompatibleEnrollment
 log = logging.getLogger(__name__)
 
 
-class Choujiang(BasePlugin):
+class Choujiang(NcatBotPlugin):
     name = "Choujiang"  # 插件名称
     version = "1.0"  # 插件版本
     # 使用字典存储每个群组的抽奖状态
@@ -46,7 +45,7 @@ class Choujiang(BasePlugin):
             ban_time = random.randint(1, 60)
 
             # 禁言用户
-            await self.api.set_group_ban(input.group_id, input.user_id, ban_time)
+            await self.api.set_group_ban(input.group_id, input.sender.user_id, ban_time)
             message = MessageChain(
                 [
                     Image("data/image/ba/haha.jpg"),
@@ -61,7 +60,7 @@ class Choujiang(BasePlugin):
         else:
             # 增加概率（每次发言增加0.01%的概率）
             group_data["probability"] = min(1.0, current_probability + 0.00005)
-            group_data["list"].append(input.user_id)  # 将用户添加到参与列表
+            group_data["list"].append(input.sender.user_id)  # 将用户添加到参与列表
 
     def _initmap(self, group_id):
         # 初始化群组的抽奖数据

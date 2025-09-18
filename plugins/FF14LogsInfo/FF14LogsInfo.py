@@ -8,11 +8,13 @@ from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 
 from ncatbot.core.message import GroupMessage
-from ncatbot.core.element import Image as ImageElement, MessageChain, Reply
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.core import Image as ImageElement, MessageChain, Reply
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
 
-bot = CompatibleEnrollment
 log = logging.getLogger(__name__)
 
 
@@ -23,7 +25,7 @@ class Zone:
         self.difficulty = difficulty
 
 
-class FF14LogsInfo(BasePlugin):
+class FF14LogsInfo(NcatBotPlugin):
     name = "FF14LogsInfo"  # 插件名称
     version = "1.0"  # 插件版本
 
@@ -359,7 +361,7 @@ class FF14LogsInfo(BasePlugin):
             return (30, 255, 0)
         return (128, 128, 128)
 
-    @bot.group_event()
+    @group_only
     async def handle_ff14_logs(self, input: GroupMessage):
         message_parts = input.raw_message.split(" ")
         if len(message_parts) != 3 or message_parts[0] != "搜索玩家logs":
@@ -370,7 +372,7 @@ class FF14LogsInfo(BasePlugin):
         if (
             character_name == "武术有栖"
             and server == "延夏"
-            and input.user_id != 273421673
+            and input.sender.user_id != "273421673"
         ):
             await self.api.post_group_msg(group_id=input.group_id, text="?")
             return

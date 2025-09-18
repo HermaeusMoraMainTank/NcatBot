@@ -1,9 +1,10 @@
 from ncatbot.core.message import GroupMessage
-from ncatbot.core.element import Image, MessageChain, Reply
-from ncatbot.plugin import CompatibleEnrollment, BasePlugin
+from ncatbot.core import Image, MessageChain, Reply
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 
-
-bot = CompatibleEnrollment
 
 HTTP_CAT_BASE_URL = "https://http.cat/"
 HTTP_STATUS_CODES = {
@@ -86,11 +87,11 @@ HTTP_STATUS_CODES = {
 }
 
 
-class HttpCat(BasePlugin):
+class HttpCat(NcatBotPlugin):
     name = "HttpCat"  # 插件名称
     version = "1.0"  # 插件版本
 
-    @bot.group_event()
+    @group_only
     async def http_cat(self, input: GroupMessage):
         """
         处理 HTTP Cat 功能

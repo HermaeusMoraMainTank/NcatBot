@@ -8,27 +8,28 @@
 
 from .ymconfig import nsfwdb
 from .utils import nsfwc, refresh_nsfw_config
-from ncatbot.core.message import GroupMessage
-from ncatbot.plugin import BasePlugin, CompatibleEnrollment
+from ncatbot.core import GroupMessage
+from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
+    group_only,
+)
 from ncatbot.utils.logger import get_log
-from ncatbot.utils.config import config
-import asyncio
+from ncatbot.utils import config
 import io
 import base64
 from PIL import Image, ImageDraw, ImageFont
 
-from ncatbot.core.element import (
+from ncatbot.core import (
     MessageChain,
     Text,
     At,
     Image as BotImage,
 )
 
-bot = CompatibleEnrollment
 _log = get_log()
 
 
-class YmNsfwPy(BasePlugin):
+class YmNsfwPy(NcatBotPlugin):
     name = "YmNsfwPy"
     version = "0.0.2"
     description = "群聊NSFW内容检测插件, 基于nsfwpy，由于插件形态可能存在变动，暂时不按照插件规范进行开发"
@@ -38,7 +39,7 @@ class YmNsfwPy(BasePlugin):
 
     def save_config(self):
         """保存配置到插件数据"""
-        self.data.update(self.NSFW_CONFIG.data)
+        self.config.update(self.NSFW_CONFIG.data)
         _log.info("配置已保存")
 
     def reload_config(self):
@@ -155,7 +156,7 @@ class YmNsfwPy(BasePlugin):
         img_byte_arr.seek(0)
         return img_byte_arr.getvalue()
 
-    @bot.group_event()
+    @group_only
     async def on_group_event(self, msg: GroupMessage):
         # 处理帮助命令
         if msg.raw_message == "nsfw":
@@ -384,7 +385,7 @@ class YmNsfwPy(BasePlugin):
 
     async def on_load(self):
         # 初始化配置
-        self.NSFW_CONFIG.init_data(self.data)
+        self.NSFW_CONFIG.init_data(self.config)
 
         # 设置配置类的回调函数
         self.NSFW_CONFIG.set_callbacks(

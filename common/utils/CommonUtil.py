@@ -1,10 +1,11 @@
-from datetime import date, datetime, timedelta
+from datetime import date
 import matplotlib.pyplot as plt
 import os
 import requests
 import time
 from PIL import Image as PILImage
 from io import BytesIO
+from common.entity.GroupMember import GroupMember
 
 
 class CommonUtil:
@@ -68,3 +69,40 @@ class CommonUtil:
             "Segoe UI Emoji",
             "sans-serif",
         ]
+
+    @staticmethod
+    def parse_group_member_list(members_response):
+        """
+        解析 GroupMemberList 对象，转换为 GroupMember 对象列表
+
+        Args:
+            members_response: GroupMemberList 对象
+
+        Returns:
+            List[GroupMember]: GroupMember 对象列表
+        """
+        members = []
+        for member_info in members_response.members:
+            # 将 GroupMemberInfo 对象转换为字典
+            member_dict = {
+                "group_id": member_info.group_id,
+                "user_id": member_info.user_id,
+                "nickname": member_info.nickname,
+                "card": member_info.card,
+                "role": member_info.role,
+                "title": member_info.title,
+                "level": member_info.level,
+                "sex": member_info.sex,
+                "age": member_info.age,
+                "area": member_info.area,
+                "qq_level": member_info.qq_level,
+                "join_time": member_info.join_time,
+                "last_sent_time": member_info.last_sent_time,
+                "title_expire_time": member_info.title_expire_time,
+                "unfriendly": member_info.unfriendly,
+                "card_changeable": member_info.card_changeable,
+                "is_robot": member_info.is_robot,
+                "shut_up_timestamp": member_info.shut_up_timestamp,
+            }
+            members.append(GroupMember(member_dict))
+        return members
