@@ -19,14 +19,14 @@ from ncatbot.core.message import GroupMessage
 _log = get_log()
 
 # 全局变量
-trigger_interval = 600  # 每小时最多触发一次（秒）
+trigger_interval = 1200
 group_reply_caches: Dict[int, "ReplyCache"] = {}  # 存储每个群的 ReplyCache
 last_trigger_times: Dict[int, datetime] = {}  # 存储每个群的上次触发时间
 user_trigger_times: Dict[int, datetime] = {}  # 存储每个用户的上次触发时间
 enable_group_cd = True  # 群聊冷却开关
-enable_user_cd = False  # 用户冷却开关
+enable_user_cd = True  # 用户冷却开关
 enable_callback = True  # 回调功能开关
-callback_timeout = 30  # 回调超时时间（秒）
+callback_timeout = 15  # 回调超时时间（秒）
 
 
 # 回调状态管理
@@ -144,6 +144,65 @@ class FakeAi(NcatBotPlugin):
                         continue
         return False
 
+    async def handle_balance_query(self, input: GroupMessage) -> None:
+        """处理查询余额命令"""
+        try:
+            # 调用 AiUtil 查询余额
+            balance_data = await AiUtil.get_deepseek_balance()
+
+            if "error" in balance_data:
+                # 查询失败，发送错误信息
+                error_msg = Text(f"查询余额失败: {balance_data['error']}")
+                await self.api.post_group_msg(
+                    group_id=input.group_id, rtf=MessageChain([error_msg])
+                )
+                return
+
+            # 解析余额信息
+            is_available = balance_data.get("is_available", False)
+            balance_infos = balance_data.get("balance_infos", [])
+
+            # 构建回复消息
+            message_parts = [Text("💰 DeepSeek API 余额查询结果:\n")]
+
+            if is_available:
+                message_parts.append(Text("✅ 账户状态: 可用\n"))
+            else:
+                message_parts.append(Text("❌ 账户状态: 不可用\n"))
+
+            if balance_infos:
+                for balance_info in balance_infos:
+                    currency = balance_info.get("currency", "未知")
+                    total_balance = balance_info.get("total_balance", "0")
+                    granted_balance = balance_info.get("granted_balance", "0")
+                    topped_up_balance = balance_info.get("topped_up_balance", "0")
+
+                    currency_name = (
+                        "人民币"
+                        if currency == "CNY"
+                        else "美元"
+                        if currency == "USD"
+                        else currency
+                    )
+
+                    message_parts.append(Text(f"💵 货币: {currency_name}\n"))
+                    message_parts.append(Text(f"💎 总余额: {total_balance}\n"))
+                    message_parts.append(Text(f"🎁 赠金余额: {granted_balance}\n"))
+                    message_parts.append(Text(f"💳 充值余额: {topped_up_balance}\n"))
+            else:
+                message_parts.append(Text("❌ 未获取到余额信息"))
+
+            # 发送消息
+            message = MessageChain(message_parts)
+            await self.api.post_group_msg(group_id=input.group_id, rtf=message)
+
+        except Exception as e:
+            _log.error(f"处理余额查询时发生错误: {e}")
+            error_msg = Text(f"查询余额时发生错误: {str(e)}")
+            await self.api.post_group_msg(
+                group_id=input.group_id, rtf=MessageChain([error_msg])
+            )
+
     @group_only
     async def handle_fake_ai(self, input: GroupMessage) -> None:
         # 检查消息是否来自排除的插件
@@ -217,7 +276,9 @@ class FakeAi(NcatBotPlugin):
                     ensure_ascii=False,
                 )
                 reply_cache.add_reply(reply_json)
-                answer = await answer_ai(group_id, group_reply_caches)
+                answer = await answer_ai(
+                    group_id, group_reply_caches, str(sender_id), "callback"
+                )
                 _log.info(answer)
                 await send_typing_response(self, input, answer)
                 return
@@ -225,15 +286,19 @@ class FakeAi(NcatBotPlugin):
         # 判断是否是功能测试的指令
         if input.raw_message == "蓝晴说话":
             if sender_id in [
-                "1064163905",
-                "1141419351",
-                "1506123340",
                 "273421673",
             ] or group_id in [719518427, 853963912]:
-                answer = await answer_ai(group_id, group_reply_caches)
+                answer = await answer_ai(
+                    group_id, group_reply_caches, str(sender_id), "test"
+                )
                 _log.info(answer)
                 await send_typing_response(self, input, answer)
                 return
+
+        # 处理查询余额命令
+        if input.raw_message == "查询余额":
+            await self.handle_balance_query(input)
+            return
 
         if is_at_message:
             # 检查用户CD（除了273421673用户）
@@ -253,7 +318,9 @@ class FakeAi(NcatBotPlugin):
                 ensure_ascii=False,
             )
             reply_cache.add_reply(reply_json)
-            answer = await answer_ai(group_id, group_reply_caches)
+            answer = await answer_ai(
+                group_id, group_reply_caches, str(sender_id), "active"
+            )
             _log.info(answer)
             await send_typing_response(self, input, answer)
 
@@ -291,7 +358,9 @@ class FakeAi(NcatBotPlugin):
 
         # 记录本次触发的时间
         last_trigger_times[group_id] = datetime.now()
-        answer = await answer_ai(group_id, group_reply_caches)
+        answer = await answer_ai(
+            group_id, group_reply_caches, str(sender_id), "passive"
+        )
         _log.info(answer)
         reply_cache.add_reply(answer)
         if not answer or answer.strip() == "" or answer == '""':
@@ -515,6 +584,118 @@ def check_user_cd(user_id: str) -> bool:
     return remaining_time <= 0
 
 
+def record_ai_usage_to_json(
+    group_id: str, user_id: str, tokens: int = 0, trigger_type: str = "active"
+):
+    """直接保存AI使用统计数据到JSON文件"""
+    import json
+    import os
+    from datetime import datetime
+
+    # 数据文件路径
+    GROUP_DATA_FILE = "data/json/ai_group_stats.json"
+    USER_DATA_FILE = "data/json/ai_user_stats.json"
+
+    now = datetime.now()
+    today = now.date().isoformat()
+
+    # 保存群组统计
+    try:
+        # 确保目录存在
+        os.makedirs(os.path.dirname(GROUP_DATA_FILE), exist_ok=True)
+
+        # 读取现有数据
+        group_data = {"group_stats": {}}
+        if os.path.exists(GROUP_DATA_FILE):
+            try:
+                with open(GROUP_DATA_FILE, "r", encoding="utf-8") as f:
+                    group_data = json.load(f)
+            except Exception:
+                pass
+
+        # 确保有 group_stats 字段
+        if "group_stats" not in group_data:
+            group_data["group_stats"] = {}
+
+        # 更新群组统计
+        if group_id not in group_data["group_stats"]:
+            group_data["group_stats"][group_id] = {
+                "daily_counts": {},
+                "daily_tokens": {},
+                "last_used": None,
+                "total_count": 0,
+                "total_tokens": 0,
+            }
+
+        stats = group_data["group_stats"][group_id]
+        if today not in stats["daily_counts"]:
+            stats["daily_counts"][today] = 0
+        if today not in stats["daily_tokens"]:
+            stats["daily_tokens"][today] = 0
+
+        stats["daily_counts"][today] += 1
+        stats["daily_tokens"][today] += tokens
+        stats["total_count"] += 1
+        stats["total_tokens"] += tokens
+        stats["last_used"] = now.isoformat()
+
+        # 保存群组数据
+        with open(GROUP_DATA_FILE, "w", encoding="utf-8") as f:
+            json.dump(group_data, f, ensure_ascii=False, indent=2)
+
+    except Exception as e:
+        print(f"保存群组AI统计数据失败: {e}")
+
+    # 保存用户统计
+    try:
+        # 确保目录存在
+        os.makedirs(os.path.dirname(USER_DATA_FILE), exist_ok=True)
+
+        # 读取现有数据
+        user_data = {"user_stats": {}}
+        if os.path.exists(USER_DATA_FILE):
+            try:
+                with open(USER_DATA_FILE, "r", encoding="utf-8") as f:
+                    user_data = json.load(f)
+            except Exception:
+                pass
+
+        # 确保有 user_stats 字段
+        if "user_stats" not in user_data:
+            user_data["user_stats"] = {}
+        if group_id not in user_data["user_stats"]:
+            user_data["user_stats"][group_id] = {}
+
+        # 更新用户统计
+        if user_id not in user_data["user_stats"][group_id]:
+            user_data["user_stats"][group_id][user_id] = {
+                "daily_counts": {},
+                "daily_tokens": {},
+                "last_used": None,
+                "total_count": 0,
+                "total_tokens": 0,
+            }
+
+        user_stats = user_data["user_stats"][group_id][user_id]
+        if today not in user_stats["daily_counts"]:
+            user_stats["daily_counts"][today] = 0
+        if today not in user_stats["daily_tokens"]:
+            user_stats["daily_tokens"][today] = 0
+
+        user_stats["daily_counts"][today] += 1
+        user_stats["daily_tokens"][today] += tokens
+        user_stats["total_count"] += 1
+        user_stats["total_tokens"] += tokens
+        user_stats["last_used"] = now.isoformat()
+
+        # 保存用户数据
+        with open(USER_DATA_FILE, "w", encoding="utf-8") as f:
+            json.dump(user_data, f, ensure_ascii=False, indent=2)
+
+    except Exception as e:
+        print(f"保存用户AI统计数据失败: {e}")
+
+
 def load_yaml_data(group_id) -> Dict:
     # if group_id == 719518427:
     #     with open("data/yml/lanqingv1_ai.yml", "r", encoding="utf-8") as file:
@@ -574,7 +755,12 @@ def remove_thinking_process(response: str) -> str:
     return "\n".join(filtered_lines)
 
 
-async def answer_ai(group_id: int, group_reply_caches: Dict[int, ReplyCache]) -> str:
+async def answer_ai(
+    group_id: int,
+    group_reply_caches: Dict[int, ReplyCache],
+    user_id: str = None,
+    trigger_type: str = "active",
+) -> str:
     # 加载 YAML 数据
     yaml_data = load_yaml_data(group_id)
     replace_time_in_system(yaml_data)
@@ -583,7 +769,24 @@ async def answer_ai(group_id: int, group_reply_caches: Dict[int, ReplyCache]) ->
     # 调用 AIUtil 的 search_deepseek 方法
     keyword = yaml_data.get("input", "")
     prompt = yaml_data.get("system", "")
-    response = await AiUtil.search_deepseek(keyword, prompt)
+    ai_response = await AiUtil.search_deepseek(keyword, prompt)
+
+    # 处理AI响应
+    if isinstance(ai_response, dict):
+        response = ai_response.get("content", "")
+        usage_info = ai_response.get("usage", {})
+        tokens = usage_info.get("total_tokens", 0)
+    else:
+        response = ai_response or ""
+        tokens = 0
+
+    # 记录AI使用统计
+    if user_id:
+        try:
+            # 直接保存AI使用统计数据到JSON文件
+            record_ai_usage_to_json(str(group_id), str(user_id), tokens, trigger_type)
+        except Exception as e:
+            _log.error(f"记录AI使用统计失败: {e}")
 
     # 首先移除思考过程
     response = remove_thinking_process(response)
@@ -629,7 +832,7 @@ async def answer_ai(group_id: int, group_reply_caches: Dict[int, ReplyCache]) ->
                         k in parsed for k in ["name", "id", "content"]
                     ):
                         return possible_json
-                except:
+                except Exception:
                     pass
 
     # 如果无法提取有效的 JSON，返回原始响应

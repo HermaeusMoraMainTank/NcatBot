@@ -1,1 +1,12 @@
-{}
+# MuteManager 禁言管理插件配置
+# 支持多种时间格式的禁言和解禁功能
+
+# 下班时间设置（用于"禁言到下班"功能）
+work_end_hour: 19
+work_end_minute: 30
+
+# 最大禁言时间限制（秒），0表示无限制
+max_mute_duration: 0
+
+# 是否显示帮助信息
+show_help: true

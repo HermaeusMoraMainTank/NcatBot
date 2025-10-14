@@ -62,13 +62,24 @@ class CommonUtil:
 
     @staticmethod
     def set_matplotlib_font():
+        """设置matplotlib字体，支持更多Unicode字符"""
         plt.rcParams["font.sans-serif"] = [
             "Microsoft YaHei",
             "SimHei",
             "Arial Unicode MS",
             "Segoe UI Emoji",
+            "Noto Sans CJK SC",  # Google Noto字体，支持更多Unicode字符
+            "Source Han Sans SC",  # Adobe思源黑体
+            "WenQuanYi Micro Hei",  # 文泉驿微米黑
+            "DejaVu Sans",  # 支持更多Unicode字符
             "sans-serif",
         ]
+        # 设置字体回退机制
+        # plt.rcParams["font.fallback"] = ["DejaVu Sans"]  # 这个参数在当前matplotlib版本中不支持
+        # 禁用字体警告
+        import warnings
+
+        warnings.filterwarnings("ignore", category=UserWarning, module="matplotlib")
 
     @staticmethod
     def parse_group_member_list(members_response):

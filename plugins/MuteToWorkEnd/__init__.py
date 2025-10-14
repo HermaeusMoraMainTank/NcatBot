@@ -1,3 +1,3 @@
-from .MuteToWorkEnd import MuteToWorkEnd
+from .MuteToWorkEnd import MuteManager
 
-__all__ = ["MuteToWorkEnd"]
+__all__ = ["MuteManager"]

@@ -80,7 +80,7 @@ class ImageSender(NcatBotPlugin):
         "llm": {
             "triggers": ["llm", "迷茫的时候 不如听听llm说的话"],
             "path": "data/image/llm",
-            "allowed_users": ["273421673", "2779893879", "361432025", "837089951"],
+            "allowed_users": ["273421673", "2779893879", "361432025", "837089951","3398902282"],
             "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
         "耄耋": {
@@ -159,6 +159,24 @@ class ImageSender(NcatBotPlugin):
         "xqs": {
             "triggers": ["xqs"],
             "path": "data/image/xqs",
+            "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
+        },
+        "qqb": {
+            "triggers": ["qqb","千千坂","干饭饭"],
+            "path": "data/image/qqb",
+            "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
+        },
+        "光头zmd": {
+            "triggers": ["光头zmd"],
+            "path": "data/image/光头zmd",
+            "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
+        },
+        "df": {
+            "triggers": ["df"],
+            "path": "data/image/df",
             "allowed_users": None,
             "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },

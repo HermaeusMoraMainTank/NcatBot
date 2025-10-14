@@ -3,10 +3,7 @@ import json
 import hashlib
 import requests
 import urllib3
-import shutil
-import tempfile
 import threading
-import time
 from datetime import datetime, date, timedelta
 from typing import Dict, List, Optional
 from dataclasses import dataclass
@@ -121,16 +118,13 @@ class EmojiStatsPlugin(NcatBotPlugin):
     CACHE_DIR = os.path.join("data", "image", "emoji_stats")
 
     # 统计数据
-    group_stats: Dict[int, Dict[str, EmojiStats]] = {}  # 群组表情包统计
-    user_stats: Dict[int, Dict[int, Dict[str, EmojiStats]]] = {}  # 用户表情包统计
-    group_count: Dict[int, Dict[str, int]] = {}  # 群组发送次数统计
-    user_count: Dict[int, Dict[int, Dict[str, int]]] = {}  # 用户发送次数统计
+    group_stats: Dict[int, Dict[str, EmojiStats]] = None  # 群组表情包统计
+    user_stats: Dict[int, Dict[int, Dict[str, EmojiStats]]] = None  # 用户表情包统计
+    group_count: Dict[int, Dict[str, int]] = None  # 群组发送次数统计
+    user_count: Dict[int, Dict[int, Dict[str, int]]] = None  # 用户发送次数统计
 
-    # 数据保存控制
+    # 简化的数据保存控制
     _save_lock = threading.Lock()
-    _last_save_time = 0
-    _save_interval = 30  # 30秒内只保存一次
-    _pending_save = False
 
     # 使用说明
     usage_instructions = """表情包统计指令：
@@ -154,49 +148,57 @@ class EmojiStatsPlugin(NcatBotPlugin):
 
     async def on_load(self):
         """异步加载插件"""
-        _log.info(f"开始加载 {self.name} 插件 v{self.version}")
+        # 开始加载插件
+        # 初始化实例变量
+        if self.group_stats is None:
+            self.group_stats = {}
+        if self.user_stats is None:
+            self.user_stats = {}
+        if self.group_count is None:
+            self.group_count = {}
+        if self.user_count is None:
+            self.user_count = {}
+        # 不要清空内存中的数据，保持现有数据
         self._load_data()
-        _log.info(f"{self.name} 插件加载完成")
+        # 插件加载完成
 
-    def _atomic_save(self, data: dict, file_path: str) -> bool:
-        """原子性保存数据，确保数据不丢失"""
+    def _reinit_(self):
+        """插件重新加载时同步处理钩子 - 保护内存中的数据"""
+        # 保存当前内存中的数据
+        temp_group_stats = self.group_stats.copy() if self.group_stats else {}
+        temp_user_stats = self.user_stats.copy() if self.user_stats else {}
+        temp_group_count = self.group_count.copy() if self.group_count else {}
+        temp_user_count = self.user_count.copy() if self.user_count else {}
+
+        # 重新初始化
+        if self.group_stats is None:
+            self.group_stats = {}
+        if self.user_stats is None:
+            self.user_stats = {}
+        if self.group_count is None:
+            self.group_count = {}
+        if self.user_count is None:
+            self.user_count = {}
+
+        # 恢复数据
+        self.group_stats.update(temp_group_stats)
+        self.user_stats.update(temp_user_stats)
+        self.group_count.update(temp_group_count)
+        self.user_count.update(temp_user_count)
+
+    def _save_data_to_file(self, data: dict, file_path: str) -> bool:
+        """简单的数据保存"""
         try:
-            # 创建临时文件
-            temp_dir = os.path.dirname(file_path)
-            temp_file = tempfile.NamedTemporaryFile(
-                mode="w", dir=temp_dir, suffix=".tmp", delete=False, encoding="utf-8"
-            )
+            # 确保目录存在
+            os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
-            # 写入临时文件
-            json.dump(
-                data, temp_file, ensure_ascii=False, indent=2, cls=DateTimeEncoder
-            )
-            temp_file.flush()
-            os.fsync(temp_file.fileno())  # 强制写入磁盘
-            temp_file.close()
-
-            # 创建备份文件
-            backup_path = file_path + ".backup"
-            if os.path.exists(file_path):
-                shutil.copy2(file_path, backup_path)
-
-            # 原子性移动文件
-            shutil.move(temp_file.name, file_path)
-
-            # 删除备份文件（如果新文件写入成功）
-            if os.path.exists(backup_path):
-                os.remove(backup_path)
+            # 直接写入文件
+            with open(file_path, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2, cls=DateTimeEncoder)
 
             return True
-
         except Exception as e:
-            _log.error(f"原子性保存失败: {e}")
-            # 清理临时文件
-            if "temp_file" in locals() and os.path.exists(temp_file.name):
-                try:
-                    os.remove(temp_file.name)
-                except:
-                    pass
+            _log.error(f"[EmojiStats] 保存数据失败: {e}")
             return False
 
     def _load_data(self):
@@ -210,259 +212,283 @@ class EmojiStatsPlugin(NcatBotPlugin):
             if os.path.exists(self.GROUP_DATA_FILE):
                 try:
                     with open(self.GROUP_DATA_FILE, "r", encoding="utf-8") as f:
-                        data = json.loads(f.read())
+                        data = json.load(f)
+
                         # 加载群组统计
-                        self.group_stats = {}
-                        for k, v in data.get("group_stats", {}).items():
+                        new_group_stats = {}
+                        group_stats_data = data.get("group_stats", {})
+
+                        for k, v in group_stats_data.items():
                             try:
-                                group_id = int(k)
-                                self.group_stats[group_id] = {}
+                                group_id = k  # 直接使用字符串，不转换
+                                new_group_stats[group_id] = {}
+
                                 for k2, v2 in v.items():
                                     try:
-                                        self.group_stats[group_id][k2] = (
+                                        new_group_stats[group_id][k2] = (
                                             EmojiStats.from_dict(v2)
                                         )
                                     except Exception as e:
-                                        _log.error(f"加载群组表情包数据失败: {e}")
+                                        _log.error(
+                                            f"[EmojiStats] 加载群组表情包数据失败: {e}"
+                                        )
                                         continue
                             except Exception as e:
-                                _log.error(f"加载群组数据失败: {e}")
+                                _log.error(f"[EmojiStats] 加载群组数据失败: {e}")
                                 continue
 
-                        # 加载群组计数
-                        self.group_count = {}
-                        for k, v in data.get("group_count", {}).items():
+                        # 合并数据而不是直接替换，避免覆盖现有数据
+                        for group_id, emojis in new_group_stats.items():
+                            self.group_stats[group_id] = emojis
+
+                        # 合并群组计数数据而不是直接替换
+                        group_count_data = data.get("group_count", {})
+
+                        for k, v in group_count_data.items():
                             try:
-                                group_id = int(k)
-                                self.group_count[group_id] = {}
+                                group_id = k  # 直接使用字符串，不转换
+                                if group_id not in self.group_count:
+                                    self.group_count[group_id] = {}
                                 for k2, v2 in v.items():
                                     try:
                                         self.group_count[group_id][k2] = int(v2)
                                     except Exception as e:
-                                        _log.error(f"加载群组计数数据失败: {e}")
+                                        _log.error(
+                                            f"[EmojiStats] 加载群组计数数据失败: {e}"
+                                        )
                                         continue
                             except Exception as e:
-                                _log.error(f"加载群组数据失败: {e}")
+                                _log.error(f"[EmojiStats] 加载群组数据失败: {e}")
                                 continue
+
                 except Exception as e:
-                    _log.error(f"加载群组数据失败: {e}")
-                    # 尝试从备份文件恢复
-                    backup_path = self.GROUP_DATA_FILE + ".backup"
-                    if os.path.exists(backup_path):
-                        try:
-                            shutil.copy2(backup_path, self.GROUP_DATA_FILE)
-                            _log.info("从备份文件恢复群组数据")
-                            self._load_data()  # 重新加载
-                            return
-                        except Exception as backup_e:
-                            _log.error(f"从备份文件恢复失败: {backup_e}")
-                    self._save_group_data()
+                    _log.error(f"[EmojiStats] 加载群组数据失败: {e}")
+                    # 不要清空内存中的数据，保持现有数据
+            else:
+                _log.warning(f"[EmojiStats] 群组数据文件不存在: {self.GROUP_DATA_FILE}")
 
             # 加载用户数据
             if os.path.exists(self.USER_DATA_FILE):
                 try:
                     with open(self.USER_DATA_FILE, "r", encoding="utf-8") as f:
-                        data = json.loads(f.read())
+                        data = json.load(f)
+
                         # 加载用户统计
-                        self.user_stats = {}
-                        for k, v in data.get("user_stats", {}).items():
+                        new_user_stats = {}
+                        user_stats_data = data.get("user_stats", {})
+
+                        for k, v in user_stats_data.items():
                             try:
-                                group_id = int(k)
-                                self.user_stats[group_id] = {}
+                                group_id = k  # 直接使用字符串，不转换
+                                new_user_stats[group_id] = {}
+
                                 for k2, v2 in v.items():
                                     try:
-                                        user_id = int(k2)
-                                        self.user_stats[group_id][user_id] = {}
+                                        user_id = k2  # 直接使用字符串，不转换
+                                        new_user_stats[group_id][user_id] = {}
+
                                         for k3, v3 in v2.items():
                                             try:
-                                                self.user_stats[group_id][user_id][
+                                                new_user_stats[group_id][user_id][
                                                     k3
                                                 ] = EmojiStats.from_dict(v3)
                                             except Exception as e:
                                                 _log.error(
-                                                    f"加载用户表情包数据失败: {e}"
+                                                    f"[EmojiStats] 加载用户表情包数据失败: {e}"
                                                 )
                                                 continue
                                     except Exception as e:
-                                        _log.error(f"加载用户数据失败: {e}")
+                                        _log.error(
+                                            f"[EmojiStats] 加载用户数据失败: {e}"
+                                        )
                                         continue
                             except Exception as e:
-                                _log.error(f"加载群组数据失败: {e}")
+                                _log.error(f"[EmojiStats] 加载群组数据失败: {e}")
                                 continue
 
-                        # 加载用户计数
-                        self.user_count = {}
-                        for k, v in data.get("user_count", {}).items():
+                        # 合并数据而不是直接替换，避免覆盖现有数据
+                        for group_id, users in new_user_stats.items():
+                            if group_id not in self.user_stats:
+                                self.user_stats[group_id] = {}
+                            for user_id, emojis in users.items():
+                                if user_id not in self.user_stats[group_id]:
+                                    self.user_stats[group_id][user_id] = {}
+                                for emoji_url, stats in emojis.items():
+                                    self.user_stats[group_id][user_id][emoji_url] = (
+                                        stats
+                                    )
+
+                        # 合并用户计数数据而不是直接替换
+                        user_count_data = data.get("user_count", {})
+
+                        for k, v in user_count_data.items():
                             try:
-                                group_id = int(k)
-                                self.user_count[group_id] = {}
+                                group_id = k  # 直接使用字符串，不转换
+                                if group_id not in self.user_count:
+                                    self.user_count[group_id] = {}
                                 for k2, v2 in v.items():
                                     try:
-                                        user_id = int(k2)
-                                        self.user_count[group_id][user_id] = {}
+                                        user_id = k2  # 直接使用字符串，不转换
+                                        if user_id not in self.user_count[group_id]:
+                                            self.user_count[group_id][user_id] = {}
                                         for k3, v3 in v2.items():
                                             try:
                                                 self.user_count[group_id][user_id][
                                                     k3
                                                 ] = int(v3)
                                             except Exception as e:
-                                                _log.error(f"加载用户计数数据失败: {e}")
+                                                _log.error(
+                                                    f"[EmojiStats] 加载用户计数数据失败: {e}"
+                                                )
                                                 continue
                                     except Exception as e:
-                                        _log.error(f"加载用户数据失败: {e}")
+                                        _log.error(
+                                            f"[EmojiStats] 加载用户数据失败: {e}"
+                                        )
                                         continue
                             except Exception as e:
-                                _log.error(f"加载群组数据失败: {e}")
+                                _log.error(f"[EmojiStats] 加载群组数据失败: {e}")
                                 continue
+
+                        total_users = sum(
+                            len(users) for users in self.user_stats.values()
+                        )
                 except Exception as e:
-                    _log.error(f"加载用户数据失败: {e}")
-                    # 尝试从备份文件恢复
-                    backup_path = self.USER_DATA_FILE + ".backup"
-                    if os.path.exists(backup_path):
-                        try:
-                            shutil.copy2(backup_path, self.USER_DATA_FILE)
-                            _log.info("从备份文件恢复用户数据")
-                            self._load_data()  # 重新加载
-                            return
-                        except Exception as backup_e:
-                            _log.error(f"从备份文件恢复失败: {backup_e}")
-                    self._save_user_data()
+                    _log.error(f"[EmojiStats] 加载用户数据失败: {e}")
+                    # 不要清空内存中的数据，保持现有数据
+            else:
+                _log.warning(f"[EmojiStats] 用户数据文件不存在: {self.USER_DATA_FILE}")
 
         except Exception as e:
-            _log.error(f"加载数据失败: {e}")
-            self._save_group_data()
-            self._save_user_data()
+            _log.error(f"[EmojiStats] 加载数据失败: {e}")
+            # 不要清空内存中的数据，保持现有数据
 
-    def _save_group_data(self):
+    def _save_group_data(self, group_id: int = None):
         """保存群组数据"""
         try:
-            data = {
-                "group_stats": {
-                    str(k): {k2: v2.to_dict() for k2, v2 in v.items()}
-                    for k, v in self.group_stats.items()
-                },
-                "group_count": {str(k): v for k, v in self.group_count.items()},
-            }
-            if self._atomic_save(data, self.GROUP_DATA_FILE):
-                _log.info("群组数据保存成功")
-            else:
-                _log.error("群组数据保存失败")
-        except Exception as e:
-            _log.error(f"保存群组数据失败: {e}")
+            if group_id is not None:
+                # 保存指定群聊的数据，只更新当前群组，不覆盖其他群组的数据
+                if group_id in self.group_stats:
+                    # 读取现有数据
+                    existing_data = {}
+                    if os.path.exists(self.GROUP_DATA_FILE):
+                        try:
+                            with open(self.GROUP_DATA_FILE, "r", encoding="utf-8") as f:
+                                existing_data = json.load(f)
+                        except Exception as e:
+                            _log.error(f"[EmojiStats] 读取现有群组数据失败: {e}")
+                            existing_data = {"group_stats": {}, "group_count": {}}
 
-    def _save_user_data(self):
+                    # 确保有必要的字段
+                    if "group_stats" not in existing_data:
+                        existing_data["group_stats"] = {}
+                    if "group_count" not in existing_data:
+                        existing_data["group_count"] = {}
+
+                    # 只更新指定群聊的数据，不修改其他群组的数据
+                    # 直接替换当前群组的数据，因为内存中的数据已经是累计数据
+                    existing_data["group_stats"][group_id] = {
+                        k2: v2.to_dict()
+                        for k2, v2 in self.group_stats[group_id].items()
+                    }
+                    existing_data["group_count"][group_id] = self.group_count.get(
+                        group_id, {}
+                    )
+                    return self._save_data_to_file(existing_data, self.GROUP_DATA_FILE)
+            else:
+                # 保存所有群聊数据
+                data = {
+                    "group_stats": {
+                        k: {k2: v2.to_dict() for k2, v2 in v.items()}
+                        for k, v in self.group_stats.items()
+                    },
+                    "group_count": {k: v for k, v in self.group_count.items()},
+                }
+                return self._save_data_to_file(data, self.GROUP_DATA_FILE)
+        except Exception as e:
+            _log.error(f"[EmojiStats] 保存群组数据失败: {e}")
+            return False
+
+    def _save_user_data(self, group_id: int = None):
         """保存用户数据"""
         try:
-            data = {
-                "user_stats": {
-                    str(k): {
-                        str(k2): {k3: v3.to_dict() for k3, v3 in v2.items()}
-                        for k2, v2 in v.items()
+            if group_id is not None:
+                # 保存指定群聊的用户数据，只更新当前群组，不覆盖其他群组的数据
+                if group_id in self.user_stats:
+                    # 读取现有数据
+                    existing_data = {}
+                    if os.path.exists(self.USER_DATA_FILE):
+                        try:
+                            with open(self.USER_DATA_FILE, "r", encoding="utf-8") as f:
+                                existing_data = json.load(f)
+                        except Exception as e:
+                            _log.error(f"[EmojiStats] 读取现有用户数据失败: {e}")
+                            existing_data = {"user_stats": {}, "user_count": {}}
+
+                    # 确保有必要的字段
+                    if "user_stats" not in existing_data:
+                        existing_data["user_stats"] = {}
+                    if "user_count" not in existing_data:
+                        existing_data["user_count"] = {}
+
+                    # 只更新指定群聊的用户数据，不修改其他群组的数据
+                    # 直接替换当前群组的用户数据，因为内存中的数据已经是累计数据
+                    existing_data["user_stats"][group_id] = {
+                        k2: {k3: v3.to_dict() for k3, v3 in v2.items()}
+                        for k2, v2 in self.user_stats[group_id].items()
                     }
-                    for k, v in self.user_stats.items()
-                },
-                "user_count": {
-                    str(k): {str(k2): v2 for k2, v2 in v.items()}
-                    for k, v in self.user_count.items()
-                },
-            }
-            if self._atomic_save(data, self.USER_DATA_FILE):
-                _log.info("用户数据保存成功")
+                    existing_data["user_count"][group_id] = {
+                        k2: v2 for k2, v2 in self.user_count.get(group_id, {}).items()
+                    }
+                    return self._save_data_to_file(existing_data, self.USER_DATA_FILE)
             else:
-                _log.error("用户数据保存失败")
+                # 保存所有用户数据
+                data = {
+                    "user_stats": {
+                        k: {
+                            k2: {k3: v3.to_dict() for k3, v3 in v2.items()}
+                            for k2, v2 in v.items()
+                        }
+                        for k, v in self.user_stats.items()
+                    },
+                    "user_count": {
+                        k: {k2: v2 for k2, v2 in v.items()}
+                        for k, v in self.user_count.items()
+                    },
+                }
+                return self._save_data_to_file(data, self.USER_DATA_FILE)
         except Exception as e:
-            _log.error(f"保存用户数据失败: {e}")
+            _log.error(f"[EmojiStats] 保存用户数据失败: {e}")
+            return False
 
-    def _save_data(self):
-        """保存所有数据（带频率控制）"""
+    def _save_data(self, group_id: int = None):
+        """保存数据 - 使用更安全的保存策略"""
         with self._save_lock:
-            current_time = time.time()
+            try:
+                if group_id is not None:
+                    # 保存指定群组的数据
+                    # 保存群组数据
+                    group_success = self._save_group_data(group_id)
+                    # 保存用户数据
+                    user_success = self._save_user_data(group_id)
 
-            # 如果距离上次保存时间太短，标记为待保存
-            if current_time - self._last_save_time < self._save_interval:
-                self._pending_save = True
-                return
+                    if group_success and user_success:
+                        pass  # 数据保存成功
+                    else:
+                        _log.error(f"[EmojiStats] 群组 {group_id} 数据保存失败")
+                else:
+                    # 保存所有数据
+                    # 保存群组数据
+                    group_success = self._save_group_data()
+                    # 保存用户数据
+                    user_success = self._save_user_data()
 
-            # 执行保存
-            self._save_group_data()
-            self._save_user_data()
-            self._last_save_time = current_time
-            self._pending_save = False
-
-    def _schedule_save(self):
-        """调度保存任务"""
-
-        def delayed_save():
-            time.sleep(self._save_interval)
-            with self._save_lock:
-                if self._pending_save:
-                    self._save_group_data()
-                    self._save_user_data()
-                    self._pending_save = False
-
-        # 在后台线程中执行延迟保存
-        save_thread = threading.Thread(target=delayed_save, daemon=True)
-        save_thread.start()
-
-    def cleanup_old_backups(self, max_age_days: int = 7):
-        """清理旧的备份文件"""
-        try:
-            current_time = time.time()
-            max_age_seconds = max_age_days * 24 * 3600
-
-            backup_files = [
-                self.GROUP_DATA_FILE + ".backup",
-                self.USER_DATA_FILE + ".backup",
-            ]
-
-            for backup_file in backup_files:
-                if os.path.exists(backup_file):
-                    file_age = current_time - os.path.getmtime(backup_file)
-                    if file_age > max_age_seconds:
-                        os.remove(backup_file)
-                        _log.info(f"清理旧备份文件: {backup_file}")
-        except Exception as e:
-            _log.error(f"清理备份文件失败: {e}")
-
-    def force_save(self):
-        """强制保存所有数据"""
-        with self._save_lock:
-            self._save_group_data()
-            self._save_user_data()
-            self._last_save_time = time.time()
-            self._pending_save = False
-            _log.info("强制保存数据完成")
-
-    def get_data_status(self) -> dict:
-        """获取数据状态信息"""
-        try:
-            status = {
-                "group_stats_count": len(self.group_stats),
-                "user_stats_count": sum(
-                    len(users) for users in self.user_stats.values()
-                ),
-                "group_count_count": len(self.group_count),
-                "user_count_count": sum(
-                    len(users) for users in self.user_count.values()
-                ),
-                "last_save_time": self._last_save_time,
-                "pending_save": self._pending_save,
-                "group_file_exists": os.path.exists(self.GROUP_DATA_FILE),
-                "user_file_exists": os.path.exists(self.USER_DATA_FILE),
-                "group_backup_exists": os.path.exists(self.GROUP_DATA_FILE + ".backup"),
-                "user_backup_exists": os.path.exists(self.USER_DATA_FILE + ".backup"),
-            }
-
-            # 获取文件大小信息
-            if os.path.exists(self.GROUP_DATA_FILE):
-                status["group_file_size"] = os.path.getsize(self.GROUP_DATA_FILE)
-            if os.path.exists(self.USER_DATA_FILE):
-                status["user_file_size"] = os.path.getsize(self.USER_DATA_FILE)
-
-            return status
-        except Exception as e:
-            _log.error(f"获取数据状态失败: {e}")
-            return {"error": str(e)}
+                    if group_success and user_success:
+                        pass  # 所有数据保存成功
+                    else:
+                        _log.error(f"[EmojiStats] 所有数据保存失败")
+            except Exception as e:
+                _log.error(f"[EmojiStats] 保存数据时发生异常: {e}")
 
     async def _download_and_cache_image(self, image_url: str) -> Optional[str]:
         """下载并缓存图片，返回缓存路径"""
@@ -482,13 +508,13 @@ class EmojiStatsPlugin(NcatBotPlugin):
 
             # 如果文件已存在，直接返回路径
             if os.path.exists(cache_path):
-                _log.info(f"图片已缓存: {cache_path}")
+                # 图片已缓存
                 return cache_path
 
             # 保存图片
             with open(cache_path, "wb") as f:
                 f.write(response.content)
-            _log.info(f"图片已缓存: {cache_path}")
+            # 图片已缓存
             return cache_path
 
         except Exception as e:
@@ -508,14 +534,18 @@ class EmojiStatsPlugin(NcatBotPlugin):
 
     async def _process_image(self, input: GroupMessage, image_url: str) -> None:
         """处理图片消息"""
-        group_id = input.group_id
-        user_id = input.sender.user_id
+        # 确保 group_id 和 user_id 都是字符串类型
+        group_id = str(input.group_id)
+        user_id = str(input.sender.user_id)
         now = datetime.now()
         today = now.date().isoformat()
+
+        # 处理表情包消息
 
         # 检查图片是否已经存在于统计中
         for emoji in self.group_stats.get(group_id, {}).values():
             if emoji.url == image_url:
+                # 找到现有表情包，更新统计
                 # 更新群组统计
                 emoji.increment_count(today)
                 emoji.last_used = now
@@ -523,8 +553,10 @@ class EmojiStatsPlugin(NcatBotPlugin):
                 # 更新用户统计
                 if group_id not in self.user_stats:
                     self.user_stats[group_id] = {}
+                    # 创建新群组用户统计
                 if user_id not in self.user_stats[group_id]:
                     self.user_stats[group_id][user_id] = {}
+                    # 创建新用户统计
                 if emoji.cache_path not in self.user_stats[group_id][user_id]:
                     # 创建新的emoji对象，确保与群组统计完全独立
                     self.user_stats[group_id][user_id][emoji.cache_path] = EmojiStats(
@@ -534,6 +566,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
                     self.user_stats[group_id][user_id][
                         emoji.cache_path
                     ].daily_counts = {}
+                    # 创建新表情包统计
                 # 只增加当天的使用次数
                 self.user_stats[group_id][user_id][emoji.cache_path].increment_count(
                     today
@@ -555,20 +588,21 @@ class EmojiStatsPlugin(NcatBotPlugin):
                     self.user_count[group_id][user_id][today] = 0
                 self.user_count[group_id][user_id][today] += 1
 
+                # 数据更新完成，开始保存数据
                 # 保存数据
-                self._save_data()
-                # 如果有待保存的数据，调度延迟保存
-                if self._pending_save:
-                    self._schedule_save()
+                self._save_data(group_id)
                 return
 
+        # 未找到现有表情包，开始下载新表情包
         # 如果图片不存在，则下载并缓存
         cache_path = await self._download_and_cache_image(image_url)
         if not cache_path:
+            _log.error(f"[EmojiStats] 表情包下载失败")
             return
 
         # 使用缓存路径作为键，而不是 URL
         cache_key = os.path.basename(cache_path)
+        # 表情包下载成功
 
         # 更新群组统计
         if group_id not in self.group_stats:
@@ -577,6 +611,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
             self.group_stats[group_id][cache_key] = EmojiStats(
                 url=image_url, cache_path=cache_path
             )
+            # 创建新表情包统计
         self.group_stats[group_id][cache_key].increment_count(today)
         self.group_stats[group_id][cache_key].last_used = now
 
@@ -589,6 +624,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
             self.user_stats[group_id][user_id][cache_key] = EmojiStats(
                 url=image_url, cache_path=cache_path
             )
+            # 创建新用户表情包统计
         self.user_stats[group_id][user_id][cache_key].increment_count(today)
         self.user_stats[group_id][user_id][cache_key].last_used = now
 
@@ -607,11 +643,9 @@ class EmojiStatsPlugin(NcatBotPlugin):
             self.user_count[group_id][user_id][today] = 0
         self.user_count[group_id][user_id][today] += 1
 
+        # 新表情包数据更新完成，开始保存数据
         # 保存数据
-        self._save_data()
-        # 如果有待保存的数据，调度延迟保存
-        if self._pending_save:
-            self._schedule_save()
+        self._save_data(group_id)
 
     def _get_top_emojis(
         self, stats: Dict[str, EmojiStats], days: int = None
@@ -928,7 +962,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
             return img
 
         # 头像更靠左
-        avatar_x = -max(counts) * 0.12 if counts else -1
+        avatar_x = -max(counts) * 0.12 - 1 if counts else -2
         # 昵称紧贴柱子
         name_x = 0
 
@@ -987,8 +1021,8 @@ class EmojiStatsPlugin(NcatBotPlugin):
         renderer = fig.canvas.get_renderer()
         for bar in bars:
             bbox = bar.get_window_extent(renderer)
-            l, b, r, t = map(int, bbox.bounds)
-            bar_pixel_boxes.append((l, b, r, t))
+            left, bottom, right, top = map(int, bbox.bounds)
+            bar_pixel_boxes.append((left, bottom, right, top))
 
         plt.tight_layout(rect=[0.08, 0, 1, 1])
         plt.subplots_adjust(left=0.18)
@@ -1061,14 +1095,18 @@ class EmojiStatsPlugin(NcatBotPlugin):
         self, input: GroupMessage, days: int, target: str, target_user_id: int
     ) -> None:
         """显示统计数据"""
+        # 显示统计数据
+
         # 发送初始响应
         await self.api.post_group_msg(
             input.group_id, rtf=MessageArray([Text("正在生成统计图表，请稍候...")])
         )
 
         if target == "群组":
-            stats = self.group_stats.get(input.group_id)
+            group_id = str(input.group_id)
+            stats = self.group_stats.get(group_id)
             if not stats:
+                _log.warning(f"[EmojiStats] 群组 {group_id} 没有统计数据")
                 await self.api.post_group_msg(
                     input.group_id,
                     rtf=MessageArray([Text("暂无群组表情包统计数据")]),
@@ -1089,7 +1127,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
             message.add_text("\n\n")
             # 2. 发表情包最多的10个用户
             user_counts = {}
-            for user_id, user_stats in self.user_count.get(input.group_id, {}).items():
+            for user_id, user_stats in self.user_count.get(group_id, {}).items():
                 user_time_stats = self._get_time_range_stats(user_stats, days)
                 user_total = sum(user_time_stats.values())
                 if user_total > 0:
@@ -1099,19 +1137,42 @@ class EmojiStatsPlugin(NcatBotPlugin):
                 :10
             ]
             user_names = {}
+            # 先设置默认值
             for user_id, _ in top_users:
-                try:
-                    user_info = await self.api.get_group_member_info(
-                        group_id=input.group_id, user_id=user_id, no_cache=True
-                    )
-                    if isinstance(user_info, dict) and user_info.get("status") == "ok":
-                        user_data = user_info.get("data", {})
-                        nickname = user_data.get("nickname", str(user_id))
-                        user_names[user_id] = nickname
-                    else:
-                        continue
-                except Exception:
-                    continue
+                user_names[user_id] = str(user_id)
+
+            # 批量获取群成员信息
+            try:
+                members_response = await self.api.get_group_member_list(
+                    group_id=input.group_id
+                )
+                if hasattr(members_response, "members") and members_response.members:
+                    members = CommonUtil.parse_group_member_list(members_response)
+                    for member in members:
+                        if str(member.user_id) in user_names:
+                            # 优先使用群昵称，如果没有则使用QQ昵称
+                            nickname = member.card if member.card else member.nickname
+                            user_names[str(member.user_id)] = nickname
+            except Exception as e:
+                _log.error(f"获取群成员列表失败: {e}")
+                # 如果批量获取失败，回退到单个获取
+                for user_id, _ in top_users:
+                    try:
+                        user_info = await self.api.get_group_member_info(
+                            group_id=input.group_id, user_id=int(user_id), no_cache=True
+                        )
+                        if (
+                            isinstance(user_info, dict)
+                            and user_info.get("status") == "ok"
+                        ):
+                            user_data = user_info.get("data", {})
+                            # 优先使用群昵称，如果没有则使用QQ昵称
+                            nickname = user_data.get("card") or user_data.get(
+                                "nickname", str(user_id)
+                            )
+                            user_names[user_id] = nickname
+                    except Exception:
+                        pass
             if top_users:
                 # 头像和昵称只传前十
                 bar_path = self._generate_top_users_barh(
@@ -1152,12 +1213,14 @@ class EmojiStatsPlugin(NcatBotPlugin):
                 )
         else:
             # 获取用户最受欢迎表情包
+            group_id = str(input.group_id)
+            user_id = str(target_user_id)
             top_emojis = self._get_top_emojis(
-                self.user_stats.get(input.group_id, {}).get(target_user_id, {}), days
+                self.user_stats.get(group_id, {}).get(user_id, {}), days
             )
             # 获取用户发送次数统计
             count_stats = self._get_time_range_stats(
-                self.user_count.get(input.group_id, {}).get(target_user_id, {}), days
+                self.user_count.get(group_id, {}).get(user_id, {}), days
             )
             total_count = sum(count_stats.values())
 
