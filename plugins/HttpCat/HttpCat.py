@@ -1,9 +1,5 @@
-from ncatbot.core.message import GroupMessage
-from ncatbot.core import Image, MessageChain, Reply
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import Image, MessageChain, Reply, GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 
 HTTP_CAT_BASE_URL = "https://http.cat/"
@@ -91,7 +87,7 @@ class HttpCat(NcatBotPlugin):
     name = "HttpCat"  # 插件名称
     version = "1.0"  # 插件版本
 
-    @group_only
+    @on_message
     async def http_cat(self, input: GroupMessage):
         """
         处理 HTTP Cat 功能

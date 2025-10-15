@@ -9,18 +9,15 @@ config.set_root("273421673")  # 设置 bot 超级管理员账号 (建议填写)
 config.set_ws_uri("ws://127.0.0.1:3001")  # 设置 napcat websocket server 地址
 config.set_ws_token("napcat")  # 设置 token (websocket 的 token)
 config.set_webui_uri("http://127.0.0.1:6099")  # 设置 napcat webui 地址
-config.set_webui_token("napcat")  # 设置 token (webui 的 token)
+config.set_webui_token("<J[Y<I1I.NPP4N)R")  # 设置 token (webui 的 token)
 
 bot = BotClient()
 
 
 @bot.group_event()
 async def on_group_message(message: GroupMessage):
-    if "四个字" in message.raw_message and message.user_id == 635773721:
+    if "四个字" in message.raw_message and message.user_id == "635773721":
         await bot.api.post_group_msg(message.group_id, text="飞舞白墨")
-        
-    if "四个字" in message.raw_message and message.user_id == 1508864751:
-        await bot.api.post_group_msg(message.group_id, text="色猪一头(zmd)")
 
     if "没有人喜欢我" in message.raw_message:
         await bot.api.post_group_msg(message.group_id, text="我喜欢你饱饱")

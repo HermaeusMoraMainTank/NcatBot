@@ -2,12 +2,8 @@ import logging
 import random
 from typing import Dict
 
-from ncatbot.core.message import GroupMessage
-from ncatbot.core import Image, MessageChain, Text
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import GroupMessage, Image, MessageChain, Text
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 log = logging.getLogger(__name__)
 
@@ -29,7 +25,7 @@ class RussianRoulette(NcatBotPlugin):
         self.load_kill_count()
         log.info(f"{self.name} 插件加载完成")
 
-    @group_only
+    @on_message
     async def handle_russian_roulette(self, input: GroupMessage):
         message = input.raw_message
         if message.startswith("轮盘赌"):

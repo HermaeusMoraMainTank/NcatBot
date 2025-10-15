@@ -7,12 +7,15 @@ from typing import List, Set
 import yaml
 from PIL import Image
 
-from ncatbot.core import At, MessageChain, Reply, Text, Image as ImageElement
-from ncatbot.core.message import GroupMessage
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
+from ncatbot.core import (
+    At,
+    MessageChain,
+    Reply,
+    Text,
+    Image as ImageElement,
+    GroupMessage,
 )
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 
 from common.constants.HMMT import HMMT
@@ -46,7 +49,7 @@ class Tarot(NcatBotPlugin):
     ]
     current_library_index = 0  # 初始化索引为0
 
-    @group_only
+    @on_message
     async def handle_tarot(self, input: GroupMessage):
         message = input.raw_message
         if message == "占卜":

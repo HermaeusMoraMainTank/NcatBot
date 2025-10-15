@@ -5,12 +5,8 @@ from typing import Dict, Set
 from common.constants.HMMT import HMMT
 from common.entity.GroupMember import GroupMember
 from common.utils.CommonUtil import CommonUtil
-from ncatbot.core import MessageArray
-from ncatbot.core.message import GroupMessage
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import MessageArray, GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 from .special_group_handler import SpecialGroupHandler
 
 from ncatbot.utils.logger import get_log
@@ -72,7 +68,7 @@ class TodayWaifu(NcatBotPlugin):
 
         return selected_wife
 
-    @group_only
+    @on_message
     async def handle_message(self, input: GroupMessage):
         """处理消息"""
         if not input.message:

@@ -17,13 +17,9 @@ matplotlib.use("Agg")  # 使用Agg后端，避免需要GUI
 import io
 from matplotlib.font_manager import FontProperties
 
-from ncatbot.core import MessageChain, Text, Image
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import MessageChain, Text, Image, GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 from ncatbot.utils.logger import get_log
-from ncatbot.core.message import GroupMessage
 
 _log = get_log()
 
@@ -378,7 +374,7 @@ class MessageStatsPlugin(NcatBotPlugin):
             except Exception as e:
                 _log.error(f"[MessageStats] 保存数据时发生异常: {e}")
 
-    @group_only
+    @on_message
     async def handle_message(self, input: GroupMessage) -> None:
         """处理群消息"""
         # 确保 group_id 和 user_id 都是字符串类型
@@ -831,7 +827,7 @@ class MessageStatsPlugin(NcatBotPlugin):
             result.append(("text", text[last:]))
         return result
 
-    @group_only
+    @on_message
     async def handle_message_stats(self, input: GroupMessage) -> None:
         """处理发言统计命令"""
         message = input.raw_message.strip()

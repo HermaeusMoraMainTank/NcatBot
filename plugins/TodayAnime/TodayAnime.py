@@ -1,12 +1,8 @@
 from datetime import datetime
 import aiohttp
 
-from ncatbot.core import MessageChain, Text, Image
-from ncatbot.core.message import GroupMessage
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import MessageChain, Text, Image, GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 from ncatbot.utils import get_log
 
 _log = get_log()
@@ -33,7 +29,7 @@ class TodayAnime(NcatBotPlugin):
         _log.info(f"开始加载 {self.name} 插件 v{self.version}")
         _log.info(f"{self.name} 插件加载完成")
 
-    @group_only
+    @on_message
     async def handle_TodayAnime_like(self, input: GroupMessage):
         if input.raw_message != "今日番剧":
             return

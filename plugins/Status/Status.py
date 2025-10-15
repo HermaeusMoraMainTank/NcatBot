@@ -3,11 +3,8 @@ import time
 import psutil
 from datetime import datetime
 
-from ncatbot.core.message import GroupMessage
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 from common.constants.HMMT import HMMT
 
@@ -17,7 +14,7 @@ class Status(NcatBotPlugin):
     version = "1.0"  # 插件版本
     START_TIME = time.time()  # 程序启动时间
 
-    @group_only
+    @on_message
     async def handle_status(self, input: GroupMessage) -> None:
         if input.raw_message == "状态" and input.sender.user_id == HMMT.HMMT_ID:
             await self.api.post_group_msg(

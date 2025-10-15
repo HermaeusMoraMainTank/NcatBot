@@ -6,12 +6,8 @@ import re
 import requests
 import html
 import hashlib
-from ncatbot.core.message import GroupMessage
-from ncatbot.core import Image, MessageChain
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import GroupMessage, Image, MessageChain
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 import asyncio
 from common.constants.HMMT import HMMT
 
@@ -188,7 +184,7 @@ class ImageSender(NcatBotPlugin):
         },
     }
 
-    @group_only
+    @on_message
     async def handle_image(self, input: GroupMessage):
         message = input.raw_message.strip()
 

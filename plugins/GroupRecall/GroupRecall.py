@@ -6,14 +6,8 @@ from datetime import datetime
 from typing import Dict, List, Optional
 from dataclasses import dataclass, asdict
 
-from ncatbot.core import MessageChain, Text, Image
-from ncatbot.core.message import GroupMessage
-from ncatbot.core.event.notice import NoticeEvent
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-    on_notice,
-)
+from ncatbot.core import GroupMessage, NoticeEvent, MessageChain, Text, Image
+from ncatbot.plugin_system import NcatBotPlugin, on_message, on_notice
 from ncatbot.utils.logger import get_log
 
 _log = get_log()
@@ -30,6 +24,7 @@ class RecallMessage:
     content: str  # 文本内容
     images: List[str] = None  # 图片路径列表
     message_type: str = "text"  # 消息类型：text, image, mixed
+    is_recalled: bool = False  # 是否已被撤回
 
     def __post_init__(self):
         if self.images is None:
@@ -64,16 +59,22 @@ class GroupRecallPlugin(NcatBotPlugin):
 
     # 使用说明
     usage_instructions = """撤回消息查询指令：
-1. 查询撤回：查询撤回 [数量]
+1. 查询撤回：查询撤回 [数量] [@用户]
    
-   数量可选（默认显示最近5条）：
-   - 数字：显示最近N条撤回消息
-   - 全部：显示所有撤回消息
+   参数说明：
+   - 数量可选（默认显示最近5条）：
+     * 数字：显示最近N条撤回消息
+     * 全部：显示所有撤回消息
+   - @用户可选：只显示指定用户的撤回消息
+   
+   权限要求：只有群主或管理员才能使用此功能
    
 示例：
 - 查询撤回
 - 查询撤回 10
 - 查询撤回 全部
+- 查询撤回 @用户
+- 查询撤回 10 @用户
 """
 
     async def on_load(self):
@@ -165,18 +166,20 @@ class GroupRecallPlugin(NcatBotPlugin):
 
     def _start_cleanup_task(self):
         """启动定时清理任务"""
-        import asyncio
+        import threading
 
-        async def cleanup_task():
+        def cleanup_task():
+            """在单独线程中运行的清理任务"""
             while True:
                 try:
-                    await asyncio.sleep(300)  # 每5分钟执行一次清理
+                    time.sleep(300)  # 每5分钟执行一次清理
                     self._cleanup_expired_messages()
                 except Exception as e:
                     _log.error(f"[GroupRecall] 清理任务异常: {e}")
 
-        # 创建并启动清理任务
-        asyncio.create_task(cleanup_task())
+        # 在单独线程中启动清理任务
+        cleanup_thread = threading.Thread(target=cleanup_task, daemon=True)
+        cleanup_thread.start()
 
     def _cleanup_expired_messages(self):
         """清理过期的消息"""
@@ -246,7 +249,22 @@ class GroupRecallPlugin(NcatBotPlugin):
 
         return None
 
-    @group_only
+    async def is_admin_or_owner(self, group_id: int, user_id: int) -> bool:
+        """检查用户是否为群主或管理员"""
+        try:
+            member_info = await self.api.get_group_member_info(
+                group_id=group_id, user_id=user_id
+            )
+            # 新API直接返回GroupMemberInfo对象
+            if member_info and hasattr(member_info, "role"):
+                # onebot协议中role字段的值：owner(群主), admin(管理员), member(普通成员)
+                return member_info.role in ["owner", "admin"]
+            return False
+        except Exception as e:
+            _log.error(f"[GroupRecall] 获取用户权限信息失败: {e}")
+            return False
+
+    @on_message
     async def handle_group_message(self, input: GroupMessage) -> None:
         """处理群消息 - 存储消息内容"""
         try:
@@ -290,7 +308,6 @@ class GroupRecallPlugin(NcatBotPlugin):
 
     @on_notice
     async def handle_recall_notice(self, input: NoticeEvent) -> None:
-        print(input)
         """处理撤回通知"""
         try:
             # 检查是否是撤回通知
@@ -300,20 +317,23 @@ class GroupRecallPlugin(NcatBotPlugin):
             group_id = str(input.group_id)
             message_id = str(input.message_id)
 
-            # 查找对应的消息
+            # 查找对应的消息并标记为已撤回
             if group_id in self.recall_messages:
                 for msg in self.recall_messages[group_id]:
                     if msg.message_id == message_id:
-                        # 找到被撤回的消息，记录撤回信息
+                        # 找到被撤回的消息，标记为已撤回
+                        msg.is_recalled = True
                         _log.info(
                             f"[GroupRecall] 检测到消息撤回: 群组 {group_id}, 用户 {msg.user_id}, 消息ID {message_id}"
                         )
+                        # 保存数据
+                        self._save_data()
                         break
 
         except Exception as e:
             _log.error(f"[GroupRecall] 处理撤回通知失败: {e}")
 
-    @group_only
+    @on_message
     async def handle_query_recall(self, input: GroupMessage) -> None:
         """处理查询撤回消息命令"""
         try:
@@ -321,16 +341,40 @@ class GroupRecallPlugin(NcatBotPlugin):
             if not message.startswith("查询撤回"):
                 return
 
+            # 检查权限 - 只有群主或管理员才能查询撤回消息
+            if not await self.is_admin_or_owner(input.group_id, input.sender.user_id):
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    text="只有群主或管理员才能查询撤回消息",
+                    reply=input.message_id,
+                )
+                return
+
             # 解析命令参数
             parts = message.split()
             count = 5  # 默认显示5条
+            target_user_id = None  # 目标用户ID
 
-            if len(parts) > 1:
-                if parts[1] == "全部":
+            # 解析参数
+            for i, part in enumerate(parts[1:], 1):
+                if part == "全部":
                     count = None  # 显示全部
+                elif part.startswith("@"):
+                    # 提取@的用户ID
+                    try:
+                        # 从消息链中查找@的用户
+                        for msg_element in input.message:
+                            if (
+                                hasattr(msg_element, "msg_seg_type")
+                                and msg_element.msg_seg_type == "at"
+                            ):
+                                target_user_id = str(msg_element.target)
+                                break
+                    except Exception as e:
+                        _log.error(f"[GroupRecall] 解析@用户失败: {e}")
                 else:
                     try:
-                        count = int(parts[1])
+                        count = int(part)
                         if count <= 0:
                             count = 5
                     except ValueError:
@@ -346,9 +390,20 @@ class GroupRecallPlugin(NcatBotPlugin):
                 await input.reply("该群组暂无撤回消息记录")
                 return
 
-            # 按时间倒序排列，获取最新的消息
+            # 过滤出被撤回的消息
+            recalled_messages = [
+                msg for msg in self.recall_messages[group_id] if msg.is_recalled
+            ]
+
+            # 如果指定了用户，进一步过滤
+            if target_user_id:
+                recalled_messages = [
+                    msg for msg in recalled_messages if msg.user_id == target_user_id
+                ]
+
+            # 按时间倒序排列
             messages = sorted(
-                self.recall_messages[group_id], key=lambda x: x.timestamp, reverse=True
+                recalled_messages, key=lambda x: x.timestamp, reverse=True
             )
 
             if count is not None:
@@ -356,14 +411,29 @@ class GroupRecallPlugin(NcatBotPlugin):
 
             # 构建回复消息
             if not messages:
-                await input.reply("暂无撤回消息记录")
+                if target_user_id:
+                    await input.reply("该用户暂无撤回消息记录")
+                else:
+                    await input.reply("暂无撤回消息记录")
                 return
 
-            reply_elements = [Text("=== 最近撤回消息 ===\n")]
+            # 构建标题
+            if target_user_id:
+                # 查找目标用户的昵称
+                target_nickname = "未知用户"
+                for msg in self.recall_messages[group_id]:
+                    if msg.user_id == target_user_id:
+                        target_nickname = msg.nickname
+                        break
+                reply_elements = [Text(f"=== {target_nickname} 的撤回消息 ===\n")]
+            else:
+                reply_elements = [Text("=== 最近撤回消息 ===\n")]
 
             for i, msg in enumerate(messages, 1):
                 # 格式化时间
-                msg_time = datetime.fromtimestamp(msg.timestamp).strftime("%m-%d %H:%M")
+                msg_time = datetime.fromtimestamp(msg.timestamp).strftime(
+                    "%m-%d %H:%M:%S"
+                )
 
                 # 添加消息信息
                 reply_elements.append(Text(f"{i}. {msg.nickname} ({msg_time})\n"))

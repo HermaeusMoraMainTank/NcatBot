@@ -8,12 +8,8 @@ from io import BytesIO
 
 from curl_cffi import requests  # 替换为 curl_cffi 的 requests
 from common.constants.HMMT import HMMT
-from ncatbot.core.message import GroupMessage
-from ncatbot.core import Image as ImageElement, MessageChain, Reply
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import Image as ImageElement, MessageChain, Reply, GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 
 class FF14RisingStoneInfo(NcatBotPlugin):
@@ -553,7 +549,7 @@ class FF14RisingStoneInfo(NcatBotPlugin):
             draw.text((420, y), achieve_time, fill="black", font=font)
             y += 60
 
-    @group_only
+    @on_message
     async def handle_ff14_rising_stone(self, input: GroupMessage):
         """处理查询命令"""
         message_parts = input.raw_message.split(" ")

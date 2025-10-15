@@ -3,11 +3,8 @@ import uuid
 import logging
 from typing import Dict, Any
 from common.constants.HMMT import HMMT
-from ncatbot.core.message import GroupMessage
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 logger = logging.getLogger("QQMusicSender")
 
@@ -96,7 +93,7 @@ class QQMusicCardSender(NcatBotPlugin):
             logger.error(f"发送失败: {str(e)}")
             return False
 
-    @group_only
+    @on_message
     async def handle_music_card(self, input: GroupMessage):
         message = input.raw_message.strip()
         if message.startswith("qq点歌 "):

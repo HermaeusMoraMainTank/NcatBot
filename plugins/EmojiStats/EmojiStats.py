@@ -13,13 +13,9 @@ from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from matplotlib.font_manager import FontProperties
 import re
 
-from ncatbot.core import MessageArray, Text, Image
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import MessageArray, Text, Image, GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 from ncatbot.utils.logger import get_log
-from ncatbot.core.message import GroupMessage
 from common.utils.CommonUtil import CommonUtil
 
 # 禁用 SSL 警告
@@ -521,7 +517,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
             _log.error(f"缓存图片失败: {e}")
             return None
 
-    @group_only
+    @on_message
     async def handle_message(self, input: GroupMessage) -> None:
         """处理群消息"""
         for element in input.message:
@@ -1057,7 +1053,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
         img.save(path)
         return path
 
-    @group_only
+    @on_message
     async def handle_emoji_stats(self, input: GroupMessage) -> None:
         """处理表情包统计命令"""
         message = input.raw_message.strip()

@@ -5,13 +5,9 @@ from datetime import datetime, date
 from typing import Dict, Tuple
 from dataclasses import dataclass
 
-from ncatbot.core import At, MessageChain, Text, Image
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import At, MessageChain, Text, Image, GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 from ncatbot.utils.logger import get_log
-from ncatbot.core.message import GroupMessage
 
 _log = get_log()
 
@@ -49,7 +45,7 @@ class EatWhat(NcatBotPlugin):
         "你在等我给你发好吃的？做梦哦！你都吃那么多了，不许再吃了！ヽ(≧Д≦)ノ",
     ]
 
-    @group_only
+    @on_message
     async def handle_eat_what(self, input: GroupMessage) -> None:
         """处理群消息"""
         content = input.raw_message.strip()

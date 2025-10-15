@@ -3,10 +3,7 @@ from common.constants.HMMT import HMMT
 from common.utils.CommonUtil import CommonUtil
 from ncatbot.core import GroupMessage
 from ncatbot.utils.logger import get_log
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 # 日志配置
 _log = get_log()
@@ -16,7 +13,7 @@ class Jrrp(NcatBotPlugin):
     name = "Jrrp"  # 插件名称
     version = "1.0"  # 插件版本
 
-    @group_only
+    @on_message
     async def handle_jrrp(self, input: GroupMessage):
         """
         处理今日人品（JRRP）功能

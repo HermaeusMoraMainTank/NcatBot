@@ -6,12 +6,8 @@ from typing import Dict, Set
 from common.constants.HMMT import HMMT
 from common.entity.GroupMember import GroupMember
 from common.utils.CommonUtil import CommonUtil
-from ncatbot.core import At, Image as ImageElement, MessageChain, Text
-from ncatbot.core.message import GroupMessage
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import At, Image as ImageElement, MessageChain, Text, GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 from ncatbot.utils.logger import get_log
 
@@ -181,7 +177,7 @@ class TodayAnimeWaifu(NcatBotPlugin):
         name = os.path.splitext(filename)[0]
         return name
 
-    @group_only
+    @on_message
     async def handle_message(self, input: GroupMessage):
         if not input.message:
             return

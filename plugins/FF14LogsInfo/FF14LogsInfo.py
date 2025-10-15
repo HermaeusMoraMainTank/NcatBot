@@ -7,12 +7,8 @@ from typing import List, Optional
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 
-from ncatbot.core.message import GroupMessage
-from ncatbot.core import Image as ImageElement, MessageChain, Reply
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import Image as ImageElement, MessageChain, Reply, GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 
 log = logging.getLogger(__name__)
@@ -361,7 +357,7 @@ class FF14LogsInfo(NcatBotPlugin):
             return (30, 255, 0)
         return (128, 128, 128)
 
-    @group_only
+    @on_message
     async def handle_ff14_logs(self, input: GroupMessage):
         message_parts = input.raw_message.split(" ")
         if len(message_parts) != 3 or message_parts[0] != "搜索玩家logs":

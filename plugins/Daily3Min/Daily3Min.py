@@ -1,16 +1,12 @@
-from ncatbot.core.message import GroupMessage
-from ncatbot.core import Image, MessageChain, Reply
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import Image, MessageChain, Reply, GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 
 class Daily3Min(NcatBotPlugin):
     name = "Daily3Min"  # 插件名称
     version = "1.0"  # 插件版本
 
-    @group_only
+    @on_message
     async def handle_daily3min(self, input: GroupMessage):
         if input.raw_message in [
             "每天3分钟",

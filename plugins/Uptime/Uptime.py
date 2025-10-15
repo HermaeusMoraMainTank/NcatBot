@@ -3,12 +3,8 @@ import io
 import requests
 from datetime import datetime, timedelta, timezone
 from PIL import Image, ImageDraw, ImageFont
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
-from ncatbot.core import MessageChain, Image as BotImage, Text
-from ncatbot.core.message import GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
+from ncatbot.core import MessageChain, Image as BotImage, Text, GroupMessage
 
 
 # 标准判定时间点 (北京时间)
@@ -144,7 +140,7 @@ class UptimePlugin(NcatBotPlugin):
     name = "uptime"
     version = "1.0"
 
-    @group_only
+    @on_message
     async def handle_uptime(self, input: GroupMessage):
         message = input.raw_message.strip()
         if not message.startswith("灭云"):

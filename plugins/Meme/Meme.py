@@ -7,12 +7,8 @@ from dataclasses_json import dataclass_json
 from pathlib import Path
 import tempfile
 
-from ncatbot.core.message import GroupMessage
-from ncatbot.core import Image, MessageChain
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import GroupMessage, Image, MessageChain
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 
 # 配置日志
@@ -93,7 +89,7 @@ class Meme(NcatBotPlugin):
         except Exception as e:
             logger.error(f"加载 meme 数据失败: {e}", exc_info=True)
 
-    @group_only
+    @on_message
     async def handle_meme(self, input: GroupMessage):
         # 检查发送者是否在 banlist 中
         if str(input.sender.user_id) in self.banlist:

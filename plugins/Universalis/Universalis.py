@@ -1,16 +1,13 @@
 import logging
 from dataclasses import dataclass
-from ncatbot.core.message import GroupMessage
+from ncatbot.core import GroupMessage
 import json
 import os
 import httpx
 from typing import Dict, Optional, Tuple
 from datetime import datetime
 from difflib import SequenceMatcher
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 
 # 定义数据类
@@ -101,7 +98,7 @@ class Universalis(NcatBotPlugin):
         # API 基础 URL
         self.api_url = "https://universalis.app/api/v2/"
 
-    @group_only
+    @on_message
     async def handle_universalis(self, input: GroupMessage):
         """
         处理物价查询

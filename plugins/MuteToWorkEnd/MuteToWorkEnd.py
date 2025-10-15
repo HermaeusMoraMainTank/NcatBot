@@ -1,11 +1,8 @@
 import logging
 import re
 from datetime import datetime, timedelta
-from ncatbot.core.message import GroupMessage
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 log = logging.getLogger(__name__)
 
@@ -59,7 +56,7 @@ class MuteManager(NcatBotPlugin):
             log.error(f"获取用户权限信息失败: {e}")
             return False
 
-    @group_only
+    @on_message
     async def handle_mute_commands(self, input: GroupMessage):
         """处理禁言相关指令"""
         message = input.raw_message.strip()

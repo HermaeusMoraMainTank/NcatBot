@@ -1,17 +1,17 @@
 root: '273421673'
 bt_uin: '3555202423'
-enable_webui_interaction: true
+enable_webui_interaction: false
 debug: false
 github_proxy: null
-check_ncatbot_update: true
+check_ncatbot_update: false
 skip_ncatbot_install_check: false
 websocket_timeout: 15
 napcat:
-  ws_uri: ws://localhost:3001
-  ws_token: NcatBot
+  ws_uri: ws://127.0.0.1:3001
+  ws_token: napcat
   ws_listen_ip: localhost
-  webui_uri: http://localhost:6099
-  webui_token: EXks[b%pkS4KVPlZ
+  webui_uri: http://127.0.0.1:6099
+  webui_token: <J[Y<I1I.NPP4N)R
   enable_webui: true
   check_napcat_update: false
   stop_napcat: false
@@ -22,4 +22,4 @@ plugin:
   plugins_dir: plugins
   plugin_whitelist: []
   plugin_blacklist: []
-  skip_plugin_load: true
+  skip_plugin_load: false

@@ -8,13 +8,9 @@ from typing import Dict, List, Optional
 import yaml
 from common.utils.AiUtil import AiUtil
 from common.utils.CommonUtil import CommonUtil
-from ncatbot.core import At, MessageChain, Text
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import At, MessageChain, Text, GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 from ncatbot.utils.logger import get_log
-from ncatbot.core.message import GroupMessage
 
 _log = get_log()
 
@@ -203,7 +199,7 @@ class FakeAi(NcatBotPlugin):
                 group_id=input.group_id, rtf=MessageChain([error_msg])
             )
 
-    @group_only
+    @on_message
     async def handle_fake_ai(self, input: GroupMessage) -> None:
         # 检查消息是否来自排除的插件
         if await self._is_from_excluded_plugin(input):

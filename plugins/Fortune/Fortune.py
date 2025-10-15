@@ -8,12 +8,8 @@ from PIL import Image as PILImage, ImageDraw, ImageFont
 import json
 
 from common.constants.HMMT import HMMT
-from ncatbot.core import At, MessageChain, Text, Image
-from ncatbot.core.message import GroupMessage
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import At, MessageChain, Text, Image, GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 
 log = logging.getLogger(__name__)
@@ -57,7 +53,7 @@ class Fortune(NcatBotPlugin):
         log.info(f"开始加载 {self.name} 插件 v{self.version}")
         log.info(f"{self.name} 插件加载完成")
 
-    @group_only
+    @on_message
     async def handle_fortune(self, input: GroupMessage):
         message = input.raw_message
         sender_id = input.sender.user_id

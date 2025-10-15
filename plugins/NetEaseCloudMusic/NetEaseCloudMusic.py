@@ -1,8 +1,5 @@
 from ncatbot.core import GroupMessage, MessageChain, Text, Record, Image
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 from ncatbot.utils.logger import get_log
 import json
 from PIL import Image as PILImage, ImageDraw, ImageFont
@@ -161,7 +158,7 @@ class NetEaseCloudMusic(NcatBotPlugin):
             _log.error(traceback.format_exc())
             raise
 
-    @group_only
+    @on_message
     async def handle_music(self, input: GroupMessage):
         """处理音乐相关命令"""
         message = input.raw_message.strip()

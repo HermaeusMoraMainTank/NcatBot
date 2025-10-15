@@ -9,12 +9,8 @@ from io import BytesIO
 
 from curl_cffi import requests
 from common.constants.HMMT import HMMT
-from ncatbot.core.message import GroupMessage
-from ncatbot.core import Image as ImageElement, MessageChain, Reply, Text
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import Image as ImageElement, MessageChain, Reply, Text, GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 # 用于存储搜索结果的字典
 # 格式: {(group_id, user_id): [user_data, ...]}
@@ -575,7 +571,7 @@ class VrChatInfo(NcatBotPlugin):
             for x in range(width):
                 image.putpixel((x, y), (r, g, b))
 
-    @group_only
+    @on_message
     async def handle_vrchat_search(self, input: GroupMessage):
         """处理查询命令"""
         message = input.raw_message.strip()

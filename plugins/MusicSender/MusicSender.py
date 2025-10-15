@@ -3,12 +3,8 @@ import logging
 import os
 import json
 import base64
-from ncatbot.core.message import GroupMessage
-from ncatbot.core import MessageChain, Record
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import GroupMessage, MessageChain, Record
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 
 log = logging.getLogger(__name__)
@@ -52,7 +48,7 @@ class MusicSender(NcatBotPlugin):
             log.error(f"读取音频文件失败: {str(e)}")
             return None
 
-    @group_only
+    @on_message
     async def handle_music(self, input: GroupMessage):
         message = input.raw_message.strip()
 

@@ -4,12 +4,8 @@ import random
 import os
 from typing import Dict, List
 
-from ncatbot.core.message import GroupMessage
-from ncatbot.core import Image, MessageChain
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import GroupMessage, Image, MessageChain
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 log = logging.getLogger(__name__)
 
@@ -69,7 +65,7 @@ class Lottery(NcatBotPlugin):
         except IOError as e:
             log.error(f"无法保存奖品总数: {e}")
 
-    @group_only
+    @on_message
     async def handle_lottery(self, input: GroupMessage):
         """处理大乐透指令"""
         if input.raw_message.startswith("大乐透"):

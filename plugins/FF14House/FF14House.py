@@ -3,12 +3,8 @@ from datetime import datetime
 import aiohttp
 import os
 import math
-from ncatbot.core.message import GroupMessage
-from ncatbot.core import Image as ImageElement, MessageChain, Reply
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import Image as ImageElement, MessageChain, Reply, GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 import json
 from ncatbot.utils.logger import get_log
@@ -357,7 +353,7 @@ class FF14House(NcatBotPlugin):
 
         return image
 
-    @group_only
+    @on_message
     async def handle_ff14house(self, input: GroupMessage):
         message_parts = input.raw_message.split(" ")
         if message_parts[0] != "搜索房屋":

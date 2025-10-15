@@ -5,12 +5,8 @@ import aiohttp
 from PIL import Image, ImageDraw, ImageFont
 import io
 import base64
-from ncatbot.core.message import GroupMessage
-from ncatbot.core import Image as BotImage, MessageChain, Text, At
-from ncatbot.plugin_system import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
-    group_only,
-)
+from ncatbot.core import Image as BotImage, MessageChain, Text, At, GroupMessage
+from ncatbot.plugin_system import NcatBotPlugin, on_message
 from .commands import COMMANDS, CATEGORY_NAMES, CATEGORY_COMMANDS
 import asyncio
 
@@ -169,7 +165,7 @@ class MoehuImageSender(NcatBotPlugin):
             log.error(f"禁言用户失败: {e}")
             return False
 
-    @group_only
+    @on_message
     async def handle_image(self, input: GroupMessage):
         message = input.raw_message.strip()
         user_id = input.sender.user_id
