@@ -5,17 +5,17 @@ import platform
 import subprocess
 import sys
 
-from requests import get
 
-from ncatbot.utils import (
+from ....utils import (
     INSTALL_SCRIPT_URL,
-    LINUX_NAPCAT_DIR,
     WINDOWS_NAPCAT_DIR,
     ncatbot_config,
     get_log,
-    get_proxy_url,
+    gen_url_with_proxy,
+    get_json,
 )
-from ncatbot.core.adapter.nc.utils import (
+
+from .utils import (
     check_linux_permissions,
     check_self_package_version,
     unzip_file,
@@ -23,31 +23,21 @@ from ncatbot.core.adapter.nc.utils import (
     get_napcat_dir,
 )
 
-LOG = get_log("ncatbot.core.adapter.nc.install")    
-
-
-def get_napcat_dir():
-    """获取 napcat 安装目录"""
-    if platform.system() == "Windows":
-        return WINDOWS_NAPCAT_DIR
-    elif platform.system() == "Linux":
-        return LINUX_NAPCAT_DIR
-    else:
-        LOG.warning("不支持的系统类型: %s, 可能需要自行适配", platform.system())
-        LOG.warning("默认使用工作目录下 napcat/ 目录")
-        return os.path.join(os.getcwd(), "napcat")
+LOG = get_log("ncatbot.core.adapter.nc.install")
 
 
 def get_napcat_version():
     """从GitHub获取 napcat 版本号"""
-    github_proxy_url = get_proxy_url()
-    version_url = f"{github_proxy_url}https://raw.githubusercontent.com/NapNeko/NapCatQQ/main/package.json"
-    version_response = get(version_url)
-    if version_response.status_code == 200:
-        version = version_response.json()["version"]
+    version_url = "https://raw.githubusercontent.com/NapNeko/NapCatQQ/main/package.json"
+    version_url = gen_url_with_proxy(version_url)
+    LOG.info(f"正在获取版号信息... {version_url}")
+    data = get_json(version_url)
+    version = data.get("version", None)
+    if version:
         LOG.debug(f"获取最新版本信息成功, 版本号: {version}")
         return version
-    LOG.info(f"获取最新版本信息失败, http 状态码: {version_response.status_code}")
+    else:
+        LOG.info("获取最新版本信息失败: package.json 中缺少 version 字段")
     return None
 
 
@@ -75,8 +65,9 @@ def install_napcat_windows(type: str):
 
     try:
         version = get_napcat_version()
-        github_proxy_url = get_proxy_url()
-        download_url = f"{github_proxy_url}https://github.com/NapNeko/NapCatQQ/releases/download/v{version}/NapCat.Shell.zip"
+        download_url = gen_url_with_proxy(
+            f"https://github.com/NapNeko/NapCatQQ/releases/download/v{version}/NapCat.Shell.zip"
+        )
         if not version:
             return False
 
@@ -88,7 +79,7 @@ def install_napcat_windows(type: str):
         check_windows_qq_version()
         return True
     except Exception as e:
-        LOG.error("安装失败:", e)
+        LOG.error("安装失败: " + str(e))
         return False
 
 
@@ -131,7 +122,7 @@ def install_napcat_linux(type: str):
             LOG.error("执行一键安装脚本失败, 请检查命令行输出")
             raise Exception("执行一键安装脚本失败")
     except Exception as e:
-        LOG.error("执行一键安装脚本失败，错误信息:", e)
+        LOG.error("执行一键安装脚本失败，错误信息: " + str(e))
         raise e
 
 
@@ -197,3 +188,11 @@ def install_or_update_napcat():
             LOG.info("当前 napcat 已是最新版本")
     else:
         return True
+
+
+def main():
+    install_napcat("install")
+
+
+if __name__ == "__main__":
+    main()

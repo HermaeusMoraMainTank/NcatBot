@@ -1,7 +1,17 @@
 from .client import BotClient
-from .event import GroupMessageEvent, PrivateMessageEvent, RequestEvent, NoticeEvent, MetaEvent, BaseMessageEvent
+from .event import (
+    GroupMessageEvent,
+    PrivateMessageEvent,
+    RequestEvent,
+    NoticeEvent,
+    MetaEvent,
+    BaseMessageEvent,
+)
+from .event import MessageArray as MessageChain
+from .event import BaseMessageEvent as BaseMessage
+from .event import GroupMessageEvent as GroupMessage
+from .event import PrivateMessageEvent as PrivateMessage
 from .helper import ForwardConstructor
-from .legacy import GroupMessage, PrivateMessage, MessageChain, BaseMessage
 from .event import (
     Text,
     At,

@@ -38,6 +38,7 @@ MANIFEST
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
+uv.lock
 
 # Installer logs
 pip-log.txt
@@ -209,3 +210,5 @@ package.zip
 resource.o
 number.txt
 data/image/avatar/
+data/
+*.DS_Store

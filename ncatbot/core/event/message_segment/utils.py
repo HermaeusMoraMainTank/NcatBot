@@ -4,6 +4,10 @@ import base64
 import urllib.request
 from urllib.parse import urljoin
 from ncatbot.utils import ncatbot_config
+from ....utils import get_log
+
+LOG = get_log("MessageSegmentUtils")
+
 
 def convert_uploadable_object(i):
     """将可上传对象转换为标准格式"""
@@ -11,10 +15,17 @@ def convert_uploadable_object(i):
     def is_base64(s: str):
         if s.startswith("base64://"):
             return True
-        if re.match(
+        elif re.match(
             r"data:image/(jpg|jpeg|png|gif|bmp|webp|tiff|svg|mp4|avi|mov|wmv|flv|mkv|mpg|mpeg|m4v);base64,",
             s,
         ):
+            return True
+        if len(s) > 10**4:
+            LOG.warning(
+                "检测到非常长的字符串，可能是 Base64 编码，强制当作 Base64 处理"
+            )
+            LOG.info("请保证 base64:// 前缀存在以便消除该警告")
+            LOG.debug(f"字符串前100字符: {s[:100]}")
             return True
         return False
 
@@ -30,6 +41,7 @@ def convert_uploadable_object(i):
                 s,
             )
             return f"base64://{m.group(2)}"
+        return f"base64://{s}"
 
     if i.startswith("http"):
         return i

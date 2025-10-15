@@ -4,24 +4,24 @@
 # @LastEditors  : Fish-LP fish.zh@outlook.com
 # @LastEditTime : 2025-08-04 15:49:02
 # @Description  : 插件加载器
-# @Copyright (c) 2025 by Fish-LP, Fcatbot使用许可协议 
+# @Copyright (c) 2025 by Fish-LP, Fcatbot使用许可协议
 # -------------------------
 import asyncio
 import importlib
+
 # TODO 用 zipimport 实现 zip 格式插件
 import sys
+import toml
 from collections import defaultdict, deque
 from pathlib import Path
 from types import ModuleType
-from typing import Dict, Iterable, List, Optional, Set, Tuple, Type, Union, TYPE_CHECKING
+from typing import Dict, Iterable, List, Optional, Set, Type, Union, TYPE_CHECKING
 
 from packaging.specifiers import SpecifierSet
 from packaging.version import parse as parse_version
-from logging import getLogger
 
 from ncatbot.utils import ncatbot_config
 
-from .decorator import CompatibleHandler
 from .base_plugin import BasePlugin
 from .event import EventBus
 from .packhelper import PackageHelper
@@ -35,6 +35,7 @@ from .config import config
 from .rbac import RBACManager
 from .builtin_plugin import SystemManager, UnifiedRegistryPlugin
 from ncatbot.utils import get_log, status
+
 if TYPE_CHECKING:
     import importlib.util
 
@@ -62,6 +63,17 @@ class _ModuleImporter:
         try:
             sys.path.insert(0, str(self.directory))
             for entry in self.directory.iterdir():
+                name = entry.stem
+                if ncatbot_config.plugin.plugin_whitelist:
+                    if name not in ncatbot_config.plugin.plugin_whitelist:
+                        LOG.info("插件文件「%s」不在白名单内，跳过加载", name)
+                        continue
+
+                if ncatbot_config.plugin.plugin_blacklist:
+                    if name in ncatbot_config.plugin.plugin_blacklist:
+                        LOG.info("插件文件「%s」在黑名单内，跳过加载", name)
+                        continue
+
                 if entry.is_dir() and (entry / "__init__.py").exists():
                     name, path = entry.name, entry
                 elif entry.suffix == ".py":
@@ -95,19 +107,37 @@ class _ModuleImporter:
     def _maybe_install_deps(self, plugin_path: Path) -> None:
         if not _AUTO_INSTALL:
             return
-        req_file = (
-            plugin_path / "requirements.txt"
-            if plugin_path.is_dir()
-            else plugin_path.with_suffix(".requirements.txt")
-        )
-        if not req_file.exists():
-            return
 
-        for line in req_file.read_text(encoding="utf-8").splitlines():
-            req = line.strip()
-            if not req or req.startswith("#") or req.startswith("-"):
-                continue
-            self._ensure_package(req)
+        def ensure_req_from_requirements():
+            req_file = (
+                plugin_path / "requirements.txt"
+                if plugin_path.is_dir()
+                else plugin_path.with_suffix(".requirements.txt")
+            )
+            if not req_file.exists():
+                return
+
+            for line in req_file.read_text(encoding="utf-8").splitlines():
+                req = line.strip()
+                if not req or req.startswith("#") or req.startswith("-"):
+                    continue
+                self._ensure_package(req)
+
+        def ensure_req_from_pyproject():
+            pyproject = (
+                plugin_path / "pyproject.toml"
+                if plugin_path.is_dir()
+                else plugin_path.with_suffix(".pyproject.toml")
+            )
+            if not pyproject.exists():
+                return
+            data = toml.load(pyproject)
+            requires = data.get("project", {}).get("dependencies", [])
+            for req in requires:
+                self._ensure_package(req)
+
+        ensure_req_from_pyproject()
+        ensure_req_from_requirements()
 
     def _ensure_package(self, req: str) -> None:
         """检查包是否存在，不存在则安装。"""
@@ -175,7 +205,7 @@ class PluginLoader:
         self.rbac_manager = RBACManager(config.rbac_path)
         self._debug = debug
         self._resolver = _DependencyResolver()
-        
+
         # 将rbac_manager注册到全局状态
         status.global_access_manager = self.rbac_manager
 
@@ -185,6 +215,7 @@ class PluginLoader:
     # -------------------- 对外 API --------------------
     async def _init_plugin_in_thread(self, plugin: BasePlugin) -> None:
         """在插件的线程中初始化"""
+
         def _run_init():
             # 在线程中创建新的事件循环
             loop = asyncio.new_event_loop()
@@ -194,12 +225,9 @@ class PluginLoader:
                 loop.run_until_complete(plugin.__onload__())
             finally:
                 loop.close()
-                
+
         # 在插件的线程池中执行初始化
-        await asyncio.get_event_loop().run_in_executor(
-            plugin.thread_pool, 
-            _run_init
-        )
+        await asyncio.get_event_loop().run_in_executor(plugin.thread_pool, _run_init)
 
     async def from_class_load_plugins(
         self, plugin_classes: List[Type[BasePlugin]], **kwargs
@@ -211,10 +239,11 @@ class PluginLoader:
         load_order = self._resolver.resolve()
         temp = {}
         init_tasks = []
-        
+
         for name in load_order:
             cls = next(c for c in valid_classes if c.name == name)
             LOG.info("加载插件「%s」", name)
+
             plugin = cls(
                 event_bus=self.event_bus,
                 debug=self._debug,
@@ -226,7 +255,7 @@ class PluginLoader:
             # 收集初始化任务
             init_tasks.append(self._init_plugin_in_thread(plugin))
 
-        self.plugins = temp
+        self.plugins.update(temp)
         self._validate_versions()
         # 并发执行所有插件的初始化
         await asyncio.gather(*init_tasks)
@@ -257,7 +286,7 @@ class PluginLoader:
         if not path.exists():
             LOG.info("插件目录: %s 不存在……跳过加载插件", path)
             return
-        
+
         if ncatbot_config.plugin.skip_plugin_load:
             LOG.info("跳过外部插件加载")
             return
@@ -312,13 +341,13 @@ class PluginLoader:
                 return False
 
             new = await self.load_plugin(cls)
-            
+
             # 执行兼容处理（这玩意应该不需要了）
             # for _, func in _iter_callables(new):
             #     for handler in CompatibleHandler._subclasses:
             #         if handler.check(func):
             #             handler.handle(new, func, self.event_bus, new)
-                        
+
             self.plugins[name] = new
             LOG.info("插件 '%s' 重载成功", name)
             return True

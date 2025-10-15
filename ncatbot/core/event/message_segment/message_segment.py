@@ -1,20 +1,16 @@
-from email import message
-import re
-import base64
 import os
-import asyncio
 import time
 import httpx
-from ncatbot.core.event.message_segment.utils import convert_uploadable_object
-import urllib
+import urllib.parse
+import copy
 from dataclasses import dataclass, field, fields
-from urllib.parse import urljoin
-from typing import Literal, Union, Any, TYPE_CHECKING, TypeVar, Dict, Type, Iterable
-from ncatbot.utils import get_log, NcatBotError, status
+from typing import Literal, Union, Any, TYPE_CHECKING, TypeVar, Dict, Type, List
+from ....utils import get_log, run_coroutine, NcatBotError, status
+from .utils import convert_uploadable_object
 
 if TYPE_CHECKING:
-    from ncatbot.core.event.message_segment.message_array import MessageArray
-    from ncatbot.core.event.event_data import MessageEventData
+    from .message_array import MessageArray
+    from ...event import MessageEventData
 
 T = TypeVar("T")
 LOG = get_log("MessageSegment")
@@ -28,7 +24,7 @@ class MessageTypeNotFoundErr(NcatBotError):
 def create_message_array(
     obj: Union[
         "MessageArray",
-        Union[list["MessageSegment"], list[dict]],
+        Union[List["MessageSegment"], List[dict]],
     ],
 ) -> "MessageArray":
     from ncatbot.core.event.message_segment.message_array import MessageArray
@@ -153,11 +149,16 @@ class MessageSegment:
             for field in fields(self)
             if hasattr(self, field.name) and field.repr
         ]
-        non_none_fields = [
-            f"{name}={value if not isinstance(value, str) else f'"{value}"'}"
-            for name, value in field_items
-            if value is not None
-        ]
+
+        non_none_fields = []
+        for name, value in field_items:
+            if value is None:
+                continue
+            if isinstance(value, str):
+                quoted = f'"{value}"'  # 这里不再有反斜杠
+            else:
+                quoted = value
+            non_none_fields.append(f"{name}={quoted}")
         return f"{self.__class__.__name__}({', '.join(non_none_fields)})"
 
     def __str__(self):
@@ -167,7 +168,7 @@ class MessageSegment:
 @dataclass(repr=False)
 class DownloadableMessageSegment(MessageSegment):
     file: str
-    url: str = field(init=False)
+    url: str = field(init=False, default=None)
     msg_seg_type: Literal["file", "image", "record", "video"] = field(
         init=False, repr=False, default=None
     )
@@ -200,8 +201,45 @@ class DownloadableMessageSegment(MessageSegment):
         return filename
 
     def to_dict(self):
-        self.file = convert_uploadable_object(self.file)
-        return super().to_dict()
+        # 不修改本身的 file 属性，提供一个转换后的副本
+        copy_self = copy.deepcopy(self)
+        copy_self.file = convert_uploadable_object(copy_self.file)
+        # 调用父类的to_dict()方法，防止无限递归
+        return super(DownloadableMessageSegment, copy_self).to_dict()
+
+    def get_base64(self):
+        import base64
+
+        if self.url is not None:
+            self.download_sync("./data", f".temp-{self.get_file_name()}")
+            with open(f"./data/.temp-{self.get_file_name()}", "rb") as f:
+                encoded = base64.b64encode(f.read()).decode("utf-8")
+            os.remove(f"./data/.temp-{self.get_file_name()}")
+            return f"base64://{encoded}"
+
+        else:
+            if os.path.exists(self.file):
+                with open(self.file, "rb") as f:
+                    encoded = base64.b64encode(f.read()).decode("utf-8")
+                return f"base64://{encoded}"
+            elif self.file.startswith("base64://"):
+                return self.file
+            elif self.file.startswith("data:"):
+                return "base64://" + self.file.split("base64,")[-1]
+            elif self.file.startswith("http"):
+                try:
+                    response = httpx.get(self.file)
+                    if response.status_code == 200:
+                        encoded = base64.b64encode(response.content).decode("utf-8")
+                        return f"base64://{encoded}"
+                    else:
+                        LOG.error(f"无法下载文件，HTTP 状态码: {response.status_code}")
+                        return None
+                except httpx.RequestError as e:
+                    LOG.error(f"下载文件时出错: {e}")
+                    return None
+            else:
+                raise NcatBotError(f"无法处理的文件 {self.file}")
 
     def __post_init__(self):
         pass
@@ -212,31 +250,60 @@ class DownloadableMessageSegment(MessageSegment):
             raise NcatBotError(f"下载路径不存在: {dir}")
         target_path = os.path.join(dir, name)
         if os.path.exists(target_path):
-            path = (
-                target_path.split(".")[0]
-                + "_"
-                + str(time.time())
-                + "."
-                + target_path.split(".")[1]
-            )
+            path = os.path.join(dir, f"{time.time()}-{name}")
             LOG.warning(f"文件已存在: {target_path}, 将保存为 {path}")
         else:
             path = target_path
         return path
 
     async def download_to(self, dir: str, name: str = None):
+        # TODO: 优化这里屎一样的逻辑
         path = self._get_final_path(dir, name)
-        try:
+        if self.url is not None:
             async with httpx.AsyncClient() as client:
-                response = await client.get(self.url)
+                resp = await client.get(self.url, timeout=60)
+                resp.raise_for_status()
                 with open(path, "wb") as f:
-                    f.write(response.content)
-        except httpx.UnsupportedProtocol as e:
-            LOG.error(f"不支持的协议: {self.file}")
-            return None
+                    f.write(resp.content)
+        else:
+            if os.path.exists(self.file):
+                import shutil
+
+                shutil.copyfile(self.file, path)
+            else:
+                b64_data = self.get_base64()
+                if b64_data is None:
+                    raise NcatBotError(f"无法下载文件: {self.file}")
+                import base64
+
+                if b64_data.startswith("data:"):
+                    b64_data = b64_data.split("base64,")[-1]
+                elif b64_data.startswith("base64://"):
+                    b64_data = b64_data[len("base64://") :]
+                with open(path, "wb") as f:
+                    f.write(base64.b64decode(b64_data))
+
         return path
 
+    async def download(self, dir, name: str = None):
+        return await self.download_to(dir, name)
 
+    def download_sync(self, dir: str, name: str = None):
+        return run_coroutine(self.download, dir, name)
+
+    def __str__(self):
+        return self.__repr__()
+    
+    def __repr__(self):
+        res = super().__repr__()
+        if len(res) > 2024:
+            shortb64 = self.file[:30] + "..." + self.file[-30:]
+            cp = self
+            cp.file = shortb64
+            return cp.__repr__()
+        else:
+            return res
+    
 @dataclass(repr=False)
 class PlainText(MessageSegment):
     # 不转义的纯文本消息
@@ -279,11 +346,15 @@ class Face(MessageSegment):
 class Image(DownloadableMessageSegment):
     msg_seg_type: Literal["image"] = field(init=False, repr=False, default="image")
     summary: str = field(default="[图片]")
+    # 0: 一般图片或 QQ 商城内的动画表情； 1: QQ 用户保存的动画表情，为 1 时发送的图片会在 QQ 内以合适的大小显示
+    sub_type: int = field(default=0)  
     type: Literal["flash"] = None
 
     def is_flase_image(self) -> bool:
         return getattr(self, "type", None) == "flash"
 
+    def is_animated_image(self) -> bool:
+        return self.sub_type == 1
 
 @dataclass(repr=False)
 class File(DownloadableMessageSegment):
@@ -332,6 +403,9 @@ class At(MessageSegment):
 @dataclass(repr=False)
 class AtAll(At):
     qq: str = field(init=False, default="all")
+
+    def __init__(self, qq: str = "all"):
+        self.qq = qq
 
     def __str__(self):
         return "AtAll()"
@@ -492,16 +566,16 @@ class Forward(MessageSegment):
     id: str = field(default=None)
     # summary: str = field(init=False, repr=False, default="[聊天记录]")
     # prompt: str = field(init=False)
-    # news: list[str] = field(init=False, repr=False, default=None)
+    # news: List[str] = field(init=False, repr=False, default=None)
     # source: str = field(init=False, repr=False, default=None)
     message_type: Literal["group", "friend"] = field(
         default=None
     )  # 用于描述消息节点的来源
-    content: list[Node] = field(default=None)
+    content: List[Node] = field(default=None)
     msg_seg_type: Literal["forward"] = field(init=False, repr=False, default="forward")
 
     @classmethod
-    def from_content(cls, content: list[dict], id):
+    def from_content(cls, content: List[dict], id):
         obj = cls(id)
         obj.content = [
             Node.from_message_event(msg_event_dict) for msg_event_dict in content
@@ -519,7 +593,7 @@ class Forward(MessageSegment):
     @classmethod
     def from_messages(
         cls,
-        messages: list[Union[Node, "MessageEventData"]],
+        messages: List[Union[Node, "MessageEventData"]],
         message_type: Literal["group", "friend"] = None,
     ):
         from ncatbot.core.event.event_data import MessageEventData
@@ -538,10 +612,8 @@ class Forward(MessageSegment):
 
     @classmethod
     async def from_message_id(
-        cls, messages: list[Union[str, int]], message_type: Literal["group", "friend"]
+        cls, messages: List[Union[str, int]], message_type: Literal["group", "friend"]
     ):
-        from ncatbot.core.event.event_data import MessageEventData
-
         obj = cls(None)
         if len(messages) == 0:
             raise NcatBotError("Forward 转化传入的消息数量不能为零")
@@ -552,7 +624,7 @@ class Forward(MessageSegment):
         obj.message_type = message_type
 
     def to_forward_dict(self):
-        def modify_type(msg_list: list[dict]):
+        def modify_type(msg_list: List[dict]):
             for msg in msg_list:
                 if msg["type"] in ("forward", "node"):
                     msg["type"] = "node"
@@ -591,12 +663,12 @@ class Forward(MessageSegment):
             "source": source,
         }
 
-    async def get_content(self) -> list[Node]:
+    async def get_content(self) -> List[Node]:
         fwd = await status.global_api.get_forward_msg(self.id)
         self.__dict__.update(fwd.__dict__)
         return self.content
 
-    def filter(self, cls: Type[T]) -> list[T]:
+    def filter(self, cls: Type[T]) -> List[T]:
         return self.content[0].content.filter(cls)
 
     def get_summary(self):
@@ -614,7 +686,7 @@ class XML(MessageSegment):
 
 @dataclass(repr=False)
 class Json(MessageSegment):
-    data: str
+    data: str  # json 字符串
     msg_seg_type: Literal["json"] = field(init=False, repr=False, default="json")
 
 
@@ -627,7 +699,7 @@ class Markdown(MessageSegment):
 
 
 def get_class_by_name(name: str) -> Type[MessageSegment]:
-    def find_all_subclasses(cls) -> list[Type[MessageSegment]]:
+    def find_all_subclasses(cls) -> List[Type[MessageSegment]]:
         subclasses = set()
         for subclass in cls.__subclasses__():
             subclasses.add(subclass)

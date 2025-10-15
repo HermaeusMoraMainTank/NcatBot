@@ -9,8 +9,8 @@ import urllib.parse
 import zipfile
 import requests
 from tqdm import tqdm
-from ncatbot.utils.assets.literals import PYPI_URL, WINDOWS_NAPCAT_DIR, LINUX_NAPCAT_DIR
-from ncatbot.utils import get_log
+from ....utils import PYPI_URL, WINDOWS_NAPCAT_DIR, LINUX_NAPCAT_DIR
+from ....utils import get_log
 
 LOG = get_log("ncatbot.core.adapter.nc.utils")
 
@@ -20,11 +20,15 @@ def get_napcat_dir():
     if platform.system() == "Windows":
         return WINDOWS_NAPCAT_DIR
     elif platform.system() == "Linux":
-        return LINUX_NAPCAT_DIR
+        target_dir = LINUX_NAPCAT_DIR
+        if os.path.exists(target_dir):
+            return target_dir
+        return os.path.expanduser("~/Napcat/opt/QQ/resources/app/app_launcher/napcat")
     else:
         LOG.warning("不支持的系统类型: %s, 可能需要自行适配", platform.system())
         LOG.warning("默认使用工作目录下 napcat/ 目录")
         return os.path.join(os.getcwd(), "napcat")
+
 
 def download_file(url, file_name):
     """下载文件, 带进度条"""
@@ -53,6 +57,7 @@ def download_file(url, file_name):
         LOG.error("错误信息:", e)
         return
 
+
 def unzip_file(file_name, exact_path, remove=False):
     try:
         with zipfile.ZipFile(file_name, "r") as zip_ref:
@@ -63,7 +68,7 @@ def unzip_file(file_name, exact_path, remove=False):
     except Exception:
         LOG.error(f"解压 {file_name} 失败")
         return
-    
+
 
 def get_local_package_version(package_name):
     """

@@ -1,6 +1,6 @@
-from ncatbot.plugin_system.builtin_mixin import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.command_system.registry import command_registry
-from ncatbot.plugin_system.builtin_plugin.unified_registry.command_system.registry.decorators import param
+from ncatbot.plugin_system import NcatBotPlugin
+from ncatbot.plugin_system import command_registry
+from ncatbot.plugin_system import param
 from ncatbot.core.event import BaseMessageEvent
 import random
 
@@ -33,9 +33,14 @@ class WebAPIPlugin(NcatBotPlugin):
             "stats": {"cpu": "45%", "memory": "60%"},
         }
         if endpoint not in mock_responses:
-            await event.reply("❌ 未知的API端点: {endpoint}\n可用端点: users, posts, stats")
+            await event.reply(
+                "❌ 未知的API端点: {endpoint}\n可用端点: users, posts, stats"
+            )
             return
         data = mock_responses[endpoint]
-        await event.reply("🌐 API响应 (" + endpoint + "):\n" + "\n".join([f"{k}: {v}" for k, v in data.items()]))
-
-
+        await event.reply(
+            "🌐 API响应 ("
+            + endpoint
+            + "):\n"
+            + "\n".join([f"{k}: {v}" for k, v in data.items()])
+        )

@@ -2,11 +2,12 @@ import os
 import json
 import shutil
 from urllib.parse import urlparse
-from ncatbot.core.adapter.nc.utils import get_napcat_dir, check_linux_permissions
-from ncatbot.utils import get_log, ncatbot_config
-from ncatbot.utils.assets.default_webui_config import config as default_webui_config
+from .utils import get_napcat_dir, check_linux_permissions
+from ....utils import get_log, ncatbot_config
+from ....utils.assets.default_webui_config import config as default_webui_config
 
 LOG = get_log("ncatbot.core.adapter.nc.config")
+
 
 def config_napcat():
     """配置 napcat 服务器, 保证 napcat_dir 存在且被正确配置"""
@@ -21,15 +22,25 @@ def config_napcat():
             original_data = json.load(
                 open(
                     os.path.join(
-                        napcat_dir, "config", "onebot11_" + str(ncatbot_config.bt_uin) + ".json"
+                        napcat_dir,
+                        "config",
+                        "onebot11_" + str(ncatbot_config.bt_uin) + ".json",
                     ),
                     "r",
                     encoding="utf-8",
                 )
             )
-            if original_data["parseMultMsg"] != ncatbot_config.napcat.report_forward_message_detail:
-                LOG.warning("解析合并转发消息配置不匹配, 将修改为 NcatBot 配置的配置: " + str(ncatbot_config.napcat.report_forward_message_detail))
-                original_data["parseMultMsg"] = ncatbot_config.napcat.report_forward_message_detail
+            if (
+                original_data["parseMultMsg"]
+                != ncatbot_config.napcat.report_forward_message_detail
+            ):
+                LOG.warning(
+                    "解析合并转发消息配置不匹配, 将修改为 NcatBot 配置的配置: "
+                    + str(ncatbot_config.napcat.report_forward_message_detail)
+                )
+                original_data["parseMultMsg"] = (
+                    ncatbot_config.napcat.report_forward_message_detail
+                )
         else:
             original_data = {
                 "network": {
@@ -47,7 +58,11 @@ def config_napcat():
             "port": int(urlparse(ncatbot_config.napcat.ws_uri).port),
             "messagePostFormat": "array",
             "reportSelfMessage": ncatbot_config.napcat.report_self_message,
-            "token": (str(ncatbot_config.napcat.ws_token) if ncatbot_config.napcat.ws_token is not None else ""),
+            "token": (
+                str(ncatbot_config.napcat.ws_token)
+                if ncatbot_config.napcat.ws_token is not None
+                else ""
+            ),
             "enableForcePushEvent": True,
             "debug": False,
             "heartInterval": 30000,
@@ -56,13 +71,24 @@ def config_napcat():
             pass
         else:
             for server_config in original_data["network"]["websocketServers"]:
-                if server_config["port"] == int(urlparse(ncatbot_config.napcat.ws_uri).port):
-                    LOG.error(
-                        f"原配置对应的端口 {server_config['port']} 已经存在, 请更改端口"
-                    )
-                    raise ValueError(
-                        f"原配置对应的端口 {server_config['port']} 已经存在, 请更改端口"
-                    )
+                if server_config["port"] == int(
+                    urlparse(ncatbot_config.napcat.ws_uri).port
+                ):
+                    if (
+                        input(
+                            "原配置对应的端口 "
+                            + str(server_config["port"])
+                            + " 已经存在, 是否强制覆盖配置 (y/n): "
+                        ).lower()
+                        == "y"
+                    ):
+                        original_data["network"]["websocketServers"].remove(
+                            server_config
+                        )
+                    else:
+                        raise ValueError(
+                            f"原配置对应的端口 {server_config['port']} 已经存在, 请更改端口"
+                        )
             original_data["network"]["websocketServers"].append(expected_server_config)
 
         try:
@@ -96,20 +122,39 @@ def config_napcat():
                 port = webui_config.get("port", 6099)
                 token = webui_config.get("token", "")
                 ws_listen_ip = webui_config.get("wsListenIp", "0.0.0.0")
+
+            update = False
             if token != ncatbot_config.napcat.webui_token:
-                LOG.warning("WebUI 令牌不匹配, 将修改为 NcatBot 配置的令牌: " + ncatbot_config.napcat.webui_token)
+                update = True
+                LOG.warning(
+                    "WebUI 令牌不匹配, 将修改为 NcatBot 配置的令牌: "
+                    + ncatbot_config.napcat.webui_token
+                )
+                webui_config["token"] = ncatbot_config.napcat.webui_token
             if port != ncatbot_config.napcat.webui_port:
-                LOG.warning("WebUI 端口不匹配, 将修改为 NcatBot 配置的端口: " + str(ncatbot_config.napcat.webui_port))
-                ncatbot_config.napcat.webui_port = port
+                update = True
+                LOG.warning(
+                    "WebUI 端口不匹配, 将修改为 NcatBot 配置的端口: "
+                    + str(ncatbot_config.napcat.webui_port)
+                )
+                webui_config["port"] = ncatbot_config.napcat.webui_port
             if ws_listen_ip != ncatbot_config.napcat.ws_listen_ip:
-                LOG.warning("WebUI 监听 IP 不匹配, 将修改为 NcatBot 配置的监听 IP: " + ncatbot_config.napcat.ws_listen_ip)
+                update = True
+                LOG.warning(
+                    "WebUI 监听 IP 不匹配, 将修改为 NcatBot 配置的监听 IP: "
+                    + ncatbot_config.napcat.ws_listen_ip
+                )
+                webui_config["wsListenIp"] = ncatbot_config.napcat.ws_listen_ip
+            if update:
+                with open(webui_config_path, "w") as f:
+                    json.dump(webui_config, f, indent=4, ensure_ascii=False)
         except FileNotFoundError:
             LOG.warning("第一次运行 WebUI, 将创建 WebUI 配置文件")
             default_webui_config["port"] = ncatbot_config.napcat.webui_port
             default_webui_config["token"] = ncatbot_config.napcat.webui_token
             default_webui_config["wsListenIp"] = ncatbot_config.napcat.ws_listen_ip
-        with open(webui_config_path, "w") as f:
-            json.dump(default_webui_config, f, indent=4, ensure_ascii=False)
+            with open(webui_config_path, "w") as f:
+                json.dump(default_webui_config, f, indent=4, ensure_ascii=False)
 
     config_onebot11()
     config_quick_login()

@@ -1,6 +1,6 @@
-from ncatbot.plugin_system.builtin_mixin import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.command_system.registry import command_registry
-from ncatbot.plugin_system.builtin_plugin.unified_registry.command_system.registry.decorators import option, param
+from ncatbot.plugin_system import NcatBotPlugin
+from ncatbot.plugin_system import command_registry
+from ncatbot.plugin_system import option, param
 from ncatbot.core.event import BaseMessageEvent
 
 
@@ -14,7 +14,9 @@ class InfoQueryPlugin(NcatBotPlugin):
 
     @command_registry.command("weather", description="查询天气")
     @param(name="units", default="metric", help="温度单位")
-    async def weather_cmd(self, event: BaseMessageEvent, city: str, units: str = "metric"):
+    async def weather_cmd(
+        self, event: BaseMessageEvent, city: str, units: str = "metric"
+    ):
         cache_key = f"weather_{city}_{units}"
         if cache_key in self.cache:
             await event.reply(f"🌤️ {city} 天气：{self.cache[cache_key]} (来自缓存)")
@@ -31,7 +33,9 @@ class InfoQueryPlugin(NcatBotPlugin):
 
     @command_registry.command("translate", description="翻译文本")
     @param(name="target", default="en", help="目标语言")
-    async def translate_cmd(self, event: BaseMessageEvent, text: str, target: str = "en"):
+    async def translate_cmd(
+        self, event: BaseMessageEvent, text: str, target: str = "en"
+    ):
         translations = {
             "en": {"你好": "Hello", "谢谢": "Thank you", "再见": "Goodbye"},
             "ja": {"你好": "こんにちは", "谢谢": "ありがとう", "再见": "さようなら"},
@@ -40,11 +44,15 @@ class InfoQueryPlugin(NcatBotPlugin):
             await event.reply("❌ 不支持的目标语言: {target}\n支持的语言: en, ja")
             return
         translated = translations[target].get(text, f"[无法翻译: {text}]")
-        await event.reply(f"🌐 翻译结果：\n原文: {text}\n{target.upper()}: {translated}")
+        await event.reply(
+            f"🌐 翻译结果：\n原文: {text}\n{target.upper()}: {translated}"
+        )
 
     @command_registry.command("search", description="搜索信息")
     @option(short_name="l", long_name="limit", help="限制结果数量")
-    async def search_cmd(self, event: BaseMessageEvent, query: str, limit: bool = False):
+    async def search_cmd(
+        self, event: BaseMessageEvent, query: str, limit: bool = False
+    ):
         search_results = [
             f"📄 关于 '{query}' 的搜索结果1",
             f"📄 关于 '{query}' 的搜索结果2",
@@ -54,6 +62,6 @@ class InfoQueryPlugin(NcatBotPlugin):
         ]
         if limit:
             search_results = search_results[:3]
-        await event.reply("🔍 搜索 '" + query + "' 的结果:\n" + "\n".join(search_results))
-
-
+        await event.reply(
+            "🔍 搜索 '" + query + "' 的结果:\n" + "\n".join(search_results)
+        )

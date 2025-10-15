@@ -1,6 +1,9 @@
-from ncatbot.plugin_system.builtin_mixin import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system import BaseFilter, filter_registry
-from ncatbot.plugin_system.builtin_plugin.unified_registry.command_system.registry import command_registry
+from ncatbot.plugin_system import NcatBotPlugin
+from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system import (
+    BaseFilter,
+    filter_registry,
+)
+from ncatbot.plugin_system import command_registry
 from ncatbot.core.event import BaseMessageEvent
 import time
 
@@ -31,9 +34,8 @@ class LevelAndCooldownPlugin(NcatBotPlugin):
 
     @LevelFilter(min_level=1)
     async def high_level_message(self, event: BaseMessageEvent):
-        if self._is_command(event):
-            return
-        await event.reply("收到一条高等级用户的消息")
+        if "高等级" in event.raw_message:
+            await event.reply("收到一条高等级用户的消息")
 
     # 冷却时间过滤器注册
     @filter_registry.register("cooldown")
@@ -54,5 +56,3 @@ class LevelAndCooldownPlugin(NcatBotPlugin):
     @command_registry.command("limited")
     async def limited_command(self, event: BaseMessageEvent):
         await event.reply("有冷却限制的命令")
-
-

@@ -1,5 +1,5 @@
-from ncatbot.plugin_system.builtin_mixin import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import group_only
+from ncatbot.plugin_system import NcatBotPlugin
+from ncatbot.plugin_system import group_filter
 from ncatbot.core.event import BaseMessageEvent
 
 
@@ -17,10 +17,8 @@ class QSPureFilterPlugin(NcatBotPlugin):
         return isinstance(raw, str) and (raw.startswith("/") or raw.startswith("!"))
 
     # 非命令，仅过滤器
-    @group_only
+    @group_filter
     async def on_group_message(self, event: BaseMessageEvent):
         if self._is_command(event):
             return
         await event.reply("收到一条群聊消息")
-
-

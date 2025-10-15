@@ -7,7 +7,7 @@
 """
 
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, List
 
 from ncatbot.utils import get_log
 from ncatbot.core.event import BaseMessageEvent
@@ -21,9 +21,11 @@ class PreprocessResult:
 
 
 class MessagePreprocessor:
-    def __init__(self, *, require_prefix: bool, prefixes: list[str], case_sensitive: bool) -> None:
-        self.require_prefix = require_prefix
+    def __init__(
+        self, *, prefixes: List[str], require_prefix: bool, case_sensitive: bool
+    ) -> None:
         self.prefixes = prefixes
+        self.require_prefix = require_prefix
         self.case_sensitive = case_sensitive
 
     def _normalize(self, s: str) -> str:
@@ -35,13 +37,13 @@ class MessagePreprocessor:
             return None
 
         first = event.message.messages[0]
-        if getattr(first, 'msg_seg_type', None) != 'text':
+        if getattr(first, "msg_seg_type", None) != "text":
             # 没有首段文本，不进入命令解析
             return None
 
-        text: str = getattr(first, 'text', '') or ''
+        text: str = getattr(first, "text", "") or ""
         raw = text
-        norm = self._normalize(text)
+        norm = self._normalize(text).lstrip()
 
         if self.require_prefix:
             matched = None
@@ -57,5 +59,3 @@ class MessagePreprocessor:
             return PreprocessResult(command_text=raw[cut_len:].lstrip())
         else:
             return PreprocessResult(command_text=raw)
-
-

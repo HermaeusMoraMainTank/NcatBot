@@ -5,7 +5,7 @@ import subprocess
 import time
 import traceback
 
-from ncatbot.utils import WINDOWS_NAPCAT_DIR, ncatbot_config, get_log
+from ....utils import WINDOWS_NAPCAT_DIR, ncatbot_config, get_log
 
 LOG = get_log("adapter.nc.start")
 
@@ -177,6 +177,7 @@ def stop_napcat():
         stop_napcat_windows()
     else:
         raise RuntimeError("不支持的操作系统")
+
 
 def start_napcat():
     """本地启动 NapCat 服务"""

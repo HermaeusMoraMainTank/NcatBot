@@ -1,7 +1,7 @@
-from ncatbot.plugin_system.builtin_mixin import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.command_system.registry import command_registry
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import group_only, admin_only
-from ncatbot.plugin_system.builtin_plugin.unified_registry.command_system.registry.decorators import option, param
+from ncatbot.plugin_system import NcatBotPlugin
+from ncatbot.plugin_system import command_registry
+from ncatbot.plugin_system import group_filter, admin_filter
+from ncatbot.plugin_system import option, param
 from ncatbot.core.event import BaseMessageEvent
 
 
@@ -34,11 +34,13 @@ class QSFullExamplePlugin(NcatBotPlugin):
         else:
             await event.reply("支持的操作: add, sub, mul, div")
 
-    @group_only
-    @admin_only
+    @group_filter
+    @admin_filter
     @command_registry.command("announce", description="发布公告")
     @option(short_name="a", long_name="all", help="发送给所有群员")
-    async def announce_cmd(self, event: BaseMessageEvent, message: str, all: bool = False):
+    async def announce_cmd(
+        self, event: BaseMessageEvent, message: str, all: bool = False
+    ):
         result = f"公告: {message}"
         if all:
             result += " [发送给所有群员]"
@@ -48,5 +50,3 @@ class QSFullExamplePlugin(NcatBotPlugin):
     @param(name="name", default="朋友", help="要问候的名字")
     async def greet_cmd(self, event: BaseMessageEvent, name: str = "朋友"):
         await event.reply(f"你好，{name}！欢迎使用机器人。")
-
-

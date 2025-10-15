@@ -1,24 +1,25 @@
-root: '273421673' # Bot 管理员 QQ 号
-bt_uin: '3555202423' # Bot QQ 号
-enable_webui_interaction: true # 启用 webui 交互
-check_ncatbot_update: true # 检查 NcatBot 更新
-skip_ncatbot_install_check: false # 跳过 NcatBot 安装检查
-debug: false # 调试模式, 开启将会打印更多调试信息
+root: '273421673'
+bt_uin: '3555202423'
+enable_webui_interaction: true
+debug: false
+github_proxy: null
+check_ncatbot_update: true
+skip_ncatbot_install_check: false
+websocket_timeout: 15
 napcat:
   ws_uri: ws://localhost:3001
-  webui_uri: http://localhost:6099
-  webui_token: napcat
-  ws_token: ''
+  ws_token: NcatBot
   ws_listen_ip: localhost
-  remote_mode: false
+  webui_uri: http://localhost:6099
+  webui_token: EXks[b%pkS4KVPlZ
+  enable_webui: true
   check_napcat_update: false
   stop_napcat: false
+  remote_mode: false
   report_self_message: false
-  report_forward_message_detail: true # 上报解析合并转发消息
+  report_forward_message_detail: true
 plugin:
-  # plugin_whitelist:
-  # - 'TestPlguin'
-  # - 'TestPlguin2'
-  # plugin_blacklist:
   plugins_dir: plugins
-  skip_plugin_load: false
+  plugin_whitelist: []
+  plugin_blacklist: []
+  skip_plugin_load: true

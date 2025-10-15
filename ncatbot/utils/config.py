@@ -2,30 +2,53 @@
 
 import copy
 import os
-import logging
 import time
 import urllib.parse
 import warnings
-from dataclasses import KW_ONLY, asdict, dataclass, field, fields
-from typing import Any, List, Optional, Self, TextIO
+from dataclasses import dataclass, field, fields
+from typing import Any, List, Optional, TextIO, TypeVar, Dict
+
+
+from urllib.parse import quote_plus
 
 import rich  # 这东西真需要吗
 import yaml
+import random
+import string
 from ncatbot.utils.logger import get_log
 from ncatbot.utils.status import status
 
 logger = get_log("Config")
 CONFIG_PATH = os.getenv("NCATBOT_CONFIG_PATH", os.path.join(os.getcwd(), "config.yaml"))
+T = TypeVar("T", bound="BaseConfig")
+
+
+def strong_password_check(password: str) -> bool:
+    # 包含 数字、大小写字母、特殊符号，至少 12 位
+    special_chars = "!@#$%^&*()_+-=[]{}|;:,.<>?"
+    return (
+        len(password) >= 12
+        and any(char.isdigit() for char in password)
+        and any(char.isalpha() for char in password)
+        and any(char in special_chars for char in password)
+    )
+
+
+def generate_strong_password(length=16):
+    special_chars = "!@#$%^&*()_+-=[]{}|;:,.<>?"
+    all_chars = string.ascii_letters + string.digits + special_chars
+    while True:
+        password = "".join(random.choice(all_chars) for _ in range(length))
+        if strong_password_check(password):
+            return password
 
 
 @dataclass(frozen=False)
 class BaseConfig:
     """基础配置类，提供通用功能。"""
 
-    _: KW_ONLY
-
     @classmethod
-    def from_dict(cls, data: dict[str, Any], /, **kwargs: Any) -> Self:
+    def from_dict(cls, data: Dict[str, Any], /, **kwargs: Any) -> T:
         """从字典创建新实例。
 
         Args:
@@ -67,11 +90,29 @@ class BaseConfig:
 
         return self
 
-    def asdict(self) -> dict[str, Any]:
+    def asdict(self) -> Dict[str, Any]:
         """将实例转换为字典。"""
-        return asdict(self)
+        data = {
+            k: v
+            for k, v in self.__dict__.items()
+            if isinstance(v, (str, int, bool, type(None), tuple, list))
+            and not k.startswith("_")
+            and k not in ATTRIBUTE_IGNORE
+        }
+        return data
 
-    def __replace__(self, **kwargs: Any) -> Self:
+    def save(self) -> None:
+        """保存当前配置到默认路径。"""
+        data = self.asdict()
+        try:
+            with open(CONFIG_PATH, "w", encoding="utf-8") as f:
+                yaml.dump(data, f, allow_unicode=True, sort_keys=False)
+            logger.info(f"配置已保存到 {CONFIG_PATH}")
+        except Exception as e:
+            logger.error(f"保存配置失败: {e}")
+            raise ValueError(f"保存配置失败: {e}") from e
+
+    def __replace__(self, **kwargs: Any) -> T:
         """替换属性值。
 
         Args:
@@ -85,7 +126,7 @@ class BaseConfig:
             setattr(replaced, key, value)
         return replaced
 
-    def pprint(self, file: TextIO | None = None) -> None:
+    def pprint(self, file: TextIO = None) -> None:
         """美化打印实例。"""
         rich.print(self, file=file)
 
@@ -110,22 +151,20 @@ class NapCatConfig(BaseConfig):
 
     ws_uri: str = "ws://localhost:3001"
     """WebSocket URI 地址"""
-    ws_token: str = ""
+    ws_token: str = "NcatBot"
     """WebSocket 令牌"""
     ws_listen_ip: str = "localhost"
     """WebSocket 监听 IP"""
     webui_uri: str = "http://localhost:6099"
     """WebUI URI 地址"""
-    webui_token: str = "napcat"
-    """WebUI 监听"""
-    webui_listen_ip: str = "0.0.0.0"
+    webui_token: str = "NcatBot"
     """WebUI 令牌"""
+    enable_webui: bool = True
+    """是否启用 WebUI"""
     check_napcat_update: bool = False
     """是否检查 NapCat 更新"""
     stop_napcat: bool = False
     """退出时是否停止 NapCat"""
-    suppress_client_initial_error: bool = False
-    """是否抑制客户端初始错误"""
     remote_mode: bool = False
     """是否启用远程模式"""
     report_self_message: bool = False
@@ -162,11 +201,39 @@ class NapCatConfig(BaseConfig):
         self.webui_host = parsed.hostname
         self.webui_port = parsed.port
 
+    def _security_check(self) -> None:
+        if self.ws_listen_ip == "0.0.0.0":
+            if not strong_password_check(self.ws_token):
+                logger.error(
+                    "WS 令牌强度不足，请修改为强密码，或者修改 ws_listen_ip 本地监听 `localhost`"
+                )
+                if input("WS 令牌强度不足，是否修改为强密码？(y/n): ").lower() == "y":
+                    pwd = generate_strong_password()
+                    logger.info(f"已生成强密码: {pwd}")
+                    self.ws_token = pwd
+                else:
+                    raise ValueError(
+                        "WS 令牌强度不足, 请修改为强密码, 或者修改 ws_listen_ip 本地监听 `localhost`"
+                    )
+
+        if self.enable_webui:
+            if not strong_password_check(self.webui_token):
+                if (
+                    input("WebUI 令牌强度不足，是否修改为强密码？(y/n): ").lower()
+                    == "y"
+                ):
+                    pwd = generate_strong_password()
+                    logger.info(f"已生成强密码: {pwd}")
+                    self.webui_token = pwd
+                else:
+                    raise ValueError("WebUI 令牌强度不足, 请修改为强密码")
+
     def validate(self) -> None:
         """验证配置，生成自动获取配置，并更新状态"""
         self._standardize_ws_uri()
         self._standardize_webui_uri()
-        
+        self._security_check()
+
         if self.ws_host not in ["localhost", "127.0.0.1"]:
             logger.info("NapCat 服务不是本地的，请确保远程服务配置正确")
             time.sleep(1)
@@ -218,7 +285,7 @@ class Config(BaseConfig):
     bt_uin: str = _default_bt_uin
     """机器人 QQ 号"""
     enable_webui_interaction: bool = True
-    """是否启用 WebUI 交互"""
+    """是否启用 WebUI"""
     debug: bool = False
     """是否启用调试模式, 调试模式会打印部分异常的堆栈信息"""
 
@@ -231,9 +298,24 @@ class Config(BaseConfig):
     """是否检查 NcatBot 更新"""
     skip_ncatbot_install_check: bool = False
     """是否跳过 NcatBot 安装检查"""
-
+    websocket_timeout: int = 15
     # 暂时没用的
 
+    def get_uri_with_token(self):
+        quoted_token = quote_plus(self.napcat.ws_token)
+        return f"{self.napcat.ws_uri.rstrip('/')}/?access_token={quoted_token}"
+
+    def asdict(self) -> Dict[str, Any]:
+        """将实例转换为字典。"""
+        napcat = self.napcat.asdict()
+        plugin = self.plugin.asdict()
+        base = {
+            k: v
+            for k, v in self.__dict__.items()
+            if isinstance(v, (str, int, bool, type(None), tuple, list))
+            and not k.startswith("_")
+        }
+        return {**base, "napcat": napcat, "plugin": plugin}
 
     @classmethod
     def create_from_file(cls, path: str) -> "Config":
@@ -321,9 +403,10 @@ class Config(BaseConfig):
         # 验证插件配置
         self.plugin.validate()
         self.napcat.validate()
+        self.save()
 
-    @staticmethod
-    def load() -> "Config":
+    @classmethod
+    def load(cls) -> "Config":
         """从默认路径加载配置。
 
         Returns:
@@ -335,58 +418,7 @@ class Config(BaseConfig):
         except Exception as e:
             logger.error(f"加载配置失败: {e}")
             cfg = Config()
-        return cfg        
-
-    def save_permanent_config(self, key: str, value: Any) -> None:
-        """有些配置是永久性的，需要保存到文件中。
-        Args:
-            key: 配置键
-            value: 配置值
-        """
-        try:
-            # 读取现有配置文件
-            try:
-                with open(CONFIG_PATH, "r", encoding="utf-8") as f:
-                    conf_dict = yaml.safe_load(f) or {}
-            except FileNotFoundError:
-                logger.warning(f"配置文件 {CONFIG_PATH} 不存在，将创建新文件")
-                conf_dict = {}
-
-            # 处理嵌套键 (例如 "napcat.ws_token")
-            if "." in key:
-                parts = key.split(".")
-                section, subkey = parts[0], parts[1]
-
-                # 确保该部分存在
-                if section not in conf_dict:
-                    conf_dict[section] = {}
-
-                # 更新子键
-                conf_dict[section][subkey] = value
-                logger.info(f"已更新配置项 {section}.{subkey}")
-            else:
-                # 直接更新顶级键
-                conf_dict[key] = value
-                logger.info(f"已更新配置项 {key}")
-
-            # 更新内存中的配置值
-            if "." in key:
-                parts = key.split(".")
-                section, subkey = parts[0], parts[1]
-                if hasattr(self, section) and hasattr(getattr(self, section), subkey):
-                    setattr(getattr(self, section), subkey, value)
-            elif hasattr(self, key):
-                setattr(self, key, value)
-
-            # 写回配置文件
-            with open(CONFIG_PATH, "w", encoding="utf-8") as f:
-                yaml.dump(conf_dict, f, allow_unicode=True, sort_keys=False)
-
-            logger.info(f"配置已保存到 {CONFIG_PATH}")
-
-        except Exception as e:
-            logger.error(f"保存配置失败: {e}")
-            raise ValueError(f"保存配置失败: {e}") from e
+        return cfg
 
     def update_config(self, **kwargs: Any) -> None:
         """更新配置。"""
@@ -401,24 +433,25 @@ class Config(BaseConfig):
     # 3xx 兼容
     def set_bot_uin(self, bot_uin: str) -> None:
         self.bt_uin = str(bot_uin)
-    
+
     def set_root(self, root: str) -> None:
         self.root = str(root)
-    
+
     def set_ws_uri(self, ws_uri: str) -> None:
         self.napcat.ws_uri = str(ws_uri)
-    
+
     def set_webui_uri(self, webui_uri: str) -> None:
         self.napcat.webui_uri = str(webui_uri)
-    
+
     def set_ws_token(self, ws_token: str) -> None:
         self.napcat.ws_token = str(ws_token)
-    
+
     def set_webui_token(self, webui_token: str) -> None:
         self.napcat.webui_token = str(webui_token)
-    
+
     def set_ws_listen_ip(self, ws_listen_ip: str) -> None:
         self.napcat.ws_listen_ip = str(ws_listen_ip)
+
 
 # 复杂嵌套对象的递归属性映射
 ATTRIBUTE_RECURSIVE = {
@@ -428,7 +461,10 @@ ATTRIBUTE_RECURSIVE = {
 
 # 处理未知字段时要忽略的属性
 ATTRIBUTE_IGNORE = {
-    "",
+    "ws_host",
+    "ws_port",
+    "webui_host",
+    "webui_port",
 }
 
 ncatbot_config = Config.load()

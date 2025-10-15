@@ -1,6 +1,6 @@
-from ncatbot.plugin_system.builtin_mixin import NcatBotPlugin
-from ncatbot.plugin_system.builtin_plugin.unified_registry.command_system.registry import command_registry
-from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import group_only, private_only, admin_only
+from ncatbot.plugin_system import NcatBotPlugin
+from ncatbot.plugin_system import command_registry
+from ncatbot.plugin_system import group_filter, private_filter, admin_filter
 from ncatbot.core.event import BaseMessageEvent
 
 
@@ -14,21 +14,19 @@ class QSPermissionsPlugin(NcatBotPlugin):
         pass
 
     # 仅群聊可用
-    @group_only
+    @group_filter
     @command_registry.command("groupinfo")
     async def group_info_cmd(self, event: BaseMessageEvent):
         await event.reply(f"当前群聊ID: {event.group_id}")
 
     # 仅私聊可用
-    @private_only
+    @private_filter
     @command_registry.command("private")
     async def private_cmd(self, event: BaseMessageEvent):
         await event.reply("这是一个私聊命令")
 
     # 仅 Bot 管理员可用
-    @admin_only
+    @admin_filter
     @command_registry.command("admin")
     async def admin_cmd(self, event: BaseMessageEvent):
         await event.reply("你是管理员！")
-
-
