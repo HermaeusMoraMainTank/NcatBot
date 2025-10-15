@@ -9,7 +9,7 @@ from PIL import Image
 
 from ncatbot.core import At, MessageChain, Reply, Text, Image as ImageElement
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system import NcatBotPlugin
 from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
     group_only,
 )

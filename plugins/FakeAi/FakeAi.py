@@ -9,7 +9,7 @@ import yaml
 from common.utils.AiUtil import AiUtil
 from common.utils.CommonUtil import CommonUtil
 from ncatbot.core import At, MessageChain, Text
-from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system import NcatBotPlugin
 from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
     group_only,
 )

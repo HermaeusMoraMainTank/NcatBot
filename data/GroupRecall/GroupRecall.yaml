@@ -1,0 +1,5 @@
+name: GroupRecall
+version: 1.0
+description: 群组撤回消息记录和查询插件
+author: NcatBot
+enabled: true

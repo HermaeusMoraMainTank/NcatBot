@@ -6,7 +6,7 @@ from typing import Dict, Tuple
 from dataclasses import dataclass
 
 from ncatbot.core import At, MessageChain, Text, Image
-from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system import NcatBotPlugin
 from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
     group_only,
 )

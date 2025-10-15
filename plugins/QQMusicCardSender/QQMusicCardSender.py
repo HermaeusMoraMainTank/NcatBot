@@ -4,7 +4,7 @@ import logging
 from typing import Dict, Any
 from common.constants.HMMT import HMMT
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system import NcatBotPlugin
 from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
     group_only,
 )

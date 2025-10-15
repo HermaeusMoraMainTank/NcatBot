@@ -1,3 +1,3 @@
-# from .GroupRecall import GroupRecall
+from .GroupRecall import GroupRecallPlugin
 
-# __all__ = ["GroupRecall"]
+__all__ = ["GroupRecallPlugin"]

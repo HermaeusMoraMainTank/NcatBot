@@ -18,7 +18,7 @@ import io
 from matplotlib.font_manager import FontProperties
 
 from ncatbot.core import MessageChain, Text, Image
-from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system import NcatBotPlugin
 from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
     group_only,
 )

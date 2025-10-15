@@ -8,7 +8,7 @@ from common.entity.GroupMember import GroupMember
 from common.utils.CommonUtil import CommonUtil
 from ncatbot.core import At, Image as ImageElement, MessageChain, Text
 from ncatbot.core.message import GroupMessage
-from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system import NcatBotPlugin
 from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
     group_only,
 )

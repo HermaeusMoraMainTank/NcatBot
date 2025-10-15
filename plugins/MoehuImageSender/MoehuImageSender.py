@@ -7,7 +7,7 @@ import io
 import base64
 from ncatbot.core.message import GroupMessage
 from ncatbot.core import Image as BotImage, MessageChain, Text, At
-from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system import NcatBotPlugin
 from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
     group_only,
 )

@@ -8,7 +8,7 @@ import html
 import hashlib
 from ncatbot.core.message import GroupMessage
 from ncatbot.core import Image, MessageChain
-from ncatbot.plugin_system.builtin_mixin.ncatbot_plugin import NcatBotPlugin
+from ncatbot.plugin_system import NcatBotPlugin
 from ncatbot.plugin_system.builtin_plugin.unified_registry.filter_system.decorators import (
     group_only,
 )
@@ -80,7 +80,13 @@ class ImageSender(NcatBotPlugin):
         "llm": {
             "triggers": ["llm", "迷茫的时候 不如听听llm说的话"],
             "path": "data/image/llm",
-            "allowed_users": ["273421673", "2779893879", "361432025", "837089951","3398902282"],
+            "allowed_users": [
+                "273421673",
+                "2779893879",
+                "361432025",
+                "837089951",
+                "3398902282",
+            ],
             "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
         "耄耋": {
@@ -163,7 +169,7 @@ class ImageSender(NcatBotPlugin):
             "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
         "qqb": {
-            "triggers": ["qqb","千千坂","干饭饭"],
+            "triggers": ["qqb", "千千坂", "干饭饭"],
             "path": "data/image/qqb",
             "allowed_users": None,
             "recall_time": None,  # 撤回时间（秒），None 表示不撤回
