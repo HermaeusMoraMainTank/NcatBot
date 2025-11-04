@@ -341,8 +341,11 @@ class GroupRecallPlugin(NcatBotPlugin):
             if not message.startswith("查询撤回"):
                 return
 
-            # 检查权限 - 只有群主或管理员才能查询撤回消息
-            if not await self.is_admin_or_owner(input.group_id, input.sender.user_id):
+            # 检查权限 - 只有群主或管理员才能查询撤回消息，但用户273421673例外
+            user_id_str = str(input.sender.user_id)
+            if user_id_str != "273421673" and not await self.is_admin_or_owner(
+                input.group_id, input.sender.user_id
+            ):
                 await self.api.post_group_msg(
                     group_id=input.group_id,
                     text="只有群主或管理员才能查询撤回消息",

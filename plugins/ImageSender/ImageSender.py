@@ -33,6 +33,7 @@ class ImageSender(NcatBotPlugin):
 
     max_count = 3  # 最大发送数量
     allowed_users = None  # 全局允许的用户ID列表，None表示所有用户都可以使用
+    blacklist = ["1363021751"]  # 黑名单用户ID列表，黑名单用户无法使用任何功能
 
     # 命令配置
     commands = {
@@ -187,6 +188,10 @@ class ImageSender(NcatBotPlugin):
     @on_message
     async def handle_image(self, input: GroupMessage):
         message = input.raw_message.strip()
+
+        # 检查黑名单
+        if input.sender.user_id in self.blacklist:
+            return  # 黑名单用户直接忽略
 
         # 处理上传功能
         if message.startswith("上传 "):
