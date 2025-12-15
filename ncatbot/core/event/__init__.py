@@ -2,11 +2,13 @@ from .event_data import BaseEventData, MessageEventData
 from .message import (
     BaseMessageEvent,
     AnonymousMessage,
+    MessageSentEvent,
     GroupMessageEvent,
     PrivateMessageEvent,
 )
 from .meta import MetaEvent, Status
 from .notice import NoticeEvent
+from .PokeNoticeEvent import PokeNoticeEvent
 from .request import RequestEvent
 from .sender import BaseSender, PrivateSender, GroupSender
 from .message_segment import (
@@ -46,6 +48,7 @@ __all__ = [
     "AnonymousMessage",
     "GroupMessageEvent",
     "PrivateMessageEvent",
+    "MessageSentEvent",
     # From meta.py
     "MetaEvent",
     "Status",
@@ -84,4 +87,5 @@ __all__ = [
     "Forward",
     "XML",
     "Json",
+    "PokeNoticeEvent",
 ]
