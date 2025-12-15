@@ -6,7 +6,7 @@ import re
 import requests
 import html
 import hashlib
-from ncatbot.core import GroupMessage, Image, MessageChain
+from ncatbot.core import GroupMessage, Image, MessageChain, Reply
 from ncatbot.plugin_system import NcatBotPlugin, on_message
 import asyncio
 from common.constants.HMMT import HMMT
@@ -183,18 +183,26 @@ class ImageSender(NcatBotPlugin):
             "allowed_users": None,
             "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
+        "xxt": {
+            "triggers": ["xxt", "小小兔", "小小猪", "xxz"],
+            "path": "data/image/xxt",
+            "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
+        },
     }
 
     @on_message
     async def handle_image(self, input: GroupMessage):
         message = input.raw_message.strip()
+        # 移除 CQ 码后的纯命令文本
+        clean_message = re.sub(r"\[CQ:[^\]]+\]", "", message).strip()
 
         # 检查黑名单
         if input.sender.user_id in self.blacklist:
             return  # 黑名单用户直接忽略
 
-        # 处理上传功能
-        if message.startswith("上传 "):
+        # 处理上传功能（支持直接发图片或回复图片）
+        if clean_message.startswith("上传 ") or clean_message.startswith("上传"):
             await self.handle_upload(input, message)
             return
 
@@ -231,14 +239,20 @@ class ImageSender(NcatBotPlugin):
                         image_files = self.get_image_files(config["path"])
 
                         if count <= self.max_count:
-                            # 收集所有要发送的图片
-                            selected_files = []
-                            for _ in range(count):
-                                file = random.choice(image_files)
+                            # 检查图片数量是否足够
+                            if len(image_files) < count:
+                                await self.api.post_group_msg(
+                                    group_id=input.group_id,
+                                    text=f"图片数量不足，当前只有 {len(image_files)} 张图片",
+                                )
+                                return
+
+                            # 使用 random.sample 不重复地选择指定数量的图片
+                            selected_files = random.sample(image_files, count)
+                            for file in selected_files:
                                 log.info(
                                     f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {file}"
                                 )
-                                selected_files.append(file)
 
                             # 一次性发送所有图片
                             if selected_files:
@@ -327,27 +341,53 @@ class ImageSender(NcatBotPlugin):
 
         await self.api.post_group_msg(group_id=input.group_id, text=response)
 
+    async def get_images_from_reply(self, input: GroupMessage) -> list:
+        """从回复消息中获取图片信息列表，返回 [(filename, url), ...]"""
+        image_list = []
+        reply_list = input.message.filter(Reply)
+        if reply_list:
+            reply_id = reply_list[0].id
+            # get_msg 返回的是 GroupMessageEvent 对象
+            reply_msg = await self.api.get_msg(reply_id)
+            # 从回复消息中获取图片
+            reply_images = reply_msg.message.filter(Image)
+            for i, img in enumerate(reply_images):
+                if hasattr(img, "url") and img.url:
+                    # 生成一个默认文件名
+                    filename = f"reply_image_{i}.jpg"
+                    if hasattr(img, "file") and img.file:
+                        filename = img.file
+                    image_list.append((filename, img.url))
+        return image_list
+
     async def handle_upload(self, input: GroupMessage, message: str):
         """处理图片上传请求"""
-        # 解析上传命令格式：上传 关键词[CQ:image,file=...,url=...]
+        # 移除 CQ 码后获取命令
+        clean_message = re.sub(r"\[CQ:[^\]]+\]", "", message).strip()
+
+        # 解析上传命令格式：上传 关键词[CQ:image,file=...,url=...] 或回复图片
         # 先提取关键词（支持没有空格的情况）
-        keyword_match = re.match(r"上传\s*(\w+)", message)
+        keyword_match = re.match(r"上传\s*(\w+)", clean_message)
         if not keyword_match:
             await self.api.post_group_msg(
-                group_id=input.group_id, text="上传格式错误！请使用：上传 关键词[图片]"
+                group_id=input.group_id, text="上传格式错误！请使用：上传 关键词[图片] 或回复图片并发送：上传 关键词"
             )
             return
 
         keyword = keyword_match.group(1)
 
-        # 然后提取所有的图片标签（支持包含额外字段的情况）
-        image_pattern = r"\[CQ:image,.*?file=([^,]+),.*?url=([^\]]+)\]"
-        image_matches = re.findall(image_pattern, message)
+        # 首先尝试从回复消息中获取图片
+        image_matches = await self.get_images_from_reply(input)
+
+        # 如果回复中没有图片，则从当前消息提取图片标签
+        if not image_matches:
+            image_pattern = r"\[CQ:image,.*?file=([^,]+),.*?url=([^\]]+)\]"
+            image_matches = re.findall(image_pattern, message)
 
         if not image_matches:
             await self.api.post_group_msg(
                 group_id=input.group_id,
-                text="未找到图片信息！请使用：上传 关键词[图片]",
+                text="未找到图片信息！请使用：上传 关键词[图片] 或回复图片并发送：上传 关键词",
             )
             return
 

@@ -2,7 +2,7 @@ import os
 import json
 import time
 import threading
-from datetime import datetime
+from datetime import datetime, date
 from typing import Dict, List, Optional
 from dataclasses import dataclass, asdict
 
@@ -54,8 +54,11 @@ class GroupRecallPlugin(NcatBotPlugin):
     # 数据保存控制
     _save_lock = threading.Lock()
 
-    # 24小时 = 86400秒
-    EXPIRATION_TIME = 24 * 3600
+    # 2天 = 48小时 = 172800秒
+    EXPIRATION_TIME = 2 * 24 * 3600
+
+    # 记录上一次清理的日期
+    last_cleanup_date: date = None
 
     # 使用说明
     usage_instructions = """撤回消息查询指令：
@@ -87,6 +90,11 @@ class GroupRecallPlugin(NcatBotPlugin):
 
         # 加载保存的数据
         self._load_data()
+
+        # 启动时执行一次清理
+        self._cleanup_expired_messages()
+        self.last_cleanup_date = date.today()
+        _log.info(f"[GroupRecall] 启动时清理完成，清理日期: {self.last_cleanup_date}")
 
         # 启动定时清理任务
         self._start_cleanup_task()
@@ -182,27 +190,92 @@ class GroupRecallPlugin(NcatBotPlugin):
         cleanup_thread.start()
 
     def _cleanup_expired_messages(self):
-        """清理过期的消息"""
+        """清理过期的消息和对应的图片文件"""
         current_time = time.time()
         cleaned_count = 0
+        deleted_images_count = 0
+
+        # 收集所有在数据中引用的图片路径
+        referenced_images = set()
+        for group_id, messages in self.recall_messages.items():
+            for msg in messages:
+                if msg.images:
+                    for img_path in msg.images:
+                        if img_path:
+                            # 转换为绝对路径以便比较
+                            abs_path = os.path.abspath(img_path)
+                            referenced_images.add(abs_path)
 
         for group_id in list(self.recall_messages.keys()):
-            original_count = len(self.recall_messages[group_id])
-            # 过滤掉过期的消息
-            self.recall_messages[group_id] = [
-                msg
-                for msg in self.recall_messages[group_id]
-                if current_time - msg.timestamp <= self.EXPIRATION_TIME
-            ]
+            original_messages = self.recall_messages[group_id]
+            expired_messages = []
+            valid_messages = []
 
-            cleaned_count += original_count - len(self.recall_messages[group_id])
+            for msg in original_messages:
+                if current_time - msg.timestamp <= self.EXPIRATION_TIME:
+                    # 消息未过期，保留
+                    valid_messages.append(msg)
+                else:
+                    # 消息已过期，标记为需要删除
+                    expired_messages.append(msg)
+
+            # 删除过期消息对应的图片文件
+            for msg in expired_messages:
+                if msg.images:
+                    for img_path in msg.images:
+                        try:
+                            if os.path.exists(img_path):
+                                os.remove(img_path)
+                                deleted_images_count += 1
+                                _log.debug(f"[GroupRecall] 删除过期图片: {img_path}")
+                        except Exception as e:
+                            _log.error(f"[GroupRecall] 删除图片失败 {img_path}: {e}")
+
+            # 更新消息列表
+            self.recall_messages[group_id] = valid_messages
+            cleaned_count += len(expired_messages)
 
             # 如果群组没有消息了，删除群组
             if not self.recall_messages[group_id]:
                 del self.recall_messages[group_id]
 
-        if cleaned_count > 0:
-            _log.info(f"[GroupRecall] 清理了 {cleaned_count} 条过期消息")
+        # 清理DATA_DIR目录下所有不在数据中引用的图片文件（遗留图片）
+        orphaned_images_count = 0
+        orphaned_images_size = 0
+        if os.path.exists(self.DATA_DIR):
+            for filename in os.listdir(self.DATA_DIR):
+                # 只处理图片文件
+                if not filename.lower().endswith(
+                    (".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp")
+                ):
+                    continue
+
+                file_path = os.path.join(self.DATA_DIR, filename)
+                if not os.path.isfile(file_path):
+                    continue
+
+                # 转换为绝对路径以便比较
+                abs_path = os.path.abspath(file_path)
+
+                # 如果文件不在引用列表中，删除它
+                if abs_path not in referenced_images:
+                    try:
+                        file_size = os.path.getsize(file_path)
+                        os.remove(file_path)
+                        orphaned_images_count += 1
+                        orphaned_images_size += file_size
+                        _log.debug(f"[GroupRecall] 删除遗留图片: {file_path}")
+                    except Exception as e:
+                        _log.error(f"[GroupRecall] 删除遗留图片失败 {file_path}: {e}")
+
+        if cleaned_count > 0 or orphaned_images_count > 0:
+            total_deleted = deleted_images_count + orphaned_images_count
+            total_size_mb = (orphaned_images_size) / (1024 * 1024)
+            _log.info(
+                f"[GroupRecall] 清理了 {cleaned_count} 条过期消息，删除了 {total_deleted} 张图片"
+                f"（过期消息图片: {deleted_images_count}，遗留图片: {orphaned_images_count}），"
+                f"释放了 {total_size_mb:.2f} MB 空间"
+            )
             self._save_data()
 
     def _save_message_content(self, message: GroupMessage) -> tuple:
@@ -268,6 +341,15 @@ class GroupRecallPlugin(NcatBotPlugin):
     async def handle_group_message(self, input: GroupMessage) -> None:
         """处理群消息 - 存储消息内容"""
         try:
+            # 检查日期是否已经跨天，如果是，则执行清理操作
+            current_date = date.today()
+            if self.last_cleanup_date is None or current_date != self.last_cleanup_date:
+                self._cleanup_expired_messages()
+                self.last_cleanup_date = current_date
+                _log.info(
+                    f"[GroupRecall] 跨天清理完成，清理日期: {self.last_cleanup_date}"
+                )
+
             # 确保 group_id 和 user_id 都是字符串类型
             group_id = str(input.group_id)
             user_id = str(input.sender.user_id)

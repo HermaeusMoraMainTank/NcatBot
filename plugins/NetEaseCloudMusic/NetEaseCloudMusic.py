@@ -1,4 +1,4 @@
-from ncatbot.core import GroupMessage, MessageChain, Text, Record, Image
+from ncatbot.core import GroupMessage, MessageChain, Text, Record, Image, Reply
 from ncatbot.plugin_system import NcatBotPlugin, on_message
 from ncatbot.utils.logger import get_log
 import json
@@ -166,78 +166,62 @@ class NetEaseCloudMusic(NcatBotPlugin):
             return
 
         # 处理回复消息
-        if input.message and len(input.message) > 1:
+        reply_list = input.message.filter(Reply)
+        if reply_list:
             try:
-                # 获取被回复的消息ID
-                reply_id = None
-                for msg in input.message:
-                    if hasattr(msg, "type") and msg.type == "reply":
-                        reply_id = msg.data.get("id")
-                        break
+                reply_id = reply_list[0].id
+                # get_msg 返回的是 GroupMessageEvent 对象
+                reply_msg = await self.api.get_msg(reply_id)
+                raw_message = reply_msg.raw_message
+                if raw_message and "请回复数字选择要播放的歌曲" in raw_message:
+                    # 处理数字选择
+                    # 先移除CQ码
+                    clean_message = re.sub(r"\[CQ:[^\]]+\]", "", message).strip()
 
-                if reply_id:
-                    msg_info = await self.api.get_msg(reply_id)
-                    if msg_info.get("status") == "ok":
-                        raw_message = msg_info["data"]["raw_message"]
-                        if "请回复数字选择要播放的歌曲" in raw_message:
-                            # 处理数字选择
-                            # 先移除CQ码
-                            clean_message = re.sub(
-                                r"\[CQ:[^\]]+\]", "", message
-                            ).strip()
+                    # 提取数字
+                    number_match = re.match(r"^\s*(\d+)", clean_message)
+                    if number_match:
+                        number = number_match.group(1)
+                        key = (input.group_id, input.sender.user_id)
 
-                            # 提取数字
-                            number_match = re.match(r"^\s*(\d+)", clean_message)
-                            if number_match:
-                                number = number_match.group(1)
-                                key = (input.group_id, input.sender.user_id)
+                        if key in search_results:
+                            try:
+                                index = int(number) - 1
+                                if 0 <= index < len(search_results[key]):
+                                    song_id = search_results[key][index][0]
+                                    # 发送初始响应
+                                    await self.api.post_group_msg(
+                                        input.group_id,
+                                        rtf=MessageChain(
+                                            [Text("正在获取音乐，请稍候...")]
+                                        ),
+                                    )
+                                    # 获取音乐URL
+                                    song_url_data = self._get_song_url(str(song_id))
 
-                                if key in search_results:
-                                    try:
-                                        index = int(number) - 1
-                                        if 0 <= index < len(search_results[key]):
-                                            song_id = search_results[key][index][0]
-                                            # 发送初始响应
-                                            await self.api.post_group_msg(
-                                                input.group_id,
-                                                rtf=MessageChain(
-                                                    [Text("正在获取音乐，请稍候...")]
-                                                ),
-                                            )
-                                            # 获取音乐URL
-                                            song_url_data = self._get_song_url(
-                                                str(song_id)
-                                            )
-
-                                            if song_url_data.get(
-                                                "data"
-                                            ) and song_url_data["data"][0].get("url"):
-                                                mes = MessageChain(
-                                                    [
-                                                        Record(
-                                                            song_url_data["data"][0][
-                                                                "url"
-                                                            ]
-                                                        )
-                                                    ]
-                                                )
-                                                await self.api.post_group_msg(
-                                                    group_id=input.group_id, rtf=mes
-                                                )
-                                            else:
-                                                _log.error("未获取到音乐URL")
-                                            # 清除搜索结果
-                                            del search_results[key]
-                                        else:
-                                            _log.error(
-                                                f"索引超出范围: {index} >= {len(search_results[key])}"
-                                            )
-                                    except Exception as e:
-                                        _log.error(f"处理歌曲时发生错误: {str(e)}")
-                                        _log.error(traceback.format_exc())
+                                    if song_url_data.get("data") and song_url_data[
+                                        "data"
+                                    ][0].get("url"):
+                                        mes = MessageChain(
+                                            [Record(song_url_data["data"][0]["url"])]
+                                        )
+                                        await self.api.post_group_msg(
+                                            group_id=input.group_id, rtf=mes
+                                        )
+                                    else:
+                                        _log.error("未获取到音乐URL")
+                                    # 清除搜索结果
+                                    del search_results[key]
                                 else:
-                                    _log.error(f"未找到搜索结果: {key}")
-                            return
+                                    _log.error(
+                                        f"索引超出范围: {index} >= {len(search_results[key])}"
+                                    )
+                            except Exception as e:
+                                _log.error(f"处理歌曲时发生错误: {str(e)}")
+                                _log.error(traceback.format_exc())
+                        else:
+                            _log.error(f"未找到搜索结果: {key}")
+                    return
             except Exception as e:
                 _log.error(f"处理回复时发生错误: {str(e)}")
                 _log.error(traceback.format_exc())

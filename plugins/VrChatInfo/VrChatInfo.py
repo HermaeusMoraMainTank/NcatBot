@@ -577,103 +577,97 @@ class VrChatInfo(NcatBotPlugin):
         message = input.raw_message.strip()
 
         # 处理回复消息
-        if input.message and len(input.message) > 1:
+        reply_list = input.message.filter(Reply)
+        if reply_list:
             try:
-                # 获取被回复的消息ID
-                reply_id = None
-                for msg in input.message:
-                    if hasattr(msg, "type") and msg.type == "reply":
-                        reply_id = msg.data.get("id")
-                        break
+                reply_id = reply_list[0].id
+                # get_msg 返回的是 GroupMessageEvent 对象
+                reply_msg = await self.api.get_msg(reply_id)
+                raw_message = reply_msg.raw_message
+                if raw_message and "请回复数字选择要查看的玩家" in raw_message:
+                    # 处理数字选择
+                    # 先移除CQ码
+                    clean_message = re.sub(
+                        r"\[CQ:[^\]]+\]", "", message
+                    ).strip()
 
-                if reply_id:
-                    msg_info = await self.api.get_msg(reply_id)
-                    if msg_info.get("status") == "ok":
-                        raw_message = msg_info["data"]["raw_message"]
-                        if "请回复数字选择要查看的玩家" in raw_message:
-                            # 处理数字选择
-                            # 先移除CQ码
-                            clean_message = re.sub(
-                                r"\[CQ:[^\]]+\]", "", message
-                            ).strip()
+                    # 提取数字
+                    number_match = re.match(r"^\s*(\d+)", clean_message)
+                    if number_match:
+                        number = int(number_match.group(1))
+                        key = (input.group_id, input.sender.user_id)
 
-                            # 提取数字
-                            number_match = re.match(r"^\s*(\d+)", clean_message)
-                            if number_match:
-                                number = int(number_match.group(1))
-                                key = (input.group_id, input.sender.user_id)
-
-                                if key in search_results:
-                                    if 0 <= number - 1 < len(search_results[key]):
-                                        # 先查详细信息
-                                        user_id = search_results[key][number - 1].get(
-                                            "id"
+                        if key in search_results:
+                            if 0 <= number - 1 < len(search_results[key]):
+                                # 先查详细信息
+                                user_id = search_results[key][number - 1].get(
+                                    "id"
+                                )
+                                print(
+                                    f"[DEBUG] 回复序号查详细信息 user_id: {user_id}"
+                                )
+                                cookie = self.read_cookie_from_file()
+                                # 只保留一组auth和twoFactorAuth（如有多组可自行处理）
+                                # 这里假设cookie文件内容已是单组
+                                print(f"[DEBUG] cookie: {cookie}")
+                                headers = {
+                                    "User-Agent": HMMT.USER_AGENT,
+                                    "Cookie": cookie,
+                                    "Accept": "application/json",
+                                    "Content-Type": "application/json",
+                                }
+                                print(f"[DEBUG] headers: {headers}")
+                                url = f"https://api.vrchat.cloud/api/1/users/{user_id}"
+                                print(f"[DEBUG] url: {url}")
+                                try:
+                                    response = requests.get(
+                                        url,
+                                        headers=headers,
+                                        timeout=10,
+                                        impersonate="chrome110",
+                                    )
+                                    print(
+                                        f"[DEBUG] resp.status_code: {response.status_code}"
+                                    )
+                                    print(f"[DEBUG] resp.text: {response.text}")
+                                    if response.status_code == 200:
+                                        user_data = response.json()
+                                        image_path = self.generate_image(
+                                            user_data
                                         )
-                                        print(
-                                            f"[DEBUG] 回复序号查详细信息 user_id: {user_id}"
+                                        await self.api.post_group_msg(
+                                            group_id=input.group_id,
+                                            rtf=MessageChain(
+                                                [
+                                                    ImageElement(image_path),
+                                                    Reply(input.message_id),
+                                                ]
+                                            ),
                                         )
-                                        cookie = self.read_cookie_from_file()
-                                        # 只保留一组auth和twoFactorAuth（如有多组可自行处理）
-                                        # 这里假设cookie文件内容已是单组
-                                        print(f"[DEBUG] cookie: {cookie}")
-                                        headers = {
-                                            "User-Agent": HMMT.USER_AGENT,
-                                            "Cookie": cookie,
-                                            "Accept": "application/json",
-                                            "Content-Type": "application/json",
-                                        }
-                                        print(f"[DEBUG] headers: {headers}")
-                                        url = f"https://api.vrchat.cloud/api/1/users/{user_id}"
-                                        print(f"[DEBUG] url: {url}")
-                                        try:
-                                            response = requests.get(
-                                                url,
-                                                headers=headers,
-                                                timeout=10,
-                                                impersonate="chrome110",
-                                            )
-                                            print(
-                                                f"[DEBUG] resp.status_code: {response.status_code}"
-                                            )
-                                            print(f"[DEBUG] resp.text: {response.text}")
-                                            if response.status_code == 200:
-                                                user_data = response.json()
-                                                image_path = self.generate_image(
-                                                    user_data
-                                                )
-                                                await self.api.post_group_msg(
-                                                    group_id=input.group_id,
-                                                    rtf=MessageChain(
-                                                        [
-                                                            ImageElement(image_path),
-                                                            Reply(input.message_id),
-                                                        ]
-                                                    ),
-                                                )
-                                                # 清除搜索结果
-                                                del search_results[key]
-                                            else:
-                                                await self.api.post_group_msg(
-                                                    group_id=input.group_id,
-                                                    text="获取详细信息失败，请重试",
-                                                )
-                                        except Exception as e:
-                                            print(f"获取用户详情失败: {e}")
-                                            await self.api.post_group_msg(
-                                                group_id=input.group_id,
-                                                text="获取详细信息失败，请重试",
-                                            )
+                                        # 清除搜索结果
+                                        del search_results[key]
                                     else:
                                         await self.api.post_group_msg(
                                             group_id=input.group_id,
-                                            text="无效的选择，请重新选择",
+                                            text="获取详细信息失败，请重试",
                                         )
-                                else:
+                                except Exception as e:
+                                    print(f"获取用户详情失败: {e}")
                                     await self.api.post_group_msg(
                                         group_id=input.group_id,
-                                        text="搜索结果已过期，请重新搜索",
+                                        text="获取详细信息失败，请重试",
                                     )
-                            return
+                            else:
+                                await self.api.post_group_msg(
+                                    group_id=input.group_id,
+                                    text="无效的选择，请重新选择",
+                                )
+                        else:
+                            await self.api.post_group_msg(
+                                group_id=input.group_id,
+                                text="搜索结果已过期，请重新搜索",
+                            )
+                    return
             except Exception as e:
                 print(f"处理回复时发生错误: {e}")
 

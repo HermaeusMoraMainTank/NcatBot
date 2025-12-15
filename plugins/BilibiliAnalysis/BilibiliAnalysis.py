@@ -17,7 +17,9 @@ class BilibiliAnalysis(NcatBotPlugin):
     name = "BilibiliAnalysis"
     version = "1.0"
     author = "Adapted from nonebot_plugin_analysis_bilibili"
-    description = "自动解析bilibili链接内容，支持视频、番剧、直播、文章、动态等"
+    description = (
+        "自动解析bilibili链接内容，支持视频、番剧、直播、文章、动态、个人空间、会员购等"
+    )
 
     async def on_load(self):
         """异步加载插件"""
@@ -31,7 +33,7 @@ class BilibiliAnalysis(NcatBotPlugin):
         self.display_image_list = getattr(
             self.config,
             "analysis_display_image_list",
-            ["video", "bangumi", "live", "article", "dynamic"],
+            ["video", "bangumi", "live", "article", "dynamic", "space", "mall"],
         )
         self.images_size = getattr(self.config, "analysis_images_size", "")
         self.cover_images_size = getattr(self.config, "analysis_cover_images_size", "")
@@ -46,7 +48,7 @@ class BilibiliAnalysis(NcatBotPlugin):
         # Bilibili链接匹配模式
         self.pattern = (
             r"^(?:(?:av|cv)\d+|BV[a-zA-Z0-9]{10})|"
-            r"(?:b23\.tv|bili(?:22|23|33|2233)\.cn|\.bilibili\.com|bilibili\.com/opus/\d+|QQ小程序(?:&amp;#93;|&#93;|\])哔哩哔哩).{0,500}"
+            r"(?:b23\.tv|bili(?:22|23|33|2233)\.cn|\.bilibili\.com|space\.bilibili\.com|mall\.bilibili\.com|bilibili\.com/opus/\d+|QQ小程序(?:&amp;#93;|&#93;|\])哔哩哔哩).{0,500}"
         )
 
         _log.info(f"{self.name} 插件加载完成")
@@ -67,6 +69,85 @@ class BilibiliAnalysis(NcatBotPlugin):
         if num > 10000:
             return f"{num / 10000:.2f}万"
         return str(num)
+
+    def extract_card_info(self, text: str) -> dict:
+        """从QQ分享卡片中提取信息"""
+        card_info = {}
+        try:
+            # 尝试提取 JSON 卡片中的信息
+            # 标题
+            title_match = re.search(r'"title":"([^"]+)"', text)
+            if title_match:
+                card_info["title"] = title_match[1].replace("&#44;", ",")
+
+            # 描述
+            desc_match = re.search(r'"desc":"([^"]+)"', text)
+            if desc_match:
+                card_info["desc"] = desc_match[1].replace("&#44;", ",")
+
+            # 预览图
+            preview_match = re.search(r'"preview":"([^"]+)"', text)
+            if preview_match:
+                card_info["preview"] = preview_match[1].replace("&amp;", "&")
+
+            # prompt（分享提示）
+            prompt_match = re.search(r'"prompt":"([^"]+)"', text)
+            if prompt_match:
+                card_info["prompt"] = (
+                    prompt_match[1]
+                    .replace("&#91;", "[")
+                    .replace("&#93;", "]")
+                    .replace("&#44;", ",")
+                )
+
+            _log.info(f"从卡片中提取的信息: {card_info}")
+        except Exception as e:
+            _log.warning(f"提取卡片信息失败: {e}")
+        return card_info
+
+    def _build_space_fallback_msg(
+        self, mid: str, vurl: str, card_info: dict
+    ) -> Tuple[List[str], str]:
+        """构建个人空间的备用消息（当API失败时使用卡片信息）"""
+        has_image = self.display_image or "space" in self.display_image_list
+
+        # 从卡片信息中提取
+        title = card_info.get("title", "用户空间")
+        preview = card_info.get("preview", "") if has_image else ""
+
+        # 构建消息
+        msg = []
+        if preview:
+            msg.append(preview)
+            msg.append("\n")
+        msg.append(f"UP主：{title}\n")
+        msg.append(f"UID：{mid}\n")
+        msg.append(f"主页：{vurl}\n")
+
+        return msg, vurl
+
+    def _build_mall_fallback_msg(
+        self, item_id: str, vurl: str, card_info: dict
+    ) -> Tuple[List[str], str]:
+        """构建会员购的备用消息（当API失败时使用卡片信息）"""
+        has_image = self.display_image or "mall" in self.display_image_list
+
+        # 从卡片信息中提取
+        title = card_info.get("title", "会员购商品")
+        preview = card_info.get("preview", "") if has_image else ""
+        desc = card_info.get("desc", "")
+
+        # 构建消息
+        msg = []
+        if preview:
+            msg.append(preview)
+            msg.append("\n")
+        msg.append(f"商品：{title}\n")
+        if desc:
+            msg.append(f"简介：{desc}\n")
+        msg.append(f"链接：{vurl}\n")
+
+        return msg, vurl
 
     def extract(self, text: str) -> Tuple[str, Optional[str], Optional[str]]:
         """提取Bilibili链接信息"""
@@ -101,6 +182,12 @@ class BilibiliAnalysis(NcatBotPlugin):
             dynamic_id = re.compile(r"(t|m).bilibili.com/(opus/)?(\d+)").search(text)
             # 新增：opus 动态链接
             opus_id = re.compile(r"bilibili\.com/opus/(\d+)").search(text)
+            # 个人空间主页
+            space_id = re.compile(r"space\.bilibili\.com/(\d+)").search(text)
+            # 会员购商品
+            mall_item_id = re.compile(r"mall\.bilibili\.com.*[?&]itemsId=(\d+)").search(
+                text
+            )
 
             _log.info(
                 f"匹配结果 - aid: {aid}, bvid: {bvid}, epid: {epid}, ssid: {ssid}, mdid: {mdid}"
@@ -109,6 +196,7 @@ class BilibiliAnalysis(NcatBotPlugin):
                 f"匹配结果 - room_id: {room_id}, cvid: {cvid}, dynamic_id_type2: {dynamic_id_type2}"
             )
             _log.info(f"匹配结果 - dynamic_id: {dynamic_id}, opus_id: {opus_id}")
+            _log.info(f"匹配结果 - space_id: {space_id}, mall_item_id: {mall_item_id}")
 
             if bvid:
                 url = f"https://api.bilibili.com/x/web-interface/view?bvid={bvid[0]}"
@@ -133,6 +221,10 @@ class BilibiliAnalysis(NcatBotPlugin):
                 url = f"https://api.bilibili.com/x/polymer/web-dynamic/v1/detail?id={dynamic_id[3]}"
             elif opus_id:
                 url = f"https://api.bilibili.com/x/polymer/web-dynamic/v1/detail?id={opus_id[1]}"
+            elif space_id:
+                url = f"https://api.bilibili.com/x/space/wbi/acc/info?mid={space_id[1]}"
+            elif mall_item_id:
+                url = f"https://api.bilibili.com/mall/v2/h5/sku/info?itemsId={mall_item_id[1]}"
 
             _log.info(f"最终提取的URL: {url}")
             return url, page, time
@@ -495,10 +587,241 @@ class BilibiliAnalysis(NcatBotPlugin):
             _log.exception(e)
             return msg, None
 
+    async def space_detail(
+        self, url: str, session: ClientSession, card_info: dict = None
+    ) -> Tuple[List[Union[List[str], str]], str]:
+        """获取用户个人空间详细信息"""
+        if card_info is None:
+            card_info = {}
+        try:
+            _log.info(f"开始解析个人空间: {url}")
+
+            # 从URL中提取mid
+            mid_match = re.search(r"mid=(\d+)", url)
+            if not mid_match:
+                return "无法提取用户ID", None
+            mid = mid_match[1]
+
+            vurl = f"https://space.bilibili.com/{mid}"
+
+            # 先访问主站获取必要的cookie
+            mainsite_url = "https://www.bilibili.com"
+            async with session.get(mainsite_url) as resp:
+                assert resp.status == 200
+
+            # 获取bili_ticket
+            bili_ticket = await get_ticket()
+            session.cookie_jar.update_cookies({"bili_ticket": bili_ticket})
+
+            # 使用wbi签名
+            query = await get_query({"mid": mid})
+            signed_url = f"https://api.bilibili.com/x/space/wbi/acc/info?{query}"
+            _log.info(f"签名后的URL: {signed_url}")
+
+            async with session.get(signed_url) as resp:
+                res = await resp.json()
+                _log.info(f"个人空间API响应: {res}")
+                if res["code"] != 0:
+                    _log.warning(f"个人空间API返回错误: {res}")
+                    # API失败，使用卡片信息作为备用
+                    return self._build_space_fallback_msg(mid, vurl, card_info)
+
+            data = res.get("data")
+            if not data:
+                return self._build_space_fallback_msg(mid, vurl, card_info)
+
+            has_image = False
+            if self.display_image or "space" in self.display_image_list:
+                has_image = True
+
+            # 头像
+            face = self.resize_image(data.get("face", "")) if has_image else ""
+
+            # 用户名
+            name = data.get("name", "未知")
+            # 性别
+            sex = data.get("sex", "保密")
+            # 签名
+            sign = data.get("sign", "这个人很懒，什么都没写~")
+            # 等级
+            level = data.get("level", 0)
+            # 生日（可能为空）
+            birthday = data.get("birthday", "")
+
+            # 获取粉丝数、关注数等统计信息
+            stat_url = f"https://api.bilibili.com/x/relation/stat?vmid={mid}"
+            async with session.get(stat_url) as resp:
+                stat_res = await resp.json()
+                follower = 0
+                following = 0
+                if stat_res.get("code") == 0 and stat_res.get("data"):
+                    follower = stat_res["data"].get("follower", 0)
+                    following = stat_res["data"].get("following", 0)
+
+            # 获取投稿数
+            upstat_url = f"https://api.bilibili.com/x/space/upstat?mid={mid}"
+            async with session.get(upstat_url) as resp:
+                upstat_res = await resp.json()
+                archive_view = 0
+                article_view = 0
+                if upstat_res.get("code") == 0 and upstat_res.get("data"):
+                    archive_view = upstat_res["data"].get("archive", {}).get("view", 0)
+                    article_view = upstat_res["data"].get("article", {}).get("view", 0)
+
+            # 构建消息
+            title = f"UP主：{name}\n"
+            info = f"性别：{sex} | 等级：Lv{level}"
+            if birthday:
+                info += f" | 生日：{birthday}"
+            info += "\n"
+            stat = f"粉丝：{self.handle_num(follower)} | 关注：{self.handle_num(following)}\n"
+            view_stat = f"视频播放：{self.handle_num(archive_view)} | 文章阅读：{self.handle_num(article_view)}\n"
+            desc = f"签名：{sign}\n" if sign else ""
+
+            vurl_display = "\n" + vurl if face else vurl
+            msg = [face, vurl_display, "\n", title, info, stat, view_stat, desc]
+            return msg, vurl
+        except Exception as e:
+            _log.exception(f"个人空间解析出错: {e}")
+            # 即使出错也使用卡片信息返回
+            mid_match = re.search(r"mid=(\d+)", url)
+            if mid_match:
+                mid = mid_match[1]
+                vurl = f"https://space.bilibili.com/{mid}"
+                return self._build_space_fallback_msg(mid, vurl, card_info)
+            return "个人空间解析出错", None
+
+    async def mall_detail(
+        self, url: str, session: ClientSession, card_info: dict = None
+    ) -> Tuple[List[Union[List[str], str]], str]:
+        """获取会员购商品详细信息"""
+        if card_info is None:
+            card_info = {}
+        try:
+            _log.info(f"开始解析会员购商品: {url}")
+
+            # 从URL中提取itemsId
+            item_id_match = re.search(r"itemsId=(\d+)", url)
+            if not item_id_match:
+                return "无法提取商品ID", None
+            item_id = item_id_match[1]
+
+            vurl = f"https://mall.bilibili.com/detail.html?itemsId={item_id}"
+
+            data = None
+            # 尝试多个API
+            api_urls = [
+                f"https://mall.bilibili.com/mall-up-c/up_shop/open/getItem?itemsId={item_id}",
+                f"https://mall.bilibili.com/mall-c/common/item/getItemInfo?itemsId={item_id}",
+            ]
+
+            for api_url in api_urls:
+                try:
+                    _log.info(f"尝试会员购API: {api_url}")
+                    async with session.get(api_url) as resp:
+                        if resp.status != 200:
+                            _log.warning(f"API返回状态码: {resp.status}")
+                            continue
+                        res = await resp.json()
+                        _log.info(f"会员购API响应: {res}")
+                        if res.get("code") == 0 and res.get("data"):
+                            data = res.get("data")
+                            break
+                except Exception as e:
+                    _log.warning(f"API调用失败: {api_url}, 错误: {e}")
+                    continue
+
+            if not data:
+                # 无法获取详细信息，使用卡片信息
+                _log.info("无法获取商品详情，使用卡片信息")
+                return self._build_mall_fallback_msg(item_id, vurl, card_info)
+
+            has_image = False
+            if self.display_image or "mall" in self.display_image_list:
+                has_image = True
+
+            # 提取商品信息 - 适配不同API返回的字段
+            name = data.get(
+                "name", data.get("title", data.get("itemsName", "未知商品"))
+            )
+
+            # 价格处理
+            price_val = data.get("price", data.get("priceStr", ""))
+            price_prefix = data.get("pricePrefix", "￥")
+            if price_val:
+                # 如果价格是分为单位，转换为元
+                if isinstance(price_val, int) and price_val > 100:
+                    price = f"{price_prefix}{price_val / 100:.2f}"
+                else:
+                    price = f"{price_prefix}{price_val}"
+            else:
+                price = "价格未知"
+
+            # 尝试不同的图片字段
+            cover = ""
+            if has_image:
+                cover_url = data.get(
+                    "cover",
+                    data.get("img", data.get("image", data.get("itemsImg", ""))),
+                )
+                if cover_url:
+                    # 确保URL是完整的
+                    if cover_url.startswith("//"):
+                        cover_url = "https:" + cover_url
+                    cover = self.resize_image(cover_url, is_cover=True)
+
+            # 商品状态
+            status = data.get("status", data.get("itemsStatus", ""))
+            status_text = ""
+            if status == 1 or status == "1":
+                status_text = "[在售] "
+            elif status == 2 or status == "2":
+                status_text = "[已售罄] "
+            elif status == 3 or status == "3":
+                status_text = "[已下架] "
+
+            # 库存
+            stock = data.get(
+                "stock", data.get("totalStock", data.get("currentStock", ""))
+            )
+            stock_text = f"库存：{stock}\n" if stock else ""
+
+            # 销量
+            sales = data.get("sales", data.get("salesCount", data.get("soldNum", "")))
+            sales_text = ""
+            if sales:
+                try:
+                    sales_text = f"销量：{self.handle_num(int(sales))}\n"
+                except (ValueError, TypeError):
+                    sales_text = f"销量：{sales}\n"
+
+            # 构建消息
+            title = f"{status_text}商品：{name}\n"
+            price_text = f"价格：{price}\n"
+
+            vurl_display = "\n" + vurl if cover else vurl
+            msg = [cover, vurl_display, "\n", title, price_text, stock_text, sales_text]
+            return msg, vurl
+        except Exception as e:
+            _log.exception(f"会员购解析出错: {e}")
+            # 即使出错也使用卡片信息返回
+            item_id_match = re.search(r"itemsId=(\d+)", url)
+            if item_id_match:
+                item_id = item_id_match[1]
+                vurl = f"https://mall.bilibili.com/detail.html?itemsId={item_id}"
+                return self._build_mall_fallback_msg(item_id, vurl, card_info)
+            return "会员购解析出错", None
+
     async def bili_keyword(
-        self, group_id: Optional[int], text: str, session: ClientSession
+        self,
+        group_id: Optional[int],
+        text: str,
+        session: ClientSession,
+        card_info: dict = None,
     ) -> Union[List[Union[List[str], str]], str, bool]:
         """主要的Bilibili解析逻辑"""
+        if card_info is None:
+            card_info = {}
         try:
             # 提取url
             url, page, time_location = self.extract(text)
@@ -523,6 +846,10 @@ class BilibiliAnalysis(NcatBotPlugin):
                 msg, vurl = await self.article_detail(url, page, session)
             elif "dynamic" in url:
                 msg, vurl = await self.dynamic_detail(url, session)
+            elif "space" in url or "wbi/acc/info" in url:
+                msg, vurl = await self.space_detail(url, session, card_info)
+            elif "mall" in url or "itemsId" in url:
+                msg, vurl = await self.mall_detail(url, session, card_info)
 
             # 避免多个机器人解析重复推送
             if group_id:
@@ -553,7 +880,8 @@ class BilibiliAnalysis(NcatBotPlugin):
                     yield i
 
         def is_image(msg: str) -> bool:
-            return msg[-4:].lower() in [
+            # 检查标准图片扩展名
+            if msg[-4:].lower() in [
                 ".jpg",
                 ".jpeg",
                 ".png",
@@ -561,7 +889,22 @@ class BilibiliAnalysis(NcatBotPlugin):
                 ".bmp",
                 "jfif",
                 "webp",
+            ]:
+                return True
+            # 检查B站和QQ图片CDN（这些URL没有标准扩展名但确实是图片）
+            image_cdn_patterns = [
+                "pic.ugcimg.cn",  # B站预览图
+                "qq.ugcimg.cn",  # QQ预览图
+                "i0.hdslb.com",  # B站图片CDN
+                "i1.hdslb.com",
+                "i2.hdslb.com",
+                "archive.biliimg.com",
+                "article.biliimg.com",
             ]
+            for pattern in image_cdn_patterns:
+                if pattern in msg:
+                    return True
+            return False
 
         _log.info(f"开始格式化消息: {msg_list}")
         flatten_msg_list = list(flatten(msg_list))
@@ -597,6 +940,9 @@ class BilibiliAnalysis(NcatBotPlugin):
 
         _log.info(f"开始处理消息: {text}")
 
+        # 先从原始消息中提取卡片信息（用于API失败时的备用）
+        card_info = self.extract_card_info(text)
+
         async with ClientSession(
             trust_env=self.trust_env, headers=self.headers
         ) as session:
@@ -608,7 +954,9 @@ class BilibiliAnalysis(NcatBotPlugin):
                     text = await self.b23_extract(text, session=session)
 
             _log.info(f"处理后的文本: {text}")
-            msg = await self.bili_keyword(group_id, text, session=session)
+            msg = await self.bili_keyword(
+                group_id, text, session=session, card_info=card_info
+            )
 
         _log.info(f"bili_keyword 返回结果: {msg}")
 

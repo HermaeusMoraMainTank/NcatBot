@@ -8,14 +8,12 @@ from PIL import Image as PILImage
 import matplotlib.pyplot as plt
 import matplotlib
 from common.utils.CommonUtil import CommonUtil
-from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from PIL import ImageDraw
 import re
 import threading
 
 matplotlib.use("Agg")  # 使用Agg后端，避免需要GUI
 import io
-from matplotlib.font_manager import FontProperties
 
 from ncatbot.core import MessageChain, Text, Image, GroupMessage
 from ncatbot.plugin_system import NcatBotPlugin, on_message
@@ -169,6 +167,13 @@ class MessageStatsPlugin(NcatBotPlugin):
             self.user_stats = {}
         # 不要清空内存中的数据，保持现有数据
         self._load_data()
+        # 添加每日18点定时任务
+        self.add_scheduled_task(
+            self._send_daily_stats_to_all_groups,
+            "daily_message_stats",
+            "18:00",
+        )
+        _log.info("[MessageStats] 每日18点发言统计定时任务已注册")
         # 插件加载完成
 
     def _reinit_(self):
@@ -621,185 +626,401 @@ class MessageStatsPlugin(NcatBotPlugin):
             plt.close()
             return None
 
-    def _generate_top_users_barh(self, user_counts, user_names, top_n=10):
-        plt.clf()
-        # 只取前十
+    def _generate_ranking_card(
+        self,
+        user_counts: Dict[str, int],
+        user_names: Dict[str, str],
+        total_messages: int,
+        total_users: int,
+        days: int = None,
+        title: str = "发言排行",
+        subtitle: str = "活跃用户 TOP 10",
+        count_label: str = "条消息",
+        total_label: str = "总发言消息数",
+        users_label: str = "总参与人数",
+        top_n: int = 10,
+    ) -> str:
+        """生成现代化排行榜卡片图片
+
+        Args:
+            user_counts: 用户ID到消息数的映射
+            user_names: 用户ID到昵称的映射
+            total_messages: 总消息数
+            total_users: 总参与人数
+            days: 时间范围（天数）
+            title: 标题
+            subtitle: 副标题
+            count_label: 计数标签（如"条消息"）
+            total_label: 总计标签（如"总发言消息数"）
+            users_label: 参与人数标签
+            top_n: 显示前N名
+
+        Returns:
+            生成的图片路径
+        """
+        from PIL import ImageFont
+
+        # 排序并获取前N名
         top_items = sorted(user_counts.items(), key=lambda x: x[1], reverse=True)[
             :top_n
         ]
-        names = [user_names.get(uid, str(uid)) for uid, _ in top_items]
-        counts = [cnt for _, cnt in top_items]
-        user_ids = [uid for uid, _ in top_items]
-        fig, ax = plt.subplots(figsize=(10, 0.8 * len(names) + 1))
-        color_palette = [
-            "#f7c873",
-            "#f7a8b8",
-            "#a3c9f7",
-            "#b8a3f7",
-            "#f7e3a3",
-            "#a3f7d3",
-            "#f7a3e3",
-            "#a3f7f7",
-            "#f7b8a3",
-            "#d3a3f7",
+        if not top_items:
+            return None
+
+        # 图片尺寸配置
+        card_width = 540
+        header_height = 120
+        item_height = 85
+        footer_height = 80
+        padding = 30
+        card_padding = 20
+
+        # 计算卡片高度
+        items_count = len(top_items)
+        card_content_height = header_height + items_count * item_height + footer_height
+        total_height = card_content_height + 2 * card_padding + 60  # 额外边距
+
+        # 创建渐变背景
+        img = PILImage.new("RGB", (card_width, total_height))
+        draw = ImageDraw.Draw(img)
+
+        # 绘制紫蓝色渐变背景
+        for y in range(total_height):
+            ratio = y / total_height
+            r = int(138 + (88 - 138) * ratio)  # 从 #8a6bff 到 #5855d6
+            g = int(107 + (85 - 107) * ratio)
+            b = int(255 + (214 - 255) * ratio)
+            draw.line([(0, y), (card_width, y)], fill=(r, g, b))
+
+        # 绘制白色圆角卡片
+        card_x = card_padding
+        card_y = card_padding
+        card_inner_width = card_width - 2 * card_padding
+        card_inner_height = card_content_height + 20
+
+        # 绘制圆角矩形（白色卡片）
+        corner_radius = 20
+        self._draw_rounded_rectangle(
+            draw,
+            card_x,
+            card_y,
+            card_x + card_inner_width,
+            card_y + card_inner_height,
+            corner_radius,
+            fill=(255, 255, 255),
+        )
+
+        # 加载字体
+        try:
+            title_font = ImageFont.truetype("C:/Windows/Fonts/msyhbd.ttc", 28)
+            subtitle_font = ImageFont.truetype("C:/Windows/Fonts/msyh.ttc", 14)
+            name_font = ImageFont.truetype("C:/Windows/Fonts/msyh.ttc", 16)
+            count_font = ImageFont.truetype("C:/Windows/Fonts/msyhbd.ttc", 14)
+            percent_font = ImageFont.truetype("C:/Windows/Fonts/msyh.ttc", 13)
+            rank_font = ImageFont.truetype("C:/Windows/Fonts/msyhbd.ttc", 18)
+            footer_num_font = ImageFont.truetype("C:/Windows/Fonts/msyhbd.ttc", 32)
+            footer_label_font = ImageFont.truetype("C:/Windows/Fonts/msyh.ttc", 12)
+        except Exception:
+            # 回退到默认字体
+            title_font = ImageFont.load_default()
+            subtitle_font = title_font
+            name_font = title_font
+            count_font = title_font
+            percent_font = title_font
+            rank_font = title_font
+            footer_num_font = title_font
+            footer_label_font = title_font
+
+        # 绘制标题区域
+        title_y = card_y + 25
+        # 主标题
+        title_text = title
+        if days == -1:
+            title_text = "昨日" + title
+        elif days == 1:
+            title_text = "今日" + title
+        elif days == 7:
+            title_text = "本周" + title
+        elif days == 30:
+            title_text = "本月" + title
+        elif days is None:
+            title_text = title + "（全部）"
+
+        title_bbox = draw.textbbox((0, 0), title_text, font=title_font)
+        title_width = title_bbox[2] - title_bbox[0]
+        title_x = card_x + (card_inner_width - title_width) // 2
+        draw.text((title_x, title_y), title_text, fill=(51, 51, 51), font=title_font)
+
+        # 副标题
+        subtitle_y = title_y + 40
+        subtitle_bbox = draw.textbbox((0, 0), subtitle, font=subtitle_font)
+        subtitle_width = subtitle_bbox[2] - subtitle_bbox[0]
+        subtitle_x = card_x + (card_inner_width - subtitle_width) // 2
+        draw.text(
+            (subtitle_x, subtitle_y), subtitle, fill=(153, 153, 153), font=subtitle_font
+        )
+
+        # 日期时间
+        date_text = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        date_y = subtitle_y + 20
+        date_bbox = draw.textbbox((0, 0), date_text, font=subtitle_font)
+        date_width = date_bbox[2] - date_bbox[0]
+        date_x = card_x + (card_inner_width - date_width) // 2
+        draw.text((date_x, date_y), date_text, fill=(180, 180, 180), font=subtitle_font)
+
+        # 排名徽章颜色
+        badge_colors = [
+            (255, 193, 7),  # 金色 - 第1名
+            (192, 192, 192),  # 银色 - 第2名
+            (205, 127, 50),  # 铜色 - 第3名
         ]
-        bar_colors = color_palette[: len(names)]
-        bars = ax.barh(
-            range(len(names)),
-            counts,
-            color=bar_colors,
-            edgecolor="#fff",
-            height=0.65,
-            zorder=2,
-        )
-        ax.set_yticks(range(len(names)))
-        ax.set_yticklabels([""] * len(names))  # 清空y轴标签
-        ax.set_xlabel("发言次数", fontsize=14, fontweight="bold")
-        ax.set_title(
-            "发言TOP10", fontsize=18, fontweight="bold", color="#6c63ff", pad=15
-        )
-        ax.invert_yaxis()
-        ax.set_facecolor("#f7f7fa")
-        fig.patch.set_facecolor("#f7f7fa")
-        ax.xaxis.grid(True, linestyle="--", color="#ccc", alpha=0.5, zorder=1)
-        ax.spines["top"].set_visible(False)
-        ax.spines["right"].set_visible(False)
-        ax.spines["left"].set_visible(False)
-        ax.spines["bottom"].set_color("#aaa")
+        # 4-10名使用渐变紫色
+        purple_gradient = [
+            (147, 112, 219),
+            (138, 107, 255),
+            (123, 97, 255),
+            (108, 87, 245),
+            (93, 77, 235),
+            (78, 67, 225),
+            (63, 57, 215),
+        ]
 
-        # 添加数值标签
-        for i, bar in enumerate(bars):
-            width = bar.get_width()
-            ax.text(
-                width + 1,
-                bar.get_y() + bar.get_height() / 2,
-                f"{counts[i]}",
-                va="center",
-                fontsize=15,
-                fontweight="bold",
-                color="#6c63ff",
-                zorder=3,
+        # 绘制每个用户条目
+        items_start_y = card_y + header_height
+        for i, (user_id, count) in enumerate(top_items):
+            item_y = items_start_y + i * item_height
+            name = user_names.get(user_id, str(user_id))
+            # 限制名称长度
+            if len(name) > 18:
+                name = name[:17] + "..."
+            percentage = (count / total_messages * 100) if total_messages > 0 else 0
+
+            # 绘制排名徽章
+            badge_x = card_x + padding
+            badge_y = item_y + 15
+            badge_size = 36
+
+            # 选择徽章颜色
+            if i < 3:
+                badge_color = badge_colors[i]
+            else:
+                badge_color = purple_gradient[min(i - 3, len(purple_gradient) - 1)]
+
+            # 绘制圆角矩形徽章
+            self._draw_rounded_rectangle(
+                draw,
+                badge_x,
+                badge_y,
+                badge_x + badge_size,
+                badge_y + badge_size,
+                8,
+                fill=badge_color,
             )
 
-        cn_font = FontProperties(
-            fname="C:/Windows/Fonts/msyh.ttc", size=15, weight="bold"
-        )
-        emoji_font = FontProperties(fname="C:/Windows/Fonts/seguiemj.ttf", size=15)
+            # 绘制排名数字
+            rank_text = str(i + 1)
+            rank_bbox = draw.textbbox((0, 0), rank_text, font=rank_font)
+            rank_width = rank_bbox[2] - rank_bbox[0]
+            rank_height = rank_bbox[3] - rank_bbox[1]
+            rank_x = badge_x + (badge_size - rank_width) // 2
+            rank_y = badge_y + (badge_size - rank_height) // 2 - 2
+            draw.text((rank_x, rank_y), rank_text, fill=(255, 255, 255), font=rank_font)
 
-        def circle_crop(img, size=44):
-            img = img.resize((size, size), PILImage.LANCZOS).convert("RGBA")
-            mask = PILImage.new("L", (size, size), 0)
-            draw = ImageDraw.Draw(mask)
-            draw.ellipse((0, 0, size, size), fill=255)
-            img.putalpha(mask)
-            return img
+            # 绘制头像
+            avatar_x = badge_x + badge_size + 15
+            avatar_y = item_y + 12
+            avatar_size = 42
 
-        def default_avatar(size=44):
-            img = PILImage.new("RGBA", (size, size), (200, 200, 200, 255))
-            draw = ImageDraw.Draw(img)
-            draw.ellipse(
-                (0, 0, size - 1, size - 1),
-                fill=(220, 220, 220, 255),
-                outline=(180, 180, 180, 255),
-                width=2,
-            )
-            return img
-
-        # 头像更靠左
-        avatar_x = -max(counts) * 0.12 - 1 if counts else -2
-        # 昵称紧贴柱子
-        name_x = 0
-
-        # 头像 AnnotationBbox 预览
-        for i, user_id in enumerate(user_ids):
             try:
                 avatar_path = CommonUtil.get_avatar(user_id)
                 avatar = PILImage.open(avatar_path).convert("RGBA")
-                avatar = circle_crop(avatar)
-            except Exception as e:
-                print(f"头像异常: {user_id} {e}")
-                avatar = default_avatar()
-            imagebox = OffsetImage(avatar, zoom=2.0)
-            ab = AnnotationBbox(
-                imagebox,
-                (avatar_x, i),
-                frameon=False,
-                box_alignment=(0.5, 0.5),
-                pad=0.1,
-                zorder=20,
+                avatar = self._circle_crop(avatar, avatar_size)
+                # 创建临时RGBA图像用于粘贴
+                img_rgba = img.convert("RGBA")
+                img_rgba.paste(avatar, (avatar_x, avatar_y), avatar)
+                img = img_rgba.convert("RGB")
+                draw = ImageDraw.Draw(img)
+            except Exception:
+                # 绘制默认头像
+                draw.ellipse(
+                    [
+                        avatar_x,
+                        avatar_y,
+                        avatar_x + avatar_size,
+                        avatar_y + avatar_size,
+                    ],
+                    fill=(220, 220, 220),
+                    outline=(200, 200, 200),
+                )
+
+            # 绘制用户名
+            name_x = avatar_x + avatar_size + 15
+            name_y = item_y + 15
+            draw.text((name_x, name_y), name, fill=(51, 51, 51), font=name_font)
+
+            # 绘制百分比进度条
+            bar_x = name_x
+            bar_y = name_y + 28
+            bar_width = 180
+            bar_height_px = 8
+
+            # 进度条背景
+            self._draw_rounded_rectangle(
+                draw,
+                bar_x,
+                bar_y,
+                bar_x + bar_width,
+                bar_y + bar_height_px,
+                4,
+                fill=(230, 230, 240),
             )
-            ax.add_artist(ab)
 
-        # 渲染y轴标签（支持emoji混排）
-        for i, name in enumerate(names):
-            x = name_x
-            for part_type, part in self.split_emoji(name):
-                if part_type == "text":
-                    ax.text(
-                        x,
-                        i,
-                        part,
-                        va="center",
-                        ha="left",
-                        fontproperties=cn_font,
-                        color="#444",
-                        zorder=12,
-                    )
-                    x += len(part) * 0.18 * max(counts) / 10 if counts else 0.2
-                else:
-                    ax.text(
-                        x,
-                        i,
-                        part,
-                        va="center",
-                        ha="left",
-                        fontproperties=emoji_font,
-                        color="#444",
-                        zorder=13,
-                    )
-                    x += len(part) * 0.18 * max(counts) / 10 if counts else 0.2
+            # 进度条填充
+            fill_width = int(bar_width * (percentage / 100)) if percentage > 0 else 0
+            if fill_width > 0:
+                # 使用渐变色填充进度条
+                progress_color = badge_color
+                self._draw_rounded_rectangle(
+                    draw,
+                    bar_x,
+                    bar_y,
+                    bar_x + max(fill_width, 8),
+                    bar_y + bar_height_px,
+                    4,
+                    fill=progress_color,
+                )
 
-        # 在 plt.savefig 之前获取柱子的像素坐标和高度
-        fig.canvas.draw()
-        bar_pixel_boxes = []
-        renderer = fig.canvas.get_renderer()
-        for bar in bars:
-            bbox = bar.get_window_extent(renderer)
-            left, bottom, right, top = map(int, bbox.bounds)
-            bar_pixel_boxes.append((left, bottom, right, top))
+            # 绘制百分比文字
+            percent_text = f"{percentage:.1f}%"
+            percent_x = bar_x
+            percent_y = bar_y + 12
+            draw.text(
+                (percent_x, percent_y),
+                percent_text,
+                fill=badge_color,
+                font=percent_font,
+            )
 
-        plt.tight_layout(rect=[0.08, 0, 1, 1])
-        plt.subplots_adjust(left=0.18)
+            # 绘制消息数量
+            count_text = f"{count} {count_label}"
+            count_bbox = draw.textbbox((0, 0), count_text, font=count_font)
+            count_width = count_bbox[2] - count_bbox[0]
+            count_x = card_x + card_inner_width - padding - count_width
+            count_y = item_y + 30
+            draw.text(
+                (count_x, count_y), count_text, fill=(120, 120, 120), font=count_font
+            )
+
+            # 绘制分隔线（除了最后一个）
+            if i < len(top_items) - 1:
+                line_y = item_y + item_height - 5
+                draw.line(
+                    [
+                        (card_x + padding, line_y),
+                        (card_x + card_inner_width - padding, line_y),
+                    ],
+                    fill=(240, 240, 245),
+                    width=1,
+                )
+
+        # 绘制底部统计区域
+        footer_y = items_start_y + items_count * item_height + 10
+
+        # 绘制分隔线
+        draw.line(
+            [
+                (card_x + padding, footer_y),
+                (card_x + card_inner_width - padding, footer_y),
+            ],
+            fill=(230, 230, 240),
+            width=2,
+        )
+
+        footer_y += 15
+
+        # 左侧：总消息数
+        left_center_x = card_x + card_inner_width // 4
+        total_text = str(total_messages)
+        total_bbox = draw.textbbox((0, 0), total_text, font=footer_num_font)
+        total_width = total_bbox[2] - total_bbox[0]
+        draw.text(
+            (left_center_x - total_width // 2, footer_y),
+            total_text,
+            fill=(88, 85, 214),
+            font=footer_num_font,
+        )
+
+        label_bbox = draw.textbbox((0, 0), total_label, font=footer_label_font)
+        label_width = label_bbox[2] - label_bbox[0]
+        draw.text(
+            (left_center_x - label_width // 2, footer_y + 38),
+            total_label,
+            fill=(150, 150, 150),
+            font=footer_label_font,
+        )
+
+        # 中间分隔线
+        mid_x = card_x + card_inner_width // 2
+        draw.line(
+            [(mid_x, footer_y + 5), (mid_x, footer_y + 55)],
+            fill=(230, 230, 240),
+            width=1,
+        )
+
+        # 右侧：总参与人数
+        right_center_x = card_x + card_inner_width * 3 // 4
+        users_text = str(total_users)
+        users_bbox = draw.textbbox((0, 0), users_text, font=footer_num_font)
+        users_width = users_bbox[2] - users_bbox[0]
+        draw.text(
+            (right_center_x - users_width // 2, footer_y),
+            users_text,
+            fill=(88, 85, 214),
+            font=footer_num_font,
+        )
+
+        users_label_bbox = draw.textbbox((0, 0), users_label, font=footer_label_font)
+        users_label_width = users_label_bbox[2] - users_label_bbox[0]
+        draw.text(
+            (right_center_x - users_label_width // 2, footer_y + 38),
+            users_label,
+            fill=(150, 150, 150),
+            font=footer_label_font,
+        )
+
+        # 保存图片
         path = os.path.join(
             "data",
             "image",
             "temp",
-            f"top_users_{datetime.now().strftime('%Y%m%d%H%M%S')}.png",
+            f"ranking_card_{datetime.now().strftime('%Y%m%d%H%M%S%f')}.png",
         )
         os.makedirs(os.path.dirname(path), exist_ok=True)
-        plt.savefig(path, bbox_inches="tight")
-        plt.close()
+        img.save(path, quality=95)
 
-        # 用 PIL 贴头像（精确布局）
-        avatar_size = 46.2
-        avatar_x = 118
-        top_margin = 86
-        bar_height = 45
-        bar_gap = 28.2
-        img = PILImage.open(path).convert("RGBA")
-        for i, user_id in enumerate(user_ids):
-            try:
-                avatar_path = CommonUtil.get_avatar(user_id)
-                avatar = PILImage.open(avatar_path).convert("RGBA")
-                avatar = avatar.resize(
-                    (int(round(avatar_size)), int(round(avatar_size))), PILImage.LANCZOS
-                )
-                avatar_y = top_margin + i * (bar_height + bar_gap)
-                img.paste(avatar, (int(round(avatar_x)), int(round(avatar_y))), avatar)
-            except Exception as e:
-                print(f"头像PIL粘贴异常: {user_id} {e}")
-        img.save(path)
         return path
+
+    def _draw_rounded_rectangle(
+        self, draw, x1, y1, x2, y2, radius, fill=None, outline=None
+    ):
+        """绘制圆角矩形"""
+        # 绘制中间矩形
+        draw.rectangle([x1 + radius, y1, x2 - radius, y2], fill=fill, outline=outline)
+        draw.rectangle([x1, y1 + radius, x2, y2 - radius], fill=fill, outline=outline)
+        # 绘制四个角
+        draw.pieslice([x1, y1, x1 + 2 * radius, y1 + 2 * radius], 180, 270, fill=fill)
+        draw.pieslice([x2 - 2 * radius, y1, x2, y1 + 2 * radius], 270, 360, fill=fill)
+        draw.pieslice([x1, y2 - 2 * radius, x1 + 2 * radius, y2], 90, 180, fill=fill)
+        draw.pieslice([x2 - 2 * radius, y2 - 2 * radius, x2, y2], 0, 90, fill=fill)
+
+    def _circle_crop(self, img, size=44):
+        """将图片裁剪为圆形"""
+        img = img.resize((size, size), PILImage.LANCZOS).convert("RGBA")
+        mask = PILImage.new("L", (size, size), 0)
+        draw = ImageDraw.Draw(mask)
+        draw.ellipse((0, 0, size, size), fill=255)
+        img.putalpha(mask)
+        return img
 
     def split_emoji(self, text):
         emoji_pattern = re.compile(
@@ -826,6 +1047,104 @@ class MessageStatsPlugin(NcatBotPlugin):
         if last < len(text):
             result.append(("text", text[last:]))
         return result
+
+    async def _send_daily_stats_to_all_groups(self):
+        """每日定时发送发言统计到所有群组"""
+        _log.info("[MessageStats] 开始执行每日发言统计定时任务")
+
+        # 遍历所有有统计数据的群组
+        for group_id in list(self.group_stats.keys()):
+            try:
+                await self._send_group_daily_stats(int(group_id))
+            except Exception as e:
+                _log.error(f"[MessageStats] 发送群组 {group_id} 每日统计失败: {e}")
+
+        _log.info("[MessageStats] 每日发言统计定时任务执行完成")
+
+    async def _send_group_daily_stats(self, group_id: int):
+        """发送单个群组的每日发言统计"""
+        group_id_str = str(group_id)
+        stats = self.group_stats.get(group_id_str)
+        if not stats:
+            return
+
+        # 获取今日的统计数据
+        today = date.today().isoformat()
+        total_count = stats.daily_counts.get(today, 0)
+
+        # 如果今天没有发言记录，跳过
+        if total_count == 0:
+            _log.info(f"[MessageStats] 群组 {group_id} 今日无发言记录，跳过发送")
+            return
+
+        # 构建消息元素
+        message_elements = []
+        message_elements.append(Text("=== 今日发言统计 ===\n"))
+        message_elements.append(Text("今日发言数量:\n"))
+        for img in self._number_to_counter(total_count):
+            message_elements.append(img)
+        message_elements.append(Text("\n\n"))
+
+        # 获取用户统计（今日）
+        user_counts = {}
+        user_names = {}
+        for user_id, user_stat in self.user_stats.get(group_id_str, {}).items():
+            user_today_count = user_stat.daily_counts.get(today, 0)
+            if user_today_count > 0:
+                user_counts[user_id] = user_today_count
+                user_names[user_id] = str(user_id)
+
+        # 批量获取群成员信息
+        try:
+            members_response = await self.api.get_group_member_list(group_id=group_id)
+            if hasattr(members_response, "members") and members_response.members:
+                members = CommonUtil.parse_group_member_list(members_response)
+                for member in members:
+                    if str(member.user_id) in user_names:
+                        nickname = member.card if member.card else member.nickname
+                        if nickname:
+                            nickname = (
+                                str(nickname)
+                                .encode("utf-8", errors="ignore")
+                                .decode("utf-8")
+                            )
+                        else:
+                            nickname = str(member.user_id)
+                        user_names[str(member.user_id)] = nickname
+        except Exception as e:
+            _log.error(f"[MessageStats] 获取群成员列表失败: {e}")
+
+        # 计算总参与人数
+        total_users = len(user_counts)
+
+        if user_counts:
+            # 使用新的排行榜卡片
+            card_path = self._generate_ranking_card(
+                user_counts=user_counts,
+                user_names=user_names,
+                total_messages=total_count,
+                total_users=total_users,
+                days=1,  # 今日
+                title="发言排行",
+                subtitle="活跃用户 TOP 10",
+                count_label="条消息",
+                total_label="总发言消息数",
+                users_label="总参与人数",
+                top_n=10,
+            )
+            if card_path:
+                message_elements.append(Image(card_path))
+                message_elements.append(Text("\n"))
+        else:
+            message_elements.append(Text("暂无用户发言数据\n"))
+
+        # 发送消息
+        try:
+            message = MessageChain(message_elements)
+            await self.api.post_group_msg(group_id, rtf=message)
+            _log.info(f"[MessageStats] 成功发送群组 {group_id} 的每日统计")
+        except Exception as e:
+            _log.error(f"[MessageStats] 发送群组 {group_id} 消息失败: {e}")
 
     @on_message
     async def handle_message_stats(self, input: GroupMessage) -> None:
@@ -964,13 +1283,27 @@ class MessageStatsPlugin(NcatBotPlugin):
                             user_names[user_id] = nickname
                     except Exception:
                         pass
+            # 计算总参与人数
+            total_users = len(user_counts)
+
             if user_counts:
-                bar_path = self._generate_top_users_barh(
-                    user_counts, user_names, top_n=10
+                # 使用新的排行榜卡片
+                card_path = self._generate_ranking_card(
+                    user_counts=user_counts,
+                    user_names=user_names,
+                    total_messages=total_count,
+                    total_users=total_users,
+                    days=days,
+                    title="发言排行",
+                    subtitle="活跃用户 TOP 10",
+                    count_label="条消息",
+                    total_label="总发言消息数",
+                    users_label="总参与人数",
+                    top_n=10,
                 )
-                message_elements.append(Text("发言最多的用户TOP10：\n"))
-                message_elements.append(Image(bar_path))
-                message_elements.append(Text("\n"))
+                if card_path:
+                    message_elements.append(Image(card_path))
+                    message_elements.append(Text("\n"))
             else:
                 message_elements.append(Text("暂无用户发言数据\n"))
 

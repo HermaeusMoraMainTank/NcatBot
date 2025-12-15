@@ -8,7 +8,7 @@ from typing import Dict, List, Optional
 import yaml
 from common.utils.AiUtil import AiUtil
 from common.utils.CommonUtil import CommonUtil
-from ncatbot.core import At, MessageChain, Text, GroupMessage
+from ncatbot.core import At, MessageChain, Text, GroupMessage, Reply
 from ncatbot.plugin_system import NcatBotPlugin, on_message
 from ncatbot.utils.logger import get_log
 
@@ -116,28 +116,67 @@ class FakeAi(NcatBotPlugin):
     excluded_plugins = [
         "NetEaseCloudMusic",
         "VrChatInfo",
+        "AnimeTrace",
+        "Meme",
+        "ImageSender",
     ]  # 在这里添加不需要触发FakeAi的插件名称
+
+    # AnimeTrace 命令前缀
+    anime_trace_prefixes = ["查询人物", "识别人物", "角色", "人物"]
+
+    # ImageSender 上传命令前缀
+    image_sender_prefixes = ["上传"]
+
+    # Meme 关键词列表（动态加载）
+    meme_keywords = []
+
+    async def on_load(self):
+        """加载 meme 关键词"""
+        try:
+            import json
+            with open("data/json/memeKeys.json", "r", encoding="utf-8") as file:
+                meme_data = json.load(file)
+                for data in meme_data:
+                    self.meme_keywords.extend(data.get("keywords", []))
+            _log.info(f"FakeAi 已加载 {len(self.meme_keywords)} 个 meme 关键词排除")
+        except Exception as e:
+            _log.warning(f"FakeAi 加载 meme 关键词失败: {e}")
 
     async def _is_from_excluded_plugin(self, input: GroupMessage) -> bool:
         """检查消息是否来自排除的插件"""
-        # 检查是否是回复消息
-        if input.message and len(input.message) > 1:
-            for msg in input.message:
-                if hasattr(msg, "type") and msg.type == "reply":
-                    # 检查被回复的消息是否包含特定文本
-                    try:
-                        reply_id = msg.data.get("id")
-                        msg_info = await self.api.get_msg(reply_id)
-                        if msg_info.get("status") == "ok":
-                            raw_message = msg_info["data"]["raw_message"]
-                            if (
-                                "请回复数字选择要播放的歌曲" in raw_message
-                                or "请回复数字选择要查看的玩家" in raw_message
-                            ):
-                                return True
-                    except Exception as e:
-                        _log.error(f"检查回复消息时发生错误: {str(e)}")
-                        continue
+        # 移除 CQ 码后的纯命令文本
+        clean_message = re.sub(r"\[CQ:[^\]]+\]", "", input.raw_message).strip()
+
+        # 检查是否是 AnimeTrace 命令
+        for prefix in self.anime_trace_prefixes:
+            if clean_message.startswith(prefix):
+                return True
+
+        # 检查是否是 ImageSender 上传命令
+        for prefix in self.image_sender_prefixes:
+            if clean_message.startswith(prefix):
+                return True
+
+        # 检查是否是 Meme 命令
+        if clean_message == "meme":
+            return True
+        # 检查是否是 meme 关键词命令
+        first_word = clean_message.split(" ")[0] if clean_message else ""
+        if first_word in self.meme_keywords:
+            return True
+
+        # 检查是否是回复消息（用于 NetEaseCloudMusic 和 VrChatInfo）
+        reply_list = input.message.filter(Reply)
+        if reply_list:
+            reply_id = reply_list[0].id
+            # get_msg 返回的是 GroupMessageEvent 对象
+            reply_msg = await self.api.get_msg(reply_id)
+            raw_message = reply_msg.raw_message
+            if raw_message and (
+                "请回复数字选择要播放的歌曲" in raw_message
+                or "请回复数字选择要查看的玩家" in raw_message
+            ):
+                return True
         return False
 
     async def handle_balance_query(self, input: GroupMessage) -> None:

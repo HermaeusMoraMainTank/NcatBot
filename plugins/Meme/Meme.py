@@ -1,4 +1,5 @@
 ﻿import json
+import re
 import requests
 import logging
 from typing import List, Optional, Any
@@ -7,7 +8,7 @@ from dataclasses_json import dataclass_json
 from pathlib import Path
 import tempfile
 
-from ncatbot.core import GroupMessage, Image, MessageChain
+from ncatbot.core import GroupMessage, Image, MessageChain, Reply
 from ncatbot.plugin_system import NcatBotPlugin, on_message
 
 
@@ -146,12 +147,16 @@ class Meme(NcatBotPlugin):
                 logger.error(f"请求 meme 列表时发生错误: {e}", exc_info=True)
             return
 
-        # 适配新的 MessageArray 结构
+        # 适配新的 MessageArray 结构，移除 CQ 码后获取纯文本
         message_text = ""
         for msg_segment in input.message:
             if hasattr(msg_segment, "text"):
                 message_text = msg_segment.text
                 break
+
+        # 也尝试从 raw_message 中移除 CQ 码获取命令
+        if not message_text:
+            message_text = re.sub(r"\[CQ:[^\]]+\]", "", input.raw_message).strip()
 
         if message_text:
             com = message_text.strip()
@@ -174,7 +179,11 @@ class Meme(NcatBotPlugin):
                     await self.send_meme_info(input, meme_config)
                     return
 
-                avatar_files = self.collect_avatar_files(
+                # 检查是否有回复图片
+                reply_images = await self.get_images_from_reply(input)
+                has_reply_images = len(reply_images) > 0
+
+                avatar_files = await self.collect_avatar_files(
                     input, params_type.min_images, params_type.max_images
                 )
                 # 检查是否有 @ 消息
@@ -182,7 +191,8 @@ class Meme(NcatBotPlugin):
                     hasattr(msg, "msg_seg_type") and msg.msg_seg_type == "at"
                     for msg in input.message
                 )
-                texts = self.collect_texts(input, has_at)
+                # 如果图片来自回复，则忽略 @ 用户（不将其当作图片来源或文本）
+                texts = self.collect_texts(input, has_at or has_reply_images)
 
                 if (
                     len(avatar_files) < params_type.min_images
@@ -220,45 +230,68 @@ class Meme(NcatBotPlugin):
         )
         await self.api.post_group_msg(group_id=input.group_id, text=info_message)
 
-    def collect_avatar_files(
+    async def get_images_from_reply(self, input: GroupMessage) -> List[str]:
+        """从回复消息中获取图片URL列表"""
+        image_urls = []
+        reply_list = input.message.filter(Reply)
+        if reply_list:
+            reply_id = reply_list[0].id
+            # get_msg 返回的是 GroupMessageEvent 对象
+            reply_msg = await self.api.get_msg(reply_id)
+            # 从回复消息中获取图片
+            reply_images = reply_msg.message.filter(Image)
+            for img in reply_images:
+                if hasattr(img, "url") and img.url:
+                    image_urls.append(img.url)
+        return image_urls
+
+    async def collect_avatar_files(
         self, input: GroupMessage, min_images: int, max_images: int
     ) -> List[Path]:
         """收集头像 URL，下载头像文件并返回文件路径列表"""
-        avatar_urls = []
+        image_urls = []
         current_user_id = str(input.sender.user_id)
 
-        for message in input.message:
-            if hasattr(message, "msg_seg_type") and message.msg_seg_type == "at":
-                target_id = str(message.qq)  # 确保是字符串类型
-                # 如果目标ID是特殊用户ID，且当前用户不是特殊用户，则替换为当前用户ID
-                if (
-                    target_id == self.SPECIAL_USER_ID
-                    and current_user_id != self.SPECIAL_USER_ID
-                ):
-                    target_id = current_user_id
-                avatar_urls.append(f"http://q1.qlogo.cn/g?b=qq&nk={target_id}&s=640")
+        # 优先从回复消息中获取图片
+        reply_images = await self.get_images_from_reply(input)
+        if reply_images:
+            image_urls.extend(reply_images)
 
-        while len(avatar_urls) < min_images:
-            avatar_urls.insert(
+        # 如果回复中没有图片，则从 @用户 获取头像
+        if not image_urls:
+            for message in input.message:
+                if hasattr(message, "msg_seg_type") and message.msg_seg_type == "at":
+                    target_id = str(message.qq)  # 确保是字符串类型
+                    # 如果目标ID是特殊用户ID，且当前用户不是特殊用户，则替换为当前用户ID
+                    if (
+                        target_id == self.SPECIAL_USER_ID
+                        and current_user_id != self.SPECIAL_USER_ID
+                    ):
+                        target_id = current_user_id
+                    image_urls.append(f"http://q1.qlogo.cn/g?b=qq&nk={target_id}&s=640")
+
+        # 如果仍然没有图片，使用发送者头像补充
+        while len(image_urls) < min_images:
+            image_urls.insert(
                 0, f"http://q1.qlogo.cn/g?b=qq&nk={current_user_id}&s=640"
             )
-        if len(avatar_urls) > max_images:
-            avatar_urls = avatar_urls[:max_images]
+        if len(image_urls) > max_images:
+            image_urls = image_urls[:max_images]
 
-        # 下载头像文件
+        # 下载图片文件
         avatar_files = []
-        for url in avatar_urls:
+        for url in image_urls:
             try:
                 response = self.session.get(url, timeout=self.timeout)
                 if response.status_code == 200:
-                    # 使用临时文件保存头像
+                    # 使用临时文件保存图片
                     with tempfile.NamedTemporaryFile(
                         delete=False, suffix=".jpg"
                     ) as tmp_file:
                         tmp_file.write(response.content)
                         avatar_files.append(Path(tmp_file.name))
             except Exception as e:
-                logger.error(f"下载头像失败 {url}: {e}")
+                logger.error(f"下载图片失败 {url}: {e}")
         return avatar_files
 
     def collect_texts(self, input: GroupMessage, has_at: bool) -> List[str]:
@@ -267,11 +300,13 @@ class Meme(NcatBotPlugin):
         if len(input.message) <= 0:
             return texts
 
-        # 处理第一个消息（命令）中的文本
+        # 找到包含命令的文本消息段索引
+        command_text_index = -1
         first_message_text = ""
-        for msg_segment in input.message:
-            if hasattr(msg_segment, "text"):
+        for i, msg_segment in enumerate(input.message):
+            if hasattr(msg_segment, "text") and msg_segment.text.strip():
                 first_message_text = msg_segment.text
+                command_text_index = i
                 break
 
         if first_message_text:
@@ -283,7 +318,8 @@ class Meme(NcatBotPlugin):
 
         # 处理其他消息
         for i, message in enumerate(input.message):
-            if i == 0:  # 跳过第一个消息段（通常是命令）
+            # 跳过命令文本消息段
+            if i == command_text_index:
                 continue
             if (
                 has_at
