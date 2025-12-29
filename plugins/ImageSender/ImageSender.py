@@ -49,17 +49,7 @@ class ImageSender(NcatBotPlugin):
                 "迷茫的时候 不如听听zmd说的话",
             ],
             "path": "data/image/zmd",
-            "allowed_users": [
-                "273421673",
-                "635773721",
-                "510337095",
-                "3420347160",
-                "1508864751",
-                "10123121",
-                "1607928177",
-                "2779893879",
-                "837089951",
-            ],
+            "allowed_users": ["10000"],
             "recall_time": None,  # 撤回时间（秒）
         },
         "doro": {
@@ -83,6 +73,7 @@ class ImageSender(NcatBotPlugin):
                 "361432025",
                 "837089951",
                 "3398902282",
+                "10123121",
             ],
             "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
@@ -150,7 +141,7 @@ class ImageSender(NcatBotPlugin):
         "色图zmd": {
             "triggers": ["色图zmd"],
             "path": "data/image/zmd色图",
-            "allowed_users": ["273421673", "635773721", "1508864751"],
+            "allowed_users": ["10000"],
             "recall_time": 1,  # 撤回时间（秒）
         },
         "猪": {
@@ -196,6 +187,11 @@ class ImageSender(NcatBotPlugin):
         message = input.raw_message.strip()
         # 移除 CQ 码后的纯命令文本
         clean_message = re.sub(r"\[CQ:[^\]]+\]", "", message).strip()
+
+        # 处理删除功能（仅限指定管理员使用）
+        if clean_message.startswith("删除 "):
+            await self.handle_delete(input, message, clean_message)
+            return
 
         # 检查黑名单
         if input.sender.user_id in self.blacklist:
@@ -345,8 +341,23 @@ class ImageSender(NcatBotPlugin):
         """从回复消息中获取图片信息列表，返回 [(filename, url), ...]"""
         image_list = []
         reply_list = input.message.filter(Reply)
+
+        # 优先从已经解析好的 Reply 段中取
+        reply_id = None
         if reply_list:
             reply_id = reply_list[0].id
+        else:
+            # 兼容某些情况下 Reply 段未被正常解析，只存在于 raw_message 中的情况
+            # 例如: [CQ:reply,id=1960706076]
+            raw = input.raw_message
+            match = re.search(r"\[CQ:reply,id=(\d+)\]", raw)
+            if match:
+                try:
+                    reply_id = int(match.group(1))
+                except ValueError:
+                    reply_id = None
+
+        if reply_id:
             # get_msg 返回的是 GroupMessageEvent 对象
             reply_msg = await self.api.get_msg(reply_id)
             # 从回复消息中获取图片
@@ -439,6 +450,80 @@ class ImageSender(NcatBotPlugin):
         result_message = f"上传完成！成功: {success_count} 张，重复: {duplicate_count} 张，失败: {failed_count} 张"
         await self.api.post_group_msg(group_id=input.group_id, text=result_message)
 
+    async def handle_delete(
+        self, input: GroupMessage, message: str, clean_message: str
+    ):
+        """处理图片删除请求（仅限特定用户）"""
+        user_id_str = str(input.sender.user_id)
+
+        # 仅允许特定用户使用删除功能
+        if user_id_str != "273421673":
+            await self.api.post_group_msg(
+                group_id=input.group_id, text="您没有删除权限！"
+            )
+            return
+
+        # 解析删除命令格式：删除 关键词 图片（关键词可替换为其他关键字）
+        # 使用 \S+ 支持中文和特殊字符关键字，同时兼容是否带“图片”二字
+        keyword_match = re.match(r"删除\s*(\S+)", clean_message)
+        if not keyword_match:
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                text="删除格式错误！请使用：删除 关键词，或回复图片并发送：删除 关键词",
+            )
+            return
+
+        keyword = keyword_match.group(1)
+
+        # 查找对应的命令配置
+        command_config = None
+        for cmd_name, config in self.commands.items():
+            if cmd_name == keyword:
+                command_config = config
+                break
+
+        if not command_config:
+            await self.api.post_group_msg(
+                group_id=input.group_id, text=f"未知的关键词：{keyword}"
+            )
+            return
+
+        # 优先从回复消息中获取要删除的图片
+        image_matches = await self.get_images_from_reply(input)
+
+        # 如果回复中没有图片，则从当前消息提取图片标签
+        if not image_matches:
+            image_pattern = r"\[CQ:image,.*?file=([^,]+),.*?url=([^\]]+)\]"
+            image_matches = re.findall(image_pattern, message)
+
+        if not image_matches:
+            await self.api.post_group_msg(
+                group_id=input.group_id,
+                text="未找到要删除的图片！请回复要删除的图片，或在同一条消息中附带图片。",
+            )
+            return
+
+        success_count = 0
+        not_found_count = 0
+        failed_count = 0
+
+        target_path = command_config["path"]
+
+        for _, url in image_matches:
+            result, status = await self.delete_image_by_url(url, target_path)
+            if result:
+                success_count += 1
+            elif status == "not_found":
+                not_found_count += 1
+            else:
+                failed_count += 1
+
+        # 构建删除结果消息
+        result_message = (
+            f"删除完成！成功: {success_count} 张，未找到: {not_found_count} 张，失败: {failed_count} 张"
+        )
+        await self.api.post_group_msg(group_id=input.group_id, text=result_message)
+
     async def download_and_save_image(
         self, url: str, filename: str, target_path: str, user_id: int
     ) -> tuple[bool, str]:
@@ -471,19 +556,11 @@ class ImageSender(NcatBotPlugin):
             image_content = response.content
             image_hash = hashlib.md5(image_content).hexdigest()
 
-            # 检查是否已存在相同内容的图片
-            existing_files = self.get_image_files(target_path)
-            for existing_file in existing_files:
-                try:
-                    with open(existing_file, "rb") as f:
-                        existing_content = f.read()
-                        existing_hash = hashlib.md5(existing_content).hexdigest()
-                        if existing_hash == image_hash:
-                            log.info(f"图片已存在，跳过上传: {existing_file}")
-                            return False, "duplicate"  # 返回重复状态
-                except Exception as e:
-                    log.warning(f"读取现有文件失败 {existing_file}: {e}")
-                    continue
+            # 检查是否已存在相同内容的图片（复用删除逻辑的 MD5 匹配方法）
+            matched_files = self._find_matching_files(target_path, image_hash)
+            if matched_files:
+                log.info(f"图片已存在，跳过上传: {matched_files[0]}")
+                return False, "duplicate"  # 返回重复状态
 
             # 生成带时间戳和用户ID的文件名
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -503,6 +580,82 @@ class ImageSender(NcatBotPlugin):
         except Exception as e:
             log.error(f"下载图片失败 {url}: {str(e)}")
             return False, "failed"
+
+    async def delete_image_by_url(
+        self, url: str, target_path: str
+    ) -> tuple[bool, str]:
+        """根据图片 URL 在指定路径中查找并删除对应图片，返回(是否成功, 状态信息)"""
+        try:
+            # 如果路径不是绝对路径，则转换为绝对路径
+            if not os.path.isabs(target_path):
+                current_dir = os.getcwd()
+                target_path = os.path.join(current_dir, target_path)
+
+            # 解码HTML实体（如 &amp; -> &）
+            decoded_url = html.unescape(url)
+
+            # 设置请求头，模拟浏览器
+            headers = {
+                "User-Agent": HMMT.USER_AGENT,
+                "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+                "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+                "Referer": "https://multimedia.nt.qq.com.cn/",
+            }
+
+            # 下载图片内容
+            response = requests.get(decoded_url, headers=headers, timeout=30)
+            response.raise_for_status()
+            image_content = response.content
+            image_hash = hashlib.md5(image_content).hexdigest()
+
+            matched_files = self._find_matching_files(target_path, image_hash)
+
+            if not matched_files:
+                log.info(
+                    f"未在路径 {target_path} 中找到与给定图片内容匹配的文件，跳过删除"
+                )
+                return False, "not_found"
+
+            deleted_any = False
+            for file_path in matched_files:
+                try:
+                    os.remove(file_path)
+                    log.info(f"已删除图片文件: {file_path}")
+                    deleted_any = True
+                except FileNotFoundError:
+                    continue
+                except Exception as e:
+                    log.warning(f"删除文件失败 {file_path}: {e}")
+
+            return (True, "success") if deleted_any else (False, "failed")
+
+        except Exception as e:
+            log.error(f"根据 URL 删除图片失败 {url}: {str(e)}")
+            return False, "failed"
+
+    def _find_matching_files(self, target_path: str, image_hash: str) -> list[str]:
+        """
+        在目录中查找与目标图片匹配的文件：
+        仅按 MD5 完全一致进行匹配（与早期重复判定逻辑保持一致）
+        返回匹配文件路径列表（可能包含多张相同内容的副本）
+        """
+        matching_files = []
+        existing_files = self.get_image_files(target_path)
+
+        # 先做 MD5 精确匹配
+        for existing_file in existing_files:
+            try:
+                with open(existing_file, "rb") as f:
+                    existing_content = f.read()
+                    existing_hash = hashlib.md5(existing_content).hexdigest()
+                    if existing_hash == image_hash:
+                        matching_files.append(existing_file)
+            except Exception as e:
+                log.warning(f"读取文件失败 {existing_file}: {e}")
+
+        if matching_files:
+            return matching_files
+        return matching_files
 
     @staticmethod
     def get_image_files(folder_path):

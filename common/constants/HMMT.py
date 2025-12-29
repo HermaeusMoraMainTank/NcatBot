@@ -30,3 +30,5 @@ class HMMT:
     USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
     LALAFELL_GROUP_ID = "853963912"
     HMMT_GROUP_ID = "1064163905"
+    # 定时任务黑名单群组ID列表
+    BLACKLIST_GROUPS = ["909710410"]

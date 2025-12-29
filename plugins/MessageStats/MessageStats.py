@@ -18,6 +18,7 @@ import io
 from ncatbot.core import MessageChain, Text, Image, GroupMessage
 from ncatbot.plugin_system import NcatBotPlugin, on_message
 from ncatbot.utils.logger import get_log
+from common.constants.HMMT import HMMT
 
 _log = get_log()
 
@@ -522,33 +523,50 @@ class MessageStatsPlugin(NcatBotPlugin):
             plt.clf()  # 清除当前图形
             plt.figure(figsize=(12, 6))
 
+            # 用于记录总消息数，便于在图表上显示
+            total_count = 0
+
             if days == 1:  # 今日
-                # 获取24小时数据
+                # 获取今日的日期字符串
+                today_str = date.today().isoformat()
+                today_count = stats.daily_counts.get(today_str, 0)
+                total_count = today_count
+
+                # 由于 hourly_counts 是累积的所有时间的数据，无法区分今天的小时分布
+                # 所以这里只能显示今日的总发言数，而不是小时分布
+                # 如果需要精确的今日小时分布，需要修改数据结构
                 hours = list(range(24))
+                # 使用累积的小时分布（这是一个已知的限制）
                 counts = [stats.hourly_counts.get(str(hour), 0) for hour in hours]
+                hourly_total = sum(counts)
 
                 plt.bar(hours, counts, alpha=0.6, color="skyblue")
                 plt.plot(hours, counts, "r-", linewidth=2)
 
                 plt.xlabel("小时", fontsize=12)
                 plt.ylabel("发言次数", fontsize=12)
-                plt.title("今日发言时间分布", fontsize=14)
+                # 注意：标题说明这是累积的小时分布
+                plt.title(
+                    f"发言时间分布（今日: {today_count}条，累积小时分布: {hourly_total}条）",
+                    fontsize=14,
+                )
                 plt.xticks(hours)
                 plt.grid(True, linestyle="--", alpha=0.7)
 
             elif days == 7:  # 本周
                 # 获取本周数据
-                today = date.today()
-                start_date = today - timedelta(days=today.weekday())
-                dates = [(start_date + timedelta(days=i)) for i in range(7)]
-                counts = [stats.daily_counts.get(date.isoformat(), 0) for date in dates]
+                today_date = date.today()
+                start_date = today_date - timedelta(days=today_date.weekday())
+                week_dates = [(start_date + timedelta(days=i)) for i in range(7)]
+                counts = [stats.daily_counts.get(d.isoformat(), 0) for d in week_dates]
+                total_count = sum(counts)
 
                 plt.bar(range(7), counts, alpha=0.6, color="skyblue")
                 plt.plot(range(7), counts, "r-", linewidth=2)
 
                 plt.xlabel("星期", fontsize=12)
                 plt.ylabel("发言次数", fontsize=12)
-                plt.title("本周发言分布", fontsize=14)
+                plt.title(f"本周发言分布（共 {total_count} 条）", fontsize=14)
                 plt.xticks(
                     range(7), ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
                 )
@@ -556,27 +574,35 @@ class MessageStatsPlugin(NcatBotPlugin):
 
             elif days == 30:  # 本月
                 # 获取本月数据
-                today = date.today()
-                start_date = date(today.year, today.month, 1)
-                dates = [(start_date + timedelta(days=i)) for i in range(today.day)]
-                counts = [stats.daily_counts.get(date.isoformat(), 0) for date in dates]
+                today_date = date.today()
+                start_date = date(today_date.year, today_date.month, 1)
+                month_dates = [
+                    (start_date + timedelta(days=i)) for i in range(today_date.day)
+                ]
+                counts = [stats.daily_counts.get(d.isoformat(), 0) for d in month_dates]
+                total_count = sum(counts)
 
-                plt.bar(range(len(dates)), counts, alpha=0.6, color="skyblue")
-                plt.plot(range(len(dates)), counts, "r-", linewidth=2)
+                plt.bar(range(len(month_dates)), counts, alpha=0.6, color="skyblue")
+                plt.plot(range(len(month_dates)), counts, "r-", linewidth=2)
 
                 plt.xlabel("日期", fontsize=12)
                 plt.ylabel("发言次数", fontsize=12)
-                plt.title("本月发言分布", fontsize=14)
+                plt.title(f"本月发言分布（共 {total_count} 条）", fontsize=14)
                 plt.xticks(
-                    range(len(dates)), [d.strftime("%d") for d in dates], rotation=45
+                    range(len(month_dates)),
+                    [d.strftime("%d") for d in month_dates],
+                    rotation=45,
                 )
                 plt.grid(True, linestyle="--", alpha=0.7)
 
             else:  # 全部
-                # 获取所有月份数据
+                # 获取所有日期数据
                 all_dates = sorted(stats.daily_counts.keys())
                 if not all_dates:
                     return None
+
+                # 计算总消息数
+                total_count = sum(stats.daily_counts.values())
 
                 # 按月份统计
                 monthly_counts = {}
@@ -592,9 +618,20 @@ class MessageStatsPlugin(NcatBotPlugin):
                 plt.bar(range(len(months)), counts, alpha=0.6, color="skyblue")
                 plt.plot(range(len(months)), counts, "r-", linewidth=2)
 
+                # 在柱状图上标注每个月的数值
+                for i, count in enumerate(counts):
+                    plt.text(
+                        i,
+                        count + max(counts) * 0.02,
+                        str(count),
+                        ha="center",
+                        va="bottom",
+                        fontsize=9,
+                    )
+
                 plt.xlabel("月份", fontsize=12)
                 plt.ylabel("发言次数", fontsize=12)
-                plt.title("发言月度分布", fontsize=14)
+                plt.title(f"发言月度分布（共 {total_count} 条）", fontsize=14)
                 plt.xticks(range(len(months)), months, rotation=45)
                 plt.grid(True, linestyle="--", alpha=0.7)
 
@@ -1055,6 +1092,11 @@ class MessageStatsPlugin(NcatBotPlugin):
         # 遍历所有有统计数据的群组
         for group_id in list(self.group_stats.keys()):
             try:
+                # 检查是否在黑名单中
+                if str(group_id) in HMMT.BLACKLIST_GROUPS:
+                    _log.info(f"[MessageStats] 跳过黑名单群组 {group_id}")
+                    continue
+                
                 await self._send_group_daily_stats(int(group_id))
             except Exception as e:
                 _log.error(f"[MessageStats] 发送群组 {group_id} 每日统计失败: {e}")

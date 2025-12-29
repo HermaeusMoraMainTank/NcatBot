@@ -28,7 +28,7 @@ class FakeForward(NcatBotPlugin):
 
         try:
             # 构造虚假合并转发消息
-            fcr = ForwardConstructor(user_id="541518108", nickname="饱饱")
+            fcr = ForwardConstructor(user_id="1095216448", nickname="喵喵喵")
             fcr.attach_text("饱饱我爱你")
             forward = fcr.to_forward()
 

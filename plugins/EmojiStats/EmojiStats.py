@@ -18,6 +18,7 @@ from ncatbot.core import MessageArray, Text, Image, GroupMessage
 from ncatbot.plugin_system import NcatBotPlugin, on_message
 from ncatbot.utils.logger import get_log
 from common.utils.CommonUtil import CommonUtil
+from common.constants.HMMT import HMMT
 
 # 禁用 SSL 警告
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -1441,6 +1442,11 @@ class EmojiStatsPlugin(NcatBotPlugin):
         # 遍历所有有统计数据的群组
         for group_id in list(self.group_stats.keys()):
             try:
+                # 检查是否在黑名单中
+                if str(group_id) in HMMT.BLACKLIST_GROUPS:
+                    _log.info(f"[EmojiStats] 跳过黑名单群组 {group_id}")
+                    continue
+                
                 await self._send_group_daily_stats(int(group_id))
             except Exception as e:
                 _log.error(f"[EmojiStats] 发送群组 {group_id} 每日统计失败: {e}")

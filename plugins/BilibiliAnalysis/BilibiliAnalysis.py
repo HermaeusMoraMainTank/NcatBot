@@ -48,7 +48,7 @@ class BilibiliAnalysis(NcatBotPlugin):
         # Bilibili链接匹配模式
         self.pattern = (
             r"^(?:(?:av|cv)\d+|BV[a-zA-Z0-9]{10})|"
-            r"(?:b23\.tv|bili(?:22|23|33|2233)\.cn|\.bilibili\.com|space\.bilibili\.com|mall\.bilibili\.com|bilibili\.com/opus/\d+|QQ小程序(?:&amp;#93;|&#93;|\])哔哩哔哩).{0,500}"
+            r"(?:b23\.tv|bili(?:22|23|33|2233)\.cn|\.bilibili\.com|game\.bilibili\.com|space\.bilibili\.com|mall\.bilibili\.com|bilibili\.com/opus/\d+|QQ小程序(?:&amp;#93;|&#93;|\])哔哩哔哩).{0,500}"
         )
 
         _log.info(f"{self.name} 插件加载完成")
@@ -188,6 +188,10 @@ class BilibiliAnalysis(NcatBotPlugin):
             mall_item_id = re.compile(r"mall\.bilibili\.com.*[?&]itemsId=(\d+)").search(
                 text
             )
+            # 游戏官网新闻
+            game_news = re.compile(
+                r"game\.bilibili\.com/([^/]+)/news\.html[#?].*?news_detail_id=(\d+)"
+            ).search(text)
 
             _log.info(
                 f"匹配结果 - aid: {aid}, bvid: {bvid}, epid: {epid}, ssid: {ssid}, mdid: {mdid}"
@@ -197,6 +201,7 @@ class BilibiliAnalysis(NcatBotPlugin):
             )
             _log.info(f"匹配结果 - dynamic_id: {dynamic_id}, opus_id: {opus_id}")
             _log.info(f"匹配结果 - space_id: {space_id}, mall_item_id: {mall_item_id}")
+            _log.info(f"匹配结果 - game_news: {game_news}")
 
             if bvid:
                 url = f"https://api.bilibili.com/x/web-interface/view?bvid={bvid[0]}"
@@ -225,6 +230,11 @@ class BilibiliAnalysis(NcatBotPlugin):
                 url = f"https://api.bilibili.com/x/space/wbi/acc/info?mid={space_id[1]}"
             elif mall_item_id:
                 url = f"https://api.bilibili.com/mall/v2/h5/sku/info?itemsId={mall_item_id[1]}"
+            elif game_news:
+                # 游戏官网新闻，使用特殊标记
+                game_code = game_news[1]  # 游戏代码，如 pcr
+                news_id = game_news[2]  # 新闻ID
+                url = f"game_news:{game_code}:{news_id}"
 
             _log.info(f"最终提取的URL: {url}")
             return url, page, time
@@ -812,6 +822,142 @@ class BilibiliAnalysis(NcatBotPlugin):
                 return self._build_mall_fallback_msg(item_id, vurl, card_info)
             return "会员购解析出错", None
 
+    async def game_news_detail(
+        self, game_code: str, news_id: str, session: ClientSession
+    ) -> Tuple[List[Union[List[str], str]], str]:
+        """获取游戏官网新闻详细信息"""
+        try:
+            _log.info(f"开始解析游戏新闻: game_code={game_code}, news_id={news_id}")
+
+            vurl = f"https://game.bilibili.com/{game_code}/news.html#news_detail_id={news_id}"
+
+            # 游戏名称映射
+            game_names = {
+                "pcr": "公主连结Re:Dive",
+                "blhx": "碧蓝航线",
+                "fgo": "命运-冠位指定",
+                "ys": "原神",
+                "sr": "崩坏：星穹铁道",
+                "zzz": "绝区零",
+                "ba": "蔚蓝档案",
+                "mhxy": "梦幻西游",
+                "arknights": "明日方舟",
+            }
+            game_name = game_names.get(game_code, game_code.upper())
+
+            # 尝试请求页面获取meta信息
+            page_url = f"https://game.bilibili.com/{game_code}/news.html"
+            
+            title = ""
+            desc = ""
+            cover = ""
+
+            try:
+                # 尝试不同的API接口
+                api_urls = [
+                    f"https://api.biligame.com/news/{game_code}/{news_id}.json",
+                    f"https://www.biligame.com/detail/api/news?id={news_id}&app_code={game_code}",
+                ]
+                
+                for api_url in api_urls:
+                    try:
+                        async with session.get(api_url, timeout=5) as resp:
+                            if resp.status == 200:
+                                data = await resp.json()
+                                if data.get("code") == 0 and data.get("data"):
+                                    news_data = data["data"]
+                                    title = news_data.get("title", "")
+                                    desc = news_data.get("content", news_data.get("summary", ""))
+                                    cover = news_data.get("cover", news_data.get("image", ""))
+                                    if title:
+                                        break
+                    except Exception as e:
+                        _log.debug(f"API {api_url} 请求失败: {e}")
+                        continue
+
+                # 如果API获取失败，尝试请求HTML页面解析meta标签
+                if not title:
+                    async with session.get(vurl, timeout=10) as resp:
+                        if resp.status == 200:
+                            html = await resp.text()
+                            # 解析 og:title
+                            title_match = re.search(
+                                r'<meta[^>]*property=["\']og:title["\'][^>]*content=["\']([^"\']+)["\']',
+                                html,
+                            )
+                            if not title_match:
+                                title_match = re.search(
+                                    r'<meta[^>]*content=["\']([^"\']+)["\'][^>]*property=["\']og:title["\']',
+                                    html,
+                                )
+                            if title_match:
+                                title = title_match[1]
+
+                            # 解析 og:description
+                            desc_match = re.search(
+                                r'<meta[^>]*property=["\']og:description["\'][^>]*content=["\']([^"\']+)["\']',
+                                html,
+                            )
+                            if not desc_match:
+                                desc_match = re.search(
+                                    r'<meta[^>]*content=["\']([^"\']+)["\'][^>]*property=["\']og:description["\']',
+                                    html,
+                                )
+                            if desc_match:
+                                desc = desc_match[1]
+
+                            # 解析 og:image
+                            img_match = re.search(
+                                r'<meta[^>]*property=["\']og:image["\'][^>]*content=["\']([^"\']+)["\']',
+                                html,
+                            )
+                            if not img_match:
+                                img_match = re.search(
+                                    r'<meta[^>]*content=["\']([^"\']+)["\'][^>]*property=["\']og:image["\']',
+                                    html,
+                                )
+                            if img_match:
+                                cover = img_match[1]
+
+                            # 尝试从页面title获取
+                            if not title:
+                                page_title_match = re.search(r"<title>([^<]+)</title>", html)
+                                if page_title_match:
+                                    title = page_title_match[1]
+
+            except Exception as e:
+                _log.warning(f"获取游戏新闻页面失败: {e}")
+
+            # 构建消息
+            has_image = self.display_image or "video" in self.display_image_list
+
+            msg = []
+            if cover and has_image:
+                if cover.startswith("//"):
+                    cover = "https:" + cover
+                msg.append(self.resize_image(cover, is_cover=True))
+                msg.append("\n")
+
+            msg.append(f"游戏：{game_name}\n")
+
+            if title:
+                msg.append(f"标题：{title}\n")
+            else:
+                msg.append(f"新闻ID：{news_id}\n")
+
+            if desc:
+                # 限制描述长度
+                if len(desc) > 100:
+                    desc = desc[:100] + "..."
+                msg.append(f"简介：{desc}\n")
+
+            msg.append(f"链接：{vurl}")
+
+            return msg, vurl
+        except Exception as e:
+            _log.exception(f"游戏新闻解析出错: {e}")
+            return f"游戏新闻解析出错: {e}", None
+
     async def bili_keyword(
         self,
         group_id: Optional[int],
@@ -850,6 +996,12 @@ class BilibiliAnalysis(NcatBotPlugin):
                 msg, vurl = await self.space_detail(url, session, card_info)
             elif "mall" in url or "itemsId" in url:
                 msg, vurl = await self.mall_detail(url, session, card_info)
+            elif url.startswith("game_news:"):
+                # 游戏官网新闻
+                parts = url.split(":")
+                if len(parts) == 3:
+                    game_code, news_id = parts[1], parts[2]
+                    msg, vurl = await self.game_news_detail(game_code, news_id, session)
 
             # 避免多个机器人解析重复推送
             if group_id:

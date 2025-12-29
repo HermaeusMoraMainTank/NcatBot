@@ -2,6 +2,7 @@ import asyncio
 import json
 import random
 import re
+import time
 from datetime import datetime
 from typing import Dict, List, Optional
 
@@ -12,7 +13,29 @@ from ncatbot.core import At, MessageChain, Text, GroupMessage, Reply
 from ncatbot.plugin_system import NcatBotPlugin, on_message
 from ncatbot.utils.logger import get_log
 
+from .memory import (
+    memory_manager,
+    generate_summary_from_messages,
+    generate_user_impression,
+)
+
 _log = get_log()
+
+
+# ========== LearningChat 记录接口 ==========
+async def _record_to_learning_chat(group_id: int, bot_id: int, message: str):
+    """将 Bot 消息记录到 LearningChat 数据库（如果插件已加载）"""
+    try:
+        from plugins.LearningChat import record_bot_message
+
+        await record_bot_message(group_id, bot_id, message)
+    except ImportError:
+        pass  # LearningChat 插件未加载，忽略
+    except Exception as e:
+        _log.debug(f"[FakeAi] 记录到 LearningChat 失败: {e}")
+
+
+# ========== LearningChat 记录接口 - 结束 ==========
 
 # 全局变量
 trigger_interval = 1200
@@ -58,17 +81,6 @@ class CallbackState:
 
 
 callback_state = CallbackState()
-
-group_ids = [
-    719518427,  # oob
-    626192977,  # e7
-    700644107,  # 花园猫
-    594529103,  # 结束
-    817304322,  # 母肥2
-    853963912,  # 母肥
-    1064163905,  # hmmt
-    812078719,  # 高难
-]
 
 
 class ReplyCache:
@@ -130,10 +142,44 @@ class FakeAi(NcatBotPlugin):
     # Meme 关键词列表（动态加载）
     meme_keywords = []
 
+    # 存储每个群最近的消息，用于生成总结
+    _message_buffer: Dict[int, List[Dict]] = {}
+    _last_summary_time: Dict[int, int] = {}
+
+    # 存储每个用户的消息，用于生成印象 {group_id: {user_id: [messages]}}
+    _user_message_buffer: Dict[int, Dict[int, List[str]]] = {}
+    _last_impression_time: Dict[int, int] = {}
+
+    # 长期记忆配置
+    SUMMARY_INTERVAL = 30 * 60  # 每30分钟总结一次
+    MIN_MESSAGES_FOR_SUMMARY = 20  # 至少20条消息才总结
+    IMPRESSION_INTERVAL = 60 * 60  # 每60分钟更新一次用户印象
+    MIN_USER_MESSAGES = 10  # 至少10条消息才生成印象
+
     async def on_load(self):
-        """加载 meme 关键词"""
+        """加载插件"""
+        # 初始化长期记忆数据库
+        await memory_manager.init_db()
+        _log.info("[FakeAi] 长期记忆数据库初始化完成")
+
+        # 添加定时总结任务（每10分钟检查一次）
+        self.add_scheduled_task(
+            self._generate_summaries,
+            "fakeai_memory_summary",
+            "10m",
+        )
+        _log.info("[FakeAi] 长期记忆总结任务已注册")
+
+        # 添加用户印象更新任务（每15分钟检查一次）
+        self.add_scheduled_task(
+            self._update_user_impressions,
+            "fakeai_user_impression",
+            "15m",
+        )
+        _log.info("[FakeAi] 用户印象更新任务已注册")
+
+        # 加载 meme 关键词
         try:
-            import json
             with open("data/json/memeKeys.json", "r", encoding="utf-8") as file:
                 meme_data = json.load(file)
                 for data in meme_data:
@@ -141,6 +187,147 @@ class FakeAi(NcatBotPlugin):
             _log.info(f"FakeAi 已加载 {len(self.meme_keywords)} 个 meme 关键词排除")
         except Exception as e:
             _log.warning(f"FakeAi 加载 meme 关键词失败: {e}")
+
+    def _add_to_message_buffer(
+        self, group_id: int, user_id: int, name: str, content: str
+    ):
+        """将消息添加到缓冲区，用于后续生成总结和用户印象"""
+        # 添加到群消息缓冲区
+        if group_id not in self._message_buffer:
+            self._message_buffer[group_id] = []
+
+        self._message_buffer[group_id].append(
+            {
+                "user_id": user_id,
+                "name": name,
+                "content": content,
+                "time": int(time.time()),
+            }
+        )
+
+        # 限制缓冲区大小
+        if len(self._message_buffer[group_id]) > 100:
+            self._message_buffer[group_id] = self._message_buffer[group_id][-100:]
+
+        # 添加到用户消息缓冲区（用于生成印象）
+        if group_id not in self._user_message_buffer:
+            self._user_message_buffer[group_id] = {}
+        if user_id not in self._user_message_buffer[group_id]:
+            self._user_message_buffer[group_id][user_id] = {
+                "name": name,
+                "messages": [],
+            }
+
+        # 更新用户名（可能会变化）
+        self._user_message_buffer[group_id][user_id]["name"] = name
+
+        if content:  # 只存储非空内容
+            self._user_message_buffer[group_id][user_id]["messages"].append(content)
+            # 限制每个用户的消息数
+            if len(self._user_message_buffer[group_id][user_id]["messages"]) > 50:
+                self._user_message_buffer[group_id][user_id]["messages"] = (
+                    self._user_message_buffer[group_id][user_id]["messages"][-50:]
+                )
+
+    async def _generate_summaries(self):
+        """定时任务：为活跃的群生成消息总结"""
+        current_time = int(time.time())
+
+        for group_id, messages in list(self._message_buffer.items()):
+            try:
+                # 检查是否有足够的消息
+                if len(messages) < self.MIN_MESSAGES_FOR_SUMMARY:
+                    continue
+
+                # 检查距离上次总结是否足够久
+                last_time = self._last_summary_time.get(group_id, 0)
+                if current_time - last_time < self.SUMMARY_INTERVAL:
+                    continue
+
+                # 生成总结
+                result = await generate_summary_from_messages(messages)
+
+                if result and result.get("summary"):
+                    # 获取参与者ID列表
+                    participant_ids = list(set(m["user_id"] for m in messages))
+
+                    # 计算时间范围
+                    start_time = messages[0]["time"]
+                    end_time = messages[-1]["time"]
+
+                    # 保存总结
+                    await memory_manager.save_summary(
+                        group_id=group_id,
+                        summary=result["summary"],
+                        key_topics=result.get("key_topics", []),
+                        participant_ids=participant_ids,
+                        message_count=len(messages),
+                        start_time=start_time,
+                        end_time=end_time,
+                    )
+
+                    # 保存重要事件
+                    for event in result.get("important_events", []):
+                        if event:
+                            await memory_manager.save_important_event(
+                                group_id=group_id,
+                                event_type="chat",
+                                description=event,
+                                related_users=participant_ids[:5],
+                            )
+
+                    _log.info(f"[FakeAi] 群 {group_id} 生成了新的记忆总结")
+
+                    # 更新时间并清空缓冲区
+                    self._last_summary_time[group_id] = current_time
+                    self._message_buffer[group_id] = []
+
+            except Exception as e:
+                _log.error(f"[FakeAi] 生成群 {group_id} 总结失败: {e}")
+
+    async def _update_user_impressions(self):
+        """定时任务：更新活跃用户的印象"""
+        current_time = int(time.time())
+
+        for group_id, users in list(self._user_message_buffer.items()):
+            try:
+                # 检查距离上次更新是否足够久
+                last_time = self._last_impression_time.get(group_id, 0)
+                if current_time - last_time < self.IMPRESSION_INTERVAL:
+                    continue
+
+                updated_count = 0
+                for user_id, user_data in list(users.items()):
+                    messages = user_data.get("messages", [])
+                    name = user_data.get("name", str(user_id))
+
+                    # 检查是否有足够的消息
+                    if len(messages) < self.MIN_USER_MESSAGES:
+                        continue
+
+                    # 生成用户印象
+                    impression = await generate_user_impression(name, messages)
+
+                    if impression:
+                        await memory_manager.update_user_impression(
+                            group_id=group_id,
+                            user_id=user_id,
+                            impression=impression,
+                        )
+                        updated_count += 1
+                        _log.debug(f"[FakeAi] 更新用户 {user_id} 的印象: {impression}")
+
+                        # 清空该用户的消息缓冲
+                        self._user_message_buffer[group_id][user_id]["messages"] = []
+
+                if updated_count > 0:
+                    _log.info(
+                        f"[FakeAi] 群 {group_id} 更新了 {updated_count} 个用户印象"
+                    )
+                    self._last_impression_time[group_id] = current_time
+
+            except Exception as e:
+                _log.error(f"[FakeAi] 更新群 {group_id} 用户印象失败: {e}")
 
     async def _is_from_excluded_plugin(self, input: GroupMessage) -> bool:
         """检查消息是否来自排除的插件"""
@@ -311,6 +498,10 @@ class FakeAi(NcatBotPlugin):
                     ensure_ascii=False,
                 )
                 reply_cache.add_reply(reply_json)
+                # 添加到长期记忆缓冲区
+                self._add_to_message_buffer(
+                    group_id, int(sender_id), sender_name, content
+                )
                 answer = await answer_ai(
                     group_id, group_reply_caches, str(sender_id), "callback"
                 )
@@ -353,6 +544,8 @@ class FakeAi(NcatBotPlugin):
                 ensure_ascii=False,
             )
             reply_cache.add_reply(reply_json)
+            # 添加到长期记忆缓冲区
+            self._add_to_message_buffer(group_id, int(sender_id), sender_name, content)
             answer = await answer_ai(
                 group_id, group_reply_caches, str(sender_id), "active"
             )
@@ -382,6 +575,8 @@ class FakeAi(NcatBotPlugin):
             ensure_ascii=False,
         )
         reply_cache.add_reply(reply_json)
+        # 添加到长期记忆缓冲区
+        self._add_to_message_buffer(group_id, int(sender_id), sender_name, content)
 
         # 检查冷却时间
         if not check_cd(group_id):
@@ -564,6 +759,11 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
             ensure_ascii=False,
         )
         reply_cache.add_reply(reply_json)
+
+        # 记录到 LearningChat 数据库
+        bot_id = int(self.api.self_id) if hasattr(self.api, "self_id") else 0
+        if bot_id:
+            await _record_to_learning_chat(group_id, bot_id, content)
 
     except Exception as e:
         _log.error(f"发送消息时发生错误: {e}")
@@ -800,6 +1000,22 @@ async def answer_ai(
     yaml_data = load_yaml_data(group_id)
     replace_time_in_system(yaml_data)
     update_yaml_with_replies(yaml_data, group_reply_caches.get(group_id, ReplyCache()))
+
+    # 注入长期记忆
+    try:
+        long_term_memory = await memory_manager.get_long_term_memory(group_id)
+        replace_placeholder(yaml_data, "{long_term_memory}", long_term_memory)
+    except Exception as e:
+        _log.debug(f"[FakeAi] 获取长期记忆失败: {e}")
+        replace_placeholder(yaml_data, "{long_term_memory}", "（暂无长期记忆）")
+
+    # 注入用户印象
+    try:
+        user_impressions = await memory_manager.get_user_impressions_text(group_id)
+        replace_placeholder(yaml_data, "{user_impressions}", user_impressions)
+    except Exception as e:
+        _log.debug(f"[FakeAi] 获取用户印象失败: {e}")
+        replace_placeholder(yaml_data, "{user_impressions}", "（暂无用户印象）")
 
     # 调用 AIUtil 的 search_deepseek 方法
     keyword = yaml_data.get("input", "")
