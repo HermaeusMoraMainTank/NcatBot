@@ -345,7 +345,9 @@ class BotClient:
         thread.daemon = True  # 设置为守护线程
         self.lock = threading.Lock()
         self.lock.acquire()
-        self.release_callback = lambda x: self.lock.release()
+        self.release_callback = (
+            lambda x: self.lock.release() if self.lock.locked() else None
+        )
         self.add_startup_handler(self.release_callback)
         thread.start()
         flag = self.lock.acquire(timeout=90)

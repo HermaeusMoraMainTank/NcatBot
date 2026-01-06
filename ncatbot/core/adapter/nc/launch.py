@@ -73,25 +73,30 @@ def check_napcat_service_remote():
         LOG.info(
             f"napcat 服务器 {ncatbot_config.napcat.ws_uri} 在线, 正在检查账号状态..."
         )
-        if ncatbot_config.napcat.enable_webui:
-            if not ncatbot_config.enable_webui_interaction:  # 跳过基于 WebUI 交互的检查
-                LOG.warning(
-                    f"跳过基于 WebUI 交互的检查, 请自行确保 NapCat 已经登录了正确的 QQ {ncatbot_config.bt_uin}"
-                )
+        if (
+            ncatbot_config.napcat.enable_webui
+            and ncatbot_config.enable_webui_interaction
+        ):
+            status = report_login_status()
+            if status == 0:
                 return True
-        status = report_login_status()
-        if status == 0:
-            return True
+            else:
+                if status == 3:
+                    LOG.error("登录状态异常, 请检查远端 NapCat 服务")
+                    LOG.error("对运行 NapCat 的服务器进行物理重启一般能解决该问题")
+                    raise NcatBotLoginError("登录状态异常, 请检查远端 NapCat 服务")
+                if status == 2:
+                    LOG.error(
+                        "远端登录的 QQ 与配置的 QQ 号不匹配, 请检查远端 NapCat 服务"
+                    )
+                    raise NcatBotLoginError(
+                        "登录的 QQ 号与配置的 QQ 号不匹配, 请检查远端 NapCat 服务"
+                    )
         else:
-            if status == 3:
-                LOG.error("登录状态异常, 请检查远端 NapCat 服务")
-                LOG.error("对运行 NapCat 的服务器进行物理重启一般能解决该问题")
-                raise NcatBotLoginError("登录状态异常, 请检查远端 NapCat 服务")
-            if status == 2:
-                LOG.error("远端登录的 QQ 与配置的 QQ 号不匹配, 请检查远端 NapCat 服务")
-                raise NcatBotLoginError(
-                    "登录的 QQ 号与配置的 QQ 号不匹配, 请检查远端 NapCat 服务"
-                )
+            LOG.info(
+                "NapCat 未启用 WebUI, 无法检查登录状态, 请自行确保 NapCat 已经登录了正确的 QQ"
+            )
+            return True
 
     LOG.info("NapCat 服务器离线或未登录")
     return False
