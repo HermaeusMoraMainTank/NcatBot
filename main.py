@@ -3,13 +3,13 @@ from ncatbot.core import BotClient, GroupMessage, PrivateMessage
 from ncatbot.utils import config, get_log
 
 _log = get_log()
-
-config.set_bot_uin("3555202423")  # 设置 bot qq 号 (必填)
-config.set_root("273421673")  # 设置 bot 超级管理员账号 (建议填写)
-config.set_ws_uri("ws://127.0.0.1:3001")  # 设置 napcat websocket server 地址
-config.set_ws_token("napcat")  # 设置 token (websocket 的 token)
-config.set_webui_uri("http://127.0.0.1:6099")  # 设置 napcat webui 地址
-config.set_webui_token("<J[Y<I1I.NPP4N)R")  # 设置 token (webui 的 token)
+#
+# config.set_bot_uin("3555202423")  # 设置 bot qq 号 (必填)
+# config.set_root("273421673")  # 设置 bot 超级管理员账号 (建议填写)
+# config.set_ws_uri("ws://127.0.0.1:3001")  # 设置 napcat websocket server 地址
+# config.set_ws_token("napcat")  # 设置 token (websocket 的 token)
+# # config.set_webui_uri("http://127.0.0.1:6099")  # 设置 napcat webui 地址
+# config.set_webui_token("{9cl=Ry0;yG)iw+p")  # 设置 token (webui 的 token)
 
 bot = BotClient()
 
