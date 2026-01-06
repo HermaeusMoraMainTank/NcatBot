@@ -39,18 +39,13 @@ jobs:
     # 提取并验证版本号
     - name: Extract and Validate Version
       run: |
-        # 从 GITHUB_REF 环境变量中提取标签名
         TAG_NAME=${GITHUB_REF#refs/tags/}
-        # 去掉标签名前面的 v 字符
         VERSION=${TAG_NAME#v}
-        # 验证版本号是否符合 X.Y.Z 格式
-        if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-          # 若不符合格式，输出错误信息
-          echo "::error::Invalid version format: $VERSION. Use X.Y.Z"
-          # 退出脚本并返回错误码 1
+        # 修改后的正则：允许 X.Y.Z 后面跟随任何字符（或者更精准的后缀）
+        if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+.*$ ]]; then
+          echo "::error::Invalid version format: $VERSION. Use X.Y.Z or X.Y.Z-suffix"
           exit 1
         fi
-        # 将版本号添加到 GITHUB_ENV 环境变量中
         echo "VERSION=$VERSION" >> $GITHUB_ENV
 
     # 安装构建工具
@@ -83,8 +78,8 @@ jobs:
     # 更新包的版本号
     - name: Update package version
       run: |
-        # 使用 sed 命令替换 src/ncatbot/__init__.py 文件中的版本号
-        sed -i "s/^__version__ = .*/__version__ = \"${{ env.VERSION }}\"/" src/ncatbot/__init__.py
+        # 使用 sed 命令替换 ncatbot/__init__.py 文件中的版本号
+        sed -i "s/^__version__ = .*/__version__ = \"${{ env.VERSION }}\"/" ncatbot/__init__.py
 
     # 构建 Python 包
     - name: Build Package
