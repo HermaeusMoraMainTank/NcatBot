@@ -16,7 +16,7 @@ from .command_system.lexer.tokenizer import StringTokenizer, Token
 from .trigger.resolver import CommandResolver
 from .trigger.binder import ArgumentBinder
 from .filter_system import filter_registry, FilterValidator
-from .command_system.registry.registry import command_registry, command_registries
+from .command_system.registry.registry import command_registry
 from .legacy_registry import legacy_registry
 
 
@@ -51,6 +51,14 @@ class UnifiedRegistryPlugin(NcatBotPlugin):
             self.handle_legacy_event,
             timeout=900,
         )
+        self.event_bus.subscribe(
+            "ncatbot.plugin_unload",
+            self.handle_plugin_unload_event,
+        )
+        self.event_bus.subscribe(
+            "ncatbot.plugin_load",
+            self.handle_plugin_load_event,
+        )
 
         # 设置过滤器验证器
         self._filter_validator = FilterValidator()
@@ -68,6 +76,19 @@ class UnifiedRegistryPlugin(NcatBotPlugin):
     def _normalize_case(self, s: str) -> str:
         # TODO: 实现大小写敏感（可能永远不会做）
         return s
+
+    async def handle_plugin_unload_event(self, event: NcatBotEvent) -> None:
+        """处理插件卸载事件，清理相关缓存"""
+        LOG.debug(f"处理插件卸载事件: {event.data['name']}")
+        self._initialized = False
+        self.command_registry.root_group.revoke_plugin(event.data["name"])
+        self.filter_registry.revoke_plugin(event.data["name"])
+        self.initialize_if_needed()
+
+    async def handle_plugin_load_event(self, event: NcatBotEvent) -> None:
+        """处理插件加载事件，清理相关缓存"""
+        self._initialized = False
+        self.initialize_if_needed()
 
     async def _execute_function(self, func: Callable, *args, **kwargs):
         """执行函数
@@ -93,7 +114,7 @@ class UnifiedRegistryPlugin(NcatBotPlugin):
 
     async def _run_pure_filters(self, event: "BaseMessageEvent") -> None:
         """遍历执行纯过滤器函数（不含命令函数）。"""
-        for func in filter_registry._function_filters:
+        for func in filter_registry._function_filters.values():
             # 额外防御：若误标记，仍跳过命令函数
             if getattr(func, "__is_command__", False):
                 continue
@@ -129,27 +150,17 @@ class UnifiedRegistryPlugin(NcatBotPlugin):
         func = match.command.func
         ignore_words = match.path_words  # 用于参数绑定的 ignore 计数
 
-        ## 参数绑定：复用 FuncAnalyser 约束
-        #bind_result: BindResult = self._binder.bind(
-        #    match.command, event, ignore_words, [prefix]
-        #)
-        #if not bind_result.ok:
-        #    # 绑定失败：可选择静默或提示（最小实现为静默）
-        #    LOG.debug(f"参数绑定失败: {bind_result.message}")
-        #    return False
         try:
             bind_result: BindResult = self._binder.bind(
                 match.command, event, ignore_words, [prefix]
             )
         except Exception as e:
-            await self.event_bus.publish(NcatBotEvent(
-                type="ncatbot.param_bind_failed",
-                data={
-                    "event": event,
-                    "msg": str(e),
-                    "cmd": match.command.name
-                }
-            ))
+            await self.event_bus.publish(
+                NcatBotEvent(
+                    type="ncatbot.param_bind_failed",
+                    data={"event": event, "msg": str(e), "cmd": match.command.name},
+                )
+            )
             return False
 
         await self._execute_function(
@@ -173,7 +184,7 @@ class UnifiedRegistryPlugin(NcatBotPlugin):
         self.prefixes = list(
             dict.fromkeys(
                 prefix
-                for registry in command_registries
+                for registry in command_registry.command_registries
                 for prefix in registry.prefixes
             )
         )
@@ -224,6 +235,7 @@ class UnifiedRegistryPlugin(NcatBotPlugin):
 
         # 3) 交给 resolver 构建并做冲突检测
         self._resolver.build_index(filtered_commands, filtered_aliases)
+        print(filtered_commands.keys(), filtered_aliases.keys())
         LOG.debug(
             f"TriggerEngine 初始化完成：命令={len(filtered_commands)}, 别名={len(filtered_aliases)}"
         )

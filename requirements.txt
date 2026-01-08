@@ -38,6 +38,7 @@ rich
 aiofiles
 typing-extensions
 
+
 colorama>=0.4.6; platform_system == "Windows"
 importlib-metadata>=8.6.1; python_version >= '3.9'
 importlib-metadata>=4.0; python_version < '3.9'

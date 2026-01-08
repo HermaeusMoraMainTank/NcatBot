@@ -68,9 +68,14 @@ class StartArgs(TypedDict, total=False):
     webui_token: Optional[str]
     ws_listen_ip: Optional[str]
     remote_mode: Optional[bool]
+    enable_webui: Optional[bool]
     enable_webui_interaction: Optional[bool]
     debug: Optional[bool]
     # 以后再加参数直接在这里补一行即可，无需改函数签名
+
+
+# 合法参数可以直接套用 StartArgs 了
+LEGAL_ARGS = StartArgs.__annotations__.keys()
 
 
 class BotClient:
@@ -98,9 +103,10 @@ class BotClient:
 
     def register_builtin_handler(self, only_private: bool = False):
         # 注册插件系统事件处理器
+        LOG.debug("正在注册内置事件处理器...")
+
         def make_async_handler(event_name):
             async def wrapper(event: BaseEventData):
-                LOG.debug(f"已发布 {event_name} 事件")
                 from ncatbot.plugin_system.event import NcatBotEvent
 
                 await self.event_bus.publish(NcatBotEvent(event_name, event))
@@ -132,7 +138,8 @@ class BotClient:
         # 创建官方事件处理器组，处理 NapCat 上报的事件
         async def event_callback(event: BaseEventData):
             # 纯异步版本:非阻塞式并发执行
-            # 关键:只创建任务,不等待完成(fire-and-forget)
+            # 关键:只创建任务, 不等待完成(fire-and-forget)
+            # Mock 的时候需要等待处理跑完再继续判断流程
             for handler in self.event_handlers[event_name]:
                 if inspect.iscoroutinefunction(handler):
                     # 创建异步任务,让它在后台运行
@@ -199,15 +206,12 @@ class BotClient:
         filter: Literal["group", "friend"] = None,
     ):
         async def wrapper(event: RequestEvent):
-            if filter is None:
-                handler(event)
+            if filter is not None and filter != event.request_type:
+                return
+            if inspect.iscoroutinefunction(handler):
+                await handler(event)
             else:
-                if filter != event.request_type:
-                    return
-                if inspect.iscoroutinefunction(handler):
-                    await handler(event)
-                else:
-                    handler(event)
+                handler(event)
 
         self.add_handler(OFFICIAL_REQUEST_EVENT, wrapper)
 
@@ -341,7 +345,9 @@ class BotClient:
         thread.daemon = True  # 设置为守护线程
         self.lock = threading.Lock()
         self.lock.acquire()
-        self.release_callback = lambda x: self.lock.release()
+        self.release_callback = (
+            lambda x: self.lock.release() if self.lock.locked() else None
+        )
         self.add_startup_handler(self.release_callback)
         thread.start()
         flag = self.lock.acquire(timeout=90)
@@ -352,22 +358,8 @@ class BotClient:
         return self.api
 
     def start(self, **kwargs):
-        # 配置参数
-        legal_args = [
-            "bt_uin",
-            "root",
-            "ws_uri",
-            "webui_uri",
-            "ws_token",
-            "webui_token",
-            "ws_listen_ip",
-            "remote_mode",
-            "enable_webui_interaction",
-            "debug",
-            "skip_plugin_load",
-        ]
         for key, value in kwargs.items():
-            if key not in legal_args:
+            if key not in LEGAL_ARGS:
                 raise NcatBotError(f"非法参数: {key}")
             elif value is None:
                 continue

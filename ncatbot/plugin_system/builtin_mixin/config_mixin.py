@@ -1,4 +1,3 @@
-from .command_mixin import CommandMixin
 from typing import Any, Dict, Union, Callable
 from ncatbot.utils import get_log
 
@@ -38,7 +37,7 @@ class Config:
         return oldvalue, newvalue
 
 
-class ConfigMixin(CommandMixin):
+class ConfigMixin:
     def get_registered_configs(self) -> Dict[str, Config]:
         if not hasattr(self, "_registered_configs"):
             self._registered_configs: Dict[str, Config] = {}

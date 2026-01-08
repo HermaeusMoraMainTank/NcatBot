@@ -4,7 +4,6 @@
 """
 
 from typing import Callable, Dict, List, Optional, Tuple
-
 from ..analyzer.func_analyzer import FuncAnalyser
 from ..utils import (
     CommandRegistrationError,
@@ -126,6 +125,29 @@ class CommandGroup:
                 all_aliases[(aliases,)] = command
         return all_aliases
 
+    def revoke_plugin(self, plugin_name: str):
+        """撤销插件的命令"""
+        deleted_commands = []
+        for command in self.commands.values():
+            if command.plugin_name == plugin_name:
+                deleted_commands.append(command.name)
+
+        for cmd_name in deleted_commands:
+            del self.commands[cmd_name]
+
+        for subgroup in self.subgroups.values():
+            subgroup.revoke_plugin(plugin_name)
+
+        deleted_aliases = []
+        for alias in self.aliases.values():
+            if alias.plugin_name == plugin_name:
+                deleted_aliases.extend(alias.aliases)
+
+        deleted_aliases = set(deleted_aliases)
+
+        for alias_name in deleted_aliases:
+            del self.aliases[alias_name]
+
 
 class ModernRegistry:
     """现代化命令注册器
@@ -135,9 +157,11 @@ class ModernRegistry:
 
     root_group = CommandGroup("root")
     error_handler = ErrorHandler()
+    command_registries: List["ModernRegistry"] = []
 
     def __init__(self, prefixes: Optional[List[str]] = None):
         self.prefixes: List[str] = prefixes if prefixes else ["/", "!"]
+        self.command_registries.append(self)
         LOG.debug("现代化命令注册器初始化完成")
 
     def command(self, name: str, aliases: list = None, description: str = "", **kwargs):
@@ -168,10 +192,8 @@ class ModernRegistry:
     def get_registry(cls, prefixes: Optional[List[str]] = None) -> "ModernRegistry":
         """获取注册器"""
         new_registry = cls(prefixes)
-        command_registries.append(new_registry)
         return new_registry
 
 
 # 创建全局实例
 command_registry = ModernRegistry()
-command_registries = [command_registry]

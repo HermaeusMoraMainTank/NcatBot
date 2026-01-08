@@ -1,13 +1,12 @@
 import asyncio
 import json
-import traceback
 from typing import Dict, Callable, Optional, Literal
 import uuid
 from threading import Lock
 from queue import Queue
 import websockets
 from .nc.launch import napcat_service_ok
-from websockets.exceptions import ConnectionClosedError
+from websockets.exceptions import ConnectionClosedError, ConnectionClosedOK
 from ncatbot.core.event import (
     PokeNoticeEvent,
     PrivateMessageEvent,
@@ -107,7 +106,7 @@ class Adapter:
                 await self.cleanup()
                 raise
 
-            except ConnectionClosedError:
+            except (ConnectionClosedError, ConnectionClosedOK):
                 LOG.info("NapCat WebSocket 连接已关闭, 正在尝试重新连接...")
                 if napcat_service_ok(ncatbot_config.websocket_timeout):
                     self.client = await websockets.connect(
@@ -124,10 +123,10 @@ class Adapter:
             except AdapterEventError:
                 LOG.warning("构造事件时出错, 已抛弃该事件")
 
-            except Exception:
+            except Exception as e:
                 await self.cleanup()
-                LOG.info(traceback.format_exc())
-                raise NcatBotError("未知网络错误")
+                LOG.exception("NapCat WebSocket 连接出错, 已关闭连接", e)
+                raise
 
     async def _handle_response(self, message: dict):
         """处理API响应, 不能阻塞"""
@@ -140,6 +139,7 @@ class Adapter:
 
     async def _handle_event(self, message: dict):
         """处理事件, 不能阻塞"""
+        LOG.debug(f"收到事件: {message}")
         try:
             post_type: Literal[
                 "message", "notice", "request", "meta_event", "message_sent"
