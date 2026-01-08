@@ -427,11 +427,108 @@ class LearningChatHandler:
             f"➤将被学习为{message.message}的回答，已学次数为{answer.count}"
         )
 
+    # 插件命令排除列表 - 精确匹配
+    EXCLUDED_COMMANDS = {
+        # Help
+        "help", "帮助", "功能", "菜单",
+        # FakeAi
+        "蓝晴说话", "查询余额", "蓝晴印象", "蓝晴知识库", "蓝晴好感度排行榜", "蓝晴好感度排行",
+        # Meme
+        "meme",
+        # Moyu
+        "摸鱼", "moyu",
+        # Jrrp
+        "jrrp", "今日人品",
+        # CrazyThursday
+        "疯狂星期四", "KFC", "星期四",
+        # Kalabichu
+        "卡拉彼丘", "卡丘", "kalabiqiu", "喵",
+        # Fortune
+        "运势", "今日doro", "今日运势",
+        # Tarot
+        "占卜",
+        # Status
+        "状态",
+        # SendLike
+        "赞我",
+        # TodayWaifu
+        "今日老婆",
+        # TodayAnimeWaifu
+        "今日二次元老婆", "今日二刺猿老婆", "今日二刺螈老婆", "今日2次元老婆",
+        "今日二次元", "今日二刺猿", "今日二刺螈",
+        # MoehuImageSender
+        "随机表情包",
+        # Lottery
+        "开始大乐透",
+        # RussianRoulette
+        "午时已到",
+        # Daily3Min
+        "每天3分钟", "每天三分钟",
+    }
+    
+    # 插件命令排除列表 - 前缀匹配
+    EXCLUDED_PREFIXES = [
+        # AnimeTrace
+        "查询人物", "识别人物", "角色", "人物",
+        # NetEaseCloudMusic
+        "点歌",
+        # QQMusicCardSender
+        "qq点歌",
+        # BilibiliAnalysis
+        "搜视频", "查询视频", "搜索视频",
+        # EmojiStats
+        "表情包统计",
+        # MessageStats
+        "发言统计",
+        # AiStats
+        "ai统计",
+        # Lottery
+        "大乐透",
+        # RussianRoulette
+        "轮盘赌",
+        # Nbnhhsh
+        "翻译 ",
+        # MuteToWorkEnd
+        "禁言", "解禁", "取消禁言", "禁言到下班",
+        # GroupRecall
+        "查询撤回",
+        # Uptime
+        "灭云",
+        # ImageSender
+        "上传", "删除 ",
+        # VrChatInfo
+        "搜索vrc玩家",
+        # Universalis
+        "搜索物品",
+        # TodayWaifu / TodayAnimeWaifu
+        "换一个老婆", "换一个二次元老婆",
+        # Fortune
+        "重置",
+        # EatWhat - 吃/喝相关
+        "吃什么", "喝什么", "今天吃", "今天喝", "明天吃", "明天喝",
+        "早餐吃", "午餐吃", "晚餐吃", "夜宵吃",
+        "早上吃", "中午吃", "晚上吃",
+        "查看菜单", "查看饮料", "查看全部菜单", "查看全部饮料",
+        "添加菜品", "添加饮品", "删除菜品", "删除饮品",
+    ]
+
     async def _check_allow(self, message: Union[ChatMessage, ChatAnswer]) -> bool:
         """检查消息是否允许"""
         raw_message = (
             message.message if isinstance(message, ChatMessage) else message.messages[0]
         )
+        
+        # 移除 CQ 码后的纯文本
+        clean_message = re.sub(r"\[CQ:[^\]]+\]", "", raw_message).strip()
+        
+        # 检查是否是插件命令 - 精确匹配
+        if clean_message in self.EXCLUDED_COMMANDS:
+            return False
+        
+        # 检查是否是插件命令 - 前缀匹配
+        for prefix in self.EXCLUDED_PREFIXES:
+            if clean_message.startswith(prefix):
+                return False
         
         # 检查特殊消息类型
         if any(

@@ -1,5 +1,9 @@
 import asyncio
+import base64
+import io
 import json
+import math
+import os
 import random
 import re
 import time
@@ -7,9 +11,10 @@ from datetime import datetime
 from typing import Dict, List, Optional
 
 import yaml
+from PIL import Image as PILImage, ImageDraw, ImageFont
 from common.utils.AiUtil import AiUtil
 from common.utils.CommonUtil import CommonUtil
-from ncatbot.core import At, MessageChain, Text, GroupMessage, Reply
+from ncatbot.core import At, MessageChain, Text, GroupMessage, Reply, Image
 from ncatbot.plugin_system import NcatBotPlugin, on_message
 from ncatbot.utils.logger import get_log
 
@@ -83,6 +88,82 @@ class CallbackState:
 callback_state = CallbackState()
 
 
+# ========== 好感度回复概率计算 ==========
+def get_reply_probability(favorability: int) -> float:
+    """根据好感度计算回复概率（指数衰减曲线）
+
+    使用指数衰减公式：probability = min_prob + (1 - min_prob) * e^(k * favorability)
+    - 好感度为正时：100% 回复
+    - 好感度为负时：快速下降，然后逐渐趋于最低值
+
+    Args:
+        favorability: 用户好感度值
+
+    Returns:
+        回复概率 (0.0 ~ 1.0)
+
+    曲线示例（k=0.03, min_prob=0.03）：
+        好感度   0 → 100%
+        好感度 -10 → 77%
+        好感度 -20 → 59%
+        好感度 -30 → 45%
+        好感度 -50 → 26%
+        好感度 -80 → 12%
+        好感度 -100 → 8%
+        好感度 -150 → 4%
+        好感度 -200 → 3%
+        好感度 -400 → 3%
+    """
+    if favorability >= 0:
+        return 1.0  # 好感度为正，100% 回复
+
+    # 指数衰减参数
+    min_prob = 0.03  # 最低概率 3%
+    k = 0.03  # 衰减系数，越大下降越快
+
+    # 指数衰减公式
+    probability = min_prob + (1.0 - min_prob) * math.exp(k * favorability)
+
+    return max(min_prob, probability)
+
+
+async def should_reply_by_favorability(user_id: int, skip_users: list = None) -> bool:
+    """根据好感度判断是否应该回复
+
+    Args:
+        user_id: 用户ID
+        skip_users: 跳过好感度检查的用户ID列表（如管理员）
+
+    Returns:
+        是否应该回复
+    """
+    # 特定用户跳过检查（管理员等）
+    if skip_users and str(user_id) in [str(u) for u in skip_users]:
+        return True
+
+    try:
+        impression_data = await memory_manager.get_user_impression_full(user_id)
+        if not impression_data:
+            # 没有印象数据的新用户，100%回复
+            return True
+
+        favorability = impression_data.get("favorability", 0)
+        probability = get_reply_probability(favorability)
+
+        # 随机判断是否回复
+        should_reply = random.random() < probability
+
+        if not should_reply:
+            _log.info(
+                f"[FakeAi] 用户 {user_id} 好感度 {favorability}，概率 {probability * 100:.0f}%，本次不回复"
+            )
+
+        return should_reply
+    except Exception as e:
+        _log.debug(f"[FakeAi] 获取用户好感度失败: {e}")
+        return True  # 出错时默认回复
+
+
 class ReplyCache:
     def __init__(self, max_size: int = 20):
         self.replies = []
@@ -146,9 +227,9 @@ class FakeAi(NcatBotPlugin):
     _message_buffer: Dict[int, List[Dict]] = {}
     _last_summary_time: Dict[int, int] = {}
 
-    # 存储每个用户的消息，用于生成印象 {group_id: {user_id: [messages]}}
-    _user_message_buffer: Dict[int, Dict[int, List[str]]] = {}
-    _last_impression_time: Dict[int, int] = {}
+    # 存储每个用户的消息，用于生成印象 {user_id: {"name": str, "messages": [str]}}（全局）
+    _user_message_buffer: Dict[int, Dict] = {}
+    _last_impression_time: int = 0  # 全局时间戳
 
     # 长期记忆配置
     SUMMARY_INTERVAL = 30 * 60  # 每30分钟总结一次
@@ -161,6 +242,14 @@ class FakeAi(NcatBotPlugin):
         # 初始化长期记忆数据库
         await memory_manager.init_db()
         _log.info("[FakeAi] 长期记忆数据库初始化完成")
+
+        # 清理知识库中的重复数据
+        try:
+            cleaned = await memory_manager.cleanup_duplicate_knowledge()
+            if cleaned > 0:
+                _log.info(f"[FakeAi] 已清理 {cleaned} 条重复知识")
+        except Exception as e:
+            _log.debug(f"[FakeAi] 清理重复知识失败: {e}")
 
         # 添加定时总结任务（每10分钟检查一次）
         self.add_scheduled_task(
@@ -209,24 +298,22 @@ class FakeAi(NcatBotPlugin):
         if len(self._message_buffer[group_id]) > 100:
             self._message_buffer[group_id] = self._message_buffer[group_id][-100:]
 
-        # 添加到用户消息缓冲区（用于生成印象）
-        if group_id not in self._user_message_buffer:
-            self._user_message_buffer[group_id] = {}
-        if user_id not in self._user_message_buffer[group_id]:
-            self._user_message_buffer[group_id][user_id] = {
+        # 添加到全局用户消息缓冲区（用于生成印象，按用户ID统一管理）
+        if user_id not in self._user_message_buffer:
+            self._user_message_buffer[user_id] = {
                 "name": name,
                 "messages": [],
             }
 
         # 更新用户名（可能会变化）
-        self._user_message_buffer[group_id][user_id]["name"] = name
+        self._user_message_buffer[user_id]["name"] = name
 
         if content:  # 只存储非空内容
-            self._user_message_buffer[group_id][user_id]["messages"].append(content)
+            self._user_message_buffer[user_id]["messages"].append(content)
             # 限制每个用户的消息数
-            if len(self._user_message_buffer[group_id][user_id]["messages"]) > 50:
-                self._user_message_buffer[group_id][user_id]["messages"] = (
-                    self._user_message_buffer[group_id][user_id]["messages"][-50:]
+            if len(self._user_message_buffer[user_id]["messages"]) > 50:
+                self._user_message_buffer[user_id]["messages"] = (
+                    self._user_message_buffer[user_id]["messages"][-50:]
                 )
 
     async def _generate_summaries(self):
@@ -286,48 +373,50 @@ class FakeAi(NcatBotPlugin):
                 _log.error(f"[FakeAi] 生成群 {group_id} 总结失败: {e}")
 
     async def _update_user_impressions(self):
-        """定时任务：更新活跃用户的印象"""
+        """定时任务：更新活跃用户的印象（全局管理）"""
         current_time = int(time.time())
 
-        for group_id, users in list(self._user_message_buffer.items()):
-            try:
-                # 检查距离上次更新是否足够久
-                last_time = self._last_impression_time.get(group_id, 0)
-                if current_time - last_time < self.IMPRESSION_INTERVAL:
+        # 检查距离上次更新是否足够久
+        if current_time - self._last_impression_time < self.IMPRESSION_INTERVAL:
+            return
+
+        try:
+            updated_count = 0
+            for user_id, user_data in list(self._user_message_buffer.items()):
+                messages = user_data.get("messages", [])
+                name = user_data.get("name", str(user_id))
+
+                # 检查是否有足够的消息
+                if len(messages) < self.MIN_USER_MESSAGES:
                     continue
 
-                updated_count = 0
-                for user_id, user_data in list(users.items()):
-                    messages = user_data.get("messages", [])
-                    name = user_data.get("name", str(user_id))
+                # 生成用户详细印象（传入user_id用于识别VIP用户）
+                impression_data = await generate_user_impression(name, messages, user_id=user_id)
 
-                    # 检查是否有足够的消息
-                    if len(messages) < self.MIN_USER_MESSAGES:
-                        continue
-
-                    # 生成用户印象
-                    impression = await generate_user_impression(name, messages)
-
-                    if impression:
-                        await memory_manager.update_user_impression(
-                            group_id=group_id,
-                            user_id=user_id,
-                            impression=impression,
-                        )
-                        updated_count += 1
-                        _log.debug(f"[FakeAi] 更新用户 {user_id} 的印象: {impression}")
-
-                        # 清空该用户的消息缓冲
-                        self._user_message_buffer[group_id][user_id]["messages"] = []
-
-                if updated_count > 0:
-                    _log.info(
-                        f"[FakeAi] 群 {group_id} 更新了 {updated_count} 个用户印象"
+                if impression_data:
+                    await memory_manager.update_user_impression(
+                        user_id=user_id,
+                        impression_data=impression_data,
+                        username=name,  # 传入用户名/群昵称
                     )
-                    self._last_impression_time[group_id] = current_time
+                    updated_count += 1
+                    _log.debug(
+                        f"[FakeAi] 更新用户 {name}({user_id}) 的印象: "
+                        f"性别={impression_data.get('gender', '')}, "
+                        f"印象={impression_data.get('impression', '')}, "
+                        f"好感度变化={impression_data.get('favorability_change', 0)}"
+                    )
 
-            except Exception as e:
-                _log.error(f"[FakeAi] 更新群 {group_id} 用户印象失败: {e}")
+                    # 清空该用户的消息缓冲
+                    self._user_message_buffer[user_id]["messages"] = []
+
+            if updated_count > 0:
+                _log.info(f"[FakeAi] 全局更新了 {updated_count} 个用户印象")
+
+            self._last_impression_time = current_time
+
+        except Exception as e:
+            _log.error(f"[FakeAi] 更新用户印象失败: {e}")
 
     async def _is_from_excluded_plugin(self, input: GroupMessage) -> bool:
         """检查消息是否来自排除的插件"""
@@ -366,6 +455,71 @@ class FakeAi(NcatBotPlugin):
                 return True
         return False
 
+    async def _process_image_descriptions(self, content: list) -> list:
+        """为消息中的图片生成描述（只处理最后一张图片）
+        
+        将图片替换为文本描述格式 [图片: 描述内容]，让 AI 能理解图片内容
+        
+        Args:
+            content: 消息内容列表
+            
+        Returns:
+            处理后的消息内容列表（图片会被替换为文本描述）
+        """
+        # 找到所有图片
+        image_indices = []
+        for i, item in enumerate(content):
+            if isinstance(item, dict) and item.get("type") == "image":
+                image_indices.append(i)
+        
+        if not image_indices:
+            return content
+        
+        # 只处理最后一张图片（效率优先）
+        last_image_idx = image_indices[-1]
+        image_data = content[last_image_idx].get("data", {})
+        image_url = image_data.get("url", "")
+        
+        if not image_url:
+            # 没有 URL，标记为无法识别的图片
+            content[last_image_idx] = {
+                "type": "text",
+                "data": {"text": "[图片]"}
+            }
+            return content
+        
+        try:
+            # 调用多模态模型生成描述
+            description = await AiUtil.describe_image_briefly(image_url)
+            if description:
+                # 把图片替换为文本描述，让 AI 能理解
+                content[last_image_idx] = {
+                    "type": "text",
+                    "data": {"text": f"[图片: {description}]"}
+                }
+                _log.info(f"[FakeAi] 图片描述已生成: {description[:50]}...")
+            else:
+                # 描述生成失败，标记为普通图片
+                content[last_image_idx] = {
+                    "type": "text",
+                    "data": {"text": "[图片]"}
+                }
+        except Exception as e:
+            _log.debug(f"[FakeAi] 图片描述生成失败: {e}")
+            content[last_image_idx] = {
+                "type": "text",
+                "data": {"text": "[图片]"}
+            }
+        
+        # 其他未处理的图片也标记一下
+        for idx in image_indices[:-1]:
+            content[idx] = {
+                "type": "text",
+                "data": {"text": "[图片]"}
+            }
+        
+        return content
+
     async def handle_balance_query(self, input: GroupMessage) -> None:
         """处理查询余额命令"""
         try:
@@ -385,12 +539,14 @@ class FakeAi(NcatBotPlugin):
             balance_infos = balance_data.get("balance_infos", [])
 
             # 构建回复消息
-            message_parts = [Text("💰 DeepSeek API 余额查询结果:\n")]
+            message_parts = [Text("━━━━━━━━━━━━━━━━━━━━\n")]
+            message_parts.append(Text("     💰 API 余额查询\n"))
+            message_parts.append(Text("━━━━━━━━━━━━━━━━━━━━\n\n"))
 
             if is_available:
-                message_parts.append(Text("✅ 账户状态: 可用\n"))
+                message_parts.append(Text("📊 账户状态: ✅ 可用\n"))
             else:
-                message_parts.append(Text("❌ 账户状态: 不可用\n"))
+                message_parts.append(Text("📊 账户状态: ❌ 不可用\n"))
 
             if balance_infos:
                 for balance_info in balance_infos:
@@ -407,12 +563,19 @@ class FakeAi(NcatBotPlugin):
                         else currency
                     )
 
-                    message_parts.append(Text(f"💵 货币: {currency_name}\n"))
+                    message_parts.append(Text(f"💵 货币类型: {currency_name}\n"))
                     message_parts.append(Text(f"💎 总余额: {total_balance}\n"))
-                    message_parts.append(Text(f"🎁 赠金余额: {granted_balance}\n"))
+                    message_parts.append(Text(f"🎁 赠送额度: {granted_balance}\n"))
                     message_parts.append(Text(f"💳 充值余额: {topped_up_balance}\n"))
             else:
-                message_parts.append(Text("❌ 未获取到余额信息"))
+                message_parts.append(Text("❌ 未获取到余额信息\n"))
+
+            # 添加模型信息和感谢语
+            message_parts.append(Text("\n━━━━━━━━━━━━━━━━━━━━\n"))
+            message_parts.append(Text("🤖 当前模型: DeepSeek-V3\n"))
+            message_parts.append(Text("━━━━━━━━━━━━━━━━━━━━\n"))
+            message_parts.append(Text("✨ 特别鸣谢 冰鲜柠檬汁(2606440373)\n"))
+            message_parts.append(Text("   提供的免费 API 支持~\n"))
 
             # 发送消息
             message = MessageChain(message_parts)
@@ -423,6 +586,502 @@ class FakeAi(NcatBotPlugin):
             error_msg = Text(f"查询余额时发生错误: {str(e)}")
             await self.api.post_group_msg(
                 group_id=input.group_id, rtf=MessageChain([error_msg])
+            )
+
+    async def handle_impression_query(
+        self, input: GroupMessage, target_user_id: int = None
+    ) -> None:
+        """处理查看角色印象命令
+
+        Args:
+            input: 群消息对象
+            target_user_id: 目标用户ID，如果为None则查询发送者自己
+        """
+        try:
+            sender_id = input.sender.user_id
+
+            # 确定查询目标：如果指定了目标用户，查询目标；否则查询自己
+            query_user_id = target_user_id if target_user_id else int(sender_id)
+            is_self = query_user_id == int(sender_id)
+
+            # 获取用户的完整印象数据
+            impression_data = await memory_manager.get_user_impression_full(
+                query_user_id
+            )
+
+            if not impression_data:
+                # 没有印象数据
+                if is_self:
+                    message = MessageChain(
+                        [
+                            At(int(sender_id)),
+                            Text(" 蓝晴还没有对你形成印象呢~\n多聊聊天吧！"),
+                        ]
+                    )
+                else:
+                    message = MessageChain(
+                        [
+                            At(int(sender_id)),
+                            Text(f" 蓝晴还没有对 "),
+                            At(query_user_id),
+                            Text(" 形成印象呢~"),
+                        ]
+                    )
+                await self.api.post_group_msg(group_id=input.group_id, rtf=message)
+                return
+
+            # 构建印象展示消息
+            if is_self:
+                message_parts = [At(int(sender_id)), Text(" 蓝晴对你的印象：\n\n")]
+            else:
+                message_parts = [
+                    At(int(sender_id)),
+                    Text(" 蓝晴对 "),
+                    At(query_user_id),
+                    Text(" 的印象：\n\n"),
+                ]
+
+            # 用户名和ID
+            username = impression_data.get("username", "")
+            if username:
+                message_parts.append(Text(f"👤 名字: {username}\n"))
+            message_parts.append(Text(f"🆔 ID: {query_user_id}\n"))
+
+            # 性别
+            gender = impression_data.get("gender", "")
+            if gender:
+                gender_emoji = (
+                    "👨" if gender == "男" else "👩" if gender == "女" else "🧑"
+                )
+                message_parts.append(Text(f"{gender_emoji} 性别: {gender}\n"))
+
+            # 印象关键词
+            impression = impression_data.get("impression", "")
+            if impression:
+                message_parts.append(Text(f"💭 印象: {impression}\n"))
+
+            # 好感度（初始0，可为负数）
+            favorability = impression_data.get("favorability", 0)
+            pending = impression_data.get("pending_favorability", 0)
+            fav_emoji = (
+                "💖"
+                if favorability >= 50
+                else "💗"
+                if favorability >= 20
+                else "💙"
+                if favorability >= 0
+                else "💔"
+                if favorability >= -20
+                else "🖤"
+            )
+            fav_text = f"{fav_emoji} 好感度: {favorability}"
+            if pending != 0:
+                fav_text += f" (待结算: {'+' if pending > 0 else ''}{pending})"
+            message_parts.append(Text(fav_text + "\n"))
+
+            # 回复概率
+            reply_prob = get_reply_probability(favorability)
+            prob_emoji = (
+                "🎯" if reply_prob >= 0.8 else "🎲" if reply_prob >= 0.5 else "🌙"
+            )
+            message_parts.append(
+                Text(f"{prob_emoji} 回复概率: {reply_prob * 100:.0f}%\n")
+            )
+
+            # 事件
+            events = impression_data.get("events", [])
+            if events:
+                recent_events = events[-3:]  # 最近3个事件
+                message_parts.append(Text(f"📝 事件: {', '.join(recent_events)}\n"))
+
+            # 称呼
+            nickname = impression_data.get("nickname", "")
+            if nickname:
+                message_parts.append(Text(f"📛 称呼: {nickname}\n"))
+
+            # 新知识
+            new_knowledge = impression_data.get("new_knowledge", [])
+            if new_knowledge:
+                recent_knowledge = new_knowledge[-3:]  # 最近3个知识点
+                message_parts.append(
+                    Text(f"📚 新知识: {', '.join(recent_knowledge)}\n")
+                )
+
+            # 重要事件
+            important_events = impression_data.get("important_events", [])
+            if important_events:
+                recent_important = important_events[-2:]  # 最近2个重要事件
+                message_parts.append(
+                    Text(f"⭐ 重要事件: {', '.join(recent_important)}\n")
+                )
+
+            # 互动次数
+            interaction_count = impression_data.get("interaction_count", 0)
+            message_parts.append(Text(f"🔢 互动次数: {interaction_count}\n"))
+
+            # 发送消息
+            message = MessageChain(message_parts)
+            await self.api.post_group_msg(group_id=input.group_id, rtf=message)
+
+        except Exception as e:
+            _log.error(f"处理印象查询时发生错误: {e}")
+            error_msg = Text(f"查询印象时发生错误: {str(e)}")
+            await self.api.post_group_msg(
+                group_id=input.group_id, rtf=MessageChain([error_msg])
+            )
+
+    async def handle_knowledge_query(self, input: GroupMessage) -> None:
+        """处理知识库查询命令（仅限管理员）"""
+        try:
+            sender_id = input.sender.user_id
+
+            # 只允许管理员查询（273421673）
+            if str(sender_id) != "273421673":
+                await self.api.post_group_msg(
+                    group_id=input.group_id, text="只有管理员可以查询知识库哦~"
+                )
+                return
+
+            # 获取知识库统计
+            total_count = await memory_manager.get_all_knowledge_count()
+
+            # 获取最近添加的知识
+            cursor = await memory_manager.db.execute(
+                """SELECT keyword, content, source_username, hit_count, created_at 
+                   FROM knowledge_base 
+                   ORDER BY created_at DESC LIMIT 10"""
+            )
+            recent_knowledge = await cursor.fetchall()
+
+            # 获取最常命中的知识
+            cursor = await memory_manager.db.execute(
+                """SELECT keyword, content, hit_count 
+                   FROM knowledge_base 
+                   WHERE hit_count > 0
+                   ORDER BY hit_count DESC LIMIT 5"""
+            )
+            popular_knowledge = await cursor.fetchall()
+
+            # 构建消息
+            message_parts = [Text("📚 蓝晴的知识库\n\n")]
+            message_parts.append(Text(f"📊 总知识量: {total_count} 条\n\n"))
+
+            if recent_knowledge:
+                message_parts.append(Text("🆕 最近学到的知识:\n"))
+                for row in recent_knowledge[:5]:
+                    keyword = row["keyword"]
+                    content = row["content"]
+                    source = row["source_username"] or "未知"
+                    if content:
+                        message_parts.append(
+                            Text(f"  • {keyword}: {content} (来自{source})\n")
+                        )
+                    else:
+                        message_parts.append(Text(f"  • {keyword} (来自{source})\n"))
+
+            if popular_knowledge:
+                message_parts.append(Text("\n🔥 常用知识:\n"))
+                for row in popular_knowledge:
+                    keyword = row["keyword"]
+                    content = row["content"]
+                    hit_count = row["hit_count"]
+                    if content:
+                        message_parts.append(
+                            Text(f"  • {keyword}: {content} (命中{hit_count}次)\n")
+                        )
+                    else:
+                        message_parts.append(
+                            Text(f"  • {keyword} (命中{hit_count}次)\n")
+                        )
+
+            message = MessageChain(message_parts)
+            await self.api.post_group_msg(group_id=input.group_id, rtf=message)
+
+        except Exception as e:
+            _log.error(f"处理知识库查询时发生错误: {e}")
+            await self.api.post_group_msg(
+                group_id=input.group_id, text=f"查询知识库时发生错误: {str(e)}"
+            )
+
+    def _generate_ranking_image(
+        self, top_list: List[Dict], bottom_list: List[Dict]
+    ) -> str:
+        """生成好感度排行榜图片
+
+        Args:
+            top_list: 好感度最高的用户列表
+            bottom_list: 好感度最低的用户列表
+
+        Returns:
+            图片的 base64 字符串
+        """
+        # 图片参数
+        width = 800
+        row_height = 45
+        padding = 30
+        title_height = 60
+        section_gap = 30
+
+        # 计算高度
+        top_count = len(top_list)
+        bottom_count = len(bottom_list)
+        height = (
+            padding * 2  # 上下边距
+            + title_height  # 总标题
+            + title_height  # 榜单标题
+            + top_count * row_height  # 好感度榜
+            + section_gap  # 两榜间隔
+            + title_height  # 黑名单标题
+            + bottom_count * row_height  # 黑名单
+            + padding  # 底部边距
+        )
+
+        # 创建图片（深色背景）
+        img = PILImage.new("RGB", (width, height), color=(30, 30, 35))
+        draw = ImageDraw.Draw(img)
+
+        # 尝试加载字体
+        try:
+            title_font = ImageFont.truetype("data/font/sakura.ttf", 32)
+            subtitle_font = ImageFont.truetype("data/font/sakura.ttf", 24)
+            text_font = ImageFont.truetype("data/font/sakura.ttf", 20)
+        except Exception:
+            try:
+                title_font = ImageFont.truetype("simhei.ttf", 32)
+                subtitle_font = ImageFont.truetype("simhei.ttf", 24)
+                text_font = ImageFont.truetype("simhei.ttf", 20)
+            except Exception:
+                title_font = ImageFont.load_default()
+                subtitle_font = title_font
+                text_font = title_font
+
+        y = padding
+
+        # 绘制总标题
+        title = "~ 蓝晴好感度排行榜 ~"
+        title_bbox = draw.textbbox((0, 0), title, font=title_font)
+        title_width = title_bbox[2] - title_bbox[0]
+        draw.text(
+            ((width - title_width) // 2, y),
+            title,
+            font=title_font,
+            fill=(255, 200, 100),
+        )
+        y += title_height
+
+        # 绘制分隔线
+        draw.line(
+            [(padding, y - 10), (width - padding, y - 10)], fill=(80, 80, 90), width=2
+        )
+
+        # 绘制好感度榜标题
+        top_title = "[ 好感度 TOP 10 ]"
+        draw.text((padding, y), top_title, font=subtitle_font, fill=(100, 200, 255))
+        y += title_height
+
+        # 绘制好感度榜内容
+        for i, user in enumerate(top_list):
+            rank = i + 1
+            username = user["username"] or "未知用户"
+            user_id = user["user_id"]
+            fav = user["favorability"]
+
+            # 排名颜色和文字
+            if rank == 1:
+                rank_color = (255, 215, 0)  # 金色
+                rank_text = "TOP1"
+            elif rank == 2:
+                rank_color = (192, 192, 192)  # 银色
+                rank_text = "TOP2"
+            elif rank == 3:
+                rank_color = (205, 127, 50)  # 铜色
+                rank_text = "TOP3"
+            else:
+                rank_color = (150, 150, 150)
+                rank_text = f" {rank}."
+
+            # 好感度颜色
+            if fav >= 50:
+                fav_color = (255, 100, 150)  # 粉红
+            elif fav >= 20:
+                fav_color = (255, 150, 100)  # 橙色
+            elif fav >= 0:
+                fav_color = (100, 200, 100)  # 绿色
+            else:
+                fav_color = (150, 150, 150)  # 灰色
+
+            # 绘制排名
+            draw.text((padding, y), rank_text, font=text_font, fill=rank_color)
+
+            # 绘制用户信息
+            user_text = f"{username} ({user_id})"
+            draw.text(
+                (padding + 60, y), user_text, font=text_font, fill=(220, 220, 220)
+            )
+
+            # 绘制好感度（右对齐）
+            fav_text = f"+{fav}" if fav > 0 else str(fav)
+            fav_bbox = draw.textbbox((0, 0), fav_text, font=text_font)
+            fav_width = fav_bbox[2] - fav_bbox[0]
+            draw.text(
+                (width - padding - fav_width, y),
+                fav_text,
+                font=text_font,
+                fill=fav_color,
+            )
+
+            y += row_height
+
+        y += section_gap
+
+        # 绘制分隔线
+        draw.line(
+            [(padding, y - section_gap // 2), (width - padding, y - section_gap // 2)],
+            fill=(80, 80, 90),
+            width=2,
+        )
+
+        # 绘制黑名单标题
+        bottom_title = "[ 好感度 BOTTOM 10 ]"
+        draw.text((padding, y), bottom_title, font=subtitle_font, fill=(255, 100, 100))
+        y += title_height
+
+        # 绘制黑名单内容
+        for i, user in enumerate(bottom_list):
+            rank = i + 1
+            username = user["username"] or "未知用户"
+            user_id = user["user_id"]
+            fav = user["favorability"]
+
+            # 排名文字
+            rank_text = f" {rank}."
+
+            # 好感度颜色（负数越低越红）
+            if fav <= -100:
+                fav_color = (255, 50, 50)  # 深红
+            elif fav <= -50:
+                fav_color = (255, 100, 80)  # 红色
+            elif fav < 0:
+                fav_color = (255, 150, 100)  # 橙红
+            else:
+                fav_color = (150, 150, 150)  # 灰色
+
+            # 绘制排名
+            draw.text((padding, y), rank_text, font=text_font, fill=(100, 100, 100))
+
+            # 绘制用户信息
+            user_text = f"{username} ({user_id})"
+            draw.text(
+                (padding + 60, y), user_text, font=text_font, fill=(180, 180, 180)
+            )
+
+            # 绘制好感度（右对齐）
+            fav_text = str(fav)
+            fav_bbox = draw.textbbox((0, 0), fav_text, font=text_font)
+            fav_width = fav_bbox[2] - fav_bbox[0]
+            draw.text(
+                (width - padding - fav_width, y),
+                fav_text,
+                font=text_font,
+                fill=fav_color,
+            )
+
+            y += row_height
+
+        # 保存到 BytesIO
+        img_byte_arr = io.BytesIO()
+        img.save(img_byte_arr, format="PNG")
+        img_byte_arr.seek(0)
+        img_base64 = base64.b64encode(img_byte_arr.getvalue()).decode()
+
+        return f"base64://{img_base64}"
+
+    async def handle_favorability_ranking(self, input: GroupMessage) -> None:
+        """处理好感度排行榜命令"""
+        try:
+            # 获取排行榜数据
+            ranking = await memory_manager.get_favorability_ranking(top_n=10)
+            top_list = ranking["top"]
+            bottom_list = ranking["bottom"]
+
+            if not top_list and not bottom_list:
+                await self.api.post_group_msg(
+                    group_id=input.group_id, text="暂无好感度数据~"
+                )
+                return
+
+            # 生成排行榜图片
+            img_base64 = self._generate_ranking_image(top_list, bottom_list)
+
+            # 发送图片
+            message = MessageChain([Image(img_base64)])
+            await self.api.post_group_msg(group_id=input.group_id, rtf=message)
+
+        except Exception as e:
+            _log.error(f"处理好感度排行榜时发生错误: {e}")
+            await self.api.post_group_msg(
+                group_id=input.group_id, text=f"生成排行榜时发生错误: {str(e)}"
+            )
+
+    async def handle_vision_test(self, input: GroupMessage) -> None:
+        """处理图片测试命令 - 使用多模态模型描述图片"""
+        try:
+            # 从消息中提取图片
+            image_urls = []
+            for msg_segment in input.message:
+                if (
+                    hasattr(msg_segment, "msg_seg_type")
+                    and msg_segment.msg_seg_type == "image"
+                ):
+                    url = getattr(msg_segment, "url", "")
+                    if url:
+                        image_urls.append(url)
+
+            if not image_urls:
+                await self.api.post_group_msg(
+                    group_id=input.group_id, text="请发送图片让我看看~"
+                )
+                return
+
+            # 发送等待提示
+            await self.api.post_group_msg(
+                group_id=input.group_id, text="正在分析图片，请稍候..."
+            )
+
+            # 先下载图片转 base64（NVIDIA API 无法访问 QQ 图片服务器）
+            image_base64_list = await AiUtil.download_images_as_base64(image_urls)
+            if not image_base64_list:
+                await self.api.post_group_msg(
+                    group_id=input.group_id, text="图片下载失败，请稍后再试~"
+                )
+                return
+
+            # 调用多模态模型
+            result = await AiUtil.chat_with_vision(
+                prompt="请用中文详细描述这张图片的内容，包括主体、场景、颜色、氛围等。",
+                image_base64_list=image_base64_list,
+                system_prompt="你是一个图像分析专家，请用简洁但详细的中文描述图片内容。",
+                max_tokens=1024,
+                temperature=0.7,
+            )
+
+            if result and result.get("content"):
+                description = result["content"]
+                usage = result.get("usage", {})
+                token_info = f"\n\n[Token: {usage.get('total_tokens', '?')}]"
+                await self.api.post_group_msg(
+                    group_id=input.group_id,
+                    text=f"📷 图片描述：\n{description}{token_info}",
+                )
+            else:
+                await self.api.post_group_msg(
+                    group_id=input.group_id, text="图片分析失败，请稍后再试~"
+                )
+
+        except Exception as e:
+            _log.error(f"处理图片测试时发生错误: {e}")
+            await self.api.post_group_msg(
+                group_id=input.group_id, text=f"图片分析出错: {str(e)}"
             )
 
     @on_message
@@ -488,6 +1147,10 @@ class FakeAi(NcatBotPlugin):
                 callback_state.remove_waiting_user(sender_id)
                 # 直接回复，不检查CD
                 reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
+                
+                # 对图片进行识别描述
+                content = await self._process_image_descriptions(content)
+                
                 reply_json = json.dumps(
                     {
                         "name": sender_name,
@@ -526,12 +1189,47 @@ class FakeAi(NcatBotPlugin):
             await self.handle_balance_query(input)
             return
 
+        # 处理查看角色印象命令（支持 @某人 查看别人的印象）
+        if "蓝晴印象" in input.raw_message:
+            # 提取消息中被@的用户（排除机器人自己 3555202423）
+            target_user_id = None
+            for msg_segment in input.message:
+                if (
+                    hasattr(msg_segment, "msg_seg_type")
+                    and msg_segment.msg_seg_type == "at"
+                ):
+                    at_qq = getattr(msg_segment, "qq", None)
+                    if at_qq and str(at_qq) != "3555202423":
+                        target_user_id = int(at_qq)
+                        break
+            await self.handle_impression_query(input, target_user_id)
+            return
+
+        # 处理知识库查询命令（仅限管理员）
+        if input.raw_message == "蓝晴知识库":
+            await self.handle_knowledge_query(input)
+            return
+
+        # 处理好感度排行榜命令
+        if input.raw_message in ["蓝晴好感度排行榜", "蓝晴好感度排行"]:
+            await self.handle_favorability_ranking(input)
+            return
+
+        # 处理图片测试命令（"测试" + 图片）
+        clean_text = re.sub(r"\[CQ:[^\]]+\]", "", input.raw_message).strip()
+        if clean_text == "测试":
+            await self.handle_vision_test(input)
+            return
+
         if is_at_message:
             # 检查用户CD（除了273421673用户）
             if sender_id != "273421673" and not check_user_cd(sender_id):
                 return
 
             reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
+
+            # 对图片进行识别描述（只处理最后一张，异步不阻塞太久）
+            content = await self._process_image_descriptions(content)
 
             # 创建 JSON 格式的字符串并添加到 replyCache 中
             reply_json = json.dumps(
@@ -546,6 +1244,13 @@ class FakeAi(NcatBotPlugin):
             reply_cache.add_reply(reply_json)
             # 添加到长期记忆缓冲区
             self._add_to_message_buffer(group_id, int(sender_id), sender_name, content)
+
+            # 根据好感度判断是否回复（管理员跳过检查）
+            skip_users = ["273421673", "635773721"]  # 管理员列表
+            if not await should_reply_by_favorability(int(sender_id), skip_users):
+                # 不回复，但可以发一个冷淡的表情或不回复
+                return
+
             answer = await answer_ai(
                 group_id, group_reply_caches, str(sender_id), "active"
             )
@@ -584,6 +1289,11 @@ class FakeAi(NcatBotPlugin):
 
         # 随机触发逻辑
         if random.random() > 0.01:
+            return
+
+        # 根据好感度判断是否回复（被动触发也检查）
+        skip_users = ["273421673", "635773721"]  # 管理员列表
+        if not await should_reply_by_favorability(int(sender_id), skip_users):
             return
 
         # 记录本次触发的时间
@@ -823,9 +1533,7 @@ def record_ai_usage_to_json(
     group_id: str, user_id: str, tokens: int = 0, trigger_type: str = "active"
 ):
     """直接保存AI使用统计数据到JSON文件"""
-    import json
-    import os
-    from datetime import datetime
+    # json, os, datetime 已在文件顶部导入
 
     # 数据文件路径
     GROUP_DATA_FILE = "data/json/ai_group_stats.json"
@@ -1009,13 +1717,77 @@ async def answer_ai(
         _log.debug(f"[FakeAi] 获取长期记忆失败: {e}")
         replace_placeholder(yaml_data, "{long_term_memory}", "（暂无长期记忆）")
 
-    # 注入用户印象
+    # 注入用户印象（全局管理，根据当前群聊活跃用户获取印象）
     try:
-        user_impressions = await memory_manager.get_user_impressions_text(group_id)
+        # 从群消息缓冲区提取活跃用户ID列表
+        reply_cache = group_reply_caches.get(group_id, ReplyCache())
+        active_user_ids = set()
+        for reply_json in reply_cache.get_replies():
+            try:
+                reply_data = json.loads(reply_json)
+                uid = reply_data.get("id")
+                if uid and uid != "0":  # 排除蓝晴自己
+                    active_user_ids.add(int(uid))
+            except (json.JSONDecodeError, ValueError):
+                continue
+
+        user_impressions = await memory_manager.get_user_impressions_text(
+            user_ids=list(active_user_ids) if active_user_ids else None
+        )
         replace_placeholder(yaml_data, "{user_impressions}", user_impressions)
     except Exception as e:
         _log.debug(f"[FakeAi] 获取用户印象失败: {e}")
         replace_placeholder(yaml_data, "{user_impressions}", "（暂无用户印象）")
+
+    # 注入相关知识（从知识库检索与当前话题相关的知识）
+    try:
+        # 从最近的消息中提取关键内容用于检索
+        reply_cache = group_reply_caches.get(group_id, ReplyCache())
+        recent_messages = []
+        for reply_json in reply_cache.get_replies()[-10:]:  # 取最近10条消息
+            try:
+                reply_data = json.loads(reply_json)
+                content = reply_data.get("content", "")
+                if content and reply_data.get("id") != "0":  # 排除蓝晴自己的消息
+                    # 从消息内容中提取纯文本
+                    if isinstance(content, list):
+                        # content 是消息段列表，提取文本内容
+                        text_parts = []
+                        for seg in content:
+                            if isinstance(seg, dict) and seg.get("type") == "text":
+                                text = seg.get("data", {}).get("text", "")
+                                if text:
+                                    text_parts.append(text)
+                        text_content = " ".join(text_parts)
+                    elif isinstance(content, str):
+                        text_content = content
+                    else:
+                        text_content = str(content)
+                    
+                    if text_content.strip():
+                        recent_messages.append(text_content)
+            except json.JSONDecodeError:
+                continue
+
+        query_text = " ".join(recent_messages)
+        _log.debug(f"[FakeAi] 知识检索查询文本: {query_text[:200] if query_text else '空'}...")
+        
+        if query_text:
+            related_knowledge = await memory_manager.get_knowledge_text(
+                query_text, max_length=300
+            )
+            if related_knowledge:
+                replace_placeholder(yaml_data, "{related_knowledge}", related_knowledge)
+                _log.info(f"[FakeAi] 注入相关知识: {related_knowledge[:100]}...")
+            else:
+                replace_placeholder(
+                    yaml_data, "{related_knowledge}", "（暂无相关知识）"
+                )
+        else:
+            replace_placeholder(yaml_data, "{related_knowledge}", "（暂无相关知识）")
+    except Exception as e:
+        _log.error(f"[FakeAi] 获取相关知识失败: {e}")
+        replace_placeholder(yaml_data, "{related_knowledge}", "（暂无相关知识）")
 
     # 调用 AIUtil 的 search_deepseek 方法
     keyword = yaml_data.get("input", "")
@@ -1046,8 +1818,6 @@ async def answer_ai(
     if response:
         # 先尝试直接解析为 JSON
         try:
-            import json
-
             # 检查是否是有效的 JSON 字符串
             parsed = json.loads(response)
             if isinstance(parsed, dict) and all(

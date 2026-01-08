@@ -180,6 +180,12 @@ class ImageSender(NcatBotPlugin):
             "allowed_users": None,
             "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
+        "zzl": {
+            "triggers": ["zzl"],
+            "path": "data/image/zzl",
+            "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
+        },
     }
 
     @on_message
@@ -381,7 +387,8 @@ class ImageSender(NcatBotPlugin):
         keyword_match = re.match(r"上传\s*(\w+)", clean_message)
         if not keyword_match:
             await self.api.post_group_msg(
-                group_id=input.group_id, text="上传格式错误！请使用：上传 关键词[图片] 或回复图片并发送：上传 关键词"
+                group_id=input.group_id,
+                text="上传格式错误！请使用：上传 关键词[图片] 或回复图片并发送：上传 关键词",
             )
             return
 
@@ -519,9 +526,7 @@ class ImageSender(NcatBotPlugin):
                 failed_count += 1
 
         # 构建删除结果消息
-        result_message = (
-            f"删除完成！成功: {success_count} 张，未找到: {not_found_count} 张，失败: {failed_count} 张"
-        )
+        result_message = f"删除完成！成功: {success_count} 张，未找到: {not_found_count} 张，失败: {failed_count} 张"
         await self.api.post_group_msg(group_id=input.group_id, text=result_message)
 
     async def download_and_save_image(
@@ -581,9 +586,7 @@ class ImageSender(NcatBotPlugin):
             log.error(f"下载图片失败 {url}: {str(e)}")
             return False, "failed"
 
-    async def delete_image_by_url(
-        self, url: str, target_path: str
-    ) -> tuple[bool, str]:
+    async def delete_image_by_url(self, url: str, target_path: str) -> tuple[bool, str]:
         """根据图片 URL 在指定路径中查找并删除对应图片，返回(是否成功, 状态信息)"""
         try:
             # 如果路径不是绝对路径，则转换为绝对路径
