@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Quake Card</title>
+    <!-- D3.js & TopoJSON -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <style>
+        /* --- 专业暗色主题 --- */
+        :root {
+            --bg-body: transparent;
+            /* 背景透明，防止截图黑边 */
+            --bg-card: #1e293b;
+            /* 卡片背景 */
+            --text-primary: #f8fafc;
+            /* 主文字 */
+            --text-secondary: #94a3b8;
+            /* 次要文字 */
+            --border: #334155;
+            /* 边框 */
+
+            /* 信号色 */
+            --color-mag-low: #10b981;
+            --color-mag-med: #f59e0b;
+            --color-mag-high: #ef4444;
+            --color-update: #3b82f6;
+            /* 更新标记色 */
+            --color-intensity: #8b5cf6;
+            /* 烈度紫色 */
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: fit-content;
+            /* 自适应内容宽度 */
+            height: fit-content;
+            /* 自适应内容高度 */
+            background-color: var(--bg-body);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            padding: 0;
+            /* 移除 body padding，由卡片 margin 控制 */
+            box-sizing: border-box;
+        }
+
+        /* --- 地震卡片设计 --- */
+        .quake-card {
+            width: 520px;
+            /* 卡片固定宽度 */
+            margin: 10px;
+            /* 添加外边距 */
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 90px 1fr;
+            /* 左侧概览 | 右侧详情 */
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* 左侧：震级与烈度 */
+        .card-visual {
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 10px;
+            border-right: 1px solid var(--border);
+            gap: 8px;
+        }
+
+        .mag-circle {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .intensity-badge {
+            background: var(--color-intensity);
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 右侧：详细数据 */
+        .card-details {
+            padding: 15px 20px;
+        }
+
+        .card-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .region-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        /* 标签：NEW / UPDATE */
+        .action-tag {
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            margin-left: 8px;
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        .tag-update {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            border: 1px solid #3b82f6;
+        }
+
+        .tag-new {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid #10b981;
+        }
+
+        .time-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-family: monospace;
+            white-space: nowrap;
+            margin-left: 10px;
+        }
+
+        /* 数据网格 */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 15px;
+            margin-top: 10px;
+        }
+
+        .metric-item {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.8rem;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            margin-bottom: 2px;
+            font-size: 0.75rem;
+        }
+
+        .metric-value {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .metric-sub {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-left: 4px;
+        }
+
+        /* 误差值颜色 */
+
+        .card-footer {
+            margin-top: 12px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #475569;
+        }
+
+        /* 颜色类 */
+        .bg-low {
+            background-color: var(--color-mag-low);
+        }
+
+        .bg-med {
+            background-color: var(--color-mag-med);
+        }
+
+        .bg-high {
+            background-color: var(--color-mag-high);
+        }
+
+        /* --- Globe Container --- */
+        #globe-container {
+            height: 150px;
+            width: 100%;
+            margin: 15px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .land {
+            fill: #334155;
+            stroke: #475569;
+            stroke-width: 1px;
+        }
+
+        .quake-ring {
+            fill: none;
+            stroke: var(--color-mag-high);
+            stroke-width: 2px;
+            opacity: 0.8;
+            transform-box: fill-box;
+            transform-origin: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quake-card">
+        <div class="card-visual">
+            <div class="mag-circle {{ mag_class }}">{{ magnitude }}</div>
+            {% if intensity %}
+            <div class="intensity-badge">MMI {{ intensity }}</div>
+            {% endif %}
+        </div>
+        <div class="card-details">
+            <div class="card-header-row">
+                <div style="flex: 1;">
+                    <span class="region-text">{{ region }}</span>
+                    {% if is_update %}
+                    <span class="action-tag tag-update">UPDATE (Rev.{{ revision }})</span>
+                    {% else %}
+                    <span class="action-tag tag-new">NEW EVENT</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="time-text" style="margin-bottom: 10px;">
+                {{ time_str }}
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <span class="metric-label">深度 (Depth)</span>
+                    <span class="metric-value">{{ depth }} km</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">震中位置 (Epicenter)</span>
+                    <span class="metric-value">
+                        {{ epicenter_str }}
+                    </span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">最大加速度 (PGA)</span>
+                    <span class="metric-value">{{ pga }}</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">定位误差 (Loc Err)</span>
+                    <span class="metric-value">{{ location_error }}</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">台站 (Used/Total)</span>
+                    <span class="metric-value">{{ stations_used }} / {{ stations_total }}</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">数据拟合 (Quality)</span>
+                    <span class="metric-value">{{ quality_pct }}</span>
+                </div>
+            </div>
+
+            <!-- Map Container -->
+            <div id="globe-container"></div>
+
+            <div class="card-footer">
+                <span>ID: {{ event_id }}</span>
+                <span>Source: Global Quake</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- D3 Globe Script -->
+    <script>
+        const width = 480;
+        const height = 150; // Match CSS height
+
+        const lat = Number("{{ latitude }}");
+        const lng = Number("{{ longitude }}");
+
+        const svg = d3.select("#globe-container")
+            .append("svg")
+            .attr("viewBox", `0 0 ${width} ${height}`)
+            .attr("preserveAspectRatio", "xMidYMid meet");
+
+        const projection = d3.geoOrthographic()
+            .scale(300)
+            .translate([width / 2, height / 2])
+            .rotate([-lng, -lat])
+            .clipAngle(90);
+
+        const path = d3.geoPath().projection(projection);
+
+        function markReady() {
+            document.body.classList.add('d3-ready');
+            console.log("D3 Render Complete");
+        }
+
+        function drawEpicenter() {
+            const center = projection([lng, lat]);
+            if (center) {
+                const size = 8; // 叉的大小
+
+                // 叉形震源标记 (X)
+                const crossGroup = svg.append("g")
+                    .attr("transform", `translate(${center[0]}, ${center[1]})`);
+
+                const outlineWidth = 6;
+                const strokeColor = "#FFF1AA";
+
+                // 绘制描边 (淡黄色)
+                crossGroup.append("line")
+                    .attr("x1", -size).attr("y1", -size)
+                    .attr("x2", size).attr("y2", size)
+                    .attr("stroke", strokeColor)
+                    .attr("stroke-width", outlineWidth)
+                    .attr("stroke-linecap", "round");
+
+                crossGroup.append("line")
+                    .attr("x1", size).attr("y1", -size)
+                    .attr("x2", -size).attr("y2", size)
+                    .attr("stroke", strokeColor)
+                    .attr("stroke-width", outlineWidth)
+                    .attr("stroke-linecap", "round");
+
+                // 第一条线 (\)
+                crossGroup.append("line")
+                    .attr("x1", -size).attr("y1", -size)
+                    .attr("x2", size).attr("y2", size)
+                    .attr("stroke", "#ef4444")
+                    .attr("stroke-width", 3)
+                    .attr("stroke-linecap", "round");
+
+                // 第二条线 (/)
+                crossGroup.append("line")
+                    .attr("x1", size).attr("y1", -size)
+                    .attr("x2", -size).attr("y2", size)
+                    .attr("stroke", "#ef4444")
+                    .attr("stroke-width", 3)
+                    .attr("stroke-linecap", "round");
+            }
+        }
+
+        d3.json("https://unpkg.com/world-atlas@2.0.2/land-110m.json").then(function (world) {
+            svg.append("path")
+                .datum(topojson.feature(world, world.objects.land))
+                .attr("class", "land")
+                .attr("d", path);
+
+            drawEpicenter();
+            markReady();
+        }).catch(err => {
+            console.error("Map load failed", err);
+            drawEpicenter();
+            markReady();
+        });
+    </script>
+</body>
+
+</html>

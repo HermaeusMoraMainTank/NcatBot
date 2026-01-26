@@ -78,6 +78,7 @@ class Fortune(NcatBotPlugin):
             )
             await self.api.post_group_msg(group_id=input.group_id, rtf=message)
 
+
         elif message == "今日运势":
             current_date = date.today()
 

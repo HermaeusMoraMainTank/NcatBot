@@ -1,0 +1,681 @@
+{
+  "enabled": {
+    "description": "启用灾害预警插件",
+    "type": "bool",
+    "default": true
+  },
+  "admin_users": {
+    "description": "插件管理员列表",
+    "type": "list",
+    "hint": "输入用户ID（QQ号等）。这些用户拥有管理插件的高级权限（如查看日志、修改配置等）。AstrBot的全站管理员默认拥有权限，无需在此重复添加。",
+    "default": null
+  },
+  "target_groups": {
+    "description": "需要推送消息的群号列表",
+    "type": "list",
+    "hint": "输入群号，留空则不推送消息",
+    "default": []
+  },
+  "platform_name": {
+    "description": "消息平台名称",
+    "type": "string",
+    "default": "default",
+    "hint": "输入你接入的消息平台下的机器人名称，如：default、aiocqhttp、telegram、discord等。在 WebUI 中的 机器人 一栏可以查看你自定义的机器人名称，填写它。"
+  },
+  "data_sources": {
+    "description": "数据源配置",
+    "type": "object",
+    "hint": "支持多API服务细粒度控制",
+    "items": {
+      "fan_studio": {
+        "description": "FAN Studio WebSocket 数据源 - 中国地震网、台湾中央气象署、气象预警、海啸预警",
+        "type": "object",
+        "items": {
+          "enabled": {
+            "description": "启用FAN Studio数据源",
+            "type": "bool",
+            "default": true
+          },
+          "china_earthquake_warning": {
+            "description": "中国地震网地震预警",
+            "type": "bool",
+            "default": true,
+            "hint": "通过FAN Studio WebSocket接收中国地震网地震预警信息"
+          },
+          "taiwan_cwa_earthquake": {
+            "description": "台湾中央气象署：强震即时警报",
+            "type": "bool",
+            "default": true,
+            "hint": "通过FAN Studio WebSocket接收台湾中央气象署强震即时警报"
+          },
+          "china_cenc_earthquake": {
+            "description": "中国地震台网（CENC）：地震测定",
+            "type": "bool",
+            "default": true,
+            "hint": "通过FAN Studio WebSocket接收中国地震台网地震测定信息"
+          },
+          "japan_jma_eew": {
+            "description": "日本气象厅（JMA）：紧急地震速报",
+            "type": "bool",
+            "default": true,
+            "hint": "通过FAN Studio WebSocket接收日本气象厅地震预警信息"
+          },
+          "usgs_earthquake": {
+            "description": "美国地质调查局（USGS）：地震测定",
+            "type": "bool",
+            "default": true,
+            "hint": "通过FAN Studio WebSocket接收USGS地震测定信息"
+          },
+          "china_weather_alarm": {
+            "description": "中国气象局：气象预警",
+            "type": "bool",
+            "default": true,
+            "hint": "通过FAN Studio WebSocket接收中国气象局气象预警信息"
+          },
+          "china_tsunami": {
+            "description": "自然资源部海啸预警中心：海啸预警信息",
+            "type": "bool",
+            "default": true,
+            "hint": "通过FAN Studio WebSocket接收自然资源部海啸预警中心海啸预警信息"
+          }
+        }
+      },
+      "p2p_earthquake": {
+        "description": "P2P地震情報 WebSocket 数据源 - 日本气象厅紧急地震速报、地震情报",
+        "type": "object",
+        "items": {
+          "enabled": {
+            "description": "启用P2P地震情報数据源",
+            "type": "bool",
+            "default": true
+          },
+          "japan_jma_eew": {
+            "description": "日本気象庁：緊急地震速報",
+            "type": "bool",
+            "default": true,
+            "hint": "通过P2P地震情報 WebSocket接收日本气象厅紧急地震速报（code:556）"
+          },
+          "japan_jma_earthquake": {
+            "description": "日本気象庁（JMA）：地震情報",
+            "type": "bool",
+            "default": true,
+            "hint": "通过P2P地震情報 WebSocket接收日本气象厅地震情报（code:551）"
+          },
+          "japan_jma_tsunami": {
+            "description": "日本気象庁：津波予報",
+            "type": "bool",
+            "default": true,
+            "hint": "通过P2P地震情報 WebSocket接收日本气象厅海啸预报（code:552）"
+          }
+        }
+      },
+      "wolfx": {
+        "description": "Wolfx API 数据源 - 多国家地震预警和地震列表",
+        "type": "object",
+        "items": {
+          "enabled": {
+            "description": "启用Wolfx数据源",
+            "type": "bool",
+            "default": true
+          },
+          "japan_jma_eew": {
+            "description": "日本気象庁：緊急地震速報",
+            "type": "bool",
+            "default": true,
+            "hint": "通过Wolfx API接收日本气象厅紧急地震速报（备注：该服务可能经常返回HTTP 503错误，如果长期处于无法使用的状况，建议关闭）"
+          },
+          "china_cenc_eew": {
+            "description": "中国地震台网（CENC）：地震预警",
+            "type": "bool",
+            "default": true,
+            "hint": "通过Wolfx API接收中国地震台网地震预警"
+          },
+          "taiwan_cwa_eew": {
+            "description": "台湾中央气象署：地震预警",
+            "type": "bool",
+            "default": true,
+            "hint": "通过Wolfx API接收台湾中央气象署地震预警（备注：该服务可能经常返回HTTP 503错误，如果长期处于无法使用的状况，建议关闭）"
+          },
+          "japan_jma_earthquake": {
+            "description": "日本気象庁（JMA）：地震情報",
+            "type": "bool",
+            "default": true,
+            "hint": "通过Wolfx API接收日本气象厅地震情报列表（备注：该服务可能经常返回HTTP 503错误，如果长期处于无法使用的状况，建议关闭）"
+          },
+          "china_cenc_earthquake": {
+            "description": "中国地震台网（CENC）：地震测定",
+            "type": "bool",
+            "default": true,
+            "hint": "通过Wolfx API接收中国地震台网地震测定列表"
+          }
+        }
+      },
+      "global_quake": {
+        "description": "Global Quake 服务器推送",
+        "type": "object",
+        "hint": "通过全球测站实时测算，精度有限",
+        "items": {
+          "enabled": {
+            "description": "启用Global Quake数据源",
+            "type": "bool",
+            "hint": "连接到GlobalQuake Monitor服务器获取全球地震实时数据",
+            "default": true
+          }
+        }
+      }
+    }
+  },
+  "local_monitoring": {
+    "description": "本地烈度监控配置",
+    "type": "object",
+    "hint": "配置机器人所在位置，计算本地预估烈度",
+    "items": {
+      "enabled": {
+        "description": "启用本地监控",
+        "type": "bool",
+        "default": false
+      },
+      "latitude": {
+        "description": "本地纬度",
+        "type": "float",
+        "hint": "选点建议位于中国大陆，目前中国台湾/日本地区没有相应的本地预估震度解析逻辑",
+        "default": 39.9042
+      },
+      "longitude": {
+        "description": "本地经度",
+        "type": "float",
+        "hint": "选点建议位于中国大陆，目前中国台湾/日本地区没有相应的本地预估震度解析逻辑",
+        "default": 116.4074
+      },
+      "place_name": {
+        "description": "本地地名",
+        "type": "string",
+        "hint": "用于在推送的预警消息中标识您的“本地监控”位置",
+        "default": "本地"
+      },
+      "strict_mode": {
+        "description": "严格过滤模式",
+        "type": "bool",
+        "hint": "开启后，如果本地烈度未达标，将忽略所有通知（包括其他地区的大地震）",
+        "default": false
+      },
+      "intensity_threshold": {
+        "description": "通知阈值(烈度)",
+        "type": "float",
+        "hint": "只有当本地预估烈度大于等于此值时才通知",
+        "default": 4.0,
+        "slider": {
+          "min": 0,
+          "max": 12,
+          "step": 0.1
+        }
+      }
+    }
+  },
+  "earthquake_filters": {
+    "description": "地震信息过滤器配置",
+    "type": "object",
+    "hint": "根据不同数据源类型使用不同的过滤器",
+    "items": {
+      "intensity_filter": {
+        "description": "基于震级和烈度的地震过滤器",
+        "type": "object",
+        "hint": "使用OR逻辑：满足 震级要求 或 满足烈度要求 即可推送",
+        "items": {
+          "enabled": {
+            "description": "启用烈度过滤器",
+            "type": "bool",
+            "default": true
+          },
+          "min_magnitude": {
+            "description": "最小震级",
+            "type": "float",
+            "hint": "大于等于此震级会推送",
+            "default": 2.0,
+            "slider": {
+              "min": 0,
+              "max": 10,
+              "step": 0.1
+            }
+          },
+          "min_intensity": {
+            "description": "最小烈度",
+            "type": "float",
+            "hint": "大于等于此烈度会推送（中国标准）",
+            "default": 4.0,
+            "slider": {
+              "min": 0,
+              "max": 12,
+              "step": 0.1
+            }
+          }
+        }
+      },
+      "scale_filter": {
+        "description": "基于震级和震度的地震过滤器",
+        "type": "object",
+        "hint": "使用OR逻辑：满足 震级要求 或 满足震度要求 即可推送",
+        "items": {
+          "enabled": {
+            "description": "启用震度过滤器",
+            "type": "bool",
+            "default": true
+          },
+          "min_magnitude": {
+            "description": "最小震级",
+            "type": "float",
+            "hint": "大于等于此震级会推送",
+            "default": 2.0,
+            "slider": {
+              "min": 0,
+              "max": 10,
+              "step": 0.1
+            }
+          },
+          "min_scale": {
+            "description": "最小震度",
+            "type": "float",
+            "hint": "大于等于此震度会推送（日本标准）",
+            "default": 1.0,
+            "slider": {
+              "min": 0,
+              "max": 7,
+              "step": 0.1
+            }
+          }
+        }
+      },
+      "magnitude_only_filter": {
+        "description": "USGS震级过滤器",
+        "type": "object",
+        "hint": "适用于USGS等只有震级信息的数据源",
+        "items": {
+          "enabled": {
+            "description": "启用仅震级过滤器",
+            "type": "bool",
+            "default": true
+          },
+          "min_magnitude": {
+            "description": "最小震级",
+            "type": "float",
+            "hint": "低于此震级的消息将被过滤。",
+            "default": 4.5,
+            "slider": {
+              "min": 0,
+              "max": 10,
+              "step": 0.1
+            }
+          }
+        }
+      },
+      "global_quake_filter": {
+        "description": "Global Quake专用过滤器",
+        "type": "object",
+        "hint": "使用OR逻辑：满足震级要求 或 满足烈度要求 即可推送",
+        "items": {
+          "enabled": {
+            "description": "启用Global Quake过滤器",
+            "type": "bool",
+            "default": true
+          },
+          "min_magnitude": {
+            "description": "最小震级",
+            "type": "float",
+            "hint": "大于等于此震级会推送",
+            "default": 4.5,
+            "slider": {
+              "min": 0,
+              "max": 10,
+              "step": 0.1
+            }
+          },
+          "min_intensity": {
+            "description": "最小烈度",
+            "type": "float",
+            "hint": "大于等于此烈度会推送（支持小数，如3.5）",
+            "default": 5.0,
+            "slider": {
+              "min": 0,
+              "max": 12,
+              "step": 0.1
+            }
+          }
+        }
+      }
+    }
+  },
+  "push_frequency_control": {
+    "description": "推送频率控制",
+    "type": "object",
+    "hint": "测试性功能，用于控制 EEW 的推送频率，如遇到问题欢迎反馈",
+    "items": {
+      "cea_cwa_report_n": {
+        "description": "CEA/CWA：每收到N报推送一次",
+        "type": "int",
+        "hint": "适用于中国地震预警网和台湾中央气象署，1表示每次都推送。这俩几乎就推两三次",
+        "default": 1,
+        "slider": {
+          "min": 1,
+          "max": 10,
+          "step": 1
+        }
+      },
+      "jma_report_n": {
+        "description": "JMA：每收到N报推送一次",
+        "type": "int",
+        "hint": "适用于日本气象厅紧急地震速报。对于M5.0-7.0的地震，一分钟内可能会推送5-20次，M7.0以上的地震可能会在一分钟内推送20+次",
+        "default": 3,
+        "slider": {
+          "min": 1,
+          "max": 20,
+          "step": 1
+        }
+      },
+      "gq_report_n": {
+        "description": "Global Quake：每收到N报推送一次",
+        "type": "int",
+        "hint": "适用于Global Quake。较大规模的地震如M6.0+可能在10分钟左右推送10-30次",
+        "default": 5,
+        "slider": {
+          "min": 1,
+          "max": 20,
+          "step": 1
+        }
+      },
+      "final_report_always_push": {
+        "description": "最终报是否总是推送",
+        "type": "bool",
+        "default": true
+      },
+      "ignore_non_final_reports": {
+        "description": "是否忽略非最终报",
+        "type": "bool",
+        "hint": "只推送最终报（以及第1报）",
+        "default": false
+      }
+    }
+  },
+  "message_format": {
+    "description": "地震消息格式配置",
+    "type": "object",
+    "items": {
+      "include_map": {
+        "description": "是否包含地图链接",
+        "type": "bool",
+        "hint": "适用于地震信息，会在消息末尾添加地图链接",
+        "default": false
+      },
+      "map_provider": {
+        "description": "地图服务提供商",
+        "type": "string",
+        "options": [
+          "openstreetmap",
+          "google",
+          "baidu",
+          "amap"
+        ],
+        "default": "baidu",
+        "hint": "推荐使用百度地图(baidu)或高德地图(amap)，在中国大陆访问更稳定"
+      },
+      "map_zoom_level": {
+        "description": "地图缩放级别",
+        "type": "int",
+        "hint": "1-20，数值越大越详细 (部分地图服务提供商可能不支持该配置)",
+        "default": 5,
+        "slider": {
+          "min": 1,
+          "max": 20,
+          "step": 1
+        }
+      },
+      "detailed_jma_intensity": {
+        "description": "详细显示JMA区域震度",
+        "type": "bool",
+        "hint": "开启后，日本气象厅地震情报将显示所有观测到震度1及以上的区域，而不仅是最大震度区域",
+        "default": false
+      },
+      "use_global_quake_card": {
+        "description": "启用 Global Quake 卡片消息",
+        "type": "bool",
+        "hint": "开启后，Global Quake 的地震预警将以图片卡片的形式推送（需要消耗少量系统资源进行渲染并增加一点延迟）",
+        "default": false
+      },
+      "global_quake_template": {
+        "description": "Global Quake 卡片模板",
+        "type": "string",
+        "hint": "选择使用的卡片模板。Aurora：极光主题，浅色背景；DarkNight：暗夜主题，深色背景",
+        "default": "Aurora",
+        "options": [
+          "Aurora",
+          "DarkNight"
+        ]
+      }
+    }
+  },
+  "weather_config": {
+    "description": "气象预警配置",
+    "type": "object",
+    "items": {
+      "weather_filter": {
+        "description": "气象预警过滤器",
+        "type": "object",
+        "hint": "配置省份过滤和级别过滤",
+        "items": {
+          "enabled": {
+            "description": "启用气象过滤",
+            "type": "bool",
+            "hint": "启用后将应用省份和级别过滤",
+            "default": false
+          },
+          "provinces": {
+            "description": "省份白名单",
+            "type": "list",
+            "hint": "留空推送全国，填写省份名称后只推送对应省份（如：北京、上海、广东、香港、台湾等）",
+            "default": []
+          },
+          "min_color_level": {
+            "description": "最低预警级别",
+            "type": "string",
+            "options": [
+              "白色",
+              "蓝色",
+              "黄色",
+              "橙色",
+              "红色"
+            ],
+            "default": "白色",
+            "hint": "只推送等于或高于此级别的预警。级别排序：白色 < 蓝色 < 黄色 < 橙色 < 红色"
+          }
+        }
+      },
+      "max_description_length": {
+        "description": "气象预警正文描述字数限制",
+        "type": "int",
+        "hint": "超过此字数的正文将被截断并显示省略号。设置为 0 则不限制字数。",
+        "default": 384,
+        "slider": {
+          "min": 0,
+          "max": 1024,
+          "step": 2
+        }
+      }
+    }
+  },
+  "websocket_config": {
+    "description": "WebSocket连接配置",
+    "type": "object",
+    "items": {
+      "reconnect_interval": {
+        "description": "重连间隔",
+        "type": "int",
+        "hint": "单位：秒",
+        "default": 10,
+        "slider": {
+          "min": 1,
+          "max": 60,
+          "step": 1
+        }
+      },
+      "max_reconnect_retries": {
+        "description": "最大重连次数",
+        "type": "int",
+        "hint": "超过此次数将停止重连",
+        "default": 3,
+        "slider": {
+          "min": 1,
+          "max": 10,
+          "step": 1
+        }
+      },
+      "connection_timeout": {
+        "description": "连接超时",
+        "type": "int",
+        "hint": "单位：秒",
+        "default": 15,
+        "slider": {
+          "min": 1,
+          "max": 120,
+          "step": 1
+        }
+      },
+      "heartbeat_interval": {
+        "description": "心跳间隔",
+        "type": "int",
+        "hint": "单位：秒，不要设置超过600的数值，否则可能被服务器断开连接",
+        "default": 120,
+        "slider": {
+          "min": 10,
+          "max": 600,
+          "step": 10
+        }
+      },
+      "fallback_retry_enabled": {
+        "description": "启用兜底重试机制",
+        "type": "bool",
+        "hint": "当短时重连失败后，系统将在设定间隔后自动尝试重新连接",
+        "default": true
+      },
+      "fallback_retry_interval": {
+        "description": "兜底重试间隔",
+        "type": "int",
+        "hint": "单位：秒，默认1800秒（30分钟）",
+        "default": 1800,
+        "slider": {
+          "min": 300,
+          "max": 86400,
+          "step": 60
+        }
+      },
+      "fallback_retry_max_count": {
+        "description": "兜底重试最大次数",
+        "type": "int",
+        "hint": "-1表示无限重试，0表示禁用，正数表示最大重试次数",
+        "default": -1,
+        "slider": {
+          "min": -1,
+          "max": 100,
+          "step": 1
+        }
+      }
+    }
+  },
+  "debug_config": {
+    "description": "调试配置",
+    "type": "object",
+    "hint": "用于开发和排查问题",
+    "items": {
+      "enable_raw_message_logging": {
+        "description": "启用原始消息格式记录",
+        "type": "bool",
+        "hint": "用于分析所有数据源的消息格式",
+        "default": false
+      },
+      "raw_message_log_path": {
+        "description": "原始消息日志文件路径",
+        "type": "string",
+        "hint": "相对于插件数据目录",
+        "default": "raw_messages.log"
+      },
+      "log_max_size_mb": {
+        "description": "日志文件最大大小",
+        "type": "int",
+        "hint": "单位：MB，超过此大小将自动轮转",
+        "default": 50,
+        "slider": {
+          "min": 1,
+          "max": 1024,
+          "step": 2
+        }
+      },
+      "log_max_files": {
+        "description": "保留的日志文件最大数量",
+        "type": "int",
+        "default": 5,
+        "slider": {
+          "min": 1,
+          "max": 64,
+          "step": 1
+        }
+      },
+      "filter_heartbeat_messages": {
+        "description": "过滤心跳包消息",
+        "type": "bool",
+        "hint": "减少日志噪音，只记录实际数据",
+        "default": true
+      },
+      "filtered_message_types": {
+        "description": "需要过滤的消息类型列表",
+        "type": "list",
+        "hint": "如心跳包、ping、pong等",
+        "items": {
+          "type": "string"
+        },
+        "default": [
+          "heartbeat",
+          "ping",
+          "pong"
+        ]
+      },
+      "filter_p2p_areas_messages": {
+        "description": "是否过滤P2P节点状态消息",
+        "type": "bool",
+        "hint": "areas数组，对分析无意义",
+        "default": true
+      },
+      "filter_duplicate_events": {
+        "description": "是否过滤重复的地震事件",
+        "type": "bool",
+        "hint": "基于时间、位置、震级",
+        "default": true
+      },
+      "filter_connection_status": {
+        "description": "是否过滤连接状态消息",
+        "type": "bool",
+        "hint": "连接建立、断开等",
+        "default": true
+      },
+      "http_earthquake_list_max_items": {
+        "description": "Wolfx HTTP地震列表日志最大记录数",
+        "type": "int",
+        "hint": "记录地震列表API响应时，只记录前N条数据，避免日志冗余。最大值50",
+        "default": 5,
+        "slider": {
+          "min": 1,
+          "max": 50,
+          "step": 1
+        }
+      },
+      "startup_silence_duration": {
+        "description": "启动后静默时间",
+        "type": "int",
+        "hint": "单位：秒。插件启动后在此时间内自动忽略所有事件，不进行推送、日志记录和统计。适用于频繁重启的开发环境或不稳定的生产环境。0表示禁用",
+        "default": 0,
+        "slider": {
+          "min": 0,
+          "max": 3600,
+          "step": 10
+        }
+      }
+    }
+  }
+}

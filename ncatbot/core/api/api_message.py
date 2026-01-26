@@ -45,7 +45,7 @@ def _validate_msg(msg: List[dict]) -> str:
         types = [m["type"] for m in msg if m["type"]]
         first_single = next((m for m in types if m in SINGLE_MSG_ONLY), None)
         if first_single:
-            if any(m["reply"] == "reply" for m in msg):
+            if any(m.get("type") == "reply" for m in msg):
                 return f"{first_single} 不允许通过回复发送, 请使用 `BotAPI.post_xxx_array_msg(msg=[...])` 直接发送"
             return f"{first_single} 不允许与其他消息混合发送，仅能发送单条此类消息"
     return "OK"

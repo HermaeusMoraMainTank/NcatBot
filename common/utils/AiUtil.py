@@ -151,6 +151,7 @@ class AiUtil:
                 completion = client.chat.completions.create(
                     # model="deepseek-chat",
                     model="deepseek-ai/deepseek-v3.1",
+                    # model="z-ai/glm4.7",
                     messages=[
                         {"role": "system", "content": prompt},
                         {"role": "user", "content": keyword},

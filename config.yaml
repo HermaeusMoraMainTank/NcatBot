@@ -7,12 +7,12 @@ check_ncatbot_update: false
 skip_ncatbot_install_check: false
 websocket_timeout: 15
 napcat:
-  ws_uri: ws://127.0.0.1:3001
-  ws_token: napcat
+  ws_uri: ws://127.0.0.1:3002
+  ws_token: y-6u8nt[nfuftYnE
   ws_listen_ip: localhost
   webui_uri: http://127.0.0.1:6099
-  webui_token: <J[Y<I1I.NPP4N)R
-  enable_webui: true
+  webui_token: a4ee53569810
+  enable_webui: false
   check_napcat_update: false
   stop_napcat: false
   remote_mode: false

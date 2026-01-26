@@ -1,0 +1,125 @@
+# 灾害预警插件配置文件
+# NcatBot 版本
+
+# 是否启用插件
+enabled: true
+
+# 插件管理员列表（QQ号）
+admin_users: []
+
+# 需要推送消息的群号列表
+target_groups:
+  - 853963912
+  - 719518427
+
+# 数据源配置
+data_sources:
+  fan_studio:
+    enabled: true
+    china_earthquake_warning: true  # 中国地震网地震预警
+    taiwan_cwa_earthquake: true     # 台湾中央气象署强震即时警报
+    china_cenc_earthquake: true     # 中国地震台网地震测定
+    japan_jma_eew: true             # 日本气象厅紧急地震速报
+    usgs_earthquake: true           # 美国地质调查局地震测定
+    china_weather_alarm: true       # 中国气象局气象预警
+    china_tsunami: true             # 自然资源部海啸预警
+  
+  p2p_earthquake:
+    enabled: true
+    japan_jma_eew: true             # 日本気象庁緊急地震速報
+    japan_jma_earthquake: true      # 日本気象庁地震情報
+    japan_jma_tsunami: true         # 日本気象庁津波予報
+  
+  wolfx:
+    enabled: true
+    japan_jma_eew: true             # 日本気象庁緊急地震速報
+    china_cenc_eew: true            # 中国地震台网地震预警
+    taiwan_cwa_eew: true            # 台湾中央气象署地震预警
+    japan_jma_earthquake: true      # 日本気象庁地震情報
+    china_cenc_earthquake: true     # 中国地震台网地震测定
+  
+  global_quake:
+    enabled: true
+
+# 本地烈度监控配置
+local_monitoring:
+  enabled: false
+  latitude: 39.9042          # 本地纬度
+  longitude: 116.4074        # 本地经度
+  place_name: "本地"          # 本地地名
+  strict_mode: false         # 严格过滤模式
+  intensity_threshold: 4.0   # 通知阈值(烈度)
+
+# 地震信息过滤器配置
+earthquake_filters:
+  intensity_filter:
+    enabled: true
+    min_magnitude: 2.0       # 最小震级
+    min_intensity: 4.0       # 最小烈度
+  
+  scale_filter:
+    enabled: true
+    min_magnitude: 2.0       # 最小震级
+    min_scale: 1.0           # 最小震度
+  
+  magnitude_only_filter:
+    enabled: true
+    min_magnitude: 4.5       # 最小震级 (USGS等)
+  
+  global_quake_filter:
+    enabled: true
+    min_magnitude: 4.5       # 最小震级
+    min_intensity: 5.0       # 最小烈度
+
+# 推送频率控制
+push_frequency_control:
+  cea_cwa_report_n: 1        # CEA/CWA 每N报推送一次
+  jma_report_n: 3            # JMA 每N报推送一次
+  gq_report_n: 5             # Global Quake 每N报推送一次
+  final_report_always_push: true
+  ignore_non_final_reports: false
+
+# 消息格式配置
+message_format:
+  include_map: false         # 是否包含地图链接
+  map_provider: "baidu"      # 地图服务提供商
+  map_zoom_level: 5          # 地图缩放级别
+  detailed_jma_intensity: false
+  use_global_quake_card: false
+  global_quake_template: "Aurora"
+
+# 气象预警配置
+weather_config:
+  weather_filter:
+    enabled: false
+    provinces: []            # 省份白名单
+    min_color_level: "白色"   # 最低预警级别
+  max_description_length: 384
+
+# WebSocket连接配置
+websocket_config:
+  reconnect_interval: 10     # 重连间隔(秒)
+  max_reconnect_retries: 3   # 最大重连次数
+  connection_timeout: 15     # 连接超时(秒)
+  heartbeat_interval: 120    # 心跳间隔(秒)
+  fallback_retry_enabled: true
+  fallback_retry_interval: 1800
+  fallback_retry_max_count: -1
+
+# 调试配置
+debug_config:
+  enable_raw_message_logging: false
+  raw_message_log_path: "raw_messages.log"
+  log_max_size_mb: 50
+  log_max_files: 5
+  filter_heartbeat_messages: true
+  filtered_message_types:
+    - "heartbeat"
+    - "ping"
+    - "pong"
+  filter_p2p_areas_messages: true
+  filter_duplicate_events: true
+  filter_connection_status: true
+  http_earthquake_list_max_items: 5
+  startup_silence_duration: 0
+

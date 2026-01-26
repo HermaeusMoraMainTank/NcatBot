@@ -1,0 +1,135 @@
+import re
+from itertools import chain
+from typing import Any, ClassVar
+
+from aiohttp import ClientError
+from bs4 import BeautifulSoup, Tag
+
+from ..compat import ConfigWrapper as AstrBotConfig
+
+from ..data import ParseResult, Platform
+from ..download import Downloader
+from ..exception import ParseException
+from .base import BaseParser, handle
+
+
+class TwitterParser(BaseParser):
+    # 平台信息
+    platform: ClassVar[Platform] = Platform(name="twitter", display_name="推特")
+
+    def __init__(self, config: AstrBotConfig, downloader: Downloader):
+        super().__init__(config, downloader)
+
+    async def _req_xdown_api(self, url: str) -> dict[str, Any]:
+        headers = {
+            "Accept": "application/json, text/plain, */*",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Origin": "https://xdown.app",
+            "Referer": "https://xdown.app/",
+            **self.headers,
+        }
+        data = {"q": url, "lang": "zh-cn"}
+
+        async with self.client.post(
+            "https://xdown.app/api/ajaxSearch",
+            data=data,
+            headers=headers,
+        ) as resp:
+            if resp.status >= 400:
+                raise ClientError(f"xdown API {resp.status} {resp.reason}")
+            return await resp.json()
+
+    @handle("x.com", r"https?://x.com/(?P<username>[0-9a-zA-Z_]{1,20})/status/(?P<status_id>[0-9]+)")
+    async def _parse(self, searched: re.Match[str]) -> ParseResult:
+        # 从匹配对象中获取原始URL和用户名
+        url = searched.group(0)
+        username = searched.group("username")
+        resp = await self._req_xdown_api(url)
+        if resp.get("status") != "ok":
+            raise ParseException("解析失败")
+
+        html_content = resp.get("data")
+
+        if html_content is None:
+            raise ParseException("解析失败, 数据为空")
+
+        return self.parse_twitter_html(html_content, username=username)
+
+    def parse_twitter_html(self, html_content: str, username: str | None = None) -> ParseResult:
+        """解析 Twitter HTML 内容
+
+        Args:
+            html_content (str): Twitter HTML 内容
+            username (str | None): 用户名
+
+        Returns:
+            ParseResult: 解析结果
+        """
+        soup = BeautifulSoup(html_content, "html.parser")
+
+        # 初始化数据
+        title = None
+        cover_url = None
+        video_url = None
+        images_urls = []
+        dynamic_urls = []
+
+        # 1. 提取缩略图链接
+        thumb_tag = soup.find("img")
+        if isinstance(thumb_tag, Tag):
+            if cover := thumb_tag.get("src"):
+                cover_url = str(cover)
+
+        # 2. 提取下载链接
+        tw_button_tags = soup.find_all("a", class_="tw-button-dl")
+        abutton_tags = soup.find_all("a", class_="abutton")
+        for tag in chain(tw_button_tags, abutton_tags):
+            if not isinstance(tag, Tag):
+                continue
+            href = tag.get("href")
+            if href is None:
+                continue
+
+            href = str(href)
+            text = tag.get_text(strip=True)
+            if "下载 MP4" in text:
+                video_url = href
+                break
+            elif "下载图片" in text:
+                images_urls.append(href)
+            elif "下载 gif" in text:
+                dynamic_urls.append(href)
+
+        # 3. 提取标题
+        title_tag = soup.find("h3")
+        if title_tag:
+            title = title_tag.get_text(strip=True)
+
+        # 简洁的构建方式
+        contents = []
+
+        # 添加视频内容
+        if video_url:
+            contents.append(self.create_video_content(video_url, cover_url))
+
+        # 添加图片内容
+        if images_urls:
+            contents.extend(self.create_image_contents(images_urls))
+
+        # 添加动态内容
+        if dynamic_urls:
+            contents.extend(self.create_dynamic_contents(dynamic_urls))
+
+        return self.result(
+            title=title,
+            author=self.create_author(username or "未知用户"),
+            contents=contents,
+        )
+        # # 4. 提取Twitter ID
+        # twitter_id_input = soup.find("input", {"id": "TwitterId"})
+        # if (
+        #     twitter_id_input
+        #     and isinstance(twitter_id_input, Tag)
+        #     and (value := twitter_id_input.get("value"))
+        #     and isinstance(value, str)
+        # ):

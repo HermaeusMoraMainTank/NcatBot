@@ -42,15 +42,20 @@ async def _record_to_learning_chat(group_id: int, bot_id: int, message: str):
 
 # ========== LearningChat 记录接口 - 结束 ==========
 
-# 全局变量
-trigger_interval = 1200
+# ========== 全局配置参数 ==========
+trigger_interval = 600
 group_reply_caches: Dict[int, "ReplyCache"] = {}  # 存储每个群的 ReplyCache
 last_trigger_times: Dict[int, datetime] = {}  # 存储每个群的上次触发时间
 user_trigger_times: Dict[int, datetime] = {}  # 存储每个用户的上次触发时间
 enable_group_cd = True  # 群聊冷却开关
 enable_user_cd = True  # 用户冷却开关
-enable_callback = True  # 回调功能开关
+enable_callback = False  # 回调功能开关
 callback_timeout = 15  # 回调超时时间（秒）
+
+# 模拟打字延迟开关（默认关闭）
+enable_typing_delay = False
+# 每个字符的延迟时间（秒）
+typing_delay_per_char = 0.1
 
 
 # 回调状态管理
@@ -137,6 +142,12 @@ async def should_reply_by_favorability(user_id: int, skip_users: list = None) ->
     Returns:
         是否应该回复
     """
+    # 冻结用户：回复概率为 0
+    frozen_users = [794383252]
+    if user_id in frozen_users:
+        _log.info(f"[FakeAi] 冻结用户 {user_id}，回复概率为 0%，不回复")
+        return False
+
     # 特定用户跳过检查（管理员等）
     if skip_users and str(user_id) in [str(u) for u in skip_users]:
         return True
@@ -223,6 +234,9 @@ class FakeAi(NcatBotPlugin):
     # Meme 关键词列表（动态加载）
     meme_keywords = []
 
+    # 冻结用户列表（AI功能不生效，只保留查询好感度）
+    frozen_users = [794383252]
+
     # 存储每个群最近的消息，用于生成总结
     _message_buffer: Dict[int, List[Dict]] = {}
     _last_summary_time: Dict[int, int] = {}
@@ -281,6 +295,10 @@ class FakeAi(NcatBotPlugin):
         self, group_id: int, user_id: int, name: str, content: str
     ):
         """将消息添加到缓冲区，用于后续生成总结和用户印象"""
+        # 冻结用户不记录到用户消息缓冲区（不更新印象）
+        if user_id in self.frozen_users:
+            return
+
         # 添加到群消息缓冲区
         if group_id not in self._message_buffer:
             self._message_buffer[group_id] = []
@@ -391,7 +409,9 @@ class FakeAi(NcatBotPlugin):
                     continue
 
                 # 生成用户详细印象（传入user_id用于识别VIP用户）
-                impression_data = await generate_user_impression(name, messages, user_id=user_id)
+                impression_data = await generate_user_impression(
+                    name, messages, user_id=user_id
+                )
 
                 if impression_data:
                     await memory_manager.update_user_impression(
@@ -457,12 +477,12 @@ class FakeAi(NcatBotPlugin):
 
     async def _process_image_descriptions(self, content: list) -> list:
         """为消息中的图片生成描述（只处理最后一张图片）
-        
+
         将图片替换为文本描述格式 [图片: 描述内容]，让 AI 能理解图片内容
-        
+
         Args:
             content: 消息内容列表
-            
+
         Returns:
             处理后的消息内容列表（图片会被替换为文本描述）
         """
@@ -471,23 +491,20 @@ class FakeAi(NcatBotPlugin):
         for i, item in enumerate(content):
             if isinstance(item, dict) and item.get("type") == "image":
                 image_indices.append(i)
-        
+
         if not image_indices:
             return content
-        
+
         # 只处理最后一张图片（效率优先）
         last_image_idx = image_indices[-1]
         image_data = content[last_image_idx].get("data", {})
         image_url = image_data.get("url", "")
-        
+
         if not image_url:
             # 没有 URL，标记为无法识别的图片
-            content[last_image_idx] = {
-                "type": "text",
-                "data": {"text": "[图片]"}
-            }
+            content[last_image_idx] = {"type": "text", "data": {"text": "[图片]"}}
             return content
-        
+
         try:
             # 调用多模态模型生成描述
             description = await AiUtil.describe_image_briefly(image_url)
@@ -495,29 +512,20 @@ class FakeAi(NcatBotPlugin):
                 # 把图片替换为文本描述，让 AI 能理解
                 content[last_image_idx] = {
                     "type": "text",
-                    "data": {"text": f"[图片: {description}]"}
+                    "data": {"text": f"[图片: {description}]"},
                 }
                 _log.info(f"[FakeAi] 图片描述已生成: {description[:50]}...")
             else:
                 # 描述生成失败，标记为普通图片
-                content[last_image_idx] = {
-                    "type": "text",
-                    "data": {"text": "[图片]"}
-                }
+                content[last_image_idx] = {"type": "text", "data": {"text": "[图片]"}}
         except Exception as e:
             _log.debug(f"[FakeAi] 图片描述生成失败: {e}")
-            content[last_image_idx] = {
-                "type": "text",
-                "data": {"text": "[图片]"}
-            }
-        
+            content[last_image_idx] = {"type": "text", "data": {"text": "[图片]"}}
+
         # 其他未处理的图片也标记一下
         for idx in image_indices[:-1]:
-            content[idx] = {
-                "type": "text",
-                "data": {"text": "[图片]"}
-            }
-        
+            content[idx] = {"type": "text", "data": {"text": "[图片]"}}
+
         return content
 
     async def handle_balance_query(self, input: GroupMessage) -> None:
@@ -679,8 +687,11 @@ class FakeAi(NcatBotPlugin):
                 fav_text += f" (待结算: {'+' if pending > 0 else ''}{pending})"
             message_parts.append(Text(fav_text + "\n"))
 
-            # 回复概率
-            reply_prob = get_reply_probability(favorability)
+            # 回复概率（冻结用户显示 0%）
+            if query_user_id in self.frozen_users:
+                reply_prob = 0.0
+            else:
+                reply_prob = get_reply_probability(favorability)
             prob_emoji = (
                 "🎯" if reply_prob >= 0.8 else "🎲" if reply_prob >= 0.5 else "🌙"
             )
@@ -1147,10 +1158,10 @@ class FakeAi(NcatBotPlugin):
                 callback_state.remove_waiting_user(sender_id)
                 # 直接回复，不检查CD
                 reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
-                
+
                 # 对图片进行识别描述
                 content = await self._process_image_descriptions(content)
-                
+
                 reply_json = json.dumps(
                     {
                         "name": sender_name,
@@ -1203,6 +1214,11 @@ class FakeAi(NcatBotPlugin):
                         target_user_id = int(at_qq)
                         break
             await self.handle_impression_query(input, target_user_id)
+            return
+
+        # 冻结用户：只允许查询好感度，其他 AI 功能不生效
+        if int(sender_id) in self.frozen_users:
+            _log.debug(f"[FakeAi] 冻结用户 {sender_id}，跳过 AI 功能")
             return
 
         # 处理知识库查询命令（仅限管理员）
@@ -1453,9 +1469,10 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
             if text_after_last_at:
                 message_elements.append(Text(text_after_last_at))
 
-            # 模拟打字的延时，根据句子的字符数设置延时
-            delay = len(sentence) * 0.1  # 每个字符延时 0.1 秒
-            await asyncio.sleep(delay)
+            # 模拟打字的延时，根据句子的字符数设置延时（可通过开关控制）
+            if enable_typing_delay:
+                delay = len(sentence) * typing_delay_per_char
+                await asyncio.sleep(delay)
 
             # 发送消息
             if message_elements:  # 确保消息链不为空
@@ -1763,15 +1780,17 @@ async def answer_ai(
                         text_content = content
                     else:
                         text_content = str(content)
-                    
+
                     if text_content.strip():
                         recent_messages.append(text_content)
             except json.JSONDecodeError:
                 continue
 
         query_text = " ".join(recent_messages)
-        _log.debug(f"[FakeAi] 知识检索查询文本: {query_text[:200] if query_text else '空'}...")
-        
+        _log.debug(
+            f"[FakeAi] 知识检索查询文本: {query_text[:200] if query_text else '空'}..."
+        )
+
         if query_text:
             related_knowledge = await memory_manager.get_knowledge_text(
                 query_text, max_length=300

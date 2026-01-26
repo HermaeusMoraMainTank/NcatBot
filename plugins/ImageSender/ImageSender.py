@@ -1,4 +1,6 @@
 from datetime import datetime
+from typing import Dict
+
 import logging
 import os
 import random
@@ -13,6 +15,30 @@ from common.constants.HMMT import HMMT
 
 
 log = logging.getLogger(__name__)
+
+# 每用户冷却：60 秒内只能调用一次（仅发图，上传无 CD）
+USER_CD_SECONDS = 60
+user_last_trigger: Dict[str, datetime] = {}
+# 无视 CD 的用户 ID（如 hmmt）
+CD_EXEMPT_USERS = {HMMT.HMMT_ID}
+
+
+def _check_user_cd(user_id: str) -> bool:
+    """检查用户 CD 是否已结束，True 表示可调用，False 表示冷却中。豁免用户直接通过。"""
+    if user_id in CD_EXEMPT_USERS:
+        return True
+    last = user_last_trigger.get(user_id)
+    if not last:
+        return True
+    elapsed = (datetime.now() - last).total_seconds()
+    return elapsed >= USER_CD_SECONDS
+
+
+def _update_user_trigger(user_id: str) -> None:
+    """记录用户本次调用时间（豁免用户不记录）"""
+    if user_id in CD_EXEMPT_USERS:
+        return
+    user_last_trigger[user_id] = datetime.now()
 
 
 class ImageSender(NcatBotPlugin):
@@ -186,6 +212,18 @@ class ImageSender(NcatBotPlugin):
             "allowed_users": None,
             "recall_time": None,  # 撤回时间（秒），None 表示不撤回
         },
+        "pgly":{
+            "triggers": ["pgly"],
+            "path": "data/image/pgly",
+            "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
+        },
+        "hmmt":{
+            "triggers": ["hmmt"],
+            "path": "data/image/hmmt",
+            "allowed_users": None,
+            "recall_time": None,  # 撤回时间（秒），None 表示不撤回
+        }
     }
 
     @on_message
@@ -249,6 +287,11 @@ class ImageSender(NcatBotPlugin):
                                 )
                                 return
 
+                            # 每用户 60 秒 CD
+                            uid = str(input.sender.user_id)
+                            if not _check_user_cd(uid):
+                                return
+
                             # 使用 random.sample 不重复地选择指定数量的图片
                             selected_files = random.sample(image_files, count)
                             for file in selected_files:
@@ -264,6 +307,7 @@ class ImageSender(NcatBotPlugin):
                                         [Image(file) for file in selected_files]
                                     ),
                                 )
+                                _update_user_trigger(uid)
                                 # 响应直接就是消息ID
                                 last_message_id = response
                                 log.info(f"发送消息 ID: {last_message_id}")  # 添加日志
@@ -290,6 +334,11 @@ class ImageSender(NcatBotPlugin):
                             )
                             return
 
+                        # 每用户 60 秒 CD
+                        uid = str(input.sender.user_id)
+                        if not _check_user_cd(uid):
+                            return
+
                         file = random.choice(image_files)
                         log.info(
                             f"Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} {file}"
@@ -297,6 +346,7 @@ class ImageSender(NcatBotPlugin):
                         response = await self.api.post_group_msg(
                             group_id=input.group_id, rtf=MessageChain([Image(file)])
                         )
+                        _update_user_trigger(uid)
                         # 响应直接就是消息ID
                         last_message_id = response
                         log.info(f"发送消息 ID: {last_message_id}")  # 添加日志

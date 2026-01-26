@@ -4,12 +4,15 @@ from ncatbot.utils import config, get_log
 
 _log = get_log()
 
+# 群名称缓存
+_group_name_cache = {}
+
 config.set_bot_uin("3555202423")  # 设置 bot qq 号 (必填)
 config.set_root("273421673")  # 设置 bot 超级管理员账号 (建议填写)
-config.set_ws_uri("ws://127.0.0.1:3001")  # 设置 napcat websocket server 地址
-config.set_ws_token("napcat")  # 设置 token (websocket 的 token)
+config.set_ws_uri("ws://127.0.0.1:3002")  # 设置 napcat websocket server 地址
+config.set_ws_token("y-6u8nt[nfuftYnE")  # 设置 token (websocket 的 token)
 config.set_webui_uri("http://127.0.0.1:6099")  # 设置 napcat webui 地址
-config.set_webui_token("<J[Y<I1I.NPP4N)R")  # 设置 token (webui 的 token)
+config.set_webui_token("a4ee53569810")  # 设置 token (webui 的 token)
 
 bot = BotClient()
 
@@ -27,8 +30,19 @@ async def on_group_message(message: GroupMessage):
 
     # 替换 &amp; 为 &
     processed_message = message.raw_message.replace("&amp;", "&")
+
+    # 获取群名称（带缓存）
+    group_id = str(message.group_id)
+    if group_id not in _group_name_cache:
+        try:
+            group_info = await bot.api.get_group_info(group_id)
+            _group_name_cache[group_id] = group_info.group_name
+        except Exception:
+            _group_name_cache[group_id] = group_id
+    group_name = _group_name_cache[group_id]
+
     _log.info(
-        f"收到群消息，Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}，群ID：{message.group_id}，ID: {message.user_id}，昵称：{message.sender.nickname}，内容：{processed_message}"
+        f"收到群消息，Time:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}，群：{group_name}({group_id})，用户：{message.sender.nickname}({message.user_id})，内容：{processed_message}"
     )
 
 
