@@ -1,3 +1,131 @@
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "ncatbot5"
+version = "5.4.1"
+description = "NcatBot, NapCat Python SDK"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [ { name = "木子", email = "lyh_02@qq.com" }, { name = "huan-yp", email = "huan_yp@qq.com"} ]
+urls = { "Source" = "https://github.com/ncatbot/ncatbot", "Bug Reports" = "https://github.com/ncatbot/ncatbot/issues", "Documentation" = "https://github.com/ncatbot/ncatbot/wiki" }
+requires-python = ">=3.12"
+dependencies = [
+  # 数据模型
+  "pydantic>=2.0",
+  # 定时任务
+  "schedule",
+  # 配置文件
+  "pyyaml>=6.0",
+  # 网络通信
+  "aiohttp>=3.9",
+  "httpx>=0.27",
+  "websockets",
+  # 版本解析
+  "packaging",
+  # 终端输出
+  "tqdm>=4.60",
+  # QR 码生成
+  "qrcode",
+  # CLI
+  "click>=8.1",
+  "ruff>=0.14.10",
+  "pre-commit>=4.5.1",
+  "tox>=4.33.0",
+]
+
+[project.scripts]
+ncatbot = "ncatbot.cli:main"
+
+[project.optional-dependencies]
+# 测试依赖
+test = [
+  "pytest>=7.0",
+  "pytest-asyncio>=0.21",
+  "pytest-cov>=4.0",
+  "pytest-html>=4.0",
+  "litellm>=1.40.0",
+]
+# 开发依赖。使用 uv sync --extra dev 安装（包含测试依赖）
+dev = [
+  "ncatbot5[test]",
+  "build>=1.4.0",
+  "twine>=6.2.0",
+  "tox>=4.0",
+  "tox-uv",
+  "pre-commit",
+  "ruff",
+  "mypy",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ncatbot", "ncatbot.*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+# 只收集 Test 开头的类作为测试类，排除 E2ETestSuite 等工具类
+python_classes = ["Test*"]
+markers = []
+
+[tool.coverage.run]
+source = ["ncatbot"]
+branch = true
+omit = [
+    # 版本文件（自动生成）
+    "ncatbot/_version.py",
+    # 测试文件
+    "ncatbot/**/test_*.py",
+    # MCP 模块（Model Context Protocol 服务端，需要外部 MCP 客户端测试）
+    "ncatbot/mcp/*",
+    # 网络 I/O（需要真实网络环境）
+    "ncatbot/utils/network_io.py",
+    # NapCat 适配器（需要真实 NapCat 服务和文件系统操作）
+    "ncatbot/core/adapter/nc/*",
+    # 模板插件（静态资源）
+    "ncatbot/utils/assets/*",
+    # 日志格式化（视觉效果代码）
+    "ncatbot/utils/logger.py",
+    # 废弃的线程池工具
+    "ncatbot/utils/thread_pool.py",
+    # 测试基础设施（不需要测试自身）
+    "ncatbot/utils/testing/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+    "@abstractmethod",
+]
+show_missing = true
+skip_covered = false
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.uv]
+# 安全约束：修复间接依赖中的已知漏洞
+constraint-dependencies = [
+  "virtualenv>=20.36.2",   # TOCTOU 符号链接攻击 (CWE-362, CWE-59)
+  "filelock>=3.20.3",      # SoftFileLock TOCTOU 漏洞 (CWE-362, CWE-367)
+  "cryptography>=46.0.5",  # SECT 曲线子群验证缺失
+  "urllib3>=2.6.3",        # HTTP 重定向解压缩炸弹绕过 (CWE-409)
+]
+
+[tool.codespell]
+ignore-words-list = "ans,fo,therefrom,lke"
+
+[tool.ruff]
+# docs/ 是 Git submodule，不进行 lint
+extend-exclude = ["docs"]
+
+[tool.ruff.lint.per-file-ignores]
+# legacy 代码正在重构替换，不再维护 lint
+"ncatbot_legacy/**" = ["F401", "F405", "F841", "E402"]
+# 示例代码允许未使用的 import（教学用途）
+"docs/docs/examples/**" = ["F401"]

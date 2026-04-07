@@ -1,12 +1,22 @@
-# 3xx 兼容层
+"""
+插件系统
 
-from ..plugin_system import NcatBotEvent as Event
-from ..plugin_system import NcatBotPlugin as BasePlugin
-from .compatible_enrollment import CompatibleEnrollment
+提供插件基类、清单模型、加载器和完整插件基类。
+"""
 
+from .base import BasePlugin
+from .manifest import PluginManifest
+from .loader import PluginLoader, check_requirements, install_packages
+from .mixin import SessionCancelled, SessionResult
+from .ncatbot_plugin import NcatBotPlugin
 
 __all__ = [
-    "Event",
     "BasePlugin",
-    "CompatibleEnrollment",
+    "NcatBotPlugin",
+    "PluginManifest",
+    "PluginLoader",
+    "SessionCancelled",
+    "SessionResult",
+    "check_requirements",
+    "install_packages",
 ]

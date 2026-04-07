@@ -17,13 +17,13 @@ repos:
       - id: detect-private-key
       - id: debug-statements
       - id: mixed-line-ending
-        args: ['--fix=crlf']
+        args: ['--fix=lf']
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.9.4
+    rev: v0.11.6
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
-      - id: ruff-format          # 替代 black
+      - id: ruff-format
 
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.1

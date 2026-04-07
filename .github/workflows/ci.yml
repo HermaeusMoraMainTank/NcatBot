@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+# 同一 SHA 的 branch push 会被后到的 tag push 取消，避免重复测试
+concurrency:
+  group: ci-${{ github.sha }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # ── 阶段 1: Lint + Test（复用 pytest.yml）────────────────
+  test:
+    uses: ./.github/workflows/pytest.yml
+
+  # ── 阶段 2: 构建 + 发布 PyPI + GitHub Release ──────────
+  publish:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - uses: astral-sh/setup-uv@v4
+
+      - name: Build
+        run: uv build
+
+      - name: Verify package
+        run: uvx twine check dist/*
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_TOKEN }}
+
+      - name: Package user reference
+        run: uv run python .agents/skills/release/scripts/pack_user_ref.py --version ${GITHUB_REF_NAME#v}
+
+      - name: Generate release notes
+        run: |
+          PREV_TAG=$(git tag --sort=-creatordate | sed -n '2p')
+          if [ -z "$PREV_TAG" ]; then
+            RANGE="HEAD"
+          else
+            RANGE="${PREV_TAG}..HEAD"
+          fi
+          {
+            echo "## Changes"
+            echo ""
+            git log "${RANGE}" --oneline --no-merges --format="- %s (%h)"
+          } > release-notes.md
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=${GITHUB_REF_NAME#v}
+          gh release create "${GITHUB_REF_NAME}" \
+            "dist/ncatbot5-${VERSION}-user-reference.zip" \
+            "dist/ncatbot5-${VERSION}-py3-none-any.whl" \
+            "dist/ncatbot5-${VERSION}.tar.gz" \
+            --title "${GITHUB_REF_NAME}" \
+            --notes-file release-notes.md

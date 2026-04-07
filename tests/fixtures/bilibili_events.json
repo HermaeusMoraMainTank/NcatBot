@@ -1,0 +1,487 @@
+[
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "DANMU_MSG",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": {
+        "info": [
+          [
+            0,
+            1,
+            25,
+            16777215,
+            1700000000,
+            0,
+            0,
+            "user-hash",
+            0
+          ],
+          "测试弹幕消息",
+          [
+            10001,
+            "TestUser1",
+            0,
+            0,
+            0,
+            10000,
+            1,
+            ""
+          ],
+          [
+            5,
+            "TestMedal",
+            "MedalOwner",
+            9999,
+            398668,
+            "",
+            0,
+            398668,
+            398668,
+            0,
+            0,
+            9999,
+            0,
+            ""
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "SEND_GIFT",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": {
+        "data": {
+          "uid": 10002,
+          "uname": "TestUser2",
+          "face": "https://example.com/face.jpg",
+          "giftName": "辣条",
+          "giftId": 1,
+          "num": 5,
+          "price": 100,
+          "coin_type": "silver"
+        }
+      }
+    }
+  },
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "SUPER_CHAT_MESSAGE",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": {
+        "data": {
+          "uid": 10003,
+          "message": "SC 测试消息",
+          "price": 30,
+          "time": 60,
+          "user_info": {
+            "uname": "TestUser3",
+            "face": "https://example.com/face3.jpg"
+          }
+        }
+      }
+    }
+  },
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "GUARD_BUY",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": {
+        "data": {
+          "uid": 10004,
+          "username": "TestUser4",
+          "guard_level": 3,
+          "price": 198000
+        }
+      }
+    }
+  },
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "INTERACT_WORD_V2",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": {
+        "data": {
+          "uid": 10005,
+          "uname": "TestUser5",
+          "msg_type": 1,
+          "pb_decoded": {
+            "uid": 10005,
+            "uname": "TestUser5",
+            "msg_type": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "LIKE_INFO_V3_CLICK",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": {
+        "data": {
+          "uid": 10006,
+          "uname": "TestUser6",
+          "like_count": 42
+        }
+      }
+    }
+  },
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "VIEW",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": 12345
+    }
+  },
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "LIVE",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": {}
+    }
+  },
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "PREPARING",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": {}
+    }
+  },
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "ROOM_CHANGE",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": {
+        "data": {
+          "title": "测试直播间标题",
+          "area_name": "虚拟主播"
+        }
+      }
+    }
+  },
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "ROOM_BLOCK_MSG",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": {
+        "data": {
+          "uid": 10007,
+          "uname": "BadUser"
+        }
+      }
+    }
+  },
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "ROOM_SILENT_ON",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": {
+        "data": {
+          "type": "level",
+          "level": 1,
+          "second": -1
+        }
+      }
+    }
+  },
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "ROOM_SILENT_OFF",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": {
+        "data": {
+          "type": "",
+          "level": 0,
+          "second": 0
+        }
+      }
+    }
+  },
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "WATCHED_CHANGE",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": {
+        "data": {
+          "num": 1234,
+          "text_small": "1234",
+          "text_large": "1234人看过"
+        }
+      }
+    }
+  },
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "DANMU_AGGREGATION",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": {
+        "data": {
+          "activity_identity": "test_identity",
+          "msg": "集合弹幕",
+          "aggregation_num": 88
+        }
+      }
+    }
+  },
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "ENTRY_EFFECT",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": {
+        "data": {
+          "uid": 10008,
+          "copy_writing_v2": "欢迎 <%TestUser8%> 进入直播间"
+        }
+      }
+    }
+  },
+  {
+    "source_type": "live",
+    "raw_data": {
+      "type": "VERIFICATION_SUCCESSFUL",
+      "room_real_id": "22628755",
+      "room_display_id": "22628755",
+      "data": {}
+    }
+  },
+  {
+    "source_type": "session",
+    "raw_data": {
+      "sender_uid": 20001,
+      "msg_type": "1",
+      "content": "你好，这是一条测试私信",
+      "msg_key": "key_12345",
+      "msg_seqno": 100,
+      "receiver_id": 99999,
+      "timestamp": 1700000000
+    }
+  },
+  {
+    "source_type": "session",
+    "raw_data": {
+      "sender_uid": 20001,
+      "msg_type": "5",
+      "msg_key": "key_12345",
+      "timestamp": 1700000010
+    }
+  },
+  {
+    "source_type": "comment",
+    "raw_data": {
+      "resource_id": "BV1Z7BeBpEnF",
+      "resource_type": "video",
+      "reply": {
+        "rpid": 88001,
+        "root": 0,
+        "parent": 0,
+        "like": 15,
+        "ctime": 1700000020,
+        "member": {
+          "mid": 30001,
+          "uname": "CommentUser",
+          "avatar": "https://example.com/avatar.jpg"
+        },
+        "content": {
+          "message": "测试评论内容"
+        }
+      }
+    }
+  },
+  {
+    "source_type": "dynamic",
+    "raw_data": {
+      "source": "dynamic",
+      "uid": 621240130,
+      "status": "new",
+      "dynamic": {
+        "id_str": "999000111222333",
+        "type": "DYNAMIC_TYPE_DRAW",
+        "visible": true,
+        "modules": {
+          "module_author": {
+            "mid": 621240130,
+            "name": "TestDynUser",
+            "face": "https://example.com/face.jpg",
+            "pub_ts": 1700000100,
+            "pub_time": "2023-11-15 08:00"
+          },
+          "module_dynamic": {
+            "major": {
+              "opus": {
+                "summary": {
+                  "text": "这是一条图文动态测试"
+                },
+                "pics": [
+                  {"url": "https://example.com/pic1.jpg"},
+                  {"url": "https://example.com/pic2.jpg"}
+                ]
+              }
+            },
+            "desc": null
+          },
+          "module_stat": {
+            "comment": {"count": 10},
+            "like": {"count": 50},
+            "forward": {"count": 3}
+          },
+          "module_tag": {
+            "text": "置顶"
+          }
+        }
+      }
+    }
+  },
+  {
+    "source_type": "dynamic",
+    "raw_data": {
+      "source": "dynamic",
+      "uid": 621240130,
+      "status": "new",
+      "dynamic": {
+        "id_str": "999000111222444",
+        "type": "DYNAMIC_TYPE_AV",
+        "visible": true,
+        "modules": {
+          "module_author": {
+            "mid": 621240130,
+            "name": "TestDynUser",
+            "face": "https://example.com/face.jpg",
+            "pub_ts": 1700000200,
+            "pub_time": "2023-11-15 09:00"
+          },
+          "module_dynamic": {
+            "major": {
+              "archive": {
+                "aid": "100200300",
+                "bvid": "BV1test123",
+                "title": "测试视频标题",
+                "cover": "https://example.com/cover.jpg",
+                "desc": "视频简介",
+                "duration_text": "10:30",
+                "stat": {
+                  "play": 12345,
+                  "danmaku": 678
+                }
+              }
+            },
+            "desc": {
+              "text": "视频动态文本"
+            }
+          },
+          "module_stat": {
+            "comment": {"count": 20},
+            "like": {"count": 100},
+            "forward": {"count": 5}
+          }
+        }
+      }
+    }
+  },
+  {
+    "source_type": "dynamic",
+    "raw_data": {
+      "source": "dynamic",
+      "uid": 621240130,
+      "status": "deleted",
+      "dynamic": {
+        "id_str": "999000111222555",
+        "type": "DYNAMIC_TYPE_WORD",
+        "visible": true,
+        "modules": {
+          "module_author": {
+            "mid": 621240130,
+            "name": "TestDynUser",
+            "face": "https://example.com/face.jpg",
+            "pub_ts": 1700000050,
+            "pub_time": "2023-11-15 07:30"
+          },
+          "module_dynamic": {
+            "major": {
+              "opus": {
+                "summary": {
+                  "text": "这条动态被删除了"
+                }
+              }
+            },
+            "desc": null
+          },
+          "module_stat": {
+            "comment": {"count": 0},
+            "like": {"count": 2},
+            "forward": {"count": 0}
+          }
+        }
+      }
+    }
+  },
+  {
+    "source_type": "dynamic",
+    "raw_data": {
+      "source": "dynamic",
+      "uid": 621240130,
+      "status": "new",
+      "dynamic": {
+        "id_str": "999000111222666",
+        "type": "DYNAMIC_TYPE_FORWARD",
+        "visible": true,
+        "modules": {
+          "module_author": {
+            "mid": 621240130,
+            "name": "TestDynUser",
+            "face": "https://example.com/face.jpg",
+            "pub_ts": 1700000300,
+            "pub_time": "2023-11-15 10:00"
+          },
+          "module_dynamic": {
+            "major": null,
+            "desc": {
+              "text": "转发一下"
+            }
+          },
+          "module_stat": {
+            "comment": {"count": 1},
+            "like": {"count": 5},
+            "forward": {"count": 0}
+          }
+        },
+        "orig": {
+          "id_str": "888000111222333"
+        }
+      }
+    }
+  }
+]

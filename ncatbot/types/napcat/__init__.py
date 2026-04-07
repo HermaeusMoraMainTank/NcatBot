@@ -1,0 +1,108 @@
+"""NapCat API 响应类型 — 统一导出"""
+
+from ._base import NapCatModel
+from .message import (
+    ForwardMessageData,
+    MessageData,
+    MessageHistory,
+    MessageSender,
+    SendMessageResult,
+)
+from .group import (
+    EssenceMessage,
+    GroupAtAllRemain,
+    GroupExtFlameData,
+    GroupExtInfo,
+    GroupHonorInfo,
+    GroupInfo,
+    GroupInfoEx,
+    GroupMemberInfo,
+    GroupNotice,
+    GroupNoticeMessage,
+    GroupNoticeSettings,
+    GroupOwnerInfo,
+    GroupShutInfo,
+    GroupSystemMsg,
+    GroupSystemRequest,
+    HonorUser,
+)
+from .user import (
+    FriendInfo,
+    LoginInfo,
+    StrangerInfo,
+)
+from .file import (
+    CreateFolderResult,
+    CreateFolderResultGroupItem,
+    CreateFolderResultItem,
+    DownloadResult,
+    FileData,
+    GroupFileInfo,
+    GroupFileList,
+    GroupFileSystemInfo,
+    GroupFolderInfo,
+)
+from .system import (
+    BotStatus,
+    EmojiLikeInfo,
+    EmojiLikesResult,
+    EmojiLikesUser,
+    EmojiLikeUser,
+    OcrResult,
+    OcrText,
+    RecentContact,
+    RecentContactMessage,
+    VersionInfo,
+)
+
+__all__ = [
+    "NapCatModel",
+    # message
+    "SendMessageResult",
+    "MessageSender",
+    "MessageData",
+    "MessageHistory",
+    "ForwardMessageData",
+    # group
+    "GroupInfo",
+    "GroupMemberInfo",
+    "GroupNotice",
+    "GroupNoticeMessage",
+    "GroupNoticeSettings",
+    "EssenceMessage",
+    "HonorUser",
+    "GroupHonorInfo",
+    "GroupAtAllRemain",
+    "GroupShutInfo",
+    "GroupSystemRequest",
+    "GroupSystemMsg",
+    "GroupOwnerInfo",
+    "GroupExtFlameData",
+    "GroupExtInfo",
+    "GroupInfoEx",
+    # user
+    "LoginInfo",
+    "StrangerInfo",
+    "FriendInfo",
+    # file
+    "GroupFileSystemInfo",
+    "GroupFileInfo",
+    "GroupFolderInfo",
+    "CreateFolderResult",
+    "CreateFolderResultGroupItem",
+    "CreateFolderResultItem",
+    "GroupFileList",
+    "FileData",
+    "DownloadResult",
+    # system
+    "VersionInfo",
+    "BotStatus",
+    "EmojiLikeInfo",
+    "EmojiLikeUser",
+    "EmojiLikesResult",
+    "EmojiLikesUser",
+    "OcrText",
+    "OcrResult",
+    "RecentContact",
+    "RecentContactMessage",
+]

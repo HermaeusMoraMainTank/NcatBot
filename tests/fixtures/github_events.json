@@ -1,0 +1,307 @@
+[
+  {
+    "event_type": "issues",
+    "payload": {
+      "action": "opened",
+      "repository": {
+        "id": 123456,
+        "full_name": "testowner/testrepo",
+        "html_url": "https://github.com/testowner/testrepo",
+        "description": "Test repo",
+        "private": false,
+        "default_branch": "main"
+      },
+      "sender": {
+        "id": 10001,
+        "login": "testuser",
+        "avatar_url": "https://example.com/avatar.png",
+        "html_url": "https://github.com/testuser",
+        "type": "User"
+      },
+      "issue": {
+        "number": 42,
+        "title": "Test issue title",
+        "body": "This is a test issue body.",
+        "state": "open",
+        "html_url": "https://github.com/testowner/testrepo/issues/42",
+        "labels": [
+          {
+            "name": "bug"
+          },
+          {
+            "name": "critical"
+          }
+        ],
+        "assignees": [
+          {
+            "login": "testuser"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "event_type": "issue_comment",
+    "payload": {
+      "action": "created",
+      "repository": {
+        "id": 123456,
+        "full_name": "testowner/testrepo",
+        "html_url": "https://github.com/testowner/testrepo",
+        "description": "Test repo",
+        "private": false,
+        "default_branch": "main"
+      },
+      "sender": {
+        "id": 10001,
+        "login": "testuser",
+        "avatar_url": "https://example.com/avatar.png",
+        "html_url": "https://github.com/testuser",
+        "type": "User"
+      },
+      "comment": {
+        "id": 999001,
+        "body": "Looks like a valid issue, I'll investigate.",
+        "html_url": "https://github.com/testowner/testrepo/issues/42#issuecomment-999001"
+      },
+      "issue": {
+        "number": 42,
+        "title": "Test issue title"
+      }
+    }
+  },
+  {
+    "event_type": "pull_request",
+    "payload": {
+      "action": "opened",
+      "repository": {
+        "id": 123456,
+        "full_name": "testowner/testrepo",
+        "html_url": "https://github.com/testowner/testrepo",
+        "description": "Test repo",
+        "private": false,
+        "default_branch": "main"
+      },
+      "sender": {
+        "id": 10001,
+        "login": "testuser",
+        "avatar_url": "https://example.com/avatar.png",
+        "html_url": "https://github.com/testuser",
+        "type": "User"
+      },
+      "pull_request": {
+        "number": 99,
+        "title": "Fix the bug in parser",
+        "body": "This PR fixes #42.",
+        "state": "open",
+        "html_url": "https://github.com/testowner/testrepo/pull/99",
+        "head": {
+          "ref": "fix/parser-bug"
+        },
+        "base": {
+          "ref": "main"
+        },
+        "merged": false,
+        "draft": false
+      }
+    }
+  },
+  {
+    "event_type": "pull_request_review_comment",
+    "payload": {
+      "action": "created",
+      "repository": {
+        "id": 123456,
+        "full_name": "testowner/testrepo",
+        "html_url": "https://github.com/testowner/testrepo",
+        "description": "Test repo",
+        "private": false,
+        "default_branch": "main"
+      },
+      "sender": {
+        "id": 10001,
+        "login": "testuser",
+        "avatar_url": "https://example.com/avatar.png",
+        "html_url": "https://github.com/testuser",
+        "type": "User"
+      },
+      "comment": {
+        "id": 999002,
+        "body": "This line could use better error handling.",
+        "html_url": "https://github.com/testowner/testrepo/pull/99#discussion_r999002",
+        "diff_hunk": "@@ -10,3 +10,5 @@\n+    try:\n+        result = parse(data)",
+        "path": "src/parser.py"
+      },
+      "pull_request": {
+        "number": 99
+      }
+    }
+  },
+  {
+    "event_type": "push",
+    "payload": {
+      "action": "created",
+      "ref": "refs/heads/main",
+      "before": "abc1234000000000000000000000000000000000",
+      "after": "def5678000000000000000000000000000000000",
+      "repository": {
+        "id": 123456,
+        "full_name": "testowner/testrepo",
+        "html_url": "https://github.com/testowner/testrepo",
+        "description": "Test repo",
+        "private": false,
+        "default_branch": "main"
+      },
+      "sender": {
+        "id": 10001,
+        "login": "testuser",
+        "avatar_url": "https://example.com/avatar.png",
+        "html_url": "https://github.com/testuser",
+        "type": "User"
+      },
+      "pusher": {
+        "name": "testuser",
+        "email": "test@example.com"
+      },
+      "commits": [
+        {
+          "id": "def5678000000000000000000000000000000000",
+          "message": "fix: resolve parser regression",
+          "author": {
+            "name": "testuser",
+            "email": "test@example.com"
+          },
+          "url": "https://github.com/testowner/testrepo/commit/def5678",
+          "timestamp": "2025-12-01T10:00:00Z",
+          "added": [
+            "src/new_file.py"
+          ],
+          "removed": [],
+          "modified": [
+            "src/parser.py"
+          ]
+        }
+      ],
+      "head_commit": {
+        "id": "def5678000000000000000000000000000000000",
+        "message": "fix: resolve parser regression",
+        "author": {
+          "name": "testuser",
+          "email": "test@example.com"
+        },
+        "url": "https://github.com/testowner/testrepo/commit/def5678",
+        "timestamp": "2025-12-01T10:00:00Z",
+        "added": [
+          "src/new_file.py"
+        ],
+        "removed": [],
+        "modified": [
+          "src/parser.py"
+        ]
+      }
+    }
+  },
+  {
+    "event_type": "watch",
+    "payload": {
+      "action": "started",
+      "repository": {
+        "id": 123456,
+        "full_name": "testowner/testrepo",
+        "html_url": "https://github.com/testowner/testrepo",
+        "description": "Test repo",
+        "private": false,
+        "default_branch": "main"
+      },
+      "sender": {
+        "id": 10001,
+        "login": "testuser",
+        "avatar_url": "https://example.com/avatar.png",
+        "html_url": "https://github.com/testuser",
+        "type": "User"
+      }
+    }
+  },
+  {
+    "event_type": "fork",
+    "payload": {
+      "action": "created",
+      "repository": {
+        "id": 123456,
+        "full_name": "testowner/testrepo",
+        "html_url": "https://github.com/testowner/testrepo",
+        "description": "Test repo",
+        "private": false,
+        "default_branch": "main"
+      },
+      "sender": {
+        "id": 10001,
+        "login": "testuser",
+        "avatar_url": "https://example.com/avatar.png",
+        "html_url": "https://github.com/testuser",
+        "type": "User"
+      },
+      "forkee": {
+        "full_name": "forker/testrepo",
+        "html_url": "https://github.com/forker/testrepo",
+        "owner": {
+          "login": "forker"
+        },
+        "description": "Forked repo"
+      }
+    }
+  },
+  {
+    "event_type": "release",
+    "payload": {
+      "action": "published",
+      "repository": {
+        "id": 123456,
+        "full_name": "testowner/testrepo",
+        "html_url": "https://github.com/testowner/testrepo",
+        "description": "Test repo",
+        "private": false,
+        "default_branch": "main"
+      },
+      "sender": {
+        "id": 10001,
+        "login": "testuser",
+        "avatar_url": "https://example.com/avatar.png",
+        "html_url": "https://github.com/testuser",
+        "type": "User"
+      },
+      "release": {
+        "id": 88001,
+        "tag_name": "v1.0.0",
+        "name": "Release v1.0.0",
+        "body": "First stable release.\n\n## Changes\n- Feature A\n- Fix B",
+        "prerelease": false,
+        "draft": false,
+        "html_url": "https://github.com/testowner/testrepo/releases/tag/v1.0.0"
+      }
+    }
+  },
+  {
+    "event_type": "ping",
+    "payload": {
+      "action": "created",
+      "zen": "Responsive is better than fast.",
+      "hook_id": 12345,
+      "repository": {
+        "id": 123456,
+        "full_name": "testowner/testrepo",
+        "html_url": "https://github.com/testowner/testrepo",
+        "description": "Test repo",
+        "private": false,
+        "default_branch": "main"
+      },
+      "sender": {
+        "id": 10001,
+        "login": "testuser",
+        "avatar_url": "https://example.com/avatar.png",
+        "html_url": "https://github.com/testuser",
+        "type": "User"
+      }
+    }
+  }
+]

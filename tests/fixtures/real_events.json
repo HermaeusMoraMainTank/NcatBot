@@ -1,0 +1,194 @@
+[
+  {
+    "time": 1764033403,
+    "self_id": "100000001",
+    "post_type": "meta_event",
+    "meta_event_type": "lifecycle",
+    "sub_type": "connect"
+  },
+  {
+    "time": 1764033410,
+    "self_id": "100000001",
+    "post_type": "meta_event",
+    "meta_event_type": "heartbeat",
+    "status": {
+      "online": true,
+      "good": true
+    },
+    "interval": 30000
+  },
+  {
+    "self_id": "100000001",
+    "user_id": "100000002",
+    "time": 1764033417,
+    "message_id": 1814436220,
+    "message_seq": 1814436220,
+    "real_id": 1814436220,
+    "real_seq": "961680",
+    "message_type": "group",
+    "sender": {
+      "user_id": "100000002",
+      "nickname": "TestUser",
+      "card": "TestCard",
+      "role": "member"
+    },
+    "raw_message": "怎么每次出节奏玩的都是最后一个知道的",
+    "font": 14,
+    "sub_type": "normal",
+    "message": [
+      {
+        "type": "text",
+        "data": {
+          "text": "怎么每次出节奏玩的都是最后一个知道的"
+        }
+      }
+    ],
+    "message_format": "array",
+    "post_type": "message",
+    "group_id": "100000003",
+    "group_name": "TestGroup"
+  },
+  {
+    "time": 1764033424,
+    "self_id": "100000001",
+    "post_type": "notice",
+    "notice_type": "notify",
+    "sub_type": "poke",
+    "target_id": "100000001",
+    "user_id": "100000004",
+    "group_id": "100000005",
+    "raw_info": [
+      {
+        "col": "1",
+        "nm": "",
+        "type": "qq",
+        "uid": "u_test_uid_nskA"
+      },
+      {
+        "jp": "https://zb.vip.qq.com/v2/pages/nudgeMall?_wv=2&actionId=0",
+        "src": "http://tianquan.gtimg.cn/nudgeaction/item/0/expression.jpg",
+        "type": "img"
+      },
+      {
+        "txt": "戳了戳",
+        "type": "nor"
+      },
+      {
+        "col": "1",
+        "nm": "",
+        "tp": "0",
+        "type": "qq",
+        "uid": "u_test_uid_-4Wg"
+      },
+      {
+        "txt": "",
+        "type": "nor"
+      }
+    ]
+  },
+  {
+    "time": 1764046784,
+    "self_id": "100000001",
+    "post_type": "notice",
+    "group_id": "100000006",
+    "user_id": "100000007",
+    "notice_type": "group_recall",
+    "operator_id": "100000007",
+    "message_id": 1318467160
+  },
+  {
+    "self_id": "100000001",
+    "user_id": "100000004",
+    "time": 1764677513,
+    "message_id": 263174224,
+    "message_seq": 263174224,
+    "real_id": 263174224,
+    "real_seq": "2084",
+    "message_type": "private",
+    "sender": {
+      "user_id": "100000004",
+      "nickname": "TestUser",
+      "card": ""
+    },
+    "raw_message": "/like 3051561876",
+    "font": 14,
+    "sub_type": "friend",
+    "message": [
+      {
+        "type": "text",
+        "data": {
+          "text": "/like 3051561876"
+        }
+      }
+    ],
+    "message_format": "array",
+    "post_type": "message",
+    "target_id": "100000004"
+  },
+  {
+    "time": 1764678233,
+    "self_id": "100000001",
+    "post_type": "notice",
+    "group_id": "100000003",
+    "user_id": "100000001",
+    "notice_type": "group_card",
+    "card_new": "",
+    "card_old": "鹿灵"
+  },
+  {
+    "time": 1767099676,
+    "self_id": "100000008",
+    "post_type": "notice",
+    "group_id": "100000009",
+    "user_id": "100000010",
+    "notice_type": "group_increase",
+    "operator_id": "100000004",
+    "sub_type": "approve"
+  },
+  {
+    "time": 1773478681,
+    "self_id": "100000008",
+    "post_type": "notice",
+    "notice_type": "group_upload",
+    "group_id": "100000011",
+    "user_id": "100000012",
+    "file": {
+      "id": "45650681afe6f2850e57634ce70571b3",
+      "name": "LuGu_1773478630281.webp",
+      "size": 51441991,
+      "busid": 102
+    }
+  },
+  {
+    "time": 1773558161,
+    "self_id": "100000008",
+    "post_type": "notice",
+    "notice_type": "group_decrease",
+    "group_id": "100000006",
+    "user_id": "100000013",
+    "sub_type": "leave",
+    "operator_id": "0"
+  },
+  {
+    "time": 1773570533,
+    "self_id": "100000008",
+    "post_type": "notice",
+    "notice_type": "group_ban",
+    "group_id": "100000006",
+    "user_id": "100000008",
+    "sub_type": "ban",
+    "operator_id": "100000004",
+    "duration": 43200
+  },
+  {
+    "time": 1773714497,
+    "self_id": "100000008",
+    "post_type": "notice",
+    "notice_type": "group_ban",
+    "group_id": "100000009",
+    "user_id": "100000014",
+    "sub_type": "lift_ban",
+    "operator_id": "100000004",
+    "duration": 0
+  }
+]

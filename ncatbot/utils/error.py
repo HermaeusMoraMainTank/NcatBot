@@ -1,6 +1,10 @@
-from .config import ncatbot_config
-from .logger import get_log
+"""NcatBot 异常类。"""
+
+import sys
 import traceback
+
+from .logger import get_log
+from .config import get_config_manager
 
 
 class NcatBotError(Exception):
@@ -9,10 +13,18 @@ class NcatBotError(Exception):
     def __init__(self, info, log: bool = True, stacklevel: int = 3):
         if log:
             self.logger.error(f"{info}", stacklevel=stacklevel)
-            if ncatbot_config.debug:
-                self.logger.info(
-                    f"stacktrace:\n{traceback.format_exc()}", stacklevel=stacklevel
-                )
+            cfg = get_config_manager()
+            if cfg.debug:
+                if sys.exc_info()[0] is not None:
+                    self.logger.info(
+                        f"stacktrace:\n{traceback.format_exc()}",
+                        stacklevel=stacklevel,
+                    )
+                else:
+                    self.logger.info(
+                        f"stacktrace:\n{''.join(traceback.format_stack()[:-1])}",
+                        stacklevel=stacklevel,
+                    )
         super().__init__(info)
 
 
@@ -22,15 +34,22 @@ class AdapterEventError(Exception):
     def __init__(self, info, log: bool = True):
         if log:
             self.logger.error(f"{info}", stacklevel=2)
-            if ncatbot_config.debug:
-                self.logger.info(f"stacktrace:\n{traceback.format_exc()}")
+            cfg = get_config_manager()
+            if cfg.debug:
+                if sys.exc_info()[0] is not None:
+                    self.logger.info(f"stacktrace:\n{traceback.format_exc()}")
+                else:
+                    self.logger.info(
+                        f"stacktrace:\n{''.join(traceback.format_stack()[:-1])}"
+                    )
         super().__init__(info)
 
 
 class NcatBotValueError(NcatBotError):
     def __init__(self, var_name, val_name, must_be: bool = False):
         super().__init__(
-            f"{var_name} 的值{'必须' if must_be else '不能'}为 {val_name}", stacklevel=3
+            f"{var_name} 的值{'必须' if must_be else '不能'}为 {val_name}",
+            stacklevel=3,
         )
 
 

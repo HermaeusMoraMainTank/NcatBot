@@ -1,0 +1,46 @@
+"""Comment API Mixin"""
+
+from __future__ import annotations
+
+from typing import Any, List
+
+from ncatbot.types.github import GitHubCommentInfo
+
+
+class CommentAPIMixin:
+    """评论操作"""
+
+    async def _request(self, method: str, path: str, **kwargs: Any) -> Any: ...
+
+    async def create_issue_comment(
+        self, repo: str, issue_number: int, body: str
+    ) -> GitHubCommentInfo:
+        data = await self._request(
+            "POST",
+            f"/repos/{repo}/issues/{issue_number}/comments",
+            json={"body": body},
+        )
+        return GitHubCommentInfo.model_validate(data)
+
+    async def update_comment(
+        self, repo: str, comment_id: int, body: str
+    ) -> GitHubCommentInfo:
+        data = await self._request(
+            "PATCH",
+            f"/repos/{repo}/issues/comments/{comment_id}",
+            json={"body": body},
+        )
+        return GitHubCommentInfo.model_validate(data)
+
+    async def delete_comment(self, repo: str, comment_id: int) -> None:
+        await self._request("DELETE", f"/repos/{repo}/issues/comments/{comment_id}")
+
+    async def list_issue_comments(
+        self, repo: str, issue_number: int, page: int = 1, per_page: int = 30
+    ) -> List[GitHubCommentInfo]:
+        data = await self._request(
+            "GET",
+            f"/repos/{repo}/issues/{issue_number}/comments",
+            params={"page": page, "per_page": per_page},
+        )
+        return [GitHubCommentInfo.model_validate(item) for item in data]

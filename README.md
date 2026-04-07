@@ -4,11 +4,11 @@
 
 ---
 
-![logo.png](https://socialify.git.ci/liyihao1110/NcatBot/image?custom_description=ncatbot+%EF%BC%8C%E5%9F%BA%E4%BA%8E+OneBot11%E5%8D%8F%E8%AE%AE+%E7%9A%84+QQ+%E6%9C%BA%E5%99%A8%E4%BA%BA+Python+SDK%EF%BC%8C%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91%EF%BC%8C%E8%BD%BB%E6%9D%BE%E9%83%A8%E7%BD%B2%E3%80%82&description=1&font=Jost&forks=1&issues=1&logo=https%3A%2F%2Fimg.remit.ee%2Fapi%2Ffile%2FAgACAgUAAyEGAASHRsPbAAO9Z_FYKczZ5dly9IKmC93J_sF7qRUAAmXEMRtA2ohX1eSKajqfARABAAMCAAN5AAM2BA.jpg&pattern=Signal&pulls=1&stargazers=1&theme=Auto)
+![logo.png](https://socialify.git.ci/ncatbot/NcatBot/image?custom_description=ncatbot+%EF%BC%8C%E5%9F%BA%E4%BA%8E+OneBot11%E5%8D%8F%E8%AE%AE+%E7%9A%84+QQ+%E6%9C%BA%E5%99%A8%E4%BA%BA+Python+SDK%EF%BC%8C%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91%EF%BC%8C%E8%BD%BB%E6%9D%BE%E9%83%A8%E7%BD%B2%E3%80%82&description=1&font=Jost&forks=1&issues=1&logo=https%3A%2F%2Fimg.remit.ee%2Fapi%2Ffile%2FAgACAgUAAyEGAASHRsPbAAO9Z_FYKczZ5dly9IKmC93J_sF7qRUAAmXEMRtA2ohX1eSKajqfARABAAMCAAN5AAM2BA.jpg&pattern=Signal&pulls=1&stargazers=1&theme=Auto)
 
- <a href="https://pypi.org/project/ncatbot/"><img src="https://img.shields.io/pypi/v/ncatbot"></a>
+ <a href="https://pypi.org/project/ncatbot5/"><img src="https://img.shields.io/pypi/v/ncatbot5"></a>
  [![OneBot v11](https://img.shields.io/badge/OneBot-v11-black.svg)](https://github.com/botuniverse/onebot)
- [![访问量统计](https://visitor-badge.laobi.icu/badge?page_id=li-yihao0328.ncatbot_sync)](https://github.com/liyihao1110/ncatbot)
+ [![访问量统计](https://visitor-badge.laobi.icu/badge?page_id=li-yihao0328.ncatbot_sync)](https://github.com/ncatbot/ncatbot)
   <a><img src="https://img.shields.io/badge/License-NcatBot License-green.svg"></a>
     <a href="https://qm.qq.com/q/CHbzJ2LH4k"><img src="https://img.shields.io/badge/官方群聊-201487478-brightgreen.svg"></a>
     <a href="https://qm.qq.com/q/CHbzJ2LH4k"><img src="https://img.shields.io/badge/官方频道-pd63222487-brightgreen.svg"></a>
@@ -17,66 +17,121 @@
 
 [文档](https://docs.ncatbot.xyz) | [许可证](LICENSE) | [QQ群](https://qm.qq.com/q/AmdNUkSxFY) | [插件社区](https://www.ityzs.com/)
 
-NcatBot 是基于 onebot11协议 的 Python SDK, 它提供了一套方便易用的 Python 接口用于开发 QQ 机器人.
+NcatBot 是基于 OneBot11 协议的 Python SDK/Framework，提供**开箱即用**的 QQ 机器人开发体验。<br>
+
+它深度考虑了 AI 时代的开发者需求，工作区内置丰富的 Skills 能力，Agent 可自主完成插件编写、调试与测试。<br>
+
+**只需要一句话，就能写出你的 QBot！**<br>
 
 </div>
 
+## 快速开始
 
-## 如何使用
+### 1. 安装
 
+```bash
+pip install ncatbot5
+```
 
-认真阅读本项目[文档](https://docs.ncatbot.xyz)
+### 2. 获取 AI 参考资料（推荐）
 
-## 欢迎来玩
+```bash
+ncatbot ref              # 交互式选择 IDE
+ncatbot ref --vscode     # VSCode + Copilot / Cursor
+ncatbot ref --trae       # Trae
+```
+
+一键从 GitHub Releases 下载最新版 `user-reference.zip` 并自动解压到当前目录（自动使用 GitHub 代理加速）。也可以手动前往 [GitHub Releases](https://github.com/ncatbot/NcatBot/releases) 页面下载。解压后目录结构如下：
+
+```
+your-project/
+├── .agents/skills/          ← AI Agent 技能文件（framework-usage / testing 等）
+├── docs/
+│   └── docs/
+│       ├── examples/        ← 示例代码（qq / github / cross_platform …）
+│       └── notes/
+│           ├── guide/       ← 使用指南（快速开始 → 多平台开发，共 11 章）
+│           └── reference/   ← API 参考（Bot API / 事件类型 / 插件系统 等）
+├── config.yaml
+└── plugins/
+```
+
+> 这些文件让 AI Agent（如 VS Code 中的 Copilot Chat）理解 NcatBot 的 API 和用法，从而提供精准的代码建议。
+
+### 3. 初始化项目
+
+```bash
+ncatbot init
+```
+
+按提示输入机器人 QQ 号和管理员 QQ 号，CLI 会自动生成 `config.yaml` 和一个以你计算机用户名命名的模板插件。该模板插件的功能是：在群聊或私聊中发送 `hello` 时，机器人回复 `hi`。
+
+### 4. 启动
+
+```bash
+ncatbot run
+```
+
+常用 CLI 命令：
+
+```bash
+ncatbot config show          # 查看当前配置
+ncatbot napcat diagnose      # 诊断 NapCat 连接
+ncatbot napcat stop          # 停止本机 NapCat（仅 Linux）
+```
+
+## AI Agent 开发
+
+工作区中预置了领域专有技能（Skills），在 VS Code 中使用 Copilot Chat 即可获得定制化辅助：
+
+- **开发插件**：Agent 利用 `framework-usage` 技能提供消息发送、事件注册、Hook/过滤器等建议
+- **框架开发**：`codebase-nav`（代码定位）、`framework-dev`（框架开发）、`testing`（测试）、`release`（发版）
+
+直接用自然语言描述你要实现的功能，Agent 会自主编写插件代码。
+
+## 其它资源
+
+- **容器化部署**：推荐使用 Docker [部署环境](https://github.com/ncatbot/NcatBot-Docker)
+- **官方文档**：[docs.ncatbot.xyz](https://docs.ncatbot.xyz)
+
+## 交流群体
 
 [是 QQ 群哦喵~](https://qm.qq.com/q/L6XGXYqL86)
 
 ## 获取帮助
 
-- 遇到任何困难时, 请先按照以下顺序尝试自己解决:
+遇到问题时，请按以下顺序尝试：
 
-  1. **仔细阅读**[文档](https://docs.ncatbot.xyz).
-  2. 询问 [DeepSeek](https://chat.deepseek.com), [Kimi](https://kimi.ai) 等人工智能.
-  3. 搜索本项目的 [Issue 列表](https://github.com/liyihao1110/ncatbot/issues).
-- 如果以上方法都无法解决你的问题, 那么:
-
-  可以[进群](https://qm.qq.com/q/L6XGXYqL86)提问.
-
-## 联系我们
-
-作者: [最可爱的木子喵~](https://gitee.com/li-yihao0328)
-
-邮箱: <lyh_02@foxmail.com>
-
+1. 阅读[文档](https://docs.ncatbot.xyz)
+2. 搜索 [Issue 列表](https://github.com/ncatbot/ncatbot/issues)
+3. 提交 [Issue](https://github.com/ncatbot/ncatbot/issues) 或[进群](https://qm.qq.com/q/L6XGXYqL86)提问
 
 ## 使用限制
 
-1. **严禁将本项目以任何形式用于传播 反动、暴力、淫秽 信息，违者将追究法律责任**.
-2. 将本项目以**任何形式**用于**盈利性用途**时，必须取得项目开发组(本仓库 Collaborators 和 Owner)的**书面授权**.
-
+1. **严禁将本项目以任何形式用于传播淫秽、反动或暴力等信息。**
+2. **未经授权，禁止将本项目以任何形式用于盈利。**
 
 ## 致谢
 
-感谢 [NapCat](https://github.com/NapNeko/NapCatQQ) 提供底层接口 | [IppClub](https://github.com/IppClub) 的宣传支持 | [Fcatbot](https://github.com/Fish-LP/Fcatbot) 提供代码和灵感.
+感谢 [NapCat](https://github.com/NapNeko/NapCatQQ) 提供底层接口 | [IppClub](https://github.com/IppClub) 的宣传支持 | [Fcatbot](https://github.com/Fish-LP/Fcatbot) 提供代码和灵感。
 
-感谢 [扶摇互联](https://www.fyyun.net/) | [林枫云](https://www.dkdun.cn/) 提供服务器支持.
+感谢 [林枫云](https://www.dkdun.cn/) 提供服务器支持。
 
 ## 参与贡献
-欢迎通过 Issue 或 Pull Request 参与项目开发！请先阅读 [贡献指南](CONTRIBUTING.md)。
 
-如果你在使用过程中遇到任何问题，欢迎在 [GitHub Issues](https://github.com/liyihao1110/ncatbot/issues) 中反馈。感谢你的支持！
+欢迎给本 Repo 贡献代码！请先阅读 [贡献指南](CONTRIBUTING.md)。
 
 
 <div align="center">
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=liyihao1110/ncatbot&type=Date)](https://www.star-history.com/#liyihao1110/ncatbot&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=ncatbot/ncatbot&type=Date)](https://www.star-history.com/#ncatbot/ncatbot&Date)
 
 ## 贡献者们
 
-<a href="https://github.com/liyihao1110/ncatbot/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=liyihao1110/ncatbot" />
+<a href="https://github.com/ncatbot/ncatbot/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ncatbot/ncatbot" />
 </a>
 
 </div>

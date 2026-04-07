@@ -1,0 +1,26 @@
+"""
+服务层
+
+提供可动态加载/卸载的内部服务，完全不依赖其他 ncatbot 模块（除 utils）。
+"""
+
+from .base import BaseService, EventCallback
+from .manager import ServiceManager
+from .builtin import (
+    RBACService,
+    PermissionPath,
+    PermissionTrie,
+    FileWatcherService,
+    TimeTaskService,
+)
+
+__all__ = [
+    "BaseService",
+    "EventCallback",
+    "ServiceManager",
+    "RBACService",
+    "PermissionPath",
+    "PermissionTrie",
+    "FileWatcherService",
+    "TimeTaskService",
+]

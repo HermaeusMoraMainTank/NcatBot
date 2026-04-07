@@ -1,0 +1,9 @@
+name = "PluginName"
+version = "0.1.0"
+main = "plugin.py"
+author = "YourName"
+description = "NcatBot 插件"
+entry_class = "PluginClassName"
+pip_dependencies = []
+
+[dependencies]
