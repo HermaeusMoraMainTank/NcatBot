@@ -1,0 +1,12 @@
+name = "FakeAi"
+version = "1.0.0"
+main = "FakeAi.py"
+entry_class = "FakeAi"
+
+[pip_dependencies]
+aiosqlite = "*"
+Pillow = "*"
+PyYAML = "*"
+openai = "*"
+
+[dependencies]

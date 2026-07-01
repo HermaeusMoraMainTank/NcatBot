@@ -1,0 +1,6 @@
+name = "Kalabichu"
+version = "1.0.0"
+main = "Kalabichu.py"
+entry_class = "Kalabiqiu"
+
+[dependencies]

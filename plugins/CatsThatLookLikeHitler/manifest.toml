@@ -1,0 +1,6 @@
+name = "CatsThatLookLikeHitler"
+version = "1.0.0"
+main = "CatsThatLookLikeHitler.py"
+entry_class = "CatsThatLookLikeHitler"
+
+[dependencies]

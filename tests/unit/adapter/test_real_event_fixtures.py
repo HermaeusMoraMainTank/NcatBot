@@ -34,7 +34,7 @@ from ncatbot.types.qq import (
     GroupRecallNoticeEventData,
     GroupDecreaseNoticeEventData,
 )
-from ncatbot.types.qq.notice import NotifyEventData
+from ncatbot.types.qq.notice import PokeNotifyEventData
 from ncatbot.types.qq import NoticeNotifySubType
 
 FIXTURE_PATH = (
@@ -186,9 +186,10 @@ class TestRealGroupNotices:
         raw = _find(all_events, "notice", "notify", sub_type="poke")
         result = EventParser.parse(raw)
 
-        assert isinstance(result, NotifyEventData)
+        assert isinstance(result, PokeNotifyEventData)
         assert result.sub_type == NoticeNotifySubType.POKE
         assert result.user_id
+        assert result.target_id
 
 
 # ── RF-06: lift_ban 变体 ─────────────────────────────────────

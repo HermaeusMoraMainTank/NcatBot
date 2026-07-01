@@ -1,0 +1,9 @@
+name = "PhoebeSearch"
+version = "1.0.0"
+main = "PhoebeSearch.py"
+entry_class = "PhoebeSearch"
+
+[pip_dependencies]
+requests = "*"
+
+[dependencies]

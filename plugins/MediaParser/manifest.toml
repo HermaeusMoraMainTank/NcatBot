@@ -1,0 +1,30 @@
+name = "MediaParser"
+version = "1.0.0"
+main = "MediaParser.py"
+entry_class = "MediaParser"
+
+[pip_dependencies]
+# 异步 HTTP（入口、下载、多平台解析）
+aiohttp = "*"
+# 文件读写
+aiofiles = "*"
+# 定时清理缓存
+APScheduler = "*"
+# 渲染表情（core/render.py）
+apilmoji = "*"
+# 微博 / NGA / Twitter 等 HTML 解析
+beautifulsoup4 = "*"
+# B 站解析（core/parsers/bilibili）
+bilibili-api-python = ">=17.4.2"
+# JSON 结构体解析（多平台）
+msgspec = "*"
+# 图片渲染（core/render.py）
+Pillow = "*"
+# 下载进度条（core/download.py）
+tqdm = "*"
+# core/parsers/base.py Unpack 等
+typing-extensions = "*"
+# Instagram 等
+yt-dlp = "*"
+
+[dependencies]

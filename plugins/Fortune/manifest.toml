@@ -1,0 +1,9 @@
+name = "Fortune"
+version = "1.0.0"
+main = "Fortune.py"
+entry_class = "Fortune"
+
+[pip_dependencies]
+Pillow = "*"
+
+[dependencies]

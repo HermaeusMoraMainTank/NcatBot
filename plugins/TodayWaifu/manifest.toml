@@ -1,0 +1,6 @@
+name = "TodayWaifu"
+version = "1.0.0"
+main = "TodayWaifu.py"
+entry_class = "TodayWaifu"
+
+[dependencies]

@@ -1,0 +1,6 @@
+name = "Jrrp"
+version = "1.0.0"
+main = "Jrrp.py"
+entry_class = "Jrrp"
+
+[dependencies]

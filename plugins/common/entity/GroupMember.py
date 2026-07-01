@@ -1,0 +1,21 @@
+class GroupMember:
+    """群成员信息类，封装字典数据为对象"""
+    def __init__(self, member_data: dict):
+        self.group_id = member_data.get("group_id")
+        self.user_id = member_data.get("user_id")
+        self.nickname = member_data.get("nickname")
+        self.card = member_data.get("card")
+        self.sex = member_data.get("sex")
+        self.age = member_data.get("age")
+        self.area = member_data.get("area")
+        self.level = member_data.get("level")
+        self.qq_level = member_data.get("qq_level")
+        self.join_time = member_data.get("join_time")
+        self.last_sent_time = member_data.get("last_sent_time")
+        self.title_expire_time = member_data.get("title_expire_time")
+        self.unfriendly = member_data.get("unfriendly")
+        self.card_changeable = member_data.get("card_changeable")
+        self.is_robot = member_data.get("is_robot")
+        self.shut_up_timestamp = member_data.get("shut_up_timestamp")
+        self.role = member_data.get("role")
+        self.title = member_data.get("title")

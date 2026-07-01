@@ -32,8 +32,8 @@ from ncatbot.types.qq import (
     GroupBanNoticeEventData,
     GroupIncreaseNoticeEventData,
     GroupRecallNoticeEventData,
+    PokeNotifyEventData,
 )
-from ncatbot.types.qq.notice import NotifyEventData
 
 
 # ===========================================================================
@@ -211,8 +211,9 @@ class TestEventParserParse:
             "group_id": "589962002",
         }
         result = EventParser.parse(data)
-        assert isinstance(result, NotifyEventData)
+        assert isinstance(result, PokeNotifyEventData)
         assert result.sub_type == NoticeNotifySubType.POKE
+        assert result.target_id == "2324488671"
 
     def test_parse_friend_request(self):
         data = {

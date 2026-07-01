@@ -1,0 +1,10 @@
+name = "AnimeTrace"
+version = "1.0.0"
+main = "AnimeTrace.py"
+entry_class = "AnimeTracePlugin"
+
+[pip_dependencies]
+requests = "*"
+Pillow = "*"
+
+[dependencies]

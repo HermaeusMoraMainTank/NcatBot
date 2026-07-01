@@ -1,0 +1,9 @@
+name = "GroupRecall"
+version = "1.0.0"
+main = "GroupRecall.py"
+entry_class = "GroupRecallPlugin"
+
+[pip_dependencies]
+requests = "*"
+
+[dependencies]

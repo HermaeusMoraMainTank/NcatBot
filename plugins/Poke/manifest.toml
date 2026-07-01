@@ -1,0 +1,6 @@
+name = "Poke"
+version = "1.0.0"
+main = "Poke.py"
+entry_class = "Poke"
+
+[dependencies]

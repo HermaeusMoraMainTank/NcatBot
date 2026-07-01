@@ -54,7 +54,6 @@ target/
 # === NcatBot runtime ===
 logs/
 /data
-/plugins
 /napcat
 /snowluma
 config.yaml
@@ -82,3 +81,10 @@ release-notes.md
 
 # === Local notes ===
 memory/
+
+# === Plugin runtime temp files ===
+/temp/
+plugins/**/data/temp/
+
+# === Plugin secrets (API keys) ===
+plugins/common/secrets.json

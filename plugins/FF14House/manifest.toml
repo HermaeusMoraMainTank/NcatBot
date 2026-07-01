@@ -1,0 +1,9 @@
+name = "FF14House"
+version = "1.0.0"
+main = "FF14House.py"
+entry_class = "FF14House"
+
+[pip_dependencies]
+Pillow = "*"
+
+[dependencies]

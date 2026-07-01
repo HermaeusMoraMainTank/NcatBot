@@ -1,0 +1,12 @@
+name = "MessageStats"
+version = "1.1.0"
+main = "MessageStats.py"
+entry_class = "MessageStatsPlugin"
+
+[pip_dependencies]
+Pillow = "*"
+pillowmd = "*"
+wordcloud = "*"
+jieba = "*"
+
+[dependencies]

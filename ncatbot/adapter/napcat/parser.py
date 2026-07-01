@@ -31,7 +31,9 @@ from ncatbot.types.qq import (
     GroupRecallNoticeEventData,
     GroupMsgEmojiLikeNoticeEventData,
     GroupUploadNoticeEventData,
+    NoticeNotifySubType,
     NotifyEventData,
+    PokeNotifyEventData,
 )
 from ncatbot.utils import get_log
 
@@ -81,6 +83,18 @@ class EventParser:
         data_cls = cls._registry.get(key)
         if not data_cls:
             raise ValueError(f"No data class registered for {key}")
+        # notify：戳一戳等子类型需保留 target_id，否则会被 NotifyEventData 丢弃导致误响应
+        if key == (PostType.NOTICE, NoticeType.NOTIFY):
+            sub_raw = data.get("sub_type")
+            if sub_raw in (NoticeNotifySubType.POKE, "poke"):
+                try:
+                    return PokeNotifyEventData.model_validate(data)
+                except Exception as e:
+                    LOG.debug(
+                        "poke 事件解析为 PokeNotifyEventData 失败，回退 NotifyEventData: %s",
+                        e,
+                    )
+                    return NotifyEventData.model_validate(data)
         return data_cls.model_validate(data)
 
 
