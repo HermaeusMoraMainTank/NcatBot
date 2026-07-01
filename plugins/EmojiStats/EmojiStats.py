@@ -10,7 +10,7 @@ import time
 from datetime import datetime, date, timedelta
 from typing import Dict, List, Optional
 from dataclasses import dataclass
-from PIL import Image as PILImage, ImageDraw
+from PIL import Image as PILImage
 import re
 
 from ncatbot.event.qq import GroupMessageEvent as GroupMessage
@@ -156,7 +156,6 @@ class EmojiStatsPlugin(NcatBotPlugin):
         return str(user_id)
 
     def _init_(self) -> None:
-        from common.utils.json_io import get_project_root
 
         root = get_project_root()
         if not hasattr(self, "group_stats") or self.group_stats is None:
@@ -487,7 +486,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
                                 _log.error(f"[EmojiStats] 加载群组数据失败: {e}")
                                 continue
 
-                        total_users = sum(
+                        sum(
                             len(users) for users in self.user_stats.values()
                         )
                 except Exception as e:
@@ -623,7 +622,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
                     if group_success and user_success:
                         pass  # 所有数据保存成功
                     else:
-                        _log.error(f"[EmojiStats] 所有数据保存失败")
+                        _log.error("[EmojiStats] 所有数据保存失败")
             except Exception as e:
                 _log.error(f"[EmojiStats] 保存数据时发生异常: {e}")
 
@@ -885,7 +884,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
         # 如果图片不存在，则下载并缓存
         cache_path = await self._download_and_cache_image(image_url)
         if not cache_path:
-            _log.error(f"[EmojiStats] 表情包下载失败")
+            _log.error("[EmojiStats] 表情包下载失败")
             return
 
         # 使用缓存路径作为键，而不是 URL

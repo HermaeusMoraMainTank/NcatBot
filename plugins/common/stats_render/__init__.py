@@ -27,6 +27,7 @@ __all__ = [
     "save_wordcloud_chart",
     "save_top_emojis_chart",
     "save_labeled_bar_chart",
+    "save_source_breakdown_chart",
     "extract_words_with_pos",
     "aggregate_word_stats",
     "process_message_text",

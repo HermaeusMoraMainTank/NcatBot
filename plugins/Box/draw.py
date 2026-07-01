@@ -1,5 +1,4 @@
 import io
-import os
 import random
 from io import BytesIO
 from pathlib import Path

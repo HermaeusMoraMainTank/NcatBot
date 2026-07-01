@@ -421,7 +421,6 @@ class TodayAnimeWaifu(NcatBotPlugin):
             and str(user_id) == HMMT.HMMT_ID
         ):
             target_user_id = None
-            new_waifu_filename = None
             at_count = 0
 
             for isAt in input.message:

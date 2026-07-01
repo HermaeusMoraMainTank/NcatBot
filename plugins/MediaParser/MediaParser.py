@@ -36,7 +36,7 @@ from .core.download import Downloader
 from .core.render import Renderer
 from .core.sender import MessageSender
 from .core.debounce import Debouncer
-from .core.arbiter import EmojiLikeArbiter, ArbiterContext
+from .core.arbiter import EmojiLikeArbiter
 from .core.clean import CacheCleaner
 from .core.utils import extract_json_url
 from .core.parsers import BaseParser, BilibiliParser

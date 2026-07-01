@@ -153,7 +153,7 @@ class RollPig(NcatBotPlugin):
         try:
             bbox = draw.textbbox((0, 0), text, font=font)
             return (bbox[2] - bbox[0], bbox[3] - bbox[1])
-        except:
+        except Exception:
             return draw.textsize(text, font=font)
 
     def _draw_bold_text(
@@ -372,14 +372,14 @@ class RollPig(NcatBotPlugin):
         # 2.3 描述尺寸
         try:
             desc_font = self.font_regular.font_variant(size=self.DESC_FONT_SIZE)
-        except:
+        except Exception:
             desc_font = self.font_regular
         desc_w, desc_h = self._get_text_size(pig_desc, desc_font)
 
         # 2.4 解析尺寸（自动换行后）
         try:
             analysis_font = self.font_regular.font_variant(size=self.ANALYSIS_FONT_SIZE)
-        except:
+        except Exception:
             analysis_font = self.font_regular
         line_height = int(self.ANALYSIS_FONT_SIZE * self.ANALYSIS_LINE_HEIGHT_FACTOR)
         max_analysis_width = int(canvas_width * self.ANALYSIS_WIDTH_RATIO)
@@ -427,7 +427,7 @@ class RollPig(NcatBotPlugin):
         else:
             try:
                 error_font = self.font_regular.font_variant(size=24)
-            except:
+            except Exception:
                 error_font = self.font_regular
             error_text = "图片加载失败"
             error_w, error_h = self._get_text_size(error_text, error_font)
@@ -609,7 +609,7 @@ class RollPig(NcatBotPlugin):
                 ])
                 await self.api.qq.post_group_msg(group_id=group_id, rtf=chain)
 
-                _log.info(f"[RollPig] 合成图片发送成功")
+                _log.info("[RollPig] 合成图片发送成功")
                 return
             except Exception as e:
                 _log.error(f"[RollPig] 发送合成图片失败：{str(e)}")

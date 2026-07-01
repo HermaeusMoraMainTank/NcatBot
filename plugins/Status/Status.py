@@ -286,7 +286,7 @@ class Status(NcatBotPlugin):
         left_w = int((W - margin * 2 - gap) * 0.31)
         right_w = W - margin * 2 - gap - left_w
         top_h = 470
-        bottom_h = H - margin * 2 - top_h - gap
+        H - margin * 2 - top_h - gap
 
         left_top = (margin, margin, margin + left_w, margin + top_h)
         right_top = (left_top[2] + gap, margin, left_top[2] + gap + right_w, margin + top_h)

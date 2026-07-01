@@ -2,8 +2,6 @@ import asyncio
 import base64
 import io
 import json
-import math
-import os
 import random
 import re
 import time
@@ -1897,18 +1895,13 @@ async def answer_ai(
     if isinstance(ai_response, dict):
         response = ai_response.get("content", "")
         usage_info = ai_response.get("usage", {})
-        tokens = usage_info.get("total_tokens", 0)
-        prompt_tokens = usage_info.get("prompt_tokens", 0)
-        completion_tokens = usage_info.get("completion_tokens", 0)
-        cache_hit = usage_info.get("prompt_cache_hit_tokens", 0)
-        model = ai_response.get("model", "deepseek-v4-flash")
+        usage_info.get("total_tokens", 0)
+        usage_info.get("prompt_tokens", 0)
+        usage_info.get("completion_tokens", 0)
+        usage_info.get("prompt_cache_hit_tokens", 0)
+        ai_response.get("model", "deepseek-v4-flash")
     else:
         response = ai_response or ""
-        tokens = 0
-        prompt_tokens = 0
-        completion_tokens = 0
-        cache_hit = 0
-        model = "deepseek-v4-flash"
 
     # 记录AI使用统计
     if group_id:

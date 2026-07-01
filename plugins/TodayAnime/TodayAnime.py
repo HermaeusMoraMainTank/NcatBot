@@ -2,7 +2,7 @@ from datetime import datetime
 import aiohttp
 
 from ncatbot.event.qq import GroupMessageEvent as GroupMessage
-from ncatbot.types import MessageArray as MessageChain, PlainText, Image
+from ncatbot.types import MessageArray as MessageChain, PlainText
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 from ncatbot.utils import get_log
@@ -36,7 +36,7 @@ class TodayAnime(NcatBotPlugin):
         if input.raw_message != "今日番剧":
             return
         data = await self.fetch_today_anime()
-        if data == None:
+        if data is None:
             _log.error("data搜索数据为空")
             return
         todaydata = self.format_anime_data(data)

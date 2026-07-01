@@ -191,7 +191,7 @@ class BaseParser:
                             f"redirect check {resp.status} {resp.reason}"
                         )
                     return resp.headers.get("Location", url)
-            except (ClientError, TimeoutError) as exc:
+            except (ClientError, TimeoutError):
                 if attempt < retries:
                     await sleep(1 + attempt)
                     continue
@@ -213,7 +213,7 @@ class BaseParser:
                     if resp.status >= 400:
                         raise ClientError(f"final url check {resp.status} {resp.reason}")
                     return str(resp.url)
-            except (ClientError, TimeoutError) as exc:
+            except (ClientError, TimeoutError):
                 if attempt < retries:
                     await sleep(1 + attempt)
                     continue

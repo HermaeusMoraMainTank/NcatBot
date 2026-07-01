@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 import os
 import threading
 from datetime import datetime
@@ -10,9 +9,9 @@ from typing import Any, Dict, List, Optional
 
 from ncatbot.utils.logger import get_log
 
-_log = get_log()
-
 from .json_io import atomic_write_json, load_json as _load_json_file, resolve_data_json
+
+_log = get_log()
 
 GROUP_DATA_FILE = resolve_data_json("ai_group_stats.json")
 USER_DATA_FILE = resolve_data_json("ai_user_stats.json")

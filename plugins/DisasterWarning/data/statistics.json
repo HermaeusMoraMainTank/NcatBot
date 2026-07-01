@@ -1,19 +1,19 @@
 {
-  "total_received": 21705,
-  "total_events": 16912,
+  "total_received": 21712,
+  "total_events": 16914,
   "start_time": "2026-04-08T10:22:03.299648",
-  "last_updated": "2026-07-01T14:46:06.783776",
+  "last_updated": "2026-07-01T14:56:12.151029",
   "by_type": {
-    "weather_alarm": 13980,
+    "weather_alarm": 13982,
     "earthquake": 2497,
     "earthquake_warning": 435
   },
   "by_source": {
-    "fan_studio_weather": 14050,
-    "fan_studio_cenc": 423,
-    "fan_studio_cea": 169,
-    "fan_studio_jma": 914,
-    "fan_studio_usgs": 4641,
+    "fan_studio_weather": 14053,
+    "fan_studio_cenc": 424,
+    "fan_studio_cea": 170,
+    "fan_studio_jma": 915,
+    "fan_studio_usgs": 4642,
     "p2p_earthquake": 348,
     "wolfx_jma_eq": 366,
     "wolfx_jma_eew": 567,
@@ -79,7 +79,7 @@
   "weather_stats": {
     "by_level": {
       "🔵蓝色": 3315,
-      "🟡黄色": 8463,
+      "🟡黄色": 8465,
       "🟠橙色": 1956,
       "🔴红色": 224,
       "未知": 22
@@ -90,7 +90,7 @@
       "强对流": 446,
       "大雾": 1417,
       "沙尘": 3,
-      "雷电": 4342,
+      "雷电": 4344,
       "高温": 288,
       "冰雹": 498,
       "雷暴大风": 467,
@@ -902,7 +902,7 @@
       "黄陵": 5,
       "太康": 3,
       "岑巩": 5,
-      "凉城": 9,
+      "凉城": 10,
       "涪陵": 18,
       "石渠": 8,
       "白玉": 5,
@@ -1981,7 +1981,7 @@
       "乐山": 1,
       "荣县": 1,
       "孝昌": 1,
-      "石景": 2,
+      "石景": 3,
       "洮南": 1,
       "英吉": 1,
       "墨玉": 2,
@@ -2088,6 +2088,55 @@
     }
   },
   "recent_pushes": [
+    {
+      "timestamp": "2026-07-01T14:56:12.151029",
+      "event_id": "15092541600000_20260701145233",
+      "type": "weather_alarm",
+      "source": "fan_studio_weather",
+      "description": "凉城县气象台发布雷电黄色预警[III级/较重]"
+    },
+    {
+      "timestamp": "2026-07-01T14:53:48.301448",
+      "event_id": "74994382",
+      "type": "earthquake",
+      "source": "fan_studio_usgs",
+      "description": "M2.7 夏威夷州附近"
+    },
+    {
+      "timestamp": "2026-07-01T14:53:48.289437",
+      "event_id": "20260604085010",
+      "type": "earthquake_warning",
+      "source": "fan_studio_jma",
+      "description": "M3.2 長野県中部"
+    },
+    {
+      "timestamp": "2026-07-01T14:53:48.280507",
+      "event_id": "b3oczhajxacyy",
+      "type": "earthquake_warning",
+      "source": "fan_studio_cea",
+      "description": "M5.2 青海海西州直辖区"
+    },
+    {
+      "timestamp": "2026-07-01T14:53:48.274890",
+      "event_id": "1074457",
+      "type": "earthquake",
+      "source": "fan_studio_cenc",
+      "description": "M5.2 青海海西州直辖区"
+    },
+    {
+      "timestamp": "2026-07-01T14:53:48.267940",
+      "event_id": "11010741600000_20260701144853",
+      "type": "weather_alarm",
+      "source": "fan_studio_weather",
+      "description": "石景山区气象台发布雷电黄色预警[III/较重]"
+    },
+    {
+      "timestamp": "2026-07-01T14:51:07.623896",
+      "event_id": "11010741600000_20260701144853",
+      "type": "weather_alarm",
+      "source": "fan_studio_weather",
+      "description": "石景山区气象台发布雷电黄色预警[III/较重]"
+    },
     {
       "timestamp": "2026-07-01T14:46:06.783776",
       "event_id": "13012541600000_20260701144331",
@@ -2738,60 +2787,9 @@
       "type": "weather_alarm",
       "source": "fan_studio_weather",
       "description": "景洪市气象台发布暴雨橙色预警[Ⅱ级/严重]"
-    },
-    {
-      "timestamp": "2026-07-01T10:16:58.752623",
-      "event_id": "6000t9bv",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M5.0 秘鲁、巴西边境地区附近"
-    },
-    {
-      "timestamp": "2026-07-01T10:12:51.802498",
-      "event_id": "15070041600000_20260701100359",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "呼伦贝尔市气象台发布雷电黄色预警[III级/较重]"
-    },
-    {
-      "timestamp": "2026-07-01T10:07:46.545585",
-      "event_id": "15092941600000_20260701095821",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "四子王旗气象台发布高温黄色预警[III级/较重]"
-    },
-    {
-      "timestamp": "2026-07-01T10:02:51.384538",
-      "event_id": "23110241600000_20260701095409",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "爱辉区气象台发布冰雹橙色预警[II级/严重]"
-    },
-    {
-      "timestamp": "2026-07-01T09:57:46.272974",
-      "event_id": "43132241600000_20260701095341",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "新化县气象局发布暴雨橙色预警信号[Ⅱ级/严重]"
-    },
-    {
-      "timestamp": "2026-07-01T09:52:40.632342",
-      "event_id": "43108141600000_20260701094659",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "资兴市气象局发布高温黄色预警信号[Ⅲ级/较重]"
-    },
-    {
-      "timestamp": "2026-07-01T09:47:45.510123",
-      "event_id": "15082241600000_20260701094245",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "磴口县气象台发布高温黄色预警[III级/较重]"
     }
   ],
   "recent_event_ids": [
-    "53042741600000_20260628071039",
-    "13032441600000_20260628071744",
     "15222241600000_20260628071347",
     "62.883,-149.009,2.5,202606280726",
     "62.883,-148.829,2.5,202606280726",
@@ -3289,6 +3287,8 @@
     "32082641600000_20260701143230",
     "15050041600000_20260701143607",
     "19.099,-155.495,2.5,202607011439",
-    "13012541600000_20260701144331"
+    "13012541600000_20260701144331",
+    "11010741600000_20260701144853",
+    "15092541600000_20260701145233"
   ]
 }

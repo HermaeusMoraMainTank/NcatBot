@@ -46,7 +46,6 @@ class MemberLeave(NcatBotPlugin):
                 return
 
             # 直接使用用户ID，不尝试获取昵称（因为成员已离开群）
-            member_nickname = f"用户{member_id}"
 
             # 判断离开事件的类型
             leave_message = ""

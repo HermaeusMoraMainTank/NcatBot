@@ -205,7 +205,7 @@ class AiUtil:
             except Exception as e:
                 _log.error(f"[Chat] {name} 请求失败: {e}")
                 if attempt < len(providers):
-                    _log.info(f"[Chat] 降级到下一提供商...")
+                    _log.info("[Chat] 降级到下一提供商...")
                     await asyncio.sleep(delay)
 
         _log.error("[Chat] 三次尝试均已失败，返回 None")

@@ -174,7 +174,7 @@ class Lottery(NcatBotPlugin):
 
         await self.api.qq.post_group_msg(
             group_id=input.group_id,
-            text=f"没有玩家取得本次大乐透的优胜！\n小小赛娜达成了清场！",
+            text="没有玩家取得本次大乐透的优胜！\n小小赛娜达成了清场！",
         )
 
         for user_id in participants:

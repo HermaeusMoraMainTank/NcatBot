@@ -227,7 +227,7 @@ class FF14House(NcatBotPlugin):
 
         # 创建画布
         image = PILImage.new("RGB", (canvas_width, canvas_height), (255, 255, 255))
-        draw = ImageDraw.Draw(image)
+        ImageDraw.Draw(image)
 
         # 加载字体
         try:

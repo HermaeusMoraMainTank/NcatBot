@@ -11,7 +11,6 @@ from datetime import datetime
 import yaml
 
 from ncatbot.event.qq import GroupMessageEvent as GroupMessage
-from ncatbot.types import MessageArray as MessageChain, PlainText
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 from ncatbot.utils import get_log
@@ -284,8 +283,6 @@ class DisasterWarning(NcatBotPlugin):
     async def handle_message(self, input: GroupMessage) -> None:
         """处理群消息"""
         raw_message = input.raw_message.strip()
-        group_id = input.group_id
-        sender_id = input.sender.user_id
 
         # 同时支持 "灾难" 和 "灾害" 两种叫法
         cmd = raw_message.replace("灾难", "灾害")

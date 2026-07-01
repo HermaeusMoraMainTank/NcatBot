@@ -136,7 +136,7 @@ class WeatherFilter:
         if self.keywords:
             if not any(kw and kw in headline for kw in self.keywords):
                 _log.info(
-                    f"[灾害预警] 气象预警被关键词过滤器过滤: 标题不含白名单关键词"
+                    "[灾害预警] 气象预警被关键词过滤器过滤: 标题不含白名单关键词"
                 )
                 return True
         elif self.provinces:

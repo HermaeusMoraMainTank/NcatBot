@@ -4,9 +4,9 @@ import logging
 from datetime import date
 
 import aiohttp
+from zhdate import ZhDate
 
 _log = logging.getLogger(__name__)
-from zhdate import ZhDate
 
 
 async def get_avatar(user_id: str) -> bytes | None:

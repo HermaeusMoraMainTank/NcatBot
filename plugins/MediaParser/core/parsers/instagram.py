@@ -14,7 +14,7 @@ from ..compat import _log, ConfigWrapper as AstrBotConfig
 
 from ..data import ImageContent, Platform, VideoContent
 from ..download import Downloader
-from ..exception import DownloadException, ParseException
+from ..exception import ParseException
 from ..utils import generate_file_name, safe_unlink, save_cookies_with_netscape
 from .base import BaseParser, handle
 

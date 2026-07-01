@@ -86,7 +86,6 @@ class Tarot(NcatBotPlugin):
                         image = random.choice(files)
                         # 获取对应的塔罗牌数据
                         blacksouls_tarot = self.load_blacksouls_tarot_data()
-                        tarot_name = image.stem
                         tarot_data = next(
                             (t for t in blacksouls_tarot if t.image_name == image.name),
                             None,

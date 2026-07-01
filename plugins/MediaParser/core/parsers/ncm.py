@@ -4,13 +4,12 @@ from typing import ClassVar
 
 from aiohttp import ClientError
 
-_log = logging.getLogger(__name__)
-
 from ..compat import ConfigWrapper as AstrBotConfig
-
 from ..data import Platform
 from ..download import Downloader
 from .base import BaseParser, handle
+
+_log = logging.getLogger(__name__)
 
 
 class NCMParser(BaseParser):

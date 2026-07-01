@@ -619,9 +619,7 @@ class DisasterWarningService:
     ) -> DisasterEvent:
         """创建简化的测试事件"""
         from ..models.models import (
-            DataSource,
             DisasterEvent,
-            DisasterType,
             EarthquakeData,
             TsunamiData,
             WeatherAlarmData,

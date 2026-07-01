@@ -11,7 +11,7 @@ import ast
 import re
 from pathlib import Path
 from typing import List, Optional, Dict
-from datetime import datetime, timedelta
+from datetime import datetime
 import aiosqlite
 
 _log = logging.getLogger(__name__)

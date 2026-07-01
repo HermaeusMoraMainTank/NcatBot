@@ -1,9 +1,9 @@
 import base64
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import datetime
 from io import BytesIO
 from pathlib import Path
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional
 
 import pillowmd
 from PIL import Image

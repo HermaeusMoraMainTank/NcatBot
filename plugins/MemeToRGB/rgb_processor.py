@@ -10,9 +10,9 @@ from pathlib import Path
 from typing import List, Literal
 
 import numpy as np
+from PIL import Image
 
 RoiMode = Literal["auto", "dark", "light"]
-from PIL import Image
 
 _log = logging.getLogger(__name__)
 

@@ -31,7 +31,7 @@ from .exception import (
 from .render import Renderer
 
 if TYPE_CHECKING:
-    from ncatbot.event.qq import GroupMessageEvent as GroupMessage
+    pass
 
 
 class MessageSender:

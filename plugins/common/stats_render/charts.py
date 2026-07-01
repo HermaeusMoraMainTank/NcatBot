@@ -8,7 +8,7 @@ from PIL import Image, ImageDraw
 
 from .crayon_utils import draw_crayon_rectangle
 from .fonts import load_font
-from .paths import RESOURCES_PATH, TEMP_PATH, ensure_dirs
+from .paths import TEMP_PATH, ensure_dirs
 
 
 def _truncate_label(draw: ImageDraw.ImageDraw, text: str, font, max_width: int) -> str:
@@ -83,7 +83,7 @@ def save_hourly_chart(hourly_data: Dict[int, int], title: str = "小时活跃度
     font = load_font(12)
 
     data = [(h, hourly_data.get(h, 0)) for h in range(24)]
-    total = sum(c for _, c in data) or 1
+    sum(c for _, c in data) or 1
     max_count = max((c for _, c in data), default=1) or 1
 
     bar_y = padding_y
@@ -134,7 +134,7 @@ def save_daily_trend_chart(
     counts: List[int] = []
 
     if days == 1:
-        today = end_date.isoformat()
+        end_date.isoformat()
         hourly = daily_counts if all(k.isdigit() or len(k) <= 2 for k in daily_counts) else {}
         if hourly:
             labels = [f"{h:02d}" for h in range(24)]
