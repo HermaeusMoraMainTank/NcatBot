@@ -58,7 +58,9 @@ class XiaoHongShuParser(BaseParser):
         xhs_id = searched.group("xhs_id")
 
         try:
-            return await self.parse_explore(f"https://www.xiaohongshu.com/{explore_route}", xhs_id)
+            return await self.parse_explore(
+                f"https://www.xiaohongshu.com/{explore_route}", xhs_id
+            )
         except ParseException:
             _log.debug("parse_explore failed, fallback to parse_discovery")
             return await self.parse_discovery(f"https://www.xiaohongshu.com/{route}")
@@ -71,7 +73,12 @@ class XiaoHongShuParser(BaseParser):
         json_obj = self._extract_initial_state_json(html)
 
         # ["note"]["noteDetailMap"][xhs_id]["note"]
-        note_data = json_obj.get("note", {}).get("noteDetailMap", {}).get(xhs_id, {}).get("note", {})
+        note_data = (
+            json_obj.get("note", {})
+            .get("noteDetailMap", {})
+            .get(xhs_id, {})
+            .get("note", {})
+        )
         if not note_data:
             raise ParseException("can't find note detail in json_obj")
 

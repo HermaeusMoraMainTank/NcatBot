@@ -10,7 +10,11 @@ from .charts import (
     save_labeled_bar_chart,
     save_source_breakdown_chart,
 )
-from .word_analysis import extract_words_with_pos, aggregate_word_stats, process_message_text
+from .word_analysis import (
+    extract_words_with_pos,
+    aggregate_word_stats,
+    process_message_text,
+)
 from .helpers import period_label, get_date_keys, rank_users, sum_user_metric
 
 __all__ = [

@@ -60,7 +60,9 @@ class MessageSender:
         ):
             if isinstance(cont, (ImageContent, GraphicsContent)):
                 light.append(cont)
-            elif isinstance(cont, (VideoContent, AudioContent, FileContent, DynamicContent)):
+            elif isinstance(
+                cont, (VideoContent, AudioContent, FileContent, DynamicContent)
+            ):
                 heavy.append(cont)
             else:
                 light.append(cont)

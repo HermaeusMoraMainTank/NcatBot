@@ -1,4 +1,5 @@
 """One-off: fix PlainText / Reply for Pydantic v2 message segments in plugins."""
+
 from __future__ import annotations
 
 import re

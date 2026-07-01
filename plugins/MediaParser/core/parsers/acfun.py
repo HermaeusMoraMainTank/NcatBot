@@ -31,7 +31,9 @@ class AcfunParser(BaseParser):
         acid = int(searched.group("acid"))
         url = f"https://www.acfun.cn/v/ac{acid}"
 
-        m3u8_url, title, description, author, upload_time = await self.parse_video_info(url)
+        m3u8_url, title, description, author, upload_time = await self.parse_video_info(
+            url
+        )
         author = self.create_author(author) if author else None
 
         # 2024-12-1 -> timestamp
@@ -120,7 +122,7 @@ class AcfunParser(BaseParser):
                                 await f.write(chunk)
                                 total += len(chunk)
                                 bar.update(len(chunk))
-                                if total > max_size:        # 大小截断
+                                if total > max_size:  # 大小截断
                                     break
                         if total > max_size:
                             break

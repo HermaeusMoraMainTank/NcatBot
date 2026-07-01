@@ -316,4 +316,3 @@ class USGSEarthquakeHandler(BaseDataHandler):
         except Exception as e:
             _log.error(f"[灾害预警] {self.source_id} 解析数据失败: {e}")
             return None
-

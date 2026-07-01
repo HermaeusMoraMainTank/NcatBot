@@ -899,9 +899,7 @@ class MessageLogger:
                             except (ValueError, IndexError):
                                 continue
 
-                _log.info(
-                    f"[灾害预警] 成功加载 {len(area_mapping)} 个P2P区域代码映射"
-                )
+                _log.info(f"[灾害预警] 成功加载 {len(area_mapping)} 个P2P区域代码映射")
             else:
                 _log.warning("[灾害预警] 未找到epsp-area.csv文件，使用备用映射")
                 area_mapping = self._get_fallback_area_mapping()
@@ -1156,9 +1154,7 @@ class MessageLogger:
                 log_content = self._format_readable_log(log_entry)
             except Exception as format_error:
                 # 如果新格式失败，回退到安全的JSON格式
-                _log.warning(
-                    f"[灾害预警] 可读格式失败，回退到JSON格式: {format_error}"
-                )
+                _log.warning(f"[灾害预警] 可读格式失败，回退到JSON格式: {format_error}")
                 log_content = (
                     json.dumps(log_entry, ensure_ascii=False, indent=2) + "\n\n"
                 )
@@ -1183,9 +1179,7 @@ class MessageLogger:
 
         except Exception as e:
             _log.error(f"[灾害预警] 记录原始消息失败: {e}")
-            _log.error(
-                f"[灾害预警] 失败的消息 - 来源: {source}, 类型: {message_type}"
-            )
+            _log.error(f"[灾害预警] 失败的消息 - 来源: {source}, 类型: {message_type}")
             # 记录异常堆栈
             _log.error(f"[灾害预警] 异常堆栈: {traceback.format_exc()}")
 
@@ -1494,7 +1488,8 @@ class MessageLogger:
 
 
 # 向后兼容的函数
-def get_message_logger(config: dict[str, Any], plugin_name: str, data_dir: Path = None) -> MessageLogger:
+def get_message_logger(
+    config: dict[str, Any], plugin_name: str, data_dir: Path = None
+) -> MessageLogger:
     """获取消息记录器实例"""
     return MessageLogger(config, plugin_name, data_dir)
-

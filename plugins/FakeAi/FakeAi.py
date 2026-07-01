@@ -236,6 +236,7 @@ class FakeAi(NcatBotPlugin):
         # 同时写入 memory 模块，主模块被热重载后仍可通过 memory 取回实例
         try:
             from plugins.FakeAi import memory as _memory
+
             _memory.fake_ai_plugin_ref = self
         except Exception:
             pass
@@ -613,10 +614,18 @@ class FakeAi(NcatBotPlugin):
                         else currency
                     )
 
-                    message_parts.append(PlainText(text=f"💵 货币类型: {currency_name}\n"))
-                    message_parts.append(PlainText(text=f"💎 总余额: {total_balance}\n"))
-                    message_parts.append(PlainText(text=f"🎁 赠送额度: {granted_balance}\n"))
-                    message_parts.append(PlainText(text=f"💳 充值余额: {topped_up_balance}\n"))
+                    message_parts.append(
+                        PlainText(text=f"💵 货币类型: {currency_name}\n")
+                    )
+                    message_parts.append(
+                        PlainText(text=f"💎 总余额: {total_balance}\n")
+                    )
+                    message_parts.append(
+                        PlainText(text=f"🎁 赠送额度: {granted_balance}\n")
+                    )
+                    message_parts.append(
+                        PlainText(text=f"💳 充值余额: {topped_up_balance}\n")
+                    )
             else:
                 message_parts.append(PlainText(text="❌ 未获取到余额信息\n"))
 
@@ -663,16 +672,12 @@ class FakeAi(NcatBotPlugin):
 
         gender = impression_data.get("gender", "")
         if gender:
-            gender_emoji = (
-                "👨" if gender == "男" else "👩" if gender == "女" else "🧑"
-            )
+            gender_emoji = "👨" if gender == "男" else "👩" if gender == "女" else "🧑"
             lines.append(f"{gender_emoji} 性别: {gender}")
 
         impression = impression_data.get("impression", "")
         if impression:
-            lines.append(
-                f"💭 印象: {self._clip_impression_field(impression, 120)}"
-            )
+            lines.append(f"💭 印象: {self._clip_impression_field(impression, 120)}")
 
         favorability = float(impression_data.get("favorability", 0))
         lines.append(f"好感: {format_favorability(favorability)}")
@@ -686,17 +691,14 @@ class FakeAi(NcatBotPlugin):
             reply_prob = 0.0
         else:
             reply_prob = get_reply_probability(favorability)
-        prob_emoji = (
-            "🎯" if reply_prob >= 0.8 else "🎲" if reply_prob >= 0.5 else "🌙"
-        )
+        prob_emoji = "🎯" if reply_prob >= 0.8 else "🎲" if reply_prob >= 0.5 else "🌙"
         lines.append(f"{prob_emoji} 回复概率: {reply_prob * 100:.0f}%")
 
         events = impression_data.get("events", [])
         if events:
             recent_events = events[-3:]
             lines.append(
-                "📝 事件: "
-                + self._clip_impression_field(", ".join(recent_events), 180)
+                "📝 事件: " + self._clip_impression_field(", ".join(recent_events), 180)
             )
 
         new_knowledge = impression_data.get("new_knowledge", [])
@@ -721,9 +723,7 @@ class FakeAi(NcatBotPlugin):
         return "\n".join(lines)
 
     @staticmethod
-    def _impression_user_label(
-        impression_data: Optional[dict], user_id: int
-    ) -> str:
+    def _impression_user_label(impression_data: Optional[dict], user_id: int) -> str:
         if impression_data:
             name = (impression_data.get("username") or "").strip()
             if name:
@@ -794,9 +794,7 @@ class FakeAi(NcatBotPlugin):
                 if is_self:
                     text = "蓝晴还没有对你形成印象呢~\n多聊聊天吧！"
                 else:
-                    text = (
-                        f"蓝晴还没有对 {query_user_id} 形成印象呢~"
-                    )
+                    text = f"蓝晴还没有对 {query_user_id} 形成印象呢~"
                 await self._post_group_msg_retry(
                     group_id=input.group_id,
                     at=sender_id,
@@ -879,7 +877,9 @@ class FakeAi(NcatBotPlugin):
                             PlainText(text=f"  • {keyword}: {content} (来自{source})\n")
                         )
                     else:
-                        message_parts.append(PlainText(text=f"  • {keyword} (来自{source})\n"))
+                        message_parts.append(
+                            PlainText(text=f"  • {keyword} (来自{source})\n")
+                        )
 
             if popular_knowledge:
                 message_parts.append(PlainText(text="\n🔥 常用知识:\n"))
@@ -889,7 +889,9 @@ class FakeAi(NcatBotPlugin):
                     hit_count = row["hit_count"]
                     if content:
                         message_parts.append(
-                            PlainText(text=f"  • {keyword}: {content} (命中{hit_count}次)\n")
+                            PlainText(
+                                text=f"  • {keyword}: {content} (命中{hit_count}次)\n"
+                            )
                         )
                     else:
                         message_parts.append(
@@ -1192,7 +1194,9 @@ class FakeAi(NcatBotPlugin):
             )
 
     @registrar.qq.on_group_message()
-    async def handle_fake_ai(self, input: Optional[GroupMessage] = None, *args, **kwargs) -> None:
+    async def handle_fake_ai(
+        self, input: Optional[GroupMessage] = None, *args, **kwargs
+    ) -> None:
         # 兼容统一注册器未找到 plugin 时只传 event 的情况（此时仅有一个参数，被当作 self 传入）
         if input is None and not args:
             input = self
@@ -1209,6 +1213,7 @@ class FakeAi(NcatBotPlugin):
             if self is None:
                 try:
                     from plugins.FakeAi import memory as _memory
+
                     plug = getattr(_memory, "fake_ai_plugin_ref", None)
                     if plug is not None:
                         _fake_ai_plugin_instance[0] = plug
@@ -1553,7 +1558,9 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
 
         at_pattern = re.compile(r"\[CQ:at,qq=([\w\u4e00-\u9fff]+)]")
         group_id = input.group_id
-        members_response = await self.api.qq.query.get_group_member_list(group_id=group_id)
+        members_response = await self.api.qq.query.get_group_member_list(
+            group_id=group_id
+        )
         members = CommonUtil.parse_group_member_list(members_response)
 
         # 遍历句子
@@ -1742,9 +1749,7 @@ def update_yaml_with_replies(yaml_data: Dict, reply_cache: ReplyCache) -> Dict:
                     }
                     sub_display = sub_map.get(sub_source, sub_source or "")
                     tag = source + (f"-{sub_display}" if sub_display else "")
-                    data["name"] = (
-                        f'{data.get("name", "")}(插件消息:{tag}，并非你生成)'
-                    )
+                    data["name"] = f"{data.get('name', '')}(插件消息:{tag}，并非你生成)"
 
                 # 删除辅助字段以免干扰
                 data.pop("source", None)

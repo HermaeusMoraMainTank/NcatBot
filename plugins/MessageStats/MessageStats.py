@@ -533,7 +533,9 @@ class MessageStatsPlugin(NcatBotPlugin):
                 parts.append(seg.text)
         return "".join(parts)
 
-    async def _resolve_user_names(self, group_id, user_ids: List[str]) -> Dict[str, str]:
+    async def _resolve_user_names(
+        self, group_id, user_ids: List[str]
+    ) -> Dict[str, str]:
         user_names = {uid: uid for uid in user_ids}
         try:
             members_response = await self.api.qq.query.get_group_member_list(
@@ -705,7 +707,7 @@ class MessageStatsPlugin(NcatBotPlugin):
                 if str(group_id) in HMMT.BLACKLIST_GROUPS:
                     _log.info(f"[MessageStats] 跳过黑名单群组 {group_id}")
                     continue
-                
+
                 await self._send_group_daily_stats(int(group_id))
             except Exception as e:
                 _log.error(f"[MessageStats] 发送群组 {group_id} 每日统计失败: {e}")
@@ -727,9 +729,7 @@ class MessageStatsPlugin(NcatBotPlugin):
 
         user_stats = self.user_stats.get(group_id_str, {})
         user_ids = [
-            uid
-            for uid, us in user_stats.items()
-            if us.daily_counts.get(today, 0) > 0
+            uid for uid, us in user_stats.items() if us.daily_counts.get(today, 0) > 0
         ]
         user_names = await self._resolve_user_names(group_id, user_ids)
         report_path = await build_group_report(
@@ -792,7 +792,8 @@ class MessageStatsPlugin(NcatBotPlugin):
     ) -> None:
         """显示统计数据：翻牌 GIF + pillowmd 长图报告。"""
         await self.api.qq.post_group_msg(
-            input.group_id, rtf=MessageChain([PlainText(text="正在生成统计图表，请稍候...")])
+            input.group_id,
+            rtf=MessageChain([PlainText(text="正在生成统计图表，请稍候...")]),
         )
 
         if target == "群组":

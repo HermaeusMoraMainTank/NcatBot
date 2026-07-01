@@ -38,9 +38,7 @@ class JMAEarthquakeP2PHandler(BaseDataHandler):
                 _log.debug(f"[灾害预警] {self.source_id} 收到地震情報(code:551)")
                 return self._parse_earthquake_data(data)
             else:
-                _log.debug(
-                    f"[灾害预警] {self.source_id} 非地震情報数据，code: {code}"
-                )
+                _log.debug(f"[灾害预警] {self.source_id} 非地震情報数据，code: {code}")
                 return None
 
         except json.JSONDecodeError as e:
@@ -75,9 +73,7 @@ class JMAEarthquakeP2PHandler(BaseDataHandler):
             # 震级解析
             magnitude = self._safe_float_convert(magnitude_raw)
             if magnitude is None:
-                _log.error(
-                    f"[灾害预警] {self.source_id} 震级解析失败: {magnitude_raw}"
-                )
+                _log.error(f"[灾害预警] {self.source_id} 震级解析失败: {magnitude_raw}")
                 return None
 
             # 经纬度解析
@@ -260,4 +256,3 @@ class JMAEarthquakeWolfxHandler(BaseDataHandler):
                 return float(base)
 
         return None
-

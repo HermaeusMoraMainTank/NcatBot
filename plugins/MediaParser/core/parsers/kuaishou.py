@@ -40,7 +40,6 @@ class KuaiShouParser(BaseParser):
         real_url = real_url.replace("/fw/long-video/", "/fw/photo/")
 
         async with self.client.get(real_url, headers=self.ios_headers) as resp:
-
             if resp.status >= 400:
                 raise ParseException(f"获取页面失败 {resp.status}")
             response_text = await resp.text()
@@ -53,7 +52,9 @@ class KuaiShouParser(BaseParser):
 
         json_str = matched.group(1).strip()
         init_state = msgspec.json.decode(json_str, type=KuaishouInitState)
-        photo = next((d.photo for d in init_state.values() if d.photo is not None), None)
+        photo = next(
+            (d.photo for d in init_state.values() if d.photo is not None), None
+        )
         if photo is None:
             raise ParseException("window.init_state don't contains videos or pics")
 
@@ -62,7 +63,9 @@ class KuaiShouParser(BaseParser):
 
         # 添加视频内容
         if video_url := photo.video_url:
-            contents.append(self.create_video_content(video_url, photo.cover_url, photo.duration))
+            contents.append(
+                self.create_video_content(video_url, photo.cover_url, photo.duration)
+            )
 
         # 添加图片内容
         if img_urls := photo.img_urls:
@@ -77,9 +80,6 @@ class KuaiShouParser(BaseParser):
             contents=contents,
             timestamp=photo.timestamp // 1000,
         )
-
-
-
 
 
 class CdnUrl(Struct):
@@ -136,7 +136,6 @@ class Photo(Struct):
 class TusjohData(Struct):
     result: int
     photo: Photo | None = None
-
 
 
 KuaishouInitState: TypeAlias = dict[str, TusjohData]

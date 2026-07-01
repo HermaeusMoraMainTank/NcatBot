@@ -289,14 +289,23 @@ class Status(NcatBotPlugin):
         H - margin * 2 - top_h - gap
 
         left_top = (margin, margin, margin + left_w, margin + top_h)
-        right_top = (left_top[2] + gap, margin, left_top[2] + gap + right_w, margin + top_h)
+        right_top = (
+            left_top[2] + gap,
+            margin,
+            left_top[2] + gap + right_w,
+            margin + top_h,
+        )
         left_bottom = (margin, left_top[3] + gap, margin + left_w, H - margin)
         right_bottom = (right_top[0], right_top[3] + gap, W - margin, H - margin)
 
         self._draw_panel(draw, left_top, fill=(255, 255, 255), border=(231, 236, 245))
         self._draw_panel(draw, right_top, fill=(255, 255, 255), border=(231, 236, 245))
-        self._draw_panel(draw, left_bottom, radius=18, fill=(255, 255, 255), border=(231, 236, 245))
-        self._draw_panel(draw, right_bottom, radius=18, fill=(255, 255, 255), border=(231, 236, 245))
+        self._draw_panel(
+            draw, left_bottom, radius=18, fill=(255, 255, 255), border=(231, 236, 245)
+        )
+        self._draw_panel(
+            draw, right_bottom, radius=18, fill=(255, 255, 255), border=(231, 236, 245)
+        )
 
         # left: profile + system rows
         x0, y0, x1, _ = left_top
@@ -305,8 +314,15 @@ class Status(NcatBotPlugin):
         avatar_img = self._load_avatar_image(HMMT.HMMT_ID, size=66)
         canvas.paste(avatar_img, (x0 + 22, y0 + 22), avatar_img)
         draw.text((x0 + 108, y0 + 26), "蓝晴", font=font_title, fill=(45, 52, 65))
-        draw.text((x0 + 110, y0 + 72), f"{HMMT.HMMT_ID}", font=font_small, fill=(120, 130, 150))
-        draw.line([(x0 + 20, y0 + 114), (x1 - 20, y0 + 114)], fill=(236, 239, 245), width=2)
+        draw.text(
+            (x0 + 110, y0 + 72),
+            f"{HMMT.HMMT_ID}",
+            font=font_small,
+            fill=(120, 130, 150),
+        )
+        draw.line(
+            [(x0 + 20, y0 + 114), (x1 - 20, y0 + 114)], fill=(236, 239, 245), width=2
+        )
 
         draw.text((x0 + 24, y0 + 132), "系统信息", font=font_h3, fill=(58, 66, 84))
         info_rows = [
@@ -354,22 +370,66 @@ class Status(NcatBotPlugin):
             row_y += 46
 
         ring_x = x1 - 140
-        self._draw_ring(draw, (ring_x, y0 + 150), 78, m["cpu_avg"], color=(233, 112, 156))
-        self._draw_ring(draw, (ring_x, y0 + 356), 78, m["mem_pct"], color=(208, 88, 238))
+        self._draw_ring(
+            draw, (ring_x, y0 + 150), 78, m["cpu_avg"], color=(233, 112, 156)
+        )
+        self._draw_ring(
+            draw, (ring_x, y0 + 356), 78, m["mem_pct"], color=(208, 88, 238)
+        )
         cpu_pct = f"{m['cpu_avg']:.0f}%"
         mem_pct = f"{m['mem_pct']:.0f}%"
-        draw.text((ring_x - text_w("CPU占用", font_small) // 2, y0 + 126), "CPU占用", font=font_small, fill=(122, 132, 150))
-        draw.text((ring_x - text_w(cpu_pct, font_h3) // 2, y0 + 152), cpu_pct, font=font_h3, fill=(35, 42, 55))
-        draw.text((ring_x - text_w("内存占用", font_small) // 2, y0 + 332), "内存占用", font=font_small, fill=(122, 132, 150))
-        draw.text((ring_x - text_w(mem_pct, font_h3) // 2, y0 + 358), mem_pct, font=font_h3, fill=(35, 42, 55))
+        draw.text(
+            (ring_x - text_w("CPU占用", font_small) // 2, y0 + 126),
+            "CPU占用",
+            font=font_small,
+            fill=(122, 132, 150),
+        )
+        draw.text(
+            (ring_x - text_w(cpu_pct, font_h3) // 2, y0 + 152),
+            cpu_pct,
+            font=font_h3,
+            fill=(35, 42, 55),
+        )
+        draw.text(
+            (ring_x - text_w("内存占用", font_small) // 2, y0 + 332),
+            "内存占用",
+            font=font_small,
+            fill=(122, 132, 150),
+        )
+        draw.text(
+            (ring_x - text_w(mem_pct, font_h3) // 2, y0 + 358),
+            mem_pct,
+            font=font_h3,
+            fill=(35, 42, 55),
+        )
 
         # bottom left
         x0, y0, _, _ = left_bottom
         draw.text((x0 + 24, y0 + 22), "网络配置", font=font_h3, fill=(58, 66, 84))
-        draw.text((x0 + 28, y0 + 80), f"发送: {self._human_bytes(m['net_sent'])}", font=font_text, fill=(51, 58, 72))
-        draw.text((x0 + 28, y0 + 124), f"接收: {self._human_bytes(m['net_recv'])}", font=font_text, fill=(51, 58, 72))
-        draw.text((x0 + 28, y0 + 168), f"上行包: {m['net_ps']}", font=font_text, fill=(51, 58, 72))
-        draw.text((x0 + 28, y0 + 212), f"下行包: {m['net_pr']}", font=font_text, fill=(51, 58, 72))
+        draw.text(
+            (x0 + 28, y0 + 80),
+            f"发送: {self._human_bytes(m['net_sent'])}",
+            font=font_text,
+            fill=(51, 58, 72),
+        )
+        draw.text(
+            (x0 + 28, y0 + 124),
+            f"接收: {self._human_bytes(m['net_recv'])}",
+            font=font_text,
+            fill=(51, 58, 72),
+        )
+        draw.text(
+            (x0 + 28, y0 + 168),
+            f"上行包: {m['net_ps']}",
+            font=font_text,
+            fill=(51, 58, 72),
+        )
+        draw.text(
+            (x0 + 28, y0 + 212),
+            f"下行包: {m['net_pr']}",
+            font=font_text,
+            fill=(51, 58, 72),
+        )
 
         # bottom right
         x0, y0, x1, y1 = right_bottom
@@ -379,18 +439,38 @@ class Status(NcatBotPlugin):
             label = d["mp"] if len(d["mp"]) <= 18 else "…" + d["mp"][-17:]
             right_text = f"{self._human_bytes(d['used'])}/{self._human_bytes(d['total'])}  {d['pct']:.0f}%"
             draw.text((x0 + 24, yy), label, font=font_text, fill=(88, 98, 118))
-            draw.text((x1 - 24 - text_w(right_text, font_text), yy), right_text, font=font_text, fill=(51, 58, 72))
+            draw.text(
+                (x1 - 24 - text_w(right_text, font_text), yy),
+                right_text,
+                font=font_text,
+                fill=(51, 58, 72),
+            )
             by = yy + 34
-            draw.rounded_rectangle((x0 + 24, by, x1 - 24, by + 10), radius=5, fill=(236, 239, 245))
+            draw.rounded_rectangle(
+                (x0 + 24, by, x1 - 24, by + 10), radius=5, fill=(236, 239, 245)
+            )
             fill_w = int((x1 - 48 - x0) * min(100.0, d["pct"]) / 100.0)
-            draw.rounded_rectangle((x0 + 24, by, x0 + 24 + fill_w, by + 10), radius=5, fill=self._bar_color(d["pct"]))
+            draw.rounded_rectangle(
+                (x0 + 24, by, x0 + 24 + fill_w, by + 10),
+                radius=5,
+                fill=self._bar_color(d["pct"]),
+            )
             yy += 62
 
         if m["load"]:
-            load_text = f"Load: {m['load'][0]:.2f} / {m['load'][1]:.2f} / {m['load'][2]:.2f}"
-            draw.text((x0 + 24, y1 - 72), load_text, font=font_text, fill=(92, 102, 122))
+            load_text = (
+                f"Load: {m['load'][0]:.2f} / {m['load'][1]:.2f} / {m['load'][2]:.2f}"
+            )
+            draw.text(
+                (x0 + 24, y1 - 72), load_text, font=font_text, fill=(92, 102, 122)
+            )
         ts = m["now"]
-        draw.text((x1 - 24 - text_w(ts, font_small), y1 - 38), ts, font=font_small, fill=(126, 136, 156))
+        draw.text(
+            (x1 - 24 - text_w(ts, font_small), y1 - 38),
+            ts,
+            font=font_small,
+            fill=(126, 136, 156),
+        )
 
         buf = io.BytesIO()
         canvas.save(buf, format="PNG", optimize=True)

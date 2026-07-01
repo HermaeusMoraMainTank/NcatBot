@@ -41,7 +41,9 @@ class Universalis(NcatBotPlugin):
             _log.error(f"JSON 解码错误: {e}")
             exit(1)
         except FileNotFoundError:
-            _log.error(f"文件未找到: {os.path.join(os.getcwd(), 'data/json/Item.json')}")
+            _log.error(
+                f"文件未找到: {os.path.join(os.getcwd(), 'data/json/Item.json')}"
+            )
             exit(1)
         except Exception as e:
             _log.error(f"发生错误: {e}")

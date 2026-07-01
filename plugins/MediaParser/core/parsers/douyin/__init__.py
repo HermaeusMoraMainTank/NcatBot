@@ -59,7 +59,9 @@ class DouyinParser(BaseParser):
     def _save_cookies(self, cookies: str):
         """保存抖音 cookies 到文件"""
         try:
-            self._cookies_file.write_text(json.dumps({"cookie": cookies}, ensure_ascii=False))
+            self._cookies_file.write_text(
+                json.dumps({"cookie": cookies}, ensure_ascii=False)
+            )
             _log.info(f"已保存抖音 cookies 到 {self._cookies_file}")
         except Exception as e:
             _log.warning(f"保存抖音 cookies 失败: {e}")
@@ -69,7 +71,9 @@ class DouyinParser(BaseParser):
         if not set_cookie_headers:
             return
 
-        _log.debug(f"[抖音] 开始更新 cookies，收到 {len(set_cookie_headers)} 个 Set-Cookie")
+        _log.debug(
+            f"[抖音] 开始更新 cookies，收到 {len(set_cookie_headers)} 个 Set-Cookie"
+        )
 
         # 解析现有的 cookies
         existing_cookies = {}
@@ -102,6 +106,7 @@ class DouyinParser(BaseParser):
             _log.debug("[抖音] Cookies 已更新并保存")
         else:
             _log.debug("[抖音] Cookies 无变化")
+
     # https://v.douyin.com/_2ljF4AmKL8
     @handle("v.douyin", r"v\.douyin\.com/[a-zA-Z0-9_\-]+")
     @handle("jx.douyin", r"jx\.douyin\.com/[a-zA-Z0-9_\-]+")
@@ -157,7 +162,9 @@ class DouyinParser(BaseParser):
         headers = headers or self.ios_headers
         _log.debug(f"[抖音] 短链重定向请求: {url}")
         _log.debug(f"[抖音] 请求头 User-Agent: {headers.get('User-Agent', 'N/A')}")
-        _log.debug(f"[抖音] 请求头 Cookie: {'已配置' if headers.get('Cookie') else '未配置'}")
+        _log.debug(
+            f"[抖音] 请求头 Cookie: {'已配置' if headers.get('Cookie') else '未配置'}"
+        )
 
         async with self.client.get(
             url, headers=headers, allow_redirects=False, ssl=False
@@ -183,8 +190,12 @@ class DouyinParser(BaseParser):
 
     async def parse_video(self, url: str):
         _log.debug(f"[抖音] 视频页面请求: {url}")
-        _log.debug(f"[抖音] 请求头 User-Agent: {self.ios_headers.get('User-Agent', 'N/A')}")
-        _log.debug(f"[抖音] 请求头 Cookie: {'已配置' if self.ios_headers.get('Cookie') else '未配置'}")
+        _log.debug(
+            f"[抖音] 请求头 User-Agent: {self.ios_headers.get('User-Agent', 'N/A')}"
+        )
+        _log.debug(
+            f"[抖音] 请求头 Cookie: {'已配置' if self.ios_headers.get('Cookie') else '未配置'}"
+        )
 
         async with self.client.get(
             url, headers=self.ios_headers, allow_redirects=False, ssl=False
@@ -214,25 +225,39 @@ class DouyinParser(BaseParser):
 
         from .video import RouterData
 
-        video_data = msgspec.json.decode(matched.group(1).strip(), type=RouterData).video_data
-        _log.debug(f"[抖音] 解析成功 - 作者: {video_data.author.nickname}, 描述: {video_data.desc[:50]}...")
+        video_data = msgspec.json.decode(
+            matched.group(1).strip(), type=RouterData
+        ).video_data
+        _log.debug(
+            f"[抖音] 解析成功 - 作者: {video_data.author.nickname}, 描述: {video_data.desc[:50]}..."
+        )
         # 使用新的简洁构建方式
         contents = []
 
         # 添加图片内容
         if image_urls := video_data.image_urls:
             _log.debug(f"[抖音] 检测到图文内容，图片数量: {len(image_urls)}")
-            contents.extend(self.create_image_contents(image_urls, ext_headers=self.ios_headers))
+            contents.extend(
+                self.create_image_contents(image_urls, ext_headers=self.ios_headers)
+            )
 
         # 添加视频内容
         elif video_url := video_data.video_url:
             cover_url = video_data.cover_url
             duration = video_data.video.duration if video_data.video else 0
             _log.debug(f"[抖音] 检测到视频内容，时长: {duration}秒")
-            contents.append(self.create_video_content(video_url, cover_url, duration, ext_headers=self.ios_headers))
+            contents.append(
+                self.create_video_content(
+                    video_url, cover_url, duration, ext_headers=self.ios_headers
+                )
+            )
 
         # 构建作者
-        author = self.create_author(video_data.author.nickname, video_data.avatar_url, ext_headers=self.ios_headers)
+        author = self.create_author(
+            video_data.author.nickname,
+            video_data.avatar_url,
+            ext_headers=self.ios_headers,
+        )
 
         return self.result(
             title=video_data.desc,
@@ -249,8 +274,12 @@ class DouyinParser(BaseParser):
         }
         _log.debug(f"[抖音] 幻灯片API请求: {url}")
         _log.debug(f"[抖音] 请求参数: {params}")
-        _log.debug(f"[抖音] 请求头 User-Agent: {self.android_headers.get('User-Agent', 'N/A')}")
-        _log.debug(f"[抖音] 请求头 Cookie: {'已配置' if self.android_headers.get('Cookie') else '未配置'}")
+        _log.debug(
+            f"[抖音] 请求头 User-Agent: {self.android_headers.get('User-Agent', 'N/A')}"
+        )
+        _log.debug(
+            f"[抖音] 请求头 Cookie: {'已配置' if self.android_headers.get('Cookie') else '未配置'}"
+        )
 
         async with self.client.get(
             url, params=params, headers=self.android_headers, ssl=False
@@ -267,22 +296,34 @@ class DouyinParser(BaseParser):
 
             response_text = await resp.read()
             _log.debug(f"[抖音] 幻灯片API响应体大小: {len(response_text)} 字节")
-            slides_data = msgspec.json.decode(response_text, type=SlidesInfo).aweme_details[0]
-        _log.debug(f"[抖音] 幻灯片解析成功 - 作者: {slides_data.name}, 描述: {slides_data.desc[:50]}...")
+            slides_data = msgspec.json.decode(
+                response_text, type=SlidesInfo
+            ).aweme_details[0]
+        _log.debug(
+            f"[抖音] 幻灯片解析成功 - 作者: {slides_data.name}, 描述: {slides_data.desc[:50]}..."
+        )
         contents = []
 
         # 添加图片内容
         if image_urls := slides_data.image_urls:
             _log.debug(f"[抖音] 检测到幻灯片图片，数量: {len(image_urls)}")
-            contents.extend(self.create_image_contents(image_urls, ext_headers=self.android_headers))
+            contents.extend(
+                self.create_image_contents(image_urls, ext_headers=self.android_headers)
+            )
 
         # 添加动态内容
         if dynamic_urls := slides_data.dynamic_urls:
             _log.debug(f"[抖音] 检测到幻灯片动态效果，数量: {len(dynamic_urls)}")
-            contents.extend(self.create_dynamic_contents(dynamic_urls, ext_headers=self.android_headers))
+            contents.extend(
+                self.create_dynamic_contents(
+                    dynamic_urls, ext_headers=self.android_headers
+                )
+            )
 
         # 构建作者
-        author = self.create_author(slides_data.name, slides_data.avatar_url, ext_headers=self.android_headers)
+        author = self.create_author(
+            slides_data.name, slides_data.avatar_url, ext_headers=self.android_headers
+        )
 
         return self.result(
             title=slides_data.desc,

@@ -103,9 +103,9 @@ FIELD_MAPPING: list[dict[str, Any]] = [
         "key": "join_time",
         "label": "加群时间",
         "source": "info2",
-        "transform": lambda v: datetime.fromtimestamp(v).strftime("%Y-%m-%d")
-        if v
-        else None,
+        "transform": lambda v: (
+            datetime.fromtimestamp(v).strftime("%Y-%m-%d") if v else None
+        ),
     },
     {
         "key": "qqLevel",
@@ -117,9 +117,9 @@ FIELD_MAPPING: list[dict[str, Any]] = [
         "key": "reg_time",
         "label": "注册时间",
         "source": "info1",
-        "transform": lambda v: datetime.fromtimestamp(v).strftime("%Y年")
-        if v
-        else None,
+        "transform": lambda v: (
+            datetime.fromtimestamp(v).strftime("%Y年") if v else None
+        ),
     },
     {
         "key": "long_nick",

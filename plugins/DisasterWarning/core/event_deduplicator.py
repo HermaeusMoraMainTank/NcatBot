@@ -295,5 +295,3 @@ class EventDeduplicator:
 
         for fingerprint in old_fingerprints:
             del self.recent_events[fingerprint]
-
-

@@ -60,7 +60,9 @@ class NGAParser(BaseParser):
         url = self.nga_url(tid)
         html = None
         guest_js: str | None = None
-        async with self.client.get(url, headers=self.headers, allow_redirects=True) as resp:
+        async with self.client.get(
+            url, headers=self.headers, allow_redirects=True
+        ) as resp:
             try:
                 # 第一次请求可能返回403，但包含设置cookie的JavaScript
                 html = await self._read_response_text(resp)
@@ -88,7 +90,6 @@ class NGAParser(BaseParser):
                             headers=clean_headers,
                             allow_redirects=True,
                         ) as retry_resp:
-
                             html = await self._read_response_text(retry_resp)
                             # 用 retry_resp 的状态继续后面的检查
                             resp = retry_resp

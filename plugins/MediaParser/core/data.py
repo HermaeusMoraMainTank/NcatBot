@@ -169,6 +169,7 @@ class ParseResult:
     """渲染图片"""
     _resource_id: str | None = field(default=None, init=False, repr=False)
     """资源 ID"""
+
     @property
     def header(self) -> str | None:
         """头信息 仅用于 default render"""
@@ -289,7 +290,6 @@ class ParseResult:
 
         self._resource_id = h.hexdigest()
         return self._resource_id
-
 
 
 class ParseResultKwargs(TypedDict, total=False):

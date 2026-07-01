@@ -63,4 +63,3 @@ __all__ = [
     # 注册表
     "DATA_HANDLERS",
 ]
-

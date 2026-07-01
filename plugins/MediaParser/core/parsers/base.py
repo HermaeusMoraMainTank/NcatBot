@@ -187,9 +187,7 @@ class BaseParser:
                     url, headers=headers, allow_redirects=False, proxy=self.proxy
                 ) as resp:
                     if resp.status >= 400:
-                        raise ClientError(
-                            f"redirect check {resp.status} {resp.reason}"
-                        )
+                        raise ClientError(f"redirect check {resp.status} {resp.reason}")
                     return resp.headers.get("Location", url)
             except (ClientError, TimeoutError):
                 if attempt < retries:
@@ -211,7 +209,9 @@ class BaseParser:
                     url, headers=headers, allow_redirects=True, proxy=self.proxy
                 ) as resp:
                     if resp.status >= 400:
-                        raise ClientError(f"final url check {resp.status} {resp.reason}")
+                        raise ClientError(
+                            f"final url check {resp.status} {resp.reason}"
+                        )
                     return str(resp.url)
             except (ClientError, TimeoutError):
                 if attempt < retries:
@@ -263,7 +263,9 @@ class BaseParser:
         """创建图片内容列表"""
         contents: list[ImageContent] = []
         for url in image_urls:
-            task = self.downloader.download_img(url, ext_headers=ext_headers or self.headers, proxy=self.proxy)
+            task = self.downloader.download_img(
+                url, ext_headers=ext_headers or self.headers, proxy=self.proxy
+            )
             contents.append(ImageContent(task))
         return contents
 
@@ -275,7 +277,9 @@ class BaseParser:
         """创建动态图片内容列表"""
         contents: list[DynamicContent] = []
         for url in dynamic_urls:
-            task = self.downloader.download_video(url, ext_headers=ext_headers or self.headers, proxy=self.proxy)
+            task = self.downloader.download_video(
+                url, ext_headers=ext_headers or self.headers, proxy=self.proxy
+            )
             contents.append(DynamicContent(task))
         return contents
 
@@ -299,7 +303,9 @@ class BaseParser:
         alt: str | None = None,
     ):
         """创建图文内容 图片不能为空 文字可空 渲染时文字在前 图片在后"""
-        image_task = self.downloader.download_img(image_url, ext_headers=self.headers, proxy=self.proxy)
+        image_task = self.downloader.download_img(
+            image_url, ext_headers=self.headers, proxy=self.proxy
+        )
         return GraphicsContent(image_task, text, alt)
 
     def create_file_content(

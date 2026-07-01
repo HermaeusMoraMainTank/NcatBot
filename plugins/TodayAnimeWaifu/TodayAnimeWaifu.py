@@ -102,7 +102,9 @@ class TodayAnimeWaifu(NcatBotPlugin):
                 continue
             for filename in filenames:
                 slot = self._waifu_slot(directory, filename)
-                if slot not in allocated and self._waifu_file_exists(directory, filename):
+                if slot not in allocated and self._waifu_file_exists(
+                    directory, filename
+                ):
                     candidates.append((directory, filename))
         return candidates
 
@@ -132,14 +134,10 @@ class TodayAnimeWaifu(NcatBotPlugin):
         preferred_dir = (
             HMMT_WAIFU_DIR if str(user_id) == HMMT.HMMT_ID else PREFERRED_WAIFU_DIR
         )
-        preferred = self._available_candidates(
-            group_id, include_dirs=[preferred_dir]
-        )
+        preferred = self._available_candidates(group_id, include_dirs=[preferred_dir])
         others = self._available_candidates(
             group_id,
-            include_dirs=[
-                d for d in self.waifu_images_by_dir if d != preferred_dir
-            ],
+            include_dirs=[d for d in self.waifu_images_by_dir if d != preferred_dir],
         )
 
         if random.random() < PREFERRED_DIR_CHANCE:
@@ -187,7 +185,9 @@ class TodayAnimeWaifu(NcatBotPlugin):
             )
         return None
 
-    def _release_user_waifu(self, group_id: int, user_id: int, user_to_waifu_map: dict) -> None:
+    def _release_user_waifu(
+        self, group_id: int, user_id: int, user_to_waifu_map: dict
+    ) -> None:
         waifu_data = user_to_waifu_map.pop(user_id, None)
         if waifu_data is not None:
             self._release_waifu(group_id, waifu_data)
@@ -231,9 +231,7 @@ class TodayAnimeWaifu(NcatBotPlugin):
                 hi = mid - 1
         return text[:lo] + ellipsis if lo > 0 else ellipsis
 
-    def _generate_waifu_list_image(
-        self, pairs: List[Tuple[str, str, str]]
-    ) -> str:
+    def _generate_waifu_list_image(self, pairs: List[Tuple[str, str, str]]) -> str:
         width = 920
         padding = 28
         row_height = 42
@@ -561,7 +559,9 @@ class TodayAnimeWaifu(NcatBotPlugin):
                 rtf=MessageChain(
                     [
                         At(user_id=user_id),
-                        PlainText(text=f" 成功更换了二次元老婆，你的新老婆是：{new_waifu_name}"),
+                        PlainText(
+                            text=f" 成功更换了二次元老婆，你的新老婆是：{new_waifu_name}"
+                        ),
                     ]
                 ),
             )

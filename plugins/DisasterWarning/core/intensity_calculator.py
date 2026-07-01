@@ -103,4 +103,3 @@ class IntensityCalculator:
             return "🔴 毁灭性"
         else:
             return "🟣 极度毁灭"
-

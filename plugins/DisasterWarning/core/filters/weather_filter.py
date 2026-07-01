@@ -135,9 +135,7 @@ class WeatherFilter:
         # 2. 地区过滤：keywords 优先（标题子串匹配），否则 provinces
         if self.keywords:
             if not any(kw and kw in headline for kw in self.keywords):
-                _log.info(
-                    "[灾害预警] 气象预警被关键词过滤器过滤: 标题不含白名单关键词"
-                )
+                _log.info("[灾害预警] 气象预警被关键词过滤器过滤: 标题不含白名单关键词")
                 return True
         elif self.provinces:
             province = self.extract_province(headline)
@@ -152,4 +150,3 @@ class WeatherFilter:
                 return True
 
         return False
-

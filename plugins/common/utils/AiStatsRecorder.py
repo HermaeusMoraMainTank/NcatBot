@@ -38,7 +38,10 @@ SOURCE_LABELS: Dict[str, str] = {
 
 # 明细展示时的归类（主动 = @ / 含蓝晴 / 回调 / 识图等对话类）
 SOURCE_ROLLUP: Dict[str, tuple[str, List[str]]] = {
-    "active": ("主动调用", [SOURCE_ACTIVE, SOURCE_CALLBACK, SOURCE_VISION, SOURCE_TEST]),
+    "active": (
+        "主动调用",
+        [SOURCE_ACTIVE, SOURCE_CALLBACK, SOURCE_VISION, SOURCE_TEST],
+    ),
     "passive": ("被动触发", [SOURCE_PASSIVE]),
     "summary": ("群聊总结", [SOURCE_SUMMARY]),
     "impression": ("用户总结", [SOURCE_IMPRESSION]),
@@ -109,7 +112,13 @@ def estimate_cost_cny(
 
 
 def _empty_source_bucket() -> dict:
-    return {"count": 0, "tokens": 0, "prompt_tokens": 0, "completion_tokens": 0, "cost": 0.0}
+    return {
+        "count": 0,
+        "tokens": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "cost": 0.0,
+    }
 
 
 def _empty_stats() -> dict:
@@ -374,11 +383,15 @@ def _sum_by_source(daily_by_source: dict, days: Optional[int]) -> Dict[str, dict
                 result[src] = _empty_source_bucket()
             for key in ("count", "tokens", "prompt_tokens", "completion_tokens"):
                 result[src][key] += int(bucket.get(key, 0))
-            result[src]["cost"] = round(result[src]["cost"] + float(bucket.get("cost", 0)), 6)
+            result[src]["cost"] = round(
+                result[src]["cost"] + float(bucket.get("cost", 0)), 6
+            )
     return result
 
 
-def get_rollup_breakdown(stats: dict, days: Optional[int], include_zero: bool = False) -> List[dict]:
+def get_rollup_breakdown(
+    stats: dict, days: Optional[int], include_zero: bool = False
+) -> List[dict]:
     """按展示归类汇总来源统计。"""
     daily_by_source = stats.get("daily_by_source") or {}
     raw = _sum_by_source(daily_by_source, days)

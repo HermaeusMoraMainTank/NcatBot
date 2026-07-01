@@ -226,9 +226,7 @@ class WebSocketHandlerRegistry:
                                 "uri": connection_info.get("uri"),
                             }
 
-                        _log.debug(
-                            f"[灾害预警] P2P地震情報处理器解析成功: {event.id}"
-                        )
+                        _log.debug(f"[灾害预警] P2P地震情報处理器解析成功: {event.id}")
                         await self.service._handle_disaster_event(event)
                         return
                 except Exception as e:
@@ -244,9 +242,7 @@ class WebSocketHandlerRegistry:
         """创建 Wolfx WebSocket 处理器"""
 
         async def wolfx_handler(message, connection_name=None, connection_info=None):
-            _log.debug(
-                f"[灾害预警] Wolfx处理器收到消息 - 连接: {connection_name}"
-            )
+            _log.debug(f"[灾害预警] Wolfx处理器收到消息 - 连接: {connection_name}")
 
             if connection_name:
                 source_mapping = {
@@ -284,9 +280,7 @@ class WebSocketHandlerRegistry:
                         )
                         return
                 else:
-                    _log.warning(
-                        f"[灾害预警] 无法识别Wolfx连接名称: {connection_name}"
-                    )
+                    _log.warning(f"[灾害预警] 无法识别Wolfx连接名称: {connection_name}")
                     return
             else:
                 _log.warning("[灾害预警] Wolfx处理器未收到连接名称")
@@ -319,9 +313,7 @@ class WebSocketHandlerRegistry:
                                 "uri": connection_info.get("uri"),
                             }
 
-                        _log.debug(
-                            f"[灾害预警] Global Quake处理器解析成功: {event.id}"
-                        )
+                        _log.debug(f"[灾害预警] Global Quake处理器解析成功: {event.id}")
                         await self.service._handle_disaster_event(event)
                 except Exception as e:
                     _log.error(
@@ -331,5 +323,3 @@ class WebSocketHandlerRegistry:
                 _log.warning("[灾害预警] 未找到Global Quake处理器")
 
         return global_quake_handler
-
-

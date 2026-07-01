@@ -116,4 +116,3 @@ class CardMaker:
                 current_x += bbox[2] - bbox[0]
 
             current_y += 40
-

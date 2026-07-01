@@ -256,7 +256,9 @@ class EmojiStatsPlugin(NcatBotPlugin):
             backup = f"{path}.corrupt.{strftime('%Y%m%d_%H%M%S')}"
             copy2(path, backup)
             with open(path, "w", encoding="utf-8") as f:
-                json.dump(empty_doc, f, ensure_ascii=False, indent=2, cls=DateTimeEncoder)
+                json.dump(
+                    empty_doc, f, ensure_ascii=False, indent=2, cls=DateTimeEncoder
+                )
             _log.warning(
                 "[EmojiStats] 数据文件 JSON 损坏，已备份到 %s 并写入空模板，可从备份恢复",
                 backup,
@@ -486,9 +488,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
                                 _log.error(f"[EmojiStats] 加载群组数据失败: {e}")
                                 continue
 
-                        sum(
-                            len(users) for users in self.user_stats.values()
-                        )
+                        sum(len(users) for users in self.user_stats.values())
                 except Exception as e:
                     _log.error(f"[EmojiStats] 加载用户数据失败: {e}")
                     # 不要清空内存中的数据，保持现有数据
@@ -1074,7 +1074,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
                 if str(group_id) in HMMT.BLACKLIST_GROUPS:
                     _log.info(f"[EmojiStats] 跳过黑名单群组 {group_id}")
                     continue
-                
+
                 await self._send_group_daily_stats(int(group_id))
             except Exception as e:
                 _log.error(f"[EmojiStats] 发送群组 {group_id} 每日统计失败: {e}")
@@ -1153,7 +1153,9 @@ class EmojiStatsPlugin(NcatBotPlugin):
     async def _resolve_user_names(self, group_id, user_ids):
         user_names = {uid: uid for uid in user_ids}
         try:
-            members_response = await self.api.qq.query.get_group_member_list(group_id=group_id)
+            members_response = await self.api.qq.query.get_group_member_list(
+                group_id=group_id
+            )
             members = CommonUtil.parse_group_member_list(members_response)
             for member in members:
                 uid = str(member.user_id)
@@ -1164,8 +1166,11 @@ class EmojiStatsPlugin(NcatBotPlugin):
             _log.error(f"[EmojiStats] 获取群成员失败: {e}")
         return user_names
 
-    async def _send_flip_and_report(self, group_id, reply_id, total_count, report_path, header=""):
+    async def _send_flip_and_report(
+        self, group_id, reply_id, total_count, report_path, header=""
+    ):
         from ncatbot.types import MessageArray as MC, PlainText as PT, Image as IM
+
         elements = []
         if header:
             elements.append(PT(text=header))
@@ -1173,7 +1178,9 @@ class EmojiStatsPlugin(NcatBotPlugin):
             elements.append(img)
         await self.api.qq.post_group_msg(group_id, rtf=MC(elements), reply=reply_id)
         if report_path:
-            await self.api.qq.post_group_msg(group_id, rtf=MC([IM(file=report_path)]), reply=reply_id)
+            await self.api.qq.post_group_msg(
+                group_id, rtf=MC([IM(file=report_path)]), reply=reply_id
+            )
 
     async def _show_stats(
         self, input: GroupMessage, days: int, target: str, target_user_id: int
@@ -1181,7 +1188,8 @@ class EmojiStatsPlugin(NcatBotPlugin):
         from .report_builder import build_emoji_group_report
 
         await self.api.qq.post_group_msg(
-            input.group_id, rtf=MessageArray([PlainText(text="正在生成统计图表，请稍候...")])
+            input.group_id,
+            rtf=MessageArray([PlainText(text="正在生成统计图表，请稍候...")]),
         )
         if target == "群组":
             group_id = str(input.group_id)
@@ -1198,14 +1206,20 @@ class EmojiStatsPlugin(NcatBotPlugin):
                 user_total = sum(self._get_time_range_stats(user_stats, days).values())
                 if user_total > 0:
                     user_counts[user_id] = user_total
-            user_names = await self._resolve_user_names(input.group_id, list(user_counts.keys()))
+            user_names = await self._resolve_user_names(
+                input.group_id, list(user_counts.keys())
+            )
             report_path = await build_emoji_group_report(
                 group_id, days, stats, user_counts, user_names
             )
             period = "全部时间" if days is None else f"最近{days}天"
             header = f"=== 群组表情包统计 ===\n{period}使用次数:\n"
             await self._send_flip_and_report(
-                input.group_id, input.message_id, total_count, report_path, header=header
+                input.group_id,
+                input.message_id,
+                total_count,
+                report_path,
+                header=header,
             )
         else:
             group_id = str(input.group_id)

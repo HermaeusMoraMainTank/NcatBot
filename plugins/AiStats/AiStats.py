@@ -639,7 +639,9 @@ class AiStats(NcatBotPlugin):
                     continue
 
         return {
-            "balance": float(last["total_balance"]) if last.get("total_balance") is not None else None,
+            "balance": float(last["total_balance"])
+            if last.get("total_balance") is not None
+            else None,
             "currency": currency,
             "is_available": last.get("is_available"),
             "period_spend": period_spend,
@@ -663,10 +665,20 @@ class AiStats(NcatBotPlugin):
             }
         except Exception:
             default = ImageFont.load_default()
-            return {k: default for k in (
-                "title", "subtitle", "name", "detail", "metric",
-                "rank", "footer_num", "footer_label", "big_num",
-            )}
+            return {
+                k: default
+                for k in (
+                    "title",
+                    "subtitle",
+                    "name",
+                    "detail",
+                    "metric",
+                    "rank",
+                    "footer_num",
+                    "footer_label",
+                    "big_num",
+                )
+            }
 
     def _draw_rounded_rectangle(
         self, draw, x1, y1, x2, y2, radius, fill=None, outline=None
@@ -747,7 +759,9 @@ class AiStats(NcatBotPlugin):
                 f"{row['count']} 次  ·  {row['tokens']:,} tok  ·  "
                 f"{self._format_money(row['cost'])}"
             )
-            draw.text((px + 12, py + 30), stat, fill=(100, 100, 110), font=fonts["detail"])
+            draw.text(
+                (px + 12, py + 30), stat, fill=(100, 100, 110), font=fonts["detail"]
+            )
 
         return img, 22 + rows_n * (panel_h + gap) + 8
 
@@ -805,7 +819,13 @@ class AiStats(NcatBotPlugin):
         inner_w = card_width - 2 * card_padding
         inner_h = card_content_height + 16
         self._draw_rounded_rectangle(
-            draw, card_x, card_y, card_x + inner_w, card_y + inner_h, 18, fill=(255, 255, 255)
+            draw,
+            card_x,
+            card_y,
+            card_x + inner_w,
+            card_y + inner_h,
+            18,
+            fill=(255, 255, 255),
         )
 
         title = f"{self._days_label(days)} AI 使用明细"
@@ -816,7 +836,12 @@ class AiStats(NcatBotPlugin):
         date_text = datetime.now().strftime("%Y-%m-%d %H:%M")
         date_bbox = draw.textbbox((0, 0), date_text, font=fonts["subtitle"])
         date_x = card_x + (inner_w - (date_bbox[2] - date_bbox[0])) // 2
-        draw.text((date_x, card_y + 48), date_text, fill=(160, 160, 160), font=fonts["subtitle"])
+        draw.text(
+            (date_x, card_y + 48),
+            date_text,
+            fill=(160, 160, 160),
+            font=fonts["subtitle"],
+        )
 
         acct_parts = []
         if account.get("balance") is not None:
@@ -830,11 +855,22 @@ class AiStats(NcatBotPlugin):
         acct_text = "  ·  ".join(acct_parts)
         acct_bbox = draw.textbbox((0, 0), acct_text, font=fonts["subtitle"])
         acct_x = card_x + (inner_w - (acct_bbox[2] - acct_bbox[0])) // 2
-        draw.text((acct_x, card_y + 68), acct_text, fill=(108, 87, 245), font=fonts["subtitle"])
+        draw.text(
+            (acct_x, card_y + 68),
+            acct_text,
+            fill=(108, 87, 245),
+            font=fonts["subtitle"],
+        )
 
         cursor_y = card_y + header_height
         img, used_h = self._draw_source_grid(
-            draw, img, fonts, card_x + padding, cursor_y, inner_w - 2 * padding, source_rows
+            draw,
+            img,
+            fonts,
+            card_x + padding,
+            cursor_y,
+            inner_w - 2 * padding,
+            source_rows,
         )
         draw = ImageDraw.Draw(img)
         cursor_y += used_h
@@ -856,8 +892,8 @@ class AiStats(NcatBotPlugin):
             cursor_y += user_title_h
 
         badge_colors = [
-            (255, 193, 7),   # 金色 - 第1名
-            (192, 192, 192), # 银色 - 第2名
+            (255, 193, 7),  # 金色 - 第1名
+            (192, 192, 192),  # 银色 - 第2名
             (205, 127, 50),  # 铜色 - 第3名
         ]
         purples = [
@@ -878,15 +914,20 @@ class AiStats(NcatBotPlugin):
             if len(name) > 16:
                 name = name[:15] + "…"
 
-            badge_color = badge_colors[i] if i < 3 else purples[min(i - 3, len(purples) - 1)]
+            badge_color = (
+                badge_colors[i] if i < 3 else purples[min(i - 3, len(purples) - 1)]
+            )
             badge_x = card_x + padding
             badge_y = item_y + 14
             badge_size = 34
             self._draw_rounded_rectangle(
                 draw,
-                badge_x, badge_y,
-                badge_x + badge_size, badge_y + badge_size,
-                8, fill=badge_color,
+                badge_x,
+                badge_y,
+                badge_x + badge_size,
+                badge_y + badge_size,
+                8,
+                fill=badge_color,
             )
             rank_text = str(i + 1)
             rank_bbox = draw.textbbox((0, 0), rank_text, font=fonts["rank"])
@@ -914,23 +955,42 @@ class AiStats(NcatBotPlugin):
                 draw = ImageDraw.Draw(img)
             except Exception:
                 draw.ellipse(
-                    [avatar_x, avatar_y, avatar_x + avatar_size, avatar_y + avatar_size],
+                    [
+                        avatar_x,
+                        avatar_y,
+                        avatar_x + avatar_size,
+                        avatar_y + avatar_size,
+                    ],
                     fill=(220, 220, 220),
                 )
 
             name_x = avatar_x + avatar_size + 12
-            draw.text((name_x, item_y + 12), name, fill=(51, 51, 51), font=fonts["name"])
+            draw.text(
+                (name_x, item_y + 12), name, fill=(51, 51, 51), font=fonts["name"]
+            )
 
             pct = (item["cost"] / group_total_cost * 100) if group_total_cost > 0 else 0
             bar_x, bar_y = name_x, item_y + 36
             bar_w, bar_h = 200, 7
             self._draw_rounded_rectangle(
-                draw, bar_x, bar_y, bar_x + bar_w, bar_y + bar_h, 3, fill=(235, 235, 245)
+                draw,
+                bar_x,
+                bar_y,
+                bar_x + bar_w,
+                bar_y + bar_h,
+                3,
+                fill=(235, 235, 245),
             )
             fill_w = max(int(bar_w * pct / 100), 6) if pct > 0 else 0
             if fill_w:
                 self._draw_rounded_rectangle(
-                    draw, bar_x, bar_y, bar_x + fill_w, bar_y + bar_h, 3, fill=badge_color
+                    draw,
+                    bar_x,
+                    bar_y,
+                    bar_x + fill_w,
+                    bar_y + bar_h,
+                    3,
+                    fill=badge_color,
                 )
 
             detail = (
@@ -938,7 +998,12 @@ class AiStats(NcatBotPlugin):
                 f"Token {item['tokens']:,}  ·  "
                 f"{self._format_money(item['cost'])}"
             )
-            draw.text((name_x, item_y + 50), detail, fill=(120, 120, 130), font=fonts["detail"])
+            draw.text(
+                (name_x, item_y + 50),
+                detail,
+                fill=(120, 120, 130),
+                font=fonts["detail"],
+            )
 
             src_tag = item.get("dominant_source") or ""
             sub = f"输入 {item['prompt_tokens']:,} / 输出 {item['completion_tokens']:,}"
@@ -946,7 +1011,9 @@ class AiStats(NcatBotPlugin):
                 sub = f"{src_tag}  ·  {sub}"
             sub_bbox = draw.textbbox((0, 0), sub, font=fonts["detail"])
             sub_x = card_x + inner_w - padding - (sub_bbox[2] - sub_bbox[0])
-            draw.text((sub_x, item_y + 68), sub, fill=(160, 160, 170), font=fonts["detail"])
+            draw.text(
+                (sub_x, item_y + 68), sub, fill=(160, 160, 170), font=fonts["detail"]
+            )
 
             if i < len(top_items) - 1:
                 line_y = item_y + item_height - 4
@@ -991,7 +1058,10 @@ class AiStats(NcatBotPlugin):
             note = f"仅显示前 {top_n} 名，共 {len(ranking)} 人"
             note_bbox = draw.textbbox((0, 0), note, font=fonts["subtitle"])
             draw.text(
-                (card_x + (inner_w - (note_bbox[2] - note_bbox[0])) // 2, footer_y + 58),
+                (
+                    card_x + (inner_w - (note_bbox[2] - note_bbox[0])) // 2,
+                    footer_y + 58,
+                ),
                 note,
                 fill=(180, 180, 180),
                 font=fonts["subtitle"],
@@ -1009,7 +1079,9 @@ class AiStats(NcatBotPlugin):
             source_rows = get_rollup_breakdown(stats.to_dict(), days)
             dominant = ""
             if source_rows:
-                dominant = max(source_rows, key=lambda r: r.get("tokens", 0)).get("label", "")
+                dominant = max(source_rows, key=lambda r: r.get("tokens", 0)).get(
+                    "label", ""
+                )
             result.append(
                 {
                     "group_id": group_id,
@@ -1101,7 +1173,13 @@ class AiStats(NcatBotPlugin):
         inner_w = card_width - 2 * card_padding
         inner_h = card_content_height + 16
         self._draw_rounded_rectangle(
-            draw, card_x, card_y, card_x + inner_w, card_y + inner_h, 18, fill=(255, 255, 255)
+            draw,
+            card_x,
+            card_y,
+            card_x + inner_w,
+            card_y + inner_h,
+            18,
+            fill=(255, 255, 255),
         )
 
         title = f"{self._days_label(days)} AI 使用总览"
@@ -1112,7 +1190,12 @@ class AiStats(NcatBotPlugin):
         date_text = datetime.now().strftime("%Y-%m-%d %H:%M")
         date_bbox = draw.textbbox((0, 0), date_text, font=fonts["subtitle"])
         date_x = card_x + (inner_w - (date_bbox[2] - date_bbox[0])) // 2
-        draw.text((date_x, card_y + 48), date_text, fill=(160, 160, 160), font=fonts["subtitle"])
+        draw.text(
+            (date_x, card_y + 48),
+            date_text,
+            fill=(160, 160, 160),
+            font=fonts["subtitle"],
+        )
 
         acct_parts = []
         if account.get("balance") is not None:
@@ -1128,11 +1211,22 @@ class AiStats(NcatBotPlugin):
         acct_text = "  ·  ".join(acct_parts)
         acct_bbox = draw.textbbox((0, 0), acct_text, font=fonts["subtitle"])
         acct_x = card_x + (inner_w - (acct_bbox[2] - acct_bbox[0])) // 2
-        draw.text((acct_x, card_y + 68), acct_text, fill=(108, 87, 245), font=fonts["subtitle"])
+        draw.text(
+            (acct_x, card_y + 68),
+            acct_text,
+            fill=(108, 87, 245),
+            font=fonts["subtitle"],
+        )
 
         cursor_y = card_y + header_height
         img, used_h = self._draw_source_grid(
-            draw, img, fonts, card_x + padding, cursor_y, inner_w - 2 * padding, source_rows
+            draw,
+            img,
+            fonts,
+            card_x + padding,
+            cursor_y,
+            inner_w - 2 * padding,
+            source_rows,
         )
         draw = ImageDraw.Draw(img)
         cursor_y += used_h
@@ -1176,15 +1270,20 @@ class AiStats(NcatBotPlugin):
             if len(name) > 20:
                 name = name[:19] + "…"
 
-            badge_color = badge_colors[i] if i < 3 else purples[min(i - 3, len(purples) - 1)]
+            badge_color = (
+                badge_colors[i] if i < 3 else purples[min(i - 3, len(purples) - 1)]
+            )
             badge_x = card_x + padding
             badge_y = item_y + 10
             badge_size = 34
             self._draw_rounded_rectangle(
                 draw,
-                badge_x, badge_y,
-                badge_x + badge_size, badge_y + badge_size,
-                8, fill=badge_color,
+                badge_x,
+                badge_y,
+                badge_x + badge_size,
+                badge_y + badge_size,
+                8,
+                fill=badge_color,
             )
             rank_text = str(i + 1)
             rank_bbox = draw.textbbox((0, 0), rank_text, font=fonts["rank"])
@@ -1205,12 +1304,24 @@ class AiStats(NcatBotPlugin):
             bar_x, bar_y = name_x, item_y + 30
             bar_w, bar_h = 220, 7
             self._draw_rounded_rectangle(
-                draw, bar_x, bar_y, bar_x + bar_w, bar_y + bar_h, 3, fill=(235, 235, 245)
+                draw,
+                bar_x,
+                bar_y,
+                bar_x + bar_w,
+                bar_y + bar_h,
+                3,
+                fill=(235, 235, 245),
             )
             fill_w = max(int(bar_w * pct / 100), 6) if pct > 0 else 0
             if fill_w:
                 self._draw_rounded_rectangle(
-                    draw, bar_x, bar_y, bar_x + fill_w, bar_y + bar_h, 3, fill=badge_color
+                    draw,
+                    bar_x,
+                    bar_y,
+                    bar_x + fill_w,
+                    bar_y + bar_h,
+                    3,
+                    fill=badge_color,
                 )
 
             detail = (
@@ -1218,7 +1329,12 @@ class AiStats(NcatBotPlugin):
                 f"Token {item['tokens']:,}  ·  "
                 f"{self._format_money(item['cost'])}"
             )
-            draw.text((name_x, item_y + 44), detail, fill=(120, 120, 130), font=fonts["detail"])
+            draw.text(
+                (name_x, item_y + 44),
+                detail,
+                fill=(120, 120, 130),
+                font=fonts["detail"],
+            )
 
             src_tag = item.get("dominant_source") or ""
             sub = f"输入 {item['prompt_tokens']:,} / 输出 {item['completion_tokens']:,}"
@@ -1226,7 +1342,9 @@ class AiStats(NcatBotPlugin):
                 sub = f"{src_tag}  ·  {sub}"
             sub_bbox = draw.textbbox((0, 0), sub, font=fonts["detail"])
             sub_x = card_x + inner_w - padding - (sub_bbox[2] - sub_bbox[0])
-            draw.text((sub_x, item_y + 52), sub, fill=(160, 160, 170), font=fonts["detail"])
+            draw.text(
+                (sub_x, item_y + 52), sub, fill=(160, 160, 170), font=fonts["detail"]
+            )
 
             if i < len(top_items) - 1:
                 line_y = item_y + item_height - 4
@@ -1271,7 +1389,10 @@ class AiStats(NcatBotPlugin):
             note = f"仅显示前 {top_n} 个群，共 {len(ranking)} 个群有记录"
             note_bbox = draw.textbbox((0, 0), note, font=fonts["subtitle"])
             draw.text(
-                (card_x + (inner_w - (note_bbox[2] - note_bbox[0])) // 2, footer_y + 58),
+                (
+                    card_x + (inner_w - (note_bbox[2] - note_bbox[0])) // 2,
+                    footer_y + 58,
+                ),
                 note,
                 fill=(180, 180, 180),
                 font=fonts["subtitle"],
@@ -1313,9 +1434,12 @@ class AiStats(NcatBotPlugin):
         inner_h = card_height - 2 * card_padding
         self._draw_rounded_rectangle(
             draw,
-            card_padding, card_padding,
-            card_padding + inner_w, card_padding + inner_h,
-            18, fill=(255, 255, 255),
+            card_padding,
+            card_padding,
+            card_padding + inner_w,
+            card_padding + inner_h,
+            18,
+            fill=(255, 255, 255),
         )
 
         cx = card_padding + inner_w // 2
@@ -2082,7 +2206,8 @@ class AiStats(NcatBotPlugin):
 
         self._load_ai_stats_json()
         await self.api.qq.post_group_msg(
-            input.group_id, rtf=MessageChain([PlainText(text="正在生成AI统计图表，请稍候...")])
+            input.group_id,
+            rtf=MessageChain([PlainText(text="正在生成AI统计图表，请稍候...")]),
         )
         if target == "群组":
             group_id = str(input.group_id)
@@ -2101,7 +2226,9 @@ class AiStats(NcatBotPlugin):
                 user_total = sum(self._get_time_range_stats(user_stat, days).values())
                 if user_total > 0:
                     user_counts[user_id] = user_total
-            user_names = await self._resolve_user_names(input.group_id, list(user_counts.keys()))
+            user_names = await self._resolve_user_names(
+                input.group_id, list(user_counts.keys())
+            )
             source_rows = get_rollup_breakdown(stats.to_dict(), days, include_zero=True)
             report_path = await build_ai_group_report(
                 group_id, days, stats, user_counts, user_names, source_rows
@@ -2123,9 +2250,16 @@ class AiStats(NcatBotPlugin):
                 return
             total_count = sum(self._get_time_range_stats(user_stat, days).values())
             names = await self._resolve_user_names(input.group_id, [user_id])
-            source_rows = get_rollup_breakdown(user_stat.to_dict(), days, include_zero=True)
+            source_rows = get_rollup_breakdown(
+                user_stat.to_dict(), days, include_zero=True
+            )
             report_path = await build_ai_personal_report(
-                group_id, user_id, days, user_stat, names.get(user_id, user_id), source_rows
+                group_id,
+                user_id,
+                days,
+                user_stat,
+                names.get(user_id, user_id),
+                source_rows,
             )
             period = "全部时间" if days is None else f"最近{days}天"
             await self._send_flip_and_report(

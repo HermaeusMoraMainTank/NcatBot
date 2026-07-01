@@ -88,7 +88,6 @@ class Fortune(NcatBotPlugin):
             )
             await self.api.qq.post_group_msg(group_id=input.group_id, rtf=message)
 
-
         elif message == "今日运势":
             current_date = date.today()
 
@@ -159,9 +158,7 @@ class Fortune(NcatBotPlugin):
                 message = MessageChain(
                     [
                         At(user_id=target_user_id),
-                        PlainText(
-                            text=f"你的运势被 {input.sender.nickname} 重置了。"
-                        ),
+                        PlainText(text=f"你的运势被 {input.sender.nickname} 重置了。"),
                     ]
                 )
                 await self.api.qq.post_group_msg(group_id=input.group_id, rtf=message)

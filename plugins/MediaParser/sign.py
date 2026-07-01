@@ -110,4 +110,3 @@ async def get_ticket():
         async with session.post(url, params=params) as resp:
             json_content = await resp.json()
             return json_content["data"]["ticket"]
-

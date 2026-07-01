@@ -82,7 +82,9 @@ def _load_font(path: str, size: int):
         return None
 
 
-def _resolve_fonts(cfg: dict[str, Any], sizes: tuple[int, int, int]) -> tuple[Any, Any, Any]:
+def _resolve_fonts(
+    cfg: dict[str, Any], sizes: tuple[int, int, int]
+) -> tuple[Any, Any, Any]:
     from PIL import ImageFont
 
     title_s, body_s, label_s = sizes
@@ -190,9 +192,19 @@ def render_weather_card_png(
 
     bar_h = 6
     label_h = _line_step(probe_draw, "气象", label_font)
-    title_h = sum(_line_step(probe_draw, ln or " ", title_font) for ln in headline_lines)
-    body_h = sum(_line_step(probe_draw, ln or " ", body_font) for ln in body_lines) if body_lines else 0
-    footer_h = _line_step(probe_draw, time_line or " ", label_font) if time_line else label_h // 2
+    title_h = sum(
+        _line_step(probe_draw, ln or " ", title_font) for ln in headline_lines
+    )
+    body_h = (
+        sum(_line_step(probe_draw, ln or " ", body_font) for ln in body_lines)
+        if body_lines
+        else 0
+    )
+    footer_h = (
+        _line_step(probe_draw, time_line or " ", label_font)
+        if time_line
+        else label_h // 2
+    )
 
     height = (
         bar_h

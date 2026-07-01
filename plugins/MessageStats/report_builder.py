@@ -11,7 +11,12 @@ from common.stats_render import (
     save_wordcloud_chart,
 )
 from common.stats_render.charts import save_hourly_chart
-from common.stats_render.helpers import get_date_keys, period_label, rank_users, sum_user_metric
+from common.stats_render.helpers import (
+    get_date_keys,
+    period_label,
+    rank_users,
+    sum_user_metric,
+)
 from common.stats_render.report import save_stats_report_file
 
 
@@ -61,7 +66,9 @@ async def build_group_report(
     if msg_counts:
         ranked = await rank_users(group_id, msg_counts, user_names, "条")
         if len(ranked) >= 3:
-            sections["话痨排行 TOP3"] = save_top3_podium((ranked[0], ranked[1], ranked[2]))
+            sections["话痨排行 TOP3"] = save_top3_podium(
+                (ranked[0], ranked[1], ranked[2])
+            )
         sections["话痨排行 TOP10"] = save_top10_list(ranked, "话痨排行 TOP10")
 
     char_counts = sum_user_metric(user_stats, days, "daily_char_totals")

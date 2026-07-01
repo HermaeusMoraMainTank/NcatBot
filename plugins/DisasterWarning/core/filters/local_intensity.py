@@ -96,4 +96,3 @@ class LocalIntensityFilter:
         }
 
         return result
-

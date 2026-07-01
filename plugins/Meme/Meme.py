@@ -389,9 +389,7 @@ class Meme(NcatBotPlugin):
                     except Exception as e:
                         _log.warning(f"删除临时文件失败: {e}")
             else:
-                _log.error(
-                    f"生成 meme 失败: {response.status_code} - {response.text}"
-                )
+                _log.error(f"生成 meme 失败: {response.status_code} - {response.text}")
         except requests.Timeout:
             _log.error("请求超时")
         except requests.ConnectionError:

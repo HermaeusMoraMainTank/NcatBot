@@ -93,7 +93,9 @@ class RussianRoulette(NcatBotPlugin):
                 rtf=MessageChain(
                     [
                         PlainText(
-                            text="左轮手枪突然炸膛了...\n" + bot_name + "换了一把新的手枪。"
+                            text="左轮手枪突然炸膛了...\n"
+                            + bot_name
+                            + "换了一把新的手枪。"
                         ),
                     ]
                 ),
@@ -151,7 +153,9 @@ class RussianRoulette(NcatBotPlugin):
                     )
                     return True
                 except Exception as e:
-                    _log.info(f"无法禁言 {input.sender.user_id} {input.sender.nickname}")
+                    _log.info(
+                        f"无法禁言 {input.sender.user_id} {input.sender.nickname}"
+                    )
                     _log.info(str(e))
                     return True
 

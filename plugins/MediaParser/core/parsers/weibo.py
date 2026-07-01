@@ -91,7 +91,6 @@ class WeiBoParser(BaseParser):
             "_t": int(time() * 1000),
         }
 
-
         async with self.client.post(
             url=url,
             data=params,
@@ -238,12 +237,16 @@ class WeiBoParser(BaseParser):
         ) as resp:
             if resp.status != 200:
                 if resp.status in (403, 418):
-                    raise ParseException(f"被风控拦截（{resp.status}），可尝试更换 UA/Referer 或稍后重试")
+                    raise ParseException(
+                        f"被风控拦截（{resp.status}），可尝试更换 UA/Referer 或稍后重试"
+                    )
                 raise ParseException(f"获取数据失败 {resp.status} {resp.reason}")
 
             ctype = resp.headers.get("content-type", "")
             if "application/json" not in ctype:
-                raise ParseException(f"获取数据失败 content-type is not application/json (got: {ctype})")
+                raise ParseException(
+                    f"获取数据失败 content-type is not application/json (got: {ctype})"
+                )
 
             # 用 bytes 更稳，避免编码歧义
             raw_body = await resp.read()
@@ -313,9 +316,6 @@ class WeiBoParser(BaseParser):
 
         result.reverse()  # 反转结果数组
         return "".join(result)  # 将结果数组连接成字符串
-
-
-
 
 
 class LargeInPic(Struct):

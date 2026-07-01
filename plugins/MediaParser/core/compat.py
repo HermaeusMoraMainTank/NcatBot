@@ -11,6 +11,7 @@ from typing import Any, Dict, Optional
 # 使用 ncatbot 的日志（模块级 _log）
 try:
     from ncatbot.utils import get_log
+
     _log = get_log()
 except ImportError:
     # 回退到标准 logging
@@ -18,10 +19,11 @@ except ImportError:
     _log.setLevel(logging.DEBUG)
     if not _log.handlers:
         handler = logging.StreamHandler()
-        handler.setFormatter(logging.Formatter(
-            "[%(asctime)s] %(levelname)s %(name)s | %(message)s",
-            datefmt="%H:%M:%S"
-        ))
+        handler.setFormatter(
+            logging.Formatter(
+                "[%(asctime)s] %(levelname)s %(name)s | %(message)s", datefmt="%H:%M:%S"
+            )
+        )
         _log.addHandler(handler)
 
 
@@ -56,8 +58,18 @@ class ConfigWrapper:
 DEFAULT_CONFIG = {
     # 启用的平台
     "enable_platforms": [
-        "A站", "B站", "微博", "小红书", "抖音", "快手",
-        "NGA", "TikTok", "Instagram", "推特", "油管", "网易云",
+        "A站",
+        "B站",
+        "微博",
+        "小红书",
+        "抖音",
+        "快手",
+        "NGA",
+        "TikTok",
+        "Instagram",
+        "推特",
+        "油管",
+        "网易云",
     ],
     # 禁用的会话列表
     "disabled_sessions": [],
@@ -119,4 +131,3 @@ def create_config(data_dir: Path, cache_dir: Path) -> ConfigWrapper:
     config["data_dir"] = str(data_dir)
     config["cache_dir"] = str(cache_dir)
     return config
-

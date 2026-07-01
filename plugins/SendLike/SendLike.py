@@ -17,7 +17,9 @@ class SendLike(NcatBotPlugin):
                 rtf=MessageChain(
                     [
                         At(user_id=input.sender.user_id),
-                        PlainText(text="\n给你赞了10下哦，记得回我~ (如赞失败请添加好友)"),
+                        PlainText(
+                            text="\n给你赞了10下哦，记得回我~ (如赞失败请添加好友)"
+                        ),
                         Image(
                             "https://api.xingzhige.com/API/dingqiu/?qq="
                             + str(input.sender.user_id)

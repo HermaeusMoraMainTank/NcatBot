@@ -77,7 +77,9 @@ async def build_ai_group_report(
     if user_counts:
         ranked = await rank_users(group_id, user_counts, user_names, "次")
         if len(ranked) >= 3:
-            sections["使用排行 TOP3"] = save_top3_podium((ranked[0], ranked[1], ranked[2]))
+            sections["使用排行 TOP3"] = save_top3_podium(
+                (ranked[0], ranked[1], ranked[2])
+            )
         sections["使用排行 TOP10"] = save_top10_list(ranked, "AI 使用 TOP10")
 
     if source_rows:
@@ -207,7 +209,10 @@ async def build_ai_overview_report(
             reverse=True,
         )[:10]
         cost_items = [
-            (group_names.get(item["group_id"], item["group_id"]), round(item.get("cost", 0), 4))
+            (
+                group_names.get(item["group_id"], item["group_id"]),
+                round(item.get("cost", 0), 4),
+            )
             for item in cost_ranked
             if item.get("cost", 0) > 0
         ]
@@ -264,7 +269,11 @@ async def build_ai_personal_report(
         breakdown = save_source_breakdown_chart(source_rows, "个人来源明细")
         if breakdown:
             sections["来源明细"] = breakdown
-        items = [(r.get("label", "?"), r.get("count", 0)) for r in source_rows if r.get("count", 0) > 0]
+        items = [
+            (r.get("label", "?"), r.get("count", 0))
+            for r in source_rows
+            if r.get("count", 0) > 0
+        ]
         chart = save_labeled_bar_chart(items, "个人来源分布", "次")
         if chart:
             sections["来源分布"] = chart

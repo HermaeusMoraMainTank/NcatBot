@@ -195,9 +195,7 @@ class RollPig(NcatBotPlugin):
             json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8"
         )
 
-    def _load_pig_thumbnail(
-        self, pig_id: str, size: int
-    ) -> Optional[PILImage.Image]:
+    def _load_pig_thumbnail(self, pig_id: str, size: int) -> Optional[PILImage.Image]:
         """加载并裁剪为方形缩略图"""
         avatar_path = self.find_image_file(pig_id)
         if not avatar_path:
@@ -266,7 +264,10 @@ class RollPig(NcatBotPlugin):
             font=self.font_list_title,
         )
         draw.line(
-            [(padding, padding + header_h - 12), (width - padding, padding + header_h - 12)],
+            [
+                (padding, padding + header_h - 12),
+                (width - padding, padding + header_h - 12),
+            ],
             fill=(240, 220, 210),
             width=2,
         )
@@ -477,19 +478,19 @@ class RollPig(NcatBotPlugin):
         """
         at_ids = []
         raw_message = input.raw_message
-        
+
         # 获取机器人自己的 ID
         bot_id = None
         if hasattr(self, "api") and hasattr(self.api, "self_id"):
             bot_id = str(self.api.self_id)
-        
+
         # 从 CQ 码中解析 @ 信息
         at_pattern = re.compile(r"\[CQ:at,qq=(\d+)\]")
         for match in at_pattern.finditer(raw_message):
             qq = match.group(1)
             if qq != bot_id:  # 排除机器人自己
                 at_ids.append(qq)
-        
+
         return at_ids
 
     def _extract_command(self, message: str) -> str:
@@ -506,7 +507,7 @@ class RollPig(NcatBotPlugin):
     async def handle_message(self, input: GroupMessage):
         """处理消息"""
         raw_message = input.raw_message.strip()
-        
+
         # 提取纯命令（去除 @ 信息）
         command = self._extract_command(raw_message)
 
@@ -520,18 +521,17 @@ class RollPig(NcatBotPlugin):
 
         group_id = input.group_id
         sender_id = str(input.sender.user_id)
-        
+
         # 检查是否有 @ 群友
         at_ids = self._get_at_ids(input)
-        
+
         if len(at_ids) > 1:
             # 一次只能抽取一个
             await self.api.qq.post_group_msg(
-                group_id=group_id,
-                text="一次只能抽取一个小猪哦！"
+                group_id=group_id, text="一次只能抽取一个小猪哦！"
             )
             return
-        
+
         # 确定目标用户 ID：如果有 @，则使用被 @ 的用户；否则使用发送者
         if at_ids:
             target_user_id = at_ids[0]
@@ -556,8 +556,7 @@ class RollPig(NcatBotPlugin):
         # 检查小猪列表
         if not self.pig_list:
             await self.api.qq.post_group_msg(
-                group_id=group_id,
-                text="小猪信息加载失败，请检查后台报错！"
+                group_id=group_id, text="小猪信息加载失败，请检查后台报错！"
             )
             return
 
@@ -602,11 +601,13 @@ class RollPig(NcatBotPlugin):
         if img_path and img_path.exists():
             try:
                 # 合并成一条消息发送
-                chain = MessageChain([
-                    At(user_id=str(user_id)),
-                    PlainText(text=" 这是你的今日小猪：\n"),
-                    Image(file=str(img_path.absolute())),
-                ])
+                chain = MessageChain(
+                    [
+                        At(user_id=str(user_id)),
+                        PlainText(text=" 这是你的今日小猪：\n"),
+                        Image(file=str(img_path.absolute())),
+                    ]
+                )
                 await self.api.qq.post_group_msg(group_id=group_id, rtf=chain)
 
                 _log.info("[RollPig] 合成图片发送成功")
@@ -630,15 +631,19 @@ class RollPig(NcatBotPlugin):
         pig_analysis = pig_data.get("analysis", "无解析")
         pig_id = pig_data.get("id", "")
 
-        text_msg = f"【今日小猪】\n名称：{pig_name}\n描述：{pig_desc}\n解析：{pig_analysis}"
+        text_msg = (
+            f"【今日小猪】\n名称：{pig_name}\n描述：{pig_desc}\n解析：{pig_analysis}"
+        )
 
         avatar_path = self.find_image_file(pig_id)
         if avatar_path and avatar_path.exists():
             try:
-                chain = MessageChain([
-                    Image(file=str(avatar_path.absolute())),
-                    PlainText(text=text_msg),
-                ])
+                chain = MessageChain(
+                    [
+                        Image(file=str(avatar_path.absolute())),
+                        PlainText(text=text_msg),
+                    ]
+                )
                 await self.api.qq.post_group_msg(group_id=group_id, rtf=chain)
                 return
             except Exception as e:

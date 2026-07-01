@@ -573,7 +573,9 @@ class GroupRecallPlugin(NcatBotPlugin):
                     if msg.user_id == target_user_id:
                         target_nickname = msg.nickname
                         break
-                reply_elements = [PlainText(text=f"=== {target_nickname} 的撤回消息 ===\n")]
+                reply_elements = [
+                    PlainText(text=f"=== {target_nickname} 的撤回消息 ===\n")
+                ]
             else:
                 reply_elements = [PlainText(text="=== 最近撤回消息 ===\n")]
 
@@ -584,7 +586,9 @@ class GroupRecallPlugin(NcatBotPlugin):
                 )
 
                 # 添加消息信息
-                reply_elements.append(PlainText(text=f"{i}. {msg.nickname} ({msg_time})\n"))
+                reply_elements.append(
+                    PlainText(text=f"{i}. {msg.nickname} ({msg_time})\n")
+                )
 
                 # 添加文本内容
                 if msg.content:
@@ -598,7 +602,9 @@ class GroupRecallPlugin(NcatBotPlugin):
                                 reply_elements.append(Image(file=img_path))
                             except Exception as e:
                                 _log.error(f"[GroupRecall] 加载图片失败: {e}")
-                                reply_elements.append(PlainText(text="   [图片加载失败]\n"))
+                                reply_elements.append(
+                                    PlainText(text="   [图片加载失败]\n")
+                                )
 
                 reply_elements.append(PlainText(text="\n"))
 

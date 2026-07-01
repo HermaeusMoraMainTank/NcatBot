@@ -43,6 +43,7 @@ class YouTubeParser(BaseParser):
         cf = (self.config.get("ytb_cookies_file") or "").strip()
         if cf and Path(cf).is_file():
             self.config["ytb_cookies_file"] = cf
+
     @handle("youtu.be", r"https?://(?:www\.)?youtu\.be/[A-Za-z\d\._\?%&\+\-=/#]+")
     @handle(
         "youtube.com",

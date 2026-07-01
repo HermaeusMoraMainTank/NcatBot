@@ -162,4 +162,3 @@ class GlobalQuakeFilter:
             f"[灾害预警] Global Quake过滤: 震级{earthquake.magnitude} < {self.min_magnitude} 且 烈度{earthquake.intensity} < {self.min_intensity}"
         )
         return True
-

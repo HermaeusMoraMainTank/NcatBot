@@ -60,7 +60,9 @@ class Poke(NcatBotPlugin):
             if target_id is None and hasattr(input, "data"):
                 target_id = getattr(input.data, "target_id", None)
             if target_id is None:
-                _log.debug("[Poke] poke 事件缺少 target_id，已忽略（无法判断是否戳到机器人）")
+                _log.debug(
+                    "[Poke] poke 事件缺少 target_id，已忽略（无法判断是否戳到机器人）"
+                )
                 return
             if str(target_id) != str(input.self_id):
                 return
@@ -89,7 +91,9 @@ class Poke(NcatBotPlugin):
                     )
                 else:
                     # 私聊戳一戳，获取好友信息
-                    friend_info = await self.api.qq.query.get_friend_info(user_id=int(user_id))
+                    friend_info = await self.api.qq.query.get_friend_info(
+                        user_id=int(user_id)
+                    )
                     user_nickname = (
                         friend_info.nickname if friend_info else f"用户{user_id}"
                     )
@@ -127,7 +131,9 @@ class Poke(NcatBotPlugin):
                 message_chain = MessageChain(
                     [At(user_id=int(user_id)), PlainText(text=f" {response_text}")]
                 )
-                await self.api.qq.post_group_msg(group_id=int(group_id), rtf=message_chain)
+                await self.api.qq.post_group_msg(
+                    group_id=int(group_id), rtf=message_chain
+                )
                 _log.info(f"[Poke] 在群 {group_id} 中回复: {response_text}")
             else:
                 # 私聊回复

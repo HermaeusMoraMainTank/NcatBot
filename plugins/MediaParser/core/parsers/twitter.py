@@ -39,7 +39,10 @@ class TwitterParser(BaseParser):
                 raise ClientError(f"xdown API {resp.status} {resp.reason}")
             return await resp.json()
 
-    @handle("x.com", r"https?://x.com/(?P<username>[0-9a-zA-Z_]{1,20})/status/(?P<status_id>[0-9]+)")
+    @handle(
+        "x.com",
+        r"https?://x.com/(?P<username>[0-9a-zA-Z_]{1,20})/status/(?P<status_id>[0-9]+)",
+    )
     async def _parse(self, searched: re.Match[str]) -> ParseResult:
         # 从匹配对象中获取原始URL和用户名
         url = searched.group(0)
@@ -55,7 +58,9 @@ class TwitterParser(BaseParser):
 
         return self.parse_twitter_html(html_content, username=username)
 
-    def parse_twitter_html(self, html_content: str, username: str | None = None) -> ParseResult:
+    def parse_twitter_html(
+        self, html_content: str, username: str | None = None
+    ) -> ParseResult:
         """解析 Twitter HTML 内容
 
         Args:

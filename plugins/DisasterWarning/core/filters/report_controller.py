@@ -107,4 +107,3 @@ class ReportCountController:
         }
 
         return source_mapping.get(event.source.value, "")
-

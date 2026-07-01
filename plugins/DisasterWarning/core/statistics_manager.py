@@ -509,5 +509,3 @@ class StatisticsManager:
             text.append(f"{source}: {count}")
 
         return "\n".join(text)
-
-

@@ -148,4 +148,3 @@ class CWAEEWWolfxHandler(BaseDataHandler):
                 return float(base)
 
         return None
-

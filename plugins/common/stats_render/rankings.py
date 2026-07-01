@@ -51,7 +51,11 @@ class RenderUserInfo:
 
 def _circle_avatar(path: str, size: int) -> Image.Image:
     try:
-        img = Image.open(path).convert("RGBA").resize((size, size), Image.Resampling.LANCZOS)
+        img = (
+            Image.open(path)
+            .convert("RGBA")
+            .resize((size, size), Image.Resampling.LANCZOS)
+        )
     except Exception:
         img = Image.new("RGBA", (size, size), (220, 220, 220, 255))
     mask = Image.new("L", (size, size), 0)
@@ -108,7 +112,9 @@ def create_top3_podium(
     return canvas
 
 
-def _truncate_to_width(draw: ImageDraw.ImageDraw, text: str, font, max_width: int) -> str:
+def _truncate_to_width(
+    draw: ImageDraw.ImageDraw, text: str, font, max_width: int
+) -> str:
     if not text:
         return ""
     bbox = draw.textbbox((0, 0), text, font=font)
@@ -173,7 +179,9 @@ def create_top10_list(
     bar_x = 280
     bar_max_w = width - bar_x - 100
     nick_max_w = bar_x - nick_x - 16
-    rank_colors = [(255, 215, 0), (192, 192, 192), (205, 127, 50)] + [(180, 180, 180)] * 7
+    rank_colors = [(255, 215, 0), (192, 192, 192), (205, 127, 50)] + [
+        (180, 180, 180)
+    ] * 7
 
     from .crayon_utils import draw_crayon_rectangle
 
@@ -185,7 +193,9 @@ def create_top10_list(
         except ValueError:
             cnt = 0
         bw = max(4, (cnt / max_count) * bar_max_w) if max_count else 4
-        draw_crayon_rectangle(draw, bar_x, y + 18, bw, 18, (135, 180, 255), "horizontal")
+        draw_crayon_rectangle(
+            draw, bar_x, y + 18, bw, 18, (135, 180, 255), "horizontal"
+        )
         row_layout.append((i, u, y))
 
     draw = ImageDraw.Draw(img)
@@ -218,7 +228,9 @@ def save_top3_podium(
 ) -> Path:
     ensure_dirs()
     out = TEMP_PATH / f"podium_{uuid.uuid4().hex}.png"
-    create_top3_podium(top3, gap=gap, text_width_reduce=text_width_reduce).save(out, "PNG")
+    create_top3_podium(top3, gap=gap, text_width_reduce=text_width_reduce).save(
+        out, "PNG"
+    )
     return out
 
 

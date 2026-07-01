@@ -12,7 +12,14 @@ from typing import Dict, List, Optional, Tuple
 from pathlib import Path
 from aiohttp import ClientSession
 
-from ncatbot.types import Image, MessageArray as MessageChain, Reply, PlainText, Video, Record
+from ncatbot.types import (
+    Image,
+    MessageArray as MessageChain,
+    Reply,
+    PlainText,
+    Video,
+    Record,
+)
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 from ncatbot.utils import get_log
@@ -425,7 +432,10 @@ class MediaParser(NcatBotPlugin):
                 await self.api.qq.post_group_msg(
                     group_id=group_id,
                     rtf=MessageChain(
-                        [Reply(id=event.message_id), PlainText(text=_format_parse_error(e))]
+                        [
+                            Reply(id=event.message_id),
+                            PlainText(text=_format_parse_error(e)),
+                        ]
                     ),
                 )
 
@@ -480,7 +490,9 @@ class MediaParser(NcatBotPlugin):
             fallback_image_urls = result.extra.get("fallback_image_urls", [])
             if isinstance(fallback_image_urls, list):
                 for image_url in fallback_image_urls:
-                    if isinstance(image_url, str) and image_url.startswith(("http://", "https://")):
+                    if isinstance(image_url, str) and image_url.startswith(
+                        ("http://", "https://")
+                    ):
                         message_chain.append(Image(file=image_url))
 
             # 如果没有内容，添加基本信息
@@ -538,7 +550,9 @@ class MediaParser(NcatBotPlugin):
                     simple_msg += f"\n{result.url}"
                 await self.api.qq.post_group_msg(
                     group_id=group_id,
-                    rtf=MessageChain([Reply(id=event.message_id), PlainText(text=simple_msg)]),
+                    rtf=MessageChain(
+                        [Reply(id=event.message_id), PlainText(text=simple_msg)]
+                    ),
                 )
 
     # ==================== 命令处理 ====================
@@ -637,7 +651,8 @@ class MediaParser(NcatBotPlugin):
                     )
                 else:
                     await self.api.qq.post_private_msg(
-                        user_id=event.user_id, rtf=MessageChain([PlainText(text=response)])
+                        user_id=event.user_id,
+                        rtf=MessageChain([PlainText(text=response)]),
                     )
 
     async def _handle_bilibili_login(self, event, group_id):
@@ -734,7 +749,9 @@ class MediaParser(NcatBotPlugin):
                     if group_id:
                         await self.api.qq.post_group_msg(
                             group_id=group_id,
-                            rtf=MessageChain([Reply(id=event.message_id), PlainText(text=response)]),
+                            rtf=MessageChain(
+                                [Reply(id=event.message_id), PlainText(text=response)]
+                            ),
                         )
                     return
 
@@ -743,7 +760,9 @@ class MediaParser(NcatBotPlugin):
                     if group_id:
                         await self.api.qq.post_group_msg(
                             group_id=group_id,
-                            rtf=MessageChain([Reply(id=event.message_id), PlainText(text=response)]),
+                            rtf=MessageChain(
+                                [Reply(id=event.message_id), PlainText(text=response)]
+                            ),
                         )
                     return
 
@@ -761,7 +780,9 @@ class MediaParser(NcatBotPlugin):
                     if group_id:
                         await self.api.qq.post_group_msg(
                             group_id=group_id,
-                            rtf=MessageChain([Reply(id=event.message_id), PlainText(text=response)]),
+                            rtf=MessageChain(
+                                [Reply(id=event.message_id), PlainText(text=response)]
+                            ),
                         )
                     return
 
@@ -784,7 +805,9 @@ class MediaParser(NcatBotPlugin):
                 if group_id:
                     await self.api.qq.post_group_msg(
                         group_id=group_id,
-                        rtf=MessageChain([Reply(id=event.message_id), PlainText(text=response)]),
+                        rtf=MessageChain(
+                            [Reply(id=event.message_id), PlainText(text=response)]
+                        ),
                     )
 
         except Exception as e:
@@ -793,7 +816,9 @@ class MediaParser(NcatBotPlugin):
             if group_id:
                 await self.api.qq.post_group_msg(
                     group_id=group_id,
-                    rtf=MessageChain([Reply(id=event.message_id), PlainText(text=error_msg)]),
+                    rtf=MessageChain(
+                        [Reply(id=event.message_id), PlainText(text=error_msg)]
+                    ),
                 )
             else:
                 await self.api.qq.post_private_msg(

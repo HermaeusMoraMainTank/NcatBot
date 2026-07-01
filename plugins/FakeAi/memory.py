@@ -91,6 +91,7 @@ def _parse_llm_json_object(text: str, required_key: str) -> dict | None:
         pass
     return None
 
+
 def _pick_fakeai_database_path() -> Path:
     """选择数据库文件：环境变量 > 仅 memory.db > 默认 cwd/data/db/memory.db。"""
     env = os.environ.get("FAKEAI_MEMORY_DB", "").strip()
@@ -871,7 +872,9 @@ class MemoryManager:
 
         existing = await self.get_user_impression_full(user_id)
         if existing:
-            current = float(existing.get("favorability_score", existing.get("favorability", 0)))
+            current = float(
+                existing.get("favorability_score", existing.get("favorability", 0))
+            )
             new_favorability = apply_favor_change(current, change, user_id)
             await self._db.execute(
                 """UPDATE user_impression SET favorability = ?, favorability_score = ?
@@ -1374,7 +1377,10 @@ async def generate_summary_from_messages(
 
         if group_id is not None:
             try:
-                from common.utils.AiStatsRecorder import SOURCE_SUMMARY, record_from_response
+                from common.utils.AiStatsRecorder import (
+                    SOURCE_SUMMARY,
+                    record_from_response,
+                )
 
                 record_from_response(str(group_id), None, SOURCE_SUMMARY, response)
             except Exception as rec_err:
@@ -1476,7 +1482,10 @@ async def generate_user_impression(
 
         if group_id is not None:
             try:
-                from common.utils.AiStatsRecorder import SOURCE_IMPRESSION, record_from_response
+                from common.utils.AiStatsRecorder import (
+                    SOURCE_IMPRESSION,
+                    record_from_response,
+                )
 
                 record_from_response(
                     str(group_id),

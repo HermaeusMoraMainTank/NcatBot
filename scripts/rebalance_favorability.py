@@ -1,4 +1,5 @@
 """一次性纠偏好感度：仅 273421673 可为 100。"""
+
 import sqlite3
 from pathlib import Path
 

@@ -134,24 +134,47 @@ def _save_gif_ffmpeg(frames_rgb: np.ndarray, path: Path, total_sec: float) -> bo
     palette_path = tempfile.mktemp(suffix=".png")
     try:
         gen_palette = [
-            "ffmpeg", "-y",
-            "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{w}x{h}",
-            "-r", str(_INPUT_FPS), "-i", "pipe:0",
-            "-frames:v", str(n),
-            "-vf", "palettegen=stats_mode=diff",
+            "ffmpeg",
+            "-y",
+            "-f",
+            "rawvideo",
+            "-pix_fmt",
+            "rgb24",
+            "-s",
+            f"{w}x{h}",
+            "-r",
+            str(_INPUT_FPS),
+            "-i",
+            "pipe:0",
+            "-frames:v",
+            str(n),
+            "-vf",
+            "palettegen=stats_mode=diff",
             palette_path,
         ]
         subprocess.run(gen_palette, input=raw, capture_output=True, check=True)
 
         encode_gif = [
-            "ffmpeg", "-y",
-            "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{w}x{h}",
-            "-r", str(_INPUT_FPS), "-i", "pipe:0",
-            "-i", palette_path,
-            "-frames:v", str(n),
+            "ffmpeg",
+            "-y",
+            "-f",
+            "rawvideo",
+            "-pix_fmt",
+            "rgb24",
+            "-s",
+            f"{w}x{h}",
+            "-r",
+            str(_INPUT_FPS),
+            "-i",
+            "pipe:0",
+            "-i",
+            palette_path,
+            "-frames:v",
+            str(n),
             "-filter_complex",
             f"[0:v]setpts={setpts_factor}*PTS[v];[v][1:v]paletteuse=dither=bayer:bayer_scale=2",
-            "-loop", "0",
+            "-loop",
+            "0",
             str(path),
         ]
         subprocess.run(encode_gif, input=raw, capture_output=True, check=True)
@@ -168,9 +191,7 @@ def _save_gif_pil(frames_rgb: np.ndarray, path: Path, total_sec: float) -> None:
     """PIL 回退：GIF 最小 10ms/帧，时长无法低于 frames*10ms。"""
     n = frames_rgb.shape[0]
     centis = max(1, round(total_sec * 100 / n))
-    pil_frames = [
-        Image.fromarray(frames_rgb[i, :, :, :3], "RGB") for i in range(n)
-    ]
+    pil_frames = [Image.fromarray(frames_rgb[i, :, :, :3], "RGB") for i in range(n)]
     pil_frames[0].save(
         path,
         save_all=True,

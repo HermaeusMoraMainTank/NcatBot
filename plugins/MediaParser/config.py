@@ -86,4 +86,3 @@ class ConfigWrapper:
     def save_config(self):
         """保存配置（暂不实现持久化）"""
         pass
-

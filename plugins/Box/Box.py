@@ -8,7 +8,12 @@ from typing import List, Optional
 from PIL import Image as PILImage
 
 from ncatbot.event.qq import GroupMessageEvent as GroupMessage
-from ncatbot.types import At, Image as NcatImage, MessageArray as MessageChain, PlainText
+from ncatbot.types import (
+    At,
+    Image as NcatImage,
+    MessageArray as MessageChain,
+    PlainText,
+)
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 
@@ -126,7 +131,9 @@ class Box(NcatBotPlugin):
             result = await self.api.qq.query.get_stranger_info(user_id=target_id)
             if result:
                 stranger_info = (
-                    result.model_dump() if hasattr(result, "model_dump") else dict(result)
+                    result.model_dump()
+                    if hasattr(result, "model_dump")
+                    else dict(result)
                 )
             else:
                 stranger_info = {}
@@ -146,7 +153,9 @@ class Box(NcatBotPlugin):
             if result:
                 # NcatBot5 返回的是 Pydantic 模型（NapCatModel），不是 dataclass
                 member_info = (
-                    result.model_dump() if hasattr(result, "model_dump") else dict(result)
+                    result.model_dump()
+                    if hasattr(result, "model_dump")
+                    else dict(result)
                 )
         except Exception as e:
             _log.warning(f"获取群成员信息失败: {e}")
@@ -183,7 +192,8 @@ class Box(NcatBotPlugin):
             # 生成卡片图片
             if not self.renderer:
                 await self.api.qq.post_group_msg(
-                    group_id=group_id, rtf=MessageChain([PlainText(text="卡片生成器未初始化")])
+                    group_id=group_id,
+                    rtf=MessageChain([PlainText(text="卡片生成器未初始化")]),
                 )
                 return
 
@@ -194,7 +204,8 @@ class Box(NcatBotPlugin):
             except Exception as e:
                 _log.error(f"生成卡片失败: {e}")
                 await self.api.qq.post_group_msg(
-                    group_id=group_id, rtf=MessageChain([PlainText(text=f"生成卡片失败: {e}")])
+                    group_id=group_id,
+                    rtf=MessageChain([PlainText(text=f"生成卡片失败: {e}")]),
                 )
                 return
 

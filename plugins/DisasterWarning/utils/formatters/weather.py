@@ -161,4 +161,3 @@ class WeatherFormatter(BaseMessageFormatter):
             )
 
         return "\n".join(lines)
-

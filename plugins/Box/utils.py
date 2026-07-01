@@ -174,4 +174,3 @@ def parse_home_town(home_town_code: str) -> str:
             return country  # 没有省份信息，返回国家名
     else:
         return country  # 不是中国，返回国家名
-

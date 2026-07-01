@@ -149,4 +149,3 @@ class BaseMessageFormatter:
         if hasattr(data, "raw_data") and data.raw_data:
             lines.append(f"📝数据: {data.raw_data}")
         return "\n".join(lines)
-

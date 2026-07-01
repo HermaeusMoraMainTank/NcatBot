@@ -213,9 +213,9 @@ class ImageSender(NcatBotPlugin):
                 continue
             legacy_abs = self._resolve_path(f"data/image/{suffix}")
             new_abs = self._resolve_path(path)
-            if os.path.isdir(legacy_abs) and os.path.abspath(legacy_abs) != os.path.abspath(
-                new_abs
-            ):
+            if os.path.isdir(legacy_abs) and os.path.abspath(
+                legacy_abs
+            ) != os.path.abspath(new_abs):
                 if not os.path.isdir(new_abs):
                     os.makedirs(os.path.dirname(new_abs), exist_ok=True)
                     shutil.move(legacy_abs, new_abs)
@@ -317,10 +317,7 @@ class ImageSender(NcatBotPlugin):
         lo, hi = 0, len(text)
         while lo < hi:
             mid = (lo + hi + 1) // 2
-            if (
-                ImageSender._text_width(draw, text[:mid] + ellipsis, font)
-                <= max_width
-            ):
+            if ImageSender._text_width(draw, text[:mid] + ellipsis, font) <= max_width:
                 lo = mid
             else:
                 hi = mid - 1
@@ -516,7 +513,9 @@ class ImageSender(NcatBotPlugin):
                 fill=(76, 110, 168),
             )
 
-            recall_color = (200, 120, 60) if row["recall"] != "不撤回" else (130, 138, 152)
+            recall_color = (
+                (200, 120, 60) if row["recall"] != "不撤回" else (130, 138, 152)
+            )
             draw.text(
                 (col_recall_x, row_top + 6),
                 row["recall"],
@@ -543,14 +542,15 @@ class ImageSender(NcatBotPlugin):
                 draw, "路径: " + row["path"], font_row_sub, inner_w
             )
             draw.text(
-                (padding + 12, line_y), path_line, font=font_row_sub, fill=(110, 118, 132)
+                (padding + 12, line_y),
+                path_line,
+                font=font_row_sub,
+                fill=(110, 118, 132),
             )
             line_y += LIST_LINE_HEIGHT
 
             users_color = (
-                (130, 138, 152)
-                if not row["users_restricted"]
-                else (56, 120, 88)
+                (130, 138, 152) if not row["users_restricted"] else (56, 120, 88)
             )
             for ln in self._wrap_text(
                 draw, "用户: " + row["users_full"], font_row_sub, inner_w
@@ -600,9 +600,7 @@ class ImageSender(NcatBotPlugin):
                 rtf=MessageChain([Image(file=img_b64)]),
             )
 
-    def _find_command(
-        self, keyword: str
-    ) -> Optional[Tuple[str, dict]]:
+    def _find_command(self, keyword: str) -> Optional[Tuple[str, dict]]:
         """按图包名或任意触发词查找配置。"""
         if keyword in self.commands:
             return keyword, self.commands[keyword]
@@ -641,9 +639,7 @@ class ImageSender(NcatBotPlugin):
                 "图包 撤回 <名称> [秒数，0=不撤回]\n"
                 "图包 重载"
             )
-            await self.api.qq.post_group_msg(
-                group_id=input.group_id, text=help_text
-            )
+            await self.api.qq.post_group_msg(group_id=input.group_id, text=help_text)
             return
 
         if body == "重载":
@@ -726,11 +722,7 @@ class ImageSender(NcatBotPlugin):
                 if not cfg["allowed_users"]
                 else ", ".join(cfg["allowed_users"])
             )
-            recall = (
-                f"{cfg['recall_time']}秒"
-                if cfg.get("recall_time")
-                else "否"
-            )
+            recall = f"{cfg['recall_time']}秒" if cfg.get("recall_time") else "否"
             await self.api.qq.post_group_msg(
                 group_id=input.group_id,
                 text=(
@@ -868,8 +860,7 @@ class ImageSender(NcatBotPlugin):
                 await self.api.qq.post_group_msg(
                     group_id=input.group_id,
                     text=(
-                        f"[{name}] 允许用户: "
-                        f"{', '.join(users) if users else '所有人'}"
+                        f"[{name}] 允许用户: {', '.join(users) if users else '所有人'}"
                     ),
                 )
                 return
@@ -892,7 +883,8 @@ class ImageSender(NcatBotPlugin):
                 seconds = int(parts[2])
             except ValueError:
                 await self.api.qq.post_group_msg(
-                    group_id=input.group_id, text="秒数必须是整数",
+                    group_id=input.group_id,
+                    text="秒数必须是整数",
                 )
                 return
             self.commands[name]["recall_time"] = seconds if seconds > 0 else None
@@ -903,12 +895,14 @@ class ImageSender(NcatBotPlugin):
                 else f"[{name}] 已关闭撤回"
             )
             await self.api.qq.post_group_msg(
-                group_id=input.group_id, text=msg,
+                group_id=input.group_id,
+                text=msg,
             )
             return
 
         await self.api.qq.post_group_msg(
-            group_id=input.group_id, text="未知子命令，发送「图包 帮助」查看用法",
+            group_id=input.group_id,
+            text="未知子命令，发送「图包 帮助」查看用法",
         )
 
     @registrar.qq.on_group_message()
@@ -951,8 +945,7 @@ class ImageSender(NcatBotPlugin):
                     # 检查命令特定权限
                     if (
                         config["allowed_users"]
-                        and str(input.sender.user_id)
-                        not in config["allowed_users"]
+                        and str(input.sender.user_id) not in config["allowed_users"]
                     ):
                         return
 
@@ -1143,7 +1136,9 @@ class ImageSender(NcatBotPlugin):
                 for i, seg in enumerate(segments):
                     if isinstance(seg, Image):
                         if getattr(seg, "url", None):
-                            filename = getattr(seg, "file", None) or f"reply_image_{i}.jpg"
+                            filename = (
+                                getattr(seg, "file", None) or f"reply_image_{i}.jpg"
+                            )
                             image_list.append((filename, seg.url))
                         continue
 

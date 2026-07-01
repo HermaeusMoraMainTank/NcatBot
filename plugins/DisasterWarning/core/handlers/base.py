@@ -87,9 +87,7 @@ class BaseDataHandler:
             lat = msg_data.get("latitude")
             lon = msg_data.get("longitude")
             if lat == 0 and lon == 0:
-                _log.debug(
-                    f"[灾害预警] {self.source_id} 检测到空坐标心跳包，静默过滤"
-                )
+                _log.debug(f"[灾害预警] {self.source_id} 检测到空坐标心跳包，静默过滤")
                 return True
 
         # 检测缺少关键字段的空数据
@@ -110,9 +108,7 @@ class BaseDataHandler:
 
             # 如果超过一半的关键字段为空，认为是心跳包
             if missing_count >= len(required_fields) / 2:
-                _log.debug(
-                    f"[灾害预警] {self.source_id} 检测到空数据心跳包，静默过滤"
-                )
+                _log.debug(f"[灾害预警] {self.source_id} 检测到空数据心跳包，静默过滤")
                 return True
 
         return False
@@ -175,4 +171,3 @@ class BaseDataHandler:
     def _safe_float_convert(self, value) -> float | None:
         """安全地将值转换为浮点数"""
         return _safe_float_convert(value)
-

@@ -489,7 +489,10 @@ class DisasterWarningService:
         return active_sources
 
     async def test_push(
-        self, target_group: int, disaster_type: str = "earthquake", test_type: str = None
+        self,
+        target_group: int,
+        disaster_type: str = "earthquake",
+        test_type: str = None,
     ):
         """测试推送功能"""
         try:
@@ -518,8 +521,16 @@ class DisasterWarningService:
                         "is_final": False,
                         "raw_data": {
                             "areas": [
-                                {"name": "测试区域1", "scaleFrom": 50, "kindCode": "10"},
-                                {"name": "测试区域2", "scaleFrom": 45, "kindCode": "11"},
+                                {
+                                    "name": "测试区域1",
+                                    "scaleFrom": 50,
+                                    "kindCode": "10",
+                                },
+                                {
+                                    "name": "测试区域2",
+                                    "scaleFrom": 45,
+                                    "kindCode": "11",
+                                },
                             ]
                         },
                     },
@@ -733,5 +744,3 @@ async def stop_disaster_service():
     if _disaster_service:
         await _disaster_service.stop()
         _disaster_service = None
-
-

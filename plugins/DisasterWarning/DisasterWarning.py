@@ -69,6 +69,7 @@ class DisasterWarning(NcatBotPlugin):
         except Exception as e:
             _log.error(f"[灾害预警] 插件初始化失败: {e}")
             import traceback
+
             _log.error(traceback.format_exc())
 
     async def on_unload(self):
@@ -260,7 +261,11 @@ class DisasterWarning(NcatBotPlugin):
         """递归合并配置"""
         result = default.copy()
         for key, value in user.items():
-            if key in result and isinstance(result[key], dict) and isinstance(value, dict):
+            if (
+                key in result
+                and isinstance(result[key], dict)
+                and isinstance(value, dict)
+            ):
                 result[key] = self._merge_config(result[key], value)
             else:
                 result[key] = value
@@ -271,7 +276,13 @@ class DisasterWarning(NcatBotPlugin):
         yaml_config_path = os.path.join(os.path.dirname(__file__), "config.yaml")
         try:
             with open(yaml_config_path, "w", encoding="utf-8") as f:
-                yaml.dump(self.config, f, allow_unicode=True, default_flow_style=False, sort_keys=False)
+                yaml.dump(
+                    self.config,
+                    f,
+                    allow_unicode=True,
+                    default_flow_style=False,
+                    sort_keys=False,
+                )
         except Exception as e:
             _log.error(f"[灾害预警] 保存配置失败: {e}")
 
@@ -420,12 +431,20 @@ class DisasterWarning(NcatBotPlugin):
                 if filter_stats and filter_stats.get("total_filtered", 0) > 0:
                     stats_summary += "\n\n🛡️ 日志过滤拦截统计:\n"
                     stats_summary += f"• 重复数据拦截: {filter_stats.get('duplicate_events_filtered', 0)}\n"
-                    stats_summary += f"• 心跳包过滤: {filter_stats.get('heartbeat_filtered', 0)}\n"
-                    stats_summary += f"• P2P节点状态: {filter_stats.get('p2p_areas_filtered', 0)}\n"
+                    stats_summary += (
+                        f"• 心跳包过滤: {filter_stats.get('heartbeat_filtered', 0)}\n"
+                    )
+                    stats_summary += (
+                        f"• P2P节点状态: {filter_stats.get('p2p_areas_filtered', 0)}\n"
+                    )
                     stats_summary += f"• 连接状态过滤: {filter_stats.get('connection_status_filtered', 0)}\n"
-                    stats_summary += f"📊 总计拦截: {filter_stats.get('total_filtered', 0)}"
+                    stats_summary += (
+                        f"📊 总计拦截: {filter_stats.get('total_filtered', 0)}"
+                    )
 
-            await self.api.qq.post_group_msg(group_id=input.group_id, text=stats_summary)
+            await self.api.qq.post_group_msg(
+                group_id=input.group_id, text=stats_summary
+            )
 
         except Exception as e:
             _log.error(f"[灾害预警] 获取统计信息失败: {e}")
@@ -494,7 +513,9 @@ class DisasterWarning(NcatBotPlugin):
             )
 
             if test_result and "✅" in test_result:
-                await self.api.qq.post_group_msg(group_id=input.group_id, text=test_result)
+                await self.api.qq.post_group_msg(
+                    group_id=input.group_id, text=test_result
+                )
             else:
                 await self.api.qq.post_group_msg(
                     group_id=input.group_id,
@@ -830,4 +851,3 @@ class DisasterWarning(NcatBotPlugin):
             await self.api.qq.post_group_msg(
                 group_id=input.group_id, text=f"❌ 清除统计失败: {str(e)}"
             )
-

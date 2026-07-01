@@ -35,7 +35,9 @@ class GroupSign(NcatBotPlugin):
     async def on_load(self) -> None:
         self.init_defaults({"group_list": []})
         self.add_permission("groupsign.manage")
-        self.add_scheduled_task("daily_group_sign", "00:00", callback=self._do_group_sign)
+        self.add_scheduled_task(
+            "daily_group_sign", "00:00", callback=self._do_group_sign
+        )
         _log.info("GroupSign 每日 0 点打卡任务已注册")
 
     def _get_group_list(self) -> list[str]:
@@ -117,7 +119,8 @@ class GroupSign(NcatBotPlugin):
         self._set_group_list(group_list)
         _log.info(f"已从打卡列表中移除群 {group_id}")
         await self._reply(
-            event, f"已移除群 {group_id}\n当前打卡列表：{', '.join(group_list) or '（空）'}"
+            event,
+            f"已移除群 {group_id}\n当前打卡列表：{', '.join(group_list) or '（空）'}",
         )
 
     async def _handle_list(self, event: GroupMessage) -> None:

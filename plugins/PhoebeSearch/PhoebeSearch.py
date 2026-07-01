@@ -93,17 +93,12 @@ class PhoebeSearch(NcatBotPlugin):
             return
 
         shown = hits[:MAX_RESULTS]
-        header = (
-            f"[Phoebe] 共找到 {len(hits)} 条，"
-            f"显示前 {len(shown)} 条："
-        )
+        header = f"[Phoebe] 共找到 {len(hits)} 条，显示前 {len(shown)} 条："
         chain: List[PlainText | Image] = [PlainText(text=header + "\n")]
 
         for idx, hit in enumerate(shown, start=1):
             chain.append(
-                PlainText(
-                    text=f"{idx}. {hit.meme.title} 相似度 {hit.score:.0f}%\n"
-                )
+                PlainText(text=f"{idx}. {hit.meme.title} 相似度 {hit.score:.0f}%\n")
             )
             chain.append(Image(file=self._image_url(hit.meme.url)))
 

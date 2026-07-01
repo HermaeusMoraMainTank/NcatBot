@@ -181,4 +181,3 @@ if __name__ == "__main__":
     stats = get_region_stats()
     for key, value in stats.items():
         _log.info("%s: %s", key, value)
-

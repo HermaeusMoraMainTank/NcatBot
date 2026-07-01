@@ -149,9 +149,7 @@ class MessagePushManager:
 
         if event_time_aware:
             current_time_utc = datetime.now(timezone.utc)
-            time_diff = (
-                current_time_utc - event_time_aware
-            ).total_seconds() / 3600
+            time_diff = (current_time_utc - event_time_aware).total_seconds() / 3600
 
             if time_diff > 1:
                 _log.info(f"[灾害预警] 事件时间过早（{time_diff:.1f}小时前），过滤")
@@ -160,7 +158,9 @@ class MessagePushManager:
         # 2. 区域限制（地震 / 海啸 / 气象）
         if isinstance(event.data, EarthquakeData):
             if not self.regional.allows_earthquake(event.data):
-                _log.info("[灾害预警] 区域限制：地震不在广东范围（关键词与边界框均未命中），已过滤")
+                _log.info(
+                    "[灾害预警] 区域限制：地震不在广东范围（关键词与边界框均未命中），已过滤"
+                )
                 return False
         elif isinstance(event.data, TsunamiData):
             if not self.regional.allows_tsunami(event.data):
@@ -376,7 +376,9 @@ class MessagePushManager:
         """构建消息链（文本 + 可选 Global Quake 卡片图 + 可选震中地图图）"""
         source_id = self._get_source_id(event)
         mf = self.config.get("message_format", {})
-        map_provider = normalize_map_provider(mf.get("map_source") or mf.get("map_provider"))
+        map_provider = normalize_map_provider(
+            mf.get("map_source") or mf.get("map_provider")
+        )
         map_zoom = int(mf.get("map_zoom_level", 5))
         detailed_jma = mf.get("detailed_jma_intensity", False)
 
@@ -435,7 +437,9 @@ class MessagePushManager:
                 playwright_server_url=str(mf.get("playwright_server_url", "") or ""),
             )
             if png:
-                caption = str(mf.get("global_quake_caption", "🚨 [地震预警] Global Quake")).strip()
+                caption = str(
+                    mf.get("global_quake_caption", "🚨 [地震预警] Global Quake")
+                ).strip()
                 if caption:
                     chain.add_segment(PlainText(text=caption))
                 chain.add_segment(Image(file=str(png)))
@@ -490,4 +494,3 @@ class MessagePushManager:
         """清理旧记录"""
         self.deduplicator.cleanup_old_events()
         self.cleanup_temp_files()
-

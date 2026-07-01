@@ -428,9 +428,7 @@ class Downloader:
             outtmpl=str(video_path),
             merge_output_format="mp4",
             format="best[height<=720]/bestvideo[height<=720]+bestaudio/best",
-            postprocessors=[
-                {"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}
-            ],
+            postprocessors=[{"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}],
         )
 
         with yt_dlp.YoutubeDL(opts) as ydl:

@@ -1,6 +1,11 @@
 from typing import Dict, Optional
 
-from common.stats_render import RenderInfo, save_daily_trend_chart, save_top10_list, save_top3_podium
+from common.stats_render import (
+    RenderInfo,
+    save_daily_trend_chart,
+    save_top10_list,
+    save_top3_podium,
+)
 from common.stats_render.charts import save_top_emojis_chart
 from common.stats_render.helpers import get_date_keys, period_label, rank_users
 from common.stats_render.report import save_stats_report_file
@@ -24,7 +29,9 @@ async def build_emoji_group_report(
     if user_counts:
         ranked = await rank_users(group_id, user_counts, user_names, "次")
         if len(ranked) >= 3:
-            sections["表情包达人 TOP3"] = save_top3_podium((ranked[0], ranked[1], ranked[2]))
+            sections["表情包达人 TOP3"] = save_top3_podium(
+                (ranked[0], ranked[1], ranked[2])
+            )
         sections["表情包使用 TOP10"] = save_top10_list(ranked, "表情包使用 TOP10")
 
     top_emojis = sorted(

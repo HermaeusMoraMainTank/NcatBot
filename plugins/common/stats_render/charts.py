@@ -135,7 +135,11 @@ def save_daily_trend_chart(
 
     if days == 1:
         end_date.isoformat()
-        hourly = daily_counts if all(k.isdigit() or len(k) <= 2 for k in daily_counts) else {}
+        hourly = (
+            daily_counts
+            if all(k.isdigit() or len(k) <= 2 for k in daily_counts)
+            else {}
+        )
         if hourly:
             labels = [f"{h:02d}" for h in range(24)]
             counts = [hourly.get(str(h), hourly.get(h, 0)) for h in range(24)]
@@ -189,7 +193,12 @@ def save_daily_trend_chart(
             draw_crayon_rectangle(draw, x, y, bar_w, bar_h, color, "vertical")
         bbox = draw.textbbox((0, 0), label, font=font)
         tw = bbox[2] - bbox[0]
-        draw.text((x + bar_w / 2 - tw / 2, padding_y + chart_h + 8), label, font=font, fill=(100, 100, 100, 255))
+        draw.text(
+            (x + bar_w / 2 - tw / 2, padding_y + chart_h + 8),
+            label,
+            font=font,
+            fill=(100, 100, 100, 255),
+        )
 
     out = TEMP_PATH / f"trend_{uuid.uuid4().hex}.png"
     img.save(out, "PNG")
@@ -234,7 +243,9 @@ def save_pos_chart(pos_counter: Dict[str, int], top_n: int = 3) -> Optional[Path
         bar_width = (count / max_count) * max_bar_width
         color = CRAYON_COLORS[idx % len(CRAYON_COLORS)]
         if bar_width > 1:
-            draw_crayon_rectangle(draw, padding_x, y, bar_width, bar_height, color, "horizontal")
+            draw_crayon_rectangle(
+                draw, padding_x, y, bar_width, bar_height, color, "horizontal"
+            )
         rows.append((pos_name, count, y, bar_width))
         y += bar_height + bar_spacing
     draw = ImageDraw.Draw(img)
@@ -249,8 +260,14 @@ def save_pos_chart(pos_counter: Dict[str, int], top_n: int = 3) -> Optional[Path
             fill=(80, 80, 80, 255),
         )
         ct = str(count)
-        cx = padding_x + bar_width + 8 if bar_width <= max_bar_width * 0.6 else padding_x + bar_width - 30
-        _draw_text_on_bg(draw, (cx, row_y + bar_height / 2 - 6), ct, font, fill=(80, 80, 80, 255))
+        cx = (
+            padding_x + bar_width + 8
+            if bar_width <= max_bar_width * 0.6
+            else padding_x + bar_width - 30
+        )
+        _draw_text_on_bg(
+            draw, (cx, row_y + bar_height / 2 - 6), ct, font, fill=(80, 80, 80, 255)
+        )
     out = TEMP_PATH / f"pos_{uuid.uuid4().hex}.png"
     img.save(out, "PNG")
     return out
@@ -282,7 +299,13 @@ def save_top_emojis_chart(
         y = header_h + i * row_h
         bw = max(4, (count / max_count) * bar_max_w)
         draw_crayon_rectangle(
-            draw, bar_x, y + 20, bw, 16, CRAYON_COLORS[i % len(CRAYON_COLORS)], "horizontal"
+            draw,
+            bar_x,
+            y + 20,
+            bw,
+            16,
+            CRAYON_COLORS[i % len(CRAYON_COLORS)],
+            "horizontal",
         )
         rows.append((path, count, label, y))
     draw = ImageDraw.Draw(img)
@@ -290,7 +313,9 @@ def save_top_emojis_chart(
     for path, count, label, y in rows:
         emoji_pastes.append((path, 20, y + 8))
         label_text = _truncate_label(draw, str(label), count_font, label_max_w)
-        _draw_text_on_bg(draw, (68, y + 18), label_text, count_font, fill=(80, 80, 80, 255))
+        _draw_text_on_bg(
+            draw, (68, y + 18), label_text, count_font, fill=(80, 80, 80, 255)
+        )
         _draw_text_on_bg(
             draw,
             (bar_x + bar_max_w + 8, y + 16),
@@ -300,7 +325,11 @@ def save_top_emojis_chart(
         )
     for path, ex, ey in emoji_pastes:
         try:
-            em = Image.open(path).convert("RGBA").resize((40, 40), Image.Resampling.LANCZOS)
+            em = (
+                Image.open(path)
+                .convert("RGBA")
+                .resize((40, 40), Image.Resampling.LANCZOS)
+            )
         except Exception:
             em = Image.new("RGBA", (40, 40), (220, 220, 220, 255))
         img.paste(em, (ex, ey), em)
@@ -335,7 +364,13 @@ def save_labeled_bar_chart(
         y = header_h + i * row_h
         bw = max(4, (float(value) / max_v) * bar_max_w)
         draw_crayon_rectangle(
-            draw, bar_x, y + 14, bw, 20, CRAYON_COLORS[i % len(CRAYON_COLORS)], "horizontal"
+            draw,
+            bar_x,
+            y + 14,
+            bw,
+            20,
+            CRAYON_COLORS[i % len(CRAYON_COLORS)],
+            "horizontal",
         )
         bar_rows.append((label, value, y))
     draw = ImageDraw.Draw(img)

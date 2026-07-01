@@ -192,4 +192,3 @@ class JMATsunamiFormatter(BaseMessageFormatter):
             lines.append("✅津波の心配はありません（无需担心海啸）")
 
         return "\n".join(lines)
-

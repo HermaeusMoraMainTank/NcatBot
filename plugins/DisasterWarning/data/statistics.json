@@ -1,19 +1,19 @@
 {
-  "total_received": 21712,
-  "total_events": 16914,
+  "total_received": 21723,
+  "total_events": 16915,
   "start_time": "2026-04-08T10:22:03.299648",
-  "last_updated": "2026-07-01T14:56:12.151029",
+  "last_updated": "2026-07-01T15:01:11.036870",
   "by_type": {
-    "weather_alarm": 13982,
+    "weather_alarm": 13983,
     "earthquake": 2497,
     "earthquake_warning": 435
   },
   "by_source": {
-    "fan_studio_weather": 14053,
-    "fan_studio_cenc": 424,
-    "fan_studio_cea": 170,
-    "fan_studio_jma": 915,
-    "fan_studio_usgs": 4642,
+    "fan_studio_weather": 14056,
+    "fan_studio_cenc": 426,
+    "fan_studio_cea": 172,
+    "fan_studio_jma": 917,
+    "fan_studio_usgs": 4644,
     "p2p_earthquake": 348,
     "wolfx_jma_eq": 366,
     "wolfx_jma_eew": 567,
@@ -80,7 +80,7 @@
     "by_level": {
       "🔵蓝色": 3315,
       "🟡黄色": 8465,
-      "🟠橙色": 1956,
+      "🟠橙色": 1957,
       "🔴红色": 224,
       "未知": 22
     },
@@ -92,7 +92,7 @@
       "沙尘": 3,
       "雷电": 4344,
       "高温": 288,
-      "冰雹": 498,
+      "冰雹": 499,
       "雷暴大风": 467,
       "道路结冰": 14,
       "暴雨": 2947,
@@ -335,7 +335,7 @@
       "靖边": 1,
       "石阡": 26,
       "绿春": 46,
-      "呼和": 6,
+      "呼和": 7,
       "宁国": 7,
       "土默": 23,
       "赛罕": 8,
@@ -2089,6 +2089,83 @@
   },
   "recent_pushes": [
     {
+      "timestamp": "2026-07-01T15:01:11.036870",
+      "event_id": "15010041600000_20260701145706",
+      "type": "weather_alarm",
+      "source": "fan_studio_weather",
+      "description": "呼和浩特市气象台发布冰雹橙色预警[II级/严重]"
+    },
+    {
+      "timestamp": "2026-07-01T15:00:38.281751",
+      "event_id": "74994382",
+      "type": "earthquake",
+      "source": "fan_studio_usgs",
+      "description": "M2.7 夏威夷州附近"
+    },
+    {
+      "timestamp": "2026-07-01T15:00:38.268222",
+      "event_id": "20260604085010",
+      "type": "earthquake_warning",
+      "source": "fan_studio_jma",
+      "description": "M3.2 長野県中部"
+    },
+    {
+      "timestamp": "2026-07-01T15:00:38.263224",
+      "event_id": "b3oczhajxacyy",
+      "type": "earthquake_warning",
+      "source": "fan_studio_cea",
+      "description": "M5.2 青海海西州直辖区"
+    },
+    {
+      "timestamp": "2026-07-01T15:00:38.258219",
+      "event_id": "1074457",
+      "type": "earthquake",
+      "source": "fan_studio_cenc",
+      "description": "M5.2 青海海西州直辖区"
+    },
+    {
+      "timestamp": "2026-07-01T15:00:38.253230",
+      "event_id": "15092541600000_20260701145233",
+      "type": "weather_alarm",
+      "source": "fan_studio_weather",
+      "description": "凉城县气象台发布雷电黄色预警[III级/较重]"
+    },
+    {
+      "timestamp": "2026-07-01T15:00:19.476927",
+      "event_id": "74994382",
+      "type": "earthquake",
+      "source": "fan_studio_usgs",
+      "description": "M2.7 夏威夷州附近"
+    },
+    {
+      "timestamp": "2026-07-01T15:00:19.462777",
+      "event_id": "20260604085010",
+      "type": "earthquake_warning",
+      "source": "fan_studio_jma",
+      "description": "M3.2 長野県中部"
+    },
+    {
+      "timestamp": "2026-07-01T15:00:19.456756",
+      "event_id": "b3oczhajxacyy",
+      "type": "earthquake_warning",
+      "source": "fan_studio_cea",
+      "description": "M5.2 青海海西州直辖区"
+    },
+    {
+      "timestamp": "2026-07-01T15:00:19.449295",
+      "event_id": "1074457",
+      "type": "earthquake",
+      "source": "fan_studio_cenc",
+      "description": "M5.2 青海海西州直辖区"
+    },
+    {
+      "timestamp": "2026-07-01T15:00:19.444297",
+      "event_id": "15092541600000_20260701145233",
+      "type": "weather_alarm",
+      "source": "fan_studio_weather",
+      "description": "凉城县气象台发布雷电黄色预警[III级/较重]"
+    },
+    {
       "timestamp": "2026-07-01T14:56:12.151029",
       "event_id": "15092541600000_20260701145233",
       "type": "weather_alarm",
@@ -2710,87 +2787,9 @@
       "type": "weather_alarm",
       "source": "fan_studio_weather",
       "description": "宁洱哈尼族彝族自治县气象台发布山洪灾害风险黄色预警[Ⅲ级/较重]"
-    },
-    {
-      "timestamp": "2026-07-01T11:08:59.333742",
-      "event_id": "53082741600000_20260701110254",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "孟连傣族拉祜族佤族自治县气象台发布山洪灾害风险蓝色预警[Ⅳ级/一般]"
-    },
-    {
-      "timestamp": "2026-07-01T11:03:54.574276",
-      "event_id": "53072441600000_20260701105737",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "宁蒗彝族自治县气象台发布地质灾害气象风险黄色预警[Ⅲ级/较重]"
-    },
-    {
-      "timestamp": "2026-07-01T10:58:52.444041",
-      "event_id": "23272141600000_20260701105106",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "呼玛县气象台发布雷雨大风黄色预警[III级/较重]"
-    },
-    {
-      "timestamp": "2026-07-01T10:53:54.792429",
-      "event_id": "53080241600000_20260701104729",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "思茅区气象台发布地质灾害气象风险黄色预警[Ⅲ级/较重]"
-    },
-    {
-      "timestamp": "2026-07-01T10:48:49.770443",
-      "event_id": "23118241600000_20260701103956",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "五大连池市气象局发布地质灾害气象风险蓝色预警[IV级/一般]"
-    },
-    {
-      "timestamp": "2026-07-01T10:43:44.402375",
-      "event_id": "53312441600000_20260701103853",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "陇川县气象台发布地质灾害气象风险橙色预警[Ⅱ级/严重]"
-    },
-    {
-      "timestamp": "2026-07-01T10:38:39.145258",
-      "event_id": "15072441600000_20260701103208",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "鄂温克族自治旗气象台发布雷电黄色预警[III级/较重]"
-    },
-    {
-      "timestamp": "2026-07-01T10:33:34.511343",
-      "event_id": "15082541600000_20260701102340",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "乌拉特后旗气象台发布高温黄色预警[III级/较重]"
-    },
-    {
-      "timestamp": "2026-07-01T10:28:18.160864",
-      "event_id": "53280141600000_20260701101949",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "景洪市气象台发布地质灾害气象风险黄色预警[Ⅲ级/较重]"
-    },
-    {
-      "timestamp": "2026-07-01T10:23:02.542266",
-      "event_id": "15070241600000_20260701101321",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "海拉尔区气象台发布雷电黄色预警[III级/较重]"
-    },
-    {
-      "timestamp": "2026-07-01T10:17:57.168597",
-      "event_id": "53280141600000_20260701101305",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "景洪市气象台发布暴雨橙色预警[Ⅱ级/严重]"
     }
   ],
   "recent_event_ids": [
-    "15222241600000_20260628071347",
     "62.883,-149.009,2.5,202606280726",
     "62.883,-148.829,2.5,202606280726",
     "14010841600000_20260628072751",
@@ -3289,6 +3288,7 @@
     "19.099,-155.495,2.5,202607011439",
     "13012541600000_20260701144331",
     "11010741600000_20260701144853",
-    "15092541600000_20260701145233"
+    "15092541600000_20260701145233",
+    "15010041600000_20260701145706"
   ]
 }

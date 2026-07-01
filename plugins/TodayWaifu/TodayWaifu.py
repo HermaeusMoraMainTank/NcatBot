@@ -36,7 +36,9 @@ class TodayWaifu(NcatBotPlugin):
         """随机获取一个老婆"""
         allocated_wives = self.allocated_wives_by_group.setdefault(group_id, set())
 
-        members_response = await self.api.qq.query.get_group_member_list(group_id=group_id)
+        members_response = await self.api.qq.query.get_group_member_list(
+            group_id=group_id
+        )
 
         # NcatBot 5：get_group_member_list 返回 list[GroupMemberInfo]，无 .members
         if members_response is None:
@@ -115,9 +117,7 @@ class TodayWaifu(NcatBotPlugin):
                 hi = mid - 1
         return text[:lo] + ellipsis if lo > 0 else ellipsis
 
-    def _generate_wife_list_image(
-        self, pairs: List[Tuple[str, str, str, str]]
-    ) -> str:
+    def _generate_wife_list_image(self, pairs: List[Tuple[str, str, str, str]]) -> str:
         width = 920
         padding = 28
         row_height = 42
@@ -326,7 +326,9 @@ class TodayWaifu(NcatBotPlugin):
             message.add_text(" 你今天的群友老婆是：")
             message.add_image(avatar_url)
             message.add_text(f" {new_wife.nickname}({new_wife.user_id})")
-            return await self.api.qq.post_group_msg(group_id=input.group_id, rtf=message)
+            return await self.api.qq.post_group_msg(
+                group_id=input.group_id, rtf=message
+            )
 
         if message_text.strip() == "群老婆列表":
             pairs = await self._build_wife_list_pairs(group_id)
@@ -504,7 +506,9 @@ class TodayWaifu(NcatBotPlugin):
             message2 = MessageArray()
             message2.add_at(target_user_id)
             message2.add_text(f" 你的老婆被 {input.sender.nickname} 更换了。")
-            return await self.api.qq.post_group_msg(group_id=input.group_id, rtf=message2)
+            return await self.api.qq.post_group_msg(
+                group_id=input.group_id, rtf=message2
+            )
 
         if message_text.strip() == "换一个老婆" and user_id == str(HMMT.HMMT_ID):
             user_to_wife_map = self.user_to_wife_map_by_group.setdefault(group_id, {})
@@ -619,4 +623,6 @@ class TodayWaifu(NcatBotPlugin):
             message = MessageArray()
             message.add_at(user_id)
             message.add_text(f" 成功更换了老婆，你的新老婆是：{new_wife.nickname}")
-            return await self.api.qq.post_group_msg(group_id=input.group_id, rtf=message)
+            return await self.api.qq.post_group_msg(
+                group_id=input.group_id, rtf=message
+            )

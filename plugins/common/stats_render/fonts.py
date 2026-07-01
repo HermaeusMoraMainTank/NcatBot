@@ -12,7 +12,9 @@ _FONT_CANDIDATES = [
 ]
 
 
-def load_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+def load_font(
+    size: int, bold: bool = False
+) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
     if bold:
         candidates = ["C:/Windows/Fonts/msyhbd.ttc"] + _FONT_CANDIDATES
     else:

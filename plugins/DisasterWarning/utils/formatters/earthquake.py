@@ -817,4 +817,3 @@ class GlobalQuakeFormatter(BaseMessageFormatter):
             lines.append(f"📡触发测站：{used}/{total}")
 
         return "\n".join(lines)
-

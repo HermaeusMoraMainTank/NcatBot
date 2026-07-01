@@ -575,7 +575,9 @@ class FF14RisingStoneInfo(NcatBotPlugin):
 
         players = self.search_player(character_name, cookie)
         if not players:
-            await self.api.qq.post_group_msg(group_id=input.group_id, text="找不到该玩家")
+            await self.api.qq.post_group_msg(
+                group_id=input.group_id, text="找不到该玩家"
+            )
             return
 
         # 根据服务器筛选玩家

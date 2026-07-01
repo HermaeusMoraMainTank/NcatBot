@@ -1,4 +1,5 @@
 """Inspect FakeAi user_impression row for a given QQ id."""
+
 import json
 import sqlite3
 import sys
@@ -66,7 +67,9 @@ def main() -> None:
     print("\nTop rows by JSON field size:")
     for r in cur.fetchall():
         mark = " <-- TARGET" if int(r["user_id"]) == UID else ""
-        print(f"  {r['user_id']}: json_total={r['json_total']}, imp_len={r['imp_len']}{mark}")
+        print(
+            f"  {r['user_id']}: json_total={r['json_total']}, imp_len={r['imp_len']}{mark}"
+        )
 
     conn.close()
 

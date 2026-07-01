@@ -304,4 +304,3 @@ class JMAEEWWolfxHandler(BaseDataHandler):
                 return float(base)
 
         return None
-

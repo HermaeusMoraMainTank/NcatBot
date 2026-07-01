@@ -44,5 +44,3 @@ __all__ = [
     "get_intensity_based_sources",
     "get_scale_based_sources",
 ]
-
-

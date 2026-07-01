@@ -164,7 +164,9 @@ class WorkClock(NcatBotPlugin):
 
     def _auto_close_shift(self, user_id: int, shift: dict, end_dt: datetime) -> dict:
         closed = dict(shift)
-        closed["clock_out"] = end_dt.replace(microsecond=0).isoformat(timespec="seconds")
+        closed["clock_out"] = end_dt.replace(microsecond=0).isoformat(
+            timespec="seconds"
+        )
         closed["auto_closed"] = True
         self._user_state(user_id)["last_closed"] = closed
         self._close_shift(user_id)
@@ -197,7 +199,11 @@ class WorkClock(NcatBotPlugin):
             if not isinstance(state, dict):
                 continue
             shift = state.get("active")
-            if not isinstance(shift, dict) or not shift.get("clock_in") or shift.get("clock_out"):
+            if (
+                not isinstance(shift, dict)
+                or not shift.get("clock_in")
+                or shift.get("clock_out")
+            ):
                 continue
             try:
                 user_id = int(uid_str)
@@ -242,7 +248,11 @@ class WorkClock(NcatBotPlugin):
     def _repair_user_state(self, state: dict) -> bool:
         """修复 active 已写入 clock_out 但未结清的半完成状态（异常退出/崩溃后遗留）。"""
         active = state.get("active")
-        if not isinstance(active, dict) or not active.get("clock_in") or not active.get("clock_out"):
+        if (
+            not isinstance(active, dict)
+            or not active.get("clock_in")
+            or not active.get("clock_out")
+        ):
             return False
 
         repaired = dict(active)
@@ -275,11 +285,17 @@ class WorkClock(NcatBotPlugin):
         if self._repair_user_state(state):
             self._save_data()
         shift = state.get("active")
-        if isinstance(shift, dict) and shift.get("clock_in") and not shift.get("clock_out"):
+        if (
+            isinstance(shift, dict)
+            and shift.get("clock_in")
+            and not shift.get("clock_out")
+        ):
             return shift
         return None
 
-    def _get_today_closed_shift(self, user_id: int, now: datetime | None = None) -> dict | None:
+    def _get_today_closed_shift(
+        self, user_id: int, now: datetime | None = None
+    ) -> dict | None:
         now = now or self._now()
         closed = self._user_state(user_id).get("last_closed")
         if not isinstance(closed, dict):
@@ -293,7 +309,9 @@ class WorkClock(NcatBotPlugin):
     def _start_shift(self, user_id: int, clock_in_dt: datetime) -> dict:
         shift = {
             "work_date": self._work_date(clock_in_dt),
-            "clock_in": clock_in_dt.replace(microsecond=0).isoformat(timespec="seconds"),
+            "clock_in": clock_in_dt.replace(microsecond=0).isoformat(
+                timespec="seconds"
+            ),
             "clock_out": None,
         }
         self._user_state(user_id)["active"] = shift
@@ -406,7 +424,7 @@ class WorkClock(NcatBotPlugin):
             return 10 + (_CN_DIGIT.get(rest, 0) if rest else 0)
         if "十" in s:
             idx = s.index("十")
-            left, right = s[:idx], s[idx + 1:]
+            left, right = s[:idx], s[idx + 1 :]
             tens = _CN_DIGIT.get(left, 0) if left else 1
             ones = _CN_DIGIT.get(right, 0) if right else 0
             return tens * 10 + ones
@@ -414,7 +432,9 @@ class WorkClock(NcatBotPlugin):
             return _CN_DIGIT[s]
         return None
 
-    def _build_time(self, hour: int, minute: int, second: int, period_add: int) -> time | None:
+    def _build_time(
+        self, hour: int, minute: int, second: int, period_add: int
+    ) -> time | None:
         if period_add and hour < 12:
             hour += period_add
         if 0 <= hour <= 23 and 0 <= minute <= 59 and 0 <= second <= 59:
@@ -447,7 +467,7 @@ class WorkClock(NcatBotPlugin):
         period_add = 0
         for prefix, add in _PERIOD_PREFIXES:
             if text.startswith(prefix):
-                text = text[len(prefix):]
+                text = text[len(prefix) :]
                 period_add = add
                 break
 
@@ -522,7 +542,12 @@ class WorkClock(NcatBotPlugin):
         return ImageFont.load_default()
 
     def _draw_divider(
-        self, draw: ImageDraw.ImageDraw, x1: int, y: int, x2: int, color: tuple[int, int, int]
+        self,
+        draw: ImageDraw.ImageDraw,
+        x1: int,
+        y: int,
+        x2: int,
+        color: tuple[int, int, int],
     ) -> None:
         draw.line([(x1, y), (x2, y)], fill=color, width=1)
 
@@ -542,11 +567,17 @@ class WorkClock(NcatBotPlugin):
         out.paste(avatar, (0, 0), mask)
         return out
 
-    def _text_width(self, draw: ImageDraw.ImageDraw, text: str, font: ImageFont.ImageFont) -> int:
+    def _text_width(
+        self, draw: ImageDraw.ImageDraw, text: str, font: ImageFont.ImageFont
+    ) -> int:
         return int(draw.textbbox((0, 0), text, font=font)[2])
 
     def _fit_text(
-        self, draw: ImageDraw.ImageDraw, text: str, font: ImageFont.ImageFont, max_w: int
+        self,
+        draw: ImageDraw.ImageDraw,
+        text: str,
+        font: ImageFont.ImageFont,
+        max_w: int,
     ) -> str:
         if self._text_width(draw, text, font) <= max_w:
             return text
@@ -603,13 +634,17 @@ class WorkClock(NcatBotPlugin):
         draw = ImageDraw.Draw(canvas)
 
         card_box = (M, M, W - M, H - M)
-        draw.rounded_rectangle(card_box, radius=16, fill=(255, 255, 255), outline=(220, 226, 236))
+        draw.rounded_rectangle(
+            card_box, radius=16, fill=(255, 255, 255), outline=(220, 226, 236)
+        )
         draw.rounded_rectangle(
             (M, M, M + accent_w, H - M),
             radius=16,
             fill=theme["accent"],
         )
-        draw.rectangle((M + accent_w // 2, M, M + accent_w, H - M), fill=theme["accent"])
+        draw.rectangle(
+            (M + accent_w // 2, M, M + accent_w, H - M), fill=theme["accent"]
+        )
 
         avatar = self._load_avatar(user_id, avatar_size)
         avatar_y = M + (header_h - avatar_size) // 2
@@ -633,7 +668,11 @@ class WorkClock(NcatBotPlugin):
         body_y = divider_y + 18
         if len(rows) == 1:
             label, value = rows[0]
-            display = self._format_clock_display(value) if ("T" in value or ":" in value) else value
+            display = (
+                self._format_clock_display(value)
+                if ("T" in value or ":" in value)
+                else value
+            )
             display = self._fit_text(draw, display, font_hero, content_w)
             hero_w = self._text_width(draw, display, font_hero)
             draw.text(
@@ -659,15 +698,31 @@ class WorkClock(NcatBotPlugin):
                     .replace("下班时间", "下班")
                     .replace("今日工时", "工时")
                 )
-                display = value if "工时" in label else self._format_clock_display(value)
+                display = (
+                    value if "工时" in label else self._format_clock_display(value)
+                )
                 label_fit = self._fit_text(draw, short, font_label, content_w // 2)
                 value_fit = self._fit_text(draw, display, font_value, content_w // 2)
-                draw.text((content_left, y + 10), label_fit, font=font_label, fill=theme["muted"])
+                draw.text(
+                    (content_left, y + 10),
+                    label_fit,
+                    font=font_label,
+                    fill=theme["muted"],
+                )
                 val_w = self._text_width(draw, value_fit, font_value)
-                draw.text((content_right - val_w, y + 8), value_fit, font=font_value, fill=theme["accent"])
+                draw.text(
+                    (content_right - val_w, y + 8),
+                    value_fit,
+                    font=font_value,
+                    fill=theme["accent"],
+                )
                 if i < len(rows) - 1:
                     self._draw_divider(
-                        draw, content_left, y + row_h - 4, content_right, (243, 246, 250)
+                        draw,
+                        content_left,
+                        y + row_h - 4,
+                        content_right,
+                        (243, 246, 250),
                     )
 
         y = body_y + body_h
@@ -723,7 +778,9 @@ class WorkClock(NcatBotPlugin):
             reply=event.message_id,
         )
 
-    async def _clock_in(self, event: GroupMessage, manual_time: time | None = None) -> None:
+    async def _clock_in(
+        self, event: GroupMessage, manual_time: time | None = None
+    ) -> None:
         now = self._now()
         user_id = event.sender.user_id
         is_manual = manual_time is not None
@@ -738,7 +795,9 @@ class WorkClock(NcatBotPlugin):
         if shift:
             existing = self._parse_clock_datetime(shift["clock_in"])
             if self._is_forgotten_shift(existing, clock_in_dt):
-                _, auto_note = self._auto_close_forgotten_shift(user_id, shift, existing)
+                _, auto_note = self._auto_close_forgotten_shift(
+                    user_id, shift, existing
+                )
                 shift = None
             elif clock_in_dt < existing:
                 shift["clock_in"] = clock_in_dt.isoformat(timespec="seconds")
@@ -763,7 +822,9 @@ class WorkClock(NcatBotPlugin):
                 return
             else:
                 existing_display = self._format_clock_display(shift["clock_in"])
-                new_display = self._format_clock_display(clock_in_dt.isoformat(timespec="seconds"))
+                new_display = self._format_clock_display(
+                    clock_in_dt.isoformat(timespec="seconds")
+                )
                 note = (
                     f"补卡时间 {new_display} 晚于已记录 {existing_display}，未更新"
                     if is_manual
@@ -784,7 +845,11 @@ class WorkClock(NcatBotPlugin):
         title = "补卡成功" if is_manual else "上班打卡成功"
         note = auto_note
         if is_manual:
-            note = "已按指定时间录入" if not auto_note else f"{auto_note}；已按指定时间录入"
+            note = (
+                "已按指定时间录入"
+                if not auto_note
+                else f"{auto_note}；已按指定时间录入"
+            )
         await self._reply_card(
             event,
             "in",
@@ -1010,7 +1075,10 @@ class WorkClock(NcatBotPlugin):
             [
                 ("上班时间", closed["clock_in"]),
                 ("下班时间", closed["clock_out"]),
-                ("今日工时", self._format_duration(self._shift_duration_seconds(closed))),
+                (
+                    "今日工时",
+                    self._format_duration(self._shift_duration_seconds(closed)),
+                ),
             ],
             note=(
                 f"本次 {self._format_clock_display(now.isoformat(timespec='seconds'))} "
@@ -1066,7 +1134,11 @@ class WorkClock(NcatBotPlugin):
             name = member.card or member.nickname or user_id
 
             shift = state.get("active")
-            if isinstance(shift, dict) and shift.get("clock_in") and not shift.get("clock_out"):
+            if (
+                isinstance(shift, dict)
+                and shift.get("clock_in")
+                and not shift.get("clock_out")
+            ):
                 clock_in = self._parse_clock_datetime(shift["clock_in"])
                 if not self._is_forgotten_shift(clock_in, now):
                     duration = max(0, int((now - clock_in).total_seconds()))
@@ -1146,9 +1218,7 @@ class WorkClock(NcatBotPlugin):
                 out_display = self._format_list_time(clock_out or clock_in)
                 right = f"{in_display}-{out_display} 已下班 · {duration}"
                 color = theme["muted"]
-            line = self._fit_text(
-                draw, f"{left} →→→ {right}", text_font, inner_width
-            )
+            line = self._fit_text(draw, f"{left} →→→ {right}", text_font, inner_width)
             draw.text((padding, y), line, font=text_font, fill=color)
             y += row_height
 

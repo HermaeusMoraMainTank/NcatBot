@@ -311,5 +311,3 @@ def convert_old_model(old_model) -> DisasterEvent | None:
     except Exception as e:
         _log.error(f"模型转换失败: {e}")
         return None
-
-

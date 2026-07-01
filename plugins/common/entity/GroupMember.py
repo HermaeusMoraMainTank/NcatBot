@@ -1,5 +1,6 @@
 class GroupMember:
     """群成员信息类，封装字典数据为对象"""
+
     def __init__(self, member_data: dict):
         self.group_id = member_data.get("group_id")
         self.user_id = member_data.get("user_id")

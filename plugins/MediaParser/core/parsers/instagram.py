@@ -144,11 +144,7 @@ class InstagramParser(BaseParser):
                     if isinstance(message, str):
                         errors.append(message)
                     return
-                if (
-                    len(item) >= 3
-                    and item[0] == 3
-                    and isinstance(item[1], str)
-                ):
+                if len(item) >= 3 and item[0] == 3 and isinstance(item[1], str):
                     urls.append(self._clean_url(item[1]))
                     return
                 if len(item) >= 2 and item[0] == 3 and isinstance(item[1], dict):
@@ -214,8 +210,6 @@ class InstagramParser(BaseParser):
             if attempt < max_attempts:
                 await asyncio.sleep(min(2 * attempt, 5))
         return None
-
-
 
     async def _download_with_ytdlp(
         self, url: str, output_name: str | None = None
@@ -308,7 +302,9 @@ class InstagramParser(BaseParser):
             return None
         return url
 
-    def _best_video_format(self, formats: list[dict[str, Any]]) -> dict[str, Any] | None:
+    def _best_video_format(
+        self, formats: list[dict[str, Any]]
+    ) -> dict[str, Any] | None:
         candidates: list[dict[str, Any]] = []
         for fmt in formats:
             if not isinstance(fmt, dict):
@@ -327,7 +323,11 @@ class InstagramParser(BaseParser):
 
         def sort_key(fmt: dict[str, Any]) -> tuple[int, int, int]:
             vcodec = fmt.get("vcodec") or ""
-            prefer_avc = 1 if isinstance(vcodec, str) and ("avc" in vcodec or "h264" in vcodec) else 0
+            prefer_avc = (
+                1
+                if isinstance(vcodec, str) and ("avc" in vcodec or "h264" in vcodec)
+                else 0
+            )
             height = fmt.get("height")
             tbr = fmt.get("tbr")
             return (
@@ -339,9 +339,7 @@ class InstagramParser(BaseParser):
         return max(candidates, key=sort_key)
 
     @classmethod
-    def _best_audio_format(
-        cls, formats: list[dict[str, Any]]
-    ) -> dict[str, Any] | None:
+    def _best_audio_format(cls, formats: list[dict[str, Any]]) -> dict[str, Any] | None:
         candidates: list[dict[str, Any]] = []
         for fmt in formats:
             if not isinstance(fmt, dict):
@@ -389,7 +387,11 @@ class InstagramParser(BaseParser):
 
         def sort_key(fmt: dict[str, Any]) -> tuple[int, int, int]:
             vcodec = fmt.get("vcodec") or ""
-            prefer_avc = 1 if isinstance(vcodec, str) and ("avc" in vcodec or "h264" in vcodec) else 0
+            prefer_avc = (
+                1
+                if isinstance(vcodec, str) and ("avc" in vcodec or "h264" in vcodec)
+                else 0
+            )
             height = fmt.get("height")
             tbr = fmt.get("tbr")
             return (
@@ -400,9 +402,7 @@ class InstagramParser(BaseParser):
 
         return max(candidates, key=sort_key)
 
-    def _select_media_urls(
-        self, info: dict[str, Any]
-    ) -> tuple[str | None, str | None]:
+    def _select_media_urls(self, info: dict[str, Any]) -> tuple[str | None, str | None]:
         formats = info.get("formats")
         if isinstance(formats, list) and formats:
             video_fmt = self._best_video_format(formats)
@@ -430,7 +430,6 @@ class InstagramParser(BaseParser):
     def _merged_output_path(self, v_url: str, a_url: str) -> Path:
         digest = hashlib.md5(f"{v_url}|{a_url}".encode()).hexdigest()[:16]
         return self.downloader.cache_dir / f"{digest}.mp4"
-
 
     @handle(
         "instagram.com",

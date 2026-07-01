@@ -325,7 +325,7 @@ def extract_json_url(data: dict | str) -> str | None:
             data = extract_cq_json_data(data)
             if data is None:
                 return None
-        
+
         try:
             data = json.loads(data)
         except Exception:
@@ -360,28 +360,28 @@ def extract_cq_json_data(message: str) -> str | None:
     """
     import html
     import re
-    
+
     # 匹配 [CQ:json,data=...] 格式
     # JSON 内的特殊字符已被 HTML 实体编码（如 &#93; 代表 ]），
     # 所以可以直接匹配到结尾的 ]
-    pattern = r'\[CQ:json,data=(.+)\]'
+    pattern = r"\[CQ:json,data=(.+)\]"
     match = re.search(pattern, message, re.DOTALL)
-    
+
     if not match:
         # 尝试匹配 HTML 实体编码的版本
-        pattern_encoded = r'&#91;CQ:json,data=(.+)&#93;'
+        pattern_encoded = r"&#91;CQ:json,data=(.+)&#93;"
         match = re.search(pattern_encoded, message, re.DOTALL)
-    
+
     if not match:
         return None
-    
+
     json_data = match.group(1)
-    
+
     # 解码 HTML 实体
     # &#44; -> ,
     # &#91; -> [
     # &#93; -> ]
     # 等等
     json_data = html.unescape(json_data)
-    
+
     return json_data

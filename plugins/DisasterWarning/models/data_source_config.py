@@ -334,5 +334,3 @@ def get_scale_based_sources() -> list[str]:
     return [
         config.source_id for config in DATA_SOURCE_CONFIGS.values() if config.uses_scale
     ]
-
-

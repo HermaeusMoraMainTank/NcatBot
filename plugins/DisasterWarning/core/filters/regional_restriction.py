@@ -54,8 +54,7 @@ class RegionalRestrictionFilter:
 
     def _in_bbox(self, lat: float, lon: float) -> bool:
         return (
-            self.min_lat <= lat <= self.max_lat
-            and self.min_lon <= lon <= self.max_lon
+            self.min_lat <= lat <= self.max_lat and self.min_lon <= lon <= self.max_lon
         )
 
     def allows_earthquake(self, eq: EarthquakeData) -> bool:

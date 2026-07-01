@@ -14,6 +14,7 @@ from .base import BaseParser, handle
 
 """
 
+
 class ExampleParser(BaseParser):
     """示例视频网站解析器"""
 

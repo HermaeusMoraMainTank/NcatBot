@@ -77,9 +77,7 @@ class MemeToRGB(NcatBotPlugin):
             return
 
         if len(parts) > 1 and parts[1].lower() in ("help", "?", "帮助"):
-            await self.api.qq.post_group_msg(
-                group_id=input.group_id, text=_RGB_HELP
-            )
+            await self.api.qq.post_group_msg(group_id=input.group_id, text=_RGB_HELP)
             return
 
         try:
@@ -262,7 +260,9 @@ class MemeToRGB(NcatBotPlugin):
 
         def _fetch() -> PILImage.Image:
             ssl_context = ssl.create_default_context()
-            ssl_context.options |= ssl.OP_NO_TLSv1 | ssl.OP_NO_TLSv1_1 | ssl.OP_NO_TLSv1_3
+            ssl_context.options |= (
+                ssl.OP_NO_TLSv1 | ssl.OP_NO_TLSv1_1 | ssl.OP_NO_TLSv1_3
+            )
             ssl_context.set_ciphers("HIGH:!aNULL:!MD5")
             headers = {
                 "User-Agent": (
