@@ -32,9 +32,9 @@ class RenderUserInfo:
     ) -> "RenderUserInfo":
         nickname = (nickname_map or {}).get(user_id, str(user_id))
         if avatar_type == "group":
-            avatar_path = CommonUtil.get_group_avatar(user_id)
+            avatar_path = await CommonUtil.get_group_avatar_async(user_id)
         else:
-            avatar_path = CommonUtil.get_avatar(user_id)
+            avatar_path = await CommonUtil.get_avatar_async(user_id)
         return cls(
             group_id=group_id,
             user_id=user_id,
@@ -154,13 +154,14 @@ def create_top10_list(
     title: str = "排行榜",
     resources_path: Path = RESOURCES_PATH,
     compact: bool = False,
+    show_title: bool = False,
 ) -> Image.Image:
     """TOP10 竖向列表（含前三名时可单独用 podium，此函数用于完整 TOP10 或 4-10）。"""
     if not users:
         users = [RenderUserInfo.placeholder(i) for i in range(1, 4)]
     row_h = 46 if compact else 52
     width = 920
-    header_h = 36
+    header_h = 36 if show_title else 10
     height = header_h + len(users) * row_h + 20
     img = Image.new("RGBA", (width, height), (255, 255, 255, 0))
     draw = ImageDraw.Draw(img)
@@ -168,7 +169,8 @@ def create_top10_list(
     name_font = load_font(14)
     count_font = load_font(13)
     rank_font = load_font(14, bold=True)
-    draw.text((20, 8), title, font=title_font, fill=(60, 60, 60, 255))
+    if show_title:
+        draw.text((20, 8), title, font=title_font, fill=(60, 60, 60, 255))
     max_count = 1
     for u in users:
         try:
@@ -239,8 +241,11 @@ def save_top10_list(
     title: str = "排行榜 TOP10",
     *,
     compact: bool = False,
+    show_title: bool = False,
 ) -> Path:
     ensure_dirs()
     out = TEMP_PATH / f"top10_{uuid.uuid4().hex}.png"
-    create_top10_list(users, title=title, compact=compact).save(out, "PNG")
+    create_top10_list(
+        users, title=title, compact=compact, show_title=show_title
+    ).save(out, "PNG")
     return out

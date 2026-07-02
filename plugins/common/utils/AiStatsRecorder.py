@@ -7,6 +7,7 @@ import threading
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
+from common.stats_render.helpers import is_date_in_period
 from ncatbot.utils.logger import get_log
 
 from .json_io import atomic_write_json, load_json as _load_json_file, resolve_data_json
@@ -348,16 +349,7 @@ def _update_user_stats_file(
 def _dates_in_range(daily_counts: dict, days: Optional[int]) -> set:
     if days is None:
         return set(daily_counts.keys())
-    cutoff = datetime.now().date()
-    dates = set()
-    for date_str in daily_counts.keys():
-        try:
-            d = datetime.strptime(date_str, "%Y-%m-%d").date()
-            if (cutoff - d).days < days:
-                dates.add(date_str)
-        except ValueError:
-            continue
-    return dates
+    return {k for k in daily_counts.keys() if is_date_in_period(k, days)}
 
 
 def _sum_by_source(daily_by_source: dict, days: Optional[int]) -> Dict[str, dict]:
@@ -368,14 +360,11 @@ def _sum_by_source(daily_by_source: dict, days: Optional[int]) -> Dict[str, dict
         if days is None:
             dates = set(daily_by_source.keys())
         else:
-            cutoff = datetime.now().date()
-            for date_str in daily_by_source.keys():
-                try:
-                    d = datetime.strptime(date_str, "%Y-%m-%d").date()
-                    if (cutoff - d).days < days:
-                        dates.add(date_str)
-                except ValueError:
-                    continue
+            dates = {
+                date_str
+                for date_str in daily_by_source.keys()
+                if is_date_in_period(date_str, days)
+            }
 
     for date_str in dates:
         for src, bucket in (daily_by_source.get(date_str) or {}).items():

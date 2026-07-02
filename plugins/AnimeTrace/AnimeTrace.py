@@ -1,6 +1,6 @@
 import os
 import re
-import ssl
+import asyncio
 import base64
 from io import BytesIO
 from typing import List, Optional
@@ -125,29 +125,23 @@ class AnimeTracePlugin(NcatBotPlugin):
 
     async def _download_image(self, url: str) -> PILImage.Image:
         """下载图片并返回PIL Image对象"""
-        # 处理HTML转义
-        url = re.sub(r"&amp;", "&", url)
 
-        # 创建SSL上下文（兼容QQ服务器）
-        ssl_context = ssl.create_default_context()
-        ssl_context.options |= ssl.OP_NO_TLSv1 | ssl.OP_NO_TLSv1_1 | ssl.OP_NO_TLSv1_3
-        ssl_context.set_ciphers("HIGH:!aNULL:!MD5")
+        def _fetch() -> PILImage.Image:
+            fetch_url = re.sub(r"&amp;", "&", url)
+            headers = {
+                "User-Agent": (
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.67"
+                ),
+            }
+            response = requests.get(
+                fetch_url, headers=headers, timeout=30, verify=False
+            )
+            response.raise_for_status()
+            return PILImage.open(BytesIO(response.content))
 
-        # 下载图片
-        headers = {
-            "User-Agent": (
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.67"
-            ),
-        }
-
-        response = requests.get(url, headers=headers, timeout=30, verify=False)
-        response.raise_for_status()
-
-        # 转换为PIL Image
-        img = PILImage.open(BytesIO(response.content))
-        return img
+        return await asyncio.to_thread(_fetch)
 
     def _convert_image_to_jpeg(self, img: PILImage.Image) -> bytes:
         """将图片转换为JPEG格式的字节流"""
@@ -331,7 +325,9 @@ class AnimeTracePlugin(NcatBotPlugin):
             # 调用API识别
             ai_detect = 1 if self.AI_DETECT else 0
             try:
-                result = self._search_character(base_img, model, ai_detect)
+                result = await asyncio.to_thread(
+                    self._search_character, base_img, model, ai_detect
+                )
             except Exception as e:
                 _log.error(f"识别失败: {e}")
                 await input.reply(f"识别失败，换张图片试试吧~\n{repr(e)}")

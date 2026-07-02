@@ -1,12 +1,15 @@
+import asyncio
 import json
+import logging
 import re
 import requests
-import logging
 from typing import List, Optional, Any
 from dataclasses import dataclass
 from dataclasses_json import dataclass_json
 from pathlib import Path
 import tempfile
+
+from common.utils.async_io import load_json
 
 from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.types import At, Image, MessageArray as MessageChain, PlainText, Reply
@@ -58,12 +61,17 @@ class Meme(NcatBotPlugin):
     banlist = ["10123121"]  # 添加 banlist
     SPECIAL_USER_ID = "273421673"  # 特殊用户ID
 
+    async def _session_request(self, method: str, url: str, **kwargs):
+        return await asyncio.to_thread(getattr(self.session, method), url, **kwargs)
+
     async def on_load(self):
         """异步加载插件"""
         _log.info(f"开始加载 {self.name} 插件 v{self.version}")
         try:
             # 检查服务是否可用
-            response = self.session.get(f"{self.baseurl}/keys", timeout=self.timeout)
+            response = await self._session_request(
+                "get", f"{self.baseurl}/keys", timeout=self.timeout
+            )
             if response.status_code != 200:
                 _log.error(f"Meme 服务不可用: {response.status_code}")
                 return
@@ -81,13 +89,12 @@ class Meme(NcatBotPlugin):
     async def load_meme_data(self):
         """异步加载 meme 数据"""
         try:
-            with open("data/json/memeKeys.json", "r", encoding="utf-8") as file:
-                meme_data = json.load(file)
-                self.keywordslist = {
-                    keyword: DataStructure.from_dict(data)
-                    for data in meme_data
-                    for keyword in data["keywords"]
-                }
+            meme_data = await load_json("data/json/memeKeys.json")
+            self.keywordslist = {
+                keyword: DataStructure.from_dict(data)
+                for data in meme_data
+                for keyword in data["keywords"]
+            }
             _log.info(f"成功加载 {len(self.keywordslist)} 个 meme 关键词")
         except Exception as e:
             _log.error(f"加载 meme 数据失败: {e}", exc_info=True)
@@ -101,8 +108,7 @@ class Meme(NcatBotPlugin):
         if input.raw_message == "meme":
             try:
                 # 从 memeKeys.json 读取数据
-                with open("data/json/memeKeys.json", "r", encoding="utf-8") as file:
-                    meme_data = json.load(file)
+                meme_data = await load_json("data/json/memeKeys.json")
 
                 # 构建 meme_list
                 meme_list = [
@@ -117,7 +123,8 @@ class Meme(NcatBotPlugin):
                     "add_category_icon": True,
                 }
 
-                response = self.session.post(
+                response = await self._session_request(
+                    "post",
                     f"{self.baseurl}/render_list/",
                     json=request_data,
                     timeout=self.timeout,
@@ -301,7 +308,9 @@ class Meme(NcatBotPlugin):
         for url in image_urls:
             try:
                 url = re.sub(r"&amp;", "&", url)
-                response = self.session.get(url, timeout=self.timeout)
+                response = await self._session_request(
+                    "get", url, timeout=self.timeout
+                )
                 if response.status_code == 200:
                     with tempfile.NamedTemporaryFile(
                         delete=False, suffix=".jpg"
@@ -364,8 +373,12 @@ class Meme(NcatBotPlugin):
         data = {"texts": texts, "args": json.dumps({"circle": True})}
 
         try:
-            response = self.session.post(
-                api_url, files=files, data=data, timeout=self.timeout
+            response = await self._session_request(
+                "post",
+                api_url,
+                files=files,
+                data=data,
+                timeout=self.timeout,
             )
 
             if response.status_code == 200:
@@ -406,15 +419,19 @@ class Meme(NcatBotPlugin):
     async def get_meme_list(self):
         """异步获取 meme 列表"""
         try:
-            response = self.session.get(f"{self.baseurl}/keys", timeout=self.timeout)
+            response = await self._session_request(
+                "get", f"{self.baseurl}/keys", timeout=self.timeout
+            )
 
             if response.status_code == 200:
                 meme_keys = response.json()
                 meme_data = []
 
                 for key in meme_keys:
-                    info_response = self.session.get(
-                        f"{self.baseurl}/{key}/info", timeout=self.timeout
+                    info_response = await self._session_request(
+                        "get",
+                        f"{self.baseurl}/{key}/info",
+                        timeout=self.timeout,
                     )
                     if info_response.status_code == 200:
                         meme_data.append(info_response.json())
@@ -423,8 +440,11 @@ class Meme(NcatBotPlugin):
                             f"获取 meme {key} 信息失败: {info_response.status_code}"
                         )
 
-                with open("data/json/memeKeys.json", "w", encoding="utf-8") as file:
-                    json.dump(meme_data, file, indent=4, ensure_ascii=False)
+                def _save_meme_keys() -> None:
+                    with open("data/json/memeKeys.json", "w", encoding="utf-8") as file:
+                        json.dump(meme_data, file, indent=4, ensure_ascii=False)
+
+                await asyncio.to_thread(_save_meme_keys)
                 _log.info(f"成功保存 {len(meme_data)} 个 meme 数据")
             else:
                 _log.error(f"获取 meme 列表失败: {response.status_code}")

@@ -312,25 +312,26 @@ class GroupRecallPlugin(NcatBotPlugin):
     def _save_image(self, image_element) -> Optional[str]:
         """保存图片到本地"""
         try:
-            # 获取图片数据
             image_url = getattr(image_element, "url", None) or getattr(
                 image_element, "file", None
             )
-            if image_url:
-                import requests
+            if not image_url:
+                return None
 
-                response = requests.get(image_url)
-                if response.status_code == 200:
-                    # 生成文件名
-                    timestamp = int(time.time() * 1000)
-                    filename = f"recall_image_{timestamp}.jpg"
-                    filepath = os.path.join(self.DATA_DIR, filename)
+            import requests
 
-                    # 保存图片
-                    with open(filepath, "wb") as f:
-                        f.write(response.content)
+            response = requests.get(image_url, timeout=30)
+            if response.status_code != 200:
+                return None
 
-                    return filepath
+            timestamp = int(time.time() * 1000)
+            filename = f"recall_image_{timestamp}.jpg"
+            filepath = os.path.join(self.DATA_DIR, filename)
+
+            with open(filepath, "wb") as f:
+                f.write(response.content)
+
+            return filepath
         except Exception as e:
             _log.error(f"[GroupRecall] 保存图片异常: {e}")
 
@@ -419,7 +420,9 @@ class GroupRecallPlugin(NcatBotPlugin):
             nickname = input.sender.nickname or str(user_id)
 
             # 保存消息内容
-            text_content, image_paths = self._save_message_content(input)
+            text_content, image_paths = await asyncio.to_thread(
+                self._save_message_content, input
+            )
 
             # 确定消息类型
             message_type = "text"

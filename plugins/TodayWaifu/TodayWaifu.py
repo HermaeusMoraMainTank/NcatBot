@@ -273,7 +273,7 @@ class TodayWaifu(NcatBotPlugin):
                     }
                     wife_member = GroupMember(wife_data)
 
-                    avatar_url = CommonUtil.get_avatar(wife_member.user_id)
+                    avatar_url = await CommonUtil.get_avatar_async(wife_member.user_id)
 
                     message = MessageArray()
                     message.add_at(user_id)
@@ -289,7 +289,7 @@ class TodayWaifu(NcatBotPlugin):
                     if wife_data:  # 确保 data 字段存在且不为空
                         wife_member = GroupMember(wife_data)
 
-                        avatar_url = CommonUtil.get_avatar(wife_member.user_id)
+                        avatar_url = await CommonUtil.get_avatar_async(wife_member.user_id)
 
                         message = MessageArray()
                         message.add_at(user_id)
@@ -318,7 +318,7 @@ class TodayWaifu(NcatBotPlugin):
             user_to_wife_map[user_id] = new_wife.user_id
             allocated_wives.add(new_wife.user_id)
 
-            avatar_url = CommonUtil.get_avatar(new_wife.user_id)
+            avatar_url = await CommonUtil.get_avatar_async(new_wife.user_id)
 
             # 发送消息
             message = MessageArray()

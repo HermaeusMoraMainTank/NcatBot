@@ -421,22 +421,24 @@ class Renderer:
         await self._draw_sections(ctx, sections)
         return image
 
-    async def render_card(self, result: ParseResult) -> Path | None:
-        """渲染卡片并落盘，失败返回 None"""
+    def _render_card_in_thread(self, result: ParseResult) -> Path | None:
+        """在独立线程中完成卡片渲染，避免 PIL/Apilmoji 阻塞主事件循环。"""
         cache = self.cache_dir / f"card_{uuid.uuid4().hex}.png"
         try:
-            img = await self._create_card_image(result)
+            img = asyncio.run(self._create_card_image(result))
             buf = BytesIO()
-            await asyncio.to_thread(img.save, buf, format="PNG")
-
-            async with aiofiles.open(cache, "wb") as fp:
-                await fp.write(buf.getvalue())
+            img.save(buf, format="PNG")
+            cache.write_bytes(buf.getvalue())
             return cache
         except Exception:
             _log.error(
                 f"Failed to render card for result={result}",
             )
             return None
+
+    async def render_card(self, result: ParseResult) -> Path | None:
+        """渲染卡片并落盘，失败返回 None"""
+        return await asyncio.to_thread(self._render_card_in_thread, result)
 
     @suppress_exception
     def _load_and_resize_cover(
@@ -551,9 +553,10 @@ class Renderer:
             sections.append(TitleSectionData(height=title_height, lines=title_lines))
 
         # 3. 封面，图集，图文内容
-        if cover_img := self._load_and_resize_cover(
+        if cover_img := await asyncio.to_thread(
+            self._load_and_resize_cover,
             await result.cover_path,
-            content_width=content_width,
+            content_width,
         ):
             sections.append(
                 CoverSectionData(height=cover_img.height, cover_img=cover_img)
@@ -609,6 +612,20 @@ class Renderer:
         """计算图文内容部分的高度和内容"""
         # 加载图片
         img_path = await graphics_content.get_path()
+        return await asyncio.to_thread(
+            self._calculate_graphics_section_sync,
+            img_path,
+            graphics_content,
+            content_width,
+        )
+
+    def _calculate_graphics_section_sync(
+        self,
+        img_path: Path,
+        graphics_content: GraphicsContent,
+        content_width: int,
+    ) -> GraphicsSectionData | None:
+        """计算图文内容部分的高度和内容（同步，供 to_thread 调用）"""
         with Image.open(img_path) as original_img:
             # 调整图片尺寸以适应内容宽度
             if original_img.width > content_width:
@@ -663,8 +680,9 @@ class Renderer:
             return None
 
         # 加载头像
-        avatar_img = self._load_and_process_avatar(
-            await result.author.get_avatar_path()
+        avatar_img = await asyncio.to_thread(
+            self._load_and_process_avatar,
+            await result.author.get_avatar_path(),
         )
 
         # 计算文字区域宽度（始终预留头像空间）
@@ -705,13 +723,16 @@ class Renderer:
     async def _calculate_repost_section(self, repost: ParseResult) -> RepostSectionData:
         """计算转发内容的高度和内容（递归调用绘制方法）"""
         repost_image = await self._create_card_image(repost, False)
-        # 缩放图片
-        scaled_width = int(repost_image.width * self.REPOST_SCALE)
-        scaled_height = int(repost_image.height * self.REPOST_SCALE)
-        repost_image_scaled = repost_image.resize(
-            (scaled_width, scaled_height),
-            Image.Resampling.LANCZOS,
-        )
+
+        def _scale_repost(img: PILImage) -> PILImage:
+            scaled_width = int(img.width * self.REPOST_SCALE)
+            scaled_height = int(img.height * self.REPOST_SCALE)
+            return img.resize(
+                (scaled_width, scaled_height),
+                Image.Resampling.LANCZOS,
+            )
+
+        repost_image_scaled = await asyncio.to_thread(_scale_repost, repost_image)
 
         return RepostSectionData(
             height=scaled_height + self.REPOST_PADDING * 2,  # 加上转发容器的内边距
@@ -803,6 +824,23 @@ class Renderer:
         Returns:
             处理后的图片对象，失败返回 None
         """
+        if not img_path.exists():
+            return None
+
+        return await asyncio.to_thread(
+            self._load_and_process_grid_image_sync,
+            img_path,
+            content_width,
+            img_count,
+        )
+
+    def _load_and_process_grid_image_sync(
+        self,
+        img_path: Path,
+        content_width: int,
+        img_count: int,
+    ) -> PILImage | None:
+        """加载并处理网格图片（同步，供 to_thread 调用）"""
         if not img_path.exists():
             return None
 

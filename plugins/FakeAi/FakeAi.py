@@ -11,6 +11,7 @@ from typing import Dict, List, Optional, Union
 import yaml
 from PIL import Image as PILImage, ImageDraw, ImageFont
 from common.utils.AiUtil import AiUtil, DEEPSEEK_CHAT_MODEL
+from common.utils.async_io import load_json, load_yaml
 from common.utils.CommonUtil import CommonUtil
 from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.types import At, MessageArray as MessageChain, PlainText, Reply, Image
@@ -309,10 +310,9 @@ class FakeAi(NcatBotPlugin):
 
         # 加载 meme 关键词
         try:
-            with open("data/json/memeKeys.json", "r", encoding="utf-8") as file:
-                meme_data = json.load(file)
-                for data in meme_data:
-                    self.meme_keywords.extend(data.get("keywords", []))
+            meme_data = await load_json("data/json/memeKeys.json")
+            for data in meme_data:
+                self.meme_keywords.extend(data.get("keywords", []))
             _log.info(f"FakeAi 已加载 {len(self.meme_keywords)} 个 meme 关键词排除")
         except Exception as e:
             _log.warning(f"FakeAi 加载 meme 关键词失败: {e}")
@@ -1264,6 +1264,17 @@ class FakeAi(NcatBotPlugin):
         # 文本里提到「蓝晴」也视为主动触发（与 @ 同等）
         is_name_mention = "蓝晴" in clean_message and not is_at_message
 
+        # 273421673 回复「撤回」/「@蓝晴 撤回」为管理指令，不触发 AI
+        if (
+            str(sender_id) == "273421673"
+            and (
+                "[CQ:reply," in input.raw_message
+                or any(isinstance(s, Reply) for s in input.message)
+            )
+            and clean_message == "撤回"
+        ):
+            return
+
         # 检查是否是等待回调的用户
         if enable_callback and callback_state.is_waiting(sender_id):
             # 检查是否超时
@@ -1696,12 +1707,10 @@ def record_ai_usage_to_json(
     )
 
 
-def load_yaml_data(group_id) -> Dict:
+async def load_yaml_data(group_id) -> Dict:
     # if group_id == 719518427:
-    #     with open("data/yml/lanqingv1_ai.yml", "r", encoding="utf-8") as file:
-    #         return yaml.safe_load(file)
-    with open("data/yml/lanqingv1.yml", "r", encoding="utf-8") as file:
-        return yaml.safe_load(file)
+    #     return await load_yaml("data/yml/lanqingv1_ai.yml")
+    return await load_yaml("data/yml/lanqingv1.yml")
 
 
 def replace_time_in_system(yaml_data: Dict) -> None:
@@ -1805,7 +1814,7 @@ async def answer_ai(
     await memory_manager.init_db()
 
     # 加载 YAML 数据
-    yaml_data = load_yaml_data(group_id)
+    yaml_data = await load_yaml_data(group_id)
     replace_time_in_system(yaml_data)
     update_yaml_with_replies(yaml_data, group_reply_caches.get(group_id, ReplyCache()))
 

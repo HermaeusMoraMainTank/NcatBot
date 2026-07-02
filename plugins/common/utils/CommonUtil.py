@@ -1,4 +1,5 @@
 from datetime import date
+import asyncio
 import matplotlib.pyplot as plt
 import os
 import requests
@@ -110,6 +111,14 @@ class CommonUtil:
             img = PILImage.new("RGB", (64, 64), (180, 200, 230))
             img.save(default_path)
         return default_path
+
+    @staticmethod
+    async def get_avatar_async(user_id):
+        return await asyncio.to_thread(CommonUtil.get_avatar, user_id)
+
+    @staticmethod
+    async def get_group_avatar_async(group_id):
+        return await asyncio.to_thread(CommonUtil.get_group_avatar, group_id)
 
     @staticmethod
     def calculate_current_day():

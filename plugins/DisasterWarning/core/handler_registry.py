@@ -153,7 +153,7 @@ class WebSocketHandlerRegistry:
                                 }
 
                             _log.debug(f"[灾害预警] {source} 解析成功: {event.id}")
-                            await self.service._handle_disaster_event(event)
+                            self.service.dispatch_disaster_event(event)
                             processed_count += 1
                     else:
                         _log.warning(f"[灾害预警] 未找到处理器: {handler_id}")
@@ -203,7 +203,7 @@ class WebSocketHandlerRegistry:
                             }
 
                         _log.debug(f"[灾害预警] P2P EEW处理器解析成功: {event.id}")
-                        await self.service._handle_disaster_event(event)
+                        self.service.dispatch_disaster_event(event)
                         return
                 except Exception as e:
                     _log.error(
@@ -227,7 +227,7 @@ class WebSocketHandlerRegistry:
                             }
 
                         _log.debug(f"[灾害预警] P2P地震情報处理器解析成功: {event.id}")
-                        await self.service._handle_disaster_event(event)
+                        self.service.dispatch_disaster_event(event)
                         return
                 except Exception as e:
                     _log.error(
@@ -272,7 +272,7 @@ class WebSocketHandlerRegistry:
                                 }
 
                             _log.debug(f"[灾害预警] Wolfx处理器解析成功: {event.id}")
-                            await self.service._handle_disaster_event(event)
+                            self.service.dispatch_disaster_event(event)
                             return
                     except Exception as e:
                         _log.error(
@@ -314,7 +314,7 @@ class WebSocketHandlerRegistry:
                             }
 
                         _log.debug(f"[灾害预警] Global Quake处理器解析成功: {event.id}")
-                        await self.service._handle_disaster_event(event)
+                        self.service.dispatch_disaster_event(event)
                 except Exception as e:
                     _log.error(
                         f"[灾害预警] Global Quake处理器解析消息失败 - 连接: {connection_name}, 错误: {e}"

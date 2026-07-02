@@ -20,6 +20,7 @@ from ncatbot.types import (
     Video,
     Record,
 )
+from ncatbot.types.qq import ForwardConstructor
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 from ncatbot.utils import get_log
@@ -323,6 +324,153 @@ class MediaParser(NcatBotPlugin):
             except OSError as e:
                 _log.debug("解析缓存延迟删除失败 %s: %s", p, e)
 
+    @staticmethod
+    def _is_send_timeout_error(exc: Exception) -> bool:
+        err_s = str(exc)
+        return "Timeout" in err_s or "[1200]" in err_s
+
+    async def _post_group_msg_retry(
+        self,
+        group_id,
+        *,
+        rtf: MessageChain,
+        retries: int = 2,
+    ) -> None:
+        last_err: Optional[Exception] = None
+        for attempt in range(retries + 1):
+            try:
+                await self.api.qq.post_group_msg(group_id=group_id, rtf=rtf)
+                return
+            except Exception as e:
+                last_err = e
+                if attempt < retries and self._is_send_timeout_error(e):
+                    _log.warning(
+                        "[MediaParser] send_group_msg 超时，重试 %s/%s",
+                        attempt + 1,
+                        retries,
+                    )
+                    await asyncio.sleep(1.5 * (attempt + 1))
+                    continue
+                raise
+        if last_err:
+            raise last_err
+
+    async def _post_private_msg_retry(
+        self,
+        user_id,
+        *,
+        rtf: MessageChain,
+        retries: int = 2,
+    ) -> None:
+        last_err: Optional[Exception] = None
+        for attempt in range(retries + 1):
+            try:
+                await self.api.qq.post_private_msg(user_id=user_id, rtf=rtf)
+                return
+            except Exception as e:
+                last_err = e
+                if attempt < retries and self._is_send_timeout_error(e):
+                    _log.warning(
+                        "[MediaParser] send_private_msg 超时，重试 %s/%s",
+                        attempt + 1,
+                        retries,
+                    )
+                    await asyncio.sleep(1.5 * (attempt + 1))
+                    continue
+                raise
+        if last_err:
+            raise last_err
+
+    @staticmethod
+    def _plan_send_chunks(other_msgs: list) -> List[list]:
+        """将普通消息拆成多条，避免多图同发导致 NapCat sendMsg 超时。"""
+        images = [m for m in other_msgs if isinstance(m, Image)]
+        non_images = [m for m in other_msgs if not isinstance(m, Image)]
+
+        if len(images) <= 1:
+            return [other_msgs] if other_msgs else []
+
+        chunks: List[list] = []
+        if non_images:
+            chunks.append(non_images)
+        chunks.extend([[img] for img in images])
+        return chunks
+
+    async def _send_message_chunks(
+        self,
+        *,
+        group_id,
+        user_id,
+        event,
+        chunks: List[list],
+        with_reply: bool = True,
+    ) -> None:
+        for index, chunk in enumerate(chunks):
+            if not chunk:
+                continue
+            chain = list(chunk)
+            if with_reply and index == 0 and group_id:
+                chain = [Reply(id=event.message_id)] + chain
+            rtf = MessageChain(chain)
+            if group_id:
+                await self._post_group_msg_retry(group_id=group_id, rtf=rtf)
+            else:
+                await self._post_private_msg_retry(user_id=user_id, rtf=rtf)
+            if index + 1 < len(chunks):
+                await asyncio.sleep(0.8)
+
+    async def _send_merge_forward(
+        self,
+        *,
+        event,
+        group_id,
+        user_id,
+        result: ParseResult,
+        other_msgs: list,
+    ) -> None:
+        author = result.author
+        bot_id = str(self.self_id or getattr(event, "self_id", "") or "0")
+        nickname = author.name if author and author.name else "链接解析"
+        user_id_str = str(author.id) if author and author.id else bot_id
+
+        fc = ForwardConstructor(user_id=user_id_str, nickname=nickname)
+        for msg in other_msgs:
+            if isinstance(msg, PlainText):
+                fc.attach_text(msg.text, user_id=user_id_str, nickname=nickname)
+            elif isinstance(msg, Image):
+                fc.attach_image(msg.file, user_id=user_id_str, nickname=nickname)
+            else:
+                fc.attach_message(MessageChain([msg]), user_id=user_id_str, nickname=nickname)
+
+        forward = fc.build()
+        if group_id and getattr(event, "message_id", None):
+            await self._post_group_msg_retry(
+                group_id=group_id,
+                rtf=MessageChain([Reply(id=event.message_id)]),
+                retries=1,
+            )
+
+        last_err: Optional[Exception] = None
+        for attempt in range(3):
+            try:
+                if group_id:
+                    await self.api.qq.post_group_forward_msg(group_id, forward)
+                else:
+                    await self.api.qq.post_private_forward_msg(user_id, forward)
+                return
+            except Exception as e:
+                last_err = e
+                if attempt < 2 and self._is_send_timeout_error(e):
+                    _log.warning(
+                        "[MediaParser] send_forward_msg 超时，重试 %s/2",
+                        attempt + 1,
+                    )
+                    await asyncio.sleep(1.5 * (attempt + 1))
+                    continue
+                raise
+        if last_err:
+            raise last_err
+
     # ==================== 消息处理 ====================
 
     @registrar.qq.on_group_message()
@@ -403,8 +551,21 @@ class MediaParser(NcatBotPlugin):
             _log.warning(f"[链接防抖] 链接 {link} 在防抖时间内，跳过解析")
             return
 
+        asyncio.create_task(
+            self._run_parse(event, keyword, searched, session_id),
+            name="mediaparser-parse",
+        )
+
+    async def _run_parse(
+        self,
+        event,
+        keyword: str,
+        searched: re.Match,
+        session_id: str,
+    ) -> None:
+        """后台执行解析与发送，避免阻塞其他消息处理。"""
+        group_id = getattr(event, "group_id", None)
         try:
-            # 执行解析
             parser = self.parser_map.get(keyword)
             if not parser:
                 _log.warning(f"未找到关键词 {keyword} 对应的解析器")
@@ -416,28 +577,29 @@ class MediaParser(NcatBotPlugin):
                 _log.warning("解析结果为空")
                 return
 
-            # 基于资源ID防抖
             resource_id = parse_result.get_resource_id()
             if self.debouncer.hit_resource(session_id, resource_id):
                 _log.warning(f"[资源防抖] 资源 {resource_id} 在防抖时间内，跳过发送")
                 return
 
-            # 发送解析结果
             await self._send_parse_result(event, parse_result)
 
         except Exception as e:
             _log.exception(f"解析失败: {e}")
-            # 发送错误提示
             if group_id:
-                await self.api.qq.post_group_msg(
-                    group_id=group_id,
-                    rtf=MessageChain(
-                        [
-                            Reply(id=event.message_id),
-                            PlainText(text=_format_parse_error(e)),
-                        ]
-                    ),
-                )
+                try:
+                    await self._post_group_msg_retry(
+                        group_id=group_id,
+                        rtf=MessageChain(
+                            [
+                                Reply(id=event.message_id),
+                                PlainText(text=_format_parse_error(e)),
+                            ]
+                        ),
+                        retries=1,
+                    )
+                except Exception as send_err:
+                    _log.warning("解析失败提示发送失败: %s", send_err)
 
     async def _send_parse_result(self, event, result: ParseResult):
         """发送解析结果"""
@@ -514,46 +676,76 @@ class MediaParser(NcatBotPlugin):
             ]
 
             if group_id:
-                # 先发送普通消息（带回复）
                 if other_msgs:
-                    await self.api.qq.post_group_msg(
-                        group_id=group_id,
-                        rtf=MessageChain([Reply(id=event.message_id)] + other_msgs),
-                    )
-                # 再单独发送每个 video/record
+                    if self.sender.should_force_merge(result):
+                        await self._send_merge_forward(
+                            event=event,
+                            group_id=group_id,
+                            user_id=event.user_id,
+                            result=result,
+                            other_msgs=other_msgs,
+                        )
+                    else:
+                        chunks = self._plan_send_chunks(other_msgs)
+                        await self._send_message_chunks(
+                            group_id=group_id,
+                            user_id=event.user_id,
+                            event=event,
+                            chunks=chunks,
+                        )
                 for single_msg in single_only_msgs:
-                    await self.api.qq.post_group_msg(
+                    await self._post_group_msg_retry(
                         group_id=group_id,
                         rtf=MessageChain([single_msg]),
                     )
+                    await asyncio.sleep(0.8)
             else:
-                # 私聊消息
                 if other_msgs:
-                    await self.api.qq.post_private_msg(
-                        user_id=event.user_id, rtf=MessageChain(other_msgs)
-                    )
+                    if self.sender.should_force_merge(result):
+                        await self._send_merge_forward(
+                            event=event,
+                            group_id=None,
+                            user_id=event.user_id,
+                            result=result,
+                            other_msgs=other_msgs,
+                        )
+                    else:
+                        chunks = self._plan_send_chunks(other_msgs)
+                        await self._send_message_chunks(
+                            group_id=None,
+                            user_id=event.user_id,
+                            event=event,
+                            chunks=chunks,
+                            with_reply=False,
+                        )
                 for single_msg in single_only_msgs:
-                    await self.api.qq.post_private_msg(
-                        user_id=event.user_id, rtf=MessageChain([single_msg])
+                    await self._post_private_msg_retry(
+                        user_id=event.user_id,
+                        rtf=MessageChain([single_msg]),
                     )
+                    await asyncio.sleep(0.8)
 
             self._schedule_parsed_media_file_cleanup(parts, preview_card)
 
         except Exception as e:
             _log.exception(f"发送解析结果失败: {e}")
-            # 发送简化版本
-            if group_id:
-                simple_msg = (
-                    f"[{result.platform.display_name}] {result.title or '解析完成'}"
-                )
-                if result.url:
-                    simple_msg += f"\n{result.url}"
-                await self.api.qq.post_group_msg(
+            if not group_id:
+                return
+            simple_msg = (
+                f"[{result.platform.display_name}] {result.title or '解析完成'}"
+            )
+            if result.url:
+                simple_msg += f"\n{result.url}"
+            try:
+                await self._post_group_msg_retry(
                     group_id=group_id,
                     rtf=MessageChain(
                         [Reply(id=event.message_id), PlainText(text=simple_msg)]
                     ),
+                    retries=1,
                 )
+            except Exception as fallback_err:
+                _log.warning("发送解析结果兜底消息失败: %s", fallback_err)
 
     # ==================== 命令处理 ====================
 
@@ -619,8 +811,10 @@ class MediaParser(NcatBotPlugin):
                 )
 
         elif message in ["登录B站", "登录b站", "blogin"]:
-            # B站扫码登录
-            await self._handle_bilibili_login(event, group_id)
+            asyncio.create_task(
+                self._handle_bilibili_login(event, group_id),
+                name="mediaparser-bilibili-login",
+            )
 
         # 搜索视频功能
         elif (
@@ -642,7 +836,10 @@ class MediaParser(NcatBotPlugin):
                 keyword = ""
 
             if keyword:
-                await self._handle_search_video(event, group_id, keyword)
+                asyncio.create_task(
+                    self._handle_search_video(event, group_id, keyword),
+                    name="mediaparser-bili-search",
+                )
             else:
                 response = "请输入搜索关键词，例如：搜视频 原神"
                 if group_id:
@@ -666,8 +863,7 @@ class MediaParser(NcatBotPlugin):
             # 发送二维码图片
             # 将bytes转为临时文件
             qrcode_path = self.cache_dir / "bilibili_qrcode.png"
-            with open(qrcode_path, "wb") as f:
-                f.write(qrcode_bytes)
+            await asyncio.to_thread(qrcode_path.write_bytes, qrcode_bytes)
 
             if group_id:
                 await self.api.qq.post_group_msg(

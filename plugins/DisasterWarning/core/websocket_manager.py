@@ -93,7 +93,12 @@ class WebSocketManager:
                             message = msg.data
                             try:
                                 if self.message_logger:
-                                    self._log_message(name, message, uri)
+                                    asyncio.create_task(
+                                        asyncio.to_thread(
+                                            self._log_message, name, message, uri
+                                        ),
+                                        name=f"disaster-ws-log-{name}",
+                                    )
 
                                 handler_name = self._find_handler_by_prefix(name)
 

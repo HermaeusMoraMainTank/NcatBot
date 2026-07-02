@@ -1,3 +1,4 @@
+import asyncio
 import os
 import json
 import hashlib
@@ -11,16 +12,20 @@ from datetime import datetime, date, timedelta
 from typing import Dict, List, Optional
 from dataclasses import dataclass
 from PIL import Image as PILImage
-import re
-
+from common.utils.async_io import http_get_bytes
 from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.types import MessageArray, PlainText, Image
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 from ncatbot.utils import get_log
 from common.utils.CommonUtil import CommonUtil
+from common.utils.QqSendUtil import QqSendUtil
 from common.utils.json_io import atomic_write_json, get_project_root
-from common.constants.HMMT import HMMT
+from common.stats_render.helpers import (
+    filter_daily_by_period,
+    period_display_label,
+    sum_daily_by_period,
+)
 
 # 禁用 SSL 警告
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -89,14 +94,7 @@ class EmojiStats:
         """获取指定天数内的使用次数"""
         if days is None:
             return sum(self.daily_counts.values())
-
-        end_date = date.today()
-        start_date = end_date - timedelta(days=days - 1)
-        return sum(
-            count
-            for date_str, count in self.daily_counts.items()
-            if start_date <= date.fromisoformat(date_str) <= end_date
-        )
+        return sum_daily_by_period(self.daily_counts, days)
 
     def increment_count(self, date_str: str):
         """增加指定日期的使用次数"""
@@ -780,28 +778,26 @@ class EmojiStatsPlugin(NcatBotPlugin):
     async def _download_and_cache_image(self, image_url: str) -> Optional[str]:
         """下载并缓存图片，返回缓存路径"""
         try:
-            # 创建缓存目录
             os.makedirs(self.CACHE_DIR, exist_ok=True)
 
-            # 下载图片
-            response = requests.get(image_url, verify=False, timeout=30)
-            if response.status_code != 200:
-                _log.error(f"下载图片失败: HTTP {response.status_code}")
+            status, content = await http_get_bytes(
+                image_url, timeout=30, verify_ssl=False
+            )
+            if status != 200:
+                _log.error(f"下载图片失败: HTTP {status}")
                 return None
 
-            # 使用图片内容的 MD5 作为文件名
-            image_hash = hashlib.md5(response.content).hexdigest()
+            image_hash = hashlib.md5(content).hexdigest()
             cache_path = os.path.join(self.CACHE_DIR, f"{image_hash}.jpg")
 
-            # 如果文件已存在，直接返回路径
             if os.path.exists(cache_path):
-                # 图片已缓存
                 return cache_path
 
-            # 保存图片
-            with open(cache_path, "wb") as f:
-                f.write(response.content)
-            # 图片已缓存
+            def _write() -> None:
+                with open(cache_path, "wb") as f:
+                    f.write(content)
+
+            await asyncio.to_thread(_write)
             return cache_path
 
         except Exception as e:
@@ -949,16 +945,8 @@ class EmojiStatsPlugin(NcatBotPlugin):
     def _get_time_range_stats(self, stats: Dict[str, int], days: int) -> Dict[str, int]:
         """获取指定时间范围内的统计"""
         if days is None:
-            # 如果是全部时间，直接返回所有统计数据
             return stats
-
-        end_date = date.today()
-        start_date = end_date - timedelta(days=days - 1)  # 包含今天，所以减 days-1
-        return {
-            date_str: count
-            for date_str, count in stats.items()
-            if start_date <= date.fromisoformat(date_str) <= end_date
-        }
+        return filter_daily_by_period(stats, days)
 
     def _number_to_counter(self, number: int) -> List[Image]:
         """将数字转换为计数器图片形式，并横向合并为一张图片，保持GIF动画效果"""
@@ -1076,6 +1064,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
                     continue
 
                 await self._send_group_daily_stats(int(group_id))
+                await asyncio.sleep(1.0)
             except Exception as e:
                 _log.error(f"[EmojiStats] 发送群组 {group_id} 每日统计失败: {e}")
 
@@ -1103,7 +1092,13 @@ class EmojiStatsPlugin(NcatBotPlugin):
                 user_counts[user_id] = user_today_count
         user_names = await self._resolve_user_names(group_id, list(user_counts.keys()))
         report_path = await build_emoji_group_report(
-            group_id_str, 1, stats, user_counts, user_names
+            group_id_str,
+            1,
+            stats,
+            user_counts,
+            user_names,
+            user_emoji_stats=self.user_stats.get(group_id_str, {}),
+            user_daily_count=self.user_count.get(group_id_str, {}),
         )
         try:
             await self._send_flip_and_report(
@@ -1169,18 +1164,15 @@ class EmojiStatsPlugin(NcatBotPlugin):
     async def _send_flip_and_report(
         self, group_id, reply_id, total_count, report_path, header=""
     ):
-        from ncatbot.types import MessageArray as MC, PlainText as PT, Image as IM
-
-        elements = []
-        if header:
-            elements.append(PT(text=header))
-        for img in self._number_to_counter(total_count):
-            elements.append(img)
-        await self.api.qq.post_group_msg(group_id, rtf=MC(elements), reply=reply_id)
-        if report_path:
-            await self.api.qq.post_group_msg(
-                group_id, rtf=MC([IM(file=report_path)]), reply=reply_id
-            )
+        await QqSendUtil.send_flip_and_report(
+            self.api.qq,
+            group_id,
+            total_count=total_count,
+            report_path=report_path,
+            header=header,
+            reply_id=reply_id,
+            number_to_counter=self._number_to_counter,
+        )
 
     async def _show_stats(
         self, input: GroupMessage, days: int, target: str, target_user_id: int
@@ -1210,9 +1202,15 @@ class EmojiStatsPlugin(NcatBotPlugin):
                 input.group_id, list(user_counts.keys())
             )
             report_path = await build_emoji_group_report(
-                group_id, days, stats, user_counts, user_names
+                group_id,
+                days,
+                stats,
+                user_counts,
+                user_names,
+                user_emoji_stats=self.user_stats.get(group_id, {}),
+                user_daily_count=self.user_count.get(group_id, {}),
             )
-            period = "全部时间" if days is None else f"最近{days}天"
+            period = period_display_label(days)
             header = f"=== 群组表情包统计 ===\n{period}使用次数:\n"
             await self._send_flip_and_report(
                 input.group_id,
@@ -1228,7 +1226,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
                 self.user_count.get(group_id, {}).get(user_id, {}), days
             )
             total_count = sum(count_stats.values())
-            period = "全部时间" if days is None else f"最近{days}天"
+            period = period_display_label(days)
             header = f"=== 个人表情包统计 ===\n{period}发送数量:\n"
             await self._send_flip_and_report(
                 input.group_id, input.message_id, total_count, None, header=header

@@ -37,6 +37,11 @@ __all__ = [
     "process_message_text",
     "period_label",
     "get_date_keys",
+    "get_period_start",
+    "is_date_in_period",
+    "filter_daily_by_period",
+    "sum_daily_by_period",
+    "period_display_label",
     "rank_users",
     "sum_user_metric",
 ]

@@ -159,7 +159,7 @@ def save_daily_trend_chart(
             labels.append(d.strftime("%d"))
             counts.append(daily_counts.get(d.isoformat(), 0))
             d += timedelta(days=1)
-    else:
+    elif days is None:
         monthly: Dict[str, int] = {}
         for ds, c in daily_counts.items():
             try:
@@ -169,32 +169,42 @@ def save_daily_trend_chart(
             monthly[m] = monthly.get(m, 0) + c
         labels = sorted(monthly.keys())
         counts = [monthly[m] for m in labels]
+    else:
+        start = end_date - timedelta(days=days - 1)
+        d = start
+        while d <= end_date:
+            labels.append(d.strftime("%m-%d"))
+            counts.append(daily_counts.get(d.isoformat(), 0))
+            d += timedelta(days=1)
 
     if not counts or max(counts) == 0:
         return None
 
     n = len(counts)
-    width = max(960, n * 36 + 160)
-    height = 280
-    padding_x, padding_y = 60, 50
+    width = 960
+    height = 232 if days in (7, 30) else 260
+    padding_x, padding_y = 48, 42
     img = Image.new("RGBA", (width, height), (255, 255, 255, 0))
     draw = ImageDraw.Draw(img)
-    font = load_font(11)
+    font = load_font(10 if days == 30 and n > 20 else 11)
     max_c = max(counts) or 1
-    chart_h = height - padding_y - 60
-    bar_w = max(8, (width - 2 * padding_x) / n - 6)
+    chart_h = height - padding_y - 48
+    slot_w = (width - 2 * padding_x) / n
+    bar_w = max(4, slot_w - 4)
 
     for i, (label, count) in enumerate(zip(labels, counts)):
         bar_h = (count / max_c) * chart_h if max_c else 0
-        x = padding_x + i * ((width - 2 * padding_x) / n)
+        x = padding_x + i * slot_w + (slot_w - bar_w) / 2
         y = padding_y + chart_h - bar_h
         color = CRAYON_COLORS[i % len(CRAYON_COLORS)]
         if bar_h > 1:
             draw_crayon_rectangle(draw, x, y, bar_w, bar_h, color, "vertical")
+        if days == 30 and n > 20 and i % 2 == 1:
+            continue
         bbox = draw.textbbox((0, 0), label, font=font)
         tw = bbox[2] - bbox[0]
         draw.text(
-            (x + bar_w / 2 - tw / 2, padding_y + chart_h + 8),
+            (x + bar_w / 2 - tw / 2, padding_y + chart_h + 6),
             label,
             font=font,
             fill=(100, 100, 100, 255),
@@ -276,20 +286,23 @@ def save_pos_chart(pos_counter: Dict[str, int], top_n: int = 3) -> Optional[Path
 def save_top_emojis_chart(
     items: List[tuple],
     title: str = "热门表情 TOP10",
+    *,
+    show_title: bool = False,
 ) -> Optional[Path]:
     """items: [(cache_path, count, label), ...]"""
     if not items:
         return None
     ensure_dirs()
-    row_h = 56
+    row_h = 48
     width = 920
-    header_h = 36
-    height = header_h + len(items) * row_h + 16
+    header_h = 36 if show_title else 10
+    height = header_h + len(items) * row_h + 12
     img = Image.new("RGBA", (width, height), (255, 255, 255, 0))
     draw = ImageDraw.Draw(img)
     title_font = load_font(18, bold=True)
     count_font = load_font(13)
-    draw.text((20, 8), title, font=title_font, fill=(60, 60, 60, 255))
+    if show_title:
+        draw.text((20, 8), title, font=title_font, fill=(60, 60, 60, 255))
     max_count = max(c for _, c, _ in items) or 1
     bar_x = 140
     bar_max_w = width - bar_x - 120
@@ -342,19 +355,22 @@ def save_labeled_bar_chart(
     items: List[tuple],
     title: str = "统计",
     unit: str = "",
+    *,
+    show_title: bool = False,
 ) -> Optional[Path]:
     if not items:
         return None
     ensure_dirs()
     width = 920
     row_h = 48
-    header_h = 36
+    header_h = 36 if show_title else 10
     height = header_h + len(items) * row_h + 16
     img = Image.new("RGBA", (width, height), (255, 255, 255, 0))
     draw = ImageDraw.Draw(img)
     font = load_font(14)
     title_font = load_font(18, bold=True)
-    draw.text((20, 8), title, font=title_font, fill=(60, 60, 60, 255))
+    if show_title:
+        draw.text((20, 8), title, font=title_font, fill=(60, 60, 60, 255))
     max_v = max(float(v) for _, v in items) or 1
     bar_x = 260
     bar_max_w = width - bar_x - 120
@@ -405,6 +421,8 @@ def _format_cost(cost: float) -> str:
 def save_source_breakdown_chart(
     source_rows: List[dict],
     title: str = "来源消耗明细",
+    *,
+    show_title: bool = False,
 ) -> Optional[Path]:
     """2x2 来源面板：次数 / Token / 输入输出 / 费用。"""
     if not source_rows:
@@ -420,7 +438,7 @@ def save_source_breakdown_chart(
     cols = 2
     panel_w = (width - 40 - gap) // cols
     panel_h = 96
-    header_h = 36
+    header_h = 36 if show_title else 8
     rows_n = (len(SOURCE_ROLLUP_ORDER) + cols - 1) // cols
     height = header_h + rows_n * (panel_h + gap) + 20
 
@@ -431,7 +449,8 @@ def save_source_breakdown_chart(
     detail_font = load_font(13)
     small_font = load_font(12)
 
-    draw.text((20, 8), title, font=title_font, fill=(60, 60, 60, 255))
+    if show_title:
+        draw.text((20, 8), title, font=title_font, fill=(60, 60, 60, 255))
     y0 = header_h
 
     row_map = {r.get("key"): r for r in source_rows if r.get("key")}

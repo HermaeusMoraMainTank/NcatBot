@@ -1,5 +1,6 @@
 import logging
 import os
+import asyncio
 import textwrap
 import httpx
 from datetime import datetime
@@ -566,14 +567,14 @@ class FF14RisingStoneInfo(NcatBotPlugin):
             else self.SERVER_ALIAS.get(message_parts[2], message_parts[2])
         )
 
-        cookie = self.read_cookie_from_file()
+        cookie = await asyncio.to_thread(self.read_cookie_from_file)
         if not cookie:
             await self.api.qq.post_group_msg(
                 group_id=input.group_id, text="Cookie获取失败"
             )
             return
 
-        players = self.search_player(character_name, cookie)
+        players = await asyncio.to_thread(self.search_player, character_name, cookie)
         if not players:
             await self.api.qq.post_group_msg(
                 group_id=input.group_id, text="找不到该玩家"
@@ -585,9 +586,13 @@ class FF14RisingStoneInfo(NcatBotPlugin):
             filtered_players = [p for p in players if p.get("group_name") == server]
             # 如果指定了区服，直接选择第一个匹配的玩家
             if filtered_players:
-                user_info = self.get_user_info(filtered_players[0].get("uuid"), cookie)
+                user_info = await asyncio.to_thread(
+                    self.get_user_info, filtered_players[0].get("uuid"), cookie
+                )
                 if user_info and user_info.get("code") == 10000:
-                    image_path = self.generate_image(user_info.get("data", {}))
+                    image_path = await asyncio.to_thread(
+                        self.generate_image, user_info.get("data", {})
+                    )
                     await self.api.qq.post_group_msg(
                         group_id=input.group_id,
                         rtf=MessageChain(
@@ -610,9 +615,13 @@ class FF14RisingStoneInfo(NcatBotPlugin):
                 group_id=input.group_id, text="未找到匹配的玩家"
             )
         elif len(filtered_players) == 1:
-            user_info = self.get_user_info(filtered_players[0].get("uuid"), cookie)
+            user_info = await asyncio.to_thread(
+                self.get_user_info, filtered_players[0].get("uuid"), cookie
+            )
             if user_info and user_info.get("code") == 10000:
-                image_path = self.generate_image(user_info.get("data", {}))
+                image_path = await asyncio.to_thread(
+                    self.generate_image, user_info.get("data", {})
+                )
                 await self.api.qq.post_group_msg(
                     group_id=input.group_id,
                     rtf=MessageChain(

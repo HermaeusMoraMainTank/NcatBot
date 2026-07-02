@@ -316,7 +316,7 @@ class DisasterWarningService:
                             if handler:
                                 event = handler.parse_message(json.dumps(cenc_data))
                                 if event:
-                                    await self._handle_disaster_event(event)
+                                    self.dispatch_disaster_event(event)
 
                         # 获取日本气象厅地震列表
                         jma_data = await fetcher.fetch_json(
@@ -327,7 +327,7 @@ class DisasterWarningService:
                             if handler:
                                 event = handler.parse_message(json.dumps(jma_data))
                                 if event:
-                                    await self._handle_disaster_event(event)
+                                    self.dispatch_disaster_event(event)
 
                 except Exception as e:
                     _log.error(f"[灾害预警] 定时HTTP数据获取失败: {e}")
@@ -342,7 +342,7 @@ class DisasterWarningService:
             while self.running:
                 try:
                     await asyncio.sleep(86400)  # 每天清理一次
-                    self.message_manager.cleanup_old_records()
+                    await asyncio.to_thread(self.message_manager.cleanup_old_records)
                 except Exception as e:
                     _log.error(f"[灾害预警] 清理任务失败: {e}")
 
@@ -363,6 +363,13 @@ class DisasterWarningService:
         elapsed = (datetime.now() - self.start_time).total_seconds()
         return elapsed < silence_duration
 
+    def dispatch_disaster_event(self, event: DisasterEvent) -> None:
+        """后台处理灾害事件，避免阻塞 WebSocket 消息循环。"""
+        asyncio.create_task(
+            self._handle_disaster_event(event),
+            name=f"disaster-event-{getattr(event, 'id', 'unknown')}",
+        )
+
     async def _handle_disaster_event(self, event: DisasterEvent):
         """处理灾害事件"""
         # 检查静默期
@@ -379,8 +386,8 @@ class DisasterWarningService:
             _log.debug(f"[灾害预警] 处理灾害事件: {event.id}")
             self._log_event(event)
 
-            # 记录统计数据
-            self.statistics_manager.record_push(event)
+            # 记录统计数据（磁盘写入放到线程池，避免阻塞事件循环）
+            await asyncio.to_thread(self.statistics_manager.record_push, event)
 
             # 推送消息
             push_result = await self.message_manager.push_event(event)

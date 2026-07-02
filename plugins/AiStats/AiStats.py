@@ -1,3 +1,4 @@
+import asyncio
 import json
 import os
 import threading
@@ -15,8 +16,15 @@ matplotlib.use("Agg")  # 使用Agg后端，避免需要GUI
 import io
 
 from common.utils.CommonUtil import CommonUtil
+from common.utils.QqSendUtil import QqSendUtil
 from common.utils.AiUtil import AiUtil
 from common.utils.json_io import atomic_write_json, resolve_data_json
+from common.stats_render.helpers import (
+    filter_daily_by_period,
+    is_date_in_period,
+    period_display_label,
+    sum_daily_by_period,
+)
 from common.utils.AiStatsRecorder import (
     SOURCE_ROLLUP,
     SOURCE_ROLLUP_ORDER,
@@ -124,17 +132,7 @@ class AiUsageStats:
             if self.total_count:
                 return self.total_count
             return sum(int(v) for v in self.daily_counts.values())
-
-        cutoff_date = datetime.now().date()
-        count = 0
-        for date_str, cnt in self.daily_counts.items():
-            try:
-                date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
-                if (cutoff_date - date_obj).days < days:
-                    count += cnt
-            except ValueError:
-                continue
-        return count
+        return sum_daily_by_period(self.daily_counts, days)
 
     def get_tokens(self, days: int = None) -> int:
         """获取指定天数内的token使用量"""
@@ -142,31 +140,12 @@ class AiUsageStats:
             if self.total_tokens:
                 return self.total_tokens
             return sum(int(v) for v in self.daily_tokens.values())
-
-        cutoff_date = datetime.now().date()
-        tokens = 0
-        for date_str, token_count in self.daily_tokens.items():
-            try:
-                date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
-                if (cutoff_date - date_obj).days < days:
-                    tokens += token_count
-            except ValueError:
-                continue
-        return tokens
+        return sum_daily_by_period(self.daily_tokens, days)
 
     def _sum_daily_field(self, field: dict, days: int = None) -> int:
         if days is None:
             return sum(int(v) for v in field.values())
-        cutoff_date = datetime.now().date()
-        total = 0
-        for date_str, value in field.items():
-            try:
-                date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
-                if (cutoff_date - date_obj).days < days:
-                    total += int(value)
-            except ValueError:
-                continue
-        return total
+        return sum_daily_by_period(field, days)
 
     def get_prompt_tokens(self, days: int = None) -> int:
         return self._sum_daily_field(self.daily_prompt_tokens, days)
@@ -180,17 +159,10 @@ class AiUsageStats:
             if self.total_cost:
                 return self.total_cost
             return round(sum(float(v) for v in self.daily_cost.values()), 4)
-
-        cutoff_date = datetime.now().date()
-        cost = 0.0
-        for date_str, amount in self.daily_cost.items():
-            try:
-                date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
-                if (cutoff_date - date_obj).days < days:
-                    cost += float(amount)
-            except ValueError:
-                continue
-        return round(cost, 4)
+        return round(
+            sum(float(v) for v in filter_daily_by_period(self.daily_cost, days).values()),
+            4,
+        )
 
     def to_dict(self) -> dict:
         """转换为字典格式"""
@@ -571,35 +543,14 @@ class AiStats(NcatBotPlugin):
     def _get_time_range_stats(self, stats: AiUsageStats, days: int) -> Dict[str, int]:
         """获取指定时间范围内的统计"""
         if days is None:
-            # 如果是全部时间，直接返回所有统计数据
             return stats.daily_counts.copy()
-
-        cutoff_date = datetime.now().date()
-        result = {}
-        for date_str, count in stats.daily_counts.items():
-            try:
-                date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
-                if (cutoff_date - date_obj).days < days:
-                    result[date_str] = count
-            except ValueError:
-                continue
-        return result
+        return filter_daily_by_period(stats.daily_counts, days)
 
     def _get_time_range_cost(self, stats: AiUsageStats, days: int) -> Dict[str, float]:
         """获取指定时间范围内的费用统计"""
         if days is None:
             return {k: float(v) for k, v in stats.daily_cost.copy().items()}
-
-        cutoff_date = datetime.now().date()
-        result = {}
-        for date_str, cost in stats.daily_cost.items():
-            try:
-                date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
-                if (cutoff_date - date_obj).days < days:
-                    result[date_str] = float(cost)
-            except ValueError:
-                continue
-        return result
+        return {k: float(v) for k, v in filter_daily_by_period(stats.daily_cost, days).items()}
 
     def _days_label(self, days: Optional[int]) -> str:
         if days == 1:
@@ -628,15 +579,10 @@ class AiStats(NcatBotPlugin):
             acct = daily_account.get(today, {})
             period_spend = float(acct.get("actual_spend", 0))
         elif days is not None:
-            cutoff = datetime.now().date()
             for date_str, acct in daily_account.items():
-                try:
-                    d = datetime.strptime(date_str, "%Y-%m-%d").date()
-                    if (cutoff - d).days < days:
-                        period_spend += float(acct.get("actual_spend", 0))
-                        currency = acct.get("currency", currency)
-                except ValueError:
-                    continue
+                if is_date_in_period(date_str, days):
+                    period_spend += float(acct.get("actual_spend", 0))
+                    currency = acct.get("currency", currency)
 
         return {
             "balance": float(last["total_balance"])
@@ -1592,19 +1538,8 @@ class AiStats(NcatBotPlugin):
     def _get_time_range_tokens(self, stats: AiUsageStats, days: int) -> Dict[str, int]:
         """获取指定时间范围内的token统计"""
         if days is None:
-            # 如果是全部时间，直接返回所有统计数据
             return stats.daily_tokens.copy()
-
-        cutoff_date = datetime.now().date()
-        result = {}
-        for date_str, tokens in stats.daily_tokens.items():
-            try:
-                date_obj = datetime.strptime(date_str, "%Y-%m-%d").date()
-                if (cutoff_date - date_obj).days < days:
-                    result[date_str] = tokens
-            except ValueError:
-                continue
-        return result
+        return filter_daily_by_period(stats.daily_tokens, days)
 
     def _generate_time_distribution_plot(
         self, stats: AiUsageStats, days: int
@@ -2126,20 +2061,15 @@ class AiStats(NcatBotPlugin):
     async def _send_flip_and_report(
         self, group_id, reply_id, total_count, report_path, header=""
     ):
-        elements = []
-        if header:
-            elements.append(PlainText(text=header))
-        for img in self._number_to_counter(total_count):
-            elements.append(img)
-        await self.api.qq.post_group_msg(
-            group_id, rtf=MessageChain(elements), reply=reply_id
+        await QqSendUtil.send_flip_and_report(
+            self.api.qq,
+            group_id,
+            total_count=total_count,
+            report_path=report_path,
+            header=header,
+            reply_id=reply_id,
+            number_to_counter=self._number_to_counter,
         )
-        if report_path:
-            await self.api.qq.post_group_msg(
-                group_id,
-                rtf=MessageChain([Image(file=report_path)]),
-                reply=reply_id,
-            )
 
     async def _show_overview_stats(self, input: GroupMessage, days: int) -> None:
         from .report_builder import build_ai_overview_report
@@ -2233,7 +2163,7 @@ class AiStats(NcatBotPlugin):
             report_path = await build_ai_group_report(
                 group_id, days, stats, user_counts, user_names, source_rows
             )
-            period = "全部时间" if days is None else f"最近{days}天"
+            period = period_display_label(days)
             await self._send_flip_and_report(
                 input.group_id,
                 input.message_id,
@@ -2261,7 +2191,7 @@ class AiStats(NcatBotPlugin):
                 names.get(user_id, user_id),
                 source_rows,
             )
-            period = "全部时间" if days is None else f"最近{days}天"
+            period = period_display_label(days)
             await self._send_flip_and_report(
                 input.group_id,
                 input.message_id,

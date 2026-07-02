@@ -1295,6 +1295,14 @@ class ImageSender(NcatBotPlugin):
         self, url: str, filename: str, target_path: str, user_id: int
     ) -> tuple[bool, str]:
         """下载并保存图片到指定路径，返回(是否成功, 状态信息)"""
+        return await asyncio.to_thread(
+            self._download_and_save_image_sync, url, filename, target_path, user_id
+        )
+
+    def _download_and_save_image_sync(
+        self, url: str, filename: str, target_path: str, user_id: int
+    ) -> tuple[bool, str]:
+        """同步下载并保存图片（供 to_thread 调用）"""
         try:
             # 如果路径不是绝对路径，则转换为绝对路径
             if not os.path.isabs(target_path):
@@ -1350,6 +1358,11 @@ class ImageSender(NcatBotPlugin):
 
     async def delete_image_by_url(self, url: str, target_path: str) -> tuple[bool, str]:
         """根据图片 URL 在指定路径中查找并删除对应图片，返回(是否成功, 状态信息)"""
+        return await asyncio.to_thread(
+            self._delete_image_by_url_sync, url, target_path
+        )
+
+    def _delete_image_by_url_sync(self, url: str, target_path: str) -> tuple[bool, str]:
         try:
             # 如果路径不是绝对路径，则转换为绝对路径
             if not os.path.isabs(target_path):

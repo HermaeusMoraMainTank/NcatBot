@@ -4,8 +4,8 @@ import base64
 import json
 import os
 from pathlib import Path
-from typing import List, Optional
-from openai import OpenAI
+from typing import Any, List, Optional
+from openai import AsyncOpenAI
 
 from ncatbot.utils.logger import get_log
 
@@ -46,6 +46,27 @@ VISION_MODEL = "meta/llama-4-maverick-17b-128e-instruct"
 # 文本对话（NVIDIA NIM OpenAI 兼容）：厂商前缀 + 模型名
 # CHAT_MODEL = "minimaxai/minimax-m2.7"  # 暂禁用：响应过慢
 CHAT_MODEL = "minimaxai/minimax-m2.7"
+
+
+def _completion_to_result(completion: Any, model: str) -> dict:
+    """将 OpenAI ChatCompletion 转为统一返回结构。"""
+    return_content = completion.choices[0].message.content
+    usage_info = completion.usage
+    usage = {
+        "prompt_tokens": usage_info.prompt_tokens,
+        "completion_tokens": usage_info.completion_tokens,
+        "total_tokens": usage_info.total_tokens,
+    }
+    if usage_info:
+        for key in ("prompt_cache_hit_tokens", "prompt_cache_miss_tokens"):
+            val = getattr(usage_info, key, None)
+            if val is not None:
+                usage[key] = val
+    return {
+        "content": return_content,
+        "usage": usage,
+        "model": model,
+    }
 
 
 class AiUtil:
@@ -160,47 +181,27 @@ class AiUtil:
         for attempt, (name, url, api_key, model) in enumerate(providers, start=1):
             try:
                 _log.info(f"[Chat] 第 {attempt} 次尝试，使用 {name} ({model})")
-                client = OpenAI(
+                async with AsyncOpenAI(
                     api_key=api_key,
                     base_url=url,
                     timeout=30.0,
-                )
-                completion = client.chat.completions.create(
-                    model=model,
-                    messages=[
-                        {"role": "system", "content": prompt},
-                        {"role": "user", "content": keyword},
-                    ],
-                    max_tokens=2048,
-                    temperature=1.2,
-                    stream=False,
-                    timeout=20.0,
-                )
+                ) as client:
+                    completion = await client.chat.completions.create(
+                        model=model,
+                        messages=[
+                            {"role": "system", "content": prompt},
+                            {"role": "user", "content": keyword},
+                        ],
+                        max_tokens=2048,
+                        temperature=1.2,
+                        stream=False,
+                        timeout=20.0,
+                    )
 
-                return_content = completion.choices[0].message.content
-                usage_info = completion.usage
-                _log.info(f"[Chat] {name} 响应成功: {return_content}")
-                _log.info(f"[Chat] Token使用: {usage_info}")
-
-                usage = {
-                    "prompt_tokens": usage_info.prompt_tokens,
-                    "completion_tokens": usage_info.completion_tokens,
-                    "total_tokens": usage_info.total_tokens,
-                }
-                if usage_info:
-                    for key in (
-                        "prompt_cache_hit_tokens",
-                        "prompt_cache_miss_tokens",
-                    ):
-                        val = getattr(usage_info, key, None)
-                        if val is not None:
-                            usage[key] = val
-
-                return {
-                    "content": return_content,
-                    "usage": usage,
-                    "model": model,
-                }
+                result = _completion_to_result(completion, model)
+                _log.info(f"[Chat] {name} 响应成功: {result['content']}")
+                _log.info(f"[Chat] Token使用: {result['usage']}")
+                return result
 
             except Exception as e:
                 _log.error(f"[Chat] {name} 请求失败: {e}")
@@ -311,40 +312,29 @@ class AiUtil:
             messages.append({"role": "system", "content": system_prompt})
         messages.append({"role": "user", "content": content_parts})
 
-        # OpenAI 配置
-        client = OpenAI(
-            api_key=NVIDIA_API_KEY,
-            base_url=NVIDIA_API_URL,
-            timeout=60.0,  # 多模态需要更长超时
-        )
-
         retry_count = 3
         delay = 2
 
         while retry_count > 0:
             try:
-                completion = client.chat.completions.create(
-                    model=VISION_MODEL,
-                    messages=messages,
-                    max_tokens=max_tokens,
-                    temperature=temperature,
-                    stream=False,
-                    timeout=45.0,
-                )
+                async with AsyncOpenAI(
+                    api_key=NVIDIA_API_KEY,
+                    base_url=NVIDIA_API_URL,
+                    timeout=60.0,
+                ) as client:
+                    completion = await client.chat.completions.create(
+                        model=VISION_MODEL,
+                        messages=messages,
+                        max_tokens=max_tokens,
+                        temperature=temperature,
+                        stream=False,
+                        timeout=45.0,
+                    )
 
-                return_content = completion.choices[0].message.content
-                usage_info = completion.usage
-                _log.info(f"[Vision] 响应内容: {return_content[:100]}...")
-                _log.info(f"[Vision] Token使用: {usage_info}")
-
-                return {
-                    "content": return_content,
-                    "usage": {
-                        "prompt_tokens": usage_info.prompt_tokens,
-                        "completion_tokens": usage_info.completion_tokens,
-                        "total_tokens": usage_info.total_tokens,
-                    },
-                }
+                result = _completion_to_result(completion, VISION_MODEL)
+                _log.info(f"[Vision] 响应内容: {result['content'][:100]}...")
+                _log.info(f"[Vision] Token使用: {result['usage']}")
+                return result
 
             except asyncio.TimeoutError as e:
                 _log.error(f"[Vision] 请求超时: {e}")

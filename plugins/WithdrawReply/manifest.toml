@@ -1,0 +1,6 @@
+name = "WithdrawReply"
+version = "1.0.0"
+main = "WithdrawReply.py"
+entry_class = "WithdrawReply"
+
+[dependencies]

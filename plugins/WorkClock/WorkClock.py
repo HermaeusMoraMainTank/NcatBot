@@ -1,3 +1,4 @@
+import asyncio
 import base64
 import io
 import os
@@ -762,7 +763,8 @@ class WorkClock(NcatBotPlugin):
         work_date: str | None = None,
     ) -> None:
         nickname = event.sender.nickname or str(event.sender.user_id)
-        png = self._render_card(
+        png = await asyncio.to_thread(
+            self._render_card,
             event.sender.user_id,
             nickname,
             kind,

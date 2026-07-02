@@ -10,25 +10,10 @@ from PIL import Image
 
 from ncatbot.utils import get_log
 
+from .mdstyle_title import save_composed_section
 from .paths import RESOURCES_PATH, TEMP_PATH, ensure_dirs
 
 _log = get_log("StatsRender")
-
-
-def _merge_pages(images: List[Image.Image]) -> Image.Image:
-    if not images:
-        raise ValueError("no images")
-    if len(images) == 1:
-        return images[0]
-    max_w = max(im.width for im in images)
-    total_h = sum(im.height for im in images)
-    merged = Image.new("RGB", (max_w, total_h), (255, 255, 255))
-    y = 0
-    for im in images:
-        frame = im.convert("RGB") if im.mode != "RGB" else im
-        merged.paste(frame, (0, y))
-        y += frame.height
-    return merged
 
 
 @dataclass
@@ -49,8 +34,8 @@ async def render_stats_report(
     page: int = 2,
 ) -> Optional[str]:
     """
-    使用 pillowmd 将多个子图合成为一张 PNG，返回 base64 字符串。
-    sections: {章节标题: 图片路径}
+    使用 pillowmd 将多个 section 合成为一张双栏长图（单次 MdToImage，纵向随内容增高）。
+    每个 section 的 mdstyle H2 标题与图表内容预先合成，避免标题与内容被分页拆开。
     """
     ensure_dirs()
     if not sections:
@@ -61,7 +46,7 @@ async def render_stats_report(
         return None
 
     pillowmd.Setting.QUICK_IMAGE_PATH = TEMP_PATH
-    temp_pics: List[Path] = []
+    composed_paths: List[Path] = []
     parts = [f"# {render_info.title}"]
     if render_info.period_label:
         parts.append(f"\n统计时段：{render_info.period_label}")
@@ -74,10 +59,10 @@ async def render_stats_report(
     for name, img_path in sections.items():
         if img_path is None or not Path(img_path).exists():
             continue
-        parts.append(f"\n## {name}\n")
-        temp_pics.append(Path(img_path))
+        composed = save_composed_section(Path(img_path), name)
+        composed_paths.append(composed)
         scale = (section_scales or {}).get(name, default_scale)
-        parts.append(f"!sgm[{Path(img_path).name}|{scale}]")
+        parts.append(f"!sgm[{composed.name}|{scale}]")
 
     markdown_text = "\n".join(parts)
     style_path = resources_path / "mdstyle"
@@ -87,6 +72,7 @@ async def render_stats_report(
             text=markdown_text,
             style=style,
             page=page,
+            autoPage=False,
             sgm=True,
             sgexter=True,
         )
@@ -94,22 +80,28 @@ async def render_stats_report(
         _log.error("[StatsRender] pillowmd 渲染失败: %s", e, exc_info=True)
         return None
 
-    if result.imageType == "gif":
-        images = result.images
-    else:
-        images = [result.image]
-
-    for p in temp_pics:
+    for p in composed_paths:
         try:
             p.unlink(missing_ok=True)
         except OSError:
             pass
+    for name, img_path in sections.items():
+        if img_path is None:
+            continue
+        try:
+            Path(img_path).unlink(missing_ok=True)
+        except OSError:
+            pass
 
-    if not images:
+    if not result.image:
         return None
-    final_image = _merge_pages(images)
+
+    final_image = result.image
+    if result.imageType == "gif" and result.images:
+        final_image = result.images[0]
+
     buffered = BytesIO()
-    final_image.save(buffered, format="PNG")
+    final_image.convert("RGB").save(buffered, format="PNG")
     return base64.b64encode(buffered.getvalue()).decode("utf-8")
 
 

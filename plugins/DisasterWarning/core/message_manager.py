@@ -294,13 +294,17 @@ class MessagePushManager:
 
             # 5. 推送消息
             push_success_count = 0
-            for group_id in self.target_groups:
-                try:
-                    await self._send_message(group_id, message)
+            send_tasks = [
+                self._send_message(group_id, message)
+                for group_id in self.target_groups
+            ]
+            results = await asyncio.gather(*send_tasks, return_exceptions=True)
+            for group_id, result in zip(self.target_groups, results):
+                if isinstance(result, Exception):
+                    _log.error(f"[灾害预警] 推送到群 {group_id} 失败: {result}")
+                else:
                     _log.info(f"[灾害预警] 消息已推送到群 {group_id}")
                     push_success_count += 1
-                except Exception as e:
-                    _log.error(f"[灾害预警] 推送到群 {group_id} 失败: {e}")
 
             # 6. 记录推送
             _log.info(
@@ -364,7 +368,8 @@ class MessagePushManager:
             async with httpx.AsyncClient(timeout=30.0, follow_redirects=True) as client:
                 response = await client.get(url)
                 response.raise_for_status()
-                path.write_bytes(response.content)
+                content = response.content
+            await asyncio.to_thread(path.write_bytes, content)
         except Exception as e:
             _log.warning(f"[灾害预警] 静态地图下载失败: {e}")
             return None

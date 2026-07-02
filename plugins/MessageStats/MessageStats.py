@@ -1,3 +1,4 @@
+import asyncio
 import os
 import json
 from datetime import datetime, date, timedelta
@@ -5,6 +6,7 @@ from typing import Dict, List, Optional
 from dataclasses import dataclass
 from PIL import Image as PILImage
 from common.utils.CommonUtil import CommonUtil
+from common.utils.QqSendUtil import QqSendUtil
 from common.utils.json_io import atomic_write_json, resolve_data_json
 from common.stats_render.word_analysis import process_message_text
 from ncatbot.types import PlainText as PlainTextSeg
@@ -18,6 +20,11 @@ from ncatbot.types import MessageArray as MessageChain, PlainText, Image
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 from ncatbot.utils import get_log
+from common.stats_render.helpers import (
+    filter_daily_by_period,
+    period_display_label,
+    sum_daily_by_period,
+)
 from common.constants.HMMT import HMMT
 
 _log = get_log()
@@ -126,14 +133,7 @@ class MessageStats:
     def get_count(self, days: int = None) -> int:
         if days is None:
             return sum(self.daily_counts.values())
-
-        end_date = date.today()
-        start_date = end_date - timedelta(days=days - 1)
-        return sum(
-            count
-            for date_str, count in self.daily_counts.items()
-            if start_date <= date.fromisoformat(date_str) <= end_date
-        )
+        return sum_daily_by_period(self.daily_counts, days)
 
     def record_message(
         self,
@@ -559,39 +559,21 @@ class MessageStatsPlugin(NcatBotPlugin):
         report_path: Optional[str],
         header: str = "",
     ):
-        elements = []
-        if header:
-            elements.append(PlainText(text=header))
-        for img in self._number_to_counter(total_count):
-            elements.append(img)
-        await self.api.qq.post_group_msg(
-            group_id, rtf=MessageChain(elements), reply=reply_id
+        await QqSendUtil.send_flip_and_report(
+            self.api.qq,
+            group_id,
+            total_count=total_count,
+            report_path=report_path,
+            header=header,
+            reply_id=reply_id,
+            number_to_counter=self._number_to_counter,
         )
-        if report_path:
-            await self.api.qq.post_group_msg(
-                group_id,
-                rtf=MessageChain([Image(file=report_path)]),
-                reply=reply_id,
-            )
 
     def _get_time_range_stats(self, stats: MessageStats, days: int) -> Dict[str, int]:
         """获取指定时间范围内的统计"""
         if days is None:
-            # 如果是全部时间，直接返回所有统计数据
             return stats.daily_counts
-
-        end_date = date.today()
-        if days == 7:  # 本周
-            # 获取本周一的日期
-            start_date = end_date - timedelta(days=end_date.weekday())
-        else:
-            start_date = end_date - timedelta(days=days - 1)  # 包含今天，所以减 days-1
-
-        return {
-            date_str: count
-            for date_str, count in stats.daily_counts.items()
-            if start_date <= date.fromisoformat(date_str) <= end_date
-        }
+        return filter_daily_by_period(stats.daily_counts, days)
 
     def _number_to_counter(self, number: int) -> List[Image]:
         """将数字转换为计数器图片形式"""
@@ -709,6 +691,7 @@ class MessageStatsPlugin(NcatBotPlugin):
                     continue
 
                 await self._send_group_daily_stats(int(group_id))
+                await asyncio.sleep(1.0)
             except Exception as e:
                 _log.error(f"[MessageStats] 发送群组 {group_id} 每日统计失败: {e}")
 
@@ -823,7 +806,7 @@ class MessageStatsPlugin(NcatBotPlugin):
                 user_names,
                 group_label=f"群号：{group_id}",
             )
-            period = "全部时间" if days is None else f"最近{days}天"
+            period = period_display_label(days)
             header = f"=== 群组发言统计 ===\n{period}发言数量:\n"
             try:
                 await self._send_flip_and_report(
@@ -855,7 +838,7 @@ class MessageStatsPlugin(NcatBotPlugin):
             report_path = await build_personal_report(
                 group_id, user_id, days, user_stat, nickname
             )
-            period = "全部时间" if days is None else f"最近{days}天"
+            period = period_display_label(days)
             header = f"=== 个人发言统计 ===\n{period}发言数量:\n"
             try:
                 await self._send_flip_and_report(

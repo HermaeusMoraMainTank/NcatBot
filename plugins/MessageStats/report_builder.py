@@ -38,7 +38,7 @@ async def build_group_report(
                 int(h): c
                 for h, c in (stats.daily_hourly_counts.get(today) or {}).items()
             }
-            sections["小时活跃度"] = save_hourly_chart(hourly)
+            sections["小时活跃度"] = save_hourly_chart(hourly, title="小时活跃度")
         elif date_keys:
             sections["小时活跃度"] = save_hourly_from_daily_buckets(
                 stats.daily_hourly_counts, date_keys
@@ -50,7 +50,7 @@ async def build_group_report(
             for k, v in (stats.daily_counts or {}).items()
             if not date_keys or k in date_keys
         }
-        trend = save_daily_trend_chart(range_daily, days)
+        trend = save_daily_trend_chart(range_daily, days, title="发言趋势")
         if trend:
             sections["发言趋势"] = trend
 
@@ -67,19 +67,27 @@ async def build_group_report(
         ranked = await rank_users(group_id, msg_counts, user_names, "条")
         if len(ranked) >= 3:
             sections["话痨排行 TOP3"] = save_top3_podium(
-                (ranked[0], ranked[1], ranked[2])
+                (ranked[0], ranked[1], ranked[2]),
+                gap=44,
+                text_width_reduce=14,
             )
-        sections["话痨排行 TOP10"] = save_top10_list(ranked, "话痨排行 TOP10")
+        sections["话痨排行 TOP10"] = save_top10_list(
+            ranked, "话痨排行 TOP10", compact=True
+        )
 
     char_counts = sum_user_metric(user_stats, days, "daily_char_totals")
     if char_counts:
         ranked = await rank_users(group_id, char_counts, user_names, "字")
-        sections["字数统计 TOP10"] = save_top10_list(ranked, "字数统计 TOP10")
+        sections["字数统计 TOP10"] = save_top10_list(
+            ranked, "字数统计 TOP10", compact=True
+        )
 
     long_counts = sum_user_metric(user_stats, days, "daily_max_message", use_max=True)
     if long_counts:
         ranked = await rank_users(group_id, long_counts, user_names, "字")
-        sections["长文写手 TOP10"] = save_top10_list(ranked, "单条最长 TOP10")
+        sections["长文写手 TOP10"] = save_top10_list(
+            ranked, "单条最长 TOP10", compact=True
+        )
 
     words, pos = aggregate_word_stats(
         getattr(stats, "daily_word_counts", None),
@@ -98,12 +106,29 @@ async def build_group_report(
     if not sections:
         return None
 
+    section_scales = {
+        "发言趋势": 0.82,
+        "小时活跃度": 0.86,
+        "话痨排行 TOP3": 0.84,
+        "话痨排行 TOP10": 0.78,
+        "字数统计 TOP10": 0.78,
+        "长文写手 TOP10": 0.78,
+        "高频词云": 0.80,
+        "词性分布": 0.82,
+    }
     info = RenderInfo(
         title="群组发言统计报告",
         period_label=period_label(days),
         group_label=group_label,
     )
-    return await save_stats_report_file(info, sections, prefix="message_stats")
+    return await save_stats_report_file(
+        info,
+        sections,
+        prefix="message_stats",
+        section_scales=section_scales,
+        default_scale=0.82,
+        page=2,
+    )
 
 
 async def build_personal_report(
@@ -123,7 +148,7 @@ async def build_personal_report(
                 int(h): c
                 for h, c in (stats.daily_hourly_counts.get(today) or {}).items()
             }
-            sections["个人活跃时段"] = save_hourly_chart(hourly)
+            sections["个人活跃时段"] = save_hourly_chart(hourly, title="个人活跃时段")
         elif date_keys:
             sections["个人活跃时段"] = save_hourly_from_daily_buckets(
                 stats.daily_hourly_counts, date_keys
@@ -135,7 +160,7 @@ async def build_personal_report(
             for k, v in (stats.daily_counts or {}).items()
             if not date_keys or k in date_keys
         }
-        trend = save_daily_trend_chart(range_daily, days)
+        trend = save_daily_trend_chart(range_daily, days, title="个人发言趋势")
         if trend:
             sections["个人发言趋势"] = trend
 

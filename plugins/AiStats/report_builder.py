@@ -15,7 +15,7 @@ def _format_cost(cost: float) -> str:
     return f"¥{cost:.4f}" if cost else "¥0.0000"
 
 
-def _rank_groups(
+async def _rank_groups(
     counts: Dict[str, int],
     group_names: Dict[str, str],
     unit: str,
@@ -32,7 +32,7 @@ def _rank_groups(
                 rank=rank,
                 count=f"{cnt} {unit}",
                 nickname=group_names.get(gid, gid),
-                avatar_path=CommonUtil.get_group_avatar(gid),
+                avatar_path=await CommonUtil.get_group_avatar_async(gid),
             )
         )
     return out
@@ -67,10 +67,10 @@ async def build_ai_group_report(
         keys = get_date_keys(days)
         daily = {k: v for k, v in daily.items() if k in keys}
 
-    if days != 1 and daily:
+    if days != 1:
         from common.stats_render import save_daily_trend_chart
 
-        trend = save_daily_trend_chart(daily, days)
+        trend = save_daily_trend_chart(daily, days, title="AI 调用趋势")
         if trend:
             sections["AI 调用趋势"] = trend
 
@@ -78,9 +78,13 @@ async def build_ai_group_report(
         ranked = await rank_users(group_id, user_counts, user_names, "次")
         if len(ranked) >= 3:
             sections["使用排行 TOP3"] = save_top3_podium(
-                (ranked[0], ranked[1], ranked[2])
+                (ranked[0], ranked[1], ranked[2]),
+                gap=44,
+                text_width_reduce=14,
             )
-        sections["使用排行 TOP10"] = save_top10_list(ranked, "AI 使用 TOP10")
+        sections["使用排行 TOP10"] = save_top10_list(
+            ranked, "AI 使用 TOP10", compact=True
+        )
 
     if source_rows:
         breakdown = save_source_breakdown_chart(source_rows, "来源消耗明细")
@@ -97,12 +101,26 @@ async def build_ai_group_report(
 
     if not sections:
         return None
+    section_scales = {
+        "AI 调用趋势": 0.82,
+        "使用排行 TOP3": 0.84,
+        "使用排行 TOP10": 0.78,
+        "来源明细": 0.80,
+        "来源分布": 0.78,
+    }
     info = RenderInfo(
         title="群组 AI 统计报告",
         period_label=period_label(days),
         group_label=f"群号：{group_id}",
     )
-    return await save_stats_report_file(info, sections, prefix="ai_group")
+    return await save_stats_report_file(
+        info,
+        sections,
+        prefix="ai_group",
+        section_scales=section_scales,
+        default_scale=0.82,
+        page=2,
+    )
 
 
 async def build_ai_overview_report(
@@ -190,7 +208,7 @@ async def build_ai_overview_report(
     if group_ranking:
         counts = {item["group_id"]: item.get("count", 0) for item in group_ranking}
         names = {gid: group_names.get(gid, gid) for gid in counts}
-        ranked = _rank_groups(counts, names, "次")
+        ranked = await _rank_groups(counts, names, "次")
         if len(ranked) >= 3:
             page2_sections["群组 TOP3"] = save_top3_podium(
                 (ranked[0], ranked[1], ranked[2]),
@@ -262,7 +280,7 @@ async def build_ai_personal_report(
     if days != 1 and daily:
         from common.stats_render import save_daily_trend_chart
 
-        trend = save_daily_trend_chart(daily, days)
+        trend = save_daily_trend_chart(daily, days, title="个人 AI 趋势")
         if trend:
             sections["个人 AI 趋势"] = trend
     if source_rows:
@@ -279,9 +297,21 @@ async def build_ai_personal_report(
             sections["来源分布"] = chart
     if not sections:
         return None
+    section_scales = {
+        "个人 AI 趋势": 0.72,
+        "来源明细": 0.68,
+        "来源分布": 0.66,
+    }
     info = RenderInfo(
         title="个人 AI 统计报告",
         period_label=period_label(days),
         group_label=f"用户：{nickname}（{user_id}）",
     )
-    return await save_stats_report_file(info, sections, prefix="ai_personal")
+    return await save_stats_report_file(
+        info,
+        sections,
+        prefix="ai_personal",
+        section_scales=section_scales,
+        default_scale=0.82,
+        page=2,
+    )
