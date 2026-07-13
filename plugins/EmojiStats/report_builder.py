@@ -24,9 +24,7 @@ def _user_distinct_emoji_counts(
 ) -> Dict[str, int]:
     out: Dict[str, int] = {}
     for uid, emojis in user_emoji_stats.items():
-        n = sum(
-            1 for em in emojis.values() if _emoji_count_in_range(em, days) > 0
-        )
+        n = sum(1 for em in emojis.values() if _emoji_count_in_range(em, days) > 0)
         if n > 0:
             out[str(uid)] = n
     return out
@@ -79,12 +77,8 @@ async def build_emoji_group_report(
             daily_total[d] = daily_total.get(d, 0) + c
     if days != 1:
         keys = get_date_keys(days) if days is not None else None
-        filtered = {
-            k: v for k, v in daily_total.items() if keys is None or k in keys
-        }
-        trend = save_daily_trend_chart(
-            filtered or daily_total, days, title="使用趋势"
-        )
+        filtered = {k: v for k, v in daily_total.items() if keys is None or k in keys}
+        trend = save_daily_trend_chart(filtered or daily_total, days, title="使用趋势")
         if trend:
             sections["使用趋势"] = trend
 

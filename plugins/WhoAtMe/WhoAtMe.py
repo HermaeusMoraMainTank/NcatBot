@@ -187,7 +187,11 @@ class WhoAtMe(NcatBotPlugin):
         ring_snapshot: List[StoredMessage],
     ) -> None:
         hit_index = next(
-            (i for i, m in enumerate(ring_snapshot) if m.message_id == stored.message_id),
+            (
+                i
+                for i, m in enumerate(ring_snapshot)
+                if m.message_id == stored.message_id
+            ),
             None,
         )
         if hit_index is None:
@@ -453,8 +457,10 @@ class WhoAtMe(NcatBotPlugin):
                     is_gif = bool(
                         blob and len(blob) >= 3 and blob[:3] == b"GIF"
                     ) or bool(
-                        p.url and "gif" in p.url.lower()
-                        or p.file and p.file.lower().endswith(".gif")
+                        p.url
+                        and "gif" in p.url.lower()
+                        or p.file
+                        and p.file.lower().endswith(".gif")
                     )
                     render_parts.append(
                         RenderPart(kind="image", image_bytes=blob, is_gif=is_gif)
@@ -639,7 +645,9 @@ class WhoAtMe(NcatBotPlugin):
         return None
 
     @staticmethod
-    def _parse_message_parts(event: GroupMessage) -> tuple[List[MessagePart], List[str]]:
+    def _parse_message_parts(
+        event: GroupMessage,
+    ) -> tuple[List[MessagePart], List[str]]:
         parts: List[MessagePart] = []
         at_ids: List[str] = []
 
@@ -658,7 +666,9 @@ class WhoAtMe(NcatBotPlugin):
                     getattr(seg, "url", None) or getattr(seg, "file", None) or ""
                 ).strip()
                 file = str(getattr(seg, "file", None) or "").strip()
-                parts.append(MessagePart(kind="image", url=url, file=file, text="[图片]"))
+                parts.append(
+                    MessagePart(kind="image", url=url, file=file, text="[图片]")
+                )
             elif isinstance(seg, Video):
                 parts.append(MessagePart(kind="video", text="[视频]"))
             elif isinstance(seg, Record):
@@ -706,7 +716,9 @@ class WhoAtMe(NcatBotPlugin):
                     file = file_m.group(1)
                 if not url and file:
                     url = file
-                parts.append(MessagePart(kind="image", url=url, file=file, text="[图片]"))
+                parts.append(
+                    MessagePart(kind="image", url=url, file=file, text="[图片]")
+                )
             elif cq.startswith("reply,"):
                 id_m = re.search(r"id=(\d+)", cq)
                 if id_m:

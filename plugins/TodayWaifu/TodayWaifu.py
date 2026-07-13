@@ -289,7 +289,9 @@ class TodayWaifu(NcatBotPlugin):
                     if wife_data:  # 确保 data 字段存在且不为空
                         wife_member = GroupMember(wife_data)
 
-                        avatar_url = await CommonUtil.get_avatar_async(wife_member.user_id)
+                        avatar_url = await CommonUtil.get_avatar_async(
+                            wife_member.user_id
+                        )
 
                         message = MessageArray()
                         message.add_at(user_id)

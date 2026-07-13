@@ -108,6 +108,7 @@ def _is_fakeai_group_allowed(group_id) -> bool:
     except (TypeError, ValueError):
         return False
 
+
 # 模拟打字延迟开关（默认关闭）
 enable_typing_delay = False
 # 每个字符的延迟时间（秒）

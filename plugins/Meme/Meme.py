@@ -308,9 +308,7 @@ class Meme(NcatBotPlugin):
         for url in image_urls:
             try:
                 url = re.sub(r"&amp;", "&", url)
-                response = await self._session_request(
-                    "get", url, timeout=self.timeout
-                )
+                response = await self._session_request("get", url, timeout=self.timeout)
                 if response.status_code == 200:
                     with tempfile.NamedTemporaryFile(
                         delete=False, suffix=".jpg"

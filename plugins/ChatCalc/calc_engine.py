@@ -269,7 +269,11 @@ def _operand_end_forward(expr: str, start: int) -> int | None:
     if expr[start] in _PI_CHARS:
         return start + 1
     if _is_pi_token(expr, start):
-        return start + (2 if expr[start : start + 2].lower() == "pi" and expr[start] not in _PI_CHARS else 1)
+        return start + (
+            2
+            if expr[start : start + 2].lower() == "pi" and expr[start] not in _PI_CHARS
+            else 1
+        )
     if _is_e_constant(expr, start):
         return start + 1
     return None
@@ -397,7 +401,7 @@ def _replace_factorial(expr: str) -> str:
         start = _operand_start(expr, pos)
         if start is not None:
             operand = expr[start:pos]
-            expr = f"{expr[:start]}factorial({operand}){expr[pos + 1:]}"
+            expr = f"{expr[:start]}factorial({operand}){expr[pos + 1 :]}"
             continue
         j = pos + 1
         while j < len(expr) and expr[j].isspace():
@@ -518,7 +522,9 @@ def _count_operands(expr: str) -> int:
     while i < len(expr):
         if _is_pi_token(expr, i):
             count += 1
-            i += 2 if expr[i : i + 2].lower() == "pi" and expr[i] not in _PI_CHARS else 1
+            i += (
+                2 if expr[i : i + 2].lower() == "pi" and expr[i] not in _PI_CHARS else 1
+            )
         elif _is_e_constant(expr, i):
             count += 1
             i += 1

@@ -199,13 +199,9 @@ class WebSocketManager:
 
         except Exception as e:
             if isinstance(e, ConnectionError):
-                _log.warning(
-                    f"[灾害预警] 连接错误 {name}: {type(e).__name__} - {e}"
-                )
+                _log.warning(f"[灾害预警] 连接错误 {name}: {type(e).__name__} - {e}")
             else:
-                _log.error(
-                    f"[灾害预警] 未知连接错误 {name}: {type(e).__name__} - {e}"
-                )
+                _log.error(f"[灾害预警] 未知连接错误 {name}: {type(e).__name__} - {e}")
             _log.debug(f"[灾害预警] 异常堆栈: {traceback.format_exc()}")
             self._handle_connection_error(name, uri, headers, e)
 
@@ -329,9 +325,7 @@ class WebSocketManager:
                         if seconds == 0:
                             fallback_interval_display = f"{minutes} 分钟"
                         else:
-                            fallback_interval_display = (
-                                f"{minutes} 分钟 {seconds} 秒"
-                            )
+                            fallback_interval_display = f"{minutes} 分钟 {seconds} 秒"
 
                     _log.warning(
                         f"[灾害预警] {name} 短时重连失败，将在 {fallback_interval_display} 后进行兜底重试 "
@@ -341,9 +335,7 @@ class WebSocketManager:
                     try:
                         await asyncio.sleep(fallback_interval)
                         self.connection_retry_counts[name] = 0
-                        _log.info(
-                            f"[灾害预警] {name} 开始兜底重试，重置短时重连计数器"
-                        )
+                        _log.info(f"[灾害预警] {name} 开始兜底重试，重置短时重连计数器")
                     except asyncio.CancelledError:
                         _log.info(f"[灾害预警] {name} 兜底重试任务被取消")
                         return
@@ -378,9 +370,7 @@ class WebSocketManager:
                 except asyncio.CancelledError:
                     raise
                 except Exception as e:
-                    _log.error(
-                        f"[灾害预警] WebSocket管理器重连执行失败 {name}: {e}"
-                    )
+                    _log.error(f"[灾害预警] WebSocket管理器重连执行失败 {name}: {e}")
 
                 if name in self.connections and not self.connections[name].closed:
                     return

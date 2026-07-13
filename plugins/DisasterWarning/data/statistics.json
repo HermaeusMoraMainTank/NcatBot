@@ -1,19 +1,19 @@
 {
-  "total_received": 22808,
+  "total_received": 22813,
   "total_events": 17536,
   "start_time": "2026-04-08T10:22:03.299648",
-  "last_updated": "2026-07-13T17:53:58.794178",
+  "last_updated": "2026-07-13T17:56:34.858283",
   "by_type": {
     "weather_alarm": 14393,
     "earthquake": 2676,
     "earthquake_warning": 467
   },
   "by_source": {
-    "fan_studio_weather": 14490,
-    "fan_studio_cenc": 478,
-    "fan_studio_cea": 202,
-    "fan_studio_jma": 975,
-    "fan_studio_usgs": 5051,
+    "fan_studio_weather": 14491,
+    "fan_studio_cenc": 479,
+    "fan_studio_cea": 203,
+    "fan_studio_jma": 976,
+    "fan_studio_usgs": 5052,
     "p2p_earthquake": 371,
     "wolfx_jma_eq": 384,
     "wolfx_jma_eew": 581,
@@ -2113,6 +2113,41 @@
   },
   "recent_pushes": [
     {
+      "timestamp": "2026-07-13T17:56:34.858283",
+      "event_id": "00921593",
+      "type": "earthquake",
+      "source": "fan_studio_usgs",
+      "description": "M2.9 内华达州附近"
+    },
+    {
+      "timestamp": "2026-07-13T17:56:34.857283",
+      "event_id": "20260712113921",
+      "type": "earthquake_warning",
+      "source": "fan_studio_jma",
+      "description": "M3.6 釧路地方中南部"
+    },
+    {
+      "timestamp": "2026-07-13T17:56:34.857283",
+      "event_id": "b3wegh59kqayy",
+      "type": "earthquake_warning",
+      "source": "fan_studio_cea",
+      "description": "M4.3 四川宜宾市高县"
+    },
+    {
+      "timestamp": "2026-07-13T17:56:34.857283",
+      "event_id": "13172040",
+      "type": "earthquake",
+      "source": "fan_studio_cenc",
+      "description": "M6.4 巴布亚新几内亚附近海域"
+    },
+    {
+      "timestamp": "2026-07-13T17:56:34.857283",
+      "event_id": "320600-20260713091215-11E0602",
+      "type": "weather_alarm",
+      "source": "fan_studio_weather",
+      "description": "南通市自然资源和规划局发布海浪黄色预警[Ⅲ级/较重]"
+    },
+    {
       "timestamp": "2026-07-13T17:53:58.794178",
       "event_id": "00921593",
       "type": "earthquake",
@@ -2776,41 +2811,6 @@
       "type": "earthquake_warning",
       "source": "fan_studio_cea",
       "description": "M4.1 四川宜宾市高县"
-    },
-    {
-      "timestamp": "2026-07-13T05:02:13.183182",
-      "event_id": "b3w8ft7bgqcyb",
-      "type": "earthquake_warning",
-      "source": "fan_studio_cea",
-      "description": "M4.6 四川宜宾市高县"
-    },
-    {
-      "timestamp": "2026-07-13T04:55:11.148744",
-      "event_id": "75394556",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M3.0 加利福尼亚州中部附近"
-    },
-    {
-      "timestamp": "2026-07-13T04:52:36.550918",
-      "event_id": "350821-20260713043100-11B1402",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "长汀县气象台发布雷电黄色预警信号"
-    },
-    {
-      "timestamp": "2026-07-13T04:38:14.082610",
-      "event_id": "340321-20260713042536-11B0301",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "怀远县气象台更新暴雨蓝色预警[IV级/一般]"
-    },
-    {
-      "timestamp": "2026-07-13T04:23:08.006392",
-      "event_id": "340323-20260713040504-11B0301",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "固镇县气象台更新暴雨蓝色预警[IV级/一般]"
     }
   ],
   "recent_event_ids": [
@@ -3314,5 +3314,7 @@
     "-3.243,148.468,6.5,202607131653",
     "-3.243,148.649,6.5,202607131653",
     "39.279,-118.919,3.0,202607131746"
+  ]
+}131746"
   ]
 }

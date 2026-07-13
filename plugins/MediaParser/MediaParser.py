@@ -453,7 +453,9 @@ class MediaParser(NcatBotPlugin):
             elif isinstance(msg, Image):
                 fc.attach_image(msg.file, user_id=user_id_str, nickname=nickname)
             else:
-                fc.attach_message(MessageChain([msg]), user_id=user_id_str, nickname=nickname)
+                fc.attach_message(
+                    MessageChain([msg]), user_id=user_id_str, nickname=nickname
+                )
 
         forward = fc.build()
         if group_id and getattr(event, "message_id", None):

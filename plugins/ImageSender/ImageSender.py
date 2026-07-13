@@ -1358,9 +1358,7 @@ class ImageSender(NcatBotPlugin):
 
     async def delete_image_by_url(self, url: str, target_path: str) -> tuple[bool, str]:
         """根据图片 URL 在指定路径中查找并删除对应图片，返回(是否成功, 状态信息)"""
-        return await asyncio.to_thread(
-            self._delete_image_by_url_sync, url, target_path
-        )
+        return await asyncio.to_thread(self._delete_image_by_url_sync, url, target_path)
 
     def _delete_image_by_url_sync(self, url: str, target_path: str) -> tuple[bool, str]:
         try:

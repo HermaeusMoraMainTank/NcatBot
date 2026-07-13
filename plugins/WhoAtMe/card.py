@@ -112,7 +112,9 @@ class ChatRenderMessage:
     display_name: str = ""
 
 
-def _load_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+def _load_font(
+    size: int, bold: bool = False
+) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
     candidates = _FONT_BOLD_CANDIDATES if bold else _FONT_CANDIDATES
     for path in candidates:
         if path.exists():
@@ -146,8 +148,10 @@ def _header_row_height(badge_font, nick_font) -> int:
 
 def _circle_avatar(path: str, size: int) -> Image.Image:
     try:
-        img = Image.open(path).convert("RGBA").resize(
-            (size, size), Image.Resampling.LANCZOS
+        img = (
+            Image.open(path)
+            .convert("RGBA")
+            .resize((size, size), Image.Resampling.LANCZOS)
         )
     except Exception:
         img = Image.new("RGBA", (size, size), (210, 210, 210, 255))
@@ -406,7 +410,9 @@ def _draw_bubble_content(
                         draw.text((cx, cy), seg, font=body_font, fill=color)
                         cx += body_font.getlength(seg)
                 else:
-                    draw.text((x + BUBBLE_PAD_X, cy), line, font=body_font, fill=TEXT_COLOR)
+                    draw.text(
+                        (x + BUBBLE_PAD_X, cy), line, font=body_font, fill=TEXT_COLOR
+                    )
                 cy += body_h + 4
         elif kind == "quote":
             quote_text = str(payload)
@@ -526,7 +532,9 @@ def _draw_new_message_divider(
     cx = CARD_WIDTH // 2
     ly = y + 8
     gap = 8
-    draw.line((PADDING_X, ly + 6, cx - lw / 2 - gap, ly + 6), fill=DIVIDER_COLOR, width=1)
+    draw.line(
+        (PADDING_X, ly + 6, cx - lw / 2 - gap, ly + 6), fill=DIVIDER_COLOR, width=1
+    )
     draw.text((cx - lw / 2, ly), label, font=font, fill=DIVIDER_COLOR)
     draw.line(
         (cx + lw / 2 + gap, ly + 6, CARD_WIDTH - PADDING_X, ly + 6),
@@ -609,7 +617,9 @@ def render_qq_chat_card(
             if part.kind == "image" and part.image_bytes:
                 if part.image_bytes not in image_cache:
                     try:
-                        image_cache[part.image_bytes] = _open_image_bytes(part.image_bytes)
+                        image_cache[part.image_bytes] = _open_image_bytes(
+                            part.image_bytes
+                        )
                     except Exception:
                         pass
 

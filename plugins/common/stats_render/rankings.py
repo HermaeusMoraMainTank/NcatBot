@@ -245,7 +245,7 @@ def save_top10_list(
 ) -> Path:
     ensure_dirs()
     out = TEMP_PATH / f"top10_{uuid.uuid4().hex}.png"
-    create_top10_list(
-        users, title=title, compact=compact, show_title=show_title
-    ).save(out, "PNG")
+    create_top10_list(users, title=title, compact=compact, show_title=show_title).save(
+        out, "PNG"
+    )
     return out

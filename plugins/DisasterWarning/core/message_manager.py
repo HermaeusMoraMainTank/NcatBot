@@ -295,8 +295,7 @@ class MessagePushManager:
             # 5. 推送消息
             push_success_count = 0
             send_tasks = [
-                self._send_message(group_id, message)
-                for group_id in self.target_groups
+                self._send_message(group_id, message) for group_id in self.target_groups
             ]
             results = await asyncio.gather(*send_tasks, return_exceptions=True)
             for group_id, result in zip(self.target_groups, results):

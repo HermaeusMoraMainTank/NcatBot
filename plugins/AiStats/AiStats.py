@@ -159,7 +159,9 @@ class AiUsageStats:
                 return self.total_cost
             return round(sum(float(v) for v in self.daily_cost.values()), 4)
         return round(
-            sum(float(v) for v in filter_daily_by_period(self.daily_cost, days).values()),
+            sum(
+                float(v) for v in filter_daily_by_period(self.daily_cost, days).values()
+            ),
             4,
         )
 
@@ -549,7 +551,10 @@ class AiStats(NcatBotPlugin):
         """获取指定时间范围内的费用统计"""
         if days is None:
             return {k: float(v) for k, v in stats.daily_cost.copy().items()}
-        return {k: float(v) for k, v in filter_daily_by_period(stats.daily_cost, days).items()}
+        return {
+            k: float(v)
+            for k, v in filter_daily_by_period(stats.daily_cost, days).items()
+        }
 
     def _days_label(self, days: Optional[int]) -> str:
         if days == 1:

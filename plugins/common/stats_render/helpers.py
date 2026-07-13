@@ -33,7 +33,9 @@ def get_period_start(days: Optional[int], end: Optional[date] = None) -> Optiona
     return end - timedelta(days=days - 1)
 
 
-def is_date_in_period(date_str: str, days: Optional[int], *, end: Optional[date] = None) -> bool:
+def is_date_in_period(
+    date_str: str, days: Optional[int], *, end: Optional[date] = None
+) -> bool:
     if days is None:
         return True
     try:
@@ -50,7 +52,9 @@ def is_date_in_period(date_str: str, days: Optional[int], *, end: Optional[date]
     return start <= d <= end
 
 
-def filter_daily_by_period(daily: Dict[str, int], days: Optional[int]) -> Dict[str, int]:
+def filter_daily_by_period(
+    daily: Dict[str, int], days: Optional[int]
+) -> Dict[str, int]:
     if days is None:
         return dict(daily)
     return {k: int(v) for k, v in daily.items() if is_date_in_period(k, days)}

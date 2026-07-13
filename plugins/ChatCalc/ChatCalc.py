@@ -92,9 +92,7 @@ class ChatCalc(NcatBotPlugin):
             return found
         return calc_failure_message(reply_text)
 
-    async def _resolve_calc(
-        self, event: GroupMessage
-    ) -> tuple[str, str] | str | None:
+    async def _resolve_calc(self, event: GroupMessage) -> tuple[str, str] | str | None:
         text = _extract_pure_text(event.message)
         if not text or not has_calc_trigger(text):
             return None
