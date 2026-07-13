@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import platform
 from dataclasses import dataclass, field
-from datetime import datetime
 from io import BytesIO
 from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Tuple

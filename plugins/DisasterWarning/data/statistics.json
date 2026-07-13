@@ -1,11 +1,11 @@
 {
-  "total_received": 22806,
-  "total_events": 17535,
+  "total_received": 22808,
+  "total_events": 17536,
   "start_time": "2026-04-08T10:22:03.299648",
-  "last_updated": "2026-07-13T17:35:05.525173",
+  "last_updated": "2026-07-13T17:53:58.794178",
   "by_type": {
     "weather_alarm": 14393,
-    "earthquake": 2675,
+    "earthquake": 2676,
     "earthquake_warning": 467
   },
   "by_source": {
@@ -13,7 +13,7 @@
     "fan_studio_cenc": 478,
     "fan_studio_cea": 202,
     "fan_studio_jma": 975,
-    "fan_studio_usgs": 5049,
+    "fan_studio_usgs": 5051,
     "p2p_earthquake": 371,
     "wolfx_jma_eq": 384,
     "wolfx_jma_eew": 581,
@@ -26,7 +26,7 @@
     "by_magnitude": {
       "M3.0 - M3.9": 921,
       "M4.0 - M4.9": 905,
-      "< M3.0": 877,
+      "< M3.0": 878,
       "M5.0 - M5.9": 347,
       "M6.0 - M6.9": 75,
       "M7.0 - M7.9": 8,
@@ -2113,6 +2113,20 @@
   },
   "recent_pushes": [
     {
+      "timestamp": "2026-07-13T17:53:58.794178",
+      "event_id": "00921593",
+      "type": "earthquake",
+      "source": "fan_studio_usgs",
+      "description": "M2.9 内华达州附近"
+    },
+    {
+      "timestamp": "2026-07-13T17:49:02.518131",
+      "event_id": "00921593",
+      "type": "earthquake",
+      "source": "fan_studio_usgs",
+      "description": "M2.9 内华达州附近"
+    },
+    {
       "timestamp": "2026-07-13T17:35:05.525173",
       "event_id": "7000szzy",
       "type": "earthquake",
@@ -2797,24 +2811,9 @@
       "type": "weather_alarm",
       "source": "fan_studio_weather",
       "description": "固镇县气象台更新暴雨蓝色预警[IV级/一般]"
-    },
-    {
-      "timestamp": "2026-07-13T04:09:03.916927",
-      "event_id": "341182-20260713034327-11B0301",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "明光市气象台更新暴雨蓝色预警[IV级/一般]"
-    },
-    {
-      "timestamp": "2026-07-13T03:57:07.604629",
-      "event_id": "341126-20260713033755-11B0301",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "凤阳县气象台更新暴雨蓝色预警[IV级/一般]"
     }
   ],
   "recent_event_ids": [
-    "52232741600000_20260702033328",
     "52232841600000_20260702034452",
     "42122441600000_20260702035352",
     "50023841600000_20260702035749",
@@ -3313,6 +3312,7 @@
     "-3.063,148.649,6.5,202607131653",
     "-2.523,148.468,6.5,202607131653",
     "-3.243,148.468,6.5,202607131653",
-    "-3.243,148.649,6.5,202607131653"
+    "-3.243,148.649,6.5,202607131653",
+    "39.279,-118.919,3.0,202607131746"
   ]
 }
