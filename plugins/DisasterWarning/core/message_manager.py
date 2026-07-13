@@ -159,17 +159,17 @@ class MessagePushManager:
         if isinstance(event.data, EarthquakeData):
             if not self.regional.allows_earthquake(event.data):
                 _log.info(
-                    "[灾害预警] 区域限制：地震不在广东范围（关键词与边界框均未命中），已过滤"
+                    "[灾害预警] 区域限制：地震不在深圳范围（关键词与边界框均未命中），已过滤"
                 )
                 return False
         elif isinstance(event.data, TsunamiData):
             if not self.regional.allows_tsunami(event.data):
-                _log.info("[灾害预警] 区域限制：海啸报文未涉及广东关键词，已过滤")
+                _log.info("[灾害预警] 区域限制：海啸报文未涉及深圳关键词，已过滤")
                 return False
             return True
         elif isinstance(event.data, WeatherAlarmData):
             if not self.regional.allows_weather(event.data):
-                _log.info("[灾害预警] 区域限制：气象预警与广东无关，已过滤")
+                _log.info("[灾害预警] 区域限制：气象预警与深圳无关，已过滤")
                 return False
             headline = event.data.headline or event.data.title or ""
             if self.weather_filter.should_filter(headline):

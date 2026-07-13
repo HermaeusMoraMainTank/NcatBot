@@ -16,8 +16,21 @@ from ncatbot.utils import get_log
 
 _log = get_log()
 
-MEMES_JSON_URL = "https://phoebehub.top/data/memes.json"
-BASE_URL = "https://phoebehub.top/"
+# phoebehub.top 已切换纯静态部署，/data/memes.json 可能不可用；优先 GitHub Pages
+MEMES_JSON_SOURCES: tuple[tuple[str, str], ...] = (
+    (
+        "https://kato-shoko705.github.io/Phoebe-Hub/data/memes.json",
+        "https://kato-shoko705.github.io/Phoebe-Hub/",
+    ),
+    (
+        "https://raw.githubusercontent.com/Kato-Shoko705/Phoebe-Hub/main/data/memes.json",
+        "https://raw.githubusercontent.com/Kato-Shoko705/Phoebe-Hub/main/",
+    ),
+    (
+        "https://phoebehub.top/data/memes.json",
+        "https://phoebehub.top/",
+    ),
+)
 COMMAND = "菲比搜索"
 MAX_RESULTS = 5
 MIN_SCORE = 30.0
@@ -53,6 +66,7 @@ class PhoebeSearch(NcatBotPlugin):
     async def on_load(self):
         self._memes: List[MemeEntry] = []
         self._cache_loaded_at = 0.0
+        self._base_url = MEMES_JSON_SOURCES[0][1]
         _log.info(f"开始加载 {self.name} 插件 v{self.version}")
         try:
             await self._ensure_memes()
@@ -123,12 +137,23 @@ class PhoebeSearch(NcatBotPlugin):
                 "Chrome/114.0.0.0 Safari/537.36"
             ),
         }
-        response = self.session.get(
-            MEMES_JSON_URL, headers=headers, timeout=self.timeout
-        )
-        response.raise_for_status()
-        response.encoding = "utf-8"
-        payload = response.json()
+        last_error: Exception | None = None
+        for json_url, base_url in MEMES_JSON_SOURCES:
+            try:
+                response = self.session.get(
+                    json_url, headers=headers, timeout=self.timeout
+                )
+                response.raise_for_status()
+                response.encoding = "utf-8"
+                payload = response.json()
+                self._base_url = base_url
+                _log.info(f"菲比数据已从 {json_url} 加载")
+                break
+            except Exception as e:
+                last_error = e
+                _log.warning(f"菲比数据源不可用 {json_url}: {e}")
+        else:
+            raise last_error or RuntimeError("无可用菲比数据源")
 
         entries: List[MemeEntry] = []
         for item in payload.get("memes", []):
@@ -167,10 +192,9 @@ class PhoebeSearch(NcatBotPlugin):
             return min(95.0, 70.0 + 25.0 * len(t) / len(q))
         return SequenceMatcher(None, q, t).ratio() * 100.0
 
-    @staticmethod
-    def _image_url(path: str) -> str:
+    def _image_url(self, path: str) -> str:
         encoded = "/".join(quote(part, safe="") for part in path.split("/"))
-        return f"{BASE_URL}{encoded}"
+        return f"{self._base_url}{encoded}"
 
     @staticmethod
     def _get_message_text(input: GroupMessage) -> str:

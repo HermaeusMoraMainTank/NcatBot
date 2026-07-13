@@ -7,7 +7,6 @@ from io import BytesIO
 from pathlib import Path
 from typing import ClassVar, ParamSpec, TypeVar
 
-import aiofiles
 from apilmoji import Apilmoji, EmojiCDNSource
 from apilmoji.core import get_font_height
 from PIL import Image, ImageDraw, ImageFont
@@ -733,6 +732,7 @@ class Renderer:
             )
 
         repost_image_scaled = await asyncio.to_thread(_scale_repost, repost_image)
+        scaled_height = repost_image_scaled.height
 
         return RepostSectionData(
             height=scaled_height + self.REPOST_PADDING * 2,  # 加上转发容器的内边距

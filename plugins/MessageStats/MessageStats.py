@@ -1,7 +1,7 @@
 import asyncio
 import os
 import json
-from datetime import datetime, date, timedelta
+from datetime import datetime, date
 from typing import Dict, List, Optional
 from dataclasses import dataclass
 from PIL import Image as PILImage

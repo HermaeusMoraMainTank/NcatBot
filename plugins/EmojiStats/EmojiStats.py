@@ -4,7 +4,7 @@ import json
 import hashlib
 from shutil import copy2
 from time import strftime
-import requests
+import re
 import urllib3
 import threading
 import time
@@ -13,6 +13,7 @@ from typing import Dict, List, Optional
 from dataclasses import dataclass
 from PIL import Image as PILImage
 from common.utils.async_io import http_get_bytes
+from common.constants.HMMT import HMMT
 from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.types import MessageArray, PlainText, Image
 from ncatbot.plugin import NcatBotPlugin
@@ -181,9 +182,9 @@ class EmojiStatsPlugin(NcatBotPlugin):
         if self.user_count is None:
             self.user_count = {}
         # 不要清空内存中的数据，保持现有数据
-        self._load_emoji_stats_json()
-        # 执行清理任务，删除不在统计数据中引用的图片
-        self._cleanup_unused_images()
+        # 数据量较大时同步加载会阻塞事件循环，放到线程池执行
+        await asyncio.to_thread(self._load_emoji_stats_json)
+        await asyncio.to_thread(self._cleanup_unused_images)
         # 启动定时清理任务
         self._start_cleanup_task()
         if not self.add_scheduled_task(

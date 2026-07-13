@@ -8,7 +8,6 @@ import time
 from datetime import datetime
 from typing import Dict, List, Optional, Union
 
-import yaml
 from PIL import Image as PILImage, ImageDraw, ImageFont
 from common.utils.AiUtil import AiUtil, DEEPSEEK_CHAT_MODEL
 from common.utils.async_io import load_json, load_yaml
@@ -95,6 +94,19 @@ callback_timeout = 15  # 回调超时时间（秒）
 
 # 被动触发概率（非@、非「蓝晴」的普通群消息）
 PASSIVE_TRIGGER_BASE_PROB = 0.08
+
+# 允许 FakeAi 响应的群号（空集合表示不限制）
+FAKEAI_ALLOWED_GROUPS = frozenset({853963912, 719518427, 585479130, 1064163905})
+
+
+def _is_fakeai_group_allowed(group_id) -> bool:
+    """群白名单：FAKEAI_ALLOWED_GROUPS 非空时仅允许列表内群号。"""
+    if not FAKEAI_ALLOWED_GROUPS:
+        return True
+    try:
+        return int(group_id) in FAKEAI_ALLOWED_GROUPS
+    except (TypeError, ValueError):
+        return False
 
 # 模拟打字延迟开关（默认关闭）
 enable_typing_delay = False
@@ -1233,6 +1245,9 @@ class FakeAi(NcatBotPlugin):
         sender_id = input.sender.user_id
         sender_name = input.sender.nickname
 
+        if not _is_fakeai_group_allowed(group_id):
+            return
+
         # 将 MessageArray 转换为可序列化的格式
         content = []
         for msg_segment in input.message:
@@ -1325,7 +1340,7 @@ class FakeAi(NcatBotPlugin):
         if input.raw_message == "蓝晴说话":
             if sender_id in [
                 "273421673",
-            ] or group_id in [719518427, 853963912]:
+            ] or _is_fakeai_group_allowed(group_id):
                 answer = await answer_ai(
                     group_id, group_reply_caches, str(sender_id), "test"
                 )

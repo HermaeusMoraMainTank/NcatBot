@@ -19,6 +19,8 @@ DEFAULT_CONFIG = {
     ],
     # 禁用的会话列表
     "disabled_sessions": [],
+    # 允许使用媒体解析的群号列表（非空时仅这些群可解析）
+    "allowed_groups": [853963912, 719518427, 585479130, 1064163905],
     # 防抖秒数
     "debounce_interval": 300,
     # 资源最大大小 (MB)

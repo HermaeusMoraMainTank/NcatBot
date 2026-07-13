@@ -1,0 +1,10 @@
+name = "WhoAtMe"
+version = "1.0.0"
+main = "WhoAtMe.py"
+entry_class = "WhoAtMe"
+
+[pip_dependencies]
+Pillow = "*"
+aiohttp = "*"
+
+[dependencies]

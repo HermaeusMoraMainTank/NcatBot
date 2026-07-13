@@ -6,7 +6,6 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 import pillowmd
-from PIL import Image
 
 from ncatbot.utils import get_log
 

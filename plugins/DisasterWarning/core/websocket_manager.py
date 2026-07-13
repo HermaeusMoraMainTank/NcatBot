@@ -31,6 +31,34 @@ class WebSocketManager:
         self.connection_info: dict[str, dict] = {}
         self.running = False
         self.session: aiohttp.ClientSession | None = None
+        self._connect_locks: dict[str, asyncio.Lock] = {}
+
+    def _get_connect_lock(self, name: str) -> asyncio.Lock:
+        if name not in self._connect_locks:
+            self._connect_locks[name] = asyncio.Lock()
+        return self._connect_locks[name]
+
+    def _ensure_reconnect(
+        self,
+        name: str,
+        uri: str,
+        headers: dict | None = None,
+        connection_info: dict | None = None,
+    ) -> None:
+        """仅在没有进行中的重连任务时调度一次重连。"""
+        if not self.running:
+            return
+        current = asyncio.current_task()
+        existing = self.reconnect_tasks.get(name)
+        if existing is not None and not existing.done():
+            if existing is current:
+                return
+            _log.debug(f"[灾害预警] {name} 重连任务已在进行，跳过重复调度")
+            return
+        self.reconnect_tasks[name] = asyncio.create_task(
+            self._schedule_reconnect(name, uri, headers, connection_info),
+            name=f"disaster-ws-reconnect-{name}",
+        )
 
     def register_handler(self, connection_name: str, handler: Callable):
         """注册消息处理器"""
@@ -46,6 +74,26 @@ class WebSocketManager:
         connection_info: dict | None = None,
     ):
         """建立WebSocket连接"""
+        lock = self._get_connect_lock(name)
+        if lock.locked():
+            _log.debug(f"[灾害预警] {name} 已有连接任务进行中，跳过重复连接")
+            return
+
+        async with lock:
+            await self._connect_impl(
+                name, uri, headers, is_retry=is_retry, connection_info=connection_info
+            )
+
+    async def _connect_impl(
+        self,
+        name: str,
+        uri: str,
+        headers: dict | None = None,
+        *,
+        is_retry: bool = False,
+        connection_info: dict | None = None,
+    ):
+        """建立 WebSocket 连接（需在 connect 锁内调用）。"""
         if not self.session or self.session.closed:
             _log.warning(f"[灾害预警] WebSocket会话未就绪，正在重新初始化: {name}")
             self.session = aiohttp.ClientSession()
@@ -131,12 +179,16 @@ class WebSocketManager:
                         websocket.close_code is not None
                         and websocket.close_code not in (1000, 1001)
                     ):
-                        raise Exception(
-                            f"WebSocket连接意外关闭，代码 {websocket.close_code}"
+                        close_code = websocket.close_code
+                        raise ConnectionError(
+                            f"WebSocket连接意外关闭，代码 {close_code}"
                         )
 
                 except Exception as e:
-                    _log.error(f"[灾害预警] WebSocket消息循环异常 {name}: {e}")
+                    if isinstance(e, ConnectionError):
+                        _log.warning(f"[灾害预警] WebSocket消息循环异常 {name}: {e}")
+                    else:
+                        _log.error(f"[灾害预警] WebSocket消息循环异常 {name}: {e}")
                     raise
 
                 _log.info(f"[灾害预警] 连接断开: {name}")
@@ -146,7 +198,14 @@ class WebSocketManager:
             self._handle_connection_error(name, uri, headers, e)
 
         except Exception as e:
-            _log.error(f"[灾害预警] 未知连接错误 {name}: {type(e).__name__} - {e}")
+            if isinstance(e, ConnectionError):
+                _log.warning(
+                    f"[灾害预警] 连接错误 {name}: {type(e).__name__} - {e}"
+                )
+            else:
+                _log.error(
+                    f"[灾害预警] 未知连接错误 {name}: {type(e).__name__} - {e}"
+                )
             _log.debug(f"[灾害预警] 异常堆栈: {traceback.format_exc()}")
             self._handle_connection_error(name, uri, headers, e)
 
@@ -178,10 +237,11 @@ class WebSocketManager:
         connection_info = self.connection_info.pop(name, {})
 
         if self.running:
+            reconnect_task = self.reconnect_tasks.get(name)
+            if reconnect_task is asyncio.current_task():
+                return
             if self._should_reconnect_on_error(error):
-                asyncio.create_task(
-                    self._schedule_reconnect(name, uri, headers, connection_info)
-                )
+                self._ensure_reconnect(name, uri, headers, connection_info)
             else:
                 _log.warning(f"[灾害预警] {name} 遇到不可恢复错误，停止重连")
 
@@ -223,106 +283,109 @@ class WebSocketManager:
         headers: dict | None = None,
         connection_info: dict | None = None,
     ):
-        """计划重连"""
-        if name in self.reconnect_tasks:
-            self.reconnect_tasks[name].cancel()
+        """计划重连（同一连接仅允许一个重连任务，失败后循环重试）。"""
+        try:
+            while self.running:
+                max_retries = self.config.get("max_reconnect_retries", 3)
+                reconnect_interval = self.config.get("reconnect_interval", 10)
 
-        async def reconnect():
-            max_retries = self.config.get("max_reconnect_retries", 3)
-            reconnect_interval = self.config.get("reconnect_interval", 10)
+                fallback_enabled = self.config.get("fallback_retry_enabled", True)
+                fallback_interval = self.config.get("fallback_retry_interval", 1800)
+                fallback_max_count = self.config.get("fallback_retry_max_count", -1)
 
-            fallback_enabled = self.config.get("fallback_retry_enabled", True)
-            fallback_interval = self.config.get("fallback_retry_interval", 1800)
-            fallback_max_count = self.config.get("fallback_retry_max_count", -1)
+                current_retry = self.connection_retry_counts.get(name, 0)
+                current_fallback = self.fallback_retry_counts.get(name, 0)
 
-            current_retry = self.connection_retry_counts.get(name, 0)
-            current_fallback = self.fallback_retry_counts.get(name, 0)
+                has_backup = connection_info and connection_info.get("backup_url")
+                total_max_retries = max_retries * 2 if has_backup else max_retries
 
-            has_backup = connection_info and connection_info.get("backup_url")
-            total_max_retries = max_retries * 2 if has_backup else max_retries
+                if current_retry >= total_max_retries:
+                    if not fallback_enabled:
+                        _log.error(
+                            f"[灾害预警] {name} 重连失败，已达到最大重试次数 ({total_max_retries})，停止重连"
+                        )
+                        return
 
-            if current_retry >= total_max_retries:
-                if not fallback_enabled:
-                    _log.error(
-                        f"[灾害预警] {name} 重连失败，已达到最大重试次数 ({total_max_retries})，停止重连"
+                    if (
+                        fallback_max_count != -1
+                        and current_fallback >= fallback_max_count
+                    ):
+                        _log.error(
+                            f"[灾害预警] {name} 兜底重试失败，已达到最大兜底重试次数 ({fallback_max_count})，停止重连"
+                        )
+                        return
+
+                    self.fallback_retry_counts[name] = current_fallback + 1
+                    fallback_display = current_fallback + 1
+                    fallback_max_display = (
+                        "无限" if fallback_max_count == -1 else str(fallback_max_count)
                     )
-                    return
 
-                if fallback_max_count != -1 and current_fallback >= fallback_max_count:
-                    _log.error(
-                        f"[灾害预警] {name} 兜底重试失败，已达到最大兜底重试次数 ({fallback_max_count})，停止重连"
-                    )
-                    return
-
-                self.fallback_retry_counts[name] = current_fallback + 1
-                fallback_display = current_fallback + 1
-                fallback_max_display = (
-                    "无限" if fallback_max_count == -1 else str(fallback_max_count)
-                )
-
-                if fallback_interval < 60:
-                    fallback_interval_display = f"{fallback_interval} 秒"
-                else:
-                    minutes = fallback_interval // 60
-                    seconds = fallback_interval % 60
-                    if seconds == 0:
-                        fallback_interval_display = f"{minutes} 分钟"
+                    if fallback_interval < 60:
+                        fallback_interval_display = f"{fallback_interval} 秒"
                     else:
-                        fallback_interval_display = f"{minutes} 分钟 {seconds} 秒"
+                        minutes = fallback_interval // 60
+                        seconds = fallback_interval % 60
+                        if seconds == 0:
+                            fallback_interval_display = f"{minutes} 分钟"
+                        else:
+                            fallback_interval_display = (
+                                f"{minutes} 分钟 {seconds} 秒"
+                            )
 
-                _log.warning(
-                    f"[灾害预警] {name} 短时重连失败，将在 {fallback_interval_display} 后进行兜底重试 "
-                    f"({fallback_display}/{fallback_max_display})"
+                    _log.warning(
+                        f"[灾害预警] {name} 短时重连失败，将在 {fallback_interval_display} 后进行兜底重试 "
+                        f"({fallback_display}/{fallback_max_display})"
+                    )
+
+                    try:
+                        await asyncio.sleep(fallback_interval)
+                        self.connection_retry_counts[name] = 0
+                        _log.info(
+                            f"[灾害预警] {name} 开始兜底重试，重置短时重连计数器"
+                        )
+                    except asyncio.CancelledError:
+                        _log.info(f"[灾害预警] {name} 兜底重试任务被取消")
+                        return
+                    continue
+
+                target_uri = uri
+                server_type = "主服务器"
+
+                if has_backup and current_retry >= max_retries:
+                    backup_url = connection_info.get("backup_url")
+                    if backup_url:
+                        target_uri = backup_url
+                        server_type = "备用服务器"
+
+                display_retry = current_retry + 1
+                if server_type == "备用服务器":
+                    display_retry = current_retry - max_retries + 1
+
+                _log.info(
+                    f"[灾害预警] {name} 将在 {reconnect_interval} 秒后尝试重连{server_type} ({display_retry}/{max_retries})"
                 )
 
                 try:
-                    await asyncio.sleep(fallback_interval)
-                    self.connection_retry_counts[name] = 0
-                    _log.info(f"[灾害预警] {name} 开始兜底重试，重置短时重连计数器")
+                    await asyncio.sleep(reconnect_interval)
                     await self.connect(
                         name,
-                        uri,
+                        target_uri,
                         headers,
                         is_retry=True,
                         connection_info=connection_info,
                     )
                 except asyncio.CancelledError:
-                    _log.info(f"[灾害预警] {name} 兜底重试任务被取消")
+                    raise
                 except Exception as e:
-                    _log.error(f"[灾害预警] {name} 兜底重试失败: {e}")
-                return
+                    _log.error(
+                        f"[灾害预警] WebSocket管理器重连执行失败 {name}: {e}"
+                    )
 
-            target_uri = uri
-            server_type = "主服务器"
-
-            if has_backup and current_retry >= max_retries:
-                backup_url = connection_info.get("backup_url")
-                if backup_url:
-                    target_uri = backup_url
-                    server_type = "备用服务器"
-
-            display_retry = current_retry + 1
-            if server_type == "备用服务器":
-                display_retry = current_retry - max_retries + 1
-
-            _log.info(
-                f"[灾害预警] {name} 将在 {reconnect_interval} 秒后尝试重连{server_type} ({display_retry}/{max_retries})"
-            )
-
-            try:
-                await asyncio.sleep(reconnect_interval)
-                await self.connect(
-                    name,
-                    target_uri,
-                    headers,
-                    is_retry=True,
-                    connection_info=connection_info,
-                )
-            except Exception as e:
-                _log.error(f"[灾害预警] WebSocket管理器重连执行失败 {name}: {e}")
-                pass
-
-        self.reconnect_tasks[name] = asyncio.create_task(reconnect())
+                if name in self.connections and not self.connections[name].closed:
+                    return
+        finally:
+            self.reconnect_tasks.pop(name, None)
 
     async def disconnect(self, name: str):
         """断开连接"""

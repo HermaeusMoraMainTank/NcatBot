@@ -170,14 +170,14 @@ class DisasterWarning(NcatBotPlugin):
                 "place_name": "本地",
             },
             "regional_restriction": {
-                "enabled": False,
-                "keywords": [],
+                "enabled": True,
+                "keywords": ["深圳"],
                 "use_bounding_box": True,
                 "bounding_box": {
-                    "min_lat": 20.12,
-                    "max_lat": 25.55,
-                    "min_lon": 109.55,
-                    "max_lon": 117.45,
+                    "min_lat": 22.40,
+                    "max_lat": 22.90,
+                    "min_lon": 113.70,
+                    "max_lon": 114.70,
                 },
             },
             "weather_config": {
@@ -191,9 +191,9 @@ class DisasterWarning(NcatBotPlugin):
                 "font_label_size": 17,
                 "font_paths": [],
                 "weather_filter": {
-                    "enabled": False,
+                    "enabled": True,
                     "provinces": [],
-                    "keywords": [],
+                    "keywords": ["深圳"],
                     "min_color_level": "白色",
                 },
             },

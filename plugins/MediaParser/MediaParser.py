@@ -248,6 +248,19 @@ class MediaParser(NcatBotPlugin):
                 return parser
         raise ValueError(f"未找到类型为 {parser_type} 的 parser 实例")
 
+    def _is_group_allowed(self, group_id: int | str | None) -> bool:
+        """群白名单：allowed_groups 非空时仅允许列表内群号。"""
+        allowed = self.config.get("allowed_groups") or []
+        if not allowed:
+            return True
+        if group_id is None:
+            return False
+        try:
+            gid = int(group_id)
+        except (TypeError, ValueError):
+            return False
+        return gid in {int(x) for x in allowed}
+
     def _extract_at_target(self, message: str) -> int | None:
         """提取消息中第一个@的目标QQ号"""
         # 匹配 [CQ:at,qq=123456] 格式
@@ -480,6 +493,9 @@ class MediaParser(NcatBotPlugin):
         group_id = getattr(event, "group_id", None)
         message_id = getattr(event, "message_id", None)
         msg_time = getattr(event, "time", None)
+
+        if not self._is_group_allowed(group_id):
+            return
 
         # 检查是否禁用
         session_id = f"group_{group_id}" if group_id else f"user_{event.user_id}"
@@ -754,6 +770,9 @@ class MediaParser(NcatBotPlugin):
         """处理命令"""
         message = event.raw_message.strip()
         group_id = getattr(event, "group_id", None)
+
+        if not self._is_group_allowed(group_id):
+            return
 
         if message == "开启解析":
             session_id = f"group_{group_id}" if group_id else f"user_{event.user_id}"

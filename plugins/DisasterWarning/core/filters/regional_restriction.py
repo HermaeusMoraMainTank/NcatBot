@@ -1,5 +1,5 @@
 """
-区域推送限制：按关键词与可选经纬度矩形过滤（默认广东省范围）。
+区域推送限制：按关键词与可选经纬度矩形过滤（默认深圳市范围）。
 """
 
 from __future__ import annotations
@@ -12,12 +12,12 @@ from ...models.models import EarthquakeData, TsunamiData, WeatherAlarmData
 
 _log = get_log()
 
-# 广东省陆地及近海大致外接矩形（WGS84），可与关键词匹配二选一或组合
-_DEFAULT_GUANGDONG_BOX: dict[str, float] = {
-    "min_lat": 20.12,
-    "max_lat": 25.55,
-    "min_lon": 109.55,
-    "max_lon": 117.45,
+# 深圳市及近海大致外接矩形（WGS84），可与关键词匹配二选一或组合
+_DEFAULT_SHENZHEN_BOX: dict[str, float] = {
+    "min_lat": 22.40,
+    "max_lat": 22.90,
+    "min_lon": 113.70,
+    "max_lon": 114.70,
 }
 
 
@@ -29,7 +29,7 @@ class RegionalRestrictionFilter:
         raw_kw = config.get("keywords", [])
         self.keywords = [str(k).strip() for k in raw_kw if k and str(k).strip()]
         self.use_bbox = bool(config.get("use_bounding_box", True))
-        bb = {**_DEFAULT_GUANGDONG_BOX, **(config.get("bounding_box") or {})}
+        bb = {**_DEFAULT_SHENZHEN_BOX, **(config.get("bounding_box") or {})}
         self.min_lat = float(bb["min_lat"])
         self.max_lat = float(bb["max_lat"])
         self.min_lon = float(bb["min_lon"])
