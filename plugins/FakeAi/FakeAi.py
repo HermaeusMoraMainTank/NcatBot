@@ -29,8 +29,31 @@ from .favorability import (
     get_reply_probability,
     get_tier,
 )
+from .cognition import DEFAULT_COGNITION
+from .expression import (
+    EXPRESSION_ENABLED,
+    MAX_STICKERS_PER_REPLY,
+    extract_stickers,
+    sticker_catalog,
+)
+from .interaction import (
+    DEFAULT_CONFIG,
+    InteractionState,
+    analyst_decide,
+    state_store,
+)
+from .interaction.analyst import AnalystDecision
+from .settings import FAVOR_SKIP_IDS, FROZEN_USERS, apply_from_plugin, is_admin
 
 _log = get_log()
+BOT_QQ = DEFAULT_CONFIG.bot_qq
+
+
+def _stamp_reply_dict(payload: dict) -> str:
+    """写入 ReplyCache 用 JSON，自动补 ts。"""
+    if "ts" not in payload:
+        payload["ts"] = time.time()
+    return json.dumps(payload, ensure_ascii=False)
 
 
 def _mask_qq_for_ranking_display(user_id: object) -> str:
@@ -69,33 +92,34 @@ def add_plugin_sent_reply(
         sub_source: 子类型，如 repeat / random / speak / other
     """
     reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
-    reply_json = json.dumps(
+    reply_json = _stamp_reply_dict(
         {
             "name": "蓝晴",
             "id": "0",
             "content": content,
             "source": plugin_source,
             "sub_source": sub_source,
-        },
-        ensure_ascii=False,
+        }
     )
     reply_cache.add_reply(reply_json)
 
 
 # ========== 全局配置参数 ==========
-trigger_interval = 600
+trigger_interval = 10  # 群触发冷却（秒），按群独立
 group_reply_caches: Dict[int, "ReplyCache"] = {}  # 存储每个群的 ReplyCache
 last_trigger_times: Dict[int, datetime] = {}  # 存储每个群的上次触发时间
 user_trigger_times: Dict[int, datetime] = {}  # 存储每个用户的上次触发时间
-enable_group_cd = False  # 群聊冷却开关
+enable_group_cd = True  # 群聊冷却开关（防止同群连续触发）
 enable_user_cd = False  # 用户冷却开关
 enable_callback = False  # 回调功能开关
 callback_timeout = 15  # 回调超时时间（秒）
+# 同群生成中互斥：LLM 耗时常超过群 CD，避免并发展开第二条回复流水线
+_inflight_groups: set = set()
 
-# 被动触发概率（非@、非「蓝晴」的普通群消息）
-PASSIVE_TRIGGER_BASE_PROB = 0.08
+# 被动触发：已改为状态机 + 分析员；裸 8% 废弃（见 interaction.config.fallback_random_prob）
+PASSIVE_TRIGGER_BASE_PROB = 0.0  # noqa: 保留名以免外部引用炸；实际不再使用
 
-# 允许 FakeAi 响应的群号（空集合表示不限制）
+# 允许 FakeAi 响应的群号（空集合表示不限制）— on_load / settings 会覆盖
 FAKEAI_ALLOWED_GROUPS = frozenset({853963912, 719518427, 585479130, 1064163905})
 
 
@@ -169,13 +193,16 @@ async def should_reply_by_favorability(user_id: int, skip_users: list = None) ->
         是否应该回复
     """
     # 冻结用户：回复概率为 0
-    frozen_users = [794383252]
-    if user_id in frozen_users:
+    if int(user_id) in FROZEN_USERS:
         _log.info(f"[FakeAi] 冻结用户 {user_id}，回复概率为 0%，不回复")
         return False
 
     # 特定用户跳过检查（管理员等）
     if skip_users and str(user_id) in [str(u) for u in skip_users]:
+        return True
+    if is_admin(user_id):
+        return True
+    if str(user_id) in FAVOR_SKIP_IDS:
         return True
 
     try:
@@ -273,8 +300,8 @@ class FakeAi(NcatBotPlugin):
     # Meme 关键词列表（动态加载）
     meme_keywords = []
 
-    # 冻结用户列表（AI功能不生效，只保留查询好感度）
-    frozen_users = [794383252]
+    # 冻结用户列表（AI功能不生效，只保留查询好感度）— 由 settings 覆盖
+    frozen_users = list(FROZEN_USERS)
 
     # 存储每个群最近的消息，用于生成总结
     _message_buffer: Dict[int, List[Dict]] = {}
@@ -293,6 +320,11 @@ class FakeAi(NcatBotPlugin):
     async def on_load(self):
         """加载插件"""
         _fake_ai_plugin_instance[0] = self
+        try:
+            apply_from_plugin(self)
+        except Exception as e:
+            _log.error("[FakeAi] 配置加载失败，使用代码默认值: %s", e)
+
         # 初始化长期记忆数据库
         await memory_manager.init_db()
         _log.info("[FakeAi] 长期记忆数据库初始化完成")
@@ -320,6 +352,21 @@ class FakeAi(NcatBotPlugin):
             callback=self._update_user_impressions,
         )
         _log.info("[FakeAi] 用户印象更新任务已注册")
+
+        if DEFAULT_COGNITION.sleep_enabled:
+            self.add_scheduled_task(
+                "fakeai_memory_consolidate",
+                "60m",
+                callback=self._consolidate_memories,
+            )
+            _log.info("[FakeAi] 记忆巩固任务已注册")
+
+        # 贴纸目录：apply_from_plugin 已 reload；此处仅兜底再扫一次
+        try:
+            n = sticker_catalog.reload()
+            _log.info("[FakeAi] 贴纸目录已加载: %s", n)
+        except Exception as e:
+            _log.warning("[FakeAi] 贴纸目录加载失败: %s", e)
 
         # 加载 meme 关键词
         try:
@@ -522,6 +569,14 @@ class FakeAi(NcatBotPlugin):
             ):
                 return True
         return False
+
+    async def _consolidate_memories(self):
+        try:
+            await memory_manager.init_db()
+            result = await memory_manager.consolidate_weak_memories()
+            _log.info("[FakeAi] 定时巩固: %s", result)
+        except Exception as e:
+            _log.error("[FakeAi] 记忆巩固失败: %s", e)
 
     async def _process_image_descriptions(
         self, content: list, group_id: int = None, user_id: str = None
@@ -848,8 +903,8 @@ class FakeAi(NcatBotPlugin):
         try:
             sender_id = input.sender.user_id
 
-            # 只允许管理员查询（273421673）
-            if str(sender_id) != "273421673":
+            # 只允许管理员查询
+            if not is_admin(sender_id):
                 await self.api.qq.post_group_msg(
                     group_id=input.group_id, text="只有管理员可以查询知识库哦~"
                 )
@@ -1275,14 +1330,12 @@ class FakeAi(NcatBotPlugin):
                 ):
                     content.append({"type": "image", "data": {"raw": str(msg_segment)}})
 
-        is_at_message = "[CQ:at,qq=3555202423]" in input.raw_message
+        is_at_message = f"[CQ:at,qq={BOT_QQ}]" in input.raw_message
         clean_message = re.sub(r"\[CQ:[^\]]+\]", "", input.raw_message).strip()
-        # 文本里提到「蓝晴」也视为主动触发（与 @ 同等）
-        is_name_mention = "蓝晴" in clean_message and not is_at_message
 
-        # 273421673 回复「撤回」/「@蓝晴 撤回」为管理指令，不触发 AI
+        # 管理员回复「撤回」为管理指令，不触发 AI
         if (
-            str(sender_id) == "273421673"
+            is_admin(sender_id)
             and (
                 "[CQ:reply," in input.raw_message
                 or any(isinstance(s, Reply) for s in input.message)
@@ -1316,14 +1369,13 @@ class FakeAi(NcatBotPlugin):
                     content, group_id=group_id, user_id=sender_id
                 )
 
-                reply_json = json.dumps(
+                reply_json = _stamp_reply_dict(
                     {
                         "name": sender_name,
                         "id": sender_id,
                         "content": content,
                         "group_nickname": input.sender.card or sender_name,
-                    },
-                    ensure_ascii=False,
+                    }
                 )
                 reply_cache.add_reply(reply_json)
                 # 添加到长期记忆缓冲区
@@ -1339,9 +1391,7 @@ class FakeAi(NcatBotPlugin):
 
         # 判断是否是功能测试的指令
         if input.raw_message == "蓝晴说话":
-            if sender_id in [
-                "273421673",
-            ] or _is_fakeai_group_allowed(group_id):
+            if is_admin(sender_id) or _is_fakeai_group_allowed(group_id):
                 answer = await answer_ai(
                     group_id, group_reply_caches, str(sender_id), "test"
                 )
@@ -1356,12 +1406,12 @@ class FakeAi(NcatBotPlugin):
 
         # 处理查看角色印象命令（支持 @某人 查看别人的印象）
         if "蓝晴印象" in input.raw_message:
-            # 提取消息中被@的用户（排除机器人自己 3555202423）
+            # 提取消息中被@的用户（排除机器人自己）
             target_user_id = None
             for msg_segment in input.message:
                 if isinstance(msg_segment, At):
                     uid = msg_segment.user_id
-                    if uid and str(uid) != "3555202423":
+                    if uid and str(uid) != str(BOT_QQ):
                         target_user_id = int(uid)
                         break
             await self.handle_impression_query(input, target_user_id)
@@ -1388,97 +1438,154 @@ class FakeAi(NcatBotPlugin):
             await self.handle_vision_test(input)
             return
 
-        if is_at_message or is_name_mention:
-            # 检查用户CD（除了273421673用户）
-            if sender_id != "273421673" and not check_user_cd(sender_id):
-                return
-
-            reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
-
-            # 对图片进行识别描述（只处理最后一张，异步不阻塞太久）
-            content = await self._process_image_descriptions(
-                content, group_id=group_id, user_id=sender_id
-            )
-
-            # 创建 JSON 格式的字符串并添加到 replyCache 中
-            reply_json = json.dumps(
-                {
-                    "name": sender_name,
-                    "id": sender_id,
-                    "content": content,
-                    "group_nickname": input.sender.card or sender_name,
-                },
-                ensure_ascii=False,
-            )
-            reply_cache.add_reply(reply_json)
-            # 添加到长期记忆缓冲区
-            self._add_to_message_buffer(group_id, int(sender_id), sender_name, content)
-
-            # 根据好感度判断是否回复（管理员跳过检查）
-            skip_users = ["273421673", "635773721"]  # 管理员列表
-            if not await should_reply_by_favorability(int(sender_id), skip_users):
-                # 不回复，但可以发一个冷淡的表情或不回复
-                return
-
-            answer = await answer_ai(
-                group_id, group_reply_caches, str(sender_id), "active"
-            )
-            _log.info(answer)
-            await send_typing_response(self, input, answer)
-
-            # 如果启用了回调功能，添加用户到等待列表
-            if enable_callback:
-                callback_state.add_waiting_user(sender_id, group_id)
-
-            # 更新用户触发时间
-            if sender_id != "273421673":
-                user_trigger_times[sender_id] = datetime.now()
-            return
-
-        # 获取或创建对应群的 ReplyCache
+        # —— 统一入账后走状态机（取消裸 8% 抽卡）——
         reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
-
-        # 创建 JSON 格式的字符串并添加到 replyCache 中
-        reply_json = json.dumps(
+        content = await self._process_image_descriptions(
+            content, group_id=group_id, user_id=sender_id
+        )
+        reply_json = _stamp_reply_dict(
             {
                 "name": sender_name,
                 "id": sender_id,
                 "content": content,
                 "group_nickname": input.sender.card or sender_name,
-            },
-            ensure_ascii=False,
+            }
         )
         reply_cache.add_reply(reply_json)
-        # 添加到长期记忆缓冲区
         self._add_to_message_buffer(group_id, int(sender_id), sender_name, content)
 
-        # 检查冷却时间
-        if not check_cd(group_id):
-            return
-
-        # 随机触发逻辑（文本含「蓝晴」已走上方主动触发，此处不再单独提升概率）
-        if random.random() > PASSIVE_TRIGGER_BASE_PROB:
-            return
-
-        # 根据好感度判断是否回复（被动触发也检查）
-        skip_users = ["273421673", "635773721"]  # 管理员列表
-        if not await should_reply_by_favorability(int(sender_id), skip_users):
-            return
-
-        # 记录本次触发的时间
-        last_trigger_times[group_id] = datetime.now()
-        answer = await answer_ai(
-            group_id, group_reply_caches, str(sender_id), "passive"
+        is_at_bot = is_at_message or any(
+            isinstance(s, At) and str(getattr(s, "user_id", "")) == BOT_QQ
+            for s in input.message
         )
-        _log.info(answer)
-        reply_cache.add_reply(answer)
-        if not answer or answer.strip() == "" or answer == '""':
-            return
-        await send_typing_response(self, input, answer)
+        det = state_store.determine(
+            int(group_id),
+            reply_cache.get_replies(),
+            clean_message,
+            is_at_bot,
+        )
+        _triggered = (
+            det.state in (InteractionState.SUMMONED, InteractionState.FAMILIAR)
+            or det.is_empty_summon
+        )
+        _state_msg = (
+            "[FakeAi] group=%s state=%s reason=%s empty_summon=%s",
+            group_id,
+            det.state.value,
+            det.reason,
+            det.is_empty_summon,
+        )
+        if DEFAULT_CONFIG.verbose_log or _triggered:
+            _log.info(*_state_msg)
+        else:
+            _log.debug(*_state_msg)
 
-        # 如果启用了回调功能，添加用户到等待列表
-        if enable_callback:
-            callback_state.add_waiting_user(sender_id, group_id)
+        if det.state in (InteractionState.NOT_PRESENT, InteractionState.OBSERVATION):
+            return
+
+        if det.is_empty_summon:
+            _log.info("[FakeAi] 空召唤，不回复 group=%s", group_id)
+            return
+
+        # 召唤连打：用户 CD + 尽早占群 CD（防并发双回）
+        if det.state == InteractionState.SUMMONED:
+            if not is_admin(sender_id) and not check_user_cd(sender_id):
+                return
+            if not is_admin(sender_id) and not try_acquire_group_cd(group_id):
+                return
+
+        gid = int(group_id)
+        # LLM 常 > 群 CD：生成中禁止同群再开一条完整流水线（本轮双表情根因）
+        if gid in _inflight_groups:
+            _log.info("[FakeAi] group=%s 上轮仍在生成，跳过", gid)
+            return
+        _inflight_groups.add(gid)
+        try:
+            decision = await analyst_decide(
+                det.state,
+                reply_cache.get_replies(),
+                config=DEFAULT_CONFIG,
+                is_empty_summon=False,
+            )
+
+            # FAMILIAR：分析员失败时过渡 fallback
+            if (
+                not decision.should_reply
+                and det.state == InteractionState.FAMILIAR
+                and decision.silence_reason in ("analyst_error", "parse_error")
+                and DEFAULT_CONFIG.fallback_random_prob > 0
+                and random.random() < DEFAULT_CONFIG.fallback_random_prob
+            ):
+                _log.warning(
+                    "[FakeAi] fallback used reason=%s group=%s prob=%s",
+                    decision.silence_reason,
+                    group_id,
+                    DEFAULT_CONFIG.fallback_random_prob,
+                )
+                decision = AnalystDecision(
+                    should_reply=True,
+                    urgency="low",
+                    reply_strategy="轻轻接一句氛围，别抢戏",
+                    topic="群聊热闹",
+                    source="fallback",
+                )
+
+            if not decision.should_reply:
+                _log.info(
+                    "[FakeAi] analyst 否决 group=%s source=%s silence=%s",
+                    group_id,
+                    decision.source,
+                    decision.silence_reason,
+                )
+                state_store.enter_not_present(gid)
+                return
+
+            if not await should_reply_by_favorability(
+                int(sender_id), list(FAVOR_SKIP_IDS)
+            ):
+                state_store.enter_not_present(gid)
+                return
+
+            # FAMILIAR：通过决策后再占群 CD
+            if det.state == InteractionState.FAMILIAR:
+                if not is_admin(sender_id) and not try_acquire_group_cd(group_id):
+                    return
+
+            trigger_type = (
+                "active" if det.state == InteractionState.SUMMONED else "passive"
+            )
+            answer = await answer_ai(
+                group_id,
+                group_reply_caches,
+                str(sender_id),
+                trigger_type,
+                decision=decision,
+            )
+            _log.info(answer)
+            if not answer or str(answer).strip() in ("", '""'):
+                state_store.enter_not_present(gid)
+                return
+
+            await send_typing_response(self, input, answer)
+            state_store.enter_observation(
+                gid,
+                from_familiar=(det.state == InteractionState.FAMILIAR),
+            )
+            try:
+                await maybe_auto_remember(
+                    clean_message,
+                    user_id=int(sender_id) if str(sender_id).isdigit() else None,
+                    group_id=gid,
+                )
+            except Exception as e:
+                _log.debug("[FakeAi] auto_remember 失败: %s", e)
+
+            if enable_callback:
+                callback_state.add_waiting_user(sender_id, group_id)
+            if not is_admin(sender_id):
+                user_trigger_times[sender_id] = datetime.now()
+        finally:
+            _inflight_groups.discard(gid)
 
 
 async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -> None:
@@ -1490,6 +1597,17 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
         except json.JSONDecodeError:
             # 如果不是 JSON 格式，直接使用原始内容
             content = answer
+
+        sticker_paths = []
+        if EXPRESSION_ENABLED and isinstance(content, str):
+            content, sticker_paths = extract_stickers(
+                content, max_count=MAX_STICKERS_PER_REPLY
+            )
+            if sticker_paths:
+                _log.info(
+                    "[FakeAi] 将另发贴纸: %s",
+                    [p.stem for p in sticker_paths],
+                )
 
         # 使用正则表达式分割句子
         # 先用句号、问号、感叹号分割，将逗号替换为空格，然后去掉句号
@@ -1634,11 +1752,19 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
                 message = MessageChain(message_elements)
                 await self.api.qq.post_group_msg(group_id=input.group_id, rtf=message)
 
+        # 贴纸单独成消息：用动画表情（image.sub_type=1），勿当普通图
+        for spath in sticker_paths:
+            try:
+                await self.api.qq.send_group_sticker(
+                    input.group_id, str(spath)
+                )
+            except Exception as e:
+                _log.error("[FakeAi] 贴纸发送失败 %s: %s", spath, e)
+
         # 将AI的回复加入到reply_cache中
         reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
-        reply_json = json.dumps(
-            {"name": "蓝晴", "id": "0", "content": content},
-            ensure_ascii=False,
+        reply_json = _stamp_reply_dict(
+            {"name": "蓝晴", "id": "0", "content": content}
         )
         reply_cache.add_reply(reply_json)
 
@@ -1665,18 +1791,32 @@ def find_user_id_by_name(name: str, group_id: int) -> Optional[int]:
     return None  # 未找到匹配的用户
 
 
-def check_cd(group_id: int) -> bool:
+def try_acquire_group_cd(group_id: int) -> bool:
+    """原子检查并占用群 CD。True=可触发且已记时，False=冷却中。"""
     if not enable_group_cd:
-        return True  # 如果群聊冷却被禁用，直接返回True
+        return True
+    now = datetime.now()
+    last = last_trigger_times.get(group_id)
+    if last:
+        remaining = trigger_interval - (now - last).total_seconds()
+        if remaining > 0:
+            _log.info(f"群CD中: {group_id}, 剩余 {remaining:.2f}秒")
+            return False
+    last_trigger_times[group_id] = now
+    return True
+
+
+def check_cd(group_id: int) -> bool:
+    """仅检查群 CD 是否已过（不占用）。"""
+    if not enable_group_cd:
+        return True
     last_trigger_time = last_trigger_times.get(group_id)
     if not last_trigger_time:
-        return True  # 如果没有记录，则表示冷却完成
-
-    now = datetime.now()
-    remaining_time = trigger_interval - (now - last_trigger_time).total_seconds()
+        return True
+    remaining_time = trigger_interval - (
+        datetime.now() - last_trigger_time
+    ).total_seconds()
     _log.info(f"群CD检查: {group_id}, 剩余时间: {remaining_time:.2f}秒")
-
-    # CD 冷却完成
     return remaining_time <= 0
 
 
@@ -1757,13 +1897,22 @@ def _reply_content_to_text(content) -> str:
 def update_yaml_with_replies(yaml_data: Dict, reply_cache: ReplyCache) -> Dict:
     replies = reply_cache.get_replies()
     if replies:
-        # 将每条回复格式化为包含详细信息的 JSON 字符串，并对「群聊学习插件」发送的做标注
+        # 可读发言人格式（轻量 I2）+ 保留 JSON 行供兼容
         lines = []
+        readable = []
         for reply_json in replies:
             try:
                 data = json.loads(reply_json)
                 source = data.get("source", "")
                 sub_source = data.get("sub_source", "")
+                name = data.get("group_nickname") or data.get("name", "")
+                uid = str(data.get("id", ""))
+                text = _reply_content_to_text(data.get("content", ""))
+                ts = data.get("ts")
+                if isinstance(ts, (int, float)) and ts > 0:
+                    stamp = datetime.fromtimestamp(ts).strftime("%H:%M")
+                else:
+                    stamp = "--:--"
 
                 if source:
                     sub_map = {
@@ -1775,15 +1924,19 @@ def update_yaml_with_replies(yaml_data: Dict, reply_cache: ReplyCache) -> Dict:
                     sub_display = sub_map.get(sub_source, sub_source or "")
                     tag = source + (f"-{sub_display}" if sub_display else "")
                     data["name"] = f"{data.get('name', '')}(插件消息:{tag}，并非你生成)"
+                    name = f"{name}(插件)"
 
-                # 删除辅助字段以免干扰
+                who = "蓝晴" if uid == "0" else name
+                readable.append(f"[{stamp}] {who}: {text}")
+
                 data.pop("source", None)
                 data.pop("sub_source", None)
                 lines.append(json.dumps(data, ensure_ascii=False))
             except (json.JSONDecodeError, TypeError):
                 lines.append(reply_json)
-        new_history = "\n".join(lines)
-        last_reply = lines[-1] if lines else ""
+                readable.append(reply_json)
+        new_history = "\n".join(readable) if readable else "\n".join(lines)
+        last_reply = readable[-1] if readable else (lines[-1] if lines else "")
         replace_placeholder(yaml_data, "{history_new}", new_history)
         replace_placeholder(yaml_data, "{history_last}", last_reply)
     return yaml_data
@@ -1820,11 +1973,58 @@ def remove_thinking_process(response: str) -> str:
     return "\n".join(filtered_lines)
 
 
+def try_extract_remember_phrase(clean_text: str) -> Optional[str]:
+    """从「记住…」类话语提取待铭记短句。"""
+    if not clean_text:
+        return None
+    # 一次性行程/闲聊粗过滤
+    ephemeral = ("现在", "马上", "下楼", "等会", "一会儿", "一会")
+    m = re.search(
+        r"(?:请?记住|记得一下|记一下)[，,:\s]*(.+)$",
+        clean_text.strip(),
+    )
+    if not m:
+        return None
+    judgment = m.group(1).strip().strip("。.!！?？")
+    if len(judgment) < 2:
+        return None
+    if any(w in judgment for w in ephemeral) and "以后" not in judgment and "总是" not in judgment:
+        return None
+    return judgment[:120]
+
+
+async def maybe_auto_remember(
+    clean_text: str,
+    *,
+    user_id: Optional[int],
+    group_id: Optional[int],
+) -> None:
+    if not DEFAULT_COGNITION.auto_remember_on_phrase:
+        return
+    if not DEFAULT_COGNITION.memory_record_enabled:
+        return
+    judgment = try_extract_remember_phrase(clean_text)
+    if not judgment:
+        return
+    scope = f"user:{user_id}" if user_id else "public"
+    result = await memory_manager.remember(
+        judgment,
+        reasoning="用户明确要求记住",
+        tags=["用户嘱托"],
+        strength=70,
+        memory_type="preference",
+        scope=scope,
+        source_user_id=user_id,
+    )
+    _log.info("[FakeAi] auto_remember %s scope=%s → %s", judgment, scope, result)
+
+
 async def answer_ai(
     group_id: int,
     group_reply_caches: Dict[int, ReplyCache],
     user_id: str = None,
     trigger_type: str = "active",
+    decision: Optional[AnalystDecision] = None,
 ) -> str:
     # 确保数据库已初始化
     await memory_manager.init_db()
@@ -1864,6 +2064,52 @@ async def answer_ai(
         _log.debug(f"[FakeAi] 获取用户印象失败: {e}")
         replace_placeholder(yaml_data, "{user_impressions}", "（暂无用户印象）")
 
+    # 注入相关主动记忆
+    mem_text = ""
+    try:
+        if (
+            DEFAULT_COGNITION.memory_record_enabled
+            and DEFAULT_COGNITION.auto_recall_enabled
+        ):
+            reply_cache_m = group_reply_caches.get(group_id, ReplyCache())
+            recent_bits = []
+            for reply_json in reply_cache_m.get_replies()[-8:]:
+                try:
+                    rd = json.loads(reply_json)
+                    if str(rd.get("id", "")) == "0":
+                        continue
+                    t = _reply_content_to_text(rd.get("content", ""))
+                    if t:
+                        recent_bits.append(t)
+                except (json.JSONDecodeError, TypeError, ValueError):
+                    continue
+            topic_q = ""
+            if decision is not None and decision.topic:
+                topic_q = decision.topic
+            if not topic_q:
+                topic_q = " ".join(recent_bits)[-120:]
+            uid_i = int(user_id) if user_id and str(user_id).isdigit() else None
+            mem_text = await memory_manager.get_memories_text(
+                topic_q,
+                user_id=uid_i,
+                group_id=int(group_id) if group_id else None,
+                limit=DEFAULT_COGNITION.auto_recall_limit,
+                max_length=300,
+            )
+            if mem_text:
+                replace_placeholder(yaml_data, "{related_memories}", mem_text)
+                _log.info("[FakeAi] 注入主动记忆: %s", mem_text[:100])
+            else:
+                replace_placeholder(yaml_data, "{related_memories}", "（暂无相关记忆）")
+                mem_text = ""
+        else:
+            replace_placeholder(yaml_data, "{related_memories}", "（暂无相关记忆）")
+            mem_text = ""
+    except Exception as e:
+        _log.debug(f"[FakeAi] 获取主动记忆失败: {e}")
+        replace_placeholder(yaml_data, "{related_memories}", "（暂无相关记忆）")
+        mem_text = ""
+
     # 注入相关知识（从知识库检索与当前话题相关的知识）
     try:
         # 从最近的消息中提取关键内容用于检索
@@ -1901,7 +2147,7 @@ async def answer_ai(
 
         if query_text:
             related_knowledge = await memory_manager.get_knowledge_text(
-                query_text, max_length=300
+                query_text, max_length=DEFAULT_COGNITION.knowledge_inject_max_chars
             )
             if related_knowledge:
                 replace_placeholder(yaml_data, "{related_knowledge}", related_knowledge)
@@ -1919,6 +2165,23 @@ async def answer_ai(
     # 调用 AIUtil 的 search_deepseek 方法
     keyword = yaml_data.get("input", "")
     prompt = yaml_data.get("system", "")
+    if decision is not None and decision.should_reply:
+        inject = decision.inject_block()
+        if inject:
+            prompt = (prompt or "") + inject
+    # YAML 若无 {related_memories} 占位，追加一块，避免静默丢失
+    if mem_text and "{related_memories}" not in (yaml_data.get("system") or ""):
+        prompt = (prompt or "") + f"\n\n【相关记忆】\n{mem_text}"
+    if EXPRESSION_ENABLED:
+        sticker_block = sticker_catalog.prompt_block()
+        if sticker_block:
+            prompt = (prompt or "") + sticker_block
+            _log.info(
+                "[FakeAi] 已注入贴纸提示 names=%s",
+                len(sticker_catalog.names()),
+            )
+        else:
+            _log.warning("[FakeAi] 贴纸目录为空，跳过表情注入")
     ai_response = await AiUtil.search_deepseek(keyword, prompt)
 
     # 处理AI响应

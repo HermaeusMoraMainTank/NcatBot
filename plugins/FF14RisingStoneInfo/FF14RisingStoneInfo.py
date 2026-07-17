@@ -553,7 +553,7 @@ class FF14RisingStoneInfo(NcatBotPlugin):
             draw.text((420, y), achieve_time, fill="black", font=font)
             y += 60
 
-    @registrar.qq.on_group_message()
+    # 命令已迁移到 Tataru 插件（石之家 玩家 …）；保留逻辑供其复用，不在此注册事件。
     async def handle_ff14_rising_stone(self, input: GroupMessage):
         """处理查询命令"""
         message_parts = input.raw_message.split(" ")

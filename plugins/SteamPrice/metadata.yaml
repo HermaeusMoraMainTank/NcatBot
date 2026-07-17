@@ -1,0 +1,4 @@
+version: v1.0.0
+name: SteamPrice
+# 上游 AstrBot 插件（同步更新对照用）
+upstream: https://github.com/penguin-madagascar/astrbot_plugin_steam_price_heybox

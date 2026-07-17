@@ -1,0 +1,1031 @@
+[
+  {
+    "id": 279305871,
+    "characterId": "10101",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCB_Sinner_Yi_Sang",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCB_Sinner_Yi_Sang_Full.png"
+  },
+  {
+    "id": 130710909,
+    "characterId": "10201",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCB_Sinner_Faust",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCB_Sinner_Faust_Full.png"
+  },
+  {
+    "id": 574601052,
+    "characterId": "10301",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCB_Sinner_Don_Quixote",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCB_Sinner_Don_Quixote_Full.png"
+  },
+  {
+    "id": 629472804,
+    "characterId": "10401",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCB_Sinner_Ryōshū",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCB_Sinner_Ry%C5%8Dsh%C5%AB_Full.png"
+  },
+  {
+    "id": 165406077,
+    "characterId": "10501",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCB_Sinner_Meursault",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCB_Sinner_Meursault_Full.png"
+  },
+  {
+    "id": 719229664,
+    "characterId": "10601",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCB_Sinner_Hong_Lu",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCB_Sinner_Hong_Lu_Full.png"
+  },
+  {
+    "id": 315140018,
+    "characterId": "10701",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCB_Sinner_Heathcliff",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCB_Sinner_Heathcliff_Full.png"
+  },
+  {
+    "id": 545089910,
+    "characterId": "10801",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCB_Sinner_Ishmael",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCB_Sinner_Ishmael_Full.png"
+  },
+  {
+    "id": 995144758,
+    "characterId": "10901",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCB_Sinner_Rodion",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCB_Sinner_Rodion_Full.png"
+  },
+  {
+    "id": 844351448,
+    "characterId": "11001",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCB_Sinner_Sinclair",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCB_Sinner_Sinclair_Full.png"
+  },
+  {
+    "id": 100599126,
+    "characterId": "11101",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCB_Sinner_Outis",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCB_Sinner_Outis_Full.png"
+  },
+  {
+    "id": 980459712,
+    "characterId": "11201",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCB_Sinner_Gregor",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCB_Sinner_Gregor_Full.png"
+  },
+  {
+    "id": 473684073,
+    "characterId": "10102",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Seven_Assoc._South_Section_6_Yi_Sang",
+    "image_url": "https://limbuscompany.wiki.gg/images/Seven_Assoc._South_Section_6_Yi_Sang_Full.png"
+  },
+  {
+    "id": 909759446,
+    "characterId": "10202",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "W_Corp._L2_Cleanup_Agent_Faust",
+    "image_url": "https://limbuscompany.wiki.gg/images/W_Corp._L2_Cleanup_Agent_Faust_Full.png"
+  },
+  {
+    "id": 554504575,
+    "characterId": "10302",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "W_Corp._L3_Cleanup_Agent_Don_Quixote",
+    "image_url": "https://limbuscompany.wiki.gg/images/W_Corp._L3_Cleanup_Agent_Don_Quixote_Full.png"
+  },
+  {
+    "id": 49604778,
+    "characterId": "10402",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Seven_Assoc._South_Section_6_Ryōshū",
+    "image_url": "https://limbuscompany.wiki.gg/images/Seven_Assoc._South_Section_6_Ry%C5%8Dsh%C5%AB_Full.png"
+  },
+  {
+    "id": 481765869,
+    "characterId": "10502",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Liu_Assoc._South_Section_6_Meursault",
+    "image_url": "https://limbuscompany.wiki.gg/images/Liu_Assoc._South_Section_6_Meursault_Full.png"
+  },
+  {
+    "id": 982422270,
+    "characterId": "10602",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Kurokumo_Clan_Wakashu_Hong_Lu",
+    "image_url": "https://limbuscompany.wiki.gg/images/Kurokumo_Clan_Wakashu_Hong_Lu_Full.png"
+  },
+  {
+    "id": 900832693,
+    "characterId": "10702",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Shi_Assoc._South_Section_5_Heathcliff",
+    "image_url": "https://limbuscompany.wiki.gg/images/Shi_Assoc._South_Section_5_Heathcliff_Full.png"
+  },
+  {
+    "id": 672904517,
+    "characterId": "10802",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "R_Corp._4th_Pack_Reindeer_Ishmael",
+    "image_url": "https://limbuscompany.wiki.gg/images/R_Corp._4th_Pack_Reindeer_Ishmael_Full.png"
+  },
+  {
+    "id": 607000727,
+    "characterId": "10902",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Kurokumo_Clan_Wakashu_Rodion",
+    "image_url": "https://limbuscompany.wiki.gg/images/Kurokumo_Clan_Wakashu_Rodion_Full.png"
+  },
+  {
+    "id": 617455424,
+    "characterId": "11002",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Blade_Lineage_Salsu_Sinclair",
+    "image_url": "https://limbuscompany.wiki.gg/images/Blade_Lineage_Salsu_Sinclair_Full.png"
+  },
+  {
+    "id": 224280907,
+    "characterId": "11102",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Blade_Lineage_Salsu_Outis",
+    "image_url": "https://limbuscompany.wiki.gg/images/Blade_Lineage_Salsu_Outis_Full.png"
+  },
+  {
+    "id": 778245211,
+    "characterId": "11202",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Liu_Assoc._South_Section_6_Gregor",
+    "image_url": "https://limbuscompany.wiki.gg/images/Liu_Assoc._South_Section_6_Gregor_Full.png"
+  },
+  {
+    "id": 131515781,
+    "characterId": "10103",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Blade_Lineage_Salsu_Yi_Sang",
+    "image_url": "https://limbuscompany.wiki.gg/images/Blade_Lineage_Salsu_Yi_Sang_Full.png"
+  },
+  {
+    "id": 550801506,
+    "characterId": "10203",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Lobotomy_Corp._Remnant_Faust",
+    "image_url": "https://limbuscompany.wiki.gg/images/Lobotomy_Corp._Remnant_Faust_Full.png"
+  },
+  {
+    "id": 170153139,
+    "characterId": "10403",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Kurokumo_Clan_Wakashu_Ryōshū",
+    "image_url": "https://limbuscompany.wiki.gg/images/Kurokumo_Clan_Wakashu_Ry%C5%8Dsh%C5%AB_Full.png"
+  },
+  {
+    "id": 601298437,
+    "characterId": "10503",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "W_Corp._L2_Cleanup_Agent_Meursault",
+    "image_url": "https://limbuscompany.wiki.gg/images/W_Corp._L2_Cleanup_Agent_Meursault_Full.png"
+  },
+  {
+    "id": 740552046,
+    "characterId": "10603",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Tingtang_Gang_Gangleader_Hong_Lu",
+    "image_url": "https://limbuscompany.wiki.gg/images/Tingtang_Gang_Gangleader_Hong_Lu_Full.png"
+  },
+  {
+    "id": 945424999,
+    "characterId": "10703",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "R_Corp._4th_Pack_Rabbit_Heathcliff",
+    "image_url": "https://limbuscompany.wiki.gg/images/R_Corp._4th_Pack_Rabbit_Heathcliff_Full.png"
+  },
+  {
+    "id": 949721650,
+    "characterId": "10803",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Shi_Assoc._South_Section_5_Ishmael",
+    "image_url": "https://limbuscompany.wiki.gg/images/Shi_Assoc._South_Section_5_Ishmael_Full.png"
+  },
+  {
+    "id": 799601520,
+    "characterId": "10903",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCCB_Assistant_Manager_Rodion",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCCB_Assistant_Manager_Rodion_Full.png"
+  },
+  {
+    "id": 365375286,
+    "characterId": "11003",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Zwei_Assoc._South_Section_6_Sinclair",
+    "image_url": "https://limbuscompany.wiki.gg/images/Zwei_Assoc._South_Section_6_Sinclair_Full.png"
+  },
+  {
+    "id": 156852110,
+    "characterId": "11103",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "G_Corp._Head_Manager_Outis",
+    "image_url": "https://limbuscompany.wiki.gg/images/G_Corp._Head_Manager_Outis_Full.png"
+  },
+  {
+    "id": 762488254,
+    "characterId": "11203",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "G_Corp._Manager_Corporal_Gregor",
+    "image_url": "https://limbuscompany.wiki.gg/images/G_Corp._Manager_Corporal_Gregor_Full.png"
+  },
+  {
+    "id": 586653780,
+    "characterId": "10804",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCCB_Assistant_Manager_Ishmael",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCCB_Assistant_Manager_Ishmael_Full.png"
+  },
+  {
+    "id": 684493787,
+    "characterId": "11004",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Los_Mariachis_Jefe_Sinclair",
+    "image_url": "https://limbuscompany.wiki.gg/images/Los_Mariachis_Jefe_Sinclair_Full.png"
+  },
+  {
+    "id": 831172276,
+    "characterId": "10303",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Shi_Assoc._South_Section_5_Director_Don_Quixote",
+    "image_url": "https://limbuscompany.wiki.gg/images/Shi_Assoc._South_Section_5_Director_Don_Quixote_Full.png"
+  },
+  {
+    "id": 61433406,
+    "characterId": "10504",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "N_Corp._Großhammer_Meursault",
+    "image_url": "https://limbuscompany.wiki.gg/images/N_Corp._Gro%C3%9Fhammer_Meursault_Full.png"
+  },
+  {
+    "id": 907308332,
+    "characterId": "10904",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "N_Corp._Mittelhammer_Rodion",
+    "image_url": "https://limbuscompany.wiki.gg/images/N_Corp._Mittelhammer_Rodion_Full.png"
+  },
+  {
+    "id": 191165911,
+    "characterId": "10204",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_One_Who_Grips_Faust",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_One_Who_Grips_Faust_Full.png"
+  },
+  {
+    "id": 110160676,
+    "characterId": "10704",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "N_Corp._Kleinhammer_Heathcliff",
+    "image_url": "https://limbuscompany.wiki.gg/images/N_Corp._Kleinhammer_Heathcliff_Full.png"
+  },
+  {
+    "id": 346285063,
+    "characterId": "11104",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Seven_Assoc._South_Section_6_Director_Outis",
+    "image_url": "https://limbuscompany.wiki.gg/images/Seven_Assoc._South_Section_6_Director_Outis_Full.png"
+  },
+  {
+    "id": 257206705,
+    "characterId": "10604",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Liu_Assoc._South_Section_5_Hong_Lu",
+    "image_url": "https://limbuscompany.wiki.gg/images/Liu_Assoc._South_Section_5_Hong_Lu_Full.png"
+  },
+  {
+    "id": 165617659,
+    "characterId": "10404",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "R.B._Chef_de_Cuisine_Ryōshū",
+    "image_url": "https://limbuscompany.wiki.gg/images/R.B._Chef_de_Cuisine_Ry%C5%8Dsh%C5%AB_Full.png"
+  },
+  {
+    "id": 635153643,
+    "characterId": "11204",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "R.B._Sous-chef_Gregor",
+    "image_url": "https://limbuscompany.wiki.gg/images/R.B._Sous-chef_Gregor_Full.png"
+  },
+  {
+    "id": 381968149,
+    "characterId": "10304",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "N_Corp._Mittelhammer_Don_Quixote",
+    "image_url": "https://limbuscompany.wiki.gg/images/N_Corp._Mittelhammer_Don_Quixote_Full.png"
+  },
+  {
+    "id": 739967988,
+    "characterId": "11005",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_One_Who_Shall_Grip_Sinclair",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_One_Who_Shall_Grip_Sinclair_Full.png"
+  },
+  {
+    "id": 750955088,
+    "characterId": "10905",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Rosespanner_Workshop_Rep_Rodion",
+    "image_url": "https://limbuscompany.wiki.gg/images/Rosespanner_Workshop_Rep_Rodion_Full.png"
+  },
+  {
+    "id": 645339103,
+    "characterId": "10505",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Rosespanner_Workshop_Fixer_Meursault",
+    "image_url": "https://limbuscompany.wiki.gg/images/Rosespanner_Workshop_Fixer_Meursault_Full.png"
+  },
+  {
+    "id": 219096040,
+    "characterId": "10705",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Lobotomy_E.G.O::_Sunshower_Heathcliff",
+    "image_url": "https://limbuscompany.wiki.gg/images/Lobotomy_E.G.O%3A%3A_Sunshower_Heathcliff_Full.png"
+  },
+  {
+    "id": 409957993,
+    "characterId": "11205",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Rosespanner_Workshop_Fixer_Gregor",
+    "image_url": "https://limbuscompany.wiki.gg/images/Rosespanner_Workshop_Fixer_Gregor_Full.png"
+  },
+  {
+    "id": 283635660,
+    "characterId": "10104",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Effloresced_E.G.O::Spicebush_Yi_Sang",
+    "image_url": "https://limbuscompany.wiki.gg/images/Effloresced_E.G.O%3A%3ASpicebush_Yi_Sang_Full.png"
+  },
+  {
+    "id": 364221935,
+    "characterId": "10805",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Lobotomy_E.G.O::Sloshing_Ishmael",
+    "image_url": "https://limbuscompany.wiki.gg/images/Lobotomy_E.G.O%3A%3ASloshing_Ishmael_Full.png"
+  },
+  {
+    "id": 228500746,
+    "characterId": "10605",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "K_Corp._Class_3_Excision_Staff_Hong_Lu",
+    "image_url": "https://limbuscompany.wiki.gg/images/K_Corp._Class_3_Excision_Staff_Hong_Lu_Full.png"
+  },
+  {
+    "id": 405387451,
+    "characterId": "11006",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Lobotomy_E.G.O::Red_Sheet_Sinclair",
+    "image_url": "https://limbuscompany.wiki.gg/images/Lobotomy_E.G.O%3A%3ARed_Sheet_Sinclair_Full.png"
+  },
+  {
+    "id": 315586131,
+    "characterId": "10806",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Liu_Assoc._South_Section_4_Ishmael",
+    "image_url": "https://limbuscompany.wiki.gg/images/Liu_Assoc._South_Section_4_Ishmael_Full.png"
+  },
+  {
+    "id": 686507869,
+    "characterId": "10506",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "R_Corp._4th_Pack_Rhino_Meursault",
+    "image_url": "https://limbuscompany.wiki.gg/images/R_Corp._4th_Pack_Rhino_Meursault_Full.png"
+  },
+  {
+    "id": 963511599,
+    "characterId": "10906",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Zwei_Assoc._South_Section_5_Rodion",
+    "image_url": "https://limbuscompany.wiki.gg/images/Zwei_Assoc._South_Section_5_Rodion_Full.png"
+  },
+  {
+    "id": 986841978,
+    "characterId": "10305",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Cinq_Assoc._South_Section_5_Director_Don_Quixote",
+    "image_url": "https://limbuscompany.wiki.gg/images/Cinq_Assoc._South_Section_5_Director_Don_Quixote_Full.png"
+  },
+  {
+    "id": 200727722,
+    "characterId": "10807",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Molar_Boatworks_Fixer_Ishmael",
+    "image_url": "https://limbuscompany.wiki.gg/images/Molar_Boatworks_Fixer_Ishmael_Full.png"
+  },
+  {
+    "id": 16969306,
+    "characterId": "11007",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Molar_Boatworks_Fixer_Sinclair",
+    "image_url": "https://limbuscompany.wiki.gg/images/Molar_Boatworks_Fixer_Sinclair_Full.png"
+  },
+  {
+    "id": 693485606,
+    "characterId": "11206",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Zwei_Assoc._South_Section_4_Gregor",
+    "image_url": "https://limbuscompany.wiki.gg/images/Zwei_Assoc._South_Section_4_Gregor_Full.png"
+  },
+  {
+    "id": 501390868,
+    "characterId": "10205",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Zwei_Assoc._South_Section_4_Faust",
+    "image_url": "https://limbuscompany.wiki.gg/images/Zwei_Assoc._South_Section_4_Faust_Full.png"
+  },
+  {
+    "id": 665497855,
+    "characterId": "10405",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "W_Corp._L3_Cleanup_Agent_Ryōshū",
+    "image_url": "https://limbuscompany.wiki.gg/images/W_Corp._L3_Cleanup_Agent_Ry%C5%8Dsh%C5%AB_Full.png"
+  },
+  {
+    "id": 811613032,
+    "characterId": "10606",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "W_Corp._L2_Cleanup_Agent_Hong_Lu",
+    "image_url": "https://limbuscompany.wiki.gg/images/W_Corp._L2_Cleanup_Agent_Hong_Lu_Full.png"
+  },
+  {
+    "id": 35413623,
+    "characterId": "10206",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Seven_Assoc._South_Section_4_Faust",
+    "image_url": "https://limbuscompany.wiki.gg/images/Seven_Assoc._South_Section_4_Faust_Full.png"
+  },
+  {
+    "id": 871735610,
+    "characterId": "10706",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Seven_Assoc._South_Section_4_Heathcliff",
+    "image_url": "https://limbuscompany.wiki.gg/images/Seven_Assoc._South_Section_4_Heathcliff_Full.png"
+  },
+  {
+    "id": 265371610,
+    "characterId": "10105",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Molar_Office_Fixer_Yi_Sang",
+    "image_url": "https://limbuscompany.wiki.gg/images/Molar_Office_Fixer_Yi_Sang_Full.png"
+  },
+  {
+    "id": 788553034,
+    "characterId": "11105",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Molar_Office_Fixer_Outis",
+    "image_url": "https://limbuscompany.wiki.gg/images/Molar_Office_Fixer_Outis_Full.png"
+  },
+  {
+    "id": 455750826,
+    "characterId": "10907",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Dieci_Assoc._South_Section_4_Rodion",
+    "image_url": "https://limbuscompany.wiki.gg/images/Dieci_Assoc._South_Section_4_Rodion_Full.png"
+  },
+  {
+    "id": 797056563,
+    "characterId": "10207",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Lobotomy_E.G.O::Regret_Faust",
+    "image_url": "https://limbuscompany.wiki.gg/images/Lobotomy_E.G.O%3A%3ARegret_Faust_Full.png"
+  },
+  {
+    "id": 15195593,
+    "characterId": "10607",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Hook_Office_Fixer_Hong_Lu",
+    "image_url": "https://limbuscompany.wiki.gg/images/Hook_Office_Fixer_Hong_Lu_Full.png"
+  },
+  {
+    "id": 916470844,
+    "characterId": "10106",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "W_Corp._L3_Cleanup_Agent_Yi_Sang",
+    "image_url": "https://limbuscompany.wiki.gg/images/W_Corp._L3_Cleanup_Agent_Yi_Sang_Full.png"
+  },
+  {
+    "id": 695722018,
+    "characterId": "11207",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Twinhook_Pirates_First_Mate_Gregor",
+    "image_url": "https://limbuscompany.wiki.gg/images/Twinhook_Pirates_First_Mate_Gregor_Full.png"
+  },
+  {
+    "id": 64154672,
+    "characterId": "10406",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCCB_Assistant_Manager_Ryōshū",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCCB_Assistant_Manager_Ry%C5%8Dsh%C5%AB_Full.png"
+  },
+  {
+    "id": 750080300,
+    "characterId": "10306",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_Middle_Little_Sister_Don_Quixote",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_Middle_Little_Sister_Don_Quixote_Full.png"
+  },
+  {
+    "id": 265525467,
+    "characterId": "10507",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_Middle_Little_Brother_Meursault",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_Middle_Little_Brother_Meursault_Full.png"
+  },
+  {
+    "id": 475148014,
+    "characterId": "10707",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_Pequod_Harpooneer_Heathcliff",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_Pequod_Harpooneer_Heathcliff_Full.png"
+  },
+  {
+    "id": 337549555,
+    "characterId": "10107",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_Pequod_First_Mate_Yi_Sang",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_Pequod_First_Mate_Yi_Sang_Full.png"
+  },
+  {
+    "id": 697608441,
+    "characterId": "11008",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Cinq_Assoc._South_Section_4_Director_Sinclair",
+    "image_url": "https://limbuscompany.wiki.gg/images/Cinq_Assoc._South_Section_4_Director_Sinclair_Full.png"
+  },
+  {
+    "id": 808291721,
+    "characterId": "11106",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Cinq_Assoc._South_Section_4_Outis",
+    "image_url": "https://limbuscompany.wiki.gg/images/Cinq_Assoc._South_Section_4_Outis_Full.png"
+  },
+  {
+    "id": 13730603,
+    "characterId": "11107",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Lobotomy_E.G.O::Magic_Bullet_Outis",
+    "image_url": "https://limbuscompany.wiki.gg/images/Lobotomy_E.G.O%3A%3AMagic_Bullet_Outis_Full.png"
+  },
+  {
+    "id": 377516866,
+    "characterId": "10307",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Lobotomy_E.G.O::Lantern_Don_Quixote",
+    "image_url": "https://limbuscompany.wiki.gg/images/Lobotomy_E.G.O%3A%3ALantern_Don_Quixote_Full.png"
+  },
+  {
+    "id": 597638401,
+    "characterId": "10608",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Dieci_Assoc._South_Section_4_Hong_Lu",
+    "image_url": "https://limbuscompany.wiki.gg/images/Dieci_Assoc._South_Section_4_Hong_Lu_Full.png"
+  },
+  {
+    "id": 138269710,
+    "characterId": "10108",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Dieci_Assoc._South_Section_4_Yi_Sang",
+    "image_url": "https://limbuscompany.wiki.gg/images/Dieci_Assoc._South_Section_4_Yi_Sang_Full.png"
+  },
+  {
+    "id": 885549475,
+    "characterId": "10808",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_Pequod_Captain_Ishmael",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_Pequod_Captain_Ishmael_Full.png"
+  },
+  {
+    "id": 287462961,
+    "characterId": "10508",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Blade_Lineage_Mentor_Meursault",
+    "image_url": "https://limbuscompany.wiki.gg/images/Blade_Lineage_Mentor_Meursault_Full.png"
+  },
+  {
+    "id": 556654469,
+    "characterId": "10208",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Blade_Lineage_Salsu_Faust",
+    "image_url": "https://limbuscompany.wiki.gg/images/Blade_Lineage_Salsu_Faust_Full.png"
+  },
+  {
+    "id": 817214991,
+    "characterId": "10308",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Blade_Lineage_Salsu_Don_Quixote",
+    "image_url": "https://limbuscompany.wiki.gg/images/Blade_Lineage_Salsu_Don_Quixote_Full.png"
+  },
+  {
+    "id": 285556422,
+    "characterId": "11208",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Kurokumo_Clan_Captain_Gregor",
+    "image_url": "https://limbuscompany.wiki.gg/images/Kurokumo_Clan_Captain_Gregor_Full.png"
+  },
+  {
+    "id": 968899666,
+    "characterId": "10908",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Liu_Assoc._South_Section_4_Director_Rodion",
+    "image_url": "https://limbuscompany.wiki.gg/images/Liu_Assoc._South_Section_4_Director_Rodion_Full.png"
+  },
+  {
+    "id": 648254442,
+    "characterId": "10407",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Liu_Assoc._South_Section_4_Ryōshū",
+    "image_url": "https://limbuscompany.wiki.gg/images/Liu_Assoc._South_Section_4_Ry%C5%8Dsh%C5%AB_Full.png"
+  },
+  {
+    "id": 803979032,
+    "characterId": "10708",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Öufi_Assoc._South_Section_3_Heathcliff",
+    "image_url": "https://limbuscompany.wiki.gg/images/%C3%96ufi_Assoc._South_Section_3_Heathcliff_Full.png"
+  },
+  {
+    "id": 558972525,
+    "characterId": "11108",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Wuthering_Heights_Chief_Butler_Outis",
+    "image_url": "https://limbuscompany.wiki.gg/images/Wuthering_Heights_Chief_Butler_Outis_Full.png"
+  },
+  {
+    "id": 42862521,
+    "characterId": "10509",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Dead_Rabbits_Boss_Meursault",
+    "image_url": "https://limbuscompany.wiki.gg/images/Dead_Rabbits_Boss_Meursault_Full.png"
+  },
+  {
+    "id": 951444551,
+    "characterId": "11209",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Edgar_Family_Heir_Gregor",
+    "image_url": "https://limbuscompany.wiki.gg/images/Edgar_Family_Heir_Gregor_Full.png"
+  },
+  {
+    "id": 215549455,
+    "characterId": "10209",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Wuthering_Heights_Butler_Faust",
+    "image_url": "https://limbuscompany.wiki.gg/images/Wuthering_Heights_Butler_Faust_Full.png"
+  },
+  {
+    "id": 367502540,
+    "characterId": "9999",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_Red_Gaze_Vergilius",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_Red_Gaze_Vergilius_Full.png"
+  },
+  {
+    "id": 354850153,
+    "characterId": "10408",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Edgar_Family_Chief_Butler_Ryōshū",
+    "image_url": "https://limbuscompany.wiki.gg/images/Edgar_Family_Chief_Butler_Ry%C5%8Dsh%C5%AB_Full.png"
+  },
+  {
+    "id": 592064316,
+    "characterId": "10809",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Edgar_Family_Butler_Ishmael",
+    "image_url": "https://limbuscompany.wiki.gg/images/Edgar_Family_Butler_Ishmael_Full.png"
+  },
+  {
+    "id": 427429459,
+    "characterId": "11009",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Dawn_Office_Fixer_Sinclair",
+    "image_url": "https://limbuscompany.wiki.gg/images/Dawn_Office_Fixer_Sinclair_Full.png"
+  },
+  {
+    "id": 444895834,
+    "characterId": "10109",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_Ring_Pointillist_Student_Yi_Sang",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_Ring_Pointillist_Student_Yi_Sang_Full.png"
+  },
+  {
+    "id": 37216598,
+    "characterId": "11109",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_Ring_Pointillist_Student_Outis",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_Ring_Pointillist_Student_Outis_Full.png"
+  },
+  {
+    "id": 558665120,
+    "characterId": "10609",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "District_20_Yurodivy_Hong_Lu",
+    "image_url": "https://limbuscompany.wiki.gg/images/District_20_Yurodivy_Hong_Lu_Full.png"
+  },
+  {
+    "id": 609115030,
+    "characterId": "10409",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "District_20_Yurodivy_Ryōshū",
+    "image_url": "https://limbuscompany.wiki.gg/images/District_20_Yurodivy_Ry%C5%8Dsh%C5%AB_Full.png"
+  },
+  {
+    "id": 253675967,
+    "characterId": "10309",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "T_Corp._Class_3_Collection_Staff_Don_Quixote",
+    "image_url": "https://limbuscompany.wiki.gg/images/T_Corp._Class_3_Collection_Staff_Don_Quixote_Full.png"
+  },
+  {
+    "id": 490083364,
+    "characterId": "10909",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "T_Corp._Class_2_Collection_Staff_Rodion",
+    "image_url": "https://limbuscompany.wiki.gg/images/T_Corp._Class_2_Collection_Staff_Rodion_Full.png"
+  },
+  {
+    "id": 694511978,
+    "characterId": "10510",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Dieci_Assoc._South_Section_4_Director_Meursault",
+    "image_url": "https://limbuscompany.wiki.gg/images/Dieci_Assoc._South_Section_4_Director_Meursault_Full.png"
+  },
+  {
+    "id": 861219734,
+    "characterId": "11110",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "W_Corp._L3_Cleanup_Captain_Outis",
+    "image_url": "https://limbuscompany.wiki.gg/images/W_Corp._L3_Cleanup_Captain_Outis_Full.png"
+  },
+  {
+    "id": 157193259,
+    "characterId": "10210",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "MultiCrack_Office_Rep_Faust",
+    "image_url": "https://limbuscompany.wiki.gg/images/MultiCrack_Office_Rep_Faust_Full.png"
+  },
+  {
+    "id": 16088322,
+    "characterId": "10709",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "MultiCrack_Office_Fixer_Heathcliff",
+    "image_url": "https://limbuscompany.wiki.gg/images/MultiCrack_Office_Fixer_Heathcliff_Full.png"
+  },
+  {
+    "id": 800307983,
+    "characterId": "10710",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Wild_Hunt_Heathcliff",
+    "image_url": "https://limbuscompany.wiki.gg/images/Wild_Hunt_Heathcliff_Full.png"
+  },
+  {
+    "id": 831932458,
+    "characterId": "10110",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Lobotomy_E.G.O::_Solemn_Lament_Yi_Sang",
+    "image_url": "https://limbuscompany.wiki.gg/images/Lobotomy_E.G.O%3A%3A_Solemn_Lament_Yi_Sang_Full.png"
+  },
+  {
+    "id": 119548317,
+    "characterId": "10410",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Lobotomy_E.G.O::_Red_Eyes_&_Penitence_Ryōshū",
+    "image_url": "https://limbuscompany.wiki.gg/images/Lobotomy_E.G.O%3A%3A_Red_Eyes_%26_Penitence_Ry%C5%8Dsh%C5%AB_Full.png"
+  },
+  {
+    "id": 165427591,
+    "characterId": "10910",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Devyat'_Assoc._North_Section_3_Rodion",
+    "image_url": "https://limbuscompany.wiki.gg/images/Devyat%27_Assoc._North_Section_3_Rodion_Full.png"
+  },
+  {
+    "id": 980933209,
+    "characterId": "10810",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Zwei_Assoc._West_Section_3_Ishmael",
+    "image_url": "https://limbuscompany.wiki.gg/images/Zwei_Assoc._West_Section_3_Ishmael_Full.png"
+  },
+  {
+    "id": 133020948,
+    "characterId": "10511",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Cinq_Assoc._West_Section_3_Meursault",
+    "image_url": "https://limbuscompany.wiki.gg/images/Cinq_Assoc._West_Section_3_Meursault_Full.png"
+  },
+  {
+    "id": 304258589,
+    "characterId": "11010",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Zwei_Assoc._West_Section_3_Sinclair",
+    "image_url": "https://limbuscompany.wiki.gg/images/Zwei_Assoc._West_Section_3_Sinclair_Full.png"
+  },
+  {
+    "id": 428379178,
+    "characterId": "11111",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_Barber_of_La_Manchaland_Outis",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_Barber_of_La_Manchaland_Outis_Full.png"
+  },
+  {
+    "id": 590894862,
+    "characterId": "10610",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Fanghunt_Office_Fixer_Hong_Lu",
+    "image_url": "https://limbuscompany.wiki.gg/images/Fanghunt_Office_Fixer_Hong_Lu_Full.png"
+  },
+  {
+    "id": 549575630,
+    "characterId": "11210",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_Priest_of_La_Manchaland_Gregor",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_Priest_of_La_Manchaland_Gregor_Full.png"
+  },
+  {
+    "id": 738701347,
+    "characterId": "10911",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_Princess_of_La_Manchaland_Rodion",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_Princess_of_La_Manchaland_Rodion_Full.png"
+  },
+  {
+    "id": 26495082,
+    "characterId": "11011",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Devyat'_Assoc._North_Section_3_Sinclair",
+    "image_url": "https://limbuscompany.wiki.gg/images/Devyat%27_Assoc._North_Section_3_Sinclair_Full.png"
+  },
+  {
+    "id": 261131799,
+    "characterId": "10310",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_Manager_of_La_Manchaland_Don_Quixote",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_Manager_of_La_Manchaland_Don_Quixote_Full.png"
+  },
+  {
+    "id": 396985147,
+    "characterId": "10611",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Full-Stop_Office_Rep_Hong_Lu",
+    "image_url": "https://limbuscompany.wiki.gg/images/Full-Stop_Office_Rep_Hong_Lu_Full.png"
+  },
+  {
+    "id": 392556237,
+    "characterId": "10711",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Full-Stop_Office_Fixer_Heathcliff",
+    "image_url": "https://limbuscompany.wiki.gg/images/Full-Stop_Office_Fixer_Heathcliff_Full.png"
+  },
+  {
+    "id": 283413554,
+    "characterId": "10211",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCE_E.G.O::_Ardor_Blossom_Star_Faust",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCE_E.G.O%3A%3A_Ardor_Blossom_Star_Faust_Full.png"
+  },
+  {
+    "id": 145902201,
+    "characterId": "10111",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "LCE_E.G.O::_Lantern_Yi_Sang",
+    "image_url": "https://limbuscompany.wiki.gg/images/LCE_E.G.O%3A%3A_Lantern_Yi_Sang_Full.png"
+  },
+  {
+    "id": 47386074,
+    "characterId": "10811",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Kurokumo_Clan_Captain_Ishmael",
+    "image_url": "https://limbuscompany.wiki.gg/images/Kurokumo_Clan_Captain_Ishmael_Full.png"
+  },
+  {
+    "id": 921896064,
+    "characterId": "10712",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Kurokumo_Clan_Wakashu_Heathcliff",
+    "image_url": "https://limbuscompany.wiki.gg/images/Kurokumo_Clan_Wakashu_Heathcliff_Full.png"
+  },
+  {
+    "id": 336640486,
+    "characterId": "10112",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Liu_Assoc._South_Section_3_Yi_Sang",
+    "image_url": "https://limbuscompany.wiki.gg/images/Liu_Assoc._South_Section_3_Yi_Sang_Full.png"
+  },
+  {
+    "id": 734231499,
+    "characterId": "10311",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Cinq_Assoc._East_Section_3_Don_Quixote",
+    "image_url": "https://limbuscompany.wiki.gg/images/Cinq_Assoc._East_Section_3_Don_Quixote_Full.png"
+  },
+  {
+    "id": 713469839,
+    "characterId": "11211",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Firefist_Office_Survivor_Gregor",
+    "image_url": "https://limbuscompany.wiki.gg/images/Firefist_Office_Survivor_Gregor_Full.png"
+  },
+  {
+    "id": 595956962,
+    "characterId": "11112",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Heishou_Pack_-_Mao_Branch_Outis",
+    "image_url": "https://limbuscompany.wiki.gg/images/Heishou_Pack_-_Mao_Branch_Outis_Full.png"
+  },
+  {
+    "id": 972884339,
+    "characterId": "10411",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Heishou_Pack_-_Mao_Branch_Ryōshū",
+    "image_url": "https://limbuscompany.wiki.gg/images/Heishou_Pack_-_Mao_Branch_Ry%C5%8Dsh%C5%AB_Full.png"
+  },
+  {
+    "id": 711979804,
+    "characterId": "11012",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_Middle_Little_Brother_Sinclair",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_Middle_Little_Brother_Sinclair_Full.png"
+  },
+  {
+    "id": 911271087,
+    "characterId": "10612",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "R_Corp._4th_Pack_Reindeer_Hong_Lu",
+    "image_url": "https://limbuscompany.wiki.gg/images/R_Corp._4th_Pack_Reindeer_Hong_Lu_Full.png"
+  },
+  {
+    "id": 640681768,
+    "characterId": "11212",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Heishou_Pack_-_Si_Branch_Gregor",
+    "image_url": "https://limbuscompany.wiki.gg/images/Heishou_Pack_-_Si_Branch_Gregor_Full.png"
+  },
+  {
+    "id": 308789192,
+    "characterId": "10912",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Heishou_Pack_-_Si_Branch_Rodion",
+    "image_url": "https://limbuscompany.wiki.gg/images/Heishou_Pack_-_Si_Branch_Rodion_Full.png"
+  },
+  {
+    "id": 671956047,
+    "characterId": "10212",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Heishou_Pack_-_Mao_Branch_Adept_Faust",
+    "image_url": "https://limbuscompany.wiki.gg/images/Heishou_Pack_-_Mao_Branch_Adept_Faust_Full.png"
+  },
+  {
+    "id": 261382949,
+    "characterId": "10812",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Family_Hierarch_Candidate_Ishmael",
+    "image_url": "https://limbuscompany.wiki.gg/images/Family_Hierarch_Candidate_Ishmael_Full.png"
+  },
+  {
+    "id": 143411991,
+    "characterId": "10512",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_Thumb_East_Capo_IIII_Meursault",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_Thumb_East_Capo_IIII_Meursault_Full.png"
+  },
+  {
+    "id": 710067352,
+    "characterId": "11013",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "The_Thumb_East_Soldato_II_Sinclair",
+    "image_url": "https://limbuscompany.wiki.gg/images/The_Thumb_East_Soldato_II_Sinclair_Full.png"
+  },
+  {
+    "id": 22646024,
+    "characterId": "10113",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "N_Corp._E.G.O::_Fell_Bullet_Yi_Sang",
+    "image_url": "https://limbuscompany.wiki.gg/images/N_Corp._E.G.O%3A%3A_Fell_Bullet_Yi_Sang_Full.png"
+  },
+  {
+    "id": 843599877,
+    "characterId": "10312",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Lobotomy_E.G.O::_In_the_Name_of_Love_and_Hate_Don_Quixote",
+    "image_url": "https://limbuscompany.wiki.gg/images/Lobotomy_E.G.O%3A%3A_In_the_Name_of_Love_and_Hate_Don_Quixote_Full.png"
+  },
+  {
+    "id": 281036456,
+    "characterId": "10913",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "Lobotomy_E.G.O::_The_Sword_Sharpened_with_Tears_Rodion",
+    "image_url": "https://limbuscompany.wiki.gg/images/Lobotomy_E.G.O%3A%3A_The_Sword_Sharpened_with_Tears_Rodion_Full.png"
+  }
+]

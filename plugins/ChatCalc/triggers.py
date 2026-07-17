@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 
-# 长词优先，避免「帮我算」只命中「帮我」
+# 长词优先；勿放单字「求」（会误伤「请求」等）
 _TRIGGER_KEYWORDS: tuple[str, ...] = (
     "帮我计算",
     "帮忙计算",
@@ -33,11 +33,15 @@ _TRIGGER_KEYWORDS: tuple[str, ...] = (
     "等于",
     "帮我",
     "帮忙",
-    "求",
 )
 
 # 单独「算」，排除 打算 / 运算 / 算法 / 预算 / 核算 等
 _SUAN_PATTERN = re.compile(r"(?<![打预核运])算(?![法术法评])")
+
+# 单独「求」，排除 请求 / 要求 / 需求 / 求助 等
+_QIU_PATTERN = re.compile(
+    r"(?<![要需请帮哀恳])求(?!助|婚|饶|生|职|学|证|教|得|人|情|值|解|一下)"
+)
 
 
 def has_calc_trigger(text: str) -> bool:
@@ -45,5 +49,7 @@ def has_calc_trigger(text: str) -> bool:
     if not text:
         return False
     if any(keyword in text for keyword in _TRIGGER_KEYWORDS):
+        return True
+    if _QIU_PATTERN.search(text):
         return True
     return bool(_SUAN_PATTERN.search(text))

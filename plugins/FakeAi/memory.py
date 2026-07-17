@@ -181,6 +181,64 @@ class MemoryManager:
         await self._migrate_drop_nickname_column()
         await self._migrate_favorability_v2()
         await self._migrate_relation_tag()
+        await self._migrate_memory_record_v1()
+
+    async def _migrate_memory_record_v1(self):
+        """主动记忆表 + 知识库短条目列 + schema version。"""
+        await self._db.executescript(
+            """
+            CREATE TABLE IF NOT EXISTS memory_record (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                judgment TEXT NOT NULL,
+                reasoning TEXT DEFAULT '',
+                tags TEXT NOT NULL DEFAULT '[]',
+                strength REAL NOT NULL DEFAULT 50,
+                memory_type TEXT NOT NULL DEFAULT 'knowledge',
+                scope TEXT NOT NULL DEFAULT 'public',
+                source_user_id INTEGER,
+                created_at INTEGER NOT NULL,
+                last_recalled_at INTEGER DEFAULT 0,
+                recall_count INTEGER DEFAULT 0,
+                active INTEGER NOT NULL DEFAULT 1
+            );
+            CREATE INDEX IF NOT EXISTS idx_memory_scope_active
+                ON memory_record(scope, active, strength DESC);
+            CREATE INDEX IF NOT EXISTS idx_memory_type
+                ON memory_record(memory_type, active);
+            CREATE TABLE IF NOT EXISTS app_meta (
+                key TEXT PRIMARY KEY,
+                value TEXT
+            );
+            """
+        )
+        await self._db.commit()
+
+        cursor = await self._db.execute("PRAGMA table_info(knowledge_base)")
+        columns = {row[1] for row in await cursor.fetchall()}
+        if "strength" not in columns:
+            await self._db.execute(
+                "ALTER TABLE knowledge_base ADD COLUMN strength REAL DEFAULT 50"
+            )
+        if "active" not in columns:
+            await self._db.execute(
+                "ALTER TABLE knowledge_base ADD COLUMN active INTEGER DEFAULT 1"
+            )
+        if "content_len" not in columns:
+            await self._db.execute(
+                "ALTER TABLE knowledge_base ADD COLUMN content_len INTEGER DEFAULT 0"
+            )
+        await self._db.execute(
+            """INSERT OR REPLACE INTO app_meta(key, value)
+               VALUES('memory_schema_version', '1')"""
+        )
+        # 回填 content_len
+        await self._db.execute(
+            """UPDATE knowledge_base
+               SET content_len = LENGTH(COALESCE(content, ''))
+               WHERE content_len IS NULL OR content_len = 0"""
+        )
+        await self._db.commit()
+        _log.info("[FakeAi Memory] memory_record schema v1 就绪")
 
     async def _migrate_relation_tag(self):
         """添加 relation_tag 列（自由文本：闺蜜/妻子/丈夫等）。"""
@@ -931,6 +989,253 @@ class MemoryManager:
             for row in rows
         ]
 
+    # ========== 主动记忆 memory_record ==========
+
+    @staticmethod
+    def _normalize_judgment(text: str) -> str:
+        t = re.sub(r"\s+", " ", (text or "").strip())
+        return t[:120]
+
+    @staticmethod
+    def _looks_like_sensitive(text: str) -> bool:
+        # 粗过滤：大陆身份证 / 长纯数字串
+        if re.search(r"\b\d{17}[\dXx]\b", text):
+            return True
+        if re.search(r"\b\d{16,19}\b", text):
+            return True
+        return False
+
+    async def remember(
+        self,
+        judgment: str,
+        *,
+        reasoning: str = "",
+        tags: Optional[List[str]] = None,
+        strength: float = 60.0,
+        memory_type: str = "preference",
+        scope: str = "public",
+        source_user_id: Optional[int] = None,
+    ) -> Dict:
+        """写入或强化一条主动记忆。"""
+        await self._ensure_db()
+        judgment_n = self._normalize_judgment(judgment)
+        if not judgment_n:
+            return {"ok": False, "reason": "empty"}
+        if self._looks_like_sensitive(judgment_n):
+            return {"ok": False, "reason": "sensitive"}
+
+        strength = max(1.0, min(100.0, float(strength)))
+        memory_type = memory_type if memory_type in (
+            "knowledge",
+            "preference",
+            "episode",
+            "relation",
+        ) else "knowledge"
+        tags = [str(t)[:16] for t in (tags or [])[:8]]
+        tags_json = json.dumps(tags, ensure_ascii=False)
+        reasoning = (reasoning or "")[:200]
+        now = int(time.time())
+
+        cursor = await self._db.execute(
+            """SELECT id, strength FROM memory_record
+               WHERE active = 1 AND judgment = ?
+               LIMIT 1""",
+            (judgment_n,),
+        )
+        existing = await cursor.fetchone()
+        if existing:
+            new_s = min(100.0, float(existing["strength"] or 50) + 10.0)
+            await self._db.execute(
+                """UPDATE memory_record SET strength = ?, last_recalled_at = ?
+                   WHERE id = ?""",
+                (new_s, now, existing["id"]),
+            )
+            await self._db.commit()
+            return {
+                "ok": True,
+                "id": int(existing["id"]),
+                "action": "reinforce",
+                "strength": new_s,
+            }
+
+        cursor = await self._db.execute(
+            """INSERT INTO memory_record
+               (judgment, reasoning, tags, strength, memory_type, scope,
+                source_user_id, created_at)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+            (
+                judgment_n,
+                reasoning,
+                tags_json,
+                strength,
+                memory_type,
+                scope or "public",
+                source_user_id,
+                now,
+            ),
+        )
+        await self._db.commit()
+        return {
+            "ok": True,
+            "id": int(cursor.lastrowid),
+            "action": "create",
+            "strength": strength,
+        }
+
+    async def recall(
+        self,
+        query: str = "",
+        *,
+        limit: int = 5,
+        user_id: Optional[int] = None,
+        group_id: Optional[int] = None,
+        scope_hint: Optional[str] = None,
+    ) -> Dict:
+        """检索主动记忆。"""
+        await self._ensure_db()
+        limit = max(1, min(8, int(limit)))
+        scopes = ["public"]
+        if user_id is not None:
+            scopes.append(f"user:{int(user_id)}")
+        if group_id is not None:
+            scopes.append(f"group:{int(group_id)}")
+        if scope_hint:
+            scopes.append(scope_hint)
+        scopes = list(dict.fromkeys(scopes))
+
+        placeholders = ",".join("?" * len(scopes))
+        params: list = list(scopes)
+        sql = f"""SELECT id, judgment, reasoning, tags, strength, memory_type, scope
+                  FROM memory_record
+                  WHERE active = 1 AND scope IN ({placeholders})"""
+        q = (query or "").strip()
+        if q:
+            like = f"%{q[:40]}%"
+            sql += " AND (judgment LIKE ? OR reasoning LIKE ? OR tags LIKE ?)"
+            params.extend([like, like, like])
+        sql += " ORDER BY strength DESC, last_recalled_at DESC LIMIT ?"
+        params.append(limit * 3)  # 多取再按 scope 优先级裁
+
+        cursor = await self._db.execute(sql, params)
+        rows = await cursor.fetchall()
+
+        def scope_rank(scope: str) -> int:
+            if scope.startswith("user:"):
+                return 0
+            if scope.startswith("group:"):
+                return 1
+            return 2
+
+        ranked = sorted(
+            rows,
+            key=lambda r: (scope_rank(r["scope"] or "public"), -float(r["strength"] or 0)),
+        )[:limit]
+
+        now = int(time.time())
+        items = []
+        for row in ranked:
+            await self._db.execute(
+                """UPDATE memory_record
+                   SET last_recalled_at = ?, recall_count = recall_count + 1
+                   WHERE id = ?""",
+                (now, row["id"]),
+            )
+            try:
+                tags = json.loads(row["tags"] or "[]")
+            except json.JSONDecodeError:
+                tags = []
+            items.append(
+                {
+                    "id": row["id"],
+                    "judgment": row["judgment"],
+                    "tags": tags,
+                    "strength": float(row["strength"] or 0),
+                    "scope": row["scope"],
+                    "memory_type": row["memory_type"],
+                }
+            )
+        await self._db.commit()
+        return {"items": items}
+
+    async def get_memories_text(
+        self,
+        query: str = "",
+        *,
+        user_id: Optional[int] = None,
+        group_id: Optional[int] = None,
+        limit: int = 3,
+        max_length: int = 300,
+    ) -> str:
+        result = await self.recall(
+            query, limit=limit, user_id=user_id, group_id=group_id
+        )
+        items = result.get("items") or []
+        if not items:
+            return ""
+        lines = [f"- [{it['scope']}] {it['judgment']}" for it in items]
+        text = "\n".join(lines)
+        if len(text) > max_length:
+            text = text[:max_length] + "..."
+        return text
+
+    async def consolidate_weak_memories(self) -> Dict[str, int]:
+        """睡眠巩固简化版：软删过弱/过旧且从未召回的记忆。"""
+        await self._ensure_db()
+        now = int(time.time())
+        week = 7 * 24 * 3600
+        cursor = await self._db.execute(
+            """UPDATE memory_record SET active = 0
+               WHERE active = 1
+                 AND strength < 15
+                 AND recall_count = 0
+                 AND created_at < ?
+            """,
+            (now - week,),
+        )
+        weak = cursor.rowcount if cursor.rowcount is not None else 0
+
+        # 同 judgment 重复：保留 strength 最高
+        cursor = await self._db.execute(
+            """SELECT judgment, COUNT(*) as cnt FROM memory_record
+               WHERE active = 1 GROUP BY judgment HAVING cnt > 1"""
+        )
+        dups = await cursor.fetchall()
+        merged = 0
+        for dup in dups:
+            judgment = dup["judgment"]
+            cursor = await self._db.execute(
+                """SELECT id, strength FROM memory_record
+                   WHERE active = 1 AND judgment = ?
+                   ORDER BY strength DESC, id ASC""",
+                (judgment,),
+            )
+            rows = await cursor.fetchall()
+            for row in rows[1:]:
+                await self._db.execute(
+                    "UPDATE memory_record SET active = 0 WHERE id = ?",
+                    (row["id"],),
+                )
+                merged += 1
+
+        # 知识过长仅打日志
+        cursor = await self._db.execute(
+            """SELECT COUNT(*) AS c FROM knowledge_base
+               WHERE COALESCE(content_len, 0) > 120 AND COALESCE(active, 1) = 1"""
+        )
+        row = await cursor.fetchone()
+        long_n = int(row["c"] if row else 0)
+        if long_n:
+            _log.warning("[FakeAi Memory] 知识库超长条目约 %s 条（>120字）", long_n)
+
+        await self._db.commit()
+        _log.info(
+            "[FakeAi Memory] 巩固完成 weak=%s merged=%s long_knowledge=%s",
+            weak,
+            merged,
+            long_n,
+        )
+        return {"weak_deactivated": weak, "dup_merged": merged, "long_knowledge": long_n}
+
     # ========== 知识库相关 ==========
 
     async def save_knowledge(
@@ -954,6 +1259,16 @@ class MemoryManager:
         Returns:
             是否有变更（新增或更新）
         """
+        max_item = 100
+        content = content or ""
+        if len(content) > max_item:
+            _log.warning(
+                "[FakeAi Knowledge] 内容超长截断 keyword=%s len=%s",
+                keyword,
+                len(content),
+            )
+            content = content[:max_item]
+
         # 检查是否已存在相同 keyword 的知识
         cursor = await self._db.execute(
             """SELECT id, content, source_username FROM knowledge_base 
@@ -980,6 +1295,8 @@ class MemoryManager:
                 merged_content = f"{old_content}；{new_content}"
             else:
                 merged_content = new_content
+            if len(merged_content) > max_item:
+                merged_content = merged_content[:max_item]
 
             # 更新来源信息（追加新来源）
             old_sources = existing["source_username"] or ""
@@ -994,9 +1311,17 @@ class MemoryManager:
 
             await self._db.execute(
                 """UPDATE knowledge_base 
-                   SET content = ?, source_username = ?, source_user_id = ?
+                   SET content = ?, source_username = ?, source_user_id = ?,
+                       content_len = ?, strength = COALESCE(strength, 50),
+                       active = COALESCE(active, 1)
                    WHERE id = ?""",
-                (merged_content, new_sources, source_user_id, existing["id"]),
+                (
+                    merged_content,
+                    new_sources,
+                    source_user_id,
+                    len(merged_content),
+                    existing["id"],
+                ),
             )
             await self._db.commit()
             _log.info(
@@ -1007,9 +1332,17 @@ class MemoryManager:
             # 新增知识
             await self._db.execute(
                 """INSERT INTO knowledge_base 
-                   (keyword, content, source_user_id, source_username, created_at)
-                   VALUES (?, ?, ?, ?, ?)""",
-                (keyword, content, source_user_id, source_username, int(time.time())),
+                   (keyword, content, source_user_id, source_username, created_at,
+                    strength, active, content_len)
+                   VALUES (?, ?, ?, ?, ?, 50, 1, ?)""",
+                (
+                    keyword,
+                    content,
+                    source_user_id,
+                    source_username,
+                    int(time.time()),
+                    len(content or ""),
+                ),
             )
             await self._db.commit()
             _log.info(f"[FakeAi Knowledge] 新增知识: {keyword}: {content}")
@@ -1094,7 +1427,8 @@ class MemoryManager:
         for kw in keywords:
             cursor = await self._db.execute(
                 """SELECT * FROM knowledge_base 
-                   WHERE keyword LIKE ? OR content LIKE ?
+                   WHERE COALESCE(active, 1) = 1
+                     AND (keyword LIKE ? OR content LIKE ?)
                    ORDER BY hit_count DESC, created_at DESC
                    LIMIT ?""",
                 (f"%{kw}%", f"%{kw}%", limit),
@@ -1139,28 +1473,20 @@ class MemoryManager:
         await self._db.commit()
 
     async def get_knowledge_text(self, query: str, max_length: int = 300) -> str:
-        """获取格式化的相关知识文本
-
-        Args:
-            query: 查询文本
-            max_length: 最大文本长度
-
-        Returns:
-            格式化的知识文本
-        """
+        """获取格式化的相关知识文本（短条目、最多 3 条）。"""
         await self._ensure_db()
-        knowledge_items = await self.search_knowledge(query, limit=5)
+        item_max = 100
+        knowledge_items = await self.search_knowledge(query, limit=3)
 
         if not knowledge_items:
             return ""
 
-        # 更新命中次数
         await self.update_knowledge_hit([k["id"] for k in knowledge_items])
 
         lines = []
         for item in knowledge_items:
             keyword = item["keyword"]
-            content = item["content"]
+            content = (item["content"] or "")[:item_max]
             if content:
                 lines.append(f"- {keyword}: {content}")
             else:

@@ -1,0 +1,2564 @@
+[
+  {
+    "characterId": "1002",
+    "name": "无声铃鹿",
+    "fullName": "无声铃鹿",
+    "fullNameChinese": "无声铃鹿",
+    "fullNameJapanese": "サイレンススズカ",
+    "aliases": [
+      "无声铃鹿",
+      "Silence Suzuka",
+      "サイレンススズカ",
+      "silencesuzuka",
+      "SilenceSuzuka"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1003",
+    "name": "东海帝王",
+    "fullName": "东海帝王",
+    "fullNameChinese": "东海帝王",
+    "fullNameJapanese": "トウカイテイオー",
+    "aliases": [
+      "东海帝王",
+      "Tokai Teio",
+      "トウカイテイオー",
+      "tokaiteio",
+      "TokaiTeio"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1001",
+    "name": "特别周",
+    "fullName": "特别周",
+    "fullNameChinese": "特别周",
+    "fullNameJapanese": "スペシャルウィーク",
+    "aliases": [
+      "特别周",
+      "Special Week",
+      "スペシャルウィーク",
+      "specialweek",
+      "SpecialWeek"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1004",
+    "name": "丸善斯基",
+    "fullName": "丸善斯基",
+    "fullNameChinese": "丸善斯基",
+    "fullNameJapanese": "マルゼンスキー",
+    "aliases": [
+      "丸善斯基",
+      "Maruzensky",
+      "マルゼンスキー",
+      "maruzensky"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1005",
+    "name": "富士奇石",
+    "fullName": "富士奇石",
+    "fullNameChinese": "富士奇石",
+    "fullNameJapanese": "フジキセキ",
+    "aliases": [
+      "富士奇石",
+      "Fuji Kiseki",
+      "フジキセキ",
+      "fujikiseki",
+      "FujiKiseki"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1006",
+    "name": "小栗帽",
+    "fullName": "小栗帽",
+    "fullNameChinese": "小栗帽",
+    "fullNameJapanese": "オグリキャップ",
+    "aliases": [
+      "小栗帽",
+      "Oguri Cap",
+      "オグリキャップ",
+      "oguricap",
+      "OguriCap"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1007",
+    "name": "黄金船",
+    "fullName": "黄金船",
+    "fullNameChinese": "黄金船",
+    "fullNameJapanese": "ゴールドシップ",
+    "aliases": [
+      "黄金船",
+      "Gold Ship",
+      "ゴールドシップ",
+      "goldship",
+      "GoldShip"
+    ],
+    "className": "???",
+    "rarity": 0
+  },
+  {
+    "characterId": "1008",
+    "name": "伏特加",
+    "fullName": "伏特加",
+    "fullNameChinese": "伏特加",
+    "fullNameJapanese": "ウオッカ",
+    "aliases": [
+      "伏特加",
+      "Vodka",
+      "ウオッカ",
+      "vodka"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1009",
+    "name": "大和赤骥",
+    "fullName": "大和赤骥",
+    "fullNameChinese": "大和赤骥",
+    "fullNameJapanese": "ダイワスカーレット",
+    "aliases": [
+      "大和赤骥",
+      "Daiwa Scarlet",
+      "ダイワスカーレット",
+      "daiwascarlet",
+      "DaiwaScarlet"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1010",
+    "name": "大树快车",
+    "fullName": "大树快车",
+    "fullNameChinese": "大树快车",
+    "fullNameJapanese": "タイキシャトル",
+    "aliases": [
+      "大树快车",
+      "Taiki Shuttle",
+      "タイキシャトル",
+      "taikishuttle",
+      "TaikiShuttle"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1011",
+    "name": "草上飞",
+    "fullName": "草上飞",
+    "fullNameChinese": "草上飞",
+    "fullNameJapanese": "グラスワンダー",
+    "aliases": [
+      "草上飞",
+      "Grass Wonder",
+      "グラスワンダー",
+      "grasswonder",
+      "GrassWonder"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1012",
+    "name": "菱亚马逊",
+    "fullName": "菱亚马逊",
+    "fullNameChinese": "菱亚马逊",
+    "fullNameJapanese": "ヒシアマゾン",
+    "aliases": [
+      "菱亚马逊",
+      "Hishi Amazon",
+      "ヒシアマゾン",
+      "hishiamazon",
+      "HishiAmazon"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1013",
+    "name": "目白麦昆",
+    "fullName": "目白麦昆",
+    "fullNameChinese": "目白麦昆",
+    "fullNameJapanese": "メジロマックイーン",
+    "aliases": [
+      "目白麦昆",
+      "Mejiro McQueen",
+      "メジロマックイーン",
+      "mejiromcqueen",
+      "MejiroMcQueen"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1014",
+    "name": "神鹰",
+    "fullName": "神鹰",
+    "fullNameChinese": "神鹰",
+    "fullNameJapanese": "エルコンドルパサー",
+    "aliases": [
+      "神鹰",
+      "El Condor Pasa",
+      "エルコンドルパサー",
+      "elcondorpasa",
+      "ElCondorPasa"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1015",
+    "name": "好歌剧",
+    "fullName": "好歌剧",
+    "fullNameChinese": "好歌剧",
+    "fullNameJapanese": "テイエムオペラオー",
+    "aliases": [
+      "好歌剧",
+      "T.M. Opera O",
+      "テイエムオペラオー",
+      "tmoperao",
+      "T.M.Opera O"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1016",
+    "name": "成田白仁",
+    "fullName": "成田白仁",
+    "fullNameChinese": "成田白仁",
+    "fullNameJapanese": "ナリタブライアン",
+    "aliases": [
+      "成田白仁",
+      "Narita Brian",
+      "ナリタブライアン",
+      "naritabrian",
+      "NaritaBrian"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1017",
+    "name": "鲁道夫象征",
+    "fullName": "鲁道夫象征",
+    "fullNameChinese": "鲁道夫象征",
+    "fullNameJapanese": "シンボリルドルフ",
+    "aliases": [
+      "鲁道夫象征",
+      "Symboli Rudolf",
+      "シンボリルドルフ",
+      "symbolirudolf",
+      "SymboliRudolf"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1018",
+    "name": "气槽",
+    "fullName": "气槽",
+    "fullNameChinese": "气槽",
+    "fullNameJapanese": "エアグルーヴ",
+    "aliases": [
+      "气槽",
+      "Air Groove",
+      "エアグルーヴ",
+      "airgroove",
+      "AirGroove"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1019",
+    "name": "爱丽数码",
+    "fullName": "爱丽数码",
+    "fullNameChinese": "爱丽数码",
+    "fullNameJapanese": "アグネスデジタル",
+    "aliases": [
+      "爱丽数码",
+      "Agnes Digital",
+      "アグネスデジタル",
+      "agnesdigital",
+      "AgnesDigital"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1020",
+    "name": "青云天空",
+    "fullName": "青云天空",
+    "fullNameChinese": "青云天空",
+    "fullNameJapanese": "セイウンスカイ",
+    "aliases": [
+      "青云天空",
+      "Seiun Sky",
+      "セイウンスカイ",
+      "seiunsky",
+      "SeiunSky"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1021",
+    "name": "玉藻十字",
+    "fullName": "玉藻十字",
+    "fullNameChinese": "玉藻十字",
+    "fullNameJapanese": "タマモクロス",
+    "aliases": [
+      "玉藻十字",
+      "Tamamo Cross",
+      "タマモクロス",
+      "tamamocross",
+      "TamamoCross"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1022",
+    "name": "美妙姿势",
+    "fullName": "美妙姿势",
+    "fullNameChinese": "美妙姿势",
+    "fullNameJapanese": "ファインモーション",
+    "aliases": [
+      "美妙姿势",
+      "Fine Motion",
+      "ファインモーション",
+      "finemotion",
+      "FineMotion"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1023",
+    "name": "琵琶晨光",
+    "fullName": "琵琶晨光",
+    "fullNameChinese": "琵琶晨光",
+    "fullNameJapanese": "ビワハヤヒデ",
+    "aliases": [
+      "琵琶晨光",
+      "Biwa Hayahide",
+      "ビワハヤヒデ",
+      "biwahayahide",
+      "BiwaHayahide"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1024",
+    "name": "重炮",
+    "fullName": "重炮",
+    "fullNameChinese": "重炮",
+    "fullNameJapanese": "マヤノトップガン",
+    "aliases": [
+      "重炮",
+      "Mayano Top Gun",
+      "マヤノトップガン",
+      "mayanotopgun",
+      "MayanoTopGun"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1025",
+    "name": "曼城茶座",
+    "fullName": "曼城茶座",
+    "fullNameChinese": "曼城茶座",
+    "fullNameJapanese": "マンハッタンカフェ",
+    "aliases": [
+      "曼城茶座",
+      "Manhattan Cafe",
+      "マンハッタンカフェ",
+      "manhattancafe",
+      "ManhattanCafe"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1026",
+    "name": "美浦波旁",
+    "fullName": "美浦波旁",
+    "fullNameChinese": "美浦波旁",
+    "fullNameJapanese": "ミホノブルボン",
+    "aliases": [
+      "美浦波旁",
+      "Mihono Bourbon",
+      "ミホノブルボン",
+      "mihonobourbon",
+      "MihonoBourbon"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1027",
+    "name": "目白莱恩",
+    "fullName": "目白莱恩",
+    "fullNameChinese": "目白莱恩",
+    "fullNameJapanese": "メジロライアン",
+    "aliases": [
+      "目白莱恩",
+      "Mejiro Ryan",
+      "メジロライアン",
+      "mejiroryan",
+      "MejiroRyan"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1028",
+    "name": "菱曙",
+    "fullName": "菱曙",
+    "fullNameChinese": "菱曙",
+    "fullNameJapanese": "ヒシアケボノ",
+    "aliases": [
+      "菱曙",
+      "Hishi Akebono",
+      "ヒシアケボノ",
+      "hishiakebono",
+      "HishiAkebono"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1029",
+    "name": "雪之美人",
+    "fullName": "雪之美人",
+    "fullNameChinese": "雪之美人",
+    "fullNameJapanese": "ユキノビジン",
+    "aliases": [
+      "雪之美人",
+      "Yukino Bijin",
+      "ユキノビジン",
+      "yukinobijin",
+      "YukinoBijin"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1030",
+    "name": "米浴",
+    "fullName": "米浴",
+    "fullNameChinese": "米浴",
+    "fullNameJapanese": "ライスシャワー",
+    "aliases": [
+      "米浴",
+      "Rice Shower",
+      "ライスシャワー",
+      "riceshower",
+      "RiceShower"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1031",
+    "name": "艾尼风神",
+    "fullName": "艾尼风神",
+    "fullNameChinese": "艾尼风神",
+    "fullNameJapanese": "アイネスフウジン",
+    "aliases": [
+      "艾尼风神",
+      "Ines Fujin",
+      "アイネスフウジン",
+      "inesfujin",
+      "InesFujin"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1032",
+    "name": "爱丽速子",
+    "fullName": "爱丽速子",
+    "fullNameChinese": "爱丽速子",
+    "fullNameJapanese": "アグネスタキオン",
+    "aliases": [
+      "爱丽速子",
+      "Agnes Tachyon",
+      "アグネスタキオン",
+      "agnestachyon",
+      "AgnesTachyon"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1033",
+    "name": "爱慕织姬",
+    "fullName": "爱慕织姬",
+    "fullNameChinese": "爱慕织姬",
+    "fullNameJapanese": "アドマイヤベガ",
+    "aliases": [
+      "爱慕织姬",
+      "Admire Vega",
+      "アドマイヤベガ",
+      "admirevega",
+      "AdmireVega"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1034",
+    "name": "稻荷一",
+    "fullName": "稻荷一",
+    "fullNameChinese": "稻荷一",
+    "fullNameJapanese": "イナリワン",
+    "aliases": [
+      "稻荷一",
+      "Inari One",
+      "イナリワン",
+      "inarione",
+      "InariOne"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1035",
+    "name": "胜利奖券",
+    "fullName": "胜利奖券",
+    "fullNameChinese": "胜利奖券",
+    "fullNameJapanese": "ウイニングチケット",
+    "aliases": [
+      "胜利奖券",
+      "Winning Ticket",
+      "ウイニングチケット",
+      "winningticket",
+      "WinningTicket"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1036",
+    "name": "空中神宫",
+    "fullName": "空中神宫",
+    "fullNameChinese": "空中神宫",
+    "fullNameJapanese": "エアシャカール",
+    "aliases": [
+      "空中神宫",
+      "Air Shakur",
+      "エアシャカール",
+      "airshakur",
+      "AirShakur"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1037",
+    "name": "荣进闪耀",
+    "fullName": "荣进闪耀",
+    "fullNameChinese": "荣进闪耀",
+    "fullNameJapanese": "エイシンフラッシュ",
+    "aliases": [
+      "荣进闪耀",
+      "Eishin Flash",
+      "エイシンフラッシュ",
+      "eishinflash",
+      "EishinFlash"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1038",
+    "name": "真机伶",
+    "fullName": "真机伶",
+    "fullNameChinese": "真机伶",
+    "fullNameJapanese": "カレンチャン",
+    "aliases": [
+      "真机伶",
+      "Curren Chan",
+      "カレンチャン",
+      "currenchan",
+      "CurrenChan"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1039",
+    "name": "川上公主",
+    "fullName": "川上公主",
+    "fullNameChinese": "川上公主",
+    "fullNameJapanese": "カワカミプリンセス",
+    "aliases": [
+      "川上公主",
+      "Kawakami Princess",
+      "カワカミプリンセス",
+      "kawakamiprincess",
+      "KawakamiPrincess"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1040",
+    "name": "黄金城",
+    "fullName": "黄金城",
+    "fullNameChinese": "黄金城",
+    "fullNameJapanese": "ゴールドシチー",
+    "aliases": [
+      "黄金城",
+      "Gold City",
+      "ゴールドシチー",
+      "goldcity",
+      "GoldCity"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1041",
+    "name": "樱花进王",
+    "fullName": "樱花进王",
+    "fullNameChinese": "樱花进王",
+    "fullNameJapanese": "サクラバクシンオー",
+    "aliases": [
+      "樱花进王",
+      "Sakura Bakushin O",
+      "サクラバクシンオー",
+      "sakurabakushino",
+      "SakuraBakushin O"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1042",
+    "name": "采珠",
+    "fullName": "采珠",
+    "fullNameChinese": "采珠",
+    "fullNameJapanese": "シーキングザパール",
+    "aliases": [
+      "采珠",
+      "Seeking the Pearl",
+      "シーキングザパール",
+      "seekingthepearl",
+      "SeekingthePearl"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1043",
+    "name": "新光风",
+    "fullName": "新光风",
+    "fullNameChinese": "新光风",
+    "fullNameJapanese": "シンコウウインディ",
+    "aliases": [
+      "新光风",
+      "Shinko Windy",
+      "シンコウウインディ",
+      "shinkowindy",
+      "ShinkoWindy"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1044",
+    "name": "东商变革",
+    "fullName": "东商变革",
+    "fullNameChinese": "东商变革",
+    "fullNameJapanese": "スイープトウショウ",
+    "aliases": [
+      "东商变革",
+      "Sweep Tosho",
+      "スイープトウショウ",
+      "sweeptosho",
+      "SweepTosho"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1045",
+    "name": "超级溪流",
+    "fullName": "超级溪流",
+    "fullNameChinese": "超级溪流",
+    "fullNameJapanese": "スーパークリーク",
+    "aliases": [
+      "超级溪流",
+      "Super Creek",
+      "スーパークリーク",
+      "supercreek",
+      "SuperCreek"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1046",
+    "name": "醒目飞鹰",
+    "fullName": "醒目飞鹰",
+    "fullNameChinese": "醒目飞鹰",
+    "fullNameJapanese": "スマートファルコン",
+    "aliases": [
+      "醒目飞鹰",
+      "Smart Falcon",
+      "スマートファルコン",
+      "smartfalcon",
+      "SmartFalcon"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1047",
+    "name": "荒漠英雄",
+    "fullName": "荒漠英雄",
+    "fullNameChinese": "荒漠英雄",
+    "fullNameJapanese": "ゼンノロブロイ",
+    "aliases": [
+      "荒漠英雄",
+      "Zenno Rob Roy",
+      "ゼンノロブロイ",
+      "zennorobroy",
+      "ZennoRobRoy"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1048",
+    "name": "岛川乔丹",
+    "fullName": "岛川乔丹",
+    "fullNameChinese": "岛川乔丹",
+    "fullNameJapanese": "トーセンジョーダン",
+    "aliases": [
+      "岛川乔丹",
+      "Tosen Jordan",
+      "トーセンジョーダン",
+      "tosenjordan",
+      "TosenJordan"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1049",
+    "name": "中山庆典",
+    "fullName": "中山庆典",
+    "fullNameChinese": "中山庆典",
+    "fullNameJapanese": "ナカヤマフェスタ",
+    "aliases": [
+      "中山庆典",
+      "Nakayama Festa",
+      "ナカヤマフェスタ",
+      "nakayamafesta",
+      "NakayamaFesta"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1050",
+    "name": "成田大进",
+    "fullName": "成田大进",
+    "fullNameChinese": "成田大进",
+    "fullNameJapanese": "ナリタタイシン",
+    "aliases": [
+      "成田大进",
+      "Narita Taishin",
+      "ナリタタイシン",
+      "naritataishin",
+      "NaritaTaishin"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1051",
+    "name": "西野花",
+    "fullName": "西野花",
+    "fullNameChinese": "西野花",
+    "fullNameJapanese": "ニシノフラワー",
+    "aliases": [
+      "西野花",
+      "Nishino Flower",
+      "ニシノフラワー",
+      "nishinoflower",
+      "NishinoFlower"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1052",
+    "name": "春乌菈菈",
+    "fullName": "春乌菈菈",
+    "fullNameChinese": "春乌菈菈",
+    "fullNameJapanese": "ハルウララ",
+    "aliases": [
+      "春乌菈菈",
+      "Haru Urara",
+      "ハルウララ",
+      "haruurara",
+      "HaruUrara"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1053",
+    "name": "青竹回忆",
+    "fullName": "青竹回忆",
+    "fullNameChinese": "青竹回忆",
+    "fullNameJapanese": "バンブーメモリー",
+    "aliases": [
+      "青竹回忆",
+      "Bamboo Memory",
+      "バンブーメモリー",
+      "bamboomemory",
+      "BambooMemory"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1054",
+    "name": "微光飞驹",
+    "fullName": "微光飞驹",
+    "fullNameChinese": "微光飞驹",
+    "fullNameJapanese": "ビコーペガサス",
+    "aliases": [
+      "微光飞驹",
+      "Biko Pegasus",
+      "ビコーペガサス",
+      "bikopegasus",
+      "BikoPegasus"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1055",
+    "name": "美丽周日",
+    "fullName": "美丽周日",
+    "fullNameChinese": "美丽周日",
+    "fullNameJapanese": "マーベラスサンデー",
+    "aliases": [
+      "美丽周日",
+      "Marvelous Sunday",
+      "マーベラスサンデー",
+      "marveloussunday",
+      "MarvelousSunday"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1056",
+    "name": "待兼福来",
+    "fullName": "待兼福来",
+    "fullNameChinese": "待兼福来",
+    "fullNameJapanese": "マチカネフクキタル",
+    "aliases": [
+      "待兼福来",
+      "Matikane​fukukitaru",
+      "マチカネフクキタル",
+      "matikanefukukitaru"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1058",
+    "name": "名将怒涛",
+    "fullName": "名将怒涛",
+    "fullNameChinese": "名将怒涛",
+    "fullNameJapanese": "メイショウドトウ",
+    "aliases": [
+      "名将怒涛",
+      "Meisho Doto",
+      "メイショウドトウ",
+      "meishodoto",
+      "MeishoDoto"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1059",
+    "name": "目白多伯",
+    "fullName": "目白多伯",
+    "fullNameChinese": "目白多伯",
+    "fullNameJapanese": "メジロドーベル",
+    "aliases": [
+      "目白多伯",
+      "Mejiro Dober",
+      "メジロドーベル",
+      "mejirodober",
+      "MejiroDober"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1060",
+    "name": "优秀素质",
+    "fullName": "优秀素质",
+    "fullNameChinese": "优秀素质",
+    "fullNameJapanese": "ナイスネイチャ",
+    "aliases": [
+      "优秀素质",
+      "Nice Nature",
+      "ナイスネイチャ",
+      "nicenature",
+      "NiceNature"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1061",
+    "name": "帝王光辉",
+    "fullName": "帝王光辉",
+    "fullNameChinese": "帝王光辉",
+    "fullNameJapanese": "キングヘイロー",
+    "aliases": [
+      "帝王光辉",
+      "King Halo",
+      "キングヘイロー",
+      "kinghalo",
+      "KingHalo"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1069",
+    "name": "樱花千代王",
+    "fullName": "樱花千代王",
+    "fullNameChinese": "樱花千代王",
+    "fullNameJapanese": "サクラチヨノオー",
+    "aliases": [
+      "樱花千代王",
+      "Sakura Chiyono O",
+      "サクラチヨノオー",
+      "sakurachiyonoo",
+      "SakuraChiyono O"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1070",
+    "name": "天狼星象征",
+    "fullName": "天狼星象征",
+    "fullNameChinese": "天狼星象征",
+    "fullNameJapanese": "シリウスシンボリ",
+    "aliases": [
+      "天狼星象征",
+      "Sirius Symboli",
+      "シリウスシンボリ",
+      "siriussymboli",
+      "SiriusSymboli"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1071",
+    "name": "目白雅丹",
+    "fullName": "目白雅丹",
+    "fullNameChinese": "目白雅丹",
+    "fullNameJapanese": "メジロアルダン",
+    "aliases": [
+      "目白雅丹",
+      "Mejiro Ardan",
+      "メジロアルダン",
+      "mejiroardan",
+      "MejiroArdan"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1072",
+    "name": "八重无敌",
+    "fullName": "八重无敌",
+    "fullNameChinese": "八重无敌",
+    "fullNameJapanese": "ヤエノムテキ",
+    "aliases": [
+      "八重无敌",
+      "Yaeno Muteki",
+      "ヤエノムテキ",
+      "yaenomuteki",
+      "YaenoMuteki"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1062",
+    "name": "待兼唐怀瑟",
+    "fullName": "待兼唐怀瑟",
+    "fullNameChinese": "待兼唐怀瑟",
+    "fullNameJapanese": "マチカネタンホイザ",
+    "aliases": [
+      "待兼唐怀瑟",
+      "Matikanetannhauser",
+      "マチカネタンホイザ",
+      "matikanetannhauser"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1063",
+    "name": "生野狄杜斯",
+    "fullName": "生野狄杜斯",
+    "fullNameChinese": "生野狄杜斯",
+    "fullNameJapanese": "イクノディクタス",
+    "aliases": [
+      "生野狄杜斯",
+      "Ikuno Dictus",
+      "イクノディクタス",
+      "ikunodictus",
+      "IkunoDictus"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1064",
+    "name": "目白善信",
+    "fullName": "目白善信",
+    "fullNameChinese": "目白善信",
+    "fullNameJapanese": "メジロパーマー",
+    "aliases": [
+      "目白善信",
+      "Mejiro Palmer",
+      "メジロパーマー",
+      "mejiropalmer",
+      "MejiroPalmer"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1065",
+    "name": "大拓太阳神",
+    "fullName": "大拓太阳神",
+    "fullNameChinese": "大拓太阳神",
+    "fullNameJapanese": "ダイタクヘリオス",
+    "aliases": [
+      "大拓太阳神",
+      "Daitaku Helios",
+      "ダイタクヘリオス",
+      "daitakuhelios",
+      "DaitakuHelios"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1066",
+    "name": "双涡轮",
+    "fullName": "双涡轮",
+    "fullNameChinese": "双涡轮",
+    "fullNameJapanese": "ツインターボ",
+    "aliases": [
+      "双涡轮",
+      "Twin Turbo",
+      "ツインターボ",
+      "twinturbo",
+      "TwinTurbo"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1067",
+    "name": "里见光钻",
+    "fullName": "里见光钻",
+    "fullNameChinese": "里见光钻",
+    "fullNameJapanese": "サトノダイヤモンド",
+    "aliases": [
+      "里见光钻",
+      "Satono Diamond",
+      "サトノダイヤモンド",
+      "satonodiamond",
+      "SatonoDiamond"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1068",
+    "name": "北部玄驹",
+    "fullName": "北部玄驹",
+    "fullNameChinese": "北部玄驹",
+    "fullNameJapanese": "キタサンブラック",
+    "aliases": [
+      "北部玄驹",
+      "Kitasan Black",
+      "キタサンブラック",
+      "kitasanblack",
+      "KitasanBlack"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "9001",
+    "name": "骏川手纲",
+    "fullName": "骏川手纲",
+    "fullNameChinese": "骏川手纲",
+    "fullNameJapanese": "駿川たづな",
+    "aliases": [
+      "骏川手纲",
+      "Tazuna Hayakawa",
+      "駿川たづな",
+      "hayakawatazuna",
+      "TazunaHayakawa"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "1057",
+    "name": "千明代表",
+    "fullName": "千明代表",
+    "fullNameChinese": "千明代表",
+    "fullNameJapanese": "ミスターシービー",
+    "aliases": [
+      "千明代表",
+      "Mr. C.B.",
+      "ミスターシービー",
+      "mrcb",
+      "Mr.C.B."
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "2001",
+    "name": "快乐米可",
+    "fullName": "快乐米可",
+    "fullNameChinese": "快乐米可",
+    "fullNameJapanese": "ハッピーミーク",
+    "aliases": [
+      "快乐米可",
+      "Happy Meek",
+      "ハッピーミーク",
+      "happymeek",
+      "HappyMeek"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "9004",
+    "name": "桐生院训练员",
+    "fullName": "桐生院训练员",
+    "fullNameChinese": "桐生院训练员",
+    "fullNameJapanese": "桐生院葵",
+    "aliases": [
+      "桐生院训练员",
+      "Aoi Kiryuin",
+      "桐生院葵",
+      "kiryuinaoi",
+      "AoiKiryuin"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "9005",
+    "name": "安心泽刺刺美",
+    "fullName": "安心泽刺刺美",
+    "fullNameChinese": "安心泽刺刺美",
+    "fullNameJapanese": "安心沢刺々美",
+    "aliases": [
+      "安心泽刺刺美",
+      "Sasami Anshinzawa",
+      "安心沢刺々美",
+      "anshinzawasasami",
+      "SasamiAnshinzawa"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "9003",
+    "name": "乙名史记者",
+    "fullName": "乙名史记者",
+    "fullNameChinese": "乙名史记者",
+    "fullNameJapanese": "乙名史悦子",
+    "aliases": [
+      "乙名史记者",
+      "Etsuko Otonashi",
+      "乙名史悦子",
+      "otonashietsuko",
+      "EtsukoOtonashi"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "2002",
+    "name": "苦涩糖衣",
+    "fullName": "苦涩糖衣",
+    "fullNameChinese": "苦涩糖衣",
+    "fullNameJapanese": "ビターグラッセ",
+    "aliases": [
+      "苦涩糖衣",
+      "Bitter Glasse",
+      "ビターグラッセ",
+      "bitterglasse",
+      "BitterGlasse"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "2003",
+    "name": "小小蚕茧",
+    "fullName": "小小蚕茧",
+    "fullNameChinese": "小小蚕茧",
+    "fullNameJapanese": "リトルココン",
+    "aliases": [
+      "小小蚕茧",
+      "Little Cocon",
+      "リトルココン",
+      "littlecocon",
+      "LittleCocon"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "9006",
+    "name": "㭴本理子",
+    "fullName": "㭴本理子",
+    "fullNameChinese": "㭴本理子",
+    "fullNameJapanese": "樫本理子",
+    "aliases": [
+      "㭴本理子",
+      "Riko Kashimoto",
+      "樫本理子",
+      "kashimotoriko",
+      "RikoKashimoto"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "1074",
+    "name": "目白光明",
+    "fullName": "目白光明",
+    "fullNameChinese": "目白光明",
+    "fullNameJapanese": "メジロブライト",
+    "aliases": [
+      "目白光明",
+      "Mejiro Bright",
+      "メジロブライト",
+      "mejirobright",
+      "MejiroBright"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1077",
+    "name": "成田路",
+    "fullName": "成田路",
+    "fullNameChinese": "成田路",
+    "fullNameJapanese": "ナリタトップロード",
+    "aliases": [
+      "成田路",
+      "Narita Top Road",
+      "ナリタトップロード",
+      "naritatoproad",
+      "NaritaTopRoad"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1076",
+    "name": "樱花桂冠",
+    "fullName": "樱花桂冠",
+    "fullNameChinese": "樱花桂冠",
+    "fullNameJapanese": "サクラローレル",
+    "aliases": [
+      "樱花桂冠",
+      "Sakura Laurel",
+      "サクラローレル",
+      "sakuralaurel",
+      "SakuraLaurel"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1078",
+    "name": "山人西风",
+    "fullName": "山人西风",
+    "fullNameChinese": "山人西风",
+    "fullNameJapanese": "ヤマニンゼファー",
+    "aliases": [
+      "山人西风",
+      "Yamanin Zephyr",
+      "ヤマニンゼファー",
+      "yamaninzephyr",
+      "YamaninZephyr"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1087",
+    "name": "阿斯顿真弓",
+    "fullName": "阿斯顿真弓",
+    "fullNameChinese": "阿斯顿真弓",
+    "fullNameJapanese": "アストンマーチャン",
+    "aliases": [
+      "阿斯顿真弓",
+      "Aston Machan",
+      "アストンマーチャン",
+      "astonmachan",
+      "AstonMachan"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1088",
+    "name": "里见皇冠",
+    "fullName": "里见皇冠",
+    "fullNameChinese": "里见皇冠",
+    "fullNameJapanese": "サトノクラウン",
+    "aliases": [
+      "里见皇冠",
+      "Satono Crown",
+      "サトノクラウン",
+      "satonocrown",
+      "SatonoCrown"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1089",
+    "name": "高尚骏逸",
+    "fullName": "高尚骏逸",
+    "fullNameChinese": "高尚骏逸",
+    "fullNameJapanese": "シュヴァルグラン",
+    "aliases": [
+      "高尚骏逸",
+      "Cheval Grand",
+      "シュヴァルグラン",
+      "chevalgrand",
+      "ChevalGrand"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1073",
+    "name": "鹤丸强志",
+    "fullName": "鹤丸强志",
+    "fullNameChinese": "鹤丸强志",
+    "fullNameJapanese": "ツルマルツヨシ",
+    "aliases": [
+      "鹤丸强志",
+      "Tsurumaru Tsuyoshi",
+      "ツルマルツヨシ",
+      "tsurumarutsuyoshi",
+      "TsurumaruTsuyoshi"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1083",
+    "name": "克里斯象征",
+    "fullName": "克里斯象征",
+    "fullNameChinese": "克里斯象征",
+    "fullNameJapanese": "シンボリクリスエス",
+    "aliases": [
+      "克里斯象征",
+      "Symboli Kris S",
+      "シンボリクリスエス",
+      "symbolikriss",
+      "SymboliKris S"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1084",
+    "name": "谷水琴蕾",
+    "fullName": "谷水琴蕾",
+    "fullNameChinese": "谷水琴蕾",
+    "fullNameJapanese": "タニノギムレット",
+    "aliases": [
+      "谷水琴蕾",
+      "Tanino Gimlet",
+      "タニノギムレット",
+      "taninogimlet",
+      "TaninoGimlet"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1098",
+    "name": "小林历奇",
+    "fullName": "小林历奇",
+    "fullNameChinese": "小林历奇",
+    "fullNameJapanese": "コパノリッキー",
+    "aliases": [
+      "小林历奇",
+      "Copano Rickey",
+      "コパノリッキー",
+      "copanorickey",
+      "CopanoRickey"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1075",
+    "name": "Daring Tact",
+    "fullName": "Daring Tact",
+    "fullNameChinese": "",
+    "fullNameJapanese": "デアリングタクト",
+    "aliases": [
+      "Daring Tact",
+      "デアリングタクト",
+      "daringtact",
+      "DaringTact"
+    ],
+    "className": "中等部",
+    "rarity": 0
+  },
+  {
+    "characterId": "1099",
+    "name": "北幸樽前",
+    "fullName": "北幸樽前",
+    "fullNameChinese": "北幸樽前",
+    "fullNameJapanese": "ホッコータルマエ",
+    "aliases": [
+      "北幸樽前",
+      "Hokko Tarumae",
+      "ホッコータルマエ",
+      "hokkotarumae",
+      "HokkoTarumae"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1100",
+    "name": "奇锐骏",
+    "fullName": "奇锐骏",
+    "fullNameChinese": "奇锐骏",
+    "fullNameJapanese": "ワンダーアキュート",
+    "aliases": [
+      "奇锐骏",
+      "Wonder Acute",
+      "ワンダーアキュート",
+      "wonderacute",
+      "WonderAcute"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1085",
+    "name": "第一红宝",
+    "fullName": "第一红宝",
+    "fullNameChinese": "第一红宝",
+    "fullNameJapanese": "ダイイチルビー",
+    "aliases": [
+      "第一红宝",
+      "Daiichi Ruby",
+      "ダイイチルビー",
+      "daiichiruby",
+      "DaiichiRuby"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1093",
+    "name": "喜嘉奇迹",
+    "fullName": "喜嘉奇迹",
+    "fullNameChinese": "喜嘉奇迹",
+    "fullNameJapanese": "ケイエスミラクル",
+    "aliases": [
+      "喜嘉奇迹",
+      "K.S. Miracle",
+      "ケイエスミラクル",
+      "ksmiracle",
+      "K.S.Miracle"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "9008",
+    "name": "明亮光晕",
+    "fullName": "明亮光晕",
+    "fullNameChinese": "明亮光晕",
+    "fullNameJapanese": "ライトハロー",
+    "aliases": [
+      "明亮光晕",
+      "Light Hello",
+      "ライトハロー",
+      "lighthello",
+      "LightHello"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "1086",
+    "name": "目白拉莫娜",
+    "fullName": "目白拉莫娜",
+    "fullNameChinese": "目白拉莫娜",
+    "fullNameJapanese": "メジロラモーヌ",
+    "aliases": [
+      "目白拉莫娜",
+      "Mejiro Ramonu",
+      "メジロラモーヌ",
+      "mejiroramonu",
+      "MejiroRamonu"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "9040",
+    "name": "达利阿拉伯",
+    "fullName": "达利阿拉伯",
+    "fullNameChinese": "达利阿拉伯",
+    "fullNameJapanese": "ダーレーアラビアン",
+    "aliases": [
+      "达利阿拉伯",
+      "Darley Arabian",
+      "ダーレーアラビアン",
+      "darleyarabian",
+      "DarleyArabian"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "9041",
+    "name": "高多芬柏布",
+    "fullName": "高多芬柏布",
+    "fullNameChinese": "高多芬柏布",
+    "fullNameJapanese": "ゴドルフィンバルブ",
+    "aliases": [
+      "高多芬柏布",
+      "Godolphin Barb",
+      "ゴドルフィンバルブ",
+      "godolphinbarb",
+      "GodolphinBarb"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "9042",
+    "name": "拜耶尔土耳其",
+    "fullName": "拜耶尔土耳其",
+    "fullNameChinese": "拜耶尔土耳其",
+    "fullNameJapanese": "バイアリーターク",
+    "aliases": [
+      "拜耶尔土耳其",
+      "Byerley Turk",
+      "バイアリーターク",
+      "byerleyturk",
+      "ByerleyTurk"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "1094",
+    "name": "森林宝袋",
+    "fullName": "森林宝袋",
+    "fullNameChinese": "森林宝袋",
+    "fullNameJapanese": "ジャングルポケット",
+    "aliases": [
+      "森林宝袋",
+      "Jungle Pocket",
+      "ジャングルポケット",
+      "junglepocket",
+      "JunglePocket"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1104",
+    "name": "葛城荣主",
+    "fullName": "葛城荣主",
+    "fullNameChinese": "葛城荣主",
+    "fullNameJapanese": "カツラギエース",
+    "aliases": [
+      "葛城荣主",
+      "Katsuragi Ace",
+      "カツラギエース",
+      "katsuragiace",
+      "KatsuragiAce"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1105",
+    "name": "新宇宙",
+    "fullName": "新宇宙",
+    "fullNameChinese": "新宇宙",
+    "fullNameJapanese": "ネオユニヴァース",
+    "aliases": [
+      "新宇宙",
+      "Neo Universe",
+      "ネオユニヴァース",
+      "neouniverse",
+      "NeoUniverse"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1106",
+    "name": "菱奇宝",
+    "fullName": "菱奇宝",
+    "fullNameChinese": "菱奇宝",
+    "fullNameJapanese": "ヒシミラクル",
+    "aliases": [
+      "菱奇宝",
+      "Hishi Miracle",
+      "ヒシミラクル",
+      "hishimiracle",
+      "HishiMiracle"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1107",
+    "name": "跳舞城",
+    "fullName": "跳舞城",
+    "fullNameChinese": "跳舞城",
+    "fullNameJapanese": "タップダンスシチー",
+    "aliases": [
+      "跳舞城",
+      "Tap Dance City",
+      "タップダンスシチー",
+      "tapdancecity",
+      "TapDanceCity"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "2006",
+    "name": "伟大女王",
+    "fullName": "伟大女王",
+    "fullNameChinese": "伟大女王",
+    "fullNameJapanese": "リガントーナ",
+    "aliases": [
+      "伟大女王",
+      "Rigantona",
+      "リガントーナ",
+      "rigantona"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "2005",
+    "name": "金星复活节",
+    "fullName": "金星复活节",
+    "fullNameChinese": "金星复活节",
+    "fullNameJapanese": "ヴェニュスパーク",
+    "aliases": [
+      "金星复活节",
+      "Venus Paques",
+      "ヴェニュスパーク",
+      "venuspaques",
+      "VenusPaques"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "9043",
+    "name": "佐岳鸣",
+    "fullName": "佐岳鸣",
+    "fullNameChinese": "佐岳鸣",
+    "fullNameJapanese": "佐岳メイ",
+    "aliases": [
+      "佐岳鸣",
+      "Mei Satake",
+      "佐岳メイ",
+      "satakemei",
+      "MeiSatake"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "1102",
+    "name": "Sounds of Earth",
+    "fullName": "Sounds of Earth",
+    "fullNameChinese": "",
+    "fullNameJapanese": "サウンズオブアース",
+    "aliases": [
+      "Sounds of Earth",
+      "サウンズオブアース",
+      "soundsofearth",
+      "SoundsofEarth"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1082",
+    "name": "North Flight",
+    "fullName": "North Flight",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ノースフライト",
+    "aliases": [
+      "North Flight",
+      "ノースフライト",
+      "northflight",
+      "NorthFlight"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1108",
+    "name": "Duramente",
+    "fullName": "Duramente",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ドゥラメンテ",
+    "aliases": [
+      "Duramente",
+      "ドゥラメンテ",
+      "duramente"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1090",
+    "name": "Verxina",
+    "fullName": "Verxina",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ヴィルシーナ",
+    "aliases": [
+      "Verxina",
+      "ヴィルシーナ",
+      "verxina"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1091",
+    "name": "Vivlos",
+    "fullName": "Vivlos",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ヴィブロス",
+    "aliases": [
+      "Vivlos",
+      "ヴィブロス",
+      "vivlos"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1103",
+    "name": "Royce and Royce",
+    "fullName": "Royce and Royce",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ロイスアンドロイス",
+    "aliases": [
+      "Royce and Royce",
+      "ロイスアンドロイス",
+      "royceandroyce",
+      "RoyceandRoyce"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1110",
+    "name": "Cesario",
+    "fullName": "Cesario",
+    "fullNameChinese": "",
+    "fullNameJapanese": "シーザリオ",
+    "aliases": [
+      "Cesario",
+      "シーザリオ",
+      "cesario"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1109",
+    "name": "Rhein Kraft",
+    "fullName": "Rhein Kraft",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ラインクラフト",
+    "aliases": [
+      "Rhein Kraft",
+      "ラインクラフト",
+      "rheinkraft",
+      "RheinKraft"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1111",
+    "name": "Air Messiah",
+    "fullName": "Air Messiah",
+    "fullNameChinese": "",
+    "fullNameJapanese": "エアメサイア",
+    "aliases": [
+      "Air Messiah",
+      "エアメサイア",
+      "airmessiah",
+      "AirMessiah"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1112",
+    "name": "Daring Heart",
+    "fullName": "Daring Heart",
+    "fullNameChinese": "",
+    "fullNameJapanese": "デアリングハート",
+    "aliases": [
+      "Daring Heart",
+      "デアリングハート",
+      "daringheart",
+      "DaringHeart"
+    ],
+    "className": "中等部",
+    "rarity": 0
+  },
+  {
+    "characterId": "1079",
+    "name": "Furioso",
+    "fullName": "Furioso",
+    "fullNameChinese": "",
+    "fullNameJapanese": "フリオーソ",
+    "aliases": [
+      "Furioso",
+      "フリオーソ",
+      "furioso"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1080",
+    "name": "Transcend",
+    "fullName": "Transcend",
+    "fullNameChinese": "",
+    "fullNameJapanese": "トランセンド",
+    "aliases": [
+      "Transcend",
+      "トランセンド",
+      "transcend"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1081",
+    "name": "Espoir City",
+    "fullName": "Espoir City",
+    "fullNameChinese": "",
+    "fullNameJapanese": "エスポワールシチー",
+    "aliases": [
+      "Espoir City",
+      "エスポワールシチー",
+      "espoircity",
+      "EspoirCity"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1092",
+    "name": "Dantsu Flame",
+    "fullName": "Dantsu Flame",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ダンツフレーム",
+    "aliases": [
+      "Dantsu Flame",
+      "ダンツフレーム",
+      "dantsuflame",
+      "DantsuFlame"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1096",
+    "name": "No Reason",
+    "fullName": "No Reason",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ノーリーズン",
+    "aliases": [
+      "No Reason",
+      "ノーリーズン",
+      "noreason",
+      "NoReason"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1097",
+    "name": "Still in Love",
+    "fullName": "Still in Love",
+    "fullNameChinese": "",
+    "fullNameJapanese": "スティルインラブ",
+    "aliases": [
+      "Still in Love",
+      "スティルインラブ",
+      "stillinlove",
+      "StillinLove"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1115",
+    "name": "Orfevre",
+    "fullName": "Orfevre",
+    "fullNameChinese": "",
+    "fullNameJapanese": "オルフェーヴル",
+    "aliases": [
+      "Orfevre",
+      "オルフェーヴル",
+      "orfevre"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1116",
+    "name": "Gentildonna",
+    "fullName": "Gentildonna",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ジェンティルドンナ",
+    "aliases": [
+      "Gentildonna",
+      "ジェンティルドンナ",
+      "gentildonna"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1117",
+    "name": "Win Variation",
+    "fullName": "Win Variation",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ウインバリアシオン",
+    "aliases": [
+      "Win Variation",
+      "ウインバリアシオン",
+      "winvariation",
+      "WinVariation"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "2007",
+    "name": "Sonon Elfie",
+    "fullName": "Sonon Elfie",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ソノンエルフィー",
+    "aliases": [
+      "Sonon Elfie",
+      "ソノンエルフィー",
+      "sononelfie",
+      "SononElfie"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "9044",
+    "name": "Ryoka Tsurugi",
+    "fullName": "Ryoka Tsurugi",
+    "fullNameChinese": "",
+    "fullNameJapanese": "都留岐涼花",
+    "aliases": [
+      "Ryoka Tsurugi",
+      "都留岐涼花",
+      "tsurugiryoka",
+      "RyokaTsurugi"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "1121",
+    "name": "Durandal",
+    "fullName": "Durandal",
+    "fullNameChinese": "",
+    "fullNameJapanese": "デュランダル",
+    "aliases": [
+      "Durandal",
+      "デュランダル",
+      "durandal"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1120",
+    "name": "Calstone Light O",
+    "fullName": "Calstone Light O",
+    "fullNameChinese": "",
+    "fullNameJapanese": "カルストンライトオ",
+    "aliases": [
+      "Calstone Light O",
+      "カルストンライトオ",
+      "calstonelighto",
+      "CalstoneLightO"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1119",
+    "name": "Dream Journey",
+    "fullName": "Dream Journey",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ドリームジャーニー",
+    "aliases": [
+      "Dream Journey",
+      "ドリームジャーニー",
+      "dreamjourney",
+      "DreamJourney"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1114",
+    "name": "Buena Vista",
+    "fullName": "Buena Vista",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ブエナビスタ",
+    "aliases": [
+      "Buena Vista",
+      "ブエナビスタ",
+      "buenavista",
+      "BuenaVista"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1095",
+    "name": "Believe",
+    "fullName": "Believe",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ビリーヴ",
+    "aliases": [
+      "Believe",
+      "ビリーヴ",
+      "believe"
+    ],
+    "className": "高等部",
+    "rarity": 0
+  },
+  {
+    "characterId": "1124",
+    "name": "Bubble Gum Fellow",
+    "fullName": "Bubble Gum Fellow",
+    "fullNameChinese": "",
+    "fullNameJapanese": "バブルガムフェロー",
+    "aliases": [
+      "Bubble Gum Fellow",
+      "バブルガムフェロー",
+      "bubblegumfellow",
+      "BubbleGumFellow"
+    ],
+    "className": "High School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1113",
+    "name": "Fusaichi Pandora",
+    "fullName": "Fusaichi Pandora",
+    "fullNameChinese": "",
+    "fullNameJapanese": "フサイチパンドラ",
+    "aliases": [
+      "Fusaichi Pandora",
+      "フサイチパンドラ",
+      "fusaichipandora",
+      "FusaichiPandora"
+    ],
+    "className": "中等部",
+    "rarity": 0
+  },
+  {
+    "characterId": "9045",
+    "name": "Sugar Lights",
+    "fullName": "Sugar Lights",
+    "fullNameChinese": "",
+    "fullNameJapanese": "シュガーライツ",
+    "aliases": [
+      "Sugar Lights",
+      "シュガーライツ",
+      "sugarlights",
+      "SugarLights"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "1128",
+    "name": "Blast Onepiece",
+    "fullName": "Blast Onepiece",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ブラストワンピース",
+    "aliases": [
+      "Blast Onepiece",
+      "ブラストワンピース",
+      "blastonepiece",
+      "BlastOnepiece"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1126",
+    "name": "Sakura Chitose O",
+    "fullName": "Sakura Chitose O",
+    "fullNameChinese": "",
+    "fullNameJapanese": "サクラチトセオー",
+    "aliases": [
+      "Sakura Chitose O",
+      "サクラチトセオー",
+      "sakurachitoseo",
+      "SakuraChitoseO"
+    ],
+    "className": "高等部",
+    "rarity": 0
+  },
+  {
+    "characterId": "9048",
+    "name": "Haiseiko",
+    "fullName": "Haiseiko",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ハイセイコー",
+    "aliases": [
+      "Haiseiko",
+      "ハイセイコー",
+      "haiseiko"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "9047",
+    "name": "Speed Symboli",
+    "fullName": "Speed Symboli",
+    "fullNameChinese": "",
+    "fullNameJapanese": "スピードシンボリ",
+    "aliases": [
+      "Speed Symboli",
+      "スピードシンボリ",
+      "speedsymboli",
+      "SpeedSymboli"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "9046",
+    "name": "Saint Lite",
+    "fullName": "Saint Lite",
+    "fullNameChinese": "",
+    "fullNameJapanese": "セントライト",
+    "aliases": [
+      "Saint Lite",
+      "セントライト",
+      "saintlite",
+      "SaintLite"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "1134",
+    "name": "Curren Bouquetd'or",
+    "fullName": "Curren Bouquetd'or",
+    "fullNameChinese": "",
+    "fullNameJapanese": "カレンブーケドール",
+    "aliases": [
+      "Curren Bouquetd'or",
+      "カレンブーケドール",
+      "currenbouquetdor",
+      "CurrenBouquetd'or"
+    ],
+    "className": "中等部",
+    "rarity": 0
+  },
+  {
+    "characterId": "1133",
+    "name": "Chrono Genesis",
+    "fullName": "Chrono Genesis",
+    "fullNameChinese": "",
+    "fullNameJapanese": "クロノジェネシス",
+    "aliases": [
+      "Chrono Genesis",
+      "クロノジェネシス",
+      "chronogenesis",
+      "ChronoGenesis"
+    ],
+    "className": "中等部",
+    "rarity": 0
+  },
+  {
+    "characterId": "1132",
+    "name": "Loves Only You",
+    "fullName": "Loves Only You",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ラヴズオンリーユー",
+    "aliases": [
+      "Loves Only You",
+      "ラヴズオンリーユー",
+      "lovesonlyyou",
+      "LovesOnlyYou"
+    ],
+    "className": "中等部",
+    "rarity": 0
+  },
+  {
+    "characterId": "1131",
+    "name": "Gran Alegria",
+    "fullName": "Gran Alegria",
+    "fullNameChinese": "",
+    "fullNameJapanese": "グランアレグリア",
+    "aliases": [
+      "Gran Alegria",
+      "グランアレグリア",
+      "granalegria",
+      "GranAlegria"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1130",
+    "name": "Lucky Lilac",
+    "fullName": "Lucky Lilac",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ラッキーライラック",
+    "aliases": [
+      "Lucky Lilac",
+      "ラッキーライラック",
+      "luckylilac",
+      "LuckyLilac"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1129",
+    "name": "Almond Eye",
+    "fullName": "Almond Eye",
+    "fullNameChinese": "",
+    "fullNameJapanese": "アーモンドアイ",
+    "aliases": [
+      "Almond Eye",
+      "アーモンドアイ",
+      "almondeye",
+      "AlmondEye"
+    ],
+    "className": "Middle School",
+    "rarity": 0
+  },
+  {
+    "characterId": "1127",
+    "name": "Fenomeno",
+    "fullName": "Fenomeno",
+    "fullNameChinese": "",
+    "fullNameJapanese": "フェノーメノ",
+    "aliases": [
+      "Fenomeno",
+      "フェノーメノ",
+      "fenomeno"
+    ],
+    "className": "高等部",
+    "rarity": 0
+  },
+  {
+    "characterId": "1135",
+    "name": "Stay Gold",
+    "fullName": "Stay Gold",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ステイゴールド",
+    "aliases": [
+      "Stay Gold",
+      "ステイゴールド",
+      "staygold",
+      "StayGold"
+    ],
+    "className": "高等部",
+    "rarity": 0
+  },
+  {
+    "characterId": "9049",
+    "name": "Tucker Bryne",
+    "fullName": "Tucker Bryne",
+    "fullNameChinese": "",
+    "fullNameJapanese": "タッカーブライン",
+    "aliases": [
+      "Tucker Bryne",
+      "タッカーブライン",
+      "tuckerbryne",
+      "TuckerBryne"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "1118",
+    "name": "Admire Groove",
+    "fullName": "Admire Groove",
+    "fullNameChinese": "",
+    "fullNameJapanese": "アドマイヤグルーヴ",
+    "aliases": [
+      "Admire Groove",
+      "アドマイヤグルーヴ",
+      "admiregroove",
+      "AdmireGroove"
+    ],
+    "className": "高等部",
+    "rarity": 0
+  },
+  {
+    "characterId": "1136",
+    "name": "Red Desire",
+    "fullName": "Red Desire",
+    "fullNameChinese": "",
+    "fullNameJapanese": "レッドディザイア",
+    "aliases": [
+      "Red Desire",
+      "レッドディザイア",
+      "reddesire",
+      "RedDesire"
+    ],
+    "className": "中等部",
+    "rarity": 0
+  },
+  {
+    "characterId": "9051",
+    "name": "Yunohana Bloom",
+    "fullName": "Yunohana Bloom",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ユノハナブルーム",
+    "aliases": [
+      "Yunohana Bloom",
+      "ユノハナブルーム",
+      "yunohanabloom",
+      "YunohanaBloom"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "9050",
+    "name": "Kiyoko Hoshina",
+    "fullName": "Kiyoko Hoshina",
+    "fullNameChinese": "",
+    "fullNameJapanese": "保科健子",
+    "aliases": [
+      "Kiyoko Hoshina",
+      "保科健子",
+      "hoshinakiyoko",
+      "KiyokoHoshina"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "1137",
+    "name": "Kiseki",
+    "fullName": "Kiseki",
+    "fullNameChinese": "",
+    "fullNameJapanese": "キセキ",
+    "aliases": [
+      "Kiseki",
+      "キセキ",
+      "kiseki"
+    ],
+    "className": "中等部",
+    "rarity": 0
+  },
+  {
+    "characterId": "1139",
+    "name": "Casino Drive",
+    "fullName": "Casino Drive",
+    "fullNameChinese": "",
+    "fullNameJapanese": "カジノドライヴ",
+    "aliases": [
+      "Casino Drive",
+      "カジノドライヴ",
+      "casinodrive",
+      "CasinoDrive"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "1140",
+    "name": "Marche Lorraine",
+    "fullName": "Marche Lorraine",
+    "fullNameChinese": "",
+    "fullNameJapanese": "マルシュロレーヌ",
+    "aliases": [
+      "Marche Lorraine",
+      "マルシュロレーヌ",
+      "marchelorraine",
+      "MarcheLorraine"
+    ],
+    "className": "中等部",
+    "rarity": 0
+  },
+  {
+    "characterId": "1138",
+    "name": "Forever Young",
+    "fullName": "Forever Young",
+    "fullNameChinese": "",
+    "fullNameJapanese": "フォーエバーヤング",
+    "aliases": [
+      "Forever Young",
+      "フォーエバーヤング",
+      "foreveryoung",
+      "ForeverYoung"
+    ],
+    "className": "高等部",
+    "rarity": 0
+  },
+  {
+    "characterId": "1145",
+    "name": "Rulership",
+    "fullName": "Rulership",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ルーラーシップ",
+    "aliases": [
+      "Rulership",
+      "ルーラーシップ",
+      "rulership"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "1144",
+    "name": "Rose Kingdom",
+    "fullName": "Rose Kingdom",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ローズキングダム",
+    "aliases": [
+      "Rose Kingdom",
+      "ローズキングダム",
+      "rosekingdom",
+      "RoseKingdom"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "1143",
+    "name": "Victoire Pisa",
+    "fullName": "Victoire Pisa",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ヴィクトワールピサ",
+    "aliases": [
+      "Victoire Pisa",
+      "ヴィクトワールピサ",
+      "victoirepisa",
+      "VictoirePisa"
+    ],
+    "className": "高等部",
+    "rarity": 0
+  },
+  {
+    "characterId": "1142",
+    "name": "Logotype",
+    "fullName": "Logotype",
+    "fullNameChinese": "",
+    "fullNameJapanese": "ロゴタイプ",
+    "aliases": [
+      "Logotype",
+      "ロゴタイプ",
+      "logotype"
+    ],
+    "className": "",
+    "rarity": 0
+  },
+  {
+    "characterId": "1141",
+    "name": "Epiphaneia",
+    "fullName": "Epiphaneia",
+    "fullNameChinese": "",
+    "fullNameJapanese": "エピファネイア",
+    "aliases": [
+      "Epiphaneia",
+      "エピファネイア",
+      "epiphaneia"
+    ],
+    "className": "",
+    "rarity": 0
+  }
+]

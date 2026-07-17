@@ -1,0 +1,401 @@
+[
+  {
+    "id": 589816290,
+    "characterId": "Aalto",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Aalto",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/6/65/Aalto_Card.jpg/revision/latest"
+  },
+  {
+    "id": 908458820,
+    "characterId": "Aemeath",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Aemeath",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/f/fc/Aemeath_Card.jpg/revision/latest"
+  },
+  {
+    "id": 454150214,
+    "characterId": "Augusta",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Augusta",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/3/39/Augusta_Card.png/revision/latest"
+  },
+  {
+    "id": 225089172,
+    "characterId": "Baizhi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Baizhi",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/e/ed/Baizhi_Card.png/revision/latest"
+  },
+  {
+    "id": 792906531,
+    "characterId": "Brant",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Brant",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/2/2d/Brant_Card.png/revision/latest"
+  },
+  {
+    "id": 124018825,
+    "characterId": "Buling",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Buling",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/5/58/Buling_Card.jpg/revision/latest"
+  },
+  {
+    "id": 730366039,
+    "characterId": "Calcharo",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Calcharo",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/e/e5/Calcharo_Card.png/revision/latest"
+  },
+  {
+    "id": 166695542,
+    "characterId": "Camellya",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Camellya",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/8/8f/Camellya_Card.png/revision/latest"
+  },
+  {
+    "id": 660021360,
+    "characterId": "Cantarella",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Cantarella",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/0/01/Cantarella_Card.png/revision/latest"
+  },
+  {
+    "id": 24059846,
+    "characterId": "Carlotta",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Carlotta",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/8/8a/Carlotta_Card.png/revision/latest"
+  },
+  {
+    "id": 447185467,
+    "characterId": "Cartethyia",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Cartethyia",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/d/d5/Cartethyia_Card.png/revision/latest"
+  },
+  {
+    "id": 430492966,
+    "characterId": "Changli",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Changli",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/e/e9/Changli_Card.png/revision/latest"
+  },
+  {
+    "id": 919414252,
+    "characterId": "Chisa",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Chisa",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/c/ca/Chisa_Card.jpg/revision/latest"
+  },
+  {
+    "id": 934729112,
+    "characterId": "Chixia",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Chixia",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/d/da/Chixia_Card.png/revision/latest"
+  },
+  {
+    "id": 99638255,
+    "characterId": "Ciaccona",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ciaccona",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/6/68/Ciaccona_Card.png/revision/latest"
+  },
+  {
+    "id": 388310324,
+    "characterId": "Danjin",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Danjin",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/3/3e/Danjin_Card.png/revision/latest"
+  },
+  {
+    "id": 53263445,
+    "characterId": "Denia",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Denia",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/b/b2/Denia_Card.jpg/revision/latest"
+  },
+  {
+    "id": 752936593,
+    "characterId": "Encore",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Encore",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/6/6c/Encore_Card.png/revision/latest"
+  },
+  {
+    "id": 529196344,
+    "characterId": "Galbrena",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Galbrena",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/9/9d/Galbrena_Card.jpg/revision/latest"
+  },
+  {
+    "id": 150422632,
+    "characterId": "Hiyuki",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hiyuki",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/d/dc/Hiyuki_Card.jpg/revision/latest"
+  },
+  {
+    "id": 24704277,
+    "characterId": "Hsin",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hsin",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/d/d6/Hsin_Card.jpg/revision/latest"
+  },
+  {
+    "id": 150572690,
+    "characterId": "Iuno",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Iuno",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/1/1f/Iuno_Card.png/revision/latest"
+  },
+  {
+    "id": 803603593,
+    "characterId": "Jianxin",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Jianxin",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/8/8a/Jianxin_Card.jpg/revision/latest"
+  },
+  {
+    "id": 200902309,
+    "characterId": "Jingran",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Jingran",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/4/44/Jingran_Card.jpg/revision/latest"
+  },
+  {
+    "id": 281486294,
+    "characterId": "Jinhsi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Jinhsi",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/a9/Jinhsi_Card.png/revision/latest"
+  },
+  {
+    "id": 290283324,
+    "characterId": "Jiyan",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Jiyan",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/0/0d/Jiyan_Card.png/revision/latest"
+  },
+  {
+    "id": 358585200,
+    "characterId": "Lingyang",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Lingyang",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/9/98/Lingyang_Card.png/revision/latest"
+  },
+  {
+    "id": 459087902,
+    "characterId": "Lucilla",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Lucilla",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/5/51/Lucilla_Card.jpg/revision/latest"
+  },
+  {
+    "id": 107278447,
+    "characterId": "Lucy",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Lucy",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/3/32/Lucy_Card.jpg/revision/latest"
+  },
+  {
+    "id": 518355373,
+    "characterId": "Lumi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Lumi",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/e/ee/Lumi_Card.jpg/revision/latest"
+  },
+  {
+    "id": 623281250,
+    "characterId": "Lupa",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Lupa",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/e/e4/Lupa_Card.png/revision/latest"
+  },
+  {
+    "id": 287575571,
+    "characterId": "Luuk_Herssen",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Luuk_Herssen",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/f/fe/Luuk_Herssen_Card.jpg/revision/latest"
+  },
+  {
+    "id": 59937816,
+    "characterId": "Lynae",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Lynae",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/7/71/Lynae_Card.jpg/revision/latest"
+  },
+  {
+    "id": 145686265,
+    "characterId": "Mornye",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mornye",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/e/eb/Mornye_Card.jpg/revision/latest"
+  },
+  {
+    "id": 284825988,
+    "characterId": "Mortefi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mortefi",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/8/8e/Mortefi_Card.jpg/revision/latest"
+  },
+  {
+    "id": 518868913,
+    "characterId": "Phoebe",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Phoebe",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/5/54/Phoebe_Card.png/revision/latest"
+  },
+  {
+    "id": 977552805,
+    "characterId": "Phrolova",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Phrolova",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/0/0b/Phrolova_Card.png/revision/latest"
+  },
+  {
+    "id": 651486851,
+    "characterId": "Qingxiao",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Qingxiao",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/1/1b/Qingxiao_Card.jpg/revision/latest"
+  },
+  {
+    "id": 284337342,
+    "characterId": "Qiuyuan",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Qiuyuan",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/1/17/Qiuyuan_Card.jpg/revision/latest"
+  },
+  {
+    "id": 697385739,
+    "characterId": "Rebecca",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Rebecca",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/c/c5/Rebecca_Card.jpg/revision/latest"
+  },
+  {
+    "id": 230494596,
+    "characterId": "Roccia",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Roccia",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/e/ea/Roccia_Card.png/revision/latest"
+  },
+  {
+    "id": 600172320,
+    "characterId": "Rover",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Rover",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/7/70/Rover_1.png/revision/latest"
+  },
+  {
+    "id": 543397137,
+    "characterId": "Sanhua",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Sanhua",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/5/5d/Sanhua_Card.png/revision/latest"
+  },
+  {
+    "id": 124465471,
+    "characterId": "Shorekeeper",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shorekeeper",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/8/85/Shorekeeper_Card.png/revision/latest"
+  },
+  {
+    "id": 919106225,
+    "characterId": "Sigrika",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Sigrika",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/f/f6/Sigrika_Card.jpg/revision/latest"
+  },
+  {
+    "id": 974979589,
+    "characterId": "Suisui",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Suisui",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/8/83/Suisui_Card.jpg/revision/latest"
+  },
+  {
+    "id": 119502621,
+    "characterId": "Suoming",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Suoming",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/7/7e/Suoming_Card.jpg/revision/latest"
+  },
+  {
+    "id": 277732218,
+    "characterId": "Taoqi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Taoqi",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/ae/Taoqi_Card.jpg/revision/latest"
+  },
+  {
+    "id": 197408562,
+    "characterId": "Verina",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Verina",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/7/7c/Verina%27s_Card.jpg/revision/latest"
+  },
+  {
+    "id": 368950068,
+    "characterId": "Xiangli_Yao",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Xiangli_Yao",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/e/e9/Xiangli_Yao_Card.png/revision/latest"
+  },
+  {
+    "id": 585162388,
+    "characterId": "Yangyang",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Yangyang",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/a/a7/Yangyang_Card.png/revision/latest"
+  },
+  {
+    "id": 215482498,
+    "characterId": "Yangyang_Xuanling",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Yangyang_Xuanling",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/4/4d/Yangyang_Xuanling_Card.jpg/revision/latest"
+  },
+  {
+    "id": 324317548,
+    "characterId": "Yinlin",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Yinlin",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/3/33/Yinlin_Card.jpg/revision/latest"
+  },
+  {
+    "id": 293779359,
+    "characterId": "Youhu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Youhu",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/b/b6/Youhu_Card.png/revision/latest"
+  },
+  {
+    "id": 188039792,
+    "characterId": "Yuanwu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Yuanwu",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/5/53/Yuanwu_Card.jpg/revision/latest"
+  },
+  {
+    "id": 108072956,
+    "characterId": "Zani",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Zani",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/d/df/Zani_Card.png/revision/latest"
+  },
+  {
+    "id": 425293405,
+    "characterId": "Zhezhi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Zhezhi",
+    "image_url": "https://static.wikia.nocookie.net/wutheringwaves/images/f/f0/Zhezhi_Card.png/revision/latest"
+  }
+]

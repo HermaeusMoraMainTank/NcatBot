@@ -1,0 +1,1418 @@
+[
+  {
+    "characterId": "10000002",
+    "name": "神里绫华",
+    "fullName": "神里绫华",
+    "fullNameChinese": "神里绫华",
+    "aliases": [
+      "神里绫华",
+      "Kamisato Ayaka"
+    ],
+    "className": "Ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000003",
+    "name": "琴",
+    "fullName": "琴",
+    "fullNameChinese": "琴",
+    "aliases": [
+      "琴",
+      "Jean"
+    ],
+    "className": "Wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000006",
+    "name": "丽莎",
+    "fullName": "丽莎",
+    "fullNameChinese": "丽莎",
+    "aliases": [
+      "丽莎",
+      "Lisa"
+    ],
+    "className": "Electric",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000014",
+    "name": "芭芭拉",
+    "fullName": "芭芭拉",
+    "fullNameChinese": "芭芭拉",
+    "aliases": [
+      "芭芭拉",
+      "Barbara"
+    ],
+    "className": "Water",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000015",
+    "name": "凯亚",
+    "fullName": "凯亚",
+    "fullNameChinese": "凯亚",
+    "aliases": [
+      "凯亚",
+      "Kaeya"
+    ],
+    "className": "Ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000016",
+    "name": "迪卢克",
+    "fullName": "迪卢克",
+    "fullNameChinese": "迪卢克",
+    "aliases": [
+      "迪卢克",
+      "Diluc"
+    ],
+    "className": "Fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000020",
+    "name": "雷泽",
+    "fullName": "雷泽",
+    "fullNameChinese": "雷泽",
+    "aliases": [
+      "雷泽",
+      "Razor"
+    ],
+    "className": "Electric",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000021",
+    "name": "安柏",
+    "fullName": "安柏",
+    "fullNameChinese": "安柏",
+    "aliases": [
+      "安柏",
+      "Amber"
+    ],
+    "className": "Fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000022",
+    "name": "温迪",
+    "fullName": "温迪",
+    "fullNameChinese": "温迪",
+    "aliases": [
+      "温迪",
+      "Venti"
+    ],
+    "className": "Wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000023",
+    "name": "香菱",
+    "fullName": "香菱",
+    "fullNameChinese": "香菱",
+    "aliases": [
+      "香菱",
+      "Xiangling"
+    ],
+    "className": "Fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000024",
+    "name": "北斗",
+    "fullName": "北斗",
+    "fullNameChinese": "北斗",
+    "aliases": [
+      "北斗",
+      "Beidou"
+    ],
+    "className": "Electric",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000025",
+    "name": "行秋",
+    "fullName": "行秋",
+    "fullNameChinese": "行秋",
+    "aliases": [
+      "行秋",
+      "Xingqiu"
+    ],
+    "className": "Water",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000026",
+    "name": "魈",
+    "fullName": "魈",
+    "fullNameChinese": "魈",
+    "aliases": [
+      "魈",
+      "Xiao"
+    ],
+    "className": "Wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000027",
+    "name": "凝光",
+    "fullName": "凝光",
+    "fullNameChinese": "凝光",
+    "aliases": [
+      "凝光",
+      "Ningguang"
+    ],
+    "className": "Rock",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000029",
+    "name": "可莉",
+    "fullName": "可莉",
+    "fullNameChinese": "可莉",
+    "aliases": [
+      "可莉",
+      "Klee"
+    ],
+    "className": "Fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000030",
+    "name": "钟离",
+    "fullName": "钟离",
+    "fullNameChinese": "钟离",
+    "aliases": [
+      "钟离",
+      "Zhongli"
+    ],
+    "className": "Rock",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000031",
+    "name": "菲谢尔",
+    "fullName": "菲谢尔",
+    "fullNameChinese": "菲谢尔",
+    "aliases": [
+      "菲谢尔",
+      "Fischl"
+    ],
+    "className": "Electric",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000032",
+    "name": "班尼特",
+    "fullName": "班尼特",
+    "fullNameChinese": "班尼特",
+    "aliases": [
+      "班尼特",
+      "Bennett"
+    ],
+    "className": "Fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000033",
+    "name": "达达利亚",
+    "fullName": "达达利亚",
+    "fullNameChinese": "达达利亚",
+    "aliases": [
+      "达达利亚",
+      "Tartaglia"
+    ],
+    "className": "Water",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000034",
+    "name": "诺艾尔",
+    "fullName": "诺艾尔",
+    "fullNameChinese": "诺艾尔",
+    "aliases": [
+      "诺艾尔",
+      "Noelle"
+    ],
+    "className": "Rock",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000035",
+    "name": "七七",
+    "fullName": "七七",
+    "fullNameChinese": "七七",
+    "aliases": [
+      "七七",
+      "Qiqi"
+    ],
+    "className": "Ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000036",
+    "name": "重云",
+    "fullName": "重云",
+    "fullNameChinese": "重云",
+    "aliases": [
+      "重云",
+      "Chongyun"
+    ],
+    "className": "Ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000037",
+    "name": "甘雨",
+    "fullName": "甘雨",
+    "fullNameChinese": "甘雨",
+    "aliases": [
+      "甘雨",
+      "Ganyu"
+    ],
+    "className": "Ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000038",
+    "name": "阿贝多",
+    "fullName": "阿贝多",
+    "fullNameChinese": "阿贝多",
+    "aliases": [
+      "阿贝多",
+      "Albedo"
+    ],
+    "className": "Rock",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000039",
+    "name": "迪奥娜",
+    "fullName": "迪奥娜",
+    "fullNameChinese": "迪奥娜",
+    "aliases": [
+      "迪奥娜",
+      "Diona"
+    ],
+    "className": "Ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000041",
+    "name": "莫娜",
+    "fullName": "莫娜",
+    "fullNameChinese": "莫娜",
+    "aliases": [
+      "莫娜",
+      "Mona"
+    ],
+    "className": "Water",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000042",
+    "name": "刻晴",
+    "fullName": "刻晴",
+    "fullNameChinese": "刻晴",
+    "aliases": [
+      "刻晴",
+      "Keqing"
+    ],
+    "className": "Electric",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000043",
+    "name": "砂糖",
+    "fullName": "砂糖",
+    "fullNameChinese": "砂糖",
+    "aliases": [
+      "砂糖",
+      "Sucrose"
+    ],
+    "className": "Wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000044",
+    "name": "辛焱",
+    "fullName": "辛焱",
+    "fullNameChinese": "辛焱",
+    "aliases": [
+      "辛焱",
+      "Xinyan"
+    ],
+    "className": "Fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000045",
+    "name": "罗莎莉亚",
+    "fullName": "罗莎莉亚",
+    "fullNameChinese": "罗莎莉亚",
+    "aliases": [
+      "罗莎莉亚",
+      "Rosaria"
+    ],
+    "className": "Ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000046",
+    "name": "胡桃",
+    "fullName": "胡桃",
+    "fullNameChinese": "胡桃",
+    "aliases": [
+      "胡桃",
+      "Hu Tao"
+    ],
+    "className": "Fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000047",
+    "name": "枫原万叶",
+    "fullName": "枫原万叶",
+    "fullNameChinese": "枫原万叶",
+    "aliases": [
+      "枫原万叶",
+      "Kaedehara Kazuha"
+    ],
+    "className": "Wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000048",
+    "name": "烟绯",
+    "fullName": "烟绯",
+    "fullNameChinese": "烟绯",
+    "aliases": [
+      "烟绯",
+      "Yanfei"
+    ],
+    "className": "Fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000049",
+    "name": "宵宫",
+    "fullName": "宵宫",
+    "fullNameChinese": "宵宫",
+    "aliases": [
+      "宵宫",
+      "Yoimiya"
+    ],
+    "className": "Fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000050",
+    "name": "托马",
+    "fullName": "托马",
+    "fullNameChinese": "托马",
+    "aliases": [
+      "托马",
+      "Thoma"
+    ],
+    "className": "Fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000051",
+    "name": "优菈",
+    "fullName": "优菈",
+    "fullNameChinese": "优菈",
+    "aliases": [
+      "优菈",
+      "Eula"
+    ],
+    "className": "Ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000052",
+    "name": "雷电将军",
+    "fullName": "雷电将军",
+    "fullNameChinese": "雷电将军",
+    "aliases": [
+      "雷电将军",
+      "Raiden Shogun"
+    ],
+    "className": "Electric",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000053",
+    "name": "早柚",
+    "fullName": "早柚",
+    "fullNameChinese": "早柚",
+    "aliases": [
+      "早柚",
+      "Sayu"
+    ],
+    "className": "Wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000054",
+    "name": "珊瑚宫心海",
+    "fullName": "珊瑚宫心海",
+    "fullNameChinese": "珊瑚宫心海",
+    "aliases": [
+      "珊瑚宫心海",
+      "Sangonomiya Kokomi"
+    ],
+    "className": "Water",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000055",
+    "name": "五郎",
+    "fullName": "五郎",
+    "fullNameChinese": "五郎",
+    "aliases": [
+      "五郎",
+      "Gorou"
+    ],
+    "className": "Rock",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000056",
+    "name": "九条裟罗",
+    "fullName": "九条裟罗",
+    "fullNameChinese": "九条裟罗",
+    "aliases": [
+      "九条裟罗",
+      "Kujou Sara"
+    ],
+    "className": "Electric",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000057",
+    "name": "荒泷一斗",
+    "fullName": "荒泷一斗",
+    "fullNameChinese": "荒泷一斗",
+    "aliases": [
+      "荒泷一斗",
+      "Arataki Itto"
+    ],
+    "className": "Rock",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000058",
+    "name": "八重神子",
+    "fullName": "八重神子",
+    "fullNameChinese": "八重神子",
+    "aliases": [
+      "八重神子",
+      "Yae Miko"
+    ],
+    "className": "Electric",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000059",
+    "name": "鹿野院平藏",
+    "fullName": "鹿野院平藏",
+    "fullNameChinese": "鹿野院平藏",
+    "aliases": [
+      "鹿野院平藏",
+      "Shikanoin Heizou"
+    ],
+    "className": "Wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000060",
+    "name": "夜兰",
+    "fullName": "夜兰",
+    "fullNameChinese": "夜兰",
+    "aliases": [
+      "夜兰",
+      "Yelan"
+    ],
+    "className": "Water",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000061",
+    "name": "绮良良",
+    "fullName": "绮良良",
+    "fullNameChinese": "绮良良",
+    "aliases": [
+      "绮良良",
+      "Kirara"
+    ],
+    "className": "Grass",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000062",
+    "name": "埃洛伊",
+    "fullName": "埃洛伊",
+    "fullNameChinese": "埃洛伊",
+    "aliases": [
+      "埃洛伊",
+      "Aloy"
+    ],
+    "className": "Ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000063",
+    "name": "申鹤",
+    "fullName": "申鹤",
+    "fullNameChinese": "申鹤",
+    "aliases": [
+      "申鹤",
+      "Shenhe"
+    ],
+    "className": "Ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000064",
+    "name": "云堇",
+    "fullName": "云堇",
+    "fullNameChinese": "云堇",
+    "aliases": [
+      "云堇",
+      "Yun Jin"
+    ],
+    "className": "Rock",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000065",
+    "name": "久岐忍",
+    "fullName": "久岐忍",
+    "fullNameChinese": "久岐忍",
+    "aliases": [
+      "久岐忍",
+      "Kuki Shinobu"
+    ],
+    "className": "Electric",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000066",
+    "name": "神里绫人",
+    "fullName": "神里绫人",
+    "fullNameChinese": "神里绫人",
+    "aliases": [
+      "神里绫人",
+      "Kamisato Ayato"
+    ],
+    "className": "Water",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000067",
+    "name": "柯莱",
+    "fullName": "柯莱",
+    "fullNameChinese": "柯莱",
+    "aliases": [
+      "柯莱",
+      "Collei"
+    ],
+    "className": "Grass",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000068",
+    "name": "多莉",
+    "fullName": "多莉",
+    "fullNameChinese": "多莉",
+    "aliases": [
+      "多莉",
+      "Dori"
+    ],
+    "className": "Electric",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000069",
+    "name": "提纳里",
+    "fullName": "提纳里",
+    "fullNameChinese": "提纳里",
+    "aliases": [
+      "提纳里",
+      "Tighnari"
+    ],
+    "className": "Grass",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000070",
+    "name": "妮露",
+    "fullName": "妮露",
+    "fullNameChinese": "妮露",
+    "aliases": [
+      "妮露",
+      "Nilou"
+    ],
+    "className": "Water",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000071",
+    "name": "赛诺",
+    "fullName": "赛诺",
+    "fullNameChinese": "赛诺",
+    "aliases": [
+      "赛诺",
+      "Cyno"
+    ],
+    "className": "Electric",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000072",
+    "name": "坎蒂丝",
+    "fullName": "坎蒂丝",
+    "fullNameChinese": "坎蒂丝",
+    "aliases": [
+      "坎蒂丝",
+      "Candace"
+    ],
+    "className": "Water",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000073",
+    "name": "纳西妲",
+    "fullName": "纳西妲",
+    "fullNameChinese": "纳西妲",
+    "aliases": [
+      "纳西妲",
+      "Nahida"
+    ],
+    "className": "Grass",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000074",
+    "name": "莱依拉",
+    "fullName": "莱依拉",
+    "fullNameChinese": "莱依拉",
+    "aliases": [
+      "莱依拉",
+      "Layla"
+    ],
+    "className": "Ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000075",
+    "name": "流浪者",
+    "fullName": "流浪者",
+    "fullNameChinese": "流浪者",
+    "aliases": [
+      "流浪者",
+      "Wanderer"
+    ],
+    "className": "Wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000076",
+    "name": "珐露珊",
+    "fullName": "珐露珊",
+    "fullNameChinese": "珐露珊",
+    "aliases": [
+      "珐露珊",
+      "Faruzan"
+    ],
+    "className": "Wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000077",
+    "name": "瑶瑶",
+    "fullName": "瑶瑶",
+    "fullNameChinese": "瑶瑶",
+    "aliases": [
+      "瑶瑶",
+      "Yaoyao"
+    ],
+    "className": "Grass",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000078",
+    "name": "艾尔海森",
+    "fullName": "艾尔海森",
+    "fullNameChinese": "艾尔海森",
+    "aliases": [
+      "艾尔海森",
+      "Alhaitham"
+    ],
+    "className": "Grass",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000079",
+    "name": "迪希雅",
+    "fullName": "迪希雅",
+    "fullNameChinese": "迪希雅",
+    "aliases": [
+      "迪希雅",
+      "Dehya"
+    ],
+    "className": "Fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000080",
+    "name": "米卡",
+    "fullName": "米卡",
+    "fullNameChinese": "米卡",
+    "aliases": [
+      "米卡",
+      "Mika"
+    ],
+    "className": "Ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000081",
+    "name": "卡维",
+    "fullName": "卡维",
+    "fullNameChinese": "卡维",
+    "aliases": [
+      "卡维",
+      "Kaveh"
+    ],
+    "className": "Grass",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000082",
+    "name": "白术",
+    "fullName": "白术",
+    "fullNameChinese": "白术",
+    "aliases": [
+      "白术",
+      "Baizhu"
+    ],
+    "className": "Grass",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000083",
+    "name": "琳妮特",
+    "fullName": "琳妮特",
+    "fullNameChinese": "琳妮特",
+    "aliases": [
+      "琳妮特",
+      "Lynette"
+    ],
+    "className": "Wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000084",
+    "name": "林尼",
+    "fullName": "林尼",
+    "fullNameChinese": "林尼",
+    "aliases": [
+      "林尼",
+      "Lyney"
+    ],
+    "className": "Fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000085",
+    "name": "菲米尼",
+    "fullName": "菲米尼",
+    "fullNameChinese": "菲米尼",
+    "aliases": [
+      "菲米尼",
+      "Freminet"
+    ],
+    "className": "Ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000086",
+    "name": "莱欧斯利",
+    "fullName": "莱欧斯利",
+    "fullNameChinese": "莱欧斯利",
+    "aliases": [
+      "莱欧斯利",
+      "Wriothesley"
+    ],
+    "className": "Ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000087",
+    "name": "那维莱特",
+    "fullName": "那维莱特",
+    "fullNameChinese": "那维莱特",
+    "aliases": [
+      "那维莱特",
+      "Neuvillette"
+    ],
+    "className": "Water",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000088",
+    "name": "夏洛蒂",
+    "fullName": "夏洛蒂",
+    "fullNameChinese": "夏洛蒂",
+    "aliases": [
+      "夏洛蒂",
+      "Charlotte"
+    ],
+    "className": "Ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000089",
+    "name": "芙宁娜",
+    "fullName": "芙宁娜",
+    "fullNameChinese": "芙宁娜",
+    "aliases": [
+      "芙宁娜",
+      "Furina"
+    ],
+    "className": "Water",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000090",
+    "name": "夏沃蕾",
+    "fullName": "夏沃蕾",
+    "fullNameChinese": "夏沃蕾",
+    "aliases": [
+      "夏沃蕾",
+      "Chevreuse"
+    ],
+    "className": "Fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000091",
+    "name": "娜维娅",
+    "fullName": "娜维娅",
+    "fullNameChinese": "娜维娅",
+    "aliases": [
+      "娜维娅",
+      "Navia"
+    ],
+    "className": "Rock",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000092",
+    "name": "嘉明",
+    "fullName": "嘉明",
+    "fullNameChinese": "嘉明",
+    "aliases": [
+      "嘉明",
+      "Gaming"
+    ],
+    "className": "Fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000093",
+    "name": "闲云",
+    "fullName": "闲云",
+    "fullNameChinese": "闲云",
+    "aliases": [
+      "闲云",
+      "Xianyun"
+    ],
+    "className": "Wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000094",
+    "name": "千织",
+    "fullName": "千织",
+    "fullNameChinese": "千织",
+    "aliases": [
+      "千织",
+      "Chiori"
+    ],
+    "className": "Rock",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000095",
+    "name": "希格雯",
+    "fullName": "希格雯",
+    "fullNameChinese": "希格雯",
+    "aliases": [
+      "希格雯",
+      "Sigewinne"
+    ],
+    "className": "Water",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000096",
+    "name": "阿蕾奇诺",
+    "fullName": "阿蕾奇诺",
+    "fullNameChinese": "阿蕾奇诺",
+    "aliases": [
+      "阿蕾奇诺",
+      "Arlecchino"
+    ],
+    "className": "Fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000097",
+    "name": "赛索斯",
+    "fullName": "赛索斯",
+    "fullNameChinese": "赛索斯",
+    "aliases": [
+      "赛索斯",
+      "Sethos"
+    ],
+    "className": "Electric",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000098",
+    "name": "克洛琳德",
+    "fullName": "克洛琳德",
+    "fullNameChinese": "克洛琳德",
+    "aliases": [
+      "克洛琳德",
+      "Clorinde"
+    ],
+    "className": "Electric",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000099",
+    "name": "艾梅莉埃",
+    "fullName": "艾梅莉埃",
+    "fullNameChinese": "艾梅莉埃",
+    "aliases": [
+      "艾梅莉埃",
+      "Emilie"
+    ],
+    "className": "Grass",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000100",
+    "name": "卡齐娜",
+    "fullName": "卡齐娜",
+    "fullNameChinese": "卡齐娜",
+    "aliases": [
+      "卡齐娜",
+      "Kachina"
+    ],
+    "className": "Rock",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000101",
+    "name": "基尼奇",
+    "fullName": "基尼奇",
+    "fullNameChinese": "基尼奇",
+    "aliases": [
+      "基尼奇",
+      "Kinich"
+    ],
+    "className": "Grass",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000102",
+    "name": "玛拉妮",
+    "fullName": "玛拉妮",
+    "fullNameChinese": "玛拉妮",
+    "aliases": [
+      "玛拉妮",
+      "Mualani"
+    ],
+    "className": "Water",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000103",
+    "name": "希诺宁",
+    "fullName": "希诺宁",
+    "fullNameChinese": "希诺宁",
+    "aliases": [
+      "希诺宁",
+      "Xilonen"
+    ],
+    "className": "Rock",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000104",
+    "name": "恰斯卡",
+    "fullName": "恰斯卡",
+    "fullNameChinese": "恰斯卡",
+    "aliases": [
+      "恰斯卡",
+      "Chasca"
+    ],
+    "className": "Wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000105",
+    "name": "欧洛伦",
+    "fullName": "欧洛伦",
+    "fullNameChinese": "欧洛伦",
+    "aliases": [
+      "欧洛伦",
+      "Ororon"
+    ],
+    "className": "Electric",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000106",
+    "name": "玛薇卡",
+    "fullName": "玛薇卡",
+    "fullNameChinese": "玛薇卡",
+    "aliases": [
+      "玛薇卡",
+      "Mavuika"
+    ],
+    "className": "Fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000107",
+    "name": "茜特菈莉",
+    "fullName": "茜特菈莉",
+    "fullNameChinese": "茜特菈莉",
+    "aliases": [
+      "茜特菈莉",
+      "Citlali"
+    ],
+    "className": "Ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000108",
+    "name": "蓝砚",
+    "fullName": "蓝砚",
+    "fullNameChinese": "蓝砚",
+    "aliases": [
+      "蓝砚",
+      "Lan Yan"
+    ],
+    "className": "Wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000109",
+    "name": "梦见月瑞希",
+    "fullName": "梦见月瑞希",
+    "fullNameChinese": "梦见月瑞希",
+    "aliases": [
+      "梦见月瑞希",
+      "Yumemizuki Mizuki"
+    ],
+    "className": "Wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000110",
+    "name": "伊安珊",
+    "fullName": "伊安珊",
+    "fullNameChinese": "伊安珊",
+    "aliases": [
+      "伊安珊",
+      "Iansan"
+    ],
+    "className": "Electric",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000111",
+    "name": "瓦雷莎",
+    "fullName": "瓦雷莎",
+    "fullNameChinese": "瓦雷莎",
+    "aliases": [
+      "瓦雷莎",
+      "Varesa"
+    ],
+    "className": "Electric",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000112",
+    "name": "爱可菲",
+    "fullName": "爱可菲",
+    "fullNameChinese": "爱可菲",
+    "aliases": [
+      "爱可菲",
+      "Escoffier"
+    ],
+    "className": "Ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000113",
+    "name": "伊法",
+    "fullName": "伊法",
+    "fullNameChinese": "伊法",
+    "aliases": [
+      "伊法",
+      "Ifa"
+    ],
+    "className": "Wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000114",
+    "name": "丝柯克",
+    "fullName": "丝柯克",
+    "fullNameChinese": "丝柯克",
+    "aliases": [
+      "丝柯克",
+      "Skirk"
+    ],
+    "className": "Ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000115",
+    "name": "塔利雅",
+    "fullName": "塔利雅",
+    "fullNameChinese": "塔利雅",
+    "aliases": [
+      "塔利雅",
+      "Dahlia"
+    ],
+    "className": "Water",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000116",
+    "name": "伊涅芙",
+    "fullName": "伊涅芙",
+    "fullNameChinese": "伊涅芙",
+    "aliases": [
+      "伊涅芙",
+      "Ineffa"
+    ],
+    "className": "Electric",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000117",
+    "name": "奇偶·男性",
+    "fullName": "奇偶·男性",
+    "fullNameChinese": "奇偶·男性",
+    "aliases": [
+      "奇偶·男性",
+      "Manekin"
+    ],
+    "className": "",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000118",
+    "name": "奇偶·女性",
+    "fullName": "奇偶·女性",
+    "fullNameChinese": "奇偶·女性",
+    "aliases": [
+      "奇偶·女性",
+      "Manekina"
+    ],
+    "className": "",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000119",
+    "name": "菈乌玛",
+    "fullName": "菈乌玛",
+    "fullNameChinese": "菈乌玛",
+    "aliases": [
+      "菈乌玛",
+      "Lauma"
+    ],
+    "className": "Grass",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000120",
+    "name": "菲林斯",
+    "fullName": "菲林斯",
+    "fullNameChinese": "菲林斯",
+    "aliases": [
+      "菲林斯",
+      "Flins"
+    ],
+    "className": "Electric",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000121",
+    "name": "爱诺",
+    "fullName": "爱诺",
+    "fullNameChinese": "爱诺",
+    "aliases": [
+      "爱诺",
+      "Aino"
+    ],
+    "className": "Water",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000122",
+    "name": "奈芙尔",
+    "fullName": "奈芙尔",
+    "fullNameChinese": "奈芙尔",
+    "aliases": [
+      "奈芙尔",
+      "Nefer"
+    ],
+    "className": "Grass",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000123",
+    "name": "杜林",
+    "fullName": "杜林",
+    "fullNameChinese": "杜林",
+    "aliases": [
+      "杜林",
+      "Durin"
+    ],
+    "className": "Fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000124",
+    "name": "雅珂达",
+    "fullName": "雅珂达",
+    "fullNameChinese": "雅珂达",
+    "aliases": [
+      "雅珂达",
+      "Jahoda"
+    ],
+    "className": "Wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000125",
+    "name": "哥伦比娅",
+    "fullName": "哥伦比娅",
+    "fullNameChinese": "哥伦比娅",
+    "aliases": [
+      "哥伦比娅",
+      "Columbina"
+    ],
+    "className": "Water",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000126",
+    "name": "兹白",
+    "fullName": "兹白",
+    "fullNameChinese": "兹白",
+    "aliases": [
+      "兹白",
+      "Zibai"
+    ],
+    "className": "Rock",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000127",
+    "name": "叶洛亚",
+    "fullName": "叶洛亚",
+    "fullNameChinese": "叶洛亚",
+    "aliases": [
+      "叶洛亚",
+      "Illuga"
+    ],
+    "className": "Rock",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000128",
+    "name": "法尔伽",
+    "fullName": "法尔伽",
+    "fullNameChinese": "法尔伽",
+    "aliases": [
+      "法尔伽",
+      "Varka"
+    ],
+    "className": "Wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000129",
+    "name": "洛恩",
+    "fullName": "洛恩",
+    "fullNameChinese": "洛恩",
+    "aliases": [
+      "洛恩",
+      "Lohen"
+    ],
+    "className": "Ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000130",
+    "name": "莉奈娅",
+    "fullName": "莉奈娅",
+    "fullNameChinese": "莉奈娅",
+    "aliases": [
+      "莉奈娅",
+      "Linnea"
+    ],
+    "className": "Rock",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000131",
+    "name": "尼可",
+    "fullName": "尼可",
+    "fullNameChinese": "尼可",
+    "aliases": [
+      "尼可",
+      "Nicole"
+    ],
+    "className": "Fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "10000132",
+    "name": "布伦妮",
+    "fullName": "布伦妮",
+    "fullNameChinese": "布伦妮",
+    "aliases": [
+      "布伦妮",
+      "Prune"
+    ],
+    "className": "Wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "10000133",
+    "name": "桑多涅",
+    "fullName": "桑多涅",
+    "fullNameChinese": "桑多涅",
+    "aliases": [
+      "桑多涅",
+      "Sandrone"
+    ],
+    "className": "Ice",
+    "rarity": 5
+  }
+]

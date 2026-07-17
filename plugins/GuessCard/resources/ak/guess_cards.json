@@ -1,0 +1,3234 @@
+[
+  {
+    "id": 536014103,
+    "characterId": "char_123_fang",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_123_fang",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_123_fang_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 957634653,
+    "characterId": "char_240_wyvern",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_240_wyvern",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_240_wyvern_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 608331630,
+    "characterId": "char_192_falco",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_192_falco",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_192_falco_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 215106056,
+    "characterId": "char_208_melan",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_208_melan",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_208_melan_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 390822633,
+    "characterId": "char_281_popka",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_281_popka",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_281_popka_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 534729250,
+    "characterId": "char_209_ardign",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_209_ardign",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_209_ardign_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 460937439,
+    "characterId": "char_122_beagle",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_122_beagle",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_122_beagle_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 643815409,
+    "characterId": "char_284_spot",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_284_spot",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_284_spot_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 325247533,
+    "characterId": "char_124_kroos",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_124_kroos",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_124_kroos_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 10344336,
+    "characterId": "char_211_adnach",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_211_adnach",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_211_adnach_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 146004372,
+    "characterId": "char_121_lava",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_121_lava",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_121_lava_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 735319868,
+    "characterId": "char_120_hibisc",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_120_hibisc",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_120_hibisc_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 365242581,
+    "characterId": "char_212_ansel",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_212_ansel",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_212_ansel_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 894216597,
+    "characterId": "char_210_stward",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_210_stward",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_210_stward_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 259644280,
+    "characterId": "char_278_orchid",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_278_orchid",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_278_orchid_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 16475005,
+    "characterId": "char_141_nights",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_141_nights",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_141_nights_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 881887813,
+    "characterId": "char_109_fmout",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_109_fmout",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_109_fmout_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 895612070,
+    "characterId": "char_253_greyy",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_253_greyy",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_253_greyy_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 553647283,
+    "characterId": "char_4051_akkord",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_4051_akkord",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4051_akkord_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 565085655,
+    "characterId": "char_328_cammou",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_328_cammou",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_328_cammou_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 941888694,
+    "characterId": "char_469_indigo",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_469_indigo",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_469_indigo_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 352580580,
+    "characterId": "char_4004_pudd",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_4004_pudd",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4004_pudd_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 814673210,
+    "characterId": "char_235_jesica",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_235_jesica",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_235_jesica_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 674855877,
+    "characterId": "char_126_shotst",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_126_shotst",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_126_shotst_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 760331742,
+    "characterId": "char_190_clour",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_190_clour",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_190_clour_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 684902148,
+    "characterId": "char_133_mm",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_133_mm",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_133_mm_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 467809300,
+    "characterId": "char_118_yuki",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_118_yuki",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_118_yuki_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 774608791,
+    "characterId": "char_440_pinecn",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_440_pinecn",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_440_pinecn_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 613040016,
+    "characterId": "char_302_glaze",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_302_glaze",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_302_glaze_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 831285317,
+    "characterId": "char_366_acdrop",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_366_acdrop",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_366_acdrop_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 544400675,
+    "characterId": "char_4062_totter",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_4062_totter",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4062_totter_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 666284694,
+    "characterId": "char_4100_caper",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_4100_caper",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4100_caper_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 680916422,
+    "characterId": "char_198_blackd",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_198_blackd",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_198_blackd_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 881950492,
+    "characterId": "char_149_scave",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_149_scave",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_149_scave_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 958267198,
+    "characterId": "char_290_vigna",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_290_vigna",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_290_vigna_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 654832574,
+    "characterId": "char_151_myrtle",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_151_myrtle",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_151_myrtle_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 713168399,
+    "characterId": "char_452_bstalk",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_452_bstalk",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_452_bstalk_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 799885502,
+    "characterId": "char_4208_wintim",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_4208_wintim",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4208_wintim_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 978232405,
+    "characterId": "char_130_doberm",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_130_doberm",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_130_doberm_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 797866412,
+    "characterId": "char_289_gyuki",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_289_gyuki",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_289_gyuki_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 243697243,
+    "characterId": "char_159_peacok",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_159_peacok",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_159_peacok_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 134195058,
+    "characterId": "char_193_frostl",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_193_frostl",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_193_frostl_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 346278538,
+    "characterId": "char_127_estell",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_127_estell",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_127_estell_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 293562116,
+    "characterId": "char_185_frncat",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_185_frncat",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_185_frncat_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 734142001,
+    "characterId": "char_301_cutter",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_301_cutter",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_301_cutter_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 524567354,
+    "characterId": "char_337_utage",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_337_utage",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_337_utage_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 518883433,
+    "characterId": "char_271_spikes",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_271_spikes",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_271_spikes_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 628381136,
+    "characterId": "char_4067_lolxh",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_4067_lolxh",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4067_lolxh_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 314541359,
+    "characterId": "char_4063_quartz",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_4063_quartz",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4063_quartz_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 778515086,
+    "characterId": "char_491_humus",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_491_humus",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_491_humus_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 753661808,
+    "characterId": "char_445_wscoot",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_445_wscoot",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_445_wscoot_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 24283927,
+    "characterId": "char_237_gravel",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_237_gravel",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_237_gravel_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 955089213,
+    "characterId": "char_272_strong",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_272_strong",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_272_strong_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 631484092,
+    "characterId": "char_236_rope",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_236_rope",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_236_rope_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 480308474,
+    "characterId": "char_117_myrrh",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_117_myrrh",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_117_myrrh_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 471193113,
+    "characterId": "char_187_ccheal",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_187_ccheal",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_187_ccheal_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 724168187,
+    "characterId": "char_298_susuro",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_298_susuro",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_298_susuro_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 78511097,
+    "characterId": "char_181_flower",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_181_flower",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_181_flower_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 744111131,
+    "characterId": "char_385_finlpp",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_385_finlpp",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_385_finlpp_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 702752549,
+    "characterId": "char_4041_chnut",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_4041_chnut",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4041_chnut_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 820799241,
+    "characterId": "char_199_yak",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_199_yak",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_199_yak_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 47721261,
+    "characterId": "char_150_snakek",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_150_snakek",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_150_snakek_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 163609152,
+    "characterId": "char_381_bubble",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_381_bubble",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_381_bubble_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 264193083,
+    "characterId": "char_4130_luton",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_4130_luton",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4130_luton_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 978128010,
+    "characterId": "char_196_sunbr",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_196_sunbr",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_196_sunbr_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 469949341,
+    "characterId": "char_260_durnar",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_260_durnar",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_260_durnar_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 992588740,
+    "characterId": "char_110_deepcl",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_110_deepcl",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_110_deepcl_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 450609942,
+    "characterId": "char_183_skgoat",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_183_skgoat",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_183_skgoat_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 48209146,
+    "characterId": "char_258_podego",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_258_podego",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_258_podego_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 251230829,
+    "characterId": "char_484_robrta",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_484_robrta",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_484_robrta_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 627756931,
+    "characterId": "char_355_ethan",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_355_ethan",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_355_ethan_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 902822231,
+    "characterId": "char_277_sqrrel",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_277_sqrrel",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_277_sqrrel_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 936140305,
+    "characterId": "char_4107_vrdant",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_4107_vrdant",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4107_vrdant_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 894186680,
+    "characterId": "char_4165_ctrail",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_4165_ctrail",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4165_ctrail_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 642472995,
+    "characterId": "char_128_plosis",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_128_plosis",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_128_plosis_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 927185609,
+    "characterId": "char_275_breeze",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_275_breeze",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_275_breeze_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 419997011,
+    "characterId": "char_4163_rosesa",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4163_rosesa",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4163_rosesa_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 52093654,
+    "characterId": "char_115_headbr",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_115_headbr",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_115_headbr_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 695348049,
+    "characterId": "char_102_texas",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_102_texas",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_102_texas_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 353898525,
+    "characterId": "char_349_chiave",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_349_chiave",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_349_chiave_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 702435345,
+    "characterId": "char_488_buildr",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_488_buildr",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_488_buildr_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 314814315,
+    "characterId": "char_4023_rfalcn",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4023_rfalcn",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4023_rfalcn_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 388418569,
+    "characterId": "char_4199_makiri",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4199_makiri",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4199_makiri_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 291939387,
+    "characterId": "char_261_sddrag",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_261_sddrag",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_261_sddrag_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 276912760,
+    "characterId": "char_496_wildmn",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_496_wildmn",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_496_wildmn_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 607381432,
+    "characterId": "char_1036_fang2",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_1036_fang2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1036_fang2_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 178884778,
+    "characterId": "char_401_elysm",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_401_elysm",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_401_elysm_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 312395944,
+    "characterId": "char_4119_wanqin",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4119_wanqin",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4119_wanqin_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 41875698,
+    "characterId": "char_476_blkngt",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_476_blkngt",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_476_blkngt_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 852683601,
+    "characterId": "char_4147_mitm",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4147_mitm",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4147_mitm_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 828960097,
+    "characterId": "char_497_ctable",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_497_ctable",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_497_ctable_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 81469562,
+    "characterId": "char_4017_puzzle",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4017_puzzle",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4017_puzzle_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 389508156,
+    "characterId": "char_4144_chilc",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4144_chilc",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4144_chilc_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 568041967,
+    "characterId": "char_4052_surfer",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4052_surfer",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4052_surfer_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 988339259,
+    "characterId": "char_308_swire",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_308_swire",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_308_swire_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 376175743,
+    "characterId": "char_265_sophia",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_265_sophia",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_265_sophia_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 920626234,
+    "characterId": "char_4106_bryota",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4106_bryota",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4106_bryota_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 290905112,
+    "characterId": "char_4125_rdoc",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4125_rdoc",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4125_rdoc_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 689148312,
+    "characterId": "char_106_franka",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_106_franka",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_106_franka_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 5514615,
+    "characterId": "char_131_flameb",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_131_flameb",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_131_flameb_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 48534201,
+    "characterId": "char_154_morgan",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_154_morgan",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_154_morgan_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 815745586,
+    "characterId": "char_4142_laios",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4142_laios",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4142_laios_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 678448796,
+    "characterId": "char_155_tiger",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_155_tiger",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_155_tiger_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 189701508,
+    "characterId": "char_415_flint",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_415_flint",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_415_flint_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 382336706,
+    "characterId": "char_157_dagda",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_157_dagda",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_157_dagda_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 40850264,
+    "characterId": "char_140_whitew",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_140_whitew",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_140_whitew_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 218910657,
+    "characterId": "char_294_ayer",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_294_ayer",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_294_ayer_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 693298432,
+    "characterId": "char_194_leto",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_194_leto",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_194_leto_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 40631895,
+    "characterId": "char_4083_chimes",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4083_chimes",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4083_chimes_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 190953528,
+    "characterId": "char_252_bibeak",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_252_bibeak",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_252_bibeak_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 250644133,
+    "characterId": "char_459_tachak",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_459_tachak",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_459_tachak_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 336820250,
+    "characterId": "char_143_ghost",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_143_ghost",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_143_ghost_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 809421278,
+    "characterId": "char_356_broca",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_356_broca",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_356_broca_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 165339471,
+    "characterId": "char_4126_fuze",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4126_fuze",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4126_fuze_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 438936364,
+    "characterId": "char_4166_varkis",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4166_varkis",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4166_varkis_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 252051719,
+    "characterId": "char_274_astesi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_274_astesi",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_274_astesi_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 190686383,
+    "characterId": "char_333_sidero",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_333_sidero",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_333_sidero_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 745554329,
+    "characterId": "char_475_akafyu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_475_akafyu",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_475_akafyu_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 350174067,
+    "characterId": "char_1030_noirc2",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_1030_noirc2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1030_noirc2_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 135891254,
+    "characterId": "char_421_crow",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_421_crow",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_421_crow_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 261422032,
+    "characterId": "char_4066_highmo",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4066_highmo",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4066_highmo_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 769720183,
+    "characterId": "char_486_takila",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_486_takila",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_486_takila_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 780109064,
+    "characterId": "char_4131_odda",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4131_odda",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4131_odda_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 45059585,
+    "characterId": "char_4187_graceb",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4187_graceb",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4187_graceb_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 507482630,
+    "characterId": "char_4185_amoris",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4185_amoris",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4185_amoris_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 367479731,
+    "characterId": "char_394_hadiya",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_394_hadiya",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_394_hadiya_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 2257895,
+    "characterId": "char_1049_catap2",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_1049_catap2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1049_catap2_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 380080955,
+    "characterId": "char_129_bluep",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_129_bluep",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_129_bluep_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 46473885,
+    "characterId": "char_204_platnm",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_204_platnm",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_204_platnm_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 780762149,
+    "characterId": "char_367_swllow",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_367_swllow",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_367_swllow_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 79475051,
+    "characterId": "char_365_aprl",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_365_aprl",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_365_aprl_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 384847534,
+    "characterId": "char_1021_kroos2",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_1021_kroos2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1021_kroos2_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 524952547,
+    "characterId": "char_498_inside",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_498_inside",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_498_inside_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 586842977,
+    "characterId": "char_219_meteo",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_219_meteo",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_219_meteo_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 332881630,
+    "characterId": "char_379_sesa",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_379_sesa",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_379_sesa_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 391152955,
+    "characterId": "char_4078_bdhkgt",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4078_bdhkgt",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4078_bdhkgt_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 435746949,
+    "characterId": "char_279_excu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_279_excu",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_279_excu_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 93470157,
+    "characterId": "char_346_aosta",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_346_aosta",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_346_aosta_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 294118880,
+    "characterId": "char_4203_kichi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4203_kichi",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4203_kichi_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 367429836,
+    "characterId": "char_4213_skybx",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4213_skybx",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4213_skybx_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 170807072,
+    "characterId": "char_002_amiya",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_002_amiya",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_002_amiya_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 849609875,
+    "characterId": "char_405_absin",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_405_absin",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_405_absin_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 985103337,
+    "characterId": "char_411_tomimi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_411_tomimi",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_411_tomimi_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 141213340,
+    "characterId": "char_466_qanik",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_466_qanik",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_466_qanik_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 809433706,
+    "characterId": "char_166_skfire",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_166_skfire",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_166_skfire_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 83582087,
+    "characterId": "char_306_leizi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_306_leizi",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_306_leizi_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 545639165,
+    "characterId": "char_135_halo",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_135_halo",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_135_halo_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 732548902,
+    "characterId": "char_344_beewax",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_344_beewax",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_344_beewax_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 687547935,
+    "characterId": "char_373_lionhd",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_373_lionhd",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_373_lionhd_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 976026658,
+    "characterId": "char_341_sntlla",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_341_sntlla",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_341_sntlla_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 154844877,
+    "characterId": "char_4031_liesel",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4031_liesel",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4031_liesel_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 476237428,
+    "characterId": "char_388_mint",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_388_mint",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_388_mint_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 208860457,
+    "characterId": "char_338_iris",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_338_iris",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_338_iris_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 595663524,
+    "characterId": "char_297_hamoni",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_297_hamoni",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_297_hamoni_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 95896180,
+    "characterId": "char_4110_delphn",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4110_delphn",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4110_delphn_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 884595179,
+    "characterId": "char_1011_lava2",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_1011_lava2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1011_lava2_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 73992726,
+    "characterId": "char_489_serum",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_489_serum",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_489_serum_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 148502923,
+    "characterId": "char_446_aroma",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_446_aroma",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_446_aroma_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 628688363,
+    "characterId": "char_4013_kjera",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4013_kjera",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4013_kjera_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 995071774,
+    "characterId": "char_4040_rockr",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4040_rockr",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4040_rockr_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 708970853,
+    "characterId": "char_4054_malist",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4054_malist",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4054_malist_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 312612588,
+    "characterId": "char_499_kaitou",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_499_kaitou",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_499_kaitou_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 97419450,
+    "characterId": "char_4081_warmy",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4081_warmy",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4081_warmy_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 95714603,
+    "characterId": "char_4198_christ",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4198_christ",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4198_christ_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 602666010,
+    "characterId": "char_4164_tecno",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4164_tecno",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4164_tecno_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 239140795,
+    "characterId": "char_242_otter",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_242_otter",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_242_otter_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 86330917,
+    "characterId": "char_336_folivo",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_336_folivo",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_336_folivo_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 668590305,
+    "characterId": "char_4140_lasher",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4140_lasher",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4140_lasher_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 231378063,
+    "characterId": "char_108_silent",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_108_silent",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_108_silent_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 259207073,
+    "characterId": "char_171_bldsk",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_171_bldsk",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_171_bldsk_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 877264560,
+    "characterId": "char_345_folnic",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_345_folnic",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_345_folnic_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 132728272,
+    "characterId": "char_4196_reckpr",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4196_reckpr",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4196_reckpr_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 516207701,
+    "characterId": "char_348_ceylon",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_348_ceylon",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_348_ceylon_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 412572525,
+    "characterId": "char_436_whispr",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_436_whispr",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_436_whispr_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 837781100,
+    "characterId": "char_4173_nowell",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4173_nowell",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4173_nowell_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 533833167,
+    "characterId": "char_402_tuye",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_402_tuye",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_402_tuye_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 324547163,
+    "characterId": "char_473_mberry",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_473_mberry",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_473_mberry_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 371874501,
+    "characterId": "char_449_glider",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_449_glider",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_449_glider_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 803097406,
+    "characterId": "char_4114_harold",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4114_harold",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4114_harold_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 660970594,
+    "characterId": "char_1024_hbisc2",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_1024_hbisc2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1024_hbisc2_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 864850116,
+    "characterId": "char_494_vendla",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_494_vendla",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_494_vendla_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 666863583,
+    "characterId": "char_4071_peper",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4071_peper",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4071_peper_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 574436723,
+    "characterId": "char_4139_papyrs",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4139_papyrs",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4139_papyrs_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 1375461,
+    "characterId": "char_4224_turdus",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4224_turdus",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4224_turdus_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 390407322,
+    "characterId": "char_4222_taraxa",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4222_taraxa",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4222_taraxa_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 589969319,
+    "characterId": "char_148_nearl",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_148_nearl",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_148_nearl_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 879169649,
+    "characterId": "char_226_hmau",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_226_hmau",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_226_hmau_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 694250318,
+    "characterId": "char_4109_baslin",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4109_baslin",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4109_baslin_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 870810985,
+    "characterId": "char_4143_sensi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4143_sensi",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4143_sensi_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 671005064,
+    "characterId": "char_144_red",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_144_red",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_144_red_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 199889671,
+    "characterId": "char_243_waaifu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_243_waaifu",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_243_waaifu_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 483217990,
+    "characterId": "char_214_kafka",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_214_kafka",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_214_kafka_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 450818565,
+    "characterId": "char_455_nothin",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_455_nothin",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_455_nothin_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 96416257,
+    "characterId": "char_4155_talr",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4155_talr",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4155_talr_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 986130071,
+    "characterId": "char_107_liskam",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_107_liskam",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_107_liskam_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 349824818,
+    "characterId": "char_4137_udflow",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4137_udflow",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4137_udflow_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 826798329,
+    "characterId": "char_201_moeshd",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_201_moeshd",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_201_moeshd_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 248368232,
+    "characterId": "char_325_bison",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_325_bison",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_325_bison_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 592392695,
+    "characterId": "char_163_hpsts",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_163_hpsts",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_163_hpsts_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 389999643,
+    "characterId": "char_4207_branch",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4207_branch",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4207_branch_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 986976591,
+    "characterId": "char_378_asbest",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_378_asbest",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_378_asbest_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 86874669,
+    "characterId": "char_4025_aprot2",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4025_aprot2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4025_aprot2_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 804127635,
+    "characterId": "char_4047_pianst",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4047_pianst",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4047_pianst_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 520306324,
+    "characterId": "char_457_blitz",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_457_blitz",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_457_blitz_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 675592993,
+    "characterId": "char_304_zebra",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_304_zebra",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_304_zebra_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 811166878,
+    "characterId": "char_431_ashlok",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_431_ashlok",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_431_ashlok_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 170441107,
+    "characterId": "char_493_firwhl",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_493_firwhl",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_493_firwhl_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 710424576,
+    "characterId": "char_422_aurora",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_422_aurora",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_422_aurora_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 762475371,
+    "characterId": "char_464_cement",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_464_cement",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_464_cement_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 830929944,
+    "characterId": "char_4148_philae",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4148_philae",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4148_philae_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 487062227,
+    "characterId": "char_4225_tanya",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4225_tanya",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4225_tanya_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 514391330,
+    "characterId": "char_145_prove",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_145_prove",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_145_prove_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 790270489,
+    "characterId": "char_4006_melnte",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4006_melnte",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4006_melnte_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 486530842,
+    "characterId": "char_158_milu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_158_milu",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_158_milu_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 502308923,
+    "characterId": "char_218_cuttle",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_218_cuttle",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_218_cuttle_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 331762982,
+    "characterId": "char_4014_lunacu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4014_lunacu",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4014_lunacu_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 966326669,
+    "characterId": "char_363_toddi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_363_toddi",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_363_toddi_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 706539918,
+    "characterId": "char_4043_erato",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4043_erato",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4043_erato_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 619520752,
+    "characterId": "char_4221_ju",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4221_ju",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4221_ju_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 773931068,
+    "characterId": "char_1027_greyy2",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_1027_greyy2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1027_greyy2_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 190538853,
+    "characterId": "char_4104_coldst",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4104_coldst",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4104_coldst_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 18991538,
+    "characterId": "char_4211_snhunt",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4211_snhunt",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4211_snhunt_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 923595741,
+    "characterId": "char_4177_brigid",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4177_brigid",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4177_brigid_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 679129124,
+    "characterId": "char_4015_spuria",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4015_spuria",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4015_spuria_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 431468110,
+    "characterId": "char_173_slchan",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_173_slchan",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_173_slchan_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 277322869,
+    "characterId": "char_383_snsant",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_383_snsant",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_383_snsant_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 245747572,
+    "characterId": "char_4105_almond",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4105_almond",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4105_almond_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 261645276,
+    "characterId": "char_174_slbell",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_174_slbell",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_174_slbell_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 683023920,
+    "characterId": "char_254_vodfox",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_254_vodfox",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_254_vodfox_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 550760361,
+    "characterId": "char_4079_haini",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4079_haini",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4079_haini_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 317799334,
+    "characterId": "char_195_glassb",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_195_glassb",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_195_glassb_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 416819643,
+    "characterId": "char_326_glacus",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_326_glacus",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_326_glacus_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 956190107,
+    "characterId": "char_4032_provs",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4032_provs",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4032_provs_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 37743954,
+    "characterId": "char_4122_grabds",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4122_grabds",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4122_grabds_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 563725797,
+    "characterId": "char_433_windft",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_433_windft",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_433_windft_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 432710336,
+    "characterId": "char_4162_cathy",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4162_cathy",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4162_cathy_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 535638995,
+    "characterId": "char_4178_alanna",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4178_alanna",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4178_alanna_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 745189783,
+    "characterId": "char_101_sora",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_101_sora",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_101_sora_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 235987174,
+    "characterId": "char_4045_heidi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4045_heidi",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4045_heidi_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 654471862,
+    "characterId": "char_4184_dolris",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4184_dolris",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4184_dolris_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 137535362,
+    "characterId": "char_343_tknogi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_343_tknogi",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_343_tknogi_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 801473814,
+    "characterId": "char_4019_ncdeer",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4019_ncdeer",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4019_ncdeer_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 820103294,
+    "characterId": "char_492_quercu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_492_quercu",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_492_quercu_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 1923836,
+    "characterId": "char_4172_xingzh",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4172_xingzh",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4172_xingzh_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 806214007,
+    "characterId": "char_1022_flwr2",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_1022_flwr2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1022_flwr2_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 588792527,
+    "characterId": "char_4102_threye",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4102_threye",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4102_threye_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 720188793,
+    "characterId": "char_487_bobb",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_487_bobb",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_487_bobb_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 399346874,
+    "characterId": "char_4223_botany",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4223_botany",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4223_botany_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 794120400,
+    "characterId": "char_4234_pedro",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4234_pedro",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4234_pedro_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 209647670,
+    "characterId": "char_215_mantic",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_215_mantic",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_215_mantic_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 500008122,
+    "characterId": "char_478_kirara",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_478_kirara",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_478_kirara_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 927636834,
+    "characterId": "char_4186_tmoris",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4186_tmoris",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4186_tmoris_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 383119454,
+    "characterId": "char_241_panda",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_241_panda",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_241_panda_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 232182681,
+    "characterId": "char_4036_forcer",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4036_forcer",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4036_forcer_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 172420139,
+    "characterId": "char_451_robin",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_451_robin",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_451_robin_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 737509688,
+    "characterId": "char_458_rfrost",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_458_rfrost",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_458_rfrost_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 9143795,
+    "characterId": "char_4171_wulfen",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4171_wulfen",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4171_wulfen_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 715391083,
+    "characterId": "char_369_bena",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_369_bena",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_369_bena_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 439733965,
+    "characterId": "char_4016_kazema",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4016_kazema",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4016_kazema_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 648442198,
+    "characterId": "char_4124_iana",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4124_iana",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4124_iana_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 157553288,
+    "characterId": "char_4183_mortis",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4183_mortis",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4183_mortis_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 325558866,
+    "characterId": "char_4151_tinman",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4151_tinman",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4151_tinman_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 196342038,
+    "characterId": "char_4191_tippi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4191_tippi",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4191_tippi_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 718597405,
+    "characterId": "char_103_angel",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_103_angel",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_103_angel_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 983495237,
+    "characterId": "char_332_archet",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_332_archet",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_332_archet_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 796531732,
+    "characterId": "char_456_ash",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_456_ash",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_456_ash_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 821093208,
+    "characterId": "char_340_shwaz",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_340_shwaz",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_340_shwaz_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 261207859,
+    "characterId": "char_4055_bgsnow",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4055_bgsnow",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4055_bgsnow_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 727553175,
+    "characterId": "char_1048_orchd2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1048_orchd2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1048_orchd2_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 250710487,
+    "characterId": "char_430_fartth",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_430_fartth",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_430_fartth_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 512473071,
+    "characterId": "char_4193_lemuen",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4193_lemuen",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4193_lemuen_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 612893922,
+    "characterId": "char_113_cqbw",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_113_cqbw",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_113_cqbw_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 652748287,
+    "characterId": "char_300_phenxi",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_300_phenxi",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_300_phenxi_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 815842542,
+    "characterId": "char_197_poca",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_197_poca",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_197_poca_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 448525698,
+    "characterId": "char_2012_typhon",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_2012_typhon",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_2012_typhon_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 467119166,
+    "characterId": "char_391_rosmon",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_391_rosmon",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_391_rosmon_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 726891884,
+    "characterId": "char_1035_wisdel",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1035_wisdel",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1035_wisdel_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 565322286,
+    "characterId": "char_1013_chen2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1013_chen2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1013_chen2_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 565582234,
+    "characterId": "char_4117_ray",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4117_ray",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4117_ray_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 979390167,
+    "characterId": "char_4138_narant",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4138_narant",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4138_narant_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 721505637,
+    "characterId": "char_112_siege",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_112_siege",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_112_siege_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 77771284,
+    "characterId": "char_222_bpipe",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_222_bpipe",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_222_bpipe_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 546819368,
+    "characterId": "char_362_saga",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_362_saga",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_362_saga_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 119428374,
+    "characterId": "char_4026_vulpis",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4026_vulpis",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4026_vulpis_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 356397967,
+    "characterId": "char_479_sleach",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_479_sleach",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_479_sleach_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 388565850,
+    "characterId": "char_420_flamtl",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_420_flamtl",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_420_flamtl_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 651522561,
+    "characterId": "char_427_vigil",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_427_vigil",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_427_vigil_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 910429139,
+    "characterId": "char_249_mlyss",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_249_mlyss",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_249_mlyss_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 952180630,
+    "characterId": "char_4228_closur",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4228_closur",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4228_closur_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 352242621,
+    "characterId": "char_1045_svash2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1045_svash2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1045_svash2_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 761437896,
+    "characterId": "char_4087_ines",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4087_ines",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4087_ines_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 176845289,
+    "characterId": "char_134_ifrit",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_134_ifrit",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_134_ifrit_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 504868824,
+    "characterId": "char_4229_aphris",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4229_aphris",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4229_aphris_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 555380162,
+    "characterId": "char_213_mostma",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_213_mostma",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_213_mostma_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 605802452,
+    "characterId": "char_180_amgoat",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_180_amgoat",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_180_amgoat_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 347242586,
+    "characterId": "char_2013_cerber",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_2013_cerber",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_2013_cerber_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 338937857,
+    "characterId": "char_4027_heyak",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4027_heyak",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4027_heyak_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 589583066,
+    "characterId": "char_4133_logos",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4133_logos",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4133_logos_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 515952099,
+    "characterId": "char_2015_dusk",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_2015_dusk",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_2015_dusk_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 381381616,
+    "characterId": "char_4141_marcil",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4141_marcil",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4141_marcil_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 69880553,
+    "characterId": "char_472_pasngr",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_472_pasngr",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_472_pasngr_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 130840070,
+    "characterId": "char_426_billro",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_426_billro",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_426_billro_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 106256428,
+    "characterId": "char_4080_lin",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4080_lin",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4080_lin_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 815377048,
+    "characterId": "char_1046_sbell2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1046_sbell2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1046_sbell2_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 495782891,
+    "characterId": "char_377_gdglow",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_377_gdglow",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_377_gdglow_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 768996002,
+    "characterId": "char_1038_whitw2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1038_whitw2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1038_whitw2_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 644656106,
+    "characterId": "char_4046_ebnhlz",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4046_ebnhlz",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4046_ebnhlz_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 798184606,
+    "characterId": "char_4226_veen",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4226_veen",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4226_veen_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 537572471,
+    "characterId": "char_4146_nymph",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4146_nymph",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4146_nymph_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 284377799,
+    "characterId": "char_1040_blaze2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1040_blaze2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1040_blaze2_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 345557281,
+    "characterId": "char_4204_mantra",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4204_mantra",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4204_mantra_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 843768555,
+    "characterId": "char_450_necras",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_450_necras",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_450_necras_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 396391072,
+    "characterId": "char_206_gnosis",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_206_gnosis",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_206_gnosis_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 622132172,
+    "characterId": "char_291_aglina",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_291_aglina",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_291_aglina_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 569890128,
+    "characterId": "char_358_lisa",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_358_lisa",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_358_lisa_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 808599409,
+    "characterId": "char_1047_halo2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1047_halo2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1047_halo2_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 495126591,
+    "characterId": "char_248_mgllan",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_248_mgllan",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_248_mgllan_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 329533228,
+    "characterId": "char_4195_radian",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4195_radian",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4195_radian_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 741780972,
+    "characterId": "char_1012_skadi2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1012_skadi2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1012_skadi2_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 231843424,
+    "characterId": "char_4134_cetsyr",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4134_cetsyr",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4134_cetsyr_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 654770047,
+    "characterId": "char_1031_slent2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1031_slent2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1031_slent2_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 765680956,
+    "characterId": "char_4202_haruka",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4202_haruka",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4202_haruka_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 931382392,
+    "characterId": "char_2023_ling",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_2023_ling",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_2023_ling_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 242932437,
+    "characterId": "char_4072_ironmn",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4072_ironmn",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4072_ironmn_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 489943795,
+    "characterId": "char_4212_nasti",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4212_nasti",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4212_nasti_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 39572358,
+    "characterId": "char_245_cello",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_245_cello",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_245_cello_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 56639871,
+    "characterId": "char_1042_phatm2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1042_phatm2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1042_phatm2_1.png",
+    "className": "SUPPORT"
+  },
+  {
+    "id": 993425418,
+    "characterId": "char_250_phatom",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_250_phatom",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_250_phatom_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 147596122,
+    "characterId": "char_1028_texas2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1028_texas2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1028_texas2_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 653754421,
+    "characterId": "char_1029_yato2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1029_yato2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1029_yato2_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 704252042,
+    "characterId": "char_1502_crosly",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1502_crosly",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1502_crosly_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 246826556,
+    "characterId": "char_322_lmlee",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_322_lmlee",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_322_lmlee_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 745722116,
+    "characterId": "char_1033_swire2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1033_swire2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1033_swire2_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 96602304,
+    "characterId": "char_400_weedy",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_400_weedy",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_400_weedy_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 996800695,
+    "characterId": "char_225_haak",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_225_haak",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_225_haak_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 246719000,
+    "characterId": "char_1041_angel2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1041_angel2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1041_angel2_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 127081910,
+    "characterId": "char_474_glady",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_474_glady",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_474_glady_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 177466357,
+    "characterId": "char_437_mizuki",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_437_mizuki",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_437_mizuki_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 56140792,
+    "characterId": "char_4132_ascln",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4132_ascln",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4132_ascln_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 338419132,
+    "characterId": "char_1023_ghost2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1023_ghost2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1023_ghost2_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 768926206,
+    "characterId": "char_4048_doroth",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4048_doroth",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4048_doroth_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 911506490,
+    "characterId": "char_4123_ela",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4123_ela",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4123_ela_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 990563693,
+    "characterId": "char_2027_wang",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_2027_wang",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_2027_wang_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 684827037,
+    "characterId": "char_1039_thorn2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1039_thorn2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1039_thorn2_1.png",
+    "className": "SPECIAL"
+  },
+  {
+    "id": 301522013,
+    "characterId": "char_147_shining",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_147_shining",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_147_shining_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 202871095,
+    "characterId": "char_179_cgbird",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_179_cgbird",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_179_cgbird_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 346428978,
+    "characterId": "char_003_kalts",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_003_kalts",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_003_kalts_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 670827818,
+    "characterId": "char_4042_lumen",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4042_lumen",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4042_lumen_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 999510096,
+    "characterId": "char_1016_agoat2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1016_agoat2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1016_agoat2_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 284210137,
+    "characterId": "char_1020_reed2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1020_reed2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1020_reed2_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 616869096,
+    "characterId": "char_4056_titi",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4056_titi",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4056_titi_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 673521043,
+    "characterId": "char_4179_monstr",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4179_monstr",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4179_monstr_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 861735409,
+    "characterId": "char_1052_kalts2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1052_kalts2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1052_kalts2_1.png",
+    "className": "MEDIC"
+  },
+  {
+    "id": 133088622,
+    "characterId": "char_136_hsguma",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_136_hsguma",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_136_hsguma_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 206634346,
+    "characterId": "char_202_demkni",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_202_demkni",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_202_demkni_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 427147134,
+    "characterId": "char_423_blemsh",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_423_blemsh",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_423_blemsh_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 660507992,
+    "characterId": "char_2025_shu",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_2025_shu",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_2025_shu_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 170305257,
+    "characterId": "char_2014_nian",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_2014_nian",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_2014_nian_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 12494505,
+    "characterId": "char_311_mudrok",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_311_mudrok",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_311_mudrok_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 216869918,
+    "characterId": "char_4065_judge",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4065_judge",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4065_judge_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 57180078,
+    "characterId": "char_416_zumama",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_416_zumama",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_416_zumama_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 948350436,
+    "characterId": "char_4039_horn",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4039_horn",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4039_horn_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 350003205,
+    "characterId": "char_1034_jesca2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1034_jesca2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1034_jesca2_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 22081865,
+    "characterId": "char_4194_rmixer",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4194_rmixer",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4194_rmixer_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 944831357,
+    "characterId": "char_2026_yu",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_2026_yu",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_2026_yu_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 906127460,
+    "characterId": "char_1044_hsgma2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1044_hsgma2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1044_hsgma2_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 99113954,
+    "characterId": "char_264_f12yin",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_264_f12yin",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_264_f12yin_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 689692067,
+    "characterId": "char_2024_chyue",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_2024_chyue",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_2024_chyue_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 801896312,
+    "characterId": "char_4037_demetr",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4037_demetr",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4037_demetr_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 569712421,
+    "characterId": "char_172_svrash",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_172_svrash",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_172_svrash_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 816575461,
+    "characterId": "char_293_thorns",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_293_thorns",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_293_thorns_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 388901558,
+    "characterId": "char_4082_qiubai",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4082_qiubai",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4082_qiubai_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 438827266,
+    "characterId": "char_4182_oblvns",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4182_oblvns",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4182_oblvns_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 768306313,
+    "characterId": "char_4088_hodrer",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4088_hodrer",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4088_hodrer_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 399576161,
+    "characterId": "char_4145_ulpia",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4145_ulpia",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4145_ulpia_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 757787237,
+    "characterId": "char_4058_pepe",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4058_pepe",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4058_pepe_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 126209274,
+    "characterId": "char_1051_headb2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1051_headb2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1051_headb2_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 541420950,
+    "characterId": "char_010_chen",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_010_chen",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_010_chen_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 562148882,
+    "characterId": "char_4009_irene",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4009_irene",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4009_irene_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 226400081,
+    "characterId": "char_4116_blkkgt",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4116_blkkgt",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4116_blkkgt_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 147939099,
+    "characterId": "char_017_huang",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_017_huang",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_017_huang_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 993762667,
+    "characterId": "char_1026_gvial2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1026_gvial2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1026_gvial2_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 696719292,
+    "characterId": "char_350_surtr",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_350_surtr",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_350_surtr_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 647622364,
+    "characterId": "char_4098_vvana",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4098_vvana",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4098_vvana_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 594178421,
+    "characterId": "char_1019_siege2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1019_siege2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1019_siege2_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 266594755,
+    "characterId": "char_1050_chen3",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1050_chen3",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1050_chen3_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 485497465,
+    "characterId": "char_188_helage",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_188_helage",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_188_helage_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 445604442,
+    "characterId": "char_4121_zuole",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4121_zuole",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4121_zuole_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 1041516,
+    "characterId": "char_485_pallas",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_485_pallas",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_485_pallas_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 12639515,
+    "characterId": "char_1014_nearl2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1014_nearl2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1014_nearl2_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 140994473,
+    "characterId": "char_4011_lessng",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4011_lessng",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4011_lessng_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 881607543,
+    "characterId": "char_1032_excu2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1032_excu2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1032_excu2_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 671272869,
+    "characterId": "char_4010_etlchi",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4010_etlchi",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4010_etlchi_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 197373336,
+    "characterId": "char_4064_mlynar",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_4064_mlynar",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4064_mlynar_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 17813117,
+    "characterId": "char_1043_leizi2",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_1043_leizi2",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_1043_leizi2_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 35487310,
+    "characterId": "char_4214_cairn",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_4214_cairn",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_4214_cairn_1.png",
+    "className": "TANK"
+  },
+  {
+    "id": 195497021,
+    "characterId": "char_230_savage",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_230_savage",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_230_savage_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 250812958,
+    "characterId": "char_282_catap",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_282_catap",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_282_catap_1.png",
+    "className": "SNIPER"
+  },
+  {
+    "id": 351966251,
+    "characterId": "char_283_midn",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "char_283_midn",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_283_midn_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 671059345,
+    "characterId": "char_137_brownb",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_137_brownb",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_137_brownb_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 483373570,
+    "characterId": "char_347_jaksel",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "char_347_jaksel",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_347_jaksel_1.png",
+    "className": "WARRIOR"
+  },
+  {
+    "id": 119562652,
+    "characterId": "char_164_nightm",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_164_nightm",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_164_nightm_1.png",
+    "className": "CASTER"
+  },
+  {
+    "id": 934166630,
+    "characterId": "char_220_grani",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "char_220_grani",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_220_grani_1.png",
+    "className": "PIONEER"
+  },
+  {
+    "id": 107904685,
+    "characterId": "char_263_skadi",
+    "cardRarityType": "rarity_6",
+    "assetbundleName": "char_263_skadi",
+    "image_url": "https://cdn.jsdelivr.net/gh/Aceship/Arknight-Images@main/portraits/char_263_skadi_1.png",
+    "className": "WARRIOR"
+  }
+]

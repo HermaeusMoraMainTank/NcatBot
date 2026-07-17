@@ -165,7 +165,12 @@ class AiUtil:
             return None
 
     @staticmethod
-    async def search_deepseek(keyword: str, prompt: str) -> Optional[dict]:
+    async def search_deepseek(
+        keyword: str,
+        prompt: str,
+        max_tokens: int = 2048,
+        temperature: float = 1.2,
+    ) -> Optional[dict]:
         """文本对话：暂时全走 DeepSeek（minimax 响应过慢），失败重试 3 次。"""
         _log.info(keyword)
 
@@ -192,8 +197,8 @@ class AiUtil:
                             {"role": "system", "content": prompt},
                             {"role": "user", "content": keyword},
                         ],
-                        max_tokens=2048,
-                        temperature=1.2,
+                        max_tokens=max_tokens,
+                        temperature=temperature,
                         stream=False,
                         timeout=20.0,
                     )

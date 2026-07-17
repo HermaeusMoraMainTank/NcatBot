@@ -1,0 +1,13 @@
+name = "GuessCard"
+version = "2.0.0"
+main = "GuessCard.py"
+entry_class = "GuessCard"
+author = "慵懒午睡 / NcatBot"
+description = "多游戏猜卡面（默认 PJSK，支持 FGO 等卡池）"
+
+[dependencies]
+
+[pip_dependencies]
+Pillow = ">=10.0.0"
+aiohttp = ">=3.9.0"
+pilmoji = ">=2.0.0"

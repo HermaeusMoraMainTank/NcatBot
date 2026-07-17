@@ -1,0 +1,4850 @@
+[
+  {
+    "characterId": "char_123_fang",
+    "name": "芬",
+    "fullName": "芬",
+    "fullNameChinese": "芬",
+    "aliases": [
+      "芬",
+      "Fang"
+    ],
+    "className": "PIONEER",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_240_wyvern",
+    "name": "香草",
+    "fullName": "香草",
+    "fullNameChinese": "香草",
+    "aliases": [
+      "香草",
+      "Vanilla"
+    ],
+    "className": "PIONEER",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_192_falco",
+    "name": "翎羽",
+    "fullName": "翎羽",
+    "fullNameChinese": "翎羽",
+    "aliases": [
+      "翎羽",
+      "Plume"
+    ],
+    "className": "PIONEER",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_208_melan",
+    "name": "玫兰莎",
+    "fullName": "玫兰莎",
+    "fullNameChinese": "玫兰莎",
+    "aliases": [
+      "玫兰莎",
+      "Melantha"
+    ],
+    "className": "WARRIOR",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_281_popka",
+    "name": "泡普卡",
+    "fullName": "泡普卡",
+    "fullNameChinese": "泡普卡",
+    "aliases": [
+      "泡普卡",
+      "Popukar"
+    ],
+    "className": "WARRIOR",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_209_ardign",
+    "name": "卡缇",
+    "fullName": "卡缇",
+    "fullNameChinese": "卡缇",
+    "aliases": [
+      "卡缇",
+      "Cardigan"
+    ],
+    "className": "TANK",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_122_beagle",
+    "name": "米格鲁",
+    "fullName": "米格鲁",
+    "fullNameChinese": "米格鲁",
+    "aliases": [
+      "米格鲁",
+      "Beagle"
+    ],
+    "className": "TANK",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_284_spot",
+    "name": "斑点",
+    "fullName": "斑点",
+    "fullNameChinese": "斑点",
+    "aliases": [
+      "斑点",
+      "Spot"
+    ],
+    "className": "TANK",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_124_kroos",
+    "name": "克洛丝",
+    "fullName": "克洛丝",
+    "fullNameChinese": "克洛丝",
+    "aliases": [
+      "克洛丝",
+      "Kroos"
+    ],
+    "className": "SNIPER",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_211_adnach",
+    "name": "安德切尔",
+    "fullName": "安德切尔",
+    "fullNameChinese": "安德切尔",
+    "aliases": [
+      "安德切尔",
+      "Adnachiel"
+    ],
+    "className": "SNIPER",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_121_lava",
+    "name": "炎熔",
+    "fullName": "炎熔",
+    "fullNameChinese": "炎熔",
+    "aliases": [
+      "炎熔",
+      "Lava"
+    ],
+    "className": "CASTER",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_120_hibisc",
+    "name": "芙蓉",
+    "fullName": "芙蓉",
+    "fullNameChinese": "芙蓉",
+    "aliases": [
+      "芙蓉",
+      "Hibiscus"
+    ],
+    "className": "MEDIC",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_212_ansel",
+    "name": "安赛尔",
+    "fullName": "安赛尔",
+    "fullNameChinese": "安赛尔",
+    "aliases": [
+      "安赛尔",
+      "Ansel"
+    ],
+    "className": "MEDIC",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_210_stward",
+    "name": "史都华德",
+    "fullName": "史都华德",
+    "fullNameChinese": "史都华德",
+    "aliases": [
+      "史都华德",
+      "Steward"
+    ],
+    "className": "CASTER",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_278_orchid",
+    "name": "梓兰",
+    "fullName": "梓兰",
+    "fullNameChinese": "梓兰",
+    "aliases": [
+      "梓兰",
+      "Orchid"
+    ],
+    "className": "SUPPORT",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_141_nights",
+    "name": "夜烟",
+    "fullName": "夜烟",
+    "fullNameChinese": "夜烟",
+    "aliases": [
+      "夜烟",
+      "Haze"
+    ],
+    "className": "CASTER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_109_fmout",
+    "name": "远山",
+    "fullName": "远山",
+    "fullNameChinese": "远山",
+    "aliases": [
+      "远山",
+      "Gitano"
+    ],
+    "className": "CASTER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_253_greyy",
+    "name": "格雷伊",
+    "fullName": "格雷伊",
+    "fullNameChinese": "格雷伊",
+    "aliases": [
+      "格雷伊",
+      "Greyy"
+    ],
+    "className": "CASTER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_4051_akkord",
+    "name": "协律",
+    "fullName": "协律",
+    "fullNameChinese": "协律",
+    "aliases": [
+      "协律",
+      "Akkord"
+    ],
+    "className": "CASTER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_328_cammou",
+    "name": "卡达",
+    "fullName": "卡达",
+    "fullNameChinese": "卡达",
+    "aliases": [
+      "卡达",
+      "Click"
+    ],
+    "className": "CASTER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_469_indigo",
+    "name": "深靛",
+    "fullName": "深靛",
+    "fullNameChinese": "深靛",
+    "aliases": [
+      "深靛",
+      "Indigo"
+    ],
+    "className": "CASTER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_4004_pudd",
+    "name": "布丁",
+    "fullName": "布丁",
+    "fullNameChinese": "布丁",
+    "aliases": [
+      "布丁",
+      "Pudding"
+    ],
+    "className": "CASTER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_235_jesica",
+    "name": "杰西卡",
+    "fullName": "杰西卡",
+    "fullNameChinese": "杰西卡",
+    "aliases": [
+      "杰西卡",
+      "Jessica"
+    ],
+    "className": "SNIPER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_126_shotst",
+    "name": "流星",
+    "fullName": "流星",
+    "fullNameChinese": "流星",
+    "aliases": [
+      "流星",
+      "Meteor"
+    ],
+    "className": "SNIPER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_190_clour",
+    "name": "红云",
+    "fullName": "红云",
+    "fullNameChinese": "红云",
+    "aliases": [
+      "红云",
+      "Vermeil"
+    ],
+    "className": "SNIPER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_133_mm",
+    "name": "梅",
+    "fullName": "梅",
+    "fullNameChinese": "梅",
+    "aliases": [
+      "梅",
+      "May"
+    ],
+    "className": "SNIPER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_118_yuki",
+    "name": "白雪",
+    "fullName": "白雪",
+    "fullNameChinese": "白雪",
+    "aliases": [
+      "白雪",
+      "ShiraYuki"
+    ],
+    "className": "SNIPER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_440_pinecn",
+    "name": "松果",
+    "fullName": "松果",
+    "fullNameChinese": "松果",
+    "aliases": [
+      "松果",
+      "Pinecone"
+    ],
+    "className": "SNIPER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_302_glaze",
+    "name": "安比尔",
+    "fullName": "安比尔",
+    "fullNameChinese": "安比尔",
+    "aliases": [
+      "安比尔",
+      "Ambriel"
+    ],
+    "className": "SNIPER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_366_acdrop",
+    "name": "酸糖",
+    "fullName": "酸糖",
+    "fullNameChinese": "酸糖",
+    "aliases": [
+      "酸糖",
+      "Aciddrop"
+    ],
+    "className": "SNIPER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_4062_totter",
+    "name": "铅踝",
+    "fullName": "铅踝",
+    "fullNameChinese": "铅踝",
+    "aliases": [
+      "铅踝",
+      "Totter"
+    ],
+    "className": "SNIPER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_4100_caper",
+    "name": "跃跃",
+    "fullName": "跃跃",
+    "fullNameChinese": "跃跃",
+    "aliases": [
+      "跃跃",
+      "Caper"
+    ],
+    "className": "SNIPER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_198_blackd",
+    "name": "讯使",
+    "fullName": "讯使",
+    "fullNameChinese": "讯使",
+    "aliases": [
+      "讯使",
+      "Courier"
+    ],
+    "className": "PIONEER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_149_scave",
+    "name": "清道夫",
+    "fullName": "清道夫",
+    "fullNameChinese": "清道夫",
+    "aliases": [
+      "清道夫",
+      "Scavenger"
+    ],
+    "className": "PIONEER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_290_vigna",
+    "name": "红豆",
+    "fullName": "红豆",
+    "fullNameChinese": "红豆",
+    "aliases": [
+      "红豆",
+      "Vigna"
+    ],
+    "className": "PIONEER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_151_myrtle",
+    "name": "桃金娘",
+    "fullName": "桃金娘",
+    "fullNameChinese": "桃金娘",
+    "aliases": [
+      "桃金娘",
+      "Myrtle"
+    ],
+    "className": "PIONEER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_452_bstalk",
+    "name": "豆苗",
+    "fullName": "豆苗",
+    "fullNameChinese": "豆苗",
+    "aliases": [
+      "豆苗",
+      "Beanstalk"
+    ],
+    "className": "PIONEER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_4208_wintim",
+    "name": "冬时",
+    "fullName": "冬时",
+    "fullNameChinese": "冬时",
+    "aliases": [
+      "冬时",
+      "Снегурочка"
+    ],
+    "className": "PIONEER",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_130_doberm",
+    "name": "杜宾",
+    "fullName": "杜宾",
+    "fullNameChinese": "杜宾",
+    "aliases": [
+      "杜宾",
+      "Dobermann"
+    ],
+    "className": "WARRIOR",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_289_gyuki",
+    "name": "缠丸",
+    "fullName": "缠丸",
+    "fullNameChinese": "缠丸",
+    "aliases": [
+      "缠丸",
+      "Matoimaru"
+    ],
+    "className": "WARRIOR",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_159_peacok",
+    "name": "断罪者",
+    "fullName": "断罪者",
+    "fullNameChinese": "断罪者",
+    "aliases": [
+      "断罪者",
+      "Conviction"
+    ],
+    "className": "WARRIOR",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_193_frostl",
+    "name": "霜叶",
+    "fullName": "霜叶",
+    "fullNameChinese": "霜叶",
+    "aliases": [
+      "霜叶",
+      "Frostleaf"
+    ],
+    "className": "WARRIOR",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_127_estell",
+    "name": "艾丝黛尔",
+    "fullName": "艾丝黛尔",
+    "fullNameChinese": "艾丝黛尔",
+    "aliases": [
+      "艾丝黛尔",
+      "Estelle"
+    ],
+    "className": "WARRIOR",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_185_frncat",
+    "name": "慕斯",
+    "fullName": "慕斯",
+    "fullNameChinese": "慕斯",
+    "aliases": [
+      "慕斯",
+      "Mousse"
+    ],
+    "className": "WARRIOR",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_301_cutter",
+    "name": "刻刀",
+    "fullName": "刻刀",
+    "fullNameChinese": "刻刀",
+    "aliases": [
+      "刻刀",
+      "Cutter"
+    ],
+    "className": "WARRIOR",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_337_utage",
+    "name": "宴",
+    "fullName": "宴",
+    "fullNameChinese": "宴",
+    "aliases": [
+      "宴",
+      "Utage"
+    ],
+    "className": "WARRIOR",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_271_spikes",
+    "name": "芳汀",
+    "fullName": "芳汀",
+    "fullNameChinese": "芳汀",
+    "aliases": [
+      "芳汀",
+      "Arene"
+    ],
+    "className": "WARRIOR",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_4067_lolxh",
+    "name": "罗小黑",
+    "fullName": "罗小黑",
+    "fullNameChinese": "罗小黑",
+    "aliases": [
+      "罗小黑",
+      "Luo Xiaohei"
+    ],
+    "className": "WARRIOR",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_4063_quartz",
+    "name": "石英",
+    "fullName": "石英",
+    "fullNameChinese": "石英",
+    "aliases": [
+      "石英",
+      "Quartz"
+    ],
+    "className": "WARRIOR",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_491_humus",
+    "name": "休谟斯",
+    "fullName": "休谟斯",
+    "fullNameChinese": "休谟斯",
+    "aliases": [
+      "休谟斯",
+      "Humus"
+    ],
+    "className": "WARRIOR",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_445_wscoot",
+    "name": "骋风",
+    "fullName": "骋风",
+    "fullNameChinese": "骋风",
+    "aliases": [
+      "骋风",
+      "Windscoot"
+    ],
+    "className": "WARRIOR",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_237_gravel",
+    "name": "砾",
+    "fullName": "砾",
+    "fullNameChinese": "砾",
+    "aliases": [
+      "砾",
+      "Gravel"
+    ],
+    "className": "SPECIAL",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_272_strong",
+    "name": "孑",
+    "fullName": "孑",
+    "fullNameChinese": "孑",
+    "aliases": [
+      "孑",
+      "Jaye"
+    ],
+    "className": "SPECIAL",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_236_rope",
+    "name": "暗索",
+    "fullName": "暗索",
+    "fullNameChinese": "暗索",
+    "aliases": [
+      "暗索",
+      "Rope"
+    ],
+    "className": "SPECIAL",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_117_myrrh",
+    "name": "末药",
+    "fullName": "末药",
+    "fullNameChinese": "末药",
+    "aliases": [
+      "末药",
+      "Myrrh"
+    ],
+    "className": "MEDIC",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_187_ccheal",
+    "name": "嘉维尔",
+    "fullName": "嘉维尔",
+    "fullNameChinese": "嘉维尔",
+    "aliases": [
+      "嘉维尔",
+      "Gavial"
+    ],
+    "className": "MEDIC",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_298_susuro",
+    "name": "苏苏洛",
+    "fullName": "苏苏洛",
+    "fullNameChinese": "苏苏洛",
+    "aliases": [
+      "苏苏洛",
+      "Sussurro"
+    ],
+    "className": "MEDIC",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_181_flower",
+    "name": "调香师",
+    "fullName": "调香师",
+    "fullNameChinese": "调香师",
+    "aliases": [
+      "调香师",
+      "Perfumer"
+    ],
+    "className": "MEDIC",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_385_finlpp",
+    "name": "清流",
+    "fullName": "清流",
+    "fullNameChinese": "清流",
+    "aliases": [
+      "清流",
+      "Purestream"
+    ],
+    "className": "MEDIC",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_4041_chnut",
+    "name": "褐果",
+    "fullName": "褐果",
+    "fullNameChinese": "褐果",
+    "aliases": [
+      "褐果",
+      "Chestnut"
+    ],
+    "className": "MEDIC",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_199_yak",
+    "name": "角峰",
+    "fullName": "角峰",
+    "fullNameChinese": "角峰",
+    "aliases": [
+      "角峰",
+      "Matterhorn"
+    ],
+    "className": "TANK",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_150_snakek",
+    "name": "蛇屠箱",
+    "fullName": "蛇屠箱",
+    "fullNameChinese": "蛇屠箱",
+    "aliases": [
+      "蛇屠箱",
+      "Cuora"
+    ],
+    "className": "TANK",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_381_bubble",
+    "name": "泡泡",
+    "fullName": "泡泡",
+    "fullNameChinese": "泡泡",
+    "aliases": [
+      "泡泡",
+      "Bubble"
+    ],
+    "className": "TANK",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_4130_luton",
+    "name": "露托",
+    "fullName": "露托",
+    "fullNameChinese": "露托",
+    "aliases": [
+      "露托",
+      "Lutonada"
+    ],
+    "className": "TANK",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_196_sunbr",
+    "name": "古米",
+    "fullName": "古米",
+    "fullNameChinese": "古米",
+    "aliases": [
+      "古米",
+      "Гум"
+    ],
+    "className": "TANK",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_260_durnar",
+    "name": "坚雷",
+    "fullName": "坚雷",
+    "fullNameChinese": "坚雷",
+    "aliases": [
+      "坚雷",
+      "Dur-nar"
+    ],
+    "className": "TANK",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_110_deepcl",
+    "name": "深海色",
+    "fullName": "深海色",
+    "fullNameChinese": "深海色",
+    "aliases": [
+      "深海色",
+      "Deepcolor"
+    ],
+    "className": "SUPPORT",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_183_skgoat",
+    "name": "地灵",
+    "fullName": "地灵",
+    "fullNameChinese": "地灵",
+    "aliases": [
+      "地灵",
+      "Earthspirit"
+    ],
+    "className": "SUPPORT",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_258_podego",
+    "name": "波登可",
+    "fullName": "波登可",
+    "fullNameChinese": "波登可",
+    "aliases": [
+      "波登可",
+      "Podenco"
+    ],
+    "className": "SUPPORT",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_484_robrta",
+    "name": "罗比菈塔",
+    "fullName": "罗比菈塔",
+    "fullNameChinese": "罗比菈塔",
+    "aliases": [
+      "罗比菈塔",
+      "Roberta"
+    ],
+    "className": "SUPPORT",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_355_ethan",
+    "name": "伊桑",
+    "fullName": "伊桑",
+    "fullNameChinese": "伊桑",
+    "aliases": [
+      "伊桑",
+      "Ethan"
+    ],
+    "className": "SPECIAL",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_277_sqrrel",
+    "name": "阿消",
+    "fullName": "阿消",
+    "fullNameChinese": "阿消",
+    "aliases": [
+      "阿消",
+      "Shaw"
+    ],
+    "className": "SPECIAL",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_4107_vrdant",
+    "name": "维荻",
+    "fullName": "维荻",
+    "fullNameChinese": "维荻",
+    "aliases": [
+      "维荻",
+      "Verdant"
+    ],
+    "className": "SPECIAL",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_4165_ctrail",
+    "name": "云迹",
+    "fullName": "云迹",
+    "fullNameChinese": "云迹",
+    "aliases": [
+      "云迹",
+      "Contrail"
+    ],
+    "className": "SPECIAL",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_128_plosis",
+    "name": "白面鸮",
+    "fullName": "白面鸮",
+    "fullNameChinese": "白面鸮",
+    "aliases": [
+      "白面鸮",
+      "Ptilopsis"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_275_breeze",
+    "name": "微风",
+    "fullName": "微风",
+    "fullNameChinese": "微风",
+    "aliases": [
+      "微风",
+      "Breeze"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4163_rosesa",
+    "name": "瑰盐",
+    "fullName": "瑰盐",
+    "fullNameChinese": "瑰盐",
+    "aliases": [
+      "瑰盐",
+      "Rose Salt"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_115_headbr",
+    "name": "凛冬",
+    "fullName": "凛冬",
+    "fullNameChinese": "凛冬",
+    "aliases": [
+      "凛冬",
+      "Зима"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_102_texas",
+    "name": "德克萨斯",
+    "fullName": "德克萨斯",
+    "fullNameChinese": "德克萨斯",
+    "aliases": [
+      "德克萨斯",
+      "Texas"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_349_chiave",
+    "name": "贾维",
+    "fullName": "贾维",
+    "fullNameChinese": "贾维",
+    "aliases": [
+      "贾维",
+      "Chiave"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_488_buildr",
+    "name": "青枳",
+    "fullName": "青枳",
+    "fullNameChinese": "青枳",
+    "aliases": [
+      "青枳",
+      "Poncirus"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4023_rfalcn",
+    "name": "红隼",
+    "fullName": "红隼",
+    "fullNameChinese": "红隼",
+    "aliases": [
+      "红隼",
+      "Kestrel"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4199_makiri",
+    "name": "松桐",
+    "fullName": "松桐",
+    "fullNameChinese": "松桐",
+    "aliases": [
+      "松桐",
+      "Matsukiri"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_261_sddrag",
+    "name": "苇草",
+    "fullName": "苇草",
+    "fullNameChinese": "苇草",
+    "aliases": [
+      "苇草",
+      "Reed"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_496_wildmn",
+    "name": "野鬃",
+    "fullName": "野鬃",
+    "fullNameChinese": "野鬃",
+    "aliases": [
+      "野鬃",
+      "Wild Mane"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_1036_fang2",
+    "name": "历阵锐枪芬",
+    "fullName": "历阵锐枪芬",
+    "fullNameChinese": "历阵锐枪芬",
+    "aliases": [
+      "历阵锐枪芬",
+      "Fang the Fire-sharpened"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_401_elysm",
+    "name": "极境",
+    "fullName": "极境",
+    "fullNameChinese": "极境",
+    "aliases": [
+      "极境",
+      "Elysium"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4119_wanqin",
+    "name": "万顷",
+    "fullName": "万顷",
+    "fullNameChinese": "万顷",
+    "aliases": [
+      "万顷",
+      "Wanqing"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_476_blkngt",
+    "name": "夜半",
+    "fullName": "夜半",
+    "fullNameChinese": "夜半",
+    "aliases": [
+      "夜半",
+      "Blacknight"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4147_mitm",
+    "name": "渡桥",
+    "fullName": "渡桥",
+    "fullNameChinese": "渡桥",
+    "aliases": [
+      "渡桥",
+      "Mitm"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_497_ctable",
+    "name": "晓歌",
+    "fullName": "晓歌",
+    "fullNameChinese": "晓歌",
+    "aliases": [
+      "晓歌",
+      "Cantabile"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4017_puzzle",
+    "name": "谜图",
+    "fullName": "谜图",
+    "fullNameChinese": "谜图",
+    "aliases": [
+      "谜图",
+      "Puzzle"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4144_chilc",
+    "name": "齐尔查克",
+    "fullName": "齐尔查克",
+    "fullNameChinese": "齐尔查克",
+    "aliases": [
+      "齐尔查克",
+      "Chilchuck"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4052_surfer",
+    "name": "寻澜",
+    "fullName": "寻澜",
+    "fullNameChinese": "寻澜",
+    "aliases": [
+      "寻澜",
+      "Surfer"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_308_swire",
+    "name": "诗怀雅",
+    "fullName": "诗怀雅",
+    "fullNameChinese": "诗怀雅",
+    "aliases": [
+      "诗怀雅",
+      "Swire"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_265_sophia",
+    "name": "鞭刃",
+    "fullName": "鞭刃",
+    "fullNameChinese": "鞭刃",
+    "aliases": [
+      "鞭刃",
+      "Whislash"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4106_bryota",
+    "name": "苍苔",
+    "fullName": "苍苔",
+    "fullNameChinese": "苍苔",
+    "aliases": [
+      "苍苔",
+      "Bryophyta"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4125_rdoc",
+    "name": "医生",
+    "fullName": "医生",
+    "fullNameChinese": "医生",
+    "aliases": [
+      "医生",
+      "Doc"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_106_franka",
+    "name": "芙兰卡",
+    "fullName": "芙兰卡",
+    "fullNameChinese": "芙兰卡",
+    "aliases": [
+      "芙兰卡",
+      "Franka"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_131_flameb",
+    "name": "炎客",
+    "fullName": "炎客",
+    "fullNameChinese": "炎客",
+    "aliases": [
+      "炎客",
+      "Flamebringer"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_154_morgan",
+    "name": "摩根",
+    "fullName": "摩根",
+    "fullNameChinese": "摩根",
+    "aliases": [
+      "摩根",
+      "Morgan"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4142_laios",
+    "name": "莱欧斯",
+    "fullName": "莱欧斯",
+    "fullNameChinese": "莱欧斯",
+    "aliases": [
+      "莱欧斯",
+      "Laios"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_155_tiger",
+    "name": "因陀罗",
+    "fullName": "因陀罗",
+    "fullNameChinese": "因陀罗",
+    "aliases": [
+      "因陀罗",
+      "Indra"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_415_flint",
+    "name": "燧石",
+    "fullName": "燧石",
+    "fullNameChinese": "燧石",
+    "aliases": [
+      "燧石",
+      "Flint"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_157_dagda",
+    "name": "达格达",
+    "fullName": "达格达",
+    "fullNameChinese": "达格达",
+    "aliases": [
+      "达格达",
+      "Dagda"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_140_whitew",
+    "name": "拉普兰德",
+    "fullName": "拉普兰德",
+    "fullNameChinese": "拉普兰德",
+    "aliases": [
+      "拉普兰德",
+      "Lappland"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_294_ayer",
+    "name": "断崖",
+    "fullName": "断崖",
+    "fullNameChinese": "断崖",
+    "aliases": [
+      "断崖",
+      "Ayerscarpe"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_194_leto",
+    "name": "烈夏",
+    "fullName": "烈夏",
+    "fullNameChinese": "烈夏",
+    "aliases": [
+      "烈夏",
+      "Лето"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4083_chimes",
+    "name": "铎铃",
+    "fullName": "铎铃",
+    "fullNameChinese": "铎铃",
+    "aliases": [
+      "铎铃",
+      "Wind Chimes"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_252_bibeak",
+    "name": "柏喙",
+    "fullName": "柏喙",
+    "fullNameChinese": "柏喙",
+    "aliases": [
+      "柏喙",
+      "Bibeak"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_459_tachak",
+    "name": "战车",
+    "fullName": "战车",
+    "fullNameChinese": "战车",
+    "aliases": [
+      "战车",
+      "Tachanka"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_143_ghost",
+    "name": "幽灵鲨",
+    "fullName": "幽灵鲨",
+    "fullNameChinese": "幽灵鲨",
+    "aliases": [
+      "幽灵鲨",
+      "Specter"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_356_broca",
+    "name": "布洛卡",
+    "fullName": "布洛卡",
+    "fullNameChinese": "布洛卡",
+    "aliases": [
+      "布洛卡",
+      "Broca"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4126_fuze",
+    "name": "导火索",
+    "fullName": "导火索",
+    "fullNameChinese": "导火索",
+    "aliases": [
+      "导火索",
+      "Fuze"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4166_varkis",
+    "name": "摆渡人",
+    "fullName": "摆渡人",
+    "fullNameChinese": "摆渡人",
+    "aliases": [
+      "摆渡人",
+      "Varkáris"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_274_astesi",
+    "name": "星极",
+    "fullName": "星极",
+    "fullNameChinese": "星极",
+    "aliases": [
+      "星极",
+      "Astesia"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_333_sidero",
+    "name": "铸铁",
+    "fullName": "铸铁",
+    "fullNameChinese": "铸铁",
+    "aliases": [
+      "铸铁",
+      "Sideroca"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_475_akafyu",
+    "name": "赤冬",
+    "fullName": "赤冬",
+    "fullNameChinese": "赤冬",
+    "aliases": [
+      "赤冬",
+      "Akafuyu"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_1030_noirc2",
+    "name": "火龙S黑角",
+    "fullName": "火龙S黑角",
+    "fullNameChinese": "火龙S黑角",
+    "aliases": [
+      "火龙S黑角",
+      "Rathalos S Noir Corne"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_421_crow",
+    "name": "羽毛笔",
+    "fullName": "羽毛笔",
+    "fullNameChinese": "羽毛笔",
+    "aliases": [
+      "羽毛笔",
+      "La Pluma"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4066_highmo",
+    "name": "海沫",
+    "fullName": "海沫",
+    "fullNameChinese": "海沫",
+    "aliases": [
+      "海沫",
+      "Highmore"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_486_takila",
+    "name": "龙舌兰",
+    "fullName": "龙舌兰",
+    "fullNameChinese": "龙舌兰",
+    "aliases": [
+      "龙舌兰",
+      "Tequila"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4131_odda",
+    "name": "奥达",
+    "fullName": "奥达",
+    "fullNameChinese": "奥达",
+    "aliases": [
+      "奥达",
+      "Odda"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4187_graceb",
+    "name": "聆音",
+    "fullName": "聆音",
+    "fullNameChinese": "聆音",
+    "aliases": [
+      "聆音",
+      "Gracebearer"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4185_amoris",
+    "name": "祐天寺若麦",
+    "fullName": "祐天寺若麦",
+    "fullNameChinese": "祐天寺若麦",
+    "aliases": [
+      "祐天寺若麦",
+      "Yūtenji Nyamu"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_394_hadiya",
+    "name": "哈蒂娅",
+    "fullName": "哈蒂娅",
+    "fullNameChinese": "哈蒂娅",
+    "aliases": [
+      "哈蒂娅",
+      "Hadiya"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_1049_catap2",
+    "name": "雷狼龙S空爆",
+    "fullName": "雷狼龙S空爆",
+    "fullNameChinese": "雷狼龙S空爆",
+    "aliases": [
+      "雷狼龙S空爆",
+      "Zinogre S Catapult"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_129_bluep",
+    "name": "蓝毒",
+    "fullName": "蓝毒",
+    "fullNameChinese": "蓝毒",
+    "aliases": [
+      "蓝毒",
+      "Blue Poison"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_204_platnm",
+    "name": "白金",
+    "fullName": "白金",
+    "fullNameChinese": "白金",
+    "aliases": [
+      "白金",
+      "Platinum"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_367_swllow",
+    "name": "灰喉",
+    "fullName": "灰喉",
+    "fullNameChinese": "灰喉",
+    "aliases": [
+      "灰喉",
+      "GreyThroat"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_365_aprl",
+    "name": "四月",
+    "fullName": "四月",
+    "fullNameChinese": "四月",
+    "aliases": [
+      "四月",
+      "April"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_1021_kroos2",
+    "name": "寒芒克洛丝",
+    "fullName": "寒芒克洛丝",
+    "fullNameChinese": "寒芒克洛丝",
+    "aliases": [
+      "寒芒克洛丝",
+      "Kroos the Keen Glint"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_498_inside",
+    "name": "隐现",
+    "fullName": "隐现",
+    "fullNameChinese": "隐现",
+    "aliases": [
+      "隐现",
+      "Insider"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_219_meteo",
+    "name": "陨星",
+    "fullName": "陨星",
+    "fullNameChinese": "陨星",
+    "aliases": [
+      "陨星",
+      "Meteorite"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_379_sesa",
+    "name": "慑砂",
+    "fullName": "慑砂",
+    "fullNameChinese": "慑砂",
+    "aliases": [
+      "慑砂",
+      "Sesa"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4078_bdhkgt",
+    "name": "截云",
+    "fullName": "截云",
+    "fullNameChinese": "截云",
+    "aliases": [
+      "截云",
+      "Jieyun"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_279_excu",
+    "name": "送葬人",
+    "fullName": "送葬人",
+    "fullNameChinese": "送葬人",
+    "aliases": [
+      "送葬人",
+      "Executor"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_346_aosta",
+    "name": "奥斯塔",
+    "fullName": "奥斯塔",
+    "fullNameChinese": "奥斯塔",
+    "aliases": [
+      "奥斯塔",
+      "Aosta"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4203_kichi",
+    "name": "吉星",
+    "fullName": "吉星",
+    "fullNameChinese": "吉星",
+    "aliases": [
+      "吉星",
+      "Kichisei"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4213_skybx",
+    "name": "天空盒",
+    "fullName": "天空盒",
+    "fullNameChinese": "天空盒",
+    "aliases": [
+      "天空盒",
+      "Skybox"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_002_amiya",
+    "name": "阿米娅",
+    "fullName": "阿米娅",
+    "fullNameChinese": "阿米娅",
+    "aliases": [
+      "阿米娅",
+      "Amiya"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_405_absin",
+    "name": "苦艾",
+    "fullName": "苦艾",
+    "fullNameChinese": "苦艾",
+    "aliases": [
+      "苦艾",
+      "Absinthe"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_411_tomimi",
+    "name": "特米米",
+    "fullName": "特米米",
+    "fullNameChinese": "特米米",
+    "aliases": [
+      "特米米",
+      "Tomimi"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_466_qanik",
+    "name": "雪绒",
+    "fullName": "雪绒",
+    "fullNameChinese": "雪绒",
+    "aliases": [
+      "雪绒",
+      "Qanipalaat"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_166_skfire",
+    "name": "天火",
+    "fullName": "天火",
+    "fullNameChinese": "天火",
+    "aliases": [
+      "天火",
+      "Skyfire"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_306_leizi",
+    "name": "惊蛰",
+    "fullName": "惊蛰",
+    "fullNameChinese": "惊蛰",
+    "aliases": [
+      "惊蛰",
+      "Leizi"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_135_halo",
+    "name": "星源",
+    "fullName": "星源",
+    "fullNameChinese": "星源",
+    "aliases": [
+      "星源",
+      "Astgenne"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_344_beewax",
+    "name": "蜜蜡",
+    "fullName": "蜜蜡",
+    "fullNameChinese": "蜜蜡",
+    "aliases": [
+      "蜜蜡",
+      "Beeswax"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_373_lionhd",
+    "name": "莱恩哈特",
+    "fullName": "莱恩哈特",
+    "fullNameChinese": "莱恩哈特",
+    "aliases": [
+      "莱恩哈特",
+      "Leonhardt"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_341_sntlla",
+    "name": "寒檀",
+    "fullName": "寒檀",
+    "fullNameChinese": "寒檀",
+    "aliases": [
+      "寒檀",
+      "Santalla"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4031_liesel",
+    "name": "复奏",
+    "fullName": "复奏",
+    "fullNameChinese": "复奏",
+    "aliases": [
+      "复奏",
+      "Ripresa"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_388_mint",
+    "name": "薄绿",
+    "fullName": "薄绿",
+    "fullNameChinese": "薄绿",
+    "aliases": [
+      "薄绿",
+      "Mint"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_338_iris",
+    "name": "爱丽丝",
+    "fullName": "爱丽丝",
+    "fullNameChinese": "爱丽丝",
+    "aliases": [
+      "爱丽丝",
+      "Iris"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_297_hamoni",
+    "name": "和弦",
+    "fullName": "和弦",
+    "fullNameChinese": "和弦",
+    "aliases": [
+      "和弦",
+      "Harmonie"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4110_delphn",
+    "name": "戴菲恩",
+    "fullName": "戴菲恩",
+    "fullNameChinese": "戴菲恩",
+    "aliases": [
+      "戴菲恩",
+      "Delphine"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_1011_lava2",
+    "name": "炎狱炎熔",
+    "fullName": "炎狱炎熔",
+    "fullNameChinese": "炎狱炎熔",
+    "aliases": [
+      "炎狱炎熔",
+      "Lava the Purgatory"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_489_serum",
+    "name": "蚀清",
+    "fullName": "蚀清",
+    "fullNameChinese": "蚀清",
+    "aliases": [
+      "蚀清",
+      "Corroserum"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_446_aroma",
+    "name": "阿罗玛",
+    "fullName": "阿罗玛",
+    "fullNameChinese": "阿罗玛",
+    "aliases": [
+      "阿罗玛",
+      "Aroma"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4013_kjera",
+    "name": "耶拉",
+    "fullName": "耶拉",
+    "fullNameChinese": "耶拉",
+    "aliases": [
+      "耶拉",
+      "Kjera"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4040_rockr",
+    "name": "洛洛",
+    "fullName": "洛洛",
+    "fullNameChinese": "洛洛",
+    "aliases": [
+      "洛洛",
+      "Rockrock"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4054_malist",
+    "name": "至简",
+    "fullName": "至简",
+    "fullNameChinese": "至简",
+    "aliases": [
+      "至简",
+      "Minimalist"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_499_kaitou",
+    "name": "折光",
+    "fullName": "折光",
+    "fullNameChinese": "折光",
+    "aliases": [
+      "折光",
+      "Diamante"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4081_warmy",
+    "name": "温米",
+    "fullName": "温米",
+    "fullNameChinese": "温米",
+    "aliases": [
+      "温米",
+      "Warmy"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4198_christ",
+    "name": "Miss.Christine",
+    "fullName": "Miss.Christine",
+    "fullNameChinese": "Miss.Christine",
+    "aliases": [
+      "Miss.Christine",
+      "Miss.Christine"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4164_tecno",
+    "name": "特克诺",
+    "fullName": "特克诺",
+    "fullNameChinese": "特克诺",
+    "aliases": [
+      "特克诺",
+      "Tecno"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_242_otter",
+    "name": "梅尔",
+    "fullName": "梅尔",
+    "fullNameChinese": "梅尔",
+    "aliases": [
+      "梅尔",
+      "Mayer"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_336_folivo",
+    "name": "稀音",
+    "fullName": "稀音",
+    "fullNameChinese": "稀音",
+    "aliases": [
+      "稀音",
+      "Scene"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4140_lasher",
+    "name": "衡沙",
+    "fullName": "衡沙",
+    "fullNameChinese": "衡沙",
+    "aliases": [
+      "衡沙",
+      "Sand Reckoner"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_108_silent",
+    "name": "赫默",
+    "fullName": "赫默",
+    "fullNameChinese": "赫默",
+    "aliases": [
+      "赫默",
+      "Silence"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_171_bldsk",
+    "name": "华法琳",
+    "fullName": "华法琳",
+    "fullNameChinese": "华法琳",
+    "aliases": [
+      "华法琳",
+      "Warfarin"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_345_folnic",
+    "name": "亚叶",
+    "fullName": "亚叶",
+    "fullNameChinese": "亚叶",
+    "aliases": [
+      "亚叶",
+      "Folinic"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4196_reckpr",
+    "name": "录武官",
+    "fullName": "录武官",
+    "fullNameChinese": "录武官",
+    "aliases": [
+      "录武官",
+      "Record Keeper"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_348_ceylon",
+    "name": "锡兰",
+    "fullName": "锡兰",
+    "fullNameChinese": "锡兰",
+    "aliases": [
+      "锡兰",
+      "Ceylon"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_436_whispr",
+    "name": "絮雨",
+    "fullName": "絮雨",
+    "fullNameChinese": "絮雨",
+    "aliases": [
+      "絮雨",
+      "Whisperain"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4173_nowell",
+    "name": "诺威尔",
+    "fullName": "诺威尔",
+    "fullNameChinese": "诺威尔",
+    "aliases": [
+      "诺威尔",
+      "Nowell"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_402_tuye",
+    "name": "图耶",
+    "fullName": "图耶",
+    "fullNameChinese": "图耶",
+    "aliases": [
+      "图耶",
+      "Tuye"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_473_mberry",
+    "name": "桑葚",
+    "fullName": "桑葚",
+    "fullNameChinese": "桑葚",
+    "aliases": [
+      "桑葚",
+      "Mulberry"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_449_glider",
+    "name": "蜜莓",
+    "fullName": "蜜莓",
+    "fullNameChinese": "蜜莓",
+    "aliases": [
+      "蜜莓",
+      "Honeyberry"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4114_harold",
+    "name": "哈洛德",
+    "fullName": "哈洛德",
+    "fullNameChinese": "哈洛德",
+    "aliases": [
+      "哈洛德",
+      "Harold"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_1024_hbisc2",
+    "name": "濯尘芙蓉",
+    "fullName": "濯尘芙蓉",
+    "fullNameChinese": "濯尘芙蓉",
+    "aliases": [
+      "濯尘芙蓉",
+      "Hibiscus the Purifier"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_494_vendla",
+    "name": "刺玫",
+    "fullName": "刺玫",
+    "fullNameChinese": "刺玫",
+    "aliases": [
+      "刺玫",
+      "Vendela"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4071_peper",
+    "name": "明椒",
+    "fullName": "明椒",
+    "fullNameChinese": "明椒",
+    "aliases": [
+      "明椒",
+      "Paprika"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4139_papyrs",
+    "name": "莎草",
+    "fullName": "莎草",
+    "fullNameChinese": "莎草",
+    "aliases": [
+      "莎草",
+      "Papyrus"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4224_turdus",
+    "name": "乌啾",
+    "fullName": "乌啾",
+    "fullNameChinese": "乌啾",
+    "aliases": [
+      "乌啾",
+      "Укусик"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4222_taraxa",
+    "name": "风絮",
+    "fullName": "风絮",
+    "fullNameChinese": "风絮",
+    "aliases": [
+      "风絮",
+      "Taraxacum"
+    ],
+    "className": "MEDIC",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_148_nearl",
+    "name": "临光",
+    "fullName": "临光",
+    "fullNameChinese": "临光",
+    "aliases": [
+      "临光",
+      "Nearl"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_226_hmau",
+    "name": "吽",
+    "fullName": "吽",
+    "fullNameChinese": "吽",
+    "aliases": [
+      "吽",
+      "Hung"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4109_baslin",
+    "name": "深律",
+    "fullName": "深律",
+    "fullNameChinese": "深律",
+    "aliases": [
+      "深律",
+      "Bassline"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4143_sensi",
+    "name": "森西",
+    "fullName": "森西",
+    "fullNameChinese": "森西",
+    "aliases": [
+      "森西",
+      "Senshi"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_144_red",
+    "name": "红",
+    "fullName": "红",
+    "fullNameChinese": "红",
+    "aliases": [
+      "红",
+      "Projekt Red"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_243_waaifu",
+    "name": "槐琥",
+    "fullName": "槐琥",
+    "fullNameChinese": "槐琥",
+    "aliases": [
+      "槐琥",
+      "Waai Fu"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_214_kafka",
+    "name": "卡夫卡",
+    "fullName": "卡夫卡",
+    "fullNameChinese": "卡夫卡",
+    "aliases": [
+      "卡夫卡",
+      "Kafka"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_455_nothin",
+    "name": "乌有",
+    "fullName": "乌有",
+    "fullNameChinese": "乌有",
+    "aliases": [
+      "乌有",
+      "Mr.Nothing"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4155_talr",
+    "name": "裁度",
+    "fullName": "裁度",
+    "fullNameChinese": "裁度",
+    "aliases": [
+      "裁度",
+      "Figurino"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_107_liskam",
+    "name": "雷蛇",
+    "fullName": "雷蛇",
+    "fullNameChinese": "雷蛇",
+    "aliases": [
+      "雷蛇",
+      "Liskarm"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4137_udflow",
+    "name": "深巡",
+    "fullName": "深巡",
+    "fullNameChinese": "深巡",
+    "aliases": [
+      "深巡",
+      "Underflow"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_201_moeshd",
+    "name": "可颂",
+    "fullName": "可颂",
+    "fullNameChinese": "可颂",
+    "aliases": [
+      "可颂",
+      "Croissant"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_325_bison",
+    "name": "拜松",
+    "fullName": "拜松",
+    "fullNameChinese": "拜松",
+    "aliases": [
+      "拜松",
+      "Bison"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_163_hpsts",
+    "name": "火神",
+    "fullName": "火神",
+    "fullNameChinese": "火神",
+    "aliases": [
+      "火神",
+      "Vulcan"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4207_branch",
+    "name": "折桠",
+    "fullName": "折桠",
+    "fullNameChinese": "折桠",
+    "aliases": [
+      "折桠",
+      "Веточки"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_378_asbest",
+    "name": "石棉",
+    "fullName": "石棉",
+    "fullNameChinese": "石棉",
+    "aliases": [
+      "石棉",
+      "Asbestos"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4025_aprot2",
+    "name": "暮落",
+    "fullName": "暮落",
+    "fullNameChinese": "暮落",
+    "aliases": [
+      "暮落",
+      "Shalem"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4047_pianst",
+    "name": "车尔尼",
+    "fullName": "车尔尼",
+    "fullNameChinese": "车尔尼",
+    "aliases": [
+      "车尔尼",
+      "Czerny"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_457_blitz",
+    "name": "闪击",
+    "fullName": "闪击",
+    "fullNameChinese": "闪击",
+    "aliases": [
+      "闪击",
+      "Blitz"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_304_zebra",
+    "name": "暴雨",
+    "fullName": "暴雨",
+    "fullNameChinese": "暴雨",
+    "aliases": [
+      "暴雨",
+      "Heavyrain"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_431_ashlok",
+    "name": "灰毫",
+    "fullName": "灰毫",
+    "fullNameChinese": "灰毫",
+    "aliases": [
+      "灰毫",
+      "Ashlock"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_493_firwhl",
+    "name": "火哨",
+    "fullName": "火哨",
+    "fullNameChinese": "火哨",
+    "aliases": [
+      "火哨",
+      "Firewhistle"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_422_aurora",
+    "name": "极光",
+    "fullName": "极光",
+    "fullNameChinese": "极光",
+    "aliases": [
+      "极光",
+      "Aurora"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_464_cement",
+    "name": "洋灰",
+    "fullName": "洋灰",
+    "fullNameChinese": "洋灰",
+    "aliases": [
+      "洋灰",
+      "Cement"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4148_philae",
+    "name": "菲莱",
+    "fullName": "菲莱",
+    "fullNameChinese": "菲莱",
+    "aliases": [
+      "菲莱",
+      "Philae"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4225_tanya",
+    "name": "裂响",
+    "fullName": "裂响",
+    "fullNameChinese": "裂响",
+    "aliases": [
+      "裂响",
+      "Crackborne"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_145_prove",
+    "name": "普罗旺斯",
+    "fullName": "普罗旺斯",
+    "fullNameChinese": "普罗旺斯",
+    "aliases": [
+      "普罗旺斯",
+      "Provence"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4006_melnte",
+    "name": "玫拉",
+    "fullName": "玫拉",
+    "fullNameChinese": "玫拉",
+    "aliases": [
+      "玫拉",
+      "Melanite"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_158_milu",
+    "name": "守林人",
+    "fullName": "守林人",
+    "fullNameChinese": "守林人",
+    "aliases": [
+      "守林人",
+      "Firewatch"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_218_cuttle",
+    "name": "安哲拉",
+    "fullName": "安哲拉",
+    "fullNameChinese": "安哲拉",
+    "aliases": [
+      "安哲拉",
+      "Andreana"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4014_lunacu",
+    "name": "子月",
+    "fullName": "子月",
+    "fullNameChinese": "子月",
+    "aliases": [
+      "子月",
+      "Lunacub"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_363_toddi",
+    "name": "熔泉",
+    "fullName": "熔泉",
+    "fullNameChinese": "熔泉",
+    "aliases": [
+      "熔泉",
+      "Toddifons"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4043_erato",
+    "name": "埃拉托",
+    "fullName": "埃拉托",
+    "fullNameChinese": "埃拉托",
+    "aliases": [
+      "埃拉托",
+      "Erato"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4221_ju",
+    "name": "矩",
+    "fullName": "矩",
+    "fullNameChinese": "矩",
+    "aliases": [
+      "矩",
+      "Ju"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_1027_greyy2",
+    "name": "承曦格雷伊",
+    "fullName": "承曦格雷伊",
+    "fullNameChinese": "承曦格雷伊",
+    "aliases": [
+      "承曦格雷伊",
+      "Greyy the Lightningbearer"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4104_coldst",
+    "name": "冰酿",
+    "fullName": "冰酿",
+    "fullNameChinese": "冰酿",
+    "aliases": [
+      "冰酿",
+      "Coldshot"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4211_snhunt",
+    "name": "雪猎",
+    "fullName": "雪猎",
+    "fullNameChinese": "雪猎",
+    "aliases": [
+      "雪猎",
+      "Snow Hunter"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4177_brigid",
+    "name": "水灯心",
+    "fullName": "水灯心",
+    "fullNameChinese": "水灯心",
+    "aliases": [
+      "水灯心",
+      "Brigid"
+    ],
+    "className": "SNIPER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4015_spuria",
+    "name": "空构",
+    "fullName": "空构",
+    "fullNameChinese": "空构",
+    "aliases": [
+      "空构",
+      "Spuria"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_173_slchan",
+    "name": "崖心",
+    "fullName": "崖心",
+    "fullNameChinese": "崖心",
+    "aliases": [
+      "崖心",
+      "Cliffheart"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_383_snsant",
+    "name": "雪雉",
+    "fullName": "雪雉",
+    "fullNameChinese": "雪雉",
+    "aliases": [
+      "雪雉",
+      "Snowsant"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4105_almond",
+    "name": "杏仁",
+    "fullName": "杏仁",
+    "fullNameChinese": "杏仁",
+    "aliases": [
+      "杏仁",
+      "Almond"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_174_slbell",
+    "name": "初雪",
+    "fullName": "初雪",
+    "fullNameChinese": "初雪",
+    "aliases": [
+      "初雪",
+      "Pramanix"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_254_vodfox",
+    "name": "巫恋",
+    "fullName": "巫恋",
+    "fullNameChinese": "巫恋",
+    "aliases": [
+      "巫恋",
+      "Shamare"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4079_haini",
+    "name": "海霓",
+    "fullName": "海霓",
+    "fullNameChinese": "海霓",
+    "aliases": [
+      "海霓",
+      "Lucilla"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_195_glassb",
+    "name": "真理",
+    "fullName": "真理",
+    "fullNameChinese": "真理",
+    "aliases": [
+      "真理",
+      "Истина"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_326_glacus",
+    "name": "格劳克斯",
+    "fullName": "格劳克斯",
+    "fullNameChinese": "格劳克斯",
+    "aliases": [
+      "格劳克斯",
+      "Glaucus"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4032_provs",
+    "name": "但书",
+    "fullName": "但书",
+    "fullNameChinese": "但书",
+    "aliases": [
+      "但书",
+      "Proviso"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4122_grabds",
+    "name": "小满",
+    "fullName": "小满",
+    "fullNameChinese": "小满",
+    "aliases": [
+      "小满",
+      "Grain Buds"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_433_windft",
+    "name": "掠风",
+    "fullName": "掠风",
+    "fullNameChinese": "掠风",
+    "aliases": [
+      "掠风",
+      "Windflit"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4162_cathy",
+    "name": "凯瑟琳",
+    "fullName": "凯瑟琳",
+    "fullNameChinese": "凯瑟琳",
+    "aliases": [
+      "凯瑟琳",
+      "Catherine"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4178_alanna",
+    "name": "阿兰娜",
+    "fullName": "阿兰娜",
+    "fullNameChinese": "阿兰娜",
+    "aliases": [
+      "阿兰娜",
+      "Alanna"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_101_sora",
+    "name": "空",
+    "fullName": "空",
+    "fullNameChinese": "空",
+    "aliases": [
+      "空",
+      "Sora"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4045_heidi",
+    "name": "海蒂",
+    "fullName": "海蒂",
+    "fullNameChinese": "海蒂",
+    "aliases": [
+      "海蒂",
+      "Heidi"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4184_dolris",
+    "name": "三角初华",
+    "fullName": "三角初华",
+    "fullNameChinese": "三角初华",
+    "aliases": [
+      "三角初华",
+      "Misumi Uika"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_343_tknogi",
+    "name": "月禾",
+    "fullName": "月禾",
+    "fullNameChinese": "月禾",
+    "aliases": [
+      "月禾",
+      "Tsukinogi"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4019_ncdeer",
+    "name": "九色鹿",
+    "fullName": "九色鹿",
+    "fullNameChinese": "九色鹿",
+    "aliases": [
+      "九色鹿",
+      "Nine-Colored Deer"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_492_quercu",
+    "name": "夏栎",
+    "fullName": "夏栎",
+    "fullNameChinese": "夏栎",
+    "aliases": [
+      "夏栎",
+      "Quercus"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4172_xingzh",
+    "name": "行箸",
+    "fullName": "行箸",
+    "fullNameChinese": "行箸",
+    "aliases": [
+      "行箸",
+      "Xingzhu"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_1022_flwr2",
+    "name": "撷英调香师",
+    "fullName": "撷英调香师",
+    "fullNameChinese": "撷英调香师",
+    "aliases": [
+      "撷英调香师",
+      "Perfumer the Distilled"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4102_threye",
+    "name": "凛视",
+    "fullName": "凛视",
+    "fullNameChinese": "凛视",
+    "aliases": [
+      "凛视",
+      "Valarqvin"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_487_bobb",
+    "name": "波卜",
+    "fullName": "波卜",
+    "fullNameChinese": "波卜",
+    "aliases": [
+      "波卜",
+      "Bobbing"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4223_botany",
+    "name": "伯塔尼",
+    "fullName": "伯塔尼",
+    "fullNameChinese": "伯塔尼",
+    "aliases": [
+      "伯塔尼",
+      "Ботани"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4234_pedro",
+    "name": "佩德洛",
+    "fullName": "佩德洛",
+    "fullNameChinese": "佩德洛",
+    "aliases": [
+      "佩德洛",
+      "Pedro"
+    ],
+    "className": "SUPPORT",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_215_mantic",
+    "name": "狮蝎",
+    "fullName": "狮蝎",
+    "fullNameChinese": "狮蝎",
+    "aliases": [
+      "狮蝎",
+      "Manticore"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_478_kirara",
+    "name": "绮良",
+    "fullName": "绮良",
+    "fullNameChinese": "绮良",
+    "aliases": [
+      "绮良",
+      "Kirara"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4186_tmoris",
+    "name": "八幡海铃",
+    "fullName": "八幡海铃",
+    "fullNameChinese": "八幡海铃",
+    "aliases": [
+      "八幡海铃",
+      "Yahata Umiri"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_241_panda",
+    "name": "食铁兽",
+    "fullName": "食铁兽",
+    "fullNameChinese": "食铁兽",
+    "aliases": [
+      "食铁兽",
+      "FEater"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4036_forcer",
+    "name": "见行者",
+    "fullName": "见行者",
+    "fullNameChinese": "见行者",
+    "aliases": [
+      "见行者",
+      "Enforcer"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_451_robin",
+    "name": "罗宾",
+    "fullName": "罗宾",
+    "fullNameChinese": "罗宾",
+    "aliases": [
+      "罗宾",
+      "Robin"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_458_rfrost",
+    "name": "霜华",
+    "fullName": "霜华",
+    "fullNameChinese": "霜华",
+    "aliases": [
+      "霜华",
+      "Frost"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4171_wulfen",
+    "name": "钼铅",
+    "fullName": "钼铅",
+    "fullNameChinese": "钼铅",
+    "aliases": [
+      "钼铅",
+      "Wulfenite"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_369_bena",
+    "name": "贝娜",
+    "fullName": "贝娜",
+    "fullNameChinese": "贝娜",
+    "aliases": [
+      "贝娜",
+      "Bena"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4016_kazema",
+    "name": "风丸",
+    "fullName": "风丸",
+    "fullNameChinese": "风丸",
+    "aliases": [
+      "风丸",
+      "Kazemaru"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4124_iana",
+    "name": "双月",
+    "fullName": "双月",
+    "fullNameChinese": "双月",
+    "aliases": [
+      "双月",
+      "Iana"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4183_mortis",
+    "name": "若叶睦",
+    "fullName": "若叶睦",
+    "fullNameChinese": "若叶睦",
+    "aliases": [
+      "若叶睦",
+      "Wakaba Mutsumi"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4151_tinman",
+    "name": "锡人",
+    "fullName": "锡人",
+    "fullNameChinese": "锡人",
+    "aliases": [
+      "锡人",
+      "Tin Man"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_4191_tippi",
+    "name": "蒂比",
+    "fullName": "蒂比",
+    "fullNameChinese": "蒂比",
+    "aliases": [
+      "蒂比",
+      "Tippi"
+    ],
+    "className": "SPECIAL",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_103_angel",
+    "name": "能天使",
+    "fullName": "能天使",
+    "fullNameChinese": "能天使",
+    "aliases": [
+      "能天使",
+      "Exusiai"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_332_archet",
+    "name": "空弦",
+    "fullName": "空弦",
+    "fullNameChinese": "空弦",
+    "aliases": [
+      "空弦",
+      "Archetto"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_456_ash",
+    "name": "灰烬",
+    "fullName": "灰烬",
+    "fullNameChinese": "灰烬",
+    "aliases": [
+      "灰烬",
+      "Ash"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_340_shwaz",
+    "name": "黑",
+    "fullName": "黑",
+    "fullNameChinese": "黑",
+    "aliases": [
+      "黑",
+      "Schwarz"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4055_bgsnow",
+    "name": "鸿雪",
+    "fullName": "鸿雪",
+    "fullNameChinese": "鸿雪",
+    "aliases": [
+      "鸿雪",
+      "Позёмка"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1048_orchd2",
+    "name": "焰狐龙梓兰",
+    "fullName": "焰狐龙梓兰",
+    "fullNameChinese": "焰狐龙梓兰",
+    "aliases": [
+      "焰狐龙梓兰",
+      "Violet Mizutsune Orchid"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_430_fartth",
+    "name": "远牙",
+    "fullName": "远牙",
+    "fullNameChinese": "远牙",
+    "aliases": [
+      "远牙",
+      "Fartooth"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4193_lemuen",
+    "name": "蕾缪安",
+    "fullName": "蕾缪安",
+    "fullNameChinese": "蕾缪安",
+    "aliases": [
+      "蕾缪安",
+      "Lemuen"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_113_cqbw",
+    "name": "W",
+    "fullName": "W",
+    "fullNameChinese": "W",
+    "aliases": [
+      "W",
+      "W"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_300_phenxi",
+    "name": "菲亚梅塔",
+    "fullName": "菲亚梅塔",
+    "fullNameChinese": "菲亚梅塔",
+    "aliases": [
+      "菲亚梅塔",
+      "Fiammetta"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_197_poca",
+    "name": "早露",
+    "fullName": "早露",
+    "fullNameChinese": "早露",
+    "aliases": [
+      "早露",
+      "Роса"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_2012_typhon",
+    "name": "提丰",
+    "fullName": "提丰",
+    "fullNameChinese": "提丰",
+    "aliases": [
+      "提丰",
+      "Typhon"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_391_rosmon",
+    "name": "迷迭香",
+    "fullName": "迷迭香",
+    "fullNameChinese": "迷迭香",
+    "aliases": [
+      "迷迭香",
+      "Rosmontis"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1035_wisdel",
+    "name": "维什戴尔",
+    "fullName": "维什戴尔",
+    "fullNameChinese": "维什戴尔",
+    "aliases": [
+      "维什戴尔",
+      "Wiš'adel"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1013_chen2",
+    "name": "假日威龙陈",
+    "fullName": "假日威龙陈",
+    "fullNameChinese": "假日威龙陈",
+    "aliases": [
+      "假日威龙陈",
+      "Ch'en the Holungday"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4117_ray",
+    "name": "莱伊",
+    "fullName": "莱伊",
+    "fullNameChinese": "莱伊",
+    "aliases": [
+      "莱伊",
+      "Ray"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4138_narant",
+    "name": "娜仁图亚",
+    "fullName": "娜仁图亚",
+    "fullNameChinese": "娜仁图亚",
+    "aliases": [
+      "娜仁图亚",
+      "Narantuya"
+    ],
+    "className": "SNIPER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_112_siege",
+    "name": "推进之王",
+    "fullName": "推进之王",
+    "fullNameChinese": "推进之王",
+    "aliases": [
+      "推进之王",
+      "Siege"
+    ],
+    "className": "PIONEER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_222_bpipe",
+    "name": "风笛",
+    "fullName": "风笛",
+    "fullNameChinese": "风笛",
+    "aliases": [
+      "风笛",
+      "Bagpipe"
+    ],
+    "className": "PIONEER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_362_saga",
+    "name": "嵯峨",
+    "fullName": "嵯峨",
+    "fullNameChinese": "嵯峨",
+    "aliases": [
+      "嵯峨",
+      "Saga"
+    ],
+    "className": "PIONEER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4026_vulpis",
+    "name": "忍冬",
+    "fullName": "忍冬",
+    "fullNameChinese": "忍冬",
+    "aliases": [
+      "忍冬",
+      "Vulpisfoglia"
+    ],
+    "className": "PIONEER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_479_sleach",
+    "name": "琴柳",
+    "fullName": "琴柳",
+    "fullNameChinese": "琴柳",
+    "aliases": [
+      "琴柳",
+      "Saileach"
+    ],
+    "className": "PIONEER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_420_flamtl",
+    "name": "焰尾",
+    "fullName": "焰尾",
+    "fullNameChinese": "焰尾",
+    "aliases": [
+      "焰尾",
+      "Flametail"
+    ],
+    "className": "PIONEER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_427_vigil",
+    "name": "伺夜",
+    "fullName": "伺夜",
+    "fullNameChinese": "伺夜",
+    "aliases": [
+      "伺夜",
+      "Vigil"
+    ],
+    "className": "PIONEER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_249_mlyss",
+    "name": "缪尔赛思",
+    "fullName": "缪尔赛思",
+    "fullNameChinese": "缪尔赛思",
+    "aliases": [
+      "缪尔赛思",
+      "Muelsyse"
+    ],
+    "className": "PIONEER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4228_closur",
+    "name": "可露希尔",
+    "fullName": "可露希尔",
+    "fullNameChinese": "可露希尔",
+    "aliases": [
+      "可露希尔",
+      "Closure"
+    ],
+    "className": "PIONEER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1045_svash2",
+    "name": "凛御银灰",
+    "fullName": "凛御银灰",
+    "fullNameChinese": "凛御银灰",
+    "aliases": [
+      "凛御银灰",
+      "SilverAsh the Reignfrost"
+    ],
+    "className": "PIONEER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4087_ines",
+    "name": "伊内丝",
+    "fullName": "伊内丝",
+    "fullNameChinese": "伊内丝",
+    "aliases": [
+      "伊内丝",
+      "Ines"
+    ],
+    "className": "PIONEER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_134_ifrit",
+    "name": "伊芙利特",
+    "fullName": "伊芙利特",
+    "fullNameChinese": "伊芙利特",
+    "aliases": [
+      "伊芙利特",
+      "Ifrit"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4229_aphris",
+    "name": "谬因",
+    "fullName": "谬因",
+    "fullNameChinese": "谬因",
+    "aliases": [
+      "谬因",
+      "Aphrissa"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_213_mostma",
+    "name": "莫斯提马",
+    "fullName": "莫斯提马",
+    "fullNameChinese": "莫斯提马",
+    "aliases": [
+      "莫斯提马",
+      "Mostima"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_180_amgoat",
+    "name": "艾雅法拉",
+    "fullName": "艾雅法拉",
+    "fullNameChinese": "艾雅法拉",
+    "aliases": [
+      "艾雅法拉",
+      "Eyjafjalla"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_2013_cerber",
+    "name": "刻俄柏",
+    "fullName": "刻俄柏",
+    "fullNameChinese": "刻俄柏",
+    "aliases": [
+      "刻俄柏",
+      "Ceobe"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4027_heyak",
+    "name": "霍尔海雅",
+    "fullName": "霍尔海雅",
+    "fullNameChinese": "霍尔海雅",
+    "aliases": [
+      "霍尔海雅",
+      "Ho'olheyak"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4133_logos",
+    "name": "逻各斯",
+    "fullName": "逻各斯",
+    "fullNameChinese": "逻各斯",
+    "aliases": [
+      "逻各斯",
+      "Logos"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_2015_dusk",
+    "name": "夕",
+    "fullName": "夕",
+    "fullNameChinese": "夕",
+    "aliases": [
+      "夕",
+      "Dusk"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4141_marcil",
+    "name": "玛露西尔",
+    "fullName": "玛露西尔",
+    "fullNameChinese": "玛露西尔",
+    "aliases": [
+      "玛露西尔",
+      "Marcille"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_472_pasngr",
+    "name": "异客",
+    "fullName": "异客",
+    "fullNameChinese": "异客",
+    "aliases": [
+      "异客",
+      "Passenger"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_426_billro",
+    "name": "卡涅利安",
+    "fullName": "卡涅利安",
+    "fullNameChinese": "卡涅利安",
+    "aliases": [
+      "卡涅利安",
+      "Carnelian"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4080_lin",
+    "name": "林",
+    "fullName": "林",
+    "fullNameChinese": "林",
+    "aliases": [
+      "林",
+      "Lin"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1046_sbell2",
+    "name": "圣聆初雪",
+    "fullName": "圣聆初雪",
+    "fullNameChinese": "圣聆初雪",
+    "aliases": [
+      "圣聆初雪",
+      "Pramanix the Prerita"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_377_gdglow",
+    "name": "澄闪",
+    "fullName": "澄闪",
+    "fullNameChinese": "澄闪",
+    "aliases": [
+      "澄闪",
+      "Goldenglow"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1038_whitw2",
+    "name": "荒芜拉普兰德",
+    "fullName": "荒芜拉普兰德",
+    "fullNameChinese": "荒芜拉普兰德",
+    "aliases": [
+      "荒芜拉普兰德",
+      "Lappland the Decadenza"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4046_ebnhlz",
+    "name": "黑键",
+    "fullName": "黑键",
+    "fullNameChinese": "黑键",
+    "aliases": [
+      "黑键",
+      "Ebenholz"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4226_veen",
+    "name": "维伊",
+    "fullName": "维伊",
+    "fullNameChinese": "维伊",
+    "aliases": [
+      "维伊",
+      "Вий"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4146_nymph",
+    "name": "妮芙",
+    "fullName": "妮芙",
+    "fullNameChinese": "妮芙",
+    "aliases": [
+      "妮芙",
+      "Nymph"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1040_blaze2",
+    "name": "烛煌",
+    "fullName": "烛煌",
+    "fullNameChinese": "烛煌",
+    "aliases": [
+      "烛煌",
+      "Blaze the Igniting Spark"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4204_mantra",
+    "name": "真言",
+    "fullName": "真言",
+    "fullNameChinese": "真言",
+    "aliases": [
+      "真言",
+      "Mantra"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_450_necras",
+    "name": "死芒",
+    "fullName": "死芒",
+    "fullNameChinese": "死芒",
+    "aliases": [
+      "死芒",
+      "Necrass"
+    ],
+    "className": "CASTER",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_206_gnosis",
+    "name": "灵知",
+    "fullName": "灵知",
+    "fullNameChinese": "灵知",
+    "aliases": [
+      "灵知",
+      "Gnosis"
+    ],
+    "className": "SUPPORT",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_291_aglina",
+    "name": "安洁莉娜",
+    "fullName": "安洁莉娜",
+    "fullNameChinese": "安洁莉娜",
+    "aliases": [
+      "安洁莉娜",
+      "Angelina"
+    ],
+    "className": "SUPPORT",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_358_lisa",
+    "name": "铃兰",
+    "fullName": "铃兰",
+    "fullNameChinese": "铃兰",
+    "aliases": [
+      "铃兰",
+      "Suzuran"
+    ],
+    "className": "SUPPORT",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1047_halo2",
+    "name": "溯光星源",
+    "fullName": "溯光星源",
+    "fullNameChinese": "溯光星源",
+    "aliases": [
+      "溯光星源",
+      "Astgenne the Lightchaser"
+    ],
+    "className": "SUPPORT",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_248_mgllan",
+    "name": "麦哲伦",
+    "fullName": "麦哲伦",
+    "fullNameChinese": "麦哲伦",
+    "aliases": [
+      "麦哲伦",
+      "Magallan"
+    ],
+    "className": "SUPPORT",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4195_radian",
+    "name": "电弧",
+    "fullName": "电弧",
+    "fullNameChinese": "电弧",
+    "aliases": [
+      "电弧",
+      "Raidian"
+    ],
+    "className": "SUPPORT",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1012_skadi2",
+    "name": "浊心斯卡蒂",
+    "fullName": "浊心斯卡蒂",
+    "fullNameChinese": "浊心斯卡蒂",
+    "aliases": [
+      "浊心斯卡蒂",
+      "Skadi the Corrupting Heart"
+    ],
+    "className": "SUPPORT",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4134_cetsyr",
+    "name": "魔王",
+    "fullName": "魔王",
+    "fullNameChinese": "魔王",
+    "aliases": [
+      "魔王",
+      "Civilight Eterna"
+    ],
+    "className": "SUPPORT",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1031_slent2",
+    "name": "淬羽赫默",
+    "fullName": "淬羽赫默",
+    "fullNameChinese": "淬羽赫默",
+    "aliases": [
+      "淬羽赫默",
+      "Silence the Paradigmatic"
+    ],
+    "className": "SUPPORT",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4202_haruka",
+    "name": "遥",
+    "fullName": "遥",
+    "fullNameChinese": "遥",
+    "aliases": [
+      "遥",
+      "Haruka"
+    ],
+    "className": "SUPPORT",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_2023_ling",
+    "name": "令",
+    "fullName": "令",
+    "fullNameChinese": "令",
+    "aliases": [
+      "令",
+      "Ling"
+    ],
+    "className": "SUPPORT",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4072_ironmn",
+    "name": "白铁",
+    "fullName": "白铁",
+    "fullNameChinese": "白铁",
+    "aliases": [
+      "白铁",
+      "Stainless"
+    ],
+    "className": "SUPPORT",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4212_nasti",
+    "name": "娜斯提",
+    "fullName": "娜斯提",
+    "fullNameChinese": "娜斯提",
+    "aliases": [
+      "娜斯提",
+      "Nasti"
+    ],
+    "className": "SUPPORT",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_245_cello",
+    "name": "塑心",
+    "fullName": "塑心",
+    "fullNameChinese": "塑心",
+    "aliases": [
+      "塑心",
+      "Virtuosa"
+    ],
+    "className": "SUPPORT",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1042_phatm2",
+    "name": "酒神",
+    "fullName": "酒神",
+    "fullNameChinese": "酒神",
+    "aliases": [
+      "酒神",
+      "Tragodia"
+    ],
+    "className": "SUPPORT",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_250_phatom",
+    "name": "傀影",
+    "fullName": "傀影",
+    "fullNameChinese": "傀影",
+    "aliases": [
+      "傀影",
+      "Phantom"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1028_texas2",
+    "name": "缄默德克萨斯",
+    "fullName": "缄默德克萨斯",
+    "fullNameChinese": "缄默德克萨斯",
+    "aliases": [
+      "缄默德克萨斯",
+      "Texas the Omertosa"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1029_yato2",
+    "name": "麒麟R夜刀",
+    "fullName": "麒麟R夜刀",
+    "fullNameChinese": "麒麟R夜刀",
+    "aliases": [
+      "麒麟R夜刀",
+      "Kirin R Yato"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1502_crosly",
+    "name": "弑君者",
+    "fullName": "弑君者",
+    "fullNameChinese": "弑君者",
+    "aliases": [
+      "弑君者",
+      "Crownslayer"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_322_lmlee",
+    "name": "老鲤",
+    "fullName": "老鲤",
+    "fullNameChinese": "老鲤",
+    "aliases": [
+      "老鲤",
+      "Lee"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1033_swire2",
+    "name": "琳琅诗怀雅",
+    "fullName": "琳琅诗怀雅",
+    "fullNameChinese": "琳琅诗怀雅",
+    "aliases": [
+      "琳琅诗怀雅",
+      "Swire the Elegant Wit"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_400_weedy",
+    "name": "温蒂",
+    "fullName": "温蒂",
+    "fullNameChinese": "温蒂",
+    "aliases": [
+      "温蒂",
+      "Weedy"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_225_haak",
+    "name": "阿",
+    "fullName": "阿",
+    "fullNameChinese": "阿",
+    "aliases": [
+      "阿",
+      "Aak"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1041_angel2",
+    "name": "新约能天使",
+    "fullName": "新约能天使",
+    "fullNameChinese": "新约能天使",
+    "aliases": [
+      "新约能天使",
+      "Exusiai the New Covenant"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_474_glady",
+    "name": "歌蕾蒂娅",
+    "fullName": "歌蕾蒂娅",
+    "fullNameChinese": "歌蕾蒂娅",
+    "aliases": [
+      "歌蕾蒂娅",
+      "Gladiia"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_437_mizuki",
+    "name": "水月",
+    "fullName": "水月",
+    "fullNameChinese": "水月",
+    "aliases": [
+      "水月",
+      "Mizuki"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4132_ascln",
+    "name": "阿斯卡纶",
+    "fullName": "阿斯卡纶",
+    "fullNameChinese": "阿斯卡纶",
+    "aliases": [
+      "阿斯卡纶",
+      "Ascalon"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1023_ghost2",
+    "name": "归溟幽灵鲨",
+    "fullName": "归溟幽灵鲨",
+    "fullNameChinese": "归溟幽灵鲨",
+    "aliases": [
+      "归溟幽灵鲨",
+      "Specter the Unchained"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4048_doroth",
+    "name": "多萝西",
+    "fullName": "多萝西",
+    "fullNameChinese": "多萝西",
+    "aliases": [
+      "多萝西",
+      "Dorothy"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4123_ela",
+    "name": "艾拉",
+    "fullName": "艾拉",
+    "fullNameChinese": "艾拉",
+    "aliases": [
+      "艾拉",
+      "Ela"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_2027_wang",
+    "name": "望",
+    "fullName": "望",
+    "fullNameChinese": "望",
+    "aliases": [
+      "望",
+      "Wang"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1039_thorn2",
+    "name": "引星棘刺",
+    "fullName": "引星棘刺",
+    "fullNameChinese": "引星棘刺",
+    "aliases": [
+      "引星棘刺",
+      "Thorns the Lodestar"
+    ],
+    "className": "SPECIAL",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_147_shining",
+    "name": "闪灵",
+    "fullName": "闪灵",
+    "fullNameChinese": "闪灵",
+    "aliases": [
+      "闪灵",
+      "Shining"
+    ],
+    "className": "MEDIC",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_179_cgbird",
+    "name": "夜莺",
+    "fullName": "夜莺",
+    "fullNameChinese": "夜莺",
+    "aliases": [
+      "夜莺",
+      "Nightingale"
+    ],
+    "className": "MEDIC",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_003_kalts",
+    "name": "凯尔希",
+    "fullName": "凯尔希",
+    "fullNameChinese": "凯尔希",
+    "aliases": [
+      "凯尔希",
+      "Kal'tsit"
+    ],
+    "className": "MEDIC",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4042_lumen",
+    "name": "流明",
+    "fullName": "流明",
+    "fullNameChinese": "流明",
+    "aliases": [
+      "流明",
+      "Lumen"
+    ],
+    "className": "MEDIC",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1016_agoat2",
+    "name": "纯烬艾雅法拉",
+    "fullName": "纯烬艾雅法拉",
+    "fullNameChinese": "纯烬艾雅法拉",
+    "aliases": [
+      "纯烬艾雅法拉",
+      "Eyjafjalla the Hvít Aska"
+    ],
+    "className": "MEDIC",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1020_reed2",
+    "name": "焰影苇草",
+    "fullName": "焰影苇草",
+    "fullNameChinese": "焰影苇草",
+    "aliases": [
+      "焰影苇草",
+      "Reed The Flame Shadow"
+    ],
+    "className": "MEDIC",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4056_titi",
+    "name": "缇缇",
+    "fullName": "缇缇",
+    "fullNameChinese": "缇缇",
+    "aliases": [
+      "缇缇",
+      "Titi"
+    ],
+    "className": "MEDIC",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4179_monstr",
+    "name": "Mon3tr",
+    "fullName": "Mon3tr",
+    "fullNameChinese": "Mon3tr",
+    "aliases": [
+      "Mon3tr",
+      "Mon3tr"
+    ],
+    "className": "MEDIC",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1052_kalts2",
+    "name": "凯尔希·思衡托",
+    "fullName": "凯尔希·思衡托",
+    "fullNameChinese": "凯尔希·思衡托",
+    "aliases": [
+      "凯尔希·思衡托",
+      "Kal'tsit·Esperanta"
+    ],
+    "className": "MEDIC",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_136_hsguma",
+    "name": "星熊",
+    "fullName": "星熊",
+    "fullNameChinese": "星熊",
+    "aliases": [
+      "星熊",
+      "Hoshiguma"
+    ],
+    "className": "TANK",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_202_demkni",
+    "name": "塞雷娅",
+    "fullName": "塞雷娅",
+    "fullNameChinese": "塞雷娅",
+    "aliases": [
+      "塞雷娅",
+      "Saria"
+    ],
+    "className": "TANK",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_423_blemsh",
+    "name": "瑕光",
+    "fullName": "瑕光",
+    "fullNameChinese": "瑕光",
+    "aliases": [
+      "瑕光",
+      "Blemishine"
+    ],
+    "className": "TANK",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_2025_shu",
+    "name": "黍",
+    "fullName": "黍",
+    "fullNameChinese": "黍",
+    "aliases": [
+      "黍",
+      "Shu"
+    ],
+    "className": "TANK",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_2014_nian",
+    "name": "年",
+    "fullName": "年",
+    "fullNameChinese": "年",
+    "aliases": [
+      "年",
+      "Nian"
+    ],
+    "className": "TANK",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_311_mudrok",
+    "name": "泥岩",
+    "fullName": "泥岩",
+    "fullNameChinese": "泥岩",
+    "aliases": [
+      "泥岩",
+      "Mudrock"
+    ],
+    "className": "TANK",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4065_judge",
+    "name": "斥罪",
+    "fullName": "斥罪",
+    "fullNameChinese": "斥罪",
+    "aliases": [
+      "斥罪",
+      "Penance"
+    ],
+    "className": "TANK",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_416_zumama",
+    "name": "森蚺",
+    "fullName": "森蚺",
+    "fullNameChinese": "森蚺",
+    "aliases": [
+      "森蚺",
+      "Eunectes"
+    ],
+    "className": "TANK",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4039_horn",
+    "name": "号角",
+    "fullName": "号角",
+    "fullNameChinese": "号角",
+    "aliases": [
+      "号角",
+      "Horn"
+    ],
+    "className": "TANK",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1034_jesca2",
+    "name": "涤火杰西卡",
+    "fullName": "涤火杰西卡",
+    "fullNameChinese": "涤火杰西卡",
+    "aliases": [
+      "涤火杰西卡",
+      "Jessica the Liberated"
+    ],
+    "className": "TANK",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4194_rmixer",
+    "name": "信仰搅拌机",
+    "fullName": "信仰搅拌机",
+    "fullNameChinese": "信仰搅拌机",
+    "aliases": [
+      "信仰搅拌机",
+      "Sankta Miksaparato"
+    ],
+    "className": "TANK",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_2026_yu",
+    "name": "余",
+    "fullName": "余",
+    "fullNameChinese": "余",
+    "aliases": [
+      "余",
+      "Yu"
+    ],
+    "className": "TANK",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1044_hsgma2",
+    "name": "斩业星熊",
+    "fullName": "斩业星熊",
+    "fullNameChinese": "斩业星熊",
+    "aliases": [
+      "斩业星熊",
+      "Hoshiguma the Breacher"
+    ],
+    "className": "TANK",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_264_f12yin",
+    "name": "山",
+    "fullName": "山",
+    "fullNameChinese": "山",
+    "aliases": [
+      "山",
+      "Mountain"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_2024_chyue",
+    "name": "重岳",
+    "fullName": "重岳",
+    "fullNameChinese": "重岳",
+    "aliases": [
+      "重岳",
+      "Chongyue"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4037_demetr",
+    "name": "贝洛内",
+    "fullName": "贝洛内",
+    "fullNameChinese": "贝洛内",
+    "aliases": [
+      "贝洛内",
+      "Bellone"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_172_svrash",
+    "name": "银灰",
+    "fullName": "银灰",
+    "fullNameChinese": "银灰",
+    "aliases": [
+      "银灰",
+      "SilverAsh"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_293_thorns",
+    "name": "棘刺",
+    "fullName": "棘刺",
+    "fullNameChinese": "棘刺",
+    "aliases": [
+      "棘刺",
+      "Thorns"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4082_qiubai",
+    "name": "仇白",
+    "fullName": "仇白",
+    "fullNameChinese": "仇白",
+    "aliases": [
+      "仇白",
+      "Qiubai"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4182_oblvns",
+    "name": "丰川祥子",
+    "fullName": "丰川祥子",
+    "fullNameChinese": "丰川祥子",
+    "aliases": [
+      "丰川祥子",
+      "Togawa Sakiko"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4088_hodrer",
+    "name": "赫德雷",
+    "fullName": "赫德雷",
+    "fullNameChinese": "赫德雷",
+    "aliases": [
+      "赫德雷",
+      "Hoederer"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4145_ulpia",
+    "name": "乌尔比安",
+    "fullName": "乌尔比安",
+    "fullNameChinese": "乌尔比安",
+    "aliases": [
+      "乌尔比安",
+      "Ulpianus"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4058_pepe",
+    "name": "佩佩",
+    "fullName": "佩佩",
+    "fullNameChinese": "佩佩",
+    "aliases": [
+      "佩佩",
+      "Pepe"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1051_headb2",
+    "name": "怒潮凛冬",
+    "fullName": "怒潮凛冬",
+    "fullNameChinese": "怒潮凛冬",
+    "aliases": [
+      "怒潮凛冬",
+      "Zima the Raging Tide"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_010_chen",
+    "name": "陈",
+    "fullName": "陈",
+    "fullNameChinese": "陈",
+    "aliases": [
+      "陈",
+      "Ch'en"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4009_irene",
+    "name": "艾丽妮",
+    "fullName": "艾丽妮",
+    "fullNameChinese": "艾丽妮",
+    "aliases": [
+      "艾丽妮",
+      "Irene"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4116_blkkgt",
+    "name": "锏",
+    "fullName": "锏",
+    "fullNameChinese": "锏",
+    "aliases": [
+      "锏",
+      "Degenbrecher"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_017_huang",
+    "name": "煌",
+    "fullName": "煌",
+    "fullNameChinese": "煌",
+    "aliases": [
+      "煌",
+      "Blaze"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1026_gvial2",
+    "name": "百炼嘉维尔",
+    "fullName": "百炼嘉维尔",
+    "fullNameChinese": "百炼嘉维尔",
+    "aliases": [
+      "百炼嘉维尔",
+      "Gavial the Invincible"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_350_surtr",
+    "name": "史尔特尔",
+    "fullName": "史尔特尔",
+    "fullNameChinese": "史尔特尔",
+    "aliases": [
+      "史尔特尔",
+      "Surtr"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4098_vvana",
+    "name": "薇薇安娜",
+    "fullName": "薇薇安娜",
+    "fullNameChinese": "薇薇安娜",
+    "aliases": [
+      "薇薇安娜",
+      "Viviana"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1019_siege2",
+    "name": "维娜·维多利亚",
+    "fullName": "维娜·维多利亚",
+    "fullNameChinese": "维娜·维多利亚",
+    "aliases": [
+      "维娜·维多利亚",
+      "Vina Victoria"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1050_chen3",
+    "name": "赤刃明霄陈",
+    "fullName": "赤刃明霄陈",
+    "fullNameChinese": "赤刃明霄陈",
+    "aliases": [
+      "赤刃明霄陈",
+      "Ch'en the Dawnstreak"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_188_helage",
+    "name": "赫拉格",
+    "fullName": "赫拉格",
+    "fullNameChinese": "赫拉格",
+    "aliases": [
+      "赫拉格",
+      "Hellagur"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4121_zuole",
+    "name": "左乐",
+    "fullName": "左乐",
+    "fullNameChinese": "左乐",
+    "aliases": [
+      "左乐",
+      "Zuo Le"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_485_pallas",
+    "name": "帕拉斯",
+    "fullName": "帕拉斯",
+    "fullNameChinese": "帕拉斯",
+    "aliases": [
+      "帕拉斯",
+      "Pallas"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1014_nearl2",
+    "name": "耀骑士临光",
+    "fullName": "耀骑士临光",
+    "fullNameChinese": "耀骑士临光",
+    "aliases": [
+      "耀骑士临光",
+      "Nearl the Radiant Knight"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4011_lessng",
+    "name": "止颂",
+    "fullName": "止颂",
+    "fullNameChinese": "止颂",
+    "aliases": [
+      "止颂",
+      "Lessing"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1032_excu2",
+    "name": "圣约送葬人",
+    "fullName": "圣约送葬人",
+    "fullNameChinese": "圣约送葬人",
+    "aliases": [
+      "圣约送葬人",
+      "Executor the Ex Foedere"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4010_etlchi",
+    "name": "隐德来希",
+    "fullName": "隐德来希",
+    "fullNameChinese": "隐德来希",
+    "aliases": [
+      "隐德来希",
+      "Entelechia"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4064_mlynar",
+    "name": "玛恩纳",
+    "fullName": "玛恩纳",
+    "fullNameChinese": "玛恩纳",
+    "aliases": [
+      "玛恩纳",
+      "Młynar"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_1043_leizi2",
+    "name": "司霆惊蛰",
+    "fullName": "司霆惊蛰",
+    "fullNameChinese": "司霆惊蛰",
+    "aliases": [
+      "司霆惊蛰",
+      "Leizi the Thunderbringer"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  },
+  {
+    "characterId": "char_4214_cairn",
+    "name": "响石",
+    "fullName": "响石",
+    "fullNameChinese": "响石",
+    "aliases": [
+      "响石",
+      "Cairn"
+    ],
+    "className": "TANK",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_230_savage",
+    "name": "暴行",
+    "fullName": "暴行",
+    "fullNameChinese": "暴行",
+    "aliases": [
+      "暴行",
+      "Savage"
+    ],
+    "className": "WARRIOR",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_282_catap",
+    "name": "空爆",
+    "fullName": "空爆",
+    "fullNameChinese": "空爆",
+    "aliases": [
+      "空爆",
+      "Catapult"
+    ],
+    "className": "SNIPER",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_283_midn",
+    "name": "月见夜",
+    "fullName": "月见夜",
+    "fullNameChinese": "月见夜",
+    "aliases": [
+      "月见夜",
+      "Midnight"
+    ],
+    "className": "WARRIOR",
+    "rarity": 3
+  },
+  {
+    "characterId": "char_137_brownb",
+    "name": "猎蜂",
+    "fullName": "猎蜂",
+    "fullNameChinese": "猎蜂",
+    "aliases": [
+      "猎蜂",
+      "Beehunter"
+    ],
+    "className": "WARRIOR",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_347_jaksel",
+    "name": "杰克",
+    "fullName": "杰克",
+    "fullNameChinese": "杰克",
+    "aliases": [
+      "杰克",
+      "Jackie"
+    ],
+    "className": "WARRIOR",
+    "rarity": 4
+  },
+  {
+    "characterId": "char_164_nightm",
+    "name": "夜魔",
+    "fullName": "夜魔",
+    "fullNameChinese": "夜魔",
+    "aliases": [
+      "夜魔",
+      "Nightmare"
+    ],
+    "className": "CASTER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_220_grani",
+    "name": "格拉尼",
+    "fullName": "格拉尼",
+    "fullNameChinese": "格拉尼",
+    "aliases": [
+      "格拉尼",
+      "Grani"
+    ],
+    "className": "PIONEER",
+    "rarity": 5
+  },
+  {
+    "characterId": "char_263_skadi",
+    "name": "斯卡蒂",
+    "fullName": "斯卡蒂",
+    "fullNameChinese": "斯卡蒂",
+    "aliases": [
+      "斯卡蒂",
+      "Skadi"
+    ],
+    "className": "WARRIOR",
+    "rarity": 6
+  }
+]

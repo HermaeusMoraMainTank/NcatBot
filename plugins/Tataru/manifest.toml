@@ -1,0 +1,14 @@
+name = "Tataru"
+version = "1.0.0"
+main = "Tataru.py"
+entry_class = "Tataru"
+author = "NcatBot / jawwe"
+description = "FF14 塔塔露统一查询插件：暖暖、日历、攻略、石之家、招募、物价、房屋、FFLogs、抽卡等"
+
+[dependencies]
+
+[pip_dependencies]
+aiohttp = ">=3.8.0"
+curl_cffi = ">=0.5.0"
+icalendar = ">=5.0.0"
+Pillow = ">=9.0.0"

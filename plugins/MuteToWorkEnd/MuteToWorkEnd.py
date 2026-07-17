@@ -58,14 +58,32 @@ class MuteManager(NcatBotPlugin):
             _log.error(f"获取用户权限信息失败: {e}")
             return False
 
+    @staticmethod
+    def _command_text(raw_message: str) -> str:
+        """去掉开头的 @/回复 CQ 码，便于 startswith 匹配指令。"""
+        text = raw_message.strip()
+        while True:
+            stripped = re.sub(
+                r"^(?:\[CQ:(?:at|reply)[^\]]*\]\s*)+",
+                "",
+                text,
+            )
+            if stripped == text:
+                break
+            text = stripped.strip()
+        return text
+
     @registrar.qq.on_group_message()
     async def handle_mute_commands(self, input: GroupMessage):
-        """处理禁言相关指令"""
-        message = input.raw_message.strip()
+        """处理禁言相关指令（仅消息以指令开头时触发）"""
+        message = self._command_text(input.raw_message)
 
-        # 只处理包含禁言相关关键词的消息
-        mute_keywords = ["禁言", "解禁", "取消禁言"]
-        if not any(keyword in message for keyword in mute_keywords):
+        # 仅 startswith，避免聊天里提到「禁言」就误触发
+        if not (
+            message.startswith("禁言")
+            or message.startswith("解禁")
+            or message.startswith("取消禁言")
+        ):
             return
 
         # 检查权限
@@ -87,17 +105,17 @@ class MuteManager(NcatBotPlugin):
             await self.mute_to_work_end(input)
             return
 
-        # 解析禁言时间命令
+        # 解析禁言时间命令（锚定开头，避免正文中部误匹配）
         mute_patterns = [
-            r"禁言\s*(\d+[天日小时分钟秒]+(?:\s*\d+[天日小时分钟秒]+)*)",
-            r"禁言\s*(\d+)\s*分钟",
-            r"禁言\s*(\d+)\s*小时",
-            r"禁言\s*(\d+)\s*天",
-            r"禁言\s*(\d+)\s*日",
+            r"^禁言\s*(\d+[天日小时分钟秒]+(?:\s*\d+[天日小时分钟秒]+)*)",
+            r"^禁言\s*(\d+)\s*分钟",
+            r"^禁言\s*(\d+)\s*小时",
+            r"^禁言\s*(\d+)\s*天",
+            r"^禁言\s*(\d+)\s*日",
         ]
 
         for pattern in mute_patterns:
-            match = re.search(pattern, message)
+            match = re.match(pattern, message)
             if match:
                 time_str = match.group(1)
                 mute_seconds = self.parse_time_string(time_str)
@@ -105,7 +123,7 @@ class MuteManager(NcatBotPlugin):
                     await self.mute_user(input, mute_seconds)
                     return
 
-        # 如果没有匹配到任何命令，显示帮助信息
+        # 以禁言开头但格式不对时显示帮助
         await self.show_help(input)
 
     def get_target_user_id(self, input: GroupMessage) -> str:

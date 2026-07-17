@@ -1,4 +1,4 @@
-import os
+﻿import os
 import json
 import httpx
 import logging
@@ -360,8 +360,7 @@ class FF14LogsInfo(NcatBotPlugin):
             return (30, 255, 0)
         return (128, 128, 128)
 
-    @registrar.qq.on_group_message()
-    async def handle_ff14_logs(self, input: GroupMessage):
+    # @registrar.qq.on_group_message()  # disabled: migrated to Tataru\n    async def handle_ff14_logs(self, input: GroupMessage):
         message_parts = input.raw_message.split(" ")
         if len(message_parts) != 3 or message_parts[0] != "搜索玩家logs":
             return

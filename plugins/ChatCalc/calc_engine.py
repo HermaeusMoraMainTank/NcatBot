@@ -662,6 +662,17 @@ def _validate_and_evaluate(raw_expr: str) -> Optional[tuple[str, str]]:
     return display_expr, _format_result(result)
 
 
+def _is_hexish_id_fragment(text: str, start: int, end: int) -> bool:
+    """候选式是否嵌在 UUID/hex id 片段里（如 94f7-81a0 中的 7-81）。"""
+    lo, hi = start, end
+    while lo > 0 and (text[lo - 1].isdigit() or text[lo - 1] in "abcdefABCDEF-"):
+        lo -= 1
+    while hi < len(text) and (text[hi].isdigit() or text[hi] in "abcdefABCDEF-"):
+        hi += 1
+    span = text[lo:hi]
+    return "-" in span and bool(re.search(r"[a-fA-F]", span))
+
+
 def find_best_expression(text: str) -> Optional[tuple[str, str]]:
     """从消息中找出最合适的可计算表达式并返回 (表达式, 结果)。"""
     best: Optional[tuple[str, str, int]] = None
@@ -691,6 +702,9 @@ def find_best_expression(text: str) -> Optional[tuple[str, str]]:
                 j = nxt
             candidate = text[start:j]
             if require_factorial and not _has_factorial_mark(candidate):
+                i = j if j > start else i + 1
+                continue
+            if _is_hexish_id_fragment(text, start, j):
                 i = j if j > start else i + 1
                 continue
             evaluated = _validate_and_evaluate(candidate)

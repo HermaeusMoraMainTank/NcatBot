@@ -1,0 +1,2270 @@
+[
+  {
+    "id": 119622377,
+    "characterId": "Aadya",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Aadya",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/6f/Aadya_Portrait.png/revision/latest"
+  },
+  {
+    "id": 919928249,
+    "characterId": "Achikita_Chinami",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Achikita_Chinami",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/48/Achikita_Chinami_Headshot.png/revision/latest"
+  },
+  {
+    "id": 895533617,
+    "characterId": "Aia_Amare",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Aia_Amare",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/8/8e/Aia_Amare_-_Portrait.png/revision/latest"
+  },
+  {
+    "id": 512583735,
+    "characterId": "Aiba_Uiha",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Aiba_Uiha",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/ed/Aiba_Uiha_Portrait.png/revision/latest"
+  },
+  {
+    "id": 457246735,
+    "characterId": "Aizono_Manami",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Aizono_Manami",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/48/Aizono_Manami_Portrait.png/revision/latest"
+  },
+  {
+    "id": 12326325,
+    "characterId": "Akabane_Youko",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Akabane_Youko",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/af/Akabane_Youko_Portrait.png/revision/latest"
+  },
+  {
+    "id": 115897726,
+    "characterId": "Akagi_Wen",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Akagi_Wen",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/20/Akagi_Wen_Portrait.png/revision/latest"
+  },
+  {
+    "id": 23320820,
+    "characterId": "Akatsuki_Hotaru",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Akatsuki_Hotaru",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/91/Akatsuki_Hotaru_twitter_icon.jpg/revision/latest"
+  },
+  {
+    "id": 759145321,
+    "characterId": "Akira_Ray",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Akira_Ray",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/be/Akira_Ray_Portrait.png/revision/latest"
+  },
+  {
+    "id": 389348846,
+    "characterId": "Alban_Knox",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Alban_Knox",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/0/04/Alban_Knox_portrait.png/revision/latest"
+  },
+  {
+    "id": 551701439,
+    "characterId": "AmaLee",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "AmaLee",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/36/Amalee_6.0.png/revision/latest"
+  },
+  {
+    "id": 350256180,
+    "characterId": "Amagase_Muyu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Amagase_Muyu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/0/04/Amagase_Muyu_Portrait.png/revision/latest"
+  },
+  {
+    "id": 135664107,
+    "characterId": "Amamiya_Kokoro",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Amamiya_Kokoro",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/6e/Amamiya_Kokoro_Portrait.png/revision/latest"
+  },
+  {
+    "id": 224159488,
+    "characterId": "Amemiya_Nazuna",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Amemiya_Nazuna",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/1a/Amemiya_Nazuna.webp/revision/latest"
+  },
+  {
+    "id": 295981237,
+    "characterId": "Amemori_Sayo",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Amemori_Sayo",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/ef/Amemori_Sayo_Portrait.png/revision/latest"
+  },
+  {
+    "id": 301611441,
+    "characterId": "Amicia_Michella",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Amicia_Michella",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/61/Amicia_Michella_Portrait.png/revision/latest"
+  },
+  {
+    "id": 554445896,
+    "characterId": "Andou_Inari",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Andou_Inari",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/8/8c/Andou_Inari_Portrait.jpg/revision/latest"
+  },
+  {
+    "id": 968186406,
+    "characterId": "Ange_Katrina",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ange_Katrina",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/29/Ange_Katrina_Portrait.png/revision/latest"
+  },
+  {
+    "id": 996590766,
+    "characterId": "Apricot",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Apricot",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e9/Froot_2D_Model.jpg/revision/latest"
+  },
+  {
+    "id": 827131562,
+    "characterId": "Ars_Almal",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ars_Almal",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/a6/Ars_Almal_Portrait.png/revision/latest"
+  },
+  {
+    "id": 76625660,
+    "characterId": "Asahina_Akane",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Asahina_Akane",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/45/Asahina_Akane_Portrait.png/revision/latest"
+  },
+  {
+    "id": 94432834,
+    "characterId": "Aster_Arcadia",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Aster_Arcadia",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/6f/Aster_Arcadia_-_Portrait.png/revision/latest"
+  },
+  {
+    "id": 537922741,
+    "characterId": "Asuka_Hina",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Asuka_Hina",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/31/Asuka_Hina_Portrait.png/revision/latest"
+  },
+  {
+    "id": 706421777,
+    "characterId": "Axia_Krone",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Axia_Krone",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e1/Axia_Krone_Portrait.png/revision/latest"
+  },
+  {
+    "id": 128551405,
+    "characterId": "Ayumi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ayumi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/38/Ayumi_portrait.png/revision/latest"
+  },
+  {
+    "id": 613064560,
+    "characterId": "Aza",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Aza",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/1f/Aza_Portrait.png/revision/latest"
+  },
+  {
+    "id": 444759977,
+    "characterId": "Azuchi_Momo",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Azuchi_Momo",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/af/Azuchi_Momo_2020_Portrait.png/revision/latest"
+  },
+  {
+    "id": 576612395,
+    "characterId": "Azura_Cecillia",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Azura_Cecillia",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/3e/Azura_Cecillia_Portrait.png/revision/latest"
+  },
+  {
+    "id": 827807606,
+    "characterId": "Azusa",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Azusa",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/4e/Azusa_Portrait.jpg/revision/latest"
+  },
+  {
+    "id": 777190817,
+    "characterId": "Ban_Hada",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ban_Hada",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/c0/Ban_Hada_Portrait.png/revision/latest"
+  },
+  {
+    "id": 961195346,
+    "characterId": "Belmond_Banderas",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Belmond_Banderas",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/4c/Belmond_Banderas_Portrait.png/revision/latest"
+  },
+  {
+    "id": 395794670,
+    "characterId": "Beribug",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Beribug",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/63/Ancestral_Beri_Face.png/revision/latest"
+  },
+  {
+    "id": 27700451,
+    "characterId": "Bonnivier_Pranaja",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Bonnivier_Pranaja",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/53/Bonnivier_Pranaja_Portrait.png/revision/latest"
+  },
+  {
+    "id": 605835040,
+    "characterId": "Chae_Ara",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Chae_Ara",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/54/Chae_Ara_Portrait.png/revision/latest"
+  },
+  {
+    "id": 558797532,
+    "characterId": "Chaos",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Chaos",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/8/87/Chaos_Portrait.png/revision/latest"
+  },
+  {
+    "id": 950705422,
+    "characterId": "Chiyuu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Chiyuu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/0/0c/Chiyuu_Portrait.png/revision/latest"
+  },
+  {
+    "id": 528645451,
+    "characterId": "Claude_Clawmark",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Claude_Clawmark",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/0/08/Claude_Clawmark_Portrait.png/revision/latest"
+  },
+  {
+    "id": 585596729,
+    "characterId": "Debidebi_Debiru",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Debidebi_Debiru",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e5/Debidebi_Debiru_Portrait.png/revision/latest"
+  },
+  {
+    "id": 473936961,
+    "characterId": "Derem_Kado",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Derem_Kado",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/fc/Derem_Kado_Portrait_2.png/revision/latest"
+  },
+  {
+    "id": 567843754,
+    "characterId": "Dola",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Dola",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/7/7d/Dola_Portrait.png/revision/latest"
+  },
+  {
+    "id": 183846929,
+    "characterId": "Doppio_Dropscythe",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Doppio_Dropscythe",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/93/Doppio_Dropscythe_Portrait.png/revision/latest"
+  },
+  {
+    "id": 338533806,
+    "characterId": "Eine",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Eine",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/4e/Eine_Portrait.png/revision/latest"
+  },
+  {
+    "id": 974448270,
+    "characterId": "Eli_Conifer",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Eli_Conifer",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/d/d9/Eli_Conifer_Portrait.png/revision/latest"
+  },
+  {
+    "id": 852017210,
+    "characterId": "Elira_Pendora",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Elira_Pendora",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/5b/Elira_Pendora_Portrait.png/revision/latest"
+  },
+  {
+    "id": 556774223,
+    "characterId": "Elu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Elu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/97/Elu_Eighth_Costume_Portrait.png/revision/latest"
+  },
+  {
+    "id": 368373821,
+    "characterId": "Emma_August",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Emma_August",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/b8/Emma_August_Portrait_2.png/revision/latest"
+  },
+  {
+    "id": 110341002,
+    "characterId": "Enna_Alouette",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Enna_Alouette",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/f1/Enna_Alouette_Portrait.png/revision/latest"
+  },
+  {
+    "id": 248080679,
+    "characterId": "Era",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Era",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/8/85/Era_-_Headshot_%28with_ears%29.jpg/revision/latest"
+  },
+  {
+    "id": 813814376,
+    "characterId": "Etna_Crimson",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Etna_Crimson",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/a6/Etna_Crimson_Portrait.png/revision/latest"
+  },
+  {
+    "id": 598247879,
+    "characterId": "Eve_VirtuaReal",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Eve_VirtuaReal",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/7/7f/Eve_-_Full_body.png/revision/latest"
+  },
+  {
+    "id": 556729816,
+    "characterId": "Ex_Albio",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ex_Albio",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/f9/Ex_Albio_Portrait.png/revision/latest"
+  },
+  {
+    "id": 340416980,
+    "characterId": "Finana_Ryugu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Finana_Ryugu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/6f/Finana_Ryugu_Portrait.png/revision/latest"
+  },
+  {
+    "id": 190773834,
+    "characterId": "Freodore",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Freodore",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/55/Freodore_portrait.png/revision/latest"
+  },
+  {
+    "id": 913736424,
+    "characterId": "Fulgur_Ovid",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Fulgur_Ovid",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/3e/Fulgur_Ovid_portrait.png/revision/latest"
+  },
+  {
+    "id": 282386162,
+    "characterId": "Fumi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Fumi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/41/Fumi_Portrait.png/revision/latest"
+  },
+  {
+    "id": 603965881,
+    "characterId": "Fumino_Tamaki",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Fumino_Tamaki",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/28/Fumino_Tamaki_Portrait.png/revision/latest"
+  },
+  {
+    "id": 664980436,
+    "characterId": "Fura_Kanato",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Fura_Kanato",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/b0/2434_Fura_Kanato_Portrait.png/revision/latest"
+  },
+  {
+    "id": 461150628,
+    "characterId": "Furen_E_Lustario",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Furen_E_Lustario",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/bf/Furen_E_Lustario_Portrait.png/revision/latest"
+  },
+  {
+    "id": 960514130,
+    "characterId": "Fushimi_Gaku",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Fushimi_Gaku",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/c2/Fushimi_Gaku_Portrait.png/revision/latest"
+  },
+  {
+    "id": 593408541,
+    "characterId": "Fuwa_Minato",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Fuwa_Minato",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/0/02/Fuwa_Minato_Host_Portrait.png/revision/latest"
+  },
+  {
+    "id": 421675353,
+    "characterId": "GEEGA",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "GEEGA",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/bf/GEEGA_twitter_progfilpic.jpg/revision/latest"
+  },
+  {
+    "id": 952459245,
+    "characterId": "Gaon",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Gaon",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/40/Gaon_Portrait.png/revision/latest"
+  },
+  {
+    "id": 632340743,
+    "characterId": "Garu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Garu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/2b/Garu_portrait.png/revision/latest"
+  },
+  {
+    "id": 7502841,
+    "characterId": "Genzuki_Tojiro",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Genzuki_Tojiro",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/8/8b/Genzuki_Tojiro_Portrait_3.png/revision/latest"
+  },
+  {
+    "id": 653601432,
+    "characterId": "Gilzaren_III",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Gilzaren_III",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/7/7c/Gilzaren_III_Portrait.png/revision/latest"
+  },
+  {
+    "id": 448809139,
+    "characterId": "Girimi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Girimi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/ef/Girimi_-_Portrait.webp/revision/latest"
+  },
+  {
+    "id": 974550043,
+    "characterId": "Gundo_Mirei",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Gundo_Mirei",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/c3/Gundo_Mirei_2021_Portrait.png/revision/latest"
+  },
+  {
+    "id": 86198407,
+    "characterId": "Gwelu_Os_Gar",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Gwelu_Os_Gar",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/7/7f/Gwelu_Os_Gar_Portrait.png/revision/latest"
+  },
+  {
+    "id": 177185416,
+    "characterId": "Ha_Yun",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ha_Yun",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/2a/Ha_Yun_Portrait.png/revision/latest"
+  },
+  {
+    "id": 572142711,
+    "characterId": "Hajime",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hajime",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/10/Hajime_portrait.png/revision/latest"
+  },
+  {
+    "id": 625392123,
+    "characterId": "Hakase_Fuyuki",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hakase_Fuyuki",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e8/Hakase_Fuyuki_Portrait.png/revision/latest"
+  },
+  {
+    "id": 897450931,
+    "characterId": "Hakuja",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hakuja",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e3/Hakuja_Portrait.png/revision/latest"
+  },
+  {
+    "id": 559837124,
+    "characterId": "Han_Chiho",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Han_Chiho",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/53/Han_Chiho_2nd_Portrait.png/revision/latest"
+  },
+  {
+    "id": 741283873,
+    "characterId": "Hana_Macchia",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hana_Macchia",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e6/Hana_Macchia_Portrait.png/revision/latest"
+  },
+  {
+    "id": 905514113,
+    "characterId": "Hanabatake_Chaika",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hanabatake_Chaika",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/f0/Hanabatake_Chaika_Portrait.png/revision/latest"
+  },
+  {
+    "id": 122900411,
+    "characterId": "Hanakago_Tsubasa",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hanakago_Tsubasa",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/b5/Hanakago_Tsubasa_Portrait.png/revision/latest"
+  },
+  {
+    "id": 460415780,
+    "characterId": "Hanon",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hanon",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/2b/Hanon_Portrait.jpg/revision/latest"
+  },
+  {
+    "id": 182400021,
+    "characterId": "Hanser",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hanser",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/7/77/Hanser_-_Full_body.webp/revision/latest"
+  },
+  {
+    "id": 680330880,
+    "characterId": "Harei",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Harei",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/54/2434_CN_Harei_Profile_2.png/revision/latest"
+  },
+  {
+    "id": 123562229,
+    "characterId": "Haruka_Karibu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Haruka_Karibu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/55/HarukaKaribu_Portrait.png/revision/latest"
+  },
+  {
+    "id": 471472845,
+    "characterId": "Harusaki_Air",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Harusaki_Air",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/fe/Harusaki_Air_Portrait_2.webp/revision/latest"
+  },
+  {
+    "id": 344524749,
+    "characterId": "Hassaku_Yuzu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hassaku_Yuzu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/99/Hassaku_Yuzu_Portrait.png/revision/latest"
+  },
+  {
+    "id": 614655452,
+    "characterId": "Hatsuse",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hatsuse",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/b6/Hatsuse_portrait.png/revision/latest"
+  },
+  {
+    "id": 6851667,
+    "characterId": "Hayama_Marin",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hayama_Marin",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/57/Hayama_Marin_-_Portrait.png/revision/latest"
+  },
+  {
+    "id": 420552451,
+    "characterId": "Hayase_Sou",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hayase_Sou",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/be/Hayase_Sou_Portrait.png/revision/latest"
+  },
+  {
+    "id": 816824587,
+    "characterId": "Henya_the_Genius",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Henya_the_Genius",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/d/d6/Henya_The_Genius.png/revision/latest"
+  },
+  {
+    "id": 867336853,
+    "characterId": "Hestia_Happiness",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hestia_Happiness",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/95/Hestia_Happiness_twitter_icon.jpg/revision/latest"
+  },
+  {
+    "id": 589291517,
+    "characterId": "Hex_Haywire",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hex_Haywire",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/1f/Hex_Haywire_Portrait.png/revision/latest"
+  },
+  {
+    "id": 546990182,
+    "characterId": "Hibachi_Mana",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hibachi_Mana",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/3f/Hibachi_Mana_Portrait.png/revision/latest"
+  },
+  {
+    "id": 830873788,
+    "characterId": "Higuchi_Kaede",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Higuchi_Kaede",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/97/Higuchi_Kaede_Portrait.png/revision/latest"
+  },
+  {
+    "id": 627995775,
+    "characterId": "Hihi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hihi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/15/Hihi_portrait.png/revision/latest"
+  },
+  {
+    "id": 783569306,
+    "characterId": "Hime_Hajime",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hime_Hajime",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/f9/Hime_Hajime_First_model.jpg/revision/latest"
+  },
+  {
+    "id": 824916983,
+    "characterId": "Hitotsubashi_Ayato",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hitotsubashi_Ayato",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/2b/Hitotsubashi_Ayato_Portrait.png/revision/latest"
+  },
+  {
+    "id": 963035277,
+    "characterId": "Honma_Himawari",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Honma_Himawari",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/0/04/Honma_Himawari_Portrait.png/revision/latest"
+  },
+  {
+    "id": 205029581,
+    "characterId": "Hoshikawa_Sara",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hoshikawa_Sara",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/af/Hoshikawa_Sara_Portrait.png/revision/latest"
+  },
+  {
+    "id": 287298894,
+    "characterId": "Hoshimi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hoshimi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/29/Hoshimi_3rd_anniversary_halfbody_2.png/revision/latest"
+  },
+  {
+    "id": 776669269,
+    "characterId": "Hoshirube_Sho",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hoshirube_Sho",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/cf/Hoshirube_Sho_Portrait.png/revision/latest"
+  },
+  {
+    "id": 292274912,
+    "characterId": "Hunger",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hunger",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/ee/Hunger_portrait.png/revision/latest"
+  },
+  {
+    "id": 778525667,
+    "characterId": "Hyakumantenbara_Salome",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hyakumantenbara_Salome",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/0/0e/Hyakumantenbara_Salome_-_Portrait.webp/revision/latest"
+  },
+  {
+    "id": 207888934,
+    "characterId": "Hyona_Elatiora",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Hyona_Elatiora",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/44/Hyona_Elatiora_Portrait.webp/revision/latest"
+  },
+  {
+    "id": 250344858,
+    "characterId": "Ibrahim",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ibrahim",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/ab/Ibrahim_Portrait.png/revision/latest"
+  },
+  {
+    "id": 897179341,
+    "characterId": "Ichigo",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ichigo",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/8/83/Ichigo_Headshot.png/revision/latest"
+  },
+  {
+    "id": 590176853,
+    "characterId": "Ienaga_Mugi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ienaga_Mugi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/66/Ienaga_Mugi_Portrait.png/revision/latest"
+  },
+  {
+    "id": 265594816,
+    "characterId": "Igarashi_Rika",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Igarashi_Rika",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/23/Igarashi_Rika_Portrait.png/revision/latest"
+  },
+  {
+    "id": 708770510,
+    "characterId": "Ike_Eveland",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ike_Eveland",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/8/87/Ike_Eveland_Portrait.png/revision/latest"
+  },
+  {
+    "id": 517906979,
+    "characterId": "Imi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Imi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/7/71/Imi_Portrait.png/revision/latest"
+  },
+  {
+    "id": 103121280,
+    "characterId": "Inami_Rai",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Inami_Rai",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/46/Inami_Rai_Portrait.png/revision/latest"
+  },
+  {
+    "id": 969755817,
+    "characterId": "Inochi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Inochi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/93/Inochi-portrait-66.jpg/revision/latest"
+  },
+  {
+    "id": 505335356,
+    "characterId": "Inui_Toko",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Inui_Toko",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/f3/Inui_Toko_Portrait.png/revision/latest"
+  },
+  {
+    "id": 657687214,
+    "characterId": "Ironmouse",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ironmouse",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/7/79/Ironmouse_season_3_rosuuri.png/revision/latest"
+  },
+  {
+    "id": 789164154,
+    "characterId": "Isabella",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Isabella",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e7/Isabella_Portrait.jpg/revision/latest"
+  },
+  {
+    "id": 437996164,
+    "characterId": "Ishigami_Nozomi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ishigami_Nozomi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/21/Ishigami_Nozomi_Portrait.png/revision/latest"
+  },
+  {
+    "id": 4846292,
+    "characterId": "Itsuki_Sakyo",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Itsuki_Sakyo",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/0/08/Itsuki_Sakyo_Portrait.png/revision/latest"
+  },
+  {
+    "id": 892705668,
+    "characterId": "Izumo_Kasumi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Izumo_Kasumi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/8/88/Izumo_Kasumi_Portrait.png/revision/latest"
+  },
+  {
+    "id": 39916676,
+    "characterId": "Joe_Rikiichi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Joe_Rikiichi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/d/d7/Joe_Rikiichi_Portrait.png/revision/latest"
+  },
+  {
+    "id": 725574633,
+    "characterId": "Kaburaki_Roco",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kaburaki_Roco",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/d/dc/Kaburaki_Roco_Portrait.png/revision/latest"
+  },
+  {
+    "id": 999035255,
+    "characterId": "Kadou_Mikaru",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kadou_Mikaru",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/45/Kadou_Mikaru_Portrait.png/revision/latest"
+  },
+  {
+    "id": 108929743,
+    "characterId": "Kaelix_Debonair",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kaelix_Debonair",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/35/Kaelix_Debonair_portrait.png/revision/latest"
+  },
+  {
+    "id": 773352925,
+    "characterId": "Kagami_Hayato",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kagami_Hayato",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/59/Kagami_Hayato_Portrait.png/revision/latest"
+  },
+  {
+    "id": 26123030,
+    "characterId": "Kaida_Haru",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kaida_Haru",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/bb/Kaida_Haru_Portrait.png/revision/latest"
+  },
+  {
+    "id": 190043842,
+    "characterId": "Kairyu_Crocodile",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kairyu_Crocodile",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/42/Kairyu_Crocodile_Portrait.png/revision/latest"
+  },
+  {
+    "id": 19895697,
+    "characterId": "Kaisei",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kaisei",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/d/de/Kaisei_Portrait.png/revision/latest"
+  },
+  {
+    "id": 377755381,
+    "characterId": "Kanae",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kanae",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/c9/Kanae_-_Portrait_3.png/revision/latest"
+  },
+  {
+    "id": 243503425,
+    "characterId": "Kanda_Shoichi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kanda_Shoichi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/28/Kanda_Shoichi_Portrait.png/revision/latest"
+  },
+  {
+    "id": 14081430,
+    "characterId": "Karisa",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Karisa",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/4c/Karisa_-_Portrait.webp/revision/latest"
+  },
+  {
+    "id": 186509161,
+    "characterId": "Karon",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Karon",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/97/Karon_Portrait.jpg/revision/latest"
+  },
+  {
+    "id": 883992788,
+    "characterId": "Karu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Karu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/60/Karu_Portrait.png/revision/latest"
+  },
+  {
+    "id": 651460030,
+    "characterId": "Kataribe_Tsumugu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kataribe_Tsumugu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/36/Kataribe_Tsumugu_Portrait.png/revision/latest"
+  },
+  {
+    "id": 695402969,
+    "characterId": "Keke",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Keke",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/7/70/Keke_portrait.png/revision/latest"
+  },
+  {
+    "id": 149352913,
+    "characterId": "Kendou",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kendou",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/6a/Kendouportrait.png/revision/latest"
+  },
+  {
+    "id": 50421043,
+    "characterId": "Kenmochi_Toya",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kenmochi_Toya",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e8/Kenmochi_Toya_Portrait.png/revision/latest"
+  },
+  {
+    "id": 599700244,
+    "characterId": "Kero",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kero",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/ba/Kero_-_Headshot_%28Chinese_New_Year_2022_outfit%29.png/revision/latest"
+  },
+  {
+    "id": 497695038,
+    "characterId": "Kima",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kima",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/a7/Kima-portrait-66.jpg/revision/latest"
+  },
+  {
+    "id": 40012679,
+    "characterId": "Kingyozaka_Meiro",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kingyozaka_Meiro",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/63/Kingyozaka_Meiro_Portrait.png/revision/latest"
+  },
+  {
+    "id": 798326053,
+    "characterId": "Kioi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kioi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/3e/2434_CN_Kioi_Profile.png/revision/latest"
+  },
+  {
+    "id": 484272424,
+    "characterId": "Kirara_Tamako",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kirara_Tamako",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/44/Kirara_Tamako_Portrait.png/revision/latest"
+  },
+  {
+    "id": 798407639,
+    "characterId": "Kisara",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kisara",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/12/Kisara_Portrait.png/revision/latest"
+  },
+  {
+    "id": 937053478,
+    "characterId": "Kitakoji_Hisui",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kitakoji_Hisui",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/91/Kitakoji_Hisui_Portrait_2.png/revision/latest"
+  },
+  {
+    "id": 347419004,
+    "characterId": "Kitami_Yusei",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kitami_Yusei",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/2a/Kitami_Yusei_Portrait.png/revision/latest"
+  },
+  {
+    "id": 976078617,
+    "characterId": "Kiti",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kiti",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/ed/Kiti_Portrait.png/revision/latest"
+  },
+  {
+    "id": 870935889,
+    "characterId": "Kiyora",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kiyora",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/0/06/Kiyora_Portrait.png/revision/latest"
+  },
+  {
+    "id": 557651801,
+    "characterId": "Kiyuu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kiyuu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/2f/Kiyuu_-_Portrait.webp/revision/latest"
+  },
+  {
+    "id": 204135733,
+    "characterId": "Klara_Charmwood",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Klara_Charmwood",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/61/Klara_Charmwood_Portrait.png/revision/latest"
+  },
+  {
+    "id": 64519062,
+    "characterId": "Ko_Yami",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ko_Yami",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/d/d3/Ko_Yami_Portrait.png/revision/latest"
+  },
+  {
+    "id": 761599180,
+    "characterId": "Kokonami_Iruka",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kokonami_Iruka",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/5d/Kokonami_Iruka_Portrait.png/revision/latest"
+  },
+  {
+    "id": 587271382,
+    "characterId": "Koshimizu_Toru",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Koshimizu_Toru",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/8/87/2434_Koshimizu_Toru_Portrait.png/revision/latest"
+  },
+  {
+    "id": 438270450,
+    "characterId": "Kotoka_Torahime",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kotoka_Torahime",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/36/Kotoka_Torahime_Portrait.png/revision/latest"
+  },
+  {
+    "id": 214550272,
+    "characterId": "Kouichi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kouichi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/16/Kouichi_Portrait.png/revision/latest"
+  },
+  {
+    "id": 916409354,
+    "characterId": "Koxia",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Koxia",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/c6/Koxia_Portrait_2023-02.webp/revision/latest"
+  },
+  {
+    "id": 352189934,
+    "characterId": "Koyanagi_Rou",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Koyanagi_Rou",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/8/8e/Koyanagi_Rou_Portrait.png/revision/latest"
+  },
+  {
+    "id": 623639715,
+    "characterId": "Kozue_Mone",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kozue_Mone",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/52/Kozue_Mone_Portrait.png/revision/latest"
+  },
+  {
+    "id": 421732143,
+    "characterId": "Kson",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kson",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/63/Kson_-_Portrait.png/revision/latest"
+  },
+  {
+    "id": 116072797,
+    "characterId": "Kudo_Chitose",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kudo_Chitose",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/18/Kudo_Chitose_Portrait.png/revision/latest"
+  },
+  {
+    "id": 711516721,
+    "characterId": "Kunai_Nakasato",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kunai_Nakasato",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/a7/Kunai_Nakasato_Portrait.png/revision/latest"
+  },
+  {
+    "id": 344906221,
+    "characterId": "Kuramochi_Meruto",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kuramochi_Meruto",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/95/Kuramochi_Meruto_Portrait.png/revision/latest"
+  },
+  {
+    "id": 259689161,
+    "characterId": "Kurau",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kurau",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/cc/Kurau_portrait.png/revision/latest"
+  },
+  {
+    "id": 435031421,
+    "characterId": "Kuri_Eita",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kuri_Eita",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/0/00/Kuri_Eita_Portrait.png/revision/latest"
+  },
+  {
+    "id": 826343810,
+    "characterId": "Kuro_Kurenai",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kuro_Kurenai",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/f8/Kuro_Undead_Pirate_Portrait.jpg/revision/latest"
+  },
+  {
+    "id": 442453930,
+    "characterId": "Kuroi_Shiba",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kuroi_Shiba",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/d/d7/Kuroi_Shiba_Portrait.png/revision/latest"
+  },
+  {
+    "id": 496469717,
+    "characterId": "Kurusu_Natsume",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kurusu_Natsume",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/66/Kurusu_Natsume_Portrait_%282%29.png/revision/latest"
+  },
+  {
+    "id": 303987385,
+    "characterId": "Kuzuha",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kuzuha",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/58/Kuzuha_Portrait.png/revision/latest"
+  },
+  {
+    "id": 381429019,
+    "characterId": "Kyo_Kaneko",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Kyo_Kaneko",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/18/Kyo_Kaneko_-_Portrait.png/revision/latest"
+  },
+  {
+    "id": 870680771,
+    "characterId": "Lain_Paterson",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Lain_Paterson",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/ee/Lain_Paterson_Portrait.png/revision/latest"
+  },
+  {
+    "id": 404041264,
+    "characterId": "Lauren_Iroas",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Lauren_Iroas",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/6e/Lauren_Iroas_Portrait.png/revision/latest"
+  },
+  {
+    "id": 794031440,
+    "characterId": "Layla_Alstroemeria",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Layla_Alstroemeria",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/69/Layla_Alstroemeria_Portrait.png/revision/latest"
+  },
+  {
+    "id": 301866811,
+    "characterId": "Lee_On",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Lee_On",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/ff/Lee_On_Portrait.png/revision/latest"
+  },
+  {
+    "id": 374843550,
+    "characterId": "Lee_Roha",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Lee_Roha",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/44/Lee_Roha_Portrait.png/revision/latest"
+  },
+  {
+    "id": 34210497,
+    "characterId": "Lee_Siu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Lee_Siu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/ba/Lee_Siu_Portrait.png/revision/latest"
+  },
+  {
+    "id": 103168889,
+    "characterId": "Leo",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Leo",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/6c/Leo_-_Portrait.png/revision/latest"
+  },
+  {
+    "id": 430746072,
+    "characterId": "Leos_Vincent",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Leos_Vincent",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/47/Leos_Vincent_Portrait.png/revision/latest"
+  },
+  {
+    "id": 913324119,
+    "characterId": "Levi_Elipha",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Levi_Elipha",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/20/Levi_Elipha_Portrait.png/revision/latest"
+  },
+  {
+    "id": 692312236,
+    "characterId": "Lize_Helesta",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Lize_Helesta",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/13/Lize_Helesta_Portrait.png/revision/latest"
+  },
+  {
+    "id": 803680118,
+    "characterId": "Lorou",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Lorou",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/6e/Lorou_Headshot.png/revision/latest"
+  },
+  {
+    "id": 944171026,
+    "characterId": "Luca_Kaneshiro",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Luca_Kaneshiro",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/91/Luca_Kaneshiro_Portrait.png/revision/latest"
+  },
+  {
+    "id": 613215510,
+    "characterId": "Luis_Cammy",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Luis_Cammy",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/bf/Luis_Cammy_-_Portrait.png/revision/latest"
+  },
+  {
+    "id": 576369959,
+    "characterId": "Lunlun",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Lunlun",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/43/Lunlun_Headshot.png/revision/latest"
+  },
+  {
+    "id": 86690197,
+    "characterId": "Machita_Chima",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Machita_Chima",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/17/Machita_Chima_Fourth_Costume_2023_Portrait.png/revision/latest"
+  },
+  {
+    "id": 652073066,
+    "characterId": "Mahiru",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mahiru",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/6e/Mahiru_dress_portrait.png/revision/latest"
+  },
+  {
+    "id": 6600484,
+    "characterId": "Maimoto_Keisuke",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Maimoto_Keisuke",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/4e/Maimoto_Keisuke_Portrait_2.webp/revision/latest"
+  },
+  {
+    "id": 667298243,
+    "characterId": "Makaino_Ririmu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Makaino_Ririmu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/7/70/Makaino_Ririmu_Sailor_Fuku_Portrait.png/revision/latest"
+  },
+  {
+    "id": 901895830,
+    "characterId": "Mari",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mari",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/d/de/Mari_Portrait.png/revision/latest"
+  },
+  {
+    "id": 479577844,
+    "characterId": "Maria_Marionette",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Maria_Marionette",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e2/Maria_Marionette_-_Portrait.png/revision/latest"
+  },
+  {
+    "id": 193185382,
+    "characterId": "Mashiro_Meme",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mashiro_Meme",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/f8/Mashiro_Portrait.png/revision/latest"
+  },
+  {
+    "id": 596645194,
+    "characterId": "Matara_Kan",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Matara_Kan",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/65/Matara_Kan_Portrait.jpg/revision/latest"
+  },
+  {
+    "id": 68214384,
+    "characterId": "Matsukai_Mao",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Matsukai_Mao",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/9d/Matsukai_Mao_New_Portrait.png/revision/latest"
+  },
+  {
+    "id": 798026207,
+    "characterId": "Mayumi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mayumi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/4b/Mayumi_Portrait.png/revision/latest"
+  },
+  {
+    "id": 111984120,
+    "characterId": "Mayuzumi_Kai",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mayuzumi_Kai",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/f3/Mayuzumi_Kai_Portrait.png/revision/latest"
+  },
+  {
+    "id": 663167899,
+    "characterId": "Mei",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mei",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/0/07/2434_CN_Mei_Profile.png/revision/latest"
+  },
+  {
+    "id": 986817729,
+    "characterId": "Melissa_Kinrenka",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Melissa_Kinrenka",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/d/da/Melissa_Kinrenka_Portrait.png/revision/latest"
+  },
+  {
+    "id": 294330690,
+    "characterId": "Meloco_Kyoran",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Meloco_Kyoran",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/2e/Meloco_Kyoran_Portrait.png/revision/latest"
+  },
+  {
+    "id": 603239641,
+    "characterId": "Melody",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Melody",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/2f/Melody_portrait1.png/revision/latest"
+  },
+  {
+    "id": 544928586,
+    "characterId": "Meme",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Meme",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/d/dc/2434_CN_Meme_Profile.png/revision/latest"
+  },
+  {
+    "id": 907733180,
+    "characterId": "Michi_Mochievee",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Michi_Mochievee",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/f9/Michi_Mochievee_profile.png/revision/latest"
+  },
+  {
+    "id": 172885382,
+    "characterId": "Mika_Melatika",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mika_Melatika",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e8/Mika_Melatika_Portrait.webp/revision/latest"
+  },
+  {
+    "id": 511061136,
+    "characterId": "Miki_VirtuaReal",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Miki_VirtuaReal",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/94/Miki_Portrait.png/revision/latest"
+  },
+  {
+    "id": 43224425,
+    "characterId": "Mikogami_Kotone",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mikogami_Kotone",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/a2/Mikogami_Kotone_Portrait.png/revision/latest"
+  },
+  {
+    "id": 838056644,
+    "characterId": "Mikoto_VirtuaReal",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mikoto_VirtuaReal",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/d/d5/Mikoto_portrait.png/revision/latest"
+  },
+  {
+    "id": 14281363,
+    "characterId": "Milan_Kestrel",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Milan_Kestrel",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e3/Milan_Kestrel_-_Headshot_Crop.png/revision/latest"
+  },
+  {
+    "id": 374631652,
+    "characterId": "Millie_Parfait",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Millie_Parfait",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e6/Millie_Parfait_Portrait.png/revision/latest"
+  },
+  {
+    "id": 53558408,
+    "characterId": "Mimoi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mimoi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/15/Mimoi_Headshot.png/revision/latest"
+  },
+  {
+    "id": 173432442,
+    "characterId": "Min_Suha",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Min_Suha",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/68/Min_Suha_Portrait.png/revision/latest"
+  },
+  {
+    "id": 909770187,
+    "characterId": "Minamo_Madoka",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Minamo_Madoka",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/68/Minamo_Madoka_Portrait.png/revision/latest"
+  },
+  {
+    "id": 707153020,
+    "characterId": "Mitsuri",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mitsuri",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/1e/2434_CN_Mitsuri_Profile.png/revision/latest"
+  },
+  {
+    "id": 865354087,
+    "characterId": "Mitsusa",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mitsusa",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/9b/Mitsusa-portrait.png/revision/latest"
+  },
+  {
+    "id": 614032830,
+    "characterId": "Miyu_VirtuaReal",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Miyu_VirtuaReal",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/f6/Miyu_Portrait.png/revision/latest"
+  },
+  {
+    "id": 787331486,
+    "characterId": "Miyu_Ottavia",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Miyu_Ottavia",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/0/01/Miyu_Ottavia_Portrait.png/revision/latest"
+  },
+  {
+    "id": 333826577,
+    "characterId": "Mizuki",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mizuki",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/bb/Mizuki_portrait.png/revision/latest"
+  },
+  {
+    "id": 497530000,
+    "characterId": "Moarin",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Moarin",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/50/Moarin_Headshot.png/revision/latest"
+  },
+  {
+    "id": 55613455,
+    "characterId": "Mofu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mofu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/a8/2434_CN_Mofu_Profile.png/revision/latest"
+  },
+  {
+    "id": 180425312,
+    "characterId": "Moira",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Moira",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/8/8c/Moira_Portrait.png/revision/latest"
+  },
+  {
+    "id": 133234815,
+    "characterId": "Momo",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Momo",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/39/Momo_2D_Model.jpg/revision/latest"
+  },
+  {
+    "id": 257677953,
+    "characterId": "Momoka",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Momoka",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/11/2434_CN_Momoka_Profile.png/revision/latest"
+  },
+  {
+    "id": 193083624,
+    "characterId": "Mononobe_Alice",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mononobe_Alice",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/5f/Mononobe_Alice_Portrait.png/revision/latest"
+  },
+  {
+    "id": 113251387,
+    "characterId": "Morinaka_Kazaki",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Morinaka_Kazaki",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/c1/Morinaka_Kazaki_Portrait.png/revision/latest"
+  },
+  {
+    "id": 190870832,
+    "characterId": "Murakumo_Kagetsu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Murakumo_Kagetsu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/17/Murakumo_Kagetsu_Portrait.png/revision/latest"
+  },
+  {
+    "id": 450815095,
+    "characterId": "Muri",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Muri",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/62/Muri_Portrait.png/revision/latest"
+  },
+  {
+    "id": 283687350,
+    "characterId": "Mysta_Rias",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Mysta_Rias",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/17/Mysta_Rias_Portrait.png/revision/latest"
+  },
+  {
+    "id": 782173646,
+    "characterId": "Na_Sera",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Na_Sera",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/ad/Na_Sera_Portrait.png/revision/latest"
+  },
+  {
+    "id": 842495874,
+    "characterId": "Nagao_Kei",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nagao_Kei",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/2e/Nagao_Kei_Portrait.png/revision/latest"
+  },
+  {
+    "id": 649549376,
+    "characterId": "Nagisa",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nagisa",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/b0/Nagisa_portrait.png/revision/latest"
+  },
+  {
+    "id": 371120986,
+    "characterId": "Nagisa_Arcinia",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nagisa_Arcinia",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/93/Nagisa_Arcinia_Portrait.png/revision/latest"
+  },
+  {
+    "id": 948771508,
+    "characterId": "Nagisa_Trout",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nagisa_Trout",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/d/d4/Nagisa_Trout_Portrait.png/revision/latest"
+  },
+  {
+    "id": 294915298,
+    "characterId": "Nakao_Azuma",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nakao_Azuma",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/6a/Nakao_Azuma_Headshot.png/revision/latest"
+  },
+  {
+    "id": 218882138,
+    "characterId": "Nanami",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nanami",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/49/Nanami_-_New_hoodie_portrait.jpg/revision/latest"
+  },
+  {
+    "id": 228507165,
+    "characterId": "Nanase_Suzuna",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nanase_Suzuna",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/4e/Nanase_Suzuna_Portrait.png/revision/latest"
+  },
+  {
+    "id": 181417473,
+    "characterId": "Nara_Haramaung",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nara_Haramaung",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/30/Nara_Haramaung_Portrait.png/revision/latest"
+  },
+  {
+    "id": 89283273,
+    "characterId": "Naraka",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Naraka",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/b1/Naraka_Portrait.png/revision/latest"
+  },
+  {
+    "id": 219451027,
+    "characterId": "Naruse_Naru",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Naruse_Naru",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/51/Naruse_Naru_-_Portrait_Main.png/revision/latest"
+  },
+  {
+    "id": 286079931,
+    "characterId": "Naruto_Kogane",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Naruto_Kogane",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/bc/Naruto_Kogane_Headshot.png/revision/latest"
+  },
+  {
+    "id": 359219458,
+    "characterId": "Nekoyashiki_Miku",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nekoyashiki_Miku",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/a8/Nekoyashiki_Miku_Portrait.png/revision/latest"
+  },
+  {
+    "id": 599088214,
+    "characterId": "Nimue",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nimue",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/d/d8/2434_CN_Nimue_Profile.png/revision/latest"
+  },
+  {
+    "id": 381824041,
+    "characterId": "Nina_Kosaka",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nina_Kosaka",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/f6/Nina_Kosaka_Portrait.png/revision/latest"
+  },
+  {
+    "id": 204829277,
+    "characterId": "Nishizono_Chigusa",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nishizono_Chigusa",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/40/Nishizono_Chigusa_Portrait.png/revision/latest"
+  },
+  {
+    "id": 261130958,
+    "characterId": "Noor",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Noor",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/aa/Noor_Portrait.png/revision/latest"
+  },
+  {
+    "id": 653101035,
+    "characterId": "Nori",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nori",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/b0/2434_CN_Nori_Profile.png/revision/latest"
+  },
+  {
+    "id": 693073928,
+    "characterId": "Nox",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nox",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/45/Nox_-_Portrait_%28June_2021_outfit%29.png/revision/latest"
+  },
+  {
+    "id": 462367874,
+    "characterId": "Nui_Sociere",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nui_Sociere",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/1a/Nui_Sociere_Portrait_2.png/revision/latest"
+  },
+  {
+    "id": 290036437,
+    "characterId": "Nun_Bora",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nun_Bora",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/c0/Nun_Bora_-_portrait_%28February_2021_costume%29.png/revision/latest"
+  },
+  {
+    "id": 296564214,
+    "characterId": "Nyatasha_Nyanners",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nyatasha_Nyanners",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/ea/Nyatasha_Nyanners_3rd_Model_Portrait.jpg/revision/latest"
+  },
+  {
+    "id": 286457981,
+    "characterId": "Nyatsuki",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Nyatsuki",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/12/Nyatsuki_Portrait.png/revision/latest"
+  },
+  {
+    "id": 573381582,
+    "characterId": "Oh_Jiyu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Oh_Jiyu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/aa/Oh_Jiyu_Portrait.png/revision/latest"
+  },
+  {
+    "id": 807347086,
+    "characterId": "Okamoto_Nagi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Okamoto_Nagi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/2d/Okamoto_Nagi_twitter_icon.jpg/revision/latest"
+  },
+  {
+    "id": 999877409,
+    "characterId": "Oliver_Evans",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Oliver_Evans",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/8/8e/Oliver_Evans_Portrait.png/revision/latest"
+  },
+  {
+    "id": 906008919,
+    "characterId": "Onomachi_Haruka",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Onomachi_Haruka",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/6a/Onomachi_Haruka_Portrait.png/revision/latest"
+  },
+  {
+    "id": 112396127,
+    "characterId": "Onotora",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Onotora",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/3c/Onotora_Portrait.png/revision/latest"
+  },
+  {
+    "id": 634530713,
+    "characterId": "Opal",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Opal",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/91/Opal_Portrait.jpg/revision/latest"
+  },
+  {
+    "id": 154572364,
+    "characterId": "Otogibara_Era",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Otogibara_Era",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e8/Otogibara_Era_Portrait.png/revision/latest"
+  },
+  {
+    "id": 708464627,
+    "characterId": "Pako",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Pako",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/59/Pako_portrait.png/revision/latest"
+  },
+  {
+    "id": 768697588,
+    "characterId": "Pax",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Pax",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/a2/Pax_Headshot.png/revision/latest"
+  },
+  {
+    "id": 660565433,
+    "characterId": "Petra_Gurin",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Petra_Gurin",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/d/d7/Petra_Gurin_Portrait.png/revision/latest"
+  },
+  {
+    "id": 621745959,
+    "characterId": "Phoebe_Chan",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Phoebe_Chan",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/2c/FeebeeDensetsu.png/revision/latest"
+  },
+  {
+    "id": 231855168,
+    "characterId": "PiaPiUFO",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "PiaPiUFO",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/49/PiaPiUFO.jpg/revision/latest"
+  },
+  {
+    "id": 725724037,
+    "characterId": "Plus",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Plus",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/c2/Plus_-_Headshot_June_2022_Costume_%28no_hat_and_cloak%29.png/revision/latest"
+  },
+  {
+    "id": 695797257,
+    "characterId": "Pomu_Rainpuff",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Pomu_Rainpuff",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/a8/Pomu_Rainpuff_Portrait.png/revision/latest"
+  },
+  {
+    "id": 246648310,
+    "characterId": "Ponto_Nei",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ponto_Nei",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/a2/Ponto_Nei_2026_Main_Model.png/revision/latest"
+  },
+  {
+    "id": 966922459,
+    "characterId": "Projekt_Melody",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Projekt_Melody",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/a5/Melody_2D_Portrait.jpg/revision/latest"
+  },
+  {
+    "id": 762085764,
+    "characterId": "Qilou",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Qilou",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/61/Qilou_Portrait.png/revision/latest"
+  },
+  {
+    "id": 96868252,
+    "characterId": "Rai_Galilei",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Rai_Galilei",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/51/Rai_Galilei_Portrait.png/revision/latest"
+  },
+  {
+    "id": 694498559,
+    "characterId": "Ratna_Petit",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ratna_Petit",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/fa/Ratna_Petit_Portrait_2024.png/revision/latest"
+  },
+  {
+    "id": 77902382,
+    "characterId": "Rayon",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Rayon",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/8/85/Rayon_Portrait.png/revision/latest"
+  },
+  {
+    "id": 418738718,
+    "characterId": "Rei7",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Rei7",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/8/81/Rei7_Portrait.png/revision/latest"
+  },
+  {
+    "id": 394988785,
+    "characterId": "Reimu_Endou",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Reimu_Endou",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/c5/Reimu_Endou_Portrait.png/revision/latest"
+  },
+  {
+    "id": 835733385,
+    "characterId": "Remi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Remi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/32/Remi_Portrait.png/revision/latest"
+  },
+  {
+    "id": 982063715,
+    "characterId": "Ren_Zotto",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ren_Zotto",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/5e/Ren_Zotto_-_Portrait.png/revision/latest"
+  },
+  {
+    "id": 495322253,
+    "characterId": "Reve",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Reve",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/c0/Reve_-_Portrait.png/revision/latest"
+  },
+  {
+    "id": 662453196,
+    "characterId": "Reza_Avanluna",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Reza_Avanluna",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/a8/Reza_Avanluna_Portrait.png/revision/latest"
+  },
+  {
+    "id": 943097054,
+    "characterId": "Rhea",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Rhea",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/93/Rhea_Chinese_style_costume_half_body.png/revision/latest"
+  },
+  {
+    "id": 142800455,
+    "characterId": "Richi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Richi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/c4/Richi_portrait.png/revision/latest"
+  },
+  {
+    "id": 551398995,
+    "characterId": "Riksa_Dhirendra",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Riksa_Dhirendra",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/12/Riksa_Dhirendra_Portrait.png/revision/latest"
+  },
+  {
+    "id": 164205093,
+    "characterId": "Rindou_Mikoto",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Rindou_Mikoto",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/f1/Rindou_Mikoto_Portrait.png/revision/latest"
+  },
+  {
+    "id": 583957291,
+    "characterId": "Roi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Roi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/15/Roi_Portrait.png/revision/latest"
+  },
+  {
+    "id": 580032303,
+    "characterId": "Rosemi_Lovelock",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Rosemi_Lovelock",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/ce/Rosemi_Lovelock_Portrait.png/revision/latest"
+  },
+  {
+    "id": 609188150,
+    "characterId": "Ruki",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ruki",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/25/Ruki_Portrait.png/revision/latest"
+  },
+  {
+    "id": 154717435,
+    "characterId": "Ryoma_Barrenwort",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ryoma_Barrenwort",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/f9/Ryoma_Barrenwort_Portrait.png/revision/latest"
+  },
+  {
+    "id": 677165539,
+    "characterId": "Ryu_Hari",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ryu_Hari",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/b1/Ryu_Hari_Portrait.png/revision/latest"
+  },
+  {
+    "id": 837862948,
+    "characterId": "Ryushen",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Ryushen",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/9/98/2434_Ryushen_Portrait.png/revision/latest"
+  },
+  {
+    "id": 239923452,
+    "characterId": "Saegusa_Akina",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Saegusa_Akina",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/5d/Saegusa_Akina_2022_Portrait.png/revision/latest"
+  },
+  {
+    "id": 998090662,
+    "characterId": "Saiki_Ittetsu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Saiki_Ittetsu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/b5/Saiki_Ittetsu_Portrait.png/revision/latest"
+  },
+  {
+    "id": 775678401,
+    "characterId": "Sakaki_Ness",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Sakaki_Ness",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/12/Sakaki_Ness_Portrait.png/revision/latest"
+  },
+  {
+    "id": 845634008,
+    "characterId": "Sakayori_Soma",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Sakayori_Soma",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e0/Sakayori_Soma_Portrait.png/revision/latest"
+  },
+  {
+    "id": 218309130,
+    "characterId": "Sakura_Ritsuki",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Sakura_Ritsuki",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/c7/Sakura_Ritsuki_Portrait.png/revision/latest"
+  },
+  {
+    "id": 18096294,
+    "characterId": "Samael",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Samael",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/2d/Samael_Portrait.png/revision/latest"
+  },
+  {
+    "id": 109131990,
+    "characterId": "Saotome_Berry",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Saotome_Berry",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/24/Saotome_Berry_Portrait.png/revision/latest"
+  },
+  {
+    "id": 751981667,
+    "characterId": "Sasaki_Saku",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Sasaki_Saku",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/36/Sasaki_Saku_Portrait_New.webp/revision/latest"
+  },
+  {
+    "id": 997524019,
+    "characterId": "Saya",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Saya",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/29/Saya_Portrait.png/revision/latest"
+  },
+  {
+    "id": 287754489,
+    "characterId": "Scarle_Yonaguni",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Scarle_Yonaguni",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/0/09/Scarle_Yonaguni_-_Portrait.png/revision/latest"
+  },
+  {
+    "id": 692106589,
+    "characterId": "Seffyna",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Seffyna",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/36/Seffyna_Portrait.png/revision/latest"
+  },
+  {
+    "id": 425972813,
+    "characterId": "Seible",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Seible",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/1/18/Seible_portrait.png/revision/latest"
+  },
+  {
+    "id": 247627317,
+    "characterId": "Selen_Tatsuki",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Selen_Tatsuki",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/4e/Selen_Tatsuki_Portrait.png/revision/latest"
+  },
+  {
+    "id": 999104040,
+    "characterId": "Senri_Ayumu",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Senri_Ayumu",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e9/Senri_Ayumu_Portrait.png/revision/latest"
+  },
+  {
+    "id": 301960138,
+    "characterId": "Seraph_Dazzlegarden",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Seraph_Dazzlegarden",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/31/2434_Seraph_Dazzlegarden_Portrait.png/revision/latest"
+  },
+  {
+    "id": 465470238,
+    "characterId": "Seto_Miyako",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Seto_Miyako",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e3/Seto_Miyako_Portrait.png/revision/latest"
+  },
+  {
+    "id": 671821230,
+    "characterId": "Setsuna",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Setsuna",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e6/Setsuna_Portrait.png/revision/latest"
+  },
+  {
+    "id": 100679675,
+    "characterId": "Shaun",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shaun",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/a4/Shaun_Portrait.png/revision/latest"
+  },
+  {
+    "id": 400039360,
+    "characterId": "Shellin_Burgundy",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shellin_Burgundy",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/42/Shellin_Burgundy_Portrait.png/revision/latest"
+  },
+  {
+    "id": 954178078,
+    "characterId": "Shibuya_Hajime",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shibuya_Hajime",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/c8/Shibuya_Hajime_Portrait.png/revision/latest"
+  },
+  {
+    "id": 482192448,
+    "characterId": "Shiga_Riko",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shiga_Riko",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/60/Shiga_Riko_Portrait.png/revision/latest"
+  },
+  {
+    "id": 85331944,
+    "characterId": "Shiina_Yuika",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shiina_Yuika",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/c9/Shiina_Yuika_Portrait.png/revision/latest"
+  },
+  {
+    "id": 733299583,
+    "characterId": "Shiki",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shiki",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/aa/Shiki_Headshot.png/revision/latest"
+  },
+  {
+    "id": 59604969,
+    "characterId": "Shikinagi_Akira",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shikinagi_Akira",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/63/2434_Shikinagi_Akira_Portrait.png/revision/latest"
+  },
+  {
+    "id": 42412133,
+    "characterId": "Shin_Kiru",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shin_Kiru",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/cd/Shin_Kiru_Portrait.png/revision/latest"
+  },
+  {
+    "id": 423766614,
+    "characterId": "Shin_Yuya",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shin_Yuya",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/c/cd/Shin_Yuya_Portrait.png/revision/latest"
+  },
+  {
+    "id": 623302483,
+    "characterId": "Shindo_Raito",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shindo_Raito",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/36/Shindo_Raito_Portrait.png/revision/latest"
+  },
+  {
+    "id": 938045104,
+    "characterId": "Shinomiya_Yuno",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shinomiya_Yuno",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/b6/Shinomiya_Yuno_Portrait.png/revision/latest"
+  },
+  {
+    "id": 688797817,
+    "characterId": "Shiori",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shiori",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/a0/Shiori_Portrait.png/revision/latest"
+  },
+  {
+    "id": 870551122,
+    "characterId": "Shioriha_Ruri",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shioriha_Ruri",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/a6/Shioriha_Ruri_-_Headshot_Crop.png/revision/latest"
+  },
+  {
+    "id": 722916211,
+    "characterId": "Shirasa_Ayane",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shirasa_Ayane",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e1/Shirasa_Ayane_Portrait.png/revision/latest"
+  },
+  {
+    "id": 971866307,
+    "characterId": "Shirayuki_Tomoe",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shirayuki_Tomoe",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/b6/Shirayuki_Tomoe_Portrait.png/revision/latest"
+  },
+  {
+    "id": 121599416,
+    "characterId": "Shirose_Isumi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shirose_Isumi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/f2/Shirose_Isumi_Potrait.png/revision/latest"
+  },
+  {
+    "id": 141347822,
+    "characterId": "Shishido_Akari",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shishido_Akari",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/f/f4/Shishido_Akari_Portrait.png/revision/latest"
+  },
+  {
+    "id": 818842085,
+    "characterId": "Shizuka_Rin",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shizuka_Rin",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/6/60/Shizuka_Rin_Portrait.png/revision/latest"
+  },
+  {
+    "id": 47406543,
+    "characterId": "Shu_Yamino",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Shu_Yamino",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/5/5f/Shu_Yamino_Portrait.png/revision/latest"
+  },
+  {
+    "id": 968127832,
+    "characterId": "Silvervale",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Silvervale",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/4a/Sakura_Silver_portrait.jpg/revision/latest"
+  },
+  {
+    "id": 245571990,
+    "characterId": "Sirius",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Sirius",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/2/21/Sirius_2023-01_costume_Halfbody.png/revision/latest"
+  },
+  {
+    "id": 321489379,
+    "characterId": "Siska_Leontyne",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Siska_Leontyne",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/0/00/Siska_Leontyne_Portrait.png/revision/latest"
+  },
+  {
+    "id": 94044939,
+    "characterId": "Sister_Claire",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Sister_Claire",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/a/a5/Sister_Cleaire_-_Portrait.png/revision/latest"
+  },
+  {
+    "id": 639238995,
+    "characterId": "So_Nagi",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "So_Nagi",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/0/0a/So_Nagi_Portrait.png/revision/latest"
+  },
+  {
+    "id": 36160955,
+    "characterId": "Song_Mia",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Song_Mia",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/4/43/Song_Mia_Portrait.png/revision/latest"
+  },
+  {
+    "id": 747199234,
+    "characterId": "Sonny_Brisko",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Sonny_Brisko",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/3/34/Sonny_Brisko_portrait.png/revision/latest"
+  },
+  {
+    "id": 835239362,
+    "characterId": "Sophia_Valentine",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Sophia_Valentine",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/d/d8/Sophia_Valentine_Portrait.png/revision/latest"
+  },
+  {
+    "id": 54070817,
+    "characterId": "Tori_Oriane",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Tori_Oriane",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/8/8a/Tori_Oriane_3.0_soul_ferryman.jpg/revision/latest"
+  },
+  {
+    "id": 60491692,
+    "characterId": "Veibae",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Veibae",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/e7/Vei2025.jpg/revision/latest"
+  },
+  {
+    "id": 515653965,
+    "characterId": "Yutori_Peke",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Yutori_Peke",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/b/b0/Yutori_Peke_twitter_icon.jpg/revision/latest"
+  },
+  {
+    "id": 451063122,
+    "characterId": "Zentreya",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "Zentreya",
+    "image_url": "https://static.wikia.nocookie.net/virtualyoutuber/images/e/ea/Cyber_Zen_face_with_jacket-modified.png/revision/latest"
+  }
+]

@@ -1,0 +1,3822 @@
+[
+  {
+    "id": 166326250,
+    "characterId": "c1144",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1144",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1144_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 395397493,
+    "characterId": "c2016",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2016",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2016_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "dark"
+  },
+  {
+    "id": 101277522,
+    "characterId": "c1017",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1017",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1017_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "fire"
+  },
+  {
+    "id": 604272662,
+    "characterId": "c3143",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3143",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3143_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "wind"
+  },
+  {
+    "id": 19483675,
+    "characterId": "c3043",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3043",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/f/f6/Adlay_big.png/revision/latest?cb=20190316142211",
+    "image_source": "fandom_big",
+    "className": "mage",
+    "attribute": "wind"
+  },
+  {
+    "id": 677934719,
+    "characterId": "c5001",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c5001",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5001_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "fire"
+  },
+  {
+    "id": 337128965,
+    "characterId": "c1138",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1138",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1138_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "wind"
+  },
+  {
+    "id": 20934905,
+    "characterId": "c1137",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1137",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1137_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "ice"
+  },
+  {
+    "id": 56099576,
+    "characterId": "c1140",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1140",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1140_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "fire"
+  },
+  {
+    "id": 771778381,
+    "characterId": "c1139",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1139",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1139_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "fire"
+  },
+  {
+    "id": 149151834,
+    "characterId": "c5110",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5110",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5110_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "fire"
+  },
+  {
+    "id": 153004665,
+    "characterId": "c3105",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3105",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3105_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "dark"
+  },
+  {
+    "id": 211798450,
+    "characterId": "c4105",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4105",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4105_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "dark"
+  },
+  {
+    "id": 899802255,
+    "characterId": "c3093",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3093",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3093_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "wind"
+  },
+  {
+    "id": 760043606,
+    "characterId": "c1155",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1155",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1155_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "dark"
+  },
+  {
+    "id": 352212024,
+    "characterId": "c1018",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c1018",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1018_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "ice"
+  },
+  {
+    "id": 831043054,
+    "characterId": "c1179",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1179",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1179_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 794268138,
+    "characterId": "c1156",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1156",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1156_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "wind"
+  },
+  {
+    "id": 102112507,
+    "characterId": "c1100",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1100",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1100_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "wind"
+  },
+  {
+    "id": 289529024,
+    "characterId": "c3012",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3012",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3012_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "ice"
+  },
+  {
+    "id": 68428218,
+    "characterId": "c4065",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4065",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4065_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "dark"
+  },
+  {
+    "id": 685730547,
+    "characterId": "c2042",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2042",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2042_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 960588575,
+    "characterId": "c1143",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1143",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1143_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "ice"
+  },
+  {
+    "id": 387457052,
+    "characterId": "c3158",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3158",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3158_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "ice"
+  },
+  {
+    "id": 949846811,
+    "characterId": "c6062",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c6062",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c6062_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "light"
+  },
+  {
+    "id": 676701508,
+    "characterId": "c4042",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4042",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/a/ab/Angelic_Montmorancy_big.png/revision/latest?cb=20190619003350",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "ice"
+  },
+  {
+    "id": 322897403,
+    "characterId": "c1062",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1062",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/9/90/Angelica_big.png/revision/latest?cb=20190310200820",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "ice"
+  },
+  {
+    "id": 115995854,
+    "characterId": "c2019",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2019",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/7/7e/Apocalypse_Ravi_big.png/revision/latest?cb=20190826193444",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 885694253,
+    "characterId": "c5175",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5175",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5175_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "fire"
+  },
+  {
+    "id": 799094647,
+    "characterId": "c1048",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1048",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1048_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "fire"
+  },
+  {
+    "id": 414924803,
+    "characterId": "c2007",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2007",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2007_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "dark"
+  },
+  {
+    "id": 395202365,
+    "characterId": "c5004",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5004",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5004_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "dark"
+  },
+  {
+    "id": 410107321,
+    "characterId": "c2099",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2099",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2099_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "light"
+  },
+  {
+    "id": 517880184,
+    "characterId": "c5128",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5128",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5128_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "ice"
+  },
+  {
+    "id": 913121998,
+    "characterId": "c1129",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1129",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1129_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "ice"
+  },
+  {
+    "id": 793881315,
+    "characterId": "c1008",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1008",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/1/1d/Armin_big.png/revision/latest?cb=20190317134809",
+    "image_source": "fandom_big",
+    "className": "knight",
+    "attribute": "wind"
+  },
+  {
+    "id": 133633994,
+    "characterId": "c3004",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3004",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3004_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 288342977,
+    "characterId": "c1124",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1124",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1124_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "wind"
+  },
+  {
+    "id": 666049513,
+    "characterId": "c2013",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2013",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2013_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 176399271,
+    "characterId": "c2014",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2014",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2014_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "dark"
+  },
+  {
+    "id": 52012515,
+    "characterId": "c2033",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2033",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2033_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "dark"
+  },
+  {
+    "id": 560362412,
+    "characterId": "c2091",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2091",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2091_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "light"
+  },
+  {
+    "id": 900588878,
+    "characterId": "c5069",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5069",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5069_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "ice"
+  },
+  {
+    "id": 874902639,
+    "characterId": "c2031",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2031",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2031_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "dark"
+  },
+  {
+    "id": 176335863,
+    "characterId": "c3031",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3031",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/b/b0/Azalea_big.png/revision/latest?cb=20190312000437",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 121026800,
+    "characterId": "c1015",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1015",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1015_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "fire"
+  },
+  {
+    "id": 114201840,
+    "characterId": "c6008",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c6008",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c6008_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 76823068,
+    "characterId": "c1093",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1093",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/d/d7/Baiken_big.png/revision/latest?cb=20190504113617",
+    "image_source": "fandom_big",
+    "className": "assassin",
+    "attribute": "wind"
+  },
+  {
+    "id": 73001280,
+    "characterId": "c1053",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1053",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1053_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "wind"
+  },
+  {
+    "id": 148450281,
+    "characterId": "c3006",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3006",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/5/52/Bask_big.png/revision/latest?cb=20190222213534",
+    "image_source": "fandom_big",
+    "className": "knight",
+    "attribute": "ice"
+  },
+  {
+    "id": 214208240,
+    "characterId": "c3095",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3095",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3095_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 216467493,
+    "characterId": "c1141",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1141",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1141_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "fire"
+  },
+  {
+    "id": 454078751,
+    "characterId": "c1117",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1117",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1117_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 768472458,
+    "characterId": "c1071",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1071",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/9/93/Bellona_big.png/revision/latest?cb=20190407141105",
+    "image_source": "fandom_big",
+    "className": "ranger",
+    "attribute": "wind"
+  },
+  {
+    "id": 874481466,
+    "characterId": "c2043",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2043",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2043_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "light"
+  },
+  {
+    "id": 332457063,
+    "characterId": "c1146",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1146",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1146_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 996008788,
+    "characterId": "c3162",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3162",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3162_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "wind"
+  },
+  {
+    "id": 727329933,
+    "characterId": "c1160",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1160",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1160_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "ice"
+  },
+  {
+    "id": 552744603,
+    "characterId": "c2021",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2021",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2021_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "light"
+  },
+  {
+    "id": 366375654,
+    "characterId": "c2011",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2011",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2011_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "dark"
+  },
+  {
+    "id": 910235473,
+    "characterId": "c2039",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2039",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2039_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "dark"
+  },
+  {
+    "id": 402118878,
+    "characterId": "c5046",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5046",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5046_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "wind"
+  },
+  {
+    "id": 166976913,
+    "characterId": "c1097",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1097",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1097_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "fire"
+  },
+  {
+    "id": 617312669,
+    "characterId": "c2124",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2124",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2124_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 158443644,
+    "characterId": "c2024",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2024",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2024_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "dark"
+  },
+  {
+    "id": 862229201,
+    "characterId": "c1145",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1145",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1145_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "ice"
+  },
+  {
+    "id": 81873622,
+    "characterId": "c3001",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3001",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3001_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "fire"
+  },
+  {
+    "id": 900927348,
+    "characterId": "c1154",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1154",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1154_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "ice"
+  },
+  {
+    "id": 463617305,
+    "characterId": "c2128",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2128",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2128_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 864743212,
+    "characterId": "c3124",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3124",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3124_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "light"
+  },
+  {
+    "id": 700579879,
+    "characterId": "c4034",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4034",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4034_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "light"
+  },
+  {
+    "id": 570718905,
+    "characterId": "c3071",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3071",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3071_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "fire"
+  },
+  {
+    "id": 640810202,
+    "characterId": "c3051",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3051",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/0/0a/Carrot_big.png/revision/latest?cb=20190316144102",
+    "image_source": "fandom_big",
+    "className": "mage",
+    "attribute": "fire"
+  },
+  {
+    "id": 903047083,
+    "characterId": "c1013",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1013",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/8/88/Cartuja_big.png/revision/latest?cb=20190325235138",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "wind"
+  },
+  {
+    "id": 577711855,
+    "characterId": "c1002",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1002",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1002_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "fire"
+  },
+  {
+    "id": 961587575,
+    "characterId": "c3064",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3064",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/0/06/Celeste_big.png/revision/latest?cb=20190317184524",
+    "image_source": "fandom_big",
+    "className": "ranger",
+    "attribute": "light"
+  },
+  {
+    "id": 379422211,
+    "characterId": "c2005",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2005",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2005_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "dark"
+  },
+  {
+    "id": 155494737,
+    "characterId": "c1103",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1103",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/4/4e/Celine_big.png/revision/latest?cb=20200618142032",
+    "image_source": "fandom_big",
+    "className": "assassin",
+    "attribute": "wind"
+  },
+  {
+    "id": 572282796,
+    "characterId": "c1081",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1081",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1081_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "ice"
+  },
+  {
+    "id": 940029808,
+    "characterId": "c1079",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1079",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1079_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 586604298,
+    "characterId": "c2037",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2037",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2037_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "dark"
+  },
+  {
+    "id": 755477529,
+    "characterId": "c2010",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2010",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2010_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "dark"
+  },
+  {
+    "id": 302093323,
+    "characterId": "c4001",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4001",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4001_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "fire"
+  },
+  {
+    "id": 865950032,
+    "characterId": "c4025",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4025",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4025_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 525663712,
+    "characterId": "c1027",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1027",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/b/b2/Charles_big.png/revision/latest?cb=20190915160346",
+    "image_source": "fandom_big",
+    "className": "knight",
+    "attribute": "wind"
+  },
+  {
+    "id": 192384248,
+    "characterId": "c1009",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1009",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1009_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "fire"
+  },
+  {
+    "id": 440158381,
+    "characterId": "c1049",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1049",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1049_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "ice"
+  },
+  {
+    "id": 243354672,
+    "characterId": "c1101",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1101",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1101_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "ice"
+  },
+  {
+    "id": 435458860,
+    "characterId": "c3123",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3123",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3123_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "wind"
+  },
+  {
+    "id": 286724733,
+    "characterId": "c3025",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3025",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3025_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 684439209,
+    "characterId": "c1014",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1014",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/b/b8/Cidd_big.png/revision/latest?cb=20190326220333",
+    "image_source": "fandom_big",
+    "className": "assassin",
+    "attribute": "wind"
+  },
+  {
+    "id": 42278958,
+    "characterId": "c1028",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1028",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/6/64/Clarissa_big.png/revision/latest?cb=20190310150819",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "ice"
+  },
+  {
+    "id": 377806731,
+    "characterId": "c3156",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3156",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3156_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "fire"
+  },
+  {
+    "id": 816241253,
+    "characterId": "c2027",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2027",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2027_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "dark"
+  },
+  {
+    "id": 567137299,
+    "characterId": "c1033",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1033",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/c/c8/Coli_big.png/revision/latest?cb=20190317202950",
+    "image_source": "fandom_big",
+    "className": "assassin",
+    "attribute": "ice"
+  },
+  {
+    "id": 766816717,
+    "characterId": "c1099",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1099",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1099_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "wind"
+  },
+  {
+    "id": 127673444,
+    "characterId": "c4035",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4035",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4035_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 102768124,
+    "characterId": "c2080",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2080",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2080_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "light"
+  },
+  {
+    "id": 95532376,
+    "characterId": "c2089",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2089",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2089_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "light"
+  },
+  {
+    "id": 745278370,
+    "characterId": "c1012",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1012",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/5/51/Corvus_big.png/revision/latest?cb=20190310212845",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 301541803,
+    "characterId": "c2054",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2054",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2054_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "dark"
+  },
+  {
+    "id": 785958057,
+    "characterId": "c2008",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2008",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2008_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 344575898,
+    "characterId": "c1036",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1036",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1036_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "ice"
+  },
+  {
+    "id": 904523676,
+    "characterId": "c2012",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2012",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2012_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 207285756,
+    "characterId": "c2090",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2090",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2090_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "dark"
+  },
+  {
+    "id": 178271151,
+    "characterId": "c2053",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2053",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2053_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "light"
+  },
+  {
+    "id": 694186523,
+    "characterId": "c2095",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2095",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2095_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 985634386,
+    "characterId": "c2022",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2022",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/1/19/Destina_big.png/revision/latest?cb=20190912235348",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "wind"
+  },
+  {
+    "id": 286835506,
+    "characterId": "c1076",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1076",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/c/cb/Diene_big.png/revision/latest?cb=20190914205831",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "ice"
+  },
+  {
+    "id": 528919730,
+    "characterId": "c1021",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1021",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/f/f5/Dingo_big.png/revision/latest?cb=20190326222212",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 863494459,
+    "characterId": "c2129",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2129",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2129_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 127402000,
+    "characterId": "c1094",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1094",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1094_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "ice"
+  },
+  {
+    "id": 197792444,
+    "characterId": "c4073",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4073",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4073_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "wind"
+  },
+  {
+    "id": 580843677,
+    "characterId": "c1037",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1037",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/7/70/Dominiel_big.png/revision/latest?cb=20190326232337",
+    "image_source": "fandom_big",
+    "className": "mage",
+    "attribute": "ice"
+  },
+  {
+    "id": 764376666,
+    "characterId": "c3044",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3044",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/2/23/Doris_big.png/revision/latest?cb=20190407145447",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "light"
+  },
+  {
+    "id": 220133939,
+    "characterId": "c2106",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2106",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2106_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 736479780,
+    "characterId": "c2132",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2132",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2132_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "light"
+  },
+  {
+    "id": 772609734,
+    "characterId": "c3094",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3094",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3094_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 663221460,
+    "characterId": "c1111",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1111",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1111_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "ice"
+  },
+  {
+    "id": 775659391,
+    "characterId": "c1134",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1134",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1134_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 851906895,
+    "characterId": "c1091",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1091",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/7/7c/Elena_big.png/revision/latest?cb=20200521152610",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "ice"
+  },
+  {
+    "id": 474646588,
+    "characterId": "c1142",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1142",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1142_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "fire"
+  },
+  {
+    "id": 47927557,
+    "characterId": "c1105",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1105",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1105_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "fire"
+  },
+  {
+    "id": 350929066,
+    "characterId": "c3054",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3054",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/4/49/Elson_big.png/revision/latest?cb=20190222221540",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "light"
+  },
+  {
+    "id": 312054608,
+    "characterId": "c1148",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1148",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1148_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "ice"
+  },
+  {
+    "id": 444896541,
+    "characterId": "c1116",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1116",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1116_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "ice"
+  },
+  {
+    "id": 776611486,
+    "characterId": "c2113",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2113",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2113_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 437854049,
+    "characterId": "c3022",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3022",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/1/1b/Enott_big.png/revision/latest?cb=20190310222437",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "ice"
+  },
+  {
+    "id": 145697791,
+    "characterId": "c1108",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1108",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1108_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "wind"
+  },
+  {
+    "id": 154513841,
+    "characterId": "c1183",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1183",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1183_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "wind"
+  },
+  {
+    "id": 222976938,
+    "characterId": "c2069",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2069",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2069_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "dark"
+  },
+  {
+    "id": 388280102,
+    "characterId": "c5147",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5147",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5147_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "wind"
+  },
+  {
+    "id": 552308612,
+    "characterId": "c3157",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3157",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3157_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "wind"
+  },
+  {
+    "id": 507313273,
+    "characterId": "c5050",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5050",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5050_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "ice"
+  },
+  {
+    "id": 207537417,
+    "characterId": "c2046",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2046",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2046_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "light"
+  },
+  {
+    "id": 363343302,
+    "characterId": "c4003",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4003",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/0/0f/Falconer_Kluri_big.png/revision/latest?cb=20190416224022",
+    "image_source": "fandom_big",
+    "className": "knight",
+    "attribute": "wind"
+  },
+  {
+    "id": 270215690,
+    "characterId": "c2002",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2002",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2002_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "dark"
+  },
+  {
+    "id": 171612014,
+    "characterId": "c1170",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1170",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1170_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "ice"
+  },
+  {
+    "id": 350503566,
+    "characterId": "c1158",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1158",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1158_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "wind"
+  },
+  {
+    "id": 915526490,
+    "characterId": "c1173",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1173",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1173_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "ice"
+  },
+  {
+    "id": 695987409,
+    "characterId": "c5111",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5111",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5111_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "fire"
+  },
+  {
+    "id": 508236488,
+    "characterId": "c2032",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2032",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2032_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 726431764,
+    "characterId": "c1110",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1110",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1110_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "ice"
+  },
+  {
+    "id": 417089285,
+    "characterId": "c3026",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c3026",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/3/3b/Free_Spirit_Tieria_big.png/revision/latest?cb=20200611174808",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "light"
+  },
+  {
+    "id": 432526459,
+    "characterId": "c1163",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1163",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1163_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "ice"
+  },
+  {
+    "id": 106438472,
+    "characterId": "c1172",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1172",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1172_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "wind"
+  },
+  {
+    "id": 797484707,
+    "characterId": "c1147",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1147",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1147_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "ice"
+  },
+  {
+    "id": 600958470,
+    "characterId": "c1087",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1087",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1087_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "ice"
+  },
+  {
+    "id": 581362871,
+    "characterId": "c2035",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2035",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2035_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "light"
+  },
+  {
+    "id": 433763232,
+    "characterId": "c2001",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2001",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2001_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 697772539,
+    "characterId": "c3103",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3103",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3103_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "wind"
+  },
+  {
+    "id": 621467687,
+    "characterId": "c3074",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3074",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3074_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "light"
+  },
+  {
+    "id": 227301719,
+    "characterId": "c3101",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3101",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3101_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "fire"
+  },
+  {
+    "id": 981166687,
+    "characterId": "c2086",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2086",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2086_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 353536231,
+    "characterId": "c5070",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5070",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5070_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 405612427,
+    "characterId": "c2018",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2018",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/f/f3/Guider_Aither_big.png/revision/latest?cb=20190414142525",
+    "image_source": "fandom_big",
+    "className": "mage",
+    "attribute": "light"
+  },
+  {
+    "id": 119647706,
+    "characterId": "c3024",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3024",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3024_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "light"
+  },
+  {
+    "id": 508613648,
+    "characterId": "c1153",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1153",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1153_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "dark"
+  },
+  {
+    "id": 544452745,
+    "characterId": "c3135",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3135",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3135_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "dark"
+  },
+  {
+    "id": 259539331,
+    "characterId": "c1039",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1039",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1039_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "fire"
+  },
+  {
+    "id": 691495903,
+    "characterId": "c3091",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3091",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3091_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "fire"
+  },
+  {
+    "id": 324259519,
+    "characterId": "c3041",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3041",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/b/b5/Hazel_big.png/revision/latest?cb=20190311230327",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "fire"
+  },
+  {
+    "id": 568065081,
+    "characterId": "c1178",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1178",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1178_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "wind"
+  },
+  {
+    "id": 161579614,
+    "characterId": "c3122",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3122",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3122_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "ice"
+  },
+  {
+    "id": 52353627,
+    "characterId": "c3023",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3023",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3023_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "wind"
+  },
+  {
+    "id": 171090756,
+    "characterId": "c2126",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2126",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2126_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "dark"
+  },
+  {
+    "id": 736366578,
+    "characterId": "c5016",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5016",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5016_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 6252917,
+    "characterId": "c4141",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4141",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4141_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "fire"
+  },
+  {
+    "id": 602721462,
+    "characterId": "c3055",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3055",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/c/cb/Hurado_big.png/revision/latest?cb=20190409223406",
+    "image_source": "fandom_big",
+    "className": "mage",
+    "attribute": "dark"
+  },
+  {
+    "id": 838757996,
+    "characterId": "c1128",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1128",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1128_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 934788146,
+    "characterId": "c3102",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3102",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3102_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "ice"
+  },
+  {
+    "id": 63243174,
+    "characterId": "c1113",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1113",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1113_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "fire"
+  },
+  {
+    "id": 754583653,
+    "characterId": "c1161",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1161",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1161_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "wind"
+  },
+  {
+    "id": 365749799,
+    "characterId": "c2085",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2085",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2085_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 882357919,
+    "characterId": "c6017",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c6017",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c6017_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "light"
+  },
+  {
+    "id": 125586044,
+    "characterId": "c4158",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4158",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4158_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "ice"
+  },
+  {
+    "id": 659690242,
+    "characterId": "c1024",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1024",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/d/d5/Iseria_big.png/revision/latest?cb=20190831121809",
+    "image_source": "fandom_big",
+    "className": "ranger",
+    "attribute": "wind"
+  },
+  {
+    "id": 333757538,
+    "characterId": "c1182",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1182",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1182_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "fire"
+  },
+  {
+    "id": 85530359,
+    "characterId": "c1130",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1130",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1130_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 666922465,
+    "characterId": "c3131",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3131",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3131_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 584311874,
+    "characterId": "c3053",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3053",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/b/b5/Jecht_big.png/revision/latest?cb=20190326005655",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "wind"
+  },
+  {
+    "id": 859819016,
+    "characterId": "c3052",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3052",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/b/b3/Jena_big.png/revision/latest?cb=20190310223756",
+    "image_source": "fandom_big",
+    "className": "mage",
+    "attribute": "ice"
+  },
+  {
+    "id": 630663692,
+    "characterId": "c1055",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1055",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1055_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "fire"
+  },
+  {
+    "id": 754636798,
+    "characterId": "c2006",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2006",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2006_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "light"
+  },
+  {
+    "id": 226849688,
+    "characterId": "c3011",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3011",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/5/51/Judith_big.png/revision/latest?cb=20190311234453",
+    "image_source": "fandom_big",
+    "className": "assassin",
+    "attribute": "fire"
+  },
+  {
+    "id": 766147862,
+    "characterId": "c3151",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3151",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3151_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 832024930,
+    "characterId": "c1152",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1152",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1152_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 733835258,
+    "characterId": "c1011",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1011",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1011_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "ice"
+  },
+  {
+    "id": 442231454,
+    "characterId": "c1073",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1073",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1073_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "fire"
+  },
+  {
+    "id": 158765381,
+    "characterId": "c1023",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1023",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/2/27/Kayron_big.png/revision/latest?cb=20190217182122",
+    "image_source": "fandom_big",
+    "className": "assassin",
+    "attribute": "fire"
+  },
+  {
+    "id": 266556646,
+    "characterId": "c1047",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1047",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/8/8e/Ken_big.png/revision/latest?cb=20190409221635",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 935531663,
+    "characterId": "c1086",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1086",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1086_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "fire"
+  },
+  {
+    "id": 105765512,
+    "characterId": "c1085",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1085",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1085_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 360081378,
+    "characterId": "c3084",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3084",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3084_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 354610767,
+    "characterId": "c3063",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3063",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3063_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "wind"
+  },
+  {
+    "id": 566699098,
+    "characterId": "c1006",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1006",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1006_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "ice"
+  },
+  {
+    "id": 860838712,
+    "characterId": "c2028",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2028",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2028_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 439556269,
+    "characterId": "c1107",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1107",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/8/80/Kizuna_AI_big.png/revision/latest?cb=20200611162117",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "fire"
+  },
+  {
+    "id": 520486025,
+    "characterId": "c3003",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3003",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/8/81/Kluri_big.png/revision/latest?cb=20190317140803",
+    "image_source": "fandom_big",
+    "className": "knight",
+    "attribute": "wind"
+  },
+  {
+    "id": 71473769,
+    "characterId": "c1070",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1070",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/8/84/Krau_big.png/revision/latest?cb=20190506012435",
+    "image_source": "fandom_big",
+    "className": "knight",
+    "attribute": "ice"
+  },
+  {
+    "id": 366817477,
+    "characterId": "c6005",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c6005",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c6005_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "light"
+  },
+  {
+    "id": 235794927,
+    "characterId": "c1159",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1159",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1159_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "wind"
+  },
+  {
+    "id": 516233094,
+    "characterId": "c1109",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1109",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1109_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "wind"
+  },
+  {
+    "id": 806041136,
+    "characterId": "c6011",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c6011",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c6011_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "light"
+  },
+  {
+    "id": 503529812,
+    "characterId": "c2070",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2070",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2070_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 211359506,
+    "characterId": "c3163",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3163",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3163_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "wind"
+  },
+  {
+    "id": 662920591,
+    "characterId": "c3092",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3092",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3092_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "ice"
+  },
+  {
+    "id": 675487674,
+    "characterId": "c1029",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1029",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1029_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "wind"
+  },
+  {
+    "id": 552205456,
+    "characterId": "c5149",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5149",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5149_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "ice"
+  },
+  {
+    "id": 100231795,
+    "characterId": "c1046",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1046",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1046_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "fire"
+  },
+  {
+    "id": 412472934,
+    "characterId": "c1089",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1089",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1089_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "fire"
+  },
+  {
+    "id": 842824624,
+    "characterId": "c1095",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1095",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/2/23/Lilibet_big.png/revision/latest?cb=20190825145158",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "wind"
+  },
+  {
+    "id": 829450474,
+    "characterId": "c3153",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3153",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3153_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "wind"
+  },
+  {
+    "id": 156242121,
+    "characterId": "c2079",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2079",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2079_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "light"
+  },
+  {
+    "id": 64590706,
+    "characterId": "c2009",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2009",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2009_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "light"
+  },
+  {
+    "id": 453295623,
+    "characterId": "c2071",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2071",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2071_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 483061395,
+    "characterId": "c2125",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2125",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2125_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 510836859,
+    "characterId": "c3035",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3035",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/e/e8/Lorina_big.png/revision/latest?cb=20190303195059",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 103694906,
+    "characterId": "c1031",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1031",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/d/d3/Lots_big.png/revision/latest?cb=20190328230650",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "wind"
+  },
+  {
+    "id": 835244518,
+    "characterId": "c1126",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1126",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1126_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "ice"
+  },
+  {
+    "id": 11408838,
+    "characterId": "c3113",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3113",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3113_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "wind"
+  },
+  {
+    "id": 496249794,
+    "characterId": "c1069",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1069",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/d/dd/Ludwig_big.png/revision/latest?cb=20190314211146",
+    "image_source": "fandom_big",
+    "className": "mage",
+    "attribute": "wind"
+  },
+  {
+    "id": 242037882,
+    "characterId": "c1082",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1082",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1082_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "ice"
+  },
+  {
+    "id": 241124209,
+    "characterId": "c1066",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1066",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1066_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "ice"
+  },
+  {
+    "id": 308209463,
+    "characterId": "c4044",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4044",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4044_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "light"
+  },
+  {
+    "id": 233691716,
+    "characterId": "c2049",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2049",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2049_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "light"
+  },
+  {
+    "id": 725735562,
+    "characterId": "c2047",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2047",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2047_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 671331333,
+    "characterId": "c4041",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4041",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/8/8f/Mascot_Hazel_big.png/revision/latest?cb=20190420130140",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "fire"
+  },
+  {
+    "id": 289139362,
+    "characterId": "c1032",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1032",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/c/ce/Maya_big.png/revision/latest?cb=20190303185311",
+    "image_source": "fandom_big",
+    "className": "knight",
+    "attribute": "fire"
+  },
+  {
+    "id": 240852205,
+    "characterId": "c2073",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2073",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2073_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 889227346,
+    "characterId": "c3121",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3121",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3121_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 182133283,
+    "characterId": "c1096",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1096",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1096_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "fire"
+  },
+  {
+    "id": 595339093,
+    "characterId": "c0002",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c0002",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c0002_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "fire"
+  },
+  {
+    "id": 247651704,
+    "characterId": "c4023",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4023",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4023_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "wind"
+  },
+  {
+    "id": 148436846,
+    "characterId": "c5089",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5089",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5089_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "wind"
+  },
+  {
+    "id": 939261049,
+    "characterId": "c1122",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1122",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1122_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "fire"
+  },
+  {
+    "id": 646405529,
+    "characterId": "c3014",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3014",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/0/0c/Mirsa_big.png/revision/latest?cb=20200812003753",
+    "image_source": "fandom_big",
+    "className": "assassin",
+    "attribute": "light"
+  },
+  {
+    "id": 667789828,
+    "characterId": "c3072",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3072",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/f/f2/Mistychain_big.png/revision/latest?cb=20190407145115",
+    "image_source": "fandom_big",
+    "className": "mage",
+    "attribute": "ice"
+  },
+  {
+    "id": 217687518,
+    "characterId": "c6024",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c6024",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c6024_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 687717018,
+    "characterId": "c3042",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3042",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/8/80/Montmorancy_big.png/revision/latest?cb=20190310202253",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "ice"
+  },
+  {
+    "id": 48154898,
+    "characterId": "c6037",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c6037",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c6037_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "light"
+  },
+  {
+    "id": 733221584,
+    "characterId": "c1104",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1104",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1104_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "wind"
+  },
+  {
+    "id": 425823727,
+    "characterId": "c3033",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3033",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3033_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "wind"
+  },
+  {
+    "id": 357837660,
+    "characterId": "c1044",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1044",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/5/5f/Mui_big.png/revision/latest?cb=20200722133241",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "wind"
+  },
+  {
+    "id": 256297185,
+    "characterId": "c4062",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4062",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4062_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "ice"
+  },
+  {
+    "id": 828887301,
+    "characterId": "c3132",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3132",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3132_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "ice"
+  },
+  {
+    "id": 275300531,
+    "characterId": "c1151",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1151",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1151_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "fire"
+  },
+  {
+    "id": 341044112,
+    "characterId": "c2109",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2109",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2109_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 42257966,
+    "characterId": "c3061",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3061",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/7/7b/Nemunas_big.png/revision/latest?cb=20190407205453",
+    "image_source": "fandom_big",
+    "className": "ranger",
+    "attribute": "fire"
+  },
+  {
+    "id": 485265385,
+    "characterId": "c2165",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2165",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2165_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "dark"
+  },
+  {
+    "id": 668150711,
+    "characterId": "c2066",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2066",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2066_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "light"
+  },
+  {
+    "id": 320787185,
+    "characterId": "c2181",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2181",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2181_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 643934008,
+    "characterId": "c5082",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5082",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5082_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "wind"
+  },
+  {
+    "id": 35660881,
+    "characterId": "c2072",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2072",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2072_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "dark"
+  },
+  {
+    "id": 218123332,
+    "characterId": "c3133",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3133",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3133_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "wind"
+  },
+  {
+    "id": 73578488,
+    "characterId": "c3045",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3045",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3045_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "dark"
+  },
+  {
+    "id": 732906267,
+    "characterId": "c1080",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1080",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1080_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "wind"
+  },
+  {
+    "id": 818106094,
+    "characterId": "c2087",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2087",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2087_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "dark"
+  },
+  {
+    "id": 882615107,
+    "characterId": "c3073",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3073",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/f/f1/Pearlhorizon_big.png/revision/latest?cb=20190407181041",
+    "image_source": "fandom_big",
+    "className": "mage",
+    "attribute": "wind"
+  },
+  {
+    "id": 886841298,
+    "characterId": "c1125",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1125",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1125_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "ice"
+  },
+  {
+    "id": 122835959,
+    "characterId": "c3125",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3125",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3125_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "dark"
+  },
+  {
+    "id": 206823599,
+    "characterId": "c5154",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5154",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5154_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "fire"
+  },
+  {
+    "id": 229553166,
+    "characterId": "c3165",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3165",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3165_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 490311017,
+    "characterId": "c2110",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2110",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2110_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "dark"
+  },
+  {
+    "id": 399865724,
+    "characterId": "c1112",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1112",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1112_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "fire"
+  },
+  {
+    "id": 370080538,
+    "characterId": "c1035",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1035",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/a/a4/Purrgis_big.png/revision/latest?cb=20190326000951",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "wind"
+  },
+  {
+    "id": 602063645,
+    "characterId": "c3005",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3005",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3005_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "dark"
+  },
+  {
+    "id": 233363377,
+    "characterId": "c3164",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3164",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3164_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "ice"
+  },
+  {
+    "id": 957189183,
+    "characterId": "c1115",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1115",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1115_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "wind"
+  },
+  {
+    "id": 36607969,
+    "characterId": "c1118",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1118",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1118_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "ice"
+  },
+  {
+    "id": 712378989,
+    "characterId": "c1001",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c1001",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/7/71/Ras_big.png/revision/latest?cb=20190830210334",
+    "image_source": "fandom_big",
+    "className": "knight",
+    "attribute": "fire"
+  },
+  {
+    "id": 398707530,
+    "characterId": "c1019",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1019",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1019_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 117225758,
+    "characterId": "c1090",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1090",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/3/39/Ray_big.png/revision/latest?cb=20200521115233",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "wind"
+  },
+  {
+    "id": 844008035,
+    "characterId": "c1114",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1114",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1114_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "ice"
+  },
+  {
+    "id": 902101440,
+    "characterId": "c2074",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2074",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/d/d1/Remnant_Violet_big.png/revision/latest?cb=20200706150240",
+    "image_source": "fandom_big",
+    "className": "assassin",
+    "attribute": "dark"
+  },
+  {
+    "id": 853690057,
+    "characterId": "c2102",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2102",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2102_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "dark"
+  },
+  {
+    "id": 230550669,
+    "characterId": "c3075",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3075",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3075_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "dark"
+  },
+  {
+    "id": 815142579,
+    "characterId": "c4051",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4051",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4051_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "fire"
+  },
+  {
+    "id": 523647052,
+    "characterId": "c3160",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3160",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3160_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "dark"
+  },
+  {
+    "id": 738761421,
+    "characterId": "c2185",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2185",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2185_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "dark"
+  },
+  {
+    "id": 987454208,
+    "characterId": "c4013",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4013",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/5/59/Righteous_Thief_Roozid_big.png/revision/latest?cb=20190417222842",
+    "image_source": "fandom_big",
+    "className": "assassin",
+    "attribute": "wind"
+  },
+  {
+    "id": 411570405,
+    "characterId": "c3034",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3034",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3034_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "light"
+  },
+  {
+    "id": 405227773,
+    "characterId": "c3062",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3062",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3062_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "ice"
+  },
+  {
+    "id": 93939456,
+    "characterId": "c1121",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1121",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1121_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "wind"
+  },
+  {
+    "id": 198283913,
+    "characterId": "c1054",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1054",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/3/38/Rin_big.png/revision/latest?cb=20190317125621",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "wind"
+  },
+  {
+    "id": 332227866,
+    "characterId": "c1168",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1168",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1168_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "wind"
+  },
+  {
+    "id": 918648683,
+    "characterId": "c1136",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1136",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1136_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "ice"
+  },
+  {
+    "id": 577121310,
+    "characterId": "c2029",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2029",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2029_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "dark"
+  },
+  {
+    "id": 305142362,
+    "characterId": "c1102",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1102",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/0/0a/Roana_big.png/revision/latest?cb=20200522114804",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "wind"
+  },
+  {
+    "id": 481491166,
+    "characterId": "c1169",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1169",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1169_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "fire"
+  },
+  {
+    "id": 342948350,
+    "characterId": "c1043",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1043",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1043_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "ice"
+  },
+  {
+    "id": 589491426,
+    "characterId": "c3013",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3013",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/8/8e/Roozid_big.png/revision/latest?cb=20190326002610",
+    "image_source": "fandom_big",
+    "className": "assassin",
+    "attribute": "wind"
+  },
+  {
+    "id": 698654210,
+    "characterId": "c1003",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1003",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1003_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "ice"
+  },
+  {
+    "id": 234711817,
+    "characterId": "c1135",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1135",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1135_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "fire"
+  },
+  {
+    "id": 671555344,
+    "characterId": "c1022",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1022",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1022_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "light"
+  },
+  {
+    "id": 243845503,
+    "characterId": "c1180",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1180",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1180_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "fire"
+  },
+  {
+    "id": 86137841,
+    "characterId": "c2015",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2015",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2015_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "light"
+  },
+  {
+    "id": 94277995,
+    "characterId": "c2184",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2184",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2184_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 874667905,
+    "characterId": "c1177",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1177",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1177_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "wind"
+  },
+  {
+    "id": 168170562,
+    "characterId": "c4144",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4144",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4144_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "light"
+  },
+  {
+    "id": 954325505,
+    "characterId": "c1060",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1060",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1060_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "wind"
+  },
+  {
+    "id": 854522053,
+    "characterId": "c2131",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2131",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2131_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "dark"
+  },
+  {
+    "id": 661922404,
+    "characterId": "c1020",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1020",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/4/4e/Schuri_big.png/revision/latest?cb=20190314231415",
+    "image_source": "fandom_big",
+    "className": "ranger",
+    "attribute": "fire"
+  },
+  {
+    "id": 775163628,
+    "characterId": "c2112",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2112",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2112_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "dark"
+  },
+  {
+    "id": 364218916,
+    "characterId": "c6065",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c6065",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c6065_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "dark"
+  },
+  {
+    "id": 605273112,
+    "characterId": "c5071",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5071",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5071_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "ice"
+  },
+  {
+    "id": 778291607,
+    "characterId": "c1106",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1106",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1106_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "wind"
+  },
+  {
+    "id": 966221259,
+    "characterId": "c4142",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4142",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4142_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "ice"
+  },
+  {
+    "id": 142623170,
+    "characterId": "c1040",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1040",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/f/fd/Serila_big.png/revision/latest?cb=20190314233408",
+    "image_source": "fandom_big",
+    "className": "mage",
+    "attribute": "fire"
+  },
+  {
+    "id": 575317993,
+    "characterId": "c1176",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1176",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1176_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "fire"
+  },
+  {
+    "id": 897081481,
+    "characterId": "c1038",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1038",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1038_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "ice"
+  },
+  {
+    "id": 684101214,
+    "characterId": "c4005",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4005",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4005_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "dark"
+  },
+  {
+    "id": 890559113,
+    "characterId": "c2003",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2003",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2003_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "dark"
+  },
+  {
+    "id": 916956927,
+    "characterId": "c1157",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1157",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1157_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 48256799,
+    "characterId": "c1132",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1132",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1132_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "wind"
+  },
+  {
+    "id": 246977646,
+    "characterId": "c4052",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4052",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4052_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "ice"
+  },
+  {
+    "id": 852031796,
+    "characterId": "c2076",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2076",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2076_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "dark"
+  },
+  {
+    "id": 287280350,
+    "characterId": "c2017",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2017",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2017_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "dark"
+  },
+  {
+    "id": 31845911,
+    "characterId": "c1123",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1123",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1123_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "fire"
+  },
+  {
+    "id": 930035625,
+    "characterId": "c1072",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1072",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1072_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "ice"
+  },
+  {
+    "id": 167677751,
+    "characterId": "c1004",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1004",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/4/45/Silk_big.png/revision/latest?cb=20190317214650",
+    "image_source": "fandom_big",
+    "className": "ranger",
+    "attribute": "wind"
+  },
+  {
+    "id": 246540464,
+    "characterId": "c2048",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2048",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/3/36/Silver_Blade_Aramintha_big.png/revision/latest?cb=20190506012554",
+    "image_source": "fandom_big",
+    "className": "mage",
+    "attribute": "light"
+  },
+  {
+    "id": 206239869,
+    "characterId": "c4123",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4123",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4123_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "wind"
+  },
+  {
+    "id": 571200228,
+    "characterId": "c2062",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2062",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2062_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "dark"
+  },
+  {
+    "id": 723289300,
+    "characterId": "c1092",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1092",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/5/5d/Sol_big.png/revision/latest?cb=20190504104419",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 669472930,
+    "characterId": "c2111",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2111",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2111_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "light"
+  },
+  {
+    "id": 756523245,
+    "characterId": "c3104",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3104",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3104_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "light"
+  },
+  {
+    "id": 181954109,
+    "characterId": "c2038",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2038",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/a/ac/Specimen_Sez_big.png/revision/latest?cb=20190514002118",
+    "image_source": "fandom_big",
+    "className": "assassin",
+    "attribute": "light"
+  },
+  {
+    "id": 512055050,
+    "characterId": "c2050",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2050",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2050_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "dark"
+  },
+  {
+    "id": 574296169,
+    "characterId": "c2103",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2103",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2103_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "light"
+  },
+  {
+    "id": 499160893,
+    "characterId": "c1174",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1174",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1174_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 632751482,
+    "characterId": "c1034",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1034",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1034_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 683615298,
+    "characterId": "c2127",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2127",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2127_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "light"
+  },
+  {
+    "id": 449328784,
+    "characterId": "c5009",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5009",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5009_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "ice"
+  },
+  {
+    "id": 674508918,
+    "characterId": "c4012",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4012",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4012_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "ice"
+  },
+  {
+    "id": 580739984,
+    "characterId": "c5024",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5024",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5024_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "fire"
+  },
+  {
+    "id": 269946988,
+    "characterId": "c1065",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1065",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/2/25/Surin_big.png/revision/latest?cb=20190409213958",
+    "image_source": "fandom_big",
+    "className": "assassin",
+    "attribute": "fire"
+  },
+  {
+    "id": 686230520,
+    "characterId": "c3155",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3155",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3155_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "dark"
+  },
+  {
+    "id": 734538201,
+    "characterId": "c3015",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3015",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/8/88/Sven_big.png/revision/latest?cb=20190326233947",
+    "image_source": "fandom_big",
+    "className": "assassin",
+    "attribute": "dark"
+  },
+  {
+    "id": 247056424,
+    "characterId": "c5072",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5072",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5072_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "fire"
+  },
+  {
+    "id": 775481110,
+    "characterId": "c2088",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2088",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2088_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "light"
+  },
+  {
+    "id": 238435200,
+    "characterId": "c5033",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c5033",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c5033_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "ice"
+  },
+  {
+    "id": 310201237,
+    "characterId": "c1127",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1127",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1127_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "ice"
+  },
+  {
+    "id": 287143169,
+    "characterId": "c3152",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3152",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3152_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "ice"
+  },
+  {
+    "id": 283701930,
+    "characterId": "c3154",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3154",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3154_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "light"
+  },
+  {
+    "id": 462169351,
+    "characterId": "c1067",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1067",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/1/11/Tamarinne_big.png/revision/latest?cb=20190831133457",
+    "image_source": "fandom_big",
+    "className": "manauser",
+    "attribute": "fire"
+  },
+  {
+    "id": 816601764,
+    "characterId": "c3032",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3032",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/0/07/Taranor_Guard_big.png/revision/latest?cb=20190317233748",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "ice"
+  },
+  {
+    "id": 748202964,
+    "characterId": "c3002",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3002",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/8/83/Taranor_Royal_Guard_big.png/revision/latest?cb=20190317231705",
+    "image_source": "fandom_big",
+    "className": "knight",
+    "attribute": "ice"
+  },
+  {
+    "id": 392398169,
+    "characterId": "c2065",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2065",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2065_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "light"
+  },
+  {
+    "id": 354954373,
+    "characterId": "c1050",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1050",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/a/a3/Tenebria_big.png/revision/latest?cb=20190217185218",
+    "image_source": "fandom_big",
+    "className": "mage",
+    "attribute": "fire"
+  },
+  {
+    "id": 786225172,
+    "characterId": "c3021",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3021",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/5/53/Tieria_big.png/revision/latest?cb=20190317190953",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "fire"
+  },
+  {
+    "id": 194802574,
+    "characterId": "c2082",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2082",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2082_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "dark"
+  },
+  {
+    "id": 306300861,
+    "characterId": "c1171",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1171",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1171_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "fire"
+  },
+  {
+    "id": 774431228,
+    "characterId": "c2036",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2036",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2036_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "dark"
+  },
+  {
+    "id": 576442023,
+    "characterId": "c2023",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2023",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2023_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "light"
+  },
+  {
+    "id": 389858561,
+    "characterId": "c1042",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1042",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/b/bb/Tywin_big.png/revision/latest?cb=20190408233120",
+    "image_source": "fandom_big",
+    "className": "knight",
+    "attribute": "ice"
+  },
+  {
+    "id": 337069535,
+    "characterId": "c4004",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4004",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4004_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 200943612,
+    "characterId": "c2101",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c2101",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2101_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "dark"
+  },
+  {
+    "id": 126074631,
+    "characterId": "c4143",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4143",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4143_su.png",
+    "image_source": "fribbels_su",
+    "className": "assassin",
+    "attribute": "wind"
+  },
+  {
+    "id": 176544490,
+    "characterId": "c1150",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1150",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1150_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "fire"
+  },
+  {
+    "id": 124436036,
+    "characterId": "c1166",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1166",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1166_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "fire"
+  },
+  {
+    "id": 863333237,
+    "characterId": "c4103",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4103",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4103_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "wind"
+  },
+  {
+    "id": 966507858,
+    "characterId": "c1007",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1007",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/3/37/Vildred_big.png/revision/latest?cb=20190914195119",
+    "image_source": "fandom_big",
+    "className": "assassin",
+    "attribute": "wind"
+  },
+  {
+    "id": 226954459,
+    "characterId": "c1074",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1074",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/8/85/Violet_big.png/revision/latest?cb=20190409225847",
+    "image_source": "fandom_big",
+    "className": "assassin",
+    "attribute": "wind"
+  },
+  {
+    "id": 226850846,
+    "characterId": "c1088",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1088",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/a/af/Vivian_big.png/revision/latest?cb=20190825221948",
+    "image_source": "fandom_big",
+    "className": "mage",
+    "attribute": "wind"
+  },
+  {
+    "id": 182210862,
+    "characterId": "c3065",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3065",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3065_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "dark"
+  },
+  {
+    "id": 947601733,
+    "characterId": "c2004",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2004",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2004_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "light"
+  },
+  {
+    "id": 939921320,
+    "characterId": "c6014",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c6014",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c6014_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "light"
+  },
+  {
+    "id": 200792373,
+    "characterId": "c2020",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c2020",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c2020_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "light"
+  },
+  {
+    "id": 85695122,
+    "characterId": "c6020",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c6020",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c6020_su.png",
+    "image_source": "fribbels_su",
+    "className": "ranger",
+    "attribute": "dark"
+  },
+  {
+    "id": 743227368,
+    "characterId": "c6050",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c6050",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c6050_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "light"
+  },
+  {
+    "id": 986762650,
+    "characterId": "c6003",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c6003",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c6003_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "light"
+  },
+  {
+    "id": 227667258,
+    "characterId": "c3134",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c3134",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c3134_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "light"
+  },
+  {
+    "id": 185035466,
+    "characterId": "c1162",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1162",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1162_su.png",
+    "image_source": "fribbels_su",
+    "className": "manauser",
+    "attribute": "wind"
+  },
+  {
+    "id": 920406008,
+    "characterId": "c1016",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1016",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/3/36/Yufine_big.png/revision/latest?cb=20190407200630",
+    "image_source": "fandom_big",
+    "className": "warrior",
+    "attribute": "wind"
+  },
+  {
+    "id": 972826141,
+    "characterId": "c1131",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1131",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1131_su.png",
+    "image_source": "fribbels_su",
+    "className": "knight",
+    "attribute": "wind"
+  },
+  {
+    "id": 486707266,
+    "characterId": "c1030",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1030",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/3/32/Yuna_big.png/revision/latest?cb=20190829222102",
+    "image_source": "fandom_big",
+    "className": "ranger",
+    "attribute": "ice"
+  },
+  {
+    "id": 883395431,
+    "characterId": "c1119",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1119",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1119_su.png",
+    "image_source": "fribbels_su",
+    "className": "warrior",
+    "attribute": "wind"
+  },
+  {
+    "id": 790440726,
+    "characterId": "c4071",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "c4071",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c4071_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "fire"
+  },
+  {
+    "id": 928346831,
+    "characterId": "c1083",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1083",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/4/4c/Zeno_big.png/revision/latest?cb=20190217204751",
+    "image_source": "fandom_big",
+    "className": "mage",
+    "attribute": "ice"
+  },
+  {
+    "id": 733595214,
+    "characterId": "c1010",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "c1010",
+    "image_url": "https://static.wikia.nocookie.net/epic-seven/images/9/95/Zerato_big.png/revision/latest?cb=20190314225259",
+    "image_source": "fandom_big",
+    "className": "mage",
+    "attribute": "ice"
+  },
+  {
+    "id": 481592418,
+    "characterId": "c1133",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "c1133",
+    "image_url": "https://cdn.jsdelivr.net/gh/fribbels/Fribbels-Epic-7-Optimizer@main/data/cachedimages/c1133_su.png",
+    "image_source": "fribbels_su",
+    "className": "mage",
+    "attribute": "dark"
+  }
+]

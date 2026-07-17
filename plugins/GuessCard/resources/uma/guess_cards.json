@@ -1,0 +1,1322 @@
+[
+  {
+    "id": 1002,
+    "characterId": "1002",
+    "cardRarityType": "uma",
+    "assetbundleName": "silencesuzuka",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/73423d67fac1052bdeda3fa92ee14469.png",
+    "className": "High School"
+  },
+  {
+    "id": 1003,
+    "characterId": "1003",
+    "cardRarityType": "uma",
+    "assetbundleName": "tokaiteio",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/55f88958c65f3d98307f6934b0ec02f9.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1001,
+    "characterId": "1001",
+    "cardRarityType": "uma",
+    "assetbundleName": "specialweek",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/3124dc017bcde8c1482216b81a368a8f.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1004,
+    "characterId": "1004",
+    "cardRarityType": "uma",
+    "assetbundleName": "maruzensky",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/3999a1b2cb3c01536fbdf4a6f87a36df.png",
+    "className": "High School"
+  },
+  {
+    "id": 1005,
+    "characterId": "1005",
+    "cardRarityType": "uma",
+    "assetbundleName": "fujikiseki",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/12/e857da397d97a875207eb65e8c1d83ff.png",
+    "className": "High School"
+  },
+  {
+    "id": 1006,
+    "characterId": "1006",
+    "cardRarityType": "uma",
+    "assetbundleName": "oguricap",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/3951cb538e012a6c1aafbe16ef892c66.png",
+    "className": "High School"
+  },
+  {
+    "id": 1007,
+    "characterId": "1007",
+    "cardRarityType": "uma",
+    "assetbundleName": "goldship",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/97b14bdb6ffecf6758d34af0cd14aec8.png",
+    "className": "???"
+  },
+  {
+    "id": 1008,
+    "characterId": "1008",
+    "cardRarityType": "uma",
+    "assetbundleName": "vodka",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/868f3442b84a398873314bce5a7fb217.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1009,
+    "characterId": "1009",
+    "cardRarityType": "uma",
+    "assetbundleName": "daiwascarlet",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/10/6f49173951de5660c8e381f53f684328.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1010,
+    "characterId": "1010",
+    "cardRarityType": "uma",
+    "assetbundleName": "taikishuttle",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/ad04452e39b3e16b32b6c0312d1bbf4a.png",
+    "className": "High School"
+  },
+  {
+    "id": 1011,
+    "characterId": "1011",
+    "cardRarityType": "uma",
+    "assetbundleName": "grasswonder",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/13fa095eacdbc00209bf22ba85951d12.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1012,
+    "characterId": "1012",
+    "cardRarityType": "uma",
+    "assetbundleName": "hishiamazon",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/96e79d8216eea01fd230247a92c20f28.png",
+    "className": "High School"
+  },
+  {
+    "id": 1013,
+    "characterId": "1013",
+    "cardRarityType": "uma",
+    "assetbundleName": "mejiromcqueen",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/afc9fba4e001e393557ce828a6e02e11.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1014,
+    "characterId": "1014",
+    "cardRarityType": "uma",
+    "assetbundleName": "elcondorpasa",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/6f5930c5da9e47feebab327a04bf7197.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1015,
+    "characterId": "1015",
+    "cardRarityType": "uma",
+    "assetbundleName": "tmoperao",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/c34d8234e794239f8ff3121cbbce20d0.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1016,
+    "characterId": "1016",
+    "cardRarityType": "uma",
+    "assetbundleName": "naritabrian",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/334259c347f33bc5eea22aa79464f43c.png",
+    "className": "High School"
+  },
+  {
+    "id": 1017,
+    "characterId": "1017",
+    "cardRarityType": "uma",
+    "assetbundleName": "symbolirudolf",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/43ffc6b52b7a514910628f15089b608e.png",
+    "className": "High School"
+  },
+  {
+    "id": 1018,
+    "characterId": "1018",
+    "cardRarityType": "uma",
+    "assetbundleName": "airgroove",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/df8bb4014dc5f1a1c4e873ca82d3ae46.png",
+    "className": "High School"
+  },
+  {
+    "id": 1019,
+    "characterId": "1019",
+    "cardRarityType": "uma",
+    "assetbundleName": "agnesdigital",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/18181e6e0d67bf15314d6b687636c152.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1020,
+    "characterId": "1020",
+    "cardRarityType": "uma",
+    "assetbundleName": "seiunsky",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/6ed4c2d777f25718031a6e0aeb7eea28.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1021,
+    "characterId": "1021",
+    "cardRarityType": "uma",
+    "assetbundleName": "tamamocross",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/c78d7da10409fe6c25afaaa622ba6fa8.png",
+    "className": "High School"
+  },
+  {
+    "id": 1022,
+    "characterId": "1022",
+    "cardRarityType": "uma",
+    "assetbundleName": "finemotion",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/fa7b9085672e2ebf026b43f06f0b9237.png",
+    "className": "High School"
+  },
+  {
+    "id": 1023,
+    "characterId": "1023",
+    "cardRarityType": "uma",
+    "assetbundleName": "biwahayahide",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/b01dbb99bb1396bed4952d8bc8d98b7a.png",
+    "className": "High School"
+  },
+  {
+    "id": 1024,
+    "characterId": "1024",
+    "cardRarityType": "uma",
+    "assetbundleName": "mayanotopgun",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/1677501afc854b1db899450c2b67caa3.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1025,
+    "characterId": "1025",
+    "cardRarityType": "uma",
+    "assetbundleName": "manhattancafe",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/695779a3a93fa9c910a68ee09eb96686.png",
+    "className": "High School"
+  },
+  {
+    "id": 1026,
+    "characterId": "1026",
+    "cardRarityType": "uma",
+    "assetbundleName": "mihonobourbon",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/e1e418cf4827fd0f8391dbb642461d8e.png",
+    "className": "High School"
+  },
+  {
+    "id": 1027,
+    "characterId": "1027",
+    "cardRarityType": "uma",
+    "assetbundleName": "mejiroryan",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/ef1167f87af94cbf39e39d48ed412bae.png",
+    "className": "High School"
+  },
+  {
+    "id": 1028,
+    "characterId": "1028",
+    "cardRarityType": "uma",
+    "assetbundleName": "hishiakebono",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/54d43d38c40232fb49c005423bfa7de8.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1029,
+    "characterId": "1029",
+    "cardRarityType": "uma",
+    "assetbundleName": "yukinobijin",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/6039535b1f6269a207876af1d4eae2b9.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1030,
+    "characterId": "1030",
+    "cardRarityType": "uma",
+    "assetbundleName": "riceshower",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/04c68c088e94fb2917551b8e3ad29d63.png",
+    "className": "High School"
+  },
+  {
+    "id": 1031,
+    "characterId": "1031",
+    "cardRarityType": "uma",
+    "assetbundleName": "inesfujin",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/01/1112465f06717da6fbe8d1ac300361d7.png",
+    "className": "High School"
+  },
+  {
+    "id": 1032,
+    "characterId": "1032",
+    "cardRarityType": "uma",
+    "assetbundleName": "agnestachyon",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/3331c9ff7ec5ea233a383d4000506d22.png",
+    "className": "High School"
+  },
+  {
+    "id": 1033,
+    "characterId": "1033",
+    "cardRarityType": "uma",
+    "assetbundleName": "admirevega",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/a9d157a3efe0a1b05273ae04080b15f1.png",
+    "className": "High School"
+  },
+  {
+    "id": 1034,
+    "characterId": "1034",
+    "cardRarityType": "uma",
+    "assetbundleName": "inarione",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/c7d545e513e9bffb39a11a3ea870fa99.png",
+    "className": "High School"
+  },
+  {
+    "id": 1035,
+    "characterId": "1035",
+    "cardRarityType": "uma",
+    "assetbundleName": "winningticket",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/d87f83dda5442cfce20aa384badf6444.png",
+    "className": "High School"
+  },
+  {
+    "id": 1036,
+    "characterId": "1036",
+    "cardRarityType": "uma",
+    "assetbundleName": "airshakur",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/6d820df154952353b011a5a39a76d6b7.png",
+    "className": "High School"
+  },
+  {
+    "id": 1037,
+    "characterId": "1037",
+    "cardRarityType": "uma",
+    "assetbundleName": "eishinflash",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/3412d6d32419196c96684ceefe2807e1.png",
+    "className": "High School"
+  },
+  {
+    "id": 1038,
+    "characterId": "1038",
+    "cardRarityType": "uma",
+    "assetbundleName": "currenchan",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/46adef292946db954ef5beb6a1c3c7c1.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1039,
+    "characterId": "1039",
+    "cardRarityType": "uma",
+    "assetbundleName": "kawakamiprincess",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/165458aab47f68223bf21e2e47d26421.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1040,
+    "characterId": "1040",
+    "cardRarityType": "uma",
+    "assetbundleName": "goldcity",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/de5caacafa9094de05d716e10ff68910.png",
+    "className": "High School"
+  },
+  {
+    "id": 1041,
+    "characterId": "1041",
+    "cardRarityType": "uma",
+    "assetbundleName": "sakurabakushino",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/a08bc01cd520febd973a9182c4504a78.png",
+    "className": "High School"
+  },
+  {
+    "id": 1042,
+    "characterId": "1042",
+    "cardRarityType": "uma",
+    "assetbundleName": "seekingthepearl",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/7929895307b96eab10da461a166a440b.png",
+    "className": "High School"
+  },
+  {
+    "id": 1043,
+    "characterId": "1043",
+    "cardRarityType": "uma",
+    "assetbundleName": "shinkowindy",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/dc81028026a5a8e39c04f225f4ac8aed.png",
+    "className": "High School"
+  },
+  {
+    "id": 1044,
+    "characterId": "1044",
+    "cardRarityType": "uma",
+    "assetbundleName": "sweeptosho",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/5cfd881e5034666d42b4373e07ea9694.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1045,
+    "characterId": "1045",
+    "cardRarityType": "uma",
+    "assetbundleName": "supercreek",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/52b01fb4407b7e59bbb65ddc751deeb6.png",
+    "className": "High School"
+  },
+  {
+    "id": 1046,
+    "characterId": "1046",
+    "cardRarityType": "uma",
+    "assetbundleName": "smartfalcon",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/7458dd3e027b481f091157bbafc76db8.png",
+    "className": "High School"
+  },
+  {
+    "id": 1047,
+    "characterId": "1047",
+    "cardRarityType": "uma",
+    "assetbundleName": "zennorobroy",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/cbe5ce3b7c528d74d8582efa4794bcf7.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1048,
+    "characterId": "1048",
+    "cardRarityType": "uma",
+    "assetbundleName": "tosenjordan",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/a1d2a21a5127a851d65d09dfc5ddabd9.png",
+    "className": "High School"
+  },
+  {
+    "id": 1049,
+    "characterId": "1049",
+    "cardRarityType": "uma",
+    "assetbundleName": "nakayamafesta",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/d6941350d92590a15cc146f1aee52b70.png",
+    "className": "High School"
+  },
+  {
+    "id": 1050,
+    "characterId": "1050",
+    "cardRarityType": "uma",
+    "assetbundleName": "naritataishin",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/9e008674a29294c4eba6617aa94b7e3e.png",
+    "className": "High School"
+  },
+  {
+    "id": 1051,
+    "characterId": "1051",
+    "cardRarityType": "uma",
+    "assetbundleName": "nishinoflower",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/ab4a52aad6f500b36c6ab4e543dedf82.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1052,
+    "characterId": "1052",
+    "cardRarityType": "uma",
+    "assetbundleName": "haruurara",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/8bc9c4bf39c30ef9bfc78b2982e9b954.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1053,
+    "characterId": "1053",
+    "cardRarityType": "uma",
+    "assetbundleName": "bamboomemory",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/3152e082fee4c32729e29e76baf406c2.png",
+    "className": "High School"
+  },
+  {
+    "id": 1054,
+    "characterId": "1054",
+    "cardRarityType": "uma",
+    "assetbundleName": "bikopegasus",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/a523da789dab7e9850957a76db795f4e.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1055,
+    "characterId": "1055",
+    "cardRarityType": "uma",
+    "assetbundleName": "marveloussunday",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/64a26806ff3aa9d4539edc171e3bceec.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1056,
+    "characterId": "1056",
+    "cardRarityType": "uma",
+    "assetbundleName": "matikanefukukitaru",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/7a1bf39e0a87d2fdbb695d79da44cf07.png",
+    "className": "High School"
+  },
+  {
+    "id": 1058,
+    "characterId": "1058",
+    "cardRarityType": "uma",
+    "assetbundleName": "meishodoto",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/4efab40d98bc95b7d987dd56510ad59e.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1059,
+    "characterId": "1059",
+    "cardRarityType": "uma",
+    "assetbundleName": "mejirodober",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/8b336f75357413af3039664e6e0d34bd.png",
+    "className": "High School"
+  },
+  {
+    "id": 1060,
+    "characterId": "1060",
+    "cardRarityType": "uma",
+    "assetbundleName": "nicenature",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/2e5c8bfd316fa49674bb3a6b40752ddc.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1061,
+    "characterId": "1061",
+    "cardRarityType": "uma",
+    "assetbundleName": "kinghalo",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/ff0441bf01c85ffdf55e1885095e00b5.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1069,
+    "characterId": "1069",
+    "cardRarityType": "uma",
+    "assetbundleName": "sakurachiyonoo",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/59f5a2faea5eb6b9e8115c5e0e3fb7ad.png",
+    "className": "High School"
+  },
+  {
+    "id": 1070,
+    "characterId": "1070",
+    "cardRarityType": "uma",
+    "assetbundleName": "siriussymboli",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/10/2c8399c406b09f88e2e4aad14fd4f4fc.png",
+    "className": "High School"
+  },
+  {
+    "id": 1071,
+    "characterId": "1071",
+    "cardRarityType": "uma",
+    "assetbundleName": "mejiroardan",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/07/af8f4954d9a46d12b281cb4c38be7a06.png",
+    "className": "High School"
+  },
+  {
+    "id": 1072,
+    "characterId": "1072",
+    "cardRarityType": "uma",
+    "assetbundleName": "yaenomuteki",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/04/3b9de0725aadd87de7b3d8a42c65f14d.png",
+    "className": "High School"
+  },
+  {
+    "id": 1062,
+    "characterId": "1062",
+    "cardRarityType": "uma",
+    "assetbundleName": "matikanetannhauser",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/010f8aee8da58893cfdba2b921ffd5f3.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1063,
+    "characterId": "1063",
+    "cardRarityType": "uma",
+    "assetbundleName": "ikunodictus",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/0732b89f95aee033e198ee3246be9c37.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1064,
+    "characterId": "1064",
+    "cardRarityType": "uma",
+    "assetbundleName": "mejiropalmer",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/12985ccb294d722c881457263c16f09c.png",
+    "className": "High School"
+  },
+  {
+    "id": 1065,
+    "characterId": "1065",
+    "cardRarityType": "uma",
+    "assetbundleName": "daitakuhelios",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/55f58b02f866123f14d00fc0bcf5ff73.png",
+    "className": "High School"
+  },
+  {
+    "id": 1066,
+    "characterId": "1066",
+    "cardRarityType": "uma",
+    "assetbundleName": "twinturbo",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/bcbc0542db2931dab3ab51a781cb3c8d.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1067,
+    "characterId": "1067",
+    "cardRarityType": "uma",
+    "assetbundleName": "satonodiamond",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/849285ef0f049bbc2c13f28275dc7cd0.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1068,
+    "characterId": "1068",
+    "cardRarityType": "uma",
+    "assetbundleName": "kitasanblack",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/672d0e4a6378fc2c4d7416cd14d50953.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 9001,
+    "characterId": "9001",
+    "cardRarityType": "uma",
+    "assetbundleName": "hayakawatazuna",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/fb92afaedf730557c0780b722d5e30e5.png",
+    "className": ""
+  },
+  {
+    "id": 1057,
+    "characterId": "1057",
+    "cardRarityType": "uma",
+    "assetbundleName": "mrcb",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/3d92e1de5a7a575deaff8f83eb154042.png",
+    "className": "High School"
+  },
+  {
+    "id": 2001,
+    "characterId": "2001",
+    "cardRarityType": "uma",
+    "assetbundleName": "happymeek",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/fe0b2b2ab710c81b7863f0f7e23870ce.png",
+    "className": ""
+  },
+  {
+    "id": 9004,
+    "characterId": "9004",
+    "cardRarityType": "uma",
+    "assetbundleName": "kiryuinaoi",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/6216c8de53c928746d749a3eef700a0d.png",
+    "className": ""
+  },
+  {
+    "id": 9005,
+    "characterId": "9005",
+    "cardRarityType": "uma",
+    "assetbundleName": "anshinzawasasami",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/71de398d728e90353fe28fc04eb907e8.png",
+    "className": ""
+  },
+  {
+    "id": 9003,
+    "characterId": "9003",
+    "cardRarityType": "uma",
+    "assetbundleName": "otonashietsuko",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/10/4a661d5cbb098c12fad3bea3cfbb75c1.png",
+    "className": ""
+  },
+  {
+    "id": 2002,
+    "characterId": "2002",
+    "cardRarityType": "uma",
+    "assetbundleName": "bitterglasse",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/08/d343da7d53e836902c7ef013e879337c.png",
+    "className": ""
+  },
+  {
+    "id": 2003,
+    "characterId": "2003",
+    "cardRarityType": "uma",
+    "assetbundleName": "littlecocon",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/08/0a876e53d6f3b6a8d1adb27ab0bd8626.png",
+    "className": ""
+  },
+  {
+    "id": 9006,
+    "characterId": "9006",
+    "cardRarityType": "uma",
+    "assetbundleName": "kashimotoriko",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/08/88decb145ed1aa3e009cf4108b40db5b.png",
+    "className": ""
+  },
+  {
+    "id": 1074,
+    "characterId": "1074",
+    "cardRarityType": "uma",
+    "assetbundleName": "mejirobright",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/01/12b07d53e9a48c9d8ef356058cd74f40.png",
+    "className": "High School"
+  },
+  {
+    "id": 1077,
+    "characterId": "1077",
+    "cardRarityType": "uma",
+    "assetbundleName": "naritatoproad",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/01/9551ab97b994276d0dc5447fe712d70e.png",
+    "className": "High School"
+  },
+  {
+    "id": 1076,
+    "characterId": "1076",
+    "cardRarityType": "uma",
+    "assetbundleName": "sakuralaurel",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/07/b4a696da318f8f9436fcc699c3ee1dc9.png",
+    "className": "High School"
+  },
+  {
+    "id": 1078,
+    "characterId": "1078",
+    "cardRarityType": "uma",
+    "assetbundleName": "yamaninzephyr",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/05/66a3ec12edbecf211867f47db32896b8.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1087,
+    "characterId": "1087",
+    "cardRarityType": "uma",
+    "assetbundleName": "astonmachan",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/08/5da1cdb7b877074a6e442d728bfa6d9e.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1088,
+    "characterId": "1088",
+    "cardRarityType": "uma",
+    "assetbundleName": "satonocrown",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/12/b5d7662b3f098d99c8b665dbdebeeb23.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1089,
+    "characterId": "1089",
+    "cardRarityType": "uma",
+    "assetbundleName": "chevalgrand",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/12/afdec197c7ea6edffef51053082503ca.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1073,
+    "characterId": "1073",
+    "cardRarityType": "uma",
+    "assetbundleName": "tsurumarutsuyoshi",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/03/7a845dedf4e286098ec740e28517bb8e.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1083,
+    "characterId": "1083",
+    "cardRarityType": "uma",
+    "assetbundleName": "symbolikriss",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/05/9f83d9bfa8a060af46fb2200c5cb1ec2.png",
+    "className": "High School"
+  },
+  {
+    "id": 1084,
+    "characterId": "1084",
+    "cardRarityType": "uma",
+    "assetbundleName": "taninogimlet",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/05/37b129aa460ef7a07115115d14f41348.png",
+    "className": "High School"
+  },
+  {
+    "id": 1098,
+    "characterId": "1098",
+    "cardRarityType": "uma",
+    "assetbundleName": "copanorickey",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/07/dd1c25ed938bb25537b32f0b70a44cf4.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1075,
+    "characterId": "1075",
+    "cardRarityType": "uma",
+    "assetbundleName": "daringtact",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/07/ecf1fa704da0059d1e6a8f66daeba5f7.png",
+    "className": "中等部"
+  },
+  {
+    "id": 1099,
+    "characterId": "1099",
+    "cardRarityType": "uma",
+    "assetbundleName": "hokkotarumae",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/07/1b2b3698fcde52d9d446177f28ebadf1.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1100,
+    "characterId": "1100",
+    "cardRarityType": "uma",
+    "assetbundleName": "wonderacute",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/07/eff3aea8f6b754b2141d67acd6df4669.png",
+    "className": "High School"
+  },
+  {
+    "id": 1085,
+    "characterId": "1085",
+    "cardRarityType": "uma",
+    "assetbundleName": "daiichiruby",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/08/d3f061e3641014cd8c39151a167b356b.png",
+    "className": "High School"
+  },
+  {
+    "id": 1093,
+    "characterId": "1093",
+    "cardRarityType": "uma",
+    "assetbundleName": "ksmiracle",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/08/ca94a973958c3d418c8e6c6930b7d929.png",
+    "className": "High School"
+  },
+  {
+    "id": 9008,
+    "characterId": "9008",
+    "cardRarityType": "uma",
+    "assetbundleName": "lighthello",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/08/383f4cb3970dd0c7ac4aef808ffe2de5.png",
+    "className": ""
+  },
+  {
+    "id": 1086,
+    "characterId": "1086",
+    "cardRarityType": "uma",
+    "assetbundleName": "mejiroramonu",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/02/085300009e7e80a17733822bc62af396.png",
+    "className": "High School"
+  },
+  {
+    "id": 9040,
+    "characterId": "9040",
+    "cardRarityType": "uma",
+    "assetbundleName": "darleyarabian",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/02/4fe066f6e897bd9f70a40df212ad7362.png",
+    "className": ""
+  },
+  {
+    "id": 9041,
+    "characterId": "9041",
+    "cardRarityType": "uma",
+    "assetbundleName": "godolphinbarb",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/02/6d254cfca7a0c0bb3c0773724cf6aac1.png",
+    "className": ""
+  },
+  {
+    "id": 9042,
+    "characterId": "9042",
+    "cardRarityType": "uma",
+    "assetbundleName": "byerleyturk",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/02/ca57c8293b4ecbad3e5882402197432c.png",
+    "className": ""
+  },
+  {
+    "id": 1094,
+    "characterId": "1094",
+    "cardRarityType": "uma",
+    "assetbundleName": "junglepocket",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/02/b666db6f463bf7b85f0b4117f2f331ac.png",
+    "className": "High School"
+  },
+  {
+    "id": 1104,
+    "characterId": "1104",
+    "cardRarityType": "uma",
+    "assetbundleName": "katsuragiace",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/02/12134ffafba2717fb3228f74bec5d6ac.png",
+    "className": "High School"
+  },
+  {
+    "id": 1105,
+    "characterId": "1105",
+    "cardRarityType": "uma",
+    "assetbundleName": "neouniverse",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/03/d11300c12f2341c5f98b8fad71e0abfa.png",
+    "className": "High School"
+  },
+  {
+    "id": 1106,
+    "characterId": "1106",
+    "cardRarityType": "uma",
+    "assetbundleName": "hishimiracle",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/02/0f4dde8aadf7fb5a25f1a470dc188adb.png",
+    "className": "High School"
+  },
+  {
+    "id": 1107,
+    "characterId": "1107",
+    "cardRarityType": "uma",
+    "assetbundleName": "tapdancecity",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/03/1bf75ec084f7a2c29999c21d1da8f965.png",
+    "className": "High School"
+  },
+  {
+    "id": 2006,
+    "characterId": "2006",
+    "cardRarityType": "uma",
+    "assetbundleName": "rigantona",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/08/8e009d5df7441fe0330898217233fc9b.png",
+    "className": ""
+  },
+  {
+    "id": 2005,
+    "characterId": "2005",
+    "cardRarityType": "uma",
+    "assetbundleName": "venuspaques",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/08/88e4b9ca20b9dc68969c5b256ff793d1.png",
+    "className": ""
+  },
+  {
+    "id": 9043,
+    "characterId": "9043",
+    "cardRarityType": "uma",
+    "assetbundleName": "satakemei",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/08/cd5fc4e46b4403bbad95cfe8a5630463.png",
+    "className": ""
+  },
+  {
+    "id": 1102,
+    "characterId": "1102",
+    "cardRarityType": "uma",
+    "assetbundleName": "soundsofearth",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/08/551804e26ec2e50becb9a72118c68d7a.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1082,
+    "characterId": "1082",
+    "cardRarityType": "uma",
+    "assetbundleName": "northflight",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/09/049f6d160896eada1819baf240c97d43.png",
+    "className": "High School"
+  },
+  {
+    "id": 1108,
+    "characterId": "1108",
+    "cardRarityType": "uma",
+    "assetbundleName": "duramente",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/10/c674dce54040ddd9abf4ae0339deb2f1.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1090,
+    "characterId": "1090",
+    "cardRarityType": "uma",
+    "assetbundleName": "verxina",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/11/a3012d0acc00dbe953cf98e03e6291a0.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1091,
+    "characterId": "1091",
+    "cardRarityType": "uma",
+    "assetbundleName": "vivlos",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/11/e6131433aca4a905dad54259aa0c7b86.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1103,
+    "characterId": "1103",
+    "cardRarityType": "uma",
+    "assetbundleName": "royceandroyce",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/12/35f421f77030acd6164e563e0b313a13.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1110,
+    "characterId": "1110",
+    "cardRarityType": "uma",
+    "assetbundleName": "cesario",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/01/48c84ba0cd12b972f46a987e4cd18779.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1109,
+    "characterId": "1109",
+    "cardRarityType": "uma",
+    "assetbundleName": "rheinkraft",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/7608f581e4457379ade257d657616aae.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1111,
+    "characterId": "1111",
+    "cardRarityType": "uma",
+    "assetbundleName": "airmessiah",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/43dcca4a9ddb8e45fc4df0e1192caed2.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1112,
+    "characterId": "1112",
+    "cardRarityType": "uma",
+    "assetbundleName": "daringheart",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/7244d78a11dd7d88b3d46ef956d7614a.png",
+    "className": "中等部"
+  },
+  {
+    "id": 1079,
+    "characterId": "1079",
+    "cardRarityType": "uma",
+    "assetbundleName": "furioso",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/de2acadacba25b12d72af5932952b3c2.png",
+    "className": "High School"
+  },
+  {
+    "id": 1080,
+    "characterId": "1080",
+    "cardRarityType": "uma",
+    "assetbundleName": "transcend",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/95ddf3e70adefc1f6f2547cb255afb5e.png",
+    "className": "High School"
+  },
+  {
+    "id": 1081,
+    "characterId": "1081",
+    "cardRarityType": "uma",
+    "assetbundleName": "espoircity",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/a29faa0ba9af899fa5b001f8c293270c.png",
+    "className": "High School"
+  },
+  {
+    "id": 1092,
+    "characterId": "1092",
+    "cardRarityType": "uma",
+    "assetbundleName": "dantsuflame",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/236ca524859e17af82d7ebc903b8242e.png",
+    "className": "High School"
+  },
+  {
+    "id": 1096,
+    "characterId": "1096",
+    "cardRarityType": "uma",
+    "assetbundleName": "noreason",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/1acc564c8f281b659c4840b401e59622.png",
+    "className": "High School"
+  },
+  {
+    "id": 1097,
+    "characterId": "1097",
+    "cardRarityType": "uma",
+    "assetbundleName": "stillinlove",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/0d98ab7c29ecfab8e1a861e5e42f5f07.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1115,
+    "characterId": "1115",
+    "cardRarityType": "uma",
+    "assetbundleName": "orfevre",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/1790f1bc804606d9ea00f0a47374522f.png",
+    "className": "High School"
+  },
+  {
+    "id": 1116,
+    "characterId": "1116",
+    "cardRarityType": "uma",
+    "assetbundleName": "gentildonna",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/ab3463449dc9d1969698f577f493b463.png",
+    "className": "High School"
+  },
+  {
+    "id": 1117,
+    "characterId": "1117",
+    "cardRarityType": "uma",
+    "assetbundleName": "winvariation",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/c43deb7c06c63934c446340fa7a57577.png",
+    "className": "High School"
+  },
+  {
+    "id": 2007,
+    "characterId": "2007",
+    "cardRarityType": "uma",
+    "assetbundleName": "sononelfie",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/b0933211c421b0bae765682acd34ebf9.png",
+    "className": ""
+  },
+  {
+    "id": 9044,
+    "characterId": "9044",
+    "cardRarityType": "uma",
+    "assetbundleName": "tsurugiryoka",
+    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/128c6783afb61f3a19e3f1053e0d2bf5.png",
+    "className": ""
+  },
+  {
+    "id": 1121,
+    "characterId": "1121",
+    "cardRarityType": "uma",
+    "assetbundleName": "durandal",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/54adb7d4190642e4a9d29b6e8da8ddf8/durandal_list.png",
+    "className": "High School"
+  },
+  {
+    "id": 1120,
+    "characterId": "1120",
+    "cardRarityType": "uma",
+    "assetbundleName": "calstonelighto",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/f1702e191d4045e3854dca9f074228fe/calstonelighto_list.png",
+    "className": "High School"
+  },
+  {
+    "id": 1119,
+    "characterId": "1119",
+    "cardRarityType": "uma",
+    "assetbundleName": "dreamjourney",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/7ec1f7674eb34eafb8bc4cec6e8ab343/dreamjourney_list.png",
+    "className": "High School"
+  },
+  {
+    "id": 1114,
+    "characterId": "1114",
+    "cardRarityType": "uma",
+    "assetbundleName": "buenavista",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/7f12ea9d50b44a4a9e0b8956eb1fd223/buenavista_list.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1095,
+    "characterId": "1095",
+    "cardRarityType": "uma",
+    "assetbundleName": "believe",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/142f6ac947e7444bb5235b1e17c8c5b7/believe_list.png",
+    "className": "高等部"
+  },
+  {
+    "id": 1124,
+    "characterId": "1124",
+    "cardRarityType": "uma",
+    "assetbundleName": "bubblegumfellow",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/eb96eb8435944a0abb98c3893afa588a/bubblegumfellow_list.png",
+    "className": "High School"
+  },
+  {
+    "id": 1113,
+    "characterId": "1113",
+    "cardRarityType": "uma",
+    "assetbundleName": "fusaichipandora",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/be5f9ba589d34592bc05a22e347c7a77/fusaichipandora_list.png",
+    "className": "中等部"
+  },
+  {
+    "id": 9045,
+    "characterId": "9045",
+    "cardRarityType": "uma",
+    "assetbundleName": "sugarlights",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e1631cf19fec4940ace4e4adb7fbad07/sugarlights_list.png",
+    "className": ""
+  },
+  {
+    "id": 1128,
+    "characterId": "1128",
+    "cardRarityType": "uma",
+    "assetbundleName": "blastonepiece",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/15d555352d574b44b0106fc70fb0892f/blastonepiece_list.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1126,
+    "characterId": "1126",
+    "cardRarityType": "uma",
+    "assetbundleName": "sakurachitoseo",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3aa6c2887e5c48348a9ecf646d123dc1/sakurachitoseo_list.png",
+    "className": "高等部"
+  },
+  {
+    "id": 9048,
+    "characterId": "9048",
+    "cardRarityType": "uma",
+    "assetbundleName": "haiseiko",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/9649d25c93c2409a85cd9af0444fa051/haiseiko_list.png",
+    "className": ""
+  },
+  {
+    "id": 9047,
+    "characterId": "9047",
+    "cardRarityType": "uma",
+    "assetbundleName": "speedsymboli",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d64cf4d8702648c1bc2aa5c5a6d7afbd/speedsymboli_list.png",
+    "className": ""
+  },
+  {
+    "id": 9046,
+    "characterId": "9046",
+    "cardRarityType": "uma",
+    "assetbundleName": "saintlite",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6fe1f0532dcb4d7b9afb1f25c21744ee/saintlite_list.png",
+    "className": ""
+  },
+  {
+    "id": 1134,
+    "characterId": "1134",
+    "cardRarityType": "uma",
+    "assetbundleName": "currenbouquetdor",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/65ff1570a4ef40af9d00918eb94a9e6f/currenbouquetdor_list.png",
+    "className": "中等部"
+  },
+  {
+    "id": 1133,
+    "characterId": "1133",
+    "cardRarityType": "uma",
+    "assetbundleName": "chronogenesis",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e515893fdf2249a8abe6602ee5ebc95e/chronogenesis_list.png",
+    "className": "中等部"
+  },
+  {
+    "id": 1132,
+    "characterId": "1132",
+    "cardRarityType": "uma",
+    "assetbundleName": "lovesonlyyou",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/abbfc5bb547f4d03a886e10f1072d603/lovesonlyyou_list.png",
+    "className": "中等部"
+  },
+  {
+    "id": 1131,
+    "characterId": "1131",
+    "cardRarityType": "uma",
+    "assetbundleName": "granalegria",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/186354558c8c4dec98c37d6e67cc2464/granalegria_list.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1130,
+    "characterId": "1130",
+    "cardRarityType": "uma",
+    "assetbundleName": "luckylilac",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/781af99cf1d84e63bc2026538f0a55a5/luckylilac_list.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1129,
+    "characterId": "1129",
+    "cardRarityType": "uma",
+    "assetbundleName": "almondeye",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6009fc8852bf4db3930510850c2bc8e9/almondeye_list.png",
+    "className": "Middle School"
+  },
+  {
+    "id": 1127,
+    "characterId": "1127",
+    "cardRarityType": "uma",
+    "assetbundleName": "fenomeno",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d2d0f8f360cb46109a7acae5ce630be9/fenomeno_list.png",
+    "className": "高等部"
+  },
+  {
+    "id": 1135,
+    "characterId": "1135",
+    "cardRarityType": "uma",
+    "assetbundleName": "staygold",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/1ae64df3a200487b88facc86e7ffd103/staygold_list.png",
+    "className": "高等部"
+  },
+  {
+    "id": 9049,
+    "characterId": "9049",
+    "cardRarityType": "uma",
+    "assetbundleName": "tuckerbryne",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/08cdb7dce3a2419e876a1405306d4a0a/tuckerbryne_list.png",
+    "className": ""
+  },
+  {
+    "id": 1118,
+    "characterId": "1118",
+    "cardRarityType": "uma",
+    "assetbundleName": "admiregroove",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/1b6233c9460c45be81a034dd53ffe7b7/admiregroove_list.png",
+    "className": "高等部"
+  },
+  {
+    "id": 1136,
+    "characterId": "1136",
+    "cardRarityType": "uma",
+    "assetbundleName": "reddesire",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d20a53c8c7be42d79bcb938abcff5e19/reddesire_list.png",
+    "className": "中等部"
+  },
+  {
+    "id": 9051,
+    "characterId": "9051",
+    "cardRarityType": "uma",
+    "assetbundleName": "yunohanabloom",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3df80272be754893a01b18c65f022cd8/yunohanabloom_list.png",
+    "className": ""
+  },
+  {
+    "id": 9050,
+    "characterId": "9050",
+    "cardRarityType": "uma",
+    "assetbundleName": "hoshinakiyoko",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d594bf4806a44533a66bef1e96fcf5a4/hoshinakiyoko_list.png",
+    "className": ""
+  },
+  {
+    "id": 1137,
+    "characterId": "1137",
+    "cardRarityType": "uma",
+    "assetbundleName": "kiseki",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/7134544fbb3d4cc38936414e1dadd3f7/kiseki_list.png",
+    "className": "中等部"
+  },
+  {
+    "id": 1139,
+    "characterId": "1139",
+    "cardRarityType": "uma",
+    "assetbundleName": "casinodrive",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/fff5260b6f454d4eaa8204afdd261332/casinodrive_list.png",
+    "className": ""
+  },
+  {
+    "id": 1140,
+    "characterId": "1140",
+    "cardRarityType": "uma",
+    "assetbundleName": "marchelorraine",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a34bb4e4616249eab5e8a21bd7c4eca4/marchelorraine_list.png",
+    "className": "中等部"
+  },
+  {
+    "id": 1138,
+    "characterId": "1138",
+    "cardRarityType": "uma",
+    "assetbundleName": "foreveryoung",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/09175cc749d347109289ca5a8b4da2c0/foreveryoung_list.png",
+    "className": "高等部"
+  },
+  {
+    "id": 1145,
+    "characterId": "1145",
+    "cardRarityType": "uma",
+    "assetbundleName": "rulership",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/84a7d75432a94a11ba16dc515263342e/rulership_list.png",
+    "className": ""
+  },
+  {
+    "id": 1144,
+    "characterId": "1144",
+    "cardRarityType": "uma",
+    "assetbundleName": "rosekingdom",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d8395693e7d44d58b051d29b85acf0ea/rosekingdom_list.png",
+    "className": ""
+  },
+  {
+    "id": 1143,
+    "characterId": "1143",
+    "cardRarityType": "uma",
+    "assetbundleName": "victoirepisa",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/74830f0fde314abca6ff711118afbdfb/victoirepisa_list.png",
+    "className": "高等部"
+  },
+  {
+    "id": 1142,
+    "characterId": "1142",
+    "cardRarityType": "uma",
+    "assetbundleName": "logotype",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/dceb3d9190484c2ab6fcd465c8751eba/logotype_list.png",
+    "className": ""
+  },
+  {
+    "id": 1141,
+    "characterId": "1141",
+    "cardRarityType": "uma",
+    "assetbundleName": "epiphaneia",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5a9f49152d614451a8ee0957fe3a28d1/epiphaneia_list.png",
+    "className": ""
+  }
+]
