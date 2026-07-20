@@ -7,12 +7,13 @@
 - 将不同类型的内容转换为 ncatbot 消息组件并发送
 """
 
+from asyncio import Task
 from itertools import chain
 from pathlib import Path
 from typing import List, Any, TYPE_CHECKING
 import re
 
-from .compat import ConfigWrapper as AstrBotConfig
+from .compat import ConfigWrapper as AstrBotConfig, video_max_duration_seconds
 from .data import (
     AudioContent,
     DynamicContent,
@@ -25,6 +26,7 @@ from .data import (
 from .exception import (
     DownloadException,
     DownloadLimitException,
+    DurationLimitException,
     SizeLimitException,
     ZeroSizeException,
 )
@@ -99,6 +101,73 @@ class MessageSender:
         matched = re.search(r"https?://[^\s|]+", name)
         return matched.group(0) if matched else None
 
+    @staticmethod
+    def _cancel_media_download(cont: Any) -> None:
+        """取消尚未完成的媒体下载任务，避免跳过发送后仍白下。"""
+        task = getattr(cont, "path_task", None)
+        if isinstance(task, Task) and not task.done():
+            task.cancel()
+
+    @staticmethod
+    def _format_duration(seconds: float | int) -> str:
+        total = int(seconds)
+        minutes, secs = divmod(total, 60)
+        hours, minutes = divmod(minutes, 60)
+        if hours:
+            return f"{hours}:{minutes:02d}:{secs:02d}"
+        return f"{minutes}:{secs:02d}"
+
+    def _video_over_duration_tip(
+        self,
+        cont: VideoContent | None,
+        limit: int,
+        *,
+        duration: float | int | None = None,
+    ) -> str:
+        actual = duration
+        if actual is None and cont is not None and cont.duration:
+            actual = cont.duration
+        if actual and actual > 0 and limit > 0:
+            return (
+                f"视频过长（时长 {self._format_duration(actual)} / "
+                f"上限 {self._format_duration(limit)}，即 {limit} 秒），"
+                "已跳过发送视频"
+            )
+        if limit > 0:
+            return (
+                f"视频过长（上限 {self._format_duration(limit)}，即 {limit} 秒），"
+                "已跳过发送视频"
+            )
+        return "视频过长，已跳过发送视频"
+
+    def _video_over_size_tip(
+        self,
+        cont: Any,
+        exc: SizeLimitException,
+    ) -> str:
+        limit_mb = exc.limit_mb
+        if limit_mb is None:
+            try:
+                limit_mb = float(self.config.get("source_max_size") or 0) or None
+            except (TypeError, ValueError):
+                limit_mb = None
+
+        parts: list[str] = []
+        if exc.size_bytes is not None and limit_mb is not None:
+            parts.append(
+                f"大小 {exc.size_bytes / 1024 / 1024:.2f} MB / 上限 {limit_mb:g} MB"
+            )
+        elif limit_mb is not None:
+            parts.append(f"已超过上限 {limit_mb:g} MB")
+        else:
+            parts.append("超过大小限制")
+
+        duration = getattr(cont, "duration", None)
+        if duration and duration > 0:
+            parts.append(f"时长 {self._format_duration(duration)}")
+
+        return f"视频过大（{'，'.join(parts)}），已跳过发送视频"
+
     async def build_message_parts(
         self,
         result: ParseResult,
@@ -110,6 +179,7 @@ class MessageSender:
         """
         plan = self._build_send_plan(result)
         parts: List[dict] = []
+        max_duration = video_max_duration_seconds(self.config)
 
         # 合并转发时，卡片以内联形式作为一个消息段参与合并
         if plan["render_card"] and plan["force_merge"]:
@@ -143,10 +213,37 @@ class MessageSender:
 
         # 重媒体处理
         for cont in plan["heavy"]:
+            # 已知时长超过阈值：不下载、不发视频，只提示（文案仍由上层发送）
+            if (
+                isinstance(cont, VideoContent)
+                and max_duration > 0
+                and cont.duration
+                and cont.duration > max_duration
+            ):
+                self._cancel_media_download(cont)
+                parts.append(
+                    {
+                        "type": "text",
+                        "data": self._video_over_duration_tip(cont, max_duration),
+                    }
+                )
+                continue
+
             try:
                 path: Path = await cont.get_path()
-            except SizeLimitException:
-                parts.append({"type": "text", "data": "此项媒体超过大小限制"})
+            except SizeLimitException as exc:
+                self._cancel_media_download(cont)
+                parts.append({"type": "text", "data": self._video_over_size_tip(cont, exc)})
+                continue
+            except DurationLimitException as exc:
+                self._cancel_media_download(cont)
+                limit = exc.limit_seconds or max_duration
+                tip = self._video_over_duration_tip(
+                    cont if isinstance(cont, VideoContent) else None,
+                    int(limit) if limit else 0,
+                    duration=exc.duration,
+                )
+                parts.append({"type": "text", "data": tip})
                 continue
             except DownloadException:
                 if self.config["show_download_fail_tip"]:

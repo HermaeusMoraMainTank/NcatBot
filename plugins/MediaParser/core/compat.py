@@ -79,8 +79,10 @@ DEFAULT_CONFIG = {
     "debounce_interval": 300,
     # 资源最大大小 (MB)
     "source_max_size": 90,
-    # 资源最大时长 (分钟)
+    # 资源最大时长 (分钟)（下载硬限制）
     "source_max_minute": 15,
+    # 超过此时长（秒）不发送视频，仅发送文案/提示；0=不限制
+    "video_send_max_seconds": 480,
     # 音频以文件形式上传
     "audio_to_file": True,
     # 单条重媒体仍渲染卡片
@@ -125,6 +127,21 @@ DEFAULT_CONFIG = {
     # 缓存目录
     "cache_dir": "",
 }
+
+
+def video_max_duration_seconds(config: Any) -> int:
+    """有效视频时长上限（秒）：取发送阈值与下载分钟限制的较小正值；0 表示不限制。"""
+    get = config.get if hasattr(config, "get") else (lambda k, d=None: config[k] if k in config else d)
+    try:
+        send_max = int(get("video_send_max_seconds") or 0)
+    except (TypeError, ValueError):
+        send_max = 0
+    try:
+        minute_max = int(get("source_max_minute") or 0) * 60
+    except (TypeError, ValueError):
+        minute_max = 0
+    candidates = [x for x in (send_max, minute_max) if x > 0]
+    return min(candidates) if candidates else 0
 
 
 def create_config(data_dir: Path, cache_dir: Path) -> ConfigWrapper:

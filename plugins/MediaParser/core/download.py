@@ -10,7 +10,7 @@ from aiohttp import ClientError, ClientSession, ClientTimeout
 from msgspec import Struct, convert
 from tqdm.asyncio import tqdm
 
-from .compat import _log, ConfigWrapper as AstrBotConfig
+from .compat import _log, ConfigWrapper as AstrBotConfig, video_max_duration_seconds
 
 from .constants import COMMON_HEADER
 from .exception import (
@@ -68,7 +68,7 @@ class Downloader:
         self.config = config
         self.cache_dir = Path(config["cache_dir"])
         self.proxy: str | None = self.config["proxy"] or None
-        self.max_duration: int = config["source_max_minute"] * 60
+        self.max_duration: int = video_max_duration_seconds(config)
         self.max_size = self.config["source_max_size"]
         self.headers: dict[str, str] = COMMON_HEADER.copy()
         # 视频信息缓存
@@ -141,7 +141,9 @@ class Downloader:
                         _log.warning(
                             f"媒体 url: {url} 大小 {content_length / 1024 / 1024:.2f} MB 超过 {self.max_size} MB, 取消下载"
                         )
-                        raise SizeLimitException
+                        raise SizeLimitException(
+                            size_bytes=content_length, limit_mb=self.max_size
+                        )
 
                     downloaded = 0
                     with self.get_progress_bar(file_name, content_length) as bar:
@@ -151,7 +153,9 @@ class Downloader:
                             ):
                                 downloaded += len(chunk)
                                 if downloaded > max_bytes:
-                                    raise SizeLimitException
+                                    raise SizeLimitException(
+                                        size_bytes=downloaded, limit_mb=self.max_size
+                                    )
                                 await file.write(chunk)
                                 bar.update(len(chunk))
 
@@ -416,8 +420,10 @@ class Downloader:
         self, url: str, cookiefile: Path | None = None
     ) -> Path:
         info = await self.ytdlp_extract_info(url, cookiefile)
-        if info.duration > self.max_duration:
-            raise DurationLimitException
+        if self.max_duration > 0 and info.duration > self.max_duration:
+            raise DurationLimitException(
+                duration=info.duration, limit_seconds=self.max_duration
+            )
 
         video_path = self.cache_dir / generate_file_name(url, ".mp4")
         if video_path.exists():

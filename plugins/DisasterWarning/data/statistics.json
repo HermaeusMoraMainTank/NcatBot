@@ -1,31 +1,34 @@
 {
-  "total_received": 252,
-  "total_events": 132,
+  "total_received": 316,
+  "total_events": 168,
   "start_time": "2026-07-14T17:59:04.268261",
-  "last_updated": "2026-07-17T14:36:43.405070",
+  "last_updated": "2026-07-20T16:18:32.209213",
   "by_type": {
-    "weather_alarm": 71,
-    "earthquake": 49,
-    "earthquake_warning": 12
+    "weather_alarm": 79,
+    "earthquake": 67,
+    "earthquake_warning": 22
   },
   "by_source": {
-    "fan_studio_weather": 75,
-    "fan_studio_cenc": 9,
-    "fan_studio_cea": 5,
-    "fan_studio_jma": 8,
-    "fan_studio_usgs": 98,
-    "wolfx_jma_eew": 22,
-    "wolfx_cenc_eq": 10,
-    "p2p_earthquake": 11,
-    "wolfx_jma_eq": 14
+    "fan_studio_weather": 83,
+    "fan_studio_cenc": 10,
+    "fan_studio_cea": 6,
+    "fan_studio_jma": 9,
+    "fan_studio_usgs": 108,
+    "wolfx_jma_eew": 36,
+    "wolfx_cenc_eq": 21,
+    "p2p_earthquake": 19,
+    "wolfx_jma_eq": 22,
+    "wolfx_cwa_eew": 1,
+    "wolfx_cenc_eew": 1
   },
   "earthquake_stats": {
     "by_magnitude": {
-      "M5.0 - M5.9": 14,
-      "M4.0 - M4.9": 17,
-      "< M3.0": 15,
-      "M3.0 - M3.9": 12,
-      "M6.0 - M6.9": 2
+      "M5.0 - M5.9": 16,
+      "M4.0 - M4.9": 26,
+      "< M3.0": 18,
+      "M3.0 - M3.9": 22,
+      "M6.0 - M6.9": 3,
+      "M7.0 - M7.9": 3
     },
     "by_region": {
       "秘鲁": 1,
@@ -33,29 +36,29 @@
       "西藏": 1
     },
     "max_magnitude": {
-      "value": 6.2,
-      "event_id": "7000t0d0",
-      "place_name": "菲律宾棉兰老岛附近",
-      "time": "2026-07-14T23:49:41",
-      "source": "fan_studio_usgs"
+      "value": 7.2,
+      "event_id": "",
+      "place_name": "墨西哥恰帕斯州沿岸近海",
+      "time": "2026-07-17T22:48:40",
+      "source": "wolfx_cenc_eq"
     }
   },
   "weather_stats": {
     "by_level": {
-      "🟠橙色": 32,
-      "🟡黄色": 28,
+      "🟠橙色": 34,
+      "🟡黄色": 34,
       "🔴红色": 10,
       "🔵蓝色": 1
     },
     "by_type": {
-      "暴雨": 43,
-      "雷电": 11,
-      "大风": 7,
+      "暴雨": 46,
+      "雷电": 12,
+      "大风": 9,
       "山洪灾害": 1,
-      "雷暴大风": 2,
+      "雷暴大风": 3,
       "强对流": 1,
       "高温": 4,
-      "冰雹": 1,
+      "冰雹": 2,
       "其他": 1
     },
     "by_region": {
@@ -71,7 +74,7 @@
       "祁县": 1,
       "电白": 2,
       "陕西": 1,
-      "藤县": 1,
+      "藤县": 2,
       "梧州": 1,
       "满城": 1,
       "雷波": 1,
@@ -116,10 +119,465 @@
       "惠州": 3,
       "华安": 1,
       "赫章": 2,
-      "普宁": 1
+      "普宁": 1,
+      "阜平": 1,
+      "静海": 1,
+      "西青": 1,
+      "沧州": 1,
+      "宝坻": 1,
+      "岑溪": 1,
+      "闽清": 1
     }
   },
   "recent_pushes": [
+    {
+      "timestamp": "2026-07-20T16:18:32.209213",
+      "event_id": "350124-20260720155500-11B0302",
+      "type": "weather_alarm",
+      "source": "fan_studio_weather",
+      "description": "闽清县气象台发布暴雨黄色预警信号"
+    },
+    {
+      "timestamp": "2026-07-20T16:11:01.470146",
+      "event_id": "7000t1wa",
+      "type": "earthquake",
+      "source": "fan_studio_usgs",
+      "description": "M4.1 墨西哥恰帕斯州沿岸近海附近"
+    },
+    {
+      "timestamp": "2026-07-20T16:03:15.054116",
+      "event_id": "450481-20260720153210-11B1402",
+      "type": "weather_alarm",
+      "source": "fan_studio_weather",
+      "description": "岑溪市气象台更新雷电黄色预警信号[III级/较重]"
+    },
+    {
+      "timestamp": "2026-07-20T15:48:00.208233",
+      "event_id": "450422-20260720151752-11B0303",
+      "type": "weather_alarm",
+      "source": "fan_studio_weather",
+      "description": "藤县气象台更新暴雨橙色预警信号[II级/严重]"
+    },
+    {
+      "timestamp": "2026-07-20T15:33:08.160228",
+      "event_id": "120115-20260720150717-11B0302",
+      "type": "weather_alarm",
+      "source": "fan_studio_weather",
+      "description": "宝坻区气象台更新暴雨黄色预警/Ⅲ级/较重"
+    },
+    {
+      "timestamp": "2026-07-20T15:19:04.915421",
+      "event_id": "7000t1w2",
+      "type": "earthquake",
+      "source": "fan_studio_usgs",
+      "description": "M5.6 加拿大温哥华岛地区附近"
+    },
+    {
+      "timestamp": "2026-07-20T15:13:58.275133",
+      "event_id": "7000t1w2",
+      "type": "earthquake",
+      "source": "fan_studio_usgs",
+      "description": "M5.6 加拿大温哥华岛地区附近"
+    },
+    {
+      "timestamp": "2026-07-20T15:13:10.917289",
+      "event_id": "130900-20260720145606-11B5802",
+      "type": "weather_alarm",
+      "source": "fan_studio_weather",
+      "description": "沧州市气象台更新雷暴大风黄色预警[III级/较重]"
+    },
+    {
+      "timestamp": "2026-07-20T15:13:07.239833",
+      "event_id": "7000t1w2",
+      "type": "earthquake",
+      "source": "fan_studio_usgs",
+      "description": "M5.6 加拿大温哥华岛地区附近"
+    },
+    {
+      "timestamp": "2026-07-20T15:11:04.665347",
+      "event_id": "7000t1w2",
+      "type": "earthquake",
+      "source": "fan_studio_usgs",
+      "description": "M5.6 加拿大温哥华岛地区附近"
+    },
+    {
+      "timestamp": "2026-07-20T15:08:01.450414",
+      "event_id": "7000t1w2",
+      "type": "earthquake",
+      "source": "fan_studio_usgs",
+      "description": "M5.6 加拿大温哥华岛地区附近"
+    },
+    {
+      "timestamp": "2026-07-20T15:07:06.900624",
+      "event_id": "7000t1w2",
+      "type": "earthquake",
+      "source": "fan_studio_usgs",
+      "description": "M5.6 加拿大温哥华岛地区附近"
+    },
+    {
+      "timestamp": "2026-07-20T15:04:57.806570",
+      "event_id": "7000t1w2",
+      "type": "earthquake",
+      "source": "fan_studio_usgs",
+      "description": "M5.6 加拿大温哥华岛地区附近"
+    },
+    {
+      "timestamp": "2026-07-20T15:00:01.599579",
+      "event_id": "7000t1w2",
+      "type": "earthquake",
+      "source": "fan_studio_usgs",
+      "description": "M5.6 加拿大温哥华岛地区附近"
+    },
+    {
+      "timestamp": "2026-07-20T14:58:02.353785",
+      "event_id": "120111-20260720143953-11B2002",
+      "type": "weather_alarm",
+      "source": "fan_studio_weather",
+      "description": "西青区气象台更新雷雨大风黄色预警/Ⅲ级/较重"
+    },
+    {
+      "timestamp": "2026-07-20T14:43:04.704790",
+      "event_id": "120118-20260720141139-11B2002",
+      "type": "weather_alarm",
+      "source": "fan_studio_weather",
+      "description": "静海区气象台更新雷雨大风黄色预警/Ⅲ级/较重"
+    },
+    {
+      "timestamp": "2026-07-20T14:36:21.166704",
+      "event_id": "a2026ofvzsk",
+      "type": "earthquake",
+      "source": "fan_studio_usgs",
+      "description": "M2.8 阿拉斯加州南部附近"
+    },
+    {
+      "timestamp": "2026-07-20T14:36:21.166704",
+      "event_id": "20260604085010",
+      "type": "earthquake_warning",
+      "source": "fan_studio_jma",
+      "description": "M3.2 長野県中部"
+    },
+    {
+      "timestamp": "2026-07-20T14:36:21.159681",
+      "event_id": "b3i6pz76gqcyy",
+      "type": "earthquake_warning",
+      "source": "fan_studio_cea",
+      "description": "M4.4 新疆克孜勒苏州阿克陶县"
+    },
+    {
+      "timestamp": "2026-07-20T14:36:21.143217",
+      "event_id": "20102739",
+      "type": "earthquake",
+      "source": "fan_studio_cenc",
+      "description": "M3.1 云南曲靖市师宗县"
+    },
+    {
+      "timestamp": "2026-07-20T14:36:21.142213",
+      "event_id": "130624-20260720131855-11B1503",
+      "type": "weather_alarm",
+      "source": "fan_studio_weather",
+      "description": "阜平县气象台更新冰雹橙色预警[II级/严重]"
+    },
+    {
+      "timestamp": "2026-07-20T10:33:06.110822",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_cenc_eq",
+      "description": "M3.1 云南曲靖市师宗县"
+    },
+    {
+      "timestamp": "2026-07-20T10:31:08.658167",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_cenc_eq",
+      "description": "M3.1 云南曲靖市师宗县"
+    },
+    {
+      "timestamp": "2026-07-20T10:29:05.831284",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_cenc_eq",
+      "description": "M3.2 云南曲靖市师宗县"
+    },
+    {
+      "timestamp": "2026-07-20T10:28:37.241341",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M3.0 福島県中通り"
+    },
+    {
+      "timestamp": "2026-07-20T10:28:36.881295",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M3.0 福島県中通り"
+    },
+    {
+      "timestamp": "2026-07-20T09:18:37.460350",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M4.4 福島県沖"
+    },
+    {
+      "timestamp": "2026-07-20T09:18:36.910284",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M4.4 福島県沖"
+    },
+    {
+      "timestamp": "2026-07-20T09:16:18.642470",
+      "event_id": "20260720101523",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.9 福島県沖"
+    },
+    {
+      "timestamp": "2026-07-20T09:16:15.092080",
+      "event_id": "20260720101523",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.9 福島県沖"
+    },
+    {
+      "timestamp": "2026-07-20T09:16:00.187652",
+      "event_id": "20260720101523",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.9 福島県沖"
+    },
+    {
+      "timestamp": "2026-07-20T09:15:56.319286",
+      "event_id": "20260720101523",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.9 福島県沖"
+    },
+    {
+      "timestamp": "2026-07-20T03:24:05.237065",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M2.7 京都府南部"
+    },
+    {
+      "timestamp": "2026-07-20T03:24:04.947200",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M2.7 京都府南部"
+    },
+    {
+      "timestamp": "2026-07-20T02:07:55.706617",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M2.8 日高地方中部"
+    },
+    {
+      "timestamp": "2026-07-20T02:07:55.409353",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M2.8 日高地方中部"
+    },
+    {
+      "timestamp": "2026-07-19T14:23:38.629397",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_cenc_eq",
+      "description": "M3.2 新疆阿克苏地区库车市"
+    },
+    {
+      "timestamp": "2026-07-18T18:55:37.973605",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_cenc_eq",
+      "description": "M5.3 塔吉克斯坦"
+    },
+    {
+      "timestamp": "2026-07-18T13:55:38.237157",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_cenc_eq",
+      "description": "M4.3 新疆克孜勒苏州阿克陶县"
+    },
+    {
+      "timestamp": "2026-07-18T13:55:24.585620",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_cenc_eq",
+      "description": "M4.3 新疆克孜勒苏州阿克陶县"
+    },
+    {
+      "timestamp": "2026-07-18T13:48:55.050223",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_cenc_eq",
+      "description": "M4.2 新疆克孜勒苏州阿克陶县"
+    },
+    {
+      "timestamp": "2026-07-18T13:47:33.785228",
+      "event_id": "b3i6pz76gqcyy",
+      "type": "earthquake_warning",
+      "source": "wolfx_cenc_eew",
+      "description": "M4.8 新疆克孜勒苏州阿克陶县"
+    },
+    {
+      "timestamp": "2026-07-18T08:51:44.817350",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M3.4 奄美大島近海"
+    },
+    {
+      "timestamp": "2026-07-18T08:51:44.802078",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M3.4 奄美大島近海"
+    },
+    {
+      "timestamp": "2026-07-18T08:49:01.503460",
+      "event_id": "20260718094827",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.7 奄美大島近海"
+    },
+    {
+      "timestamp": "2026-07-18T08:48:58.132985",
+      "event_id": "20260718094827",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.7 奄美大島近海"
+    },
+    {
+      "timestamp": "2026-07-18T08:48:46.789813",
+      "event_id": "20260718094827",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.7 奄美大島近海"
+    },
+    {
+      "timestamp": "2026-07-18T08:48:43.330462",
+      "event_id": "20260718094827",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.0 奄美大島近海"
+    },
+    {
+      "timestamp": "2026-07-18T08:48:40.372830",
+      "event_id": "20260718094827",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.7 奄美大島近海"
+    },
+    {
+      "timestamp": "2026-07-18T08:48:37.213110",
+      "event_id": "20260718094827",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.5 奄美大島近海"
+    },
+    {
+      "timestamp": "2026-07-18T08:29:55.431473",
+      "event_id": "9990001",
+      "type": "earthquake_warning",
+      "source": "wolfx_cwa_eew",
+      "description": "M6.0 花蓮縣秀林鄉"
+    },
+    {
+      "timestamp": "2026-07-18T05:33:47.959781",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M3.4 岩手県沖"
+    },
+    {
+      "timestamp": "2026-07-18T05:33:47.852889",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M3.4 岩手県沖"
+    },
+    {
+      "timestamp": "2026-07-18T03:48:20.364225",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M4.3 千葉県東方沖"
+    },
+    {
+      "timestamp": "2026-07-18T03:48:20.346664",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M4.3 千葉県東方沖"
+    },
+    {
+      "timestamp": "2026-07-18T03:46:07.901854",
+      "event_id": "20260718044522",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.3 千葉県東方沖"
+    },
+    {
+      "timestamp": "2026-07-18T03:45:53.423568",
+      "event_id": "20260718044522",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.3 千葉県東方沖"
+    },
+    {
+      "timestamp": "2026-07-18T03:45:33.292685",
+      "event_id": "20260718044522",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.0 千葉県東方沖"
+    },
+    {
+      "timestamp": "2026-07-18T03:45:29.701115",
+      "event_id": "20260718044522",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.0 千葉県東方沖"
+    },
+    {
+      "timestamp": "2026-07-18T00:03:18.698799",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_cenc_eq",
+      "description": "M7.2 墨西哥恰帕斯州沿岸近海"
+    },
+    {
+      "timestamp": "2026-07-17T23:17:49.604999",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_cenc_eq",
+      "description": "M7.2 墨西哥恰帕斯州沿岸近海"
+    },
+    {
+      "timestamp": "2026-07-17T23:16:26.894005",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M7.4 メキシコ、チアパス州沿岸"
+    },
+    {
+      "timestamp": "2026-07-17T23:16:26.760602",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M7.4 中米"
+    },
+    {
+      "timestamp": "2026-07-17T23:03:01.428823",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_cenc_eq",
+      "description": "M7.3 墨西哥恰帕斯州沿岸远海"
+    },
     {
       "timestamp": "2026-07-17T14:36:43.405070",
       "event_id": "",
@@ -371,454 +829,6 @@
       "type": "earthquake",
       "source": "p2p_earthquake",
       "description": "M2.0 石川県加賀地方"
-    },
-    {
-      "timestamp": "2026-07-15T20:35:04.609909",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M4.4 岩手県沖"
-    },
-    {
-      "timestamp": "2026-07-15T20:33:09.844488",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M4.4 岩手県沖"
-    },
-    {
-      "timestamp": "2026-07-15T16:44:05.586354",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M3.9 宮城県沖"
-    },
-    {
-      "timestamp": "2026-07-15T16:42:11.966354",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M3.9 宮城県沖"
-    },
-    {
-      "timestamp": "2026-07-15T16:40:09.600113",
-      "event_id": "20260715173924",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M4.1 宮城県沖"
-    },
-    {
-      "timestamp": "2026-07-15T16:39:54.896893",
-      "event_id": "20260715173924",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M4.1 宮城県沖"
-    },
-    {
-      "timestamp": "2026-07-15T16:39:39.518217",
-      "event_id": "20260715173924",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M4.2 宮城県沖"
-    },
-    {
-      "timestamp": "2026-07-15T15:33:22.274972",
-      "event_id": "445281-20260715151740-11B0302",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "普宁市气象台发布暴雨黄色预警[III级/较重]"
-    },
-    {
-      "timestamp": "2026-07-15T15:18:10.281970",
-      "event_id": "520527-20260715150214-11B8503",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "赫章县气象台发布雷雨强风橙色预警[Ⅱ/严重]"
-    },
-    {
-      "timestamp": "2026-07-15T15:14:00.834711",
-      "event_id": "75002821",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M2.6 夏威夷州附近"
-    },
-    {
-      "timestamp": "2026-07-15T15:14:00.833711",
-      "event_id": "20260714202032",
-      "type": "earthquake_warning",
-      "source": "fan_studio_jma",
-      "description": "M4.6 三陸沖"
-    },
-    {
-      "timestamp": "2026-07-15T15:14:00.832711",
-      "event_id": "b3wegh59kqayy",
-      "type": "earthquake_warning",
-      "source": "fan_studio_cea",
-      "description": "M4.3 四川宜宾市高县"
-    },
-    {
-      "timestamp": "2026-07-15T15:14:00.832711",
-      "event_id": "15080530",
-      "type": "earthquake",
-      "source": "fan_studio_cenc",
-      "description": "M3.0 青海海西州直辖区"
-    },
-    {
-      "timestamp": "2026-07-15T15:14:00.831724",
-      "event_id": "520527-20260715144213-11B1503",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "赫章县气象台发布冰雹橙色预警[Ⅱ/严重]"
-    },
-    {
-      "timestamp": "2026-07-15T15:03:19.128598",
-      "event_id": "520527-20260715144213-11B1503",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "赫章县气象台发布冰雹橙色预警[Ⅱ/严重]"
-    },
-    {
-      "timestamp": "2026-07-15T14:58:39.187153",
-      "event_id": "441300-20260715142422-11B0302",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "惠州市气象台发布暴雨黄色预警[III级/较重]"
-    },
-    {
-      "timestamp": "2026-07-15T14:27:02.220030",
-      "event_id": "75002821",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M2.6 夏威夷州附近"
-    },
-    {
-      "timestamp": "2026-07-15T14:25:59.343181",
-      "event_id": "75002821",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M2.6 夏威夷州附近"
-    },
-    {
-      "timestamp": "2026-07-15T14:07:32.367707",
-      "event_id": "40655106",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M2.7 加利福尼亚州、内华达州边境地区附近"
-    },
-    {
-      "timestamp": "2026-07-15T14:07:32.366031",
-      "event_id": "20260714202032",
-      "type": "earthquake_warning",
-      "source": "fan_studio_jma",
-      "description": "M4.6 三陸沖"
-    },
-    {
-      "timestamp": "2026-07-15T14:07:32.365030",
-      "event_id": "b3wegh59kqayy",
-      "type": "earthquake_warning",
-      "source": "fan_studio_cea",
-      "description": "M4.3 四川宜宾市高县"
-    },
-    {
-      "timestamp": "2026-07-15T14:07:32.365030",
-      "event_id": "15080530",
-      "type": "earthquake",
-      "source": "fan_studio_cenc",
-      "description": "M3.0 青海海西州直辖区"
-    },
-    {
-      "timestamp": "2026-07-15T14:07:32.365030",
-      "event_id": "532530-20260715131328-11B0301",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "金平苗族瑶族傣族自治县气象台发布暴雨蓝色预警[Ⅳ级/一般]"
-    },
-    {
-      "timestamp": "2026-07-15T13:34:38.800902",
-      "event_id": "532530-20260715131328-11B0301",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "金平苗族瑶族傣族自治县气象台发布暴雨蓝色预警[Ⅳ级/一般]"
-    },
-    {
-      "timestamp": "2026-07-15T13:19:00.829589",
-      "event_id": "441300-20260715125725-11B2002",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "惠州市气象台发布雷雨大风黄色预警[III级/较重]"
-    },
-    {
-      "timestamp": "2026-07-15T13:03:11.876655",
-      "event_id": "350629-20260715123200-11B1402",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "华安县气象台发布雷电黄色预警信号"
-    },
-    {
-      "timestamp": "2026-07-15T13:01:05.148110",
-      "event_id": "40655106",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M2.7 加利福尼亚州、内华达州边境地区附近"
-    },
-    {
-      "timestamp": "2026-07-15T12:58:01.196181",
-      "event_id": "40655106",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M2.7 加利福尼亚州、内华达州边境地区附近"
-    },
-    {
-      "timestamp": "2026-07-15T12:52:02.747156",
-      "event_id": "40655106",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M2.7 加利福尼亚州、内华达州边境地区附近"
-    },
-    {
-      "timestamp": "2026-07-15T12:51:01.367827",
-      "event_id": "40655106",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M2.7 加利福尼亚州、内华达州边境地区附近"
-    },
-    {
-      "timestamp": "2026-07-15T12:49:59.770947",
-      "event_id": "40655106",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M2.9 加利福尼亚州、内华达州边境地区附近"
-    },
-    {
-      "timestamp": "2026-07-15T12:48:58.363945",
-      "event_id": "40655106",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M2.9 加利福尼亚州、内华达州边境地区附近"
-    },
-    {
-      "timestamp": "2026-07-15T12:40:57.738299",
-      "event_id": "7000t0kl",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M4.2 智利中部沿岸近海附近"
-    },
-    {
-      "timestamp": "2026-07-15T12:38:04.624655",
-      "event_id": "75396126",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M2.6 加利福尼亚州北部沿岸近海附近"
-    },
-    {
-      "timestamp": "2026-07-15T12:33:05.908575",
-      "event_id": "441300-20260715120720-11B2002",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "惠州市气象台发布雷雨大风黄色预警[III级/较重]"
-    },
-    {
-      "timestamp": "2026-07-15T12:18:25.292953",
-      "event_id": "440403-20260715115623-11B0303",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "斗门区气象台发布暴雨橙色预警[II级/严重]"
-    },
-    {
-      "timestamp": "2026-07-15T12:13:05.607471",
-      "event_id": "75396126",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M2.6 加利福尼亚州北部沿岸近海附近"
-    },
-    {
-      "timestamp": "2026-07-15T12:08:00.129184",
-      "event_id": "75396126",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M2.6 加利福尼亚州北部沿岸近海附近"
-    },
-    {
-      "timestamp": "2026-07-15T12:05:06.591300",
-      "event_id": "75396126",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M2.6 加利福尼亚州北部沿岸近海附近"
-    },
-    {
-      "timestamp": "2026-07-15T11:48:51.806090",
-      "event_id": "451321-20260715112155-11B0304",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "忻城县气象台更新暴雨红色预警信号[I级/特别严重]"
-    },
-    {
-      "timestamp": "2026-07-15T11:47:57.862748",
-      "event_id": "a2026nwlupu",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M2.8 阿拉斯加州中部附近"
-    },
-    {
-      "timestamp": "2026-07-15T11:33:04.908847",
-      "event_id": "310116-20260715111051-11B0903",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "金山区气象台发布高温橙色预警[Ⅱ级/严重]"
-    },
-    {
-      "timestamp": "2026-07-15T11:30:18.942922",
-      "event_id": "7000t0k4",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M4.9 堪察加东岸远海附近"
-    },
-    {
-      "timestamp": "2026-07-15T11:30:18.940923",
-      "event_id": "20260714202032",
-      "type": "earthquake_warning",
-      "source": "fan_studio_jma",
-      "description": "M4.6 三陸沖"
-    },
-    {
-      "timestamp": "2026-07-15T11:30:18.940923",
-      "event_id": "b3wegh59kqayy",
-      "type": "earthquake_warning",
-      "source": "fan_studio_cea",
-      "description": "M4.3 四川宜宾市高县"
-    },
-    {
-      "timestamp": "2026-07-15T11:30:18.940923",
-      "event_id": "15080530",
-      "type": "earthquake",
-      "source": "fan_studio_cenc",
-      "description": "M3.0 青海海西州直辖区"
-    },
-    {
-      "timestamp": "2026-07-15T11:30:18.939920",
-      "event_id": "321081-20260715104849-11B0903",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "仪征市气象台发布高温橙色预警[Ⅱ级/严重]"
-    },
-    {
-      "timestamp": "2026-07-15T11:21:20.510449",
-      "event_id": "7000t0k4",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M4.9 堪察加东岸远海附近"
-    },
-    {
-      "timestamp": "2026-07-15T11:21:20.456245",
-      "event_id": "20260714202032",
-      "type": "earthquake_warning",
-      "source": "fan_studio_jma",
-      "description": "M4.6 三陸沖"
-    },
-    {
-      "timestamp": "2026-07-15T11:21:20.447875",
-      "event_id": "b3wegh59kqayy",
-      "type": "earthquake_warning",
-      "source": "fan_studio_cea",
-      "description": "M4.3 四川宜宾市高县"
-    },
-    {
-      "timestamp": "2026-07-15T11:21:20.444882",
-      "event_id": "15080530",
-      "type": "earthquake",
-      "source": "fan_studio_cenc",
-      "description": "M3.0 青海海西州直辖区"
-    },
-    {
-      "timestamp": "2026-07-15T11:21:20.374863",
-      "event_id": "321081-20260715104849-11B0903",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "仪征市气象台发布高温橙色预警[Ⅱ级/严重]"
-    },
-    {
-      "timestamp": "2026-07-15T11:04:07.455970",
-      "event_id": "7000t0k4",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M4.9 堪察加东岸远海附近"
-    },
-    {
-      "timestamp": "2026-07-15T11:03:07.657069",
-      "event_id": "321081-20260715104849-11B0903",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "仪征市气象台发布高温橙色预警[Ⅱ级/严重]"
-    },
-    {
-      "timestamp": "2026-07-15T10:57:59.753841",
-      "event_id": "7000t0k1",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M5.1 堪察加东岸远海附近"
-    },
-    {
-      "timestamp": "2026-07-15T10:48:33.293171",
-      "event_id": "532530-20260715101406-11B0303",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "金平苗族瑶族傣族自治县气象台发布暴雨橙色预警[Ⅱ级/严重]"
-    },
-    {
-      "timestamp": "2026-07-15T10:36:20.790741",
-      "event_id": "321182-20260715101254-11B0903",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "扬中市气象台发布高温橙色预警[Ⅱ级/严重]"
-    },
-    {
-      "timestamp": "2026-07-15T10:02:14.337692",
-      "event_id": "450981-20260715093705-11B0303",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "北流市气象台更新暴雨橙色预警信号[II级/严重]"
-    },
-    {
-      "timestamp": "2026-07-15T09:49:07.894025",
-      "event_id": "71524378",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M2.6 波多黎各地区附近"
-    },
-    {
-      "timestamp": "2026-07-15T09:48:16.852837",
-      "event_id": "451302-20260715091821-11B0303",
-      "type": "weather_alarm",
-      "source": "fan_studio_weather",
-      "description": "兴宾区气象台更新暴雨橙色预警信号[II级/严重]"
-    },
-    {
-      "timestamp": "2026-07-15T09:47:05.623981",
-      "event_id": "7000t0it",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M5.1 智利中部沿岸近海附近"
-    },
-    {
-      "timestamp": "2026-07-15T09:41:07.964036",
-      "event_id": "7000t0it",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M5.1 智利中部沿岸近海附近"
-    },
-    {
-      "timestamp": "2026-07-15T09:35:00.361924",
-      "event_id": "7000t0it",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M5.1 智利中部沿岸近海附近"
-    },
-    {
-      "timestamp": "2026-07-15T09:30:04.298056",
-      "event_id": "7000t0it",
-      "type": "earthquake",
-      "source": "fan_studio_usgs",
-      "description": "M5.1 智利中部沿岸近海附近"
     }
   ],
   "recent_event_ids": [
@@ -953,6 +963,42 @@
     "30.811,131.532,5.0,202607170649",
     "30.631,131.532,5.0,202607170649",
     "-200.000,-200.000,-1.0,202607170649",
-    "unknown_location"
+    "unknown_location",
+    "14.414,-92.793,7.5,202607172248",
+    "14.414,-92.973,7.5,202607172349",
+    "14.775,-92.973,7.0,202607172248",
+    "35.676,141.081,4.0,202607180445",
+    "35.676,141.261,4.5,202607180445",
+    "35.676,141.081,4.5,202607180445",
+    "39.099,142.162,3.5,202607180630",
+    "39.099,142.162,3.5,202607180631",
+    "23.964,121.441,6.0,202607180829",
+    "28.468,129.550,3.5,202607180948",
+    "28.468,129.730,3.5,202607180948",
+    "28.649,129.730,4.0,202607180948",
+    "28.288,129.730,3.5,202607180948",
+    "38.739,75.135,5.0,202607181347",
+    "38.739,75.135,4.0,202607181347",
+    "38.739,75.135,4.5,202607181347",
+    "37.658,72.613,5.5,202607181836",
+    "41.441,83.423,3.0,202607191419",
+    "42.342,142.703,3.0,202607200304",
+    "35.135,135.676,2.5,202607200421",
+    "37.477,141.982,4.0,202607201015",
+    "37.477,141.982,4.5,202607201015",
+    "37.117,140.541,3.0,202607201125",
+    "24.505,104.324,3.0,202607201027",
+    "130624-20260720131855-11B1503",
+    "36.036,138.018,3.0,202606040850",
+    "61.081,-146.126,3.0,202607201348",
+    "120118-20260720141139-11B2002",
+    "120111-20260720143953-11B2002",
+    "49.369,-129.369,5.5,202607201441",
+    "130900-20260720145606-11B5802",
+    "120115-20260720150717-11B0302",
+    "450422-20260720151752-11B0303",
+    "450481-20260720153210-11B1402",
+    "14.414,-92.793,4.0,202607201519",
+    "350124-20260720155500-11B0302"
   ]
 }

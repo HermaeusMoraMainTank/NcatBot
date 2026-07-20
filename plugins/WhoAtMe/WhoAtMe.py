@@ -1,4 +1,4 @@
-"""谁艾特我 — 查询最近一次被艾特时的群聊上下文。"""
+"""谁艾特我 — 查询最近被艾特时的群聊上下文。"""
 
 from __future__ import annotations
 
@@ -8,94 +8,52 @@ import re
 import tempfile
 import time
 from collections import deque
-from dataclasses import dataclass, field
 from datetime import datetime
+from pathlib import Path
 from typing import Deque, Dict, List, Optional, Tuple
 
 from common.utils.CommonUtil import CommonUtil
 from common.utils.async_io import http_get_bytes
 from ncatbot.core import registrar
 from ncatbot.event.qq import GroupMessageEvent as GroupMessage
+from ncatbot.event.qq import GroupRecallEvent
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.types import At, Image, PlainText, Reply, Record, Video
 from ncatbot.types import MessageArray as MessageChain
 from ncatbot.utils import get_log
 
 from .card import ChatRenderMessage, RenderPart, render_qq_chat_card
+from .models import MessagePart, PendingAt, StoredMessage
+from .store import AtStore
 
 _log = get_log()
 
-COMMAND = "谁艾特我"
-CONTEXT_SIZE = 10
-CONTEXT_WINDOW = 50
-PENDING_TTL_SEC = 86400
-_EMPTY_REPLY = "最近没有未查看的艾特哦~"
+PLUGIN_DIR = Path(__file__).resolve().parent
+
+DEFAULT_CONFIG = {
+    # 空列表 = 全群启用
+    "group_whitelist": [],
+    # 未读记录保留秒数
+    "record_expire_seconds": 86400,
+    # @ 消息前后各保留条数
+    "context_size": 10,
+    # 群滚动消息窗口
+    "context_window": 50,
+    # 单次查询最多发送几张未读卡片
+    "max_cards_per_query": 3,
+}
+
+_SELF_QUERY_RE = re.compile(r"^(?:谁艾特我|谁@我)[?？]?$")
+_TARGET_QUERY_RE = re.compile(r"^(?:谁艾特|谁@)\s*")
+_EMPTY_SELF = "最近没有未查看的艾特哦~"
+_EMPTY_OTHER = "最近没有人艾特 TA 哦~"
 
 PendingKey = Tuple[int, str]
 
 
-@dataclass
-class MessagePart:
-    kind: str  # text | at | image | reply | video | record | other
-    text: str = ""
-    url: str = ""
-    file: str = ""
-    user_id: str = ""
-    reply_id: str = ""
-
-
-@dataclass
-class StoredMessage:
-    message_id: str
-    user_id: str
-    nickname: str
-    card: str = ""
-    role: str = "member"
-    level: str = ""
-    title: str = ""
-    parts: List[MessagePart] = field(default_factory=list)
-    at_user_ids: List[str] = field(default_factory=list)
-    timestamp: float = 0.0
-
-    @property
-    def display_name(self) -> str:
-        return self.card or self.nickname or self.user_id
-
-    @property
-    def plain_preview(self) -> str:
-        chunks: List[str] = []
-        for p in self.parts:
-            if p.kind == "text":
-                chunks.append(p.text)
-            elif p.kind == "at":
-                chunks.append(p.text or f"@{p.user_id}")
-            elif p.kind == "image":
-                chunks.append("[图片]")
-            elif p.kind == "reply":
-                chunks.append("")
-            elif p.kind == "video":
-                chunks.append("[视频]")
-            elif p.kind == "record":
-                chunks.append("[语音]")
-            else:
-                chunks.append(p.text or f"[{p.kind}]")
-        return "".join(chunks).strip() or "[消息]"
-
-
-@dataclass
-class PendingAt:
-    message_id: str
-    target_user_id: str
-    atter_user_id: str
-    atter_nickname: str
-    timestamp: float
-    created_at: float
-    context: List[StoredMessage] = field(default_factory=list)
-
-
 class WhoAtMe(NcatBotPlugin):
     name = "WhoAtMe"
-    version = "1.2.3"
+    version = "1.3.0"
 
     _context_ring: Dict[int, Deque[StoredMessage]] = {}
     _pending: Dict[PendingKey, List[PendingAt]] = {}
@@ -105,22 +63,161 @@ class WhoAtMe(NcatBotPlugin):
     _MEMBER_CACHE_TTL = 600
 
     async def on_load(self):
-        _log.info("开始加载 %s 插件 v%s", self.name, self.version)
+        self.init_defaults(DEFAULT_CONFIG)
+        self.data_dir = PLUGIN_DIR / "data"
+        self.data_dir.mkdir(parents=True, exist_ok=True)
+        self.store = AtStore(self.data_dir / "who_at_me.db")
+        self._reload_pending_from_store()
+        _log.info(
+            "开始加载 %s 插件 v%s（pending=%s）",
+            self.name,
+            self.version,
+            sum(len(v) for v in self._pending.values()),
+        )
+
+    def _cfg(self, key: str, default=None):
+        return self.get_config(key, DEFAULT_CONFIG.get(key, default))
+
+    def _context_size(self) -> int:
+        try:
+            return max(1, int(self._cfg("context_size", 10)))
+        except (TypeError, ValueError):
+            return 10
+
+    def _context_window(self) -> int:
+        try:
+            return max(self._context_size() * 2 + 1, int(self._cfg("context_window", 50)))
+        except (TypeError, ValueError):
+            return 50
+
+    def _expire_seconds(self) -> int:
+        try:
+            v = int(self._cfg("record_expire_seconds", 86400))
+            return v if v > 0 else 86400
+        except (TypeError, ValueError):
+            return 86400
+
+    def _max_cards(self) -> int:
+        try:
+            return max(1, min(10, int(self._cfg("max_cards_per_query", 3))))
+        except (TypeError, ValueError):
+            return 3
+
+    def _is_group_allowed(self, group_id) -> bool:
+        raw = self._cfg("group_whitelist", []) or []
+        if not raw:
+            return True
+        try:
+            gid = int(group_id)
+        except (TypeError, ValueError):
+            return False
+        allowed = set()
+        for x in raw:
+            try:
+                allowed.add(int(x))
+            except (TypeError, ValueError):
+                continue
+        return gid in allowed
+
+    def _reload_pending_from_store(self) -> None:
+        self._pending.clear()
+        for pending in self.store.load_all_alive(self._expire_seconds()):
+            key = (int(pending.group_id), str(pending.target_user_id))
+            self._pending.setdefault(key, []).append(pending)
 
     @registrar.qq.on_group_message(priority=50)
     async def handle_group_message(self, event: GroupMessage) -> None:
-        text = self._extract_plain_text(event)
-        if text == COMMAND:
-            await self._reply_who_at_me(event)
+        if not self._is_group_allowed(event.group_id):
             return
+
+        query_target = self._parse_query_target(event)
+        if query_target is not None:
+            await self._reply_who_at(event, query_target)
+            return
+
         self._record_message(event)
+
+    @registrar.qq.on_group_recall()
+    async def handle_group_recall(self, event: GroupRecallEvent) -> None:
+        try:
+            group_id = int(event.group_id)
+            message_id = str(event.message_id)
+        except (TypeError, ValueError):
+            return
+        if not self._is_group_allowed(group_id):
+            return
+        affected = self.store.handle_recall(group_id, message_id)
+        if affected:
+            self._apply_recall_in_memory(group_id, message_id)
+            _log.info(
+                "[WhoAtMe] 撤回同步: 群 %s 消息 %s 影响 %s",
+                group_id,
+                message_id,
+                affected,
+            )
+
+    def _apply_recall_in_memory(self, group_id: int, message_id: str) -> None:
+        mid = str(message_id)
+        for key in list(self._pending.keys()):
+            if key[0] != group_id:
+                continue
+            bucket = self._pending.get(key) or []
+            kept: List[PendingAt] = []
+            for p in bucket:
+                if p.message_id == mid:
+                    continue
+                if p.context:
+                    p.context = [m for m in p.context if m.message_id != mid]
+                kept.append(p)
+            if kept:
+                self._pending[key] = kept
+            else:
+                self._pending.pop(key, None)
+
+        ring = self._context_ring.get(group_id)
+        if ring:
+            filtered = deque(
+                (m for m in ring if m.message_id != mid),
+                maxlen=ring.maxlen,
+            )
+            self._context_ring[group_id] = filtered
+
+    def _parse_query_target(self, event: GroupMessage) -> Optional[str]:
+        """解析查询指令。返回目标 QQ；非查询返回 None。"""
+        text = self._extract_plain_text(event)
+        if _SELF_QUERY_RE.fullmatch(text):
+            return str(event.sender.user_id)
+
+        if not _TARGET_QUERY_RE.match(text):
+            return None
+
+        # 「谁艾特@用户」/「谁@@用户」
+        self_id = str(getattr(event, "self_id", "") or "")
+        for seg in event.message:
+            if isinstance(seg, At):
+                uid = str(seg.user_id)
+                if uid and uid != "all" and uid != self_id:
+                    return uid
+
+        # 纯文本兜底：谁艾特123456
+        rest = _TARGET_QUERY_RE.sub("", text).strip()
+        rest = rest.lstrip("@").strip()
+        if rest.isdigit():
+            return rest
+        # 以「谁艾特」开头但未指定目标：不当作查询，避免吞消息
+        return None
 
     def _record_message(self, event: GroupMessage) -> None:
         group_id = event.group_id
         if group_id is None:
             return
         stored = self._build_stored_message(event)
-        ring = self._context_ring.setdefault(group_id, deque(maxlen=CONTEXT_WINDOW))
+        window = self._context_window()
+        ring = self._context_ring.get(group_id)
+        if ring is None or ring.maxlen != window:
+            old = list(ring) if ring else []
+            ring = deque(old, maxlen=window)
+            self._context_ring[group_id] = ring
         ring.append(stored)
         self._extend_pending_after_context(group_id, stored)
         if stored.at_user_ids:
@@ -129,15 +226,15 @@ class WhoAtMe(NcatBotPlugin):
     def _resolve_context_for_pending(
         self, group_id: int, pending: PendingAt
     ) -> List[StoredMessage]:
-        """从滚动窗口取 @ 消息前后各 CONTEXT_SIZE 条（含 @ 本身）。"""
+        size = self._context_size()
         ring = list(self._context_ring.get(group_id, []))
         hit_index = next(
             (i for i, m in enumerate(ring) if m.message_id == pending.message_id),
             None,
         )
         if hit_index is not None:
-            start = max(0, hit_index - CONTEXT_SIZE)
-            end = min(len(ring), hit_index + CONTEXT_SIZE + 1)
+            start = max(0, hit_index - size)
+            end = min(len(ring), hit_index + size + 1)
             return list(ring[start:end])
         if pending.context:
             return list(pending.context)
@@ -155,7 +252,7 @@ class WhoAtMe(NcatBotPlugin):
     def _extend_pending_after_context(
         self, group_id: int, stored: StoredMessage
     ) -> None:
-        """@ 之后的新消息追加到未读 pending 的下文（最多 CONTEXT_SIZE 条）。"""
+        size = self._context_size()
         for key, bucket in self._pending.items():
             if key[0] != group_id:
                 continue
@@ -176,9 +273,11 @@ class WhoAtMe(NcatBotPlugin):
                 except StopIteration:
                     continue
                 after_count = len(ctx) - at_idx - 1
-                if after_count >= CONTEXT_SIZE:
+                if after_count >= size:
                     continue
                 ctx.append(stored)
+                if pending.id is not None:
+                    self.store.update_context(pending.id, ctx)
 
     def _register_pending_ats(
         self,
@@ -186,6 +285,7 @@ class WhoAtMe(NcatBotPlugin):
         stored: StoredMessage,
         ring_snapshot: List[StoredMessage],
     ) -> None:
+        size = self._context_size()
         hit_index = next(
             (
                 i
@@ -197,43 +297,59 @@ class WhoAtMe(NcatBotPlugin):
         if hit_index is None:
             context = [stored]
         else:
-            start = max(0, hit_index - CONTEXT_SIZE)
-            end = min(len(ring_snapshot), hit_index + CONTEXT_SIZE + 1)
+            start = max(0, hit_index - size)
+            end = min(len(ring_snapshot), hit_index + size + 1)
             context = ring_snapshot[start:end]
 
         now = time.time()
         for target_id in stored.at_user_ids:
-            key = (group_id, target_id)
             pending = PendingAt(
+                id=None,
+                group_id=int(group_id),
                 message_id=stored.message_id,
-                target_user_id=target_id,
+                target_user_id=str(target_id),
                 atter_user_id=stored.user_id,
                 atter_nickname=stored.display_name,
                 timestamp=stored.timestamp,
                 created_at=now,
                 context=list(context),
             )
+            pending = self.store.insert(pending)
+            key = (int(group_id), str(target_id))
             self._pending.setdefault(key, []).append(pending)
-            self._purge_expired_pending(group_id, target_id)
+            self._purge_expired_pending(int(group_id), str(target_id))
 
     def _purge_expired_pending(self, group_id: int, user_id: str) -> None:
+        self.store.cleanup_expired(self._expire_seconds())
         key = (group_id, user_id)
         bucket = self._pending.get(key)
         if not bucket:
             return
-        cutoff = time.time() - PENDING_TTL_SEC
+        cutoff = time.time() - self._expire_seconds()
         alive = [p for p in bucket if p.created_at >= cutoff]
         if alive:
             self._pending[key] = alive
         else:
             self._pending.pop(key, None)
 
-    def _clear_pending(self, group_id: int, user_id: str) -> None:
-        self._pending.pop((group_id, user_id), None)
+    def _clear_pending_ids(self, group_id: int, user_id: str, ids: List[int]) -> None:
+        self.store.delete_ids(ids)
+        key = (group_id, user_id)
+        bucket = self._pending.get(key) or []
+        id_set = set(ids)
+        kept = [p for p in bucket if p.id not in id_set]
+        if kept:
+            self._pending[key] = kept
+        else:
+            self._pending.pop(key, None)
 
     def _get_pending_list(self, group_id: int, user_id: str) -> List[PendingAt]:
-        self._purge_expired_pending(group_id, user_id)
-        return list(self._pending.get((group_id, user_id), []))
+        # 以 DB 为准，保证重启后一致
+        rows = self.store.list_for_target(
+            int(group_id), str(user_id), expire_seconds=self._expire_seconds()
+        )
+        self._pending[(int(group_id), str(user_id))] = list(rows)
+        return rows
 
     def _build_stored_message(self, event: GroupMessage) -> StoredMessage:
         parts, at_ids = self._parse_message_parts(event)
@@ -263,32 +379,46 @@ class WhoAtMe(NcatBotPlugin):
             _log.debug("[WhoAtMe] 获取群信息失败: %s", e)
             return str(group_id)
 
-    async def _reply_who_at_me(self, event: GroupMessage) -> None:
-        group_id = event.group_id
-        user_id = str(event.sender.user_id)
+    async def _reply_who_at(self, event: GroupMessage, target_user_id: str) -> None:
+        group_id = int(event.group_id)
+        viewer_id = str(event.sender.user_id)
+        is_self = target_user_id == viewer_id
 
-        pending_list = self._get_pending_list(group_id, user_id)
+        pending_list = self._get_pending_list(group_id, target_user_id)
         if not pending_list:
-            await self.api.qq.post_group_msg(group_id=group_id, text=_EMPTY_REPLY)
+            await self.api.qq.post_group_msg(
+                group_id=group_id,
+                text=_EMPTY_SELF if is_self else _EMPTY_OTHER,
+            )
             return
 
-        latest = max(pending_list, key=lambda p: (p.timestamp, p.created_at))
-        pending_count = len(pending_list)
-        context = self._resolve_context_for_pending(group_id, latest)
+        # 从旧到新展示最近若干条未读
+        max_cards = self._max_cards()
+        to_show = pending_list[-max_cards:]
+        remaining = len(pending_list) - len(to_show)
 
         try:
             group_title = await self._fetch_group_title(group_id)
-            render_msgs = await self._build_render_messages(
-                group_id,
-                context,
-                highlight_message_id=latest.message_id,
-            )
-            png_bytes = await asyncio.to_thread(
-                render_qq_chat_card,
-                group_title=group_title,
-                messages=render_msgs,
-                pending_count=pending_count,
-            )
+            for idx, pending in enumerate(to_show):
+                context = self._resolve_context_for_pending(group_id, pending)
+                render_msgs = await self._build_render_messages(
+                    group_id,
+                    context,
+                    highlight_message_id=pending.message_id,
+                )
+                # 多条时用「第 i/n 条未读」提示
+                pending_count_label = len(pending_list) if idx == 0 else 0
+                png_bytes = await asyncio.to_thread(
+                    render_qq_chat_card,
+                    group_title=group_title,
+                    messages=render_msgs,
+                    pending_count=pending_count_label
+                    if len(to_show) == 1
+                    else len(to_show),
+                )
+                await self._send_card_image(group_id, png_bytes)
+                if idx + 1 < len(to_show):
+                    await asyncio.sleep(0.4)
         except Exception as e:
             _log.error("绘制谁艾特我卡片失败: %s", e, exc_info=True)
             await self.api.qq.post_group_msg(
@@ -297,6 +427,26 @@ class WhoAtMe(NcatBotPlugin):
             )
             return
 
+        clear_ids = [p.id for p in to_show if p.id is not None]
+        self._clear_pending_ids(group_id, target_user_id, clear_ids)
+
+        if remaining > 0:
+            tip = (
+                f"已展示最近 {len(to_show)} 条，还有 {remaining} 条未读，"
+                f"再发一次「{'谁艾特我' if is_self else '谁艾特@TA'}」继续查看"
+            )
+            await self.api.qq.post_group_msg(group_id=group_id, text=tip)
+
+        _log.info(
+            "[WhoAtMe] 群 %s 查看者 %s 目标 %s 展示 %s/%s",
+            group_id,
+            viewer_id,
+            target_user_id,
+            len(to_show),
+            len(pending_list),
+        )
+
+    async def _send_card_image(self, group_id: int, png_bytes: bytes) -> None:
         fd, path = tempfile.mkstemp(suffix=".png", prefix="who_at_me_")
         try:
             with os.fdopen(fd, "wb") as f:
@@ -306,13 +456,6 @@ class WhoAtMe(NcatBotPlugin):
             await self.api.qq.post_group_msg(
                 group_id=group_id,
                 rtf=MessageChain([ImageSeg(file=path)]),
-            )
-            self._clear_pending(group_id, user_id)
-            _log.info(
-                "[WhoAtMe] 群 %s 用户 %s 已查看 %s 条未读 @",
-                group_id,
-                user_id,
-                pending_count,
             )
         finally:
             try:
@@ -597,10 +740,6 @@ class WhoAtMe(NcatBotPlugin):
                 parts.append(MessagePart(kind="record", text="[语音]"))
         return parts, at_ids
 
-    @staticmethod
-    def _is_gif_bytes(data: bytes) -> bool:
-        return len(data) >= 3 and data[:3] == b"GIF"
-
     async def _fetch_image_bytes(self, url: str, file: str = "") -> Optional[bytes]:
         cache_key = url or file
         if not cache_key:
@@ -762,9 +901,12 @@ class WhoAtMe(NcatBotPlugin):
 
     @staticmethod
     def _extract_plain_text(event: GroupMessage) -> str:
+        chunks: List[str] = []
         for seg in event.message:
-            if isinstance(seg, PlainText) and seg.text.strip():
-                return seg.text.strip()
+            if isinstance(seg, PlainText) and seg.text:
+                chunks.append(seg.text)
+        if chunks:
+            return "".join(chunks).strip()
         return re.sub(r"\[CQ:[^\]]+\]", "", event.raw_message).strip()
 
     @staticmethod

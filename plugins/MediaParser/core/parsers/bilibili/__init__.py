@@ -12,7 +12,7 @@ from bilibili_api.video import Video, VideoCodecs, VideoQuality
 from bs4 import BeautifulSoup
 from msgspec import convert
 
-from ...compat import _log, ConfigWrapper as AstrBotConfig
+from ...compat import _log, ConfigWrapper as AstrBotConfig, video_max_duration_seconds
 
 from ...data import ImageContent, MediaContent, Platform
 from ...exception import DownloadException, DurationLimitException
@@ -39,7 +39,7 @@ class BilibiliParser(BaseParser):
         super().__init__(config, downloader)
         self.headers = HEADERS.copy()
         self._credential: Credential | None = None
-        self.max_duration = config["source_max_minute"] * 60
+        self.max_duration = video_max_duration_seconds(config)
         self.cache_dir = Path(config["cache_dir"])
 
         self.video_quality = getattr(
@@ -226,8 +226,10 @@ class BilibiliParser(BaseParser):
             v_url, a_url = await self.extract_download_urls(
                 video=video, page_index=page_info.index
             )
-            if page_info.duration > self.max_duration:
-                raise DurationLimitException
+            if self.max_duration > 0 and page_info.duration > self.max_duration:
+                raise DurationLimitException(
+                    duration=page_info.duration, limit_seconds=self.max_duration
+                )
             if a_url is not None:
                 return await self.downloader.download_av_and_merge(
                     v_url,

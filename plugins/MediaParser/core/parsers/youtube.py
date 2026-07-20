@@ -1,4 +1,5 @@
 import re
+from asyncio import create_task
 from pathlib import Path
 from typing import ClassVar
 
@@ -6,9 +7,10 @@ import msgspec
 from aiohttp import ClientError
 from msgspec import Struct
 
-from ..compat import ConfigWrapper as AstrBotConfig
-
+from ..compat import ConfigWrapper as AstrBotConfig, video_max_duration_seconds
+from ..data import VideoContent
 from ..download import Downloader
+from ..exception import DurationLimitException
 from ..utils import save_cookies_with_netscape
 from .base import BaseParser, Platform, handle
 
@@ -19,7 +21,7 @@ class YouTubeParser(BaseParser):
 
     def __init__(self, config: AstrBotConfig, downloader: Downloader):
         super().__init__(config, downloader)
-        self.max_duration = config["source_max_minute"] * 60
+        self.max_duration = video_max_duration_seconds(config)
         self._set_cookies()
         cf = self.config.get("ytb_cookies_file")
         self.ytb_cookies_file = Path(cf) if cf else None
@@ -62,7 +64,7 @@ class YouTubeParser(BaseParser):
         author = await self._fetch_author_info(video_info.channel_id)
 
         contents = []
-        if video_info.duration <= self.max_duration:
+        if self.max_duration <= 0 or video_info.duration <= self.max_duration:
             video = self.downloader.download_video(
                 url, use_ytdlp=True, cookiefile=self.ytb_cookies_file, proxy=self.proxy
             )
@@ -75,6 +77,21 @@ class YouTubeParser(BaseParser):
             )
         else:
             contents.extend(self.create_image_contents([video_info.thumbnail]))
+
+            async def _skip_overlong() -> Path:
+                raise DurationLimitException(
+                    duration=video_info.duration,
+                    limit_seconds=self.max_duration,
+                )
+
+            # 占位：发送端按时长跳过并提示，不真正下载
+            contents.append(
+                VideoContent(
+                    create_task(_skip_overlong()),
+                    None,
+                    float(video_info.duration or 0),
+                )
+            )
 
         return self.result(
             title=video_info.title,
@@ -98,7 +115,7 @@ class YouTubeParser(BaseParser):
         contents = []
         contents.extend(self.create_image_contents([video_info.thumbnail]))
 
-        if video_info.duration <= self.max_duration:
+        if self.max_duration <= 0 or video_info.duration <= self.max_duration:
             audio_task = self.downloader.download_audio(
                 url, use_ytdlp=True, cookiefile=self.ytb_cookies_file, proxy=self.proxy
             )
