@@ -85,6 +85,12 @@ memory/
 # === Plugin runtime temp files ===
 /temp/
 plugins/**/data/temp/
+# 关系图 / 猜卡 / 幻影坦克等渲染缓存（保留目录占位 .gitignore）
+plugins/GuessCard/data/output/*
+!plugins/GuessCard/data/output/.gitignore
+plugins/TodayWaifu/data/output/*
+!plugins/TodayWaifu/data/output/.gitignore
+plugins/MirageTank/data/
 
 # === Plugin secrets (API keys) ===
 plugins/common/secrets.json

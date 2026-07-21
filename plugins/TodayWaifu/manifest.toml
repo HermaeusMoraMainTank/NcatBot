@@ -1,6 +1,11 @@
 name = "TodayWaifu"
-version = "1.0.0"
+version = "2.0.0"
 main = "TodayWaifu.py"
 entry_class = "TodayWaifu"
+
+[pip_dependencies]
+Pillow = "*"
+Jinja2 = "*"
+playwright = ">=1.30.0"
 
 [dependencies]

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body, html {
+      margin: 0; padding: 0; width: 100%; height: 100%;
+      background: #ffffff; overflow: hidden;
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    }
+    #network-container {
+      width: 100%;
+      height: calc(100vh - 80px);
+      position: relative;
+    }
+    .header {
+      width: 100%; height: 80px;
+      display: flex; align-items: center; justify-content: center;
+      color: #000; font-size: 32px; font-weight: bold;
+      background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      position: relative; z-index: 10;
+    }
+  </style>
+  <script>{{ vis_js_content | safe }}</script>
+</head>
+<body>
+  <div class="header">🌸 群 {{ group_name }} 今日老婆羁绊图谱 🌸</div>
+  <div id="network-container"></div>
+  <script>
+    const hourlyTag = new Date().toISOString().slice(0, 13);
+    const raw_data = {{ records_json | safe }};
+    const user_map = {{ user_map_json | safe }} || {};
+    const nodes = [];
+    const edges = [];
+    const userSet = new Set();
+
+    raw_data.forEach(r => {
+      const userName = user_map[r.user_id] || ("用户" + r.user_id);
+      const wifeName = user_map[r.wife_id] || r.wife_name || ("用户" + r.wife_id);
+      [
+        { id: String(r.user_id), name: userName },
+        { id: String(r.wife_id), name: wifeName }
+      ].forEach(u => {
+        if (!userSet.has(u.id)) {
+          userSet.add(u.id);
+          nodes.push({
+            id: u.id,
+            label: u.name,
+            shape: "circularImage",
+            image: `https://q4.qlogo.cn/headimg_dl?dst_uin=${u.id}&spec=640&t=${hourlyTag}`,
+            borderWidth: 6,
+            size: 110,
+            color: { border: "#4facfe", background: "#ffffff" },
+            font: {
+              color: "#000000", size: 50, vadjust: 40,
+              strokeWidth: 6, strokeColor: "#ffffff",
+              bold: { color: "#000000", size: 44, vadjust: 40 }
+            }
+          });
+        }
+      });
+      edges.push({
+        from: String(r.user_id),
+        to: String(r.wife_id),
+        label: r.forced ? "强娶" : "抽中",
+        arrows: { to: { enabled: true, scaleFactor: 3, type: "arrow" } },
+        color: { color: r.forced ? "#ff4d4f" : "#1890ff", width: 4 },
+        font: { align: "middle", color: "#444", size: 48, background: "#ffffff" },
+        length: 480
+      });
+    });
+
+    const container = document.getElementById("network-container");
+    const data = {
+      nodes: new vis.DataSet(nodes),
+      edges: new vis.DataSet(edges)
+    };
+    const options = {
+      nodes: { shape: "circularImage", font: { face: "Microsoft YaHei" } },
+      edges: { smooth: { type: "curvedCW", roundness: 0.15 } },
+      physics: {
+        enabled: true,
+        barnesHut: {
+          gravitationalConstant: -80000,
+          // 略提高向心力，避免离散簇被推到画布外缘
+          centralGravity: 0.08,
+          springLength: 520,
+          springConstant: 0.05,
+          damping: 0.2,
+          avoidOverlap: 1
+        },
+        stabilization: {
+          enabled: true,
+          iterations: {{ iterations }},
+          updateInterval: 25,
+          onlyDynamicEdges: false,
+          fit: true
+        }
+      }
+    };
+    const network = new vis.Network(container, data, options);
+
+    // 节点很大且 label 有 vadjust，fit 默认包围盒偏紧，底部/侧边易裁切
+    const FIT_PADDING = { top: 48, right: 96, bottom: 140, left: 96 };
+
+    function freezeAndFit() {
+      network.setOptions({ physics: { enabled: false } });
+      network.fit({ animation: false, padding: FIT_PADDING });
+    }
+
+    network.once("stabilizationIterationsDone", function () {
+      freezeAndFit();
+      // 再 fit 一次，确保关物理后包围盒稳定（含标签下沉）
+      requestAnimationFrame(function () {
+        network.fit({ animation: false, padding: FIT_PADDING });
+        document.body.classList.add("graph-ready");
+      });
+    });
+    // 兜底：防止迭代异常导致永远不 ready
+    setTimeout(function () {
+      freezeAndFit();
+      document.body.classList.add("graph-ready");
+    }, 20000);
+  </script>
+</body>
+</html>

@@ -317,45 +317,30 @@ class AiUtil:
             messages.append({"role": "system", "content": system_prompt})
         messages.append({"role": "user", "content": content_parts})
 
-        retry_count = 3
-        delay = 2
+        try:
+            async with AsyncOpenAI(
+                api_key=NVIDIA_API_KEY,
+                base_url=NVIDIA_API_URL,
+                timeout=60.0,
+            ) as client:
+                completion = await client.chat.completions.create(
+                    model=VISION_MODEL,
+                    messages=messages,
+                    max_tokens=max_tokens,
+                    temperature=temperature,
+                    stream=False,
+                    timeout=45.0,
+                )
 
-        while retry_count > 0:
-            try:
-                async with AsyncOpenAI(
-                    api_key=NVIDIA_API_KEY,
-                    base_url=NVIDIA_API_URL,
-                    timeout=60.0,
-                ) as client:
-                    completion = await client.chat.completions.create(
-                        model=VISION_MODEL,
-                        messages=messages,
-                        max_tokens=max_tokens,
-                        temperature=temperature,
-                        stream=False,
-                        timeout=45.0,
-                    )
+            result = _completion_to_result(completion, VISION_MODEL)
+            _log.info(f"[Vision] 响应内容: {result['content'][:100]}...")
+            _log.info(f"[Vision] Token使用: {result['usage']}")
+            return result
 
-                result = _completion_to_result(completion, VISION_MODEL)
-                _log.info(f"[Vision] 响应内容: {result['content'][:100]}...")
-                _log.info(f"[Vision] Token使用: {result['usage']}")
-                return result
+        except asyncio.TimeoutError as e:
+            _log.error(f"[Vision] 请求超时: {e}")
+            return None
 
-            except asyncio.TimeoutError as e:
-                _log.error(f"[Vision] 请求超时: {e}")
-                retry_count -= 1
-                if retry_count > 0:
-                    _log.info(f"[Vision] 重试 {3 - retry_count} 次...")
-                    await asyncio.sleep(delay)
-
-            except Exception as e:
-                _log.error(f"[Vision] 异常: {e}")
-                retry_count -= 1
-                if retry_count > 0:
-                    _log.info(f"[Vision] 重试 {3 - retry_count} 次...")
-                    await asyncio.sleep(delay)
-                else:
-                    break
-
-        _log.error("[Vision] 重试次数已用尽")
-        return None
+        except Exception as e:
+            _log.error(f"[Vision] 异常: {e}")
+            return None

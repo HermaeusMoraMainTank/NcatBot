@@ -556,6 +556,14 @@ class FakeAi(NcatBotPlugin):
         if first_word.lower() == "rgb":
             return True
 
+        # FakeAiWatermark 命令
+        if first_word == "豆包水印" or first_word.lower() == "gemini水印":
+            return True
+
+        # MirageTank 命令
+        if first_word in ("幻影坦克", "彩色幻影坦克"):
+            return True
+
         # 检查是否是回复消息（用于 NetEaseCloudMusic 和 VrChatInfo）
         reply_list = input.message.filter(Reply)
         if reply_list:
