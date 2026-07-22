@@ -1,6 +1,6 @@
 name = "TodayWaifu"
-version = "2.0.0"
-main = "TodayWaifu.py"
+version = "2.0.1"
+main = "waifu_plugin.py"
 entry_class = "TodayWaifu"
 
 [pip_dependencies]

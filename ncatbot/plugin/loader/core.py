@@ -176,6 +176,10 @@ class PluginLoader:
                 return None
 
         try:
+            # 未在线时先清掉可能残留的 sys.modules（上次 on_load 失败会留下过期代码）
+            if name not in self.plugins:
+                self._importer.unload_module(manifest)
+
             # ContextVar 包裹模块加载，确保装饰器能读取到当前插件名
             token = set_current_plugin(name)
             try:
@@ -200,8 +204,12 @@ class PluginLoader:
             return plugin
 
         except Exception as e:
-            # 加载失败时清理残留的 pending handlers
+            # 加载失败时清理残留的 pending handlers 与模块，避免下次复用坏代码
             clear_pending(name)
+            try:
+                self._importer.unload_module(manifest)
+            except Exception:
+                pass
             LOG.error("加载插件 %s 失败: %s", name, e, exc_info=True)
             return None
 
@@ -340,6 +348,8 @@ class PluginLoader:
 
             LOG.info("热重载触发: %s (文件夹: %s)", plugin_name, folder_name)
             try:
+                # 清单可能已变（如 main/entry），先重索引再加载
+                self._indexer.rescan_plugin(plugin_name)
                 if plugin_name in self.plugins:
                     await self.reload_plugin(plugin_name)
                 else:

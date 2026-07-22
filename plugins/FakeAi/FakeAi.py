@@ -276,7 +276,7 @@ class FakeAi(NcatBotPlugin):
         _fake_ai_loader = getattr(self, "_loader", None)
         # 同时写入 memory 模块，主模块被热重载后仍可通过 memory 取回实例
         try:
-            from plugins.FakeAi import memory as _memory
+            from . import memory as _memory
 
             _memory.fake_ai_plugin_ref = self
         except Exception:
@@ -562,6 +562,27 @@ class FakeAi(NcatBotPlugin):
 
         # MirageTank 命令
         if first_word in ("幻影坦克", "彩色幻影坦克"):
+            return True
+
+        # TodayWaifu 命令
+        if first_word in (
+            "今日老婆",
+            "jrlp",
+            "抽老婆",
+            "我的老婆",
+            "wdlp",
+            "抽取历史",
+            "关系图",
+            "羁绊图谱",
+            "gxt",
+            "rbq排行",
+            "rbqph",
+            "抽老婆帮助",
+            "老婆插件帮助",
+            "clpbz",
+        ):
+            return True
+        if first_word in ("强娶", "qiangqu", "求婚", "qh"):
             return True
 
         # 检查是否是回复消息（用于 NetEaseCloudMusic 和 VrChatInfo）
@@ -1288,7 +1309,7 @@ class FakeAi(NcatBotPlugin):
             # 主模块热重载后 _fake_ai_plugin_instance[0] 会变 None，从 memory 取回实例（memory 通常不重载）
             if self is None:
                 try:
-                    from plugins.FakeAi import memory as _memory
+                    from . import memory as _memory
 
                     plug = getattr(_memory, "fake_ai_plugin_ref", None)
                     if plug is not None:

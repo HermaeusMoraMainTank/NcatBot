@@ -53,7 +53,11 @@ class TodayWaifu(NcatBotPlugin):
             days, int(self.cfg_dict().get("max_records", 500) or 500)
         )
         self.store.cleanup_rbq(30)
-        cleared = self._cleanup_output_dir()
+        cleared = 0
+        try:
+            cleared = self._cleanup_output_dir()
+        except Exception as e:
+            _log.warning("[TodayWaifu] 启动时清理输出缓存失败: %s", e)
         # 每小时清理一次关系图渲染缓存
         try:
             self.add_scheduled_task(
@@ -62,7 +66,7 @@ class TodayWaifu(NcatBotPlugin):
                 callback=self._scheduled_output_cleanup,
             )
         except Exception as e:
-            _log.debug("[TodayWaifu] 注册输出清理任务失败: %s", e)
+            _log.warning("[TodayWaifu] 注册输出清理任务失败: %s", e)
         _log.info(
             "TodayWaifu v%s 加载完成，清理过期活跃 %s 条，输出缓存 %s 个",
             self.version,

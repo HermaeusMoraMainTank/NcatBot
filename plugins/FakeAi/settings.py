@@ -133,7 +133,7 @@ def apply_from_plugin(plugin) -> None:
     expr_enabled = bool(expr_raw.get("enabled", True))
     expr_max = int(expr_raw.get("max_per_message", 1))
     catalog_path = str(expr_raw.get("catalog_path", "data/fakeai/stickers"))
-    import plugins.FakeAi.expression as expr_pkg
+    from . import expression as expr_pkg
 
     expr_pkg.EXPRESSION_ENABLED = expr_enabled
     expr_pkg.MAX_STICKERS_PER_REPLY = expr_max
@@ -146,7 +146,10 @@ def apply_from_plugin(plugin) -> None:
         _log.warning("[FakeAi] 贴纸目录 reload 失败: %s", e)
 
     # —— FakeAi 模块级运行时（冷却 / 白名单）——
-    import plugins.FakeAi.FakeAi as fakeai_mod
+    # 注意：from . import FakeAi 会拿到 __init__ 导出的类，必须按子模块导入
+    from importlib import import_module
+
+    fakeai_mod = import_module(".FakeAi", package=__package__)
 
     fakeai_mod.FAKEAI_ALLOWED_GROUPS = frozenset(allowed)
     fakeai_mod.trigger_interval = float(new_inter.group_cd_sec)

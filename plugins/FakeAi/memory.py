@@ -106,7 +106,20 @@ def _pick_fakeai_database_path() -> Path:
     ).resolve()
 
     candidates = [cwd_db_dir / "memory.db", repo_db_dir / "memory.db"]
-    existing = [p for p in candidates if p.is_file()]
+    # cwd 与仓库根相同时会重复同一路径，先去重再判断
+    unique: list[Path] = []
+    seen: set[Path] = set()
+    for p in candidates:
+        try:
+            key = p.resolve()
+        except OSError:
+            key = p
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(p)
+
+    existing = [p for p in unique if p.is_file()]
     if existing:
         if len(existing) > 1:
             try:
