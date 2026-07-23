@@ -564,6 +564,10 @@ class FakeAi(NcatBotPlugin):
         if first_word in ("幻影坦克", "彩色幻影坦克"):
             return True
 
+        # GalgameBox 命令
+        if first_word.lower() == "gal":
+            return True
+
         # TodayWaifu 命令
         if first_word in (
             "今日老婆",

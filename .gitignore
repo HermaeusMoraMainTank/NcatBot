@@ -91,6 +91,7 @@ plugins/GuessCard/data/output/*
 plugins/TodayWaifu/data/output/*
 !plugins/TodayWaifu/data/output/.gitignore
 plugins/MirageTank/data/
+plugins/GalgameBox/data/
 
 # === Plugin secrets (API keys) ===
 plugins/common/secrets.json

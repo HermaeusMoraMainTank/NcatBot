@@ -1,0 +1,65 @@
+import asyncio
+from io import BytesIO
+
+from PIL import Image as PILImage
+
+
+class Image:
+    @classmethod
+    def image2jpg(cls, image_data: bytes) -> bytes:
+
+        if not image_data:
+            raise ValueError("图片数据为空")
+
+        img = PILImage.open(BytesIO(image_data))
+        try:
+            if img.mode == "RGBA":
+                if img.getchannel("A").getextrema() != (255, 255):
+                    background = PILImage.new("RGB", img.size, (255, 255, 255))
+                    background.paste(img, mask=img.split()[3])
+                    img = background
+                else:
+                    img = img.convert("RGB")
+
+            elif img.mode == "P" and "transparency" in img.info:
+                img = img.convert("RGBA")
+                return cls._image2jpg_simple(img)
+
+            elif img.mode == "LA":
+                img = img.convert("RGBA")
+                return cls._image2jpg_simple(img)
+
+            elif img.mode not in ["RGB", "L"]:
+                img = img.convert("RGB")
+
+            buffer = BytesIO()
+            img.save(buffer, "JPEG", quality=85)
+            result = buffer.getvalue()
+
+            return result
+
+        except Exception as e:
+            raise ValueError(f"图片转换失败: {e}")
+        finally:
+            if "img" in locals():
+                img.close()
+
+    @classmethod
+    def _image2jpg_simple(cls, img: PILImage.Image) -> bytes:
+        if img.mode == "RGBA":
+            if img.getchannel("A").getextrema() != (255, 255):
+                background = PILImage.new("RGB", img.size, (255, 255, 255))
+                background.paste(img, mask=img.split()[3])
+                img = background
+            else:
+                img = img.convert("RGB")
+        elif img.mode not in ["RGB", "L"]:
+            img = img.convert("RGB")
+
+        buffer = BytesIO()
+        img.save(buffer, "JPEG", quality=85)
+        return buffer.getvalue()
+
+    @classmethod
+    async def image2jpg_async(cls, image_data: bytes) -> bytes:
+        return await asyncio.to_thread(cls.image2jpg, image_data)

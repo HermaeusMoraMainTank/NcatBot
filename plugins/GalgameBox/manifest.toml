@@ -1,0 +1,15 @@
+name = "GalgameBox"
+version = "1.0.0"
+main = "GalgameBox.py"
+entry_class = "GalgameBox"
+
+[pip_dependencies]
+aiohttp = "*"
+beautifulsoup4 = "*"
+curl_cffi = "*"
+jinja2 = "*"
+pillow = "*"
+playwright = "*"
+pydantic = "*"
+
+[dependencies]
