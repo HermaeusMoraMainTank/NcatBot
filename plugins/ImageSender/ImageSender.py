@@ -83,10 +83,10 @@ class ImageSender(NcatBotPlugin):
         for name, cmd in self.commands.items():
             full_path = self._resolve_path(cmd["path"])
             if not os.path.exists(full_path):
-                _log.warning(f"图包 [{name}] 目录不存在: {full_path}")
+                _log.warning(f"图库 [{name}] 目录不存在: {full_path}")
         _log.info(
-            f"{self.name} 插件加载完成，共 {len(self.commands)} 个图包；"
-            f"图包目录: {DEFAULT_IMAGE_ROOT} | "
+            f"{self.name} 插件加载完成，共 {len(self.commands)} 个图库；"
+            f"图库目录: {DEFAULT_IMAGE_ROOT} | "
             f"配置: {COMMANDS_JSON_PATH.resolve()}（修改后自动生效）"
         )
 
@@ -106,10 +106,10 @@ class ImageSender(NcatBotPlugin):
         for legacy in _LEGACY_COMMANDS_PATHS:
             if legacy.is_file():
                 shutil.copy2(legacy, COMMANDS_JSON_PATH)
-                _log.info(f"已迁移图包配置: {legacy} -> {COMMANDS_JSON_PATH}")
+                _log.info(f"已迁移图库配置: {legacy} -> {COMMANDS_JSON_PATH}")
                 return
         COMMANDS_JSON_PATH.write_text("{}", encoding="utf-8")
-        _log.info(f"已创建空图包配置: {COMMANDS_JSON_PATH}")
+        _log.info(f"已创建空图库配置: {COMMANDS_JSON_PATH}")
 
     def _sync_commands_mtime(self) -> None:
         if COMMANDS_JSON_PATH.is_file():
@@ -176,7 +176,7 @@ class ImageSender(NcatBotPlugin):
             pass
 
     def _migrate_package_paths(self, commands: Dict[str, dict]) -> Dict[str, dict]:
-        """把图包目录收拢到 data/image/imagesender/，并迁移磁盘上的旧文件夹。"""
+        """把图库目录收拢到 data/image/imagesender/，并迁移磁盘上的旧文件夹。"""
         changed = False
         DEFAULT_IMAGE_ROOT.mkdir(parents=True, exist_ok=True)
 
@@ -194,10 +194,10 @@ class ImageSender(NcatBotPlugin):
                     new_abs_parent = os.path.dirname(new_abs)
                     os.makedirs(new_abs_parent, exist_ok=True)
                     shutil.move(old_abs, new_abs)
-                    _log.info(f"图包 [{name}] 目录已迁移: {old_path} -> {new_path}")
+                    _log.info(f"图库 [{name}] 目录已迁移: {old_path} -> {new_path}")
                 elif os.path.abspath(old_abs) != os.path.abspath(new_abs):
                     self._merge_dir_contents(old_abs, new_abs)
-                    _log.info(f"图包 [{name}] 目录已合并: {old_path} -> {new_path}")
+                    _log.info(f"图库 [{name}] 目录已合并: {old_path} -> {new_path}")
             elif not os.path.isdir(new_abs):
                 os.makedirs(new_abs, exist_ok=True)
 
@@ -219,19 +219,19 @@ class ImageSender(NcatBotPlugin):
                 if not os.path.isdir(new_abs):
                     os.makedirs(os.path.dirname(new_abs), exist_ok=True)
                     shutil.move(legacy_abs, new_abs)
-                    _log.info(f"图包 [{name}] 遗留目录已迁入: data/image/{suffix}")
+                    _log.info(f"图库 [{name}] 遗留目录已迁入: data/image/{suffix}")
                 else:
                     self._merge_dir_contents(legacy_abs, new_abs)
-                    _log.info(f"图包 [{name}] 遗留目录已合并: data/image/{suffix}")
+                    _log.info(f"图库 [{name}] 遗留目录已合并: data/image/{suffix}")
                 changed = True
 
         if changed:
             self._save_commands()
-            _log.info("图包路径已收拢至 data/image/imagesender/ 并写回配置")
+            _log.info("图库路径已收拢至 data/image/imagesender/ 并写回配置")
         return commands
 
     def _reload_commands_if_changed(self) -> None:
-        """检测 JSON 文件变更并热更新内存配置（无需重启或「图包 重载」）。"""
+        """检测 JSON 文件变更并热更新内存配置（无需重启或「图库 重载」）。"""
         self._ensure_commands_file()
         try:
             mtime = COMMANDS_JSON_PATH.stat().st_mtime
@@ -242,14 +242,14 @@ class ImageSender(NcatBotPlugin):
         prev = len(self.commands)
         commands = self._read_commands_file()
         if commands is None:
-            _log.error("图包配置热更新失败，已保留当前内存配置")
+            _log.error("图库配置热更新失败，已保留当前内存配置")
             self._commands_mtime = mtime
             return
         self.commands = commands
         self.commands = self._migrate_package_paths(self.commands)
         self._commands_mtime = mtime
         _log.info(
-            f"图包配置已热更新: {len(self.commands)} 个图包（此前 {prev} 个）<- {COMMANDS_JSON_PATH}"
+            f"图库配置已热更新: {len(self.commands)} 个图库（此前 {prev} 个）<- {COMMANDS_JSON_PATH}"
         )
 
     def _save_commands(self) -> None:
@@ -451,7 +451,7 @@ class ImageSender(NcatBotPlugin):
             outline=(225, 230, 240),
             width=2,
         )
-        title = "图包列表"
+        title = "图库列表"
         if page_total > 1:
             title += f"（{page_index}/{page_total}）"
         draw.text(
@@ -462,7 +462,7 @@ class ImageSender(NcatBotPlugin):
         )
         draw.text(
             (padding + 16, padding + 48),
-            f"共 {total_count} 个图包 · 更新 {datetime.now().strftime('%Y-%m-%d %H:%M')}",
+            f"共 {total_count} 个图库 · 更新 {datetime.now().strftime('%Y-%m-%d %H:%M')}",
             font=font_meta,
             fill=(120, 130, 150),
         )
@@ -591,7 +591,7 @@ class ImageSender(NcatBotPlugin):
     async def _send_package_list_images(self, group_id: int) -> None:
         images = self._render_package_list_images()
         if not images:
-            await self.api.qq.post_group_msg(group_id=group_id, text="暂无图包")
+            await self.api.qq.post_group_msg(group_id=group_id, text="暂无图库")
             return
         LIST_CACHE_DIR.mkdir(parents=True, exist_ok=True)
         for img_b64 in images:
@@ -601,7 +601,7 @@ class ImageSender(NcatBotPlugin):
             )
 
     def _find_command(self, keyword: str) -> Optional[Tuple[str, dict]]:
-        """按图包名或任意触发词查找配置。"""
+        """按图库名或任意触发词查找配置。"""
         if keyword in self.commands:
             return keyword, self.commands[keyword]
         for name, cfg in self.commands.items():
@@ -609,35 +609,53 @@ class ImageSender(NcatBotPlugin):
                 return name, cfg
         return None
 
+    def _create_command(
+        self, name: str, triggers: list[str] | None = None
+    ) -> dict:
+        """创建新图库、建目录并写回配置。"""
+        triggers = triggers or [name]
+        rel_path = DEFAULT_IMAGE_ROOT / name
+        rel_path.mkdir(parents=True, exist_ok=True)
+        path_str = self._path_str(rel_path)
+        cfg = {
+            "triggers": triggers,
+            "path": path_str,
+            "allowed_users": None,
+            "recall_time": None,
+        }
+        self.commands[name] = cfg
+        self._save_commands()
+        return cfg
+
     async def handle_package_admin(
         self, input: GroupMessage, clean_message: str
     ) -> None:
-        """图包管理命令（仅管理员）"""
+        """图库管理命令（仅管理员）"""
         self._reload_commands_if_changed()
         user_id = str(input.sender.user_id)
         if not self._is_admin(user_id):
             await self.api.qq.post_group_msg(
-                group_id=input.group_id, text="您没有图包管理权限！"
+                group_id=input.group_id, text="您没有图库管理权限！"
             )
             return
 
-        body = clean_message[len("图包") :].strip()
+        body = clean_message[len("图库") :].strip()
         if not body or body in ("帮助", "help"):
             help_text = (
-                "图包管理（图包目录 data/image/imagesender/，配置 data/json/image_sender_commands.json）：\n"
-                "图包 列表\n"
-                "图包 添加 <名称> [触发词1 触发词2 ...]\n"
-                "图包 删除 <名称>\n"
-                "图包 查看 <名称>\n"
-                "图包 触发 <名称> <触发词1> [触发词2 ...]\n"
-                "图包 触发 添加 <名称> <触发词>\n"
-                "图包 触发 删除 <名称> <触发词>\n"
-                "图包 路径 <名称> [新路径]\n"
-                "图包 权限 开放 <名称>\n"
-                "图包 权限 添加 <名称> <QQ号>\n"
-                "图包 权限 移除 <名称> <QQ号>\n"
-                "图包 撤回 <名称> [秒数，0=不撤回]\n"
-                "图包 重载"
+                "图库管理（图库目录 data/image/imagesender/，配置 data/json/image_sender_commands.json）：\n"
+                "图库 列表\n"
+                "图库 添加 <名称> [触发词1 触发词2 ...]\n"
+                "图库 删除 <名称>\n"
+                "图库 查看 <名称>\n"
+                "图库 触发 <名称> <触发词1> [触发词2 ...]\n"
+                "图库 触发 添加 <名称> <触发词>\n"
+                "图库 触发 删除 <名称> <触发词>\n"
+                "图库 路径 <名称> [新路径]\n"
+                "图库 权限 开放 <名称>\n"
+                "图库 权限 添加 <名称> <QQ号>\n"
+                "图库 权限 移除 <名称> <QQ号>\n"
+                "图库 撤回 <名称> [秒数，0=不撤回]\n"
+                "图库 重载"
             )
             await self.api.qq.post_group_msg(group_id=input.group_id, text=help_text)
             return
@@ -647,7 +665,7 @@ class ImageSender(NcatBotPlugin):
             self._sync_commands_mtime()
             await self.api.qq.post_group_msg(
                 group_id=input.group_id,
-                text=f"已重载，当前 {len(self.commands)} 个图包",
+                text=f"已重载，当前 {len(self.commands)} 个图库",
             )
             return
 
@@ -662,31 +680,22 @@ class ImageSender(NcatBotPlugin):
             if len(parts) < 2:
                 await self.api.qq.post_group_msg(
                     group_id=input.group_id,
-                    text="用法：图包 添加 <名称> [触发词...]",
+                    text="用法：图库 添加 <名称> [触发词...]",
                 )
                 return
             name = parts[1]
             if name in self.commands:
                 await self.api.qq.post_group_msg(
-                    group_id=input.group_id, text=f"图包已存在：{name}"
+                    group_id=input.group_id, text=f"图库已存在：{name}"
                 )
                 return
             triggers = parts[2:] if len(parts) > 2 else [name]
-            rel_path = DEFAULT_IMAGE_ROOT / name
-            rel_path.mkdir(parents=True, exist_ok=True)
-            path_str = self._path_str(rel_path)
-            self.commands[name] = {
-                "triggers": triggers,
-                "path": path_str,
-                "allowed_users": None,
-                "recall_time": None,
-            }
-            self._save_commands()
+            cfg = self._create_command(name, triggers)
             await self.api.qq.post_group_msg(
                 group_id=input.group_id,
                 text=(
-                    f"已添加图包 [{name}]\n"
-                    f"路径: {path_str}\n"
+                    f"已添加图库 [{name}]\n"
+                    f"路径: {cfg['path']}\n"
                     f"触发: {', '.join(triggers)}\n"
                     f"上传请用：上传 {name}"
                 ),
@@ -697,14 +706,14 @@ class ImageSender(NcatBotPlugin):
             name = parts[1]
             if name not in self.commands:
                 await self.api.qq.post_group_msg(
-                    group_id=input.group_id, text=f"未知图包：{name}"
+                    group_id=input.group_id, text=f"未知图库：{name}"
                 )
                 return
             del self.commands[name]
             self._save_commands()
             await self.api.qq.post_group_msg(
                 group_id=input.group_id,
-                text=f"已从配置移除图包 [{name}]（磁盘图片目录未删除）",
+                text=f"已从配置移除图库 [{name}]（磁盘图片目录未删除）",
             )
             return
 
@@ -712,7 +721,7 @@ class ImageSender(NcatBotPlugin):
             found = self._find_command(parts[1])
             if not found:
                 await self.api.qq.post_group_msg(
-                    group_id=input.group_id, text=f"未知图包：{parts[1]}"
+                    group_id=input.group_id, text=f"未知图库：{parts[1]}"
                 )
                 return
             name, cfg = found
@@ -726,7 +735,7 @@ class ImageSender(NcatBotPlugin):
             await self.api.qq.post_group_msg(
                 group_id=input.group_id,
                 text=(
-                    f"图包 [{name}]\n"
+                    f"图库 [{name}]\n"
                     f"路径: {cfg['path']}\n"
                     f"触发: {', '.join(cfg['triggers'])}\n"
                     f"图片: {count} 张\n"
@@ -742,7 +751,7 @@ class ImageSender(NcatBotPlugin):
                 if not trigger or name not in self.commands:
                     await self.api.qq.post_group_msg(
                         group_id=input.group_id,
-                        text="用法：图包 触发 添加 <名称> <触发词>",
+                        text="用法：图库 触发 添加 <名称> <触发词>",
                     )
                     return
                 triggers = self.commands[name]["triggers"]
@@ -759,7 +768,7 @@ class ImageSender(NcatBotPlugin):
                 if not trigger or name not in self.commands:
                     await self.api.qq.post_group_msg(
                         group_id=input.group_id,
-                        text="用法：图包 触发 删除 <名称> <触发词>",
+                        text="用法：图库 触发 删除 <名称> <触发词>",
                     )
                     return
                 triggers = self.commands[name]["triggers"]
@@ -781,7 +790,7 @@ class ImageSender(NcatBotPlugin):
                 name = parts[1]
                 if name not in self.commands:
                     await self.api.qq.post_group_msg(
-                        group_id=input.group_id, text=f"未知图包：{name}"
+                        group_id=input.group_id, text=f"未知图库：{name}"
                     )
                     return
                 new_triggers = parts[2:]
@@ -797,7 +806,7 @@ class ImageSender(NcatBotPlugin):
             name = parts[1]
             if name not in self.commands:
                 await self.api.qq.post_group_msg(
-                    group_id=input.group_id, text=f"未知图包：{name}"
+                    group_id=input.group_id, text=f"未知图库：{name}"
                 )
                 return
             if len(parts) == 2:
@@ -820,13 +829,13 @@ class ImageSender(NcatBotPlugin):
             if len(parts) < 3:
                 await self.api.qq.post_group_msg(
                     group_id=input.group_id,
-                    text="用法：图包 权限 开放|添加|移除 <名称> [QQ号]",
+                    text="用法：图库 权限 开放|添加|移除 <名称> [QQ号]",
                 )
                 return
             sub, name = parts[1], parts[2]
             if name not in self.commands:
                 await self.api.qq.post_group_msg(
-                    group_id=input.group_id, text=f"未知图包：{name}"
+                    group_id=input.group_id, text=f"未知图库：{name}"
                 )
                 return
             cfg = self.commands[name]
@@ -869,7 +878,7 @@ class ImageSender(NcatBotPlugin):
             name = parts[1]
             if name not in self.commands:
                 await self.api.qq.post_group_msg(
-                    group_id=input.group_id, text=f"未知图包：{name}"
+                    group_id=input.group_id, text=f"未知图库：{name}"
                 )
                 return
             if len(parts) == 2:
@@ -902,7 +911,7 @@ class ImageSender(NcatBotPlugin):
 
         await self.api.qq.post_group_msg(
             group_id=input.group_id,
-            text="未知子命令，发送「图包 帮助」查看用法",
+            text="未知子命令，发送「图库 帮助」查看用法",
         )
 
     @registrar.qq.on_group_message()
@@ -912,8 +921,8 @@ class ImageSender(NcatBotPlugin):
         # 移除 CQ 码后的纯命令文本
         clean_message = re.sub(r"\[CQ:[^\]]+\]", "", message).strip()
 
-        # 图包配置管理
-        if clean_message.startswith("图包"):
+        # 图库配置管理
+        if clean_message.startswith("图库"):
             await self.handle_package_admin(input, clean_message)
             return
 
@@ -1189,12 +1198,13 @@ class ImageSender(NcatBotPlugin):
         user_id = input.sender.user_id
 
         found = self._find_command(keyword)
+        auto_created = False
         if not found:
-            await self.api.qq.post_group_msg(
-                group_id=input.group_id, text=f"未知的关键词：{keyword}"
-            )
-            return
-        keyword, command_config = found
+            command_config = self._create_command(keyword)
+            auto_created = True
+            _log.info(f"上传时自动创建图库 [{keyword}]")
+        else:
+            keyword, command_config = found
 
         # 检查该关键词的上传权限（基于allowed_users）
         if (
@@ -1223,6 +1233,8 @@ class ImageSender(NcatBotPlugin):
 
         # 发送上传结果
         result_message = f"上传完成！成功: {success_count} 张，重复: {duplicate_count} 张，失败: {failed_count} 张"
+        if auto_created:
+            result_message = f"已自动创建图库 [{keyword}]\n{result_message}"
         await self.api.qq.post_group_msg(group_id=input.group_id, text=result_message)
 
     async def handle_delete(
