@@ -14,6 +14,7 @@ from typing import Deque, Dict, List, Optional, Tuple
 
 from common.utils.CommonUtil import CommonUtil
 from common.utils.async_io import http_get_bytes
+from common.utils.plugin_commands import format_help, is_help_message
 from ncatbot.core import registrar
 from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.event.qq import GroupRecallEvent
@@ -30,6 +31,10 @@ _log = get_log()
 
 PLUGIN_DIR = Path(__file__).resolve().parent
 
+SELF_QUERY_COMMANDS = ("谁艾特我", "谁@我")
+TARGET_QUERY_PREFIXES = ("谁艾特", "谁@")
+QUERY_COMMANDS = (*SELF_QUERY_COMMANDS, *TARGET_QUERY_PREFIXES)
+
 DEFAULT_CONFIG = {
     # 空列表 = 全群启用
     "group_whitelist": [],
@@ -42,6 +47,15 @@ DEFAULT_CONFIG = {
     # 单次查询最多发送几张未读卡片
     "max_cards_per_query": 3,
 }
+
+HELP_TEXT = format_help(
+    "WhoAtMe 谁艾特我",
+    [
+        "谁艾特我 / 谁@我：查看最近未读的 @ 上下文",
+        "谁艾特 @用户 / 谁@ @用户：查看指定成员被 @ 的记录",
+        "谁艾特 QQ号：同上（纯数字 QQ）",
+    ],
+)
 
 _SELF_QUERY_RE = re.compile(r"^(?:谁艾特我|谁@我)[?？]?$")
 _TARGET_QUERY_RE = re.compile(r"^(?:谁艾特|谁@)\s*")
@@ -130,6 +144,14 @@ class WhoAtMe(NcatBotPlugin):
     @registrar.qq.on_group_message(priority=50)
     async def handle_group_message(self, event: GroupMessage) -> None:
         if not self._is_group_allowed(event.group_id):
+            return
+
+        text = self._extract_plain_text(event)
+        if is_help_message(
+            text,
+            command_names=QUERY_COMMANDS,
+        ):
+            await event.reply(text=HELP_TEXT, at_sender=False)
             return
 
         query_target = self._parse_query_target(event)

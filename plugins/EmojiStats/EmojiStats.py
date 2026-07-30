@@ -27,11 +27,23 @@ from common.stats_render.helpers import (
     period_display_label,
     sum_daily_by_period,
 )
+from common.utils.plugin_commands import format_help, is_help_message
 
 # 禁用 SSL 警告
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 _log = get_log()
+
+COMMAND_PREFIX = "表情包统计"
+
+HELP_TEXT = format_help(
+    "EmojiStats 表情包统计",
+    [
+        f"{COMMAND_PREFIX} <时间范围> <统计对象> [@用户]",
+        "时间范围：今日、本周、本月、全部",
+        "统计对象：群组、个人",
+    ],
+)
 
 
 class DateTimeEncoder(json.JSONEncoder):
@@ -1117,6 +1129,11 @@ class EmojiStatsPlugin(NcatBotPlugin):
     async def handle_emoji_stats(self, input: GroupMessage) -> None:
         """处理表情包统计命令"""
         message = input.raw_message.strip()
+        if is_help_message(
+            message,
+            command_names=(COMMAND_PREFIX,)):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
         if not message.startswith("表情包统计"):
             return
 

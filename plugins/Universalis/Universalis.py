@@ -7,6 +7,9 @@ from typing import Dict, Optional, Tuple
 from datetime import datetime
 from difflib import SequenceMatcher
 from ncatbot.plugin import NcatBotPlugin
+from ncatbot.core import registrar
+from ncatbot.event.qq import GroupMessageEvent as GroupMessage
+from common.utils.plugin_commands import format_help, is_help_message
 
 
 # 定义数据类
@@ -17,6 +20,17 @@ class Item:
 
 # 日志配置
 _log = logging.getLogger(__name__)
+
+COMMAND_SEARCH = "搜索物品"
+
+HELP_TEXT = format_help(
+    "Universalis FF14 物价",
+    [
+        f"{COMMAND_SEARCH} <物品名> <服务器/大区>：查询市场售价",
+        "物品名可带 hq/HQ 表示高品质",
+        "服务器别名：猫=猫小胖、狗=豆豆柴、鸟=陆行鸟 等",
+    ],
+)
 
 
 class Universalis(NcatBotPlugin):
@@ -157,6 +171,14 @@ class Universalis(NcatBotPlugin):
             # 格式化输出
             msg = self.format_market_data(data, item_name, server_name, hq)
             await self.api.qq.post_group_msg(group_id=input.group_id, text=msg)
+
+    @registrar.qq.on_group_message()
+    async def handle_help(self, input: GroupMessage):
+        text = (input.raw_message or "").strip()
+        if is_help_message(
+            text,
+            command_names=(COMMAND_SEARCH,)):
+            await input.reply(text=HELP_TEXT, at_sender=False)
 
     def get_item_id(self, item_name: str) -> int:
         """

@@ -2,9 +2,19 @@ from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.types import Image, MessageArray as MessageChain, Reply
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
+from common.utils.plugin_commands import format_help, is_help_message
 
 
 HTTP_CAT_BASE_URL = "https://http.cat/"
+COMMAND = "httpcat"
+
+HELP_TEXT = format_help(
+    "HttpCat HTTP 状态码猫图",
+    [
+        "直接发送 HTTP 状态码数字（如 404、500）获取对应猫图",
+        f"支持的状态码见插件 HTTP_STATUS_CODES（{HTTP_CAT_BASE_URL}）",
+    ],
+)
 HTTP_STATUS_CODES = {
     100: "100",
     101: "101",
@@ -94,7 +104,13 @@ class HttpCat(NcatBotPlugin):
         """
         处理 HTTP Cat 功能
         """
-        message_content = input.raw_message
+        message_content = input.raw_message.strip()
+        if is_help_message(
+            message_content,
+            command_names=(COMMAND,),
+        ):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
         if not message_content.isdigit():
             return
 

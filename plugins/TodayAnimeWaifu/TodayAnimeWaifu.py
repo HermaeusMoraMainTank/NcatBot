@@ -16,6 +16,7 @@ from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 
 from ncatbot.utils import get_log
+from common.utils.plugin_commands import format_help, is_help_message
 
 
 _log = get_log()
@@ -27,6 +28,26 @@ ANIME_WAIFU_BASE_DIR = r"C:\Users\Administrator\Documents\GitHub\wife"
 PREFERRED_WAIFU_DIR = "img1"
 PREFERRED_DIR_CHANCE = 0.30
 HMMT_WAIFU_DIR = "img3"
+
+TRIGGER_COMMANDS = (
+    "今日二次元老婆",
+    "今日二刺猿老婆",
+    "今日二刺螈老婆",
+    "今日2次元老婆",
+    "今日二次元",
+    "今日二刺猿",
+    "今日二刺螈",
+)
+LIST_COMMAND = "群二次元老婆列表"
+
+HELP_TEXT = format_help(
+    "TodayAnimeWaifu 今日二次元老婆",
+    [
+        f"{' / '.join(TRIGGER_COMMANDS)}：抽取今日二次元老婆",
+        f"{LIST_COMMAND}：查看本群今日分配列表",
+        "换 @用户 的二次元老婆：管理员更换指定用户老婆",
+    ],
+)
 
 
 class TodayAnimeWaifu(NcatBotPlugin):
@@ -342,6 +363,11 @@ class TodayAnimeWaifu(NcatBotPlugin):
             self.last_reset_date = current_date
 
         command = input.raw_message.strip()
+        if is_help_message(
+            command,
+            command_names=(*TRIGGER_COMMANDS, LIST_COMMAND)):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
         if command == "群二次元老婆列表":
             pairs = await self._build_waifu_list_pairs(group_id)
             if not pairs:
@@ -356,15 +382,7 @@ class TodayAnimeWaifu(NcatBotPlugin):
             )
 
         # 触发指令列表
-        trigger_commands = [
-            "今日二次元老婆",
-            "今日二刺猿老婆",
-            "今日二刺螈老婆",
-            "今日2次元老婆",
-            "今日二次元",
-            "今日二刺猿",
-            "今日二刺螈",
-        ]
+        trigger_commands = list(TRIGGER_COMMANDS)
 
         if message in trigger_commands:
             user_to_waifu_map = self.user_to_waifu_map_by_group.setdefault(group_id, {})

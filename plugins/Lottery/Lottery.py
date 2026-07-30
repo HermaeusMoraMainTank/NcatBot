@@ -8,8 +8,22 @@ from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.types import Image, MessageArray as MessageChain
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
+from common.utils.plugin_commands import format_help, is_help_message
 
 _log = logging.getLogger(__name__)
+
+COMMAND_JOIN = "大乐透"
+COMMAND_START = "开始大乐透"
+COMMANDS = (COMMAND_JOIN, COMMAND_START)
+
+HELP_TEXT = format_help(
+    "Lottery 大乐透",
+    [
+        f"{COMMAND_JOIN}：加入本群大乐透（满员或手动开始）",
+        f"{COMMAND_START}：参与者手动开始（至少 2 人）",
+        "奖品为随机禁言时长；小概率触发全场禁言",
+    ],
+)
 
 
 class Lottery(NcatBotPlugin):
@@ -70,6 +84,12 @@ class Lottery(NcatBotPlugin):
     @registrar.qq.on_group_message()
     async def handle_lottery(self, input: GroupMessage):
         """处理大乐透指令"""
+        raw = input.raw_message.strip()
+        if is_help_message(
+            raw,
+            command_names=COMMANDS):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
         if input.raw_message.startswith("大乐透"):
             await self.join_lottery(input)
         elif input.raw_message == "开始大乐透":

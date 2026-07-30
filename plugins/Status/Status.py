@@ -18,6 +18,17 @@ from ncatbot.types import Image as QQImage
 
 from common.constants.HMMT import HMMT
 from common.utils.CommonUtil import CommonUtil
+from common.utils.plugin_commands import format_help, is_help_message
+
+
+COMMAND_STATUS = "状态"
+
+HELP_TEXT = format_help(
+    "Status 服务器状态",
+    [
+        f"{COMMAND_STATUS}：生成 Bot 所在机器的资源状态卡片（仅管理员）",
+    ],
+)
 
 
 class Status(NcatBotPlugin):
@@ -35,7 +46,13 @@ class Status(NcatBotPlugin):
 
     @registrar.qq.on_group_message()
     async def handle_status(self, input: GroupMessage) -> None:
-        if input.raw_message == "状态" and input.sender.user_id == HMMT.HMMT_ID:
+        raw = input.raw_message.strip()
+        if is_help_message(
+            raw,
+            command_names=(COMMAND_STATUS,)):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
+        if raw == COMMAND_STATUS and input.sender.user_id == HMMT.HMMT_ID:
             png = self._render_status_png()
             cache = Path(__file__).resolve().parent / "data"
             cache.mkdir(parents=True, exist_ok=True)

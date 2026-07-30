@@ -15,9 +15,19 @@ from ncatbot.core import registrar
 
 from common.constants.HMMT import HMMT
 from common.utils.CommonUtil import CommonUtil
+from common.utils.plugin_commands import format_help, is_help_message
 
 
 _log = logging.getLogger(__name__)
+
+COMMAND_DIVINE = "占卜"
+
+HELP_TEXT = format_help(
+    "Tarot 塔罗占卜",
+    [
+        f"{COMMAND_DIVINE}：随机抽取一张塔罗牌（含正/逆位）",
+    ],
+)
 
 
 # 塔罗牌数据类
@@ -69,6 +79,11 @@ class Tarot(NcatBotPlugin):
     @registrar.qq.on_group_message()
     async def handle_tarot(self, input: GroupMessage):
         message = input.raw_message
+        if is_help_message(
+            message.strip(),
+            command_names=(COMMAND_DIVINE,)):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
         if message == "占卜":
             probability = 0.05  # 触发概率为5%
             if input.sender.user_id == HMMT.HMMT_ID:

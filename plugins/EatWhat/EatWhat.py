@@ -10,6 +10,7 @@ from ncatbot.types import At, MessageArray as MessageChain, PlainText, Image
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 from ncatbot.utils import get_log
+from common.utils.plugin_commands import format_help, is_help_message
 
 _log = get_log()
 
@@ -17,6 +18,16 @@ _log = get_log()
 time_words = r"(今|明|后)?(天|日|晚)?"
 meal_words = r"(早|中|晚)?(上|午|餐|饭|夜宵|宵夜)?"
 action_words = r"(吃|喝)(什么|啥|点啥)?"
+
+
+HELP_TEXT = format_help(
+    "EatWhat 吃什么",
+    [
+        "吃什么 / 喝什么 / 今天吃什么 等：随机推荐一张图",
+        "每日每类最多 5 次，5 秒 CD",
+        "查看全部菜单 / 添加菜品 等管理命令暂未实现",
+    ],
+)
 
 
 @dataclass
@@ -51,6 +62,12 @@ class EatWhat(NcatBotPlugin):
     async def handle_eat_what(self, input: GroupMessage) -> None:
         """处理群消息"""
         content = input.raw_message.strip()
+
+        if is_help_message(
+            content,
+            command_names=("吃什么", "喝什么")):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
 
         # 定义操作映射
         operations = {

@@ -12,9 +12,22 @@ from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.types import At, MessageArray as MessageChain, PlainText, Image
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
+from common.utils.plugin_commands import format_help, is_help_message
 
 
 _log = logging.getLogger(__name__)
+
+COMMANDS = ("运势", "今日doro", "今日运势")
+
+HELP_TEXT = format_help(
+    "Fortune 运势",
+    [
+        "运势：随机 amm 运势图",
+        "今日doro：随机 doro 结局图",
+        "今日运势：每日限一次的文字运势图",
+        "重置 @用户 的运势：管理员重置他人今日运势",
+    ],
+)
 
 # 常量
 LUCK_DESC_LIST = [
@@ -59,6 +72,12 @@ class Fortune(NcatBotPlugin):
     async def handle_fortune(self, input: GroupMessage):
         message = input.raw_message
         sender_id = input.sender.user_id
+
+        if is_help_message(
+            message.strip(),
+            command_names=COMMANDS):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
 
         if message == "运势":
             luck_value = self.calculate_luck_value(sender_id)

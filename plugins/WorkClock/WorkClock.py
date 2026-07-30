@@ -16,9 +16,25 @@ from ncatbot.types import Image as QQImage
 from ncatbot.utils import get_log
 
 from common.utils.CommonUtil import CommonUtil
+from common.utils.plugin_commands import format_help, is_help_message
 
 _CLOCK_IN_TRIGGERS = ("群上班", "打卡", "补卡", "上班")
 _CLOCK_OUT_TRIGGERS = ("群下班", "下班")
+_GROUP_ACTIVE_LIST_COMMAND = "群上班列表"
+CLOCK_COMMANDS = (
+    *_CLOCK_IN_TRIGGERS,
+    *_CLOCK_OUT_TRIGGERS,
+    _GROUP_ACTIVE_LIST_COMMAND,
+)
+
+HELP_TEXT = format_help(
+    "WorkClock 上下班打卡",
+    [
+        "群上班 / 打卡 / 补卡 / 上班 [时间]：上班打卡",
+        "群下班 / 下班 [时间]：下班打卡",
+        f"{_GROUP_ACTIVE_LIST_COMMAND}：查看本群今日上班列表",
+    ],
+)
 _MIN_SHIFT_SECONDS = 6 * 3600
 _MAX_SHIFT_SECONDS = 18 * 3600
 
@@ -1263,6 +1279,11 @@ class WorkClock(NcatBotPlugin):
     @registrar.qq.on_group_message()
     async def handle_work_clock(self, input: GroupMessage) -> None:
         message = input.raw_message.strip()
+        if is_help_message(
+            message,
+            command_names=CLOCK_COMMANDS):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
         if message == "群上班列表":
             await self._handle_group_active_list(input)
             return

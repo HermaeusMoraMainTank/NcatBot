@@ -9,11 +9,20 @@ from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.types import At, MessageArray as MessageChain, PlainText, Reply
 from ncatbot.utils import get_log
+from common.utils.plugin_commands import format_help, is_help_message
 
 _log = get_log()
 
-_ALLOWED_USER_ID = "273421673"
 _RECALL_TEXT = "撤回"
+
+HELP_TEXT = format_help(
+    "WithdrawReply 引用撤回",
+    [
+        f"回复某条消息并发送「{_RECALL_TEXT}」或「@蓝晴 {_RECALL_TEXT}」：撤回被引用消息",
+        "仅指定管理员账号可用",
+    ],
+)
+_ALLOWED_USER_ID = "273421673"
 _AT_NAME_PATTERN = re.compile(r"^@?蓝晴\s*撤回$")
 
 _TEXT_ONLY_SEGMENTS = (PlainText, Reply, At)
@@ -82,6 +91,14 @@ class WithdrawReply(NcatBotPlugin):
 
     @registrar.qq.on_group_message()
     async def handle_group_message(self, event: GroupMessage) -> None:
+        text = (event.raw_message or "").strip()
+        if is_help_message(
+            text,
+            command_names=(_RECALL_TEXT,)):
+            if str(event.sender.user_id) == _ALLOWED_USER_ID:
+                await event.reply(text=HELP_TEXT, at_sender=False)
+            return
+
         if str(event.sender.user_id) != _ALLOWED_USER_ID:
             return
 

@@ -10,6 +10,7 @@ from pathlib import Path
 import tempfile
 
 from common.utils.async_io import load_json
+from common.utils.plugin_commands import format_help, is_help_message
 
 from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.types import At, Image, MessageArray as MessageChain, PlainText, Reply
@@ -25,6 +26,17 @@ handler.setLevel(logging.INFO)
 formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 handler.setFormatter(formatter)
 _log.addHandler(handler)
+
+MEME_LIST_COMMAND = "meme"
+
+HELP_TEXT = format_help(
+    "Meme 表情包",
+    [
+        f"{MEME_LIST_COMMAND}：生成可用 meme 关键词列表图",
+        "<关键词> [文字参数…]：生成对应 meme（需 Meme 服务运行）",
+        "关键词见 data/json/memeKeys.json",
+    ],
+)
 
 
 @dataclass_json
@@ -103,6 +115,13 @@ class Meme(NcatBotPlugin):
     async def handle_meme(self, input: GroupMessage):
         # 检查发送者是否在 banlist 中
         if str(input.sender.user_id) in self.banlist:
+            return
+
+        raw = input.raw_message.strip()
+        if is_help_message(
+            raw,
+            command_names=(MEME_LIST_COMMAND,)):
+            await input.reply(text=HELP_TEXT, at_sender=False)
             return
 
         if input.raw_message == "meme":

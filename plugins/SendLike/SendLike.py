@@ -2,6 +2,16 @@ from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.types import At, Image, MessageArray as MessageChain, Reply, PlainText
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
+from common.utils.plugin_commands import format_help, is_help_message
+
+COMMAND_LIKE = "赞我"
+
+HELP_TEXT = format_help(
+    "SendLike 点赞",
+    [
+        f"{COMMAND_LIKE}：Bot 给你点 10 个赞（需互为好友时更稳定）",
+    ],
+)
 
 
 class SendLike(NcatBotPlugin):
@@ -10,7 +20,13 @@ class SendLike(NcatBotPlugin):
 
     @registrar.qq.on_group_message()
     async def handle_send_like(self, input: GroupMessage):
-        if input.raw_message == "赞我":
+        raw = input.raw_message.strip()
+        if is_help_message(
+            raw,
+            command_names=(COMMAND_LIKE,)):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
+        if raw == "赞我":
             await self.api.qq.send_like(input.sender.user_id, 10)
             await self.api.qq.post_group_msg(
                 group_id=input.group_id,

@@ -14,11 +14,20 @@ from ncatbot.types import MessageArray as MessageChain, PlainText, Image, Reply
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 from ncatbot.utils import get_log
+from common.utils.plugin_commands import format_help, is_help_message
 
 _log = get_log()
 
 # 命令前缀列表
 COMMAND_PREFIXES = ["查询人物", "识别人物", "角色", "人物"]
+
+HELP_TEXT = format_help(
+    "AnimeTrace 动漫人物识别",
+    [
+        f"{' / '.join(COMMAND_PREFIXES)} [动漫|gal]：识别图片中的角色",
+        "需附带图片或回复含图消息；默认动漫模式，加 gal 为 Galgame 模式",
+    ],
+)
 
 
 @dataclass
@@ -299,6 +308,12 @@ class AnimeTracePlugin(NcatBotPlugin):
         try:
             # 移除 CQ 码后再检查命令
             message = re.sub(r"\[CQ:[^\]]+\]", "", input.raw_message).strip()
+
+            if is_help_message(
+                message,
+                command_names=COMMAND_PREFIXES):
+                await input.reply(text=HELP_TEXT, at_sender=False)
+                return
 
             # 检查命令
             is_match, mode_type = self._check_command(message)

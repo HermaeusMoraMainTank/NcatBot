@@ -38,6 +38,7 @@ from ncatbot.types import Image, MessageArray as MessageChain, PlainText
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 from ncatbot.utils import get_log
+from common.utils.plugin_commands import format_help, is_help_message
 
 # 设置 matplotlib 字体
 CommonUtil.set_matplotlib_font()
@@ -59,6 +60,17 @@ plt.rcParams["axes.unicode_minus"] = False  # 解决负号显示问题
 warnings.filterwarnings("ignore", category=UserWarning, module="matplotlib")
 
 _log = get_log()
+
+COMMAND_PREFIX = "ai统计"
+
+HELP_TEXT = format_help(
+    "AiStats AI 使用统计",
+    [
+        f"{COMMAND_PREFIX} <时间范围> <统计对象> [@用户]",
+        "时间范围：今日、本周、本月、全部",
+        "统计对象：群组、个人、明细、总览、全群",
+    ],
+)
 
 
 class AiUsageStats:
@@ -1957,6 +1969,11 @@ class AiStats(NcatBotPlugin):
     async def handle_ai_stats(plugin_instance, input: GroupMessage) -> None:
         """处理AI统计命令"""
         message = input.raw_message.strip()
+        if is_help_message(
+            message,
+            command_names=(COMMAND_PREFIX,)):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
         if not message.startswith("ai统计"):
             return
 

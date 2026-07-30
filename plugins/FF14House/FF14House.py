@@ -5,11 +5,25 @@ import os
 import math
 from ncatbot.types import Image, MessageArray as MessageChain, Reply
 from ncatbot.plugin import NcatBotPlugin
+from ncatbot.core import registrar
+from ncatbot.event.qq import GroupMessageEvent as GroupMessage
+from common.utils.plugin_commands import format_help, is_help_message
 
 import json
 from ncatbot.utils import get_log
 
 _log = get_log()
+
+COMMAND_SEARCH = "搜索房屋"
+
+HELP_TEXT = format_help(
+    "FF14House 房屋查询",
+    [
+        f"{COMMAND_SEARCH} <服务器> <S|M|L> [部队|个人] [区域名]",
+        "示例：搜索房屋 拂晓之间 M 部队 海雾村",
+        "S 房数据过多，请使用 househelper.ffxiv.cyou 查询",
+    ],
+)
 
 
 class FF14House(NcatBotPlugin):
@@ -445,3 +459,11 @@ class FF14House(NcatBotPlugin):
                 group_id=input.group_id,
                 text=error_message,
             )
+
+    @registrar.qq.on_group_message()
+    async def handle_help(self, input: GroupMessage):
+        text = (input.raw_message or "").strip()
+        if is_help_message(
+            text,
+            command_names=(COMMAND_SEARCH,)):
+            await input.reply(text=HELP_TEXT, at_sender=False)

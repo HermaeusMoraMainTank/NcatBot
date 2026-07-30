@@ -20,9 +20,22 @@ from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.types import At, MessageArray as MessageChain, PlainText, Image
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
+from common.utils.plugin_commands import format_help, is_help_message
 
 
 _log = logging.getLogger(__name__)
+
+COMMANDS = frozenset({"今日小猪", "抽小猪", "我的小猪", "rollpig"})
+LIST_COMMANDS = frozenset({"小猪列表", "小猪图鉴", "猪列表"})
+
+HELP_TEXT = format_help(
+    "RollPig 今日小猪",
+    [
+        "今日小猪 / 抽小猪 / 我的小猪 / rollpig：抽取今日小猪",
+        "@群友 + 上述命令：为对方抽取",
+        "小猪列表 / 小猪图鉴 / 猪列表：查看图鉴",
+    ],
+)
 
 
 class RollPig(NcatBotPlugin):
@@ -45,11 +58,7 @@ class RollPig(NcatBotPlugin):
     ANALYSIS_WIDTH_RATIO = 0.85  # 解析宽度比例
     NAME_FONT_SIZE = 66  # 名称字体大小
 
-    # 命令别名
-    COMMANDS = {"今日小猪", "抽小猪", "我的小猪", "rollpig"}
-    LIST_COMMANDS = {"小猪列表", "小猪图鉴", "猪列表"}
-
-    # 图鉴网格参数（单张长图，8 列紧凑布局）
+    data_dir = "data"
     LIST_COLS = 8
     LIST_CANVAS_WIDTH = 920
     LIST_PADDING = 20
@@ -59,8 +68,6 @@ class RollPig(NcatBotPlugin):
     LIST_CELL_NAME_HEIGHT = 20
     LIST_NAME_FONT_SIZE = 14
     LIST_TITLE_FONT_SIZE = 24
-
-    data_dir = "data"
 
     async def on_load(self):
         """插件加载"""
@@ -511,12 +518,16 @@ class RollPig(NcatBotPlugin):
         # 提取纯命令（去除 @ 信息）
         command = self._extract_command(raw_message)
 
-        if command in self.LIST_COMMANDS:
+        if is_help_message(command, command_names=(*COMMANDS, *LIST_COMMANDS)):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
+
+        if command in LIST_COMMANDS:
             await self._send_pig_list(input)
             return
 
         # 检查是否是今日小猪命令
-        if command not in self.COMMANDS:
+        if command not in COMMANDS:
             return
 
         group_id = input.group_id

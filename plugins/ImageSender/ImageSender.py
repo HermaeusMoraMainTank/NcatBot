@@ -22,6 +22,12 @@ from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 import asyncio
 from common.constants.HMMT import HMMT
+from common.utils.plugin_commands import (
+    cfg_str,
+    cfg_str_list,
+    format_help,
+    is_help_message,
+)
 
 
 _log = logging.getLogger(__name__)
@@ -55,6 +61,64 @@ user_last_trigger: Dict[str, datetime] = {}
 # 无视 CD 的用户 ID（如 hmmt）
 CD_EXEMPT_USERS = {HMMT.HMMT_ID}
 
+# ========== 命令与帮助（可在插件 config 中覆盖） ==========
+DEFAULT_CONFIG = {
+    "admin_prefix": "图库",
+    "upload_prefix": "上传",
+    "delete_prefix": "删除",
+    "admin_help_triggers": ["帮助", "help"],
+}
+
+
+def _format_user_help(
+    admin_prefix: str,
+    upload_prefix: str,
+    delete_prefix: str,
+    *,
+    image_root: str,
+    commands_path: str,
+) -> str:
+    return format_help(
+        "ImageSender 图库插件帮助",
+        [
+            "发图：发送图库触发词（配置见下方路径）",
+            "多张：触发词 数量（如 猫 3）",
+            "数量：触发词 count",
+            f"{upload_prefix} <图库名> [图片]：上传（图库不存在会自动创建）",
+            f"{delete_prefix} <图库名>：管理员删除图片（需回复目标图）",
+            f"{admin_prefix} 帮助：图库管理（仅管理员）",
+            f"图库目录：{image_root}",
+            f"触发词配置：{commands_path}",
+        ],
+    )
+
+
+def _format_admin_help(
+    admin_prefix: str,
+    *,
+    image_root: str,
+    commands_path: str,
+) -> str:
+    p = admin_prefix
+    return format_help(
+        f"{p}管理（目录 {image_root}，配置 {commands_path}）",
+        [
+            f"{p} 列表",
+            f"{p} 添加 <名称> [触发词1 触发词2 ...]",
+            f"{p} 删除 <名称>",
+            f"{p} 查看 <名称>",
+            f"{p} 触发 <名称> <触发词1> [触发词2 ...]",
+            f"{p} 触发 添加 <名称> <触发词>",
+            f"{p} 触发 删除 <名称> <触发词>",
+            f"{p} 路径 <名称> [新路径]",
+            f"{p} 权限 开放 <名称>",
+            f"{p} 权限 添加 <名称> <QQ号>",
+            f"{p} 权限 移除 <名称> <QQ号>",
+            f"{p} 撤回 <名称> [秒数，0=不撤回]",
+            f"{p} 重载",
+        ],
+    )
+
 
 def _try_acquire_user_cd(user_id: str) -> bool:
     """原子地检查并占用 CD。True 表示可调用且已记录触发时间，False 表示冷却中。"""
@@ -77,6 +141,7 @@ class ImageSender(NcatBotPlugin):
 
     async def on_load(self):
         """异步加载插件"""
+        self.init_defaults(DEFAULT_CONFIG)
         _log.info(f"开始加载 {self.name} 插件 v{self.version}")
         self.commands = self._load_commands()
         self.commands = self._migrate_package_paths(self.commands)
@@ -97,6 +162,43 @@ class ImageSender(NcatBotPlugin):
     @staticmethod
     def _is_admin(user_id: str) -> bool:
         return user_id == HMMT.HMMT_ID
+
+    def _cmd(self, key: str) -> str:
+        return cfg_str(self, key, DEFAULT_CONFIG[key], DEFAULT_CONFIG)
+
+    def _admin_help_triggers(self) -> list[str]:
+        return cfg_str_list(
+            self,
+            "admin_help_triggers",
+            DEFAULT_CONFIG["admin_help_triggers"],
+            DEFAULT_CONFIG,
+        )
+
+    def _is_auxiliary_help(self, clean_message: str) -> bool:
+        """上传/删除 等辅助命令的帮助（图库 帮助 走管理入口）。"""
+        return is_help_message(
+            clean_message,
+            command_names=(
+                self._cmd("upload_prefix"),
+                self._cmd("delete_prefix"),
+            ),
+        )
+
+    def _user_help_text(self) -> str:
+        return _format_user_help(
+            self._cmd("admin_prefix"),
+            self._cmd("upload_prefix"),
+            self._cmd("delete_prefix"),
+            image_root=str(DEFAULT_IMAGE_ROOT),
+            commands_path=str(COMMANDS_JSON_PATH),
+        )
+
+    def _admin_help_text(self) -> str:
+        return _format_admin_help(
+            self._cmd("admin_prefix"),
+            image_root=str(DEFAULT_IMAGE_ROOT),
+            commands_path=str(COMMANDS_JSON_PATH),
+        )
 
     def _ensure_commands_file(self) -> None:
         """确保 data/json 下存在配置文件，必要时从旧路径或插件内置模板迁移。"""
@@ -631,31 +733,23 @@ class ImageSender(NcatBotPlugin):
         """图库管理命令（仅管理员）"""
         self._reload_commands_if_changed()
         user_id = str(input.sender.user_id)
+        admin_prefix = self._cmd("admin_prefix")
+        upload_prefix = self._cmd("upload_prefix")
+
+        body = clean_message[len(admin_prefix) :].strip()
+        if not body or body in self._admin_help_triggers():
+            help_text = (
+                self._admin_help_text()
+                if self._is_admin(user_id)
+                else self._user_help_text()
+            )
+            await self.api.qq.post_group_msg(group_id=input.group_id, text=help_text)
+            return
+
         if not self._is_admin(user_id):
             await self.api.qq.post_group_msg(
                 group_id=input.group_id, text="您没有图库管理权限！"
             )
-            return
-
-        body = clean_message[len("图库") :].strip()
-        if not body or body in ("帮助", "help"):
-            help_text = (
-                "图库管理（图库目录 data/image/imagesender/，配置 data/json/image_sender_commands.json）：\n"
-                "图库 列表\n"
-                "图库 添加 <名称> [触发词1 触发词2 ...]\n"
-                "图库 删除 <名称>\n"
-                "图库 查看 <名称>\n"
-                "图库 触发 <名称> <触发词1> [触发词2 ...]\n"
-                "图库 触发 添加 <名称> <触发词>\n"
-                "图库 触发 删除 <名称> <触发词>\n"
-                "图库 路径 <名称> [新路径]\n"
-                "图库 权限 开放 <名称>\n"
-                "图库 权限 添加 <名称> <QQ号>\n"
-                "图库 权限 移除 <名称> <QQ号>\n"
-                "图库 撤回 <名称> [秒数，0=不撤回]\n"
-                "图库 重载"
-            )
-            await self.api.qq.post_group_msg(group_id=input.group_id, text=help_text)
             return
 
         if body == "重载":
@@ -678,7 +772,7 @@ class ImageSender(NcatBotPlugin):
             if len(parts) < 2:
                 await self.api.qq.post_group_msg(
                     group_id=input.group_id,
-                    text="用法：图库 添加 <名称> [触发词...]",
+                    text=f"用法：{admin_prefix} 添加 <名称> [触发词...]",
                 )
                 return
             name = parts[1]
@@ -695,7 +789,7 @@ class ImageSender(NcatBotPlugin):
                     f"已添加图库 [{name}]\n"
                     f"路径: {cfg['path']}\n"
                     f"触发: {', '.join(triggers)}\n"
-                    f"上传请用：上传 {name}"
+                    f"上传请用：{upload_prefix} {name}"
                 ),
             )
             return
@@ -749,7 +843,7 @@ class ImageSender(NcatBotPlugin):
                 if not trigger or name not in self.commands:
                     await self.api.qq.post_group_msg(
                         group_id=input.group_id,
-                        text="用法：图库 触发 添加 <名称> <触发词>",
+                        text=f"用法：{admin_prefix} 触发 添加 <名称> <触发词>",
                     )
                     return
                 triggers = self.commands[name]["triggers"]
@@ -766,7 +860,7 @@ class ImageSender(NcatBotPlugin):
                 if not trigger or name not in self.commands:
                     await self.api.qq.post_group_msg(
                         group_id=input.group_id,
-                        text="用法：图库 触发 删除 <名称> <触发词>",
+                        text=f"用法：{admin_prefix} 触发 删除 <名称> <触发词>",
                     )
                     return
                 triggers = self.commands[name]["triggers"]
@@ -827,7 +921,7 @@ class ImageSender(NcatBotPlugin):
             if len(parts) < 3:
                 await self.api.qq.post_group_msg(
                     group_id=input.group_id,
-                    text="用法：图库 权限 开放|添加|移除 <名称> [QQ号]",
+                    text=f"用法：{admin_prefix} 权限 开放|添加|移除 <名称> [QQ号]",
                 )
                 return
             sub, name = parts[1], parts[2]
@@ -909,7 +1003,7 @@ class ImageSender(NcatBotPlugin):
 
         await self.api.qq.post_group_msg(
             group_id=input.group_id,
-            text="未知子命令，发送「图库 帮助」查看用法",
+            text=f"未知子命令，发送「{admin_prefix} 帮助」查看用法",
         )
 
     @registrar.qq.on_group_message()
@@ -919,13 +1013,23 @@ class ImageSender(NcatBotPlugin):
         # 移除 CQ 码后的纯命令文本
         clean_message = re.sub(r"\[CQ:[^\]]+\]", "", message).strip()
 
+        if self._is_auxiliary_help(clean_message):
+            await self.api.qq.post_group_msg(
+                group_id=input.group_id, text=self._user_help_text()
+            )
+            return
+
+        admin_prefix = self._cmd("admin_prefix")
+        upload_prefix = self._cmd("upload_prefix")
+        delete_prefix = self._cmd("delete_prefix")
+
         # 图库配置管理
-        if clean_message.startswith("图库"):
+        if clean_message.startswith(admin_prefix):
             await self.handle_package_admin(input, clean_message)
             return
 
         # 处理删除功能（仅限指定管理员使用）
-        if clean_message.startswith("删除 "):
+        if clean_message.startswith(f"{delete_prefix} "):
             await self.handle_delete(input, message, clean_message)
             return
 
@@ -934,7 +1038,10 @@ class ImageSender(NcatBotPlugin):
             return  # 黑名单用户直接忽略
 
         # 处理上传功能（支持直接发图片或回复图片）
-        if clean_message.startswith("上传 ") or clean_message.startswith("上传"):
+        if (
+            clean_message.startswith(f"{upload_prefix} ")
+            or clean_message == upload_prefix
+        ):
             await self.handle_upload(input, message)
             return
 
@@ -1159,16 +1266,19 @@ class ImageSender(NcatBotPlugin):
 
     async def handle_upload(self, input: GroupMessage, message: str):
         """处理图片上传请求"""
+        upload_prefix = self._cmd("upload_prefix")
         # 移除 CQ 码后获取命令
         clean_message = re.sub(r"\[CQ:[^\]]+\]", "", message).strip()
 
-        # 解析上传命令格式：上传 关键词[CQ:image,file=...,url=...] 或回复图片
-        # 先提取关键词（支持没有空格的情况）
-        keyword_match = re.match(r"上传\s*(\S+)", clean_message)
+        # 解析上传命令格式：上传 关键词[CQ:image,...] 或回复图片
+        keyword_match = re.match(rf"{re.escape(upload_prefix)}\s*(\S+)", clean_message)
         if not keyword_match:
             await self.api.qq.post_group_msg(
                 group_id=input.group_id,
-                text="上传格式错误！请使用：上传 关键词[图片] 或回复图片并发送：上传 关键词",
+                text=(
+                    f"{upload_prefix}格式错误！请使用：{upload_prefix} 关键词[图片] "
+                    f"或回复图片并发送：{upload_prefix} 关键词"
+                ),
             )
             return
 
@@ -1185,7 +1295,10 @@ class ImageSender(NcatBotPlugin):
         if not image_matches:
             await self.api.qq.post_group_msg(
                 group_id=input.group_id,
-                text="未找到图片信息！请使用：上传 关键词[图片] 或回复图片并发送：上传 关键词",
+                text=(
+                    f"未找到图片信息！请使用：{upload_prefix} 关键词[图片] "
+                    f"或回复图片并发送：{upload_prefix} 关键词"
+                ),
             )
             return
 
@@ -1247,13 +1360,16 @@ class ImageSender(NcatBotPlugin):
             )
             return
 
-        # 解析删除命令格式：删除 关键词 图片（关键词可替换为其他关键字）
-        # 使用 \S+ 支持中文和特殊字符关键字，同时兼容是否带“图片”二字
-        keyword_match = re.match(r"删除\s*(\S+)", clean_message)
+        delete_prefix = self._cmd("delete_prefix")
+        # 解析删除命令格式：删除 关键词
+        keyword_match = re.match(rf"{re.escape(delete_prefix)}\s*(\S+)", clean_message)
         if not keyword_match:
             await self.api.qq.post_group_msg(
                 group_id=input.group_id,
-                text="删除格式错误！请使用：删除 关键词，或回复图片并发送：删除 关键词",
+                text=(
+                    f"{delete_prefix}格式错误！请使用：{delete_prefix} 关键词，"
+                    f"或回复图片并发送：{delete_prefix} 关键词"
+                ),
             )
             return
 

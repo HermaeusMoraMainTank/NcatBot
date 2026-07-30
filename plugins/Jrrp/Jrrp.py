@@ -5,9 +5,19 @@ from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.utils import get_log
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
+from common.utils.plugin_commands import format_help, is_help_message
 
 # 日志配置
 _log = get_log()
+
+COMMANDS = ("jrrp", "今日人品")
+
+HELP_TEXT = format_help(
+    "Jrrp 今日人品",
+    [
+        "jrrp / 今日人品：查看今日人品值（0–100）",
+    ],
+)
 
 
 class Jrrp(NcatBotPlugin):
@@ -19,7 +29,11 @@ class Jrrp(NcatBotPlugin):
         """
         处理今日人品（JRRP）功能
         """
-        if input.raw_message in ["jrrp", "今日人品"]:
+        raw = input.raw_message.strip()
+        if is_help_message(raw, command_names=COMMANDS):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
+        if raw in COMMANDS:
             sender = input.sender
             _log.info(f"JRRP request from {sender.nickname} ({sender.user_id})")
             if sender.user_id in [HMMT.HMMT_ID, "1042081663", "864772045"]:

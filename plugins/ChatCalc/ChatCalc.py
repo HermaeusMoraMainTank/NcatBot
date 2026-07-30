@@ -5,11 +5,22 @@ from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.types import At, MessageArray as MessageChain, PlainText, Reply
 from ncatbot.utils import get_log
+from common.utils.plugin_commands import format_help, is_help_message
 
 from .calc_engine import calc_failure_message, find_best_expression
 from .triggers import has_calc_trigger
 
 _log = get_log()
+
+
+HELP_TEXT = format_help(
+    "ChatCalc 聊天计算器",
+    [
+        "消息含「算」「计算」「等于多少」等触发词时自动计算",
+        "也可回复含算式的消息并再次提问",
+        "支持四则运算、开方、日期差等（见 calc_engine）",
+    ],
+)
 
 _TEXT_ONLY_SEGMENTS = (PlainText, Reply, At)
 
@@ -109,6 +120,13 @@ class ChatCalc(NcatBotPlugin):
 
     @registrar.qq.on_group_message()
     async def handle_group_message(self, event: GroupMessage):
+        text = _extract_pure_text(event.message)
+        if text and is_help_message(
+            text.strip(),
+            command_names=("计算", "算")):
+            await event.reply(text=HELP_TEXT, at_sender=False)
+            return
+
         resolved = await self._resolve_calc(event)
         if not resolved:
             return

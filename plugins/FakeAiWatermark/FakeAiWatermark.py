@@ -23,6 +23,7 @@ from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.types import At, Image, MessageArray as MessageChain, Reply
 from ncatbot.utils import get_log
+from common.utils.plugin_commands import format_help, is_help_message
 
 from .processor import WatermarkProcessor
 
@@ -38,6 +39,16 @@ COMMANDS: dict[str, str] = {
     "Gemini水印": "gemini",
     "GEMINI水印": "gemini",
 }
+COMMAND_NAMES = tuple(COMMANDS.keys())
+
+HELP_TEXT = format_help(
+    "FakeAiWatermark 仿 AI 水印",
+    [
+        "豆包水印：为图片添加豆包风格水印",
+        "gemini水印：为图片添加 Gemini 风格水印",
+        "图片来源：当前消息图 > 回复图 > @ 头像 > 发送者头像",
+    ],
+)
 
 
 class FakeAiWatermark(NcatBotPlugin):
@@ -66,6 +77,12 @@ class FakeAiWatermark(NcatBotPlugin):
         # 去掉开头的 / 前缀（兼容）
         if text.startswith("/"):
             text = text[1:].lstrip()
+
+        if is_help_message(
+            text,
+            command_names=COMMAND_NAMES):
+            await event.reply(text=HELP_TEXT, at_sender=False)
+            return
 
         first = text.split(None, 1)[0] if text else ""
         watermark_type = COMMANDS.get(first)

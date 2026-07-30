@@ -13,6 +13,11 @@ from ncatbot.core import non_self, registrar
 from ncatbot.event.qq import GroupMessageEvent, PrivateMessageEvent
 from ncatbot.plugin import NcatBotPlugin
 
+from common.utils.plugin_commands import (
+    format_help,
+    is_help_message,
+)
+
 from .steam_price import PriceLookupError, SteamPriceService
 
 _log = logging.getLogger("SteamPrice")
@@ -30,6 +35,14 @@ DEFAULT_CONFIG = {
     "show_api_links": False,
     "llm_name_retry_count": 3,
 }
+
+HELP_TEXT = format_help(
+    "SteamPrice Steam 查价",
+    [
+        f"{' / '.join(COMMAND_PREFIXES)} <游戏名或 appid>：查询 Steam 价格",
+        "支持历史低价、各区价格等（见 steam_price 子命令）",
+    ],
+)
 
 
 class SteamPrice(NcatBotPlugin):
@@ -122,6 +135,12 @@ class SteamPrice(NcatBotPlugin):
             return
         raw = (event.raw_message or "").strip()
         if not raw:
+            return
+        if is_help_message(
+            raw,
+            command_names=COMMAND_PREFIXES,
+        ):
+            await self._reply(event, HELP_TEXT)
             return
         prefix = self._match_prefix(raw)
         if prefix is None:

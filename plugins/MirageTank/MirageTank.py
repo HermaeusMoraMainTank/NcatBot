@@ -24,6 +24,7 @@ from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.types import At, Image, MessageArray as MessageChain, Reply
 from ncatbot.utils import get_log
+from common.utils.plugin_commands import format_help, is_help_message
 
 from .inference import generate_mirage
 
@@ -36,6 +37,17 @@ QQ_AVATAR_URL = "http://q1.qlogo.cn/g?b=qq&nk={user_id}&s=640"
 COMMAND_GRAY = "幻影坦克"
 COMMAND_COLOR = "彩色幻影坦克"
 COMMAND_CANCEL = "取消"
+COMMANDS = (COMMAND_GRAY, COMMAND_COLOR)
+
+HELP_TEXT = format_help(
+    "MirageTank 幻影坦克",
+    [
+        f"{COMMAND_GRAY}：生成灰度幻影坦克（需两张图：表/里）",
+        f"{COMMAND_COLOR}：生成彩色幻影坦克",
+        "同条消息两张图 / 依次发图 / @ 头像 均可作为素材",
+        f"{COMMAND_CANCEL}：取消进行中的生成",
+    ],
+)
 Mode = Literal["gray", "color"]
 
 
@@ -114,6 +126,12 @@ class MirageTank(NcatBotPlugin):
         user_id = str(event.sender.user_id)
         key = self._session_key(group_id, user_id)
         text = self._get_command_text(event)
+
+        if is_help_message(
+            text.lstrip("/"),
+            command_names=COMMANDS):
+            await event.reply(text=HELP_TEXT, at_sender=False)
+            return
 
         # 取消进行中的会话
         if text == COMMAND_CANCEL or text == f"/{COMMAND_CANCEL}":

@@ -16,12 +16,23 @@ from ncatbot.types import (
 )
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
+from common.utils.plugin_commands import format_help, is_help_message
 
 from .draw import CardMaker
 from .field_mapping import FIELD_MAPPING, LABEL_TO_KEY, DEFAULT_DISPLAY_OPTIONS
 from .utils import get_avatar, get_constellation, get_zodiac, render_digest
 
 _log = logging.getLogger(__name__)
+
+COMMAND_PREFIXES = ("盒", "开盒")
+
+HELP_TEXT = format_help(
+    "Box 开盒",
+    [
+        "盒 / 开盒：查看自己的 QQ 资料卡片",
+        "开盒 @用户 / 开盒 QQ号：查看他人资料（受保护名单除外）",
+    ],
+)
 
 
 class Box(NcatBotPlugin):
@@ -77,6 +88,12 @@ class Box(NcatBotPlugin):
         message = input.raw_message.strip()
         sender_id = input.sender.user_id
         group_id = input.group_id
+
+        if is_help_message(
+            message,
+            command_names=COMMAND_PREFIXES):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
 
         # 检查是否是开盒命令
         if not (message.startswith("盒") or message.startswith("开盒")):

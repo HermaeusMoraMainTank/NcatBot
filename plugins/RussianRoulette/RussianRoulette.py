@@ -6,8 +6,21 @@ from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.types import Image, MessageArray as MessageChain, PlainText
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
+from common.utils.plugin_commands import format_help, is_help_message
 
 _log = logging.getLogger(__name__)
+
+COMMAND_ROULETTE = "轮盘赌"
+COMMAND_HIGH_NOON = "午时已到"
+COMMANDS = (COMMAND_ROULETTE, COMMAND_HIGH_NOON)
+
+HELP_TEXT = format_help(
+    "RussianRoulette 轮盘赌",
+    [
+        f"{COMMAND_ROULETTE}：左轮一枪，中弹禁言",
+        f"{COMMAND_HIGH_NOON}：连续开 6 枪直至有人中弹",
+    ],
+)
 
 
 class RussianRoulette(NcatBotPlugin):
@@ -29,7 +42,12 @@ class RussianRoulette(NcatBotPlugin):
 
     @registrar.qq.on_group_message()
     async def handle_russian_roulette(self, input: GroupMessage):
-        message = input.raw_message
+        message = input.raw_message.strip()
+        if is_help_message(
+            message,
+            command_names=COMMANDS):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
         if message.startswith("轮盘赌"):
             await self.shoot(input)
         if message == "午时已到":

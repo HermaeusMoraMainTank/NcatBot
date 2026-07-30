@@ -12,8 +12,19 @@ from ncatbot.types import At, Image, MessageArray as MessageChain, PlainText
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 from ncatbot.utils import get_log
+from common.utils.plugin_commands import format_help, is_help_message
 
 _log = get_log()
+
+COMMAND_QUERY = "查询撤回"
+
+HELP_TEXT = format_help(
+    "GroupRecall 撤回查询",
+    [
+        f"{COMMAND_QUERY} [条数|全部] [@用户]：管理员查询近期撤回消息",
+        "示例：查询撤回 10、查询撤回 全部 @某人",
+    ],
+)
 
 
 @dataclass
@@ -486,6 +497,11 @@ class GroupRecallPlugin(NcatBotPlugin):
         """处理查询撤回消息命令"""
         try:
             message = input.raw_message.strip()
+            if is_help_message(
+                message,
+                command_names=(COMMAND_QUERY,)):
+                await input.reply(text=HELP_TEXT, at_sender=False)
+                return
             if not message.startswith("查询撤回"):
                 return
 

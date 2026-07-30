@@ -6,8 +6,18 @@ from ncatbot.types import MessageArray as MessageChain, PlainText
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 from ncatbot.utils import get_log
+from common.utils.plugin_commands import format_help, is_help_message
 
 _log = get_log()
+
+COMMAND_TODAY_ANIME = "今日番剧"
+
+HELP_TEXT = format_help(
+    "TodayAnime 今日番剧",
+    [
+        f"{COMMAND_TODAY_ANIME}：从 Bangumi 日历获取今日更新的番剧列表",
+    ],
+)
 
 
 class TodayAnime(NcatBotPlugin):
@@ -33,7 +43,13 @@ class TodayAnime(NcatBotPlugin):
 
     @registrar.qq.on_group_message()
     async def handle_TodayAnime_like(self, input: GroupMessage):
-        if input.raw_message != "今日番剧":
+        raw = input.raw_message.strip()
+        if is_help_message(
+            raw,
+            command_names=(COMMAND_TODAY_ANIME,)):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
+        if raw != COMMAND_TODAY_ANIME:
             return
         data = await self.fetch_today_anime()
         if data is None:

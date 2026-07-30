@@ -26,8 +26,20 @@ from common.stats_render.helpers import (
     sum_daily_by_period,
 )
 from common.constants.HMMT import HMMT
+from common.utils.plugin_commands import format_help, is_help_message
 
 _log = get_log()
+
+COMMAND_PREFIX = "发言统计"
+
+HELP_TEXT = format_help(
+    "MessageStats 发言统计",
+    [
+        f"{COMMAND_PREFIX} <时间范围> <统计对象> [@用户]",
+        "时间范围：今日、本周、本月、全部",
+        "统计对象：群组、个人",
+    ],
+)
 
 
 class DateTimeEncoder(json.JSONEncoder):
@@ -739,6 +751,11 @@ class MessageStatsPlugin(NcatBotPlugin):
     async def handle_message_stats(self, input: GroupMessage) -> None:
         """处理发言统计命令"""
         message = input.raw_message.strip()
+        if is_help_message(
+            message,
+            command_names=(COMMAND_PREFIX,)):
+            await input.reply(text=HELP_TEXT, at_sender=False)
+            return
         if not message.startswith("发言统计"):
             return
 
