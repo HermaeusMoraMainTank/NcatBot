@@ -1,0 +1,910 @@
+[
+  {
+    "characterId": "hbr_31a_01",
+    "name": "茅森月歌",
+    "fullName": "Ruka Kayamori",
+    "fullNameChinese": "茅森月歌",
+    "aliases": [
+      "茅森月歌",
+      "Ruka Kayamori",
+      "RukaKayamori",
+      "Ruka",
+      "Kayamori"
+    ],
+    "className": "31A",
+    "kind": "character",
+    "squad": "31a",
+    "portraitFile": "img_stand_01.png"
+  },
+  {
+    "characterId": "hbr_31a_02",
+    "name": "和泉由希",
+    "fullName": "Yuki Izumi",
+    "fullNameChinese": "和泉由希",
+    "aliases": [
+      "和泉由希",
+      "Yuki Izumi",
+      "YukiIzumi",
+      "Yuki",
+      "Izumi"
+    ],
+    "className": "31A",
+    "kind": "character",
+    "squad": "31a",
+    "portraitFile": "img_stand_02.png"
+  },
+  {
+    "characterId": "hbr_31a_03",
+    "name": "逢川惠",
+    "fullName": "Megumi Aikawa",
+    "fullNameChinese": "逢川惠",
+    "aliases": [
+      "逢川惠",
+      "Megumi Aikawa",
+      "MegumiAikawa",
+      "Megumi",
+      "Aikawa"
+    ],
+    "className": "31A",
+    "kind": "character",
+    "squad": "31a",
+    "portraitFile": "img_stand_03.png"
+  },
+  {
+    "characterId": "hbr_31a_04",
+    "name": "东城司",
+    "fullName": "Tsukasa Tojo",
+    "fullNameChinese": "东城司",
+    "aliases": [
+      "东城司",
+      "東城司",
+      "Tsukasa Tojo",
+      "TsukasaTojo",
+      "Tsukasa",
+      "Tojo"
+    ],
+    "className": "31A",
+    "kind": "character",
+    "squad": "31a",
+    "portraitFile": "img_stand_04.png"
+  },
+  {
+    "characterId": "hbr_31a_05",
+    "name": "朝仓可怜",
+    "fullName": "Karen Asakura",
+    "fullNameChinese": "朝仓可怜",
+    "aliases": [
+      "朝仓可怜",
+      "朝倉可憐",
+      "Karen Asakura",
+      "KarenAsakura",
+      "Karen",
+      "Asakura"
+    ],
+    "className": "31A",
+    "kind": "character",
+    "squad": "31a",
+    "portraitFile": "img_stand_05.png"
+  },
+  {
+    "characterId": "hbr_31a_06",
+    "name": "国见玉",
+    "fullName": "Tama Kunimi",
+    "fullNameChinese": "国见玉",
+    "aliases": [
+      "国见玉",
+      "國見玉",
+      "Tama Kunimi",
+      "TamaKunimi",
+      "Tama",
+      "Kunimi"
+    ],
+    "className": "31A",
+    "kind": "character",
+    "squad": "31a",
+    "portraitFile": "img_stand_06.png"
+  },
+  {
+    "characterId": "hbr_31b_01",
+    "name": "苍井绘梨花",
+    "fullName": "Erika Aoi",
+    "fullNameChinese": "苍井绘梨花",
+    "aliases": [
+      "苍井绘梨花",
+      "蒼井繪梨花",
+      "Erika Aoi",
+      "ErikaAoi",
+      "Erika",
+      "Aoi"
+    ],
+    "className": "31B",
+    "kind": "character",
+    "squad": "31b",
+    "portraitFile": "img_stand_01.png"
+  },
+  {
+    "characterId": "hbr_31b_02",
+    "name": "水濑莓",
+    "fullName": "Ichigo Minase",
+    "fullNameChinese": "水濑莓",
+    "aliases": [
+      "水濑莓",
+      "水瀨莓",
+      "Ichigo Minase",
+      "IchigoMinase",
+      "Ichigo",
+      "Minase"
+    ],
+    "className": "31B",
+    "kind": "character",
+    "squad": "31b",
+    "portraitFile": "img_stand_02.png"
+  },
+  {
+    "characterId": "hbr_31b_03",
+    "name": "水濑李",
+    "fullName": "Sumomo Minase",
+    "fullNameChinese": "水濑李",
+    "aliases": [
+      "水濑李",
+      "水瀨李",
+      "Sumomo Minase",
+      "SumomoMinase",
+      "Sumomo",
+      "Minase"
+    ],
+    "className": "31B",
+    "kind": "character",
+    "squad": "31b",
+    "portraitFile": "img_stand_03.png"
+  },
+  {
+    "characterId": "hbr_31b_04",
+    "name": "樋口圣华",
+    "fullName": "Seika Higuchi",
+    "fullNameChinese": "樋口圣华",
+    "aliases": [
+      "樋口圣华",
+      "樋口聖華",
+      "Seika Higuchi",
+      "SeikaHiguchi",
+      "Seika",
+      "Higuchi"
+    ],
+    "className": "31B",
+    "kind": "character",
+    "squad": "31b",
+    "portraitFile": "img_stand_04.png"
+  },
+  {
+    "characterId": "hbr_31b_05",
+    "name": "柊木梢",
+    "fullName": "Kozue Hiiragi",
+    "fullNameChinese": "柊木梢",
+    "aliases": [
+      "柊木梢",
+      "Kozue Hiiragi",
+      "KozueHiiragi",
+      "Kozue",
+      "Hiiragi"
+    ],
+    "className": "31B",
+    "kind": "character",
+    "squad": "31b",
+    "portraitFile": "img_stand_05.png"
+  },
+  {
+    "characterId": "hbr_31b_06",
+    "name": "白虎",
+    "fullName": "Byakko",
+    "fullNameChinese": "白虎",
+    "aliases": [
+      "白虎",
+      "Byakko"
+    ],
+    "className": "31B",
+    "kind": "character",
+    "squad": "31b",
+    "portraitFile": "img_stand_06.png"
+  },
+  {
+    "characterId": "hbr_31c_01",
+    "name": "山胁·波昂·伊瓦尔",
+    "fullName": "Bon Ivar Yamawaki",
+    "fullNameChinese": "山胁·波昂·伊瓦尔",
+    "aliases": [
+      "山胁·波昂·伊瓦尔",
+      "山脇‧波昂‧伊瓦爾",
+      "Bon Ivar Yamawaki",
+      "山胁波昂伊瓦尔",
+      "山脇波昂伊瓦爾",
+      "BonIvarYamawaki",
+      "Bon",
+      "Yamawaki"
+    ],
+    "className": "31C",
+    "kind": "character",
+    "squad": "31c",
+    "portraitFile": "img_stand_01.png"
+  },
+  {
+    "characterId": "hbr_31c_02",
+    "name": "樱庭星罗",
+    "fullName": "Seira Sakuraba",
+    "fullNameChinese": "樱庭星罗",
+    "aliases": [
+      "樱庭星罗",
+      "櫻庭星羅",
+      "Seira Sakuraba",
+      "SeiraSakuraba",
+      "Seira",
+      "Sakuraba"
+    ],
+    "className": "31C",
+    "kind": "character",
+    "squad": "31c",
+    "portraitFile": "img_stand_02.png"
+  },
+  {
+    "characterId": "hbr_31c_03",
+    "name": "天音巫呼",
+    "fullName": "Miko Tenne",
+    "fullNameChinese": "天音巫呼",
+    "aliases": [
+      "天音巫呼",
+      "Miko Tenne",
+      "MikoTenne",
+      "Miko",
+      "Tenne"
+    ],
+    "className": "31C",
+    "kind": "character",
+    "squad": "31c",
+    "portraitFile": "img_stand_03.png"
+  },
+  {
+    "characterId": "hbr_31c_04",
+    "name": "丰后弥生",
+    "fullName": "Yayoi Bungo",
+    "fullNameChinese": "丰后弥生",
+    "aliases": [
+      "丰后弥生",
+      "豐後彌生",
+      "Yayoi Bungo",
+      "YayoiBungo",
+      "Yayoi",
+      "Bungo"
+    ],
+    "className": "31C",
+    "kind": "character",
+    "squad": "31c",
+    "portraitFile": "img_stand_04.png"
+  },
+  {
+    "characterId": "hbr_31c_05",
+    "name": "神崎阿黛尔海德",
+    "fullName": "Adelheid Kanzaki",
+    "fullNameChinese": "神崎阿黛尔海德",
+    "aliases": [
+      "神崎阿黛尔海德",
+      "神崎阿黛爾海德",
+      "Adelheid Kanzaki",
+      "AdelheidKanzaki",
+      "Adelheid",
+      "Kanzaki"
+    ],
+    "className": "31C",
+    "kind": "character",
+    "squad": "31c",
+    "portraitFile": "img_stand_05.png"
+  },
+  {
+    "characterId": "hbr_31c_06",
+    "name": "佐月麻里",
+    "fullName": "Mari Satsuki",
+    "fullNameChinese": "佐月麻里",
+    "aliases": [
+      "佐月麻里",
+      "Mari Satsuki",
+      "MariSatsuki",
+      "Mari",
+      "Satsuki"
+    ],
+    "className": "31C",
+    "kind": "character",
+    "squad": "31c",
+    "portraitFile": "img_stand_06.png"
+  },
+  {
+    "characterId": "hbr_30g_01",
+    "name": "白河结奈",
+    "fullName": "Yuina Shirakawa",
+    "fullNameChinese": "白河结奈",
+    "aliases": [
+      "白河结奈",
+      "白河結奈",
+      "Yuina Shirakawa",
+      "YuinaShirakawa",
+      "Yuina",
+      "Shirakawa"
+    ],
+    "className": "30G",
+    "kind": "character",
+    "squad": "30g",
+    "portraitFile": "img_stand_01.png"
+  },
+  {
+    "characterId": "hbr_30g_02",
+    "name": "月城最中",
+    "fullName": "Monaka Tsukishiro",
+    "fullNameChinese": "月城最中",
+    "aliases": [
+      "月城最中",
+      "Monaka Tsukishiro",
+      "MonakaTsukishiro",
+      "Monaka",
+      "Tsukishiro"
+    ],
+    "className": "30G",
+    "kind": "character",
+    "squad": "30g",
+    "portraitFile": "img_stand_02.png"
+  },
+  {
+    "characterId": "hbr_30g_03",
+    "name": "桐生美也",
+    "fullName": "Miya Kiryu",
+    "fullNameChinese": "桐生美也",
+    "aliases": [
+      "桐生美也",
+      "Miya Kiryu",
+      "MiyaKiryu",
+      "Miya",
+      "Kiryu"
+    ],
+    "className": "30G",
+    "kind": "character",
+    "squad": "30g",
+    "portraitFile": "img_stand_03.png"
+  },
+  {
+    "characterId": "hbr_30g_04",
+    "name": "菅原千惠",
+    "fullName": "Chie Sugawara",
+    "fullNameChinese": "菅原千惠",
+    "aliases": [
+      "菅原千惠",
+      "Chie Sugawara",
+      "ChieSugawara",
+      "Chie",
+      "Sugawara"
+    ],
+    "className": "30G",
+    "kind": "character",
+    "squad": "30g",
+    "portraitFile": "img_stand_04.png"
+  },
+  {
+    "characterId": "hbr_30g_05",
+    "name": "小笠原绯雨",
+    "fullName": "Hisame Ogasahara",
+    "fullNameChinese": "小笠原绯雨",
+    "aliases": [
+      "小笠原绯雨",
+      "小笠原緋雨",
+      "Hisame Ogasahara",
+      "HisameOgasahara",
+      "Hisame",
+      "Ogasahara"
+    ],
+    "className": "30G",
+    "kind": "character",
+    "squad": "30g",
+    "portraitFile": "img_stand_05.png"
+  },
+  {
+    "characterId": "hbr_30g_06",
+    "name": "藏里见",
+    "fullName": "Satomi Kura",
+    "fullNameChinese": "藏里见",
+    "aliases": [
+      "藏里见",
+      "藏里見",
+      "Satomi Kura",
+      "SatomiKura",
+      "Satomi",
+      "Kura"
+    ],
+    "className": "30G",
+    "kind": "character",
+    "squad": "30g",
+    "portraitFile": "img_stand_06.png"
+  },
+  {
+    "characterId": "hbr_31d_01",
+    "name": "二阶堂三乡",
+    "fullName": "Misato Nikaido",
+    "fullNameChinese": "二阶堂三乡",
+    "aliases": [
+      "二阶堂三乡",
+      "二階堂三鄉",
+      "Misato Nikaido",
+      "MisatoNikaido",
+      "Misato",
+      "Nikaido"
+    ],
+    "className": "31D",
+    "kind": "character",
+    "squad": "31d",
+    "portraitFile": "img_stand_01.png"
+  },
+  {
+    "characterId": "hbr_31d_02",
+    "name": "石井色叶",
+    "fullName": "Iroha Ishii",
+    "fullNameChinese": "石井色叶",
+    "aliases": [
+      "石井色叶",
+      "石井色葉",
+      "Iroha Ishii",
+      "IrohaIshii",
+      "Iroha",
+      "Ishii"
+    ],
+    "className": "31D",
+    "kind": "character",
+    "squad": "31d",
+    "portraitFile": "img_stand_02.png"
+  },
+  {
+    "characterId": "hbr_31d_03",
+    "name": "命吹雪",
+    "fullName": "Fubuki Mikoto",
+    "fullNameChinese": "命吹雪",
+    "aliases": [
+      "命吹雪",
+      "Fubuki Mikoto",
+      "FubukiMikoto",
+      "Fubuki",
+      "Mikoto"
+    ],
+    "className": "31D",
+    "kind": "character",
+    "squad": "31d",
+    "portraitFile": "img_stand_03.png"
+  },
+  {
+    "characterId": "hbr_31d_04",
+    "name": "室伏理沙",
+    "fullName": "Risa Murofushi",
+    "fullNameChinese": "室伏理沙",
+    "aliases": [
+      "室伏理沙",
+      "Risa Murofushi",
+      "RisaMurofushi",
+      "Risa",
+      "Murofushi"
+    ],
+    "className": "31D",
+    "kind": "character",
+    "squad": "31d",
+    "portraitFile": "img_stand_04.png"
+  },
+  {
+    "characterId": "hbr_31d_05",
+    "name": "伊达朱里",
+    "fullName": "Akari Date",
+    "fullNameChinese": "伊达朱里",
+    "aliases": [
+      "伊达朱里",
+      "伊達朱里",
+      "Akari Date",
+      "AkariDate",
+      "Akari",
+      "Date"
+    ],
+    "className": "31D",
+    "kind": "character",
+    "squad": "31d",
+    "portraitFile": "img_stand_05.png"
+  },
+  {
+    "characterId": "hbr_31d_06",
+    "name": "瑞原蓝娜",
+    "fullName": "Aina Mizuhara",
+    "fullNameChinese": "瑞原蓝娜",
+    "aliases": [
+      "瑞原蓝娜",
+      "瑞原藍娜",
+      "Aina Mizuhara",
+      "AinaMizuhara",
+      "Aina",
+      "Mizuhara"
+    ],
+    "className": "31D",
+    "kind": "character",
+    "squad": "31d",
+    "portraitFile": "img_stand_06.png"
+  },
+  {
+    "characterId": "hbr_31e_01",
+    "name": "大岛一千子",
+    "fullName": "Ichiko Ohshima",
+    "fullNameChinese": "大岛一千子",
+    "aliases": [
+      "大岛一千子",
+      "大島一千子",
+      "Ichiko Ohshima",
+      "IchikoOhshima",
+      "Ichiko",
+      "Ohshima"
+    ],
+    "className": "31E",
+    "kind": "character",
+    "squad": "31e",
+    "portraitFile": "img_stand_01.png"
+  },
+  {
+    "characterId": "hbr_31e_02",
+    "name": "大岛二以奈",
+    "fullName": "Niina Ohshima",
+    "fullNameChinese": "大岛二以奈",
+    "aliases": [
+      "大岛二以奈",
+      "大島二以奈",
+      "Niina Ohshima",
+      "NiinaOhshima",
+      "Niina",
+      "Ohshima"
+    ],
+    "className": "31E",
+    "kind": "character",
+    "squad": "31e",
+    "portraitFile": "img_stand_02.png"
+  },
+  {
+    "characterId": "hbr_31e_03",
+    "name": "大岛三野里",
+    "fullName": "Minori Ohshima",
+    "fullNameChinese": "大岛三野里",
+    "aliases": [
+      "大岛三野里",
+      "大島三野里",
+      "Minori Ohshima",
+      "MinoriOhshima",
+      "Minori",
+      "Ohshima"
+    ],
+    "className": "31E",
+    "kind": "character",
+    "squad": "31e",
+    "portraitFile": "img_stand_03.png"
+  },
+  {
+    "characterId": "hbr_31e_04",
+    "name": "大岛四叶草",
+    "fullName": "Yotsuha Ohshima",
+    "fullNameChinese": "大岛四叶草",
+    "aliases": [
+      "大岛四叶草",
+      "大島四葉草",
+      "Yotsuha Ohshima",
+      "YotsuhaOhshima",
+      "Yotsuha",
+      "Ohshima"
+    ],
+    "className": "31E",
+    "kind": "character",
+    "squad": "31e",
+    "portraitFile": "img_stand_04.png"
+  },
+  {
+    "characterId": "hbr_31e_05",
+    "name": "大岛五十铃",
+    "fullName": "Isuzu Ohshima",
+    "fullNameChinese": "大岛五十铃",
+    "aliases": [
+      "大岛五十铃",
+      "大島五十鈴",
+      "Isuzu Ohshima",
+      "IsuzuOhshima",
+      "Isuzu",
+      "Ohshima"
+    ],
+    "className": "31E",
+    "kind": "character",
+    "squad": "31e",
+    "portraitFile": "img_stand_05.png"
+  },
+  {
+    "characterId": "hbr_31e_06",
+    "name": "大岛六宇亚",
+    "fullName": "Muua Ohshima",
+    "fullNameChinese": "大岛六宇亚",
+    "aliases": [
+      "大岛六宇亚",
+      "大島六宇亞",
+      "Muua Ohshima",
+      "MuuaOhshima",
+      "Muua",
+      "Ohshima"
+    ],
+    "className": "31E",
+    "kind": "character",
+    "squad": "31e",
+    "portraitFile": "img_stand_06.png"
+  },
+  {
+    "characterId": "hbr_31f_01",
+    "name": "柳美音",
+    "fullName": "Mion Yanagi",
+    "fullNameChinese": "柳美音",
+    "aliases": [
+      "柳美音",
+      "Mion Yanagi",
+      "MionYanagi",
+      "Mion",
+      "Yanagi"
+    ],
+    "className": "31F",
+    "kind": "character",
+    "squad": "31f",
+    "portraitFile": "img_stand_01.png"
+  },
+  {
+    "characterId": "hbr_31f_02",
+    "name": "丸山奏多",
+    "fullName": "Kanata Maruyama",
+    "fullNameChinese": "丸山奏多",
+    "aliases": [
+      "丸山奏多",
+      "Kanata Maruyama",
+      "KanataMaruyama",
+      "Kanata",
+      "Maruyama"
+    ],
+    "className": "31F",
+    "kind": "character",
+    "squad": "31f",
+    "portraitFile": "img_stand_02.png"
+  },
+  {
+    "characterId": "hbr_31f_03",
+    "name": "华村诗纪",
+    "fullName": "Shiki Hanamura",
+    "fullNameChinese": "华村诗纪",
+    "aliases": [
+      "华村诗纪",
+      "華村詩紀",
+      "Shiki Hanamura",
+      "ShikiHanamura",
+      "Shiki",
+      "Hanamura"
+    ],
+    "className": "31F",
+    "kind": "character",
+    "squad": "31f",
+    "portraitFile": "img_stand_03.png"
+  },
+  {
+    "characterId": "hbr_31f_04",
+    "name": "松冈绮罗路",
+    "fullName": "Chiroru Matsuoka",
+    "fullNameChinese": "松冈绮罗路",
+    "aliases": [
+      "松冈绮罗路",
+      "松岡綺羅路",
+      "Chiroru Matsuoka",
+      "ChiroruMatsuoka",
+      "Chiroru",
+      "Matsuoka"
+    ],
+    "className": "31F",
+    "kind": "character",
+    "squad": "31f",
+    "portraitFile": "img_stand_04.png"
+  },
+  {
+    "characterId": "hbr_31f_05",
+    "name": "夏目祈",
+    "fullName": "Inori Natsume",
+    "fullNameChinese": "夏目祈",
+    "aliases": [
+      "夏目祈",
+      "Inori Natsume",
+      "InoriNatsume",
+      "Inori",
+      "Natsume"
+    ],
+    "className": "31F",
+    "kind": "character",
+    "squad": "31f",
+    "portraitFile": "img_stand_05.png"
+  },
+  {
+    "characterId": "hbr_31f_06",
+    "name": "黑泽真希",
+    "fullName": "Maki Kurosawa",
+    "fullNameChinese": "黑泽真希",
+    "aliases": [
+      "黑泽真希",
+      "黑澤真希",
+      "Maki Kurosawa",
+      "MakiKurosawa",
+      "Maki",
+      "Kurosawa"
+    ],
+    "className": "31F",
+    "kind": "character",
+    "squad": "31f",
+    "portraitFile": "img_stand_06.png"
+  },
+  {
+    "characterId": "hbr_31x_01",
+    "name": "卡罗尔·利帕",
+    "fullName": "Carole Reaper",
+    "fullNameChinese": "卡罗尔·利帕",
+    "aliases": [
+      "卡罗尔·利帕",
+      "卡羅爾‧利帕",
+      "Carole Reaper",
+      "卡罗尔利帕",
+      "卡羅爾利帕",
+      "CaroleReaper",
+      "Carole",
+      "Reaper"
+    ],
+    "className": "31X",
+    "kind": "character",
+    "squad": "31x",
+    "portraitFile": "img_stand_01.png"
+  },
+  {
+    "characterId": "hbr_31x_02",
+    "name": "李映夏",
+    "fullName": "Yingxia Li",
+    "fullNameChinese": "李映夏",
+    "aliases": [
+      "李映夏",
+      "Yingxia Li",
+      "YingxiaLi",
+      "Yingxia",
+      "Li"
+    ],
+    "className": "31X",
+    "kind": "character",
+    "squad": "31x",
+    "portraitFile": "img_stand_02.png"
+  },
+  {
+    "characterId": "hbr_31x_03",
+    "name": "艾琳·雷德梅因",
+    "fullName": "Irene Redmayne",
+    "fullNameChinese": "艾琳·雷德梅因",
+    "aliases": [
+      "艾琳·雷德梅因",
+      "艾琳‧雷德梅因",
+      "Irene Redmayne",
+      "艾琳雷德梅因",
+      "IreneRedmayne",
+      "Irene",
+      "Redmayne"
+    ],
+    "className": "31X",
+    "kind": "character",
+    "squad": "31x",
+    "portraitFile": "img_stand_03.png"
+  },
+  {
+    "characterId": "hbr_31x_04",
+    "name": "芙里提卡·巴拉克里希南",
+    "fullName": "Vritika Balakrishnan",
+    "fullNameChinese": "芙里提卡·巴拉克里希南",
+    "aliases": [
+      "芙里提卡·巴拉克里希南",
+      "芙里提卡‧巴拉克里希南",
+      "Vritika Balakrishnan",
+      "芙里提卡巴拉克里希南",
+      "VritikaBalakrishnan",
+      "Vritika",
+      "Balakrishnan"
+    ],
+    "className": "31X",
+    "kind": "character",
+    "squad": "31x",
+    "portraitFile": "img_stand_04.png"
+  },
+  {
+    "characterId": "hbr_31x_05",
+    "name": "玛丽亚·黛·安杰利斯",
+    "fullName": "Maria de Angelis",
+    "fullNameChinese": "玛丽亚·黛·安杰利斯",
+    "aliases": [
+      "玛丽亚·黛·安杰利斯",
+      "瑪麗亞‧黛‧安傑利斯",
+      "Maria de Angelis",
+      "玛丽亚黛安杰利斯",
+      "瑪麗亞黛安傑利斯",
+      "MariadeAngelis",
+      "Maria",
+      "Angelis"
+    ],
+    "className": "31X",
+    "kind": "character",
+    "squad": "31x",
+    "portraitFile": "img_stand_05.png"
+  },
+  {
+    "characterId": "hbr_31x_06",
+    "name": "夏洛特·斯可波夫斯加",
+    "fullName": "Charlotta Skopovskaya",
+    "fullNameChinese": "夏洛特·斯可波夫斯加",
+    "aliases": [
+      "夏洛特·斯可波夫斯加",
+      "夏洛特‧斯可波夫斯加",
+      "Charlotta Skopovskaya",
+      "夏洛特斯可波夫斯加",
+      "CharlottaSkopovskaya",
+      "Charlotta",
+      "Skopovskaya"
+    ],
+    "className": "31X",
+    "kind": "character",
+    "squad": "31x",
+    "portraitFile": "img_stand_06.png"
+  },
+  {
+    "characterId": "hbr_other_01",
+    "name": "手冢咲",
+    "fullName": "Saki Tezuka",
+    "fullNameChinese": "手冢咲",
+    "aliases": [
+      "手冢咲",
+      "手塚咲",
+      "Saki Tezuka",
+      "SakiTezuka",
+      "Saki",
+      "Tezuka"
+    ],
+    "className": "OTHER",
+    "kind": "character",
+    "squad": "other",
+    "portraitFile": "img_stand_01.png"
+  },
+  {
+    "characterId": "hbr_other_02",
+    "name": "七濑七海",
+    "fullName": "Nanami Nanase",
+    "fullNameChinese": "七濑七海",
+    "aliases": [
+      "七濑七海",
+      "七瀨七海",
+      "Nanami Nanase",
+      "NanamiNanase",
+      "Nanami",
+      "Nanase"
+    ],
+    "className": "OTHER",
+    "kind": "character",
+    "squad": "other",
+    "portraitFile": "img_stand_02.png"
+  },
+  {
+    "characterId": "hbr_other_03",
+    "name": "浅见真纪子",
+    "fullName": "Makiko Asami",
+    "fullNameChinese": "浅见真纪子",
+    "aliases": [
+      "浅见真纪子",
+      "淺見真紀子",
+      "Makiko Asami",
+      "MakikoAsami",
+      "Makiko",
+      "Asami"
+    ],
+    "className": "OTHER",
+    "kind": "character",
+    "squad": "other",
+    "portraitFile": "img_stand_03.png"
+  }
+]

@@ -1,4 +1,5 @@
 import asyncio
+import random
 import re
 import time
 from dataclasses import dataclass
@@ -32,13 +33,16 @@ MEMES_JSON_SOURCES: tuple[tuple[str, str], ...] = (
     ),
 )
 COMMAND = "菲比搜索"
+RANDOM_COMMAND = "随机菲比"
 MAX_RESULTS = 5
+MAX_RANDOM = 5
 MIN_SCORE = 30.0
 CACHE_TTL_SEC = 3600
 
 _HELP = (
     "菲比搜索用法：菲比搜索 <关键词>\n"
     "示例：菲比搜索 2000元烧鸡哈哈\n"
+    "随机：随机菲比 [数量]\n"
     "数据来源：Phoebe Hub (https://phoebehub.top/)"
 )
 
@@ -58,7 +62,7 @@ class SearchHit:
 
 class PhoebeSearch(NcatBotPlugin):
     name = "PhoebeSearch"
-    version = "1.0.0"
+    version = "1.1.0"
 
     timeout = 30
     session = requests.Session()
@@ -78,6 +82,11 @@ class PhoebeSearch(NcatBotPlugin):
     async def handle_phoebe_search(self, input: GroupMessage):
         message_text = self._get_message_text(input)
         if not message_text:
+            return
+
+        random_count = self._parse_random(message_text)
+        if random_count is not None:
+            await self._handle_random(input, random_count)
             return
 
         query = self._parse_query(message_text)
@@ -115,6 +124,55 @@ class PhoebeSearch(NcatBotPlugin):
                 PlainText(text=f"{idx}. {hit.meme.title} 相似度 {hit.score:.0f}%\n")
             )
             chain.append(Image(file=self._image_url(hit.meme.url)))
+
+        await self.api.qq.post_group_msg(
+            group_id=input.group_id,
+            rtf=MessageChain(chain),
+        )
+
+    async def _handle_random(self, input: GroupMessage, count: int) -> None:
+        if count <= 0:
+            await self.api.qq.post_group_msg(
+                group_id=input.group_id,
+                text="[Phoebe] 数量需为正整数，例如：随机菲比 3",
+            )
+            return
+        if count > MAX_RANDOM:
+            await self.api.qq.post_group_msg(
+                group_id=input.group_id,
+                text=f"[Phoebe] 一次最多抽取 {MAX_RANDOM} 条菲比",
+            )
+            return
+
+        try:
+            await self._ensure_memes()
+        except Exception as e:
+            _log.error(f"加载菲比数据失败: {e}", exc_info=True)
+            await self.api.qq.post_group_msg(
+                group_id=input.group_id,
+                text=f"[Phoebe] 菲比数据加载失败，请稍后再试: {e}",
+            )
+            return
+
+        if not self._memes:
+            await self.api.qq.post_group_msg(
+                group_id=input.group_id,
+                text="[Phoebe] 暂时没有可用的菲比图片",
+            )
+            return
+
+        picked = random.sample(self._memes, k=min(count, len(self._memes)))
+        if len(picked) == 1:
+            meme = picked[0]
+            chain: List[PlainText | Image] = [
+                PlainText(text=f"[Phoebe] 随机菲比：{meme.title}\n"),
+                Image(file=self._image_url(meme.url)),
+            ]
+        else:
+            chain = [PlainText(text=f"[Phoebe] 随机抽取 {len(picked)} 条菲比：\n")]
+            for idx, meme in enumerate(picked, start=1):
+                chain.append(PlainText(text=f"{idx}. {meme.title}\n"))
+                chain.append(Image(file=self._image_url(meme.url)))
 
         await self.api.qq.post_group_msg(
             group_id=input.group_id,
@@ -212,3 +270,19 @@ class PhoebeSearch(NcatBotPlugin):
         if query.lower() in ("help", "?", "帮助"):
             return ""
         return query
+
+    @staticmethod
+    def _parse_random(message_text: str) -> Optional[int]:
+        text = message_text.strip()
+        if text == RANDOM_COMMAND:
+            return 1
+        if text.startswith(RANDOM_COMMAND + " ") or text.startswith(
+            RANDOM_COMMAND + "\u3000"
+        ):
+            rest = text[len(RANDOM_COMMAND) :].strip()
+            if not rest:
+                return 1
+            if rest.isdigit():
+                return int(rest)
+            return 0
+        return None

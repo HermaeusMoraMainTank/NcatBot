@@ -6,7 +6,7 @@ import uuid
 from pathlib import Path
 from typing import Any
 
-from jinja2 import Environment, BaseLoader, select_autoescape
+from jinja2 import Environment, BaseLoader
 from ncatbot.utils import get_log
 
 _log = get_log()
@@ -33,7 +33,7 @@ async def render_custom_template(
 
     env = Environment(
         loader=BaseLoader(),
-        autoescape=select_autoescape(["html", "xml"]),
+        autoescape=False,  # 模板依赖 join("<br>") / 简介中的 HTML 换行
     )
     html = env.from_string(tmpl).render(**data)
 

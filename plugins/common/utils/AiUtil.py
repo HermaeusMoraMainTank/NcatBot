@@ -3,8 +3,9 @@ import asyncio
 import base64
 import json
 import os
+from io import BytesIO
 from pathlib import Path
-from typing import Any, List, Optional
+from typing import Any, List, Optional, Tuple
 from openai import AsyncOpenAI
 
 from ncatbot.utils.logger import get_log
@@ -40,8 +41,10 @@ DEEPSEEK_API_URL = "https://api.deepseek.com"
 DEEPSEEK_API_KEY = _load_secret("deepseek_api_key", "DEEPSEEK_API_KEY")
 DEEPSEEK_CHAT_MODEL = "deepseek-v4-flash"
 
-# 多模态模型
-VISION_MODEL = "meta/llama-4-maverick-17b-128e-instruct"
+# 多模态模型（llama-4-maverick 已于 2026-07-27 EOL）
+# 候选实测：kimi-k2.6 本账号 404；ministral-14b 同日 EOL；
+# nemotron-omni 可用；默认会 reasoning 偏慢，关闭 thinking 后约 1.5–3s。
+VISION_MODEL = "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning"
 
 # 文本对话（NVIDIA NIM OpenAI 兼容）：厂商前缀 + 模型名
 # CHAT_MODEL = "minimaxai/minimax-m2.7"  # 暂禁用：响应过慢
@@ -69,6 +72,73 @@ def _completion_to_result(completion: Any, model: str) -> dict:
     }
 
 
+def _detect_mime_type(image_data: bytes, content_type: str) -> str:
+    """根据响应头与文件头推断 MIME。"""
+    ct = (content_type or "").split(";")[0].strip().lower()
+    if ct.startswith("image/"):
+        return ct
+    head = image_data[:12]
+    if head.startswith((b"GIF87a", b"GIF89a")):
+        return "image/gif"
+    if head.startswith(b"\x89PNG\r\n\x1a\n"):
+        return "image/png"
+    if head.startswith(b"\xff\xd8\xff"):
+        return "image/jpeg"
+    if head[:4] == b"RIFF" and head[8:12] == b"WEBP":
+        return "image/webp"
+    return "image/jpeg"
+
+
+def _needs_vision_conversion(mime_type: str, image_data: bytes) -> bool:
+    mime = mime_type.lower()
+    if mime in ("image/gif", "image/webp"):
+        return True
+    return image_data[:6].startswith((b"GIF87a", b"GIF89a"))
+
+
+def _normalize_image_for_vision(image_data: bytes, mime_type: str) -> Tuple[bytes, str]:
+    """Vision API 不支持 GIF/WebP，转为 JPEG（动图取首帧）。"""
+    if not _needs_vision_conversion(mime_type, image_data):
+        return image_data, mime_type
+
+    try:
+        from PIL import Image as PILImage
+    except ImportError:
+        _log.warning("[Vision] 未安装 Pillow，无法转换 GIF/WebP")
+        return image_data, mime_type
+
+    with PILImage.open(BytesIO(image_data)) as img:
+        if getattr(img, "is_animated", False):
+            img.seek(0)
+        frame = img
+        if frame.mode in ("RGBA", "LA"):
+            if frame.getchannel("A").getextrema() != (255, 255):
+                background = PILImage.new("RGB", frame.size, (255, 255, 255))
+                background.paste(frame, mask=frame.split()[-1])
+                frame = background
+            else:
+                frame = frame.convert("RGB")
+        elif frame.mode == "P":
+            if "transparency" in frame.info:
+                frame = frame.convert("RGBA")
+                background = PILImage.new("RGB", frame.size, (255, 255, 255))
+                background.paste(frame, mask=frame.split()[-1])
+                frame = background
+            else:
+                frame = frame.convert("RGB")
+        elif frame.mode != "RGB":
+            frame = frame.convert("RGB")
+
+        buf = BytesIO()
+        frame.save(buf, format="JPEG", quality=85)
+        out = buf.getvalue()
+
+    _log.info(
+        f"[Vision] 图片已转为 JPEG，大小: {len(out)} bytes (原 {mime_type})"
+    )
+    return out, "image/jpeg"
+
+
 class AiUtil:
     @staticmethod
     async def download_image_as_base64(url: str) -> Optional[str]:
@@ -85,18 +155,15 @@ class AiUtil:
                 async with session.get(url, timeout=30) as response:
                     if response.status == 200:
                         image_data = await response.read()
-                        # 根据 Content-Type 确定图片类型
-                        content_type = response.headers.get(
-                            "Content-Type", "image/jpeg"
-                        )
-                        if "png" in content_type:
-                            mime_type = "image/png"
-                        elif "gif" in content_type:
-                            mime_type = "image/gif"
-                        elif "webp" in content_type:
-                            mime_type = "image/webp"
-                        else:
-                            mime_type = "image/jpeg"
+                        content_type = response.headers.get("Content-Type", "")
+                        mime_type = _detect_mime_type(image_data, content_type)
+                        try:
+                            image_data, mime_type = await asyncio.to_thread(
+                                _normalize_image_for_vision, image_data, mime_type
+                            )
+                        except Exception as e:
+                            _log.error(f"[Vision] 图片格式转换失败: {e}")
+                            return None
 
                         b64_str = base64.b64encode(image_data).decode("utf-8")
                         _log.info(
@@ -275,7 +342,7 @@ class AiUtil:
         max_tokens: int = 2048,
         temperature: float = 0.7,
     ) -> Optional[dict]:
-        """多模态模型调用 - 使用 Llama 3.2 90B Vision
+        """多模态模型调用（NVIDIA NIM Vision / Omni）
 
         Args:
             prompt: 用户提问文本
@@ -330,6 +397,10 @@ class AiUtil:
                     temperature=temperature,
                     stream=False,
                     timeout=45.0,
+                    # Nemotron Omni 默认会先 reasoning，关闭后延迟从 ~13s 降到 ~2s
+                    extra_body={
+                        "chat_template_kwargs": {"enable_thinking": False}
+                    },
                 )
 
             result = _completion_to_result(completion, VISION_MODEL)

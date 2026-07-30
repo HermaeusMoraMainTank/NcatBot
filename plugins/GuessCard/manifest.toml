@@ -3,7 +3,7 @@ version = "2.0.0"
 main = "GuessCard.py"
 entry_class = "GuessCard"
 author = "慵懒午睡 / NcatBot"
-description = "多游戏猜卡面（默认 PJSK，支持 FGO 等卡池）"
+description = "多游戏猜卡面（含 FF14 Boss / 武士刀等卡池）"
 
 [dependencies]
 

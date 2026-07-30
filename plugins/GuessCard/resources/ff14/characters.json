@@ -1,0 +1,1798 @@
+[
+  {
+    "characterId": "b2832",
+    "name": "拉姆",
+    "fullName": "Ramuh",
+    "fullNameChinese": "拉姆",
+    "fullNameJapanese": "ラムウ",
+    "aliases": [
+      "拉姆",
+      "Ramuh",
+      "ラムウ"
+    ],
+    "className": "零式",
+    "sources": [
+      "拉姆歼殛战",
+      "伊甸零式希望乐园 共鸣之章1"
+    ]
+  },
+  {
+    "characterId": "b1644",
+    "name": "迦楼罗",
+    "fullName": "Garuda",
+    "fullNameChinese": "迦楼罗",
+    "fullNameJapanese": "ガルーダ",
+    "aliases": [
+      "迦楼罗",
+      "Garuda",
+      "ガルーダ"
+    ],
+    "className": "绝境战",
+    "sources": [
+      "迦楼罗歼殛战",
+      "伊甸零式希望乐园 共鸣之章2",
+      "究极神兵绝境战"
+    ]
+  },
+  {
+    "characterId": "b1801",
+    "name": "泰坦",
+    "fullName": "Titan",
+    "fullNameChinese": "泰坦",
+    "fullNameJapanese": "タイタン",
+    "aliases": [
+      "泰坦",
+      "Titan",
+      "タイタン"
+    ],
+    "className": "绝境战",
+    "sources": [
+      "泰坦歼殛战",
+      "伊甸零式希望乐园 觉醒之章4",
+      "究极神兵绝境战"
+    ]
+  },
+  {
+    "characterId": "b1185",
+    "name": "伊弗利特",
+    "fullName": "Ifrit",
+    "fullNameChinese": "伊弗利特",
+    "fullNameJapanese": "イフリート",
+    "aliases": [
+      "伊弗利特",
+      "Ifrit",
+      "イフリート"
+    ],
+    "className": "绝境战",
+    "sources": [
+      "伊弗利特歼殛战",
+      "伊甸零式希望乐园 共鸣之章2",
+      "究极神兵绝境战"
+    ]
+  },
+  {
+    "characterId": "b2752",
+    "name": "贤王莫古尔·莫古十二世",
+    "fullName": "Good King Moggle Mog XII",
+    "fullNameChinese": "贤王莫古尔·莫古十二世",
+    "fullNameJapanese": "善王モグル・モグXII世",
+    "aliases": [
+      "贤王莫古尔·莫古十二世",
+      "Good King Moggle Mog XII",
+      "善王モグル・モグXII世",
+      "GoodKingMoggleMogXII"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "莫古力贤王歼殛战"
+    ]
+  },
+  {
+    "characterId": "b2505",
+    "name": "利维亚桑",
+    "fullName": "Leviathan",
+    "fullNameChinese": "利维亚桑",
+    "fullNameJapanese": "リヴァイアサン",
+    "aliases": [
+      "利维亚桑",
+      "Leviathan",
+      "リヴァイアサン"
+    ],
+    "className": "零式",
+    "sources": [
+      "利维亚桑歼殛战",
+      "伊甸零式希望乐园 觉醒之章3"
+    ]
+  },
+  {
+    "characterId": "b2994",
+    "name": "希瓦",
+    "fullName": "Shiva",
+    "fullNameChinese": "希瓦",
+    "fullNameJapanese": "シヴァ",
+    "aliases": [
+      "希瓦",
+      "Shiva",
+      "シヴァ"
+    ],
+    "className": "零式",
+    "sources": [
+      "希瓦歼殛战",
+      "伊甸零式希望乐园 共鸣之章4"
+    ]
+  },
+  {
+    "characterId": "b3660",
+    "name": "罗波那",
+    "fullName": "Ravana",
+    "fullNameChinese": "罗波那",
+    "fullNameJapanese": "ラーヴァナ",
+    "aliases": [
+      "罗波那",
+      "Ravana",
+      "ラーヴァナ"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "罗波那歼殛战"
+    ]
+  },
+  {
+    "characterId": "b4776",
+    "name": "萨菲洛特",
+    "fullName": "Sephirot",
+    "fullNameChinese": "萨菲洛特",
+    "fullNameJapanese": "セフィロト",
+    "aliases": [
+      "萨菲洛特",
+      "Sephirot",
+      "セフィロト"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "萨菲洛特歼殛战"
+    ]
+  },
+  {
+    "characterId": "b5199",
+    "name": "索菲娅",
+    "fullName": "Sophia",
+    "fullNameChinese": "索菲娅",
+    "fullNameJapanese": "ソフィア",
+    "aliases": [
+      "索菲娅",
+      "Sophia",
+      "ソフィア"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "索菲娅歼殛战"
+    ]
+  },
+  {
+    "characterId": "b5567",
+    "name": "祖尔宛",
+    "fullName": "Zurvan",
+    "fullNameChinese": "祖尔宛",
+    "fullNameJapanese": "ズルワーン",
+    "aliases": [
+      "祖尔宛",
+      "Zurvan",
+      "ズルワーン"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "祖尔宛歼殛战"
+    ]
+  },
+  {
+    "characterId": "b6221",
+    "name": "须佐之男",
+    "fullName": "Susano",
+    "fullNameChinese": "须佐之男",
+    "fullNameJapanese": "スサノオ",
+    "aliases": [
+      "须佐之男",
+      "Susano",
+      "スサノオ"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "须佐之男歼殛战"
+    ]
+  },
+  {
+    "characterId": "b8361",
+    "name": "缇坦妮雅",
+    "fullName": "Titania",
+    "fullNameChinese": "缇坦妮雅",
+    "fullNameJapanese": "ティターニア",
+    "aliases": [
+      "缇坦妮雅",
+      "Titania",
+      "ティターニア"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "缇坦妮雅歼殛战"
+    ]
+  },
+  {
+    "characterId": "b8297",
+    "name": "无瑕灵君",
+    "fullName": "Innocence",
+    "fullNameChinese": "无瑕灵君",
+    "fullNameJapanese": "イノセンス",
+    "aliases": [
+      "无瑕灵君",
+      "Innocence",
+      "イノセンス"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "无瑕灵君歼殛战"
+    ]
+  },
+  {
+    "characterId": "b10298",
+    "name": "巴尔巴莉希娅",
+    "fullName": "Barbariccia",
+    "fullNameChinese": "巴尔巴莉希娅",
+    "fullNameJapanese": "バルバリシア",
+    "aliases": [
+      "巴尔巴莉希娅",
+      "Barbariccia",
+      "バルバリシア"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "巴尔巴莉希娅歼殛战"
+    ]
+  },
+  {
+    "characterId": "b12054",
+    "name": "卢比坎特",
+    "fullName": "Rubicante",
+    "fullNameChinese": "卢比坎特",
+    "fullNameJapanese": "ルビカンテ",
+    "aliases": [
+      "卢比坎特",
+      "Rubicante",
+      "ルビカンテ"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "卢比坎特歼殛战"
+    ]
+  },
+  {
+    "characterId": "b12365",
+    "name": "高贝扎",
+    "fullName": "高贝扎",
+    "fullNameChinese": "高贝扎",
+    "fullNameJapanese": "",
+    "aliases": [
+      "高贝扎"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "高贝扎歼殛战"
+    ]
+  },
+  {
+    "characterId": "b12586",
+    "name": "泽罗姆斯",
+    "fullName": "Zeromus",
+    "fullNameChinese": "泽罗姆斯",
+    "fullNameJapanese": "ゼロムス",
+    "aliases": [
+      "泽罗姆斯",
+      "Zeromus",
+      "ゼロムス"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "泽罗姆斯歼殛战"
+    ]
+  },
+  {
+    "characterId": "b12854",
+    "name": "艳翼蛇鸟",
+    "fullName": "Valigarmanda",
+    "fullNameChinese": "艳翼蛇鸟",
+    "fullNameJapanese": "ヴァリガルマンダ",
+    "aliases": [
+      "艳翼蛇鸟",
+      "Valigarmanda",
+      "ヴァリガルマンダ"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "艳翼蛇鸟歼殛战"
+    ]
+  },
+  {
+    "characterId": "b12739",
+    "name": "佐拉加",
+    "fullName": "佐拉加",
+    "fullNameChinese": "佐拉加",
+    "fullNameJapanese": "",
+    "aliases": [
+      "佐拉加"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "佐拉加歼殛战"
+    ]
+  },
+  {
+    "characterId": "b13861",
+    "name": "泽莲尼娅",
+    "fullName": "Zelenia",
+    "fullNameChinese": "泽莲尼娅",
+    "fullNameJapanese": "ゼレニア",
+    "aliases": [
+      "泽莲尼娅",
+      "Zelenia",
+      "ゼレニア"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "泽莲尼娅歼殛战"
+    ]
+  },
+  {
+    "characterId": "b14284",
+    "name": "格莱杨拉波尔",
+    "fullName": "Doomtrain",
+    "fullNameChinese": "格莱杨拉波尔",
+    "fullNameJapanese": "グラシャラボラス",
+    "aliases": [
+      "格莱杨拉波尔",
+      "Doomtrain",
+      "グラシャラボラス"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "格莱杨拉波尔歼殛战"
+    ]
+  },
+  {
+    "characterId": "b14749",
+    "name": "恩欧",
+    "fullName": "Enuo",
+    "fullNameChinese": "恩欧",
+    "fullNameJapanese": "エヌオー",
+    "aliases": [
+      "恩欧",
+      "Enuo",
+      "エヌオー"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "恩欧歼殛战"
+    ]
+  },
+  {
+    "characterId": "b887",
+    "name": "奥丁",
+    "fullName": "Odin",
+    "fullNameChinese": "奥丁",
+    "fullNameJapanese": "オーディン",
+    "aliases": [
+      "奥丁",
+      "Odin",
+      "オーディン"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "奥丁歼灭战"
+    ]
+  },
+  {
+    "characterId": "b3632",
+    "name": "骑神托尔丹",
+    "fullName": "King Thordan",
+    "fullNameChinese": "骑神托尔丹",
+    "fullNameJapanese": "騎神トールダン",
+    "aliases": [
+      "骑神托尔丹",
+      "King Thordan",
+      "騎神トールダン",
+      "KingThordan"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "圆桌骑士歼灭战",
+      "圆桌骑士幻想歼灭战"
+    ]
+  },
+  {
+    "characterId": "b5640",
+    "name": "神龙",
+    "fullName": "Shinryu",
+    "fullNameChinese": "神龙",
+    "fullNameJapanese": "神龍",
+    "aliases": [
+      "神龙",
+      "Shinryu",
+      "神龍"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "神龙歼灭战",
+      "神龙梦幻歼灭战"
+    ]
+  },
+  {
+    "characterId": "b7225",
+    "name": "月读",
+    "fullName": "Tsukuyomi",
+    "fullNameChinese": "月读",
+    "fullNameJapanese": "ツクヨミ",
+    "aliases": [
+      "月读",
+      "Tsukuyomi",
+      "ツクヨミ"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "月读歼灭战",
+      "月读幽夜歼灭战"
+    ]
+  },
+  {
+    "characterId": "b6089",
+    "name": "保镖",
+    "fullName": "保镖",
+    "fullNameChinese": "保镖",
+    "fullNameJapanese": "",
+    "aliases": [
+      "保镖"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "保镖歼灭战"
+    ]
+  },
+  {
+    "characterId": "b9462",
+    "name": "光之战士",
+    "fullName": "光之战士",
+    "fullNameChinese": "光之战士",
+    "fullNameJapanese": "",
+    "aliases": [
+      "光之战士"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "光之战士歼灭战",
+      "光之战士幻耀歼灭战"
+    ]
+  },
+  {
+    "characterId": "b10456",
+    "name": "佐迪亚克",
+    "fullName": "Zodiark",
+    "fullNameChinese": "佐迪亚克",
+    "fullNameJapanese": "ゾディアーク",
+    "aliases": [
+      "佐迪亚克",
+      "Zodiark",
+      "ゾディアーク"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "佐迪亚克歼灭战",
+      "佐迪亚克暝暗歼灭战"
+    ]
+  },
+  {
+    "characterId": "b2183",
+    "name": "海德林",
+    "fullName": "Hydaelyn",
+    "fullNameChinese": "海德林",
+    "fullNameJapanese": "ハイデリン",
+    "aliases": [
+      "海德林",
+      "Hydaelyn",
+      "ハイデリン"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "海德林歼灭战",
+      "海德林晖光歼灭战"
+    ]
+  },
+  {
+    "characterId": "b12351",
+    "name": "阿修罗",
+    "fullName": "Asura",
+    "fullNameChinese": "阿修罗",
+    "fullNameJapanese": "アスラ",
+    "aliases": [
+      "阿修罗",
+      "Asura",
+      "アスラ"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "阿修罗歼灭战"
+    ]
+  },
+  {
+    "characterId": "b13029",
+    "name": "永恒女王",
+    "fullName": "Queen Eternal",
+    "fullNameChinese": "永恒女王",
+    "fullNameJapanese": "エターナルクイーン",
+    "aliases": [
+      "永恒女王",
+      "Queen Eternal",
+      "エターナルクイーン",
+      "QueenEternal"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "永恒女王歼灭战",
+      "永恒女王忆想歼灭战"
+    ]
+  },
+  {
+    "characterId": "b14093",
+    "name": "永远之暗",
+    "fullName": "Necron",
+    "fullNameChinese": "永远之暗",
+    "fullNameJapanese": "永遠の闇",
+    "aliases": [
+      "永远之暗",
+      "Necron",
+      "永遠の闇"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "永远之暗歼灭战",
+      "永远之暗悲惶歼灭战"
+    ]
+  },
+  {
+    "characterId": "b14037",
+    "name": "卓异的悲寂",
+    "fullName": "Eminent Grief",
+    "fullNameChinese": "卓异的悲寂",
+    "fullNameJapanese": "エミネントグリーフ",
+    "aliases": [
+      "卓异的悲寂",
+      "Eminent Grief",
+      "エミネントグリーフ",
+      "EminentGrief"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "卓异的悲寂歼灭战"
+    ]
+  },
+  {
+    "characterId": "b2609",
+    "name": "大王花",
+    "fullName": "Rafflesia",
+    "fullNameChinese": "大王花",
+    "fullNameJapanese": "ラフレシア",
+    "aliases": [
+      "大王花",
+      "Rafflesia",
+      "ラフレシア"
+    ],
+    "className": "零式",
+    "sources": [
+      "巴哈姆特零式大迷宫 入侵之章1"
+    ]
+  },
+  {
+    "characterId": "b2610",
+    "name": "美瑠姬奴",
+    "fullName": "Melusine",
+    "fullNameChinese": "美瑠姬奴",
+    "fullNameJapanese": "メリュジーヌ",
+    "aliases": [
+      "美瑠姬奴",
+      "Melusine",
+      "メリュジーヌ"
+    ],
+    "className": "零式",
+    "sources": [
+      "巴哈姆特零式大迷宫 入侵之章2"
+    ]
+  },
+  {
+    "characterId": "b2611",
+    "name": "降世化身",
+    "fullName": "The Avatar",
+    "fullNameChinese": "降世化身",
+    "fullNameJapanese": "アバター",
+    "aliases": [
+      "降世化身",
+      "The Avatar",
+      "アバター",
+      "TheAvatar"
+    ],
+    "className": "零式",
+    "sources": [
+      "巴哈姆特零式大迷宫 入侵之章3"
+    ]
+  },
+  {
+    "characterId": "b3747",
+    "name": "压迫者",
+    "fullName": "Oppressor",
+    "fullNameChinese": "压迫者",
+    "fullNameJapanese": "オプレッサー",
+    "aliases": [
+      "压迫者",
+      "Oppressor",
+      "オプレッサー"
+    ],
+    "className": "零式",
+    "sources": [
+      "亚历山大零式机神城 启动之章1"
+    ]
+  },
+  {
+    "characterId": "b3760",
+    "name": "9号哥布林黑寡妇",
+    "fullName": "Magitek Gobwidow G-IX",
+    "fullNameChinese": "9号哥布林黑寡妇",
+    "fullNameJapanese": "IX号ゴブリウィドー",
+    "aliases": [
+      "9号哥布林黑寡妇",
+      "Magitek Gobwidow G-IX",
+      "IX号ゴブリウィドー",
+      "MagitekGobwidowGIX"
+    ],
+    "className": "零式",
+    "sources": [
+      "亚历山大零式机神城 启动之章2"
+    ]
+  },
+  {
+    "characterId": "b3765",
+    "name": "有生命活水",
+    "fullName": "Living Liquid",
+    "fullNameChinese": "有生命活水",
+    "fullNameJapanese": "リビングリキッド",
+    "aliases": [
+      "有生命活水",
+      "Living Liquid",
+      "リビングリキッド",
+      "LivingLiquid"
+    ],
+    "className": "绝境战",
+    "sources": [
+      "亚历山大零式机神城 启动之章3",
+      "亚历山大绝境战"
+    ]
+  },
+  {
+    "characterId": "b3772",
+    "name": "操纵者",
+    "fullName": "The Manipulator",
+    "fullNameChinese": "操纵者",
+    "fullNameJapanese": "マニピュレーター",
+    "aliases": [
+      "操纵者",
+      "The Manipulator",
+      "マニピュレーター",
+      "TheManipulator"
+    ],
+    "className": "零式",
+    "sources": [
+      "亚历山大零式机神城 启动之章4"
+    ]
+  },
+  {
+    "characterId": "b4687",
+    "name": "奇才 拉特芬克斯",
+    "fullName": "Ratfinx Twinkledinks",
+    "fullNameChinese": "奇才 拉特芬克斯",
+    "fullNameJapanese": "奇才のラットフィンクス",
+    "aliases": [
+      "奇才 拉特芬克斯",
+      "Ratfinx Twinkledinks",
+      "奇才のラットフィンクス",
+      "RatfinxTwinkledinks"
+    ],
+    "className": "零式",
+    "sources": [
+      "亚历山大零式机神城 律动之章1"
+    ]
+  },
+  {
+    "characterId": "b4705",
+    "name": "欺诈者",
+    "fullName": "Swindler",
+    "fullNameChinese": "欺诈者",
+    "fullNameJapanese": "スウィンドラー",
+    "aliases": [
+      "欺诈者",
+      "Swindler",
+      "スウィンドラー"
+    ],
+    "className": "零式",
+    "sources": [
+      "亚历山大零式机神城 律动之章2",
+      "亚历山大零式机神城 律动之章4"
+    ]
+  },
+  {
+    "characterId": "b4699",
+    "name": "爆破者",
+    "fullName": "Blaster",
+    "fullNameChinese": "爆破者",
+    "fullNameJapanese": "ブラスター",
+    "aliases": [
+      "爆破者",
+      "Blaster",
+      "ブラスター"
+    ],
+    "className": "零式",
+    "sources": [
+      "亚历山大零式机神城 律动之章2",
+      "亚历山大零式机神城 律动之章4"
+    ]
+  },
+  {
+    "characterId": "b4703",
+    "name": "争斗者",
+    "fullName": "Brawler",
+    "fullNameChinese": "争斗者",
+    "fullNameJapanese": "ブロウラー",
+    "aliases": [
+      "争斗者",
+      "Brawler",
+      "ブロウラー"
+    ],
+    "className": "零式",
+    "sources": [
+      "亚历山大零式机神城 律动之章2",
+      "亚历山大零式机神城 律动之章4"
+    ]
+  },
+  {
+    "characterId": "b4706",
+    "name": "环旋者",
+    "fullName": "Vortexer",
+    "fullNameChinese": "环旋者",
+    "fullNameJapanese": "ボルテッカー",
+    "aliases": [
+      "环旋者",
+      "Vortexer",
+      "ボルテッカー"
+    ],
+    "className": "零式",
+    "sources": [
+      "亚历山大零式机神城 律动之章2",
+      "亚历山大零式机神城 律动之章4"
+    ]
+  },
+  {
+    "characterId": "b4708",
+    "name": "残暴正义号",
+    "fullName": "Brute Justice",
+    "fullNameChinese": "残暴正义号",
+    "fullNameJapanese": "ブルートジャスティス",
+    "aliases": [
+      "残暴正义号",
+      "Brute Justice",
+      "ブルートジャスティス",
+      "BruteJustice"
+    ],
+    "className": "绝境战",
+    "sources": [
+      "亚历山大零式机神城 律动之章4",
+      "亚历山大绝境战"
+    ]
+  },
+  {
+    "characterId": "b4707",
+    "name": "突击者",
+    "fullName": "Onslaughter",
+    "fullNameChinese": "突击者",
+    "fullNameJapanese": "オンスローター",
+    "aliases": [
+      "突击者",
+      "Onslaughter",
+      "オンスローター"
+    ],
+    "className": "零式",
+    "sources": [
+      "亚历山大零式机神城 律动之章4"
+    ]
+  },
+  {
+    "characterId": "b5170",
+    "name": "废品翻新装置",
+    "fullName": "Refurbisher 0",
+    "fullNameChinese": "废品翻新装置",
+    "fullNameJapanese": "リファビッシャー",
+    "aliases": [
+      "废品翻新装置",
+      "Refurbisher 0",
+      "リファビッシャー",
+      "Refurbisher0"
+    ],
+    "className": "零式",
+    "sources": [
+      "亚历山大零式机神城 天动之章1"
+    ]
+  },
+  {
+    "characterId": "b5180",
+    "name": "佣兵雷姆普里克斯",
+    "fullName": "Lamebrix Strikebocks",
+    "fullNameChinese": "佣兵雷姆普里克斯",
+    "fullNameJapanese": "傭兵のレイムプリクス",
+    "aliases": [
+      "佣兵雷姆普里克斯",
+      "Lamebrix Strikebocks",
+      "傭兵のレイムプリクス",
+      "LamebrixStrikebocks"
+    ],
+    "className": "零式",
+    "sources": [
+      "亚历山大零式机神城 天动之章2"
+    ]
+  },
+  {
+    "characterId": "b5186",
+    "name": "巡航驱逐者",
+    "fullName": "Cruise Chaser",
+    "fullNameChinese": "巡航驱逐者",
+    "fullNameJapanese": "クルーズチェイサー",
+    "aliases": [
+      "巡航驱逐者",
+      "Cruise Chaser",
+      "クルーズチェイサー",
+      "CruiseChaser"
+    ],
+    "className": "绝境战",
+    "sources": [
+      "亚历山大零式机神城 天动之章3",
+      "亚历山大绝境战"
+    ]
+  },
+  {
+    "characterId": "b5193",
+    "name": "至尊亚历山大",
+    "fullName": "Alexander Prime",
+    "fullNameChinese": "至尊亚历山大",
+    "fullNameJapanese": "アレキサンダー・プライム",
+    "aliases": [
+      "至尊亚历山大",
+      "Alexander Prime",
+      "アレキサンダー・プライム",
+      "AlexanderPrime"
+    ],
+    "className": "绝境战",
+    "sources": [
+      "亚历山大零式机神城 天动之章4",
+      "亚历山大绝境战"
+    ]
+  },
+  {
+    "characterId": "b5629",
+    "name": "老者",
+    "fullName": "Alte Roite",
+    "fullNameChinese": "老者",
+    "fullNameJapanese": "アルテ・ロイテ",
+    "aliases": [
+      "老者",
+      "Alte Roite",
+      "アルテ・ロイテ",
+      "AlteRoite"
+    ],
+    "className": "零式",
+    "sources": [
+      "欧米茄零式时空狭缝 德尔塔幻境1"
+    ]
+  },
+  {
+    "characterId": "b5631",
+    "name": "灾变者",
+    "fullName": "Catastrophe",
+    "fullNameChinese": "灾变者",
+    "fullNameJapanese": "カタストロフィー",
+    "aliases": [
+      "灾变者",
+      "Catastrophe",
+      "カタストロフィー"
+    ],
+    "className": "零式",
+    "sources": [
+      "欧米茄零式时空狭缝 德尔塔幻境2"
+    ]
+  },
+  {
+    "characterId": "b2346",
+    "name": "哈利卡纳苏斯",
+    "fullName": "Halicarnassus",
+    "fullNameChinese": "哈利卡纳苏斯",
+    "fullNameJapanese": "ハリカルナッソス",
+    "aliases": [
+      "哈利卡纳苏斯",
+      "Halicarnassus",
+      "ハリカルナッソス"
+    ],
+    "className": "零式",
+    "sources": [
+      "欧米茄零式时空狭缝 德尔塔幻境3"
+    ]
+  },
+  {
+    "characterId": "b6052",
+    "name": "艾克斯迪司",
+    "fullName": "艾克斯迪司",
+    "fullNameChinese": "艾克斯迪司",
+    "fullNameJapanese": "",
+    "aliases": [
+      "艾克斯迪司"
+    ],
+    "className": "零式",
+    "sources": [
+      "欧米茄零式时空狭缝 德尔塔幻境4"
+    ]
+  },
+  {
+    "characterId": "b7127",
+    "name": "魔列车",
+    "fullName": "Phantom Train",
+    "fullNameChinese": "魔列车",
+    "fullNameJapanese": "魔列車",
+    "aliases": [
+      "魔列车",
+      "Phantom Train",
+      "魔列車",
+      "PhantomTrain"
+    ],
+    "className": "零式",
+    "sources": [
+      "欧米茄零式时空狭缝 西格玛幻境1"
+    ]
+  },
+  {
+    "characterId": "b7107",
+    "name": "守护者",
+    "fullName": "Guardian",
+    "fullNameChinese": "守护者",
+    "fullNameJapanese": "ガーディアン",
+    "aliases": [
+      "守护者",
+      "Guardian",
+      "ガーディアン"
+    ],
+    "className": "零式",
+    "sources": [
+      "欧米茄零式时空狭缝 西格玛幻境3"
+    ]
+  },
+  {
+    "characterId": "b7131",
+    "name": "凯夫卡",
+    "fullName": "Kefka",
+    "fullNameChinese": "凯夫卡",
+    "fullNameJapanese": "ケフカ",
+    "aliases": [
+      "凯夫卡",
+      "Kefka",
+      "ケフカ"
+    ],
+    "className": "绝境战",
+    "sources": [
+      "欧米茄零式时空狭缝 西格玛幻境4",
+      "妖星乱舞绝境战"
+    ]
+  },
+  {
+    "characterId": "b7691",
+    "name": "卡奥斯",
+    "fullName": "Chaos",
+    "fullNameChinese": "卡奥斯",
+    "fullNameJapanese": "カオス",
+    "aliases": [
+      "卡奥斯",
+      "Chaos",
+      "カオス"
+    ],
+    "className": "零式",
+    "sources": [
+      "欧米茄零式时空狭缝 阿尔法幻境1"
+    ]
+  },
+  {
+    "characterId": "b3374",
+    "name": "尘世幻龙",
+    "fullName": "尘世幻龙",
+    "fullNameChinese": "尘世幻龙",
+    "fullNameJapanese": "",
+    "aliases": [
+      "尘世幻龙"
+    ],
+    "className": "零式",
+    "sources": [
+      "欧米茄零式时空狭缝 阿尔法幻境2"
+    ]
+  },
+  {
+    "characterId": "b7635",
+    "name": "欧米茄",
+    "fullName": "欧米茄",
+    "fullNameChinese": "欧米茄",
+    "fullNameJapanese": "",
+    "aliases": [
+      "欧米茄"
+    ],
+    "className": "零式",
+    "sources": [
+      "欧米茄零式时空狭缝 阿尔法幻境3",
+      "欧米茄零式时空狭缝 阿尔法幻境4"
+    ]
+  },
+  {
+    "characterId": "b8345",
+    "name": "至尊伊甸",
+    "fullName": "Eden Prime",
+    "fullNameChinese": "至尊伊甸",
+    "fullNameJapanese": "エデン·プライム",
+    "aliases": [
+      "至尊伊甸",
+      "Eden Prime",
+      "エデン·プライム",
+      "EdenPrime"
+    ],
+    "className": "零式",
+    "sources": [
+      "伊甸零式希望乐园 觉醒之章1"
+    ]
+  },
+  {
+    "characterId": "b8382",
+    "name": "虚无行者",
+    "fullName": "Voidwalker",
+    "fullNameChinese": "虚无行者",
+    "fullNameJapanese": "ヴォイドウォーカー",
+    "aliases": [
+      "虚无行者",
+      "Voidwalker",
+      "ヴォイドウォーカー"
+    ],
+    "className": "零式",
+    "sources": [
+      "伊甸零式希望乐园 觉醒之章2"
+    ]
+  },
+  {
+    "characterId": "b9289",
+    "name": "赤翼罗羯坨博叉",
+    "fullName": "Raktapaksa",
+    "fullNameChinese": "赤翼罗羯坨博叉",
+    "fullNameJapanese": "ラクタパクシャ",
+    "aliases": [
+      "赤翼罗羯坨博叉",
+      "Raktapaksa",
+      "ラクタパクシャ"
+    ],
+    "className": "零式",
+    "sources": [
+      "伊甸零式希望乐园 共鸣之章2"
+    ]
+  },
+  {
+    "characterId": "b9298",
+    "name": "暗黑心象",
+    "fullName": "The Idol of Darkness",
+    "fullNameChinese": "暗黑心象",
+    "fullNameJapanese": "ダークアイドル",
+    "aliases": [
+      "暗黑心象",
+      "The Idol of Darkness",
+      "ダークアイドル",
+      "TheIdolofDarkness"
+    ],
+    "className": "零式",
+    "sources": [
+      "伊甸零式希望乐园 共鸣之章3"
+    ]
+  },
+  {
+    "characterId": "b3240",
+    "name": "暗黑之云",
+    "fullName": "Cloud of Darkness",
+    "fullNameChinese": "暗黑之云",
+    "fullNameJapanese": "暗闇の雲",
+    "aliases": [
+      "暗黑之云",
+      "Cloud of Darkness",
+      "暗闇の雲",
+      "CloudofDarkness"
+    ],
+    "className": "零式",
+    "sources": [
+      "伊甸零式希望乐园 再生之章1"
+    ]
+  },
+  {
+    "characterId": "b9769",
+    "name": "影之王",
+    "fullName": "Shadowkeeper",
+    "fullNameChinese": "影之王",
+    "fullNameJapanese": "影の王",
+    "aliases": [
+      "影之王",
+      "Shadowkeeper",
+      "影の王"
+    ],
+    "className": "零式",
+    "sources": [
+      "伊甸零式希望乐园 再生之章2"
+    ]
+  },
+  {
+    "characterId": "b9707",
+    "name": "绝命战士",
+    "fullName": "Fatebreaker",
+    "fullNameChinese": "绝命战士",
+    "fullNameJapanese": "フェイトブレイカー",
+    "aliases": [
+      "绝命战士",
+      "Fatebreaker",
+      "フェイトブレイカー"
+    ],
+    "className": "零式",
+    "sources": [
+      "伊甸零式希望乐园 再生之章3"
+    ]
+  },
+  {
+    "characterId": "b9813",
+    "name": "伊甸之约",
+    "fullName": "Eden's Promise",
+    "fullNameChinese": "伊甸之约",
+    "fullNameJapanese": "プロミス・オブ・エデン",
+    "aliases": [
+      "伊甸之约",
+      "Eden's Promise",
+      "プロミス・オブ・エデン",
+      "Eden'sPromise"
+    ],
+    "className": "零式",
+    "sources": [
+      "伊甸零式希望乐园 再生之章4"
+    ]
+  },
+  {
+    "characterId": "b10345",
+    "name": "埃里克特翁尼亚斯",
+    "fullName": "埃里克特翁尼亚斯",
+    "fullNameChinese": "埃里克特翁尼亚斯",
+    "fullNameJapanese": "",
+    "aliases": [
+      "埃里克特翁尼亚斯"
+    ],
+    "className": "零式",
+    "sources": [
+      "零式万魔殿 边境之狱1"
+    ]
+  },
+  {
+    "characterId": "b10348",
+    "name": "鱼尾海马怪",
+    "fullName": "Hippokampos",
+    "fullNameChinese": "鱼尾海马怪",
+    "fullNameJapanese": "ヒッポカムポス",
+    "aliases": [
+      "鱼尾海马怪",
+      "Hippokampos",
+      "ヒッポカムポス"
+    ],
+    "className": "零式",
+    "sources": [
+      "零式万魔殿 边境之狱2"
+    ]
+  },
+  {
+    "characterId": "b10720",
+    "name": "菲尼克司",
+    "fullName": "Phoinix",
+    "fullNameChinese": "菲尼克司",
+    "fullNameJapanese": "フェネクス",
+    "aliases": [
+      "菲尼克司",
+      "Phoinix",
+      "フェネクス"
+    ],
+    "className": "零式",
+    "sources": [
+      "零式万魔殿 边境之狱3"
+    ]
+  },
+  {
+    "characterId": "b10742",
+    "name": "赫斯珀洛斯",
+    "fullName": "赫斯珀洛斯",
+    "fullNameChinese": "赫斯珀洛斯",
+    "fullNameJapanese": "",
+    "aliases": [
+      "赫斯珀洛斯"
+    ],
+    "className": "零式",
+    "sources": [
+      "零式万魔殿 边境之狱4"
+    ]
+  },
+  {
+    "characterId": "b11440",
+    "name": "原型宝石兽",
+    "fullName": "Proto-Carbuncle",
+    "fullNameChinese": "原型宝石兽",
+    "fullNameJapanese": "プロトカーバンクル",
+    "aliases": [
+      "原型宝石兽",
+      "Proto-Carbuncle",
+      "プロトカーバンクル",
+      "ProtoCarbuncle"
+    ],
+    "className": "零式",
+    "sources": [
+      "零式万魔殿 炼净之狱1"
+    ]
+  },
+  {
+    "characterId": "b11381",
+    "name": "赫革摩涅",
+    "fullName": "赫革摩涅",
+    "fullNameChinese": "赫革摩涅",
+    "fullNameJapanese": "",
+    "aliases": [
+      "赫革摩涅"
+    ],
+    "className": "零式",
+    "sources": [
+      "零式万魔殿 炼净之狱2"
+    ]
+  },
+  {
+    "characterId": "b11374",
+    "name": "阿格狄斯提斯",
+    "fullName": "阿格狄斯提斯",
+    "fullNameChinese": "阿格狄斯提斯",
+    "fullNameJapanese": "",
+    "aliases": [
+      "阿格狄斯提斯"
+    ],
+    "className": "零式",
+    "sources": [
+      "零式万魔殿 炼净之狱3"
+    ]
+  },
+  {
+    "characterId": "b11399",
+    "name": "赫淮斯托斯",
+    "fullName": "赫淮斯托斯",
+    "fullNameChinese": "赫淮斯托斯",
+    "fullNameJapanese": "",
+    "aliases": [
+      "赫淮斯托斯"
+    ],
+    "className": "零式",
+    "sources": [
+      "零式万魔殿 炼净之狱4"
+    ]
+  },
+  {
+    "characterId": "b12369",
+    "name": "科库托斯",
+    "fullName": "Kokytos",
+    "fullNameChinese": "科库托斯",
+    "fullNameJapanese": "コキュートス",
+    "aliases": [
+      "科库托斯",
+      "Kokytos",
+      "コキュートス"
+    ],
+    "className": "零式",
+    "sources": [
+      "零式万魔殿 荒天之狱1"
+    ]
+  },
+  {
+    "characterId": "b11445",
+    "name": "特弥斯",
+    "fullName": "特弥斯",
+    "fullNameChinese": "特弥斯",
+    "fullNameJapanese": "",
+    "aliases": [
+      "特弥斯"
+    ],
+    "className": "零式",
+    "sources": [
+      "零式万魔殿 荒天之狱3"
+    ]
+  },
+  {
+    "characterId": "b12377",
+    "name": "雅典娜",
+    "fullName": "雅典娜",
+    "fullNameChinese": "雅典娜",
+    "fullNameJapanese": "",
+    "aliases": [
+      "雅典娜"
+    ],
+    "className": "零式",
+    "sources": [
+      "零式万魔殿 荒天之狱4"
+    ]
+  },
+  {
+    "characterId": "b12685",
+    "name": "蜂蜂小甜心",
+    "fullName": "蜂蜂小甜心",
+    "fullNameChinese": "蜂蜂小甜心",
+    "fullNameJapanese": "",
+    "aliases": [
+      "蜂蜂小甜心"
+    ],
+    "className": "零式",
+    "sources": [
+      "阿卡狄亚零式登天斗技场 轻量级2"
+    ]
+  },
+  {
+    "characterId": "b13356",
+    "name": "野蛮爆弹",
+    "fullName": "野蛮爆弹",
+    "fullNameChinese": "野蛮爆弹",
+    "fullNameJapanese": "",
+    "aliases": [
+      "野蛮爆弹"
+    ],
+    "className": "零式",
+    "sources": [
+      "阿卡狄亚零式登天斗技场 轻量级3"
+    ]
+  },
+  {
+    "characterId": "b13778",
+    "name": "热舞绿光",
+    "fullName": "热舞绿光",
+    "fullNameChinese": "热舞绿光",
+    "fullNameJapanese": "",
+    "aliases": [
+      "热舞绿光"
+    ],
+    "className": "零式",
+    "sources": [
+      "阿卡狄亚零式登天斗技场 中量级1"
+    ]
+  },
+  {
+    "characterId": "b13822",
+    "name": "狂热糖潮",
+    "fullName": "狂热糖潮",
+    "fullNameChinese": "狂热糖潮",
+    "fullNameJapanese": "",
+    "aliases": [
+      "狂热糖潮"
+    ],
+    "className": "零式",
+    "sources": [
+      "阿卡狄亚零式登天斗技场 中量级2"
+    ]
+  },
+  {
+    "characterId": "b13756",
+    "name": "野蛮恨心",
+    "fullName": "Brute Abombinator",
+    "fullNameChinese": "野蛮恨心",
+    "fullNameJapanese": "ブルートアボミネーター",
+    "aliases": [
+      "野蛮恨心",
+      "Brute Abombinator",
+      "ブルートアボミネーター",
+      "BruteAbombinator"
+    ],
+    "className": "零式",
+    "sources": [
+      "阿卡狄亚零式登天斗技场 中量级3"
+    ]
+  },
+  {
+    "characterId": "b14300",
+    "name": "致命美人",
+    "fullName": "致命美人",
+    "fullNameChinese": "致命美人",
+    "fullNameJapanese": "",
+    "aliases": [
+      "致命美人"
+    ],
+    "className": "零式",
+    "sources": [
+      "阿卡狄亚零式登天斗技场 重量级1"
+    ]
+  },
+  {
+    "characterId": "b5609",
+    "name": "深蓝",
+    "fullName": "深蓝",
+    "fullNameChinese": "深蓝",
+    "fullNameJapanese": "",
+    "aliases": [
+      "深蓝"
+    ],
+    "className": "零式",
+    "sources": [
+      "阿卡狄亚零式登天斗技场 重量级2"
+    ]
+  },
+  {
+    "characterId": "b14370",
+    "name": "炽红",
+    "fullName": "炽红",
+    "fullNameChinese": "炽红",
+    "fullNameJapanese": "",
+    "aliases": [
+      "炽红"
+    ],
+    "className": "零式",
+    "sources": [
+      "阿卡狄亚零式登天斗技场 重量级2"
+    ]
+  },
+  {
+    "characterId": "b14305",
+    "name": "霸王",
+    "fullName": "霸王",
+    "fullNameChinese": "霸王",
+    "fullNameJapanese": "",
+    "aliases": [
+      "霸王"
+    ],
+    "className": "零式",
+    "sources": [
+      "阿卡狄亚零式登天斗技场 重量级3"
+    ]
+  },
+  {
+    "characterId": "b14378",
+    "name": "林德布鲁姆",
+    "fullName": "Lindwurm",
+    "fullNameChinese": "林德布鲁姆",
+    "fullNameJapanese": "リンドブルム",
+    "aliases": [
+      "林德布鲁姆",
+      "Lindwurm",
+      "リンドブルム"
+    ],
+    "className": "零式",
+    "sources": [
+      "阿卡狄亚零式登天斗技场 重量级4"
+    ]
+  },
+  {
+    "characterId": "b11393",
+    "name": "鬼阴火 泽雷斯·夏",
+    "fullName": "<br>Shadowcaster Zeless Gah",
+    "fullNameChinese": "鬼阴火 泽雷斯·夏",
+    "fullNameJapanese": "影火のゼレズ・ガー",
+    "aliases": [
+      "鬼阴火 泽雷斯·夏",
+      "<br>Shadowcaster Zeless Gah",
+      "影火のゼレズ・ガー",
+      "<br>ShadowcasterZelessGah"
+    ],
+    "className": "零式",
+    "sources": [
+      "零式异闻希拉狄哈水道"
+    ]
+  },
+  {
+    "characterId": "b12357",
+    "name": "怨灵猛虎",
+    "fullName": "Moko the Restless",
+    "fullNameChinese": "怨灵猛虎",
+    "fullNameJapanese": "怨霊モウコ",
+    "aliases": [
+      "怨灵猛虎",
+      "Moko the Restless",
+      "怨霊モウコ",
+      "MokotheRestless"
+    ],
+    "className": "零式",
+    "sources": [
+      "零式异闻六根山"
+    ]
+  },
+  {
+    "characterId": "b12506",
+    "name": "斯塔缇丝",
+    "fullName": "Statice",
+    "fullNameChinese": "斯塔缇丝",
+    "fullNameJapanese": "スターチス",
+    "aliases": [
+      "斯塔缇丝",
+      "Statice",
+      "スターチス"
+    ],
+    "className": "零式",
+    "sources": [
+      "零式异闻阿罗阿罗岛"
+    ]
+  },
+  {
+    "characterId": "b3210",
+    "name": "至尊巴哈姆特",
+    "fullName": "Bahamut Prime",
+    "fullNameChinese": "至尊巴哈姆特",
+    "fullNameJapanese": "バハムート・プライム",
+    "aliases": [
+      "至尊巴哈姆特",
+      "Bahamut Prime",
+      "バハムート・プライム",
+      "BahamutPrime"
+    ],
+    "className": "绝境战",
+    "sources": [
+      "巴哈姆特绝境战"
+    ]
+  },
+  {
+    "characterId": "b1482",
+    "name": "双塔尼亚",
+    "fullName": "Twintania",
+    "fullNameChinese": "双塔尼亚",
+    "fullNameJapanese": "ツインタニア",
+    "aliases": [
+      "双塔尼亚",
+      "Twintania",
+      "ツインタニア"
+    ],
+    "className": "绝境战",
+    "sources": [
+      "巴哈姆特绝境战"
+    ]
+  },
+  {
+    "characterId": "b2612",
+    "name": "奈尔·神·达纳斯",
+    "fullName": "Nael deus Darnus",
+    "fullNameChinese": "奈尔·神·达纳斯",
+    "fullNameJapanese": "ネール・デウス・ダーナス",
+    "aliases": [
+      "奈尔·神·达纳斯",
+      "Nael deus Darnus",
+      "ネール・デウス・ダーナス",
+      "NaeldeusDarnus"
+    ],
+    "className": "绝境战",
+    "sources": [
+      "巴哈姆特绝境战"
+    ]
+  },
+  {
+    "characterId": "b2137",
+    "name": "究极神兵",
+    "fullName": "The Ultima Weapon",
+    "fullNameChinese": "究极神兵",
+    "fullNameJapanese": "アルテマウェポン",
+    "aliases": [
+      "究极神兵",
+      "The Ultima Weapon",
+      "アルテマウェポン",
+      "TheUltimaWeapon"
+    ],
+    "className": "绝境战",
+    "sources": [
+      "究极神兵绝境战"
+    ]
+  },
+  {
+    "characterId": "b11319",
+    "name": "龙威骑神托尔丹",
+    "fullName": "Dragon-king Thordan",
+    "fullNameChinese": "龙威骑神托尔丹",
+    "fullNameJapanese": "騎竜神トールダン",
+    "aliases": [
+      "龙威骑神托尔丹",
+      "Dragon-king Thordan",
+      "騎竜神トールダン",
+      "DragonkingThordan"
+    ],
+    "className": "绝境战",
+    "sources": [
+      "幻想龙诗绝境战"
+    ]
+  },
+  {
+    "characterId": "b12256",
+    "name": "阿尔法欧米茄",
+    "fullName": "Alpha Omega",
+    "fullNameChinese": "阿尔法欧米茄",
+    "fullNameJapanese": "アルファオメガ",
+    "aliases": [
+      "阿尔法欧米茄",
+      "Alpha Omega",
+      "アルファオメガ",
+      "AlphaOmega"
+    ],
+    "className": "绝境战",
+    "sources": [
+      "欧米茄绝境验证战"
+    ]
+  },
+  {
+    "characterId": "b13561",
+    "name": "潘多拉·米特隆",
+    "fullName": "Pandora",
+    "fullNameChinese": "潘多拉·米特隆",
+    "fullNameJapanese": "パンドラ・ミトロン",
+    "aliases": [
+      "潘多拉·米特隆",
+      "Pandora",
+      "パンドラ・ミトロン"
+    ],
+    "className": "绝境战",
+    "sources": [
+      "光暗未来绝境战"
+    ]
+  },
+  {
+    "characterId": "b6385",
+    "name": "吉祥天女",
+    "fullName": "Lakshmi",
+    "fullNameChinese": "吉祥天女",
+    "fullNameJapanese": "ラクシュミ",
+    "aliases": [
+      "吉祥天女",
+      "Lakshmi",
+      "ラクシュミ"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "吉祥天女歼殛战"
+    ]
+  },
+  {
+    "characterId": "b8352",
+    "name": "哈迪斯",
+    "fullName": "哈迪斯",
+    "fullNameChinese": "哈迪斯",
+    "fullNameJapanese": "",
+    "aliases": [
+      "哈迪斯",
+      "爱梅特赛尔克"
+    ],
+    "className": "讨伐",
+    "sources": [
+      "哈迪斯歼灭战",
+      "哈迪斯孤念歼灭战"
+    ]
+  },
+  {
+    "characterId": "b3376",
+    "name": "万事通 奎克辛克斯",
+    "fullName": "万事通 奎克辛克斯",
+    "fullNameChinese": "万事通 奎克辛克斯",
+    "fullNameJapanese": "",
+    "aliases": [
+      "万事通 奎克辛克斯",
+      "奎克辛克斯"
+    ],
+    "className": "零式",
+    "sources": [
+      "亚历山大零式机神城 律动之章3"
+    ]
+  },
+  {
+    "characterId": "b6055",
+    "name": "新生艾克斯迪司",
+    "fullName": "新生艾克斯迪司",
+    "fullNameChinese": "新生艾克斯迪司",
+    "fullNameJapanese": "",
+    "aliases": [
+      "新生艾克斯迪司",
+      "艾克斯迪司"
+    ],
+    "className": "零式",
+    "sources": [
+      "欧米茄零式时空狭缝 德尔塔幻境4"
+    ]
+  },
+  {
+    "characterId": "b7097",
+    "name": "恶魔查达奴克",
+    "fullName": "恶魔查达奴克",
+    "fullNameChinese": "恶魔查达奴克",
+    "fullNameJapanese": "",
+    "aliases": [
+      "恶魔查达奴克",
+      "查达奴克"
+    ],
+    "className": "零式",
+    "sources": [
+      "欧米茄零式时空狭缝 西格玛幻境2"
+    ]
+  },
+  {
+    "characterId": "b9832",
+    "name": "暗之巫女",
+    "fullName": "暗之巫女",
+    "fullNameChinese": "暗之巫女",
+    "fullNameJapanese": "",
+    "aliases": [
+      "暗之巫女",
+      "盖娅"
+    ],
+    "className": "零式",
+    "sources": [
+      "伊甸零式希望乐园 再生之章4"
+    ]
+  },
+  {
+    "characterId": "b12382",
+    "name": "帕拉斯雅典娜",
+    "fullName": "帕拉斯雅典娜",
+    "fullNameChinese": "帕拉斯雅典娜",
+    "fullNameJapanese": "",
+    "aliases": [
+      "帕拉斯雅典娜",
+      "雅典娜"
+    ],
+    "className": "零式",
+    "sources": [
+      "零式万魔殿 荒天之狱4"
+    ]
+  },
+  {
+    "characterId": "b12686",
+    "name": "黑猫",
+    "fullName": "黑猫",
+    "fullNameChinese": "黑猫",
+    "fullNameJapanese": "",
+    "aliases": [
+      "黑猫",
+      "亚纳"
+    ],
+    "className": "零式",
+    "sources": [
+      "阿卡狄亚零式登天斗技场 轻量级1"
+    ]
+  },
+  {
+    "characterId": "b13057",
+    "name": "狡雷",
+    "fullName": "狡雷",
+    "fullNameChinese": "狡雷",
+    "fullNameJapanese": "",
+    "aliases": [
+      "狡雷",
+      "尤特萝普"
+    ],
+    "className": "零式",
+    "sources": [
+      "阿卡狄亚零式登天斗技场 轻量级4"
+    ]
+  },
+  {
+    "characterId": "b13843",
+    "name": "剑嚎",
+    "fullName": "剑嚎",
+    "fullNameChinese": "剑嚎",
+    "fullNameJapanese": "",
+    "aliases": [
+      "剑嚎",
+      "瑞扎拉"
+    ],
+    "className": "零式",
+    "sources": [
+      "阿卡狄亚零式登天斗技场 中量级4"
+    ]
+  }
+]

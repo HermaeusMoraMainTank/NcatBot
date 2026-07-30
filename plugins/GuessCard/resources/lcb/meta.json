@@ -1,7 +1,12 @@
 {
-  "source": "unacro personalities + limbuscompany.wiki.gg images",
+  "source": "unacro personalities + wiki.gg Boss Enemy StoryLog + huiji CN",
   "display": "边狱巴士",
   "skipped_sample": 0,
-  "character_count": 147,
-  "card_count": 147
+  "boss_raw_pages": 78,
+  "boss_unique": 67,
+  "boss_kept": 60,
+  "boss_skipped_no_image": 7,
+  "boss_fallback_en_name": 15,
+  "character_count": 207,
+  "card_count": 207
 }

@@ -4,7 +4,11 @@
     "characterId": "1002",
     "cardRarityType": "uma",
     "assetbundleName": "silencesuzuka",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/73423d67fac1052bdeda3fa92ee14469.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3192b6b2ec81493ca2cdb901f31fabab/silencesuzuka_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3192b6b2ec81493ca2cdb901f31fabab/silencesuzuka_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e582564f60c346dfacb8736a7967b6f0/silencesuzuka_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -12,7 +16,11 @@
     "characterId": "1003",
     "cardRarityType": "uma",
     "assetbundleName": "tokaiteio",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/55f88958c65f3d98307f6934b0ec02f9.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/cadcd418eba148898a2621f878da87ea/tokaiteio_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/cadcd418eba148898a2621f878da87ea/tokaiteio_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/0d2b1038b6524efc83d473d71af0ad1b/tokaiteio_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -20,7 +28,11 @@
     "characterId": "1001",
     "cardRarityType": "uma",
     "assetbundleName": "specialweek",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/3124dc017bcde8c1482216b81a368a8f.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2e5d34d593f5460caf8045671798d4e4/specialweek_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2e5d34d593f5460caf8045671798d4e4/specialweek_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/263d1bf2f7e14b5bbedfe497cf9d4bc5/specialweek_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -28,7 +40,11 @@
     "characterId": "1004",
     "cardRarityType": "uma",
     "assetbundleName": "maruzensky",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/3999a1b2cb3c01536fbdf4a6f87a36df.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/caaeb3fdb43a4056943b2849e43402fb/maruzensky_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/caaeb3fdb43a4056943b2849e43402fb/maruzensky_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/4c82a78b76dc412a8a7fecc8537b664b/maruzensky_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -36,7 +52,11 @@
     "characterId": "1005",
     "cardRarityType": "uma",
     "assetbundleName": "fujikiseki",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/12/e857da397d97a875207eb65e8c1d83ff.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/ce7748228f1944deab2d263f2f527638/fujikiseki_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/ce7748228f1944deab2d263f2f527638/fujikiseki_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/0294fa4b5199451282856fe3a1e41f1a/fujikiseki_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -44,7 +64,11 @@
     "characterId": "1006",
     "cardRarityType": "uma",
     "assetbundleName": "oguricap",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/3951cb538e012a6c1aafbe16ef892c66.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/0095545db55e4030b50f0e58604e0520/oguricap_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/0095545db55e4030b50f0e58604e0520/oguricap_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3a6c880210d74c0fb19d8e7943f0d993/oguricap_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -52,7 +76,11 @@
     "characterId": "1007",
     "cardRarityType": "uma",
     "assetbundleName": "goldship",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/97b14bdb6ffecf6758d34af0cd14aec8.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b6b50669a65f4c3ba0434206532c561d/goldship_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b6b50669a65f4c3ba0434206532c561d/goldship_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a90bf3fa786849799824cfc7536abdd1/goldship_icon.png"
+    ],
     "className": "???"
   },
   {
@@ -60,7 +88,11 @@
     "characterId": "1008",
     "cardRarityType": "uma",
     "assetbundleName": "vodka",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/868f3442b84a398873314bce5a7fb217.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8ac7b341d0d94da092a76dbb568581d6/vodka_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8ac7b341d0d94da092a76dbb568581d6/vodka_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/072fe1830804435780bafa026f2eb393/vodka_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -68,7 +100,11 @@
     "characterId": "1009",
     "cardRarityType": "uma",
     "assetbundleName": "daiwascarlet",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/10/6f49173951de5660c8e381f53f684328.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/bc82096dd018407690fcbca17a20ae18/daiwascarlet_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/bc82096dd018407690fcbca17a20ae18/daiwascarlet_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/42abb441267c42938a06f35a817353cb/daiwascarlet_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -76,7 +112,11 @@
     "characterId": "1010",
     "cardRarityType": "uma",
     "assetbundleName": "taikishuttle",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/ad04452e39b3e16b32b6c0312d1bbf4a.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/02bf653dc681485c958cff8768ca5fd5/taikishuttle_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/02bf653dc681485c958cff8768ca5fd5/taikishuttle_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/325165332ed949c4b6261ca0f3e128cf/taikishuttle_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -84,7 +124,11 @@
     "characterId": "1011",
     "cardRarityType": "uma",
     "assetbundleName": "grasswonder",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/13fa095eacdbc00209bf22ba85951d12.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/aee4caf3e84244a492c21e6e8fe49b6b/grasswonder_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/aee4caf3e84244a492c21e6e8fe49b6b/grasswonder_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/41146e002c394fbb897be86d4add3ff1/grasswonder_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -92,7 +136,11 @@
     "characterId": "1012",
     "cardRarityType": "uma",
     "assetbundleName": "hishiamazon",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/96e79d8216eea01fd230247a92c20f28.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/eb835aeb20374658ab98d6fc2b38f538/hishiamazon_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/eb835aeb20374658ab98d6fc2b38f538/hishiamazon_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e9a9d1e8d15f45adb10aed0b0f03184f/hishiamazon_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -100,7 +148,11 @@
     "characterId": "1013",
     "cardRarityType": "uma",
     "assetbundleName": "mejiromcqueen",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/afc9fba4e001e393557ce828a6e02e11.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b54190968d3644ecb42a708d0f6a084c/mejiromcqueen_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b54190968d3644ecb42a708d0f6a084c/mejiromcqueen_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/79c995c466c143d2b68ebea8e451fe17/mejiromcqueen_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -108,7 +160,11 @@
     "characterId": "1014",
     "cardRarityType": "uma",
     "assetbundleName": "elcondorpasa",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/6f5930c5da9e47feebab327a04bf7197.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d29681f88e0746508ab45ed552f9ae6e/elcondorpasa_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d29681f88e0746508ab45ed552f9ae6e/elcondorpasa_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/603a5337584c4b2083e1588d84cfa61e/elcondorpasa_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -116,7 +172,11 @@
     "characterId": "1015",
     "cardRarityType": "uma",
     "assetbundleName": "tmoperao",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/c34d8234e794239f8ff3121cbbce20d0.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/64289b3630bf46d3aa4a97039b3923f3/tmoperao_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/64289b3630bf46d3aa4a97039b3923f3/tmoperao_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/66919331e5644e6da2a72a42aeca4449/tmoperao_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -124,7 +184,11 @@
     "characterId": "1016",
     "cardRarityType": "uma",
     "assetbundleName": "naritabrian",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/334259c347f33bc5eea22aa79464f43c.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/cdf5701489cb4d3da86b76de708418db/naritabrian_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/cdf5701489cb4d3da86b76de708418db/naritabrian_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/f26eccbfff03474ab1a2637718bc9c51/naritabrian_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -132,7 +196,11 @@
     "characterId": "1017",
     "cardRarityType": "uma",
     "assetbundleName": "symbolirudolf",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/43ffc6b52b7a514910628f15089b608e.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/ff6ad42816db4b82bb7393c7b987f817/symbolirudolf_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/ff6ad42816db4b82bb7393c7b987f817/symbolirudolf_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/86ce288907bf469a88bba83f469faaaa/symbolirudolf_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -140,7 +208,11 @@
     "characterId": "1018",
     "cardRarityType": "uma",
     "assetbundleName": "airgroove",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/df8bb4014dc5f1a1c4e873ca82d3ae46.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/479656c2d22a4ca18480c52185335b15/airgroove_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/479656c2d22a4ca18480c52185335b15/airgroove_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a92aa8655998479f92e5bc93cf5094ce/airgroove_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -148,7 +220,11 @@
     "characterId": "1019",
     "cardRarityType": "uma",
     "assetbundleName": "agnesdigital",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/18181e6e0d67bf15314d6b687636c152.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6b560061c3234a36be1640bc6c67e00d/agnesdigital_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6b560061c3234a36be1640bc6c67e00d/agnesdigital_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/20f1629302d741caa4aec5d96f71554c/agnesdigital_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -156,7 +232,11 @@
     "characterId": "1020",
     "cardRarityType": "uma",
     "assetbundleName": "seiunsky",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/6ed4c2d777f25718031a6e0aeb7eea28.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/97e45e2926de43e79c55295a7378c2d4/seiunsky_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/97e45e2926de43e79c55295a7378c2d4/seiunsky_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3b5f18231c5244e7ada408fc5fae6554/seiunsky_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -164,7 +244,11 @@
     "characterId": "1021",
     "cardRarityType": "uma",
     "assetbundleName": "tamamocross",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/c78d7da10409fe6c25afaaa622ba6fa8.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/380fca1269d048abb5a0db0e01cc4ac0/tamamocross_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/380fca1269d048abb5a0db0e01cc4ac0/tamamocross_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/4509e25397cd4185a971bc64ec5c4d75/tamamocross_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -172,7 +256,11 @@
     "characterId": "1022",
     "cardRarityType": "uma",
     "assetbundleName": "finemotion",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/fa7b9085672e2ebf026b43f06f0b9237.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6bd53dfa4a6a49dc8478e225943ee0e3/finemotion_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6bd53dfa4a6a49dc8478e225943ee0e3/finemotion_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/063191429f624957ae91e21d8397228e/finemotion_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -180,7 +268,11 @@
     "characterId": "1023",
     "cardRarityType": "uma",
     "assetbundleName": "biwahayahide",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/b01dbb99bb1396bed4952d8bc8d98b7a.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5a779ba26d434e409062c6ac89e7db2d/biwahayahide_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5a779ba26d434e409062c6ac89e7db2d/biwahayahide_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3e0ec31bcc0a4c5882563735a58e5069/biwahayahide_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -188,7 +280,11 @@
     "characterId": "1024",
     "cardRarityType": "uma",
     "assetbundleName": "mayanotopgun",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/1677501afc854b1db899450c2b67caa3.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/653ba32321a240728d848fe16b8660a9/mayanotopgun_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/653ba32321a240728d848fe16b8660a9/mayanotopgun_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a025b873c4bb46f2a1cd07b79c168391/mayanotopgun_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -196,7 +292,11 @@
     "characterId": "1025",
     "cardRarityType": "uma",
     "assetbundleName": "manhattancafe",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/695779a3a93fa9c910a68ee09eb96686.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/ca853da2596e4a339222b293579fa889/manhattancafe_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/ca853da2596e4a339222b293579fa889/manhattancafe_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/46a8925cd9e144df89f5f2fe98f5f3b6/manhattancafe_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -204,7 +304,11 @@
     "characterId": "1026",
     "cardRarityType": "uma",
     "assetbundleName": "mihonobourbon",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/e1e418cf4827fd0f8391dbb642461d8e.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/480c33efca85474aa5818d01a4b1e59c/mihonobourbon_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/480c33efca85474aa5818d01a4b1e59c/mihonobourbon_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5a75b87919304966b59fe1cd8dc41b7a/mihonobourbon_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -212,7 +316,11 @@
     "characterId": "1027",
     "cardRarityType": "uma",
     "assetbundleName": "mejiroryan",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/ef1167f87af94cbf39e39d48ed412bae.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/48ba7bf78f364f819e141d8e54594a8e/mejiroryan_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/48ba7bf78f364f819e141d8e54594a8e/mejiroryan_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3ffa442bdd92433299bdff7f041bdf6b/mejiroryan_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -220,7 +328,11 @@
     "characterId": "1028",
     "cardRarityType": "uma",
     "assetbundleName": "hishiakebono",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/54d43d38c40232fb49c005423bfa7de8.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c6ecf416eb414e24ac53bacd057fd2ad/hishiakebono_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c6ecf416eb414e24ac53bacd057fd2ad/hishiakebono_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b4ba9b4f88aa4c5f9c259cd765d62570/hishiakebono_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -228,7 +340,11 @@
     "characterId": "1029",
     "cardRarityType": "uma",
     "assetbundleName": "yukinobijin",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/6039535b1f6269a207876af1d4eae2b9.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5dcb22f3b1ad45778c9ecb4d44d4213f/yukinobijin_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5dcb22f3b1ad45778c9ecb4d44d4213f/yukinobijin_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/1ed260c00e6f4c70842de6bb767f8f03/yukinobijin_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -236,7 +352,11 @@
     "characterId": "1030",
     "cardRarityType": "uma",
     "assetbundleName": "riceshower",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/04c68c088e94fb2917551b8e3ad29d63.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8c203ea11f8a47d0b58296fdcdadd82b/riceshower_01_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8c203ea11f8a47d0b58296fdcdadd82b/riceshower_01_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/57232882dcd04044b0768f24b1e961fe/riceshower_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -244,7 +364,11 @@
     "characterId": "1031",
     "cardRarityType": "uma",
     "assetbundleName": "inesfujin",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/01/1112465f06717da6fbe8d1ac300361d7.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/aa6edad3e72244a08b0299e5435f35b8/inesfujin_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/aa6edad3e72244a08b0299e5435f35b8/inesfujin_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/13bb41c455154c37865c0a212dd53880/inesfujin_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -252,7 +376,11 @@
     "characterId": "1032",
     "cardRarityType": "uma",
     "assetbundleName": "agnestachyon",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/3331c9ff7ec5ea233a383d4000506d22.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/0b6e09c2dbdb4cacb16c87571f3b257b/agnestachyon_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/0b6e09c2dbdb4cacb16c87571f3b257b/agnestachyon_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c7e60e4a663b491ea8e29432d2298d0a/agnestachyon_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -260,7 +388,11 @@
     "characterId": "1033",
     "cardRarityType": "uma",
     "assetbundleName": "admirevega",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/a9d157a3efe0a1b05273ae04080b15f1.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/925d48819455476abc12ff3577a35ea9/admirevega_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/925d48819455476abc12ff3577a35ea9/admirevega_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d34bee3b36f0457f896e851359d0bd00/admirevega_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -268,7 +400,11 @@
     "characterId": "1034",
     "cardRarityType": "uma",
     "assetbundleName": "inarione",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/c7d545e513e9bffb39a11a3ea870fa99.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3f76404022de4285b5af8e9bb1a5648f/inarione_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3f76404022de4285b5af8e9bb1a5648f/inarione_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/ffe2e707dddb4729bf1bf8bdc84a1850/inarione_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -276,7 +412,11 @@
     "characterId": "1035",
     "cardRarityType": "uma",
     "assetbundleName": "winningticket",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/d87f83dda5442cfce20aa384badf6444.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b3fb7ecb2a2d4529b788ce72cd10e4c6/winningticket_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b3fb7ecb2a2d4529b788ce72cd10e4c6/winningticket_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d7c98cfed49745d0b85d04385abc5b2a/winningticket_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -284,7 +424,11 @@
     "characterId": "1036",
     "cardRarityType": "uma",
     "assetbundleName": "airshakur",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/6d820df154952353b011a5a39a76d6b7.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/774a464f460547fe9a153b535d2b1984/airshakur_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/774a464f460547fe9a153b535d2b1984/airshakur_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/aaa3c80bc9c6491f93d0db64c1f02ede/airshakur_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -292,7 +436,11 @@
     "characterId": "1037",
     "cardRarityType": "uma",
     "assetbundleName": "eishinflash",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/3412d6d32419196c96684ceefe2807e1.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2e87602a093f4e6ab13a3d5215f63038/eishinflash_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2e87602a093f4e6ab13a3d5215f63038/eishinflash_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/0f6dcb1021654a5da876ac4346ec54be/eishinflash_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -300,7 +448,11 @@
     "characterId": "1038",
     "cardRarityType": "uma",
     "assetbundleName": "currenchan",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/46adef292946db954ef5beb6a1c3c7c1.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/bbd93a3db4c54416bb3f7792689d106b/currenchan_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/bbd93a3db4c54416bb3f7792689d106b/currenchan_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/ad99e436c417449aa9aba8f99aa22835/currenchan_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -308,7 +460,11 @@
     "characterId": "1039",
     "cardRarityType": "uma",
     "assetbundleName": "kawakamiprincess",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/165458aab47f68223bf21e2e47d26421.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e4e38a1329b94e4391cb1be2455ad120/kawakamiprincess_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e4e38a1329b94e4391cb1be2455ad120/kawakamiprincess_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/59d7d2969ea547abafd78f80ff464ef0/kawakamiprincess_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -316,7 +472,11 @@
     "characterId": "1040",
     "cardRarityType": "uma",
     "assetbundleName": "goldcity",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/de5caacafa9094de05d716e10ff68910.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/096e7b2787ea40c9882f5a797d545d23/goldcity_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/096e7b2787ea40c9882f5a797d545d23/goldcity_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/140e184b6778458d8e081e254e2229a4/goldcity_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -324,7 +484,11 @@
     "characterId": "1041",
     "cardRarityType": "uma",
     "assetbundleName": "sakurabakushino",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/a08bc01cd520febd973a9182c4504a78.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/84bea2aa55464ce1814700575202f21a/sakurabakushino_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/84bea2aa55464ce1814700575202f21a/sakurabakushino_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c7c9b4ed17414f0b9fa0daeb55a4af55/sakurabakushino_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -332,7 +496,11 @@
     "characterId": "1042",
     "cardRarityType": "uma",
     "assetbundleName": "seekingthepearl",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/7929895307b96eab10da461a166a440b.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/7ae751ce6dfd4cf08b6dc81b6e0526ab/seekingthepearl_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/7ae751ce6dfd4cf08b6dc81b6e0526ab/seekingthepearl_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/7815896866aa45b4967ca8cc858df994/seekingthepearl_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -340,7 +508,11 @@
     "characterId": "1043",
     "cardRarityType": "uma",
     "assetbundleName": "shinkowindy",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/dc81028026a5a8e39c04f225f4ac8aed.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5ebd10d2a828409093747427da23ee19/shinkowindy_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5ebd10d2a828409093747427da23ee19/shinkowindy_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/280091eaccf84d6dbba403e87572f638/shinkowindy_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -348,7 +520,11 @@
     "characterId": "1044",
     "cardRarityType": "uma",
     "assetbundleName": "sweeptosho",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/5cfd881e5034666d42b4373e07ea9694.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5d243633c0ef415bb48702d0c8531308/sweeptosho_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5d243633c0ef415bb48702d0c8531308/sweeptosho_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/bdac61e144cc4780a9b2acc6cf63ab4e/sweeptosho_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -356,7 +532,11 @@
     "characterId": "1045",
     "cardRarityType": "uma",
     "assetbundleName": "supercreek",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/52b01fb4407b7e59bbb65ddc751deeb6.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3316aa27ddf54fa0bb4af195af3e67de/supercreek_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3316aa27ddf54fa0bb4af195af3e67de/supercreek_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d1f0f0644f63494f87f124680706298a/supercreek_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -364,7 +544,11 @@
     "characterId": "1046",
     "cardRarityType": "uma",
     "assetbundleName": "smartfalcon",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/7458dd3e027b481f091157bbafc76db8.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/7ceffc005e594501822ac3d58db4e1e1/smartfalcon_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/7ceffc005e594501822ac3d58db4e1e1/smartfalcon_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/ae99965a64324011ac051249e16c7aec/smartfalcon_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -372,7 +556,11 @@
     "characterId": "1047",
     "cardRarityType": "uma",
     "assetbundleName": "zennorobroy",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/cbe5ce3b7c528d74d8582efa4794bcf7.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/61ce5a3a4d6b46018c8f68e3f503d9c6/zennorobroy_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/61ce5a3a4d6b46018c8f68e3f503d9c6/zennorobroy_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/eaffa58017814de3bfe0ade1ce96fef5/zennorobroy_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -380,7 +568,11 @@
     "characterId": "1048",
     "cardRarityType": "uma",
     "assetbundleName": "tosenjordan",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/a1d2a21a5127a851d65d09dfc5ddabd9.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a4ed11cb612f4cc1ad6ea3c167c9ac85/tosenjordan_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a4ed11cb612f4cc1ad6ea3c167c9ac85/tosenjordan_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/26de292320864112a63aaf2ec04bffdf/tosenjordan_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -388,7 +580,11 @@
     "characterId": "1049",
     "cardRarityType": "uma",
     "assetbundleName": "nakayamafesta",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/d6941350d92590a15cc146f1aee52b70.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5720bd42899f47499c079d5cc2458e50/nakayamafesta_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5720bd42899f47499c079d5cc2458e50/nakayamafesta_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a1f2cb939585418cbf0f4bd71a978da0/nakayamafesta_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -396,7 +592,11 @@
     "characterId": "1050",
     "cardRarityType": "uma",
     "assetbundleName": "naritataishin",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/9e008674a29294c4eba6617aa94b7e3e.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/4371cd67a6e04442b7d9e03626aa39da/naritataishin_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/4371cd67a6e04442b7d9e03626aa39da/naritataishin_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a59ff29b11dc48e29af962b6cceb1203/naritataishin_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -404,7 +604,11 @@
     "characterId": "1051",
     "cardRarityType": "uma",
     "assetbundleName": "nishinoflower",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/ab4a52aad6f500b36c6ab4e543dedf82.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/acff3a5cc385458383764856832a82c5/nishinoflower_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/acff3a5cc385458383764856832a82c5/nishinoflower_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e664e28dc74d41209f10c6d1aa8d85cd/nishinoflower_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -412,7 +616,11 @@
     "characterId": "1052",
     "cardRarityType": "uma",
     "assetbundleName": "haruurara",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/8bc9c4bf39c30ef9bfc78b2982e9b954.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/ab34862a2ae0421ca01b42c161761f21/haruurara_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/ab34862a2ae0421ca01b42c161761f21/haruurara_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/70087820ba234602bff541d31ff3ef8f/haruurara_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -420,7 +628,11 @@
     "characterId": "1053",
     "cardRarityType": "uma",
     "assetbundleName": "bamboomemory",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/3152e082fee4c32729e29e76baf406c2.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6f5207cad44044c5a5b7ebffda2d80e7/bamboomemory_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6f5207cad44044c5a5b7ebffda2d80e7/bamboomemory_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/fe4df457c9b147fe8b53caf988fc7fb8/bamboomemory_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -428,7 +640,11 @@
     "characterId": "1054",
     "cardRarityType": "uma",
     "assetbundleName": "bikopegasus",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/a523da789dab7e9850957a76db795f4e.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/778cde50d585476dbb7aa01d9e2ba248/bikopegasus_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/778cde50d585476dbb7aa01d9e2ba248/bikopegasus_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3293dcc0642b44fd9f021b5757a620ba/bikopegasus_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -436,7 +652,11 @@
     "characterId": "1055",
     "cardRarityType": "uma",
     "assetbundleName": "marveloussunday",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/64a26806ff3aa9d4539edc171e3bceec.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b3af712d8ccf4c4094de92e2aaffc3c4/marveloussunday_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b3af712d8ccf4c4094de92e2aaffc3c4/marveloussunday_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/28ed06ea8d994782a771c7632884fa35/marveloussunday_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -444,7 +664,11 @@
     "characterId": "1056",
     "cardRarityType": "uma",
     "assetbundleName": "matikanefukukitaru",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/7a1bf39e0a87d2fdbb695d79da44cf07.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/77837c8a379c452aa44e55a3b36a07c9/matikanefukukitaru_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/77837c8a379c452aa44e55a3b36a07c9/matikanefukukitaru_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/43eaec6496ce4e6f95614872f884c10d/matikanefukukitaru_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -452,7 +676,11 @@
     "characterId": "1058",
     "cardRarityType": "uma",
     "assetbundleName": "meishodoto",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/4efab40d98bc95b7d987dd56510ad59e.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c45afaaf78dd481c9e918e50e6181134/meishodoto_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c45afaaf78dd481c9e918e50e6181134/meishodoto_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/134e603789d146519224daf0fc9b3b65/meishodoto_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -460,7 +688,11 @@
     "characterId": "1059",
     "cardRarityType": "uma",
     "assetbundleName": "mejirodober",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/8b336f75357413af3039664e6e0d34bd.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/35293ceb39e54f9c8ebfb4407dc4eb48/mejirodober_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/35293ceb39e54f9c8ebfb4407dc4eb48/mejirodober_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a17237adfafe4643a73ce174e551c4ec/mejirodober_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -468,7 +700,11 @@
     "characterId": "1060",
     "cardRarityType": "uma",
     "assetbundleName": "nicenature",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/2e5c8bfd316fa49674bb3a6b40752ddc.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/edb0ea3aa20248799927528bc8726e08/nicenature_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/edb0ea3aa20248799927528bc8726e08/nicenature_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6297279ab8424a6da5c620d95cd7b4c6/nicenature_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -476,7 +712,11 @@
     "characterId": "1061",
     "cardRarityType": "uma",
     "assetbundleName": "kinghalo",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/ff0441bf01c85ffdf55e1885095e00b5.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/eb01acda524d4f28b38d4d699fbaa47e/kinghalo_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/eb01acda524d4f28b38d4d699fbaa47e/kinghalo_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/bb27cd8d8ee944eaa5dd6496c714647e/kinghalo_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -484,7 +724,11 @@
     "characterId": "1069",
     "cardRarityType": "uma",
     "assetbundleName": "sakurachiyonoo",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/59f5a2faea5eb6b9e8115c5e0e3fb7ad.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/07f4b9a6a6984b74b0e9f4c06cff07f0/sakurachiyonoo_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/07f4b9a6a6984b74b0e9f4c06cff07f0/sakurachiyonoo_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/54ca5b65f05945d49d8780de4b3e75b7/sakurachiyonoo_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -492,7 +736,11 @@
     "characterId": "1070",
     "cardRarityType": "uma",
     "assetbundleName": "siriussymboli",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/10/2c8399c406b09f88e2e4aad14fd4f4fc.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b5f37d052b064e868b9695b06bc67f41/siriussymboli_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b5f37d052b064e868b9695b06bc67f41/siriussymboli_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/101cb966bce74c3a9a7299debd854390/siriussymboli_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -500,7 +748,11 @@
     "characterId": "1071",
     "cardRarityType": "uma",
     "assetbundleName": "mejiroardan",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/07/af8f4954d9a46d12b281cb4c38be7a06.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5882fc435fab47278954eb9cd756f7a2/mejiroardan_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5882fc435fab47278954eb9cd756f7a2/mejiroardan_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6bbea20746ee42d399ac1edb8897edff/mejiroardan_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -508,7 +760,11 @@
     "characterId": "1072",
     "cardRarityType": "uma",
     "assetbundleName": "yaenomuteki",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/04/3b9de0725aadd87de7b3d8a42c65f14d.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/caa3ad8e1507499ab727e27bd353f59c/yaenomuteki_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/caa3ad8e1507499ab727e27bd353f59c/yaenomuteki_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/fa8ece356e6c484eae1cc8584b6e0d39/yaenomuteki_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -516,7 +772,11 @@
     "characterId": "1062",
     "cardRarityType": "uma",
     "assetbundleName": "matikanetannhauser",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/010f8aee8da58893cfdba2b921ffd5f3.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e7c65191769c49acab4fbbbf43887de1/matikanetannhauser_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e7c65191769c49acab4fbbbf43887de1/matikanetannhauser_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/84950375528545698a56ac724cd85a46/matikanetannhauser_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -524,7 +784,11 @@
     "characterId": "1063",
     "cardRarityType": "uma",
     "assetbundleName": "ikunodictus",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/0732b89f95aee033e198ee3246be9c37.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/fc93e52618534b6c88eddf78570851aa/ikunodictus_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/fc93e52618534b6c88eddf78570851aa/ikunodictus_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/570e93b5d79b4f67a0b092a9da6d6b5a/ikunodictus_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -532,7 +796,11 @@
     "characterId": "1064",
     "cardRarityType": "uma",
     "assetbundleName": "mejiropalmer",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/12985ccb294d722c881457263c16f09c.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/54e5614a3eac44e6a0e8b4f4a2e3ed4d/mejiropalmer_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/54e5614a3eac44e6a0e8b4f4a2e3ed4d/mejiropalmer_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/9e1dba83c4a14b0a876f59fe57494a5e/mejiropalmer_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -540,7 +808,11 @@
     "characterId": "1065",
     "cardRarityType": "uma",
     "assetbundleName": "daitakuhelios",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/55f58b02f866123f14d00fc0bcf5ff73.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/decc332003964b6db79967dda717fee6/daitakuhelios_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/decc332003964b6db79967dda717fee6/daitakuhelios_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/cf63e735e8bd479abb68dd0bae747378/daitakuhelios_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -548,7 +820,11 @@
     "characterId": "1066",
     "cardRarityType": "uma",
     "assetbundleName": "twinturbo",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/bcbc0542db2931dab3ab51a781cb3c8d.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/36e7e622a69b45f6b3d00bc0c9b48ab7/twinturbo_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/36e7e622a69b45f6b3d00bc0c9b48ab7/twinturbo_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/014e7dc3eddf4c539a4ace91d7c903a9/twinturbo_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -556,7 +832,11 @@
     "characterId": "1067",
     "cardRarityType": "uma",
     "assetbundleName": "satonodiamond",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/849285ef0f049bbc2c13f28275dc7cd0.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/75073e52e88c432f80a4e60333884f77/satonodiamond_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/75073e52e88c432f80a4e60333884f77/satonodiamond_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c29afd66792743fcb5aca539e9b93e31/satonodiamond_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -564,7 +844,11 @@
     "characterId": "1068",
     "cardRarityType": "uma",
     "assetbundleName": "kitasanblack",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/672d0e4a6378fc2c4d7416cd14d50953.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/94e780747b6c447fa48c99052cd7e2de/kitasanblack_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/94e780747b6c447fa48c99052cd7e2de/kitasanblack_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/cab05993de7e487c994c6d67165f4f45/kitasanblack_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -572,7 +856,11 @@
     "characterId": "9001",
     "cardRarityType": "uma",
     "assetbundleName": "hayakawatazuna",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/fb92afaedf730557c0780b722d5e30e5.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/10329e7971be44b99741c89492ef9d06/hayakawatazuna_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/10329e7971be44b99741c89492ef9d06/hayakawatazuna_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/813c72b3c6324d1e98df765801f5b973/hayakawatazuna_icon.png"
+    ],
     "className": ""
   },
   {
@@ -580,7 +868,11 @@
     "characterId": "1057",
     "cardRarityType": "uma",
     "assetbundleName": "mrcb",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/3d92e1de5a7a575deaff8f83eb154042.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3488578cbbb04e63988ad45d74795cde/mrcb_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3488578cbbb04e63988ad45d74795cde/mrcb_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c374e9dea9bc4a628b2e71e816480abf/mrcb_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -588,7 +880,11 @@
     "characterId": "2001",
     "cardRarityType": "uma",
     "assetbundleName": "happymeek",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/fe0b2b2ab710c81b7863f0f7e23870ce.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2a04bc169cf4436a93ab79f19c19b966/happymik_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2a04bc169cf4436a93ab79f19c19b966/happymik_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8e030ccc830e4b3fb282d4f1b7da218d/happymik_icon.png"
+    ],
     "className": ""
   },
   {
@@ -596,7 +892,11 @@
     "characterId": "9004",
     "cardRarityType": "uma",
     "assetbundleName": "kiryuinaoi",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/6216c8de53c928746d749a3eef700a0d.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e23de710d8e14542be1e9b9a1428c8c4/kiryuinaoi_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e23de710d8e14542be1e9b9a1428c8c4/kiryuinaoi_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/f840235902204995b00f5f8cc4972b8e/kiryuinaoi_icon.png"
+    ],
     "className": ""
   },
   {
@@ -604,7 +904,11 @@
     "characterId": "9005",
     "cardRarityType": "uma",
     "assetbundleName": "anshinzawasasami",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/01/71de398d728e90353fe28fc04eb907e8.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/71783b15668345698f7cc6755b05d0fb/anshinzawasasami_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/71783b15668345698f7cc6755b05d0fb/anshinzawasasami_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/88594a007d3d4818a655874f3dad3461/anshinzawasasami_icon.png"
+    ],
     "className": ""
   },
   {
@@ -612,7 +916,11 @@
     "characterId": "9003",
     "cardRarityType": "uma",
     "assetbundleName": "otonashietsuko",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/10/4a661d5cbb098c12fad3bea3cfbb75c1.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/4e17a943ad134d08ae12a4d67ee85114/otonashietsuko_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/4e17a943ad134d08ae12a4d67ee85114/otonashietsuko_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2f6a0764835148db814e307300bce9fc/otonashietsuko_icon.png"
+    ],
     "className": ""
   },
   {
@@ -620,7 +928,11 @@
     "characterId": "2002",
     "cardRarityType": "uma",
     "assetbundleName": "bitterglasse",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/08/d343da7d53e836902c7ef013e879337c.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/0f00e4c009f44283a6bbef7680c35082/bitterglasse_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/0f00e4c009f44283a6bbef7680c35082/bitterglasse_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2fa8959a00534023be48472b2db505f3/bitterglasse_icon.png"
+    ],
     "className": ""
   },
   {
@@ -628,7 +940,11 @@
     "characterId": "2003",
     "cardRarityType": "uma",
     "assetbundleName": "littlecocon",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/08/0a876e53d6f3b6a8d1adb27ab0bd8626.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/55922c4a12ed4fc2a7cb84b158c7ce1d/littlecocon_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/55922c4a12ed4fc2a7cb84b158c7ce1d/littlecocon_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/cbc6120aea734c8b9bc8c6a05cc61c30/littlecocon_icon.png"
+    ],
     "className": ""
   },
   {
@@ -636,7 +952,11 @@
     "characterId": "9006",
     "cardRarityType": "uma",
     "assetbundleName": "kashimotoriko",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2021/08/88decb145ed1aa3e009cf4108b40db5b.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a7eb3c955f444b25ab17259f9de1a58a/kashimotoriko_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a7eb3c955f444b25ab17259f9de1a58a/kashimotoriko_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a6854fb4070c485a9b9997e7277b2241/kashimotoriko_icon.png"
+    ],
     "className": ""
   },
   {
@@ -644,7 +964,11 @@
     "characterId": "1074",
     "cardRarityType": "uma",
     "assetbundleName": "mejirobright",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/01/12b07d53e9a48c9d8ef356058cd74f40.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e97d5a3de746495593b33c225e2902e5/mejirobright_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e97d5a3de746495593b33c225e2902e5/mejirobright_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/9ee4750e079c40f9816e9a8ad02cfd1e/mejirobright_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -652,7 +976,11 @@
     "characterId": "1077",
     "cardRarityType": "uma",
     "assetbundleName": "naritatoproad",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/01/9551ab97b994276d0dc5447fe712d70e.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3f60d51fd01149148b6f7b59997632b2/naritatoproad_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3f60d51fd01149148b6f7b59997632b2/naritatoproad_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/27b101eef2354d3385169fb7548cadae/naritatoproad_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -660,7 +988,11 @@
     "characterId": "1076",
     "cardRarityType": "uma",
     "assetbundleName": "sakuralaurel",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/07/b4a696da318f8f9436fcc699c3ee1dc9.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/37b9b1f564234e3ea98bfeddbe452848/sakuralaurel_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/37b9b1f564234e3ea98bfeddbe452848/sakuralaurel_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/46676d5bf7ce4414885dc38537ad93bf/sakuralaurel_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -668,7 +1000,11 @@
     "characterId": "1078",
     "cardRarityType": "uma",
     "assetbundleName": "yamaninzephyr",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/05/66a3ec12edbecf211867f47db32896b8.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e62bd533503649a785c537401292f159/yamaninzephyr_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e62bd533503649a785c537401292f159/yamaninzephyr_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/1cb476b7e5284a85ac2b9c90b7e4f9f1/yamaninzephyr_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -676,7 +1012,11 @@
     "characterId": "1087",
     "cardRarityType": "uma",
     "assetbundleName": "astonmachan",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/08/5da1cdb7b877074a6e442d728bfa6d9e.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/0ca3971ec9fd4a998cef1328f23ba730/astonmachan_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/0ca3971ec9fd4a998cef1328f23ba730/astonmachan_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6cbe9384164943e195d74d79a788a495/astonmachan_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -684,7 +1024,11 @@
     "characterId": "1088",
     "cardRarityType": "uma",
     "assetbundleName": "satonocrown",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/12/b5d7662b3f098d99c8b665dbdebeeb23.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/749b7b5716904f79bb16749de4bdaff6/satonocrown_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/749b7b5716904f79bb16749de4bdaff6/satonocrown_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/fad722e69f2c44468967a1fd479d1f33/satonocrown_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -692,7 +1036,11 @@
     "characterId": "1089",
     "cardRarityType": "uma",
     "assetbundleName": "chevalgrand",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/12/afdec197c7ea6edffef51053082503ca.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5cf740ed13c64829a4f7b73487d180ff/chevalgrand_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5cf740ed13c64829a4f7b73487d180ff/chevalgrand_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2743b7ed8959484db0266870ba913803/chevalgrand_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -700,7 +1048,11 @@
     "characterId": "1073",
     "cardRarityType": "uma",
     "assetbundleName": "tsurumarutsuyoshi",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/03/7a845dedf4e286098ec740e28517bb8e.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/549338befba74a278b03f1fb9e2d1e50/tsurumarutsuyoshi_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/549338befba74a278b03f1fb9e2d1e50/tsurumarutsuyoshi_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3d587f24f3004c7db7c49483c03d21d1/tsurumarutsuyoshi_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -708,7 +1060,11 @@
     "characterId": "1083",
     "cardRarityType": "uma",
     "assetbundleName": "symbolikriss",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/05/9f83d9bfa8a060af46fb2200c5cb1ec2.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/cf2cb0069c144ff4ace3ba7f0c04b120/symbolikriss_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/cf2cb0069c144ff4ace3ba7f0c04b120/symbolikriss_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/7afb36b87d1a4d489117dfe6f4b8ce27/symbolikriss_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -716,7 +1072,11 @@
     "characterId": "1084",
     "cardRarityType": "uma",
     "assetbundleName": "taninogimlet",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/05/37b129aa460ef7a07115115d14f41348.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/38ba273b41354eb2871ca785740107e5/taninogimlet_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/38ba273b41354eb2871ca785740107e5/taninogimlet_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2801722e709b40a7b04211902c6ce892/taninogimlet_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -724,7 +1084,11 @@
     "characterId": "1098",
     "cardRarityType": "uma",
     "assetbundleName": "copanorickey",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/07/dd1c25ed938bb25537b32f0b70a44cf4.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2072a3ff37c343e9a0669eee3894b6fa/copanorickey_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2072a3ff37c343e9a0669eee3894b6fa/copanorickey_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d830bda4ec074de5aa2d8d0d0b92a889/copanorickey_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -732,7 +1096,11 @@
     "characterId": "1075",
     "cardRarityType": "uma",
     "assetbundleName": "daringtact",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/07/ecf1fa704da0059d1e6a8f66daeba5f7.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/9cbf0e8af9fc4d95a274b03319834a3e/daringtact_list_2.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/9cbf0e8af9fc4d95a274b03319834a3e/daringtact_list_2.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6943355a86424745862ba8a93cf38109/daringtact_icon.png"
+    ],
     "className": "中等部"
   },
   {
@@ -740,7 +1108,11 @@
     "characterId": "1099",
     "cardRarityType": "uma",
     "assetbundleName": "hokkotarumae",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/07/1b2b3698fcde52d9d446177f28ebadf1.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/f53900276c384a5884e81476465bcbe0/hokkotarumae_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/f53900276c384a5884e81476465bcbe0/hokkotarumae_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/582d720f17274191b31b8af1f5024c76/hokkotarumae_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -748,7 +1120,11 @@
     "characterId": "1100",
     "cardRarityType": "uma",
     "assetbundleName": "wonderacute",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/07/eff3aea8f6b754b2141d67acd6df4669.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/0035d494d1d447a5b09f103ae0983b80/wonderacute_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/0035d494d1d447a5b09f103ae0983b80/wonderacute_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5b4b3d2d5a864f809e1dfc89fa5678fb/wonderacute_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -756,7 +1132,11 @@
     "characterId": "1085",
     "cardRarityType": "uma",
     "assetbundleName": "daiichiruby",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/08/d3f061e3641014cd8c39151a167b356b.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/4899801222cd459488b99fb94f716e65/daiichiruby_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/4899801222cd459488b99fb94f716e65/daiichiruby_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/129d658edc4c422c8cc4d76b4c6f0657/daiichiruby_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -764,7 +1144,11 @@
     "characterId": "1093",
     "cardRarityType": "uma",
     "assetbundleName": "ksmiracle",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/08/ca94a973958c3d418c8e6c6930b7d929.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2b2b6f02405e43f1a65592a370401109/k-s-miracle_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2b2b6f02405e43f1a65592a370401109/k-s-miracle_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/f46bba4600604f22838e9f46fc1a1d6d/k.s.miracle_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -772,7 +1156,11 @@
     "characterId": "9008",
     "cardRarityType": "uma",
     "assetbundleName": "lighthello",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2022/08/383f4cb3970dd0c7ac4aef808ffe2de5.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5fb25172f3c8483883662c1009695306/lighthello_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5fb25172f3c8483883662c1009695306/lighthello_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/cac5c2d1c4fb4c528769106d608b933a/lighthello_icon.png"
+    ],
     "className": ""
   },
   {
@@ -780,7 +1168,11 @@
     "characterId": "1086",
     "cardRarityType": "uma",
     "assetbundleName": "mejiroramonu",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/02/085300009e7e80a17733822bc62af396.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5d6e67035f7f4fcca64d9ed93b0ee241/mejiroramonu_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5d6e67035f7f4fcca64d9ed93b0ee241/mejiroramonu_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e0f18c86694148a5bbf9af5d39f98682/mejiroramonu_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -788,7 +1180,11 @@
     "characterId": "9040",
     "cardRarityType": "uma",
     "assetbundleName": "darleyarabian",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/02/4fe066f6e897bd9f70a40df212ad7362.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3554c8e804a342c0840890b055643d60/darleyarabian_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3554c8e804a342c0840890b055643d60/darleyarabian_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2e77071e930540aaaf6ef370eabd91e2/darleyarabian_icon.png"
+    ],
     "className": ""
   },
   {
@@ -796,7 +1192,11 @@
     "characterId": "9041",
     "cardRarityType": "uma",
     "assetbundleName": "godolphinbarb",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/02/6d254cfca7a0c0bb3c0773724cf6aac1.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a5ef307acc8f4ee3b88e7d7cffefe9d4/godolphinbarb_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a5ef307acc8f4ee3b88e7d7cffefe9d4/godolphinbarb_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/689a27a8a7c44d068e8bd58d752d0bd5/godolphinbarb_icon.png"
+    ],
     "className": ""
   },
   {
@@ -804,7 +1204,11 @@
     "characterId": "9042",
     "cardRarityType": "uma",
     "assetbundleName": "byerleyturk",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/02/ca57c8293b4ecbad3e5882402197432c.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a49c57bbd91c466c8335e3d879a1ea7c/byerleyturk_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a49c57bbd91c466c8335e3d879a1ea7c/byerleyturk_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/319645eabeee4addad085892eb6cd25e/byerleyturk_icon.png"
+    ],
     "className": ""
   },
   {
@@ -812,7 +1216,11 @@
     "characterId": "1094",
     "cardRarityType": "uma",
     "assetbundleName": "junglepocket",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/02/b666db6f463bf7b85f0b4117f2f331ac.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e3f353e616aa490d988b909e8acb237b/junglepocket_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e3f353e616aa490d988b909e8acb237b/junglepocket_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/32839db7c26a48b09680721434351de5/junglepocket_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -820,7 +1228,11 @@
     "characterId": "1104",
     "cardRarityType": "uma",
     "assetbundleName": "katsuragiace",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/02/12134ffafba2717fb3228f74bec5d6ac.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/28479a70523e471cb84ac10b4b1ff114/katsuragiace_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/28479a70523e471cb84ac10b4b1ff114/katsuragiace_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/7b47e214c9024fc9ba0ed9aed930ed20/katsuragiace_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -828,7 +1240,11 @@
     "characterId": "1105",
     "cardRarityType": "uma",
     "assetbundleName": "neouniverse",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/03/d11300c12f2341c5f98b8fad71e0abfa.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/10f27dc4dfd0425d9dab1b46d6d50690/neouniverse_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/10f27dc4dfd0425d9dab1b46d6d50690/neouniverse_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/bbfbc19c7fa144a982670cec820b17db/neouniverse_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -836,7 +1252,11 @@
     "characterId": "1106",
     "cardRarityType": "uma",
     "assetbundleName": "hishimiracle",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/02/0f4dde8aadf7fb5a25f1a470dc188adb.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/13f8dd98962c42d6b33644fe5f59595d/hishimiracle_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/13f8dd98962c42d6b33644fe5f59595d/hishimiracle_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/809979a411b44d81b115202ef0f5db8f/hishimiracle_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -844,7 +1264,11 @@
     "characterId": "1107",
     "cardRarityType": "uma",
     "assetbundleName": "tapdancecity",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/03/1bf75ec084f7a2c29999c21d1da8f965.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/15937c6439c2407c845b8fe8bc9e1819/tapdancecity_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/15937c6439c2407c845b8fe8bc9e1819/tapdancecity_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/f97d420507b047549dcb45eed3c3a65b/tapdancecity_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -852,7 +1276,11 @@
     "characterId": "2006",
     "cardRarityType": "uma",
     "assetbundleName": "rigantona",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/08/8e009d5df7441fe0330898217233fc9b.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/829453808b664a469beec3d0def366c9/rigantona_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/829453808b664a469beec3d0def366c9/rigantona_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c8dae69e05b344b08bd42791b083f792/rigantona_icon.png"
+    ],
     "className": ""
   },
   {
@@ -860,7 +1288,11 @@
     "characterId": "2005",
     "cardRarityType": "uma",
     "assetbundleName": "venuspaques",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/08/88e4b9ca20b9dc68969c5b256ff793d1.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b2cd6bcb61014b5e9f51c1d9c07ffb09/venuspark_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b2cd6bcb61014b5e9f51c1d9c07ffb09/venuspark_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8968dce8d8704325981cc57d08940ac8/venuspark_icon.png"
+    ],
     "className": ""
   },
   {
@@ -868,7 +1300,11 @@
     "characterId": "9043",
     "cardRarityType": "uma",
     "assetbundleName": "satakemei",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/08/cd5fc4e46b4403bbad95cfe8a5630463.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/55547e52d732465d8ee85d0f5f4b53be/satakemei_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/55547e52d732465d8ee85d0f5f4b53be/satakemei_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/f1be37af342c47c29f775012239f252d/satakemei_icon.png"
+    ],
     "className": ""
   },
   {
@@ -876,7 +1312,11 @@
     "characterId": "1102",
     "cardRarityType": "uma",
     "assetbundleName": "soundsofearth",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/08/551804e26ec2e50becb9a72118c68d7a.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b17330e872874656976f15d93b424a76/soundsofearth_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b17330e872874656976f15d93b424a76/soundsofearth_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8827722c574f47c08dc0cad6f283b5fd/soundsofearth_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -884,7 +1324,11 @@
     "characterId": "1082",
     "cardRarityType": "uma",
     "assetbundleName": "northflight",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/09/049f6d160896eada1819baf240c97d43.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/950f5f8d81df4d9b97a9cc2361b632be/northflight_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/950f5f8d81df4d9b97a9cc2361b632be/northflight_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e4458762b8d94cc682c1a7fb3b49c3d0/northflight_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -892,7 +1336,11 @@
     "characterId": "1108",
     "cardRarityType": "uma",
     "assetbundleName": "duramente",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/10/c674dce54040ddd9abf4ae0339deb2f1.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5ba2e3004acd4cdc8d9b0e7f0bf7cbe0/duramente_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5ba2e3004acd4cdc8d9b0e7f0bf7cbe0/duramente_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/972321d11da1467c96b70a4c876dd8a6/duramente_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -900,7 +1348,11 @@
     "characterId": "1090",
     "cardRarityType": "uma",
     "assetbundleName": "verxina",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/11/a3012d0acc00dbe953cf98e03e6291a0.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/427bf6bd17d844b383e332e2db60e782/verxina_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/427bf6bd17d844b383e332e2db60e782/verxina_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c13d97d325384b8f8275e5483a4ca8e1/verxina_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -908,7 +1360,11 @@
     "characterId": "1091",
     "cardRarityType": "uma",
     "assetbundleName": "vivlos",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/11/e6131433aca4a905dad54259aa0c7b86.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/88bb264a970c4551b5fae492cd0518a1/vivlos_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/88bb264a970c4551b5fae492cd0518a1/vivlos_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a72fd0cded7040da8c4873657fb624a3/vivlos_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -916,7 +1372,11 @@
     "characterId": "1103",
     "cardRarityType": "uma",
     "assetbundleName": "royceandroyce",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2023/12/35f421f77030acd6164e563e0b313a13.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/81d3c0e88c144e8f9fa328f581ade44f/royceandroyce_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/81d3c0e88c144e8f9fa328f581ade44f/royceandroyce_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/0bc607d5f9b945c8a101ad2b9d24f161/royceandroyce_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -924,7 +1384,11 @@
     "characterId": "1110",
     "cardRarityType": "uma",
     "assetbundleName": "cesario",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/01/48c84ba0cd12b972f46a987e4cd18779.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/93c31193c3314ba9b7bb92598bcba30b/cesario_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/93c31193c3314ba9b7bb92598bcba30b/cesario_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d0510e8eb3ce4176b0d8cb57ccfb72d9/cesario_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -932,7 +1396,11 @@
     "characterId": "1109",
     "cardRarityType": "uma",
     "assetbundleName": "rheinkraft",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/7608f581e4457379ade257d657616aae.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/cfd166d87db64907b4ffd176f50af1cd/rheinkraft_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/cfd166d87db64907b4ffd176f50af1cd/rheinkraft_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b5dfb3aab2d341729f2764e48dbbbb91/rheinkraft_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -940,7 +1408,11 @@
     "characterId": "1111",
     "cardRarityType": "uma",
     "assetbundleName": "airmessiah",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/43dcca4a9ddb8e45fc4df0e1192caed2.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/9b3c204c205f4e76ae1c31f3db2e9646/airmessiah_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/9b3c204c205f4e76ae1c31f3db2e9646/airmessiah_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/4f4ce57568f14a04919af2a8d2e03ec7/airmessiah_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -948,7 +1420,11 @@
     "characterId": "1112",
     "cardRarityType": "uma",
     "assetbundleName": "daringheart",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/7244d78a11dd7d88b3d46ef956d7614a.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/837386c50db047d9b723a27440b35e58/daringheart_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/837386c50db047d9b723a27440b35e58/daringheart_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d31484970dbc41469971d05f3ce34714/daringheart_icon.png"
+    ],
     "className": "中等部"
   },
   {
@@ -956,7 +1432,11 @@
     "characterId": "1079",
     "cardRarityType": "uma",
     "assetbundleName": "furioso",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/de2acadacba25b12d72af5932952b3c2.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3de9f0dba51749d1828aee4adaf39549/furioso_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3de9f0dba51749d1828aee4adaf39549/furioso_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/9a4ea9bc4568418f8a5d79d478aa28a1/furioso_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -964,7 +1444,11 @@
     "characterId": "1080",
     "cardRarityType": "uma",
     "assetbundleName": "transcend",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/95ddf3e70adefc1f6f2547cb255afb5e.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a3bed0aee9c04959a8086d09c8409b66/transcend_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a3bed0aee9c04959a8086d09c8409b66/transcend_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/cf56876004c34b8a982918b979e887e9/transcend_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -972,7 +1456,11 @@
     "characterId": "1081",
     "cardRarityType": "uma",
     "assetbundleName": "espoircity",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/a29faa0ba9af899fa5b001f8c293270c.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6c6e4c6387bc40fd9a3f63e2b414f62a/espoircity_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6c6e4c6387bc40fd9a3f63e2b414f62a/espoircity_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c94d0f4aa9384f12ab268120915e73c2/espoircity_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -980,7 +1468,11 @@
     "characterId": "1092",
     "cardRarityType": "uma",
     "assetbundleName": "dantsuflame",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/236ca524859e17af82d7ebc903b8242e.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/9367bd41586947ecb0d7d83e9a16e431/dantsuflame_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/9367bd41586947ecb0d7d83e9a16e431/dantsuflame_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/45130a57c3754f2cb3ffb66b452d2293/dantsuflame_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -988,7 +1480,11 @@
     "characterId": "1096",
     "cardRarityType": "uma",
     "assetbundleName": "noreason",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/1acc564c8f281b659c4840b401e59622.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/4d848a9d09eb4d4996321debd8c22c8c/noreason_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/4d848a9d09eb4d4996321debd8c22c8c/noreason_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/f62b03ff22694b6697ad64cac6b314bc/noreason_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -996,7 +1492,11 @@
     "characterId": "1097",
     "cardRarityType": "uma",
     "assetbundleName": "stillinlove",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/0d98ab7c29ecfab8e1a861e5e42f5f07.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/ce53c7d0280049c3b9f474955ef9e51b/stillinlove_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/ce53c7d0280049c3b9f474955ef9e51b/stillinlove_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/080b1657e29b4f08af9de1ed2c3440e3/stillinlove_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -1004,7 +1504,11 @@
     "characterId": "1115",
     "cardRarityType": "uma",
     "assetbundleName": "orfevre",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/1790f1bc804606d9ea00f0a47374522f.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/1a5c8514113b4c1dba972e9508e0ed78/orfevre_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/1a5c8514113b4c1dba972e9508e0ed78/orfevre_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a798b27f1c68421ca6c104c3e2060b79/orfevre_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -1012,7 +1516,11 @@
     "characterId": "1116",
     "cardRarityType": "uma",
     "assetbundleName": "gentildonna",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/ab3463449dc9d1969698f577f493b463.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c3c0c457704a447c9061d1631588f2c8/gentildonna_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c3c0c457704a447c9061d1631588f2c8/gentildonna_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/662d120123ef40c3aa628a2b651442b3/gentildonna_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -1020,7 +1528,11 @@
     "characterId": "1117",
     "cardRarityType": "uma",
     "assetbundleName": "winvariation",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/c43deb7c06c63934c446340fa7a57577.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c15373cabd854df7ae8c16be37c28db8/winvariation_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c15373cabd854df7ae8c16be37c28db8/winvariation_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/0fb28a9c7e9d45e49c9527eebddcbdb1/winvariation_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -1028,7 +1540,11 @@
     "characterId": "2007",
     "cardRarityType": "uma",
     "assetbundleName": "sononelfie",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/b0933211c421b0bae765682acd34ebf9.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/f68afd4bf36643139bb7942c80b5be7f/sononelfie_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/f68afd4bf36643139bb7942c80b5be7f/sononelfie_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/4aaa7a3688c24dc78e419cc9a9f9f5f1/sononelfie_icon.png"
+    ],
     "className": ""
   },
   {
@@ -1036,7 +1552,11 @@
     "characterId": "9044",
     "cardRarityType": "uma",
     "assetbundleName": "tsurugiryoka",
-    "image_url": "https://umamusume.jp/app/wp-content/uploads/2024/02/128c6783afb61f3a19e3f1053e0d2bf5.png",
+    "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2f76d29b4f0a4ae5b047f3ed9f1016cf/tsurugiryoka_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/2f76d29b4f0a4ae5b047f3ed9f1016cf/tsurugiryoka_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b0211f0340a74a34bea67a5ea66b6d78/tsurugiryoka_icon.png"
+    ],
     "className": ""
   },
   {
@@ -1045,6 +1565,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "durandal",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/54adb7d4190642e4a9d29b6e8da8ddf8/durandal_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/54adb7d4190642e4a9d29b6e8da8ddf8/durandal_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d396a938e026420f921707e2fafebddc/durandal_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -1053,6 +1577,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "calstonelighto",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/f1702e191d4045e3854dca9f074228fe/calstonelighto_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/f1702e191d4045e3854dca9f074228fe/calstonelighto_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/c76ed7b6ba3e4211bc3327ca62e8cff6/calstonelighto_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -1061,6 +1589,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "dreamjourney",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/7ec1f7674eb34eafb8bc4cec6e8ab343/dreamjourney_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/7ec1f7674eb34eafb8bc4cec6e8ab343/dreamjourney_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/47d286c259134c028c607563edbc2547/dreamjourney_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -1069,6 +1601,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "buenavista",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/7f12ea9d50b44a4a9e0b8956eb1fd223/buenavista_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/7f12ea9d50b44a4a9e0b8956eb1fd223/buenavista_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b5f55dae42f14be08711d570e3921804/buenavista_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -1077,6 +1613,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "believe",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/142f6ac947e7444bb5235b1e17c8c5b7/believe_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/142f6ac947e7444bb5235b1e17c8c5b7/believe_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/575d943a9ac64d77bc550019ef548433/believe_icon.png"
+    ],
     "className": "高等部"
   },
   {
@@ -1085,6 +1625,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "bubblegumfellow",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/eb96eb8435944a0abb98c3893afa588a/bubblegumfellow_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/eb96eb8435944a0abb98c3893afa588a/bubblegumfellow_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b6f89363c469428285da8427a73e03e8/bubblegumfellow_icon.png"
+    ],
     "className": "High School"
   },
   {
@@ -1093,6 +1637,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "fusaichipandora",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/be5f9ba589d34592bc05a22e347c7a77/fusaichipandora_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/be5f9ba589d34592bc05a22e347c7a77/fusaichipandora_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/65960c56dffd472e9e706753e61f7ce1/fusaichipandora_icon.png"
+    ],
     "className": "中等部"
   },
   {
@@ -1101,6 +1649,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "sugarlights",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e1631cf19fec4940ace4e4adb7fbad07/sugarlights_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e1631cf19fec4940ace4e4adb7fbad07/sugarlights_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a4122d2549834a5198e685d947d54162/sugarlights_icon.png"
+    ],
     "className": ""
   },
   {
@@ -1109,6 +1661,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "blastonepiece",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/15d555352d574b44b0106fc70fb0892f/blastonepiece_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/15d555352d574b44b0106fc70fb0892f/blastonepiece_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/47660e14ce4f4f4fabb8a6b045ab4d0b/blastonepiece_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -1117,6 +1673,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "sakurachitoseo",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3aa6c2887e5c48348a9ecf646d123dc1/sakurachitoseo_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3aa6c2887e5c48348a9ecf646d123dc1/sakurachitoseo_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/f3ac83fe050844d0b6a70c0a8ef68c61/sakurachitoseo_icon.png"
+    ],
     "className": "高等部"
   },
   {
@@ -1125,6 +1685,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "haiseiko",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/9649d25c93c2409a85cd9af0444fa051/haiseiko_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/9649d25c93c2409a85cd9af0444fa051/haiseiko_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/77842405b2754037b3470a695d018d08/haiseiko_icon.png"
+    ],
     "className": ""
   },
   {
@@ -1133,6 +1697,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "speedsymboli",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d64cf4d8702648c1bc2aa5c5a6d7afbd/speedsymboli_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d64cf4d8702648c1bc2aa5c5a6d7afbd/speedsymboli_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b7c4c4544ff844879bb3e2453799ee75/speedsymboli_icon.png"
+    ],
     "className": ""
   },
   {
@@ -1141,6 +1709,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "saintlite",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6fe1f0532dcb4d7b9afb1f25c21744ee/saintlite_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6fe1f0532dcb4d7b9afb1f25c21744ee/saintlite_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/4081769bd08e43a4a9d034c609142652/saintlite_icon.png"
+    ],
     "className": ""
   },
   {
@@ -1149,6 +1721,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "currenbouquetdor",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/65ff1570a4ef40af9d00918eb94a9e6f/currenbouquetdor_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/65ff1570a4ef40af9d00918eb94a9e6f/currenbouquetdor_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/bc00e8b39b094be48c3e849273dbe196/currenbouquetdor_icon.png"
+    ],
     "className": "中等部"
   },
   {
@@ -1157,6 +1733,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "chronogenesis",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e515893fdf2249a8abe6602ee5ebc95e/chronogenesis_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e515893fdf2249a8abe6602ee5ebc95e/chronogenesis_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/1b2325f4acaf4079924941d8bbdb873b/chronogenesis_icon.png"
+    ],
     "className": "中等部"
   },
   {
@@ -1165,6 +1745,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "lovesonlyyou",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/abbfc5bb547f4d03a886e10f1072d603/lovesonlyyou_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/abbfc5bb547f4d03a886e10f1072d603/lovesonlyyou_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6fc88f4252eb4c898e362efa831ed577/lovesonlyyou_icon.png"
+    ],
     "className": "中等部"
   },
   {
@@ -1173,6 +1757,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "granalegria",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/186354558c8c4dec98c37d6e67cc2464/granalegria_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/186354558c8c4dec98c37d6e67cc2464/granalegria_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/575611d9711d4da3840f13618d1c8c21/granalegria_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -1181,6 +1769,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "luckylilac",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/781af99cf1d84e63bc2026538f0a55a5/luckylilac_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/781af99cf1d84e63bc2026538f0a55a5/luckylilac_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/46e363185d2f442bbba7882346446650/luckylilac_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -1189,6 +1781,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "almondeye",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6009fc8852bf4db3930510850c2bc8e9/almondeye_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/6009fc8852bf4db3930510850c2bc8e9/almondeye_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b9f6142acbfa4eb4ba7c9a56899de5c8/almondeye_icon.png"
+    ],
     "className": "Middle School"
   },
   {
@@ -1197,6 +1793,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "fenomeno",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d2d0f8f360cb46109a7acae5ce630be9/fenomeno_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d2d0f8f360cb46109a7acae5ce630be9/fenomeno_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/76ace758891b4446ae31751f41a6c492/fenomeno_icon.png"
+    ],
     "className": "高等部"
   },
   {
@@ -1205,6 +1805,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "staygold",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/1ae64df3a200487b88facc86e7ffd103/staygold_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/1ae64df3a200487b88facc86e7ffd103/staygold_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/e3759ff2ed3f40fca6600ec447af0141/staygold_icon.png"
+    ],
     "className": "高等部"
   },
   {
@@ -1213,6 +1817,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "tuckerbryne",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/08cdb7dce3a2419e876a1405306d4a0a/tuckerbryne_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/08cdb7dce3a2419e876a1405306d4a0a/tuckerbryne_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/b7a7561363884194a2fade6376588952/tuckerbryne_icon.png"
+    ],
     "className": ""
   },
   {
@@ -1221,6 +1829,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "admiregroove",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/1b6233c9460c45be81a034dd53ffe7b7/admiregroove_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/1b6233c9460c45be81a034dd53ffe7b7/admiregroove_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d062be63cff04d7b861e3f735c9b0ae0/admiregroove_icon.png"
+    ],
     "className": "高等部"
   },
   {
@@ -1229,6 +1841,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "reddesire",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d20a53c8c7be42d79bcb938abcff5e19/reddesire_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d20a53c8c7be42d79bcb938abcff5e19/reddesire_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/cb4af3e7f7f1487393d9bdf3a6d56794/reddesire_icon.png"
+    ],
     "className": "中等部"
   },
   {
@@ -1237,6 +1853,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "yunohanabloom",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3df80272be754893a01b18c65f022cd8/yunohanabloom_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3df80272be754893a01b18c65f022cd8/yunohanabloom_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/8e98ba0c4c7d4bd8afac8bd8368c4a8f/yunohanabloom_icon.png"
+    ],
     "className": ""
   },
   {
@@ -1245,6 +1865,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "hoshinakiyoko",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d594bf4806a44533a66bef1e96fcf5a4/hoshinakiyoko_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d594bf4806a44533a66bef1e96fcf5a4/hoshinakiyoko_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/699d5e7f597546dc855d7a15255ef93c/hoshinakiyoko_icon.png"
+    ],
     "className": ""
   },
   {
@@ -1253,6 +1877,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "kiseki",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/7134544fbb3d4cc38936414e1dadd3f7/kiseki_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/7134544fbb3d4cc38936414e1dadd3f7/kiseki_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/170cf5a83cdb4f9ea69014df5b03f7cb/kiseki_icon.png"
+    ],
     "className": "中等部"
   },
   {
@@ -1261,6 +1889,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "casinodrive",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/fff5260b6f454d4eaa8204afdd261332/casinodrive_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/fff5260b6f454d4eaa8204afdd261332/casinodrive_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5aad4ede013a4ba4b49043940e3c0c92/casinodrive_icon.png"
+    ],
     "className": ""
   },
   {
@@ -1269,6 +1901,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "marchelorraine",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a34bb4e4616249eab5e8a21bd7c4eca4/marchelorraine_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/a34bb4e4616249eab5e8a21bd7c4eca4/marchelorraine_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/3f2a1725304b43b983783905b1bd2a82/marchelorraine_icon.png"
+    ],
     "className": "中等部"
   },
   {
@@ -1277,6 +1913,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "foreveryoung",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/09175cc749d347109289ca5a8b4da2c0/foreveryoung_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/09175cc749d347109289ca5a8b4da2c0/foreveryoung_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/68579507696e4ec6b73969d24ed9057c/foreveryoung_icon.png"
+    ],
     "className": "高等部"
   },
   {
@@ -1285,6 +1925,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "rulership",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/84a7d75432a94a11ba16dc515263342e/rulership_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/84a7d75432a94a11ba16dc515263342e/rulership_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/4aeb1b2498dd4371a3333a59fedb22ca/rulership_icon.png"
+    ],
     "className": ""
   },
   {
@@ -1293,6 +1937,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "rosekingdom",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d8395693e7d44d58b051d29b85acf0ea/rosekingdom_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/d8395693e7d44d58b051d29b85acf0ea/rosekingdom_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/cf691c5426ea48e2ad8c83f05284d065/rosekingdom_icon.png"
+    ],
     "className": ""
   },
   {
@@ -1301,6 +1949,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "victoirepisa",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/74830f0fde314abca6ff711118afbdfb/victoirepisa_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/74830f0fde314abca6ff711118afbdfb/victoirepisa_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/bfbe62c6b00d49dbab70299dc1632455/victoirepisa_icon.png"
+    ],
     "className": "高等部"
   },
   {
@@ -1309,6 +1961,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "logotype",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/dceb3d9190484c2ab6fcd465c8751eba/logotype_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/dceb3d9190484c2ab6fcd465c8751eba/logotype_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/caae8e5a5fdd4bbda8a350644f197d39/logotype_icon.png"
+    ],
     "className": ""
   },
   {
@@ -1317,6 +1973,10 @@
     "cardRarityType": "uma",
     "assetbundleName": "epiphaneia",
     "image_url": "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5a9f49152d614451a8ee0957fe3a28d1/epiphaneia_list.png",
+    "image_urls": [
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/5a9f49152d614451a8ee0957fe3a28d1/epiphaneia_list.png",
+      "https://images.microcms-assets.io/assets/973fc097984b400db8729642ddff5938/39645c138d9f44dea5d55599af96b231/epiphaneia_icon.png"
+    ],
     "className": ""
   }
 ]

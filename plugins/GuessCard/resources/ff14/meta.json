@@ -1,0 +1,14 @@
+{
+  "source": "ff14.huijiwiki.com Data:Instance + monster pages",
+  "display": "FF14",
+  "character_count": 112,
+  "card_count": 112,
+  "duty_count": 119,
+  "skipped_count": 14,
+  "rules": {
+    "trial": "歼殛优先，无极则保留歼灭",
+    "savage": "全部零式楼层",
+    "ultimate": "绝境战全阶段 Boss",
+    "dedupe": "按中文 Boss 名去重"
+  }
+}

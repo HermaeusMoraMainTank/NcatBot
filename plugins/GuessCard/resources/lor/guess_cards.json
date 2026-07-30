@@ -1,0 +1,1817 @@
+[
+  {
+    "id": 260132663,
+    "characterId": "lor_Alloc",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Alloc",
+    "image_url": "https://libraryofruina.wiki.gg/images/AllocFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/AllocFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 548886512,
+    "characterId": "lor_Alpha",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Alpha",
+    "image_url": "https://libraryofruina.wiki.gg/images/AlphaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/AlphaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 309640041,
+    "characterId": "lor_Angela",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Angela",
+    "image_url": "https://libraryofruina.wiki.gg/images/AngelaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/AngelaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 358864344,
+    "characterId": "lor_Anton",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Anton",
+    "image_url": "https://libraryofruina.wiki.gg/images/AntonFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/AntonFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 913858036,
+    "characterId": "lor_Argalia",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Argalia",
+    "image_url": "https://libraryofruina.wiki.gg/images/ArgaliaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/ArgaliaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 152803671,
+    "characterId": "lor_Arnold",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Arnold",
+    "image_url": "https://libraryofruina.wiki.gg/images/ArnoldFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/ArnoldFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 220658571,
+    "characterId": "lor_Bada",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Bada",
+    "image_url": "https://libraryofruina.wiki.gg/images/BadaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/BadaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 225698970,
+    "characterId": "lor_Baral",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Baral",
+    "image_url": "https://libraryofruina.wiki.gg/images/BaralFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/BaralFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 901603478,
+    "characterId": "lor_Beta",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Beta",
+    "image_url": "https://libraryofruina.wiki.gg/images/BetaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/BetaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 150790680,
+    "characterId": "lor_Binah",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Binah",
+    "image_url": "https://libraryofruina.wiki.gg/images/BinahFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/BinahFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 609448162,
+    "characterId": "lor_Bono",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Bono",
+    "image_url": "https://libraryofruina.wiki.gg/images/BonoFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/BonoFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 392026537,
+    "characterId": "lor_Boris",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Boris",
+    "image_url": "https://libraryofruina.wiki.gg/images/BorisFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/BorisFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 304580525,
+    "characterId": "lor_Bremen",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Bremen",
+    "image_url": "https://libraryofruina.wiki.gg/images/BremenFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/BremenFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 187458774,
+    "characterId": "lor_Carmen",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Carmen",
+    "image_url": "https://libraryofruina.wiki.gg/images/CarmenFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/CarmenFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 983606824,
+    "characterId": "lor_Cecil",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Cecil",
+    "image_url": "https://libraryofruina.wiki.gg/images/CecilFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/CecilFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 77108146,
+    "characterId": "lor_Chesed",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Chesed",
+    "image_url": "https://libraryofruina.wiki.gg/images/ChesedFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/ChesedFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 597770752,
+    "characterId": "lor_Chun",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Chun",
+    "image_url": "https://libraryofruina.wiki.gg/images/ChunFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/ChunFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 326200759,
+    "characterId": "lor_Consta",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Consta",
+    "image_url": "https://libraryofruina.wiki.gg/images/ConstaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/ConstaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 853246295,
+    "characterId": "lor_Dalloc",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Dalloc",
+    "image_url": "https://libraryofruina.wiki.gg/images/DallocFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/DallocFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 485697060,
+    "characterId": "lor_Denis",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Denis",
+    "image_url": "https://libraryofruina.wiki.gg/images/DenisFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/DenisFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 532501516,
+    "characterId": "lor_Dino",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Dino",
+    "image_url": "https://libraryofruina.wiki.gg/images/DinoFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/DinoFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 486861982,
+    "characterId": "lor_Eileen",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Eileen",
+    "image_url": "https://libraryofruina.wiki.gg/images/Eileen1GearFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Eileen1GearFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 262584192,
+    "characterId": "lor_Elena",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Elena",
+    "image_url": "https://libraryofruina.wiki.gg/images/ElenaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/ElenaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 321020212,
+    "characterId": "lor_Emma",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Emma",
+    "image_url": "https://libraryofruina.wiki.gg/images/EmmaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/EmmaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 821289700,
+    "characterId": "lor_Eri",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Eri",
+    "image_url": "https://libraryofruina.wiki.gg/images/EriFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/EriFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 227606640,
+    "characterId": "lor_Esther",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Esther",
+    "image_url": "https://libraryofruina.wiki.gg/images/EstherFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/EstherFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 702971938,
+    "characterId": "lor_Finn",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Finn",
+    "image_url": "https://libraryofruina.wiki.gg/images/FinnFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/FinnFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 392938147,
+    "characterId": "lor_Gamma",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Gamma",
+    "image_url": "https://libraryofruina.wiki.gg/images/GammaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/GammaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 301952105,
+    "characterId": "lor_Gebura",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Gebura",
+    "image_url": "https://libraryofruina.wiki.gg/images/GeburaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/GeburaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 437816316,
+    "characterId": "lor_Gin",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Gin",
+    "image_url": "https://libraryofruina.wiki.gg/images/GinFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/GinFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 925281214,
+    "characterId": "lor_Gloria",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Gloria",
+    "image_url": "https://libraryofruina.wiki.gg/images/GloriaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/GloriaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 346961213,
+    "characterId": "lor_Greta",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Greta",
+    "image_url": "https://libraryofruina.wiki.gg/images/GretaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/GretaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 823764931,
+    "characterId": "lor_Gyeong_mi",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Gyeong_mi",
+    "image_url": "https://libraryofruina.wiki.gg/images/Gyeong-miFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Gyeong-miFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 354861724,
+    "characterId": "lor_Harold",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Harold",
+    "image_url": "https://libraryofruina.wiki.gg/images/HaroldFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/HaroldFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 225275150,
+    "characterId": "lor_Hod",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Hod",
+    "image_url": "https://libraryofruina.wiki.gg/images/HodFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/HodFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 824664342,
+    "characterId": "lor_Hokma",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Hokma",
+    "image_url": "https://libraryofruina.wiki.gg/images/HokmaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/HokmaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 85059332,
+    "characterId": "lor_Hubert",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Hubert",
+    "image_url": "https://libraryofruina.wiki.gg/images/HubertFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/HubertFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 59133932,
+    "characterId": "lor_Iori",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Iori",
+    "image_url": "https://libraryofruina.wiki.gg/images/IoriFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/IoriFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 349229411,
+    "characterId": "lor_Isadora",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Isadora",
+    "image_url": "https://libraryofruina.wiki.gg/images/IsadoraFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/IsadoraFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 653323768,
+    "characterId": "lor_Jack",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Jack",
+    "image_url": "https://libraryofruina.wiki.gg/images/JackFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/JackFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 789911379,
+    "characterId": "lor_Jae_heon",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Jae_heon",
+    "image_url": "https://libraryofruina.wiki.gg/images/Jae-heonFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Jae-heonFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 185106283,
+    "characterId": "lor_Jin",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Jin",
+    "image_url": "https://libraryofruina.wiki.gg/images/JinFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/JinFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 967319977,
+    "characterId": "lor_Julia",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Julia",
+    "image_url": "https://libraryofruina.wiki.gg/images/JuliaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/JuliaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 486395095,
+    "characterId": "lor_Kali",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Kali",
+    "image_url": "https://libraryofruina.wiki.gg/images/KaliFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/KaliFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 522771360,
+    "characterId": "lor_Kalo",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Kalo",
+    "image_url": "https://libraryofruina.wiki.gg/images/KaloFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/KaloFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 783486340,
+    "characterId": "lor_Katriel",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Katriel",
+    "image_url": "https://libraryofruina.wiki.gg/images/KatrielFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/KatrielFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 880235338,
+    "characterId": "lor_Lenny",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Lenny",
+    "image_url": "https://libraryofruina.wiki.gg/images/LennyFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/LennyFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 549854164,
+    "characterId": "lor_Lesti",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Lesti",
+    "image_url": "https://libraryofruina.wiki.gg/images/LestiFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/LestiFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 982076212,
+    "characterId": "lor_Liwei",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Liwei",
+    "image_url": "https://libraryofruina.wiki.gg/images/LiweiFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/LiweiFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 347748976,
+    "characterId": "lor_Lowell",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Lowell",
+    "image_url": "https://libraryofruina.wiki.gg/images/LowellFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/LowellFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 554805663,
+    "characterId": "lor_Luda",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Luda",
+    "image_url": "https://libraryofruina.wiki.gg/images/LudaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/LudaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 950083928,
+    "characterId": "lor_Lulu",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Lulu",
+    "image_url": "https://libraryofruina.wiki.gg/images/LuluFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/LuluFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 289443311,
+    "characterId": "lor_Lyla",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Lyla",
+    "image_url": "https://libraryofruina.wiki.gg/images/LylaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/LylaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 843403848,
+    "characterId": "lor_Malkuth",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Malkuth",
+    "image_url": "https://libraryofruina.wiki.gg/images/MalkuthFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/MalkuthFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 952456946,
+    "characterId": "lor_Mang_chi",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Mang_chi",
+    "image_url": "https://libraryofruina.wiki.gg/images/Mang-chiFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Mang-chiFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 226498280,
+    "characterId": "lor_Mars",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Mars",
+    "image_url": "https://libraryofruina.wiki.gg/images/MarsFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/MarsFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 437499897,
+    "characterId": "lor_Martina",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Martina",
+    "image_url": "https://libraryofruina.wiki.gg/images/MartinaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/MartinaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 868393377,
+    "characterId": "lor_Maxim",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Maxim",
+    "image_url": "https://libraryofruina.wiki.gg/images/MaximFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/MaximFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 994008941,
+    "characterId": "lor_McCullin",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_McCullin",
+    "image_url": "https://libraryofruina.wiki.gg/images/McCullinFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/McCullinFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 52055841,
+    "characterId": "lor_Mei",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Mei",
+    "image_url": "https://libraryofruina.wiki.gg/images/MeiFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/MeiFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 767022414,
+    "characterId": "lor_Meow",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Meow",
+    "image_url": "https://libraryofruina.wiki.gg/images/MeowFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/MeowFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 520385078,
+    "characterId": "lor_Merry",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Merry",
+    "image_url": "https://libraryofruina.wiki.gg/images/MerryFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/MerryFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 744596833,
+    "characterId": "lor_Mi",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Mi",
+    "image_url": "https://libraryofruina.wiki.gg/images/MiFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/MiFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 108625204,
+    "characterId": "lor_Mika",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Mika",
+    "image_url": "https://libraryofruina.wiki.gg/images/MikaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/MikaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 762153252,
+    "characterId": "lor_Mirinae",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Mirinae",
+    "image_url": "https://libraryofruina.wiki.gg/images/MirinaeFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/MirinaeFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 206997682,
+    "characterId": "lor_Miris",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Miris",
+    "image_url": "https://libraryofruina.wiki.gg/images/MirisFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/MirisFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 960352144,
+    "characterId": "lor_Mo",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Mo",
+    "image_url": "https://libraryofruina.wiki.gg/images/MoFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/MoFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 648216131,
+    "characterId": "lor_Moirai",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Moirai",
+    "image_url": "https://libraryofruina.wiki.gg/images/MoiraiFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/MoiraiFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 696688471,
+    "characterId": "lor_MuMu",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_MuMu",
+    "image_url": "https://libraryofruina.wiki.gg/images/MuMuFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/MuMuFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 794057619,
+    "characterId": "lor_Myo",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Myo",
+    "image_url": "https://libraryofruina.wiki.gg/images/MyoFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/MyoFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 385312236,
+    "characterId": "lor_Naimon",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Naimon",
+    "image_url": "https://libraryofruina.wiki.gg/images/NaimonFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/NaimonFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 725605073,
+    "characterId": "lor_Naoki",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Naoki",
+    "image_url": "https://libraryofruina.wiki.gg/images/NaokiFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/NaokiFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 964393263,
+    "characterId": "lor_Nemo",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Nemo",
+    "image_url": "https://libraryofruina.wiki.gg/images/NemoFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/NemoFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 863958774,
+    "characterId": "lor_Netzach",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Netzach",
+    "image_url": "https://libraryofruina.wiki.gg/images/NetzachFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/NetzachFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 613564040,
+    "characterId": "lor_Nikolai",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Nikolai",
+    "image_url": "https://libraryofruina.wiki.gg/images/NikolaiFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/NikolaiFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 930730729,
+    "characterId": "lor_Nimble_Puppet",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Nimble_Puppet",
+    "image_url": "https://libraryofruina.wiki.gg/images/NimblePuppetFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/NimblePuppetFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 442244414,
+    "characterId": "lor_Noah",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Noah",
+    "image_url": "https://libraryofruina.wiki.gg/images/NoahFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/NoahFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 355055178,
+    "characterId": "lor_Ogier",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Ogier",
+    "image_url": "https://libraryofruina.wiki.gg/images/OgierFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/OgierFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 240596245,
+    "characterId": "lor_Oink",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Oink",
+    "image_url": "https://libraryofruina.wiki.gg/images/OinkFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/OinkFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 783164860,
+    "characterId": "lor_Olga",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Olga",
+    "image_url": "https://libraryofruina.wiki.gg/images/OlgaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/OlgaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 44406143,
+    "characterId": "lor_Olivier",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Olivier",
+    "image_url": "https://libraryofruina.wiki.gg/images/OlivierFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/OlivierFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 977540324,
+    "characterId": "lor_Oscar",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Oscar",
+    "image_url": "https://libraryofruina.wiki.gg/images/OscarFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/OscarFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 329299469,
+    "characterId": "lor_Oswald",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Oswald",
+    "image_url": "https://libraryofruina.wiki.gg/images/OswaldFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/OswaldFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 232201760,
+    "characterId": "lor_Pamela",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Pamela",
+    "image_url": "https://libraryofruina.wiki.gg/images/PamelaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/PamelaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 393555666,
+    "characterId": "lor_Pameli",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Pameli",
+    "image_url": "https://libraryofruina.wiki.gg/images/PameliFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/PameliFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 470682629,
+    "characterId": "lor_Pete",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Pete",
+    "image_url": "https://libraryofruina.wiki.gg/images/PeteFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/PeteFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 750984622,
+    "characterId": "lor_Philip",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Philip",
+    "image_url": "https://libraryofruina.wiki.gg/images/PhilipFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/PhilipFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 482522169,
+    "characterId": "lor_Pierre",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Pierre",
+    "image_url": "https://libraryofruina.wiki.gg/images/PierreFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/PierreFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 895291115,
+    "characterId": "lor_Pluto",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Pluto",
+    "image_url": "https://libraryofruina.wiki.gg/images/PlutoFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/PlutoFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 419848113,
+    "characterId": "lor_Puppet",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Puppet",
+    "image_url": "https://libraryofruina.wiki.gg/images/PuppetFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/PuppetFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 792658389,
+    "characterId": "lor_Rain",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Rain",
+    "image_url": "https://libraryofruina.wiki.gg/images/RainFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/RainFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 725753231,
+    "characterId": "lor_Renaud",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Renaud",
+    "image_url": "https://libraryofruina.wiki.gg/images/RenaudFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/RenaudFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 600984615,
+    "characterId": "lor_Roland",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Roland",
+    "image_url": "https://libraryofruina.wiki.gg/images/RolandFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/RolandFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 350587816,
+    "characterId": "lor_Rose",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Rose",
+    "image_url": "https://libraryofruina.wiki.gg/images/RoseFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/RoseFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 112443377,
+    "characterId": "lor_Rudolph",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Rudolph",
+    "image_url": "https://libraryofruina.wiki.gg/images/RudolphFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/RudolphFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 313599856,
+    "characterId": "lor_Salvador",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Salvador",
+    "image_url": "https://libraryofruina.wiki.gg/images/SalvadorFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/SalvadorFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 82640645,
+    "characterId": "lor_San",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_San",
+    "image_url": "https://libraryofruina.wiki.gg/images/SanFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/SanFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 603934148,
+    "characterId": "lor_Sayo",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Sayo",
+    "image_url": "https://libraryofruina.wiki.gg/images/SayoFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/SayoFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 793681498,
+    "characterId": "lor_Sen",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Sen",
+    "image_url": "https://libraryofruina.wiki.gg/images/SenFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/SenFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 28747482,
+    "characterId": "lor_Stephan",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Stephan",
+    "image_url": "https://libraryofruina.wiki.gg/images/StephanFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/StephanFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 756509749,
+    "characterId": "lor_Taein",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Taein",
+    "image_url": "https://libraryofruina.wiki.gg/images/TaeinFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/TaeinFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 808092863,
+    "characterId": "lor_Tamaki",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Tamaki",
+    "image_url": "https://libraryofruina.wiki.gg/images/TamakiFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/TamakiFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 255617417,
+    "characterId": "lor_Tanya",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Tanya",
+    "image_url": "https://libraryofruina.wiki.gg/images/TanyaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/TanyaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 796647911,
+    "characterId": "lor_Tenma",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Tenma",
+    "image_url": "https://libraryofruina.wiki.gg/images/TenmaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/TenmaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 500636741,
+    "characterId": "lor_Tiphereth",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Tiphereth",
+    "image_url": "https://libraryofruina.wiki.gg/images/TipherethFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/TipherethFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 381601876,
+    "characterId": "lor_Tomerry",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Tomerry",
+    "image_url": "https://libraryofruina.wiki.gg/images/TomerryFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/TomerryFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 678765821,
+    "characterId": "lor_Tommy",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Tommy",
+    "image_url": "https://libraryofruina.wiki.gg/images/TommyFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/TommyFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 540804771,
+    "characterId": "lor_Valentin",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Valentin",
+    "image_url": "https://libraryofruina.wiki.gg/images/ValentinFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/ValentinFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 453697369,
+    "characterId": "lor_Valerie",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Valerie",
+    "image_url": "https://libraryofruina.wiki.gg/images/ValerieFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/ValerieFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 783652934,
+    "characterId": "lor_Walter",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Walter",
+    "image_url": "https://libraryofruina.wiki.gg/images/WalterFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/WalterFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 496341179,
+    "characterId": "lor_Wang",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Wang",
+    "image_url": "https://libraryofruina.wiki.gg/images/WangFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/WangFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 693681417,
+    "characterId": "lor_Xiao",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Xiao",
+    "image_url": "https://libraryofruina.wiki.gg/images/XiaoFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/XiaoFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 576504349,
+    "characterId": "lor_Yan",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Yan",
+    "image_url": "https://libraryofruina.wiki.gg/images/YanFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/YanFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 720407171,
+    "characterId": "lor_Yesod",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Yesod",
+    "image_url": "https://libraryofruina.wiki.gg/images/YesodFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/YesodFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 460843592,
+    "characterId": "lor_Yujin",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Yujin",
+    "image_url": "https://libraryofruina.wiki.gg/images/YujinFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/YujinFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 249250488,
+    "characterId": "lor_Yun",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Yun",
+    "image_url": "https://libraryofruina.wiki.gg/images/YunFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/YunFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 80539321,
+    "characterId": "lor_Yuna",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Yuna",
+    "image_url": "https://libraryofruina.wiki.gg/images/YunaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/YunaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 726010734,
+    "characterId": "lor_Zena",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Zena",
+    "image_url": "https://libraryofruina.wiki.gg/images/ZenaFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/ZenaFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 677161217,
+    "characterId": "lor_Zulu",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_Zulu",
+    "image_url": "https://libraryofruina.wiki.gg/images/ZuluFullBody.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/ZuluFullBody.png"
+    ],
+    "kind": "portrait"
+  },
+  {
+    "id": 261437250,
+    "characterId": "lor_abno_Bloodbath",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Bloodbath",
+    "image_url": "https://libraryofruina.wiki.gg/images/Wrist_Cutter_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Wrist_Cutter_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 370941562,
+    "characterId": "lor_abno_Heart_of_Aspiration",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Heart_of_Aspiration",
+    "image_url": "https://libraryofruina.wiki.gg/images/Aspiration_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Aspiration_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 617490909,
+    "characterId": "lor_abno_Pinocchio",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Pinocchio",
+    "image_url": "https://libraryofruina.wiki.gg/images/Marionette_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Marionette_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 375309138,
+    "characterId": "lor_abno_The_Snow_Queen",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_The_Snow_Queen",
+    "image_url": "https://libraryofruina.wiki.gg/images/Frost_Splinter_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Frost_Splinter_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 119628204,
+    "characterId": "lor_abno_Silent_Girl",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Silent_Girl",
+    "image_url": "https://libraryofruina.wiki.gg/images/Remorse_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Remorse_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 550671850,
+    "characterId": "lor_abno_Scorched_Girl",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Scorched_Girl",
+    "image_url": "https://libraryofruina.wiki.gg/images/Fourth_Match_Flame_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Fourth_Match_Flame_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 616650468,
+    "characterId": "lor_abno_Happy_Teddy_Bear",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Happy_Teddy_Bear",
+    "image_url": "https://libraryofruina.wiki.gg/images/The_Forgotten_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/The_Forgotten_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 279259857,
+    "characterId": "lor_abno_Fairy_Festival",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Fairy_Festival",
+    "image_url": "https://libraryofruina.wiki.gg/images/Wingbeat_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Wingbeat_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 504808779,
+    "characterId": "lor_abno_Queen_Bee",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Queen_Bee",
+    "image_url": "https://libraryofruina.wiki.gg/images/Hornet_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Hornet_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 255325668,
+    "characterId": "lor_abno_Snow_White_s_Apple",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Snow_White_s_Apple",
+    "image_url": "https://libraryofruina.wiki.gg/images/Green_Stem_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Green_Stem_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 790409622,
+    "characterId": "lor_abno_Forsaken_Murderer",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Forsaken_Murderer",
+    "image_url": "https://libraryofruina.wiki.gg/images/Regret_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Regret_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 363854692,
+    "characterId": "lor_abno_All_Around_Helper",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_All_Around_Helper",
+    "image_url": "https://libraryofruina.wiki.gg/images/Grinder_Mk._5-2_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Grinder_Mk._5-2_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 726024217,
+    "characterId": "lor_abno_Singing_Machine",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Singing_Machine",
+    "image_url": "https://libraryofruina.wiki.gg/images/Harmony_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Harmony_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 928221978,
+    "characterId": "lor_abno_Funeral_of_the_Dead_Butterflies",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Funeral_of_the_Dead_Butterflies",
+    "image_url": "https://libraryofruina.wiki.gg/images/Solemn_Lament_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Solemn_Lament_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 472761065,
+    "characterId": "lor_abno_Der_Freisch_tz",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Der_Freisch_tz",
+    "image_url": "https://libraryofruina.wiki.gg/images/Magic_Bullet_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Magic_Bullet_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 646234672,
+    "characterId": "lor_abno_Today_s_Shy_Look",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Today_s_Shy_Look",
+    "image_url": "https://libraryofruina.wiki.gg/images/Today%27s_Expression_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Today%27s_Expression_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 420470069,
+    "characterId": "lor_abno_The_Red_Shoes",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_The_Red_Shoes",
+    "image_url": "https://libraryofruina.wiki.gg/images/Sanguine_Desire_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Sanguine_Desire_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 570560059,
+    "characterId": "lor_abno_Spider_Bud",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Spider_Bud",
+    "image_url": "https://libraryofruina.wiki.gg/images/Red_Eyes_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Red_Eyes_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 421036758,
+    "characterId": "lor_abno_Laetitia",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Laetitia",
+    "image_url": "https://libraryofruina.wiki.gg/images/Laetitia_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Laetitia_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 228810861,
+    "characterId": "lor_abno_Dream_of_a_Black_Swan",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Dream_of_a_Black_Swan",
+    "image_url": "https://libraryofruina.wiki.gg/images/Black_Swan_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Black_Swan_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 165581434,
+    "characterId": "lor_abno_Fragment_of_the_Universe",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Fragment_of_the_Universe",
+    "image_url": "https://libraryofruina.wiki.gg/images/Fragments_from_Somewhere_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Fragments_from_Somewhere_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 8760069,
+    "characterId": "lor_abno_Child_of_the_Galaxy",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Child_of_the_Galaxy",
+    "image_url": "https://libraryofruina.wiki.gg/images/Our_Galaxy_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Our_Galaxy_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 579493181,
+    "characterId": "lor_abno_Porccubus",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Porccubus",
+    "image_url": "https://libraryofruina.wiki.gg/images/Pleasure_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Pleasure_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 264991801,
+    "characterId": "lor_abno_Alriune",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Alriune",
+    "image_url": "https://libraryofruina.wiki.gg/images/Faint_Aroma_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Faint_Aroma_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 897106160,
+    "characterId": "lor_abno_The_Silent_Orchestra",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_The_Silent_Orchestra",
+    "image_url": "https://libraryofruina.wiki.gg/images/Da_Capo_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Da_Capo_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 719441513,
+    "characterId": "lor_abno_The_Queen_of_Hatred",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_The_Queen_of_Hatred",
+    "image_url": "https://libraryofruina.wiki.gg/images/In_the_Name_of_Love_and_Hate_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/In_the_Name_of_Love_and_Hate_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 621256482,
+    "characterId": "lor_abno_The_Knight_of_Despair",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_The_Knight_of_Despair",
+    "image_url": "https://libraryofruina.wiki.gg/images/The_Sword_Sharpened_by_Tears_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/The_Sword_Sharpened_by_Tears_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 459226928,
+    "characterId": "lor_abno_The_King_of_Greed",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_The_King_of_Greed",
+    "image_url": "https://libraryofruina.wiki.gg/images/Gold_Rush_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Gold_Rush_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 887064099,
+    "characterId": "lor_abno_The_Servant_of_Wrath",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_The_Servant_of_Wrath",
+    "image_url": "https://libraryofruina.wiki.gg/images/Blind_Wrath_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Blind_Wrath_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 73282963,
+    "characterId": "lor_abno_The_Jester_of_Nihil",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_The_Jester_of_Nihil",
+    "image_url": "https://libraryofruina.wiki.gg/images/Nihil_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Nihil_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 244972008,
+    "characterId": "lor_abno_Little_Red_Riding_Hooded_Mercenary",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Little_Red_Riding_Hooded_Mercenary",
+    "image_url": "https://libraryofruina.wiki.gg/images/Crimson_Scar_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Crimson_Scar_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 246633717,
+    "characterId": "lor_abno_Big_and_Will_be_Bad_Wolf",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Big_and_Will_be_Bad_Wolf",
+    "image_url": "https://libraryofruina.wiki.gg/images/Cobalt_Scar_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Cobalt_Scar_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 447800968,
+    "characterId": "lor_abno_Mountain_of_Smiling_Bodies",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Mountain_of_Smiling_Bodies",
+    "image_url": "https://libraryofruina.wiki.gg/images/Smile_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Smile_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 697431664,
+    "characterId": "lor_abno_Nosferatu",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Nosferatu",
+    "image_url": "https://libraryofruina.wiki.gg/images/Dipsia_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Dipsia_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 694482065,
+    "characterId": "lor_abno_Nothing_There",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Nothing_There",
+    "image_url": "https://libraryofruina.wiki.gg/images/Mimicry_Final_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Mimicry_Final_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 658842619,
+    "characterId": "lor_abno_Scarecrow_Searching_for_Wisdom",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Scarecrow_Searching_for_Wisdom",
+    "image_url": "https://libraryofruina.wiki.gg/images/Harvest_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Harvest_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 345823312,
+    "characterId": "lor_abno_Warm_hearted_Woodsman",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Warm_hearted_Woodsman",
+    "image_url": "https://libraryofruina.wiki.gg/images/Lumber_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Lumber_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 117988539,
+    "characterId": "lor_abno_The_Road_Home",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_The_Road_Home",
+    "image_url": "https://libraryofruina.wiki.gg/images/Roland_HomingInstinct.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Roland_HomingInstinct.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 485500733,
+    "characterId": "lor_abno_Ozma",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Ozma",
+    "image_url": "https://libraryofruina.wiki.gg/images/Faded_Memories_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Faded_Memories_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 789558034,
+    "characterId": "lor_abno_The_Adult_who_Tells_Lies",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_The_Adult_who_Tells_Lies",
+    "image_url": "https://libraryofruina.wiki.gg/images/False_Throne_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/False_Throne_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 239001813,
+    "characterId": "lor_abno_Big_Bird",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Big_Bird",
+    "image_url": "https://libraryofruina.wiki.gg/images/Lamp_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Lamp_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 418516713,
+    "characterId": "lor_abno_Punishing_Bird",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Punishing_Bird",
+    "image_url": "https://libraryofruina.wiki.gg/images/Beak_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Beak_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 44855214,
+    "characterId": "lor_abno_Judgement_Bird",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Judgement_Bird",
+    "image_url": "https://libraryofruina.wiki.gg/images/Justicia_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Justicia_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 844560355,
+    "characterId": "lor_abno_Apocalypse_Bird",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Apocalypse_Bird",
+    "image_url": "https://libraryofruina.wiki.gg/images/Twilight_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Twilight_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 20843601,
+    "characterId": "lor_abno_Plague_Doctor",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_Plague_Doctor",
+    "image_url": "https://libraryofruina.wiki.gg/images/Prophet_Realization_Sprite_V1.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Prophet_Realization_Sprite_V1.png"
+    ],
+    "kind": "abno_realization"
+  },
+  {
+    "id": 812156631,
+    "characterId": "lor_abno_WhiteNight",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "lor_abno_WhiteNight",
+    "image_url": "https://libraryofruina.wiki.gg/images/Paradise_Lost_Realization_Sprite.png",
+    "image_urls": [
+      "https://libraryofruina.wiki.gg/images/Paradise_Lost_Realization_Sprite.png"
+    ],
+    "kind": "abno_realization"
+  }
+]

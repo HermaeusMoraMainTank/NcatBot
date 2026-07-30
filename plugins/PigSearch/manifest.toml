@@ -1,0 +1,9 @@
+name = "PigSearch"
+version = "1.0.0"
+main = "PigSearch.py"
+entry_class = "PigSearch"
+
+[pip_dependencies]
+requests = "*"
+
+[dependencies]

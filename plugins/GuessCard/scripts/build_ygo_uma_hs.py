@@ -288,12 +288,36 @@ def build_uma() -> None:
         if not en and not jp and not cn:
             continue
         img = (
-            (d.get("detail_img_pc") or "").strip()
-            or (d.get("thumb_img") or "").strip()
+            (d.get("thumb_img") or "").strip()
             or (d.get("sns_icon") or "").strip()
+            or (d.get("detail_img_pc") or "").strip()
+            or (d.get("detail_img_sp") or "").strip()
         )
         if not img:
             continue
+        # umamusume.jp 官立绘大量 404；microcms 仍可用。若仍是官网链则跳过。
+        if "umamusume.jp" in img and "microcms-assets.io" not in img:
+            # 再试一次 thumb；没有可用图就丢弃
+            img2 = (d.get("thumb_img") or d.get("sns_icon") or "").strip()
+            if not img2 or "umamusume.jp" in img2:
+                print(f"  skip no microcms img {gid} {en or jp}", flush=True)
+                continue
+            img = img2
+        image_urls = []
+        for u in (
+            (d.get("thumb_img") or "").strip(),
+            (d.get("sns_icon") or "").strip(),
+            (d.get("detail_img_pc") or "").strip(),
+            (d.get("detail_img_sp") or "").strip(),
+        ):
+            if u and u not in image_urls:
+                # 官网链放最后，且运行时多半 404
+                if "umamusume.jp/" in u and "microcms" not in u:
+                    continue
+                image_urls.append(u)
+        if not image_urls:
+            continue
+        img = image_urls[0]
         aliases = []
         for a in (cn, en, jp, (d.get("name_en_internal") or "").strip()):
             if a and a not in aliases:
@@ -324,6 +348,7 @@ def build_uma() -> None:
                 "cardRarityType": "uma",
                 "assetbundleName": d.get("name_en_internal") or cid,
                 "image_url": img,
+                "image_urls": image_urls,
                 "className": d.get("grade") or "",
             }
         )

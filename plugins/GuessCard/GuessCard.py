@@ -24,7 +24,7 @@ import aiohttp
 from ncatbot.core import non_self, registrar
 from ncatbot.event.qq import GroupMessageEvent
 from ncatbot.plugin import NcatBotPlugin
-from ncatbot.types import Image, MessageArray, PlainText
+from ncatbot.types import At, Image, MessageArray, PlainText
 from PIL import Image as PILImage
 from PIL import ImageDraw, ImageFont
 from pilmoji import Pilmoji
@@ -35,18 +35,30 @@ from .pools import (
     POOL_DISPLAY,
     CardPool,
     add_custom_aliases,
+    build_member_character,
     character_answer_keys,
     display_answer_name,
+    display_member_answer,
     find_character,
+    format_reveal_details,
     load_custom_nicknames,
     load_pool,
+    make_member_pool_stub,
     normalize_answer,
     rebuild_valid_answers,
     reload_character_from_disk,
     resolve_card_image_url,
+    resolve_character_alias_query,
+    resolve_local_card_path,
     resolve_pool_id,
     suggest_answers,
 )
+from .sam_item_card import (
+    fetch_item_json_curl,
+    normalize_wiki_item,
+    render_wiki_item_card,
+)
+from common.utils.CommonUtil import CommonUtil
 
 _log = logging.getLogger("GuessCard")
 
@@ -55,7 +67,7 @@ RESOURCES_DIR = PLUGIN_DIR / "resources"
 
 DEFAULT_CONFIG: dict[str, Any] = {
     "default_pool": "pjsk",
-    "enabled_pools": ["pjsk", "fgo", "e7", "ak", "pcr", "gi", "vt", "lcb", "ww", "ygo", "uma", "hs", "sv", "gbf", "ba"],
+    "enabled_pools": ["pjsk", "fgo", "e7", "ak", "pcr", "gi", "vt", "lcb", "lor", "ww", "ygo", "uma", "hs", "sv", "gbf", "ba", "ff14", "sam", "hbr", "member"],
     "answer_timeout": 30,
     "daily_play_limit": 999,
     "super_users": ["273421673"],
@@ -74,6 +86,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
     "pool_effects": {
         "e7": ["light_blur", "heavy_blur"],
         "ak": ["light_blur", "heavy_blur"],
+        "sam": ["light_blur", "heavy_blur"],
+        "member": ["light_blur", "heavy_blur"],
     },
 }
 
@@ -148,16 +162,62 @@ class GuessCard(NcatBotPlugin):
         enabled = list(
             self._cfg(
                 "enabled_pools",
-                ["pjsk", "fgo", "e7", "ak", "pcr", "gi", "vt", "lcb", "ww", "ygo", "uma", "hs", "sv", "gbf", "ba"],
+                [
+                    "pjsk",
+                    "fgo",
+                    "e7",
+                    "ak",
+                    "pcr",
+                    "gi",
+                    "vt",
+                    "lcb",
+                    "lor",
+                    "ww",
+                    "ygo",
+                    "uma",
+                    "hs",
+                    "sv",
+                    "gbf",
+                    "ba",
+                    "ff14",
+                    "sam",
+                    "member",
+                ],
             )
-            or ["pjsk", "fgo", "e7", "ak", "pcr", "gi", "vt", "lcb", "ww", "ygo", "uma", "hs", "sv", "gbf", "ba"]
+            or [
+                "pjsk",
+                "fgo",
+                "e7",
+                "ak",
+                "pcr",
+                "gi",
+                "vt",
+                "lcb",
+                "lor",
+                "ww",
+                "ygo",
+                "uma",
+                "hs",
+                "sv",
+                "gbf",
+                "ba",
+                "ff14",
+                "sam",
+                "member",
+            ]
         )
         self.custom_nicknames = load_custom_nicknames(self.data_dir)
         self.pools: dict[str, CardPool] = {}
         for pid in enabled:
+            if pid == "member":
+                self.pools[pid] = make_member_pool_stub()
+                continue
             self.pools[pid] = load_pool(
                 self.resources_dir, pid, self.custom_nicknames.get(pid)
             )
+        # 配置未写 member 时也默认挂上动态池
+        if "member" not in self.pools:
+            self.pools["member"] = make_member_pool_stub()
 
         self.last_game_end_time: dict[str, float] = {}
         self.last_round_context: dict[str, dict[str, str]] = {}
@@ -272,6 +332,132 @@ class GuessCard(NcatBotPlugin):
         self._refresh_acl()
         return str(user_id) in self.super_users
 
+    def _persist_super_users(self) -> None:
+        """把当前管理员集合写回配置并刷新内存。"""
+        ordered = sorted(self.super_users, key=lambda x: int(x) if str(x).isdigit() else str(x))
+        self.set_config("super_users", ordered)
+        self.super_users = {str(x) for x in ordered}
+
+    def _extract_target_user_ids(self, event: GroupMessageEvent) -> list[str]:
+        """从 @ 与纯数字 QQ 提取目标用户（排除机器人自己）。"""
+        ids: list[str] = []
+        seen: set[str] = set()
+        bot_id = str(getattr(self, "self_id", None) or getattr(getattr(self, "api", None), "self_id", "") or "")
+
+        def add(uid: object) -> None:
+            s = str(uid or "").strip()
+            if not s or not s.isdigit() or s == "all" or s == bot_id or s in seen:
+                return
+            seen.add(s)
+            ids.append(s)
+
+        for seg in event.message or []:
+            if isinstance(seg, At):
+                add(getattr(seg, "user_id", None))
+
+        raw = event.raw_message or ""
+        for m in re.finditer(r"\[CQ:at,qq=(\d+)\]", raw):
+            add(m.group(1))
+        # 去掉 CQ 后再扫裸 QQ，避免把 at 里的数字重复/漏扫
+        cleaned = re.sub(r"\[CQ:at,qq=\d+\]", " ", raw)
+        cleaned = re.sub(
+            r"^(猜卡面|pjsk猜卡面|猜卡|gc)\s*", "", cleaned, flags=re.I
+        )
+        cleaned = re.sub(
+            r"^(添加|删除|移除)管理员|管理员列表|列出管理员|管理员\b",
+            " ",
+            cleaned,
+        )
+        for m in re.finditer(r"\b(\d{5,12})\b", cleaned):
+            add(m.group(1))
+        return ids
+
+    @staticmethod
+    def _admin_mgmt_action(text: str) -> Optional[str]:
+        """识别管理员子命令：add / remove / list；否则 None。"""
+        t = (text or "").strip()
+        t = re.sub(r"\[CQ:at,qq=\d+\]", " ", t)
+        t = re.sub(r"\s+", " ", t).strip()
+        if re.match(r"^(添加管理员)\b", t):
+            return "add"
+        if re.match(r"^(删除管理员|移除管理员)\b", t):
+            return "remove"
+        if re.fullmatch(r"(管理员列表|列出管理员|管理员)", t):
+            return "list"
+        return None
+
+    async def _handle_admin_mgmt(self, event: GroupMessageEvent, raw: str) -> None:
+        action = self._admin_mgmt_action(raw)
+        if not action:
+            return
+        sender = str(event.user_id)
+        if not self._is_admin(sender):
+            await self._reply_text(event, "哎呀，管理猜卡管理员只有现有管理员才能操作哦~ 😊")
+            return
+
+        if action == "list":
+            self._refresh_acl()
+            if not self.super_users:
+                await self._reply_text(event, "当前还没有配置猜卡管理员。")
+                return
+            lines = "\n".join(f"- {uid}" for uid in sorted(self.super_users, key=lambda x: int(x) if x.isdigit() else x))
+            await self._reply_text(event, f"猜卡管理员列表（{len(self.super_users)}）:\n{lines}")
+            return
+
+        targets = self._extract_target_user_ids(event)
+        if not targets:
+            tip = (
+                "请 @ 成员或附上 QQ 号，例如：\n猜卡 添加管理员 @成员"
+                if action == "add"
+                else "请 @ 成员或附上 QQ 号，例如：\n猜卡 删除管理员 @成员"
+            )
+            await self._reply_text(event, tip)
+            return
+
+        self._refresh_acl()
+        if action == "add":
+            added, existed = [], []
+            for uid in targets:
+                if uid in self.super_users:
+                    existed.append(uid)
+                else:
+                    self.super_users.add(uid)
+                    added.append(uid)
+            if added:
+                self._persist_super_users()
+            parts = []
+            if added:
+                parts.append("已添加: " + "、".join(added))
+            if existed:
+                parts.append("已是管理员: " + "、".join(existed))
+            await self._reply_text(event, "\n".join(parts) or "没有变更。")
+            return
+
+        # remove
+        removed, missing = [], []
+        for uid in targets:
+            if uid not in self.super_users:
+                missing.append(uid)
+                continue
+            if uid == sender and len(self.super_users) <= 1:
+                await self._reply_text(event, "不能删除自己：至少需要保留一名猜卡管理员。")
+                return
+            self.super_users.discard(uid)
+            removed.append(uid)
+        if removed:
+            # 禁止删光
+            if not self.super_users:
+                self.super_users.add(sender)
+                await self._reply_text(event, "操作取消：不能清空全部管理员。")
+                return
+            self._persist_super_users()
+        parts = []
+        if removed:
+            parts.append("已删除: " + "、".join(removed))
+        if missing:
+            parts.append("本就不是管理员: " + "、".join(missing))
+        await self._reply_text(event, "\n".join(parts) or "没有变更。")
+
     def _get_display_name(
         self, user_id: str, original_name: Optional[str] = None
     ) -> str:
@@ -352,6 +538,21 @@ class GuessCard(NcatBotPlugin):
                 urls.append(u)
 
         add(url)
+        # xivapi / cafemaker icon: try hr1 <-> normal, and both hosts
+        m = re.match(
+            r"^(https://(?:xivapi\.com|cafemaker\.wakingsands\.com)/i/)(\d{6}/\d{6})(_hr1)?(\.png)$",
+            url,
+            re.I,
+        )
+        if m:
+            base, path, hr, ext = m.groups()
+            hosts = [
+                "https://cafemaker.wakingsands.com/i/",
+                "https://xivapi.com/i/",
+            ]
+            for host in hosts:
+                add(f"{host}{path}_hr1{ext}")
+                add(f"{host}{path}{ext}")
         # /revision/latest/scale-to-width-down/621?... -> /revision/latest
         no_scale = re.sub(r"/scale-to-width-down/\d+", "", url)
         add(no_scale)
@@ -366,8 +567,20 @@ class GuessCard(NcatBotPlugin):
     @staticmethod
     def _image_request_headers(url: str) -> dict[str, str]:
         headers: dict[str, str] = {}
-        if "wiki.gg" in url:
-            headers["Referer"] = "https://limbuscompany.wiki.gg/"
+        if "huijistatic.com" in url or "huijiwiki.com" in url:
+            headers["Referer"] = "https://ff14.huijiwiki.com/"
+            headers["Accept"] = "image/avif,image/webp,image/apng,image/*,*/*;q=0.8"
+        elif "umamusume.jp" in url or "microcms-assets.io" in url:
+            headers["Referer"] = "https://umamusume.jp/"
+        elif "prts.wiki" in url or "torappu.prts" in url:
+            headers["Referer"] = "https://prts.wiki/"
+        elif "wiki.gg" in url:
+            # https://libraryofruina.wiki.gg/... → 对应站 Referer
+            try:
+                host = url.split("//", 1)[1].split("/", 1)[0]
+            except IndexError:
+                host = "limbuscompany.wiki.gg"
+            headers["Referer"] = f"https://{host}/"
         elif "wikia.nocookie.net" in url:
             # https://static.wikia.nocookie.net/<wiki>/images/...
             m = re.search(r"wikia\.nocookie\.net/([^/]+)/", url)
@@ -375,14 +588,60 @@ class GuessCard(NcatBotPlugin):
             headers["Referer"] = f"https://{wiki}.fandom.com/"
         elif "fandom.com" in url:
             headers["Referer"] = "https://www.fandom.com/"
+        elif "estertion.win" in url:
+            headers["Referer"] = "https://redive.estertion.win/"
+        elif "akamaized.net" in url:
+            headers["Referer"] = "https://game.granbluefantasy.jp/"
         return headers
 
+    async def _fetch_via_curl(self, url: str) -> Optional[bytes]:
+        """huiji 等 CDN 会拦 Python TLS（返回 567）；curl 指纹通常可过。"""
+        headers = self._image_request_headers(url)
+        cmd = [
+            "curl",
+            "-sL",
+            "--fail",
+            "-A",
+            (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/124.0.0.0 Safari/537.36"
+            ),
+            "--connect-timeout",
+            "20",
+            "--max-time",
+            "45",
+        ]
+        if headers.get("Referer"):
+            cmd.extend(["-e", headers["Referer"]])
+        cmd.append(url)
+        try:
+            proc = await asyncio.create_subprocess_exec(
+                *cmd,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+            )
+            stdout, _stderr = await asyncio.wait_for(proc.communicate(), timeout=50)
+        except FileNotFoundError:
+            _log.warning("curl 不可用，无法回退拉取 %s", url)
+            return None
+        except (asyncio.TimeoutError, OSError) as e:
+            _log.warning("curl 拉取失败 %s: %s", url, e)
+            return None
+        if proc.returncode != 0 or not stdout or len(stdout) < 100:
+            return None
+        if len(stdout) > 10 * 1024 * 1024:
+            _log.error("curl 图片过大: %s", len(stdout))
+            return None
+        return stdout
+
     async def _fetch_remote_image_bytes(self, url: str) -> Optional[bytes]:
-        """带重试拉远程图；对 502/503/429 退避。"""
+        """带重试拉远程图；对 502/503/429/567 退避；huiji 失败时 curl 回退。"""
         session = await self._get_session()
         max_size = 10 * 1024 * 1024
         headers = self._image_request_headers(url)
         last_err: Optional[BaseException] = None
+        blocked_tls = False
         for attempt in range(3):
             try:
                 async with session.get(
@@ -390,7 +649,9 @@ class GuessCard(NcatBotPlugin):
                     headers=headers or None,
                     timeout=aiohttp.ClientTimeout(total=25),
                 ) as response:
-                    if response.status in (429, 502, 503, 504):
+                    if response.status in (429, 502, 503, 504, 567):
+                        if response.status == 567:
+                            blocked_tls = True
                         last_err = aiohttp.ClientResponseError(
                             response.request_info,
                             response.history,
@@ -415,36 +676,98 @@ class GuessCard(NcatBotPlugin):
             except (aiohttp.ClientError, asyncio.TimeoutError) as e:
                 last_err = e
                 await asyncio.sleep(0.4 * (attempt + 1))
+        # 部分 CDN 对 Python TLS / WAF 不友好：改用 curl
+        if (
+            blocked_tls
+            or "huijistatic.com" in url
+            or "huijiwiki.com" in url
+            or "umamusume.jp" in url
+            or "wiki.gg" in url
+            or "wikia.nocookie.net" in url
+        ):
+            data = await self._fetch_via_curl(url)
+            if data:
+                return data
         if last_err:
             _log.warning("拉取失败 %s: %s", url, last_err)
         return None
 
     async def _open_image(
-        self, image_source: Union[Path, str]
+        self, image_source: Union[Path, str], extra_urls: Optional[list] = None
     ) -> Optional[PILImage.Image]:
-        if not image_source:
+        if not image_source and not extra_urls:
             return None
         try:
-            if isinstance(image_source, str) and image_source.startswith(
-                ("http://", "https://")
-            ):
-                for url in self._image_url_candidates(image_source):
-                    image_data = await self._fetch_remote_image_bytes(url)
+            candidates: list[str] = []
+            seen: set[str] = set()
+
+            def add_src(src: Union[Path, str, None]) -> None:
+                if not src:
+                    return
+                s = str(src).strip()
+                if not s or s in seen:
+                    return
+                if s.startswith(("http://", "https://")):
+                    # 注意：不要先把 s 放进 seen，否则 candidates 生成的首条
+                    # （就是 s 本身）会被跳过，导致 FGO 等无备用链的卡池瞬间失败。
+                    for u in self._image_url_candidates(s):
+                        if u not in seen:
+                            seen.add(u)
+                            candidates.append(u)
+                else:
+                    seen.add(s)
+                    candidates.append(s)
+
+            add_src(image_source)
+            for u in extra_urls or []:
+                add_src(u)
+
+            for src in candidates:
+                if src.startswith(("http://", "https://")):
+                    image_data = await self._fetch_remote_image_bytes(src)
                     if not image_data:
                         continue
                     try:
                         img = PILImage.open(io.BytesIO(image_data))
                         return ImageEffectProcessor.ensure_processable(img)
                     except Exception as e:
-                        _log.warning("解码失败 %s: %s", url, e)
+                        _log.warning("解码失败 %s: %s", src, e)
                         continue
-                _log.error("无法打开图片（已尝试备用 URL）: %s", image_source)
-                return None
-            img = PILImage.open(image_source)
-            return ImageEffectProcessor.ensure_processable(img)
+                try:
+                    img = PILImage.open(src)
+                    return ImageEffectProcessor.ensure_processable(img)
+                except Exception as e:
+                    _log.warning("打开本地图失败 %s: %s", src, e)
+                    continue
+            _log.error(
+                "无法打开图片（已尝试备用 URL）: %s", image_source or (extra_urls or [None])[0]
+            )
+            return None
         except Exception as e:
             _log.error("无法打开图片 %s: %s", image_source, e)
             return None
+
+    async def _apply_effects(
+        self,
+        image_source: Union[Path, str],
+        effect_names: list,
+        extra_urls: Optional[list] = None,
+    ) -> Optional[str]:
+        # URL 里可能含 @（Atlas CharaGraph），aiohttp 可直接请求
+        img = await self._open_image(image_source, extra_urls=extra_urls)
+        if not img:
+            # FGO 个别灵基图缺失时回退 face_url
+            return None
+        try:
+            processed = await asyncio.to_thread(
+                self.effect_processor.apply_effects, img, effect_names
+            )
+            self.output_dir.mkdir(parents=True, exist_ok=True)
+            img_path = self.output_dir / f"processed_{time.time_ns()}.png"
+            await asyncio.to_thread(processed.save, img_path)
+            return str(img_path)
+        finally:
+            img.close()
 
     def _cleanup_output_dir(self, max_age_seconds: int = 3600):
         if not self.output_dir.exists():
@@ -474,25 +797,6 @@ class GuessCard(NcatBotPlugin):
         except Exception as e:
             _log.error("清理图片出错: %s", e)
 
-    async def _apply_effects(
-        self, image_source: Union[Path, str], effect_names: list
-    ) -> Optional[str]:
-        # URL 里可能含 @（Atlas CharaGraph），aiohttp 可直接请求
-        img = await self._open_image(image_source)
-        if not img:
-            # FGO 个别灵基图缺失时回退 face
-            return None
-        try:
-            processed = await asyncio.to_thread(
-                self.effect_processor.apply_effects, img, effect_names
-            )
-            self.output_dir.mkdir(parents=True, exist_ok=True)
-            img_path = self.output_dir / f"processed_{time.time_ns()}.png"
-            await asyncio.to_thread(processed.save, img_path)
-            return str(img_path)
-        finally:
-            img.close()
-
     def start_new_game(
         self,
         pool_id: Optional[str] = None,
@@ -520,6 +824,14 @@ class GuessCard(NcatBotPlugin):
             image_source = resolve_card_image_url(pool_id, card)
             # 若构造 URL 失效，下面开局时再回退 face_url
 
+        image_source = resolve_local_card_path(
+            self.resources_dir, pool_id, str(image_source)
+        )
+
+        # 武士刀等多源图标：把备用 URL 挂到 card，供打开图片时回退
+        if card.get("image_urls"):
+            card = dict(card)
+
         allowed = self._pool_allowed_effects(pool_id)
         if force_effect_names:
             effect_names = list(force_effect_names)
@@ -542,6 +854,7 @@ class GuessCard(NcatBotPlugin):
             "card_state": card_state,
             "card_image_source": image_source,
             "face_url": card.get("face_url"),
+            "image_urls": list(card.get("image_urls") or []),
             "character": character,
             "score": difficulty,
             "show_rarity_hint": random.choice([True, False]),
@@ -556,15 +869,20 @@ class GuessCard(NcatBotPlugin):
         pool_id = game_data.get("pool_id", "pjsk")
         hints = []
         if game_data.get("show_rarity_hint"):
-            rarity = game_data["card"].get("cardRarityType", "")
-            if rarity.startswith("rarity_"):
-                n = rarity.split("_")[-1]
-                if n.isdigit():
-                    hints.append(f"星级提示: {'⭐' * int(n)}")
+            if pool_id == "sam":
+                rarity_label = game_data["character"].get("rarityLabel")
+                if rarity_label:
+                    hints.append(f"品质提示: {rarity_label}")
+            else:
+                rarity = game_data["card"].get("cardRarityType", "")
+                if rarity.startswith("rarity_"):
+                    n = rarity.split("_")[-1]
+                    if n.isdigit():
+                        hints.append(f"星级提示: {'⭐' * int(n)}")
+                    else:
+                        hints.append(f"星级提示: {rarity}")
                 else:
                     hints.append(f"星级提示: {rarity}")
-            else:
-                hints.append(f"星级提示: {rarity}")
         if pool_id == "pjsk" and game_data.get("show_training_hint"):
             state_text = (
                 "花后" if game_data["card_state"] == "after_training" else "花前"
@@ -589,14 +907,116 @@ class GuessCard(NcatBotPlugin):
 
         prefix = "【测试模式】" if test else ""
         pool_label = game_data.get("pool_display") or POOL_DISPLAY.get(pool_id, pool_id)
+        ask_what = (
+            "刀的名称"
+            if pool_id == "sam"
+            else "昵称或群名片"
+            if pool_id == "member"
+            else "角色名称"
+        )
         intro = (
-            f"{prefix}【{pool_label}】请在{timeout}秒内发送角色名称进行回答哦(无需@机器人)\n"
+            f"{prefix}【{pool_label}】请在{timeout}秒内发送{ask_what}进行回答哦(无需@机器人)\n"
             f"本轮图片效果: {game_data.get('effect_name', '无效果')}\n"
             f"猜对得分: {game_data.get('difficulty', 1)}分\n"
         )
         if hints:
             intro += "\n".join(hints) + "\n"
         return intro
+
+    async def _start_member_game(
+        self,
+        event: GroupMessageEvent,
+        force_effect_names: Optional[list] = None,
+    ) -> Optional[dict]:
+        """从本群成员中抽一位，下载头像并套用效果。"""
+        group_id = str(event.group_id)
+        bot_id = str(getattr(event, "self_id", "") or "")
+        try:
+            members_response = await self.api.qq.query.get_group_member_list(
+                group_id=group_id
+            )
+        except Exception as e:
+            _log.error("拉取群成员列表失败: %s", e, exc_info=True)
+            return None
+
+        members = CommonUtil.parse_group_member_list(members_response)
+        candidates = []
+        for m in members:
+            uid = str(m.user_id or "")
+            if not uid or uid == bot_id:
+                continue
+            if getattr(m, "is_robot", None):
+                continue
+            nick = (m.nickname or "").strip()
+            card = (m.card or "").strip()
+            if not nick and not card:
+                continue
+            candidates.append((uid, nick, card))
+
+        if len(candidates) < 3:
+            return {"_error": "insufficient"}
+
+        random.shuffle(candidates)
+        allowed = self._pool_allowed_effects("member") or [
+            "light_blur",
+            "heavy_blur",
+        ]
+        if force_effect_names:
+            effect_names = list(force_effect_names)
+            if allowed is not None:
+                effect_names = [n for n in effect_names if n in allowed]
+                if not effect_names:
+                    effect_names = [allowed[0]] if allowed else ["light_blur"]
+            effect_name = " + ".join(
+                self.effect_processor.EFFECT_NAMES.get(n, n) for n in effect_names
+            )
+        else:
+            effect_names, effect_name = (
+                self.effect_processor.random_effect_combination(allowed=allowed)
+            )
+        difficulty = self.effect_processor.calculate_difficulty(effect_names)
+
+        for uid, nick, card in candidates[:40]:
+            try:
+                avatar_path = await CommonUtil.get_avatar_async(uid)
+            except Exception as e:
+                _log.warning("下载群友头像失败 uid=%s: %s", uid, e)
+                continue
+            if not avatar_path or str(avatar_path).endswith("default.jpg"):
+                continue
+            if not Path(avatar_path).is_file():
+                continue
+
+            character = build_member_character(
+                user_id=uid, nickname=nick, card=card
+            )
+            keys = set(character.get("_answer_keys") or [])
+            if not keys:
+                continue
+
+            return {
+                "pool_id": "member",
+                "pool_display": POOL_DISPLAY.get("member", "群友"),
+                "card": {
+                    "id": uid,
+                    "characterId": uid,
+                    "image_url": str(avatar_path),
+                },
+                "card_state": "avatar",
+                "card_image_source": str(avatar_path),
+                "face_url": str(avatar_path),
+                "image_urls": [str(avatar_path)],
+                "character": character,
+                "valid_answers": keys,
+                "score": difficulty,
+                "show_rarity_hint": False,
+                "show_training_hint": False,
+                "show_class_hint": False,
+                "effect_names": effect_names,
+                "effect_name": effect_name,
+                "difficulty": difficulty,
+            }
+        return {"_error": "avatar"}
 
     async def _run_game(
         self,
@@ -651,29 +1071,54 @@ class GuessCard(NcatBotPlugin):
         try:
             processed = None
             game_data = None
-            # 远端图床（Fandom 等）偶发 503：换卡重试
-            for attempt in range(4):
-                game_data = self.start_new_game(
-                    pool_id=pool_id, force_effect_names=force_effect
+            if pool_id == "member":
+                game_data = await self._start_member_game(
+                    event, force_effect_names=force_effect
                 )
-                if not game_data:
-                    break
-                processed = await self._apply_effects(
-                    game_data["card_image_source"], game_data.get("effect_names", [])
-                )
-                if not processed and game_data.get("face_url"):
-                    game_data["card_image_source"] = game_data["face_url"]
-                    processed = await self._apply_effects(
-                        game_data["face_url"], game_data.get("effect_names", [])
+                if game_data and game_data.get("_error") == "insufficient":
+                    await self._reply_text(
+                        event, "本群可用群友不足（至少需要 3 人），暂时没法开局哦~"
                     )
-                if processed:
-                    break
-                _log.warning(
-                    "开局取图失败，换卡重试 %s/%s pool=%s",
-                    attempt + 1,
-                    4,
-                    pool_id,
+                    return
+                if game_data and game_data.get("_error") == "avatar":
+                    await self._reply_text(
+                        event, "群友头像下载失败，请稍后再试一次吧~"
+                    )
+                    return
+                if not game_data:
+                    await self._reply_text(
+                        event, "拉取群成员失败，请稍后再试一次吧~"
+                    )
+                    return
+                processed = await self._apply_effects(
+                    game_data["card_image_source"],
+                    game_data.get("effect_names", []),
+                    extra_urls=list(game_data.get("image_urls") or []),
                 )
+            else:
+                # 远端图床（Fandom 等）偶发 503：换卡重试
+                for attempt in range(4):
+                    game_data = self.start_new_game(
+                        pool_id=pool_id, force_effect_names=force_effect
+                    )
+                    if not game_data:
+                        break
+                    extras = list(game_data.get("image_urls") or [])
+                    if game_data.get("face_url"):
+                        extras.append(game_data["face_url"])
+                    processed = await self._apply_effects(
+                        game_data["card_image_source"],
+                        game_data.get("effect_names", []),
+                        extra_urls=extras,
+                    )
+                    if processed:
+                        break
+                    _log.warning(
+                        "开局取图失败，换卡重试 %s/%s pool=%s",
+                        attempt + 1,
+                        4,
+                        pool_id,
+                    )
             if not game_data:
                 await self._reply_text(
                     event,
@@ -692,7 +1137,9 @@ class GuessCard(NcatBotPlugin):
                 "[猜卡%s][%s] 答案=%s 效果=%s",
                 "测试" if is_test else "",
                 pool_id,
-                display_answer_name(game_data["character"]),
+                display_member_answer(game_data["character"])
+                if pool_id == "member"
+                else display_answer_name(game_data["character"]),
                 game_data.get("effect_name"),
             )
             intro = self._build_intro(game_data, timeout, is_test)
@@ -782,7 +1229,10 @@ class GuessCard(NcatBotPlugin):
         if not session or not session.game_data:
             return
         game_data = session.game_data
-        correct_name = display_answer_name(game_data["character"])
+        if game_data.get("pool_id") == "member":
+            correct_name = display_member_answer(game_data["character"])
+        else:
+            correct_name = display_answer_name(game_data["character"])
         text = ""
         if session.winner_info:
             winners = session.winners_list or [
@@ -834,22 +1284,95 @@ class GuessCard(NcatBotPlugin):
         else:
             text = f"时间到啦~ 大家有没有猜出来呢？\n正确答案是: {correct_name}\n"
 
-        tips = suggest_answers(game_data.get("character") or {}, limit=4)
+        tips = []
+        if game_data.get("pool_id") != "member":
+            tips = suggest_answers(game_data.get("character") or {}, limit=4)
         if text and tips:
             text = f"{text.rstrip()}\n也可答: {' / '.join(tips)}"
+
+        wiki_info = None
+        if game_data.get("pool_id") == "sam":
+            # 文案只给名字/品级/等级；完整属性走 wiki 物品卡图片
+            wiki_info = await self._get_sam_wiki_info(game_data)
+            char = game_data.get("character") or {}
+            name = (
+                (wiki_info or {}).get("name")
+                or char.get("fullNameChinese")
+                or char.get("name")
+                or correct_name
+            )
+            ilvl = (wiki_info or {}).get("ilvl") or char.get("itemLevel")
+            elvl = (wiki_info or {}).get("elvl") or char.get("equipLevel")
+            short = [str(name)]
+            if ilvl is not None:
+                short.append(f"品级 {ilvl}")
+            if elvl is not None:
+                short.append(f"{elvl}级")
+            text = f"{text.rstrip()}\n\n" + "\n".join(short)
+        else:
+            details = format_reveal_details(game_data.get("character") or {})
+            if text and details:
+                text = f"{text.rstrip()}\n{details}"
 
         if text:
             await self._reply_text(event, text)
 
         await asyncio.sleep(0.5)
-        answer_path = await self._prepare_answer_image(game_data)
+        answer_path = await self._prepare_answer_image(game_data, wiki_info=wiki_info)
         if answer_path:
             try:
                 await self._reply_image(event, image_path=answer_path)
             except Exception as e:
                 _log.error("发送答案图失败: %s", e)
 
-    async def _prepare_answer_image(self, game_data: dict) -> Optional[str]:
+    async def _get_sam_wiki_info(self, game_data: dict) -> Optional[dict]:
+        character = game_data.get("character") or {}
+        item_id = character.get("itemId")
+        if not item_id:
+            return None
+        cache_dir = self.data_dir / "sam_wiki"
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        cache_path = cache_dir / f"{int(item_id)}.json"
+        raw = None
+        if cache_path.exists():
+            try:
+                raw = json.loads(cache_path.read_text(encoding="utf-8"))
+            except Exception:
+                raw = None
+        if not raw:
+            raw = await asyncio.to_thread(fetch_item_json_curl, int(item_id))
+            if raw:
+                try:
+                    cache_path.write_text(
+                        json.dumps(raw, ensure_ascii=False, indent=2), encoding="utf-8"
+                    )
+                except Exception as e:
+                    _log.warning("缓存武士刀 wiki 数据失败: %s", e)
+        if not raw:
+            # 退化：用卡池里已有字段拼一份
+            return normalize_wiki_item(
+                {
+                    "中文名": character.get("fullNameChinese") or character.get("name"),
+                    "类型": "武士刀",
+                    "物理性能": character.get("damagePhys") or 0,
+                    "攻击间隔": 2640,
+                    "品级": character.get("itemLevel"),
+                    "装备等级": character.get("equipLevel"),
+                    "品质": character.get("rarity") or 1,
+                    "可使用职业显示": "武士",
+                },
+                fallback=character,
+            )
+        return normalize_wiki_item(raw, fallback=character)
+
+    async def _prepare_answer_image(
+        self, game_data: dict, wiki_info: Optional[dict] = None
+    ) -> Optional[str]:
+        # 武士刀：灰机 wiki 风格物品卡
+        if game_data.get("pool_id") == "sam":
+            path = await self._render_sam_answer_card(game_data, wiki_info=wiki_info)
+            if path:
+                return path
         source = game_data.get("card_image_source")
         if not source:
             return None
@@ -870,6 +1393,48 @@ class GuessCard(NcatBotPlugin):
                 img.close()
         return str(source)
 
+    async def _render_sam_answer_card(
+        self, game_data: dict, wiki_info: Optional[dict] = None
+    ) -> Optional[str]:
+        """武士刀揭晓：灰机 wiki 物品卡样式。"""
+        character = game_data.get("character") or {}
+        card = game_data.get("card") or {}
+        info = wiki_info or await self._get_sam_wiki_info(game_data)
+        if not info:
+            return None
+
+        urls = list(card.get("image_urls") or [])
+        primary = game_data.get("card_image_source") or card.get("image_url")
+        if primary:
+            urls = [str(primary)] + [u for u in urls if u != primary]
+
+        icon = None
+        for u in urls:
+            icon = await self._open_image(u)
+            if icon:
+                break
+
+        try:
+            out = (
+                self.output_dir
+                / f"answer_sam_{card.get('assetbundleName', 'x')}_{game_data.get('card_state', '1')}.png"
+            )
+            font_path = self.resources_dir / "pjsk" / "font.ttf"
+            await asyncio.to_thread(
+                render_wiki_item_card,
+                info,
+                icon,
+                font_path=font_path if font_path.exists() else None,
+                out_path=out,
+            )
+            return str(out)
+        except Exception as e:
+            _log.error("生成武士刀 wiki 答案卡失败: %s", e)
+            return None
+        finally:
+            if icon is not None:
+                icon.close()
+
     def _check_answer(self, session: GameSession, answer_key: str) -> bool:
         character = session.game_data["character"]
         keys = character.get("_answer_keys")
@@ -883,8 +1448,12 @@ class GuessCard(NcatBotPlugin):
         if session.finishing or not session.game_data:
             return
         answer_key = normalize_answer(answer)
-        pool = self._get_pool(session.pool_id)
-        valid = pool.valid_answers if pool else set()
+        session_valid = (session.game_data or {}).get("valid_answers")
+        if session_valid is not None:
+            valid = session_valid
+        else:
+            pool = self._get_pool(session.pool_id)
+            valid = pool.valid_answers if pool else set()
         if not answer_key or answer_key not in valid:
             return
 
@@ -979,11 +1548,17 @@ class GuessCard(NcatBotPlugin):
             "开局（必须指定主题）\n"
             "猜卡 <主题>\n"
             "例如: 猜卡 pjsk / 猜卡 fgo / 猜卡 e7 / 猜卡 vt / "
-            "猜卡 ygo / 猜卡 sv / 猜卡 gbf / 猜卡 ba\n"
-            "（e7/ak/sv 仅模糊；sv/szb影之诗 gbf碧蓝幻想 ba蔚蓝档案）\n\n"
+            "猜卡 ygo / 猜卡 sv / 猜卡 gbf / 猜卡 ba / 猜卡 ff14 / 猜卡 武士刀 / "
+            "猜卡 废墟图书馆 / 猜卡 群友\n"
+            "（e7/ak/sv/sam/member 仅模糊；sv/szb影之诗 gbf碧蓝幻想 ba蔚蓝档案；"
+            "ff14/14/ffxiv 讨伐·零式·绝境 Boss；武士刀/打刀/katana 猜刀名；"
+            "lor/ruina/废墟图书馆/废图 人物立绘；群友/群成员/member 猜本群头像）\n\n"
             "数据统计\n"
             "猜卡面排行榜 / 猜卡面分数 / 猜卡面自定义名称\n\n"
             "管理员\n"
+            "猜卡 添加管理员 @成员\n"
+            "猜卡 删除管理员 @成员\n"
+            "猜卡 管理员列表\n"
             "测试猜卡 <主题> 效果名\n"
             "重置猜卡面次数 [QQ]\n"
             "猜卡加答案 <主题> <角色> <别名>\n"
@@ -1012,6 +1587,10 @@ class GuessCard(NcatBotPlugin):
             await self._reply_text(
                 event, self._help_text(hint="请指定卡池主题，例如：猜卡 fgo")
             )
+            return
+        # 管理员增删查：猜卡 添加管理员 @成员
+        if self._admin_mgmt_action(raw):
+            await self._handle_admin_mgmt(event, raw)
             return
         pool_id, _rest = self._parse_pool_arg(raw)
         # 未知主题 → 帮助（不再默认 pjsk）
@@ -1224,6 +1803,46 @@ class GuessCard(NcatBotPlugin):
                     )
 
     @non_self
+    @registrar.on_group_command("猜卡添加管理员", "猜卡加管理员")
+    async def cmd_add_admin(self, event: GroupMessageEvent, _arg: str = ""):
+        if not self._is_group_allowed(event.group_id):
+            msg = self._whitelist_reject()
+            if msg:
+                await self._reply_text(event, msg)
+            return
+        raw = re.sub(
+            r"^(猜卡添加管理员|猜卡加管理员)\s*",
+            "添加管理员 ",
+            (event.raw_message or "").strip(),
+        ).strip()
+        await self._handle_admin_mgmt(event, raw)
+
+    @non_self
+    @registrar.on_group_command("猜卡删除管理员", "猜卡移除管理员")
+    async def cmd_remove_admin(self, event: GroupMessageEvent, _arg: str = ""):
+        if not self._is_group_allowed(event.group_id):
+            msg = self._whitelist_reject()
+            if msg:
+                await self._reply_text(event, msg)
+            return
+        raw = re.sub(
+            r"^(猜卡删除管理员|猜卡移除管理员)\s*",
+            "删除管理员 ",
+            (event.raw_message or "").strip(),
+        ).strip()
+        await self._handle_admin_mgmt(event, raw)
+
+    @non_self
+    @registrar.on_group_command("猜卡管理员", "猜卡管理员列表")
+    async def cmd_list_admin(self, event: GroupMessageEvent, _arg: str = ""):
+        if not self._is_group_allowed(event.group_id):
+            msg = self._whitelist_reject()
+            if msg:
+                await self._reply_text(event, msg)
+            return
+        await self._handle_admin_mgmt(event, "管理员列表")
+
+    @non_self
     @registrar.on_group_command("猜卡加答案", "猜卡添加答案")
     async def cmd_add_answer(self, event: GroupMessageEvent, arg: str = ""):
         if not self._is_group_allowed(event.group_id):
@@ -1249,22 +1868,34 @@ class GuessCard(NcatBotPlugin):
                 "用法:\n"
                 "猜卡加答案 e7 洁若米亚 夏娜\n"
                 "猜卡加答案 e7 洁若米亚 夏娜/火夏娜\n"
+                "猜卡加答案 边狱巴士 环指 点彩派 学徒 李箱 环指箱\n"
                 "猜卡加答案 夏娜（沿用本群上一局角色）",
             )
             return
 
         pool_id, rest = self._parse_pool_arg(raw)
-        char_query = ""
+        character = None
+        ambiguous: list = []
         alias_text = ""
+        char_query = ""
+        if pool_id == "member":
+            await self._reply_text(event, "群友卡池不支持手动加答案哦~")
+            return
         if pool_id:
-            parts = rest.split(maxsplit=1)
-            if len(parts) < 2:
+            if not rest.strip():
                 await self._reply_text(
                     event,
                     "请同时指定角色和别名，例如：猜卡加答案 e7 洁若米亚 夏娜",
                 )
                 return
-            char_query, alias_text = parts[0].strip(), parts[1].strip()
+            pool = self._get_pool(pool_id)
+            if not pool:
+                await self._reply_text(event, f"卡池「{pool_id}」不可用。")
+                return
+            # 角色名可含空格：取最长唯一匹配前缀，剩余当别名
+            character, alias_text, ambiguous, char_query = resolve_character_alias_query(
+                pool.characters, rest
+            )
         else:
             ctx = self.last_round_context.get(str(event.group_id))
             if not ctx:
@@ -1275,15 +1906,22 @@ class GuessCard(NcatBotPlugin):
                 )
                 return
             pool_id = ctx["pool_id"]
+            if pool_id == "member":
+                await self._reply_text(event, "群友卡池不支持手动加答案哦~")
+                return
             char_query = ctx["character_id"]
             alias_text = raw
+            pool = self._get_pool(pool_id)
+            if not pool:
+                await self._reply_text(event, f"卡池「{pool_id}」不可用。")
+                return
+            character, ambiguous = find_character(pool.characters, char_query)
 
         pool = self._get_pool(pool_id)
         if not pool:
             await self._reply_text(event, f"卡池「{pool_id}」不可用。")
             return
 
-        character, ambiguous = find_character(pool.characters, char_query)
         if ambiguous:
             names = "、".join(display_answer_name(c) for c in ambiguous[:5])
             await self._reply_text(
@@ -1292,6 +1930,9 @@ class GuessCard(NcatBotPlugin):
             return
         if not character:
             await self._reply_text(event, f"在 {pool.display_name} 中未找到角色「{char_query}」。")
+            return
+        if not (alias_text or "").strip():
+            await self._reply_text(event, "请至少提供一个别名。")
             return
 
         aliases = [
@@ -1426,6 +2067,12 @@ class GuessCard(NcatBotPlugin):
             "猜卡面自定义名称",
             "猜卡加答案",
             "猜卡添加答案",
+            "猜卡添加管理员",
+            "猜卡加管理员",
+            "猜卡删除管理员",
+            "猜卡移除管理员",
+            "猜卡管理员",
+            "猜卡管理员列表",
             "重置猜卡面次数",
         }:
             return

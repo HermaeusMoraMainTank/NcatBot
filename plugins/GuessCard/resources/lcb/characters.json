@@ -20,7 +20,8 @@
       "Sinner 李箱",
       "SinnerYi Sang"
     ],
-    "className": "LCB 罪人"
+    "className": "LCB 罪人",
+    "kind": "identity"
   },
   {
     "characterId": "10201",
@@ -43,7 +44,8 @@
       "Sinner 浮士德",
       "SinnerFaust"
     ],
-    "className": "LCB 罪人"
+    "className": "LCB 罪人",
+    "kind": "identity"
   },
   {
     "characterId": "10301",
@@ -66,7 +68,8 @@
       "Sinner 堂吉诃德",
       "SinnerDon Quixote"
     ],
-    "className": "LCB 罪人"
+    "className": "LCB 罪人",
+    "kind": "identity"
   },
   {
     "characterId": "10401",
@@ -89,7 +92,8 @@
       "Sinner 良秀",
       "SinnerRyōshū"
     ],
-    "className": "LCB 罪人"
+    "className": "LCB 罪人",
+    "kind": "identity"
   },
   {
     "characterId": "10501",
@@ -112,7 +116,8 @@
       "Sinner 默尔索",
       "SinnerMeursault"
     ],
-    "className": "LCB 罪人"
+    "className": "LCB 罪人",
+    "kind": "identity"
   },
   {
     "characterId": "10601",
@@ -135,7 +140,8 @@
       "Sinner 鸿璐",
       "SinnerHong Lu"
     ],
-    "className": "LCB 罪人"
+    "className": "LCB 罪人",
+    "kind": "identity"
   },
   {
     "characterId": "10701",
@@ -158,7 +164,8 @@
       "Sinner 希斯克利夫",
       "SinnerHeathcliff"
     ],
-    "className": "LCB 罪人"
+    "className": "LCB 罪人",
+    "kind": "identity"
   },
   {
     "characterId": "10801",
@@ -181,7 +188,8 @@
       "Sinner 以实玛利",
       "SinnerIshmael"
     ],
-    "className": "LCB 罪人"
+    "className": "LCB 罪人",
+    "kind": "identity"
   },
   {
     "characterId": "10901",
@@ -204,7 +212,8 @@
       "Sinner 罗佳",
       "SinnerRodion"
     ],
-    "className": "LCB 罪人"
+    "className": "LCB 罪人",
+    "kind": "identity"
   },
   {
     "characterId": "11001",
@@ -227,7 +236,8 @@
       "Sinner 辛克莱",
       "SinnerSinclair"
     ],
-    "className": "LCB 罪人"
+    "className": "LCB 罪人",
+    "kind": "identity"
   },
   {
     "characterId": "11101",
@@ -250,7 +260,8 @@
       "Sinner 奥提斯",
       "SinnerOutis"
     ],
-    "className": "LCB 罪人"
+    "className": "LCB 罪人",
+    "kind": "identity"
   },
   {
     "characterId": "11201",
@@ -273,7 +284,8 @@
       "Sinner 格里高尔",
       "SinnerGregor"
     ],
-    "className": "LCB 罪人"
+    "className": "LCB 罪人",
+    "kind": "identity"
   },
   {
     "characterId": "10102",
@@ -293,7 +305,8 @@
       "南部6科 李箱",
       "南部6科Yi Sang"
     ],
-    "className": "Seven协会 南部6科"
+    "className": "Seven协会 南部6科",
+    "kind": "identity"
   },
   {
     "characterId": "10202",
@@ -316,7 +329,8 @@
       "Agent 浮士德",
       "AgentFaust"
     ],
-    "className": "W公司 2级 清扫人员"
+    "className": "W公司 2级 清扫人员",
+    "kind": "identity"
   },
   {
     "characterId": "10302",
@@ -339,7 +353,8 @@
       "Agent 堂吉诃德",
       "AgentDon Quixote"
     ],
-    "className": "W公司 3级 清扫人员"
+    "className": "W公司 3级 清扫人员",
+    "kind": "identity"
   },
   {
     "characterId": "10402",
@@ -359,7 +374,8 @@
       "南部6科 良秀",
       "南部6科Ryōshū"
     ],
-    "className": "Seven协会 南部6科"
+    "className": "Seven协会 南部6科",
+    "kind": "identity"
   },
   {
     "characterId": "10502",
@@ -379,7 +395,8 @@
       "南部6科 默尔索",
       "南部6科Meursault"
     ],
-    "className": "六协会 南部6科"
+    "className": "六协会 南部6科",
+    "kind": "identity"
   },
   {
     "characterId": "10602",
@@ -402,7 +419,8 @@
       "Wakashu 鸿璐",
       "WakashuHong Lu"
     ],
-    "className": "黑云会 若众"
+    "className": "黑云会 若众",
+    "kind": "identity"
   },
   {
     "characterId": "10702",
@@ -422,7 +440,8 @@
       "南部5科 希斯克利夫",
       "南部5科Heathcliff"
     ],
-    "className": "し协会 南部5科"
+    "className": "し协会 南部5科",
+    "kind": "identity"
   },
   {
     "characterId": "10802",
@@ -445,7 +464,8 @@
       "Reindeer 以实玛利",
       "ReindeerIshmael"
     ],
-    "className": "R公司 第四集团军 驯鹿队"
+    "className": "R公司 第四集团军 驯鹿队",
+    "kind": "identity"
   },
   {
     "characterId": "10902",
@@ -468,7 +488,8 @@
       "Wakashu 罗佳",
       "WakashuRodion"
     ],
-    "className": "黑云会 若众"
+    "className": "黑云会 若众",
+    "kind": "identity"
   },
   {
     "characterId": "11002",
@@ -491,7 +512,8 @@
       "Salsu 辛克莱",
       "SalsuSinclair"
     ],
-    "className": "剑契组 杀手"
+    "className": "剑契组 杀手",
+    "kind": "identity"
   },
   {
     "characterId": "11102",
@@ -514,7 +536,8 @@
       "Salsu 奥提斯",
       "SalsuOutis"
     ],
-    "className": "剑契组 杀手"
+    "className": "剑契组 杀手",
+    "kind": "identity"
   },
   {
     "characterId": "11202",
@@ -534,7 +557,8 @@
       "南部6科 格里高尔",
       "南部6科Gregor"
     ],
-    "className": "六协会 南部6科"
+    "className": "六协会 南部6科",
+    "kind": "identity"
   },
   {
     "characterId": "10103",
@@ -557,7 +581,8 @@
       "Salsu 李箱",
       "SalsuYi Sang"
     ],
-    "className": "剑契组 杀手"
+    "className": "剑契组 杀手",
+    "kind": "identity"
   },
   {
     "characterId": "10203",
@@ -580,7 +605,8 @@
       "Remnant 浮士德",
       "RemnantFaust"
     ],
-    "className": "脑叶公司 幸存者"
+    "className": "脑叶公司 幸存者",
+    "kind": "identity"
   },
   {
     "characterId": "10403",
@@ -603,7 +629,8 @@
       "Wakashu 良秀",
       "WakashuRyōshū"
     ],
-    "className": "黑云会 若众"
+    "className": "黑云会 若众",
+    "kind": "identity"
   },
   {
     "characterId": "10503",
@@ -626,7 +653,8 @@
       "Agent 默尔索",
       "AgentMeursault"
     ],
-    "className": "W公司 2级 清扫人员"
+    "className": "W公司 2级 清扫人员",
+    "kind": "identity"
   },
   {
     "characterId": "10603",
@@ -649,7 +677,8 @@
       "Gangleader 鸿璐",
       "GangleaderHong Lu"
     ],
-    "className": "豆豆帮 帮主"
+    "className": "豆豆帮 帮主",
+    "kind": "identity"
   },
   {
     "characterId": "10703",
@@ -672,7 +701,8 @@
       "Rabbit 希斯克利夫",
       "RabbitHeathcliff"
     ],
-    "className": "R公司 第四集团军 兔子队"
+    "className": "R公司 第四集团军 兔子队",
+    "kind": "identity"
   },
   {
     "characterId": "10803",
@@ -692,7 +722,8 @@
       "南部5科 以实玛利",
       "南部5科Ishmael"
     ],
-    "className": "し协会 南部5科"
+    "className": "し协会 南部5科",
+    "kind": "identity"
   },
   {
     "characterId": "10903",
@@ -715,7 +746,8 @@
       "Manager 罗佳",
       "ManagerRodion"
     ],
-    "className": "LCCB 系长"
+    "className": "LCCB 系长",
+    "kind": "identity"
   },
   {
     "characterId": "11003",
@@ -735,7 +767,8 @@
       "南部6科 辛克莱",
       "南部6科Sinclair"
     ],
-    "className": "Zwei协会 南部6科"
+    "className": "Zwei协会 南部6科",
+    "kind": "identity"
   },
   {
     "characterId": "11103",
@@ -758,7 +791,8 @@
       "Manager 奥提斯",
       "ManagerOutis"
     ],
-    "className": "G公司 部长"
+    "className": "G公司 部长",
+    "kind": "identity"
   },
   {
     "characterId": "11203",
@@ -781,7 +815,8 @@
       "Corporal 格里高尔",
       "CorporalGregor"
     ],
-    "className": "G公司 科长代理"
+    "className": "G公司 科长代理",
+    "kind": "identity"
   },
   {
     "characterId": "10804",
@@ -804,7 +839,8 @@
       "Manager 以实玛利",
       "ManagerIshmael"
     ],
-    "className": "LCCB 系长"
+    "className": "LCCB 系长",
+    "kind": "identity"
   },
   {
     "characterId": "11004",
@@ -827,7 +863,8 @@
       "Jefe 辛克莱",
       "JefeSinclair"
     ],
-    "className": "流浪乐队 头目"
+    "className": "流浪乐队 头目",
+    "kind": "identity"
   },
   {
     "characterId": "10303",
@@ -850,7 +887,8 @@
       "Director 堂吉诃德",
       "DirectorDon Quixote"
     ],
-    "className": "し协会 南部5科科长"
+    "className": "し协会 南部5科科长",
+    "kind": "identity"
   },
   {
     "characterId": "10504",
@@ -873,7 +911,8 @@
       "Großhammer 默尔索",
       "GroßhammerMeursault"
     ],
-    "className": "N公司 大锤"
+    "className": "N公司 大锤",
+    "kind": "identity"
   },
   {
     "characterId": "10904",
@@ -896,7 +935,8 @@
       "Mittelhammer 罗佳",
       "MittelhammerRodion"
     ],
-    "className": "N公司 中锤"
+    "className": "N公司 中锤",
+    "kind": "identity"
   },
   {
     "characterId": "10204",
@@ -917,7 +957,8 @@
       "Grips 浮士德",
       "GripsFaust"
     ],
-    "className": "执柄者"
+    "className": "执柄者",
+    "kind": "identity"
   },
   {
     "characterId": "10704",
@@ -940,7 +981,8 @@
       "Kleinhammer 希斯克利夫",
       "KleinhammerHeathcliff"
     ],
-    "className": "N公司 小锤"
+    "className": "N公司 小锤",
+    "kind": "identity"
   },
   {
     "characterId": "11104",
@@ -963,7 +1005,8 @@
       "Director 奥提斯",
       "DirectorOutis"
     ],
-    "className": "Seven协会 南部6科科长"
+    "className": "Seven协会 南部6科科长",
+    "kind": "identity"
   },
   {
     "characterId": "10604",
@@ -983,7 +1026,8 @@
       "南部5科 鸿璐",
       "南部5科Hong Lu"
     ],
-    "className": "六协会 南部5科"
+    "className": "六协会 南部5科",
+    "kind": "identity"
   },
   {
     "characterId": "10404",
@@ -1006,7 +1050,8 @@
       "Cuisine 良秀",
       "CuisineRyōshū"
     ],
-    "className": "良·派 厨师长"
+    "className": "良·派 厨师长",
+    "kind": "identity"
   },
   {
     "characterId": "11204",
@@ -1029,7 +1074,8 @@
       "Sous-chef 格里高尔",
       "Sous-chefGregor"
     ],
-    "className": "良·派 帮厨"
+    "className": "良·派 帮厨",
+    "kind": "identity"
   },
   {
     "characterId": "10304",
@@ -1052,7 +1098,8 @@
       "Mittelhammer 堂吉诃德",
       "MittelhammerDon Quixote"
     ],
-    "className": "N公司 中锤"
+    "className": "N公司 中锤",
+    "kind": "identity"
   },
   {
     "characterId": "11005",
@@ -1073,7 +1120,8 @@
       "Grip 辛克莱",
       "GripSinclair"
     ],
-    "className": "准执柄者"
+    "className": "准执柄者",
+    "kind": "identity"
   },
   {
     "characterId": "10905",
@@ -1096,7 +1144,8 @@
       "Rep 罗佳",
       "RepRodion"
     ],
-    "className": "玫瑰扳手工坊 代表"
+    "className": "玫瑰扳手工坊 代表",
+    "kind": "identity"
   },
   {
     "characterId": "10505",
@@ -1119,7 +1168,8 @@
       "Fixer 默尔索",
       "FixerMeursault"
     ],
-    "className": "玫瑰扳手工坊 收尾人"
+    "className": "玫瑰扳手工坊 收尾人",
+    "kind": "identity"
   },
   {
     "characterId": "10705",
@@ -1142,7 +1192,8 @@
       "Sunshower 希斯克利夫",
       "SunshowerHeathcliff"
     ],
-    "className": "脑叶公司E.G.O:: 狐雨"
+    "className": "脑叶公司E.G.O:: 狐雨",
+    "kind": "identity"
   },
   {
     "characterId": "11205",
@@ -1165,7 +1216,8 @@
       "Fixer 格里高尔",
       "FixerGregor"
     ],
-    "className": "玫瑰扳手工坊 收尾人"
+    "className": "玫瑰扳手工坊 收尾人",
+    "kind": "identity"
   },
   {
     "characterId": "10104",
@@ -1188,7 +1240,8 @@
       "E.G.O::Spicebush 李箱",
       "E.G.O::SpicebushYi Sang"
     ],
-    "className": "绽放E.G.O:: 山茶花"
+    "className": "绽放E.G.O:: 山茶花",
+    "kind": "identity"
   },
   {
     "characterId": "10805",
@@ -1211,7 +1264,8 @@
       "E.G.O::Sloshing 以实玛利",
       "E.G.O::SloshingIshmael"
     ],
-    "className": "脑叶公司E.G.O:: 荡漾"
+    "className": "脑叶公司E.G.O:: 荡漾",
+    "kind": "identity"
   },
   {
     "characterId": "10605",
@@ -1234,7 +1288,8 @@
       "Staff 鸿璐",
       "StaffHong Lu"
     ],
-    "className": "K公司 3级 摘除人员"
+    "className": "K公司 3级 摘除人员",
+    "kind": "identity"
   },
   {
     "characterId": "11006",
@@ -1257,7 +1312,8 @@
       "Sheet 辛克莱",
       "SheetSinclair"
     ],
-    "className": "脑叶公司E.G.O:: 朱符"
+    "className": "脑叶公司E.G.O:: 朱符",
+    "kind": "identity"
   },
   {
     "characterId": "10806",
@@ -1277,7 +1333,8 @@
       "南部4科 以实玛利",
       "南部4科Ishmael"
     ],
-    "className": "六协会 南部4科"
+    "className": "六协会 南部4科",
+    "kind": "identity"
   },
   {
     "characterId": "10506",
@@ -1300,7 +1357,8 @@
       "Rhino 默尔索",
       "RhinoMeursault"
     ],
-    "className": "R公司 第四集团军 犀牛队"
+    "className": "R公司 第四集团军 犀牛队",
+    "kind": "identity"
   },
   {
     "characterId": "10906",
@@ -1320,7 +1378,8 @@
       "南部5科 罗佳",
       "南部5科Rodion"
     ],
-    "className": "Zwei协会 南部5科"
+    "className": "Zwei协会 南部5科",
+    "kind": "identity"
   },
   {
     "characterId": "10305",
@@ -1343,7 +1402,8 @@
       "Director 堂吉诃德",
       "DirectorDon Quixote"
     ],
-    "className": "Cinq协会 南部5科科长"
+    "className": "Cinq协会 南部5科科长",
+    "kind": "identity"
   },
   {
     "characterId": "10807",
@@ -1366,7 +1426,8 @@
       "Fixer 以实玛利",
       "FixerIshmael"
     ],
-    "className": "臼齿修船厂 收尾人"
+    "className": "臼齿修船厂 收尾人",
+    "kind": "identity"
   },
   {
     "characterId": "11007",
@@ -1389,7 +1450,8 @@
       "Fixer 辛克莱",
       "FixerSinclair"
     ],
-    "className": "臼齿修船厂 收尾人"
+    "className": "臼齿修船厂 收尾人",
+    "kind": "identity"
   },
   {
     "characterId": "11206",
@@ -1409,7 +1471,8 @@
       "南部4科 格里高尔",
       "南部4科Gregor"
     ],
-    "className": "Zwei协会 南部4科"
+    "className": "Zwei协会 南部4科",
+    "kind": "identity"
   },
   {
     "characterId": "10205",
@@ -1429,7 +1492,8 @@
       "南部4科 浮士德",
       "南部4科Faust"
     ],
-    "className": "Zwei协会 南部4科"
+    "className": "Zwei协会 南部4科",
+    "kind": "identity"
   },
   {
     "characterId": "10405",
@@ -1452,7 +1516,8 @@
       "Agent 良秀",
       "AgentRyōshū"
     ],
-    "className": "W公司 3级 清扫人员"
+    "className": "W公司 3级 清扫人员",
+    "kind": "identity"
   },
   {
     "characterId": "10606",
@@ -1475,7 +1540,8 @@
       "Agent 鸿璐",
       "AgentHong Lu"
     ],
-    "className": "W公司 2级 清扫人员"
+    "className": "W公司 2级 清扫人员",
+    "kind": "identity"
   },
   {
     "characterId": "10206",
@@ -1495,7 +1561,8 @@
       "南部4科 浮士德",
       "南部4科Faust"
     ],
-    "className": "Seven协会 南部4科"
+    "className": "Seven协会 南部4科",
+    "kind": "identity"
   },
   {
     "characterId": "10706",
@@ -1515,7 +1582,8 @@
       "南部4科 希斯克利夫",
       "南部4科Heathcliff"
     ],
-    "className": "Seven协会 南部4科"
+    "className": "Seven协会 南部4科",
+    "kind": "identity"
   },
   {
     "characterId": "10105",
@@ -1538,7 +1606,8 @@
       "Fixer 李箱",
       "FixerYi Sang"
     ],
-    "className": "臼齿事务所 收尾人"
+    "className": "臼齿事务所 收尾人",
+    "kind": "identity"
   },
   {
     "characterId": "11105",
@@ -1561,7 +1630,8 @@
       "Fixer 奥提斯",
       "FixerOutis"
     ],
-    "className": "臼齿事务所 收尾人"
+    "className": "臼齿事务所 收尾人",
+    "kind": "identity"
   },
   {
     "characterId": "10907",
@@ -1581,7 +1651,8 @@
       "南部4科 罗佳",
       "南部4科Rodion"
     ],
-    "className": "Dieci协会 南部4科"
+    "className": "Dieci协会 南部4科",
+    "kind": "identity"
   },
   {
     "characterId": "10207",
@@ -1604,7 +1675,8 @@
       "E.G.O::Regret 浮士德",
       "E.G.O::RegretFaust"
     ],
-    "className": "脑叶公司E.G.O:: 悔恨"
+    "className": "脑叶公司E.G.O:: 悔恨",
+    "kind": "identity"
   },
   {
     "characterId": "10607",
@@ -1627,7 +1699,8 @@
       "Fixer 鸿璐",
       "FixerHong Lu"
     ],
-    "className": "吊钩事务所 收尾人"
+    "className": "吊钩事务所 收尾人",
+    "kind": "identity"
   },
   {
     "characterId": "10106",
@@ -1650,7 +1723,8 @@
       "Agent 李箱",
       "AgentYi Sang"
     ],
-    "className": "W公司 3级 清扫人员"
+    "className": "W公司 3级 清扫人员",
+    "kind": "identity"
   },
   {
     "characterId": "11207",
@@ -1673,7 +1747,8 @@
       "Mate 格里高尔",
       "MateGregor"
     ],
-    "className": "双钩海盗团 大副"
+    "className": "双钩海盗团 大副",
+    "kind": "identity"
   },
   {
     "characterId": "10406",
@@ -1696,7 +1771,8 @@
       "Manager 良秀",
       "ManagerRyōshū"
     ],
-    "className": "LCCB 系长"
+    "className": "LCCB 系长",
+    "kind": "identity"
   },
   {
     "characterId": "10306",
@@ -1719,7 +1795,8 @@
       "Sister 堂吉诃德",
       "SisterDon Quixote"
     ],
-    "className": "中指 幼妹"
+    "className": "中指 幼妹",
+    "kind": "identity"
   },
   {
     "characterId": "10507",
@@ -1742,7 +1819,8 @@
       "Brother 默尔索",
       "BrotherMeursault"
     ],
-    "className": "中指 幼弟"
+    "className": "中指 幼弟",
+    "kind": "identity"
   },
   {
     "characterId": "10707",
@@ -1765,7 +1843,8 @@
       "Harpooneer 希斯克利夫",
       "HarpooneerHeathcliff"
     ],
-    "className": "裴廓德号 鱼叉手"
+    "className": "裴廓德号 鱼叉手",
+    "kind": "identity"
   },
   {
     "characterId": "10107",
@@ -1788,7 +1867,8 @@
       "Mate 李箱",
       "MateYi Sang"
     ],
-    "className": "裴廓德号 大副"
+    "className": "裴廓德号 大副",
+    "kind": "identity"
   },
   {
     "characterId": "11008",
@@ -1811,7 +1891,8 @@
       "Director 辛克莱",
       "DirectorSinclair"
     ],
-    "className": "Cinq协会 南部4科科长"
+    "className": "Cinq协会 南部4科科长",
+    "kind": "identity"
   },
   {
     "characterId": "11106",
@@ -1831,7 +1912,8 @@
       "南部4科 奥提斯",
       "南部4科Outis"
     ],
-    "className": "Cinq协会 南部4科"
+    "className": "Cinq协会 南部4科",
+    "kind": "identity"
   },
   {
     "characterId": "11107",
@@ -1854,7 +1936,8 @@
       "Bullet 奥提斯",
       "BulletOutis"
     ],
-    "className": "脑叶公司E.G.O:: 魔弹"
+    "className": "脑叶公司E.G.O:: 魔弹",
+    "kind": "identity"
   },
   {
     "characterId": "10307",
@@ -1877,7 +1960,8 @@
       "E.G.O::Lantern 堂吉诃德",
       "E.G.O::LanternDon Quixote"
     ],
-    "className": "脑叶公司E.G.O:: 提灯"
+    "className": "脑叶公司E.G.O:: 提灯",
+    "kind": "identity"
   },
   {
     "characterId": "10608",
@@ -1897,7 +1981,8 @@
       "南部4科 鸿璐",
       "南部4科Hong Lu"
     ],
-    "className": "Dieci协会 南部4科"
+    "className": "Dieci协会 南部4科",
+    "kind": "identity"
   },
   {
     "characterId": "10108",
@@ -1917,7 +2002,8 @@
       "南部4科 李箱",
       "南部4科Yi Sang"
     ],
-    "className": "Dieci协会 南部4科"
+    "className": "Dieci协会 南部4科",
+    "kind": "identity"
   },
   {
     "characterId": "10808",
@@ -1940,7 +2026,8 @@
       "Captain 以实玛利",
       "CaptainIshmael"
     ],
-    "className": "裴廓德号 船长"
+    "className": "裴廓德号 船长",
+    "kind": "identity"
   },
   {
     "characterId": "10508",
@@ -1963,7 +2050,8 @@
       "Mentor 默尔索",
       "MentorMeursault"
     ],
-    "className": "剑契组 头领"
+    "className": "剑契组 头领",
+    "kind": "identity"
   },
   {
     "characterId": "10208",
@@ -1986,7 +2074,8 @@
       "Salsu 浮士德",
       "SalsuFaust"
     ],
-    "className": "剑契组 杀手"
+    "className": "剑契组 杀手",
+    "kind": "identity"
   },
   {
     "characterId": "10308",
@@ -2009,7 +2098,8 @@
       "Salsu 堂吉诃德",
       "SalsuDon Quixote"
     ],
-    "className": "剑契组 杀手"
+    "className": "剑契组 杀手",
+    "kind": "identity"
   },
   {
     "characterId": "11208",
@@ -2032,7 +2122,8 @@
       "Captain 格里高尔",
       "CaptainGregor"
     ],
-    "className": "黑云会 副会长"
+    "className": "黑云会 副会长",
+    "kind": "identity"
   },
   {
     "characterId": "10908",
@@ -2055,7 +2146,8 @@
       "Director 罗佳",
       "DirectorRodion"
     ],
-    "className": "六协会 南部4科科长"
+    "className": "六协会 南部4科科长",
+    "kind": "identity"
   },
   {
     "characterId": "10407",
@@ -2075,7 +2167,8 @@
       "南部4科 良秀",
       "南部4科Ryōshū"
     ],
-    "className": "六协会 南部4科"
+    "className": "六协会 南部4科",
+    "kind": "identity"
   },
   {
     "characterId": "10708",
@@ -2095,7 +2188,8 @@
       "南部3科 希斯克利夫",
       "南部3科Heathcliff"
     ],
-    "className": "Öufi协会 南部3科"
+    "className": "Öufi协会 南部3科",
+    "kind": "identity"
   },
   {
     "characterId": "11108",
@@ -2118,7 +2212,8 @@
       "Butler 奥提斯",
       "ButlerOutis"
     ],
-    "className": "呼啸山庄 首席管家"
+    "className": "呼啸山庄 首席管家",
+    "kind": "identity"
   },
   {
     "characterId": "10509",
@@ -2141,7 +2236,8 @@
       "Boss 默尔索",
       "BossMeursault"
     ],
-    "className": "死兔帮 老大"
+    "className": "死兔帮 老大",
+    "kind": "identity"
   },
   {
     "characterId": "11209",
@@ -2164,7 +2260,8 @@
       "Heir 格里高尔",
       "HeirGregor"
     ],
-    "className": "埃德加家族 继承人"
+    "className": "埃德加家族 继承人",
+    "kind": "identity"
   },
   {
     "characterId": "10209",
@@ -2187,7 +2284,8 @@
       "Butler 浮士德",
       "ButlerFaust"
     ],
-    "className": "呼啸山庄 管家"
+    "className": "呼啸山庄 管家",
+    "kind": "identity"
   },
   {
     "characterId": "9999",
@@ -2208,7 +2306,8 @@
       "Gaze 维吉里乌斯",
       "GazeVergilius"
     ],
-    "className": "猩红凝视"
+    "className": "猩红凝视",
+    "kind": "identity"
   },
   {
     "characterId": "10408",
@@ -2231,7 +2330,8 @@
       "Butler 良秀",
       "ButlerRyōshū"
     ],
-    "className": "埃德加家族 首席管家"
+    "className": "埃德加家族 首席管家",
+    "kind": "identity"
   },
   {
     "characterId": "10809",
@@ -2254,7 +2354,8 @@
       "Butler 以实玛利",
       "ButlerIshmael"
     ],
-    "className": "埃德加家族 管家"
+    "className": "埃德加家族 管家",
+    "kind": "identity"
   },
   {
     "characterId": "11009",
@@ -2277,7 +2378,8 @@
       "Fixer 辛克莱",
       "FixerSinclair"
     ],
-    "className": "黎明事务所 收尾人"
+    "className": "黎明事务所 收尾人",
+    "kind": "identity"
   },
   {
     "characterId": "10109",
@@ -2300,7 +2402,8 @@
       "Student 李箱",
       "StudentYi Sang"
     ],
-    "className": "环指 点彩派 学徒"
+    "className": "环指 点彩派 学徒",
+    "kind": "identity"
   },
   {
     "characterId": "11109",
@@ -2323,7 +2426,8 @@
       "Student 奥提斯",
       "StudentOutis"
     ],
-    "className": "环指 点彩派 学徒"
+    "className": "环指 点彩派 学徒",
+    "kind": "identity"
   },
   {
     "characterId": "10609",
@@ -2346,7 +2450,8 @@
       "Yurodivy 鸿璐",
       "YurodivyHong Lu"
     ],
-    "className": "20区 圣愚"
+    "className": "20区 圣愚",
+    "kind": "identity"
   },
   {
     "characterId": "10409",
@@ -2369,7 +2474,8 @@
       "Yurodivy 良秀",
       "YurodivyRyōshū"
     ],
-    "className": "20区 圣愚"
+    "className": "20区 圣愚",
+    "kind": "identity"
   },
   {
     "characterId": "10309",
@@ -2392,7 +2498,8 @@
       "Staff 堂吉诃德",
       "StaffDon Quixote"
     ],
-    "className": "T公司 3级 征收人员"
+    "className": "T公司 3级 征收人员",
+    "kind": "identity"
   },
   {
     "characterId": "10909",
@@ -2415,7 +2522,8 @@
       "Staff 罗佳",
       "StaffRodion"
     ],
-    "className": "T公司 2级 征收人员"
+    "className": "T公司 2级 征收人员",
+    "kind": "identity"
   },
   {
     "characterId": "10510",
@@ -2438,7 +2546,8 @@
       "Director 默尔索",
       "DirectorMeursault"
     ],
-    "className": "Dieci协会 南部4科科长"
+    "className": "Dieci协会 南部4科科长",
+    "kind": "identity"
   },
   {
     "characterId": "11110",
@@ -2461,7 +2570,8 @@
       "Captain 奥提斯",
       "CaptainOutis"
     ],
-    "className": "W公司 3级 清扫组长"
+    "className": "W公司 3级 清扫组长",
+    "kind": "identity"
   },
   {
     "characterId": "10210",
@@ -2484,7 +2594,8 @@
       "Rep 浮士德",
       "RepFaust"
     ],
-    "className": "多裂纹事务所 代表"
+    "className": "多裂纹事务所 代表",
+    "kind": "identity"
   },
   {
     "characterId": "10709",
@@ -2507,7 +2618,8 @@
       "Fixer 希斯克利夫",
       "FixerHeathcliff"
     ],
-    "className": "多裂纹事务所 收尾人"
+    "className": "多裂纹事务所 收尾人",
+    "kind": "identity"
   },
   {
     "characterId": "10710",
@@ -2528,7 +2640,8 @@
       "Hunt 希斯克利夫",
       "HuntHeathcliff"
     ],
-    "className": "狂猎"
+    "className": "狂猎",
+    "kind": "identity"
   },
   {
     "characterId": "10110",
@@ -2551,7 +2664,8 @@
       "Lament 李箱",
       "LamentYi Sang"
     ],
-    "className": "脑叶公司E.G.O:: 庄严哀悼"
+    "className": "脑叶公司E.G.O:: 庄严哀悼",
+    "kind": "identity"
   },
   {
     "characterId": "10410",
@@ -2574,7 +2688,8 @@
       "Penitence 良秀",
       "PenitenceRyōshū"
     ],
-    "className": "脑叶公司E.G.O:: 赤瞳·忏悔"
+    "className": "脑叶公司E.G.O:: 赤瞳·忏悔",
+    "kind": "identity"
   },
   {
     "characterId": "10910",
@@ -2594,7 +2709,8 @@
       "北部3科 罗佳",
       "北部3科Rodion"
     ],
-    "className": "Девять协会 北部3科"
+    "className": "Девять协会 北部3科",
+    "kind": "identity"
   },
   {
     "characterId": "10810",
@@ -2614,7 +2730,8 @@
       "西部3科 以实玛利",
       "西部3科Ishmael"
     ],
-    "className": "Zwei协会 西部3科"
+    "className": "Zwei协会 西部3科",
+    "kind": "identity"
   },
   {
     "characterId": "10511",
@@ -2634,7 +2751,8 @@
       "西部3科 默尔索",
       "西部3科Meursault"
     ],
-    "className": "Cinq协会 西部3科"
+    "className": "Cinq协会 西部3科",
+    "kind": "identity"
   },
   {
     "characterId": "11010",
@@ -2654,7 +2772,8 @@
       "西部3科 辛克莱",
       "西部3科Sinclair"
     ],
-    "className": "Zwei协会 西部3科"
+    "className": "Zwei协会 西部3科",
+    "kind": "identity"
   },
   {
     "characterId": "11111",
@@ -2677,7 +2796,8 @@
       "Manchaland 奥提斯",
       "ManchalandOutis"
     ],
-    "className": "拉·曼却领 理发师"
+    "className": "拉·曼却领 理发师",
+    "kind": "identity"
   },
   {
     "characterId": "10610",
@@ -2700,7 +2820,8 @@
       "Fixer 鸿璐",
       "FixerHong Lu"
     ],
-    "className": "猎牙事务所 收尾人"
+    "className": "猎牙事务所 收尾人",
+    "kind": "identity"
   },
   {
     "characterId": "11210",
@@ -2723,7 +2844,8 @@
       "Manchaland 格里高尔",
       "ManchalandGregor"
     ],
-    "className": "拉·曼却领 神父"
+    "className": "拉·曼却领 神父",
+    "kind": "identity"
   },
   {
     "characterId": "10911",
@@ -2746,7 +2868,8 @@
       "Manchaland 罗佳",
       "ManchalandRodion"
     ],
-    "className": "拉·曼却领 公主"
+    "className": "拉·曼却领 公主",
+    "kind": "identity"
   },
   {
     "characterId": "11011",
@@ -2766,7 +2889,8 @@
       "北部3科 辛克莱",
       "北部3科Sinclair"
     ],
-    "className": "Девять协会 北部3科"
+    "className": "Девять协会 北部3科",
+    "kind": "identity"
   },
   {
     "characterId": "10310",
@@ -2789,7 +2913,8 @@
       "Manchaland 堂吉诃德",
       "ManchalandDon Quixote"
     ],
-    "className": "拉·曼却领 总督"
+    "className": "拉·曼却领 总督",
+    "kind": "identity"
   },
   {
     "characterId": "10611",
@@ -2812,7 +2937,8 @@
       "Rep 鸿璐",
       "RepHong Lu"
     ],
-    "className": "句点事务所 代表"
+    "className": "句点事务所 代表",
+    "kind": "identity"
   },
   {
     "characterId": "10711",
@@ -2835,7 +2961,8 @@
       "Fixer 希斯克利夫",
       "FixerHeathcliff"
     ],
-    "className": "句点事务所 收尾人"
+    "className": "句点事务所 收尾人",
+    "kind": "identity"
   },
   {
     "characterId": "10211",
@@ -2858,7 +2985,8 @@
       "Star 浮士德",
       "StarFaust"
     ],
-    "className": "LCE E.G.O:: 红艳煞"
+    "className": "LCE E.G.O:: 红艳煞",
+    "kind": "identity"
   },
   {
     "characterId": "10111",
@@ -2881,7 +3009,8 @@
       "Lantern 李箱",
       "LanternYi Sang"
     ],
-    "className": "LCE E.G.O:: 提灯"
+    "className": "LCE E.G.O:: 提灯",
+    "kind": "identity"
   },
   {
     "characterId": "10811",
@@ -2904,7 +3033,8 @@
       "Captain 以实玛利",
       "CaptainIshmael"
     ],
-    "className": "黑云会 副会长"
+    "className": "黑云会 副会长",
+    "kind": "identity"
   },
   {
     "characterId": "10712",
@@ -2927,7 +3057,8 @@
       "Wakashu 希斯克利夫",
       "WakashuHeathcliff"
     ],
-    "className": "黑云会 若众"
+    "className": "黑云会 若众",
+    "kind": "identity"
   },
   {
     "characterId": "10112",
@@ -2947,7 +3078,8 @@
       "南部3科 李箱",
       "南部3科Yi Sang"
     ],
-    "className": "六协会 南部3科"
+    "className": "六协会 南部3科",
+    "kind": "identity"
   },
   {
     "characterId": "10311",
@@ -2967,7 +3099,8 @@
       "东部3科 堂吉诃德",
       "东部3科Don Quixote"
     ],
-    "className": "Cinq协会 东部3科"
+    "className": "Cinq协会 东部3科",
+    "kind": "identity"
   },
   {
     "characterId": "11211",
@@ -2990,7 +3123,8 @@
       "Survivor 格里高尔",
       "SurvivorGregor"
     ],
-    "className": "炎拳事务所 幸存者"
+    "className": "炎拳事务所 幸存者",
+    "kind": "identity"
   },
   {
     "characterId": "11112",
@@ -3010,7 +3144,8 @@
       "Branch 奥提斯",
       "BranchOutis"
     ],
-    "className": "黑兽 - 卯"
+    "className": "黑兽 - 卯",
+    "kind": "identity"
   },
   {
     "characterId": "10411",
@@ -3030,7 +3165,8 @@
       "Branch 良秀",
       "BranchRyōshū"
     ],
-    "className": "黑兽 - 卯"
+    "className": "黑兽 - 卯",
+    "kind": "identity"
   },
   {
     "characterId": "11012",
@@ -3053,7 +3189,8 @@
       "Brother 辛克莱",
       "BrotherSinclair"
     ],
-    "className": "中指 幼弟"
+    "className": "中指 幼弟",
+    "kind": "identity"
   },
   {
     "characterId": "10612",
@@ -3076,7 +3213,8 @@
       "Reindeer 鸿璐",
       "ReindeerHong Lu"
     ],
-    "className": "R公司 第四集团军 驯鹿队"
+    "className": "R公司 第四集团军 驯鹿队",
+    "kind": "identity"
   },
   {
     "characterId": "11212",
@@ -3096,7 +3234,8 @@
       "Branch 格里高尔",
       "BranchGregor"
     ],
-    "className": "黑兽 - 巳"
+    "className": "黑兽 - 巳",
+    "kind": "identity"
   },
   {
     "characterId": "10912",
@@ -3116,7 +3255,8 @@
       "Branch 罗佳",
       "BranchRodion"
     ],
-    "className": "黑兽 - 巳"
+    "className": "黑兽 - 巳",
+    "kind": "identity"
   },
   {
     "characterId": "10212",
@@ -3139,7 +3279,8 @@
       "Adept 浮士德",
       "AdeptFaust"
     ],
-    "className": "黑兽 - 卯 魁首"
+    "className": "黑兽 - 卯 魁首",
+    "kind": "identity"
   },
   {
     "characterId": "10812",
@@ -3160,7 +3301,8 @@
       "Candidate 以实玛利",
       "CandidateIshmael"
     ],
-    "className": "家主候选人"
+    "className": "家主候选人",
+    "kind": "identity"
   },
   {
     "characterId": "10512",
@@ -3183,7 +3325,8 @@
       "IIII 默尔索",
       "IIIIMeursault"
     ],
-    "className": "拇指 东部 指挥官IIII"
+    "className": "拇指 东部 指挥官IIII",
+    "kind": "identity"
   },
   {
     "characterId": "11013",
@@ -3206,7 +3349,8 @@
       "II 辛克莱",
       "IISinclair"
     ],
-    "className": "拇指 东部 士兵II"
+    "className": "拇指 东部 士兵II",
+    "kind": "identity"
   },
   {
     "characterId": "10113",
@@ -3229,7 +3373,8 @@
       "Bullet 李箱",
       "BulletYi Sang"
     ],
-    "className": "N公司E.G.O:: 凶弹"
+    "className": "N公司E.G.O:: 凶弹",
+    "kind": "identity"
   },
   {
     "characterId": "10312",
@@ -3252,7 +3397,8 @@
       "Hate 堂吉诃德",
       "HateDon Quixote"
     ],
-    "className": "脑叶公司E.G.O:: 以爱与憎之名"
+    "className": "脑叶公司E.G.O:: 以爱与憎之名",
+    "kind": "identity"
   },
   {
     "characterId": "10913",
@@ -3275,6 +3421,801 @@
       "Tears 罗佳",
       "TearsRodion"
     ],
-    "className": "脑叶公司E.G.O:: 泪锋之剑"
+    "className": "脑叶公司E.G.O:: 泪锋之剑",
+    "kind": "identity"
+  },
+  {
+    "characterId": "boss_Ahab",
+    "name": "亚哈",
+    "fullName": "Ahab",
+    "fullNameChinese": "亚哈",
+    "aliases": [
+      "亚哈",
+      "Ahab"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Ahab/Enemy/Ahab"
+  },
+  {
+    "characterId": "boss_Aida",
+    "name": "艾达",
+    "fullName": "Aida",
+    "fullNameChinese": "艾达",
+    "aliases": [
+      "艾达",
+      "Aida"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Aida/Enemy"
+  },
+  {
+    "characterId": "boss_Albina",
+    "name": "阿尔比娜",
+    "fullName": "Albina",
+    "fullNameChinese": "阿尔比娜",
+    "aliases": [
+      "阿尔比娜",
+      "Albina"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Albina/Enemy"
+  },
+  {
+    "characterId": "boss_Araya",
+    "name": "阿赖耶",
+    "fullName": "Araya",
+    "fullNameChinese": "阿赖耶",
+    "aliases": [
+      "阿赖耶",
+      "Araya"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Araya/Enemy"
+  },
+  {
+    "characterId": "boss_Bamboo_hatted_Kim",
+    "name": "金笠",
+    "fullName": "Bamboo-hatted Kim",
+    "fullNameChinese": "金笠",
+    "aliases": [
+      "金笠",
+      "Bamboo-hatted Kim",
+      "Bamboo-hattedKim"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Bamboo-hatted Kim/Enemy/Distorted Bamboo-hatted Kim"
+  },
+  {
+    "characterId": "boss_Callisto",
+    "name": "卡利斯托",
+    "fullName": "Callisto",
+    "fullNameChinese": "卡利斯托",
+    "aliases": [
+      "卡利斯托",
+      "Callisto"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Callisto/Enemy"
+  },
+  {
+    "characterId": "boss_Camille",
+    "name": "卡米尔",
+    "fullName": "Camille",
+    "fullNameChinese": "卡米尔",
+    "aliases": [
+      "卡米尔",
+      "Camille"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Camille/Enemy"
+  },
+  {
+    "characterId": "boss_Cassetti",
+    "name": "卡塞蒂",
+    "fullName": "Cassetti",
+    "fullNameChinese": "卡塞蒂",
+    "aliases": [
+      "卡塞蒂",
+      "Cassetti"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Cassetti/Enemy"
+  },
+  {
+    "characterId": "boss_Dead_Rabbits_Boss",
+    "name": "马修",
+    "fullName": "Dead Rabbits Boss",
+    "fullNameChinese": "马修",
+    "aliases": [
+      "马修",
+      "Dead Rabbits Boss",
+      "DeadRabbitsBoss"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Dead Rabbits Boss/Enemy"
+  },
+  {
+    "characterId": "boss_District_20_Yurodiviye_Captain",
+    "name": "20区圣愚队长",
+    "fullName": "District 20 Yurodiviye Captain",
+    "fullNameChinese": "20区圣愚队长",
+    "aliases": [
+      "20区圣愚队长",
+      "District 20 Yurodiviye Captain",
+      "District20YurodiviyeCaptain"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "District 20 Yurodiviye Captain/Enemy"
+  },
+  {
+    "characterId": "boss_Dongbaek",
+    "name": "冬柏",
+    "fullName": "Dongbaek",
+    "fullNameChinese": "冬柏",
+    "aliases": [
+      "冬柏",
+      "Dongbaek"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Dongbaek/Enemy/Dongbaek E.G.O::Spicebush"
+  },
+  {
+    "characterId": "boss_Dongrang",
+    "name": "东朗",
+    "fullName": "Dongrang",
+    "fullNameChinese": "东朗",
+    "aliases": [
+      "东朗",
+      "Dongrang"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Dongrang/Enemy/Dongrang, Who Denies All"
+  },
+  {
+    "characterId": "boss_Dulcinea",
+    "name": "杜尔西内娅",
+    "fullName": "Dulcinea",
+    "fullNameChinese": "杜尔西内娅",
+    "aliases": [
+      "杜尔西内娅",
+      "Dulcinea"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Dulcinea/Enemy"
+  },
+  {
+    "characterId": "boss_Erlking_Heathcliff",
+    "name": "Erlking希斯克利夫",
+    "fullName": "Erlking Heathcliff",
+    "fullNameChinese": "Erlking希斯克利夫",
+    "aliases": [
+      "Erlking希斯克利夫",
+      "Erlking Heathcliff"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Erlking Heathcliff/Enemy"
+  },
+  {
+    "characterId": "boss_Fabius",
+    "name": "费边",
+    "fullName": "Fabius",
+    "fullNameChinese": "费边",
+    "aliases": [
+      "费边",
+      "Fabius"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Fabius/Enemy"
+  },
+  {
+    "characterId": "boss_Gubo",
+    "name": "顾泊",
+    "fullName": "Gubo",
+    "fullNameChinese": "顾泊",
+    "aliases": [
+      "顾泊",
+      "Gubo"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Gubo/Enemy"
+  },
+  {
+    "characterId": "boss_Guido",
+    "name": "圭多",
+    "fullName": "Guido",
+    "fullNameChinese": "圭多",
+    "aliases": [
+      "圭多",
+      "Guido"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Guido/Enemy"
+  },
+  {
+    "characterId": "boss_Hindley",
+    "name": "亨德利",
+    "fullName": "Hindley",
+    "fullNameChinese": "亨德利",
+    "aliases": [
+      "亨德利",
+      "Hindley"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Hindley/Enemy/Hindley"
+  },
+  {
+    "characterId": "boss_Hohenheim",
+    "name": "霍恩海姆",
+    "fullName": "Hohenheim",
+    "fullNameChinese": "霍恩海姆",
+    "aliases": [
+      "霍恩海姆",
+      "Hohenheim"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Hohenheim/Enemy"
+  },
+  {
+    "characterId": "boss_Im_Gyeong_eop",
+    "name": "林庆业",
+    "fullName": "Im Gyeong-eop",
+    "fullNameChinese": "林庆业",
+    "aliases": [
+      "林庆业",
+      "Im Gyeong-eop",
+      "ImGyeong-eop"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Im Gyeong-eop/Enemy/Imagined Im Gyeong-eop"
+  },
+  {
+    "characterId": "boss_Jia_Huan",
+    "name": "贾环",
+    "fullName": "Jia Huan",
+    "fullNameChinese": "贾环",
+    "aliases": [
+      "贾环",
+      "Jia Huan",
+      "JiaHuan"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Jia Huan/Enemy"
+  },
+  {
+    "characterId": "boss_Jia_Mu",
+    "name": "贾母",
+    "fullName": "Jia Mu",
+    "fullNameChinese": "贾母",
+    "aliases": [
+      "贾母",
+      "Jia Mu",
+      "JiaMu"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Jia Mu/Enemy/Jia Mu"
+  },
+  {
+    "characterId": "boss_Josephine",
+    "name": "约瑟芬",
+    "fullName": "Josephine",
+    "fullNameChinese": "约瑟芬",
+    "aliases": [
+      "约瑟芬",
+      "Josephine"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Josephine/Enemy"
+  },
+  {
+    "characterId": "boss_Jun",
+    "name": "林",
+    "fullName": "Jun",
+    "fullNameChinese": "林",
+    "aliases": [
+      "林",
+      "Jun"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Jun/Enemy"
+  },
+  {
+    "characterId": "boss_Kira",
+    "name": "绮罗",
+    "fullName": "Kira",
+    "fullNameChinese": "绮罗",
+    "aliases": [
+      "绮罗",
+      "Kira"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Kira/Enemy"
+  },
+  {
+    "characterId": "boss_Kromer",
+    "name": "克罗默",
+    "fullName": "Kromer",
+    "fullNameChinese": "克罗默",
+    "aliases": [
+      "克罗默",
+      "Kromer"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Kromer/Enemy/Kromer"
+  },
+  {
+    "characterId": "boss_La_Manchaland_s_Don_Quixote",
+    "name": "拉曼却领堂吉诃德",
+    "fullName": "La Manchaland's Don Quixote",
+    "fullNameChinese": "拉曼却领堂吉诃德",
+    "aliases": [
+      "拉曼却领堂吉诃德",
+      "La Manchaland's Don Quixote"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "La Manchaland's Don Quixote/Enemy"
+  },
+  {
+    "characterId": "boss_Lei_Heng",
+    "name": "雷横",
+    "fullName": "Lei Heng",
+    "fullNameChinese": "雷横",
+    "aliases": [
+      "雷横",
+      "Lei Heng",
+      "LeiHeng"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Lei Heng/Enemy"
+  },
+  {
+    "characterId": "boss_Lucio",
+    "name": "卢西奥",
+    "fullName": "Lucio",
+    "fullNameChinese": "卢西奥",
+    "aliases": [
+      "卢西奥",
+      "Lucio"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Lucio/Enemy"
+  },
+  {
+    "characterId": "boss_Marile",
+    "name": "玛丽勒",
+    "fullName": "Marile",
+    "fullNameChinese": "玛丽勒",
+    "aliases": [
+      "玛丽勒",
+      "Marile"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Marile/Enemy"
+  },
+  {
+    "characterId": "boss_Matthias",
+    "name": "马蒂亚斯",
+    "fullName": "Matthias",
+    "fullNameChinese": "马蒂亚斯",
+    "aliases": [
+      "马蒂亚斯",
+      "Matthias"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Matthias/Enemy"
+  },
+  {
+    "characterId": "boss_Mayors",
+    "name": "梅厄斯",
+    "fullName": "Mayors",
+    "fullNameChinese": "梅厄斯",
+    "aliases": [
+      "梅厄斯",
+      "Mayors"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Mayors/Enemy"
+  },
+  {
+    "characterId": "boss_Nelly",
+    "name": "耐莉",
+    "fullName": "Nelly",
+    "fullNameChinese": "耐莉",
+    "aliases": [
+      "耐莉",
+      "Nelly"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Nelly/Enemy"
+  },
+  {
+    "characterId": "boss_Night_Drifter",
+    "name": "醉手夜客",
+    "fullName": "Night Drifter",
+    "fullNameChinese": "醉手夜客",
+    "aliases": [
+      "醉手夜客",
+      "Night Drifter",
+      "NightDrifter"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Night Drifter/Enemy"
+  },
+  {
+    "characterId": "boss_Niko",
+    "name": "尼柯",
+    "fullName": "Niko",
+    "fullNameChinese": "尼柯",
+    "aliases": [
+      "尼柯",
+      "Niko"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Niko/Enemy"
+  },
+  {
+    "characterId": "boss_Old_G_Corp_Head_Manager",
+    "name": "旧G公司部长",
+    "fullName": "Old G Corp. Head Manager",
+    "fullNameChinese": "旧G公司部长",
+    "aliases": [
+      "旧G公司部长",
+      "Old G Corp. Head Manager"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Old G Corp. Head Manager/Enemy"
+  },
+  {
+    "characterId": "boss_Papa_Bongy",
+    "name": "胖胖鸡爸爸",
+    "fullName": "Papa Bongy",
+    "fullNameChinese": "胖胖鸡爸爸",
+    "aliases": [
+      "胖胖鸡爸爸",
+      "Papa Bongy"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Papa Bongy/Enemy"
+  },
+  {
+    "characterId": "boss_Queequeg",
+    "name": "魁魁格",
+    "fullName": "Queequeg",
+    "fullNameChinese": "魁魁格",
+    "aliases": [
+      "魁魁格",
+      "Queequeg"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Queequeg/Enemy"
+  },
+  {
+    "characterId": "boss_Ren",
+    "name": "莲",
+    "fullName": "Ren",
+    "fullNameChinese": "莲",
+    "aliases": [
+      "莲",
+      "Ren"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Ren/Enemy"
+  },
+  {
+    "characterId": "boss_Ricardo",
+    "name": "里卡多",
+    "fullName": "Ricardo",
+    "fullNameChinese": "里卡多",
+    "aliases": [
+      "里卡多",
+      "Ricardo"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Ricardo/Enemy"
+  },
+  {
+    "characterId": "boss_Rien",
+    "name": "里恩",
+    "fullName": "Rien",
+    "fullNameChinese": "里恩",
+    "aliases": [
+      "里恩",
+      "Rien"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Rien/Enemy"
+  },
+  {
+    "characterId": "boss_Rufo",
+    "name": "卢佛",
+    "fullName": "Rufo",
+    "fullNameChinese": "卢佛",
+    "aliases": [
+      "卢佛",
+      "Rufo"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Rufo/Enemy"
+  },
+  {
+    "characterId": "boss_Santata",
+    "name": "桑塔塔",
+    "fullName": "Santata",
+    "fullNameChinese": "桑塔塔",
+    "aliases": [
+      "桑塔塔",
+      "Santata"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Santata/Enemy"
+  },
+  {
+    "characterId": "boss_Shi_Huazhen",
+    "name": "史华贞",
+    "fullName": "Shi Huazhen",
+    "fullNameChinese": "史华贞",
+    "aliases": [
+      "史华贞",
+      "Shi Huazhen",
+      "ShiHuazhen"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Shi Huazhen/Enemy"
+  },
+  {
+    "characterId": "boss_Shi_Sijing",
+    "name": "史思静",
+    "fullName": "Shi Sijing",
+    "fullNameChinese": "史思静",
+    "aliases": [
+      "史思静",
+      "Shi Sijing",
+      "ShiSijing"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Shi Sijing/Enemy"
+  },
+  {
+    "characterId": "boss_Shi_Yihua",
+    "name": "史易华",
+    "fullName": "Shi Yihua",
+    "fullNameChinese": "史易华",
+    "aliases": [
+      "史易华",
+      "Shi Yihua",
+      "ShiYihua"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Shi Yihua/Enemy"
+  },
+  {
+    "characterId": "boss_Shiomi_Yoru",
+    "name": "盐见夜",
+    "fullName": "Shiomi Yoru",
+    "fullNameChinese": "盐见夜",
+    "aliases": [
+      "盐见夜",
+      "Shiomi Yoru",
+      "ShiomiYoru"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Shiomi Yoru/Enemy"
+  },
+  {
+    "characterId": "boss_Smee",
+    "name": "斯米",
+    "fullName": "Smee",
+    "fullNameChinese": "斯米",
+    "aliases": [
+      "斯米",
+      "Smee"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Smee/Enemy"
+  },
+  {
+    "characterId": "boss_Sora",
+    "name": "空",
+    "fullName": "Sora",
+    "fullNameChinese": "空",
+    "aliases": [
+      "空",
+      "Sora"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Sora/Enemy"
+  },
+  {
+    "characterId": "boss_Starbuck",
+    "name": "斯达巴克",
+    "fullName": "Starbuck",
+    "fullNameChinese": "斯达巴克",
+    "aliases": [
+      "斯达巴克",
+      "Starbuck"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Starbuck/Enemy"
+  },
+  {
+    "characterId": "boss_The_Barber",
+    "name": "理发师",
+    "fullName": "The Barber",
+    "fullNameChinese": "理发师",
+    "aliases": [
+      "理发师",
+      "The Barber"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "The Barber/Enemy"
+  },
+  {
+    "characterId": "boss_The_Last_Knight",
+    "name": "最后的骑士",
+    "fullName": "The Last Knight",
+    "fullNameChinese": "最后的骑士",
+    "aliases": [
+      "最后的骑士",
+      "The Last Knight"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "The Last Knight"
+  },
+  {
+    "characterId": "boss_The_Priest",
+    "name": "神父",
+    "fullName": "The Priest",
+    "fullNameChinese": "神父",
+    "aliases": [
+      "神父",
+      "The Priest"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "The Priest/Enemy"
+  },
+  {
+    "characterId": "boss_The_Time_Ripper",
+    "name": "时间杀人魔",
+    "fullName": "The Time Ripper",
+    "fullNameChinese": "时间杀人魔",
+    "aliases": [
+      "时间杀人魔",
+      "The Time Ripper"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "The Time Ripper/Enemy"
+  },
+  {
+    "characterId": "boss_Tingtang_Boss",
+    "name": "叮噹帮头目",
+    "fullName": "Tingtang Boss",
+    "fullNameChinese": "叮噹帮头目",
+    "aliases": [
+      "叮噹帮头目",
+      "Tingtang Boss"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Tingtang Boss/Enemy"
+  },
+  {
+    "characterId": "boss_Valencina",
+    "name": "瓦伦希娜",
+    "fullName": "Valencina",
+    "fullNameChinese": "瓦伦希娜",
+    "aliases": [
+      "瓦伦希娜",
+      "Valencina"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Valencina/Enemy"
+  },
+  {
+    "characterId": "boss_Wang_Qingshan",
+    "name": "王清山",
+    "fullName": "Wang Qingshan",
+    "fullNameChinese": "王清山",
+    "aliases": [
+      "王清山",
+      "Wang Qingshan",
+      "WangQingshan"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Wang Qingshan/Enemy"
+  },
+  {
+    "characterId": "boss_Wei",
+    "name": "卫",
+    "fullName": "Wei",
+    "fullNameChinese": "卫",
+    "aliases": [
+      "卫",
+      "Wei"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Wei/Enemy"
+  },
+  {
+    "characterId": "boss_Xue_Pan",
+    "name": "薛蟠",
+    "fullName": "Xue Pan",
+    "fullNameChinese": "薛蟠",
+    "aliases": [
+      "薛蟠",
+      "Xue Pan",
+      "XuePan"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Xue Pan/Enemy"
+  },
+  {
+    "characterId": "boss_ufi_Assoc_Director",
+    "name": "欧甫协会部长",
+    "fullName": "Öufi Assoc. Director",
+    "fullNameChinese": "欧甫协会部长",
+    "aliases": [
+      "欧甫协会部长",
+      "Öufi Assoc. Director"
+    ],
+    "className": "Boss",
+    "kind": "boss",
+    "wikiPage": "Öufi Assoc. Director/Enemy"
   }
 ]

@@ -1,0 +1,4184 @@
+[
+  {
+    "id": 3926665479,
+    "characterId": "i52312",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i52312",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036584_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036584_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036584.png",
+      "https://xivapi.com/i/036000/036584_hr1.png",
+      "https://xivapi.com/i/036000/036584.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 795,
+    "equipLevel": 100
+  },
+  {
+    "id": 190393793,
+    "characterId": "i49671",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i49671",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036578_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036578_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036578.png",
+      "https://xivapi.com/i/036000/036578_hr1.png",
+      "https://xivapi.com/i/036000/036578.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 795,
+    "equipLevel": 100
+  },
+  {
+    "id": 3184952363,
+    "characterId": "i49594",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i49594",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036580_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036580_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036580.png",
+      "https://xivapi.com/i/036000/036580_hr1.png",
+      "https://xivapi.com/i/036000/036580.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 790,
+    "equipLevel": 100
+  },
+  {
+    "id": 70830034,
+    "characterId": "i50906",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i50906",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036583_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036583_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036583.png",
+      "https://xivapi.com/i/036000/036583_hr1.png",
+      "https://xivapi.com/i/036000/036583.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 785,
+    "equipLevel": 100
+  },
+  {
+    "id": 2413264289,
+    "characterId": "i51123",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i51123",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036581_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036581_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036581.png",
+      "https://xivapi.com/i/036000/036581_hr1.png",
+      "https://xivapi.com/i/036000/036581.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 780,
+    "equipLevel": 100
+  },
+  {
+    "id": 4188342691,
+    "characterId": "i49517",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i49517",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036580_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036580_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036580.png",
+      "https://xivapi.com/i/036000/036580_hr1.png",
+      "https://xivapi.com/i/036000/036580.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 780,
+    "equipLevel": 100
+  },
+  {
+    "id": 2099393342,
+    "characterId": "i50045",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i50045",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036577_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036577_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036577.png",
+      "https://xivapi.com/i/036000/036577_hr1.png",
+      "https://xivapi.com/i/036000/036577.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 775,
+    "equipLevel": 100
+  },
+  {
+    "id": 3836501658,
+    "characterId": "i49495",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i49495",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036579_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036579_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036579.png",
+      "https://xivapi.com/i/036000/036579_hr1.png",
+      "https://xivapi.com/i/036000/036579.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 775,
+    "equipLevel": 100
+  },
+  {
+    "id": 4149331210,
+    "characterId": "i49262",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i49262",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036581_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036581_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036581.png",
+      "https://xivapi.com/i/036000/036581_hr1.png",
+      "https://xivapi.com/i/036000/036581.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 770,
+    "equipLevel": 100
+  },
+  {
+    "id": 1893628610,
+    "characterId": "i46643",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i46643",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036571_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036571_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036571.png",
+      "https://xivapi.com/i/036000/036571_hr1.png",
+      "https://xivapi.com/i/036000/036571.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 765,
+    "equipLevel": 100
+  },
+  {
+    "id": 1039842918,
+    "characterId": "i47019",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i47019",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036572_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036572_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036572.png",
+      "https://xivapi.com/i/036000/036572_hr1.png",
+      "https://xivapi.com/i/036000/036572.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 760,
+    "equipLevel": 100
+  },
+  {
+    "id": 808135664,
+    "characterId": "i47325",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i47325",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036573_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036573_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036573.png",
+      "https://xivapi.com/i/036000/036573_hr1.png",
+      "https://xivapi.com/i/036000/036573.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 760,
+    "equipLevel": 100
+  },
+  {
+    "id": 2119018105,
+    "characterId": "i46566",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i46566",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036570_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036570_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036570.png",
+      "https://xivapi.com/i/036000/036570_hr1.png",
+      "https://xivapi.com/i/036000/036570.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 760,
+    "equipLevel": 100
+  },
+  {
+    "id": 2250714956,
+    "characterId": "i47063",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i47063",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036575_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036575_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036575.png",
+      "https://xivapi.com/i/036000/036575_hr1.png",
+      "https://xivapi.com/i/036000/036575.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 755,
+    "equipLevel": 100
+  },
+  {
+    "id": 1088541975,
+    "characterId": "i46997",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i46997",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036576_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036576_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036576.png",
+      "https://xivapi.com/i/036000/036576_hr1.png",
+      "https://xivapi.com/i/036000/036576.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 755,
+    "equipLevel": 100
+  },
+  {
+    "id": 379776570,
+    "characterId": "i47041",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i47041",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036574_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036574_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036574.png",
+      "https://xivapi.com/i/036000/036574_hr1.png",
+      "https://xivapi.com/i/036000/036574.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 750,
+    "equipLevel": 100
+  },
+  {
+    "id": 2903916094,
+    "characterId": "i46908",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i46908",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036568_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036568_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036568.png",
+      "https://xivapi.com/i/036000/036568_hr1.png",
+      "https://xivapi.com/i/036000/036568.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 750,
+    "equipLevel": 100
+  },
+  {
+    "id": 3594861310,
+    "characterId": "i46489",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i46489",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036570_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036570_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036570.png",
+      "https://xivapi.com/i/036000/036570_hr1.png",
+      "https://xivapi.com/i/036000/036570.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 750,
+    "equipLevel": 100
+  },
+  {
+    "id": 476438648,
+    "characterId": "i46467",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i46467",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036569_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036569_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036569.png",
+      "https://xivapi.com/i/036000/036569_hr1.png",
+      "https://xivapi.com/i/036000/036569.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 745,
+    "equipLevel": 100
+  },
+  {
+    "id": 2083708468,
+    "characterId": "i47882",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i47882",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036572_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036572_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036572.png",
+      "https://xivapi.com/i/036000/036572_hr1.png",
+      "https://xivapi.com/i/036000/036572.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 745,
+    "equipLevel": 100
+  },
+  {
+    "id": 181714386,
+    "characterId": "i47085",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i47085",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036573_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036573_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036573.png",
+      "https://xivapi.com/i/036000/036573_hr1.png",
+      "https://xivapi.com/i/036000/036573.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 745,
+    "equipLevel": 100
+  },
+  {
+    "id": 2094148109,
+    "characterId": "i46023",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i46023",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036568_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036568_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036568.png",
+      "https://xivapi.com/i/036000/036568_hr1.png",
+      "https://xivapi.com/i/036000/036568.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 740,
+    "equipLevel": 100
+  },
+  {
+    "id": 2929759439,
+    "characterId": "i44734",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i44734",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036565_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036565_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036565.png",
+      "https://xivapi.com/i/036000/036565_hr1.png",
+      "https://xivapi.com/i/036000/036565.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 735,
+    "equipLevel": 100
+  },
+  {
+    "id": 2670717117,
+    "characterId": "i43114",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i43114",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036554_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036554_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036554.png",
+      "https://xivapi.com/i/036000/036554_hr1.png",
+      "https://xivapi.com/i/036000/036554.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 735,
+    "equipLevel": 100
+  },
+  {
+    "id": 696697291,
+    "characterId": "i43037",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i43037",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036555_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036555_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036555.png",
+      "https://xivapi.com/i/036000/036555_hr1.png",
+      "https://xivapi.com/i/036000/036555.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 730,
+    "equipLevel": 100
+  },
+  {
+    "id": 4274596163,
+    "characterId": "i44709",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i44709",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036566_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036566_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036566.png",
+      "https://xivapi.com/i/036000/036566_hr1.png",
+      "https://xivapi.com/i/036000/036566.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 725,
+    "equipLevel": 100
+  },
+  {
+    "id": 3001457541,
+    "characterId": "i44757",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i44757",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036559_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036559_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036559.png",
+      "https://xivapi.com/i/036000/036559_hr1.png",
+      "https://xivapi.com/i/036000/036559.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 720,
+    "equipLevel": 100
+  },
+  {
+    "id": 1308266293,
+    "characterId": "i42960",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i42960",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036555_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036555_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036555.png",
+      "https://xivapi.com/i/036000/036555_hr1.png",
+      "https://xivapi.com/i/036000/036555.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 720,
+    "equipLevel": 100
+  },
+  {
+    "id": 2142122653,
+    "characterId": "i42883",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i42883",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036559_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036559_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036559.png",
+      "https://xivapi.com/i/036000/036559_hr1.png",
+      "https://xivapi.com/i/036000/036559.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 710,
+    "equipLevel": 100
+  },
+  {
+    "id": 3516977668,
+    "characterId": "i42786",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i42786",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036561_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036561_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036561.png",
+      "https://xivapi.com/i/036000/036561_hr1.png",
+      "https://xivapi.com/i/036000/036561.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 710,
+    "equipLevel": 100
+  },
+  {
+    "id": 3449520042,
+    "characterId": "i42709",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i42709",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036552_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036552_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036552.png",
+      "https://xivapi.com/i/036000/036552_hr1.png",
+      "https://xivapi.com/i/036000/036552.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 700,
+    "equipLevel": 100
+  },
+  {
+    "id": 3327461748,
+    "characterId": "i42582",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i42582",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036550_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036550_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036550.png",
+      "https://xivapi.com/i/036000/036550_hr1.png",
+      "https://xivapi.com/i/036000/036550.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 690,
+    "equipLevel": 99
+  },
+  {
+    "id": 1568845883,
+    "characterId": "i42465",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i42465",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036564_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036564_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036564.png",
+      "https://xivapi.com/i/036000/036564_hr1.png",
+      "https://xivapi.com/i/036000/036564.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 675,
+    "equipLevel": 98
+  },
+  {
+    "id": 1965679847,
+    "characterId": "i42388",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i42388",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036562_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036562_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036562.png",
+      "https://xivapi.com/i/036000/036562_hr1.png",
+      "https://xivapi.com/i/036000/036562.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 672,
+    "equipLevel": 97
+  },
+  {
+    "id": 4173864921,
+    "characterId": "i42311",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i42311",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036551_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036551_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036551.png",
+      "https://xivapi.com/i/036000/036551_hr1.png",
+      "https://xivapi.com/i/036000/036551.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 669,
+    "equipLevel": 96
+  },
+  {
+    "id": 2561622608,
+    "characterId": "i42234",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i42234",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036560_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036560_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036560.png",
+      "https://xivapi.com/i/036000/036560_hr1.png",
+      "https://xivapi.com/i/036000/036560.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 666,
+    "equipLevel": 95
+  },
+  {
+    "id": 4058720593,
+    "characterId": "i41692",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i41692",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036547_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036547_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036547.png",
+      "https://xivapi.com/i/036000/036547_hr1.png",
+      "https://xivapi.com/i/036000/036547.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 665,
+    "equipLevel": 90
+  },
+  {
+    "id": 3481231249,
+    "characterId": "i40178",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i40178",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036546_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036546_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036546.png",
+      "https://xivapi.com/i/036000/036546_hr1.png",
+      "https://xivapi.com/i/036000/036546.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 665,
+    "equipLevel": 90
+  },
+  {
+    "id": 2850296436,
+    "characterId": "i40945",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i40945",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036548_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036548_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036548.png",
+      "https://xivapi.com/i/036000/036548_hr1.png",
+      "https://xivapi.com/i/036000/036548.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 665,
+    "equipLevel": 90
+  },
+  {
+    "id": 1685801758,
+    "characterId": "i42157",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i42157",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036558_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036558_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036558.png",
+      "https://xivapi.com/i/036000/036558_hr1.png",
+      "https://xivapi.com/i/036000/036558.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 663,
+    "equipLevel": 94
+  },
+  {
+    "id": 1822003281,
+    "characterId": "i42080",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i42080",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036563_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036563_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036563.png",
+      "https://xivapi.com/i/036000/036563_hr1.png",
+      "https://xivapi.com/i/036000/036563.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 660,
+    "equipLevel": 93
+  },
+  {
+    "id": 3645203714,
+    "characterId": "i40103",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i40103",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036547_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036547_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036547.png",
+      "https://xivapi.com/i/036000/036547_hr1.png",
+      "https://xivapi.com/i/036000/036547.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 660,
+    "equipLevel": 90
+  },
+  {
+    "id": 1070322739,
+    "characterId": "i42003",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i42003",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036556_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036556_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036556.png",
+      "https://xivapi.com/i/036000/036556_hr1.png",
+      "https://xivapi.com/i/036000/036556.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 655,
+    "equipLevel": 92
+  },
+  {
+    "id": 1415615239,
+    "characterId": "i41046",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i41046",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036549_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036549_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036549.png",
+      "https://xivapi.com/i/036000/036549_hr1.png",
+      "https://xivapi.com/i/036000/036549.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 655,
+    "equipLevel": 90
+  },
+  {
+    "id": 125943359,
+    "characterId": "i41926",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i41926",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036557_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036557_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036557.png",
+      "https://xivapi.com/i/036000/036557_hr1.png",
+      "https://xivapi.com/i/036000/036557.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 650,
+    "equipLevel": 91
+  },
+  {
+    "id": 3519359475,
+    "characterId": "i40028",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i40028",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036547_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036547_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036547.png",
+      "https://xivapi.com/i/036000/036547_hr1.png",
+      "https://xivapi.com/i/036000/036547.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 650,
+    "equipLevel": 90
+  },
+  {
+    "id": 580590860,
+    "characterId": "i40833",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i40833",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036545_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036545_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036545.png",
+      "https://xivapi.com/i/036000/036545_hr1.png",
+      "https://xivapi.com/i/036000/036545.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 650,
+    "equipLevel": 90
+  },
+  {
+    "id": 3211200075,
+    "characterId": "i41849",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i41849",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036553_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036553_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036553.png",
+      "https://xivapi.com/i/036000/036553_hr1.png",
+      "https://xivapi.com/i/036000/036553.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 645,
+    "equipLevel": 90
+  },
+  {
+    "id": 2889675133,
+    "characterId": "i39933",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i39933",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036543_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036543_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036543.png",
+      "https://xivapi.com/i/036000/036543_hr1.png",
+      "https://xivapi.com/i/036000/036543.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 645,
+    "equipLevel": 90
+  },
+  {
+    "id": 1651671096,
+    "characterId": "i39953",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i39953",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036544_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036544_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036544.png",
+      "https://xivapi.com/i/036000/036544_hr1.png",
+      "https://xivapi.com/i/036000/036544.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 645,
+    "equipLevel": 90
+  },
+  {
+    "id": 574575178,
+    "characterId": "i39643",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i39643",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036545_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036545_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036545.png",
+      "https://xivapi.com/i/036000/036545_hr1.png",
+      "https://xivapi.com/i/036000/036545.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 640,
+    "equipLevel": 90
+  },
+  {
+    "id": 2660785770,
+    "characterId": "i38094",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i38094",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036535_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036535_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036535.png",
+      "https://xivapi.com/i/036000/036535_hr1.png",
+      "https://xivapi.com/i/036000/036535.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 635,
+    "equipLevel": 90
+  },
+  {
+    "id": 2335371176,
+    "characterId": "i39177",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i39177",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036542_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036542_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036542.png",
+      "https://xivapi.com/i/036000/036542_hr1.png",
+      "https://xivapi.com/i/036000/036542.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 635,
+    "equipLevel": 90
+  },
+  {
+    "id": 1627665756,
+    "characterId": "i38019",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i38019",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036536_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036536_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036536.png",
+      "https://xivapi.com/i/036000/036536_hr1.png",
+      "https://xivapi.com/i/036000/036536.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 630,
+    "equipLevel": 90
+  },
+  {
+    "id": 1904499261,
+    "characterId": "i39157",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i39157",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036539_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036539_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036539.png",
+      "https://xivapi.com/i/036000/036539_hr1.png",
+      "https://xivapi.com/i/036000/036539.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 630,
+    "equipLevel": 90
+  },
+  {
+    "id": 4085699736,
+    "characterId": "i39137",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i39137",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036538_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036538_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036538.png",
+      "https://xivapi.com/i/036000/036538_hr1.png",
+      "https://xivapi.com/i/036000/036538.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 625,
+    "equipLevel": 90
+  },
+  {
+    "id": 2803111540,
+    "characterId": "i39217",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i39217",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036541_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036541_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036541.png",
+      "https://xivapi.com/i/036000/036541_hr1.png",
+      "https://xivapi.com/i/036000/036541.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 625,
+    "equipLevel": 90
+  },
+  {
+    "id": 3812813319,
+    "characterId": "i39025",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i39025",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036534_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036534_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036534.png",
+      "https://xivapi.com/i/036000/036534_hr1.png",
+      "https://xivapi.com/i/036000/036534.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 620,
+    "equipLevel": 90
+  },
+  {
+    "id": 1908334284,
+    "characterId": "i37944",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i37944",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036536_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036536_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036536.png",
+      "https://xivapi.com/i/036000/036536_hr1.png",
+      "https://xivapi.com/i/036000/036536.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 620,
+    "equipLevel": 90
+  },
+  {
+    "id": 1201681374,
+    "characterId": "i39197",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i39197",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036540_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036540_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036540.png",
+      "https://xivapi.com/i/036000/036540_hr1.png",
+      "https://xivapi.com/i/036000/036540.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 620,
+    "equipLevel": 90
+  },
+  {
+    "id": 22825565,
+    "characterId": "i38413",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i38413",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036533_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036533_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036533.png",
+      "https://xivapi.com/i/036000/036533_hr1.png",
+      "https://xivapi.com/i/036000/036533.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 615,
+    "equipLevel": 90
+  },
+  {
+    "id": 19245420,
+    "characterId": "i37869",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i37869",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036537_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036537_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036537.png",
+      "https://xivapi.com/i/036000/036537_hr1.png",
+      "https://xivapi.com/i/036000/036537.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 615,
+    "equipLevel": 90
+  },
+  {
+    "id": 3847366121,
+    "characterId": "i37755",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i37755",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036534_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036534_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036534.png",
+      "https://xivapi.com/i/036000/036534_hr1.png",
+      "https://xivapi.com/i/036000/036534.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 610,
+    "equipLevel": 90
+  },
+  {
+    "id": 2932112814,
+    "characterId": "i35258",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i35258",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036527_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036527_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036527.png",
+      "https://xivapi.com/i/036000/036527_hr1.png",
+      "https://xivapi.com/i/036000/036527.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 605,
+    "equipLevel": 90
+  },
+  {
+    "id": 3906137062,
+    "characterId": "i36956",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i36956",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036532_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036532_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036532.png",
+      "https://xivapi.com/i/036000/036532_hr1.png",
+      "https://xivapi.com/i/036000/036532.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 605,
+    "equipLevel": 90
+  },
+  {
+    "id": 422368482,
+    "characterId": "i35183",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i35183",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036518_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036518_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036518.png",
+      "https://xivapi.com/i/036000/036518_hr1.png",
+      "https://xivapi.com/i/036000/036518.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 600,
+    "equipLevel": 90
+  },
+  {
+    "id": 1370173920,
+    "characterId": "i36936",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i36936",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036530_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036530_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036530.png",
+      "https://xivapi.com/i/036000/036530_hr1.png",
+      "https://xivapi.com/i/036000/036530.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 595,
+    "equipLevel": 90
+  },
+  {
+    "id": 4264727445,
+    "characterId": "i36731",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i36731",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036526_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036526_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036526.png",
+      "https://xivapi.com/i/036000/036526_hr1.png",
+      "https://xivapi.com/i/036000/036526.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 590,
+    "equipLevel": 90
+  },
+  {
+    "id": 2276109538,
+    "characterId": "i35108",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i35108",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036518_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036518_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036518.png",
+      "https://xivapi.com/i/036000/036518_hr1.png",
+      "https://xivapi.com/i/036000/036518.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 590,
+    "equipLevel": 90
+  },
+  {
+    "id": 4235008696,
+    "characterId": "i35033",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i35033",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036526_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036526_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036526.png",
+      "https://xivapi.com/i/036000/036526_hr1.png",
+      "https://xivapi.com/i/036000/036526.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 580,
+    "equipLevel": 90
+  },
+  {
+    "id": 1992403819,
+    "characterId": "i34938",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i34938",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036515_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036515_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036515.png",
+      "https://xivapi.com/i/036000/036515_hr1.png",
+      "https://xivapi.com/i/036000/036515.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 580,
+    "equipLevel": 90
+  },
+  {
+    "id": 4247767392,
+    "characterId": "i34863",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i34863",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036517_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036517_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036517.png",
+      "https://xivapi.com/i/036000/036517_hr1.png",
+      "https://xivapi.com/i/036000/036517.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 570,
+    "equipLevel": 90
+  },
+  {
+    "id": 2869731065,
+    "characterId": "i48186",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i48186",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036515_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036515_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036515.png",
+      "https://xivapi.com/i/036000/036515_hr1.png",
+      "https://xivapi.com/i/036000/036515.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 560,
+    "equipLevel": 90
+  },
+  {
+    "id": 1591803892,
+    "characterId": "i34055",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i34055",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036519_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036519_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036519.png",
+      "https://xivapi.com/i/036000/036519_hr1.png",
+      "https://xivapi.com/i/036000/036519.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 560,
+    "equipLevel": 89
+  },
+  {
+    "id": 3284120597,
+    "characterId": "i34693",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i34693",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036525_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036525_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036525.png",
+      "https://xivapi.com/i/036000/036525_hr1.png",
+      "https://xivapi.com/i/036000/036525.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 545,
+    "equipLevel": 88
+  },
+  {
+    "id": 3631773939,
+    "characterId": "i34618",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i34618",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036523_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036523_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036523.png",
+      "https://xivapi.com/i/036000/036523_hr1.png",
+      "https://xivapi.com/i/036000/036523.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 542,
+    "equipLevel": 87
+  },
+  {
+    "id": 3593429167,
+    "characterId": "i34543",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i34543",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036521_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036521_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036521.png",
+      "https://xivapi.com/i/036000/036521_hr1.png",
+      "https://xivapi.com/i/036000/036521.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 539,
+    "equipLevel": 86
+  },
+  {
+    "id": 1097261188,
+    "characterId": "i34468",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i34468",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036529_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036529_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036529.png",
+      "https://xivapi.com/i/036000/036529_hr1.png",
+      "https://xivapi.com/i/036000/036529.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 536,
+    "equipLevel": 85
+  },
+  {
+    "id": 3985449515,
+    "characterId": "i32289",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i32289",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036511_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036511_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036511.png",
+      "https://xivapi.com/i/036000/036511_hr1.png",
+      "https://xivapi.com/i/036000/036511.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 535,
+    "equipLevel": 80
+  },
+  {
+    "id": 481033140,
+    "characterId": "i33475",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i33475",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036513_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036513_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036513.png",
+      "https://xivapi.com/i/036000/036513_hr1.png",
+      "https://xivapi.com/i/036000/036513.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 535,
+    "equipLevel": 80
+  },
+  {
+    "id": 1838057841,
+    "characterId": "i34393",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i34393",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036516_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036516_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036516.png",
+      "https://xivapi.com/i/036000/036516_hr1.png",
+      "https://xivapi.com/i/036000/036516.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 533,
+    "equipLevel": 84
+  },
+  {
+    "id": 2919007692,
+    "characterId": "i34318",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i34318",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036524_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036524_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036524.png",
+      "https://xivapi.com/i/036000/036524_hr1.png",
+      "https://xivapi.com/i/036000/036524.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 530,
+    "equipLevel": 83
+  },
+  {
+    "id": 427337835,
+    "characterId": "i32511",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i32511",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036508_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036508_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036508.png",
+      "https://xivapi.com/i/036000/036508_hr1.png",
+      "https://xivapi.com/i/036000/036508.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 530,
+    "equipLevel": 80
+  },
+  {
+    "id": 554219830,
+    "characterId": "i34243",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i34243",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036522_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036522_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036522.png",
+      "https://xivapi.com/i/036000/036522_hr1.png",
+      "https://xivapi.com/i/036000/036522.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 525,
+    "equipLevel": 82
+  },
+  {
+    "id": 3507747541,
+    "characterId": "i33495",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i33495",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036514_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036514_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036514.png",
+      "https://xivapi.com/i/036000/036514_hr1.png",
+      "https://xivapi.com/i/036000/036514.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 525,
+    "equipLevel": 80
+  },
+  {
+    "id": 2087961388,
+    "characterId": "i34168",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i34168",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036520_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036520_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036520.png",
+      "https://xivapi.com/i/036000/036520_hr1.png",
+      "https://xivapi.com/i/036000/036520.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 520,
+    "equipLevel": 81
+  },
+  {
+    "id": 1660028754,
+    "characterId": "i32431",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i32431",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036508_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036508_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036508.png",
+      "https://xivapi.com/i/036000/036508_hr1.png",
+      "https://xivapi.com/i/036000/036508.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 520,
+    "equipLevel": 80
+  },
+  {
+    "id": 200894619,
+    "characterId": "i33372",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i33372",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036510_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036510_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036510.png",
+      "https://xivapi.com/i/036000/036510_hr1.png",
+      "https://xivapi.com/i/036000/036510.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 520,
+    "equipLevel": 80
+  },
+  {
+    "id": 280536026,
+    "characterId": "i32682",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i32682",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036509_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036509_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036509.png",
+      "https://xivapi.com/i/036000/036509_hr1.png",
+      "https://xivapi.com/i/036000/036509.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 515,
+    "equipLevel": 80
+  },
+  {
+    "id": 1051940891,
+    "characterId": "i32271",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i32271",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036512_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036512_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036512.png",
+      "https://xivapi.com/i/036000/036512_hr1.png",
+      "https://xivapi.com/i/036000/036512.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 515,
+    "equipLevel": 80
+  },
+  {
+    "id": 255427694,
+    "characterId": "i34093",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i34093",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036528_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036528_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036528.png",
+      "https://xivapi.com/i/036000/036528_hr1.png",
+      "https://xivapi.com/i/036000/036528.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 515,
+    "equipLevel": 80
+  },
+  {
+    "id": 1970506793,
+    "characterId": "i31826",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i31826",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036510_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036510_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036510.png",
+      "https://xivapi.com/i/036000/036510_hr1.png",
+      "https://xivapi.com/i/036000/036510.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 510,
+    "equipLevel": 80
+  },
+  {
+    "id": 52661877,
+    "characterId": "i32664",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i32664",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036509_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036509_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036509.png",
+      "https://xivapi.com/i/036000/036509_hr1.png",
+      "https://xivapi.com/i/036000/036509.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 510,
+    "equipLevel": 80
+  },
+  {
+    "id": 1865109676,
+    "characterId": "i29050",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i29050",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036505_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036505_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036505.png",
+      "https://xivapi.com/i/036000/036505_hr1.png",
+      "https://xivapi.com/i/036000/036505.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 505,
+    "equipLevel": 80
+  },
+  {
+    "id": 3494715985,
+    "characterId": "i30780",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i30780",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036502_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036502_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036502.png",
+      "https://xivapi.com/i/036000/036502_hr1.png",
+      "https://xivapi.com/i/036000/036502.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 500,
+    "equipLevel": 80
+  },
+  {
+    "id": 3694407699,
+    "characterId": "i29272",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i29272",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036503_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036503_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036503.png",
+      "https://xivapi.com/i/036000/036503_hr1.png",
+      "https://xivapi.com/i/036000/036503.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 500,
+    "equipLevel": 80
+  },
+  {
+    "id": 654505162,
+    "characterId": "i30798",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i30798",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036502_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036502_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036502.png",
+      "https://xivapi.com/i/036000/036502_hr1.png",
+      "https://xivapi.com/i/036000/036502.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 500,
+    "equipLevel": 80
+  },
+  {
+    "id": 2158580877,
+    "characterId": "i30610",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i30610",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036506_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036506_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036506.png",
+      "https://xivapi.com/i/036000/036506_hr1.png",
+      "https://xivapi.com/i/036000/036506.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 495,
+    "equipLevel": 80
+  },
+  {
+    "id": 782341023,
+    "characterId": "i30521",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i30521",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036501_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036501_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036501.png",
+      "https://xivapi.com/i/036000/036501_hr1.png",
+      "https://xivapi.com/i/036000/036501.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 490,
+    "equipLevel": 80
+  },
+  {
+    "id": 4067048489,
+    "characterId": "i29192",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i29192",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036503_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036503_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036503.png",
+      "https://xivapi.com/i/036000/036503_hr1.png",
+      "https://xivapi.com/i/036000/036503.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 490,
+    "equipLevel": 80
+  },
+  {
+    "id": 1406604369,
+    "characterId": "i30241",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i30241",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036502_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036502_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036502.png",
+      "https://xivapi.com/i/036000/036502_hr1.png",
+      "https://xivapi.com/i/036000/036502.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 485,
+    "equipLevel": 80
+  },
+  {
+    "id": 4022958960,
+    "characterId": "i29015",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i29015",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036504_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036504_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036504.png",
+      "https://xivapi.com/i/036000/036504_hr1.png",
+      "https://xivapi.com/i/036000/036504.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 485,
+    "equipLevel": 80
+  },
+  {
+    "id": 4105861121,
+    "characterId": "i29417",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i29417",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036501_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036501_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036501.png",
+      "https://xivapi.com/i/036000/036501_hr1.png",
+      "https://xivapi.com/i/036000/036501.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 480,
+    "equipLevel": 80
+  },
+  {
+    "id": 1235792560,
+    "characterId": "i26948",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i26948",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036483_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036483_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036483.png",
+      "https://xivapi.com/i/036000/036483_hr1.png",
+      "https://xivapi.com/i/036000/036483.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 475,
+    "equipLevel": 80
+  },
+  {
+    "id": 1313510349,
+    "characterId": "i28302",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i28302",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036500_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036500_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036500.png",
+      "https://xivapi.com/i/036000/036500_hr1.png",
+      "https://xivapi.com/i/036000/036500.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 475,
+    "equipLevel": 80
+  },
+  {
+    "id": 3638293751,
+    "characterId": "i25561",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i25561",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036488_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036488_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036488.png",
+      "https://xivapi.com/i/036000/036488_hr1.png",
+      "https://xivapi.com/i/036000/036488.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 470,
+    "equipLevel": 80
+  },
+  {
+    "id": 163891071,
+    "characterId": "i28284",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i28284",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036499_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036499_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036499.png",
+      "https://xivapi.com/i/036000/036499_hr1.png",
+      "https://xivapi.com/i/036000/036499.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 465,
+    "equipLevel": 80
+  },
+  {
+    "id": 1698149036,
+    "characterId": "i25481",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i25481",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036488_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036488_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036488.png",
+      "https://xivapi.com/i/036000/036488_hr1.png",
+      "https://xivapi.com/i/036000/036488.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 460,
+    "equipLevel": 80
+  },
+  {
+    "id": 881038748,
+    "characterId": "i28394",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i28394",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036486_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036486_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036486.png",
+      "https://xivapi.com/i/036000/036486_hr1.png",
+      "https://xivapi.com/i/036000/036486.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 460,
+    "equipLevel": 80
+  },
+  {
+    "id": 887533464,
+    "characterId": "i27609",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i27609",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036484_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036484_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036484.png",
+      "https://xivapi.com/i/036000/036484_hr1.png",
+      "https://xivapi.com/i/036000/036484.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 450,
+    "equipLevel": 80
+  },
+  {
+    "id": 907216772,
+    "characterId": "i26441",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i26441",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036486_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036486_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036486.png",
+      "https://xivapi.com/i/036000/036486_hr1.png",
+      "https://xivapi.com/i/036000/036486.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 450,
+    "equipLevel": 80
+  },
+  {
+    "id": 2863233340,
+    "characterId": "i25401",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i25401",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036494_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036494_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036494.png",
+      "https://xivapi.com/i/036000/036494_hr1.png",
+      "https://xivapi.com/i/036000/036494.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 440,
+    "equipLevel": 80
+  },
+  {
+    "id": 1572984035,
+    "characterId": "i33900",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i33900",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036499_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036499_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036499.png",
+      "https://xivapi.com/i/036000/036499_hr1.png",
+      "https://xivapi.com/i/036000/036499.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 430,
+    "equipLevel": 80
+  },
+  {
+    "id": 3749716791,
+    "characterId": "i38554",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i38554",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036484_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036484_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036484.png",
+      "https://xivapi.com/i/036000/036484_hr1.png",
+      "https://xivapi.com/i/036000/036484.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 430,
+    "equipLevel": 80
+  },
+  {
+    "id": 4033144350,
+    "characterId": "i44989",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i44989",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036514_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036514_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036514.png",
+      "https://xivapi.com/i/036000/036514_hr1.png",
+      "https://xivapi.com/i/036000/036514.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 430,
+    "equipLevel": 80
+  },
+  {
+    "id": 3963584220,
+    "characterId": "i25231",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i25231",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036485_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036485_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036485.png",
+      "https://xivapi.com/i/036000/036485_hr1.png",
+      "https://xivapi.com/i/036000/036485.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 430,
+    "equipLevel": 80
+  },
+  {
+    "id": 2062536147,
+    "characterId": "i39562",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i39562",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036504_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036504_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036504.png",
+      "https://xivapi.com/i/036000/036504_hr1.png",
+      "https://xivapi.com/i/036000/036504.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 430,
+    "equipLevel": 80
+  },
+  {
+    "id": 2192673944,
+    "characterId": "i41613",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i41613",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036512_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036512_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036512.png",
+      "https://xivapi.com/i/036000/036512_hr1.png",
+      "https://xivapi.com/i/036000/036512.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 430,
+    "equipLevel": 80
+  },
+  {
+    "id": 179763386,
+    "characterId": "i26361",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i26361",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036490_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036490_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036490.png",
+      "https://xivapi.com/i/036000/036490_hr1.png",
+      "https://xivapi.com/i/036000/036490.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 418,
+    "equipLevel": 79
+  },
+  {
+    "id": 3731607367,
+    "characterId": "i26281",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i26281",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036491_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036491_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036491.png",
+      "https://xivapi.com/i/036000/036491_hr1.png",
+      "https://xivapi.com/i/036000/036491.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 415,
+    "equipLevel": 78
+  },
+  {
+    "id": 2493180792,
+    "characterId": "i26201",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i26201",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036495_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036495_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036495.png",
+      "https://xivapi.com/i/036000/036495_hr1.png",
+      "https://xivapi.com/i/036000/036495.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 412,
+    "equipLevel": 77
+  },
+  {
+    "id": 388945817,
+    "characterId": "i26121",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i26121",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036487_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036487_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036487.png",
+      "https://xivapi.com/i/036000/036487_hr1.png",
+      "https://xivapi.com/i/036000/036487.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 409,
+    "equipLevel": 76
+  },
+  {
+    "id": 3225815489,
+    "characterId": "i26041",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i26041",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036493_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036493_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036493.png",
+      "https://xivapi.com/i/036000/036493_hr1.png",
+      "https://xivapi.com/i/036000/036493.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 406,
+    "equipLevel": 75
+  },
+  {
+    "id": 1868685549,
+    "characterId": "i23579",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i23579",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036473_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036473_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036473.png",
+      "https://xivapi.com/i/036000/036473_hr1.png",
+      "https://xivapi.com/i/036000/036473.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 405,
+    "equipLevel": 70
+  },
+  {
+    "id": 2402288240,
+    "characterId": "i24704",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i24704",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036481_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036481_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036481.png",
+      "https://xivapi.com/i/036000/036481_hr1.png",
+      "https://xivapi.com/i/036000/036481.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 405,
+    "equipLevel": 70
+  },
+  {
+    "id": 1202556056,
+    "characterId": "i24720",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i24720",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036481_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036481_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036481.png",
+      "https://xivapi.com/i/036000/036481_hr1.png",
+      "https://xivapi.com/i/036000/036481.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 405,
+    "equipLevel": 70
+  },
+  {
+    "id": 2770793515,
+    "characterId": "i25961",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i25961",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036497_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036497_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036497.png",
+      "https://xivapi.com/i/036000/036497_hr1.png",
+      "https://xivapi.com/i/036000/036497.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 403,
+    "equipLevel": 74
+  },
+  {
+    "id": 403121215,
+    "characterId": "i25881",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i25881",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036492_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036492_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036492.png",
+      "https://xivapi.com/i/036000/036492_hr1.png",
+      "https://xivapi.com/i/036000/036492.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 400,
+    "equipLevel": 73
+  },
+  {
+    "id": 945392134,
+    "characterId": "i23485",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i23485",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036471_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036471_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036471.png",
+      "https://xivapi.com/i/036000/036471_hr1.png",
+      "https://xivapi.com/i/036000/036471.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 400,
+    "equipLevel": 70
+  },
+  {
+    "id": 1564679304,
+    "characterId": "i24688",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i24688",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036478_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036478_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036478.png",
+      "https://xivapi.com/i/036000/036478_hr1.png",
+      "https://xivapi.com/i/036000/036478.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 400,
+    "equipLevel": 70
+  },
+  {
+    "id": 2830060274,
+    "characterId": "i25801",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i25801",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036489_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036489_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036489.png",
+      "https://xivapi.com/i/036000/036489_hr1.png",
+      "https://xivapi.com/i/036000/036489.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 395,
+    "equipLevel": 72
+  },
+  {
+    "id": 972877828,
+    "characterId": "i24672",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i24672",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036468_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036468_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036468.png",
+      "https://xivapi.com/i/036000/036468_hr1.png",
+      "https://xivapi.com/i/036000/036468.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 395,
+    "equipLevel": 70
+  },
+  {
+    "id": 3717299122,
+    "characterId": "i24485",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i24485",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036479_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036479_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036479.png",
+      "https://xivapi.com/i/036000/036479_hr1.png",
+      "https://xivapi.com/i/036000/036479.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 395,
+    "equipLevel": 70
+  },
+  {
+    "id": 1133635018,
+    "characterId": "i25721",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i25721",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036498_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036498_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036498.png",
+      "https://xivapi.com/i/036000/036498_hr1.png",
+      "https://xivapi.com/i/036000/036498.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 390,
+    "equipLevel": 71
+  },
+  {
+    "id": 4173053703,
+    "characterId": "i24656",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i24656",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036468_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036468_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036468.png",
+      "https://xivapi.com/i/036000/036468_hr1.png",
+      "https://xivapi.com/i/036000/036468.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 390,
+    "equipLevel": 70
+  },
+  {
+    "id": 3117400196,
+    "characterId": "i24923",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i24923",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036474_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036474_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036474.png",
+      "https://xivapi.com/i/036000/036474_hr1.png",
+      "https://xivapi.com/i/036000/036474.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 390,
+    "equipLevel": 70
+  },
+  {
+    "id": 575078978,
+    "characterId": "i23407",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i23407",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036471_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036471_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036471.png",
+      "https://xivapi.com/i/036000/036471_hr1.png",
+      "https://xivapi.com/i/036000/036471.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 390,
+    "equipLevel": 70
+  },
+  {
+    "id": 81364418,
+    "characterId": "i23563",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i23563",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036472_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036472_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036472.png",
+      "https://xivapi.com/i/036000/036472_hr1.png",
+      "https://xivapi.com/i/036000/036472.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 385,
+    "equipLevel": 70
+  },
+  {
+    "id": 3610390404,
+    "characterId": "i24084",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i24084",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036468_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036468_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036468.png",
+      "https://xivapi.com/i/036000/036468_hr1.png",
+      "https://xivapi.com/i/036000/036468.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 385,
+    "equipLevel": 70
+  },
+  {
+    "id": 1590495499,
+    "characterId": "i25641",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i25641",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036496_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036496_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036496.png",
+      "https://xivapi.com/i/036000/036496_hr1.png",
+      "https://xivapi.com/i/036000/036496.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 385,
+    "equipLevel": 70
+  },
+  {
+    "id": 3490780027,
+    "characterId": "i24068",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i24068",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036468_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036468_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036468.png",
+      "https://xivapi.com/i/036000/036468_hr1.png",
+      "https://xivapi.com/i/036000/036468.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 380,
+    "equipLevel": 70
+  },
+  {
+    "id": 3475994018,
+    "characterId": "i23781",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i23781",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036474_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036474_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036474.png",
+      "https://xivapi.com/i/036000/036474_hr1.png",
+      "https://xivapi.com/i/036000/036474.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 380,
+    "equipLevel": 70
+  },
+  {
+    "id": 2750247162,
+    "characterId": "i24052",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i24052",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036468_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036468_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036468.png",
+      "https://xivapi.com/i/036000/036468_hr1.png",
+      "https://xivapi.com/i/036000/036468.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 375,
+    "equipLevel": 70
+  },
+  {
+    "id": 2732813726,
+    "characterId": "i22881",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i22881",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036470_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036470_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036470.png",
+      "https://xivapi.com/i/036000/036470_hr1.png",
+      "https://xivapi.com/i/036000/036470.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 375,
+    "equipLevel": 70
+  },
+  {
+    "id": 2048688781,
+    "characterId": "i21506",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i21506",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036464_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036464_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036464.png",
+      "https://xivapi.com/i/036000/036464_hr1.png",
+      "https://xivapi.com/i/036000/036464.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 375,
+    "equipLevel": 70
+  },
+  {
+    "id": 758653099,
+    "characterId": "i22970",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "i22970",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036468_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036468_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036468.png",
+      "https://xivapi.com/i/036000/036468_hr1.png",
+      "https://xivapi.com/i/036000/036468.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 370,
+    "equipLevel": 70
+  },
+  {
+    "id": 3171671577,
+    "characterId": "i21412",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i21412",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036465_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036465_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036465.png",
+      "https://xivapi.com/i/036000/036465_hr1.png",
+      "https://xivapi.com/i/036000/036465.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 370,
+    "equipLevel": 70
+  },
+  {
+    "id": 2638841676,
+    "characterId": "i22990",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i22990",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036467_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036467_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036467.png",
+      "https://xivapi.com/i/036000/036467_hr1.png",
+      "https://xivapi.com/i/036000/036467.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 365,
+    "equipLevel": 70
+  },
+  {
+    "id": 2938175820,
+    "characterId": "i22865",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i22865",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036469_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036469_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036469.png",
+      "https://xivapi.com/i/036000/036469_hr1.png",
+      "https://xivapi.com/i/036000/036469.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 365,
+    "equipLevel": 70
+  },
+  {
+    "id": 1678206452,
+    "characterId": "i22954",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i22954",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036412_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036412_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036412.png",
+      "https://xivapi.com/i/036000/036412_hr1.png",
+      "https://xivapi.com/i/036000/036412.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 365,
+    "equipLevel": 70
+  },
+  {
+    "id": 3483509594,
+    "characterId": "i21334",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i21334",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036465_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036465_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036465.png",
+      "https://xivapi.com/i/036000/036465_hr1.png",
+      "https://xivapi.com/i/036000/036465.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 360,
+    "equipLevel": 70
+  },
+  {
+    "id": 2364188914,
+    "characterId": "i23244",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i23244",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036463_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036463_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036463.png",
+      "https://xivapi.com/i/036000/036463_hr1.png",
+      "https://xivapi.com/i/036000/036463.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 360,
+    "equipLevel": 70
+  },
+  {
+    "id": 2828732913,
+    "characterId": "i22938",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i22938",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036412_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036412_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036412.png",
+      "https://xivapi.com/i/036000/036412_hr1.png",
+      "https://xivapi.com/i/036000/036412.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 360,
+    "equipLevel": 70
+  },
+  {
+    "id": 4217756799,
+    "characterId": "i21490",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i21490",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036466_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036466_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036466.png",
+      "https://xivapi.com/i/036000/036466_hr1.png",
+      "https://xivapi.com/i/036000/036466.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 355,
+    "equipLevel": 70
+  },
+  {
+    "id": 334338965,
+    "characterId": "i22003",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i22003",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036412_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036412_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036412.png",
+      "https://xivapi.com/i/036000/036412_hr1.png",
+      "https://xivapi.com/i/036000/036412.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 355,
+    "equipLevel": 70
+  },
+  {
+    "id": 3987777438,
+    "characterId": "i21708",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i21708",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036463_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036463_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036463.png",
+      "https://xivapi.com/i/036000/036463_hr1.png",
+      "https://xivapi.com/i/036000/036463.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 350,
+    "equipLevel": 70
+  },
+  {
+    "id": 3161281484,
+    "characterId": "i19372",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i19372",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036420_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036420_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036420.png",
+      "https://xivapi.com/i/036000/036420_hr1.png",
+      "https://xivapi.com/i/036000/036420.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 345,
+    "equipLevel": 70
+  },
+  {
+    "id": 3338435317,
+    "characterId": "i20972",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20972",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036462_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036462_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036462.png",
+      "https://xivapi.com/i/036000/036462_hr1.png",
+      "https://xivapi.com/i/036000/036462.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 345,
+    "equipLevel": 70
+  },
+  {
+    "id": 3077181743,
+    "characterId": "i21987",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i21987",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036412_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036412_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036412.png",
+      "https://xivapi.com/i/036000/036412_hr1.png",
+      "https://xivapi.com/i/036000/036412.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 345,
+    "equipLevel": 70
+  },
+  {
+    "id": 3693513252,
+    "characterId": "i19294",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i19294",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036424_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036424_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036424.png",
+      "https://xivapi.com/i/036000/036424_hr1.png",
+      "https://xivapi.com/i/036000/036424.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 340,
+    "equipLevel": 70
+  },
+  {
+    "id": 862636393,
+    "characterId": "i21971",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i21971",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036412_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036412_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036412.png",
+      "https://xivapi.com/i/036000/036412_hr1.png",
+      "https://xivapi.com/i/036000/036412.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 340,
+    "equipLevel": 70
+  },
+  {
+    "id": 453322003,
+    "characterId": "i20956",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20956",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036461_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036461_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036461.png",
+      "https://xivapi.com/i/036000/036461_hr1.png",
+      "https://xivapi.com/i/036000/036461.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 335,
+    "equipLevel": 70
+  },
+  {
+    "id": 2342726676,
+    "characterId": "i21955",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i21955",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036412_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036412_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036412.png",
+      "https://xivapi.com/i/036000/036412_hr1.png",
+      "https://xivapi.com/i/036000/036412.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 335,
+    "equipLevel": 70
+  },
+  {
+    "id": 559410494,
+    "characterId": "i19216",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i19216",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036424_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036424_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036424.png",
+      "https://xivapi.com/i/036000/036424_hr1.png",
+      "https://xivapi.com/i/036000/036424.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 330,
+    "equipLevel": 70
+  },
+  {
+    "id": 725798471,
+    "characterId": "i18982",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i18982",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036407_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036407_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036407.png",
+      "https://xivapi.com/i/036000/036407_hr1.png",
+      "https://xivapi.com/i/036000/036407.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 320,
+    "equipLevel": 70
+  },
+  {
+    "id": 3198072759,
+    "characterId": "i19784",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i19784",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036421_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036421_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036421.png",
+      "https://xivapi.com/i/036000/036421_hr1.png",
+      "https://xivapi.com/i/036000/036421.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 320,
+    "equipLevel": 70
+  },
+  {
+    "id": 2729847238,
+    "characterId": "i19138",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i19138",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036447_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036447_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036447.png",
+      "https://xivapi.com/i/036000/036447_hr1.png",
+      "https://xivapi.com/i/036000/036447.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 310,
+    "equipLevel": 70
+  },
+  {
+    "id": 1525226590,
+    "characterId": "i18826",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i18826",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036422_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036422_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036422.png",
+      "https://xivapi.com/i/036000/036422_hr1.png",
+      "https://xivapi.com/i/036000/036422.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 300,
+    "equipLevel": 70
+  },
+  {
+    "id": 1989317131,
+    "characterId": "i17830",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i17830",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036412_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036412_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036412.png",
+      "https://xivapi.com/i/036000/036412_hr1.png",
+      "https://xivapi.com/i/036000/036412.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 290,
+    "equipLevel": 70
+  },
+  {
+    "id": 985472536,
+    "characterId": "i30824",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i30824",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036469_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036469_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036469.png",
+      "https://xivapi.com/i/036000/036469_hr1.png",
+      "https://xivapi.com/i/036000/036469.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 290,
+    "equipLevel": 70
+  },
+  {
+    "id": 3839539167,
+    "characterId": "i30840",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i30840",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036472_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036472_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036472.png",
+      "https://xivapi.com/i/036000/036472_hr1.png",
+      "https://xivapi.com/i/036000/036472.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 290,
+    "equipLevel": 70
+  },
+  {
+    "id": 143325047,
+    "characterId": "i33610",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i33610",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036466_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036466_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036466.png",
+      "https://xivapi.com/i/036000/036466_hr1.png",
+      "https://xivapi.com/i/036000/036466.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 290,
+    "equipLevel": 70
+  },
+  {
+    "id": 3465404349,
+    "characterId": "i30081",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i30081",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036461_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036461_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036461.png",
+      "https://xivapi.com/i/036000/036461_hr1.png",
+      "https://xivapi.com/i/036000/036461.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 290,
+    "equipLevel": 70
+  },
+  {
+    "id": 613975191,
+    "characterId": "i37330",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i37330",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036421_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036421_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036421.png",
+      "https://xivapi.com/i/036000/036421_hr1.png",
+      "https://xivapi.com/i/036000/036421.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 290,
+    "equipLevel": 70
+  },
+  {
+    "id": 4252406546,
+    "characterId": "i30856",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i30856",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036479_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036479_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036479.png",
+      "https://xivapi.com/i/036000/036479_hr1.png",
+      "https://xivapi.com/i/036000/036479.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 290,
+    "equipLevel": 70
+  },
+  {
+    "id": 355309309,
+    "characterId": "i18748",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i18748",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036442_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036442_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036442.png",
+      "https://xivapi.com/i/036000/036442_hr1.png",
+      "https://xivapi.com/i/036000/036442.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 288,
+    "equipLevel": 69
+  },
+  {
+    "id": 3414749903,
+    "characterId": "i18670",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i18670",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036404_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036404_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036404.png",
+      "https://xivapi.com/i/036000/036404_hr1.png",
+      "https://xivapi.com/i/036000/036404.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 285,
+    "equipLevel": 68
+  },
+  {
+    "id": 2516254481,
+    "characterId": "i18592",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i18592",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036449_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036449_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036449.png",
+      "https://xivapi.com/i/036000/036449_hr1.png",
+      "https://xivapi.com/i/036000/036449.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 282,
+    "equipLevel": 67
+  },
+  {
+    "id": 1838875372,
+    "characterId": "i20454",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "i20454",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036458_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036458_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036458.png",
+      "https://xivapi.com/i/036000/036458_hr1.png",
+      "https://xivapi.com/i/036000/036458.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 280,
+    "equipLevel": 60
+  },
+  {
+    "id": 3728320877,
+    "characterId": "i18514",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i18514",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036437_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036437_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036437.png",
+      "https://xivapi.com/i/036000/036437_hr1.png",
+      "https://xivapi.com/i/036000/036437.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 279,
+    "equipLevel": 66
+  },
+  {
+    "id": 559406153,
+    "characterId": "i18436",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i18436",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036426_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036426_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036426.png",
+      "https://xivapi.com/i/036000/036426_hr1.png",
+      "https://xivapi.com/i/036000/036426.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 276,
+    "equipLevel": 65
+  },
+  {
+    "id": 2192272840,
+    "characterId": "i20452",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20452",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036452_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036452_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036452.png",
+      "https://xivapi.com/i/036000/036452_hr1.png",
+      "https://xivapi.com/i/036000/036452.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 275,
+    "equipLevel": 60
+  },
+  {
+    "id": 2486566883,
+    "characterId": "i18358",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i18358",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036440_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036440_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036440.png",
+      "https://xivapi.com/i/036000/036440_hr1.png",
+      "https://xivapi.com/i/036000/036440.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 273,
+    "equipLevel": 64
+  },
+  {
+    "id": 1233421002,
+    "characterId": "i18280",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i18280",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036423_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036423_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036423.png",
+      "https://xivapi.com/i/036000/036423_hr1.png",
+      "https://xivapi.com/i/036000/036423.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 270,
+    "equipLevel": 63
+  },
+  {
+    "id": 3128411755,
+    "characterId": "i20422",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20422",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036409_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036409_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036409.png",
+      "https://xivapi.com/i/036000/036409_hr1.png",
+      "https://xivapi.com/i/036000/036409.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 270,
+    "equipLevel": 60
+  },
+  {
+    "id": 3624910738,
+    "characterId": "i18202",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i18202",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036430_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036430_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036430.png",
+      "https://xivapi.com/i/036000/036430_hr1.png",
+      "https://xivapi.com/i/036000/036430.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 265,
+    "equipLevel": 62
+  },
+  {
+    "id": 2903882235,
+    "characterId": "i20446",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20446",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036418_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036418_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036418.png",
+      "https://xivapi.com/i/036000/036418_hr1.png",
+      "https://xivapi.com/i/036000/036418.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 265,
+    "equipLevel": 60
+  },
+  {
+    "id": 6934367,
+    "characterId": "i18124",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i18124",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036451_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036451_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036451.png",
+      "https://xivapi.com/i/036000/036451_hr1.png",
+      "https://xivapi.com/i/036000/036451.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 260,
+    "equipLevel": 61
+  },
+  {
+    "id": 103696114,
+    "characterId": "i20420",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20420",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036409_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036409_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036409.png",
+      "https://xivapi.com/i/036000/036409_hr1.png",
+      "https://xivapi.com/i/036000/036409.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 260,
+    "equipLevel": 60
+  },
+  {
+    "id": 376776908,
+    "characterId": "i20444",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20444",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036443_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036443_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036443.png",
+      "https://xivapi.com/i/036000/036443_hr1.png",
+      "https://xivapi.com/i/036000/036443.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 255,
+    "equipLevel": 60
+  },
+  {
+    "id": 2487465924,
+    "characterId": "i18046",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i18046",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036435_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036435_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036435.png",
+      "https://xivapi.com/i/036000/036435_hr1.png",
+      "https://xivapi.com/i/036000/036435.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 255,
+    "equipLevel": 60
+  },
+  {
+    "id": 987612675,
+    "characterId": "i20458",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20458",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036446_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036446_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036446.png",
+      "https://xivapi.com/i/036000/036446_hr1.png",
+      "https://xivapi.com/i/036000/036446.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 255,
+    "equipLevel": 60
+  },
+  {
+    "id": 2984531465,
+    "characterId": "i20450",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20450",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036411_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036411_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036411.png",
+      "https://xivapi.com/i/036000/036411_hr1.png",
+      "https://xivapi.com/i/036000/036411.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 245,
+    "equipLevel": 60
+  },
+  {
+    "id": 2967598269,
+    "characterId": "i20418",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20418",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036408_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036408_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036408.png",
+      "https://xivapi.com/i/036000/036408_hr1.png",
+      "https://xivapi.com/i/036000/036408.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 240,
+    "equipLevel": 60
+  },
+  {
+    "id": 2942064554,
+    "characterId": "i20456",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i20456",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036431_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036431_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036431.png",
+      "https://xivapi.com/i/036000/036431_hr1.png",
+      "https://xivapi.com/i/036000/036431.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 235,
+    "equipLevel": 60
+  },
+  {
+    "id": 171723631,
+    "characterId": "i20442",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20442",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036401_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036401_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036401.png",
+      "https://xivapi.com/i/036000/036401_hr1.png",
+      "https://xivapi.com/i/036000/036401.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 235,
+    "equipLevel": 60
+  },
+  {
+    "id": 1144163806,
+    "characterId": "i20416",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20416",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036408_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036408_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036408.png",
+      "https://xivapi.com/i/036000/036408_hr1.png",
+      "https://xivapi.com/i/036000/036408.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 230,
+    "equipLevel": 60
+  },
+  {
+    "id": 3935493087,
+    "characterId": "i20438",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20438",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036453_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036453_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036453.png",
+      "https://xivapi.com/i/036000/036453_hr1.png",
+      "https://xivapi.com/i/036000/036453.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 220,
+    "equipLevel": 60
+  },
+  {
+    "id": 3383550760,
+    "characterId": "i20448",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20448",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036406_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036406_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036406.png",
+      "https://xivapi.com/i/036000/036406_hr1.png",
+      "https://xivapi.com/i/036000/036406.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 210,
+    "equipLevel": 60
+  },
+  {
+    "id": 1536231329,
+    "characterId": "i20410",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i20410",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036457_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036457_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036457.png",
+      "https://xivapi.com/i/036000/036457_hr1.png",
+      "https://xivapi.com/i/036000/036457.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 205,
+    "equipLevel": 60
+  },
+  {
+    "id": 3195539794,
+    "characterId": "i20434",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20434",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036410_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036410_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036410.png",
+      "https://xivapi.com/i/036000/036410_hr1.png",
+      "https://xivapi.com/i/036000/036410.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 205,
+    "equipLevel": 60
+  },
+  {
+    "id": 3829568432,
+    "characterId": "i20430",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20430",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036416_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036416_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036416.png",
+      "https://xivapi.com/i/036000/036416_hr1.png",
+      "https://xivapi.com/i/036000/036416.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 190,
+    "equipLevel": 60
+  },
+  {
+    "id": 1726253194,
+    "characterId": "i20432",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20432",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036416_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036416_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036416.png",
+      "https://xivapi.com/i/036000/036416_hr1.png",
+      "https://xivapi.com/i/036000/036416.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 180,
+    "equipLevel": 60
+  },
+  {
+    "id": 17544162,
+    "characterId": "i20436",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20436",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036410_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036410_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036410.png",
+      "https://xivapi.com/i/036000/036410_hr1.png",
+      "https://xivapi.com/i/036000/036410.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 180,
+    "equipLevel": 60
+  },
+  {
+    "id": 1732567334,
+    "characterId": "i20414",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20414",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036448_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036448_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036448.png",
+      "https://xivapi.com/i/036000/036448_hr1.png",
+      "https://xivapi.com/i/036000/036448.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 180,
+    "equipLevel": 60
+  },
+  {
+    "id": 1626042879,
+    "characterId": "i20428",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20428",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036441_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036441_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036441.png",
+      "https://xivapi.com/i/036000/036441_hr1.png",
+      "https://xivapi.com/i/036000/036441.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 180,
+    "equipLevel": 60
+  },
+  {
+    "id": 437910610,
+    "characterId": "i25051",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i25051",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036418_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036418_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036418.png",
+      "https://xivapi.com/i/036000/036418_hr1.png",
+      "https://xivapi.com/i/036000/036418.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 180,
+    "equipLevel": 60
+  },
+  {
+    "id": 2928643504,
+    "characterId": "i20440",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20440",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036453_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036453_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036453.png",
+      "https://xivapi.com/i/036000/036453_hr1.png",
+      "https://xivapi.com/i/036000/036453.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 180,
+    "equipLevel": 60
+  },
+  {
+    "id": 94892479,
+    "characterId": "i25035",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i25035",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036443_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036443_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036443.png",
+      "https://xivapi.com/i/036000/036443_hr1.png",
+      "https://xivapi.com/i/036000/036443.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 180,
+    "equipLevel": 60
+  },
+  {
+    "id": 1766697697,
+    "characterId": "i24333",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i24333",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036401_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036401_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036401.png",
+      "https://xivapi.com/i/036000/036401_hr1.png",
+      "https://xivapi.com/i/036000/036401.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 180,
+    "equipLevel": 60
+  },
+  {
+    "id": 3399426040,
+    "characterId": "i20408",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i20408",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036419_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036419_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036419.png",
+      "https://xivapi.com/i/036000/036419_hr1.png",
+      "https://xivapi.com/i/036000/036419.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 180,
+    "equipLevel": 60
+  },
+  {
+    "id": 4278244776,
+    "characterId": "i20426",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20426",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036441_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036441_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036441.png",
+      "https://xivapi.com/i/036000/036441_hr1.png",
+      "https://xivapi.com/i/036000/036441.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 175,
+    "equipLevel": 60
+  },
+  {
+    "id": 1877355785,
+    "characterId": "i20412",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20412",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036448_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036448_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036448.png",
+      "https://xivapi.com/i/036000/036448_hr1.png",
+      "https://xivapi.com/i/036000/036448.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 170,
+    "equipLevel": 60
+  },
+  {
+    "id": 2409573704,
+    "characterId": "i20424",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i20424",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036403_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036403_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036403.png",
+      "https://xivapi.com/i/036000/036403_hr1.png",
+      "https://xivapi.com/i/036000/036403.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 160,
+    "equipLevel": 60
+  },
+  {
+    "id": 1851516510,
+    "characterId": "i20406",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i20406",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036450_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036450_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036450.png",
+      "https://xivapi.com/i/036000/036450_hr1.png",
+      "https://xivapi.com/i/036000/036450.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 148,
+    "equipLevel": 59
+  },
+  {
+    "id": 1447133039,
+    "characterId": "i20396",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i20396",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036429_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036429_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036429.png",
+      "https://xivapi.com/i/036000/036429_hr1.png",
+      "https://xivapi.com/i/036000/036429.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 145,
+    "equipLevel": 58
+  },
+  {
+    "id": 3347617383,
+    "characterId": "i20404",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i20404",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036438_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036438_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036438.png",
+      "https://xivapi.com/i/036000/036438_hr1.png",
+      "https://xivapi.com/i/036000/036438.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 142,
+    "equipLevel": 57
+  },
+  {
+    "id": 3111148378,
+    "characterId": "i20394",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i20394",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036433_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036433_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036433.png",
+      "https://xivapi.com/i/036000/036433_hr1.png",
+      "https://xivapi.com/i/036000/036433.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 139,
+    "equipLevel": 56
+  },
+  {
+    "id": 1682781344,
+    "characterId": "i20402",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i20402",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036439_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036439_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036439.png",
+      "https://xivapi.com/i/036000/036439_hr1.png",
+      "https://xivapi.com/i/036000/036439.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 136,
+    "equipLevel": 55
+  },
+  {
+    "id": 2397473200,
+    "characterId": "i20975",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20975",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036460_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036460_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036460.png",
+      "https://xivapi.com/i/036000/036460_hr1.png",
+      "https://xivapi.com/i/036000/036460.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 135,
+    "equipLevel": 50
+  },
+  {
+    "id": 3494472316,
+    "characterId": "i20392",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i20392",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036428_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036428_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036428.png",
+      "https://xivapi.com/i/036000/036428_hr1.png",
+      "https://xivapi.com/i/036000/036428.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 133,
+    "equipLevel": 54
+  },
+  {
+    "id": 781273663,
+    "characterId": "i20400",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i20400",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036425_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036425_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036425.png",
+      "https://xivapi.com/i/036000/036425_hr1.png",
+      "https://xivapi.com/i/036000/036425.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 130,
+    "equipLevel": 53
+  },
+  {
+    "id": 3414861019,
+    "characterId": "i20386",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20386",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036454_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036454_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036454.png",
+      "https://xivapi.com/i/036000/036454_hr1.png",
+      "https://xivapi.com/i/036000/036454.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 130,
+    "equipLevel": 50
+  },
+  {
+    "id": 3808318185,
+    "characterId": "i23957",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i23957",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036477_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036477_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036477.png",
+      "https://xivapi.com/i/036000/036477_hr1.png",
+      "https://xivapi.com/i/036000/036477.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 130,
+    "equipLevel": 50
+  },
+  {
+    "id": 2801077478,
+    "characterId": "i23956",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i23956",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036476_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036476_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036476.png",
+      "https://xivapi.com/i/036000/036476_hr1.png",
+      "https://xivapi.com/i/036000/036476.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 130,
+    "equipLevel": 50
+  },
+  {
+    "id": 3247773985,
+    "characterId": "i23958",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i23958",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036475_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036475_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036475.png",
+      "https://xivapi.com/i/036000/036475_hr1.png",
+      "https://xivapi.com/i/036000/036475.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 130,
+    "equipLevel": 50
+  },
+  {
+    "id": 3226862244,
+    "characterId": "i20390",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i20390",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036432_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036432_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036432.png",
+      "https://xivapi.com/i/036000/036432_hr1.png",
+      "https://xivapi.com/i/036000/036432.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 125,
+    "equipLevel": 52
+  },
+  {
+    "id": 3470834812,
+    "characterId": "i20398",
+    "cardRarityType": "rarity_2",
+    "assetbundleName": "i20398",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036436_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036436_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036436.png",
+      "https://xivapi.com/i/036000/036436_hr1.png",
+      "https://xivapi.com/i/036000/036436.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 120,
+    "equipLevel": 51
+  },
+  {
+    "id": 1270471224,
+    "characterId": "i20384",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20384",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036454_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036454_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036454.png",
+      "https://xivapi.com/i/036000/036454_hr1.png",
+      "https://xivapi.com/i/036000/036454.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 120,
+    "equipLevel": 50
+  },
+  {
+    "id": 3093529554,
+    "characterId": "i20382",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20382",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036415_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036415_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036415.png",
+      "https://xivapi.com/i/036000/036415_hr1.png",
+      "https://xivapi.com/i/036000/036415.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 115,
+    "equipLevel": 50
+  },
+  {
+    "id": 4289642997,
+    "characterId": "i20388",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i20388",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036427_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036427_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036427.png",
+      "https://xivapi.com/i/036000/036427_hr1.png",
+      "https://xivapi.com/i/036000/036427.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 115,
+    "equipLevel": 50
+  },
+  {
+    "id": 4175798914,
+    "characterId": "i20380",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20380",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036415_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036415_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036415.png",
+      "https://xivapi.com/i/036000/036415_hr1.png",
+      "https://xivapi.com/i/036000/036415.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 110,
+    "equipLevel": 50
+  },
+  {
+    "id": 4014971316,
+    "characterId": "i20378",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20378",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036445_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036445_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036445.png",
+      "https://xivapi.com/i/036000/036445_hr1.png",
+      "https://xivapi.com/i/036000/036445.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 110,
+    "equipLevel": 50
+  },
+  {
+    "id": 824372871,
+    "characterId": "i20374",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20374",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036417_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036417_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036417.png",
+      "https://xivapi.com/i/036000/036417_hr1.png",
+      "https://xivapi.com/i/036000/036417.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 100,
+    "equipLevel": 50
+  },
+  {
+    "id": 1048207933,
+    "characterId": "i20376",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20376",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036445_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036445_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036445.png",
+      "https://xivapi.com/i/036000/036445_hr1.png",
+      "https://xivapi.com/i/036000/036445.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 100,
+    "equipLevel": 50
+  },
+  {
+    "id": 3219971778,
+    "characterId": "i20366",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20366",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036405_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036405_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036405.png",
+      "https://xivapi.com/i/036000/036405_hr1.png",
+      "https://xivapi.com/i/036000/036405.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 95,
+    "equipLevel": 50
+  },
+  {
+    "id": 2195601125,
+    "characterId": "i20362",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20362",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036444_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036444_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036444.png",
+      "https://xivapi.com/i/036000/036444_hr1.png",
+      "https://xivapi.com/i/036000/036444.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 95,
+    "equipLevel": 50
+  },
+  {
+    "id": 1813924514,
+    "characterId": "i20372",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20372",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036417_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036417_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036417.png",
+      "https://xivapi.com/i/036000/036417_hr1.png",
+      "https://xivapi.com/i/036000/036417.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 95,
+    "equipLevel": 50
+  },
+  {
+    "id": 756174529,
+    "characterId": "i20358",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20358",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036402_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036402_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036402.png",
+      "https://xivapi.com/i/036000/036402_hr1.png",
+      "https://xivapi.com/i/036000/036402.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 95,
+    "equipLevel": 50
+  },
+  {
+    "id": 4278039393,
+    "characterId": "i20370",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20370",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036413_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036413_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036413.png",
+      "https://xivapi.com/i/036000/036413_hr1.png",
+      "https://xivapi.com/i/036000/036413.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 95,
+    "equipLevel": 50
+  },
+  {
+    "id": 4279403457,
+    "characterId": "i20364",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20364",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036405_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036405_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036405.png",
+      "https://xivapi.com/i/036000/036405_hr1.png",
+      "https://xivapi.com/i/036000/036405.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 80,
+    "equipLevel": 50
+  },
+  {
+    "id": 1633778561,
+    "characterId": "i20368",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20368",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036413_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036413_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036413.png",
+      "https://xivapi.com/i/036000/036413_hr1.png",
+      "https://xivapi.com/i/036000/036413.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 75,
+    "equipLevel": 50
+  },
+  {
+    "id": 3927026731,
+    "characterId": "i20360",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20360",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036444_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036444_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036444.png",
+      "https://xivapi.com/i/036000/036444_hr1.png",
+      "https://xivapi.com/i/036000/036444.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 70,
+    "equipLevel": 50
+  },
+  {
+    "id": 1237702180,
+    "characterId": "i20356",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "i20356",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036402_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036402_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036402.png",
+      "https://xivapi.com/i/036000/036402_hr1.png",
+      "https://xivapi.com/i/036000/036402.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 60,
+    "equipLevel": 50
+  },
+  {
+    "id": 2315284376,
+    "characterId": "i20512",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i20512",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036414_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036414_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036414.png",
+      "https://xivapi.com/i/036000/036414_hr1.png",
+      "https://xivapi.com/i/036000/036414.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 50,
+    "equipLevel": 50
+  },
+  {
+    "id": 1221138094,
+    "characterId": "i30807",
+    "cardRarityType": "rarity_1",
+    "assetbundleName": "i30807",
+    "image_url": "https://cafemaker.wakingsands.com/i/036000/036507_hr1.png",
+    "image_urls": [
+      "https://cafemaker.wakingsands.com/i/036000/036507_hr1.png",
+      "https://cafemaker.wakingsands.com/i/036000/036507.png",
+      "https://xivapi.com/i/036000/036507_hr1.png",
+      "https://xivapi.com/i/036000/036507.png"
+    ],
+    "image_source": "xivapi_icon",
+    "className": "武士刀",
+    "itemLevel": 30,
+    "equipLevel": 30
+  }
+]

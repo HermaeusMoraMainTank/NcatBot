@@ -4368,6 +4368,18 @@
     "rarity": 6
   },
   {
+    "characterId": "char_4230_mcnist",
+    "name": "机械师",
+    "fullName": "机械师",
+    "fullNameChinese": "机械师",
+    "aliases": [
+      "机械师",
+      "Mechanist"
+    ],
+    "className": "TANK",
+    "rarity": 6
+  },
+  {
     "characterId": "char_2026_yu",
     "name": "余",
     "fullName": "余",
