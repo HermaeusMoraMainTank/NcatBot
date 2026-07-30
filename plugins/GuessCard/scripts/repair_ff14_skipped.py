@@ -1,4 +1,5 @@
 """Retry skipped FF14 bosses that likely have wiki portraits."""
+
 from __future__ import annotations
 
 import json
@@ -38,7 +39,9 @@ def main() -> None:
                     bid = int(ids[idx])
                 except (TypeError, ValueError):
                     bid = None
-            boss_meta.setdefault(cn, {"boss_id": bid, "tag": d.get("tag"), "sources": []})
+            boss_meta.setdefault(
+                cn, {"boss_id": bid, "tag": d.get("tag"), "sources": []}
+            )
             boss_meta[cn]["sources"].append(d.get("name") or d.get("title"))
             if bid and not boss_meta[cn].get("boss_id"):
                 boss_meta[cn]["boss_id"] = bid

@@ -1,4 +1,5 @@
 """为 ygo / uma / hs 写入常见外号 nicknames.json。"""
+
 from __future__ import annotations
 
 import json
@@ -40,13 +41,30 @@ def _bidirectional(n: dict[str, list[str]]) -> dict[str, list[str]]:
 
 def enrich_ygo() -> None:
     n = {
-        "青眼白龙": ["蓝眼白龙", "青眼", "蓝眼", "Blue-Eyes White Dragon", "BEWD", "白龙"],
+        "青眼白龙": [
+            "蓝眼白龙",
+            "青眼",
+            "蓝眼",
+            "Blue-Eyes White Dragon",
+            "BEWD",
+            "白龙",
+        ],
         "黑魔术师": ["黑魔导", "黑魔導", "Dark Magician", "黑麦"],
         "黑魔术女孩": ["黑魔导女孩", "魔导女孩", "Dark Magician Girl", "DMG"],
         "真红眼黑龙": ["红眼黑龙", "红眼", "真红眼", "Red-Eyes Black Dragon", "REBD"],
-        "被封印的艾克佐迪亚": ["艾克佐迪亚", "Exodia", "埃克佐迪亚", "Exodia the Forbidden One"],
+        "被封印的艾克佐迪亚": [
+            "艾克佐迪亚",
+            "Exodia",
+            "埃克佐迪亚",
+            "Exodia the Forbidden One",
+        ],
         "欧西里斯的天空龙": ["天空龙", "欧西里斯", "奥西里斯", "Slifer the Sky Dragon"],
-        "欧贝利斯克的巨神兵": ["巨神兵", "欧贝利斯克", "Obelisk the Tormentor", "Obelisk"],
+        "欧贝利斯克的巨神兵": [
+            "巨神兵",
+            "欧贝利斯克",
+            "Obelisk the Tormentor",
+            "Obelisk",
+        ],
         "太阳神的翼神龙": ["翼神龙", "拉神", "The Winged Dragon of Ra", "Ra"],
         "青眼究极龙": ["蓝眼究极龙", "究极龙", "Blue-Eyes Ultimate Dragon"],
         "青眼亚白龙": ["亚白龙", "Blue-Eyes Alternative White Dragon"],
@@ -82,7 +100,13 @@ def enrich_ygo() -> None:
 
 def enrich_uma() -> None:
     n = {
-        "特别周": ["Special Week", "スペシャルウィーク", "特雷神", "周妈", "スペちゃん"],
+        "特别周": [
+            "Special Week",
+            "スペシャルウィーク",
+            "特雷神",
+            "周妈",
+            "スペちゃん",
+        ],
         "无声铃鹿": ["Silence Suzuka", "サイレンススズカ", "铃鹿", "逃马", "スズカ"],
         "东海帝王": ["Tokai Teio", "トウカイテイオー", "帝王", "大腿", "テイオー"],
         "丸善斯基": ["Maruzensky", "マルゼンスキー", "丸姐"],
@@ -94,7 +118,13 @@ def enrich_uma() -> None:
         "大树快车": ["Taiki Shuttle", "タイキシャトル", "大树"],
         "草上飞": ["Grass Wonder", "グラスワンダー", "草飞"],
         "菱亚马逊": ["Hishi Amazon", "ヒシアマゾン", "亚马逊"],
-        "目白麦昆": ["Mejiro McQueen", "メジロマックイーン", "麦昆", "大小姐", "マックイーン"],
+        "目白麦昆": [
+            "Mejiro McQueen",
+            "メジロマックイーン",
+            "麦昆",
+            "大小姐",
+            "マックイーン",
+        ],
         "神鹰": ["El Condor Pasa", "エルコンドルパサー", "神雕", "コンドル"],
         "好歌剧": ["T.M. Opera O", "テイエムオペラオー", "歌剧", "天子", "オペラオー"],
         "成田白仁": ["Narita Brian", "ナリブリアン", "白仁"],
@@ -111,8 +141,22 @@ def enrich_uma() -> None:
         "目白赖恩": ["Mejiro Ryan", "メジロライアン", "赖恩"],
         "米浴": ["Rice Shower", "ライスシャワー", "米饭", "乌鸦", "ライス"],
         "爱丽速子": ["Agnes Tachyon", "アグネスタキオン", "速子", "博士", "タキオン"],
-        "春乌菈菈": ["Haru Urara", "ハルウララ", "乌拉拉", "うらら", "春丽乌拉拉", "一着都没有"],
-        "春丽乌拉拉": ["Haru Urara", "ハルウララ", "乌拉拉", "うらら", "春乌菈菈", "一着都没有"],
+        "春乌菈菈": [
+            "Haru Urara",
+            "ハルウララ",
+            "乌拉拉",
+            "うらら",
+            "春丽乌拉拉",
+            "一着都没有",
+        ],
+        "春丽乌拉拉": [
+            "Haru Urara",
+            "ハルウララ",
+            "乌拉拉",
+            "うらら",
+            "春乌菈菈",
+            "一着都没有",
+        ],
         "乌拉拉": ["Haru Urara", "ハルウララ", "春乌菈菈", "春丽乌拉拉"],
         "优秀素质": ["Nice Nature", "ナイスネイチャ", "素质", "三着"],
         "北部玄驹": ["Kitasan Black", "キタサンブラック", "北黑", "玄驹", "キタサン"],
@@ -158,9 +202,19 @@ def enrich_hs() -> None:
         "恩佐斯": ["N'Zoth", "NZoth", "恩佐斯"],
         "亚煞极": ["Y'Shaarj", "YShaarj"],
         "拉格纳罗斯": ["Ragnaros", "火元素", "炎魔之王", "拉格"],
-        "拉格纳罗斯，炎魔之王": ["Ragnaros the Firelord", "炎魔之王拉格纳罗斯", "火元素", "拉格"],
+        "拉格纳罗斯，炎魔之王": [
+            "Ragnaros the Firelord",
+            "炎魔之王拉格纳罗斯",
+            "火元素",
+            "拉格",
+        ],
         "加拉克苏斯大王": ["Lord Jaraxxus", "加拉克苏斯", "加拉"],
-        "希尔瓦娜斯·风行者": ["Sylvanas Windrunner", "希尔瓦娜斯", "女妖之王", "Sylvanas"],
+        "希尔瓦娜斯·风行者": [
+            "Sylvanas Windrunner",
+            "希尔瓦娜斯",
+            "女妖之王",
+            "Sylvanas",
+        ],
         "凯恩·血蹄": ["Cairne Bloodhoof", "凯恩", "Cairne"],
         "火车王里诺艾": ["Leeroy Jenkins", "LeeroyJenkins", "火车王", "Leeroy", "冲锋"],
         "砰砰博士": ["Dr. Boom", "Dr Boom", "Boom", "炸弹人"],

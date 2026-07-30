@@ -1,4 +1,5 @@
 """构建 游戏王 / 赛马娘 / 炉石传说 卡池。"""
+
 from __future__ import annotations
 
 import json
@@ -79,9 +80,7 @@ def _read_cdb_names(path: Path) -> dict[int, str]:
 def _read_cdb_datas(path: Path) -> dict[int, dict]:
     con = sqlite3.connect(path)
     cur = con.cursor()
-    rows = cur.execute(
-        "SELECT id, alias, type, atk, def, level FROM datas"
-    ).fetchall()
+    rows = cur.execute("SELECT id, alias, type, atk, def, level FROM datas").fetchall()
     con.close()
     out = {}
     for cid, alias, typ, atk, deff, level in rows:
@@ -353,7 +352,7 @@ def build_uma() -> None:
             }
         )
         if (i + 1) % 20 == 0:
-            print(f"  progress {i+1}/{len(lst)} last={display}", flush=True)
+            print(f"  progress {i + 1}/{len(lst)} last={display}", flush=True)
             time.sleep(0.1)
         else:
             time.sleep(0.05)

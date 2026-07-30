@@ -1,4 +1,5 @@
 """PJSK 猜卡面图片效果处理器（上游移植）。"""
+
 from __future__ import annotations
 
 import logging
@@ -310,11 +311,13 @@ class ImageEffectProcessor:
             return img
         if effect_name == "light_blur":
             return self.apply_light_blur(
-                img, kwargs.get("blur_radius", self.EFFECTS["light_blur"]["blur_radius"])
+                img,
+                kwargs.get("blur_radius", self.EFFECTS["light_blur"]["blur_radius"]),
             )
         if effect_name == "heavy_blur":
             return self.apply_heavy_blur(
-                img, kwargs.get("blur_radius", self.EFFECTS["heavy_blur"]["blur_radius"])
+                img,
+                kwargs.get("blur_radius", self.EFFECTS["heavy_blur"]["blur_radius"]),
             )
         if effect_name == "shuffle_blocks_easy":
             return self.apply_shuffle_blocks(
@@ -398,11 +401,7 @@ class ImageEffectProcessor:
     def random_effect_combination(
         self, allowed: Optional[list[str]] = None
     ) -> tuple[list[str], str]:
-        if (
-            not allowed
-            and self.COMBINATIONS
-            and random.random() < 0.3
-        ):
+        if not allowed and self.COMBINATIONS and random.random() < 0.3:
             combo_key = random.choice(list(self.COMBINATIONS.keys()))
             combo = self.COMBINATIONS[combo_key]
             return combo["effects"], combo["name"]

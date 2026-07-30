@@ -1,4 +1,5 @@
 """Smoke: render wiki-style card for 改良型月使武士刀."""
+
 from __future__ import annotations
 
 import json

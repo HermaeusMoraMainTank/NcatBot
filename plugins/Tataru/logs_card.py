@@ -1,4 +1,5 @@
 """原 FF14LogsInfo 风格卡片绘制，数据源改为塔塔露 zone / records。"""
+
 from __future__ import annotations
 
 import logging

@@ -5,6 +5,7 @@
 - Malkuth/Gebura/Binah 主名保持英文，中文外号只在 nicknames.json
 - Yesod/Hod/Netzach/Tiphereth/Chesed/Hokma 禁止中文作答（主名与别名均去中文）
 """
+
 from __future__ import annotations
 
 import json
@@ -85,4 +86,11 @@ print(f"updated_cn_fields={updated} total={len(chars)}", flush=True)
 for en in ("Tiphereth", "Gebura", "Binah", "Malkuth", "Roland", "Angela", "Yesod"):
     hits = [c for c in chars if c.get("fullName") == en]
     if hits:
-        print(en, "->", hits[0]["fullNameChinese"], "aliases=", hits[0]["aliases"], flush=True)
+        print(
+            en,
+            "->",
+            hits[0]["fullNameChinese"],
+            "aliases=",
+            hits[0]["aliases"],
+            flush=True,
+        )

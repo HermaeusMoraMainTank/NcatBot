@@ -61,13 +61,9 @@ class ChatStateStore:
             st.state = InteractionState.NOT_PRESENT
             st.observation_until = 0.0
             if self.config.verbose_log:
-                _log.info(
-                    "[FakeAi] group=%s OBSERVATION 超时 → NOT_PRESENT", group_id
-                )
+                _log.info("[FakeAi] group=%s OBSERVATION 超时 → NOT_PRESENT", group_id)
             else:
-                _log.debug(
-                    "[FakeAi] group=%s OBSERVATION 超时 → NOT_PRESENT", group_id
-                )
+                _log.debug("[FakeAi] group=%s OBSERVATION 超时 → NOT_PRESENT", group_id)
         return st
 
     def enter_observation(self, group_id: int, from_familiar: bool = False) -> None:

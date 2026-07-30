@@ -3,6 +3,7 @@
 上游 PJSK：https://github.com/yonglanws/astrbot_plugin_pjsk_guess_card
 FGO 卡面：Atlas Academy（https://api.atlasacademy.io）
 """
+
 from __future__ import annotations
 
 import asyncio
@@ -67,7 +68,28 @@ RESOURCES_DIR = PLUGIN_DIR / "resources"
 
 DEFAULT_CONFIG: dict[str, Any] = {
     "default_pool": "pjsk",
-    "enabled_pools": ["pjsk", "fgo", "e7", "ak", "pcr", "gi", "vt", "lcb", "lor", "ww", "ygo", "uma", "hs", "sv", "gbf", "ba", "ff14", "sam", "hbr", "member"],
+    "enabled_pools": [
+        "pjsk",
+        "fgo",
+        "e7",
+        "ak",
+        "pcr",
+        "gi",
+        "vt",
+        "lcb",
+        "lor",
+        "ww",
+        "ygo",
+        "uma",
+        "hs",
+        "sv",
+        "gbf",
+        "ba",
+        "ff14",
+        "sam",
+        "hbr",
+        "member",
+    ],
     "answer_timeout": 30,
     "daily_play_limit": 999,
     "super_users": ["273421673"],
@@ -243,9 +265,7 @@ class GuessCard(NcatBotPlugin):
         if not ok_pools:
             _log.error("没有任何可用卡池，猜卡功能将不可用")
         else:
-            detail = ", ".join(
-                f"{p.pool_id}:{len(p.cards)}" for p in ok_pools
-            )
+            detail = ", ".join(f"{p.pool_id}:{len(p.cards)}" for p in ok_pools)
             _log.info("GuessCard v%s 加载完成 [%s]", self.version, detail)
 
     async def on_close(self):
@@ -285,7 +305,10 @@ class GuessCard(NcatBotPlugin):
             self.medal_font = default
 
     def _default_pool_id(self) -> str:
-        return resolve_pool_id(str(self._cfg("default_pool", "pjsk")), default="pjsk") or "pjsk"
+        return (
+            resolve_pool_id(str(self._cfg("default_pool", "pjsk")), default="pjsk")
+            or "pjsk"
+        )
 
     def _pool_allowed_effects(self, pool_id: str) -> Optional[list[str]]:
         """若配置了 pool_effects[pool_id]，则该卡池只能用这些效果；否则不限制。"""
@@ -317,7 +340,9 @@ class GuessCard(NcatBotPlugin):
         return None, text
 
     def _normalize_lists(self):
-        self.group_whitelist = {str(x) for x in (self._cfg("group_whitelist", []) or [])}
+        self.group_whitelist = {
+            str(x) for x in (self._cfg("group_whitelist", []) or [])
+        }
         self.blacklist = {str(x) for x in (self._cfg("blacklist", []) or [])}
         self.super_users = {str(x) for x in (self._cfg("super_users", []) or [])}
 
@@ -334,7 +359,9 @@ class GuessCard(NcatBotPlugin):
 
     def _persist_super_users(self) -> None:
         """把当前管理员集合写回配置并刷新内存。"""
-        ordered = sorted(self.super_users, key=lambda x: int(x) if str(x).isdigit() else str(x))
+        ordered = sorted(
+            self.super_users, key=lambda x: int(x) if str(x).isdigit() else str(x)
+        )
         self.set_config("super_users", ordered)
         self.super_users = {str(x) for x in ordered}
 
@@ -342,7 +369,11 @@ class GuessCard(NcatBotPlugin):
         """从 @ 与纯数字 QQ 提取目标用户（排除机器人自己）。"""
         ids: list[str] = []
         seen: set[str] = set()
-        bot_id = str(getattr(self, "self_id", None) or getattr(getattr(self, "api", None), "self_id", "") or "")
+        bot_id = str(
+            getattr(self, "self_id", None)
+            or getattr(getattr(self, "api", None), "self_id", "")
+            or ""
+        )
 
         def add(uid: object) -> None:
             s = str(uid or "").strip()
@@ -360,9 +391,7 @@ class GuessCard(NcatBotPlugin):
             add(m.group(1))
         # 去掉 CQ 后再扫裸 QQ，避免把 at 里的数字重复/漏扫
         cleaned = re.sub(r"\[CQ:at,qq=\d+\]", " ", raw)
-        cleaned = re.sub(
-            r"^(猜卡面|pjsk猜卡面|猜卡|gc)\s*", "", cleaned, flags=re.I
-        )
+        cleaned = re.sub(r"^(猜卡面|pjsk猜卡面|猜卡|gc)\s*", "", cleaned, flags=re.I)
         cleaned = re.sub(
             r"^(添加|删除|移除)管理员|管理员列表|列出管理员|管理员\b",
             " ",
@@ -392,7 +421,9 @@ class GuessCard(NcatBotPlugin):
             return
         sender = str(event.user_id)
         if not self._is_admin(sender):
-            await self._reply_text(event, "哎呀，管理猜卡管理员只有现有管理员才能操作哦~ 😊")
+            await self._reply_text(
+                event, "哎呀，管理猜卡管理员只有现有管理员才能操作哦~ 😊"
+            )
             return
 
         if action == "list":
@@ -400,8 +431,15 @@ class GuessCard(NcatBotPlugin):
             if not self.super_users:
                 await self._reply_text(event, "当前还没有配置猜卡管理员。")
                 return
-            lines = "\n".join(f"- {uid}" for uid in sorted(self.super_users, key=lambda x: int(x) if x.isdigit() else x))
-            await self._reply_text(event, f"猜卡管理员列表（{len(self.super_users)}）:\n{lines}")
+            lines = "\n".join(
+                f"- {uid}"
+                for uid in sorted(
+                    self.super_users, key=lambda x: int(x) if x.isdigit() else x
+                )
+            )
+            await self._reply_text(
+                event, f"猜卡管理员列表（{len(self.super_users)}）:\n{lines}"
+            )
             return
 
         targets = self._extract_target_user_ids(event)
@@ -440,7 +478,9 @@ class GuessCard(NcatBotPlugin):
                 missing.append(uid)
                 continue
             if uid == sender and len(self.super_users) <= 1:
-                await self._reply_text(event, "不能删除自己：至少需要保留一名猜卡管理员。")
+                await self._reply_text(
+                    event, "不能删除自己：至少需要保留一名猜卡管理员。"
+                )
                 return
             self.super_users.discard(uid)
             removed.append(uid)
@@ -740,7 +780,8 @@ class GuessCard(NcatBotPlugin):
                     _log.warning("打开本地图失败 %s: %s", src, e)
                     continue
             _log.error(
-                "无法打开图片（已尝试备用 URL）: %s", image_source or (extra_urls or [None])[0]
+                "无法打开图片（已尝试备用 URL）: %s",
+                image_source or (extra_urls or [None])[0],
             )
             return None
         except Exception as e:
@@ -788,9 +829,7 @@ class GuessCard(NcatBotPlugin):
                     os.remove(file_path)
             if files_to_delete:
                 keys_to_remove = [
-                    k
-                    for k, v in self.image_cache.cache.items()
-                    if v in files_to_delete
+                    k for k, v in self.image_cache.cache.items() if v in files_to_delete
                 ]
                 for key in keys_to_remove:
                     del self.image_cache.cache[key]
@@ -843,8 +882,8 @@ class GuessCard(NcatBotPlugin):
                 self.effect_processor.EFFECT_NAMES.get(n, n) for n in effect_names
             )
         else:
-            effect_names, effect_name = (
-                self.effect_processor.random_effect_combination(allowed=allowed)
+            effect_names, effect_name = self.effect_processor.random_effect_combination(
+                allowed=allowed
             )
         difficulty = self.effect_processor.calculate_difficulty(effect_names)
         return {
@@ -971,8 +1010,8 @@ class GuessCard(NcatBotPlugin):
                 self.effect_processor.EFFECT_NAMES.get(n, n) for n in effect_names
             )
         else:
-            effect_names, effect_name = (
-                self.effect_processor.random_effect_combination(allowed=allowed)
+            effect_names, effect_name = self.effect_processor.random_effect_combination(
+                allowed=allowed
             )
         difficulty = self.effect_processor.calculate_difficulty(effect_names)
 
@@ -987,9 +1026,7 @@ class GuessCard(NcatBotPlugin):
             if not Path(avatar_path).is_file():
                 continue
 
-            character = build_member_character(
-                user_id=uid, nickname=nick, card=card
-            )
+            character = build_member_character(user_id=uid, nickname=nick, card=card)
             keys = set(character.get("_answer_keys") or [])
             if not keys:
                 continue
@@ -1081,14 +1118,10 @@ class GuessCard(NcatBotPlugin):
                     )
                     return
                 if game_data and game_data.get("_error") == "avatar":
-                    await self._reply_text(
-                        event, "群友头像下载失败，请稍后再试一次吧~"
-                    )
+                    await self._reply_text(event, "群友头像下载失败，请稍后再试一次吧~")
                     return
                 if not game_data:
-                    await self._reply_text(
-                        event, "拉取群成员失败，请稍后再试一次吧~"
-                    )
+                    await self._reply_text(event, "拉取群成员失败，请稍后再试一次吧~")
                     return
                 processed = await self._apply_effects(
                     game_data["card_image_source"],
@@ -1209,9 +1242,7 @@ class GuessCard(NcatBotPlugin):
         self._cancel_session_timers(session)
         session.done_event.set()
 
-    async def _timeout_watcher(
-        self, session_id: str, timeout: float, token: int
-    ):
+    async def _timeout_watcher(self, session_id: str, timeout: float, token: int):
         try:
             await asyncio.sleep(timeout)
             session = self.game_sessions.get(session_id)
@@ -1442,7 +1473,12 @@ class GuessCard(NcatBotPlugin):
         return answer_key in keys
 
     def _handle_guess(
-        self, session: GameSession, session_id: str, user_id: str, user_name: str, answer: str
+        self,
+        session: GameSession,
+        session_id: str,
+        user_id: str,
+        user_name: str,
+        answer: str,
     ):
         if session.finishing or not session.game_data:
             return
@@ -1488,11 +1524,7 @@ class GuessCard(NcatBotPlugin):
                         try:
                             await asyncio.sleep(reward_valid_time)
                             cur = self.game_sessions.get(session_id)
-                            if (
-                                cur
-                                and cur.token == end_token
-                                and not cur.finishing
-                            ):
+                            if cur and cur.token == end_token and not cur.finishing:
                                 self._end_session(cur)
                         except asyncio.CancelledError:
                             return
@@ -1517,10 +1549,7 @@ class GuessCard(NcatBotPlugin):
                         }
                     )
         else:
-            if (
-                not session.is_test
-                and user_id not in session.user_stats_recorded
-            ):
+            if not session.is_test and user_id not in session.user_stats_recorded:
                 self._update_stats(user_id, user_name, 0, correct=False)
                 session.user_stats_recorded.add(user_id)
 
@@ -1542,8 +1571,7 @@ class GuessCard(NcatBotPlugin):
         if hint:
             head = f"{hint}\n\n" + head
         return (
-            head
-            + f"可用卡池: {pools}\n\n"
+            head + f"可用卡池: {pools}\n\n"
             "开局（必须指定主题）\n"
             "猜卡 <主题>\n"
             "例如: 猜卡 pjsk / 猜卡 fgo / 猜卡 e7 / 猜卡 vt / "
@@ -1624,9 +1652,7 @@ class GuessCard(NcatBotPlugin):
         if pool_id is None or not self._get_pool(pool_id):
             await self._reply_text(
                 event,
-                self._help_text(
-                    hint="测试猜卡需指定主题，例如：测试猜卡 e7 轻度模糊"
-                ),
+                self._help_text(hint="测试猜卡需指定主题，例如：测试猜卡 e7 轻度模糊"),
             )
             return
         allowed = self._pool_allowed_effects(pool_id)
@@ -1703,9 +1729,7 @@ class GuessCard(NcatBotPlugin):
                 return
             score, attempts, correct_attempts, last_play_date, daily_plays = user_data
             accuracy = (correct_attempts * 100 / attempts) if attempts > 0 else 0
-            cursor.execute(
-                "SELECT COUNT(*) FROM user_stats WHERE score > ?", (score,)
-            )
+            cursor.execute("SELECT COUNT(*) FROM user_stats WHERE score > ?", (score,))
             rank = cursor.fetchone()[0] + 1
         daily_limit = self._cfg("daily_play_limit", 999)
         today = time.strftime("%Y-%m-%d")
@@ -1892,16 +1916,15 @@ class GuessCard(NcatBotPlugin):
                 await self._reply_text(event, f"卡池「{pool_id}」不可用。")
                 return
             # 角色名可含空格：取最长唯一匹配前缀，剩余当别名
-            character, alias_text, ambiguous, char_query = resolve_character_alias_query(
-                pool.characters, rest
+            character, alias_text, ambiguous, char_query = (
+                resolve_character_alias_query(pool.characters, rest)
             )
         else:
             ctx = self.last_round_context.get(str(event.group_id))
             if not ctx:
                 await self._reply_text(
                     event,
-                    "未找到本群上一局角色，请使用完整格式："
-                    "猜卡加答案 e7 洁若米亚 夏娜",
+                    "未找到本群上一局角色，请使用完整格式：猜卡加答案 e7 洁若米亚 夏娜",
                 )
                 return
             pool_id = ctx["pool_id"]
@@ -1928,7 +1951,9 @@ class GuessCard(NcatBotPlugin):
             )
             return
         if not character:
-            await self._reply_text(event, f"在 {pool.display_name} 中未找到角色「{char_query}」。")
+            await self._reply_text(
+                event, f"在 {pool.display_name} 中未找到角色「{char_query}」。"
+            )
             return
         if not (alias_text or "").strip():
             await self._reply_text(event, "请至少提供一个别名。")
@@ -2152,9 +2177,7 @@ class GuessCard(NcatBotPlugin):
                     display_name = self._get_display_name(
                         user_id, custom_name if custom_name else user_name
                     )
-                    accuracy = (
-                        f"{(correct_attempts * 100 / int(attempts) if int(attempts) > 0 else 0):.1f}%"
-                    )
+                    accuracy = f"{(correct_attempts * 100 / int(attempts) if int(attempts) > 0 else 0):.1f}%"
                     col_positions = [40, 150, 500, 610, 720]
                     pilmoji.text(
                         (130, current_y),
@@ -2268,9 +2291,7 @@ class GuessCard(NcatBotPlugin):
                 )
             conn.commit()
 
-    def _update_stats(
-        self, user_id: str, user_name: str, score: int, correct: bool
-    ):
+    def _update_stats(self, user_id: str, user_name: str, score: int, correct: bool):
         with sqlite3.connect(self.db_path, timeout=30.0) as conn:
             cursor = conn.cursor()
             cursor.execute(

@@ -133,9 +133,7 @@ def _normalize_image_for_vision(image_data: bytes, mime_type: str) -> Tuple[byte
         frame.save(buf, format="JPEG", quality=85)
         out = buf.getvalue()
 
-    _log.info(
-        f"[Vision] 图片已转为 JPEG，大小: {len(out)} bytes (原 {mime_type})"
-    )
+    _log.info(f"[Vision] 图片已转为 JPEG，大小: {len(out)} bytes (原 {mime_type})")
     return out, "image/jpeg"
 
 
@@ -398,9 +396,7 @@ class AiUtil:
                     stream=False,
                     timeout=45.0,
                     # Nemotron Omni 默认会先 reasoning，关闭后延迟从 ~13s 降到 ~2s
-                    extra_body={
-                        "chat_template_kwargs": {"enable_thinking": False}
-                    },
+                    extra_body={"chat_template_kwargs": {"enable_thinking": False}},
                 )
 
             result = _completion_to_result(completion, VISION_MODEL)

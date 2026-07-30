@@ -1,4 +1,5 @@
 """Tataru service — command logic ported from astrbot_plugin_tataru."""
+
 from __future__ import annotations
 
 import asyncio
@@ -195,13 +196,20 @@ class TataruService:
     async def help(self, event: SimpleEvent):
         """显示塔塔露当前指令。"""
         parts: list[ReplyPart] = []
-        parts.append(ReplyPart.text(create_help_text() + "[石之家 玩家 角色名 (服务器)] 查询角色信息卡（现有绘图）\n"))
+        parts.append(
+            ReplyPart.text(
+                create_help_text()
+                + "[石之家 玩家 角色名 (服务器)] 查询角色信息卡（现有绘图）\n"
+            )
+        )
         return parts
 
     async def precious(self, event: SimpleEvent):
         """帮你选藏宝洞的门。"""
         parts: list[ReplyPart] = []
-        parts.append(ReplyPart.text("塔塔露在藏宝洞中横冲直撞！\n" + random_left_right()))
+        parts.append(
+            ReplyPart.text("塔塔露在藏宝洞中横冲直撞！\n" + random_left_right())
+        )
         return parts
 
     async def lottery(self, event: SimpleEvent):
@@ -224,7 +232,6 @@ class TataruService:
     async def nuannuan(self, event: SimpleEvent):
         """本周时尚品鉴作业。"""
         return await self.create_nuannuan_result(event)
-
 
     async def dungeon_note(self, event: SimpleEvent):
         """查简单副本攻略。"""
@@ -278,7 +285,11 @@ class TataruService:
                     "rp": "RP",
                 }
                 keyword_label = f"「{query.keyword}」" if query.keyword else "当前条件"
-                parts.append(ReplyPart.text(f"石之家{kind_labels[query.kind]}招募中没有找到{keyword_label}的内容"))
+                parts.append(
+                    ReplyPart.text(
+                        f"石之家{kind_labels[query.kind]}招募中没有找到{keyword_label}的内容"
+                    )
+                )
                 return parts
             parts.append(ReplyPart.text(format_risingstones_recruits(query, rows)))
             return parts
@@ -293,7 +304,9 @@ class TataruService:
         if not rows:
             kind_label = "攻略" if query.kind == "strat" else "帖子"
             keyword_label = f"「{query.keyword}」" if query.keyword else "当前条件"
-            parts.append(ReplyPart.text(f"石之家{kind_label}中没有找到{keyword_label}的内容"))
+            parts.append(
+                ReplyPart.text(f"石之家{kind_label}中没有找到{keyword_label}的内容")
+            )
             return parts
         parts.append(ReplyPart.text(format_risingstones_posts(query, rows)))
         return parts
@@ -513,7 +526,11 @@ class TataruService:
             )
             search_hint = f"包含「{search_text}」的" if search_text else ""
             job_hint = "指定职业的" if query.job_ids else ""
-            parts.append(ReplyPart.text(f"当前{scope_label}{category_hint}{search_hint}{job_hint}无人上传招募信息"))
+            parts.append(
+                ReplyPart.text(
+                    f"当前{scope_label}{category_hint}{search_hint}{job_hint}无人上传招募信息"
+                )
+            )
             return parts
 
         image_components = []
@@ -591,11 +608,9 @@ class TataruService:
         """查询指定服务器空房。"""
         return await self.create_house_result(event, "房子")
 
-
     async def house_alias(self, event: SimpleEvent):
         """查询指定服务器空房。"""
         return await self.create_house_result(event, "房屋")
-
 
     async def create_house_result(self, event: SimpleEvent, command: str):
         """查询指定服务器空房。"""
@@ -737,7 +752,6 @@ class TataruService:
         """随机抽取一张FF14塔罗牌。"""
         return await self.create_tarot_result(event)
 
-
     async def create_tarot_result(self, event: SimpleEvent):
         parts: list[ReplyPart] = []
         if self.tarot_dict is None:
@@ -751,7 +765,8 @@ class TataruService:
         text_image_path = self.cache_dir / "tarot_text.jpg"
         self.render_text_image(text_now, text_image_path)
 
-        parts.extend([
+        parts.extend(
+            [
                 ReplyPart.image(str(text_image_path)),
                 ReplyPart.image(str(tarot_image_path)),
             ]

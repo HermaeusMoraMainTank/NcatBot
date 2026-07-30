@@ -2,6 +2,7 @@
 
 Upstream: https://github.com/jawwe/astrbot_plugin_tataru
 """
+
 from __future__ import annotations
 
 import asyncio
@@ -63,6 +64,7 @@ def page_error_response(message: str, *, status_code: int = 400):
 
 async def get_page_request_json() -> object:
     return {}
+
 
 PLUGIN_DIR = Path(__file__).resolve().parent
 PLUGIN_NAME = "astrbot_plugin_tataru"
@@ -280,7 +282,6 @@ def debug_command(command_name: str):
         return func
 
     return decorator
-
 
 
 DATA_DIR = PLUGIN_DIR / "data"
@@ -6491,5 +6492,3 @@ async def get_party_finder_entries(
         job_ids=job_ids,
         limit=limit,
     )
-
-

@@ -6,6 +6,7 @@ Sources (batched, short timeouts):
    - epic-seven.fandom.com 「Name big.png」 (~1500px, old roster only)
    - else Fribbels `{code}_su.png` (~200–430×206)
 """
+
 from __future__ import annotations
 
 import json
@@ -35,16 +36,20 @@ def fandom_list_big_titles() -> list[str]:
     titles: list[str] = []
     offset = 0
     for page in range(8):
-        api = FANDOM_API + "?" + urllib.parse.urlencode(
-            {
-                "action": "query",
-                "list": "search",
-                "srnamespace": "6",
-                "srsearch": "big.png",
-                "srlimit": "50",
-                "sroffset": str(offset),
-                "format": "json",
-            }
+        api = (
+            FANDOM_API
+            + "?"
+            + urllib.parse.urlencode(
+                {
+                    "action": "query",
+                    "list": "search",
+                    "srnamespace": "6",
+                    "srsearch": "big.png",
+                    "srlimit": "50",
+                    "sroffset": str(offset),
+                    "format": "json",
+                }
+            )
         )
         j = fetch_json(api, timeout=20)
         hits = j.get("query", {}).get("search", [])
@@ -55,7 +60,7 @@ def fandom_list_big_titles() -> list[str]:
             low = t.lower()
             if low.endswith(" big.png") or low.endswith("_big.png"):
                 titles.append(t)
-        print(f"  fandom search page {page+1}: hits={len(hits)}", flush=True)
+        print(f"  fandom search page {page + 1}: hits={len(hits)}", flush=True)
         if "continue" not in j:
             break
         offset = int(j["continue"].get("sroffset", offset + 50))
@@ -77,14 +82,18 @@ def fandom_resolve_urls(titles: list[str]) -> dict[str, str]:
     batch = 40
     for i in range(0, len(titles), batch):
         chunk = titles[i : i + batch]
-        api = FANDOM_API + "?" + urllib.parse.urlencode(
-            {
-                "action": "query",
-                "titles": "|".join(chunk),
-                "prop": "imageinfo",
-                "iiprop": "url",
-                "format": "json",
-            }
+        api = (
+            FANDOM_API
+            + "?"
+            + urllib.parse.urlencode(
+                {
+                    "action": "query",
+                    "titles": "|".join(chunk),
+                    "prop": "imageinfo",
+                    "iiprop": "url",
+                    "format": "json",
+                }
+            )
         )
         j = fetch_json(api, timeout=25)
         pages = j.get("query", {}).get("pages", {})
@@ -128,7 +137,9 @@ def main() -> None:
         rarity = int(h.get("rarity") or 0)
         if not code or not en or rarity < 3:
             continue
-        playable.append((code, en, rarity, h.get("role") or "", h.get("attribute") or ""))
+        playable.append(
+            (code, en, rarity, h.get("role") or "", h.get("attribute") or "")
+        )
     playable.sort(key=lambda x: x[1].lower())
     print(f"  rarity>=3: {len(playable)}", flush=True)
 

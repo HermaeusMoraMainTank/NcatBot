@@ -98,7 +98,9 @@ async def from_ncatbot(event: Any, api: Any) -> AstrMessageEvent:
             texts.append(seg.text)
             chain.append(comp.Plain(seg.text))
         elif isinstance(seg, NbImage):
-            img = comp.Image(file=getattr(seg, "file", "") or "", url=getattr(seg, "url", None))
+            img = comp.Image(
+                file=getattr(seg, "file", "") or "", url=getattr(seg, "url", None)
+            )
             chain.append(img)
         elif isinstance(seg, NbReply):
             reply = comp.Reply(id=seg.id)

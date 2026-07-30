@@ -1,4 +1,5 @@
 """清洗 VT nicknames：去掉 by/... 杂质，补常见假名/简体别名。"""
+
 from __future__ import annotations
 
 import json
@@ -241,7 +242,7 @@ def main() -> None:
             if not re.search(r"[\u4e00-\u9fff]", str(c.get("fullNameChinese") or "")):
                 # 优先汉字名作中文展示
                 han = [a for a in jp if re.search(r"[\u4e00-\u9fff]", a)]
-                c["fullNameChinese"] = (han[0] if han else jp[0])
+                c["fullNameChinese"] = han[0] if han else jp[0]
                 c["name"] = c["fullNameChinese"]
 
     out = {"by_id": by_id, "by_name": by_name}

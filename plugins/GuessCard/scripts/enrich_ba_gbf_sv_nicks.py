@@ -1,4 +1,5 @@
 """为 ba / gbf / sv 写入常见外号 nicknames.json。"""
+
 from __future__ import annotations
 
 import json

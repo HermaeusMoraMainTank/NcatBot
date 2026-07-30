@@ -79,7 +79,11 @@ def message_part_from_dict(data: dict[str, Any]) -> MessagePart:
 
 
 def stored_message_from_dict(data: dict[str, Any]) -> StoredMessage:
-    parts = [message_part_from_dict(p) for p in (data.get("parts") or []) if isinstance(p, dict)]
+    parts = [
+        message_part_from_dict(p)
+        for p in (data.get("parts") or [])
+        if isinstance(p, dict)
+    ]
     at_ids = [str(x) for x in (data.get("at_user_ids") or [])]
     return StoredMessage(
         message_id=str(data.get("message_id") or ""),

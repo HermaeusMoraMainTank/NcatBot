@@ -1,4 +1,5 @@
 """构建 影之诗 / 碧蓝幻想 / 蔚蓝档案 卡池。"""
+
 from __future__ import annotations
 
 import json
@@ -149,9 +150,7 @@ def build_sv() -> None:
 
     # char_type 1=随从；rarity 3=金 4=传说
     candidates = [
-        c
-        for c in twc
-        if c.get("char_type") == 1 and int(c.get("rarity") or 0) >= 3
+        c for c in twc if c.get("char_type") == 1 and int(c.get("rarity") or 0) >= 3
     ]
     seen_base: set = set()
     characters, cards = [], []
@@ -225,17 +224,14 @@ def _gbf_cargo_all() -> list[dict]:
     rows: list[dict] = []
     offset = 0
     while True:
-        url = (
-            "https://gbf.wiki/Special:CargoExport?"
-            + urllib.parse.urlencode(
-                {
-                    "tables": "characters",
-                    "fields": fields,
-                    "format": "json",
-                    "limit": "500",
-                    "offset": str(offset),
-                }
-            )
+        url = "https://gbf.wiki/Special:CargoExport?" + urllib.parse.urlencode(
+            {
+                "tables": "characters",
+                "fields": fields,
+                "format": "json",
+                "limit": "500",
+                "offset": str(offset),
+            }
         )
         chunk = fetch_json(url, 90)
         if not chunk:

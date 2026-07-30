@@ -1,4 +1,5 @@
 """Build FGO guess-card pool from Atlas Academy + Chaldea (+ optional Mooncell aliases)."""
+
 from __future__ import annotations
 
 import json
@@ -26,9 +27,7 @@ def fetch_text(url: str, timeout: int = 60) -> str:
 
 def main() -> None:
     print("fetch atlas basic_servant...")
-    servants = fetch_json(
-        "https://api.atlasacademy.io/export/JP/basic_servant.json"
-    )
+    servants = fetch_json("https://api.atlasacademy.io/export/JP/basic_servant.json")
     print("fetch chaldea svt_names...")
     name_map = fetch_json(
         "https://raw.githubusercontent.com/chaldea-center/chaldea-data/main/mappings/svt_names.json"
@@ -37,9 +36,7 @@ def main() -> None:
     mooncell_aliases: dict[int, dict] = {}
     print("fetch mooncell list for aliases...")
     try:
-        html = fetch_text(
-            "https://fgo.wiki/w/%E5%BE%AE%E4%BB%B6:ServantsList/data"
-        )
+        html = fetch_text("https://fgo.wiki/w/%E5%BE%AE%E4%BB%B6:ServantsList/data")
         rows = re.findall(
             r"(\d+),(\d+),([^,\n]+),([^,\n]+),([^,\n]+),([^,\n]*),([^,\n]*)",
             html,

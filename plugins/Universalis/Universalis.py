@@ -1,4 +1,4 @@
-﻿import logging
+import logging
 from dataclasses import dataclass
 import json
 import os
@@ -99,7 +99,7 @@ class Universalis(NcatBotPlugin):
         # API 基础 URL
         self.api_url = "https://universalis.app/api/v2/"
 
-    # @registrar.qq.on_group_message()  # disabled: migrated to Tataru\n    async def handle_universalis(self, input: GroupMessage):
+        # @registrar.qq.on_group_message()  # disabled: migrated to Tataru\n    async def handle_universalis(self, input: GroupMessage):
         """
         处理物价查询
         """

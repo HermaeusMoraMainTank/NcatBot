@@ -6,6 +6,7 @@ Rules (product):
 - Ultimate: all phases listed in BOSS.中文名.
 - Dedupe characters by Chinese boss name; one portrait card each.
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -142,7 +143,12 @@ def _is_junk_image(fn: str) -> bool:
         return True
     if low.startswith("060") or low.startswith("061") or low.startswith("065"):
         return True
-    if "icon" in low or low.startswith("职业") or "lodestone" in low or "garland" in low:
+    if (
+        "icon" in low
+        or low.startswith("职业")
+        or "lodestone" in low
+        or "garland" in low
+    ):
         return True
     if low.startswith("112") and low.endswith(".png"):  # duty journal icons often
         return True
@@ -245,7 +251,7 @@ def main() -> None:
         ("ult", ultimates),
     ):
         for i, title in enumerate(titles):
-            print(f"2) resolve [{tag}] {i+1}/{len(titles)} {title}", flush=True)
+            print(f"2) resolve [{tag}] {i + 1}/{len(titles)} {title}", flush=True)
             pid = resolve_instance_id(title)
             time.sleep(0.55)
             if not pid:
@@ -315,7 +321,7 @@ def main() -> None:
     skipped: list[dict] = []
 
     for i, (cn, info) in enumerate(boss_map.items()):
-        print(f"3) portrait {i+1}/{len(boss_map)} {cn}", flush=True)
+        print(f"3) portrait {i + 1}/{len(boss_map)} {cn}", flush=True)
         detail = boss_portrait_and_names(cn)
         time.sleep(0.7)
         url = detail.get("image_url") or ""
@@ -405,7 +411,12 @@ def main() -> None:
         flush=True,
     )
     if characters:
-        print("sample", characters[0]["fullNameChinese"], characters[0]["aliases"], flush=True)
+        print(
+            "sample",
+            characters[0]["fullNameChinese"],
+            characters[0]["aliases"],
+            flush=True,
+        )
 
 
 if __name__ == "__main__":

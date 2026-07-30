@@ -24,7 +24,9 @@ class SteamStoreClient:
     def __init__(self, client: httpx.AsyncClient) -> None:
         self.client = client
 
-    async def search(self, query: str, country: str, language: str) -> list[dict[str, Any]]:
+    async def search(
+        self, query: str, country: str, language: str
+    ) -> list[dict[str, Any]]:
         data = await self._get_json(
             STEAM_STORE_SEARCH_URL,
             {"term": query, "cc": country, "l": language},
@@ -40,7 +42,9 @@ class SteamStoreClient:
                 results.append({"appid": int(appid), "name": name})
         return results
 
-    async def details(self, appid: int, country: str, language: str) -> SteamGameDetails:
+    async def details(
+        self, appid: int, country: str, language: str
+    ) -> SteamGameDetails:
         payload = await self._get_json(
             STEAM_APP_DETAILS_URL,
             {"appids": appid, "cc": country, "l": language},
@@ -63,7 +67,9 @@ class HeyboxClient:
     def __init__(self, client: httpx.AsyncClient) -> None:
         self.client = client
 
-    async def price_history(self, appid: int, country: str, days: int) -> dict[str, Any]:
+    async def price_history(
+        self, appid: int, country: str, days: int
+    ) -> dict[str, Any]:
         response = await self.client.get(
             XIAOHEIHE_PRICE_HISTORY_URL,
             params={"appid": appid, "platf": "steam", "cc": country, "days": days},
@@ -90,19 +96,31 @@ class HeyboxClient:
         )
         response.raise_for_status()
         data = response.json()
-        prices = data.get("result", {}).get("prices", []) if isinstance(data, dict) else []
+        prices = (
+            data.get("result", {}).get("prices", []) if isinstance(data, dict) else []
+        )
         return parse_region_prices(prices)
 
 
 def parse_steam_details(appid: int, data: dict[str, Any]) -> SteamGameDetails:
-    release = data.get("release_date") if isinstance(data.get("release_date"), dict) else {}
-    metacritic = data.get("metacritic") if isinstance(data.get("metacritic"), dict) else {}
-    recommendations = (
-        data.get("recommendations") if isinstance(data.get("recommendations"), dict) else {}
+    release = (
+        data.get("release_date") if isinstance(data.get("release_date"), dict) else {}
     )
-    achievements = data.get("achievements") if isinstance(data.get("achievements"), dict) else {}
+    metacritic = (
+        data.get("metacritic") if isinstance(data.get("metacritic"), dict) else {}
+    )
+    recommendations = (
+        data.get("recommendations")
+        if isinstance(data.get("recommendations"), dict)
+        else {}
+    )
+    achievements = (
+        data.get("achievements") if isinstance(data.get("achievements"), dict) else {}
+    )
     descriptors = (
-        data.get("content_descriptors") if isinstance(data.get("content_descriptors"), dict) else {}
+        data.get("content_descriptors")
+        if isinstance(data.get("content_descriptors"), dict)
+        else {}
     )
     platforms = data.get("platforms") if isinstance(data.get("platforms"), dict) else {}
 

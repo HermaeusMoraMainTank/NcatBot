@@ -1,4 +1,5 @@
 """多游戏卡池加载。"""
+
 from __future__ import annotations
 
 import json
@@ -238,11 +239,7 @@ def expand_answer_keys(*names: Optional[str]) -> set[str]:
                 return
             # 纯拉丁短词易串台（Titaniklad the Ash Dragon → Ash）
             # 整名本身就是短外号（如 Ash）时仍保留
-            if (
-                re.fullmatch(r"[a-z0-9]+", nk)
-                and len(nk) < 4
-                and nk != raw_key
-            ):
+            if re.fullmatch(r"[a-z0-9]+", nk) and len(nk) < 4 and nk != raw_key:
                 return
             # 中文碎片：全名较长时拒绝 1～2 字分段（水神·打刀 → 打刀）
             if (
@@ -433,9 +430,7 @@ def character_answer_keys(character: dict) -> set[str]:
         if prefix and not _is_generic_class_name(prefix):
             names.extend(_title_name_combos(prefix, cn))
     # 中文形态名/属性外号（E7 战术型可丽 → 可丽/水可丽/战术性可丽）
-    names.extend(
-        _chinese_form_aliases(cn, str(character.get("attribute") or ""))
-    )
+    names.extend(_chinese_form_aliases(cn, str(character.get("attribute") or "")))
     return expand_answer_keys(*names)
 
 
@@ -724,11 +719,7 @@ def reload_character_from_disk(
         return str(stored) == str(query)
 
     base = next(
-        (
-            c
-            for c in characters_data
-            if _same_id(c.get("characterId"), character_id)
-        ),
+        (c for c in characters_data if _same_id(c.get("characterId"), character_id)),
         None,
     )
     if not base:

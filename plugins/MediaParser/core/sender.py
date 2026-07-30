@@ -233,7 +233,9 @@ class MessageSender:
                 path: Path = await cont.get_path()
             except SizeLimitException as exc:
                 self._cancel_media_download(cont)
-                parts.append({"type": "text", "data": self._video_over_size_tip(cont, exc)})
+                parts.append(
+                    {"type": "text", "data": self._video_over_size_tip(cont, exc)}
+                )
                 continue
             except DurationLimitException as exc:
                 self._cancel_media_download(cont)

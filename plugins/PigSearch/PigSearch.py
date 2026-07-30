@@ -227,9 +227,7 @@ class PigSearch(NcatBotPlugin):
                         if not title or not image_url or pig_id is None:
                             continue
                         entries.append(
-                            PigEntry(
-                                id=str(pig_id), title=title, image_url=image_url
-                            )
+                            PigEntry(id=str(pig_id), title=title, image_url=image_url)
                         )
                     if not entries:
                         raise RuntimeError("PigHub 返回了空图片列表")

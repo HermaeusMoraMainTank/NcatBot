@@ -2,6 +2,7 @@
 
 超时短、只拉 JSON、不验图，避免卡住。
 """
+
 from __future__ import annotations
 
 import json
@@ -44,7 +45,9 @@ def curl_json(url: str, referer: str, timeout: int = 45) -> dict:
         str(timeout),
         url,
     ]
-    r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="ignore")
+    r = subprocess.run(
+        cmd, capture_output=True, text=True, encoding="utf-8", errors="ignore"
+    )
     if r.returncode != 0 or not (r.stdout or "").strip():
         return {}
     try:
@@ -287,7 +290,7 @@ def _fandom_category_titles(category: str, limit_pages: int = 8) -> list[str]:
             t = it.get("title") or ""
             if t and not t.startswith("Category:"):
                 titles.append(t)
-        print(f"  {category} page {page+1}: total={len(titles)}", flush=True)
+        print(f"  {category} page {page + 1}: total={len(titles)}", flush=True)
         cont = (j.get("continue") or {}).get("cmcontinue")
         if not cont:
             break
@@ -317,7 +320,7 @@ def _fandom_pageimages(titles: list[str]) -> dict[str, tuple[str, str]]:
             if t and thumb:
                 out[t] = (thumb, p.get("pageimage") or "")
         print(
-            f"  pageimages {min(i+batch, len(titles))}/{len(titles)} mapped={len(out)}",
+            f"  pageimages {min(i + batch, len(titles))}/{len(titles)} mapped={len(out)}",
             flush=True,
         )
     return out
@@ -424,7 +427,9 @@ def _curl_url_ok(url: str, referer: str = "https://limbuscompany.wiki.gg/") -> b
         "20",
         url,
     ]
-    r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="ignore")
+    r = subprocess.run(
+        cmd, capture_output=True, text=True, encoding="utf-8", errors="ignore"
+    )
     head = r.stdout or ""
     return bool(re.search(r"HTTP/\S+\s+200\b", head))
 
@@ -514,8 +519,14 @@ def _lcb_huiji_cn_name(en_name: str) -> str:
             # 去掉消歧义后缀：克罗默(角色) → 克罗默
             return re.sub(r"[（(][^）)]*[）)]\s*$", "", title).strip() or title
         # 标题本身就是中文且搜索命中较强
-        if re.search(r"[\u4e00-\u9fff]", title) and "主线" not in title and "战斗" not in title:
-            if en_name.lower() in wt.lower() or f"英文名={en_name}" in wt.replace(" ", ""):
+        if (
+            re.search(r"[\u4e00-\u9fff]", title)
+            and "主线" not in title
+            and "战斗" not in title
+        ):
+            if en_name.lower() in wt.lower() or f"英文名={en_name}" in wt.replace(
+                " ", ""
+            ):
                 cn_m = re.search(r"\|中文名\s*=\s*([^\n|{]+)", wt)
                 if cn_m and cn_m.group(1).strip():
                     return cn_m.group(1).strip()
@@ -547,9 +558,13 @@ def build_lcb_bosses() -> tuple[list[dict], list[dict], dict]:
         }
         if cont:
             params["cmcontinue"] = cont
-        d = curl_json(api + "?" + urllib.parse.urlencode(params), "https://limbuscompany.wiki.gg/")
+        d = curl_json(
+            api + "?" + urllib.parse.urlencode(params), "https://limbuscompany.wiki.gg/"
+        )
         titles.extend(
-            x["title"] for x in d.get("query", {}).get("categorymembers", []) if x.get("title")
+            x["title"]
+            for x in d.get("query", {}).get("categorymembers", [])
+            if x.get("title")
         )
         cont = (d.get("continue") or {}).get("cmcontinue")
         if not cont:
@@ -606,7 +621,9 @@ def build_lcb_bosses() -> tuple[list[dict], list[dict], dict]:
             }
         )
         if i % 15 == 0 or i == len(picked):
-            print(f"  boss progress {i}/{len(picked)} kept={len(characters)}", flush=True)
+            print(
+                f"  boss progress {i}/{len(picked)} kept={len(characters)}", flush=True
+            )
 
     stats = {
         "boss_raw_pages": len(titles),
@@ -697,7 +714,7 @@ def build_lcb() -> None:
             }
         )
         if (i + 1) % 40 == 0:
-            print(f"  progress {i+1}/{len(items)}", flush=True)
+            print(f"  progress {i + 1}/{len(items)}", flush=True)
 
     print("[LCB 3/3] Boss Enemy ...", flush=True)
     bosses, boss_cards, boss_stats = build_lcb_bosses()
@@ -739,7 +756,7 @@ def _fandom_category_members(
             t = it.get("title") or ""
             if t and not t.startswith("Category:"):
                 titles.append(t)
-        print(f"  {category} page {page+1}: total={len(titles)}", flush=True)
+        print(f"  {category} page {page + 1}: total={len(titles)}", flush=True)
         cont = (j.get("continue") or {}).get("cmcontinue")
         if not cont:
             break
@@ -755,8 +772,7 @@ def build_ww() -> None:
     titles = [
         t
         for t in titles
-        if t
-        not in {"Resonator", "Resonators"}
+        if t not in {"Resonator", "Resonators"}
         and not t.startswith('"')
         and "List of" not in t
     ]
@@ -767,17 +783,21 @@ def build_ww() -> None:
     batch = 40
     for i in range(0, len(titles), batch):
         chunk = titles[i : i + batch]
-        api = host + "?" + urllib.parse.urlencode(
-            {
-                "action": "query",
-                "titles": "|".join(chunk),
-                "prop": "pageimages|langlinks",
-                "pithumbsize": "800",
-                "piprop": "thumbnail",
-                "lllang": "zh",
-                "lllimit": "max",
-                "format": "json",
-            }
+        api = (
+            host
+            + "?"
+            + urllib.parse.urlencode(
+                {
+                    "action": "query",
+                    "titles": "|".join(chunk),
+                    "prop": "pageimages|langlinks",
+                    "pithumbsize": "800",
+                    "piprop": "thumbnail",
+                    "lllang": "zh",
+                    "lllimit": "max",
+                    "format": "json",
+                }
+            )
         )
         j = fetch_json(api, timeout=30)
         for _, p in (j.get("query") or {}).get("pages", {}).items():
@@ -795,7 +815,7 @@ def build_ww() -> None:
                     break
             meta[t] = {"url": thumb, "zh": zh}
         print(
-            f"  meta {min(i+batch, len(titles))}/{len(titles)} mapped={len(meta)}",
+            f"  meta {min(i + batch, len(titles))}/{len(titles)} mapped={len(meta)}",
             flush=True,
         )
 
@@ -857,7 +877,9 @@ def _lor_curl_ok(url: str) -> bool:
         "20",
         url,
     ]
-    r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="ignore")
+    r = subprocess.run(
+        cmd, capture_output=True, text=True, encoding="utf-8", errors="ignore"
+    )
     return bool(re.search(r"HTTP/\S+\s+200\b", r.stdout or ""))
 
 
@@ -1013,7 +1035,11 @@ def build_lor() -> None:
         )
         for x in d.get("query", {}).get("categorymembers", []):
             t = x.get("title") or ""
-            if not t or t.startswith("Category:") or t in {"Characters", "Guests", "???"}:
+            if (
+                not t
+                or t.startswith("Category:")
+                or t in {"Characters", "Guests", "???"}
+            ):
                 continue
             if "(Reception)" in t or t.endswith(" (reception)"):
                 continue
@@ -1035,9 +1061,7 @@ def build_lor() -> None:
         q = urllib.parse.urlencode(
             {"action": "parse", "page": title, "prop": "wikitext", "format": "json"}
         )
-        page = curl_json(
-            api + "?" + q, "https://libraryofruina.wiki.gg/", timeout=45
-        )
+        page = curl_json(api + "?" + q, "https://libraryofruina.wiki.gg/", timeout=45)
         wt = page.get("parse", {}).get("wikitext", {}).get("*") or ""
         if not wt:
             skipped += 1
@@ -1555,10 +1579,20 @@ def build_lor_abno() -> None:
 
     # 去掉旧异想体条目，便于重复运行
     characters = [c for c in characters if c.get("kind") != "abno_realization"]
-    abno_ids = {c["characterId"] for c in characters if str(c.get("characterId", "")).startswith("lor_abno_")}
+    abno_ids = {
+        c["characterId"]
+        for c in characters
+        if str(c.get("characterId", "")).startswith("lor_abno_")
+    }
     # 上面已按 kind 过滤；再按 id 前缀清一次
-    characters = [c for c in characters if not str(c.get("characterId", "")).startswith("lor_abno_")]
-    cards = [c for c in cards if not str(c.get("characterId", "")).startswith("lor_abno_")]
+    characters = [
+        c
+        for c in characters
+        if not str(c.get("characterId", "")).startswith("lor_abno_")
+    ]
+    cards = [
+        c for c in cards if not str(c.get("characterId", "")).startswith("lor_abno_")
+    ]
     del abno_ids
 
     kept = 0
@@ -1940,4 +1974,3 @@ if __name__ == "__main__":
             fn()
     else:
         main()
-

@@ -142,9 +142,7 @@ class MirageTank(NcatBotPlugin):
 
         await self._feed_session(event, session, key, urls)
 
-    async def _start_or_run(
-        self, event: GroupMessage, mode: Mode, key: str
-    ) -> None:
+    async def _start_or_run(self, event: GroupMessage, mode: Mode, key: str) -> None:
         # 覆盖旧会话
         old = self._pending.pop(key, None)
         if old:
@@ -211,9 +209,7 @@ class MirageTank(NcatBotPlugin):
             if len(urls) >= 2:
                 self._pending.pop(key, None)
                 await event.reply(text="收到两张图，正在生成幻影坦克…")
-                await self._generate_and_send(
-                    event, session.mode, urls[0], urls[1]
-                )
+                await self._generate_and_send(event, session.mode, urls[0], urls[1])
                 return
             try:
                 front_path = await self._download_to_png(urls[0])
@@ -372,9 +368,7 @@ class MirageTank(NcatBotPlugin):
                     "Chrome/114.0.0.0 Safari/537.36"
                 ),
             }
-            resp = self.session.get(
-                url, headers=headers, timeout=30, verify=False
-            )
+            resp = self.session.get(url, headers=headers, timeout=30, verify=False)
             resp.raise_for_status()
             if len(resp.content) > self.max_image_bytes:
                 raise ValueError(

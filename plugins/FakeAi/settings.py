@@ -109,11 +109,9 @@ def apply_from_plugin(plugin) -> None:
     inter["group_cd_sec"] = float(
         inter.get("group_cd_sec", plugin.get_config("group_cd_sec", 10))
     )
-    new_inter = InteractionConfig(**{
-        k: inter[k]
-        for k in InteractionConfig.__dataclass_fields__
-        if k in inter
-    })
+    new_inter = InteractionConfig(
+        **{k: inter[k] for k in InteractionConfig.__dataclass_fields__ if k in inter}
+    )
     for k, v in asdict(new_inter).items():
         setattr(DEFAULT_CONFIG, k, v)
     state_store.config = DEFAULT_CONFIG
@@ -121,9 +119,9 @@ def apply_from_plugin(plugin) -> None:
     # —— cognition ——
     cog_raw = plugin.get_config("cognition", {}) or {}
     cog = _merge_dict(asdict(CognitionConfig()), cog_raw)
-    new_cog = CognitionConfig(**{
-        k: cog[k] for k in CognitionConfig.__dataclass_fields__ if k in cog
-    })
+    new_cog = CognitionConfig(
+        **{k: cog[k] for k in CognitionConfig.__dataclass_fields__ if k in cog}
+    )
     for k, v in asdict(new_cog).items():
         setattr(DEFAULT_COGNITION, k, v)
 

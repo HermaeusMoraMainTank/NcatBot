@@ -1,4 +1,5 @@
 """FF14 武士刀灰机 wiki 风格物品卡渲染。"""
+
 from __future__ import annotations
 
 import json
@@ -75,7 +76,9 @@ def normalize_wiki_item(raw: dict, fallback: Optional[dict] = None) -> dict[str,
     special = attrs_block.get("属性") or {}
     order = attrs_block.get("属性顺序") or list(special.keys())
 
-    phys = int(base.get("物理基本性能") or raw.get("物理性能") or fb.get("damagePhys") or 0)
+    phys = int(
+        base.get("物理基本性能") or raw.get("物理性能") or fb.get("damagePhys") or 0
+    )
     mag = int(base.get("魔法基本性能") or raw.get("魔法性能") or 0)
     delay_ms = int(raw.get("攻击间隔") or 2640)
     delay_s = round(delay_ms / 1000.0, 2)
@@ -83,7 +86,9 @@ def normalize_wiki_item(raw: dict, fallback: Optional[dict] = None) -> dict[str,
     elvl = int(raw.get("装备等级") or fb.get("equipLevel") or 0)
     rarity = int(raw.get("品质") or fb.get("rarity") or 1)
     job = (raw.get("可使用职业显示") or "武士").strip()
-    name = (raw.get("中文名") or fb.get("fullNameChinese") or fb.get("name") or "").strip()
+    name = (
+        raw.get("中文名") or fb.get("fullNameChinese") or fb.get("name") or ""
+    ).strip()
     itype = (raw.get("类型") or "武士刀").strip()
 
     stats: list[tuple[str, int]] = []
@@ -97,7 +102,14 @@ def normalize_wiki_item(raw: dict, fallback: Optional[dict] = None) -> dict[str,
             continue
     if not stats:
         # fallback from flat fields
-        mapping = {1: "力量", 3: "耐力", 27: "暴击", 44: "信念", 22: "直击", 45: "技能速度"}
+        mapping = {
+            1: "力量",
+            3: "耐力",
+            27: "暴击",
+            44: "信念",
+            22: "直击",
+            45: "技能速度",
+        }
         for i in range(1, 7):
             t = int(raw.get(f"属性类型{i}") or 0)
             v = int(raw.get(f"属性数值{i}") or 0)
@@ -215,7 +227,9 @@ def format_wiki_text(info: dict) -> str:
     return "\n".join(lines)
 
 
-def _font(path: Optional[Path], size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+def _font(
+    path: Optional[Path], size: int
+) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
     if path and path.exists():
         try:
             return ImageFont.truetype(str(path), size)
@@ -280,7 +294,9 @@ def render_wiki_item_card(
         draw.line([(pad, y), (W - pad, y)], fill=(70, 80, 110), width=1)
         y += 10
 
-    def row(label: str, value: str, label_color=(150, 165, 190), value_color=(235, 240, 250)) -> None:
+    def row(
+        label: str, value: str, label_color=(150, 165, 190), value_color=(235, 240, 250)
+    ) -> None:
         nonlocal y
         draw.text((pad, y), label, fill=label_color, font=font_label)
         vw = _text_width(draw, value, font_body)

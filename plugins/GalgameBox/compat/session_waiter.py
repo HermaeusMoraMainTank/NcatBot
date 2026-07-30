@@ -27,7 +27,9 @@ class SessionController:
             self._timeout = float(timeout)
             self._deadline = time.monotonic() + self._timeout
         else:
-            self._deadline = time.monotonic() + max(0.0, self.remaining()) + float(timeout)
+            self._deadline = (
+                time.monotonic() + max(0.0, self.remaining()) + float(timeout)
+            )
 
     def stop(self) -> None:
         self._stopped = True

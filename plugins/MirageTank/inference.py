@@ -34,9 +34,7 @@ def _tmp_png(save_dir: Optional[str | Path]) -> tempfile.NamedTemporaryFile:
     dir_arg = str(save_dir) if save_dir else None
     if dir_arg:
         Path(dir_arg).mkdir(parents=True, exist_ok=True)
-    return tempfile.NamedTemporaryFile(
-        delete=False, suffix=".png", dir=dir_arg
-    )
+    return tempfile.NamedTemporaryFile(delete=False, suffix=".png", dir=dir_arg)
 
 
 def _generate_gray_tank(
@@ -94,14 +92,10 @@ def _generate_color_tank(
         b_arr = np.array(b_img, dtype=np.float32)
 
         a_gray = (
-            0.299 * a_arr[:, :, 0]
-            + 0.587 * a_arr[:, :, 1]
-            + 0.114 * a_arr[:, :, 2]
+            0.299 * a_arr[:, :, 0] + 0.587 * a_arr[:, :, 1] + 0.114 * a_arr[:, :, 2]
         )
         b_gray = (
-            0.299 * b_arr[:, :, 0]
-            + 0.587 * b_arr[:, :, 1]
-            + 0.114 * b_arr[:, :, 2]
+            0.299 * b_arr[:, :, 0] + 0.587 * b_arr[:, :, 1] + 0.114 * b_arr[:, :, 2]
         )
         b_gray = a * b_gray + b
 

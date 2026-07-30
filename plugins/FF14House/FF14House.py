@@ -1,4 +1,4 @@
-﻿from PIL import Image as PILImage, ImageDraw, ImageFont
+from PIL import Image as PILImage, ImageDraw, ImageFont
 from datetime import datetime
 import aiohttp
 import os
@@ -353,7 +353,7 @@ class FF14House(NcatBotPlugin):
 
         return image
 
-    # @registrar.qq.on_group_message()  # disabled: migrated to Tataru\n    async def handle_ff14house(self, input: GroupMessage):
+        # @registrar.qq.on_group_message()  # disabled: migrated to Tataru\n    async def handle_ff14house(self, input: GroupMessage):
         message_parts = input.raw_message.split(" ")
         if message_parts[0] != "搜索房屋":
             return

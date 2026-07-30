@@ -609,9 +609,7 @@ class ImageSender(NcatBotPlugin):
                 return name, cfg
         return None
 
-    def _create_command(
-        self, name: str, triggers: list[str] | None = None
-    ) -> dict:
+    def _create_command(self, name: str, triggers: list[str] | None = None) -> dict:
         """创建新图库、建目录并写回配置。"""
         triggers = triggers or [name]
         rel_path = DEFAULT_IMAGE_ROOT / name

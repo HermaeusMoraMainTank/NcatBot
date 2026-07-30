@@ -3,6 +3,7 @@
 优先: vt（virtualyoutuber.fandom）
 其它: gi / ak / ww 做轻量补充
 """
+
 from __future__ import annotations
 
 import json
@@ -125,9 +126,7 @@ def enrich_vt() -> None:
         aliases.extend(fans)
 
         # 清洗去重（去掉 (by X) 归因，避免答案键串台）
-        _by_paren = re.compile(
-            r"\s*[\(（]\s*(?:by|from|aka)\b[^）)]*[\)）]", re.I
-        )
+        _by_paren = re.compile(r"\s*[\(（]\s*(?:by|from|aka)\b[^）)]*[\)）]", re.I)
         uniq: list[str] = []
         seen = set()
         for a in aliases:
@@ -167,7 +166,10 @@ def enrich_vt() -> None:
                 c["name"] = jp_candidates[0]
 
         if (i + 1) % 20 == 0:
-            print(f"  progress {i+1}/{len(chars)} last={title} n={len(uniq)}", flush=True)
+            print(
+                f"  progress {i + 1}/{len(chars)} last={title} n={len(uniq)}",
+                flush=True,
+            )
             time.sleep(0.15)
         else:
             time.sleep(0.05)

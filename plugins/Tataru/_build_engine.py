@@ -1,4 +1,5 @@
 """One-shot builder: convert astrbot tataru_main.py -> engine.py + service helpers."""
+
 from __future__ import annotations
 
 import re
@@ -36,7 +37,8 @@ rest = re.sub(
     flags=re.S,
 )
 
-engine = '''"""Tataru core engine — ported from astrbot_plugin_tataru (MIT)."""
+engine = (
+    '''"""Tataru core engine — ported from astrbot_plugin_tataru (MIT)."""
 from __future__ import annotations
 
 import asyncio
@@ -101,7 +103,9 @@ def page_error_response(message: str, *, status_code: int = 400):
 async def get_page_request_json() -> object:
     return {}
 
-''' + rest
+'''
+    + rest
+)
 
 (ROOT / "engine.py").write_text(engine, encoding="utf-8")
 print("engine.py lines:", len(engine.splitlines()))

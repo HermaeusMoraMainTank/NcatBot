@@ -10,14 +10,24 @@ from .models import PriceHistory, PricePoint, SaleEvent
 def parse_price_history(value: dict[str, Any]) -> PriceHistory:
     raw_points = value.get("prices") if isinstance(value.get("prices"), list) else []
     points = sorted(
-        (point for item in raw_points if (point := parse_price_point(item)) is not None),
+        (
+            point
+            for item in raw_points
+            if (point := parse_price_point(item)) is not None
+        ),
         key=lambda point: point.recorded_on,
     )
     points = deduplicate_points(points)
     events = build_sale_events(points)
 
-    lowest_info = value.get("lowest_info") if isinstance(value.get("lowest_info"), dict) else {}
-    lowest_v2 = value.get("lowest_info_v2") if isinstance(value.get("lowest_info_v2"), dict) else {}
+    lowest_info = (
+        value.get("lowest_info") if isinstance(value.get("lowest_info"), dict) else {}
+    )
+    lowest_v2 = (
+        value.get("lowest_info_v2")
+        if isinstance(value.get("lowest_info_v2"), dict)
+        else {}
+    )
     lowest_price = to_decimal(lowest_info.get("price"))
     lowest_date = parse_history_date(lowest_info.get("date"))
     lowest_discount = int(lowest_info.get("discount") or 0)
@@ -101,7 +111,9 @@ def build_sale_events(points: list[PricePoint]) -> list[SaleEvent]:
     return events
 
 
-def count_lowest_occurrences(points: list[PricePoint], lowest_price: Decimal | None) -> int:
+def count_lowest_occurrences(
+    points: list[PricePoint], lowest_price: Decimal | None
+) -> int:
     if lowest_price is None:
         return 0
     occurrences = 0

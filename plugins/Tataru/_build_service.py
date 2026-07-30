@@ -1,4 +1,5 @@
 """Convert AstrBot TataruPlugin body into NcatBot-friendly service.py."""
+
 from __future__ import annotations
 
 import re
@@ -92,6 +93,7 @@ raw = raw.replace(
 
 # Convert event.message_str usage - SimpleEvent has message_str field; handlers take event
 # Convert yields: transform async generator command handlers into list collectors
+
 
 def convert_async_gen_method(text: str) -> str:
     """Convert methods that yield event.*_result into methods returning list[ReplyPart]."""
@@ -327,12 +329,14 @@ COMMAND_METHODS = [
 
 for name in COMMAND_METHODS:
     pattern = rf"(    async def {name}\([\s\S]*?\n)(        \"\"\"[\s\S]*?\"\"\"\n)?"
+
     def inject(m, _name=name):
         head = m.group(1)
         doc = m.group(2) or ""
         if "parts: list[ReplyPart] = []" in head + doc:
             return m.group(0)
         return head + doc + "        parts: list[ReplyPart] = []\n"
+
     raw2 = re.sub(pattern, inject, raw, count=1)
     if raw2 == raw:
         print("WARN: inject failed for", name)
@@ -371,16 +375,22 @@ raw = "".join(out_lines)
 # Methods that end with parts.append without return - append return parts before next method
 # Do a second pass: if a COMMAND method body ends without return parts, add it.
 
+
 def ensure_return_parts(text: str) -> str:
     for name in COMMAND_METHODS:
         # Find method and next method at same indent
-        m = re.search(rf"(    async def {name}\([\s\S]*?)(?=\n    (?:async )?def |\Z)", text)
+        m = re.search(
+            rf"(    async def {name}\([\s\S]*?)(?=\n    (?:async )?def |\Z)", text
+        )
         if not m:
             continue
         body = m.group(1)
         if "parts: list[ReplyPart] = []" not in body:
             continue
-        if re.search(r"\n        return parts\s*\n\s*$", body) or "return parts" in body[-80:]:
+        if (
+            re.search(r"\n        return parts\s*\n\s*$", body)
+            or "return parts" in body[-80:]
+        ):
             continue
         # If body has return [ReplyPart already somewhere as sole returns ok
         if "return [ReplyPart" in body and "parts.append" not in body:
@@ -410,7 +420,10 @@ raw = ensure_return_parts(raw)
 if "_persist_plugin_config" in raw:
     # add stub method at end of class if missing
     if "def _persist_plugin_config" not in raw:
-        raw = raw.rstrip() + "\n\n    def _persist_plugin_config(self) -> None:\n        return\n"
+        raw = (
+            raw.rstrip()
+            + "\n\n    def _persist_plugin_config(self) -> None:\n        return\n"
+        )
 
 # Fix image_components.append(ReplyPart.image(...)) then parts.extend(_chain_to_parts(image_components))
 # Good.

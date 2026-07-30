@@ -2,6 +2,7 @@
 
 Rewrites guess_cards.json image_url to local relative paths: images/<file>.
 """
+
 from __future__ import annotations
 
 import json
@@ -88,7 +89,9 @@ def main() -> None:
         fname = safe_name(url, f"card_{card.get('id')}")
         stored = (card.get("image_file") or "").strip()
         if stored:
-            fname = safe_name(stored if "/" in stored or "\\" in stored else f"x/{stored}", fname)
+            fname = safe_name(
+                stored if "/" in stored or "\\" in stored else f"x/{stored}", fname
+            )
         dest = IMG_DIR / fname
         rel = f"images/{fname}"
         if dest.exists() and dest.stat().st_size > 100:
@@ -96,7 +99,7 @@ def main() -> None:
             card["image_remote"] = url
             ok += 1
             continue
-        print(f"[{i+1}/{len(cards)}] {fname}", flush=True)
+        print(f"[{i + 1}/{len(cards)}] {fname}", flush=True)
         if curl_download(url, dest):
             card["image_url"] = rel
             card["image_remote"] = url

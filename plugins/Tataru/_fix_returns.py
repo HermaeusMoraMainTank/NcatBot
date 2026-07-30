@@ -1,4 +1,5 @@
 """Fix bare `return` -> `return parts` inside methods that collect ReplyPart."""
+
 import ast
 import re
 from pathlib import Path

@@ -89,20 +89,14 @@ class FakeAiWatermark(NcatBotPlugin):
 
         out_path: Optional[Path] = None
         try:
-            result = await asyncio.to_thread(
-                self._apply, image, watermark_type
-            )
+            result = await asyncio.to_thread(self._apply, image, watermark_type)
             if result is None:
                 await event.reply(text="水印处理失败")
                 return
 
-            with tempfile.NamedTemporaryFile(
-                delete=False, suffix=".jpg"
-            ) as tmp:
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as tmp:
                 out_path = Path(tmp.name)
-            await asyncio.to_thread(
-                result.save, str(out_path), "JPEG", quality=95
-            )
+            await asyncio.to_thread(result.save, str(out_path), "JPEG", quality=95)
             await self.api.qq.post_group_msg(
                 group_id=event.group_id,
                 rtf=MessageChain([Image(file=str(out_path))]),
@@ -130,9 +124,7 @@ class FakeAiWatermark(NcatBotPlugin):
                 return segment.text.strip()
         return re.sub(r"\[CQ:[^\]]+\]", "", event.raw_message or "").strip()
 
-    async def _resolve_image(
-        self, event: GroupMessage
-    ) -> Optional[PILImage.Image]:
+    async def _resolve_image(self, event: GroupMessage) -> Optional[PILImage.Image]:
         """优先级：当前消息图片 > 回复图片 > @ 头像 > 发送者头像。"""
         current = event.message.filter(Image)
         if current and getattr(current[0], "url", None):

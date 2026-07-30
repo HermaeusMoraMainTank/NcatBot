@@ -2,6 +2,7 @@
 
 移植自：https://github.com/penguin-madagascar/astrbot_plugin_steam_price_heybox
 """
+
 from __future__ import annotations
 
 import asyncio
@@ -213,7 +214,9 @@ class SteamPriceService:
                     identity = await self.search_game(suggestion, country, searched)
                     if identity:
                         return identity, country
-                    if suggestion.casefold() not in {name.casefold() for name in failed_names}:
+                    if suggestion.casefold() not in {
+                        name.casefold() for name in failed_names
+                    }:
                         failed_names.append(suggestion)
 
         if not country:
@@ -290,7 +293,9 @@ class SteamPriceService:
             f"{candidate['name']} / appid={candidate['appid']}",
         )
 
-    async def require_details(self, identity: GameIdentity, country: str) -> SteamGameDetails:
+    async def require_details(
+        self, identity: GameIdentity, country: str
+    ) -> SteamGameDetails:
         try:
             return await self.steam_client.details(
                 identity.appid,
@@ -307,7 +312,9 @@ class SteamPriceService:
             self.heybox_client.global_prices(identity.appid),
             return_exceptions=True,
         )
-        details = details_result if isinstance(details_result, SteamGameDetails) else None
+        details = (
+            details_result if isinstance(details_result, SteamGameDetails) else None
+        )
         history = history_result if isinstance(history_result, PriceHistory) else None
         regions = regions_result if isinstance(regions_result, list) else []
         if details is None and history is None:
@@ -338,7 +345,9 @@ class SteamPriceService:
             self.load_history(identity.appid, country),
             return_exceptions=True,
         )
-        details = details_result if isinstance(details_result, SteamGameDetails) else None
+        details = (
+            details_result if isinstance(details_result, SteamGameDetails) else None
+        )
         if not isinstance(history_result, PriceHistory):
             raise PriceLookupError(f"小黑盒历史价格读取失败：{history_result}")
 
@@ -360,7 +369,9 @@ class SteamPriceService:
         if events:
             lines.append(f"最近 {len(events)} 次促销：")
             for index, event in enumerate(events, start=1):
-                lines.append(f"{index}. {format_sale_event(event, self.today_provider())}")
+                lines.append(
+                    f"{index}. {format_sale_event(event, self.today_provider())}"
+                )
         else:
             lines.append("记录内没有发现折扣事件。")
         if self.show_api_links:
@@ -377,7 +388,9 @@ class SteamPriceService:
             self.heybox_client.global_prices(identity.appid),
             return_exceptions=True,
         )
-        details = details_result if isinstance(details_result, SteamGameDetails) else None
+        details = (
+            details_result if isinstance(details_result, SteamGameDetails) else None
+        )
         if not isinstance(regions_result, list) or not regions_result:
             raise PriceLookupError("小黑盒全球区价暂时不可用。")
 
@@ -422,7 +435,9 @@ def parse_command(
     if first == "--":
         remainder = remainder_after_first
     else:
-        extracted = extract_country_token(first, require_remainder=bool(remainder_after_first))
+        extracted = extract_country_token(
+            first, require_remainder=bool(remainder_after_first)
+        )
         if extracted is not None:
             if mode not in {"summary", "history"}:
                 labels = {
@@ -526,14 +541,18 @@ def parse_country(value: str) -> str:
 
 
 def unknown_country_error(country_token: str) -> PriceLookupError:
-    return PriceLookupError(f"无法识别地区：-{country_token}。请使用两字母代码或内置正式中文国名。")
+    return PriceLookupError(
+        f"无法识别地区：-{country_token}。请使用两字母代码或内置正式中文国名。"
+    )
 
 
 def xiaoheihe_country(country: str) -> str:
     return XIAOHEIHE_REGION_ALIASES.get(country, country.lower())
 
 
-def choose_steam_candidate(query: str, results: list[dict[str, Any]]) -> dict[str, Any] | None:
+def choose_steam_candidate(
+    query: str, results: list[dict[str, Any]]
+) -> dict[str, Any] | None:
     if not results:
         return None
     normalized_query = normalize_game_title(query)
@@ -568,7 +587,9 @@ def country_label(country: str) -> str:
     return f"{COUNTRY_NAMES.get(country, country)} / {country}"
 
 
-def format_current_price(details: SteamGameDetails | None, history: PriceHistory | None) -> str:
+def format_current_price(
+    details: SteamGameDetails | None, history: PriceHistory | None
+) -> str:
     if details and details.is_free:
         return "Steam 当前价格：免费"
     if details and details.coming_soon and details.price is None:
@@ -654,7 +675,9 @@ def format_region_summary(regions: list[RegionPrice]) -> str:
     if china and cheapest.code != "CN" and china.current_rmb > 0:
         difference = china.current_rmb - cheapest.current_rmb
         percentage = difference / china.current_rmb * 100
-        text += f"，比国区节省约 ¥{decimal_text(difference)}（{decimal_text(percentage)}%）"
+        text += (
+            f"，比国区节省约 ¥{decimal_text(difference)}（{decimal_text(percentage)}%）"
+        )
     elif cheapest.code == "CN":
         text += "，国区当前最低"
     return text
@@ -668,8 +691,12 @@ def format_region_line(region: RegionPrice, china: RegionPrice | None) -> str:
         text += f"，-{region.discount}%"
     if china and region.code != "CN" and region.current_rmb < china.current_rmb:
         difference = china.current_rmb - region.current_rmb
-        percentage = difference / china.current_rmb * 100 if china.current_rmb else Decimal(0)
-        text += f"，比国区省约 ¥{decimal_text(difference)}（{decimal_text(percentage)}%）"
+        percentage = (
+            difference / china.current_rmb * 100 if china.current_rmb else Decimal(0)
+        )
+        text += (
+            f"，比国区省约 ¥{decimal_text(difference)}（{decimal_text(percentage)}%）"
+        )
     return text
 
 
@@ -700,9 +727,15 @@ def format_basic_info(details: SteamGameDetails) -> str:
 
 
 def format_detailed_info(details: SteamGameDetails) -> str:
-    metacritic = str(details.metacritic_score) if details.metacritic_score is not None else "暂无"
+    metacritic = (
+        str(details.metacritic_score)
+        if details.metacritic_score is not None
+        else "暂无"
+    )
     recommendations = (
-        str(details.recommendation_count) if details.recommendation_count is not None else "暂无"
+        str(details.recommendation_count)
+        if details.recommendation_count is not None
+        else "暂无"
     )
     age = details.required_age or "未标注"
     lines = [

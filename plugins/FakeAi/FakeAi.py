@@ -1788,17 +1788,13 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
         # 贴纸单独成消息：用动画表情（image.sub_type=1），勿当普通图
         for spath in sticker_paths:
             try:
-                await self.api.qq.send_group_sticker(
-                    input.group_id, str(spath)
-                )
+                await self.api.qq.send_group_sticker(input.group_id, str(spath))
             except Exception as e:
                 _log.error("[FakeAi] 贴纸发送失败 %s: %s", spath, e)
 
         # 将AI的回复加入到reply_cache中
         reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
-        reply_json = _stamp_reply_dict(
-            {"name": "蓝晴", "id": "0", "content": content}
-        )
+        reply_json = _stamp_reply_dict({"name": "蓝晴", "id": "0", "content": content})
         reply_cache.add_reply(reply_json)
 
     except Exception as e:
@@ -1846,9 +1842,9 @@ def check_cd(group_id: int) -> bool:
     last_trigger_time = last_trigger_times.get(group_id)
     if not last_trigger_time:
         return True
-    remaining_time = trigger_interval - (
-        datetime.now() - last_trigger_time
-    ).total_seconds()
+    remaining_time = (
+        trigger_interval - (datetime.now() - last_trigger_time).total_seconds()
+    )
     _log.info(f"群CD检查: {group_id}, 剩余时间: {remaining_time:.2f}秒")
     return remaining_time <= 0
 
@@ -2021,7 +2017,11 @@ def try_extract_remember_phrase(clean_text: str) -> Optional[str]:
     judgment = m.group(1).strip().strip("。.!！?？")
     if len(judgment) < 2:
         return None
-    if any(w in judgment for w in ephemeral) and "以后" not in judgment and "总是" not in judgment:
+    if (
+        any(w in judgment for w in ephemeral)
+        and "以后" not in judgment
+        and "总是" not in judgment
+    ):
         return None
     return judgment[:120]
 

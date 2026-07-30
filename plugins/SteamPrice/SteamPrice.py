@@ -3,6 +3,7 @@
 上游来源（同步更新对照）：
 https://github.com/penguin-madagascar/astrbot_plugin_steam_price_heybox
 """
+
 from __future__ import annotations
 
 import logging
@@ -110,8 +111,7 @@ class SteamPrice(NcatBotPlugin):
             await event.reply(text=text, at_sender=False)
         else:
             uid = str(
-                getattr(event, "user_id", None)
-                or getattr(event.sender, "user_id", "")
+                getattr(event, "user_id", None) or getattr(event.sender, "user_id", "")
             )
             await self.api.qq.post_private_msg(user_id=uid, text=text)
 

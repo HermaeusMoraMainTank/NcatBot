@@ -3,6 +3,7 @@
 上游来源（同步更新对照）：
 https://github.com/jawwe/astrbot_plugin_tataru
 """
+
 from __future__ import annotations
 
 import asyncio
@@ -65,9 +66,13 @@ class Tataru(NcatBotPlugin):
 
         configure_network_settings(self._svc.config)
 
-    def _make_event(self, event: GroupMessageEvent | PrivateMessageEvent) -> SimpleEvent:
+    def _make_event(
+        self, event: GroupMessageEvent | PrivateMessageEvent
+    ) -> SimpleEvent:
         is_private = isinstance(event, PrivateMessageEvent)
-        sender_id = str(getattr(event.sender, "user_id", "") or getattr(event, "user_id", ""))
+        sender_id = str(
+            getattr(event.sender, "user_id", "") or getattr(event, "user_id", "")
+        )
         return SimpleEvent(
             platform_id="qq",
             sender_id=sender_id,
@@ -163,9 +168,18 @@ class Tataru(NcatBotPlugin):
                 server = helper.SERVER_ALIAS.get(server, server)
             cookie = await asyncio.to_thread(helper.read_cookie_from_file)
             if not cookie:
-                await self._reply_parts(event, [ReplyPart.text("石之家 Cookie 获取失败，请检查 data/txt/cookie.txt")])
+                await self._reply_parts(
+                    event,
+                    [
+                        ReplyPart.text(
+                            "石之家 Cookie 获取失败，请检查 data/txt/cookie.txt"
+                        )
+                    ],
+                )
                 return True
-            players = await asyncio.to_thread(helper.search_player, character_name, cookie)
+            players = await asyncio.to_thread(
+                helper.search_player, character_name, cookie
+            )
             if not players:
                 await self._reply_parts(event, [ReplyPart.text("找不到该玩家")])
                 return True
@@ -179,7 +193,9 @@ class Tataru(NcatBotPlugin):
                     f"角色名: {p.get('character_name')} 区服: {p.get('group_name')}"
                     for p in players
                 )
-                await self._reply_parts(event, [ReplyPart.text("找到多个玩家:\n" + listing)])
+                await self._reply_parts(
+                    event, [ReplyPart.text("找到多个玩家:\n" + listing)]
+                )
                 return True
             user_info = await asyncio.to_thread(
                 helper.get_user_info, players[0].get("uuid"), cookie

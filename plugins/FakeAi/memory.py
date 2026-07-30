@@ -1038,12 +1038,17 @@ class MemoryManager:
             return {"ok": False, "reason": "sensitive"}
 
         strength = max(1.0, min(100.0, float(strength)))
-        memory_type = memory_type if memory_type in (
-            "knowledge",
-            "preference",
-            "episode",
-            "relation",
-        ) else "knowledge"
+        memory_type = (
+            memory_type
+            if memory_type
+            in (
+                "knowledge",
+                "preference",
+                "episode",
+                "relation",
+            )
+            else "knowledge"
+        )
         tags = [str(t)[:16] for t in (tags or [])[:8]]
         tags_json = json.dumps(tags, ensure_ascii=False)
         reasoning = (reasoning or "")[:200]
@@ -1141,7 +1146,10 @@ class MemoryManager:
 
         ranked = sorted(
             rows,
-            key=lambda r: (scope_rank(r["scope"] or "public"), -float(r["strength"] or 0)),
+            key=lambda r: (
+                scope_rank(r["scope"] or "public"),
+                -float(r["strength"] or 0),
+            ),
         )[:limit]
 
         now = int(time.time())
@@ -1247,7 +1255,11 @@ class MemoryManager:
             merged,
             long_n,
         )
-        return {"weak_deactivated": weak, "dup_merged": merged, "long_knowledge": long_n}
+        return {
+            "weak_deactivated": weak,
+            "dup_merged": merged,
+            "long_knowledge": long_n,
+        }
 
     # ========== 知识库相关 ==========
 

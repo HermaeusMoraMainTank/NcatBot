@@ -3,6 +3,7 @@
 Source: thewakingsands/ffxiv-datamining-cn Item.csv (ItemUICategory=96 武士刀)
 Icons: xivapi / cafemaker icon CDN (hr1 preferred)
 """
+
 from __future__ import annotations
 
 import csv

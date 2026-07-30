@@ -86,7 +86,9 @@ class WhoAtMe(NcatBotPlugin):
 
     def _context_window(self) -> int:
         try:
-            return max(self._context_size() * 2 + 1, int(self._cfg("context_window", 50)))
+            return max(
+                self._context_size() * 2 + 1, int(self._cfg("context_window", 50))
+            )
         except (TypeError, ValueError):
             return 50
 

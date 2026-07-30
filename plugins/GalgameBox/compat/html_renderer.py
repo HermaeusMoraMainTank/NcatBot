@@ -63,7 +63,9 @@ async def render_custom_template(
             )
             await page.set_content(html, wait_until="networkidle", timeout=120_000)
             # 按内容高度截全页
-            await page.screenshot(path=str(out_path), full_page=True, type="jpeg", quality=90)
+            await page.screenshot(
+                path=str(out_path), full_page=True, type="jpeg", quality=90
+            )
         finally:
             await browser.close()
 

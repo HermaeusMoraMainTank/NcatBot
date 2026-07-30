@@ -330,7 +330,9 @@ class GalgameBox(NcatBotPlugin):
                 gen = S.get(Recommend).goooooooooo(astr_event, args.strip())
             elif sub == "download":
                 if not args.strip():
-                    await native.reply(text="用法：gal 下载 <ID/关键词>", at_sender=False)
+                    await native.reply(
+                        text="用法：gal 下载 <ID/关键词>", at_sender=False
+                    )
                     return
                 gen = S.get(Download).goooooooooo(astr_event, args.strip())
             elif sub == "find":

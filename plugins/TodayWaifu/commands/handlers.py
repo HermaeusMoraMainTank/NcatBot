@@ -38,7 +38,9 @@ def extract_at_user_id(event) -> Optional[str]:
 
 
 async def _member_map(plugin: "TodayWaifu", group_id: str) -> dict[str, Any]:
-    members_response = await plugin.api.qq.query.get_group_member_list(group_id=group_id)
+    members_response = await plugin.api.qq.query.get_group_member_list(
+        group_id=group_id
+    )
     members = CommonUtil.parse_group_member_list(members_response)
     return {str(m.user_id): m for m in members}
 
@@ -165,7 +167,9 @@ async def cmd_force_marry(plugin: "TodayWaifu", event) -> None:
         )
         return
     if target_id == user_id:
-        await plugin.api.qq.post_group_msg(group_id=event.group_id, text="不能强娶自己哦")
+        await plugin.api.qq.post_group_msg(
+            group_id=event.group_id, text="不能强娶自己哦"
+        )
         return
 
     excluded = normalize_id_set(cfg.get("force_marry_excluded_users"))
@@ -315,8 +319,12 @@ async def handle_propose_reply(plugin: "TodayWaifu", event, text: str) -> bool:
         b = members.get(user_id)
         a_name = display_name(a, proposer_id)
         b_name = display_name(b, user_id)
-        upsert_draw_record(plugin.store, cfg, group_id, proposer_id, user_id, b_name, False)
-        upsert_draw_record(plugin.store, cfg, group_id, user_id, proposer_id, a_name, False)
+        upsert_draw_record(
+            plugin.store, cfg, group_id, proposer_id, user_id, b_name, False
+        )
+        upsert_draw_record(
+            plugin.store, cfg, group_id, user_id, proposer_id, a_name, False
+        )
         cd = get_propose_cd_seconds(cfg)
         if cd > 0:
             expire = time.time() + cd
@@ -360,9 +368,7 @@ async def cmd_graph(plugin: "TodayWaifu", event) -> None:
         pass
 
     members = await _member_map(plugin, group_id)
-    user_map = {
-        uid: display_name(m, uid) for uid, m in members.items()
-    }
+    user_map = {uid: display_name(m, uid) for uid, m in members.items()}
     for r in records:
         user_map.setdefault(str(r["user_id"]), str(r["user_id"]))
         user_map.setdefault(str(r["wife_id"]), str(r.get("wife_name") or r["wife_id"]))
@@ -415,7 +421,9 @@ async def cmd_rbq(plugin: "TodayWaifu", event) -> None:
         lines = ["近30天被强娶排行："]
         for row in ranking:
             lines.append(f"#{row['rank']} {row['name']} — {row['count']} 次")
-        await plugin.api.qq.post_group_msg(group_id=event.group_id, text="\n".join(lines))
+        await plugin.api.qq.post_group_msg(
+            group_id=event.group_id, text="\n".join(lines)
+        )
         return
     msg = MessageArray()
     msg.add_image(str(path))
@@ -441,23 +449,35 @@ async def cmd_help(plugin: "TodayWaifu", event) -> None:
 
 async def cmd_reset_records(plugin: "TodayWaifu", event) -> None:
     if not plugin.is_admin(str(event.sender.user_id)):
-        await plugin.api.qq.post_group_msg(group_id=event.group_id, text="需要管理员权限")
+        await plugin.api.qq.post_group_msg(
+            group_id=event.group_id, text="需要管理员权限"
+        )
         return
     plugin.store.clear_today_records(str(event.group_id))
-    await plugin.api.qq.post_group_msg(group_id=event.group_id, text="已清空本群今日抽取记录")
+    await plugin.api.qq.post_group_msg(
+        group_id=event.group_id, text="已清空本群今日抽取记录"
+    )
 
 
 async def cmd_reset_force_cd(plugin: "TodayWaifu", event) -> None:
     if not plugin.is_admin(str(event.sender.user_id)):
-        await plugin.api.qq.post_group_msg(group_id=event.group_id, text="需要管理员权限")
+        await plugin.api.qq.post_group_msg(
+            group_id=event.group_id, text="需要管理员权限"
+        )
         return
     plugin.store.clear_force_cd(str(event.group_id))
-    await plugin.api.qq.post_group_msg(group_id=event.group_id, text="已重置本群强娶冷却")
+    await plugin.api.qq.post_group_msg(
+        group_id=event.group_id, text="已重置本群强娶冷却"
+    )
 
 
 async def cmd_reset_propose_cd(plugin: "TodayWaifu", event) -> None:
     if not plugin.is_admin(str(event.sender.user_id)):
-        await plugin.api.qq.post_group_msg(group_id=event.group_id, text="需要管理员权限")
+        await plugin.api.qq.post_group_msg(
+            group_id=event.group_id, text="需要管理员权限"
+        )
         return
     plugin.store.clear_propose_cd(str(event.group_id))
-    await plugin.api.qq.post_group_msg(group_id=event.group_id, text="已重置本群求婚冷却")
+    await plugin.api.qq.post_group_msg(
+        group_id=event.group_id, text="已重置本群求婚冷却"
+    )

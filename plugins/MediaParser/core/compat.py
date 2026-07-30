@@ -131,7 +131,11 @@ DEFAULT_CONFIG = {
 
 def video_max_duration_seconds(config: Any) -> int:
     """有效视频时长上限（秒）：取发送阈值与下载分钟限制的较小正值；0 表示不限制。"""
-    get = config.get if hasattr(config, "get") else (lambda k, d=None: config[k] if k in config else d)
+    get = (
+        config.get
+        if hasattr(config, "get")
+        else (lambda k, d=None: config[k] if k in config else d)
+    )
     try:
         send_max = int(get("video_send_max_seconds") or 0)
     except (TypeError, ValueError):

@@ -229,8 +229,18 @@ class TodayWaifu(NcatBotPlugin):
             return None
 
         # 前缀类：强娶 / 求婚
-        for prefix, action in (("强娶", "force_marry"), ("求婚", "propose"), ("qiangqu", "force_marry"), ("qh", "propose")):
-            if text == prefix or text.startswith(prefix + " ") or text.startswith(prefix + "@") or text.startswith(prefix + "＠"):
+        for prefix, action in (
+            ("强娶", "force_marry"),
+            ("求婚", "propose"),
+            ("qiangqu", "force_marry"),
+            ("qh", "propose"),
+        ):
+            if (
+                text == prefix
+                or text.startswith(prefix + " ")
+                or text.startswith(prefix + "@")
+                or text.startswith(prefix + "＠")
+            ):
                 return action
 
         for keyword, action in KEYWORD_ROUTES.items():

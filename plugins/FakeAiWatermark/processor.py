@@ -65,9 +65,7 @@ class WatermarkProcessor:
             )
             return False
         if pixels > WARNING_PIXELS:
-            _log.warning(
-                "[FakeAiWatermark] 处理大图: %sx%s", img.width, img.height
-            )
+            _log.warning("[FakeAiWatermark] 处理大图: %sx%s", img.width, img.height)
         return True
 
     @staticmethod
