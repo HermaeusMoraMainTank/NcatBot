@@ -295,8 +295,8 @@ def enrich_ak_static() -> None:
             "SilverAsh": ["银灰", "银老板"],
             "陈": ["陈晖洁", "Ch'en", "Chen"],
             "Ch'en": ["陈", "陈晖洁"],
-            "煌": ["Blaze"],
-            "Blaze": ["煌"],
+            "煌": ["Blaze", "火枪手"],
+            "Blaze": ["煌", "火枪手"],
             "W": ["达不溜", "二重阴影"],
             "凯尔希": ["凯爷爷", "Kal'tsit", "猫"],
             "Kal'tsit": ["凯尔希", "凯爷爷"],
@@ -305,7 +305,6 @@ def enrich_ak_static() -> None:
             "Lapland": ["拉普兰德", "拉普"],
             "斯卡蒂": ["虎鲸", "Skadi"],
             "Skadi": ["斯卡蒂", "虎鲸"],
-            "银灰": ["银老板"],
             "嵯峨": ["Saga"],
             "年": ["Nian"],
             "夕": ["Dusk"],
@@ -318,7 +317,6 @@ def enrich_ak_static() -> None:
             "Logos": ["逻各斯"],
             "调香师": ["Perfumer"],
             "嘉维尔": ["Gaavial", "鳄鱼"],
-            "煌": ["火枪手"],
         }
     }
     path = ROOT / "ak" / "nicknames.json"
@@ -508,7 +506,6 @@ def enrich_ww_extra() -> None:
         "Mortefi": ["莫特斐"],
         "莫特斐": ["Mortefi"],
         "Aalto": ["奥托"],
-        "Encore": ["安可"],
         "Lingyang": ["凌阳"],
         "凌阳": ["Lingyang"],
         "Youhu": ["釉瑚"],

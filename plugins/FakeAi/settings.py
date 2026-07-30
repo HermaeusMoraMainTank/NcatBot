@@ -8,7 +8,6 @@ from typing import Any, Dict, Iterable, List, Set
 
 from .cognition.config import DEFAULT_COGNITION, CognitionConfig
 from .expression import catalog as expression_catalog_mod
-from .expression import replace as expression_replace_mod
 from .interaction.config import DEFAULT_CONFIG, InteractionConfig
 from .interaction.state_machine import state_store
 

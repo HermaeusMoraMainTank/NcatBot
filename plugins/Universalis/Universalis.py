@@ -1,6 +1,5 @@
 ﻿import logging
 from dataclasses import dataclass
-from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 import json
 import os
 import httpx
@@ -8,7 +7,6 @@ from typing import Dict, Optional, Tuple
 from datetime import datetime
 from difflib import SequenceMatcher
 from ncatbot.plugin import NcatBotPlugin
-from ncatbot.core import registrar
 
 
 # 定义数据类

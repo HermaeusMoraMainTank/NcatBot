@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parent.parent / "resources" / "vt"
 
 # 常见「读音/简体」补丁（wiki 常只有汉字 or 罗马音）
 EXTRA_BY_NAME: dict[str, list[str]] = {
-    "Kuzuha": ["くずは", "クズハ", "葛叶", "葛葉"],
+    "Kuzuha": ["くずは", "クズハ", "葛叶", "葛葉", "久坐叶"],
     "Ibrahim": ["イブラヒム", "あいぶらむ", "アイブラ", "Ibra", "爱卜羊", "爱卜"],
     "Kanae": ["叶", "カナエ", "かなえ"],
     "叶": ["Kanae", "カナエ", "かなえ"],
@@ -42,7 +42,7 @@ EXTRA_BY_NAME: dict[str, list[str]] = {
     "Millie Parfait": ["ミリー・パフェ", "ミリー", "Millie"],
     "Enna Alouette": ["エンナ・アルエット", "エンナ", "Enna"],
     "Reimu Endou": ["遠藤霊夢", "れいむ", "Reimu"],
-    "Hex Haywire": ["ヘックス", "Hex"],
+    "Hex Haywire": ["ヘックス", "Hex", "ヘックス・ヘイワイヤー"],
     "Kotoka Torahime": ["虎姫コトカ", "コトカ", "Kotoka"],
     "Ver Vermillion": ["ヴェール", "Ver"],
     "Claude Clawmark": ["クロード", "Claude"],
@@ -50,9 +50,6 @@ EXTRA_BY_NAME: dict[str, list[str]] = {
     "Victoria Brightshield": ["ヴィクトリア", "Victoria"],
     "Doppio Dropscythe": ["ドッピオ", "Doppio"],
     "Meloco Kyoran": ["狂蘭メロコ", "メロコ", "Meloco"],
-    "Hex Haywire": ["ヘックス・ヘイワイヤー"],
-    "Mysta Rias": ["ミスタ"],
-    "Kuzuha": ["くずは", "クズハ", "葛叶"],
     "Genzuki Tojiro": ["弦月藤士郎", "とうじろう"],
     "Sakayori Soma": ["酒寄ソウマ", "ソウマ"],
     "Nagao Kei": ["長尾景", "けい", "景"],
@@ -62,7 +59,6 @@ EXTRA_BY_NAME: dict[str, list[str]] = {
     "Leos Vincent": ["レオス・ヴィンセント", "レオス"],
     "Oliver Evans": ["オリバー・エバンス", "オリバー"],
     "Axia Krone": ["アクシア・クローネ", "アクシア"],
-    "Lauren Iroas": ["ローレン"],
     "Kanda Shoichi": ["神田笑一", "しょういち"],
     "Amamiya Kokoro": ["天宮こころ", "こころ"],
     "Rizu-kyun": ["りずきゅん"],
@@ -86,7 +82,6 @@ EXTRA_BY_NAME: dict[str, list[str]] = {
     "Suha": ["すは"],
     "Fushimi Gaku": ["伏見ガク", "ガク"],
     "Kenmochi Touya": ["剣持刀也"],
-    "Kuzuha": ["くずは", "クズハ", "葛叶", "葛葉", "久坐叶"],
 }
 
 _BY_PAREN = re.compile(

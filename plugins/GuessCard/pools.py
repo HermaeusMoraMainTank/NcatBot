@@ -594,13 +594,13 @@ def character_lookup_keys(character: dict) -> list[str]:
     """写入 custom nicknames 时同步更新的 by_name 键。"""
     keys: list[str] = []
     seen: set[str] = set()
-    for field in (
+    for field_name in (
         "fullNameChinese",
         "fullName",
         "fullNameJapanese",
         "name",
     ):
-        value = character.get(field)
+        value = character.get(field_name)
         if not value:
             continue
         text = str(value).strip()

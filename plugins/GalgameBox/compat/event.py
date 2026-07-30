@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
-from typing import Any, List, Optional
+from typing import Any, List
 
 from . import message_components as comp
 from .message_components import MessageResult, result_to_ncatbot_segments

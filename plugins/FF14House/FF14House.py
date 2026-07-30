@@ -3,10 +3,8 @@ from datetime import datetime
 import aiohttp
 import os
 import math
-from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.types import Image, MessageArray as MessageChain, Reply
 from ncatbot.plugin import NcatBotPlugin
-from ncatbot.core import registrar
 
 import json
 from ncatbot.utils import get_log

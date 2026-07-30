@@ -7,10 +7,8 @@ from typing import List, Optional
 from PIL import Image as PILImage, ImageDraw, ImageFont
 from io import BytesIO
 
-from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.types import Image, MessageArray as MessageChain, Reply
 from ncatbot.plugin import NcatBotPlugin
-from ncatbot.core import registrar
 
 
 _log = logging.getLogger(__name__)

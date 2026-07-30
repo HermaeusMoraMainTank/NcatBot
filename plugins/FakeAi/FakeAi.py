@@ -117,7 +117,7 @@ callback_timeout = 15  # 回调超时时间（秒）
 _inflight_groups: set = set()
 
 # 被动触发：已改为状态机 + 分析员；裸 8% 废弃（见 interaction.config.fallback_random_prob）
-PASSIVE_TRIGGER_BASE_PROB = 0.0  # noqa: 保留名以免外部引用炸；实际不再使用
+PASSIVE_TRIGGER_BASE_PROB = 0.0  # noqa: F841  # 保留名以免外部引用炸；实际不再使用
 
 # 允许 FakeAi 响应的群号（空集合表示不限制）— on_load / settings 会覆盖
 FAKEAI_ALLOWED_GROUPS = frozenset({853963912, 719518427, 585479130, 1064163905})

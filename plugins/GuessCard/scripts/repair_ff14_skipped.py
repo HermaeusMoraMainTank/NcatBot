@@ -57,7 +57,7 @@ def main() -> None:
         time.sleep(0.8)
         url = detail.get("image_url") or ""
         if not url:
-            print(f"  still no image", flush=True)
+            print("  still no image", flush=True)
             still.append({**item, "detail": detail})
             continue
         info = boss_meta.get(cn) or {}

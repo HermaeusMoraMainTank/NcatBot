@@ -8,7 +8,6 @@ import asyncio
 from dataclasses import dataclass
 from datetime import date, datetime
 from email.utils import parsedate_to_datetime
-from functools import wraps
 import html
 import ipaddress
 import itertools
@@ -20,13 +19,12 @@ import sqlite3
 import time
 import uuid
 from pathlib import Path
-from typing import Any, Protocol
+from typing import Protocol
 from urllib.parse import parse_qsl, quote, urlencode, urlsplit, urlunsplit
 from zoneinfo import ZoneInfo
 
 import aiohttp
 from curl_cffi import requests as curl_requests
-from icalendar import Calendar
 from PIL import Image, ImageDraw, ImageFont
 
 logger = logging.getLogger("Tataru")

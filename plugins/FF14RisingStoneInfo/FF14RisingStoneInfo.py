@@ -13,7 +13,6 @@ from common.constants.HMMT import HMMT
 from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.types import Image, MessageArray as MessageChain, Reply
 from ncatbot.plugin import NcatBotPlugin
-from ncatbot.core import registrar
 
 _log = logging.getLogger(__name__)
 

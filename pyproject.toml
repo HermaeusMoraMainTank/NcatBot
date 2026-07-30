@@ -122,7 +122,11 @@ ignore-words-list = "ans,fo,therefrom,lke"
 
 [tool.ruff]
 # docs/ 是 Git submodule，不进行 lint
-extend-exclude = ["docs"]
+extend-exclude = [
+  "docs",
+  "plugins/Tataru/legacy",
+  "plugins/Tataru/_build_service2.py",
+]
 
 [tool.ruff.lint.per-file-ignores]
 # legacy 代码正在重构替换，不再维护 lint

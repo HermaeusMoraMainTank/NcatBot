@@ -1397,7 +1397,6 @@ class GuessCard(NcatBotPlugin):
         self, game_data: dict, wiki_info: Optional[dict] = None
     ) -> Optional[str]:
         """武士刀揭晓：灰机 wiki 物品卡样式。"""
-        character = game_data.get("character") or {}
         card = game_data.get("card") or {}
         info = wiki_info or await self._get_sam_wiki_info(game_data)
         if not info:
