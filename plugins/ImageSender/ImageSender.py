@@ -747,8 +747,8 @@ class ImageSender(NcatBotPlugin):
             return
 
         if not self._is_admin(user_id):
-            await self.api.qq.post_group_msg(
-                group_id=input.group_id, text="您没有图库管理权限！"
+            _log.warning(
+                f"用户 {user_id} 尝试执行图库管理命令（{body}），无权限，已忽略"
             )
             return
 
@@ -1024,7 +1024,9 @@ class ImageSender(NcatBotPlugin):
         delete_prefix = self._cmd("delete_prefix")
 
         # 图库配置管理
-        if clean_message.startswith(admin_prefix):
+        if clean_message == admin_prefix or clean_message.startswith(
+            f"{admin_prefix} "
+        ):
             await self.handle_package_admin(input, clean_message)
             return
 
@@ -1035,6 +1037,7 @@ class ImageSender(NcatBotPlugin):
 
         # 检查黑名单
         if input.sender.user_id in self.blacklist:
+            _log.warning(f"用户 {input.sender.user_id} 在图库黑名单中，已忽略")
             return  # 黑名单用户直接忽略
 
         # 处理上传功能（支持直接发图片或回复图片）
@@ -1046,6 +1049,7 @@ class ImageSender(NcatBotPlugin):
             return
 
         # 检查消息是否以任何命令开头
+        user_id = str(input.sender.user_id)
         for command, config in self.commands.items():
             for trigger in config["triggers"]:
                 if message.startswith(trigger):
@@ -1054,13 +1058,15 @@ class ImageSender(NcatBotPlugin):
                         self.allowed_users
                         and input.sender.user_id not in self.allowed_users
                     ):
+                        _log.warning(f"用户 {user_id} 无权调用图库 [{command}]，已忽略")
                         return
 
                     # 检查命令特定权限
                     if (
                         config["allowed_users"]
-                        and str(input.sender.user_id) not in config["allowed_users"]
+                        and user_id not in config["allowed_users"]
                     ):
+                        _log.warning(f"用户 {user_id} 无权调用图库 [{command}]，已忽略")
                         return
 
                     # 处理 count 查询
@@ -1319,12 +1325,11 @@ class ImageSender(NcatBotPlugin):
 
         # 检查该关键词的上传权限（基于allowed_users）
         if (
-            command_config["allowed_users"]
+            not auto_created
+            and command_config["allowed_users"]
             and str(user_id) not in command_config["allowed_users"]
         ):
-            await self.api.qq.post_group_msg(
-                group_id=input.group_id, text="您没有上传权限！"
-            )
+            _log.warning(f"用户 {user_id} 无权上传到图库 [{keyword}]，已忽略")
             return
 
         for filename, url in image_matches:
@@ -1355,9 +1360,7 @@ class ImageSender(NcatBotPlugin):
         user_id_str = str(input.sender.user_id)
 
         if not self._is_admin(user_id_str):
-            await self.api.qq.post_group_msg(
-                group_id=input.group_id, text="您没有删除权限！"
-            )
+            _log.warning(f"用户 {user_id_str} 尝试删除图库图片，无权限，已忽略")
             return
 
         delete_prefix = self._cmd("delete_prefix")

@@ -141,6 +141,21 @@ DATABASE_PATH = _pick_fakeai_database_path()
 DATABASE_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 
+def vision_cache_key(file_ref: str = "") -> str:
+    """Return a stable image identity for the vision description cache."""
+    raw = str(file_ref or "").strip()
+    if not raw:
+        return ""
+    if raw.lower().startswith("file://"):
+        raw = raw[len("file://") :]
+    # QQ image URLs contain short-lived fileid/rkey values, so file is the key.
+    if "://" in raw:
+        return ""
+    if "/" in raw or "\\" in raw:
+        raw = raw.replace("\\", "/").rsplit("/", 1)[-1]
+    return raw
+
+
 class MemoryManager:
     """长期记忆管理器"""
 
@@ -341,6 +356,22 @@ class MemoryManager:
                 ON knowledge_base(keyword);
             CREATE INDEX IF NOT EXISTS idx_knowledge_content
                 ON knowledge_base(content);
+
+            -- 图片识别缓存：重复表情包直接复用描述，默认保留 3 天
+            CREATE TABLE IF NOT EXISTS vision_cache (
+                image_key TEXT NOT NULL,
+                prompt_key TEXT NOT NULL DEFAULT 'brief',
+                description TEXT NOT NULL,
+                result_json TEXT NOT NULL DEFAULT '{}',
+                image_url TEXT DEFAULT '',
+                hit_count INTEGER NOT NULL DEFAULT 0,
+                created_at INTEGER NOT NULL,
+                last_seen_at INTEGER NOT NULL,
+                PRIMARY KEY (image_key, prompt_key)
+            );
+
+            CREATE INDEX IF NOT EXISTS idx_vision_cache_last_seen
+                ON vision_cache(last_seen_at);
         """)
         await self._db.commit()
 
@@ -1668,6 +1699,95 @@ class MemoryManager:
             _log.info(f"[FakeAi Knowledge] 清理了 {total_cleaned} 条重复知识")
 
         return total_cleaned
+
+    async def get_vision_cache(
+        self,
+        image_key: str,
+        prompt_key: str = "brief",
+        max_age_days: int = 3,
+    ) -> Optional[Dict]:
+        """读取 3 天内的图片识别缓存，命中后刷新最近使用时间。"""
+        if not image_key:
+            return None
+        await self._ensure_db()
+        cutoff = int(time.time()) - max_age_days * 86400
+        cursor = await self._db.execute(
+            """SELECT description, result_json
+               FROM vision_cache
+               WHERE image_key = ? AND prompt_key = ? AND last_seen_at >= ?""",
+            (image_key, prompt_key, cutoff),
+        )
+        row = await cursor.fetchone()
+        if row is None:
+            return None
+        await self._db.execute(
+            """UPDATE vision_cache
+               SET last_seen_at = ?, hit_count = hit_count + 1
+               WHERE image_key = ? AND prompt_key = ?""",
+            (int(time.time()), image_key, prompt_key),
+        )
+        await self._db.commit()
+
+        try:
+            result = json.loads(row["result_json"] or "{}")
+        except json.JSONDecodeError:
+            result = {}
+        if not isinstance(result, dict):
+            result = {}
+        result["content"] = row["description"]
+        result["cached"] = True
+        return result
+
+    async def save_vision_cache(
+        self,
+        image_key: str,
+        result: Optional[Dict],
+        prompt_key: str = "brief",
+        image_url: str = "",
+    ) -> None:
+        """保存一次图片识别结果；同图同场景再次出现时直接命中。"""
+        if not image_key or not result or not result.get("content"):
+            return
+        await self._ensure_db()
+        now = int(time.time())
+        description = str(result.get("content"))
+        payload = {k: v for k, v in result.items() if k != "cached"}
+        try:
+            result_json = json.dumps(payload, ensure_ascii=False)
+        except (TypeError, ValueError):
+            result_json = json.dumps({"content": description}, ensure_ascii=False)
+        await self._db.execute(
+            """INSERT INTO vision_cache
+               (image_key, prompt_key, description, result_json, image_url,
+                hit_count, created_at, last_seen_at)
+               VALUES (?, ?, ?, ?, ?, 1, ?, ?)
+               ON CONFLICT(image_key, prompt_key) DO UPDATE SET
+                 description = excluded.description,
+                 result_json = excluded.result_json,
+                 image_url = excluded.image_url,
+                 last_seen_at = excluded.last_seen_at,
+                 hit_count = hit_count + 1""",
+            (
+                image_key,
+                prompt_key,
+                description,
+                result_json,
+                image_url or "",
+                now,
+                now,
+            ),
+        )
+        await self._db.commit()
+
+    async def cleanup_vision_cache(self, max_age_days: int = 3) -> int:
+        """清理超过保留期未再出现的图片识别缓存。"""
+        await self._ensure_db()
+        cutoff = int(time.time()) - max_age_days * 86400
+        cursor = await self._db.execute(
+            "DELETE FROM vision_cache WHERE last_seen_at < ?", (cutoff,)
+        )
+        await self._db.commit()
+        return cursor.rowcount or 0
 
 
 # 全局实例

@@ -244,7 +244,7 @@ class DouyinParser(BaseParser):
         # 添加视频内容
         elif video_url := video_data.video_url:
             cover_url = video_data.cover_url
-            duration = video_data.video.duration if video_data.video else 0
+            duration = video_data.video.duration_seconds if video_data.video else 0
             _log.debug(f"[抖音] 检测到视频内容，时长: {duration}秒")
             contents.append(
                 self.create_video_content(

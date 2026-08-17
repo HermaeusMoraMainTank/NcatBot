@@ -18,6 +18,8 @@ ADMIN_IDS: Set[str] = {"273421673"}
 FAVOR_SKIP_IDS: Set[str] = {"273421673", "635773721"}
 FROZEN_USERS: List[int] = [794383252]
 BOT_QQ: str = "3555202423"
+VISION_CACHE_ENABLED: bool = True
+VISION_CACHE_RETENTION_DAYS: int = 3
 
 FAKEAI_CONFIG_DEFAULTS: Dict[str, Any] = {
     "allowed_groups": [853963912, 719518427, 585479130, 1064163905],
@@ -26,6 +28,8 @@ FAKEAI_CONFIG_DEFAULTS: Dict[str, Any] = {
     "admin_ids": ["273421673"],
     "favor_skip_ids": ["273421673", "635773721"],
     "frozen_users": [794383252],
+    "vision_cache_enabled": True,
+    "vision_cache_days": 3,
     "enable_group_cd": True,
     "enable_user_cd": False,
     "enable_callback": False,
@@ -84,6 +88,7 @@ def _merge_dict(base: Dict[str, Any], override: Any) -> Dict[str, Any]:
 def apply_from_plugin(plugin) -> None:
     """从 FakeAi 插件 ConfigMixin 加载并应用到各模块。"""
     global ADMIN_IDS, FAVOR_SKIP_IDS, FROZEN_USERS, BOT_QQ
+    global VISION_CACHE_ENABLED, VISION_CACHE_RETENTION_DAYS
 
     plugin.init_defaults(FAKEAI_CONFIG_DEFAULTS)
 
@@ -95,11 +100,15 @@ def apply_from_plugin(plugin) -> None:
         _as_str_list(plugin.get_config("favor_skip_ids", list(FAVOR_SKIP_IDS)))
     )
     frozen = _as_int_list(plugin.get_config("frozen_users", FROZEN_USERS))
+    vision_cache_enabled = bool(plugin.get_config("vision_cache_enabled", True))
+    vision_cache_days = int(plugin.get_config("vision_cache_days", 3))
 
     ADMIN_IDS = admin_ids or ADMIN_IDS
     FAVOR_SKIP_IDS = favor_skip or FAVOR_SKIP_IDS
     FROZEN_USERS = frozen if frozen else FROZEN_USERS
     BOT_QQ = bot_qq
+    VISION_CACHE_ENABLED = vision_cache_enabled
+    VISION_CACHE_RETENTION_DAYS = max(1, vision_cache_days)
 
     # —— interaction ——
     inter_raw = plugin.get_config("interaction", {}) or {}
@@ -161,13 +170,20 @@ def apply_from_plugin(plugin) -> None:
         plugin.get_config("typing_delay_per_char", 0.1)
     )
     fakeai_mod.BOT_QQ = bot_qq
+    fakeai_mod.VISION_CACHE_ENABLED = VISION_CACHE_ENABLED
+    fakeai_mod.VISION_CACHE_RETENTION_DAYS = VISION_CACHE_RETENTION_DAYS
     fakeai_mod.FakeAi.frozen_users = list(FROZEN_USERS)
 
     _log.info(
-        "[FakeAi] 配置已加载 groups=%s aliases=%s obs=%ss cd=%ss stickers=%s",
+        (
+            "[FakeAi] 配置已加载 groups=%s aliases=%s obs=%ss cd=%ss "
+            "stickers=%s vision_cache=%s/%sd"
+        ),
         list(allowed) if allowed else "ALL",
         aliases,
         new_inter.observation_sec,
         new_inter.group_cd_sec,
         catalog_path,
+        "ON" if VISION_CACHE_ENABLED else "OFF",
+        VISION_CACHE_RETENTION_DAYS,
     )

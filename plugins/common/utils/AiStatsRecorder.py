@@ -51,9 +51,9 @@ SOURCE_ROLLUP: Dict[str, tuple[str, List[str]]] = {
 # 明细图固定展示的来源顺序
 SOURCE_ROLLUP_ORDER = ["active", "passive", "summary", "impression"]
 
-# deepseek-v4-flash 官方定价（元 / 百万 tokens）
+# MiMo 模型定价（元 / 百万 tokens）
 MODEL_PRICING_CNY: Dict[str, Dict[str, float]] = {
-    "deepseek-v4-flash": {
+    "mimo-v2.5": {
         "input_cache_hit": 0.02,
         "input_cache_miss": 1.0,
         "output": 2.0,
@@ -90,7 +90,7 @@ def estimate_cost_cny(
     completion_tokens: int = 0,
     prompt_cache_hit_tokens: int = 0,
     total_tokens: int = 0,
-    model: str = "deepseek-v4-flash",
+    model: str = "mimo-v2.5",
 ) -> float:
     pricing = MODEL_PRICING_CNY.get(model)
     if not pricing:
@@ -171,7 +171,7 @@ def record_from_response(
     user_id: Optional[str],
     source: str,
     ai_response: Optional[dict],
-    model: str = "deepseek-v4-flash",
+    model: str = "mimo-v2.5",
 ) -> None:
     """从 AI 响应 dict 中提取 usage 并记录。"""
     if not ai_response or not isinstance(ai_response, dict):
@@ -196,7 +196,7 @@ def record_ai_usage(
     prompt_tokens: int = 0,
     completion_tokens: int = 0,
     prompt_cache_hit_tokens: int = 0,
-    model: str = "deepseek-v4-flash",
+    model: str = "mimo-v2.5",
     source: str = SOURCE_ACTIVE,
     trigger_type: str = None,
 ) -> None:

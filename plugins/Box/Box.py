@@ -1,4 +1,4 @@
-import asyncio
+﻿import asyncio
 import logging
 import textwrap
 from io import BytesIO
@@ -17,6 +17,7 @@ from ncatbot.types import (
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 from common.utils.plugin_commands import format_help, is_help_message
+from common.utils.temp_cleanup import cleanup_old_files
 
 from .draw import CardMaker
 from .field_mapping import FIELD_MAPPING, LABEL_TO_KEY, DEFAULT_DISPLAY_OPTIONS
@@ -64,6 +65,14 @@ class Box(NcatBotPlugin):
 
         # 创建缓存目录
         self.cache_dir.mkdir(parents=True, exist_ok=True)
+
+        # 清理过期缓存（保留30天内的文件，最多200个）
+        try:
+            deleted = cleanup_old_files(self.cache_dir, keep_hours=720, max_files=200)
+            if deleted > 0:
+                _log.info(f"[Box] 清理了 {deleted} 个过期缓存文件")
+        except Exception as e:
+            _log.warning(f"[Box] 清理缓存异常: {e}")
 
         # 初始化卡片生成器
         try:
@@ -371,3 +380,4 @@ class Box(NcatBotPlugin):
         # if self.cache_dir.exists():
         #     shutil.rmtree(self.cache_dir)
         _log.info(f"{self.name} 插件已卸载")
+

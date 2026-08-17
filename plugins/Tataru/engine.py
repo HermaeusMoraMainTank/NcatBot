@@ -26,6 +26,7 @@ from zoneinfo import ZoneInfo
 
 import aiohttp
 from curl_cffi import requests as curl_requests
+from icalendar import Calendar as Calendar
 from PIL import Image, ImageDraw, ImageFont
 
 logger = logging.getLogger("Tataru")

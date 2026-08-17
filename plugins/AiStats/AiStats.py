@@ -24,6 +24,9 @@ from common.stats_render.helpers import (
     period_display_label,
     sum_daily_by_period,
 )
+from common.stats_render.paths import (
+    cleanup_temp as cleanup_stats_temp,  # noqa: F401
+)
 from common.utils.AiStatsRecorder import (
     SOURCE_ROLLUP,
     SOURCE_ROLLUP_ORDER,
@@ -538,7 +541,7 @@ class AiStats(NcatBotPlugin):
         prompt_tokens: int = 0,
         completion_tokens: int = 0,
         prompt_cache_hit_tokens: int = 0,
-        model: str = "deepseek-v4-flash",
+        model: str = "mimo-v2.5",
     ):
         """记录AI使用情况（写入 JSON 并刷新内存）。"""
         del trigger_type

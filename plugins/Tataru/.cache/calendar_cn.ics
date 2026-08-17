@@ -1,6 +1,6 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//caldav.icloud.com//CALDAVJ 2626B756//EN
+PRODID:-//caldav.icloud.com//CALDAVJ 2628B761//EN
 X-WR-CALNAME:国服(最终幻想14)
 X-APPLE-CALENDAR-COLOR:#ff9500
 BEGIN:VEVENT
@@ -696,13 +696,13 @@ DTSTART;VALUE=DATE:20210722
 DTEND;VALUE=DATE:20210723
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20260529T055734Z
-SUMMARY:C-（预测）7.56版本更新维护（新主线、驯兽师等）
+DTSTAMP:20260807T085514Z
+SUMMARY:C-7.56版本更新维护（新主线、驯兽师、金碟更新等）
 DESCRIPTION:9月上旬预定，来源PLL
 TZID:Asia/Tokyo
 SEQUENCE:0
 UID:25e92639-3166-4c12-944c-e8e33dc13b31
-CREATED:20260529T055734Z
+CREATED:20260807T085514Z
 DTSTART;VALUE=DATE:20260908
 DTEND;VALUE=DATE:20260909
 END:VEVENT
@@ -3414,15 +3414,17 @@ DTSTART;TZID=Asia/Shanghai:20240723T000000
 DTEND;TZID=Asia/Shanghai:20240916T235900
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20260529T055710Z
-SUMMARY:C-（预测）7.55版本更新维护（调查员、新月岛等）
-DESCRIPTION:7月下旬预定，来源PLL
+DTSTAMP:20260807T075632Z
+SUMMARY:C-7.55版本更新维护（调查员、新月岛等）
+DESCRIPTION:更新笔记：\nhttps://ff.web.sdo.com/web8/index.html#/newstab/newsco
+ nt/391284
 TZID:Asia/Tokyo
 SEQUENCE:0
 UID:ab7b6c4b-84af-4a4b-93da-684c1a0c5672
-CREATED:20260529T055710Z
+CREATED:20260807T075632Z
 DTSTART;VALUE=DATE:20260728
 DTEND;VALUE=DATE:20260729
+URL:https://ff.web.sdo.com/web8/index.html#/newstab/newscont/391284
 END:VEVENT
 BEGIN:VEVENT
 DTSTAMP:20240816T104652Z
@@ -3692,6 +3694,17 @@ DTEND;TZID=Asia/Shanghai:20250508T140000
 URL:https://actff1.web.sdo.com/project/20250424LittleLadiesDay/
 END:VEVENT
 BEGIN:VEVENT
+DTSTAMP:20260807T083417Z
+SUMMARY:（预测）C-8.0版本更新维护
+DESCRIPTION:来源FANFES，2027一月。
+TZID:Asia/Tokyo
+SEQUENCE:0
+UID:cfb8d2a1-451d-4ffa-ac4e-c40ec27040fa
+CREATED:20260807T083417Z
+DTSTART;VALUE=DATE:20270119
+DTEND;VALUE=DATE:20270120
+END:VEVENT
+BEGIN:VEVENT
 DTSTAMP:20240816T045848Z
 SUMMARY:C-FF16联动
 DESCRIPTION:（需要打完50级主线究极神兵（就是会给幻想药的那个任务））\n\n活动奖励：\n美堤亚套（共四件）-「美堤亚上衣」、「美堤
@@ -3733,6 +3746,19 @@ CREATED:20260127T162819Z
 DTSTART;TZID=Asia/Shanghai:20260127T130000
 DTEND;TZID=Asia/Shanghai:20260127T180000
 URL:https://ff.web.sdo.com/web8/index.html#/newstab/newscont/383894
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260807T080343Z
+SUMMARY:C-月卡启航计划（月卡优惠）
+DESCRIPTION:需注意优惠时间和月卡礼赠（能获得肖像教材的活动）时间不一样，月卡优惠的持续时间更长。\n\n月卡优惠活动页面：\nhttp
+ s://actff1.web.sdo.com/20260704_CardBill/index.html#/index
+TZID:Asia/Shanghai
+SEQUENCE:0
+UID:d7bf61ca-4007-4754-bc36-15bf38aebe8b
+CREATED:20260807T080343Z
+DTSTART;TZID=Asia/Shanghai:20260725T180000
+DTEND;TZID=Asia/Shanghai:20270201T140000
+URL:https://actff1.web.sdo.com/20260704_CardBill/index.html#/index
 END:VEVENT
 BEGIN:VEVENT
 DTSTAMP:20251014T064257Z
@@ -3860,6 +3886,22 @@ DTEND;TZID=Asia/Shanghai:20250218T170000
 URL:https://ff.web.sdo.com/web8/index.html#/newstab/newscont/371173
 END:VEVENT
 BEGIN:VEVENT
+DTSTAMP:20260807T082653Z
+SUMMARY:C-红莲节「盛夏度假村，心随浪花漂」
+DESCRIPTION:活动奖励：\n坐骑-「莫古力充气浮床」\n庭具-「莫古力充气床」（不可染色）\n庭具-「陆行鸟充气床」（单染色）\n庭具-
+ 「爆弹怪充气床」（单染色）\n家具-壁挂-「红莲节海报2025」\n家具-桌上-「红莲节桌面海报2025」\n家具-壁挂-「红莲节海报2018」
+ \n\n活动页面：\nhttps://actff1.web.sdo.com/project/20260801Moonfire_Faire/4eo
+ jmxe6rl2s/index.html
+TZID:Asia/Shanghai
+SEQUENCE:0
+UID:e7997527-87bd-4852-a02b-382ef910914b
+CREATED:20260807T082653Z
+DTSTART;TZID=Asia/Shanghai:20260812T160000
+DTEND;TZID=Asia/Shanghai:20260826T225900
+URL:https://actff1.web.sdo.com/project/20260801Moonfire_Faire/4eojmxe6rl2
+ s/index.html
+END:VEVENT
+BEGIN:VEVENT
 DTSTAMP:20251204T064800Z
 SUMMARY:C-「第90回 FFXIV PLL」转播
 DESCRIPTION:放送内容：\n版本7.4实装内容特集Part2\n\nB站直播间地址：\nhttps://live.bilibili.co
@@ -3942,6 +3984,21 @@ DTSTART;TZID=Asia/Tokyo:20240516T200000
 DTEND;TZID=Asia/Tokyo:20240516T220000
 END:VEVENT
 BEGIN:VEVENT
+DTSTAMP:20260807T080858Z
+SUMMARY:C-妖怪手表联动（追加3种家具）
+DESCRIPTION:新家具购买要求为和17只妖怪都成为朋友，在金碟游乐场（X:5.2 Y:6.9）npc“小野日”处兑换。\n\n活动页面：\
+ nhttps://actff1.web.sdo.com/project/20260715youkai-watch/vaz1gqm16a3h/in
+ dex.html
+TZID:Asia/Shanghai
+SEQUENCE:0
+UID:f42ae867-cc0f-4805-b195-34b291401c41
+CREATED:20260807T080858Z
+DTSTART;TZID=Asia/Shanghai:20260804T160000
+DTEND;TZID=Asia/Shanghai:20261005T225900
+URL:https://actff1.web.sdo.com/project/20260715youkai-watch/vaz1gqm16a3h/
+ index.html
+END:VEVENT
+BEGIN:VEVENT
 DTSTAMP:20260525T053957Z
 SUMMARY:C-金碟庆典「獭獭宣传大使登场？」
 DESCRIPTION:活动期间金碟币1.5倍。\n\n活动奖励：\n宠物-「獭獭先生」\n时尚配饰-「獭獭先生背包」\n\n家具-壁挂-「金碟嘉
@@ -3970,6 +4027,20 @@ CREATED:20241011T093843Z
 DTSTART;TZID=Asia/Shanghai:20240927T000000
 DTEND;TZID=Asia/Shanghai:20241107T235900
 URL:https://actff1.web.sdo.com/20240621_C2_eorzea/index.html#/index
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260807T080305Z
+SUMMARY:C-月卡礼赠（奖励：肖像教材：随身神典石1&2）
+DESCRIPTION:需注意活动时间和月卡优惠时间不一样，这个活动持续时间更短。\n\n月卡礼赠（活动期间内消耗/拥有90天月卡可以得到全部奖励
+ ）活动页面：\nhttps://actff1.web.sdo.com/20260704_CardBill/gift/index.html#/in
+ dex
+TZID:Asia/Shanghai
+SEQUENCE:0
+UID:f7749ab7-b0c6-47a6-a485-e7721d61cc00
+CREATED:20260807T080305Z
+DTSTART;TZID=Asia/Shanghai:20260725T180000
+DTEND;TZID=Asia/Shanghai:20261120T235900
+URL:https://actff1.web.sdo.com/20260704_CardBill/gift/index.html#/index
 END:VEVENT
 BEGIN:VEVENT
 DTSTAMP:20240202T125127Z

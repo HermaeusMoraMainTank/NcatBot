@@ -4,6 +4,7 @@ from typing import Any
 from msgspec import Struct, field
 
 from ..base import ParseException
+from .duration import duration_ms_to_seconds
 
 
 class Avatar(Struct):
@@ -27,7 +28,11 @@ class Cover(Struct):
 class Video(Struct):
     play_addr: PlayAddr
     cover: Cover
-    duration: int
+    duration: int  # Douyin reports this in milliseconds
+
+    @property
+    def duration_seconds(self) -> int:
+        return duration_ms_to_seconds(self.duration)
 
 
 class Image(Struct):

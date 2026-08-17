@@ -9,6 +9,9 @@ from common.utils.CommonUtil import CommonUtil
 from common.utils.QqSendUtil import QqSendUtil
 from common.utils.json_io import atomic_write_json, resolve_data_json
 from common.stats_render.word_analysis import process_message_text
+from common.stats_render.paths import (
+    cleanup_temp as cleanup_stats_temp,  # noqa: F401
+)
 from ncatbot.types import PlainText as PlainTextSeg
 import re
 import threading

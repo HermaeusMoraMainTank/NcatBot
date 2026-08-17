@@ -1,10 +1,10 @@
 {
   "filter_stats": {
-    "heartbeat_filtered": 297917,
-    "p2p_areas_filtered": 16429,
-    "duplicate_events_filtered": 13264,
+    "heartbeat_filtered": 460230,
+    "p2p_areas_filtered": 25301,
+    "duplicate_events_filtered": 17179,
     "connection_status_filtered": 0,
-    "total_filtered": 327610
+    "total_filtered": 502710
   },
-  "updated_at": "2026-07-30T16:04:10.019455"
+  "updated_at": "2026-08-17T14:48:13.714165"
 }
