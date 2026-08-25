@@ -541,7 +541,7 @@ class AiStats(NcatBotPlugin):
         prompt_tokens: int = 0,
         completion_tokens: int = 0,
         prompt_cache_hit_tokens: int = 0,
-        model: str = "mimo-v2.5",
+        model: str = "mimo-v2.5-pro",
     ):
         """记录AI使用情况（写入 JSON 并刷新内存）。"""
         del trigger_type

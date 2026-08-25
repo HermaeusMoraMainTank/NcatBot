@@ -89,6 +89,26 @@ class TodayWaifu(NcatBotPlugin):
     def cfg_bool(self, key: str) -> bool:
         return bool(self.cfg_dict().get(key))
 
+    def get_favor(self, group_id: str, user_id: str, target_id: str) -> int:
+        """供经济插件读取关系好感，不暴露 SQLite 连接。"""
+        return self.store.get_favor(str(group_id), str(user_id), str(target_id))
+
+    def change_favor(
+        self, group_id: str, user_id: str, target_id: str, delta: int
+    ) -> int:
+        """供经济插件原子更新关系好感。"""
+        cfg = self.cfg_dict()
+        minimum_value = cfg.get("favor_min")
+        maximum_value = cfg.get("favor_max")
+        return self.store.change_favor(
+            str(group_id),
+            str(user_id),
+            str(target_id),
+            int(delta),
+            minimum=int(minimum_value if minimum_value is not None else 0),
+            maximum=int(maximum_value if maximum_value is not None else 100),
+        )
+
     def is_admin(self, user_id: str) -> bool:
         return str(user_id) in self.admin_ids
 
@@ -213,6 +233,11 @@ class TodayWaifu(NcatBotPlugin):
             exclude_ids=excluded,
             allow_bot=bool(cfg.get("allow_marry_bot")),
             bot_id=self.bot_id,
+            favor_for=lambda target_id: self.store.get_favor(
+                group_id, str(event.sender.user_id), target_id
+            ),
+            favor_weight=cfg.get("draw_favor_weight", 0.001),
+            favor_randomness=cfg.get("draw_favor_randomness", 0.05),
         )
 
     def _resolve_action(self, text: str) -> Optional[str]:
@@ -224,13 +249,14 @@ class TodayWaifu(NcatBotPlugin):
             for kw in ("今日老婆", "我的老婆", "关系图", "抽老婆帮助", "rbq排行"):
                 if match_keyword(text, kw, "exact"):
                     return KEYWORD_ROUTES[kw]
-            if text.startswith("强娶") or text.startswith("求婚"):
+            if text.startswith("强娶") or text.startswith("强奸") or text.startswith("求婚"):
                 return KEYWORD_ROUTES.get(text.split()[0], None)
             return None
 
         # 前缀类：强娶 / 求婚
         for prefix, action in (
             ("强娶", "force_marry"),
+            ("强奸", "rape_marry"),
             ("求婚", "propose"),
             ("qiangqu", "force_marry"),
             ("qh", "propose"),
@@ -287,6 +313,7 @@ class TodayWaifu(NcatBotPlugin):
             "draw": handlers.cmd_draw,
             "history": handlers.cmd_history,
             "force_marry": handlers.cmd_force_marry,
+            "rape_marry": handlers.cmd_rape_marry,
             "propose": handlers.cmd_propose,
             "graph": handlers.cmd_graph,
             "rbq": handlers.cmd_rbq,

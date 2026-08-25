@@ -36,10 +36,22 @@ def _load_secret(json_key: str, env_key: str) -> str:
 NVIDIA_API_URL = "https://integrate.api.nvidia.com/v1"
 NVIDIA_API_KEY = _load_secret("nvidia_api_key", "NVIDIA_API_KEY")
 
-# DeepSeek API 配置（NVIDIA 宕机时降级）
+# DeepSeek 账户查询配置（仅用于余额查询，不参与当前聊天请求）
 DEEPSEEK_API_URL = "https://api.deepseek.com"
 DEEPSEEK_API_KEY = _load_secret("deepseek_api_key", "DEEPSEEK_API_KEY")
-DEEPSEEK_CHAT_MODEL = "deepseek-v4-flash"
+
+# MiMo Token Plan API 配置（OpenAI 兼容接口）
+MIMO_API_URL = "https://token-plan-cn.xiaomimimo.com/v1"
+MIMO_API_KEY = _load_secret("mimo_api_key", "MIMO_API_KEY")
+MIMO_CHAT_MODEL = "mimo-v2.5-pro"
+
+# MiMo TTS（复用当前 MiMo Token Plan 凭据）
+MIMO_TTS_API_URL = MIMO_API_URL
+MIMO_TTS_API_KEY = MIMO_API_KEY
+MIMO_TTS_MODEL = "mimo-v2.5-tts"
+
+# 兼容旧调用方的模型常量名；实际聊天请求使用 MiMo 端点和密钥。
+DEEPSEEK_CHAT_MODEL = MIMO_CHAT_MODEL
 
 # 多模态模型（llama-4-maverick 已于 2026-07-27 EOL）
 # 候选实测：kimi-k2.6 本账号 404；ministral-14b 同日 EOL；
@@ -139,6 +151,47 @@ def _normalize_image_for_vision(image_data: bytes, mime_type: str) -> Tuple[byte
 
 class AiUtil:
     @staticmethod
+    async def synthesize_mimo_tts(
+        text: str,
+        voice: str = "mimo_default",
+    ) -> Optional[bytes]:
+        """使用 MiMo TTS 生成 WAV 音频。"""
+        text = (text or "").strip()
+        if not text:
+            return None
+        if not MIMO_TTS_API_KEY:
+            _log.error("[TTS] 未配置 mimo_api_key")
+            return None
+
+        try:
+            async with AsyncOpenAI(
+                api_key=MIMO_TTS_API_KEY,
+                base_url=MIMO_TTS_API_URL,
+                timeout=60.0,
+            ) as client:
+                completion = await client.chat.completions.create(
+                    model=MIMO_TTS_MODEL,
+                    messages=[{"role": "assistant", "content": text}],
+                    audio={"format": "wav", "voice": voice},
+                    stream=False,
+                    timeout=50.0,
+                )
+
+            audio = getattr(completion.choices[0].message, "audio", None)
+            audio_data = (
+                audio.get("data")
+                if isinstance(audio, dict)
+                else getattr(audio, "data", None)
+            )
+            if not audio_data:
+                _log.error("[TTS] MiMo 响应中没有音频数据")
+                return None
+            return base64.b64decode(audio_data)
+        except Exception as e:
+            _log.error(f"[TTS] MiMo 请求失败: {e}")
+            return None
+
+    @staticmethod
     async def download_image_as_base64(url: str) -> Optional[str]:
         """下载图片并转换为 base64 编码
 
@@ -236,15 +289,10 @@ class AiUtil:
         max_tokens: int = 2048,
         temperature: float = 1.2,
     ) -> Optional[dict]:
-        """文本对话：暂时全走 DeepSeek（minimax 响应过慢），失败重试 3 次。"""
+        """文本对话：使用 MiMo，失败重试 3 次。"""
         _log.info(keyword)
 
-        provider = (
-            "DeepSeek",
-            DEEPSEEK_API_URL,
-            DEEPSEEK_API_KEY,
-            DEEPSEEK_CHAT_MODEL,
-        )
+        provider = ("MiMo", MIMO_API_URL, MIMO_API_KEY, MIMO_CHAT_MODEL)
         providers = [provider] * 3
         delay = 2
 
@@ -285,7 +333,7 @@ class AiUtil:
     @staticmethod
     async def get_deepseek_balance() -> dict:
         """查询 DeepSeek API 余额"""
-        url = "https://api.deepseek.com/user/balance"
+        url = f"{DEEPSEEK_API_URL}/user/balance"
         api_key = DEEPSEEK_API_KEY
 
         headers = {"Accept": "application/json", "Authorization": f"Bearer {api_key}"}

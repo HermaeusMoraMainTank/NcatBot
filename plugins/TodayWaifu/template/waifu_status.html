@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; width: 760px; background: #edf3f7; }
+    body { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; color: #25364a; }
+    .card { overflow: hidden; background: #f8fbfc; }
+    .hero {
+      padding: 28px 34px 24px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #29465c 0%, #4d7890 58%, #86a99d 100%);
+    }
+    .hero-row { display: flex; align-items: center; gap: 18px; }
+    .user-avatar, .wife-avatar {
+      object-fit: cover; border-radius: 50%; background: #dce7ec;
+    }
+    .user-avatar { width: 74px; height: 74px; border: 3px solid rgba(255,255,255,.75); }
+    .hero h1 { margin: 0; font-size: 31px; letter-spacing: 0; }
+    .hero p { margin: 7px 0 0; color: #dcebed; font-size: 17px; }
+    .summary {
+      display: flex; gap: 12px; padding: 18px 34px;
+      background: #ffffff; border-bottom: 1px solid #dce7eb;
+    }
+    .summary-item { flex: 1; min-width: 0; }
+    .summary-label { color: #78909c; font-size: 14px; }
+    .summary-value { margin-top: 5px; color: #29465c; font-size: 21px; font-weight: 700; }
+    .section { padding: 24px 34px 28px; }
+    .section-title { margin-bottom: 13px; color: #567182; font-size: 16px; font-weight: 700; }
+    .empty {
+      padding: 28px 20px; text-align: center; color: #78909c;
+      background: #ffffff; border: 1px solid #dce7eb; border-radius: 12px;
+    }
+    .record {
+      display: flex; align-items: center; gap: 16px; min-height: 94px;
+      margin-bottom: 12px; padding: 13px 16px;
+      background: #ffffff; border: 1px solid #dce7eb; border-radius: 12px;
+    }
+    .record:last-child { margin-bottom: 0; }
+    .wife-avatar { width: 68px; height: 68px; border: 2px solid #f0c98d; }
+    .record-main { flex: 1; min-width: 0; }
+    .record-name {
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      color: #29465c; font-size: 22px; font-weight: 700;
+    }
+    .record-id { margin-top: 4px; color: #8a9aa4; font-size: 14px; }
+    .record-meta { display: flex; gap: 9px; margin-top: 7px; flex-wrap: wrap; }
+    .tag { padding: 4px 9px; border-radius: 9px; color: #486677; background: #e8f1f2; font-size: 14px; }
+    .favor { color: #a76c38; background: #fff0d9; }
+    .footer { padding: 0 34px 22px; color: #91a1aa; font-size: 13px; }
+  </style>
+</head>
+<body class="card-ready">
+  <div class="card">
+    <div class="hero">
+      <div class="hero-row">
+        <img class="user-avatar" src="{{ user_avatar }}" alt="" />
+        <div>
+          <h1>我的老婆</h1>
+          <p>{{ user_name }} · 今日抽取 {{ limit - remaining }}/{{ limit }} 次</p>
+        </div>
+      </div>
+    </div>
+    <div class="summary">
+      <div class="summary-item">
+        <div class="summary-label">剩余次数</div>
+        <div class="summary-value">{{ remaining }}/{{ limit }}</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">钱包状态</div>
+        <div class="summary-value">{{ wallet_summary }}</div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">今日关系</div>
+      {% if records %}
+        {% for record in records %}
+        <div class="record">
+          <img class="wife-avatar" src="{{ record.avatar }}" alt="" />
+          <div class="record-main">
+            <div class="record-name">{{ record.name }}</div>
+            <div class="record-id">QQ {{ record.user_id }}</div>
+            <div class="record-meta">
+              <span class="tag">{{ record.tag }}</span>
+              <span class="tag favor">好感度 {{ record.favor }}</span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="empty">今天还没有抽过老婆，先发送「抽老婆」吧</div>
+      {% endif %}
+    </div>
+    <div class="footer">好感度会影响后续抽取倾向，但结果仍保留随机性</div>
+  </div>
+</body>
+</html>

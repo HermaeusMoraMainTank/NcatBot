@@ -78,11 +78,11 @@ DEFAULT_CONFIG = {
     # 防抖秒数
     "debounce_interval": 300,
     # 资源最大大小 (MB)
-    "source_max_size": 90,
+    "source_max_size": 300,
     # 资源最大时长 (分钟)（下载硬限制）
-    "source_max_minute": 15,
+    "source_max_minute": 10,
     # 超过此时长（秒）不发送视频，仅发送文案/提示；0=不限制
-    "video_send_max_seconds": 480,
+    "video_send_max_seconds": 600,
     # 音频以文件形式上传
     "audio_to_file": True,
     # 单条重媒体仍渲染卡片

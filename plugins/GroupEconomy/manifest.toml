@@ -1,0 +1,11 @@
+name = "GroupEconomy"
+version = "1.0.0"
+main = "GroupEconomy.py"
+entry_class = "GroupEconomy"
+
+[pip_dependencies]
+Pillow = "*"
+httpx = ">=0.27"
+
+[dependencies]
+TodayWaifu = ">=2.0.0"

@@ -61,6 +61,9 @@ user_last_trigger: Dict[str, datetime] = {}
 # 无视 CD 的用户 ID（如 hmmt）
 CD_EXEMPT_USERS = {HMMT.HMMT_ID}
 
+# 该用户仅保留发图权限，不得上传、删除或管理图库。
+CALL_ONLY_USERS = {"1363021751"}
+
 # ========== 命令与帮助（可在插件 config 中覆盖） ==========
 DEFAULT_CONFIG = {
     "admin_prefix": "图库",
@@ -162,6 +165,10 @@ class ImageSender(NcatBotPlugin):
     @staticmethod
     def _is_admin(user_id: str) -> bool:
         return user_id == HMMT.HMMT_ID
+
+    @staticmethod
+    def _is_call_only_user(user_id: str) -> bool:
+        return str(user_id) in CALL_ONLY_USERS
 
     def _cmd(self, key: str) -> str:
         return cfg_str(self, key, DEFAULT_CONFIG[key], DEFAULT_CONFIG)
@@ -1027,11 +1034,17 @@ class ImageSender(NcatBotPlugin):
         if clean_message == admin_prefix or clean_message.startswith(
             f"{admin_prefix} "
         ):
+            if self._is_call_only_user(input.sender.user_id):
+                _log.warning("用户 %s 仅有发图权限，已忽略图库管理命令", input.sender.user_id)
+                return
             await self.handle_package_admin(input, clean_message)
             return
 
         # 处理删除功能（仅限指定管理员使用）
         if clean_message.startswith(f"{delete_prefix} "):
+            if self._is_call_only_user(input.sender.user_id):
+                _log.warning("用户 %s 仅有发图权限，已忽略删除图库命令", input.sender.user_id)
+                return
             await self.handle_delete(input, message, clean_message)
             return
 
@@ -1045,6 +1058,9 @@ class ImageSender(NcatBotPlugin):
             clean_message.startswith(f"{upload_prefix} ")
             or clean_message == upload_prefix
         ):
+            if self._is_call_only_user(input.sender.user_id):
+                _log.warning("用户 %s 仅有发图权限，已忽略上传图库命令", input.sender.user_id)
+                return
             await self.handle_upload(input, message)
             return
 
@@ -1057,6 +1073,7 @@ class ImageSender(NcatBotPlugin):
                     if (
                         self.allowed_users
                         and input.sender.user_id not in self.allowed_users
+                        and not self._is_call_only_user(user_id)
                     ):
                         _log.warning(f"用户 {user_id} 无权调用图库 [{command}]，已忽略")
                         return
@@ -1065,6 +1082,7 @@ class ImageSender(NcatBotPlugin):
                     if (
                         config["allowed_users"]
                         and user_id not in config["allowed_users"]
+                        and not self._is_call_only_user(user_id)
                     ):
                         _log.warning(f"用户 {user_id} 无权调用图库 [{command}]，已忽略")
                         return
@@ -1272,6 +1290,9 @@ class ImageSender(NcatBotPlugin):
 
     async def handle_upload(self, input: GroupMessage, message: str):
         """处理图片上传请求"""
+        if self._is_call_only_user(input.sender.user_id):
+            _log.warning("用户 %s 仅有发图权限，已忽略上传图库命令", input.sender.user_id)
+            return
         upload_prefix = self._cmd("upload_prefix")
         # 移除 CQ 码后获取命令
         clean_message = re.sub(r"\[CQ:[^\]]+\]", "", message).strip()
@@ -1358,6 +1379,10 @@ class ImageSender(NcatBotPlugin):
     ):
         """处理图片删除请求（仅限特定用户）"""
         user_id_str = str(input.sender.user_id)
+
+        if self._is_call_only_user(user_id_str):
+            _log.warning("用户 %s 仅有发图权限，已忽略删除图库命令", user_id_str)
+            return
 
         if not self._is_admin(user_id_str):
             _log.warning(f"用户 {user_id_str} 尝试删除图库图片，无权限，已忽略")

@@ -73,8 +73,20 @@ class WaifuStore:
                     user_id TEXT NOT NULL,
                     forced_at REAL NOT NULL
                 );
+
+                CREATE TABLE IF NOT EXISTS relationship_favor (
+                    group_id TEXT NOT NULL,
+                    user_id TEXT NOT NULL,
+                    target_id TEXT NOT NULL,
+                    favor INTEGER NOT NULL DEFAULT 0,
+                    updated_at REAL NOT NULL,
+                    PRIMARY KEY (group_id, user_id, target_id)
+                );
                 """
             )
+            # The current relationship scale starts at zero; normalize records
+            # created under the previous negative lower bound.
+            cur.execute("UPDATE relationship_favor SET favor = 0 WHERE favor < 0")
             self._conn.commit()
 
     def close(self) -> None:
@@ -420,3 +432,43 @@ class WaifuStore:
                 (cutoff,),
             )
             self._conn.commit()
+
+    # ── 关系好感 ──────────────────────────────────────────────
+
+    def get_favor(self, group_id: str, user_id: str, target_id: str) -> int:
+        with self._lock:
+            row = self._conn.execute(
+                """SELECT favor FROM relationship_favor
+                   WHERE group_id = ? AND user_id = ? AND target_id = ?""",
+                (str(group_id), str(user_id), str(target_id)),
+            ).fetchone()
+        return int(row["favor"]) if row else 0
+
+    def change_favor(
+        self,
+        group_id: str,
+        user_id: str,
+        target_id: str,
+        delta: int,
+        minimum: int = -20,
+        maximum: int = 100,
+    ) -> int:
+        gid, uid, tid = str(group_id), str(user_id), str(target_id)
+        with self._lock:
+            row = self._conn.execute(
+                """SELECT favor FROM relationship_favor
+                   WHERE group_id = ? AND user_id = ? AND target_id = ?""",
+                (gid, uid, tid),
+            ).fetchone()
+            old = int(row["favor"]) if row else 0
+            new = max(int(minimum), min(int(maximum), old + int(delta)))
+            self._conn.execute(
+                """INSERT INTO relationship_favor
+                   (group_id, user_id, target_id, favor, updated_at)
+                   VALUES (?, ?, ?, ?, ?)
+                   ON CONFLICT(group_id, user_id, target_id) DO UPDATE SET
+                   favor = excluded.favor, updated_at = excluded.updated_at""",
+                (gid, uid, tid, new, time.time()),
+            )
+            self._conn.commit()
+        return new

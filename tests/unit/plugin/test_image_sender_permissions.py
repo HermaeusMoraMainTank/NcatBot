@@ -75,6 +75,46 @@ class TestImageSenderCommandMatching:
 
 class TestImageSenderPermissions:
     @pytest.mark.asyncio(loop_scope="function")
+    async def test_call_only_user_cannot_write_or_manage(
+        self, image_sender_module
+    ):
+        """1363021751 只能调用图库，不能上传、删除或管理。"""
+        plugin = _make_plugin(image_sender_module)
+        user = _group_message(1363021751, "图库 添加 测试")
+        plugin.handle_package_admin = AsyncMock()
+        plugin.handle_delete = AsyncMock()
+        plugin.handle_upload = AsyncMock()
+
+        await plugin.handle_image(user)
+        await plugin.handle_image(_group_message(1363021751, "删除 测试"))
+        await plugin.handle_image(_group_message(1363021751, "上传 测试"))
+
+        plugin.handle_package_admin.assert_not_awaited()
+        plugin.handle_delete.assert_not_awaited()
+        plugin.handle_upload.assert_not_awaited()
+
+    @pytest.mark.asyncio(loop_scope="function")
+    async def test_call_only_user_can_call_whitelisted_gallery(
+        self, image_sender_module, tmp_path
+    ):
+        """仅发图用户仍可调用配置了其它用户白名单的图库。"""
+        plugin = _make_plugin(
+            image_sender_module,
+            commands={
+                "私有": {
+                    "triggers": ["私有"],
+                    "path": str(tmp_path),
+                    "allowed_users": ["273421673"],
+                    "recall_time": None,
+                }
+            },
+        )
+        (tmp_path / "x.jpg").write_bytes(b"x")
+        await plugin.handle_image(_group_message(1363021751, "私有"))
+
+        plugin.api.qq.post_group_msg.assert_called_once()
+
+    @pytest.mark.asyncio(loop_scope="function")
     async def test_non_admin_admin_command_is_silent(self, image_sender_module, caplog):
         """普通用户执行图库管理命令时只写后台日志，不向前台报错。"""
         plugin = _make_plugin(image_sender_module)

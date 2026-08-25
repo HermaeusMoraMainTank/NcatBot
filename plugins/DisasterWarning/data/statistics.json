@@ -1,26 +1,28 @@
 {
-  "total_received": 1453,
-  "total_events": 671,
+  "total_received": 1746,
+  "total_events": 805,
   "start_time": "2026-07-30T11:51:08.511565",
-  "last_updated": "2026-08-17T14:43:07.882598",
+  "last_updated": "2026-08-25T07:29:49.410501",
   "by_type": {
-    "earthquake": 454,
-    "earthquake_warning": 217
+    "earthquake": 543,
+    "earthquake_warning": 262
   },
   "by_source": {
-    "wolfx_jma_eq": 376,
-    "p2p_earthquake": 458,
-    "wolfx_jma_eew": 523,
-    "wolfx_cenc_eq": 83,
-    "wolfx_cenc_eew": 13
+    "wolfx_jma_eq": 440,
+    "p2p_earthquake": 548,
+    "wolfx_jma_eew": 635,
+    "wolfx_cenc_eq": 103,
+    "wolfx_cenc_eew": 16,
+    "wolfx_cwa_eew": 3,
+    "p2p_eew": 1
   },
   "earthquake_stats": {
     "by_magnitude": {
-      "< M3.0": 277,
-      "M3.0 - M3.9": 249,
-      "M5.0 - M5.9": 29,
-      "M4.0 - M4.9": 106,
-      "M6.0 - M6.9": 4,
+      "< M3.0": 323,
+      "M3.0 - M3.9": 291,
+      "M5.0 - M5.9": 40,
+      "M4.0 - M4.9": 133,
+      "M6.0 - M6.9": 12,
       "M7.0 - M7.9": 4
     },
     "by_region": {},
@@ -39,841 +41,707 @@
   },
   "recent_pushes": [
     {
-      "timestamp": "2026-08-17T14:43:07.882598",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M3.5 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-17T14:43:07.389100",
+      "timestamp": "2026-08-25T07:29:49.410501",
       "event_id": "",
       "type": "earthquake",
       "source": "p2p_earthquake",
-      "description": "M3.5 熊本県熊本地方"
+      "description": "M4.2 宮古島近海"
     },
     {
-      "timestamp": "2026-08-17T14:41:20.457525",
+      "timestamp": "2026-08-25T07:29:49.188687",
       "event_id": "",
       "type": "earthquake",
       "source": "wolfx_jma_eq",
-      "description": "M3.5 熊本県熊本地方"
+      "description": "M4.2 宮古島近海"
     },
     {
-      "timestamp": "2026-08-17T14:41:19.931405",
+      "timestamp": "2026-08-25T07:27:55.417841",
+      "event_id": "20260825082706",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.1 宮古島近海"
+    },
+    {
+      "timestamp": "2026-08-25T07:27:36.451625",
+      "event_id": "20260825082706",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.1 宮古島近海"
+    },
+    {
+      "timestamp": "2026-08-25T07:27:20.731179",
+      "event_id": "20260825082706",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.0 宮古島近海"
+    },
+    {
+      "timestamp": "2026-08-25T07:27:16.273120",
+      "event_id": "20260825082706",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.5 宮古島近海"
+    },
+    {
+      "timestamp": "2026-08-25T07:27:15.477225",
+      "event_id": "20260825082706",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.5 宮古島近海"
+    },
+    {
+      "timestamp": "2026-08-25T02:10:42.873828",
       "event_id": "",
       "type": "earthquake",
       "source": "p2p_earthquake",
-      "description": "M3.5 熊本県熊本地方"
+      "description": "M4.3 岩手県沖"
     },
     {
-      "timestamp": "2026-08-17T14:40:40.330361",
+      "timestamp": "2026-08-25T02:10:41.389317",
       "event_id": "",
       "type": "earthquake",
       "source": "wolfx_jma_eq",
-      "description": "MNone 震源 調査中"
+      "description": "M4.3 岩手県沖"
     },
     {
-      "timestamp": "2026-08-17T14:40:39.672311",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M-1.0 未知地点"
-    },
-    {
-      "timestamp": "2026-08-17T14:27:55.435410",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_cenc_eq",
-      "description": "M2.5 甘肃陇南市礼县"
-    },
-    {
-      "timestamp": "2026-08-17T12:57:40.358291",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M4.3 宮古島近海"
-    },
-    {
-      "timestamp": "2026-08-17T12:57:39.990548",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M4.3 宮古島近海"
-    },
-    {
-      "timestamp": "2026-08-17T12:55:51.149062",
-      "event_id": "20260817135500",
+      "timestamp": "2026-08-25T02:08:02.469367",
+      "event_id": "20260825030706",
       "type": "earthquake_warning",
       "source": "wolfx_jma_eew",
-      "description": "M4.4 宮古島近海"
+      "description": "M4.3 岩手県沖"
     },
     {
-      "timestamp": "2026-08-17T12:55:47.970709",
-      "event_id": "20260817135500",
+      "timestamp": "2026-08-25T02:07:57.373377",
+      "event_id": "20260825030706",
       "type": "earthquake_warning",
       "source": "wolfx_jma_eew",
-      "description": "M4.4 宮古島近海"
+      "description": "M4.3 岩手県沖"
     },
     {
-      "timestamp": "2026-08-17T12:55:29.277971",
-      "event_id": "20260817135500",
+      "timestamp": "2026-08-25T02:07:37.130682",
+      "event_id": "20260825030706",
       "type": "earthquake_warning",
       "source": "wolfx_jma_eew",
-      "description": "M4.4 宮古島近海"
+      "description": "M4.2 岩手県沖"
     },
     {
-      "timestamp": "2026-08-17T12:55:19.234042",
-      "event_id": "20260817135500",
+      "timestamp": "2026-08-25T02:07:32.350161",
+      "event_id": "20260825030706",
       "type": "earthquake_warning",
       "source": "wolfx_jma_eew",
-      "description": "M4.4 宮古島近海"
+      "description": "M4.0 岩手県沖"
     },
     {
-      "timestamp": "2026-08-17T12:55:08.412452",
-      "event_id": "20260817135500",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.9 宮古島近海"
-    },
-    {
-      "timestamp": "2026-08-17T12:55:07.018937",
-      "event_id": "20260817135500",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.9 宮古島近海"
-    },
-    {
-      "timestamp": "2026-08-17T11:11:44.329211",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M4.1 日向灘"
-    },
-    {
-      "timestamp": "2026-08-17T11:11:43.664298",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M4.1 日向灘"
-    },
-    {
-      "timestamp": "2026-08-17T11:07:38.005707",
-      "event_id": "20260817120659",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M4.2 日向灘"
-    },
-    {
-      "timestamp": "2026-08-17T11:07:31.819386",
-      "event_id": "20260817120659",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M4.2 日向灘"
-    },
-    {
-      "timestamp": "2026-08-17T11:07:28.420104",
-      "event_id": "20260817120659",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.8 日向灘"
-    },
-    {
-      "timestamp": "2026-08-17T11:07:10.984988",
-      "event_id": "20260817120659",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.7 日向灘"
-    },
-    {
-      "timestamp": "2026-08-17T06:12:03.876576",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_cenc_eq",
-      "description": "M3.0 四川内江市隆昌市"
-    },
-    {
-      "timestamp": "2026-08-17T05:41:13.779305",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M4.4 福岡県福岡地方"
-    },
-    {
-      "timestamp": "2026-08-17T05:41:12.502144",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M4.4 福岡県福岡地方"
-    },
-    {
-      "timestamp": "2026-08-17T05:40:20.160214",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M4.4 福岡県福岡地方"
-    },
-    {
-      "timestamp": "2026-08-17T05:40:19.969740",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M4.4 福岡県福岡地方"
-    },
-    {
-      "timestamp": "2026-08-17T05:38:52.505959",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M-1.0 未知地点"
-    },
-    {
-      "timestamp": "2026-08-17T05:38:52.430409",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "MNone 震源 調査中"
-    },
-    {
-      "timestamp": "2026-08-17T05:38:35.744511",
-      "event_id": "20260817063722",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M4.2 福岡県福岡地方"
-    },
-    {
-      "timestamp": "2026-08-17T05:38:30.952270",
-      "event_id": "20260817063722",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M4.2 福岡県福岡地方"
-    },
-    {
-      "timestamp": "2026-08-17T05:38:11.045613",
-      "event_id": "20260817063722",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M4.2 福岡県福岡地方"
-    },
-    {
-      "timestamp": "2026-08-17T05:37:51.527382",
-      "event_id": "20260817063722",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M4.0 福岡県福岡地方"
-    },
-    {
-      "timestamp": "2026-08-17T05:37:31.375066",
-      "event_id": "20260817063722",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M4.1 福岡県福岡地方"
-    },
-    {
-      "timestamp": "2026-08-17T05:37:27.419909",
-      "event_id": "20260817063722",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M4.2 福岡県福岡地方"
-    },
-    {
-      "timestamp": "2026-08-17T05:37:26.586497",
-      "event_id": "20260817063722",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M4.3 福岡県福岡地方"
-    },
-    {
-      "timestamp": "2026-08-17T05:37:25.617375",
-      "event_id": "20260817063722",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.8 福岡県福岡地方"
-    },
-    {
-      "timestamp": "2026-08-17T05:37:25.334694",
-      "event_id": "20260817063722",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.6 福岡県福岡地方"
-    },
-    {
-      "timestamp": "2026-08-17T04:10:19.488321",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_cenc_eq",
-      "description": "M3.1 四川自贡市富顺县"
-    },
-    {
-      "timestamp": "2026-08-17T04:05:24.106781",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_cenc_eq",
-      "description": "M3.3 四川内江市隆昌市"
-    },
-    {
-      "timestamp": "2026-08-17T03:27:37.547749",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_cenc_eq",
-      "description": "M3.6 四川内江市隆昌市"
-    },
-    {
-      "timestamp": "2026-08-16T23:25:18.059280",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M3.0 天草灘"
-    },
-    {
-      "timestamp": "2026-08-16T23:25:17.632956",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M3.0 天草灘"
-    },
-    {
-      "timestamp": "2026-08-16T22:22:07.269622",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M2.3 熊本県天草・芦北地方"
-    },
-    {
-      "timestamp": "2026-08-16T22:22:06.785171",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M2.3 熊本県天草・芦北地方"
-    },
-    {
-      "timestamp": "2026-08-16T21:52:05.368959",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M2.7 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T21:52:05.322392",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M2.7 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T20:45:15.318971",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M3.0 天草灘"
-    },
-    {
-      "timestamp": "2026-08-16T20:45:14.872135",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M3.0 天草灘"
-    },
-    {
-      "timestamp": "2026-08-16T20:28:43.629918",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M3.3 天草灘"
-    },
-    {
-      "timestamp": "2026-08-16T20:28:42.498096",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M3.3 天草灘"
-    },
-    {
-      "timestamp": "2026-08-16T17:56:18.196043",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_cenc_eq",
-      "description": "M2.1 河北唐山市丰南区"
-    },
-    {
-      "timestamp": "2026-08-16T17:08:52.236209",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M2.5 熊本県天草・芦北地方"
-    },
-    {
-      "timestamp": "2026-08-16T17:08:51.893847",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M2.5 熊本県天草・芦北地方"
-    },
-    {
-      "timestamp": "2026-08-16T13:24:01.991025",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M2.1 熊本県天草・芦北地方"
-    },
-    {
-      "timestamp": "2026-08-16T13:24:01.786735",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M2.1 熊本県天草・芦北地方"
-    },
-    {
-      "timestamp": "2026-08-16T13:05:42.245211",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M2.6 熊本県天草・芦北地方"
-    },
-    {
-      "timestamp": "2026-08-16T13:05:41.582504",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M2.6 熊本県天草・芦北地方"
-    },
-    {
-      "timestamp": "2026-08-16T12:40:48.921036",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M4.1 日向灘"
-    },
-    {
-      "timestamp": "2026-08-16T12:40:48.416593",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M4.1 日向灘"
-    },
-    {
-      "timestamp": "2026-08-16T12:38:23.268329",
-      "event_id": "20260816133738",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.8 日向灘"
-    },
-    {
-      "timestamp": "2026-08-16T12:38:06.663978",
-      "event_id": "20260816133738",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.8 日向灘"
-    },
-    {
-      "timestamp": "2026-08-16T12:37:46.629874",
-      "event_id": "20260816133738",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.9 日向灘"
-    },
-    {
-      "timestamp": "2026-08-16T12:37:44.976590",
-      "event_id": "20260816133738",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.9 日向灘"
-    },
-    {
-      "timestamp": "2026-08-16T12:35:45.376268",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M1.9 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T12:35:44.828958",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M1.9 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T11:48:00.701178",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_cenc_eq",
-      "description": "M6.1 瓦努阿图群岛"
-    },
-    {
-      "timestamp": "2026-08-16T11:07:37.040213",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M3.6 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T11:07:36.772186",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M3.6 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T11:06:35.909379",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M3.6 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T11:06:35.733752",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M3.6 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T11:05:49.153002",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M-1.0 未知地点"
-    },
-    {
-      "timestamp": "2026-08-16T11:05:48.742232",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "MNone 震源 調査中"
-    },
-    {
-      "timestamp": "2026-08-16T11:04:53.877369",
-      "event_id": "20260816120419",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.3 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T11:04:47.885994",
-      "event_id": "20260816120419",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.3 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T11:04:27.722736",
-      "event_id": "20260816120419",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.3 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T11:04:24.929325",
-      "event_id": "20260816120419",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.3 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T08:33:30.958217",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M2.1 熊本県天草・芦北地方"
-    },
-    {
-      "timestamp": "2026-08-16T08:33:30.913656",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M2.1 熊本県天草・芦北地方"
-    },
-    {
-      "timestamp": "2026-08-16T05:21:08.759277",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M3.7 岩手県沖"
-    },
-    {
-      "timestamp": "2026-08-16T05:21:08.518371",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M3.7 岩手県沖"
-    },
-    {
-      "timestamp": "2026-08-16T03:39:23.859049",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M5.4 硫黄島近海"
-    },
-    {
-      "timestamp": "2026-08-16T03:39:23.706482",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M5.4 硫黄島近海"
-    },
-    {
-      "timestamp": "2026-08-16T03:28:06.445585",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M3.4 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T03:28:06.157279",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M3.4 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T03:26:00.577084",
-      "event_id": "20260816042522",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.3 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T03:25:52.946056",
-      "event_id": "20260816042522",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.3 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T03:25:32.820812",
-      "event_id": "20260816042522",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.3 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T03:25:26.841607",
-      "event_id": "20260816042522",
-      "type": "earthquake_warning",
-      "source": "wolfx_jma_eew",
-      "description": "M3.2 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T02:01:32.603475",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M3.2 茨城県北部"
-    },
-    {
-      "timestamp": "2026-08-16T02:01:32.434867",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M3.2 茨城県北部"
-    },
-    {
-      "timestamp": "2026-08-16T00:45:12.679548",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_cenc_eq",
-      "description": "M5.9 印尼托米尼湾"
-    },
-    {
-      "timestamp": "2026-08-16T00:15:28.643525",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_cenc_eq",
-      "description": "M2.8 四川眉山市仁寿县"
-    },
-    {
-      "timestamp": "2026-08-16T00:14:44.054366",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "wolfx_jma_eq",
-      "description": "M2.9 熊本県熊本地方"
-    },
-    {
-      "timestamp": "2026-08-16T00:14:43.830049",
+      "timestamp": "2026-08-25T01:16:31.962952",
       "event_id": "",
       "type": "earthquake",
       "source": "p2p_earthquake",
       "description": "M2.9 熊本県熊本地方"
     },
     {
-      "timestamp": "2026-08-16T00:05:27.777555",
+      "timestamp": "2026-08-25T01:16:31.897845",
       "event_id": "",
       "type": "earthquake",
       "source": "wolfx_jma_eq",
-      "description": "M2.7 熊本県熊本地方"
+      "description": "M2.9 熊本県熊本地方"
     },
     {
-      "timestamp": "2026-08-16T00:05:27.410823",
+      "timestamp": "2026-08-24T23:28:34.366861",
+      "event_id": "20260825002747",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.9 沖縄本島近海"
+    },
+    {
+      "timestamp": "2026-08-24T23:28:18.443946",
+      "event_id": "20260825002747",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.9 沖縄本島近海"
+    },
+    {
+      "timestamp": "2026-08-24T23:28:12.009950",
+      "event_id": "20260825002747",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.8 沖縄本島近海"
+    },
+    {
+      "timestamp": "2026-08-24T23:28:11.273748",
+      "event_id": "20260825002747",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.5 沖縄本島近海"
+    },
+    {
+      "timestamp": "2026-08-24T23:27:59.636677",
+      "event_id": "20260825002747",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.9 沖縄本島近海"
+    },
+    {
+      "timestamp": "2026-08-24T22:50:07.627155",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M4.3 岩手県沖"
+    },
+    {
+      "timestamp": "2026-08-24T22:50:07.524711",
       "event_id": "",
       "type": "earthquake",
       "source": "p2p_earthquake",
-      "description": "M2.7 熊本県熊本地方"
+      "description": "M4.3 岩手県沖"
     },
     {
-      "timestamp": "2026-08-15T20:40:26.534097",
+      "timestamp": "2026-08-24T22:30:51.140064",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_cenc_eq",
+      "description": "M5.9 印尼班达海"
+    },
+    {
+      "timestamp": "2026-08-24T20:31:31.287767",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M2.6 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-24T20:31:30.262465",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M2.6 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-24T19:37:52.226433",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M2.9 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-24T19:37:52.106602",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M2.9 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-24T19:35:24.339638",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M3.8 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-24T19:35:24.117257",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M3.8 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-24T19:32:44.044416",
+      "event_id": "20260824203209",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.4 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-24T19:32:37.025038",
+      "event_id": "20260824203209",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.4 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-24T19:32:17.225223",
+      "event_id": "20260824203209",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.4 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-24T19:32:11.985824",
+      "event_id": "20260824203209",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.3 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-24T18:20:21.565832",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M2.9 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-24T18:20:20.992639",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M2.9 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-24T17:13:32.912584",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M2.5 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-24T17:13:31.990092",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M2.5 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-24T11:57:22.044341",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M3.3 釧路地方中南部"
+    },
+    {
+      "timestamp": "2026-08-24T11:57:21.810112",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M3.3 釧路地方中南部"
+    },
+    {
+      "timestamp": "2026-08-24T08:35:09.370691",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_cenc_eq",
+      "description": "M4.7 四川宜宾市长宁县"
+    },
+    {
+      "timestamp": "2026-08-24T08:26:28.488758",
+      "event_id": "b4b38nxiyicyy",
+      "type": "earthquake_warning",
+      "source": "wolfx_cenc_eew",
+      "description": "M5.4 四川宜宾市长宁县"
+    },
+    {
+      "timestamp": "2026-08-24T07:15:51.181523",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M2.2 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-24T07:15:50.895336",
       "event_id": "",
       "type": "earthquake",
       "source": "wolfx_jma_eq",
       "description": "M2.2 熊本県熊本地方"
     },
     {
-      "timestamp": "2026-08-15T20:40:26.179325",
+      "timestamp": "2026-08-24T06:35:28.673798",
       "event_id": "",
       "type": "earthquake",
       "source": "p2p_earthquake",
-      "description": "M2.2 熊本県熊本地方"
+      "description": "M3.8 房総半島南方沖"
     },
     {
-      "timestamp": "2026-08-15T20:06:08.501825",
-      "event_id": "",
-      "type": "earthquake",
-      "source": "p2p_earthquake",
-      "description": "M3.0 大阪湾"
-    },
-    {
-      "timestamp": "2026-08-15T20:06:08.011512",
+      "timestamp": "2026-08-24T06:35:27.973317",
       "event_id": "",
       "type": "earthquake",
       "source": "wolfx_jma_eq",
-      "description": "M3.0 大阪湾"
+      "description": "M3.8 房総半島南方沖"
+    },
+    {
+      "timestamp": "2026-08-24T06:33:31.226595",
+      "event_id": "20260824073240",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.1 房総半島南方沖"
+    },
+    {
+      "timestamp": "2026-08-24T06:33:29.676784",
+      "event_id": "20260824073240",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.1 房総半島南方沖"
+    },
+    {
+      "timestamp": "2026-08-24T06:33:10.170600",
+      "event_id": "20260824073240",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.1 房総半島南方沖"
+    },
+    {
+      "timestamp": "2026-08-24T06:32:55.686169",
+      "event_id": "20260824073240",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.8 房総半島南方沖"
+    },
+    {
+      "timestamp": "2026-08-24T03:09:42.570216",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M3.9 熊本県天草・芦北地方"
+    },
+    {
+      "timestamp": "2026-08-24T03:09:40.735903",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M3.9 熊本県天草・芦北地方"
+    },
+    {
+      "timestamp": "2026-08-24T03:08:31.159921",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M3.9 熊本県天草・芦北地方"
+    },
+    {
+      "timestamp": "2026-08-24T03:08:31.054529",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M3.9 熊本県天草・芦北地方"
+    },
+    {
+      "timestamp": "2026-08-24T03:06:53.292003",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M-1.0 未知地点"
+    },
+    {
+      "timestamp": "2026-08-24T03:06:53.222434",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "MNone 震源 調査中"
+    },
+    {
+      "timestamp": "2026-08-24T03:06:04.213463",
+      "event_id": "20260824040526",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.7 熊本県天草・芦北地方"
+    },
+    {
+      "timestamp": "2026-08-24T03:05:57.111559",
+      "event_id": "20260824040526",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.7 熊本県天草・芦北地方"
+    },
+    {
+      "timestamp": "2026-08-24T03:05:37.073703",
+      "event_id": "20260824040526",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.7 熊本県天草・芦北地方"
+    },
+    {
+      "timestamp": "2026-08-24T03:05:36.552103",
+      "event_id": "20260824040526",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.7 熊本県天草・芦北地方"
+    },
+    {
+      "timestamp": "2026-08-24T03:05:36.308084",
+      "event_id": "20260824040526",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.6 熊本県天草・芦北地方"
+    },
+    {
+      "timestamp": "2026-08-24T00:39:12.956067",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M4.0 日高地方東部"
+    },
+    {
+      "timestamp": "2026-08-24T00:39:12.940717",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M4.0 日高地方東部"
+    },
+    {
+      "timestamp": "2026-08-24T00:37:02.421771",
+      "event_id": "20260824013623",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.2 日高地方東部"
+    },
+    {
+      "timestamp": "2026-08-24T00:36:54.747439",
+      "event_id": "20260824013623",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.2 日高地方東部"
+    },
+    {
+      "timestamp": "2026-08-24T00:36:34.991561",
+      "event_id": "20260824013623",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.1 日高地方東部"
+    },
+    {
+      "timestamp": "2026-08-24T00:36:34.542673",
+      "event_id": "20260824013623",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M4.1 日高地方東部"
+    },
+    {
+      "timestamp": "2026-08-24T00:36:34.542673",
+      "event_id": "20260824013623",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.4 日高地方東部"
+    },
+    {
+      "timestamp": "2026-08-24T00:36:28.550318",
+      "event_id": "20260824013623",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M3.5 日高地方東部"
+    },
+    {
+      "timestamp": "2026-08-23T22:12:09.360546",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_cenc_eq",
+      "description": "M6.0 日本北海道附近海域"
+    },
+    {
+      "timestamp": "2026-08-23T21:49:07.378778",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M6.0 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T21:49:04.518317",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M6.0 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T21:48:04.029412",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M6.0 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T21:48:04.011331",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M6.0 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T21:47:33.284442",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M-1.0 未知地点"
+    },
+    {
+      "timestamp": "2026-08-23T21:46:36.338674",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M-1.0 未知地点"
+    },
+    {
+      "timestamp": "2026-08-23T21:46:33.748577",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "MNone 震源 調査中"
+    },
+    {
+      "timestamp": "2026-08-23T21:46:16.809176",
+      "event_id": "20260823224502",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M6.1 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T21:45:55.936792",
+      "event_id": "20260823224502",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M6.1 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T21:45:50.928958",
+      "event_id": "20260823224502",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M6.1 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T21:45:29.704978",
+      "event_id": "20260823224502",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M6.0 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T21:45:23.962288",
+      "event_id": "20260823224502",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M6.0 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T21:45:23.250083",
+      "event_id": "20260823224502",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M5.9 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T21:45:22.409157",
+      "event_id": "20260823224502",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M5.6 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T21:45:22.407155",
+      "event_id": "20260823224502",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M5.9 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T21:45:20.003195",
+      "event_id": "20260823224502",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M6.1 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T21:45:18.221300",
+      "event_id": "20260823224502",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M6.1 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T21:45:17.113850",
+      "event_id": "20260823224502",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M5.8 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T21:45:16.095976",
+      "event_id": "20260823224502",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M6.2 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T21:45:15.176936",
+      "event_id": "20260823224502",
+      "type": "earthquake_warning",
+      "source": "wolfx_jma_eew",
+      "description": "M6.1 浦河沖"
+    },
+    {
+      "timestamp": "2026-08-23T18:30:38.117351",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M2.6 熊本県天草・芦北地方"
+    },
+    {
+      "timestamp": "2026-08-23T18:30:37.640801",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M2.6 熊本県天草・芦北地方"
+    },
+    {
+      "timestamp": "2026-08-23T18:16:01.441652",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_cenc_eq",
+      "description": "M4.2 克什米尔"
+    },
+    {
+      "timestamp": "2026-08-23T14:34:18.287293",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M2.2 熊本県天草・芦北地方"
+    },
+    {
+      "timestamp": "2026-08-23T14:34:17.339530",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M2.2 熊本県天草・芦北地方"
+    },
+    {
+      "timestamp": "2026-08-23T06:59:23.902488",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M2.3 石川県能登地方"
+    },
+    {
+      "timestamp": "2026-08-23T06:59:23.583829",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M2.3 石川県能登地方"
+    },
+    {
+      "timestamp": "2026-08-23T06:12:21.740526",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M1.7 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-23T06:12:21.105648",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M1.7 熊本県熊本地方"
+    },
+    {
+      "timestamp": "2026-08-23T05:51:35.968697",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "wolfx_jma_eq",
+      "description": "M2.1 大阪府北部"
+    },
+    {
+      "timestamp": "2026-08-23T05:51:35.284192",
+      "event_id": "",
+      "type": "earthquake",
+      "source": "p2p_earthquake",
+      "description": "M2.1 大阪府北部"
     }
   ],
   "recent_event_ids": [
-    "32.432,130.631,2.5,202608020636",
-    "32.613,130.631,2.0,202608020804",
-    "32.613,130.811,2.0,202608020812",
-    "39.279,142.162,3.0,202608020817",
-    "32.613,130.631,3.0,202608020919",
-    "32.613,130.631,3.5,202608020919",
-    "35.315,99.640,3.0,202608020825",
-    "40.180,142.523,4.5,202608020945",
-    "40.180,142.523,3.5,202608020945",
-    "32.432,130.631,3.0,202608020948",
-    "37.477,141.441,3.5,202608021038",
-    "37.477,141.441,4.0,202608021038",
-    "33.514,91.171,3.0,202608021115",
-    "29.369,129.369,2.5,202608021229",
-    "32.432,130.631,2.5,202608021347",
-    "32.432,130.631,2.5,202608021648",
-    "32.613,130.631,2.0,202608021728",
-    "32.613,130.811,2.0,202608021755",
-    "32.432,130.631,1.0,202608021900",
-    "32.432,130.631,3.5,202608021900",
-    "32.432,130.450,4.0,202608021900",
-    "-200.000,-200.000,-1.0,202608021900",
-    "32.432,130.450,4.5,202608021900",
-    "32.432,130.631,3.5,202608021905",
-    "32.432,130.450,3.5,202608021905",
-    "27.568,128.649,4.0,202608021910",
-    "27.568,128.649,4.5,202608021910",
-    "32.613,130.631,3.0,202608021922",
-    "32.432,130.450,3.5,202608021939",
-    "32.432,130.450,3.0,202608021939",
-    "32.613,130.631,3.0,202608022007",
-    "32.432,130.631,3.0,202608022020",
-    "32.432,130.450,3.0,202608022020",
-    "32.432,130.631,3.0,202608022021",
-    "32.613,130.631,2.0,202608022041",
-    "32.432,130.631,3.5,202608022258",
-    "35.315,99.459,4.5,202608022231",
-    "35.315,99.640,5.0,202608022231",
-    "35.315,99.459,5.0,202608022231",
-    "35.315,99.459,3.5,202608022237",
-    "42.342,143.063,4.0,202608022349",
-    "42.342,143.063,4.5,202608022349",
-    "42.342,143.063,5.0,202608022349",
-    "-200.000,-200.000,-1.0,202608022349",
-    "32.252,130.450,2.5,202608030025",
-    "32.432,130.631,3.0,202608030026",
-    "28.468,104.685,4.5,202608030221",
-    "28.468,104.685,5.0,202608030221",
-    "28.649,104.685,3.0,202608030232",
-    "32.613,130.811,1.5,202608030417",
-    "28.649,104.685,3.5,202608030329",
-    "28.468,104.685,3.5,202608030329",
-    "28.649,104.685,3.0,202608030354",
-    "28.468,104.685,3.5,202608030354",
-    "43.243,147.387,5.0,202608030502",
-    "43.243,147.387,4.5,202608030502",
-    "43.243,147.207,4.5,202608030502",
-    "32.252,130.450,2.5,202608030553",
-    "32.252,130.450,3.0,202608030641",
-    "-200.000,-200.000,-1.0,202608030658",
-    "32.613,130.811,3.0,202608030658",
-    "32.613,130.631,2.5,202608030812",
-    "32.613,130.631,2.5,202608030813",
-    "32.432,130.450,2.5,202608031133",
-    "28.649,104.685,3.5,202608031112",
-    "28.468,104.685,3.5,202608031111",
-    "32.613,130.631,2.5,202608031221",
-    "32.432,130.450,3.0,202608031332",
-    "32.432,130.450,3.5,202608031332",
-    "28.468,104.685,4.0,202608031300",
-    "28.649,104.685,4.0,202608031300",
-    "41.982,142.523,3.5,202608031430",
-    "36.937,139.459,3.0,202608031500",
-    "32.793,130.811,3.0,202608031624",
-    "26.126,99.820,3.0,202608031625",
-    "32.432,130.450,2.5,202608031754",
-    "32.432,130.450,2.5,202608032010",
-    "32.432,130.450,3.0,202608032021",
-    "26.847,128.288,3.0,202608032221",
-    "43.243,146.847,5.0,202608032339",
-    "43.063,146.847,5.0,202608032339",
-    "43.063,146.847,4.5,202608032339",
-    "43.063,146.847,4.5,202608032340",
-    "32.613,130.631,2.5,202608040013",
-    "39.640,143.423,4.0,202608040054",
-    "32.252,130.450,2.5,202608040218",
-    "32.613,130.631,4.0,202608040532",
-    "-200.000,-200.000,-1.0,202608040532",
-    "32.613,130.631,4.0,202608040604",
-    "32.432,130.631,4.0,202608040604",
-    "-200.000,-200.000,-1.0,202608040604",
-    "32.613,130.631,2.5,202608040702",
-    "32.432,130.450,3.5,202608040712",
-    "32.613,130.631,2.5,202608040811",
-    "32.613,130.631,3.0,202608041047",
-    "28.468,104.685,3.5,202608041025",
-    "32.432,130.631,2.0,202608041207",
-    "28.829,129.550,3.5,202608041215",
-    "28.829,129.550,4.0,202608041215",
-    "35.315,138.559,2.5,202608041246",
-    "32.793,140.721,5.0,202608041346",
-    "32.973,140.541,4.5,202608041346",
-    "32.793,140.541,4.5,202608041346",
-    "32.432,130.450,4.0,202608041406",
-    "32.432,130.631,4.0,202608041406",
-    "32.432,130.450,4.5,202608041406",
-    "-200.000,-200.000,-1.0,202608041406",
-    "32.432,130.631,3.0,202608041413",
-    "32.432,130.450,3.0,202608041419",
-    "32.432,130.631,3.0,202608041429",
-    "23.063,115.495,3.0,202608041521",
-    "40.360,142.342,4.0,202608041706",
-    "32.432,130.631,2.5,202608041718",
-    "32.432,130.450,3.0,202608041757",
-    "32.432,130.631,2.5,202608041923",
-    "32.252,130.270,2.5,202608042003",
-    "32.613,130.631,2.5,202608042015",
-    "32.613,130.631,2.0,202608042125",
-    "32.793,130.811,3.0,202608042223",
-    "38.378,142.162,4.0,202608042300",
-    "38.378,142.162,4.5,202608042300",
-    "-200.000,-200.000,-1.0,202608042300",
-    "32.613,130.631,2.0,202608042342",
-    "32.432,130.450,2.5,202608050047",
-    "28.468,104.685,4.0,202608042358",
-    "28.468,104.685,3.5,202608042358",
-    "32.613,130.631,2.5,202608050117",
-    "28.649,104.685,3.0,202608050122",
-    "26.667,128.649,4.5,202608050321",
-    "26.847,128.288,3.5,202608050321",
-    "27.027,128.288,3.5,202608050321",
-    "26.847,128.468,4.0,202608050321",
-    "37.477,137.117,3.0,202608050343",
-    "32.613,130.631,2.5,202608050359",
     "32.613,130.631,2.0,202608050446",
     "30.450,130.811,3.5,202608050457",
     "30.450,130.991,4.0,202608050457",
@@ -1239,6 +1107,140 @@
     "24.144,125.405,4.5,202608171355",
     "33.874,104.865,2.5,202608171415",
     "-200.000,-200.000,-1.0,202608171539",
-    "32.432,130.631,3.5,202608171539"
+    "32.432,130.631,3.5,202608171539",
+    "32.432,130.631,2.5,202608171734",
+    "32.072,130.090,3.0,202608171936",
+    "40.901,142.162,3.5,202608172107",
+    "40.901,142.162,4.0,202608172107",
+    "32.072,132.072,3.5,202608172233",
+    "32.072,131.892,3.5,202608172233",
+    "32.432,130.631,3.0,202608172309",
+    "32.613,130.631,2.5,202608180432",
+    "32.613,130.631,2.0,202608180522",
+    "32.432,130.450,2.5,202608180546",
+    "33.514,130.090,3.0,202608180821",
+    "32.432,130.450,2.5,202608180954",
+    "32.432,130.450,3.5,202608181242",
+    "-200.000,-200.000,-1.0,202608181505",
+    "32.432,130.450,4.0,202608181505",
+    "32.432,130.450,3.0,202608181709",
+    "32.252,130.450,2.5,202608181756",
+    "32.432,130.631,2.5,202608181836",
+    "36.396,70.811,5.0,202608190351",
+    "37.838,95.495,5.5,202608190536",
+    "37.838,95.676,5.5,202608190536",
+    "37.838,95.676,3.5,202608190559",
+    "32.613,130.631,3.5,202608190710",
+    "32.613,130.631,4.0,202608190710",
+    "-200.000,-200.000,-1.0,202608190710",
+    "40.901,78.739,3.5,202608190653",
+    "37.477,137.117,2.0,202608190942",
+    "37.838,95.676,3.5,202608191322",
+    "28.829,128.108,4.5,202608192043",
+    "28.829,128.108,5.0,202608192043",
+    "28.829,127.928,5.0,202608192043",
+    "29.009,127.928,4.5,202608192043",
+    "32.432,130.450,2.5,202608192255",
+    "32.432,130.450,2.5,202608200000",
+    "41.982,143.243,4.0,202608200050",
+    "41.982,143.063,4.0,202608200050",
+    "-200.000,-200.000,-1.0,202608200050",
+    "41.982,143.063,3.5,202608200055",
+    "32.432,130.631,2.5,202608200429",
+    "36.577,140.721,3.5,202608200838",
+    "36.577,140.541,3.5,202608200838",
+    "32.252,130.450,2.0,202608200848",
+    "40.901,142.162,3.5,202608200906",
+    "32.613,130.631,2.5,202608200945",
+    "34.234,135.135,3.0,202608201140",
+    "35.856,115.676,4.0,202608201100",
+    "32.432,130.631,3.0,202608201204",
+    "35.856,115.676,3.5,202608201100",
+    "36.396,141.081,3.5,202608201428",
+    "36.396,140.901,4.0,202608201428",
+    "-200.000,-200.000,-1.0,202608201428",
+    "32.252,130.450,2.0,202608201748",
+    "37.838,95.495,4.0,202608201748",
+    "37.658,95.495,5.0,202608201749",
+    "37.838,95.676,3.5,202608201805",
+    "34.054,135.315,2.5,202608210046",
+    "24.685,125.045,3.5,202608210315",
+    "24.685,125.045,4.0,202608210315",
+    "-14.775,-73.333,6.5,202608210200",
+    "32.432,130.450,3.0,202608210323",
+    "32.613,130.631,2.5,202608210513",
+    "36.577,105.405,3.0,202608210501",
+    "32.072,130.631,2.0,202608210734",
+    "-200.000,-200.000,-1.0,202608210901",
+    "26.667,127.568,4.0,202608210901",
+    "32.613,130.631,2.0,202608210911",
+    "33.694,140.541,5.0,202608212102",
+    "33.874,140.541,5.5,202608212102",
+    "-200.000,-200.000,-1.0,202608212102",
+    "33.694,140.541,5.5,202608212102",
+    "32.432,130.631,3.0,202608212327",
+    "32.432,130.631,2.0,202608212332",
+    "42.342,143.063,3.5,202608221135",
+    "42.342,143.063,4.0,202608221135",
+    "42.523,143.063,3.5,202608221135",
+    "24.324,121.982,4.5,202608221140",
+    "24.324,121.982,5.0,202608221140",
+    "24.324,122.162,4.5,202608221140",
+    "45.045,145.586,4.0,202608221737",
+    "-60.360,-47.387,6.0,202608221622",
+    "44.865,145.586,3.5,202608221832",
+    "32.613,130.631,2.0,202608221837",
+    "32.432,130.450,2.5,202608221930",
+    "43.063,145.405,3.0,202608222246",
+    "36.036,140.180,5.0,202608230200",
+    "36.036,140.180,6.5,202608230200",
+    "36.036,140.180,6.0,202608230200",
+    "-200.000,-200.000,-1.0,202608230200",
+    "35.856,140.180,6.0,202608230100",
+    "32.613,130.631,3.0,202608230247",
+    "34.955,135.315,2.0,202608230645",
+    "32.432,130.631,1.5,202608230707",
+    "37.297,136.757,2.5,202608230756",
+    "32.252,130.450,2.0,202608231531",
+    "36.937,74.595,4.0,202608231804",
+    "32.252,130.450,2.5,202608231928",
+    "41.802,143.063,6.0,202608232244",
+    "41.802,142.883,6.0,202608232244",
+    "41.802,143.063,5.5,202608232244",
+    "-200.000,-200.000,-1.0,202608232245",
+    "41.802,142.883,6.0,202608232245",
+    "41.622,143.063,6.0,202608232144",
+    "42.342,142.883,3.5,202608240136",
+    "42.162,142.883,3.5,202608240136",
+    "42.342,142.883,4.0,202608240136",
+    "42.162,142.883,4.0,202608240136",
+    "32.613,130.631,3.5,202608240405",
+    "-200.000,-200.000,-1.0,202608240405",
+    "32.613,130.631,4.0,202608240405",
+    "34.054,140.360,4.0,202608240732",
+    "34.234,140.360,4.0,202608240732",
+    "32.613,130.631,2.0,202608240812",
+    "28.288,105.045,5.5,202608240826",
+    "28.288,105.045,4.5,202608240826",
+    "43.243,145.045,3.5,202608241254",
+    "32.613,130.631,2.5,202608241810",
+    "32.432,130.631,3.0,202608241917",
+    "32.432,130.631,3.5,202608242032",
+    "32.432,130.631,4.0,202608242032",
+    "32.432,130.631,3.0,202608242032",
+    "32.432,130.631,3.0,202608242033",
+    "32.432,130.631,2.5,202608242128",
+    "-6.667,127.387,6.0,202608242210",
+    "40.000,142.883,4.5,202608242347",
+    "26.126,128.649,4.0,202608250027",
+    "25.946,128.829,4.5,202608250027",
+    "25.946,128.829,5.0,202608250027",
+    "32.432,130.631,3.0,202608250213",
+    "40.360,143.063,4.0,202608250307",
+    "40.360,143.063,4.5,202608250307",
+    "40.360,142.883,4.5,202608250307",
+    "24.324,125.225,3.5,202608250826",
+    "24.324,125.225,4.0,202608250826",
+    "24.324,125.225,4.0,202608250827"
   ]
 }

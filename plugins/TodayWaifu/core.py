@@ -5,7 +5,7 @@ from __future__ import annotations
 import random
 import time
 from datetime import date, datetime
-from typing import Any, Protocol
+from typing import Any, Callable, Protocol
 
 
 class StoreLike(Protocol):
@@ -79,6 +79,14 @@ def get_daily_limit(cfg: dict[str, Any]) -> int:
         return 1
 
 
+def get_favor_gain(cfg: dict[str, Any], key: str, default: int) -> int:
+    """读取非负好感奖励，避免错误配置把奖励变成扣分。"""
+    try:
+        return max(0, int(cfg.get(key, default)))
+    except (TypeError, ValueError):
+        return max(0, int(default))
+
+
 def get_force_cd_days(cfg: dict[str, Any]) -> int:
     try:
         return max(0, int(cfg.get("force_marry_cd", 3)))
@@ -92,6 +100,17 @@ def get_propose_cd_seconds(cfg: dict[str, Any]) -> int:
     except (TypeError, ValueError):
         minutes = 60
     return max(0, minutes) * 60
+
+
+def propose_auto_accept_probability(cfg: dict[str, Any], favor: int) -> float:
+    """按好感计算自动同意概率；不设置最低好感门槛。"""
+    try:
+        base = float(cfg.get("propose_auto_accept_base", 0.20))
+        per_favor = float(cfg.get("propose_auto_accept_per_favor", 0.006))
+        maximum = float(cfg.get("propose_auto_accept_max", 0.90))
+    except (TypeError, ValueError):
+        base, per_favor, maximum = 0.20, 0.006, 0.90
+    return min(maximum, max(0.0, base + max(-20, min(100, int(favor))) * per_favor))
 
 
 def is_cd_exempt(user_id: str) -> bool:
@@ -210,8 +229,11 @@ def pick_from_active_members(
     exclude_ids: set[str],
     allow_bot: bool,
     bot_id: str,
+    favor_for: Callable[[str], int] | None = None,
+    favor_weight: float = 0.001,
+    favor_randomness: float = 0.05,
 ) -> Any | None:
-    """从活跃成员中随机挑选，排除 exclude_ids。"""
+    """从活跃成员中随机挑选，排除 exclude_ids，并可按好感轻微加权。"""
     pool = []
     for m in members:
         uid = str(getattr(m, "user_id", "") or "")
@@ -226,7 +248,30 @@ def pick_from_active_members(
         pool.append(m)
     if not pool:
         return None
-    return random.choice(pool)
+    if favor_for is None:
+        return random.choice(pool)
+
+    # 好感只改变基础倍率，且每次抽取为候选人加入独立扰动，避免固定优先级。
+    try:
+        weight_step = max(0.0, min(0.003, float(favor_weight)))
+    except (TypeError, ValueError):
+        weight_step = 0.001
+    try:
+        jitter = max(0.0, min(0.15, float(favor_randomness)))
+    except (TypeError, ValueError):
+        jitter = 0.05
+
+    weights = []
+    for member in pool:
+        uid = str(getattr(member, "user_id", ""))
+        try:
+            favor = max(-20, min(100, int(favor_for(uid))))
+        except Exception:
+            favor = 0
+        base = max(0.85, min(1.15, 1.0 + favor * weight_step))
+        noise = random.uniform(max(0.85, 1.0 - jitter), min(1.15, 1.0 + jitter))
+        weights.append(base * noise)
+    return random.choices(pool, weights=weights, k=1)[0]
 
 
 def display_name(member: Any | None, fallback_id: str) -> str:

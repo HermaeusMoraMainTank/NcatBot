@@ -4,8 +4,10 @@ import io
 import json
 import random
 import re
+import tempfile
 import time
 from datetime import datetime
+from pathlib import Path
 from typing import Dict, List, Optional, Union
 
 from PIL import Image as PILImage, ImageDraw, ImageFont
@@ -1432,6 +1434,33 @@ class FakeAi(NcatBotPlugin):
                 await send_typing_response(self, input, answer)
                 return
 
+        # MiMo TTS：普通 API key 专用，Token Plan key 不回退使用。
+        tts_match = re.match(r"^说(?:\s+|　+)(.+)$", input.raw_message.strip(), re.S)
+        if tts_match:
+            audio_bytes = await AiUtil.synthesize_mimo_tts(tts_match.group(1))
+            if not audio_bytes:
+                await self.api.qq.post_group_msg(
+                    group_id=input.group_id,
+                    rtf=MessageChain([PlainText(text="TTS 暂不可用，请检查普通 MiMo API key 配置")]),
+                )
+                return
+
+            audio_path = None
+            try:
+                with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as audio_file:
+                    audio_file.write(audio_bytes)
+                    audio_path = audio_file.name
+                await self.api.qq.send_group_record(input.group_id, audio_path)
+            except Exception as e:
+                _log.error(f"[TTS] 发送群语音失败: {e}")
+            finally:
+                if audio_path:
+                    try:
+                        Path(audio_path).unlink(missing_ok=True)
+                    except OSError:
+                        pass
+            return
+
         # 处理查询余额命令
         if input.raw_message == "查询余额":
             await self.handle_balance_query(input)
@@ -1874,7 +1903,7 @@ def record_ai_usage_to_json(
     prompt_tokens: int = 0,
     completion_tokens: int = 0,
     prompt_cache_hit_tokens: int = 0,
-    model: str = "deepseek-v4-flash",
+    model: str = "mimo-v2.5-pro",
 ):
     """保存 AI 使用统计（委托 AiStatsRecorder）。"""
     from common.utils.AiStatsRecorder import record_ai_usage
@@ -2225,7 +2254,7 @@ async def answer_ai(
         usage_info.get("prompt_tokens", 0)
         usage_info.get("completion_tokens", 0)
         usage_info.get("prompt_cache_hit_tokens", 0)
-        ai_response.get("model", "deepseek-v4-flash")
+        ai_response.get("model", "mimo-v2.5-pro")
     else:
         response = ai_response or ""
 

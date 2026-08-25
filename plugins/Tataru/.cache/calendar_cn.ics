@@ -1,6 +1,6 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//caldav.icloud.com//CALDAVJ 2628B761//EN
+PRODID:-//caldav.icloud.com//CALDAVJ 2630B964//EN
 X-WR-CALNAME:国服(最终幻想14)
 X-APPLE-CALENDAR-COLOR:#ff9500
 BEGIN:VEVENT
@@ -933,6 +933,22 @@ DTSTART;VALUE=DATE:20210515
 DTEND;VALUE=DATE:20210517
 END:VEVENT
 BEGIN:VEVENT
+DTSTAMP:20260820T131915Z
+SUMMARY:C-喊出你的爱 12周年快乐！（喊话得管弦乐琴乐谱：彼岸花开（芯片音乐版））
+DESCRIPTION:在任意游戏主城使用喊话频道，喊话内容需包含：\n「最终幻想14十二周年快乐」\n1天内喊话1次即算当日签到成功。累计签到4
+ 天克获得管弦乐琴乐谱：彼岸花开（芯片音乐版）。\n\n每日喊话后还能得到1个漂流瓶投放机会。\n累计投放3个漂流瓶可获得传送网使用券x10\n累
+ 计投放5个漂流瓶可获得管弦乐琴乐谱：末路尽头（交响乐版）\n\n活动页面：\nhttps://actff1.web.sdo.com/projec
+ t/20260803gameanniv/oix29m92x1r5/index.html#/
+TZID:Asia/Shanghai
+SEQUENCE:0
+UID:3a347df5-da10-4073-b013-59f8cab82a3b
+CREATED:20260820T131915Z
+DTSTART;TZID=Asia/Shanghai:20260818T000000
+DTEND;TZID=Asia/Shanghai:20260906T235900
+URL:https://actff1.web.sdo.com/project/20260803gameanniv/oix29m92x1r5/ind
+ ex.html#/
+END:VEVENT
+BEGIN:VEVENT
 DTSTAMP:20250915T122522Z
 SUMMARY:C-「日随签到领好礼」（回原始大区日随的活动）（管弦乐琴乐谱：忘却的彼岸（GUNN演唱版）等奖励）
 DESCRIPTION:期间共可以打23次日随，最大奖励为12次签到的管弦乐琴乐谱：忘却的彼岸（GUNN演唱版）。\n日随不包括行会令。\n具体奖
@@ -1710,6 +1726,19 @@ DTSTART;VALUE=DATE:20250624
 DTEND;VALUE=DATE:20250625
 END:VEVENT
 BEGIN:VEVENT
+DTSTAMP:20260820T132020Z
+SUMMARY:C-大国防联军后勤补给站优惠（雇员8折，改名5折）
+DESCRIPTION:大国防联军页面：\nhttps://actff1.web.sdo.com/project/141028dgf/index.
+ html
+TZID:Asia/Shanghai
+SEQUENCE:0
+UID:713383e8-8bd3-420b-9ee2-834b5089b375
+CREATED:20260820T132020Z
+DTSTART;TZID=Asia/Shanghai:20260818T000000
+DTEND;TZID=Asia/Shanghai:20260906T235900
+URL:https://actff1.web.sdo.com/project/141028dgf/index.html
+END:VEVENT
+BEGIN:VEVENT
 CREATED:20220519T084302Z
 DESCRIPTION:公告详情原文：\nhttps://ff.web.sdo.com/web8/index.html#/newstab/news
  cont/339633\n
@@ -1745,6 +1774,22 @@ UID:72FAB18B-D89B-4755-8BAB-2B1EC5311C72
 CREATED:20211009T091751Z
 DTSTART;TZID=Asia/Shanghai:20211015T190000
 DTEND;TZID=Asia/Shanghai:20211015T220000
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20260820T132627Z
+SUMMARY:C-新生庆典「旅途尽头，等待着你的将是——」
+DESCRIPTION:活动奖励：\n宠物-「迷你乌克・拉玛特」\n家具-桌上-「新生庆典桌面海报2025-2」（可染色）\n家具-壁挂-「新生庆
+ 典海报2025-2」\n家具-壁挂-「新生庆典海报2025」\n管弦乐琴乐谱-「主题曲 ~ 玛托雅的洞穴（转调版）」\n管弦乐琴乐谱-「悠久之风
+ （转调版）」\n管弦乐琴乐谱-「在札纳尔坎德（转调版）」\n\n活动页面：\nhttps://actff1.web.sdo.com/projec
+ t/20260817The_Rising/7rzrnb48uiw9/index.html
+TZID:Asia/Shanghai
+SEQUENCE:0
+UID:72e8e006-d7c4-4325-a764-3e98be2f43b4
+CREATED:20260820T132627Z
+DTSTART;TZID=Asia/Shanghai:20260827T150000
+DTEND;TZID=Asia/Shanghai:20260910T225900
+URL:https://actff1.web.sdo.com/project/20260817The_Rising/7rzrnb48uiw9/in
+ dex.html
 END:VEVENT
 BEGIN:VEVENT
 DTSTAMP:20240605T094100Z
@@ -3427,6 +3472,19 @@ DTEND;VALUE=DATE:20260729
 URL:https://ff.web.sdo.com/web8/index.html#/newstab/newscont/391284
 END:VEVENT
 BEGIN:VEVENT
+DTSTAMP:20260820T132730Z
+SUMMARY:C-全区全服维护（持续一天的数据中心迁移）
+DESCRIPTION:公告页面：\nhttps://ff.web.sdo.com/web8/index.html#/newstab/newsco
+ nt/392101
+TZID:Asia/Shanghai
+SEQUENCE:0
+UID:abdcd5a7-8c91-4d7e-9aa9-55dbef5f6ff8
+CREATED:20260820T132730Z
+DTSTART;TZID=Asia/Shanghai:20260826T170000
+DTEND;TZID=Asia/Shanghai:20260827T170000
+URL:https://ff.web.sdo.com/web8/index.html#/newstab/newscont/392101
+END:VEVENT
+BEGIN:VEVENT
 DTSTAMP:20240816T104652Z
 SUMMARY:C-十周年活动特辑Part1-2（奖励：海德林偶像/佐迪亚克偶像）
 DESCRIPTION:PART2攻略一次佐迪亚克歼灭战/极佐迪亚克\n\n活动页面：\nhttps://actff1.web.sdo.com/2
@@ -3886,7 +3944,7 @@ DTEND;TZID=Asia/Shanghai:20250218T170000
 URL:https://ff.web.sdo.com/web8/index.html#/newstab/newscont/371173
 END:VEVENT
 BEGIN:VEVENT
-DTSTAMP:20260807T082653Z
+DTSTAMP:20260820T132139Z
 SUMMARY:C-红莲节「盛夏度假村，心随浪花漂」
 DESCRIPTION:活动奖励：\n坐骑-「莫古力充气浮床」\n庭具-「莫古力充气床」（不可染色）\n庭具-「陆行鸟充气床」（单染色）\n庭具-
  「爆弹怪充气床」（单染色）\n家具-壁挂-「红莲节海报2025」\n家具-桌上-「红莲节桌面海报2025」\n家具-壁挂-「红莲节海报2018」
@@ -3895,9 +3953,9 @@ DESCRIPTION:活动奖励：\n坐骑-「莫古力充气浮床」\n庭具-「莫�
 TZID:Asia/Shanghai
 SEQUENCE:0
 UID:e7997527-87bd-4852-a02b-382ef910914b
-CREATED:20260807T082653Z
+CREATED:20260820T132139Z
 DTSTART;TZID=Asia/Shanghai:20260812T160000
-DTEND;TZID=Asia/Shanghai:20260826T225900
+DTEND;TZID=Asia/Shanghai:20260826T165900
 URL:https://actff1.web.sdo.com/project/20260801Moonfire_Faire/4eojmxe6rl2
  s/index.html
 END:VEVENT

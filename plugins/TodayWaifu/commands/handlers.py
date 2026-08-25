@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import random
 import time
 from typing import TYPE_CHECKING, Any, Optional
 
@@ -13,15 +14,18 @@ from ..core import (
     force_cd_remaining,
     format_duration,
     get_daily_limit,
+    get_favor_gain,
     get_propose_cd_seconds,
     is_cd_exempt,
     normalize_id_set,
+    propose_auto_accept_probability,
     propose_cd_remaining,
     today_str,
     upsert_draw_record,
     user_draw_count,
 )
-from ..render import render_rbq_ranking, render_relation_graph
+from ..config import RAPE_COMMAND_TARGET_ID, RAPE_COMMAND_USER_ID
+from ..render import render_rbq_ranking, render_relation_graph, render_waifu_status
 
 if TYPE_CHECKING:
     from ..TodayWaifu import TodayWaifu
@@ -53,6 +57,8 @@ async def _send_wife_result(
     wife_id: str,
     wife_name: str,
     prefix: str,
+    favor: int | None = None,
+    favor_delta: int | None = None,
 ) -> None:
     avatar = await CommonUtil.get_avatar_async(wife_id)
     msg = MessageArray()
@@ -60,6 +66,9 @@ async def _send_wife_result(
     msg.add_text(prefix)
     msg.add_image(avatar)
     msg.add_text(f" {wife_name}({wife_id})")
+    if favor is not None:
+        change = f" · 好感 {'+' if favor_delta is not None and favor_delta >= 0 else ''}{favor_delta}" if favor_delta is not None else ""
+        msg.add_text(f"{change} · 当前好感度 {favor}")
     if plugin.cfg_bool("at_waifu"):
         msg.add_text(" ")
         msg.add_at(wife_id)
@@ -84,6 +93,7 @@ async def cmd_draw(plugin: "TodayWaifu", event) -> None:
                 wife_id=str(last["wife_id"]),
                 wife_name=str(last["wife_name"]),
                 prefix=" 你今天的群友老婆是：",
+                favor=plugin.get_favor(group_id, user_id, str(last["wife_id"])),
             )
         else:
             await plugin.api.qq.post_group_msg(
@@ -93,8 +103,6 @@ async def cmd_draw(plugin: "TodayWaifu", event) -> None:
         return
 
     # 小概率整活
-    import random
-
     rv = random.random()
     if 0.05 <= rv <= 0.12:
         await plugin.api.qq.post_group_msg(group_id=event.group_id, text="今*老婆")
@@ -116,6 +124,8 @@ async def cmd_draw(plugin: "TodayWaifu", event) -> None:
     wife_id = str(wife.user_id)
     wife_name = display_name(wife, wife_id)
     upsert_draw_record(plugin.store, cfg, group_id, user_id, wife_id, wife_name, False)
+    favor_gain = get_favor_gain(cfg, "draw_favor_gain", 1)
+    favor = plugin.change_favor(group_id, user_id, wife_id, favor_gain)
 
     if plugin.cfg_bool("auto_set_other_half"):
         other_used = user_draw_count(plugin.store, group_id, wife_id)
@@ -132,6 +142,8 @@ async def cmd_draw(plugin: "TodayWaifu", event) -> None:
         wife_id=wife_id,
         wife_name=wife_name,
         prefix=" 你今天的群友老婆是：",
+        favor=favor,
+        favor_delta=favor_gain,
     )
 
 
@@ -142,17 +154,49 @@ async def cmd_history(plugin: "TodayWaifu", event) -> None:
     limit = get_daily_limit(cfg)
     records = plugin.store.get_user_today_records(group_id, user_id, today_str())
     remain = max(0, limit - len(records))
-    if not records:
-        await plugin.api.qq.post_group_msg(
-            group_id=event.group_id,
-            text=f"你今天还没抽过老婆哦~ 剩余次数：{remain}/{limit}",
-        )
+    economy = plugin.get_plugin("GroupEconomy")
+    economy_store = getattr(economy, "store", None) if economy else None
+    economy_summary = "未启用"
+    if economy_store is not None:
+        account = economy_store.account(user_id)
+        gift = economy_store.gift_status(group_id, user_id, today_str())
+        gift_summary = "已送礼" if gift else "今日未送礼"
+        economy_summary = f"{account['balance']} · {gift_summary}"
+    card_records = [
+        {
+            "name": str(r["wife_name"]),
+            "user_id": str(r["wife_id"]),
+            "favor": plugin.get_favor(group_id, user_id, str(r["wife_id"])),
+            "tag": "强娶" if r.get("forced") else "抽中",
+            "avatar": f"https://q4.qlogo.cn/headimg_dl?dst_uin={r['wife_id']}&spec=640",
+        }
+        for r in records
+    ]
+    path = await render_waifu_status(
+        user_name=str(event.sender.nickname or user_id),
+        user_avatar=f"https://q4.qlogo.cn/headimg_dl?dst_uin={user_id}&spec=640",
+        records=card_records,
+        remaining=remain,
+        limit=limit,
+        wallet_summary=economy_summary,
+        out_dir=plugin.output_dir,
+    )
+    if path:
+        msg = MessageArray()
+        msg.add_image(str(path))
+        await plugin.api.qq.post_group_msg(group_id=event.group_id, rtf=msg)
         return
-    lines = [f"今日记录（剩余 {remain}/{limit}）："]
-    for i, r in enumerate(records, 1):
-        tag = "强娶" if r.get("forced") else "抽中"
-        lines.append(f"{i}. [{tag}] {r['wife_name']}({r['wife_id']})")
-    await plugin.api.qq.post_group_msg(group_id=event.group_id, text="\n".join(lines))
+
+    if not records:
+        text = f"你今天还没抽过老婆哦~ 剩余次数：{remain}/{limit}"
+    else:
+        lines = [f"今日记录（剩余 {remain}/{limit}）："]
+        for r in records:
+            tag = "强娶" if r.get("forced") else "抽中"
+            favor = plugin.get_favor(group_id, user_id, str(r["wife_id"]))
+            lines.append(f"[{tag}] {r['wife_name']}({r['wife_id']}) · 好感 {favor}")
+        text = "\n".join(lines)
+    await plugin.api.qq.post_group_msg(group_id=event.group_id, text=text)
 
 
 async def cmd_force_marry(plugin: "TodayWaifu", event) -> None:
@@ -214,6 +258,8 @@ async def cmd_force_marry(plugin: "TodayWaifu", event) -> None:
 
     wife_name = display_name(target, target_id)
     upsert_draw_record(plugin.store, cfg, group_id, user_id, target_id, wife_name, True)
+    favor_gain = get_favor_gain(cfg, "force_marry_favor_gain", 1)
+    favor = plugin.change_favor(group_id, user_id, target_id, favor_gain)
     if not is_cd_exempt(user_id):
         plugin.store.set_force_cd(group_id, user_id, time.time())
     plugin.store.add_rbq(group_id, target_id, time.time())
@@ -225,7 +271,70 @@ async def cmd_force_marry(plugin: "TodayWaifu", event) -> None:
         wife_id=target_id,
         wife_name=wife_name,
         prefix=" 强娶成功！今日老婆是：",
+        favor=favor,
+        favor_delta=favor_gain,
     )
+
+
+async def cmd_rape_marry(plugin: "TodayWaifu", event) -> None:
+    """受限的强娶别名：仅允许指定发起人针对指定目标使用。"""
+    user_id = str(event.sender.user_id)
+    target_id = extract_at_user_id(event)
+    if user_id != RAPE_COMMAND_USER_ID or target_id != RAPE_COMMAND_TARGET_ID:
+        return
+    await cmd_force_marry(plugin, event)
+
+
+async def _complete_proposal(
+    plugin: "TodayWaifu", event, proposer_id: str, target_id: str, *, automatic: bool
+) -> None:
+    group_id = str(event.group_id)
+    cfg = plugin.cfg_dict()
+    members = await _member_map(plugin, group_id)
+    proposer = members.get(str(proposer_id))
+    target = members.get(str(target_id))
+    proposer_name = display_name(proposer, str(proposer_id))
+    target_name = display_name(target, str(target_id))
+    upsert_draw_record(
+        plugin.store, cfg, group_id, str(proposer_id), str(target_id), target_name, False
+    )
+    upsert_draw_record(
+        plugin.store, cfg, group_id, str(target_id), str(proposer_id), proposer_name, False
+    )
+    favor_gain = get_favor_gain(cfg, "propose_favor_gain", 3)
+    proposer_favor = plugin.change_favor(
+        group_id, str(proposer_id), str(target_id), favor_gain
+    )
+    target_favor = plugin.change_favor(
+        group_id, str(target_id), str(proposer_id), favor_gain
+    )
+    cd = get_propose_cd_seconds(cfg)
+    if cd > 0:
+        expire = time.time() + cd
+        if not is_cd_exempt(str(proposer_id)):
+            plugin.store.set_propose_cd(
+                group_id, str(proposer_id), expire, str(target_id), "proposer"
+            )
+        if not is_cd_exempt(str(target_id)):
+            plugin.store.set_propose_cd(
+                group_id, str(target_id), expire, str(proposer_id), "accepter"
+            )
+    if automatic:
+        await plugin.api.qq.post_group_msg(
+            group_id=event.group_id,
+            text=(
+                f"{target_name} 被好感度打动，自动同意了 {proposer_name} 的求婚！💍\n"
+                f"双方好感 +{favor_gain}，当前好感：{proposer_favor} / {target_favor}"
+            ),
+        )
+    else:
+        await plugin.api.qq.post_group_msg(
+            group_id=event.group_id,
+            text=(
+                f"恭喜！{proposer_name} 与 {target_name} 求婚成功 💍\n"
+                f"双方好感 +{favor_gain}，当前好感：{proposer_favor} / {target_favor}"
+            ),
+        )
 
 
 async def cmd_propose(plugin: "TodayWaifu", event) -> None:
@@ -244,11 +353,34 @@ async def cmd_propose(plugin: "TodayWaifu", event) -> None:
         )
         return
 
+    members = await _member_map(plugin, group_id)
+    target = members.get(target_id)
+    if target is None:
+        await plugin.api.qq.post_group_msg(
+            group_id=event.group_id, text="找不到对方，确认还在群里吗？"
+        )
+        return
+    if (not plugin.cfg_bool("allow_marry_bot")) and (
+        target_id == str(plugin.bot_id) or bool(getattr(target, "is_robot", False))
+    ):
+        await plugin.api.qq.post_group_msg(
+            group_id=event.group_id, text="不可以向机器人求婚哦"
+        )
+        return
+
     remain = propose_cd_remaining(plugin.store, group_id, user_id)
     if remain:
         await plugin.api.qq.post_group_msg(
             group_id=event.group_id,
             text=f"求婚冷却中，还需 {format_duration(remain)}",
+        )
+        return
+
+    favor = plugin.store.get_favor(group_id, user_id, target_id)
+    probability = propose_auto_accept_probability(cfg, favor)
+    if random.random() < probability:
+        await _complete_proposal(
+            plugin, event, user_id, target_id, automatic=True
         )
         return
 
@@ -289,6 +421,10 @@ async def handle_propose_reply(plugin: "TodayWaifu", event, text: str) -> bool:
         upsert_draw_record(
             plugin.store, cfg, group_id, user_id, event_like_target, wife_name, True
         )
+        favor_gain = get_favor_gain(cfg, "force_marry_favor_gain", 1)
+        favor = plugin.change_favor(
+            group_id, user_id, event_like_target, favor_gain
+        )
         if not is_cd_exempt(user_id):
             plugin.store.set_force_cd(group_id, user_id, time.time())
         plugin.store.add_rbq(group_id, event_like_target, time.time())
@@ -299,6 +435,8 @@ async def handle_propose_reply(plugin: "TodayWaifu", event, text: str) -> bool:
             wife_id=event_like_target,
             wife_name=wife_name,
             prefix=" 强娶成功！今日老婆是：",
+            favor=favor,
+            favor_delta=favor_gain,
         )
         return True
 
@@ -313,33 +451,7 @@ async def handle_propose_reply(plugin: "TodayWaifu", event, text: str) -> bool:
     plugin.clear_propose(group_id, user_id)
 
     if text == "同意":
-        cfg = plugin.cfg_dict()
-        members = await _member_map(plugin, group_id)
-        a = members.get(proposer_id)
-        b = members.get(user_id)
-        a_name = display_name(a, proposer_id)
-        b_name = display_name(b, user_id)
-        upsert_draw_record(
-            plugin.store, cfg, group_id, proposer_id, user_id, b_name, False
-        )
-        upsert_draw_record(
-            plugin.store, cfg, group_id, user_id, proposer_id, a_name, False
-        )
-        cd = get_propose_cd_seconds(cfg)
-        if cd > 0:
-            expire = time.time() + cd
-            if not is_cd_exempt(proposer_id):
-                plugin.store.set_propose_cd(
-                    group_id, proposer_id, expire, user_id, "proposer"
-                )
-            if not is_cd_exempt(user_id):
-                plugin.store.set_propose_cd(
-                    group_id, user_id, expire, proposer_id, "accepter"
-                )
-        await plugin.api.qq.post_group_msg(
-            group_id=event.group_id,
-            text=f"恭喜！{a_name} 与 {b_name} 求婚成功 💍",
-        )
+        await _complete_proposal(plugin, event, proposer_id, user_id, automatic=False)
         return True
 
     # 拒绝 → 提示可转强娶
@@ -437,6 +549,10 @@ async def cmd_help(plugin: "TodayWaifu", event) -> None:
         "我的老婆 / wdlp — 查看今日记录与剩余次数\n"
         "强娶 @用户 / qiangqu — 强娶（有冷却）\n"
         "求婚 @用户 / qh — 求婚，对方同意/拒绝\n"
+        "求婚会按当前好感度概率自动同意，不设最低好感门槛\n"
+        "签到 / 我的钱包 / 买礼物给 @用户 [金额] — 经济与好感养成\n"
+        "抽中关系后送礼可提升或降低好感；默认好感 0~100，求婚概率约 20%~80%\n"
+        "好感获取：抽老婆 +1；求婚成功双方各 +3；强娶发起方 +1\n"
         "关系图 / gxt — 今日羁绊关系图\n"
         "rbq排行 / rbqph — 近30天被强娶排行\n"
         "重置记录 / 重置强娶时间 / 重置求婚时间 — 管理员\n\n"

@@ -142,3 +142,37 @@ async def render_rbq_ranking(
         height=height,
         wait_ms=300,
     )
+
+
+async def render_waifu_status(
+    *,
+    user_name: str,
+    user_avatar: str,
+    records: list[dict[str, Any]],
+    remaining: int,
+    limit: int,
+    wallet_summary: str,
+    out_dir: Path,
+) -> Path | None:
+    """Render the user's current waifu records and related economy status."""
+    html = _render_template(
+        "waifu_status.html",
+        {
+            "user_name": user_name,
+            "user_avatar": user_avatar,
+            "records": records,
+            "remaining": int(remaining),
+            "limit": int(limit),
+            "wallet_summary": wallet_summary,
+        },
+    )
+    height = 330 + max(1, len(records)) * 112
+    out_path = out_dir / f"waifu_status_{uuid.uuid4().hex[:8]}.png"
+    return await _screenshot_html(
+        html,
+        out_path=out_path,
+        width=760,
+        height=height,
+        wait_selector="body.card-ready",
+        wait_ms=200,
+    )
