@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import time
 from pathlib import Path
 from typing import Any, Optional
@@ -48,6 +49,7 @@ class TodayWaifu(NcatBotPlugin):
         self._propose: dict[str, dict[str, dict]] = {}
         self._force_confirm: dict[str, dict[str, dict]] = {}
         self._last_cleanup = 0.0
+        self._background_tasks: set[asyncio.Task] = set()
         days = get_active_days(self.cfg_dict())
         removed = self.store.cleanup_active(
             days, int(self.cfg_dict().get("max_records", 500) or 500)
@@ -75,6 +77,10 @@ class TodayWaifu(NcatBotPlugin):
         )
 
     async def on_close(self):
+        for task in getattr(self, "_background_tasks", set()):
+            task.cancel()
+        if getattr(self, "_background_tasks", None):
+            await asyncio.gather(*self._background_tasks, return_exceptions=True)
         try:
             self.store.close()
         except Exception:
@@ -152,6 +158,25 @@ class TodayWaifu(NcatBotPlugin):
 
     async def _scheduled_output_cleanup(self) -> None:
         self._cleanup_output_dir()
+
+    def _start_background_command(self, handler, event, action: str) -> None:
+        """将网络/绘图命令移出消息处理链，并统一记录后台异常。"""
+        if not hasattr(self, "_background_tasks"):
+            self._background_tasks = set()
+        task = asyncio.create_task(handler(self, event), name=f"todaywaifu-{action}")
+        self._background_tasks.add(task)
+
+        def _done(completed: asyncio.Task) -> None:
+            self._background_tasks.discard(completed)
+            error = None if completed.cancelled() else completed.exception()
+            if error is not None:
+                _log.error(
+                    "[TodayWaifu] 后台命令 %s 执行失败",
+                    action,
+                    exc_info=(type(error), error, error.__traceback__),
+                )
+
+        task.add_done_callback(_done)
 
     # ── 求婚状态 ──────────────────────────────────────────────
 
@@ -324,4 +349,20 @@ class TodayWaifu(NcatBotPlugin):
         }
         handler = dispatch.get(action)
         if handler:
-            await handler(self, event)
+            slow_actions = {
+                "draw": "正在抽取老婆，请稍候...",
+                "history": "正在生成老婆记录，请稍候...",
+                "graph": "正在生成关系图，请稍候...",
+                "rbq": "正在生成排行，请稍候...",
+                "force_marry": "正在查询群成员，请稍候...",
+                "propose": "正在查询群成员，请稍候...",
+            }
+            notice = slow_actions.get(action)
+            if notice:
+                await self.api.qq.post_group_msg(
+                    group_id=event.group_id,
+                    text=notice,
+                )
+                self._start_background_command(handler, event, action)
+            else:
+                await handler(self, event)

@@ -183,6 +183,8 @@ class EmojiStatsPlugin(NcatBotPlugin):
 
     async def on_load(self):
         """异步加载插件"""
+        self._main_loop = asyncio.get_running_loop()
+        self._scheduled_futures = set()
         # 开始加载插件
         # 初始化实例变量
         if self.group_stats is None:
@@ -202,7 +204,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
         if not self.add_scheduled_task(
             "daily_emoji_stats",
             "18:00",
-            callback=self._send_daily_stats_to_all_groups,
+            callback=self._schedule_daily_stats,
         ):
             _log.warning("[EmojiStats] 每日 18:00 表情包统计定时任务注册失败")
         if not self.add_scheduled_task(
@@ -216,6 +218,30 @@ class EmojiStatsPlugin(NcatBotPlugin):
             self.list_scheduled_tasks(),
         )
         # 插件加载完成
+
+    def _schedule_daily_stats(self) -> None:
+        """将定时线程中的异步发送安全地投递到机器人主事件循环。"""
+        loop = getattr(self, "_main_loop", None)
+        if loop is None or loop.is_closed():
+            _log.warning("[EmojiStats] 主事件循环不可用，跳过每日统计发送")
+            return
+        try:
+            current_loop = asyncio.get_running_loop()
+        except RuntimeError:
+            current_loop = None
+        if current_loop is loop:
+            task = loop.create_task(self._send_daily_stats_to_all_groups())
+            self._scheduled_futures.add(task)
+            task.add_done_callback(self._discard_scheduled_future)
+            return
+        future = asyncio.run_coroutine_threadsafe(
+            self._send_daily_stats_to_all_groups(), loop
+        )
+        self._scheduled_futures.add(future)
+        future.add_done_callback(self._discard_scheduled_future)
+
+    def _discard_scheduled_future(self, future) -> None:
+        self._scheduled_futures.discard(future)
 
     def _reinit_(self):
         """插件重新加载时同步处理钩子 - 保护内存中的数据"""
@@ -245,6 +271,9 @@ class EmojiStatsPlugin(NcatBotPlugin):
         self._persist_emoji_stats()
 
     async def on_close(self) -> None:
+        for future in getattr(self, "_scheduled_futures", set()):
+            future.cancel()
+        getattr(self, "_scheduled_futures", set()).clear()
         self._persist_emoji_stats()
 
     def _save_data_to_file(self, data: dict, file_path: str) -> bool:

@@ -4,6 +4,9 @@ from __future__ import annotations
 
 import random
 import time
+import asyncio
+import base64
+import mimetypes
 from typing import TYPE_CHECKING, Any, Optional
 
 from common.utils.CommonUtil import CommonUtil
@@ -47,6 +50,17 @@ async def _member_map(plugin: "TodayWaifu", group_id: str) -> dict[str, Any]:
     )
     members = CommonUtil.parse_group_member_list(members_response)
     return {str(m.user_id): m for m in members}
+
+
+async def _avatar_uri(user_id: str) -> str:
+    path = await CommonUtil.get_avatar_async(str(user_id))
+    try:
+        with open(path, "rb") as avatar_file:
+            data = avatar_file.read()
+        mime = mimetypes.guess_type(path)[0] or "image/jpeg"
+        return f"data:{mime};base64,{base64.b64encode(data).decode('ascii')}"
+    except (OSError, TypeError):
+        return ""
 
 
 async def _send_wife_result(
@@ -162,19 +176,21 @@ async def cmd_history(plugin: "TodayWaifu", event) -> None:
         gift = economy_store.gift_status(group_id, user_id, today_str())
         gift_summary = "已送礼" if gift else "今日未送礼"
         economy_summary = f"{account['balance']} · {gift_summary}"
-    card_records = [
-        {
+    avatar_paths = await asyncio.gather(
+        *(_avatar_uri(str(r["wife_id"])) for r in records)
+    )
+    card_records = []
+    for r, avatar in zip(records, avatar_paths):
+        card_records.append({
             "name": str(r["wife_name"]),
             "user_id": str(r["wife_id"]),
             "favor": plugin.get_favor(group_id, user_id, str(r["wife_id"])),
             "tag": "强娶" if r.get("forced") else "抽中",
-            "avatar": f"https://q4.qlogo.cn/headimg_dl?dst_uin={r['wife_id']}&spec=640",
-        }
-        for r in records
-    ]
+            "avatar": avatar,
+        })
     path = await render_waifu_status(
         user_name=str(event.sender.nickname or user_id),
-        user_avatar=f"https://q4.qlogo.cn/headimg_dl?dst_uin={user_id}&spec=640",
+        user_avatar=(await _avatar_uri(user_id)),
         records=card_records,
         remaining=remain,
         limit=limit,
@@ -485,11 +501,16 @@ async def cmd_graph(plugin: "TodayWaifu", event) -> None:
         user_map.setdefault(str(r["user_id"]), str(r["user_id"]))
         user_map.setdefault(str(r["wife_id"]), str(r.get("wife_name") or r["wife_id"]))
 
+    avatar_ids = {str(r["user_id"]) for r in records} | {str(r["wife_id"]) for r in records}
+    avatar_values = await asyncio.gather(*(_avatar_uri(uid) for uid in avatar_ids))
+    avatar_map = dict(zip(avatar_ids, avatar_values))
+
     path = await render_relation_graph(
         group_id=group_id,
         group_name=group_name,
         records=records,
         user_map=user_map,
+        avatar_map=avatar_map,
         iterations=int(plugin.cfg_dict().get("iterations", 140) or 140),
         out_dir=plugin.output_dir,
     )
@@ -513,14 +534,17 @@ async def cmd_rbq(plugin: "TodayWaifu", event) -> None:
         )
         return
     members = await _member_map(plugin, group_id)
+    avatar_values = await asyncio.gather(
+        *(_avatar_uri(str(uid)) for uid, _count in ranking_raw)
+    )
     ranking = []
-    for i, (uid, count) in enumerate(ranking_raw, 1):
+    for i, ((uid, count), avatar) in enumerate(zip(ranking_raw, avatar_values), 1):
         ranking.append(
             {
                 "rank": i,
                 "name": display_name(members.get(uid), uid),
                 "count": count,
-                "avatar": f"https://q4.qlogo.cn/headimg_dl?dst_uin={uid}&spec=100",
+                "avatar": avatar,
             }
         )
     path = await render_rbq_ranking(

@@ -333,7 +333,8 @@ class BilibiliParser(BaseParser):
         if not isinstance(opus_info, dict):
             raise ParseException("获取图文动态信息失败")
         # 转换为结构体
-        opus_data = convert(opus_info, OpusItem)
+        # Bilibili occasionally returns numeric fields such as pub_ts as strings.
+        opus_data = convert(opus_info, OpusItem, strict=False)
         _log.debug(f"opus_data: {opus_data}")
         author = self.create_author(*opus_data.name_avatar)
 

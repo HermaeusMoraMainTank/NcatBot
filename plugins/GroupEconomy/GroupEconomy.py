@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import io
+import asyncio
 import random
 import re
 from datetime import date
@@ -16,7 +17,7 @@ from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.types import At, Image, MessageArray
 
-from .config import DEFAULT_CONFIG, level_for_score
+from .config import DEFAULT_CONFIG, level_for_xp
 from .render import (
     cache_is_fresh,
     cache_key,
@@ -32,11 +33,16 @@ HELP = format_help(
         "经济帮助 / 钱包帮助 / 签到帮助：查看完整使用说明",
         "签到：每日领取钱包和经验，返回签到图片",
         "我的钱包 / 查看我的钱包：查询余额和等级",
-        "查看等级排名：跨群经验排名",
-        "查看钱包排名：钱包排名",
-        "买礼物给 / 送礼物给 @用户 [金额]：随机扣除 1~30，提升老婆好感",
+        "查看等级排名 / 查看等级排行：跨群经验排名",
+        "查看钱包排名 / 查看钱包排行：钱包排名",
+        "买礼物给 / 送礼物给 @用户 [金额]：随机扣除 30~60，提升老婆好感",
+        "充钱 @用户 金额：正数增加、负数扣减指定用户钱包余额（仅限授权用户）",
+        "打劫 @用户 或 打劫 QQ号：双方余额至少1000；失败赔偿对方，每日限一次",
+        "钓鱼帮助：查看钓鱼、背包、商店、装备、交易和合成说明",
     ],
 )
+
+GRANT_USERS = {"273421673"}
 
 
 class GroupEconomy(NcatBotPlugin):
@@ -108,14 +114,16 @@ class GroupEconomy(NcatBotPlugin):
         avatar = await CommonUtil.get_avatar_async(user_id)
         background = await self._background()
         output = self.card_dir / f"signin_{user_id}_{date.today().isoformat()}.png"
-        render_sign_card(
+        await asyncio.to_thread(
+            render_sign_card,
             background_path=background,
             avatar_path=avatar,
             nickname=str(account.get("nickname") or event.sender.nickname or user_id),
             reward=int(result.get("reward", 0)),
             balance=int(account["balance"]),
             score=int(account["score"]),
-            level=level_for_score(int(account["score"])),
+            xp=int(account["xp"]),
+            level=level_for_xp(int(account["xp"])),
             rank=rank,
             streak=int(result.get("streak", 1)),
             output_path=output,
@@ -138,13 +146,15 @@ class GroupEconomy(NcatBotPlugin):
         avatar = await CommonUtil.get_avatar_async(user_id)
         background = await self._background()
         output = self.card_dir / f"wallet_{user_id}_{date.today().isoformat()}.png"
-        render_wallet_card(
+        await asyncio.to_thread(
+            render_wallet_card,
             background_path=background,
             avatar_path=avatar,
             nickname=str(account.get("nickname") or event.sender.nickname or user_id),
             balance=int(account["balance"]),
             score=int(account["score"]),
-            level=level_for_score(int(account["score"])),
+            xp=int(account["xp"]),
+            level=level_for_xp(int(account["xp"])),
             rank=rank,
             streak=int(last.get("streak", 0)) if last else 0,
             total_earned=int(account["total_earned"]),
@@ -164,8 +174,8 @@ class GroupEconomy(NcatBotPlugin):
         low = max(0, int(self.cfg("checkin_min_reward") or 10))
         high = max(low, int(self.cfg("checkin_max_reward") or 30))
         account = self.store.account(str(event.sender.user_id))
-        level = level_for_score(int(account["score"]))
-        reward = random.randint(low + level * 5, high + level * 5)
+        level = level_for_xp(int(account["xp"]))
+        reward = random.randint(low + level * 2, high + level * 2)
         result = self.store.checkin(str(event.sender.user_id), str(event.sender.nickname or ""), reward)
         if not result["ok"]:
             last = self.store.last_checkin(str(event.sender.user_id))
@@ -254,13 +264,60 @@ class GroupEconomy(NcatBotPlugin):
             favor_text = f"好感变化 {favor_delta:+d}"
         await event.reply(text=f"你花了 {amount} 钱买礼物送给 {target_id}，对方{mood}，{favor_text}，余额 {result['balance']}")
 
+    async def _grant(self, event) -> None:
+        """为群成员充值；权限固定为指定 QQ 用户。"""
+        if str(event.sender.user_id) not in GRANT_USERS:
+            return
+
+        target_id = self._at_user(event)
+        if not target_id:
+            await event.reply(text="用法：充钱 @用户 金额")
+            return
+
+        in_group = await self._target_in_group(event, target_id)
+        if in_group is not True:
+            message = (
+                "找不到对方，充钱目标必须是当前群成员"
+                if in_group is False
+                else "暂时无法确认对方是否在群内，请稍后再试"
+            )
+            await event.reply(text=message)
+            return
+
+        text_parts = [
+            str(getattr(segment, "text", "") or "")
+            for segment in event.message or []
+            if getattr(segment, "text", None)
+        ]
+        numbers = re.findall(r"[-+]?\d+", " ".join(text_parts))
+        if len(numbers) != 1 or int(numbers[0]) == 0:
+            await event.reply(text="用法：充钱 @用户 金额，金额不能为0")
+            return
+
+        amount = int(numbers[0])
+        if amount > 0:
+            result = self.store.grant(target_id, amount, reason="admin_grant")
+            await event.reply(text=f"已为 {target_id} 增加 {amount} 钱包余额，当前余额 {result['balance']}")
+            return
+
+        result = self.store.change_balance(target_id, amount, reason="admin_deduct")
+        if not result["ok"]:
+            await event.reply(text=f"扣减失败，{target_id} 当前余额仅有 {result['balance']} 金币")
+            return
+        await event.reply(text=f"已为 {target_id} 扣减 {-amount} 钱包余额，当前余额 {result['balance']}")
+
     async def _ranking(self, event, *, wallet: bool = False) -> None:
         rows = self.store.wallet_ranking(int(self.cfg("ranking_limit") or 10)) if wallet else self.store.global_ranking(int(self.cfg("ranking_limit") or 10))
         for row in rows:
-            row["level"] = level_for_score(int(row["score"]))
-            row["avatar_path"] = await CommonUtil.get_avatar_async(str(row["user_id"]))
+            row["level"] = level_for_xp(int(row["xp"]))
+        avatar_paths = await asyncio.gather(
+            *(CommonUtil.get_avatar_async(str(row["user_id"])) for row in rows)
+        )
+        for row, avatar_path in zip(rows, avatar_paths):
+            row["avatar_path"] = avatar_path
         output = self.card_dir / ("global_wallet_ranking.png" if wallet else "global_level_ranking.png")
-        render_ranking(
+        await asyncio.to_thread(
+            render_ranking,
             rows,
             output,
             wallet=wallet,
@@ -280,13 +337,19 @@ class GroupEconomy(NcatBotPlugin):
                 "我的钱包",
                 "查看我的钱包",
                 "查看等级排名",
+                "查看等级排行",
                 "查看钱包排名",
+                "查看钱包排行",
+                "充钱",
+                "打劫",
             ),
         ):
             await event.reply(text=HELP, at_sender=False)
         elif text == "签到":
+            await event.reply(text="正在生成签到卡片，请稍候...")
             await self._checkin(event)
         elif text in ("我的钱包", "查看我的钱包", "查看钱包余额"):
+            await event.reply(text="正在生成钱包卡片，请稍候...")
             account = self.store.account(str(event.sender.user_id))
             await self._send_wallet_card(
                 event,
@@ -295,9 +358,13 @@ class GroupEconomy(NcatBotPlugin):
                 main_label="钱包余额",
                 notice=f"累计收入 {account['total_earned']} · 累计支出 {account['total_spent']}",
             )
-        elif text == "查看等级排名":
+        elif text in ("查看等级排名", "查看等级排行"):
+            await event.reply(text="正在生成等级排行榜，请稍候...")
             await self._ranking(event)
-        elif text == "查看钱包排名":
+        elif text in ("查看钱包排名", "查看钱包排行"):
+            await event.reply(text="正在生成钱包排行榜，请稍候...")
             await self._ranking(event, wallet=True)
         elif text.startswith(("买礼物给", "送礼物给")):
             await self._gift(event)
+        elif text.startswith("充钱"):
+            await self._grant(event)

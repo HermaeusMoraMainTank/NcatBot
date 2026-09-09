@@ -1,10 +1,14 @@
-"""插件命令前缀与帮助文本的轻量工具。"""
+"""插件命令前缀与帮助文本的轻量工具。
+
+帮助请求必须绑定到具体命令，例如 ``钓鱼帮助``；裸 ``帮助`` 不属于任何插件。
+"""
 
 from __future__ import annotations
 
 from typing import Any, Iterable, Sequence
 
-DEFAULT_HELP_EXTRA = frozenset({"帮助", "help"})
+HELP_SUFFIXES = ("帮助", "help")
+HELP_SEPARATORS = ("", " ")
 
 
 def cfg_value(plugin: Any, key: str, default: Any, defaults: dict[str, Any]) -> Any:
@@ -38,22 +42,25 @@ def is_help_message(
     text: str,
     *,
     command_names: Iterable[str] = (),
-    extra_triggers: Iterable[str] = DEFAULT_HELP_EXTRA,
 ) -> bool:
-    """匹配 `<命令> 帮助` / `<命令> help`，或单独的「帮助」「help」。"""
+    """匹配具体命令的帮助请求。
+
+    只有 ``<命令>帮助`` / ``<命令> 帮助`` 和对应的 ``help`` 形式会匹配；
+    裸 ``帮助`` / ``help`` 必须被拒绝，避免一条通用消息唤起所有插件。
+    """
     t = (text or "").strip()
     if not t:
         return False
     lower = t.lower()
-    extras = set(extra_triggers) | DEFAULT_HELP_EXTRA
-    if t in extras or lower in {x.lower() for x in extras}:
-        return True
     for cmd in command_names:
         c = cmd.strip()
         if not c:
             continue
-        if t == f"{c} 帮助" or lower == f"{c} help".lower():
-            return True
+        for separator in HELP_SEPARATORS:
+            for suffix in HELP_SUFFIXES:
+                expected = f"{c}{separator}{suffix}"
+                if t == expected or lower == expected.lower():
+                    return True
     return False
 
 

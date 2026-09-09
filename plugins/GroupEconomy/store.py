@@ -6,6 +6,8 @@ import time
 from datetime import date, timedelta
 from pathlib import Path
 
+from .config import XP_PER_CHECKIN
+
 
 class EconomyStore:
     """账户、签到和礼物的单库事务存储。"""
@@ -22,6 +24,7 @@ class EconomyStore:
                 user_id TEXT PRIMARY KEY,
                 balance INTEGER NOT NULL DEFAULT 0,
                 score INTEGER NOT NULL DEFAULT 0,
+                xp INTEGER NOT NULL DEFAULT 0,
                 total_earned INTEGER NOT NULL DEFAULT 0,
                 total_spent INTEGER NOT NULL DEFAULT 0,
                 nickname TEXT NOT NULL DEFAULT '',
@@ -59,6 +62,13 @@ class EconomyStore:
             );
             """
         )
+        columns = {row[1] for row in self._conn.execute("PRAGMA table_info(accounts)")}
+        if "xp" not in columns:
+            self._conn.execute("ALTER TABLE accounts ADD COLUMN xp INTEGER NOT NULL DEFAULT 0")
+        self._conn.execute(
+            "UPDATE accounts SET xp = score * ? WHERE xp = 0 AND score > 0",
+            (XP_PER_CHECKIN,),
+        )
         self._conn.commit()
 
     def close(self) -> None:
@@ -81,7 +91,7 @@ class EconomyStore:
             try:
                 self._ensure_account(user_id, nickname)
                 old = self._conn.execute(
-                    "SELECT balance, score FROM accounts WHERE user_id = ?",
+                    "SELECT balance, score, xp FROM accounts WHERE user_id = ?",
                     (str(user_id),),
                 ).fetchone()
                 previous = self._conn.execute(
@@ -109,9 +119,9 @@ class EconomyStore:
                     self._conn.commit()
                     return {"ok": False, "balance": int(row["balance"]), "score": int(row["score"]), "streak": streak}
                 self._conn.execute(
-                    """UPDATE accounts SET balance = balance + ?, score = score + 1,
+                    """UPDATE accounts SET balance = balance + ?, score = score + 1, xp = xp + ?,
                        total_earned = total_earned + ?, updated_at = ? WHERE user_id = ?""",
-                    (int(reward), int(reward), time.time(), str(user_id)),
+                    (int(reward), XP_PER_CHECKIN, int(reward), time.time(), str(user_id)),
                 )
                 self._conn.execute(
                     """INSERT INTO ledger(user_id, delta, reason, request_id, created_at)
@@ -119,7 +129,7 @@ class EconomyStore:
                     (str(user_id), int(reward), f"checkin:{user_id}:{day}", time.time()),
                 )
                 self._conn.commit()
-                return {"ok": True, "balance": int(old["balance"]) + int(reward), "score": int(old["score"]) + 1, "streak": streak, "reward": int(reward)}
+                return {"ok": True, "balance": int(old["balance"]) + int(reward), "score": int(old["score"]) + 1, "xp": int(old["xp"]) + XP_PER_CHECKIN, "streak": streak, "reward": int(reward)}
             except Exception:
                 self._conn.rollback()
                 raise
@@ -163,11 +173,117 @@ class EconomyStore:
                 self._conn.rollback()
                 raise
 
+    def change_balance(
+        self,
+        user_id: str,
+        delta: int,
+        *,
+        reason: str,
+        related_user_id: str = "",
+    ) -> dict:
+        """Atomically change a wallet balance and append a ledger entry."""
+        delta = int(delta)
+        if delta == 0:
+            raise ValueError("balance delta must not be zero")
+        user_id = str(user_id)
+        with self._lock:
+            self._conn.execute("BEGIN IMMEDIATE")
+            try:
+                self._ensure_account(user_id)
+                row = self._conn.execute(
+                    "SELECT balance FROM accounts WHERE user_id = ?", (user_id,)
+                ).fetchone()
+                old_balance = int(row["balance"])
+                new_balance = old_balance + delta
+                if new_balance < 0:
+                    self._conn.rollback()
+                    return {"ok": False, "balance": old_balance, "reason": "insufficient"}
+                request_id = f"balance:{reason}:{user_id}:{time.time_ns()}"
+                self._conn.execute(
+                    """UPDATE accounts SET balance = ?, total_earned = total_earned + ?,
+                       total_spent = total_spent + ?, updated_at = ? WHERE user_id = ?""",
+                    (new_balance, max(delta, 0), max(-delta, 0), time.time(), user_id),
+                )
+                self._conn.execute(
+                    """INSERT INTO ledger
+                       (user_id, delta, reason, related_user_id, request_id, created_at)
+                       VALUES (?, ?, ?, ?, ?, ?)""",
+                    (user_id, delta, str(reason), str(related_user_id), request_id, time.time()),
+                )
+                self._conn.commit()
+                return {"ok": True, "delta": delta, "balance": new_balance}
+            except Exception:
+                self._conn.rollback()
+                raise
+
+    def transfer_balance(
+        self,
+        sender_id: str,
+        receiver_id: str,
+        amount: int,
+        *,
+        reason: str,
+    ) -> dict:
+        """Atomically transfer wallet balance and append both ledger entries."""
+        amount = int(amount)
+        sender_id = str(sender_id)
+        receiver_id = str(receiver_id)
+        if amount <= 0 or sender_id == receiver_id:
+            return {"ok": False, "reason": "invalid"}
+        with self._lock:
+            self._conn.execute("BEGIN IMMEDIATE")
+            try:
+                self._ensure_account(sender_id)
+                self._ensure_account(receiver_id)
+                rows = self._conn.execute(
+                    "SELECT user_id, balance FROM accounts WHERE user_id IN (?, ?)",
+                    (sender_id, receiver_id),
+                ).fetchall()
+                balances = {str(row["user_id"]): int(row["balance"]) for row in rows}
+                sender_balance = balances[sender_id]
+                receiver_balance = balances[receiver_id]
+                if sender_balance < amount:
+                    self._conn.rollback()
+                    return {"ok": False, "balance": sender_balance, "reason": "insufficient"}
+
+                now = time.time()
+                self._conn.execute(
+                    """UPDATE accounts SET balance = balance - ?, total_spent = total_spent + ?, updated_at = ?
+                       WHERE user_id = ?""",
+                    (amount, amount, now, sender_id),
+                )
+                self._conn.execute(
+                    """UPDATE accounts SET balance = balance + ?, total_earned = total_earned + ?, updated_at = ?
+                       WHERE user_id = ?""",
+                    (amount, amount, now, receiver_id),
+                )
+                request_id = f"transfer:{reason}:{sender_id}:{receiver_id}:{time.time_ns()}"
+                self._conn.execute(
+                    """INSERT INTO ledger(user_id, delta, reason, related_user_id, request_id, created_at)
+                       VALUES (?, ?, ?, ?, ?, ?)""",
+                    (sender_id, -amount, reason, receiver_id, f"{request_id}:sender", now),
+                )
+                self._conn.execute(
+                    """INSERT INTO ledger(user_id, delta, reason, related_user_id, request_id, created_at)
+                       VALUES (?, ?, ?, ?, ?, ?)""",
+                    (receiver_id, amount, reason, sender_id, f"{request_id}:receiver", now),
+                )
+                self._conn.commit()
+                return {
+                    "ok": True,
+                    "amount": amount,
+                    "sender_balance": sender_balance - amount,
+                    "receiver_balance": receiver_balance + amount,
+                }
+            except Exception:
+                self._conn.rollback()
+                raise
+
     def global_ranking(self, limit: int = 10) -> list[dict]:
         with self._lock:
             rows = self._conn.execute(
-                """SELECT user_id, nickname, score, balance, total_earned, total_spent
-                   FROM accounts ORDER BY score DESC, user_id ASC LIMIT ?""",
+                """SELECT user_id, nickname, score, xp, balance, total_earned, total_spent
+                   FROM accounts ORDER BY xp DESC, user_id ASC LIMIT ?""",
                 (max(1, int(limit)),),
             ).fetchall()
         return [dict(row) for row in rows]
@@ -176,7 +292,7 @@ class EconomyStore:
         with self._lock:
             row = self._conn.execute(
                 """SELECT COUNT(*) + 1 AS rank FROM accounts
-                   WHERE score > (SELECT score FROM accounts WHERE user_id = ?)""",
+                   WHERE xp > (SELECT xp FROM accounts WHERE user_id = ?)""",
                 (str(user_id),),
             ).fetchone()
         return int(row["rank"]) if row else 1
@@ -184,7 +300,7 @@ class EconomyStore:
     def wallet_ranking(self, limit: int = 10) -> list[dict]:
         with self._lock:
             rows = self._conn.execute(
-                """SELECT user_id, nickname, score, balance, total_earned, total_spent FROM accounts
+                """SELECT user_id, nickname, score, xp, balance, total_earned, total_spent FROM accounts
                    ORDER BY balance DESC, total_earned DESC, user_id ASC LIMIT ?""",
                 (max(1, int(limit)),),
             ).fetchall()

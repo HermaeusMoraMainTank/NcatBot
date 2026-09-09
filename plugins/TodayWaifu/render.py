@@ -90,6 +90,7 @@ async def render_relation_graph(
     user_map: dict[str, str],
     iterations: int,
     out_dir: Path,
+    avatar_map: dict[str, str] | None = None,
 ) -> Path | None:
     unique_nodes: set[str] = set()
     for r in records:
@@ -107,6 +108,7 @@ async def render_relation_graph(
             "group_id": group_id,
             "group_name": group_name,
             "user_map_json": json.dumps(user_map, ensure_ascii=False),
+            "avatar_map_json": json.dumps(avatar_map or {}, ensure_ascii=False),
             "records_json": json.dumps(records, ensure_ascii=False),
             "iterations": int(iterations),
         },

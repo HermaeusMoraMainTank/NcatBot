@@ -1,0 +1,20 @@
+{
+  "mcfish_wealth_bobber": {"name": "财富浮标", "file": "icons/mcfish_wealth_bobber.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_tough_tackle": {"name": "坚韧钓组", "file": "icons/mcfish_tough_tackle.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_gold_magnet": {"name": "黄金磁石", "file": "icons/mcfish_gold_magnet.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_magic_bait": {"name": "魔法鱼饵", "file": "icons/mcfish_magic_bait.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_lucky_starfish": {"name": "幸运海星", "file": "icons/mcfish_lucky_starfish.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_hidden_lure": {"name": "隐秘诱饵", "file": "icons/mcfish_hidden_lure.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_universal_bait": {"name": "万能鱼饵", "file": "icons/mcfish_universal_bait.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_moon_carp_king": {"name": "月影巨鲤", "file": "icons/mcfish_moon_carp_king.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_river_carp_king": {"name": "河湾巨鲤", "file": "icons/mcfish_river_carp_king.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_deep_blackfin_king": {"name": "深海黑鳍", "file": "icons/mcfish_deep_blackfin_king.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_deep_lanternfish_king": {"name": "深海灯笼鱼", "file": "icons/mcfish_deep_lanternfish_king.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_ruin_copper_scale_king": {"name": "遗迹铜鳞", "file": "icons/mcfish_ruin_copper_scale_king.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_ruin_gold_scale_king": {"name": "遗迹金鳞鱼", "file": "icons/mcfish_ruin_gold_scale_king.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_storm_whelp_king": {"name": "风暴幼龙", "file": "icons/mcfish_storm_whelp_king.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_storm_seadragon_king": {"name": "风暴海龙", "file": "icons/mcfish_storm_seadragon_king.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_luminous_ray": {"name": "幽光鳐", "file": "icons/mcfish_luminous_ray.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_starsand_eel": {"name": "星砂鳗", "file": "icons/mcfish_starsand_eel.png", "size": [64, 64], "source": "project-original", "license": "MIT"},
+  "mcfish_cloudtide_shark": {"name": "云潮鲨", "file": "icons/mcfish_cloudtide_shark.png", "size": [64, 64], "source": "project-original", "license": "MIT"}
+}

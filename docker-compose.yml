@@ -2,16 +2,16 @@ version: '3.8'
 
 services:
   napcat:
-    image: mlikiowa/napcat-docker:latest
+    image: mlikiowa/napcat-docker:pr-1768-e310a57
     container_name: napcat
     restart: always
     ports:
       - "6099:6099"
       - "3001:3001"
     environment:
-      - ACCOUNT=3555202423
       - NAPCAT_GID=0
       - NAPCAT_UID=0
+      - WEBUI_TOKEN=napcat
     volumes:
       - ./napcat/config:/app/napcat/config
-      - ./napcat/data:/app/napcat/.login
+      - ./napcat/QQ:/app/.config/QQ
