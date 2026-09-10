@@ -98,6 +98,7 @@ MCFISH_HELP = """一款钓鱼模拟器
 - 钓鱼看板 / 钓鱼商店 / 钓鱼背包
 - 钓鱼时钟（只在查询时发送图片，显示当前和最近5次鱼王窗口，不主动通知）
 - 钓鱼图鉴 或 钓鱼图鉴 鱼名
+- 查看上次钓鱼结果
 - 购买xxx [数量]
 - 出售xxx [数量]，可一次出售多个物品
 - 出售所有垃圾
@@ -230,6 +231,7 @@ class McFish(NcatBotPlugin):
         state.setdefault("emergency_pole_day", "")
         state.setdefault("emergency_pole_count", 1 if state.get("emergency_pole_day") else 0)
         state.setdefault("starter_pole_day", "")
+        state.setdefault("last_fishing_result", None)
         if state["fish_day"] != today:
             state["fish_day"], state["fish_today"] = today, 0
             state["fishing_zone"] = daily_fishing_zone()
@@ -1004,6 +1006,27 @@ class McFish(NcatBotPlugin):
         self._fishing_tasks[uid] = asyncio.create_task(run())
         await asyncio.sleep(0)
 
+    async def _show_last_fishing_result(self, event, state: dict) -> None:
+        task = getattr(self, "_fishing_tasks", {}).get(str(event.sender.user_id))
+        if task is not None and not task.done():
+            await event.reply(text="你正在钓鱼，请稍后再试", at_sender=False)
+            return
+        result = state.get("last_fishing_result")
+        if not isinstance(result, dict) or not result.get("text"):
+            await event.reply(text="暂无上次钓鱼结果", at_sender=False)
+            return
+        image = result.get("image")
+        if image:
+            await event.reply(rtf=MessageArray([PlainText(text=str(result["text"])), Image(file=str(image))]))
+        else:
+            await event.reply(text=str(result["text"]), at_sender=False)
+
+    async def _send_fishing_result(self, event, result_text: str, image: Path | None = None) -> None:
+        if image:
+            await event.reply(rtf=MessageArray([PlainText(text=result_text), Image(file=str(image))]))
+        else:
+            await event.reply(text=result_text)
+
     def _has_pole(self, state: dict) -> bool:
         return bool(state.get("equip")) or any(
             name in POLES and isinstance(value, list) and value
@@ -1233,10 +1256,12 @@ class McFish(NcatBotPlugin):
 
     async def _handle_message(self, event) -> None:
         text = (event.raw_message or self._text(event)).strip()
-        if not text or not (text.startswith(("进行", "购买", "出售", "装备", "附魔", "合成", "消除", "修复", "维修")) or text in ("花费100购买鱼竿", "钓鱼帮助", "钓鱼背包", "钓鱼商店", "钓鱼看板", "钓鱼时钟", "钓鱼图鉴", "出售所有垃圾", "当前装备概率明细", "查看钓鱼规则") or text.startswith("钓鱼图鉴 ")):
+        if not text or not (text.startswith(("进行", "购买", "出售", "装备", "附魔", "合成", "消除", "修复", "维修")) or text in ("花费100购买鱼竿", "钓鱼帮助", "钓鱼背包", "钓鱼商店", "钓鱼看板", "钓鱼时钟", "钓鱼图鉴", "查看上次钓鱼结果", "出售所有垃圾", "当前装备概率明细", "查看钓鱼规则") or text.startswith("钓鱼图鉴 ")):
             return
         uid = str(event.sender.user_id)
         state = self._state(uid)
+        if text == "查看上次钓鱼结果":
+            await self._show_last_fishing_result(event, state); return
         if text in ("钓鱼背包",):
             output = await asyncio.to_thread(self._render_pack_image, uid, state)
             await self._send_original_message(event, MessageArray([Image(file=str(output))])); return
@@ -2002,10 +2027,12 @@ class McFish(NcatBotPlugin):
             result_text = f"你进行了{fish_attempts}次钓鱼,结果如下:\n"
             result_text += "".join(f"{name} : {count}\n" for name, count in results.items())
             result_text += result_note
-        if len(results) == 1 and single_image:
-            await event.reply(rtf=MessageArray([PlainText(text=result_text), Image(file=str(single_image))]))
-        else:
-            await event.reply(text=result_text)
+        state["last_fishing_result"] = {
+            "text": result_text,
+            "image": str(single_image) if len(results) == 1 and single_image else None,
+        }
+        self._save(uid, state)
+        await self._send_fishing_result(event, result_text, single_image if len(results) == 1 else None)
 
     async def _buy(self, event, state: dict, item_text: str) -> None:
         uid = str(event.sender.user_id); match = re.fullmatch(r"(.+?)(?:\s+(\d+))?", item_text); name = match.group(1) if match else item_text; number = int(match.group(2) or 1) if match else 1
