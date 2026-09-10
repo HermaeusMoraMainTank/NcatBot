@@ -895,6 +895,74 @@ def test_mcfish_craft_all_preserves_remainder_for_non_multiple_of_three(monkeypa
     assert "剩余 1 根材料未参与合成" in event.reply.await_args.kwargs["text"]
 
 
+
+def test_mcfish_craft_from_fresh_materials_keeps_full_durability_and_zero_enchant(monkeypatch):
+    """Crafting uses the target rod's full durability, so fresh materials always give the same stats."""
+    import asyncio
+    import importlib
+
+    mcfish_module = importlib.import_module("McFish.McFish")
+    monkeypatch.setattr(mcfish_module.random, "randrange", lambda _stop: 0)
+    plugin = McFish.__new__(McFish)
+    plugin._save = lambda *_args: None
+    plugin._choose = AsyncMock(return_value=SimpleNamespace(key=None))
+    state = {"pack": {"木竿": [{"durable": 30, "maintenance": 0, "induce": 0, "favor": 0}] * 3}}
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+
+    asyncio.run(plugin._craft(event, state, "铁竿"))
+
+    assert state["pack"]["铁竿"] == [{"durable": 50, "maintenance": 0, "induce": 0, "favor": 0}]
+    assert event.reply.await_args.kwargs["text"] == "成功合成：1 个铁竿\n属性: 50/0/0/0"
+
+
+def test_mcfish_craft_averages_material_enchant_levels_and_drops_wear(monkeypatch):
+    """Enchant levels are averaged (floor) while material durability and maintenance are discarded."""
+    import asyncio
+    import importlib
+
+    mcfish_module = importlib.import_module("McFish.McFish")
+    monkeypatch.setattr(mcfish_module.random, "randrange", lambda _stop: 0)
+    plugin = McFish.__new__(McFish)
+    plugin._save = lambda *_args: None
+    plugin._choose = AsyncMock(return_value=SimpleNamespace(key=None))
+    state = {"pack": {"木竿": [
+        {"durable": 30, "maintenance": 0, "induce": 3, "favor": 0},
+        {"durable": 12, "maintenance": 4, "induce": 0, "favor": 1},
+        {"durable": 3, "maintenance": 9, "induce": 0, "favor": 0},
+    ]}}
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+
+    asyncio.run(plugin._craft(event, state, "铁竿"))
+
+    assert state["pack"]["铁竿"] == [{"durable": 50, "maintenance": 0, "induce": 1, "favor": 0}]
+    assert event.reply.await_args.kwargs["text"] == "成功合成：1 个铁竿\n属性: 50/0/1/0"
+
+
+def test_mcfish_craft_all_averages_each_batch_of_three_separately(monkeypatch):
+    """Suoha averages every triple on its own, matching the original plugin batch loop."""
+    import asyncio
+    import importlib
+
+    mcfish_module = importlib.import_module("McFish.McFish")
+    monkeypatch.setattr(mcfish_module.random, "randrange", lambda _stop: 0)
+    plugin = McFish.__new__(McFish)
+    plugin._save = lambda *_args: None
+    plugin._choose = AsyncMock(return_value=SimpleNamespace(key="all"))
+    state = {"pack": {"木竿": [
+        {"durable": 30, "maintenance": 0, "induce": 3, "favor": 0},
+        {"durable": 30, "maintenance": 0, "induce": 3, "favor": 0},
+        {"durable": 30, "maintenance": 0, "induce": 3, "favor": 0},
+        {"durable": 30, "maintenance": 0, "induce": 0, "favor": 3},
+        {"durable": 30, "maintenance": 0, "induce": 0, "favor": 3},
+        {"durable": 30, "maintenance": 0, "induce": 0, "favor": 3},
+    ]}}
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+
+    asyncio.run(plugin._craft(event, state, "铁竿"))
+
+    assert sorted((pole["induce"], pole["favor"]) for pole in state["pack"]["铁竿"]) == [(0, 3), (3, 0)]
+
+
 def test_mcfish_help_explains_emergency_pole_is_independent_of_shop():
     assert "花费100购买鱼竿" in MCFISH_HELP
     assert "最多可以购买3次" in MCFISH_HELP
