@@ -13,7 +13,13 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "plugins"))
 
 from GroupEconomy.store import EconomyStore  # noqa: E402
-from McFish.McFish import MCFISH_HELP, SHOP_WOOD_PRICE, FishKingWindow, McFish  # noqa: E402
+from McFish.McFish import (  # noqa: E402
+    MCFISH_HELP,
+    MCFISH_SPECIAL_MECHANICS,
+    SHOP_WOOD_PRICE,
+    FishKingWindow,
+    McFish,
+)
 from Robbery.Robbery import Robbery  # noqa: E402
 
 
@@ -1006,6 +1012,56 @@ def test_mcfish_help_explains_emergency_pole_is_independent_of_shop():
     assert "最多可以购买3次" in MCFISH_HELP
     assert "每3天最多补偿1根木竿" in MCFISH_HELP
     assert "可一次出售多个物品" in MCFISH_HELP
+
+
+def test_mcfish_help_documents_every_special_mechanic():
+    """帮助里的特殊机制清单必须覆盖美西螈等全部特殊规则。"""
+    text = "\n".join(MCFISH_SPECIAL_MECHANICS)
+    for keyword in (
+        "美西螈",
+        "每竿要吃3条鱼",
+        "永久失去",
+        "一次获得5个",
+        "海豚",
+        "超过100条",
+        "满75点自动获得1本净化书",
+        "每满10次获得1个宝藏诅咒",
+        "约50%–199%",
+        "半价福利",
+        "自动换成1–2个钓鱼碎片",
+        "4.5%概率出现",
+    ):
+        assert keyword in text
+
+
+def test_mcfish_help_image_renders_special_mechanics(tmp_path: Path):
+    from PIL import Image as PILImage
+    from PIL import ImageDraw
+
+    captured: dict[str, object] = {}
+
+    def fake_panel(title, lines, height=300):
+        captured["title"] = title
+        captured["lines"] = lines
+        return PILImage.new("RGB", (1000, max(300, height)))
+
+    plugin = McFish.__new__(McFish)
+    plugin.workspace = tmp_path
+    plugin._panel = fake_panel
+
+    output = plugin._render_help_image("100")
+
+    assert output.exists()
+    lines = captured["lines"]
+    assert "已确认的特殊机制" in lines
+    # _panel 收到的已经是按 900px 折行后的文本，折行只按字符切分，拼回去即为原文。
+    rendered = "".join(lines)
+    for line in MCFISH_SPECIAL_MECHANICS:
+        assert line in rendered
+    # 折行后每行都必须留在 900px 文案宽度内，避免文字压到边框上。
+    font = McFish._font(50)
+    measure = ImageDraw.Draw(PILImage.new("RGB", (1, 1)))
+    assert max(measure.textbbox((0, 0), line, font=font)[2] for line in lines if line) <= 900
 
 
 def test_mcfish_emergency_pole_command_is_limited_to_three_purchases():
