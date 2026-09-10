@@ -85,7 +85,7 @@ class QueryAPIMixin:
 
     async def get_forward_msg(self, message_id: Union[str, int]) -> ForwardMessageData:
         data = (
-            await self._call_data("get_forward_msg", {"message_id": int(message_id)})
+            await self._call_data("get_forward_msg", {"message_id": str(message_id)})
             or {}
         )
         return ForwardMessageData(**data)

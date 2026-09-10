@@ -1,5 +1,7 @@
+## ✨ 新功能
+- **event**: 为 EventMixin 增加群聊与私聊消息的类型化等待方法 (1a1600e0)
+
 ## 🐛 修复
-- **event**: 修复 QQ 请求事件 `approve()`/`reject()` 直接调用 API 方法未经子对象路由的问题 (c237badb)
-- **event**: 修复 QQ 消息事件 `delete()`/`kick()`/`ban()` 直接调用 API 方法未经子对象路由的问题 (a6624c2b)
-- 同步示例与技能参考 (62bac12c)
-- 更新 stale example 引用 (eb6ec05d)
+- **event**: 修复类型化消息等待的运行时注解、平台 API 注入和实体复用问题 (c3442601)
+- **event**: 完善类型化事件实体转换与泛型推导 (c259ae54)
+- **napcat**: 修复 `get_forward_msg` 参数与转发消息 ID 精度问题 (350d3702, 8cf98fe1)

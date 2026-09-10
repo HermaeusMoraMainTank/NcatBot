@@ -14,7 +14,7 @@
 | [plugin/](plugin/) | `ncatbot.plugin.mixin` + FakeAi vision cache | M-01 ~ M-41, ID-01 ~ ID-02, LD-01 ~ LD-08, VC-01 ~ VC-06 |
 | [adapter/](adapter/) | `ncatbot.adapter.napcat` | P-01 ~ P-07, RF-01 ~ RF-08, AR-01 ~ AR-05, GM-01 ~ GM-05, BL-01 ~ BL-14, GH-01 ~ GH-11 |
 | [config/](config/) | `ncatbot.utils.config` | CF-01 ~ CF-05, CS-01 ~ CS-05, CE-01 ~ CE-05 |
-| [cli/](cli/) | `ncatbot.cli` | CX-01 ~ CX-14 |
+| [cli/](cli/) | `ncatbot.cli` | CX-01 ~ CX-22 |
 
 ## 公共 Fixtures (`conftest.py`)
 

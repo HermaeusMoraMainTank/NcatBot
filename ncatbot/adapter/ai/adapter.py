@@ -22,6 +22,25 @@ from .api import AIBotAPI
 LOG = get_log("AIAdapter")
 
 
+def _parse_kv(text: str, sep: str = "=") -> Dict[str, str]:
+    """解析 ``KEY=VALUE`` 逗号分隔文本为字典。"""
+    result: Dict[str, str] = {}
+    for part in text.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        key, _, value = part.partition(sep)
+        key = key.strip()
+        if key:
+            result[key] = value.strip()
+    return result
+
+
+def _parse_headers(text: str) -> Dict[str, str]:
+    """解析 ``Key:Value`` 逗号分隔文本为请求头字典。"""
+    return _parse_kv(text, sep=":")
+
+
 class AIAdapter(BaseAdapter):
     """AI 适配器 — 通过 litellm 统一调用 100+ LLM 提供商
 
@@ -45,7 +64,10 @@ class AIAdapter(BaseAdapter):
     description = "AI 适配器（基于 litellm 的多模型统一接口）"
     supported_protocols: List[str] = ["litellm"]
     platform = "ai"
-    pip_dependencies: Dict[str, str] = {"litellm": ">=1.40.0"}
+    pip_dependencies: Dict[str, str] = {
+        "litellm": ">=1.40.0",
+        "mcp": ">=1.25.0,<2.0.0",
+    }
 
     @classmethod
     def cli_configure(cls) -> Dict[str, Any]:
@@ -71,7 +93,77 @@ class AIAdapter(BaseAdapter):
             cfg["base_url"] = base_url
         if completion_model:
             cfg["completion_model"] = completion_model
+
+        mcp_servers = cls._cli_configure_mcp()
+        if mcp_servers:
+            cfg["mcp_servers"] = mcp_servers
         return cfg
+
+    @classmethod
+    def _cli_configure_mcp(cls) -> Dict[str, Any]:
+        """交互式收集 MCP 服务器配置（LiteLLM 兼容格式）。"""
+        import click
+
+        servers: Dict[str, Any] = {}
+        if not click.confirm(
+            "是否添加 MCP 服务器（让模型调用外部工具）?", default=False
+        ):
+            return servers
+
+        while True:
+            click.echo(
+                click.style(
+                    "\n  ── MCP 服务器 ──\n"
+                    "  传输类型: http (Streamable HTTP) / sse / stdio\n"
+                    "  http/sse 需 URL，stdio 需 command + args",
+                    dim=True,
+                )
+            )
+            name = click.prompt("服务器名称（如 deepwiki）").strip()
+            if not name:
+                click.echo(click.style("服务器名称不能为空，已跳过", fg="yellow"))
+                continue
+
+            transport = click.prompt(
+                "传输类型", type=click.Choice(["http", "sse", "stdio"]), default="http"
+            )
+
+            entry: Dict[str, Any] = {"transport": transport}
+            if transport == "stdio":
+                command = click.prompt("启动命令（如 npx / uvx）")
+                entry["command"] = command
+                args = click.prompt(
+                    "参数（空格分隔，可直接回车跳过）",
+                    default="",
+                    show_default=False,
+                )
+                if args:
+                    entry["args"] = args.split()
+                env = click.prompt(
+                    "环境变量（逗号分隔 KEY=VALUE，可回车跳过）",
+                    default="",
+                    show_default=False,
+                )
+                parsed_env = _parse_kv(env)
+                if parsed_env:
+                    entry["env"] = parsed_env
+            else:
+                url = click.prompt("MCP 服务器 URL")
+                entry["url"] = url
+                headers = click.prompt(
+                    "请求头（逗号分隔 Key:Value，可回车跳过）",
+                    default="",
+                    show_default=False,
+                )
+                parsed_headers = _parse_headers(headers)
+                if parsed_headers:
+                    entry["headers"] = parsed_headers
+
+            servers[name] = entry
+            if not click.confirm("继续添加 MCP 服务器?", default=False):
+                break
+
+        return servers
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)

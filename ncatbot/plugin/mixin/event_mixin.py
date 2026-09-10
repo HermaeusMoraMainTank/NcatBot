@@ -9,26 +9,34 @@ session_prompt / session_choose）在 wait_event 基础上封装了
 session 绑定、取消词检测、超时处理和自动回复等常用模式。
 """
 
+from __future__ import annotations
+
 import asyncio
 from typing import (
+    TYPE_CHECKING,
     Callable,
     Dict,
     List,
     Optional,
     Sequence,
+    TypeVar,
     Union,
-    TYPE_CHECKING,
 )
 
+from ncatbot.event import BaseEvent, create_entity
+from ncatbot.event.qq import GroupMessageEvent, PrivateMessageEvent
 from ncatbot.utils import get_log
 
 from .session_types import SessionCancelled, SessionResult
 
 if TYPE_CHECKING:
+    from ncatbot.api import BotAPIClient
     from ncatbot.core import AsyncEventDispatcher, Event, EventStream, P
     from ncatbot.types.qq import EventType
 
 LOG = get_log("EventMixin")
+
+EventT = TypeVar("EventT", bound=BaseEvent)
 
 
 class EventMixin:
@@ -45,6 +53,7 @@ class EventMixin:
     """
 
     _dispatcher: "AsyncEventDispatcher"
+    api: "BotAPIClient"
 
     def events(
         self,
@@ -85,6 +94,73 @@ class EventMixin:
             asyncio.TimeoutError: 超时未匹配到事件
         """
         return await self._dispatcher.wait_event(predicate, timeout)
+
+    async def _wait_entity(
+        self,
+        event_type: type[EventT],
+        predicate: Optional[Callable[[EventT], bool]] = None,
+        timeout: Optional[float] = None,
+    ) -> EventT:
+        """等待指定类型的事件实体，并保留精确返回类型。"""
+        matched_entity: Optional[EventT] = None
+
+        def _check(raw_event: Event) -> bool:
+            nonlocal matched_entity
+
+            api_client = self.api.platform(raw_event.platform)
+            entity = create_entity(raw_event.data, api_client)
+
+            if not isinstance(entity, event_type):
+                return False
+            if predicate is not None and not predicate(entity):
+                return False
+
+            matched_entity = entity
+            return True
+
+        await self.wait_event(_check, timeout=timeout)
+
+        if matched_entity is None:
+            raise RuntimeError("事件等待器返回时未保留匹配实体")
+        return matched_entity
+
+    async def wait_group_message_event(
+        self,
+        predicate: Optional[Callable[[GroupMessageEvent], bool]] = None,
+        timeout: Optional[float] = None,
+    ) -> GroupMessageEvent:
+        """等待下一个满足条件的群聊消息事件,封装wait_event
+
+        Args:
+            predicate: 针对群聊消息的过滤函数，None 表示接受任意事件
+            timeout: 超时秒数，None 表示无限等待
+
+        Returns:
+            匹配的 GroupMessageEvent
+        """
+
+        return await self._wait_entity(
+            GroupMessageEvent, predicate=predicate, timeout=timeout
+        )
+
+    async def wait_private_message_event(
+        self,
+        predicate: Optional[Callable[[PrivateMessageEvent], bool]] = None,
+        timeout: Optional[float] = None,
+    ) -> PrivateMessageEvent:
+        """等待下一个满足条件的私聊消息事件,封装wait_event
+
+        Args:
+            predicate: 针对私聊消息的过滤函数，None 表示接受任意事件
+            timeout: 超时秒数，None 表示无限等待
+
+        Returns:
+            匹配的 PrivateMessageEvent
+        """
+
+        return await self._wait_entity(
+            PrivateMessageEvent, predicate=predicate, timeout=timeout
+        )
 
     # ------------------------------------------------------------------
     # Session 便利方法

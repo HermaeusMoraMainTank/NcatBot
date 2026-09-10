@@ -40,3 +40,10 @@
 | CX-18 | `snowluma diagnose ws` | `--uri` / `--token` 传入 `_check_ws()` |
 | CX-19 | `snowluma stop` (Linux) | 调用 `PlatformOps.stop_snowluma()` |
 | CX-20 | `snowluma install --yes` | `--yes` 绑定到 `SnowLumaInstaller.install(skip_confirm=True)` |
+
+### init 模板插件生成 (`test_init.py`)
+
+| 规范 ID | 说明 | 验证点 |
+|---------|------|--------|
+| CX-21 | 数字开头用户名 | 模拟 `getpass.getuser` 返回数字用户名，生成的 `plugin.py` 可编译、`entry_class` 为合法标识符且与类名一致 |
+| CX-22 | `_to_class_name` | 始终产出合法标识符（数字开头前置 `_`），且不重复 `Plugin` 后缀 |

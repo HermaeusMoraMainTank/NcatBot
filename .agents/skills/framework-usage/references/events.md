@@ -129,6 +129,25 @@ async def on_confirm(self, event: GroupMessageEvent):
         await event.reply("超时，已取消")
 ```
 
+### 类型化消息等待
+
+插件需要直接获得可回复的 QQ 消息实体时，使用 EventMixin 的类型化方法：
+
+```python
+reply = await self.wait_group_message_event(
+    predicate=lambda e: e.group_id == event.group_id and e.user_id == event.user_id,
+    timeout=30,
+)
+await reply.reply(f"收到：{reply.raw_message}")
+```
+
+| 方法 | predicate / 返回类型 | 说明 |
+|------|----------------------|------|
+| `wait_group_message_event` | `GroupMessageEvent` | 只接受 QQ 群消息 |
+| `wait_private_message_event` | `PrivateMessageEvent` | 只接受 QQ 私聊消息 |
+
+两者都会忽略其他事件类型，超时抛出 `asyncio.TimeoutError`。返回实体已绑定对应平台 API，可直接调用 `reply()` 等实体行为。
+
 ### Predicate DSL
 
 `ncatbot.core` 提供可组合的 Predicate DSL，用运算符替代冗长的 lambda。

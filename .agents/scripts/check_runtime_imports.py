@@ -45,6 +45,7 @@ from pathlib import Path
 OPTIONAL_DEPS: set[str] = {
     "bilibili_api",
     "litellm",
+    "mcp",
     "schedule",
 }
 

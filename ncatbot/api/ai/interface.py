@@ -33,6 +33,8 @@ class IAIAPIClient(IAPIClient):
         temperature: Optional[float] = None,
         max_tokens: Optional[int] = None,
         nickname_map: Optional[Dict[str, str]] = None,
+        mcp_servers: Optional[Dict[str, dict]] = None,
+        max_tool_calls: int = 10,
         **kwargs: Any,
     ) -> Any:
         """Chat Completion
@@ -52,6 +54,11 @@ class IAIAPIClient(IAPIClient):
             最大生成 token 数。
         nickname_map:
             ``{user_id: 昵称}`` 映射，At 段转为可读文本。
+        mcp_servers:
+            MCP 服务器配置字典（格式见 ``AIConfig.mcp_servers``）。
+            缺省使用配置中的 ``mcp_servers``；为空则不启用 MCP 工具。
+        max_tool_calls:
+            单轮对话中最多工具调用轮数（默认 10），防止死循环。
 
         Returns
         -------
@@ -120,6 +127,8 @@ class IAIAPIClient(IAPIClient):
         temperature: Optional[float] = None,
         max_tokens: Optional[int] = None,
         nickname_map: Optional[Dict[str, str]] = None,
+        mcp_servers: Optional[Dict[str, dict]] = None,
+        max_tool_calls: int = 10,
         **kwargs: Any,
     ) -> str:
         """Chat Completion — 直接返回文本

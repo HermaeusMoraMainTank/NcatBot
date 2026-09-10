@@ -30,6 +30,8 @@
 | M-20 | `events()` | 返回 EventStream 并追踪到 `_active_streams` |
 | M-21 | `wait_event(timeout)` | 超时抛出 `TimeoutError` |
 | M-22 | `_mixin_unload()` | 关闭所有活跃 stream |
+| M-23 | `wait_group_message_event()` | 类型过滤与 predicate 返回可回复的群消息实体 |
+| M-24 | `wait_private_message_event()` | 忽略群消息并返回可回复的私聊消息实体 |
 
 ### TimeTaskMixin (`test_time_task_mixin.py`)
 

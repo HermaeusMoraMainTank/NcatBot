@@ -89,6 +89,20 @@ def _sanitize_plugin_name(name: str) -> str:
     return sanitized or "my_plugin"
 
 
+def _to_class_name(plugin_name: str) -> str:
+    """从插件名（合法标识符）派生入口类名。
+
+    生成 CamelCase 名称并以 Plugin 结尾，保证结果始终是合法的 Python 标识符
+    （数字开头时前置下划线），避免数字开头的用户名生成非法类名。
+    """
+    camel = "".join(part.capitalize() for part in plugin_name.split("_") if part)
+    if not camel.endswith("Plugin"):
+        camel += "Plugin"
+    if not camel or camel[0].isdigit():
+        camel = "_" + camel
+    return camel
+
+
 # ---------------------------------------------------------------------------
 # 各平台模板插件内容
 # ---------------------------------------------------------------------------
@@ -170,9 +184,19 @@ class {class_name}(NcatBotPlugin):
     "ai": {
         "description": "NcatBot 模板插件 — AI 对话",
         "code": """\
-\"\"\"模板插件 — AI 对话。\"\"\"
+\"\"\"模板插件 — AI 对话。
+
+前置配置（config.yaml）:
+  adapters:
+    - type: ai
+      config:
+        api_key: "sk-xxxx"
+        base_url: "https://api.openai.com/v1"   # 可选，兼容国内 LLM
+        completion_model: "gpt-4"
+\"\"\"
 
 from ncatbot.plugin import NcatBotPlugin
+from ncatbot.core import registrar
 
 
 class {class_name}(NcatBotPlugin):
@@ -182,6 +206,15 @@ class {class_name}(NcatBotPlugin):
 
     async def on_close(self):
         self.logger.info(f"{{self.name}} 已卸载")
+
+    @registrar.on_command("ai对话")
+    async def on_ai_chat(self, event, prompt: str):
+        \"\"\"AI 对话：发送 'ai对话 你的问题' 获取 AI 回复。\"\"\"
+        try:
+            reply = await self.api.ai.chat_text(prompt)
+        except Exception as e:
+            reply = f"AI 调用失败: {{e}}"
+        await event.reply(text=reply)
 """,
     },
     "lark": {
@@ -216,7 +249,7 @@ def _generate_template_plugin(
     """在 plugins/ 下生成以当前用户名命名的模板插件。"""
     username = getpass.getuser()
     plugin_name = _sanitize_plugin_name(username) + "_plugin"
-    class_name = plugin_name.title().replace("_", "") + "Plugin"
+    class_name = _to_class_name(plugin_name)
     plugins_dir = plugins_path / plugin_name
 
     if plugins_dir.exists():

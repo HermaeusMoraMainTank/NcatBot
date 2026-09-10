@@ -35,7 +35,7 @@ class GroupFileInfo(NapCatModel):
     dead_time: Optional[int] = None
     modify_time: Optional[int] = None
     download_times: Optional[int] = None
-    uploader: str = ""
+    uploader: str | int = ""
     uploader_name: Optional[str] = None
 
 
@@ -50,7 +50,7 @@ class GroupFolderInfo(NapCatModel):
     folder_id: str = ""
     folder_name: Optional[str] = None
     create_time: Optional[int] = None
-    creator: str = ""
+    creator: str | int = ""
     creator_name: Optional[str] = None
     total_file_count: Optional[int] = None
 

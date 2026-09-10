@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from pydantic import BaseModel
 
@@ -27,6 +27,18 @@ class AIConfig(BaseModel):
         请求超时（秒）。
     max_tokens:
         默认最大 token 数，为 ``None`` 时由模型自行决定。
+    mcp_servers:
+        MCP 服务器配置（配置格式与 LiteLLM 兼容），``chat()`` 时自动加载
+        其工具供模型调用。格式::
+
+            mcp_servers:
+              server_name:
+                transport: "http" | "sse" | "stdio"  # 缺省自动判断
+                url: "https://mcp.example.com/mcp"   # http / sse
+                headers: {Authorization: "Bearer ..."}  # http / sse
+                command: "npx"                        # stdio
+                args: ["-y", "@mcp/server"]           # stdio
+                env: {TOKEN: "..."}                   # stdio
     """
 
     api_key: str = ""
@@ -37,3 +49,4 @@ class AIConfig(BaseModel):
     asr_model: str = ""
     timeout: float = 120.0
     max_tokens: Optional[int] = None
+    mcp_servers: Dict[str, Any] = {}

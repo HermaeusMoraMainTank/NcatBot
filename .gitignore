@@ -60,6 +60,8 @@ config.yaml
 
 # === Development ===
 dev/
+.claude/
+CLAUDE.md
 
 # === WebUI frontend ===
 ncatbot/webui/frontend/node_modules/

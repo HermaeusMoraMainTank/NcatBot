@@ -45,6 +45,7 @@ class SystemManagerPlugin(NcatBotPlugin):
 
     def _init_(self) -> None:
         self._last_heartbeat_time: float = time_mod.time()
+        self._heartbeat_active: bool = False
         self._heartbeat_monitor_task: Optional[asyncio.Task] = None
 
     async def on_load(self) -> None:
@@ -436,11 +437,15 @@ class SystemManagerPlugin(NcatBotPlugin):
             async with self.events("meta_event.heartbeat") as stream:
                 async for event in stream:
                     self._last_heartbeat_time = time_mod.time()
+                    if not self._heartbeat_active:
+                        self._heartbeat_active = True
         except asyncio.CancelledError:
             pass
 
     async def _check_heartbeat_timeout(self) -> None:
         """定时任务：检查心跳是否超时。"""
+        if not self._heartbeat_active:
+            return  # 从未收到过心跳，适配器可能未连接，跳过检查
         timeout = self.get_config("heartbeat_timeout", 60)
         elapsed = time_mod.time() - self._last_heartbeat_time
 

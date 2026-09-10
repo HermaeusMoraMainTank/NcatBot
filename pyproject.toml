@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ncatbot5"
-version = "5.5.5"
+version = "5.5.8"
 description = "NcatBot, NapCat Python SDK"
 readme = "README.md"
 license = { text = "MIT" }
@@ -46,6 +46,7 @@ test = [
   "pytest-cov>=4.0",
   "pytest-html>=4.0",
   "litellm>=1.83.0",
+  "mcp>=1.25.0,<2.0.0",
 ]
 # 开发依赖。使用 uv sync --extra dev 安装（包含测试依赖）
 dev = [

@@ -17,6 +17,7 @@ from ncatbot.types import (
 from ncatbot.utils import get_log
 
 from ..config import AIConfig
+from .mcp import MCPSessionManager
 
 # 接受的输入类型：str / list[dict] / MessageArray / 单个 MessageSegment
 ChatInput = Union[str, List[dict], "MessageArray", "MessageSegment"]
@@ -63,6 +64,8 @@ class AIBotAPI(IAPIClient):
         temperature: Optional[float] = None,
         max_tokens: Optional[int] = None,
         nickname_map: Optional[Dict[str, str]] = None,
+        mcp_servers: Optional[Dict[str, dict]] = None,
+        max_tool_calls: int = 10,
         **kwargs: Any,
     ) -> Any:
         """Chat Completion
@@ -83,6 +86,12 @@ class AIBotAPI(IAPIClient):
         nickname_map:
             ``{user_id: 昵称}`` 映射，用于将 ``At`` 段转为可读文本。
             缺省时 At 段渲染为 ``@{user_id}``。
+        mcp_servers:
+            MCP 服务器配置字典（格式见 ``AIConfig.mcp_servers``）。
+            缺省使用配置中的 ``mcp_servers``；为空则不启用 MCP 工具。
+            启用后模型可调用 MCP 工具，工具名按 ``{server}_{tool}`` 命名空间区分。
+        max_tool_calls:
+            单轮对话中允许的最多工具调用轮数（默认 10），防止死循环。
 
         Returns
         -------
@@ -106,13 +115,103 @@ class AIBotAPI(IAPIClient):
         if resolved_max_tokens is not None:
             call_kwargs["max_tokens"] = resolved_max_tokens
 
-        return await self._call_with_fallback(
+        merged_mcp_servers = (
+            mcp_servers if mcp_servers is not None else self._config.mcp_servers
+        )
+        if not merged_mcp_servers:
+            return await self._call_with_fallback(
+                acompletion,
+                resolved_model,
+                self._config.completion_model,
+                messages=messages,
+                **call_kwargs,
+            )
+
+        return await self._chat_with_tools(
             acompletion,
             resolved_model,
             self._config.completion_model,
-            messages=messages,
-            **call_kwargs,
+            messages,
+            merged_mcp_servers,
+            max_tool_calls,
+            call_kwargs,
         )
+
+    async def _chat_with_tools(
+        self,
+        acompletion: Any,
+        model: str,
+        default_model: str,
+        messages: List[dict],
+        mcp_servers: Dict[str, dict],
+        max_tool_calls: int,
+        call_kwargs: Dict[str, Any],
+    ) -> Any:
+        """带 MCP 工具调用循环的 Chat Completion。
+
+        模型请求工具 → 执行 MCP 工具 → 回传结果 → 继续对话，
+        直到模型不再请求工具或达到 ``max_tool_calls`` 上限。
+        """
+        async with MCPSessionManager(mcp_servers) as mcp:
+            tools = await mcp.load_tools()
+            if not tools:
+                LOG.warning("MCP 服务器未加载到任何工具，按普通对话处理（无 tools）")
+                return await self._call_with_fallback(
+                    acompletion,
+                    model,
+                    default_model,
+                    messages=messages,
+                    **call_kwargs,
+                )
+
+            msgs = list(messages)
+            resp: Any = None
+            for _ in range(max_tool_calls):
+                resp = await self._call_with_fallback(
+                    acompletion,
+                    model,
+                    default_model,
+                    messages=msgs,
+                    tools=tools,
+                    **call_kwargs,
+                )
+                message = resp.choices[0].message
+                tool_calls = getattr(message, "tool_calls", None)
+                if not tool_calls:
+                    return resp
+
+                msgs.append(self._assistant_tool_message(message, tool_calls))
+                for tool_call in tool_calls:
+                    try:
+                        result_text = await mcp.call_openai_tool(tool_call)
+                    except Exception as exc:  # noqa: BLE001
+                        LOG.error("MCP 工具调用失败: %s", exc)
+                        result_text = f"[MCP 工具调用失败: {exc}]"
+                    msgs.append(
+                        {
+                            "role": "tool",
+                            "tool_call_id": tool_call.id,
+                            "content": result_text,
+                        }
+                    )
+
+            LOG.warning("MCP 工具调用达到上限 %d 轮，返回最后一次响应", max_tool_calls)
+            return resp
+
+    @staticmethod
+    def _assistant_tool_message(message: Any, tool_calls: List[Any]) -> dict:
+        """构造带 tool_calls 的 assistant 消息，供下一轮请求使用。"""
+        dumped = []
+        for tc in tool_calls:
+            if hasattr(tc, "model_dump"):
+                dumped.append(tc.model_dump())
+            else:
+                dumped.append(dict(tc))
+        return {
+            "role": "assistant",
+            "content": getattr(message, "content", None),
+            "tool_calls": dumped,
+        }
 
     async def embeddings(
         self,
@@ -232,6 +331,8 @@ class AIBotAPI(IAPIClient):
         temperature: Optional[float] = None,
         max_tokens: Optional[int] = None,
         nickname_map: Optional[Dict[str, str]] = None,
+        mcp_servers: Optional[Dict[str, dict]] = None,
+        max_tool_calls: int = 10,
         **kwargs: Any,
     ) -> str:
         """Chat Completion — 直接返回文本
@@ -244,6 +345,8 @@ class AIBotAPI(IAPIClient):
             temperature=temperature,
             max_tokens=max_tokens,
             nickname_map=nickname_map,
+            mcp_servers=mcp_servers,
+            max_tool_calls=max_tool_calls,
             **kwargs,
         )
         return resp.choices[0].message.content or ""

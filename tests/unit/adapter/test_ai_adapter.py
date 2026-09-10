@@ -20,6 +20,15 @@ AI 适配器单元测试
   AI-18: transcription() 模型不存在时回退到默认 asr_model
   AI-19: transcription_text() 返回文本字符串
   AI-20: transcription() 透传 language/prompt/response_format/temperature
+  AI-21: chat() 带 MCP 服务器时加载工具并传给 acompletion
+  AI-22: chat() 无 mcp_servers 时不传 tools
+  AI-23: chat() MCP 工具调用循环（请求工具 → 执行 → 回传 → 完成）
+  AI-24: chat() MCP 工具调用达到 max_tool_calls 上限
+  AI-25: MCP 传输类型自动判断
+  AI-26: MCP 工具加载与命名空间化（{server}_{tool}）
+  AI-27: MCP 工具调用返回文本结果
+  AI-28: MCP 单个服务器连接失败不影响其他服务器
+  AI-31: chat_text() 透传 mcp_servers / max_tool_calls 给 chat()
 """
 
 import asyncio
@@ -29,6 +38,7 @@ import pytest
 
 from ncatbot.adapter.ai.config import AIConfig
 from ncatbot.adapter.ai.api.bot_api import AIBotAPI
+from ncatbot.adapter.ai.api.mcp import MCPSessionManager
 from ncatbot.adapter.ai.adapter import AIAdapter
 from ncatbot.types import Image
 
@@ -570,3 +580,414 @@ async def test_transcription_kwargs_passthrough():
     assert call_kwargs["prompt"] == "这是一段中文语音"
     assert call_kwargs["response_format"] == "json"
     assert call_kwargs["temperature"] == 0.2
+
+
+# ---- MCP 支持（AI-21 ~ AI-30） ----
+
+
+class FakeMCPManager:
+    """MCPSessionManager 的替身，供 chat() 工具调用测试使用。"""
+
+    def __init__(self, tools=None):
+        self.tools = tools or [
+            {
+                "type": "function",
+                "function": {
+                    "name": "weather_get_weather",
+                    "description": "查询天气",
+                    "parameters": {"type": "object", "properties": {}},
+                },
+            }
+        ]
+        self.called_tools: list = []
+
+    async def __aenter__(self):
+        return self
+
+    async def __aexit__(self, *exc):
+        return None
+
+    async def load_tools(self):
+        return self.tools
+
+    async def call_openai_tool(self, tool_call):
+        self.called_tools.append(tool_call)
+        return "北京天气晴朗"
+
+
+def _make_response(content=None, tool_calls=None):
+    """构造 litellm ModelResponse 风格的 mock 响应。"""
+    message = MagicMock()
+    message.content = content
+    message.tool_calls = tool_calls
+    choice = MagicMock()
+    choice.message = message
+    resp = MagicMock()
+    resp.choices = [choice]
+    return resp
+
+
+# ---- AI-21 ----
+
+
+@pytest.mark.asyncio
+async def test_chat_mcp_loads_tools_param():
+    """AI-21: chat() 传 mcp_servers 时加载工具并传给 acompletion"""
+    cfg = AIConfig(completion_model="gpt-4")
+    api = AIBotAPI(cfg)
+
+    resp = _make_response(content="回答", tool_calls=None)
+    with (
+        patch(
+            "ncatbot.adapter.ai.api.bot_api.MCPSessionManager",
+            return_value=FakeMCPManager(),
+        ),
+        patch("litellm.acompletion", AsyncMock(return_value=resp)) as mock_fn,
+    ):
+        await api.chat("北京天气如何?", mcp_servers={"weather": {"url": "http://x"}})
+
+    call_kwargs = mock_fn.call_args.kwargs
+    assert call_kwargs.get("tools") == FakeMCPManager().tools
+    assert call_kwargs["tools"][0]["function"]["name"] == "weather_get_weather"
+
+
+@pytest.mark.asyncio
+async def test_chat_mcp_uses_config_default():
+    """AI-21: chat() 未显式传 mcp_servers 时使用 config 默认值"""
+    cfg = AIConfig(
+        completion_model="gpt-4",
+        mcp_servers={"weather": {"url": "http://x"}},
+    )
+    api = AIBotAPI(cfg)
+
+    resp = _make_response(content="回答", tool_calls=None)
+    with (
+        patch(
+            "ncatbot.adapter.ai.api.bot_api.MCPSessionManager",
+            return_value=FakeMCPManager(),
+        ),
+        patch("litellm.acompletion", AsyncMock(return_value=resp)) as mock_fn,
+    ):
+        await api.chat("北京天气如何?")
+
+    assert "tools" in mock_fn.call_args.kwargs
+
+
+# ---- AI-22 ----
+
+
+@pytest.mark.asyncio
+async def test_chat_no_mcp_no_tools():
+    """AI-22: 未配置 MCP 时不传 tools 参数（回归保护）"""
+    cfg = AIConfig(completion_model="gpt-4")
+    api = AIBotAPI(cfg)
+
+    resp = _make_response(content="回答", tool_calls=None)
+    with patch("litellm.acompletion", AsyncMock(return_value=resp)) as mock_fn:
+        await api.chat("hello")
+
+    assert "tools" not in mock_fn.call_args.kwargs
+
+
+# ---- AI-23 ----
+
+
+@pytest.mark.asyncio
+async def test_chat_mcp_tool_call_loop():
+    """AI-23: chat() 模型请求工具 → 执行 MCP 工具 → 回传结果 → 完成"""
+    from litellm.types.utils import ChatCompletionMessageToolCall
+
+    cfg = AIConfig(completion_model="gpt-4")
+    api = AIBotAPI(cfg)
+
+    first = _make_response(
+        content=None,
+        tool_calls=[
+            ChatCompletionMessageToolCall(
+                id="call_1",
+                type="function",
+                function={
+                    "name": "weather_get_weather",
+                    "arguments": '{"city": "北京"}',
+                },
+            )
+        ],
+    )
+    second = _make_response(content="北京今天天气晴朗", tool_calls=None)
+
+    manager = FakeMCPManager()
+    with (
+        patch("ncatbot.adapter.ai.api.bot_api.MCPSessionManager", return_value=manager),
+        patch("litellm.acompletion", AsyncMock(side_effect=[first, second])) as mock_fn,
+    ):
+        result = await api.chat(
+            "北京天气如何?", mcp_servers={"weather": {"url": "http://x"}}
+        )
+
+    assert result is second
+    assert mock_fn.await_count == 2
+    assert len(manager.called_tools) == 1
+    assert manager.called_tools[0].id == "call_1"
+
+    # 第二次调用应包含 assistant 工具请求 + tool 结果消息
+    msgs = mock_fn.await_args.kwargs["messages"]
+    assert msgs[-2]["role"] == "assistant"
+    assert msgs[-2]["tool_calls"][0]["id"] == "call_1"
+    assert msgs[-1] == {
+        "role": "tool",
+        "tool_call_id": "call_1",
+        "content": "北京天气晴朗",
+    }
+
+
+# ---- AI-24 ----
+
+
+@pytest.mark.asyncio
+async def test_chat_mcp_max_tool_calls():
+    """AI-24: chat() 工具调用达到 max_tool_calls 上限时返回最后一次响应"""
+    from litellm.types.utils import ChatCompletionMessageToolCall
+
+    cfg = AIConfig(completion_model="gpt-4")
+    api = AIBotAPI(cfg)
+
+    always_tools = _make_response(
+        content=None,
+        tool_calls=[
+            ChatCompletionMessageToolCall(
+                id="call_1",
+                type="function",
+                function={"name": "weather_get_weather", "arguments": "{}"},
+            )
+        ],
+    )
+
+    manager = FakeMCPManager()
+    with (
+        patch("ncatbot.adapter.ai.api.bot_api.MCPSessionManager", return_value=manager),
+        patch("litellm.acompletion", AsyncMock(return_value=always_tools)) as mock_fn,
+    ):
+        result = await api.chat(
+            "hi", mcp_servers={"weather": {"url": "http://x"}}, max_tool_calls=3
+        )
+
+    assert mock_fn.await_count == 3
+    assert result is always_tools
+
+
+# ---- AI-25 ----
+
+
+def test_mcp_transport_resolution():
+    """AI-25: MCP 传输类型缺省自动判断"""
+    assert MCPSessionManager._resolve_transport({"url": "https://x/mcp"}) == "http"
+    assert MCPSessionManager._resolve_transport({"command": "npx"}) == "stdio"
+    assert (
+        MCPSessionManager._resolve_transport({"transport": "sse", "url": "https://x"})
+        == "sse"
+    )
+    assert (
+        MCPSessionManager._resolve_transport({"transport": "http", "url": "https://x"})
+        == "http"
+    )
+    assert MCPSessionManager._resolve_transport({}) == "stdio"
+
+
+# ---- AI-26 ----
+
+
+@pytest.mark.asyncio
+async def test_mcp_load_tools_namespace():
+    """AI-26: MCP 工具加载并按 {server}_{tool} 命名空间化"""
+    from mcp.types import ListToolsResult, Tool
+
+    class FakeSession:
+        def __init__(self, tools):
+            self._tools = tools
+
+        async def list_tools(self):
+            return ListToolsResult(tools=self._tools)
+
+    tool = Tool(
+        name="get_weather",
+        description="查询天气",
+        inputSchema={"type": "object", "properties": {}},
+    )
+    mgr = MCPSessionManager({})
+    mgr._sessions = {"weather": FakeSession([tool])}
+
+    tools = await mgr.load_tools()
+
+    assert len(tools) == 1
+    assert tools[0]["function"]["name"] == "weather_get_weather"
+    assert mgr._tool_map["weather_get_weather"] == ("weather", "get_weather")
+
+
+# ---- AI-27 ----
+
+
+@pytest.mark.asyncio
+async def test_mcp_call_tool_returns_text():
+    """AI-27: MCP 工具调用返回文本结果"""
+    from mcp.types import CallToolResult, TextContent
+
+    class FakeSession:
+        def __init__(self, result):
+            self._result = result
+            self.called = None
+
+        async def call_tool(self, name, arguments):
+            self.called = (name, arguments)
+            return self._result
+
+    result = CallToolResult(
+        content=[TextContent(type="text", text="sunny")], isError=False
+    )
+    session = FakeSession(result)
+    mgr = MCPSessionManager({})
+    mgr._sessions = {"weather": session}
+    mgr._tool_map = {"weather_get_weather": ("weather", "get_weather")}
+
+    text = await mgr.call_tool("weather_get_weather", {"city": "Beijing"})
+
+    assert text == "sunny"
+    assert session.called == ("get_weather", {"city": "Beijing"})
+
+
+@pytest.mark.asyncio
+async def test_mcp_call_tool_error_marked():
+    """AI-27: MCP 工具 isError 时返回错误标注"""
+    from mcp.types import CallToolResult, TextContent
+
+    class FakeSession:
+        async def call_tool(self, name, arguments):
+            return CallToolResult(
+                content=[TextContent(type="text", text="no permission")],
+                isError=True,
+            )
+
+    mgr = MCPSessionManager({})
+    mgr._sessions = {"srv": FakeSession()}
+    mgr._tool_map = {"srv_tool": ("srv", "tool")}
+
+    text = await mgr.call_tool("srv_tool", {})
+
+    assert text == "[MCP 工具调用错误]\nno permission"
+
+
+# ---- AI-28 ----
+
+
+@pytest.mark.asyncio
+async def test_mcp_connect_tolerates_single_failure():
+    """AI-28: 单个 MCP 服务器连接失败不影响其他服务器"""
+    import contextlib
+
+    mgr = MCPSessionManager({"ok": {}, "bad": {"fail": True}})
+
+    def _fake_build(name, cfg):
+        @contextlib.asynccontextmanager
+        async def _cm():
+            session = MagicMock()
+            session.initialize = AsyncMock()
+            if cfg.get("fail"):
+                session.initialize.side_effect = RuntimeError("connect failed")
+            yield session
+
+        return _cm()
+
+    with patch.object(mgr, "_build_session_cm", side_effect=_fake_build):
+        await mgr.connect()
+
+    assert "ok" in mgr._sessions
+    assert "bad" not in mgr._sessions
+    assert mgr.connected is True
+    await mgr.close()
+
+
+# ---- AI-29 ----
+
+
+def test_cli_configure_mcp_http(monkeypatch):
+    """AI-29: cli_configure() 交互收集 http MCP 服务器"""
+    responses = iter(
+        [
+            "yes",  # 是否添加 MCP
+            "deepwiki",  # 服务器名称
+            "http",  # 传输类型
+            "https://mcp.deepwiki.com/mcp",  # url
+            "Authorization:Bearer abc",  # headers
+            "no",  # 继续添加?
+        ]
+    )
+    monkeypatch.setattr(
+        "click.confirm",
+        lambda msg, *a, **k: next(responses).lower().startswith("y"),
+    )
+    monkeypatch.setattr("click.prompt", lambda msg, *a, **k: next(responses))
+
+    servers = AIAdapter._cli_configure_mcp()
+
+    assert servers == {
+        "deepwiki": {
+            "transport": "http",
+            "url": "https://mcp.deepwiki.com/mcp",
+            "headers": {"Authorization": "Bearer abc"},
+        }
+    }
+
+
+def test_cli_configure_mcp_stdio(monkeypatch):
+    """AI-29: cli_configure() 交互收集 stdio MCP 服务器"""
+    responses = iter(
+        [
+            "yes",  # 是否添加 MCP
+            "mcp",  # 服务器名称
+            "stdio",  # 传输类型
+            "npx",  # command
+            "-y @mcp/server",  # args
+            "TOKEN=abc",  # env
+            "no",  # 继续添加?
+        ]
+    )
+    monkeypatch.setattr(
+        "click.confirm",
+        lambda msg, *a, **k: next(responses).lower().startswith("y"),
+    )
+    monkeypatch.setattr("click.prompt", lambda msg, *a, **k: next(responses))
+
+    servers = AIAdapter._cli_configure_mcp()
+
+    assert servers == {
+        "mcp": {
+            "transport": "stdio",
+            "command": "npx",
+            "args": ["-y", "@mcp/server"],
+            "env": {"TOKEN": "abc"},
+        }
+    }
+
+
+# ---- AI-31 ----
+
+
+@pytest.mark.asyncio
+async def test_chat_text_forwards_mcp_params():
+    """AI-31: chat_text() 透传 mcp_servers / max_tool_calls 给 chat()"""
+    cfg = AIConfig(completion_model="gpt-4")
+    api = AIBotAPI(cfg)
+
+    mock_resp = _make_response(content="北京天气晴朗", tool_calls=None)
+
+    with patch.object(api, "chat", new_callable=AsyncMock) as mock_chat:
+        mock_chat.return_value = mock_resp
+        result = await api.chat_text(
+            "北京天气如何?",
+            mcp_servers={"weather": {"url": "http://x"}},
+            max_tool_calls=5,
+        )
+
+    assert result == "北京天气晴朗"
+    call_kwargs = mock_chat.call_args.kwargs
+    assert call_kwargs["mcp_servers"] == {"weather": {"url": "http://x"}}
+    assert call_kwargs["max_tool_calls"] == 5
