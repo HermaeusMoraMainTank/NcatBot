@@ -571,6 +571,50 @@ def test_mcfish_permanent_wood_pole_purchase_respects_daily_trade_limit():
     assert event.reply.await_args.kwargs["text"] == "你用360购买了2木竿"
 
 
+
+def test_mcfish_handle_message_buys_multiple_wood_poles_end_to_end(tmp_path):
+    """The user-visible command must buy as many permanent wood poles as requested."""
+    import asyncio
+
+    plugin = McFish.__new__(McFish)
+    plugin.workspace = tmp_path
+    plugin._db = sqlite3.connect(str(tmp_path / "mcfish.db"))
+    plugin._db.execute(
+        "CREATE TABLE players (user_id TEXT PRIMARY KEY, state TEXT NOT NULL, updated_at REAL NOT NULL)"
+    )
+    plugin._db.execute(
+        "CREATE TABLE shop (day TEXT PRIMARY KEY, discounts TEXT NOT NULL, inventory TEXT NOT NULL)"
+    )
+    plugin._load_original_data()
+    store = EconomyStore(tmp_path / "economy.db")
+    store.grant("100", 2000)
+    plugin._economy = SimpleNamespace(store=store)
+    plugin.get_config = lambda key, default=None: default
+    plugin._choose = AsyncMock(return_value=SimpleNamespace(key="confirm"))
+    event = SimpleNamespace(
+        sender=SimpleNamespace(user_id="100"),
+        raw_message="购买木竿 3",
+        reply=AsyncMock(),
+        group_id="1",
+        message=[],
+    )
+
+    asyncio.run(plugin._handle_message(event))
+
+    assert event.reply.await_args.kwargs["text"] == "你用540购买了3木竿"
+    state = plugin._state("100")
+    assert len(state["pack"]["木竿"]) == 3
+    assert state["pole_trade_count"] == 3
+    assert store.account("100")["balance"] == 2000 - 540
+
+    asyncio.run(plugin._handle_message(event))
+
+    assert len(plugin._state("100")["pack"]["木竿"]) == 6
+    assert store.account("100")["balance"] == 2000 - 1080
+    plugin._db.close()
+    store.close()
+
+
 def test_mcfish_buy_wood_pole_falls_back_when_initial_listing_is_empty():
     import asyncio
     from types import SimpleNamespace
