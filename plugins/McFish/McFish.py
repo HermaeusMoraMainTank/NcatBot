@@ -424,7 +424,7 @@ class McFish(NcatBotPlugin):
             "",
             "已确认的特殊机制",
             "累计完成75次钓鱼保底获得1本净化书，超过75次的部分继续计入下一轮。",
-            "背包中鱼的总数量超过100条时，掉落大类区间切换为2/8/35/45，普通非鱼竿物品数量可能增加至5个。",
+            "背包中鱼的总数量超过100条时，掉落大类区间切换为2/8/35/45；装备美西螈时，非鱼竿物品一次获得5个。",
             "普通碎片连续12次未获得时，第13次普通掉落必得1至2枚碎片。",
             "每竿另有0.1%概率触发碎片宝藏，额外获得50枚碎片并显示特殊提示。",
             "鱼王窗口、前置鱼王路径、咬钩策略和上钩技能按钓鱼时钟及实际提示进行。",
@@ -872,7 +872,11 @@ class McFish(NcatBotPlugin):
         items = catalog.get("物品", [])
         if not zones or not items:
             return None, 1
-        boosted = sum(int(value) for name, value in state.get("pack", {}).items() if name in FISH and isinstance(value, int)) > 100 or (state.get("equip") or {}).get("name") == AXOLOTL
+        axolotl = (state.get("equip") or {}).get("name") == AXOLOTL
+
+        def drop_quantity(dropped: str) -> int:
+            # 原插件只有装备美西螈时才一次获得 5 个（鱼竿与美西螈本身除外），鱼的总数超过100只改变概率区间。
+            return 5 if axolotl and dropped not in POLES and dropped != AXOLOTL else 1
         boundaries = boundaries or self._zone_boundaries(state)
         roll = random.randrange(100)
         zone = None
@@ -898,7 +902,7 @@ class McFish(NcatBotPlugin):
                         weights[name] = int(weights[name] * 1.25)
             names = [name for name, weight in weights.items() if weight > 0]
             selected_name = random.choices(names, weights=[weights[name] for name in names], k=1)[0]
-            return selected_name, 5 if boosted else 1
+            return selected_name, drop_quantity(selected_name)
         if zone == "fish" and int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0:
             rare_names = {"水晶虾", "深海鱼", "银鱼", "金鳞鱼"}
             weights = [
@@ -906,14 +910,14 @@ class McFish(NcatBotPlugin):
                 for item in candidates
             ]
             selected = random.choices(candidates, weights=weights, k=1)[0]
-            quantity = 5 if boosted and str(selected["名称"]) not in POLES else 1
+            quantity = drop_quantity(str(selected["名称"]))
             return str(selected["名称"]), quantity
         roll = random.randrange(100)
         lower = 0
         for item in candidates:
             upper = lower + int(item.get("概率[0-100)", 0))
             if lower <= roll < upper:
-                quantity = 5 if boosted and str(item["名称"]) not in POLES else 1
+                quantity = drop_quantity(str(item["名称"]))
                 return str(item["名称"]), quantity
             lower = upper
         return str(candidates[-1]["名称"]), 1

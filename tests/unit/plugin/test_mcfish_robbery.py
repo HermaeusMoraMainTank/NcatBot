@@ -963,6 +963,44 @@ def test_mcfish_craft_all_averages_each_batch_of_three_separately(monkeypatch):
     assert sorted((pole["induce"], pole["favor"]) for pole in state["pack"]["铁竿"]) == [(0, 3), (3, 0)]
 
 
+def test_mcfish_more_than_hundred_fish_only_switches_probability_ranges():
+    """Both the 100 fish milestone and the axolotl rod only widen the probability table."""
+    plugin = McFish.__new__(McFish)
+    plugin._catalog = {"分类": [
+        {"类型": "treasure", "概率[0-100)": 10},
+        {"类型": "pole", "概率[0-100)": 10},
+        {"类型": "fish", "概率[0-100)": 30},
+        {"类型": "waste", "概率[0-100)": 10},
+    ], "物品": []}
+
+    assert plugin._zone_boundaries({"pack": {"鳗鱼": 101}, "equip": {"name": "木竿", "favor": 0}}) == (0, 2, 10, 45, 90)
+    assert plugin._zone_boundaries({"pack": {}, "equip": {"name": "美西螈", "favor": 0}}) == (0, 2, 10, 45, 90)
+    assert plugin._zone_boundaries({"pack": {"鳗鱼": 100}, "equip": {"name": "木竿", "favor": 0}}) == (0, 10, 20, 50, 60)
+
+
+def test_mcfish_drop_quantity_is_five_only_while_equipped_with_axolotl(monkeypatch):
+    """The x5 multiplier needs the axolotl rod; a 100+ fish pack must not multiply drops."""
+    import importlib
+
+    mcfish_module = importlib.import_module("McFish.McFish")
+    monkeypatch.setattr(mcfish_module.random, "randrange", lambda _stop: 0)
+    plugin = McFish.__new__(McFish)
+    plugin._catalog = {"分类": [
+        {"类型": "fish", "概率[0-100)": 50},
+        {"类型": "treasure", "概率[0-100)": 50},
+    ], "物品": [
+        {"名称": "鳗鱼", "类型": "fish", "概率[0-100)": 100},
+        {"名称": "美西螈", "类型": "treasure", "概率[0-100)": 100},
+    ]}
+
+    plugin._zone_boundaries = lambda _state, _boundaries=None: (0, 0, 0, 100, 100)
+    assert plugin._original_drop({"pack": {"鳗鱼": 101}, "equip": {"name": "木竿"}}) == ("鳗鱼", 1)
+    assert plugin._original_drop({"pack": {}, "equip": {"name": "美西螈"}}) == ("鳗鱼", 5)
+
+    plugin._zone_boundaries = lambda _state, _boundaries=None: (0, 100, 100, 100, 100)
+    assert plugin._original_drop({"pack": {}, "equip": {"name": "美西螈"}}) == ("美西螈", 1)
+
+
 def test_mcfish_help_explains_emergency_pole_is_independent_of_shop():
     assert "花费100购买鱼竿" in MCFISH_HELP
     assert "最多可以购买3次" in MCFISH_HELP
