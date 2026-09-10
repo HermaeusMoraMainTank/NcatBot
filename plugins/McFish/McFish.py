@@ -93,6 +93,46 @@ SHOP_WOOD_PRICE = 180
 AXOLOTL = "美西螈"
 UPGRADES = {"铁竿": "木竿", "金竿": "铁竿", "钻石竿": "金竿", "下界合金竿": "钻石竿", "三叉戟": "下界合金竿"}
 
+# 2026-09-10 数据修复：移植时把“背包里鱼的总数超过 100 只会改变概率区间”误写成“一次获得 5 个”，
+# 下面两位玩家因此多领了物品和经验。清单来自服务器日志里的逐竿上钩记录（09-09 完整日志 + 09-10
+# 17:53 的十连结果）：每一次计入 ×5 的上钩都多发了 4 个物品，经验差额与捕获记录完全吻合
+# （891-4×81=567、1205-4×123=713）。
+EXCESSIVE_DROP_REPAIRS = {
+    "1310043427": {
+        "excess_xp": 324,
+        "items": {
+            "鳕鱼": 12,
+            "鲑鱼": 16,
+            "河豚": 4,
+            "鳗鱼": 4,
+            "绊线钩": 8,
+            "鞋子": 4,
+            "碗": 4,
+            "木棍": 4,
+            "瓶子": 4,
+            "腐肉": 4,
+        },
+    },
+    "10123121": {
+        "excess_xp": 492,
+        "items": {
+            "鹦鹉螺": 8,
+            "墨鱼": 4,
+            "鳕鱼": 4,
+            "河豚": 4,
+            "鲑鱼": 4,
+            "热带鱼": 4,
+            "帽子": 8,
+            "木棍": 8,
+            "海草": 4,
+            "瓶子": 4,
+            "碗": 12,
+            "骨头": 12,
+        },
+    },
+}
+
+
 MCFISH_HELP = """一款钓鱼模拟器
 ----------指令----------
 - 钓鱼看板 / 钓鱼商店 / 钓鱼背包
@@ -185,6 +225,8 @@ class McFish(NcatBotPlugin):
         self._repair_abnormal_pole_inventory()
         self._repair_abnormal_equipment()
         self._reset_fishing_progress_for_level_release()
+        self._repair_excessive_drop_quantities()
+        self._top_up_excessive_drop_quantities()
 
     async def on_close(self) -> None:
         for task in getattr(self, "_fishing_tasks", {}).values():
@@ -818,6 +860,80 @@ class McFish(NcatBotPlugin):
         except Exception:
             self._db.rollback()
             raise
+
+    def _reclaim_excessive_drops(self, migration_id: str, targets: dict[str, dict]) -> None:
+        """Deduct the given items/XP from players and record the adjustment once per migration_id."""
+        if self._db.execute("SELECT 1 FROM migrations WHERE migration_id = ?", (migration_id,)).fetchone():
+            return
+        details: dict[str, dict] = {}
+        try:
+            for user_id, repair in targets.items():
+                row = self._db.execute("SELECT state FROM players WHERE user_id = ?", (user_id,)).fetchone()
+                if not row:
+                    continue
+                state = json.loads(row[0])
+                old_state = json.dumps(state, ensure_ascii=False, sort_keys=True)
+                pack = state.setdefault("pack", {})
+                removed: dict[str, int] = {}
+                for name, amount in repair["items"].items():
+                    held = int(pack.get(name, 0) or 0)
+                    deducted = min(held, int(amount))
+                    if deducted:
+                        pack[name] = held - deducted
+                        removed[name] = deducted
+                excess_xp = min(max(0, int(state.get("fish_xp", 0))), int(repair.get("excess_xp", 0)))
+                state["fish_xp"] = max(0, int(state.get("fish_xp", 0)) - excess_xp)
+                state["fish_level"] = max(1, level_for_xp(state["fish_xp"]))
+                new_state = json.dumps(state, ensure_ascii=False, sort_keys=True)
+                self._db.execute(
+                    "UPDATE players SET state = ?, updated_at = ? WHERE user_id = ?",
+                    (new_state, time.time(), user_id),
+                )
+                self._db.execute(
+                    "INSERT INTO admin_adjustments(user_id, reason, old_state, new_state, created_at) VALUES (?, ?, ?, ?, ?)",
+                    (user_id, migration_id, old_state, new_state, time.time()),
+                )
+                details[user_id] = {
+                    "removed_items": removed,
+                    "removed_xp": excess_xp,
+                    "fish_xp": state["fish_xp"],
+                    "fish_level": state["fish_level"],
+                }
+            self._db.execute(
+                "INSERT INTO migrations(migration_id, applied_at, details) VALUES (?, ?, ?)",
+                (migration_id, time.time(), json.dumps(details, ensure_ascii=False)),
+            )
+            self._db.commit()
+        except Exception:
+            self._db.rollback()
+            raise
+
+    def _repair_excessive_drop_quantities(self) -> None:
+        """Reclaim the items and XP granted while the >100 fish drop bug was live."""
+        self._reclaim_excessive_drops("mcfish-drop-quantity-2026-09-10", EXCESSIVE_DROP_REPAIRS)
+
+    def _top_up_excessive_drop_quantities(self) -> None:
+        """补齐首次线上执行时键名写错而漏掉的 鳕鱼/鳗鱼 差额。"""
+        migration_id = "mcfish-drop-quantity-2026-09-10-v2"
+        row = self._db.execute(
+            "SELECT details FROM migrations WHERE migration_id = ?",
+            ("mcfish-drop-quantity-2026-09-10",),
+        ).fetchone()
+        if not row:
+            self._reclaim_excessive_drops(migration_id, {})
+            return
+        recorded = json.loads(row[0])
+        targets: dict[str, dict] = {}
+        for user_id, repair in EXCESSIVE_DROP_REPAIRS.items():
+            removed = (recorded.get(user_id) or {}).get("removed_items", {})
+            missing = {
+                name: int(amount) - int(removed.get(name, 0))
+                for name, amount in repair["items"].items()
+                if int(removed.get(name, 0)) < int(amount)
+            }
+            if missing:
+                targets[user_id] = {"excess_xp": 0, "items": missing}
+        self._reclaim_excessive_drops(migration_id, targets)
 
     @staticmethod
     def _shop_poles(value, name: str) -> list[dict]:

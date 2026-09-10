@@ -1258,3 +1258,151 @@ def test_wallet_help_does_not_claim_the_fishing_help_command():
     from GroupEconomy.GroupEconomy import HELP
 
     assert "钓鱼帮助：查看钓鱼、背包、商店、装备、交易和合成说明" in HELP
+
+
+def _make_migration_plugin(tmp_path: Path) -> McFish:
+    plugin = McFish.__new__(McFish)
+    plugin._db = sqlite3.connect(tmp_path / "mcfish.db")
+    plugin._db.execute("CREATE TABLE players (user_id TEXT PRIMARY KEY, state TEXT NOT NULL, updated_at REAL NOT NULL)")
+    plugin._db.execute("CREATE TABLE migrations (migration_id TEXT PRIMARY KEY, applied_at REAL NOT NULL, details TEXT NOT NULL)")
+    plugin._db.execute("CREATE TABLE admin_adjustments (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id TEXT NOT NULL, reason TEXT NOT NULL, old_state TEXT NOT NULL, new_state TEXT NOT NULL, created_at REAL NOT NULL)")
+    return plugin
+
+
+def test_mcfish_drop_quantity_migration_reclaims_five_times_items_and_xp(tmp_path: Path):
+    plugin = _make_migration_plugin(tmp_path)
+    state = {
+        "fish_level": 5,
+        "fish_xp": 891,
+        "pack": {
+            "鳕鱼": 58,
+            "鲑鱼": 38,
+            "河豚": 16,
+            "鳗鱼": 3,
+            "绊线钩": 18,
+            "鞋子": 8,
+            "碗": 6,
+            "木棍": 9,
+            "瓶子": 7,
+            "腐肉": 9,
+            "墨鱼": 6,
+        },
+    }
+    plugin._db.execute("INSERT INTO players VALUES (?, ?, ?)", ("1310043427", json.dumps(state, ensure_ascii=False), time.time()))
+    plugin._db.commit()
+
+    plugin._repair_excessive_drop_quantities()
+
+    repaired = json.loads(plugin._db.execute("SELECT state FROM players WHERE user_id = '1310043427'").fetchone()[0])
+    assert repaired["fish_xp"] == 567
+    assert repaired["fish_level"] == 4
+    assert repaired["pack"]["鳕鱼"] == 46
+    assert repaired["pack"]["鲑鱼"] == 22
+    assert repaired["pack"]["河豚"] == 12
+    assert repaired["pack"]["鳗鱼"] == 0
+    assert repaired["pack"]["绊线钩"] == 10
+    assert repaired["pack"]["鞋子"] == 4
+    assert repaired["pack"]["碗"] == 2
+    assert repaired["pack"]["木棍"] == 5
+    assert repaired["pack"]["瓶子"] == 3
+    assert repaired["pack"]["腐肉"] == 5
+    assert repaired["pack"]["墨鱼"] == 6
+
+    reason, old_state, new_state = plugin._db.execute(
+        "SELECT reason, old_state, new_state FROM admin_adjustments WHERE user_id = '1310043427'"
+    ).fetchone()
+    assert reason == "mcfish-drop-quantity-2026-09-10"
+    assert json.loads(old_state)["fish_xp"] == 891
+    assert json.loads(new_state)["fish_xp"] == 567
+
+    plugin._repair_excessive_drop_quantities()
+    assert plugin._db.execute("SELECT COUNT(*) FROM migrations").fetchone()[0] == 1
+    plugin._db.close()
+
+
+def test_mcfish_drop_quantity_migration_skips_unrecorded_players(tmp_path: Path):
+    plugin = _make_migration_plugin(tmp_path)
+    states = {
+        "10123121": {
+            "fish_level": 6,
+            "fish_xp": 1205,
+            "pack": {
+                "鹦鹉螺": 22,
+                "墨鱼": 12,
+                "鳕鱼": 53,
+                "河豚": 10,
+                "鲑鱼": 28,
+                "热带鱼": 11,
+                "帽子": 11,
+                "木棍": 12,
+                "海草": 0,
+                "瓶子": 16,
+                "碗": 20,
+                "骨头": 22,
+            },
+        },
+        "99999999": {"fish_level": 3, "fish_xp": 200, "pack": {"鳕鱼": 5}},
+    }
+    for user_id, state in states.items():
+        plugin._db.execute("INSERT INTO players VALUES (?, ?, ?)", (user_id, json.dumps(state, ensure_ascii=False), time.time()))
+    plugin._db.commit()
+
+    plugin._repair_excessive_drop_quantities()
+
+    repaired = json.loads(plugin._db.execute("SELECT state FROM players WHERE user_id = '10123121'").fetchone()[0])
+    assert repaired["fish_xp"] == 713
+    assert repaired["fish_level"] == 5
+    assert repaired["pack"]["鹦鹉螺"] == 14
+    assert repaired["pack"]["墨鱼"] == 8
+    assert repaired["pack"]["鳕鱼"] == 49
+    assert repaired["pack"]["河豚"] == 6
+    assert repaired["pack"]["鲑鱼"] == 24
+    assert repaired["pack"]["热带鱼"] == 7
+    assert repaired["pack"]["帽子"] == 3
+    assert repaired["pack"]["木棍"] == 4
+    assert repaired["pack"]["海草"] == 0
+    assert repaired["pack"]["瓶子"] == 12
+    assert repaired["pack"]["碗"] == 8
+    assert repaired["pack"]["骨头"] == 10
+
+    untouched = json.loads(plugin._db.execute("SELECT state FROM players WHERE user_id = '99999999'").fetchone()[0])
+    assert untouched == states["99999999"]
+    assert plugin._db.execute("SELECT COUNT(*) FROM migrations").fetchone()[0] == 1
+    plugin._db.close()
+
+
+def test_mcfish_drop_quantity_migration_tops_up_partial_first_pass(tmp_path: Path):
+    plugin = _make_migration_plugin(tmp_path)
+    state = {"fish_level": 4, "fish_xp": 567, "pack": {"鳕鱼": 58, "鳗鱼": 6}}
+    plugin._db.execute("INSERT INTO players VALUES (?, ?, ?)", ("1310043427", json.dumps(state, ensure_ascii=False), time.time()))
+    plugin._db.execute(
+        "INSERT INTO migrations VALUES (?, ?, ?)",
+        (
+            "mcfish-drop-quantity-2026-09-10",
+            time.time(),
+            json.dumps(
+                {"1310043427": {"removed_items": {"鲑鱼": 16, "河豚": 4}, "removed_xp": 324}},
+                ensure_ascii=False,
+            ),
+        ),
+    )
+    plugin._db.commit()
+
+    plugin._top_up_excessive_drop_quantities()
+
+    repaired = json.loads(plugin._db.execute("SELECT state FROM players WHERE user_id = '1310043427'").fetchone()[0])
+    assert repaired["pack"]["鳕鱼"] == 46
+    assert repaired["pack"]["鳗鱼"] == 2
+    assert repaired["fish_xp"] == 567
+    assert repaired["fish_level"] == 4
+    details = json.loads(
+        plugin._db.execute(
+            "SELECT details FROM migrations WHERE migration_id = 'mcfish-drop-quantity-2026-09-10-v2'"
+        ).fetchone()[0]
+    )
+    assert details["1310043427"]["removed_items"] == {"鳕鱼": 12, "鳗鱼": 4}
+    assert details["1310043427"]["removed_xp"] == 0
+
+    plugin._top_up_excessive_drop_quantities()
+    assert plugin._db.execute("SELECT COUNT(*) FROM migrations").fetchone()[0] == 2
+    plugin._db.close()
