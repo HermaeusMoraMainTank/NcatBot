@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "plugins"))
 
 from GroupEconomy.store import EconomyStore  # noqa: E402
-from McFish.McFish import MCFISH_HELP, FishKingWindow, McFish  # noqa: E402
+from McFish.McFish import MCFISH_HELP, SHOP_WOOD_PRICE, FishKingWindow, McFish  # noqa: E402
 from Robbery.Robbery import Robbery  # noqa: E402
 
 
@@ -507,7 +507,7 @@ def test_mcfish_waste_sale_matches_full_original_listing_order():
     )
 
 
-def test_mcfish_buy_wood_pole_uses_initial_wood_shop_listing():
+def test_mcfish_buy_wood_pole_uses_permanent_fixed_price():
     import asyncio
     from types import SimpleNamespace
 
@@ -527,7 +527,48 @@ def test_mcfish_buy_wood_pole_uses_initial_wood_shop_listing():
     asyncio.run(plugin._buy(event, state, "木杆"))
 
     assert len(state["pack"]["木竿"]) == 1
-    assert event.reply.await_args.kwargs["text"] == "你用100购买了1木杆"
+    assert event.reply.await_args.kwargs["text"] == "你用180购买了1木杆"
+
+
+def test_mcfish_buy_multiple_permanent_wood_poles():
+    import asyncio
+
+    plugin = McFish.__new__(McFish)
+    plugin._prices = {"木竿": 100}
+    plugin._economy_change = lambda *_args: True
+    plugin._save = lambda *_args: None
+    plugin._choose = AsyncMock(return_value=SimpleNamespace(key="confirm"))
+    plugin.get_config = lambda _key, default=None: default
+    plugin._shop_data = lambda: ({"木竿": 100}, {"初始木竿": [{"durable": 30, "maintenance": 0, "induce": 0, "favor": 0}]})
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {"pack": {}}
+
+    asyncio.run(plugin._buy(event, state, "木竿 3"))
+
+    assert len(state["pack"]["木竿"]) == 3
+    assert state["pole_trade_count"] == 3
+    assert plugin._choose.await_args.args[0].startswith("你确定花费540购买3个木竿?")
+    assert event.reply.await_args.kwargs["text"] == "你用540购买了3木竿"
+
+
+def test_mcfish_permanent_wood_pole_purchase_respects_daily_trade_limit():
+    import asyncio
+
+    plugin = McFish.__new__(McFish)
+    plugin._prices = {"木竿": 100}
+    plugin._economy_change = lambda *_args: True
+    plugin._save = lambda *_args: None
+    plugin._choose = AsyncMock(return_value=SimpleNamespace(key="confirm"))
+    plugin.get_config = lambda _key, default=None: default
+    plugin._shop_data = lambda: ({"木竿": 100}, {"初始木竿": [{"durable": 30, "maintenance": 0, "induce": 0, "favor": 0}]})
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {"pack": {}, "pole_trade_count": 8}
+
+    asyncio.run(plugin._buy(event, state, "木竿 3"))
+
+    assert len(state["pack"]["木竿"]) == 2
+    assert state["pole_trade_count"] == 10
+    assert event.reply.await_args.kwargs["text"] == "你用360购买了2木竿"
 
 
 def test_mcfish_buy_wood_pole_falls_back_when_initial_listing_is_empty():
@@ -591,12 +632,12 @@ def test_mcfish_buy_fish_uses_listed_shop_inventory():
     assert event.reply.await_args.kwargs["text"] == "你用10购买了1鳕鱼"
 
 
-def test_mcfish_initial_wood_pole_uses_daily_multiplier():
+def test_mcfish_permanent_wood_pole_uses_fixed_price():
     plugin = McFish.__new__(McFish)
     plugin._prices = {"木竿": 100}
 
-    assert plugin._shop_price("初始木竿", {"木竿": 50}) == 50
-    assert plugin._shop_price("初始木竿", {"木竿": 199}) == 199
+    assert plugin._shop_price("初始木竿", {"木竿": 50}) == SHOP_WOOD_PRICE
+    assert plugin._shop_price("初始木竿", {"木竿": 199}) == SHOP_WOOD_PRICE
 
 
 def test_mcfish_enchanted_pole_price_is_bounded_by_pole_value():

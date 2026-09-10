@@ -2043,7 +2043,7 @@ class McFish(NcatBotPlugin):
         if has_level_state and name in POLES and player_level < rod_unlock_level(name):
             await event.reply(text=f"你的钓鱼等级为{player_level}，{name}需要等级{rod_unlock_level(name)}才能购买")
             return
-        if name in POLES:
+        if name in POLES and name != "木竿":
             number = 1
         if name not in POLES and name not in FISH and name not in ITEMS and name not in SHOP_EQUIPMENT_PRICES or name in ("垃圾", "宝藏诅咒"): await event.reply(text="商店没有这个物品"); return
         discounts, inventory = self._shop_data()
@@ -2063,6 +2063,12 @@ class McFish(NcatBotPlugin):
         if is_pole and int(state.get("pole_trade_count", 0)) >= 10:
             await event.reply(text="今天鱼竿交易次数已达上限")
             return
+        if name == "木竿" and shop_name == "初始木竿":
+            # 常驻木竿可按数量购买，但仍受每日交易次数和持有上限约束
+            number = min(number, 10 - int(state.get("pole_trade_count", 0)), 50 - pole_count)
+            if number <= 0:
+                await event.reply(text="当前无法购买更多鱼竿")
+                return
         if not is_pole and int(state.get("item_buy_count", 0)) + number > 30:
             number = max(0, 30 - int(state.get("item_buy_count", 0)))
             if number == 0:
@@ -2080,10 +2086,14 @@ class McFish(NcatBotPlugin):
                 number = curse_count
         if is_pole:
             available = self._shop_poles(inventory[shop_name], name if shop_name != "初始木竿" else "木竿")
+            if shop_name == "初始木竿":
+                # 常驻商品：库存不足时按购买数量补足同规格木竿
+                while len(available) < number:
+                    available.append({"durable": POLES["木竿"][0], "maintenance": 0, "induce": 0, "favor": 0})
             if len(available) < number:
                 await event.reply(text="当前商店并没有上架该物品")
                 return
-            if len(available) > 1 and number == 1:
+            if len(available) > 1 and number == 1 and shop_name != "初始木竿":
                 choices = {str(i): str(i) for i in range(len(available))}
                 listing = "\n".join(f"[{i}]{name}({p['durable']}/{p['maintenance']}/{p['induce']}/{p['favor']}) 价格:{self._pole_price(p, discounts, name if shop_name != '初始木竿' else '木竿')}" for i, p in enumerate(available))
                 result = await self._choose(
@@ -2097,7 +2107,7 @@ class McFish(NcatBotPlugin):
                 selected_poles = available[:number]
                 del available[:number]
             if shop_name == "初始木竿":
-                price = self._shop_price(shop_name, discounts)
+                price = self._shop_price(shop_name, discounts) * len(selected_poles)
             else:
                 price = sum(self._pole_price(p, discounts, name) for p in selected_poles)
         else:
