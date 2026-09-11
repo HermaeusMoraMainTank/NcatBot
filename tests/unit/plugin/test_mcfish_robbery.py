@@ -1611,3 +1611,38 @@ def test_mcfish_concurrent_overwrite_repair_restores_lost_purchases(tmp_path: Pa
     again = json.loads(plugin._db.execute("SELECT state FROM players WHERE user_id = '10123121'").fetchone()[0])
     assert len(again["pack"]["木竿"]) == 7
     plugin._db.close()
+
+
+def test_mcfish_concurrent_overwrite_late_repair_grants_items_and_refunds_gold(tmp_path: Path):
+    """第二批补发：其余被覆盖的购买要么补发木竿，要么按原价退回金币，且只执行一次。"""
+    plugin = _make_migration_plugin(tmp_path)
+    economy = EconomyStore(tmp_path / "economy.db")
+    plugin._economy = SimpleNamespace(store=economy)
+    for user_id in ("10123121", "1506123340", "2448564447", "1310043427", "273421673"):
+        plugin._db.execute(
+            "INSERT INTO players VALUES (?, ?, ?)",
+            (user_id, json.dumps({"pack": {}}, ensure_ascii=False), time.time()),
+        )
+    plugin._db.commit()
+
+    plugin._top_up_concurrent_overwrite_losses()
+
+    def poles(user_id):
+        return len(json.loads(plugin._db.execute("SELECT state FROM players WHERE user_id = ?", (user_id,)).fetchone()[0])["pack"].get("木竿", []))
+
+    assert poles("10123121") == 1
+    assert poles("2448564447") == 3
+    assert poles("1310043427") == 1
+    assert poles("273421673") == 1
+    assert poles("1506123340") == 0
+    balance = lambda uid: economy.account(uid)["balance"]  # noqa: E731
+    assert balance("2448564447") == 300
+    assert balance("1310043427") == 80
+    assert balance("1506123340") == 2253
+    assert balance("10123121") == 0
+
+    plugin._top_up_concurrent_overwrite_losses()
+
+    assert poles("10123121") == 1
+    assert balance("1506123340") == 2253
+    plugin._db.close()

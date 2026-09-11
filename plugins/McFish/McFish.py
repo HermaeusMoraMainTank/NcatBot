@@ -151,6 +151,25 @@ CONCURRENT_OVERWRITE_REPAIRS = {
 }
 
 
+# 2026-09-11 补发（第二批）：同一个“后台任务整份覆盖存档”bug 在更早的时间段还吞掉了
+# 下面这些购买。逐条来自 GroupEconomy 账本与 mcfish.fishing_attempts 任务区间的时间重叠：
+# - 10123121：09-10 21:46（-180，1 根木竿）落在 21:45:51-21:59:42 的十连区间内。
+# - 2448564447：09-10 18:50（-540，3 根木竿）落在 18:50:38-18:56:08；09-11 03:38（-300）
+#   落在 03:37:25-03:52:24，购买物品无法唯一还原，按原价补回金币。
+# - 1310043427：09-10 17:54（-180，1 根木竿）落在 17:53:30-18:07:33；09-08 00:20（-80）
+#   落在 00:17:43-00:34:01，按原价补回金币。
+# - 273421673：09-10 17:32（-180，1 根木竿）落在 17:27:34-17:36:28。
+# - 1506123340：09-08 的 -405 / -1740 / -108 分别落在当天的两次十连区间内，购买物品无法
+#   唯一还原，共补回 2253 金币。
+CONCURRENT_OVERWRITE_LATE_REPAIRS = {
+    "10123121": {"items": {"木竿": 1}, "gold": 0},
+    "2448564447": {"items": {"木竿": 3}, "gold": 300},
+    "1310043427": {"items": {"木竿": 1}, "gold": 80},
+    "273421673": {"items": {"木竿": 1}, "gold": 0},
+    "1506123340": {"items": {}, "gold": 2253},
+}
+
+
 MCFISH_HELP = """一款钓鱼模拟器
 ----------指令----------
 - 钓鱼看板 / 钓鱼商店 / 钓鱼背包
@@ -274,6 +293,7 @@ class McFish(NcatBotPlugin):
         self._repair_excessive_drop_quantities()
         self._top_up_excessive_drop_quantities()
         self._repair_concurrent_overwrite_losses()
+        self._top_up_concurrent_overwrite_losses()
 
     async def on_close(self) -> None:
         for task in getattr(self, "_fishing_tasks", {}).values():
@@ -1039,6 +1059,46 @@ class McFish(NcatBotPlugin):
                     (user_id, migration_id, old_state, new_state, time.time()),
                 )
                 details[user_id] = {name: int(amount) for name, amount in granted.items()}
+            self._db.execute(
+                "INSERT INTO migrations(migration_id, applied_at, details) VALUES (?, ?, ?)",
+                (migration_id, time.time(), json.dumps(details, ensure_ascii=False)),
+            )
+            self._db.commit()
+        except Exception:
+            self._db.rollback()
+            raise
+
+    def _top_up_concurrent_overwrite_losses(self) -> None:
+        """补发同一覆盖 bug 在其余时间段吞掉的购买（第二批）。"""
+        migration_id = "mcfish-concurrent-overwrite-2026-09-11-v2"
+        if self._db.execute("SELECT 1 FROM migrations WHERE migration_id = ?", (migration_id,)).fetchone():
+            return
+        details: dict[str, dict] = {}
+        try:
+            for user_id, repair in CONCURRENT_OVERWRITE_LATE_REPAIRS.items():
+                row = self._db.execute("SELECT state FROM players WHERE user_id = ?", (user_id,)).fetchone()
+                if not row:
+                    continue
+                state = json.loads(row[0])
+                state.setdefault("pack", {})
+                old_state = json.dumps(state, ensure_ascii=False, sort_keys=True)
+                for name, amount in repair["items"].items():
+                    for _ in range(int(amount)):
+                        self._add(state, name, pole=name in POLES)
+                new_state = json.dumps(state, ensure_ascii=False, sort_keys=True)
+                self._db.execute(
+                    "UPDATE players SET state = ?, updated_at = ? WHERE user_id = ?",
+                    (new_state, time.time(), user_id),
+                )
+                self._db.execute(
+                    "INSERT INTO admin_adjustments(user_id, reason, old_state, new_state, created_at) VALUES (?, ?, ?, ?, ?)",
+                    (user_id, migration_id, old_state, new_state, time.time()),
+                )
+                details[user_id] = {name: int(amount) for name, amount in repair["items"].items()}
+                gold = int(repair["gold"])
+                if gold:
+                    self._economy_change(user_id, gold, "mcfish_overwrite_refund")
+                    details[user_id]["退款金币"] = gold
             self._db.execute(
                 "INSERT INTO migrations(migration_id, applied_at, details) VALUES (?, ?, ?)",
                 (migration_id, time.time(), json.dumps(details, ensure_ascii=False)),
