@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import copy
 import json
 import random
 import re
@@ -51,6 +52,9 @@ from .mcfish_rules import (
 
 
 LOG = get_log("McFish")
+
+# 用于区分“状态里没有这个键”和“键的值就是 None”。
+_MISSING = object()
 
 
 class _McFishEvent:
@@ -133,6 +137,20 @@ EXCESSIVE_DROP_REPAIRS = {
 }
 
 
+# 2026-09-11 数据修复：后台钓鱼任务在等待期间持有整份内存快照、每竿结束再整份写回，
+# 玩家在等待期间的购买会被覆盖丢失。账本（GroupEconomy ledger）与 fishing_attempts
+# 的时间轴对比结果：
+# - 10123121：01:16:00（-540，3 根木竿）落在 01:15:17-01:30:15 任务区间内；
+#   01:59:50（-720，4 根木竿）落在 01:54:29-02:08:11 区间内。他当天共买 13 根木竿，
+#   其中 6 根合成了现在背包里的 2 根铁竿，被覆盖丢失的正好是这 3+4=7 根。
+# - 1506123340：07:56:40（-8500，20 条墨鱼）与 07:56:54（-4250，10 条墨鱼）
+#   都落在 07:54:19-08:10:28 任务区间内，30 条墨鱼全部被覆盖。
+CONCURRENT_OVERWRITE_REPAIRS = {
+    "10123121": {"木竿": 7},
+    "1506123340": {"墨鱼": 30},
+}
+
+
 MCFISH_HELP = """一款钓鱼模拟器
 ----------指令----------
 - 钓鱼看板 / 钓鱼商店 / 钓鱼背包
@@ -200,7 +218,7 @@ MCFISH_HELP = """一款钓鱼模拟器
 # 帮助图片里的“已确认的特殊机制”清单：每条渲染成一行，超宽时自动折行。
 MCFISH_SPECIAL_MECHANICS = (
     "掉落基础概率：宝藏1%、鱼竿4%、鱼25%、垃圾30%，其余40%为空竿（赛博空气，不给物品也不给经验）。",
-    "背包里鱼的总数超过100条时，区间变为宝藏2%、鱼竿8%、鱼35%、垃圾45%，只改变概率、不改变数量。",
+    "背包里鱼的总数超过100条时，区间变为宝藏2%、鱼竿8%、鱼35%、垃圾45%，只改变概率、不改变数量；此时海之眷顾仍然生效，把剩余空竿转化为宝藏/鱼竿/鱼。",
     "海之眷顾每级把6%的空竿转化为宝藏1%、鱼竿2%、鱼3%；诱钓每级把上钩等待按(等级+1)等分缩短。",
     "钓到鱼竿时会自动换成1–2个钓鱼碎片，鱼竿只能通过合成、修复和交易获得。",
     "美西螈：宝藏掉落；装备后区间同样变为2/8/35/45，并且除鱼竿与美西螈本身外，其他物品一次获得5个。",
@@ -255,6 +273,7 @@ class McFish(NcatBotPlugin):
         self._reset_fishing_progress_for_level_release()
         self._repair_excessive_drop_quantities()
         self._top_up_excessive_drop_quantities()
+        self._repair_concurrent_overwrite_losses()
 
     async def on_close(self) -> None:
         for task in getattr(self, "_fishing_tasks", {}).values():
@@ -521,6 +540,40 @@ class McFish(NcatBotPlugin):
     def _save(self, user_id: str, state: dict) -> None:
         self._db.execute("INSERT OR REPLACE INTO players(user_id, state, updated_at) VALUES (?, ?, ?)", (str(user_id), json.dumps(state, ensure_ascii=False), time.time()))
         self._db.commit()
+
+    @staticmethod
+    def _apply_state_delta(target: dict, base: dict, current: dict) -> None:
+        """把 current 相对 base 的改动合并进 target，用于避免整份覆盖并发写入。"""
+        for key, value in current.items():
+            old = base.get(key, _MISSING)
+            if isinstance(value, dict) and isinstance(old, dict):
+                slot = target.get(key)
+                if not isinstance(slot, dict):
+                    slot = target[key] = {}
+                McFish._apply_state_delta(slot, old, value)
+            elif isinstance(value, bool) or isinstance(old, bool):
+                if old != value:
+                    target[key] = value
+            elif isinstance(value, (int, float)) and isinstance(old, (int, float)):
+                held = target.get(key)
+                target[key] = (held if isinstance(held, (int, float)) else 0) + value - old
+            elif old != value:
+                target[key] = value
+        for key in base:
+            if key not in current:
+                target.pop(key, None)
+
+    def _save_fishing_state(self, uid: str, state: dict, base: dict) -> dict:
+        """钓鱼任务落盘时先读回最新存档，只把本次改动合并进去。
+
+        后台钓鱼任务会跨分钟持有内存快照，直接整份写回会覆盖玩家在等待期间完成的
+        购买、合成、出售或装备操作（2026-09-11 的丢鱼竿事故根因）。这里改成
+        “读回最新状态 + 合并本次增量”，返回新的基准状态供下一次结算使用。
+        """
+        latest = self._state(uid)
+        self._apply_state_delta(latest, base, state)
+        self._save(uid, latest)
+        return copy.deepcopy(state)
 
     @staticmethod
     def _record_capture(state: dict, name: str, *, caught_at: datetime | None = None) -> None:
@@ -959,6 +1012,42 @@ class McFish(NcatBotPlugin):
                 targets[user_id] = {"excess_xp": 0, "items": missing}
         self._reclaim_excessive_drops(migration_id, targets)
 
+    def _repair_concurrent_overwrite_losses(self) -> None:
+        """补发 2026-09-11 被后台钓鱼任务整份覆盖而丢失的购买物品。"""
+        migration_id = "mcfish-concurrent-overwrite-2026-09-11"
+        if self._db.execute("SELECT 1 FROM migrations WHERE migration_id = ?", (migration_id,)).fetchone():
+            return
+        details: dict[str, dict] = {}
+        try:
+            for user_id, granted in CONCURRENT_OVERWRITE_REPAIRS.items():
+                row = self._db.execute("SELECT state FROM players WHERE user_id = ?", (user_id,)).fetchone()
+                if not row:
+                    continue
+                state = json.loads(row[0])
+                state.setdefault("pack", {})
+                old_state = json.dumps(state, ensure_ascii=False, sort_keys=True)
+                for name, amount in granted.items():
+                    for _ in range(int(amount)):
+                        self._add(state, name, pole=name in POLES)
+                new_state = json.dumps(state, ensure_ascii=False, sort_keys=True)
+                self._db.execute(
+                    "UPDATE players SET state = ?, updated_at = ? WHERE user_id = ?",
+                    (new_state, time.time(), user_id),
+                )
+                self._db.execute(
+                    "INSERT INTO admin_adjustments(user_id, reason, old_state, new_state, created_at) VALUES (?, ?, ?, ?, ?)",
+                    (user_id, migration_id, old_state, new_state, time.time()),
+                )
+                details[user_id] = {name: int(amount) for name, amount in granted.items()}
+            self._db.execute(
+                "INSERT INTO migrations(migration_id, applied_at, details) VALUES (?, ?, ?)",
+                (migration_id, time.time(), json.dumps(details, ensure_ascii=False)),
+            )
+            self._db.commit()
+        except Exception:
+            self._db.rollback()
+            raise
+
     @staticmethod
     def _shop_poles(value, name: str) -> list[dict]:
         if isinstance(value, list):
@@ -969,35 +1058,44 @@ class McFish(NcatBotPlugin):
     def _enchant_label(level: int) -> str:
         return ("0", "Ⅰ", "Ⅱ", "Ⅲ")[max(0, min(3, int(level)))]
 
+    # 海之眷顾每级把 6% 的空竿转化为宝藏 1%、鱼竿 2%、鱼 3%。
+    FAVOR_AIR_COST = 6
+    FAVOR_SPLIT = (1, 2, 3)
+
     def _zone_boundaries(self, state: dict) -> tuple[int, int, int, int, int]:
         favor = int((state.get("equip") or {}).get("favor", 0))
         fish_count = sum(
             int(value) for name, value in state.get("pack", {}).items()
             if name in FISH and isinstance(value, int)
         )
-        boosted = fish_count > 100 or (state.get("equip") or {}).get("name") == AXOLOTL
-        if boosted:
-            boundaries = (0, 2, 10, 45, 90)
+        if fish_count > 100 or (state.get("equip") or {}).get("name") == AXOLOTL:
+            zones = [2, 8, 35, 45]
         else:
             zone_probabilities = {
                 str(info.get("类型")): int(info.get("概率[0-100)", 0))
                 for info in getattr(self, "_catalog", {}).get("分类", [])
             }
-            boundaries = (
-                0,
-                zone_probabilities.get("treasure", 0) + favor,
-                zone_probabilities.get("treasure", 0)
-                + zone_probabilities.get("pole", 0)
-                + favor * 2,
-                zone_probabilities.get("treasure", 0)
-                + zone_probabilities.get("pole", 0)
-                + zone_probabilities.get("fish", 0)
-                + favor * 3,
-                zone_probabilities.get("treasure", 0)
-                + zone_probabilities.get("pole", 0)
-                + zone_probabilities.get("fish", 0)
-                + zone_probabilities.get("waste", 0),
-            )
+            zones = [
+                zone_probabilities.get("treasure", 0),
+                zone_probabilities.get("pole", 0),
+                zone_probabilities.get("fish", 0),
+                zone_probabilities.get("waste", 0),
+            ]
+        if favor > 0:
+            # 眷顾只消耗“空竿”：空竿不足时按剩余量折算，不会挤占垃圾区间。
+            air = max(0, 100 - sum(zones))
+            converted = min(favor * self.FAVOR_AIR_COST, air)
+            split = [converted * part // self.FAVOR_AIR_COST for part in self.FAVOR_SPLIT]
+            split[2] += converted - sum(split)
+            for index, amount in enumerate(split):
+                zones[index] += amount
+        boundaries = (
+            0,
+            zones[0],
+            zones[0] + zones[1],
+            zones[0] + zones[1] + zones[2],
+            sum(zones),
+        )
         if int(state.get("pack", {}).get("海豚", 0)) > 0:
             boundaries = (*boundaries[:4], 100)
         if "财富浮标" in state.get("accessories", []) and boundaries[1] > boundaries[0]:
@@ -1219,24 +1317,14 @@ class McFish(NcatBotPlugin):
         return old_level, state["fish_level"]
 
     def _probability_detail_text(self, state: dict) -> str:
-        zone = {
-            str(info.get("类型")): int(info.get("概率[0-100)", 0))
-            for info in getattr(self, "_catalog", {}).get("分类", [])
-        }
-        fish_count = sum(
-            int(value) for name, value in state.get("pack", {}).items()
-            if name in FISH and isinstance(value, int)
-        )
-        if fish_count > 100 or (state.get("equip") or {}).get("name") == AXOLOTL:
-            category = [2, 8, 35, 45]
-        else:
-            category = [zone.get("treasure", 0), zone.get("pole", 0), zone.get("fish", 0), zone.get("waste", 0)]
-        favor = int((state.get("equip") or {}).get("favor", 0))
-        if favor:
-            category[0] += favor
-            category[1] += favor
-            category[2] += favor
-            category[3] -= favor * 3
+        # 大类概率直接取自 _zone_boundaries，保证展示与实际掉落完全一致。
+        boundaries = self._zone_boundaries(state)
+        category = [
+            boundaries[1] - boundaries[0],
+            boundaries[2] - boundaries[1],
+            boundaries[3] - boundaries[2],
+            boundaries[4] - boundaries[3],
+        ]
         lines = [
             "\n大类概率:",
             f"宝藏 : {category[0]}%",
@@ -1874,6 +1962,7 @@ class McFish(NcatBotPlugin):
         result_note = ""
         if equip["name"] == "三叉戟":
             fish_attempts *= 3
+        base = copy.deepcopy(state)
         if axolotl:
             fish_available = sum(
                 int(state["pack"].get(name, 0)) for name in FISH
@@ -1906,7 +1995,7 @@ class McFish(NcatBotPlugin):
                 result_note = "(你的鱼竿已销毁)"
         state["fish_today"] += number
         # 先持久化本次预约消耗；鱼获在每一竿实际等待结束后单独结算并保存。
-        self._save(uid, state)
+        base = self._save_fishing_state(uid, state, base)
         magic_bait = int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0
         wait_rate = EQUIPMENT["魔法鱼饵"]["effects"]["wait_rate"] if magic_bait else 1.0
         initial_wait_seconds = fishing_wait_for_result(
@@ -1929,6 +2018,10 @@ class McFish(NcatBotPlugin):
             wait_seconds = (scheduled_at - datetime.now()).total_seconds()
             if wait_seconds > 0:
                 await asyncio.sleep(wait_seconds)
+            # 每竿开始前读回最新存档：等待期间玩家的购买/合成/装备改动不会被本竿覆盖。
+            state = self._state(uid)
+            equip = state.get("equip") or equip
+            base = copy.deepcopy(state)
             if magic_bait:
                 state["active_consumables"]["魔法鱼饵"] -= 1
                 state["pack"]["魔法鱼饵"] = max(0, int(state["pack"].get("魔法鱼饵", 0)) - 1)
@@ -1974,7 +2067,7 @@ class McFish(NcatBotPlugin):
                 result_note += f"\n水中出现隐秘的光影……成功钓起【{hidden_name}】！"
                 self._grant_fishing_fragments(state, "rare")
                 self._record_attempt(uid, attempt_index, scheduled_at, equip["name"], "隐秘诱饵", king_window, "hidden_fish")
-                self._save(uid, state)
+                base = self._save_fishing_state(uid, state, base)
                 continue
             king = FISH_KINGS.get(king_window.king_name) if king_window else None
             prerequisite = king.get("requires") if king else None
@@ -2023,7 +2116,7 @@ class McFish(NcatBotPlugin):
                     )
                     result_note += "\n你放弃了这次鱼王机会。"
                     self._record_attempt(uid, attempt_index, scheduled_at, equip["name"], "咬钩阶段放弃", king_window, "king_give_up")
-                    self._save(uid, state)
+                    base = self._save_fishing_state(uid, state, base)
                     continue
                 if bite_skill == "mooch_post":
                     king_window = post_window
@@ -2089,7 +2182,7 @@ class McFish(NcatBotPlugin):
                         "鱼王脱钩", induce=int(equip.get("induce", 0)), wait_rate=wait_rate
                     )
                     self._record_attempt(uid, attempt_index, scheduled_at, equip["name"], "鱼王策略", king_window, "king_escape")
-                self._save(uid, state)
+                base = self._save_fishing_state(uid, state, base)
                 continue
             name, quantity = self._original_drop(state, drop_boundaries)
             if universal_bait and name is None:
@@ -2105,7 +2198,7 @@ class McFish(NcatBotPlugin):
                         "赛博空气", induce=int(equip.get("induce", 0)), wait_rate=wait_rate
                     )
                     self._record_attempt(uid, attempt_index, scheduled_at, equip["name"], "默认鱼饵", king_window, "air")
-                    self._save(uid, state)
+                    base = self._save_fishing_state(uid, state, base)
                     continue
                 else:
                     roll = random.random()
@@ -2146,14 +2239,14 @@ class McFish(NcatBotPlugin):
             else:
                 single_image = None
             self._record_attempt(uid, attempt_index, scheduled_at, equip["name"], "魔法鱼饵" if magic_bait else "默认鱼饵", king_window, "ordinary")
-            self._save(uid, state)
+            base = self._save_fishing_state(uid, state, base)
         if not axolotl and equip["durable"] <= 0:
             state["equip"] = None
         state["fish_bless"] = int(state.get("fish_bless", 0)) + fish_attempts
         while state["fish_bless"] >= 75:
             state["fish_bless"] -= 75
             self._add(state, "净化书")
-        self._save(uid, state)
+        base = self._save_fishing_state(uid, state, base)
         if int(state.get("fish_level", 0)) > starting_level:
             result_note += f"\n恭喜你，钓鱼等级提升至{state['fish_level']}级！每日钓鱼次数上限为{daily_attempt_limit(state['fish_level'])}次。"
         detail_lines = ["\n逐竿上钩记录："]
@@ -2175,7 +2268,7 @@ class McFish(NcatBotPlugin):
             "text": result_text,
             "image": str(single_image) if len(results) == 1 and single_image else None,
         }
-        self._save(uid, state)
+        base = self._save_fishing_state(uid, state, base)
         await self._send_fishing_result(event, result_text, single_image if len(results) == 1 else None)
 
     async def _buy(self, event, state: dict, item_text: str) -> None:

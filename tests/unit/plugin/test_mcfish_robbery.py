@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import sys
 import json
 import sqlite3
@@ -21,6 +22,28 @@ from McFish.McFish import (  # noqa: E402
     McFish,
 )
 from Robbery.Robbery import Robbery  # noqa: E402
+
+
+def _attach_fake_state_store(plugin: McFish, initial: dict, snapshot: list | None = None) -> dict:
+    """给直接调用 _fish 的测试接一个假存档。
+
+    后台钓鱼任务现在会“先读回最新存档、再合并本竿增量”，所以测试里的 _state
+    必须像数据库一样返回上一次 _save 的结果，而不是返回内存里的同一份快照。
+    """
+    stored = copy.deepcopy(initial)
+
+    def load(_uid):
+        return copy.deepcopy(stored)
+
+    def save(_uid, state):
+        stored.clear()
+        stored.update(copy.deepcopy(state))
+        if snapshot is not None:
+            snapshot.append(dict(state.get("pack", {})))
+
+    plugin._state = load
+    plugin._save = save
+    return stored
 
 
 def test_mcfish_pack_operations_preserve_pole_attributes():
@@ -1231,7 +1254,6 @@ def test_mcfish_fishing_result_reports_used_and_remaining_count(monkeypatch):
     plugin.get_config = lambda key, default=None: 50 if key == "fish_limit" else default
     plugin._original_drop = lambda _state, _boundaries=None: ("垃圾", 1)
     plugin._item_image = lambda _name: None
-    plugin._save = lambda *_args: None
     event = SimpleNamespace(
         sender=SimpleNamespace(user_id="100"),
         reply=AsyncMock(),
@@ -1241,6 +1263,7 @@ def test_mcfish_fishing_result_reports_used_and_remaining_count(monkeypatch):
         "equip": {"name": "木竿", "durable": 2, "maintenance": 0, "induce": 0, "favor": 0},
         "pack": {},
     }
+    _attach_fake_state_store(plugin, state)
 
     asyncio.run(plugin._fish(event, state, "进行1次钓鱼"))
 
@@ -1261,7 +1284,6 @@ def test_mcfish_batch_fishing_uses_one_probability_snapshot(monkeypatch):
     plugin = McFish.__new__(McFish)
     plugin.get_config = lambda key, default=None: 50 if key == "fish_limit" else default
     plugin._item_image = lambda _name: None
-    plugin._save = lambda *_args: None
 
     def drop(_state, boundaries):
         boundaries_seen.append(boundaries)
@@ -1274,6 +1296,7 @@ def test_mcfish_batch_fishing_uses_one_probability_snapshot(monkeypatch):
         "equip": {"name": "木竿", "durable": 2, "maintenance": 0, "induce": 0, "favor": 0},
         "pack": {"鲑鱼": 100},
     }
+    _attach_fake_state_store(plugin, state)
 
     asyncio.run(plugin._fish(event, state, "进行2次钓鱼"))
 
@@ -1291,17 +1314,13 @@ def test_mcfish_batch_fishing_persists_each_catch_after_its_wait(monkeypatch):
     plugin._item_image = lambda _name: None
     plugin._original_drop = lambda _state, _boundaries=None: ("鲑鱼", 1)
     snapshots = []
-
-    def save(_uid, state):
-        snapshots.append(dict(state.get("pack", {})))
-
-    plugin._save = save
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
     state = {
         "fish_today": 0,
         "equip": {"name": "木竿", "durable": 3, "maintenance": 0, "induce": 0, "favor": 0},
         "pack": {},
     }
+    _attach_fake_state_store(plugin, state, snapshot=snapshots)
 
     asyncio.run(plugin._fish(event, state, "进行2次钓鱼"))
 
@@ -1461,4 +1480,134 @@ def test_mcfish_drop_quantity_migration_tops_up_partial_first_pass(tmp_path: Pat
 
     plugin._top_up_excessive_drop_quantities()
     assert plugin._db.execute("SELECT COUNT(*) FROM migrations").fetchone()[0] == 2
+    plugin._db.close()
+
+
+def test_mcfish_fishing_batch_keeps_purchase_made_while_waiting(monkeypatch):
+    """两起丢物品事故的根因回归：后台钓鱼任务不能再整份覆盖并发写入。"""
+    import asyncio
+    import importlib
+
+    module = importlib.import_module("McFish.McFish")
+    monkeypatch.setattr(module, "fishing_wait_for_result", lambda *_args, **_kwargs: 0.01)
+    plugin = McFish.__new__(McFish)
+    plugin.get_config = lambda key, default=None: 50 if key == "fish_limit" else default
+    plugin._item_image = lambda _name: None
+    plugin._original_drop = lambda _state, _boundaries=None: ("鲑鱼", 1)
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {
+        "fish_today": 0,
+        "equip": {"name": "木竿", "durable": 10, "maintenance": 0, "induce": 0, "favor": 0},
+        "pack": {},
+    }
+    stored = _attach_fake_state_store(plugin, state)
+
+    async def buy_while_waiting():
+        # 落在第一竿和第二竿之间：旧实现会把这次购买连同木竿一起覆盖掉。
+        await asyncio.sleep(0.015)
+        snapshot = plugin._state("100")
+        plugin._add(snapshot, "木竿", pole=True)
+        plugin._save("100", snapshot)
+
+    async def run():
+        await asyncio.gather(plugin._fish(event, state, "进行3次钓鱼"), buy_while_waiting())
+
+    asyncio.run(run())
+
+    assert len(stored["pack"]["木竿"]) == 1
+    assert stored["pack"]["鲑鱼"] == 3
+
+
+def test_mcfish_fishing_save_only_merges_the_current_cast_changes():
+    """落盘时只合并本竿增量，其它指令在等待期间写入的改动必须原样保留。"""
+    plugin = McFish.__new__(McFish)
+    initial = {
+        "fish_today": 1,
+        "equip": {"name": "木竿", "durable": 5, "maintenance": 0, "induce": 0, "favor": 0},
+        "pack": {"鲑鱼": 2},
+    }
+    _attach_fake_state_store(plugin, initial)
+    base = plugin._state("100")
+    current = copy.deepcopy(base)
+    current["pack"]["鳕鱼"] = 3
+    current["fish_today"] = 2
+
+    purchase = plugin._state("100")
+    plugin._add(purchase, "铁竿", pole=True)
+    plugin._save("100", purchase)
+
+    plugin._save_fishing_state("100", current, base)
+
+    stored = plugin._state("100")
+    assert stored["pack"]["鳕鱼"] == 3
+    assert stored["fish_today"] == 2
+    assert len(stored["pack"]["铁竿"]) == 1
+    assert stored["pack"]["鲑鱼"] == 2
+
+
+def test_mcfish_favor_converts_air_when_king_hunter_state_is_active():
+    """钓鱼佬/美西螈区间下海之眷顾依旧把空竿转化为宝藏/鱼竿/鱼，而不是被忽略。"""
+    plugin = McFish.__new__(McFish)
+    plugin._load_original_data()
+
+    assert plugin._zone_boundaries({"pack": {}, "equip": None}) == (0, 1, 5, 30, 60)
+    # 普通区间：每级 宝藏+1、鱼竿+2、鱼+3，空竿-6。
+    assert plugin._zone_boundaries({"pack": {}, "equip": {"name": "木竿", "favor": 3}}) == (0, 4, 14, 48, 78)
+    assert plugin._zone_boundaries({"pack": {"鳕鱼": 101}, "equip": {"name": "木竿", "favor": 0}}) == (0, 2, 10, 45, 90)
+    # 钓鱼佬只剩 10% 空竿，两级眷顾刚好把它转化完，剩下的空竿按 0 处理。
+    assert plugin._zone_boundaries({"pack": {"鳕鱼": 101}, "equip": {"name": "木竿", "favor": 1}}) == (0, 3, 13, 51, 96)
+    assert plugin._zone_boundaries({"pack": {"鳕鱼": 101}, "equip": {"name": "木竿", "favor": 2}}) == (0, 3, 14, 55, 100)
+    assert plugin._zone_boundaries({"pack": {"鳕鱼": 101}, "equip": {"name": "木竿", "favor": 3}}) == (0, 3, 14, 55, 100)
+
+
+def test_mcfish_probability_detail_matches_zone_boundaries():
+    """“当前装备概率明细”必须和实际掉落区间同源，不能各算一套。"""
+    plugin = McFish.__new__(McFish)
+    plugin._load_original_data()
+
+    states = [
+        {"pack": {}, "equip": None},
+        {"pack": {}, "equip": {"name": "木竿", "favor": 3}},
+        {"pack": {"鳕鱼": 101}, "equip": {"name": "木竿", "favor": 2}},
+        {"pack": {"海豚": 1}, "equip": {"name": "木竿", "favor": 3}},
+    ]
+    for state in states:
+        boundaries = plugin._zone_boundaries(state)
+        zones = [
+            boundaries[1] - boundaries[0],
+            boundaries[2] - boundaries[1],
+            boundaries[3] - boundaries[2],
+            boundaries[4] - boundaries[3],
+        ]
+        detail = plugin._probability_detail_text(state)
+        assert f"宝藏 : {zones[0]}%" in detail
+        assert f"鱼竿 : {zones[1]}%" in detail
+        assert f"鱼类 : {zones[2]}%" in detail
+        assert f"垃圾 : {zones[3]}%" in detail
+        assert f"合计 : {sum(zones)}%" in detail
+
+
+def test_mcfish_concurrent_overwrite_repair_restores_lost_purchases(tmp_path: Path):
+    """2026-09-11 被覆盖丢失的购买一次性补发，并且只补发一次。"""
+    plugin = _make_migration_plugin(tmp_path)
+    for user_id in ("10123121", "1506123340"):
+        plugin._db.execute(
+            "INSERT INTO players VALUES (?, ?, ?)",
+            (user_id, json.dumps({"pack": {}}, ensure_ascii=False), time.time()),
+        )
+    plugin._db.commit()
+
+    plugin._repair_concurrent_overwrite_losses()
+
+    fisher = json.loads(plugin._db.execute("SELECT state FROM players WHERE user_id = '10123121'").fetchone()[0])
+    assert len(fisher["pack"]["木竿"]) == 7
+    assert fisher["pack"]["木竿"][0]["durable"] == 30
+    collector = json.loads(plugin._db.execute("SELECT state FROM players WHERE user_id = '1506123340'").fetchone()[0])
+    assert collector["pack"]["墨鱼"] == 30
+    assert plugin._db.execute("SELECT COUNT(*) FROM admin_adjustments").fetchone()[0] == 2
+
+    plugin._repair_concurrent_overwrite_losses()
+
+    again = json.loads(plugin._db.execute("SELECT state FROM players WHERE user_id = '10123121'").fetchone()[0])
+    assert len(again["pack"]["木竿"]) == 7
     plugin._db.close()
