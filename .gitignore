@@ -1,0 +1,9 @@
+.venv
+.idea
+src/catbot/config.yaml
+src/catbot/logs/
+
+src/catbot/plugins/GuessCard/data/output/
+src/catbot/plugins/GuessCard/resources/ff14/images/
+src/catbot/plugins/MirageTank/data/
+src/catbot/plugins/TodayWaifu/data/output/
