@@ -1,5 +1,8 @@
 .venv
 .idea
+data
+
+
 src/catbot/config.yaml
 src/catbot/logs/
 
