@@ -1,0 +1,16 @@
+bot_uin: '机器人qq号'
+root: '管理员账号'
+skip_napcat_install_confirm: true
+adapters:
+  - type: snowluma
+    platform: qq
+    enabled: true
+    config:
+      ws_uri: ws://192.168.10.63:3001                                              #
+      ws_token: token
+      skip_setup: true                          #跳过加载
+
+plugin:
+  load_plugin: true                             # 插件模式
+
+# 本文重名为 config.yaml

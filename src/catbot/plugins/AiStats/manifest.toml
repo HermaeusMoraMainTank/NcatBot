@@ -1,0 +1,10 @@
+name = "AiStats"
+version = "1.1.0"
+main = "AiStats.py"
+entry_class = "AiStats"
+
+[pip_dependencies]
+Pillow = "*"
+pillowmd = "*"
+
+[dependencies]

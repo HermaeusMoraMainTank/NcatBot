@@ -1,0 +1,11 @@
+name = "MirageTank"
+version = "1.0.0"
+main = "MirageTank.py"
+entry_class = "MirageTank"
+
+[pip_dependencies]
+pillow = "*"
+numpy = "*"
+requests = "*"
+
+[dependencies]

@@ -1,0 +1,26 @@
+[project]
+name = "catbot"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "xww", email = "1271701079@qq.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "common>=0.1.2",
+    "dataclasses-json>=0.6.7",
+    "django-emoji>=2.2.2",
+    "matplotlib>=3.11.2",
+    "ncatbot5>=5.5.8",
+    "pillow>=12.3.0",
+    "requests>=2.34.2",
+    "uv-build>=0.12.10",
+    "zhdate>=0.1",
+]
+
+[project.scripts]
+catbot = "catbot:main"
+
+[build-system]
+requires = ["uv_build>=0.12.10,<0.13.0"]
+build-backend = "uv_build"

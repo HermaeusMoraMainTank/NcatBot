@@ -1,0 +1,946 @@
+[
+  {
+    "id": 400752920,
+    "characterId": "10000002",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Ayaka",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Ayaka.png",
+    "className": "Ice"
+  },
+  {
+    "id": 847788844,
+    "characterId": "10000003",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Qin",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Qin.png",
+    "className": "Wind"
+  },
+  {
+    "id": 99516213,
+    "characterId": "10000006",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Lisa",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Lisa.png",
+    "className": "Electric"
+  },
+  {
+    "id": 721746903,
+    "characterId": "10000014",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Barbara",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Barbara.png",
+    "className": "Water"
+  },
+  {
+    "id": 102276022,
+    "characterId": "10000015",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Kaeya",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Kaeya.png",
+    "className": "Ice"
+  },
+  {
+    "id": 698361414,
+    "characterId": "10000016",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Diluc",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Diluc.png",
+    "className": "Fire"
+  },
+  {
+    "id": 204397683,
+    "characterId": "10000020",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Razor",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Razor.png",
+    "className": "Electric"
+  },
+  {
+    "id": 119884799,
+    "characterId": "10000021",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Ambor",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Ambor.png",
+    "className": "Fire"
+  },
+  {
+    "id": 969555881,
+    "characterId": "10000022",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Venti",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Venti.png",
+    "className": "Wind"
+  },
+  {
+    "id": 325902033,
+    "characterId": "10000023",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Xiangling",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Xiangling.png",
+    "className": "Fire"
+  },
+  {
+    "id": 283009569,
+    "characterId": "10000024",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Beidou",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Beidou.png",
+    "className": "Electric"
+  },
+  {
+    "id": 39601126,
+    "characterId": "10000025",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Xingqiu",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Xingqiu.png",
+    "className": "Water"
+  },
+  {
+    "id": 100213560,
+    "characterId": "10000026",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Xiao",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Xiao.png",
+    "className": "Wind"
+  },
+  {
+    "id": 674366698,
+    "characterId": "10000027",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Ningguang",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Ningguang.png",
+    "className": "Rock"
+  },
+  {
+    "id": 219200129,
+    "characterId": "10000029",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Klee",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Klee.png",
+    "className": "Fire"
+  },
+  {
+    "id": 812839222,
+    "characterId": "10000030",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Zhongli",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Zhongli.png",
+    "className": "Rock"
+  },
+  {
+    "id": 896016542,
+    "characterId": "10000031",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Fischl",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Fischl.png",
+    "className": "Electric"
+  },
+  {
+    "id": 846337896,
+    "characterId": "10000032",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Bennett",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Bennett.png",
+    "className": "Fire"
+  },
+  {
+    "id": 218209551,
+    "characterId": "10000033",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Tartaglia",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Tartaglia.png",
+    "className": "Water"
+  },
+  {
+    "id": 239068560,
+    "characterId": "10000034",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Noel",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Noel.png",
+    "className": "Rock"
+  },
+  {
+    "id": 364793280,
+    "characterId": "10000035",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Qiqi",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Qiqi.png",
+    "className": "Ice"
+  },
+  {
+    "id": 136536883,
+    "characterId": "10000036",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Chongyun",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Chongyun.png",
+    "className": "Ice"
+  },
+  {
+    "id": 261429,
+    "characterId": "10000037",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Ganyu",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Ganyu.png",
+    "className": "Ice"
+  },
+  {
+    "id": 531576839,
+    "characterId": "10000038",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Albedo",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Albedo.png",
+    "className": "Rock"
+  },
+  {
+    "id": 846190549,
+    "characterId": "10000039",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Diona",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Diona.png",
+    "className": "Ice"
+  },
+  {
+    "id": 536801147,
+    "characterId": "10000041",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Mona",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Mona.png",
+    "className": "Water"
+  },
+  {
+    "id": 693334148,
+    "characterId": "10000042",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Keqing",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Keqing.png",
+    "className": "Electric"
+  },
+  {
+    "id": 307203336,
+    "characterId": "10000043",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Sucrose",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Sucrose.png",
+    "className": "Wind"
+  },
+  {
+    "id": 737414537,
+    "characterId": "10000044",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Xinyan",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Xinyan.png",
+    "className": "Fire"
+  },
+  {
+    "id": 895708994,
+    "characterId": "10000045",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Rosaria",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Rosaria.png",
+    "className": "Ice"
+  },
+  {
+    "id": 531321311,
+    "characterId": "10000046",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Hutao",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Hutao.png",
+    "className": "Fire"
+  },
+  {
+    "id": 836788083,
+    "characterId": "10000047",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Kazuha",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Kazuha.png",
+    "className": "Wind"
+  },
+  {
+    "id": 663116229,
+    "characterId": "10000048",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Feiyan",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Feiyan.png",
+    "className": "Fire"
+  },
+  {
+    "id": 526157933,
+    "characterId": "10000049",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Yoimiya",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Yoimiya.png",
+    "className": "Fire"
+  },
+  {
+    "id": 970387573,
+    "characterId": "10000050",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Tohma",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Tohma.png",
+    "className": "Fire"
+  },
+  {
+    "id": 322943121,
+    "characterId": "10000051",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Eula",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Eula.png",
+    "className": "Ice"
+  },
+  {
+    "id": 120617560,
+    "characterId": "10000052",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Shougun",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Shougun.png",
+    "className": "Electric"
+  },
+  {
+    "id": 629164304,
+    "characterId": "10000053",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Sayu",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Sayu.png",
+    "className": "Wind"
+  },
+  {
+    "id": 747139930,
+    "characterId": "10000054",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Kokomi",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Kokomi.png",
+    "className": "Water"
+  },
+  {
+    "id": 782182832,
+    "characterId": "10000055",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Gorou",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Gorou.png",
+    "className": "Rock"
+  },
+  {
+    "id": 761170768,
+    "characterId": "10000056",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Sara",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Sara.png",
+    "className": "Electric"
+  },
+  {
+    "id": 16391092,
+    "characterId": "10000057",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Itto",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Itto.png",
+    "className": "Rock"
+  },
+  {
+    "id": 710261775,
+    "characterId": "10000058",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Yae",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Yae.png",
+    "className": "Electric"
+  },
+  {
+    "id": 856491754,
+    "characterId": "10000059",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Heizo",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Heizo.png",
+    "className": "Wind"
+  },
+  {
+    "id": 164806078,
+    "characterId": "10000060",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Yelan",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Yelan.png",
+    "className": "Water"
+  },
+  {
+    "id": 733147719,
+    "characterId": "10000061",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Momoka",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Momoka.png",
+    "className": "Grass"
+  },
+  {
+    "id": 464822022,
+    "characterId": "10000062",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Aloy",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Aloy.png",
+    "className": "Ice"
+  },
+  {
+    "id": 372609990,
+    "characterId": "10000063",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Shenhe",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Shenhe.png",
+    "className": "Ice"
+  },
+  {
+    "id": 443354388,
+    "characterId": "10000064",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Yunjin",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Yunjin.png",
+    "className": "Rock"
+  },
+  {
+    "id": 752639687,
+    "characterId": "10000065",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Shinobu",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Shinobu.png",
+    "className": "Electric"
+  },
+  {
+    "id": 187567606,
+    "characterId": "10000066",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Ayato",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Ayato.png",
+    "className": "Water"
+  },
+  {
+    "id": 120329466,
+    "characterId": "10000067",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Collei",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Collei.png",
+    "className": "Grass"
+  },
+  {
+    "id": 259952963,
+    "characterId": "10000068",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Dori",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Dori.png",
+    "className": "Electric"
+  },
+  {
+    "id": 870934369,
+    "characterId": "10000069",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Tighnari",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Tighnari.png",
+    "className": "Grass"
+  },
+  {
+    "id": 805797555,
+    "characterId": "10000070",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Nilou",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Nilou.png",
+    "className": "Water"
+  },
+  {
+    "id": 962804283,
+    "characterId": "10000071",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Cyno",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Cyno.png",
+    "className": "Electric"
+  },
+  {
+    "id": 972115816,
+    "characterId": "10000072",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Candace",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Candace.png",
+    "className": "Water"
+  },
+  {
+    "id": 543228485,
+    "characterId": "10000073",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Nahida",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Nahida.png",
+    "className": "Grass"
+  },
+  {
+    "id": 489968355,
+    "characterId": "10000074",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Layla",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Layla.png",
+    "className": "Ice"
+  },
+  {
+    "id": 975080419,
+    "characterId": "10000075",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Wanderer",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Wanderer.png",
+    "className": "Wind"
+  },
+  {
+    "id": 147257338,
+    "characterId": "10000076",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Faruzan",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Faruzan.png",
+    "className": "Wind"
+  },
+  {
+    "id": 92905931,
+    "characterId": "10000077",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Yaoyao",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Yaoyao.png",
+    "className": "Grass"
+  },
+  {
+    "id": 31478030,
+    "characterId": "10000078",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Alhatham",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Alhatham.png",
+    "className": "Grass"
+  },
+  {
+    "id": 36719540,
+    "characterId": "10000079",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Dehya",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Dehya.png",
+    "className": "Fire"
+  },
+  {
+    "id": 442734104,
+    "characterId": "10000080",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Mika",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Mika.png",
+    "className": "Ice"
+  },
+  {
+    "id": 378965356,
+    "characterId": "10000081",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Kaveh",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Kaveh.png",
+    "className": "Grass"
+  },
+  {
+    "id": 387631953,
+    "characterId": "10000082",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Baizhuer",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Baizhuer.png",
+    "className": "Grass"
+  },
+  {
+    "id": 694307174,
+    "characterId": "10000083",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Linette",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Linette.png",
+    "className": "Wind"
+  },
+  {
+    "id": 309472804,
+    "characterId": "10000084",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Liney",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Liney.png",
+    "className": "Fire"
+  },
+  {
+    "id": 533298593,
+    "characterId": "10000085",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Freminet",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Freminet.png",
+    "className": "Ice"
+  },
+  {
+    "id": 978350076,
+    "characterId": "10000086",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Wriothesley",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Wriothesley.png",
+    "className": "Ice"
+  },
+  {
+    "id": 224310512,
+    "characterId": "10000087",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Neuvillette",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Neuvillette.png",
+    "className": "Water"
+  },
+  {
+    "id": 490583242,
+    "characterId": "10000088",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Charlotte",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Charlotte.png",
+    "className": "Ice"
+  },
+  {
+    "id": 59544636,
+    "characterId": "10000089",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Furina",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Furina.png",
+    "className": "Water"
+  },
+  {
+    "id": 814084463,
+    "characterId": "10000090",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Chevreuse",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Chevreuse.png",
+    "className": "Fire"
+  },
+  {
+    "id": 685592933,
+    "characterId": "10000091",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Navia",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Navia.png",
+    "className": "Rock"
+  },
+  {
+    "id": 358904046,
+    "characterId": "10000092",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Gaming",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Gaming.png",
+    "className": "Fire"
+  },
+  {
+    "id": 460127932,
+    "characterId": "10000093",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Liuyun",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Liuyun.png",
+    "className": "Wind"
+  },
+  {
+    "id": 287133698,
+    "characterId": "10000094",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Chiori",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Chiori.png",
+    "className": "Rock"
+  },
+  {
+    "id": 34342672,
+    "characterId": "10000095",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Sigewinne",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Sigewinne.png",
+    "className": "Water"
+  },
+  {
+    "id": 372317816,
+    "characterId": "10000096",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Arlecchino",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Arlecchino.png",
+    "className": "Fire"
+  },
+  {
+    "id": 458085481,
+    "characterId": "10000097",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Sethos",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Sethos.png",
+    "className": "Electric"
+  },
+  {
+    "id": 857150806,
+    "characterId": "10000098",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Clorinde",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Clorinde.png",
+    "className": "Electric"
+  },
+  {
+    "id": 111421785,
+    "characterId": "10000099",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Emilie",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Emilie.png",
+    "className": "Grass"
+  },
+  {
+    "id": 795406740,
+    "characterId": "10000100",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Kachina",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Kachina.png",
+    "className": "Rock"
+  },
+  {
+    "id": 127840265,
+    "characterId": "10000101",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Kinich",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Kinich.png",
+    "className": "Grass"
+  },
+  {
+    "id": 958620133,
+    "characterId": "10000102",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Mualani",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Mualani.png",
+    "className": "Water"
+  },
+  {
+    "id": 102792770,
+    "characterId": "10000103",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Xilonen",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Xilonen.png",
+    "className": "Rock"
+  },
+  {
+    "id": 510831415,
+    "characterId": "10000104",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Chasca",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Chasca.png",
+    "className": "Wind"
+  },
+  {
+    "id": 320533437,
+    "characterId": "10000105",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Olorun",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Olorun.png",
+    "className": "Electric"
+  },
+  {
+    "id": 944418698,
+    "characterId": "10000106",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Mavuika",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Mavuika.png",
+    "className": "Fire"
+  },
+  {
+    "id": 349062193,
+    "characterId": "10000107",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Citlali",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Citlali.png",
+    "className": "Ice"
+  },
+  {
+    "id": 230650080,
+    "characterId": "10000108",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Lanyan",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Lanyan.png",
+    "className": "Wind"
+  },
+  {
+    "id": 761269863,
+    "characterId": "10000109",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Mizuki",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Mizuki.png",
+    "className": "Wind"
+  },
+  {
+    "id": 757290550,
+    "characterId": "10000110",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Iansan",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Iansan.png",
+    "className": "Electric"
+  },
+  {
+    "id": 565461830,
+    "characterId": "10000111",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Varesa",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Varesa.png",
+    "className": "Electric"
+  },
+  {
+    "id": 501132152,
+    "characterId": "10000112",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Escoffier",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Escoffier.png",
+    "className": "Ice"
+  },
+  {
+    "id": 374158518,
+    "characterId": "10000113",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Ifa",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Ifa.png",
+    "className": "Wind"
+  },
+  {
+    "id": 803378026,
+    "characterId": "10000114",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_SkirkNew",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_SkirkNew.png",
+    "className": "Ice"
+  },
+  {
+    "id": 20850190,
+    "characterId": "10000115",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Dahlia",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Dahlia.png",
+    "className": "Water"
+  },
+  {
+    "id": 931493155,
+    "characterId": "10000116",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Ineffa",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Ineffa.png",
+    "className": "Electric"
+  },
+  {
+    "id": 859209226,
+    "characterId": "10000117",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_MannequinBoy",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_MannequinBoy.png",
+    "className": ""
+  },
+  {
+    "id": 934649428,
+    "characterId": "10000118",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_MannequinGirl",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_MannequinGirl.png",
+    "className": ""
+  },
+  {
+    "id": 121860237,
+    "characterId": "10000119",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Lauma",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Lauma.png",
+    "className": "Grass"
+  },
+  {
+    "id": 154104311,
+    "characterId": "10000120",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Flins",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Flins.png",
+    "className": "Electric"
+  },
+  {
+    "id": 993755586,
+    "characterId": "10000121",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Aino",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Aino.png",
+    "className": "Water"
+  },
+  {
+    "id": 21929679,
+    "characterId": "10000122",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Nefer",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Nefer.png",
+    "className": "Grass"
+  },
+  {
+    "id": 556355475,
+    "characterId": "10000123",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Durin",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Durin.png",
+    "className": "Fire"
+  },
+  {
+    "id": 539441747,
+    "characterId": "10000124",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Jahoda",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Jahoda.png",
+    "className": "Wind"
+  },
+  {
+    "id": 829214929,
+    "characterId": "10000125",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Columbina",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Columbina.png",
+    "className": "Water"
+  },
+  {
+    "id": 723074392,
+    "characterId": "10000126",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Zibai",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Zibai.png",
+    "className": "Rock"
+  },
+  {
+    "id": 175598326,
+    "characterId": "10000127",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Illuga",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Illuga.png",
+    "className": "Rock"
+  },
+  {
+    "id": 216384745,
+    "characterId": "10000128",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Varka",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Varka.png",
+    "className": "Wind"
+  },
+  {
+    "id": 811464017,
+    "characterId": "10000129",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Lohen",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Lohen.png",
+    "className": "Ice"
+  },
+  {
+    "id": 932473290,
+    "characterId": "10000130",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Linnea",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Linnea.png",
+    "className": "Rock"
+  },
+  {
+    "id": 611670130,
+    "characterId": "10000131",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_Nicole",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Nicole.png",
+    "className": "Fire"
+  },
+  {
+    "id": 108080619,
+    "characterId": "10000132",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "UI_Gacha_AvatarImg_Prune",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_Prune.png",
+    "className": "Wind"
+  },
+  {
+    "id": 662131113,
+    "characterId": "10000133",
+    "cardRarityType": "rarity_5",
+    "assetbundleName": "UI_Gacha_AvatarImg_MarionetteNew",
+    "image_url": "https://enka.network/ui/UI_Gacha_AvatarImg_MarionetteNew.png",
+    "className": "Ice"
+  }
+]

@@ -1,0 +1,1689 @@
+[
+  {
+    "id": 228824674,
+    "characterId": "1001",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "100131",
+    "image_url": "https://redive.estertion.win/card/full/100131.webp"
+  },
+  {
+    "id": 335926888,
+    "characterId": "1002",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "100231",
+    "image_url": "https://redive.estertion.win/card/full/100231.webp"
+  },
+  {
+    "id": 945604417,
+    "characterId": "1003",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "100331",
+    "image_url": "https://redive.estertion.win/card/full/100331.webp"
+  },
+  {
+    "id": 931089778,
+    "characterId": "1004",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "100431",
+    "image_url": "https://redive.estertion.win/card/full/100431.webp"
+  },
+  {
+    "id": 215027323,
+    "characterId": "1005",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "100531",
+    "image_url": "https://redive.estertion.win/card/full/100531.webp"
+  },
+  {
+    "id": 400431140,
+    "characterId": "1006",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "100631",
+    "image_url": "https://redive.estertion.win/card/full/100631.webp"
+  },
+  {
+    "id": 133988108,
+    "characterId": "1007",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "100731",
+    "image_url": "https://redive.estertion.win/card/full/100731.webp"
+  },
+  {
+    "id": 259275166,
+    "characterId": "1008",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "100831",
+    "image_url": "https://redive.estertion.win/card/full/100831.webp"
+  },
+  {
+    "id": 791225628,
+    "characterId": "1009",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "100931",
+    "image_url": "https://redive.estertion.win/card/full/100931.webp"
+  },
+  {
+    "id": 973602411,
+    "characterId": "1010",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "101031",
+    "image_url": "https://redive.estertion.win/card/full/101031.webp"
+  },
+  {
+    "id": 318862036,
+    "characterId": "1011",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "101131",
+    "image_url": "https://redive.estertion.win/card/full/101131.webp"
+  },
+  {
+    "id": 939185347,
+    "characterId": "1012",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "101231",
+    "image_url": "https://redive.estertion.win/card/full/101231.webp"
+  },
+  {
+    "id": 87528254,
+    "characterId": "1013",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "101331",
+    "image_url": "https://redive.estertion.win/card/full/101331.webp"
+  },
+  {
+    "id": 260807964,
+    "characterId": "1014",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "101431",
+    "image_url": "https://redive.estertion.win/card/full/101431.webp"
+  },
+  {
+    "id": 415753989,
+    "characterId": "1015",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "101531",
+    "image_url": "https://redive.estertion.win/card/full/101531.webp"
+  },
+  {
+    "id": 116618191,
+    "characterId": "1016",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "101631",
+    "image_url": "https://redive.estertion.win/card/full/101631.webp"
+  },
+  {
+    "id": 746729245,
+    "characterId": "1017",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "101731",
+    "image_url": "https://redive.estertion.win/card/full/101731.webp"
+  },
+  {
+    "id": 597492121,
+    "characterId": "1018",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "101831",
+    "image_url": "https://redive.estertion.win/card/full/101831.webp"
+  },
+  {
+    "id": 284290450,
+    "characterId": "1020",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "102031",
+    "image_url": "https://redive.estertion.win/card/full/102031.webp"
+  },
+  {
+    "id": 754722660,
+    "characterId": "1021",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "102131",
+    "image_url": "https://redive.estertion.win/card/full/102131.webp"
+  },
+  {
+    "id": 161853027,
+    "characterId": "1022",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "102231",
+    "image_url": "https://redive.estertion.win/card/full/102231.webp"
+  },
+  {
+    "id": 635222495,
+    "characterId": "1023",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "102331",
+    "image_url": "https://redive.estertion.win/card/full/102331.webp"
+  },
+  {
+    "id": 606564495,
+    "characterId": "1025",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "102531",
+    "image_url": "https://redive.estertion.win/card/full/102531.webp"
+  },
+  {
+    "id": 452049322,
+    "characterId": "1026",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "102631",
+    "image_url": "https://redive.estertion.win/card/full/102631.webp"
+  },
+  {
+    "id": 195822225,
+    "characterId": "1027",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "102731",
+    "image_url": "https://redive.estertion.win/card/full/102731.webp"
+  },
+  {
+    "id": 334317330,
+    "characterId": "1028",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "102831",
+    "image_url": "https://redive.estertion.win/card/full/102831.webp"
+  },
+  {
+    "id": 425625339,
+    "characterId": "1029",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "102931",
+    "image_url": "https://redive.estertion.win/card/full/102931.webp"
+  },
+  {
+    "id": 415700283,
+    "characterId": "1030",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "103031",
+    "image_url": "https://redive.estertion.win/card/full/103031.webp"
+  },
+  {
+    "id": 310399108,
+    "characterId": "1031",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "103131",
+    "image_url": "https://redive.estertion.win/card/full/103131.webp"
+  },
+  {
+    "id": 404473199,
+    "characterId": "1032",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "103231",
+    "image_url": "https://redive.estertion.win/card/full/103231.webp"
+  },
+  {
+    "id": 66422,
+    "characterId": "1033",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "103331",
+    "image_url": "https://redive.estertion.win/card/full/103331.webp"
+  },
+  {
+    "id": 799172544,
+    "characterId": "1034",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "103431",
+    "image_url": "https://redive.estertion.win/card/full/103431.webp"
+  },
+  {
+    "id": 61774386,
+    "characterId": "1036",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "103631",
+    "image_url": "https://redive.estertion.win/card/full/103631.webp"
+  },
+  {
+    "id": 641030971,
+    "characterId": "1037",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "103731",
+    "image_url": "https://redive.estertion.win/card/full/103731.webp"
+  },
+  {
+    "id": 458279037,
+    "characterId": "1038",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "103831",
+    "image_url": "https://redive.estertion.win/card/full/103831.webp"
+  },
+  {
+    "id": 48361602,
+    "characterId": "1040",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "104031",
+    "image_url": "https://redive.estertion.win/card/full/104031.webp"
+  },
+  {
+    "id": 701364405,
+    "characterId": "1042",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "104231",
+    "image_url": "https://redive.estertion.win/card/full/104231.webp"
+  },
+  {
+    "id": 921848797,
+    "characterId": "1043",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "104331",
+    "image_url": "https://redive.estertion.win/card/full/104331.webp"
+  },
+  {
+    "id": 511723735,
+    "characterId": "1044",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "104431",
+    "image_url": "https://redive.estertion.win/card/full/104431.webp"
+  },
+  {
+    "id": 364612935,
+    "characterId": "1045",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "104531",
+    "image_url": "https://redive.estertion.win/card/full/104531.webp"
+  },
+  {
+    "id": 123703086,
+    "characterId": "1046",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "104631",
+    "image_url": "https://redive.estertion.win/card/full/104631.webp"
+  },
+  {
+    "id": 212347659,
+    "characterId": "1047",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "104731",
+    "image_url": "https://redive.estertion.win/card/full/104731.webp"
+  },
+  {
+    "id": 352570789,
+    "characterId": "1048",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "104831",
+    "image_url": "https://redive.estertion.win/card/full/104831.webp"
+  },
+  {
+    "id": 108419290,
+    "characterId": "1049",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "104931",
+    "image_url": "https://redive.estertion.win/card/full/104931.webp"
+  },
+  {
+    "id": 219916791,
+    "characterId": "1050",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "105031",
+    "image_url": "https://redive.estertion.win/card/full/105031.webp"
+  },
+  {
+    "id": 421875544,
+    "characterId": "1051",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "105131",
+    "image_url": "https://redive.estertion.win/card/full/105131.webp"
+  },
+  {
+    "id": 341736628,
+    "characterId": "1052",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "105231",
+    "image_url": "https://redive.estertion.win/card/full/105231.webp"
+  },
+  {
+    "id": 103786491,
+    "characterId": "1053",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "105331",
+    "image_url": "https://redive.estertion.win/card/full/105331.webp"
+  },
+  {
+    "id": 231981826,
+    "characterId": "1054",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "105431",
+    "image_url": "https://redive.estertion.win/card/full/105431.webp"
+  },
+  {
+    "id": 22448427,
+    "characterId": "1055",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "105531",
+    "image_url": "https://redive.estertion.win/card/full/105531.webp"
+  },
+  {
+    "id": 711404937,
+    "characterId": "1056",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "105631",
+    "image_url": "https://redive.estertion.win/card/full/105631.webp"
+  },
+  {
+    "id": 188817331,
+    "characterId": "1057",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "105731",
+    "image_url": "https://redive.estertion.win/card/full/105731.webp"
+  },
+  {
+    "id": 426415232,
+    "characterId": "1058",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "105831",
+    "image_url": "https://redive.estertion.win/card/full/105831.webp"
+  },
+  {
+    "id": 645287581,
+    "characterId": "1059",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "105931",
+    "image_url": "https://redive.estertion.win/card/full/105931.webp"
+  },
+  {
+    "id": 98006467,
+    "characterId": "1060",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "106031",
+    "image_url": "https://redive.estertion.win/card/full/106031.webp"
+  },
+  {
+    "id": 639573232,
+    "characterId": "1061",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "106131",
+    "image_url": "https://redive.estertion.win/card/full/106131.webp"
+  },
+  {
+    "id": 907385198,
+    "characterId": "1063",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "106331",
+    "image_url": "https://redive.estertion.win/card/full/106331.webp"
+  },
+  {
+    "id": 621173614,
+    "characterId": "1064",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "106431",
+    "image_url": "https://redive.estertion.win/card/full/106431.webp"
+  },
+  {
+    "id": 627213558,
+    "characterId": "1065",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "106531",
+    "image_url": "https://redive.estertion.win/card/full/106531.webp"
+  },
+  {
+    "id": 681972066,
+    "characterId": "1066",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "106631",
+    "image_url": "https://redive.estertion.win/card/full/106631.webp"
+  },
+  {
+    "id": 381534371,
+    "characterId": "1067",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "106731",
+    "image_url": "https://redive.estertion.win/card/full/106731.webp"
+  },
+  {
+    "id": 158836561,
+    "characterId": "1068",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "106831",
+    "image_url": "https://redive.estertion.win/card/full/106831.webp"
+  },
+  {
+    "id": 267590214,
+    "characterId": "1069",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "106931",
+    "image_url": "https://redive.estertion.win/card/full/106931.webp"
+  },
+  {
+    "id": 69098417,
+    "characterId": "1070",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "107031",
+    "image_url": "https://redive.estertion.win/card/full/107031.webp"
+  },
+  {
+    "id": 605702931,
+    "characterId": "1071",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "107131",
+    "image_url": "https://redive.estertion.win/card/full/107131.webp"
+  },
+  {
+    "id": 916971386,
+    "characterId": "1075",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "107531",
+    "image_url": "https://redive.estertion.win/card/full/107531.webp"
+  },
+  {
+    "id": 48682780,
+    "characterId": "1076",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "107631",
+    "image_url": "https://redive.estertion.win/card/full/107631.webp"
+  },
+  {
+    "id": 609870423,
+    "characterId": "1077",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "107731",
+    "image_url": "https://redive.estertion.win/card/full/107731.webp"
+  },
+  {
+    "id": 775164585,
+    "characterId": "1078",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "107831",
+    "image_url": "https://redive.estertion.win/card/full/107831.webp"
+  },
+  {
+    "id": 194893183,
+    "characterId": "1079",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "107931",
+    "image_url": "https://redive.estertion.win/card/full/107931.webp"
+  },
+  {
+    "id": 63213933,
+    "characterId": "1080",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "108031",
+    "image_url": "https://redive.estertion.win/card/full/108031.webp"
+  },
+  {
+    "id": 900495001,
+    "characterId": "1081",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "108131",
+    "image_url": "https://redive.estertion.win/card/full/108131.webp"
+  },
+  {
+    "id": 636445790,
+    "characterId": "1082",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "108231",
+    "image_url": "https://redive.estertion.win/card/full/108231.webp"
+  },
+  {
+    "id": 65504968,
+    "characterId": "1083",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "108331",
+    "image_url": "https://redive.estertion.win/card/full/108331.webp"
+  },
+  {
+    "id": 250338758,
+    "characterId": "1084",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "108431",
+    "image_url": "https://redive.estertion.win/card/full/108431.webp"
+  },
+  {
+    "id": 602064513,
+    "characterId": "1085",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "108531",
+    "image_url": "https://redive.estertion.win/card/full/108531.webp"
+  },
+  {
+    "id": 391806598,
+    "characterId": "1086",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "108631",
+    "image_url": "https://redive.estertion.win/card/full/108631.webp"
+  },
+  {
+    "id": 714604632,
+    "characterId": "1087",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "108731",
+    "image_url": "https://redive.estertion.win/card/full/108731.webp"
+  },
+  {
+    "id": 134121160,
+    "characterId": "1088",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "108831",
+    "image_url": "https://redive.estertion.win/card/full/108831.webp"
+  },
+  {
+    "id": 471158569,
+    "characterId": "1089",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "108931",
+    "image_url": "https://redive.estertion.win/card/full/108931.webp"
+  },
+  {
+    "id": 443037187,
+    "characterId": "1090",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "109031",
+    "image_url": "https://redive.estertion.win/card/full/109031.webp"
+  },
+  {
+    "id": 688988320,
+    "characterId": "1091",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "109131",
+    "image_url": "https://redive.estertion.win/card/full/109131.webp"
+  },
+  {
+    "id": 703731110,
+    "characterId": "1092",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "109231",
+    "image_url": "https://redive.estertion.win/card/full/109231.webp"
+  },
+  {
+    "id": 490236716,
+    "characterId": "1093",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "109331",
+    "image_url": "https://redive.estertion.win/card/full/109331.webp"
+  },
+  {
+    "id": 684044268,
+    "characterId": "1094",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "109431",
+    "image_url": "https://redive.estertion.win/card/full/109431.webp"
+  },
+  {
+    "id": 369199932,
+    "characterId": "1095",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "109531",
+    "image_url": "https://redive.estertion.win/card/full/109531.webp"
+  },
+  {
+    "id": 567617600,
+    "characterId": "1096",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "109631",
+    "image_url": "https://redive.estertion.win/card/full/109631.webp"
+  },
+  {
+    "id": 333678299,
+    "characterId": "1097",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "109731",
+    "image_url": "https://redive.estertion.win/card/full/109731.webp"
+  },
+  {
+    "id": 108703549,
+    "characterId": "1098",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "109831",
+    "image_url": "https://redive.estertion.win/card/full/109831.webp"
+  },
+  {
+    "id": 894274871,
+    "characterId": "1099",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "109931",
+    "image_url": "https://redive.estertion.win/card/full/109931.webp"
+  },
+  {
+    "id": 95880976,
+    "characterId": "1100",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "110031",
+    "image_url": "https://redive.estertion.win/card/full/110031.webp"
+  },
+  {
+    "id": 607658128,
+    "characterId": "1101",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "110131",
+    "image_url": "https://redive.estertion.win/card/full/110131.webp"
+  },
+  {
+    "id": 506099319,
+    "characterId": "1103",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "110331",
+    "image_url": "https://redive.estertion.win/card/full/110331.webp"
+  },
+  {
+    "id": 513227045,
+    "characterId": "1104",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "110431",
+    "image_url": "https://redive.estertion.win/card/full/110431.webp"
+  },
+  {
+    "id": 136740521,
+    "characterId": "1105",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "110531",
+    "image_url": "https://redive.estertion.win/card/full/110531.webp"
+  },
+  {
+    "id": 566081198,
+    "characterId": "1106",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "110631",
+    "image_url": "https://redive.estertion.win/card/full/110631.webp"
+  },
+  {
+    "id": 388625631,
+    "characterId": "1107",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "110731",
+    "image_url": "https://redive.estertion.win/card/full/110731.webp"
+  },
+  {
+    "id": 478349790,
+    "characterId": "1108",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "110831",
+    "image_url": "https://redive.estertion.win/card/full/110831.webp"
+  },
+  {
+    "id": 767009289,
+    "characterId": "1109",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "110931",
+    "image_url": "https://redive.estertion.win/card/full/110931.webp"
+  },
+  {
+    "id": 494195055,
+    "characterId": "1110",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "111031",
+    "image_url": "https://redive.estertion.win/card/full/111031.webp"
+  },
+  {
+    "id": 678367955,
+    "characterId": "1111",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "111131",
+    "image_url": "https://redive.estertion.win/card/full/111131.webp"
+  },
+  {
+    "id": 218281996,
+    "characterId": "1112",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "111231",
+    "image_url": "https://redive.estertion.win/card/full/111231.webp"
+  },
+  {
+    "id": 235334647,
+    "characterId": "1113",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "111331",
+    "image_url": "https://redive.estertion.win/card/full/111331.webp"
+  },
+  {
+    "id": 596023960,
+    "characterId": "1114",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "111431",
+    "image_url": "https://redive.estertion.win/card/full/111431.webp"
+  },
+  {
+    "id": 983849383,
+    "characterId": "1115",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "111531",
+    "image_url": "https://redive.estertion.win/card/full/111531.webp"
+  },
+  {
+    "id": 305320159,
+    "characterId": "1116",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "111631",
+    "image_url": "https://redive.estertion.win/card/full/111631.webp"
+  },
+  {
+    "id": 910533119,
+    "characterId": "1117",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "111731",
+    "image_url": "https://redive.estertion.win/card/full/111731.webp"
+  },
+  {
+    "id": 920800067,
+    "characterId": "1118",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "111831",
+    "image_url": "https://redive.estertion.win/card/full/111831.webp"
+  },
+  {
+    "id": 969549125,
+    "characterId": "1119",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "111931",
+    "image_url": "https://redive.estertion.win/card/full/111931.webp"
+  },
+  {
+    "id": 211307290,
+    "characterId": "1120",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "112031",
+    "image_url": "https://redive.estertion.win/card/full/112031.webp"
+  },
+  {
+    "id": 45874004,
+    "characterId": "1121",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "112131",
+    "image_url": "https://redive.estertion.win/card/full/112131.webp"
+  },
+  {
+    "id": 345135862,
+    "characterId": "1122",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "112231",
+    "image_url": "https://redive.estertion.win/card/full/112231.webp"
+  },
+  {
+    "id": 800217140,
+    "characterId": "1123",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "112331",
+    "image_url": "https://redive.estertion.win/card/full/112331.webp"
+  },
+  {
+    "id": 204969454,
+    "characterId": "1124",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "112431",
+    "image_url": "https://redive.estertion.win/card/full/112431.webp"
+  },
+  {
+    "id": 746913409,
+    "characterId": "1125",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "112531",
+    "image_url": "https://redive.estertion.win/card/full/112531.webp"
+  },
+  {
+    "id": 216217619,
+    "characterId": "1126",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "112631",
+    "image_url": "https://redive.estertion.win/card/full/112631.webp"
+  },
+  {
+    "id": 920587414,
+    "characterId": "1127",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "112731",
+    "image_url": "https://redive.estertion.win/card/full/112731.webp"
+  },
+  {
+    "id": 408973498,
+    "characterId": "1128",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "112831",
+    "image_url": "https://redive.estertion.win/card/full/112831.webp"
+  },
+  {
+    "id": 410945434,
+    "characterId": "1129",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "112931",
+    "image_url": "https://redive.estertion.win/card/full/112931.webp"
+  },
+  {
+    "id": 717196287,
+    "characterId": "1130",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "113031",
+    "image_url": "https://redive.estertion.win/card/full/113031.webp"
+  },
+  {
+    "id": 690831044,
+    "characterId": "1131",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "113131",
+    "image_url": "https://redive.estertion.win/card/full/113131.webp"
+  },
+  {
+    "id": 746925641,
+    "characterId": "1132",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "113231",
+    "image_url": "https://redive.estertion.win/card/full/113231.webp"
+  },
+  {
+    "id": 210773836,
+    "characterId": "1133",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "113331",
+    "image_url": "https://redive.estertion.win/card/full/113331.webp"
+  },
+  {
+    "id": 999514490,
+    "characterId": "1134",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "113431",
+    "image_url": "https://redive.estertion.win/card/full/113431.webp"
+  },
+  {
+    "id": 436370141,
+    "characterId": "1135",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "113531",
+    "image_url": "https://redive.estertion.win/card/full/113531.webp"
+  },
+  {
+    "id": 360798802,
+    "characterId": "1136",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "113631",
+    "image_url": "https://redive.estertion.win/card/full/113631.webp"
+  },
+  {
+    "id": 177665665,
+    "characterId": "1137",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "113731",
+    "image_url": "https://redive.estertion.win/card/full/113731.webp"
+  },
+  {
+    "id": 52305958,
+    "characterId": "1138",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "113831",
+    "image_url": "https://redive.estertion.win/card/full/113831.webp"
+  },
+  {
+    "id": 565339840,
+    "characterId": "1139",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "113931",
+    "image_url": "https://redive.estertion.win/card/full/113931.webp"
+  },
+  {
+    "id": 618408221,
+    "characterId": "1140",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "114031",
+    "image_url": "https://redive.estertion.win/card/full/114031.webp"
+  },
+  {
+    "id": 804427676,
+    "characterId": "1141",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "114131",
+    "image_url": "https://redive.estertion.win/card/full/114131.webp"
+  },
+  {
+    "id": 511118896,
+    "characterId": "1142",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "114231",
+    "image_url": "https://redive.estertion.win/card/full/114231.webp"
+  },
+  {
+    "id": 821271344,
+    "characterId": "1143",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "114331",
+    "image_url": "https://redive.estertion.win/card/full/114331.webp"
+  },
+  {
+    "id": 478450863,
+    "characterId": "1144",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "114431",
+    "image_url": "https://redive.estertion.win/card/full/114431.webp"
+  },
+  {
+    "id": 219950756,
+    "characterId": "1145",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "114531",
+    "image_url": "https://redive.estertion.win/card/full/114531.webp"
+  },
+  {
+    "id": 941313682,
+    "characterId": "1146",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "114631",
+    "image_url": "https://redive.estertion.win/card/full/114631.webp"
+  },
+  {
+    "id": 62196428,
+    "characterId": "1147",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "114731",
+    "image_url": "https://redive.estertion.win/card/full/114731.webp"
+  },
+  {
+    "id": 467806234,
+    "characterId": "1150",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "115031",
+    "image_url": "https://redive.estertion.win/card/full/115031.webp"
+  },
+  {
+    "id": 185620828,
+    "characterId": "1155",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "115531",
+    "image_url": "https://redive.estertion.win/card/full/115531.webp"
+  },
+  {
+    "id": 285127378,
+    "characterId": "1156",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "115631",
+    "image_url": "https://redive.estertion.win/card/full/115631.webp"
+  },
+  {
+    "id": 986935998,
+    "characterId": "1157",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "115731",
+    "image_url": "https://redive.estertion.win/card/full/115731.webp"
+  },
+  {
+    "id": 521814526,
+    "characterId": "1158",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "115831",
+    "image_url": "https://redive.estertion.win/card/full/115831.webp"
+  },
+  {
+    "id": 597648965,
+    "characterId": "1159",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "115931",
+    "image_url": "https://redive.estertion.win/card/full/115931.webp"
+  },
+  {
+    "id": 989047564,
+    "characterId": "1160",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "116031",
+    "image_url": "https://redive.estertion.win/card/full/116031.webp"
+  },
+  {
+    "id": 707816524,
+    "characterId": "1162",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "116231",
+    "image_url": "https://redive.estertion.win/card/full/116231.webp"
+  },
+  {
+    "id": 122035776,
+    "characterId": "1163",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "116331",
+    "image_url": "https://redive.estertion.win/card/full/116331.webp"
+  },
+  {
+    "id": 544839294,
+    "characterId": "1164",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "116431",
+    "image_url": "https://redive.estertion.win/card/full/116431.webp"
+  },
+  {
+    "id": 426244862,
+    "characterId": "1165",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "116531",
+    "image_url": "https://redive.estertion.win/card/full/116531.webp"
+  },
+  {
+    "id": 874517587,
+    "characterId": "1166",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "116631",
+    "image_url": "https://redive.estertion.win/card/full/116631.webp"
+  },
+  {
+    "id": 758181106,
+    "characterId": "1167",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "116731",
+    "image_url": "https://redive.estertion.win/card/full/116731.webp"
+  },
+  {
+    "id": 473547619,
+    "characterId": "1168",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "116831",
+    "image_url": "https://redive.estertion.win/card/full/116831.webp"
+  },
+  {
+    "id": 533333548,
+    "characterId": "1169",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "116931",
+    "image_url": "https://redive.estertion.win/card/full/116931.webp"
+  },
+  {
+    "id": 189423339,
+    "characterId": "1170",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "117031",
+    "image_url": "https://redive.estertion.win/card/full/117031.webp"
+  },
+  {
+    "id": 392075291,
+    "characterId": "1171",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "117131",
+    "image_url": "https://redive.estertion.win/card/full/117131.webp"
+  },
+  {
+    "id": 198613329,
+    "characterId": "1172",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "117231",
+    "image_url": "https://redive.estertion.win/card/full/117231.webp"
+  },
+  {
+    "id": 267445965,
+    "characterId": "1173",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "117331",
+    "image_url": "https://redive.estertion.win/card/full/117331.webp"
+  },
+  {
+    "id": 612165824,
+    "characterId": "1174",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "117431",
+    "image_url": "https://redive.estertion.win/card/full/117431.webp"
+  },
+  {
+    "id": 799410381,
+    "characterId": "1175",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "117531",
+    "image_url": "https://redive.estertion.win/card/full/117531.webp"
+  },
+  {
+    "id": 423155987,
+    "characterId": "1176",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "117631",
+    "image_url": "https://redive.estertion.win/card/full/117631.webp"
+  },
+  {
+    "id": 260343093,
+    "characterId": "1177",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "117731",
+    "image_url": "https://redive.estertion.win/card/full/117731.webp"
+  },
+  {
+    "id": 836969064,
+    "characterId": "1178",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "117831",
+    "image_url": "https://redive.estertion.win/card/full/117831.webp"
+  },
+  {
+    "id": 232250957,
+    "characterId": "1179",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "117931",
+    "image_url": "https://redive.estertion.win/card/full/117931.webp"
+  },
+  {
+    "id": 882958735,
+    "characterId": "1180",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "118031",
+    "image_url": "https://redive.estertion.win/card/full/118031.webp"
+  },
+  {
+    "id": 97110227,
+    "characterId": "1181",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "118131",
+    "image_url": "https://redive.estertion.win/card/full/118131.webp"
+  },
+  {
+    "id": 286731940,
+    "characterId": "1182",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "118231",
+    "image_url": "https://redive.estertion.win/card/full/118231.webp"
+  },
+  {
+    "id": 517886769,
+    "characterId": "1185",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "118531",
+    "image_url": "https://redive.estertion.win/card/full/118531.webp"
+  },
+  {
+    "id": 228012416,
+    "characterId": "1190",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "119031",
+    "image_url": "https://redive.estertion.win/card/full/119031.webp"
+  },
+  {
+    "id": 716777919,
+    "characterId": "1191",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "119131",
+    "image_url": "https://redive.estertion.win/card/full/119131.webp"
+  },
+  {
+    "id": 833686938,
+    "characterId": "1192",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "119231",
+    "image_url": "https://redive.estertion.win/card/full/119231.webp"
+  },
+  {
+    "id": 594308702,
+    "characterId": "1193",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "119331",
+    "image_url": "https://redive.estertion.win/card/full/119331.webp"
+  },
+  {
+    "id": 349469434,
+    "characterId": "1199",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "119931",
+    "image_url": "https://redive.estertion.win/card/full/119931.webp"
+  },
+  {
+    "id": 309491552,
+    "characterId": "1200",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "120031",
+    "image_url": "https://redive.estertion.win/card/full/120031.webp"
+  },
+  {
+    "id": 844704609,
+    "characterId": "1207",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "120731",
+    "image_url": "https://redive.estertion.win/card/full/120731.webp"
+  },
+  {
+    "id": 249920116,
+    "characterId": "1208",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "120831",
+    "image_url": "https://redive.estertion.win/card/full/120831.webp"
+  },
+  {
+    "id": 362992340,
+    "characterId": "1209",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "120931",
+    "image_url": "https://redive.estertion.win/card/full/120931.webp"
+  },
+  {
+    "id": 987235603,
+    "characterId": "1210",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "121031",
+    "image_url": "https://redive.estertion.win/card/full/121031.webp"
+  },
+  {
+    "id": 799900996,
+    "characterId": "1211",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "121131",
+    "image_url": "https://redive.estertion.win/card/full/121131.webp"
+  },
+  {
+    "id": 569470328,
+    "characterId": "1212",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "121231",
+    "image_url": "https://redive.estertion.win/card/full/121231.webp"
+  },
+  {
+    "id": 178282418,
+    "characterId": "1213",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "121331",
+    "image_url": "https://redive.estertion.win/card/full/121331.webp"
+  },
+  {
+    "id": 100803085,
+    "characterId": "1214",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "121431",
+    "image_url": "https://redive.estertion.win/card/full/121431.webp"
+  },
+  {
+    "id": 415521911,
+    "characterId": "1215",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "121531",
+    "image_url": "https://redive.estertion.win/card/full/121531.webp"
+  },
+  {
+    "id": 747268800,
+    "characterId": "1216",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "121631",
+    "image_url": "https://redive.estertion.win/card/full/121631.webp"
+  },
+  {
+    "id": 942585688,
+    "characterId": "1219",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "121931",
+    "image_url": "https://redive.estertion.win/card/full/121931.webp"
+  },
+  {
+    "id": 57716305,
+    "characterId": "1220",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "122031",
+    "image_url": "https://redive.estertion.win/card/full/122031.webp"
+  },
+  {
+    "id": 805691626,
+    "characterId": "1221",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "122131",
+    "image_url": "https://redive.estertion.win/card/full/122131.webp"
+  },
+  {
+    "id": 265764414,
+    "characterId": "1222",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "122231",
+    "image_url": "https://redive.estertion.win/card/full/122231.webp"
+  },
+  {
+    "id": 186927523,
+    "characterId": "1223",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "122331",
+    "image_url": "https://redive.estertion.win/card/full/122331.webp"
+  },
+  {
+    "id": 721681691,
+    "characterId": "1224",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "122431",
+    "image_url": "https://redive.estertion.win/card/full/122431.webp"
+  },
+  {
+    "id": 384714763,
+    "characterId": "1225",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "122531",
+    "image_url": "https://redive.estertion.win/card/full/122531.webp"
+  },
+  {
+    "id": 513672764,
+    "characterId": "1226",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "122631",
+    "image_url": "https://redive.estertion.win/card/full/122631.webp"
+  },
+  {
+    "id": 300354643,
+    "characterId": "1227",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "122731",
+    "image_url": "https://redive.estertion.win/card/full/122731.webp"
+  },
+  {
+    "id": 541623439,
+    "characterId": "1228",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "122831",
+    "image_url": "https://redive.estertion.win/card/full/122831.webp"
+  },
+  {
+    "id": 542604105,
+    "characterId": "1229",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "122931",
+    "image_url": "https://redive.estertion.win/card/full/122931.webp"
+  },
+  {
+    "id": 784205323,
+    "characterId": "1230",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "123031",
+    "image_url": "https://redive.estertion.win/card/full/123031.webp"
+  },
+  {
+    "id": 992270188,
+    "characterId": "1231",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "123131",
+    "image_url": "https://redive.estertion.win/card/full/123131.webp"
+  },
+  {
+    "id": 474226519,
+    "characterId": "1232",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "123231",
+    "image_url": "https://redive.estertion.win/card/full/123231.webp"
+  },
+  {
+    "id": 903324876,
+    "characterId": "1233",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "123331",
+    "image_url": "https://redive.estertion.win/card/full/123331.webp"
+  },
+  {
+    "id": 161915307,
+    "characterId": "1235",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "123531",
+    "image_url": "https://redive.estertion.win/card/full/123531.webp"
+  },
+  {
+    "id": 396194285,
+    "characterId": "1236",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "123631",
+    "image_url": "https://redive.estertion.win/card/full/123631.webp"
+  },
+  {
+    "id": 869877208,
+    "characterId": "1237",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "123731",
+    "image_url": "https://redive.estertion.win/card/full/123731.webp"
+  },
+  {
+    "id": 843633584,
+    "characterId": "1238",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "123831",
+    "image_url": "https://redive.estertion.win/card/full/123831.webp"
+  },
+  {
+    "id": 95236141,
+    "characterId": "1239",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "123931",
+    "image_url": "https://redive.estertion.win/card/full/123931.webp"
+  },
+  {
+    "id": 455380704,
+    "characterId": "1240",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "124031",
+    "image_url": "https://redive.estertion.win/card/full/124031.webp"
+  },
+  {
+    "id": 301438073,
+    "characterId": "1241",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "124131",
+    "image_url": "https://redive.estertion.win/card/full/124131.webp"
+  },
+  {
+    "id": 83413761,
+    "characterId": "1242",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "124231",
+    "image_url": "https://redive.estertion.win/card/full/124231.webp"
+  },
+  {
+    "id": 184434893,
+    "characterId": "1245",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "124531",
+    "image_url": "https://redive.estertion.win/card/full/124531.webp"
+  },
+  {
+    "id": 626017502,
+    "characterId": "1246",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "124631",
+    "image_url": "https://redive.estertion.win/card/full/124631.webp"
+  },
+  {
+    "id": 139733674,
+    "characterId": "1247",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "124731",
+    "image_url": "https://redive.estertion.win/card/full/124731.webp"
+  },
+  {
+    "id": 311838942,
+    "characterId": "1251",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "125131",
+    "image_url": "https://redive.estertion.win/card/full/125131.webp"
+  },
+  {
+    "id": 411326502,
+    "characterId": "1252",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "125231",
+    "image_url": "https://redive.estertion.win/card/full/125231.webp"
+  },
+  {
+    "id": 799841658,
+    "characterId": "1253",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "125331",
+    "image_url": "https://redive.estertion.win/card/full/125331.webp"
+  },
+  {
+    "id": 945530092,
+    "characterId": "1254",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "125431",
+    "image_url": "https://redive.estertion.win/card/full/125431.webp"
+  },
+  {
+    "id": 754327680,
+    "characterId": "1701",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "170131",
+    "image_url": "https://redive.estertion.win/card/full/170131.webp"
+  },
+  {
+    "id": 313617890,
+    "characterId": "1702",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "170231",
+    "image_url": "https://redive.estertion.win/card/full/170231.webp"
+  },
+  {
+    "id": 622134866,
+    "characterId": "1801",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "180131",
+    "image_url": "https://redive.estertion.win/card/full/180131.webp"
+  },
+  {
+    "id": 712549790,
+    "characterId": "1802",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "180231",
+    "image_url": "https://redive.estertion.win/card/full/180231.webp"
+  },
+  {
+    "id": 767228367,
+    "characterId": "1803",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "180331",
+    "image_url": "https://redive.estertion.win/card/full/180331.webp"
+  },
+  {
+    "id": 207449781,
+    "characterId": "1804",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "180431",
+    "image_url": "https://redive.estertion.win/card/full/180431.webp"
+  },
+  {
+    "id": 296121738,
+    "characterId": "1805",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "180531",
+    "image_url": "https://redive.estertion.win/card/full/180531.webp"
+  },
+  {
+    "id": 754307006,
+    "characterId": "1806",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "180631",
+    "image_url": "https://redive.estertion.win/card/full/180631.webp"
+  },
+  {
+    "id": 404504817,
+    "characterId": "1807",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "180731",
+    "image_url": "https://redive.estertion.win/card/full/180731.webp"
+  },
+  {
+    "id": 298794200,
+    "characterId": "1808",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "180831",
+    "image_url": "https://redive.estertion.win/card/full/180831.webp"
+  },
+  {
+    "id": 837031324,
+    "characterId": "1809",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "180931",
+    "image_url": "https://redive.estertion.win/card/full/180931.webp"
+  },
+  {
+    "id": 177634296,
+    "characterId": "1810",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "181031",
+    "image_url": "https://redive.estertion.win/card/full/181031.webp"
+  },
+  {
+    "id": 525038221,
+    "characterId": "1900",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "190031",
+    "image_url": "https://redive.estertion.win/card/full/190031.webp"
+  },
+  {
+    "id": 954626177,
+    "characterId": "1901",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "190131",
+    "image_url": "https://redive.estertion.win/card/full/190131.webp"
+  },
+  {
+    "id": 731572773,
+    "characterId": "1907",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "190731",
+    "image_url": "https://redive.estertion.win/card/full/190731.webp"
+  },
+  {
+    "id": 199386473,
+    "characterId": "1908",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "190831",
+    "image_url": "https://redive.estertion.win/card/full/190831.webp"
+  },
+  {
+    "id": 689108654,
+    "characterId": "1909",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "190931",
+    "image_url": "https://redive.estertion.win/card/full/190931.webp"
+  },
+  {
+    "id": 405630758,
+    "characterId": "1910",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "191031",
+    "image_url": "https://redive.estertion.win/card/full/191031.webp"
+  },
+  {
+    "id": 50233995,
+    "characterId": "1911",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "191131",
+    "image_url": "https://redive.estertion.win/card/full/191131.webp"
+  },
+  {
+    "id": 974125066,
+    "characterId": "1913",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "191331",
+    "image_url": "https://redive.estertion.win/card/full/191331.webp"
+  },
+  {
+    "id": 834819179,
+    "characterId": "1914",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "191431",
+    "image_url": "https://redive.estertion.win/card/full/191431.webp"
+  },
+  {
+    "id": 958572506,
+    "characterId": "1915",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "191531",
+    "image_url": "https://redive.estertion.win/card/full/191531.webp"
+  },
+  {
+    "id": 173905764,
+    "characterId": "1916",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "191631",
+    "image_url": "https://redive.estertion.win/card/full/191631.webp"
+  },
+  {
+    "id": 275988747,
+    "characterId": "1917",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "191731",
+    "image_url": "https://redive.estertion.win/card/full/191731.webp"
+  },
+  {
+    "id": 191289137,
+    "characterId": "1918",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "191831",
+    "image_url": "https://redive.estertion.win/card/full/191831.webp"
+  },
+  {
+    "id": 808811988,
+    "characterId": "1919",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "191931",
+    "image_url": "https://redive.estertion.win/card/full/191931.webp"
+  },
+  {
+    "id": 725129942,
+    "characterId": "1920",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "192031",
+    "image_url": "https://redive.estertion.win/card/full/192031.webp"
+  },
+  {
+    "id": 772276127,
+    "characterId": "4031",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "403131",
+    "image_url": "https://redive.estertion.win/card/full/403131.webp"
+  },
+  {
+    "id": 393824409,
+    "characterId": "9000",
+    "cardRarityType": "rarity_3",
+    "assetbundleName": "900031",
+    "image_url": "https://redive.estertion.win/card/full/900031.webp"
+  }
+]

@@ -1,0 +1,1554 @@
+[
+  {
+    "id": 10000,
+    "characterId": "10000",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Aru",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10000.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 10001,
+    "characterId": "10001",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Eimi",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10001.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10002,
+    "characterId": "10002",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Haruna",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10002.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 10003,
+    "characterId": "10003",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hifumi",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10003.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10004,
+    "characterId": "10004",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hina",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10004.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 10005,
+    "characterId": "10005",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hoshino",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10005.webp",
+    "className": "Abydos"
+  },
+  {
+    "id": 10006,
+    "characterId": "10006",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Iori",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10006.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 10007,
+    "characterId": "10007",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Maki",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10007.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10008,
+    "characterId": "10008",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Neru",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10008.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10009,
+    "characterId": "10009",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Izumi",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10009.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 10010,
+    "characterId": "10010",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Shiroko",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10010.webp",
+    "className": "Abydos"
+  },
+  {
+    "id": 10011,
+    "characterId": "10011",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Shun",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10011.webp",
+    "className": "Shanhaijing"
+  },
+  {
+    "id": 10012,
+    "characterId": "10012",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Sumire",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10012.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10013,
+    "characterId": "10013",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Tsurugi",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10013.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 13000,
+    "characterId": "13000",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Akane",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/13000.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 13001,
+    "characterId": "13001",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Chise",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/13001.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 13002,
+    "characterId": "13002",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Akari",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/13002.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 13003,
+    "characterId": "13003",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Hasumi",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/13003.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 13004,
+    "characterId": "13004",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Nonomi",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/13004.webp",
+    "className": "Abydos"
+  },
+  {
+    "id": 13005,
+    "characterId": "13005",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Kayoko",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/13005.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 13006,
+    "characterId": "13006",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Mutsuki",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/13006.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 13007,
+    "characterId": "13007",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Junko",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/13007.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 13008,
+    "characterId": "13008",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Serika",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/13008.webp",
+    "className": "Abydos"
+  },
+  {
+    "id": 13009,
+    "characterId": "13009",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Tsubaki",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/13009.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 13010,
+    "characterId": "13010",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Yuuka",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/13010.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 16000,
+    "characterId": "16000",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Haruka",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/16000.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 16001,
+    "characterId": "16001",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Asuna",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/16001.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 16002,
+    "characterId": "16002",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Kotori",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/16002.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 16003,
+    "characterId": "16003",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Suzumi",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/16003.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 16004,
+    "characterId": "16004",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Pina",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/16004.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 20000,
+    "characterId": "20000",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hibiki",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20000.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 20001,
+    "characterId": "20001",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Karin",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20001.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 20002,
+    "characterId": "20002",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Saya",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20002.webp",
+    "className": "Shanhaijing"
+  },
+  {
+    "id": 23000,
+    "characterId": "23000",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Airi",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/23000.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 23001,
+    "characterId": "23001",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Fuuka",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/23001.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 23002,
+    "characterId": "23002",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Hanae",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/23002.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 23003,
+    "characterId": "23003",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Hare",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/23003.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 23004,
+    "characterId": "23004",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Utaha",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/23004.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 23005,
+    "characterId": "23005",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Ayane",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/23005.webp",
+    "className": "Abydos"
+  },
+  {
+    "id": 26000,
+    "characterId": "26000",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Chinatsu",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/26000.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 26001,
+    "characterId": "26001",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Kotama",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/26001.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 26002,
+    "characterId": "26002",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Juri",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/26002.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 26003,
+    "characterId": "26003",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Serina",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/26003.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 26004,
+    "characterId": "26004",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Shimiko",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/26004.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 26005,
+    "characterId": "26005",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Yoshimi",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/26005.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 20003,
+    "characterId": "20003",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Mashiro",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20003.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10014,
+    "characterId": "10014",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Izuna",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10014.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 23006,
+    "characterId": "23006",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Shizuko",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/23006.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 10015,
+    "characterId": "10015",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Aris",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10015.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10016,
+    "characterId": "10016",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Midori",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10016.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 13011,
+    "characterId": "13011",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Momoi",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/13011.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10017,
+    "characterId": "10017",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Cherino",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10017.webp",
+    "className": "RedWinter"
+  },
+  {
+    "id": 26006,
+    "characterId": "26006",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Nodoka",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/26006.webp",
+    "className": "RedWinter"
+  },
+  {
+    "id": 10018,
+    "characterId": "10018",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Yuzu",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10018.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10019,
+    "characterId": "10019",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Azusa",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10019.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 23007,
+    "characterId": "23007",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Hanako",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/23007.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10020,
+    "characterId": "10020",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Koharu",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10020.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10021,
+    "characterId": "10021",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Azusa_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10021.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 20004,
+    "characterId": "20004",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Mashiro_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20004.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 16005,
+    "characterId": "16005",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Tsurugi_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/16005.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 20005,
+    "characterId": "20005",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hifumi_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20005.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10022,
+    "characterId": "10022",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hina_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10022.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 10023,
+    "characterId": "10023",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Iori_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10023.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 16006,
+    "characterId": "16006",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Izumi_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/16006.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 10024,
+    "characterId": "10024",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Shiroko_Cycling",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10024.webp",
+    "className": "Abydos"
+  },
+  {
+    "id": 10025,
+    "characterId": "10025",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Shun_Small",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10025.webp",
+    "className": "Shanhaijing"
+  },
+  {
+    "id": 13012,
+    "characterId": "13012",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Kirino",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/13012.webp",
+    "className": "Valkyrie"
+  },
+  {
+    "id": 20006,
+    "characterId": "20006",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Saya_Casual",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20006.webp",
+    "className": "Shanhaijing"
+  },
+  {
+    "id": 10026,
+    "characterId": "10026",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Neru_Bunny",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10026.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10027,
+    "characterId": "10027",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Karin_Bunny",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10027.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10028,
+    "characterId": "10028",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Asuna_Bunny",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10028.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10029,
+    "characterId": "10029",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Natsu",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10029.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 23008,
+    "characterId": "23008",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Mari",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/23008.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 20007,
+    "characterId": "20007",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hatsune_Miku",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20007.webp",
+    "className": "ETC"
+  },
+  {
+    "id": 20008,
+    "characterId": "20008",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Ako",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20008.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 20009,
+    "characterId": "20009",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Cherino_HotSpring",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20009.webp",
+    "className": "RedWinter"
+  },
+  {
+    "id": 10030,
+    "characterId": "10030",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Chinatsu_HotSpring",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10030.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 16007,
+    "characterId": "16007",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Tomoe",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/16007.webp",
+    "className": "RedWinter"
+  },
+  {
+    "id": 20010,
+    "characterId": "20010",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Nodoka_HotSpring",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20010.webp",
+    "className": "RedWinter"
+  },
+  {
+    "id": 10031,
+    "characterId": "10031",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Aru_NewYear",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10031.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 10032,
+    "characterId": "10032",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Mutsuki_NewYear",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10032.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 20011,
+    "characterId": "20011",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Serika_NewYear",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20011.webp",
+    "className": "Abydos"
+  },
+  {
+    "id": 10033,
+    "characterId": "10033",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Wakamo",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10033.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 16008,
+    "characterId": "16008",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Fubuki",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/16008.webp",
+    "className": "Valkyrie"
+  },
+  {
+    "id": 20012,
+    "characterId": "20012",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Sena",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20012.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 20013,
+    "characterId": "20013",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Chihiro",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20013.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10034,
+    "characterId": "10034",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Mimori",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10034.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 10035,
+    "characterId": "10035",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Ui",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10035.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10036,
+    "characterId": "10036",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hinata",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10036.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10037,
+    "characterId": "10037",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Marina",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10037.webp",
+    "className": "RedWinter"
+  },
+  {
+    "id": 10038,
+    "characterId": "10038",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Miyako",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10038.webp",
+    "className": "SRT"
+  },
+  {
+    "id": 20014,
+    "characterId": "20014",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Saki",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20014.webp",
+    "className": "SRT"
+  },
+  {
+    "id": 10039,
+    "characterId": "10039",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Miyu",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10039.webp",
+    "className": "SRT"
+  },
+  {
+    "id": 20015,
+    "characterId": "20015",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Kaede",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20015.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 20016,
+    "characterId": "20016",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Iroha",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20016.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 16009,
+    "characterId": "16009",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Michiru",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/16009.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 10040,
+    "characterId": "10040",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Tsukuyo",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10040.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 10041,
+    "characterId": "10041",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Misaki",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10041.webp",
+    "className": "Arius"
+  },
+  {
+    "id": 20017,
+    "characterId": "20017",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hiyori",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20017.webp",
+    "className": "Arius"
+  },
+  {
+    "id": 10042,
+    "characterId": "10042",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Atsuko",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10042.webp",
+    "className": "Arius"
+  },
+  {
+    "id": 10043,
+    "characterId": "10043",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Wakamo_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10043.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 10044,
+    "characterId": "10044",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Nonomi_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10044.webp",
+    "className": "Abydos"
+  },
+  {
+    "id": 26007,
+    "characterId": "26007",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Ayane_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/26007.webp",
+    "className": "Abydos"
+  },
+  {
+    "id": 10045,
+    "characterId": "10045",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hoshino_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10045.webp",
+    "className": "Abydos"
+  },
+  {
+    "id": 26008,
+    "characterId": "26008",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Shizuko_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/26008.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 10046,
+    "characterId": "10046",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Izuna_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10046.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 10047,
+    "characterId": "10047",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Chise_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10047.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 10048,
+    "characterId": "10048",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Saori",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10048.webp",
+    "className": "Arius"
+  },
+  {
+    "id": 20018,
+    "characterId": "20018",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Moe",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20018.webp",
+    "className": "SRT"
+  },
+  {
+    "id": 10049,
+    "characterId": "10049",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Kazusa",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10049.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10050,
+    "characterId": "10050",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Kokona",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10050.webp",
+    "className": "Shanhaijing"
+  },
+  {
+    "id": 10051,
+    "characterId": "10051",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Utaha_Cheerleader",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10051.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10052,
+    "characterId": "10052",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Noa",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10052.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 16010,
+    "characterId": "16010",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Hibiki_Cheerleader",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/16010.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 20019,
+    "characterId": "20019",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Akane_Bunny",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20019.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10053,
+    "characterId": "10053",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Yuuka_Track",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10053.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10054,
+    "characterId": "10054",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Mari_Track",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10054.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 16011,
+    "characterId": "16011",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Hasumi_Track",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/16011.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 20020,
+    "characterId": "20020",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Himari",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20020.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10055,
+    "characterId": "10055",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Shigure",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10055.webp",
+    "className": "RedWinter"
+  },
+  {
+    "id": 10056,
+    "characterId": "10056",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Serina_Christmas",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10056.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 20021,
+    "characterId": "20021",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hanae_Christmas",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20021.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10057,
+    "characterId": "10057",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Haruna_NewYear",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10057.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 20022,
+    "characterId": "20022",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Fuuka_NewYear",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20022.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 16012,
+    "characterId": "16012",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Junko_NewYear",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/16012.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 10058,
+    "characterId": "10058",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Mine",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10058.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10059,
+    "characterId": "10059",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Mika",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10059.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10060,
+    "characterId": "10060",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Megu",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10060.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 20023,
+    "characterId": "20023",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Kanna",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20023.webp",
+    "className": "Valkyrie"
+  },
+  {
+    "id": 10061,
+    "characterId": "10061",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Sakurako",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10061.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10062,
+    "characterId": "10062",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Toki",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10062.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 20024,
+    "characterId": "20024",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Nagisa",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20024.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10063,
+    "characterId": "10063",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Koyuki",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10063.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10064,
+    "characterId": "10064",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Kayoko_NewYear",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10064.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 20025,
+    "characterId": "20025",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Haruka_NewYear",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20025.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 10065,
+    "characterId": "10065",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Kaho",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10065.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 10066,
+    "characterId": "10066",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Aris_Maid",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10066.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10067,
+    "characterId": "10067",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Toki_Bunny",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10067.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 26009,
+    "characterId": "26009",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Yuzu_Maid",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/26009.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10068,
+    "characterId": "10068",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Reisa",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10068.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10069,
+    "characterId": "10069",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Rumi",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10069.webp",
+    "className": "Shanhaijing"
+  },
+  {
+    "id": 10070,
+    "characterId": "10070",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Mina",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10070.webp",
+    "className": "Shanhaijing"
+  },
+  {
+    "id": 20026,
+    "characterId": "20026",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Minori",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20026.webp",
+    "className": "RedWinter"
+  },
+  {
+    "id": 10071,
+    "characterId": "10071",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Miyako_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10071.webp",
+    "className": "SRT"
+  },
+  {
+    "id": 10072,
+    "characterId": "10072",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Saki_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10072.webp",
+    "className": "SRT"
+  },
+  {
+    "id": 26010,
+    "characterId": "26010",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Miyu_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/26010.webp",
+    "className": "SRT"
+  },
+  {
+    "id": 20027,
+    "characterId": "20027",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Shiroko_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20027.webp",
+    "className": "Abydos"
+  },
+  {
+    "id": 10073,
+    "characterId": "10073",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Ui_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10073.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 20028,
+    "characterId": "20028",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hinata_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20028.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 16013,
+    "characterId": "16013",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Koharu_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/16013.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10074,
+    "characterId": "10074",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hanako_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10074.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 20029,
+    "characterId": "20029",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Mimori_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20029.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 10075,
+    "characterId": "10075",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Meru",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10075.webp",
+    "className": "RedWinter"
+  },
+  {
+    "id": 13013,
+    "characterId": "13013",
+    "cardRarityType": "star_2",
+    "assetbundleName": "Momiji",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/13013.webp",
+    "className": "RedWinter"
+  },
+  {
+    "id": 10076,
+    "characterId": "10076",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Kotori_Cheerleader",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10076.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 20030,
+    "characterId": "20030",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Haruna_Track",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20030.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 10077,
+    "characterId": "10077",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Ichika",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10077.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10078,
+    "characterId": "10078",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Kasumi",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10078.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 20031,
+    "characterId": "20031",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Shigure_HotSpring",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20031.webp",
+    "className": "RedWinter"
+  },
+  {
+    "id": 10079,
+    "characterId": "10079",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Misaka_Mikoto",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10079.webp",
+    "className": "Tokiwadai"
+  },
+  {
+    "id": 10080,
+    "characterId": "10080",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Shokuhou_Misaki",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10080.webp",
+    "className": "Tokiwadai"
+  },
+  {
+    "id": 26011,
+    "characterId": "26011",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Saten_Ruiko",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/26011.webp",
+    "className": "Sakugawa"
+  },
+  {
+    "id": 10081,
+    "characterId": "10081",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Yukari",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10081.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 10082,
+    "characterId": "10082",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Renge",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10082.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 10083,
+    "characterId": "10083",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Kikyou",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10083.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 20032,
+    "characterId": "20032",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Eimi_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20032.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10084,
+    "characterId": "10084",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Kotama_Camp",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10084.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10085,
+    "characterId": "10085",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hare_Camp",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10085.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10087,
+    "characterId": "10087",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Ako_Dress",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10087.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 16014,
+    "characterId": "16014",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Ibuki",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/16014.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 20033,
+    "characterId": "20033",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Makoto",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20033.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 10086,
+    "characterId": "10086",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hina_Dress",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10086.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 10088,
+    "characterId": "10088",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Kayoko_Dress",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10088.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 10089,
+    "characterId": "10089",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Aru_Dress",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10089.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 20034,
+    "characterId": "20034",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Akari_NewYear",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20034.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 10090,
+    "characterId": "10090",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Umika",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10090.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 20035,
+    "characterId": "20035",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Tsubaki_Guide",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20035.webp",
+    "className": "Hyakkiyako"
+  },
+  {
+    "id": 10091,
+    "characterId": "10091",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Kazusa_Band",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10091.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10092,
+    "characterId": "10092",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Yoshimi_Band",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10092.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 16015,
+    "characterId": "16015",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Airi_Band",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/16015.webp",
+    "className": "Trinity"
+  },
+  {
+    "id": 10093,
+    "characterId": "10093",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Kirara",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10093.webp",
+    "className": "Gehenna"
+  },
+  {
+    "id": 10094,
+    "characterId": "10094",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Momoi_Maid",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10094.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 10095,
+    "characterId": "10095",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Midori_Maid",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10095.webp",
+    "className": "Millennium"
+  },
+  {
+    "id": 20036,
+    "characterId": "20036",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Serika_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20036.webp",
+    "className": "Abydos"
+  },
+  {
+    "id": 10096,
+    "characterId": "10096",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Kanna_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10096.webp",
+    "className": "Valkyrie"
+  },
+  {
+    "id": 20037,
+    "characterId": "20037",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Fubuki_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/20037.webp",
+    "className": "Valkyrie"
+  },
+  {
+    "id": 26012,
+    "characterId": "26012",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Kirino_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/26012.webp",
+    "className": "Valkyrie"
+  },
+  {
+    "id": 10097,
+    "characterId": "10097",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Moe_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10097.webp",
+    "className": "SRT"
+  },
+  {
+    "id": 10098,
+    "characterId": "10098",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hoshino_Battle_Tank",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10098.webp",
+    "className": "Abydos"
+  },
+  {
+    "id": 10099,
+    "characterId": "10099",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hoshino_Battle_Dealer",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10099.webp",
+    "className": "Abydos"
+  },
+  {
+    "id": 10100,
+    "characterId": "10100",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Shiroko_Terror",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10100.webp",
+    "className": "Abydos"
+  },
+  {
+    "id": 26013,
+    "characterId": "26013",
+    "cardRarityType": "star_1",
+    "assetbundleName": "Atsuko_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/26013.webp",
+    "className": "Arius"
+  },
+  {
+    "id": 10101,
+    "characterId": "10101",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Saori_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10101.webp",
+    "className": "Arius"
+  },
+  {
+    "id": 10102,
+    "characterId": "10102",
+    "cardRarityType": "star_3",
+    "assetbundleName": "Hiyori_Swimsuit",
+    "image_url": "https://cdn.jsdelivr.net/gh/lonqie/SchaleDB@main/images/student/portrait/10102.webp",
+    "className": "Arius"
+  }
+]

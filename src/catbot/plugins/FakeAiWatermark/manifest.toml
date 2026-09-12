@@ -1,0 +1,10 @@
+name = "FakeAiWatermark"
+version = "1.0.0"
+main = "FakeAiWatermark.py"
+entry_class = "FakeAiWatermark"
+
+[pip_dependencies]
+pillow = "*"
+requests = "*"
+
+[dependencies]

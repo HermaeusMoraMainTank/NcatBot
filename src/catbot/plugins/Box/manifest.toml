@@ -1,0 +1,9 @@
+name = "Box"
+version = "1.0.0"
+main = "Box.py"
+entry_class = "Box"
+
+[pip_dependencies]
+Pillow = "*"
+
+[dependencies]

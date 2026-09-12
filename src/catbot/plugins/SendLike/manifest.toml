@@ -1,0 +1,6 @@
+name = "SendLike"
+version = "1.0.0"
+main = "SendLike.py"
+entry_class = "SendLike"
+
+[dependencies]

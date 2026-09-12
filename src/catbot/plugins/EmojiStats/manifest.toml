@@ -1,0 +1,11 @@
+name = "EmojiStats"
+version = "1.1.0"
+main = "EmojiStats.py"
+entry_class = "EmojiStatsPlugin"
+
+[pip_dependencies]
+Pillow = "*"
+pillowmd = "*"
+requests = "*"
+
+[dependencies]

@@ -1,0 +1,6 @@
+name = "MuteToWorkEnd"
+version = "1.0.0"
+main = "MuteToWorkEnd.py"
+entry_class = "MuteManager"
+
+[dependencies]

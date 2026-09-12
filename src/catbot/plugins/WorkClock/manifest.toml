@@ -1,0 +1,9 @@
+name = "WorkClock"
+    version = "1.6.1"
+main = "WorkClock.py"
+entry_class = "WorkClock"
+
+[dependencies]
+
+[pip_dependencies]
+Pillow = "*"

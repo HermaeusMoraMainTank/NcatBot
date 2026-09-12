@@ -1,0 +1,10 @@
+name = "Status"
+version = "1.0.0"
+main = "Status.py"
+entry_class = "Status"
+
+[dependencies]
+
+[pip_dependencies]
+Pillow = "*"
+psutil = "*"

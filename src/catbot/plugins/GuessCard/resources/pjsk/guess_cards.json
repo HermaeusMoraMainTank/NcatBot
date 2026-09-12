@@ -1,0 +1,5444 @@
+[
+    {
+        "id": 3,
+        "characterId": 1,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res001_no003"
+    },
+    {
+        "id": 4,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no004"
+    },
+    {
+        "id": 7,
+        "characterId": 2,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res002_no003"
+    },
+    {
+        "id": 11,
+        "characterId": 3,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res003_no003"
+    },
+    {
+        "id": 15,
+        "characterId": 4,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res004_no003"
+    },
+    {
+        "id": 19,
+        "characterId": 5,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res005_no003"
+    },
+    {
+        "id": 23,
+        "characterId": 6,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res006_no003"
+    },
+    {
+        "id": 27,
+        "characterId": 7,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res007_no003"
+    },
+    {
+        "id": 31,
+        "characterId": 8,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res008_no003"
+    },
+    {
+        "id": 35,
+        "characterId": 9,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res009_no003"
+    },
+    {
+        "id": 39,
+        "characterId": 10,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res010_no003"
+    },
+    {
+        "id": 43,
+        "characterId": 11,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res011_no003"
+    },
+    {
+        "id": 47,
+        "characterId": 12,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res012_no003"
+    },
+    {
+        "id": 51,
+        "characterId": 13,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res013_no003"
+    },
+    {
+        "id": 55,
+        "characterId": 14,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res014_no003"
+    },
+    {
+        "id": 59,
+        "characterId": 15,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res015_no003"
+    },
+    {
+        "id": 63,
+        "characterId": 16,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res016_no003"
+    },
+    {
+        "id": 67,
+        "characterId": 17,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res017_no003"
+    },
+    {
+        "id": 71,
+        "characterId": 18,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res018_no003"
+    },
+    {
+        "id": 75,
+        "characterId": 19,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res019_no003"
+    },
+    {
+        "id": 79,
+        "characterId": 20,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res020_no003"
+    },
+    {
+        "id": 87,
+        "characterId": 21,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res021_no007"
+    },
+    {
+        "id": 88,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no008"
+    },
+    {
+        "id": 91,
+        "characterId": 22,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res022_no003"
+    },
+    {
+        "id": 92,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no004"
+    },
+    {
+        "id": 95,
+        "characterId": 23,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res023_no003"
+    },
+    {
+        "id": 96,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no004"
+    },
+    {
+        "id": 99,
+        "characterId": 24,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res024_no003"
+    },
+    {
+        "id": 103,
+        "characterId": 25,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res025_no003"
+    },
+    {
+        "id": 107,
+        "characterId": 26,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res026_no003"
+    },
+    {
+        "id": 109,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no005"
+    },
+    {
+        "id": 110,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no005"
+    },
+    {
+        "id": 111,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no005"
+    },
+    {
+        "id": 112,
+        "characterId": 3,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res003_no005"
+    },
+    {
+        "id": 114,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no005"
+    },
+    {
+        "id": 115,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no005"
+    },
+    {
+        "id": 116,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no009"
+    },
+    {
+        "id": 117,
+        "characterId": 20,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res020_no005"
+    },
+    {
+        "id": 119,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no005"
+    },
+    {
+        "id": 120,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no005"
+    },
+    {
+        "id": 121,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no006"
+    },
+    {
+        "id": 122,
+        "characterId": 14,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res014_no006"
+    },
+    {
+        "id": 124,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no007"
+    },
+    {
+        "id": 125,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no005"
+    },
+    {
+        "id": 126,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no010"
+    },
+    {
+        "id": 127,
+        "characterId": 18,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res018_no006"
+    },
+    {
+        "id": 129,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no005"
+    },
+    {
+        "id": 130,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no005"
+    },
+    {
+        "id": 131,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no005"
+    },
+    {
+        "id": 132,
+        "characterId": 8,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res008_no005"
+    },
+    {
+        "id": 134,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no005"
+    },
+    {
+        "id": 135,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no005"
+    },
+    {
+        "id": 136,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no005"
+    },
+    {
+        "id": 137,
+        "characterId": 12,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res012_no005"
+    },
+    {
+        "id": 139,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no006"
+    },
+    {
+        "id": 140,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no007"
+    },
+    {
+        "id": 141,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no006"
+    },
+    {
+        "id": 142,
+        "characterId": 15,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res015_no006"
+    },
+    {
+        "id": 144,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no007"
+    },
+    {
+        "id": 145,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no011"
+    },
+    {
+        "id": 146,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no006"
+    },
+    {
+        "id": 147,
+        "characterId": 16,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res016_no006"
+    },
+    {
+        "id": 149,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no012"
+    },
+    {
+        "id": 150,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no005"
+    },
+    {
+        "id": 151,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no006"
+    },
+    {
+        "id": 152,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no006"
+    },
+    {
+        "id": 153,
+        "characterId": 2,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res002_no007"
+    },
+    {
+        "id": 155,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no006"
+    },
+    {
+        "id": 156,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no007"
+    },
+    {
+        "id": 157,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no006"
+    },
+    {
+        "id": 158,
+        "characterId": 2,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res002_no008"
+    },
+    {
+        "id": 160,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no006"
+    },
+    {
+        "id": 161,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no007"
+    },
+    {
+        "id": 162,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no006"
+    },
+    {
+        "id": 163,
+        "characterId": 6,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res006_no007"
+    },
+    {
+        "id": 165,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no007"
+    },
+    {
+        "id": 166,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no006"
+    },
+    {
+        "id": 167,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no006"
+    },
+    {
+        "id": 168,
+        "characterId": 9,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res009_no006"
+    },
+    {
+        "id": 170,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no007"
+    },
+    {
+        "id": 171,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no006"
+    },
+    {
+        "id": 172,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no007"
+    },
+    {
+        "id": 173,
+        "characterId": 13,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res013_no008"
+    },
+    {
+        "id": 175,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no007"
+    },
+    {
+        "id": 176,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no007"
+    },
+    {
+        "id": 177,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no006"
+    },
+    {
+        "id": 178,
+        "characterId": 22,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res022_no007"
+    },
+    {
+        "id": 180,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no009"
+    },
+    {
+        "id": 181,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no008"
+    },
+    {
+        "id": 182,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no008"
+    },
+    {
+        "id": 183,
+        "characterId": 23,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res023_no007"
+    },
+    {
+        "id": 185,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no009"
+    },
+    {
+        "id": 186,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no010"
+    },
+    {
+        "id": 187,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no008"
+    },
+    {
+        "id": 188,
+        "characterId": 24,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res024_no008"
+    },
+    {
+        "id": 190,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no007"
+    },
+    {
+        "id": 191,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no008"
+    },
+    {
+        "id": 192,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no007"
+    },
+    {
+        "id": 193,
+        "characterId": 24,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res024_no009"
+    },
+    {
+        "id": 195,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no007"
+    },
+    {
+        "id": 196,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no008"
+    },
+    {
+        "id": 197,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no007"
+    },
+    {
+        "id": 198,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no013"
+    },
+    {
+        "id": 199,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no007"
+    },
+    {
+        "id": 200,
+        "characterId": 5,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res005_no008"
+    },
+    {
+        "id": 202,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no008"
+    },
+    {
+        "id": 203,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no008"
+    },
+    {
+        "id": 204,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no008"
+    },
+    {
+        "id": 205,
+        "characterId": 17,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res017_no009"
+    },
+    {
+        "id": 207,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no008"
+    },
+    {
+        "id": 208,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no009"
+    },
+    {
+        "id": 209,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no010"
+    },
+    {
+        "id": 210,
+        "characterId": 1,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res001_no008"
+    },
+    {
+        "id": 212,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no007"
+    },
+    {
+        "id": 213,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no007"
+    },
+    {
+        "id": 214,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no008"
+    },
+    {
+        "id": 215,
+        "characterId": 9,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res009_no008"
+    },
+    {
+        "id": 217,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no009"
+    },
+    {
+        "id": 218,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no008"
+    },
+    {
+        "id": 219,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no009"
+    },
+    {
+        "id": 220,
+        "characterId": 16,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res016_no009"
+    },
+    {
+        "id": 222,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no009"
+    },
+    {
+        "id": 223,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no008"
+    },
+    {
+        "id": 224,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no009"
+    },
+    {
+        "id": 225,
+        "characterId": 25,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res025_no010"
+    },
+    {
+        "id": 227,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no010"
+    },
+    {
+        "id": 228,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no010"
+    },
+    {
+        "id": 229,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no008"
+    },
+    {
+        "id": 230,
+        "characterId": 11,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res011_no008"
+    },
+    {
+        "id": 232,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no011"
+    },
+    {
+        "id": 233,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no010"
+    },
+    {
+        "id": 234,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no009"
+    },
+    {
+        "id": 235,
+        "characterId": 22,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res022_no008"
+    },
+    {
+        "id": 237,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no010"
+    },
+    {
+        "id": 238,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no011"
+    },
+    {
+        "id": 239,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no010"
+    },
+    {
+        "id": 240,
+        "characterId": 20,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res020_no010"
+    },
+    {
+        "id": 242,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no010"
+    },
+    {
+        "id": 243,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no010"
+    },
+    {
+        "id": 244,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no011"
+    },
+    {
+        "id": 245,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no009"
+    },
+    {
+        "id": 246,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no009"
+    },
+    {
+        "id": 247,
+        "characterId": 3,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res003_no010"
+    },
+    {
+        "id": 249,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no009"
+    },
+    {
+        "id": 250,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no009"
+    },
+    {
+        "id": 251,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no011"
+    },
+    {
+        "id": 252,
+        "characterId": 12,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res012_no011"
+    },
+    {
+        "id": 254,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no009"
+    },
+    {
+        "id": 255,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no011"
+    },
+    {
+        "id": 256,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no009"
+    },
+    {
+        "id": 257,
+        "characterId": 7,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res007_no011"
+    },
+    {
+        "id": 259,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no011"
+    },
+    {
+        "id": 260,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no012"
+    },
+    {
+        "id": 261,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no011"
+    },
+    {
+        "id": 262,
+        "characterId": 21,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res021_no014"
+    },
+    {
+        "id": 264,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no012"
+    },
+    {
+        "id": 265,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no010"
+    },
+    {
+        "id": 266,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no011"
+    },
+    {
+        "id": 267,
+        "characterId": 8,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res008_no009"
+    },
+    {
+        "id": 269,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no010"
+    },
+    {
+        "id": 270,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no011"
+    },
+    {
+        "id": 271,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no012"
+    },
+    {
+        "id": 272,
+        "characterId": 26,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res026_no010"
+    },
+    {
+        "id": 274,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no010"
+    },
+    {
+        "id": 275,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no010"
+    },
+    {
+        "id": 276,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no012"
+    },
+    {
+        "id": 277,
+        "characterId": 21,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res021_no015"
+    },
+    {
+        "id": 279,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no010"
+    },
+    {
+        "id": 280,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no011"
+    },
+    {
+        "id": 281,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no012"
+    },
+    {
+        "id": 282,
+        "characterId": 4,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res004_no011"
+    },
+    {
+        "id": 284,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no012"
+    },
+    {
+        "id": 285,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no012"
+    },
+    {
+        "id": 286,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no011"
+    },
+    {
+        "id": 287,
+        "characterId": 19,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res019_no012"
+    },
+    {
+        "id": 289,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no016"
+    },
+    {
+        "id": 290,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no011"
+    },
+    {
+        "id": 291,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no011"
+    },
+    {
+        "id": 292,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no011"
+    },
+    {
+        "id": 293,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no012"
+    },
+    {
+        "id": 294,
+        "characterId": 17,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res017_no012"
+    },
+    {
+        "id": 296,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no010"
+    },
+    {
+        "id": 297,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no012"
+    },
+    {
+        "id": 298,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no017"
+    },
+    {
+        "id": 299,
+        "characterId": 23,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res023_no011"
+    },
+    {
+        "id": 301,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no012"
+    },
+    {
+        "id": 302,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no013"
+    },
+    {
+        "id": 303,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no011"
+    },
+    {
+        "id": 304,
+        "characterId": 13,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res013_no013"
+    },
+    {
+        "id": 307,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no013"
+    },
+    {
+        "id": 308,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no013"
+    },
+    {
+        "id": 309,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no013"
+    },
+    {
+        "id": 310,
+        "characterId": 25,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res025_no013"
+    },
+    {
+        "id": 313,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no014"
+    },
+    {
+        "id": 314,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no012"
+    },
+    {
+        "id": 315,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no014"
+    },
+    {
+        "id": 316,
+        "characterId": 1,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res001_no012"
+    },
+    {
+        "id": 319,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no012"
+    },
+    {
+        "id": 320,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no013"
+    },
+    {
+        "id": 321,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no013"
+    },
+    {
+        "id": 322,
+        "characterId": 10,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res010_no011"
+    },
+    {
+        "id": 324,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no014"
+    },
+    {
+        "id": 325,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no013"
+    },
+    {
+        "id": 326,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no018"
+    },
+    {
+        "id": 327,
+        "characterId": 17,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res017_no014"
+    },
+    {
+        "id": 330,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no012"
+    },
+    {
+        "id": 331,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no013"
+    },
+    {
+        "id": 332,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no013"
+    },
+    {
+        "id": 333,
+        "characterId": 26,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res026_no012"
+    },
+    {
+        "id": 335,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no013"
+    },
+    {
+        "id": 336,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no013"
+    },
+    {
+        "id": 337,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no014"
+    },
+    {
+        "id": 338,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no015"
+    },
+    {
+        "id": 339,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no013"
+    },
+    {
+        "id": 341,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no013"
+    },
+    {
+        "id": 342,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no012"
+    },
+    {
+        "id": 343,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no012"
+    },
+    {
+        "id": 344,
+        "characterId": 24,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res024_no015"
+    },
+    {
+        "id": 348,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no012"
+    },
+    {
+        "id": 349,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no013"
+    },
+    {
+        "id": 350,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no015"
+    },
+    {
+        "id": 351,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no016"
+    },
+    {
+        "id": 352,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no014"
+    },
+    {
+        "id": 353,
+        "characterId": 21,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res021_no020"
+    },
+    {
+        "id": 356,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no014"
+    },
+    {
+        "id": 357,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no014"
+    },
+    {
+        "id": 358,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no016"
+    },
+    {
+        "id": 359,
+        "characterId": 15,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res015_no013"
+    },
+    {
+        "id": 361,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no015"
+    },
+    {
+        "id": 362,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no015"
+    },
+    {
+        "id": 363,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no014"
+    },
+    {
+        "id": 364,
+        "characterId": 19,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res019_no014"
+    },
+    {
+        "id": 368,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no014"
+    },
+    {
+        "id": 369,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no015"
+    },
+    {
+        "id": 370,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no015"
+    },
+    {
+        "id": 371,
+        "characterId": 22,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res022_no015"
+    },
+    {
+        "id": 373,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no015"
+    },
+    {
+        "id": 374,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no014"
+    },
+    {
+        "id": 375,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no015"
+    },
+    {
+        "id": 376,
+        "characterId": 10,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res010_no013"
+    },
+    {
+        "id": 380,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no015"
+    },
+    {
+        "id": 381,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no014"
+    },
+    {
+        "id": 382,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no015"
+    },
+    {
+        "id": 383,
+        "characterId": 2,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res002_no016"
+    },
+    {
+        "id": 385,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no015"
+    },
+    {
+        "id": 386,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no014"
+    },
+    {
+        "id": 387,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no015"
+    },
+    {
+        "id": 388,
+        "characterId": 4,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res004_no016"
+    },
+    {
+        "id": 391,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no015"
+    },
+    {
+        "id": 392,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no013"
+    },
+    {
+        "id": 393,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no022"
+    },
+    {
+        "id": 394,
+        "characterId": 6,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res006_no016"
+    },
+    {
+        "id": 397,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no015"
+    },
+    {
+        "id": 398,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no017"
+    },
+    {
+        "id": 399,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no016"
+    },
+    {
+        "id": 400,
+        "characterId": 18,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res018_no017"
+    },
+    {
+        "id": 402,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no014"
+    },
+    {
+        "id": 403,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no015"
+    },
+    {
+        "id": 404,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no023"
+    },
+    {
+        "id": 405,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no017"
+    },
+    {
+        "id": 406,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no017"
+    },
+    {
+        "id": 407,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no016"
+    },
+    {
+        "id": 408,
+        "characterId": 25,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res025_no017"
+    },
+    {
+        "id": 410,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no016"
+    },
+    {
+        "id": 411,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no014"
+    },
+    {
+        "id": 412,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no015"
+    },
+    {
+        "id": 413,
+        "characterId": 14,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res014_no016"
+    },
+    {
+        "id": 416,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no015"
+    },
+    {
+        "id": 417,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no017"
+    },
+    {
+        "id": 418,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no018"
+    },
+    {
+        "id": 419,
+        "characterId": 4,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res004_no017"
+    },
+    {
+        "id": 422,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no017"
+    },
+    {
+        "id": 423,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no015"
+    },
+    {
+        "id": 424,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no018"
+    },
+    {
+        "id": 425,
+        "characterId": 21,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res021_no025"
+    },
+    {
+        "id": 428,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no016"
+    },
+    {
+        "id": 429,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no017"
+    },
+    {
+        "id": 430,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no019"
+    },
+    {
+        "id": 431,
+        "characterId": 11,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res011_no015"
+    },
+    {
+        "id": 434,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no016"
+    },
+    {
+        "id": 435,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no017"
+    },
+    {
+        "id": 436,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no017"
+    },
+    {
+        "id": 437,
+        "characterId": 12,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res012_no016"
+    },
+    {
+        "id": 440,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no016"
+    },
+    {
+        "id": 441,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no017"
+    },
+    {
+        "id": 442,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no018"
+    },
+    {
+        "id": 443,
+        "characterId": 7,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res007_no017"
+    },
+    {
+        "id": 445,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no018"
+    },
+    {
+        "id": 446,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no018"
+    },
+    {
+        "id": 447,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no018"
+    },
+    {
+        "id": 448,
+        "characterId": 19,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res019_no018"
+    },
+    {
+        "id": 450,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no015"
+    },
+    {
+        "id": 451,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no018"
+    },
+    {
+        "id": 452,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no017"
+    },
+    {
+        "id": 453,
+        "characterId": 25,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res025_no019"
+    },
+    {
+        "id": 456,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no019"
+    },
+    {
+        "id": 457,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no018"
+    },
+    {
+        "id": 458,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no019"
+    },
+    {
+        "id": 459,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no016"
+    },
+    {
+        "id": 460,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no019"
+    },
+    {
+        "id": 461,
+        "characterId": 24,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res024_no020"
+    },
+    {
+        "id": 463,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no017"
+    },
+    {
+        "id": 464,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no017"
+    },
+    {
+        "id": 465,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no019"
+    },
+    {
+        "id": 466,
+        "characterId": 9,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res009_no019"
+    },
+    {
+        "id": 469,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no019"
+    },
+    {
+        "id": 470,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no017"
+    },
+    {
+        "id": 471,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no019"
+    },
+    {
+        "id": 472,
+        "characterId": 26,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res026_no018"
+    },
+    {
+        "id": 475,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no017"
+    },
+    {
+        "id": 476,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no018"
+    },
+    {
+        "id": 477,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no019"
+    },
+    {
+        "id": 478,
+        "characterId": 11,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res011_no018"
+    },
+    {
+        "id": 481,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no018"
+    },
+    {
+        "id": 482,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no018"
+    },
+    {
+        "id": 483,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no020"
+    },
+    {
+        "id": 484,
+        "characterId": 5,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res005_no017"
+    },
+    {
+        "id": 486,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no019"
+    },
+    {
+        "id": 487,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no020"
+    },
+    {
+        "id": 488,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no019"
+    },
+    {
+        "id": 489,
+        "characterId": 19,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res019_no020"
+    },
+    {
+        "id": 493,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no020"
+    },
+    {
+        "id": 494,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no019"
+    },
+    {
+        "id": 495,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no020"
+    },
+    {
+        "id": 496,
+        "characterId": 22,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res022_no020"
+    },
+    {
+        "id": 499,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no021"
+    },
+    {
+        "id": 500,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no021"
+    },
+    {
+        "id": 501,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no020"
+    },
+    {
+        "id": 502,
+        "characterId": 23,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res023_no020"
+    },
+    {
+        "id": 504,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no020"
+    },
+    {
+        "id": 505,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no020"
+    },
+    {
+        "id": 506,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no019"
+    },
+    {
+        "id": 507,
+        "characterId": 10,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res010_no019"
+    },
+    {
+        "id": 509,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no028"
+    },
+    {
+        "id": 510,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no022"
+    },
+    {
+        "id": 511,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no020"
+    },
+    {
+        "id": 512,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no019"
+    },
+    {
+        "id": 513,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no020"
+    },
+    {
+        "id": 514,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no019"
+    },
+    {
+        "id": 515,
+        "characterId": 3,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res003_no022"
+    },
+    {
+        "id": 517,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no018"
+    },
+    {
+        "id": 518,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no020"
+    },
+    {
+        "id": 519,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no019"
+    },
+    {
+        "id": 520,
+        "characterId": 8,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res008_no020"
+    },
+    {
+        "id": 522,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no020"
+    },
+    {
+        "id": 523,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no019"
+    },
+    {
+        "id": 524,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no018"
+    },
+    {
+        "id": 525,
+        "characterId": 21,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res021_no029"
+    },
+    {
+        "id": 528,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no021"
+    },
+    {
+        "id": 529,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no021"
+    },
+    {
+        "id": 530,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no019"
+    },
+    {
+        "id": 531,
+        "characterId": 6,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res006_no021"
+    },
+    {
+        "id": 535,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no020"
+    },
+    {
+        "id": 536,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no024"
+    },
+    {
+        "id": 537,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no030"
+    },
+    {
+        "id": 538,
+        "characterId": 2,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res002_no021"
+    },
+    {
+        "id": 540,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no022"
+    },
+    {
+        "id": 541,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no022"
+    },
+    {
+        "id": 542,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no021"
+    },
+    {
+        "id": 543,
+        "characterId": 20,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res020_no021"
+    },
+    {
+        "id": 545,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no022"
+    },
+    {
+        "id": 546,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no020"
+    },
+    {
+        "id": 547,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no022"
+    },
+    {
+        "id": 548,
+        "characterId": 5,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res005_no020"
+    },
+    {
+        "id": 551,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no022"
+    },
+    {
+        "id": 552,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no021"
+    },
+    {
+        "id": 553,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no023"
+    },
+    {
+        "id": 554,
+        "characterId": 9,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res009_no022"
+    },
+    {
+        "id": 556,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no023"
+    },
+    {
+        "id": 557,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no022"
+    },
+    {
+        "id": 558,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no022"
+    },
+    {
+        "id": 559,
+        "characterId": 7,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res007_no021"
+    },
+    {
+        "id": 563,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no023"
+    },
+    {
+        "id": 564,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no022"
+    },
+    {
+        "id": 565,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no020"
+    },
+    {
+        "id": 566,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no021"
+    },
+    {
+        "id": 567,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no023"
+    },
+    {
+        "id": 568,
+        "characterId": 15,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res015_no019"
+    },
+    {
+        "id": 571,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no022"
+    },
+    {
+        "id": 572,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no021"
+    },
+    {
+        "id": 573,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no023"
+    },
+    {
+        "id": 574,
+        "characterId": 13,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res013_no021"
+    },
+    {
+        "id": 576,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no025"
+    },
+    {
+        "id": 577,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no022"
+    },
+    {
+        "id": 578,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no024"
+    },
+    {
+        "id": 579,
+        "characterId": 21,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res021_no031"
+    },
+    {
+        "id": 583,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no022"
+    },
+    {
+        "id": 584,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no021"
+    },
+    {
+        "id": 585,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no023"
+    },
+    {
+        "id": 586,
+        "characterId": 3,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res003_no026"
+    },
+    {
+        "id": 589,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no024"
+    },
+    {
+        "id": 590,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no021"
+    },
+    {
+        "id": 591,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no022"
+    },
+    {
+        "id": 592,
+        "characterId": 6,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res006_no023"
+    },
+    {
+        "id": 595,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no023"
+    },
+    {
+        "id": 596,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no022"
+    },
+    {
+        "id": 597,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no024"
+    },
+    {
+        "id": 598,
+        "characterId": 12,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res012_no022"
+    },
+    {
+        "id": 600,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no023"
+    },
+    {
+        "id": 601,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no022"
+    },
+    {
+        "id": 602,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no024"
+    },
+    {
+        "id": 603,
+        "characterId": 21,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res021_no032"
+    },
+    {
+        "id": 606,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no022"
+    },
+    {
+        "id": 607,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no023"
+    },
+    {
+        "id": 608,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no022"
+    },
+    {
+        "id": 609,
+        "characterId": 16,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res016_no023"
+    },
+    {
+        "id": 612,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no025"
+    },
+    {
+        "id": 613,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no024"
+    },
+    {
+        "id": 614,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no023"
+    },
+    {
+        "id": 615,
+        "characterId": 26,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res026_no025"
+    },
+    {
+        "id": 617,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no024"
+    },
+    {
+        "id": 618,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no025"
+    },
+    {
+        "id": 619,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no025"
+    },
+    {
+        "id": 620,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no023"
+    },
+    {
+        "id": 621,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no025"
+    },
+    {
+        "id": 622,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no033"
+    },
+    {
+        "id": 623,
+        "characterId": 15,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res015_no023"
+    },
+    {
+        "id": 624,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no024"
+    },
+    {
+        "id": 625,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no027"
+    },
+    {
+        "id": 626,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no025"
+    },
+    {
+        "id": 627,
+        "characterId": 1,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res001_no023"
+    },
+    {
+        "id": 630,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no024"
+    },
+    {
+        "id": 631,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no024"
+    },
+    {
+        "id": 632,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no025"
+    },
+    {
+        "id": 633,
+        "characterId": 26,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res026_no026"
+    },
+    {
+        "id": 636,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no024"
+    },
+    {
+        "id": 637,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no025"
+    },
+    {
+        "id": 638,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no026"
+    },
+    {
+        "id": 639,
+        "characterId": 23,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res023_no026"
+    },
+    {
+        "id": 642,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no025"
+    },
+    {
+        "id": 643,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no024"
+    },
+    {
+        "id": 644,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no034"
+    },
+    {
+        "id": 645,
+        "characterId": 2,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res002_no026"
+    },
+    {
+        "id": 648,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no025"
+    },
+    {
+        "id": 649,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no024"
+    },
+    {
+        "id": 650,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no027"
+    },
+    {
+        "id": 651,
+        "characterId": 14,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res014_no024"
+    },
+    {
+        "id": 654,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no028"
+    },
+    {
+        "id": 655,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no025"
+    },
+    {
+        "id": 656,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no026"
+    },
+    {
+        "id": 657,
+        "characterId": 22,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res022_no025"
+    },
+    {
+        "id": 659,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no024"
+    },
+    {
+        "id": 660,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no025"
+    },
+    {
+        "id": 661,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no026"
+    },
+    {
+        "id": 662,
+        "characterId": 11,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res011_no025"
+    },
+    {
+        "id": 664,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no024"
+    },
+    {
+        "id": 665,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no025"
+    },
+    {
+        "id": 666,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no027"
+    },
+    {
+        "id": 667,
+        "characterId": 8,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res008_no026"
+    },
+    {
+        "id": 670,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no026"
+    },
+    {
+        "id": 671,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no026"
+    },
+    {
+        "id": 672,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no026"
+    },
+    {
+        "id": 673,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no027"
+    },
+    {
+        "id": 674,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no025"
+    },
+    {
+        "id": 675,
+        "characterId": 18,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res018_no026"
+    },
+    {
+        "id": 677,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no027"
+    },
+    {
+        "id": 678,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no027"
+    },
+    {
+        "id": 679,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no028"
+    },
+    {
+        "id": 680,
+        "characterId": 20,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res020_no026"
+    },
+    {
+        "id": 683,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no025"
+    },
+    {
+        "id": 684,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no027"
+    },
+    {
+        "id": 685,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no028"
+    },
+    {
+        "id": 686,
+        "characterId": 3,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res003_no029"
+    },
+    {
+        "id": 689,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no027"
+    },
+    {
+        "id": 690,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no028"
+    },
+    {
+        "id": 691,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no027"
+    },
+    {
+        "id": 692,
+        "characterId": 5,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res005_no025"
+    },
+    {
+        "id": 694,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no027"
+    },
+    {
+        "id": 695,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no027"
+    },
+    {
+        "id": 696,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no026"
+    },
+    {
+        "id": 697,
+        "characterId": 10,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res010_no026"
+    },
+    {
+        "id": 700,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no027"
+    },
+    {
+        "id": 701,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no027"
+    },
+    {
+        "id": 702,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no026"
+    },
+    {
+        "id": 703,
+        "characterId": 16,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res016_no027"
+    },
+    {
+        "id": 707,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no037"
+    },
+    {
+        "id": 708,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no027"
+    },
+    {
+        "id": 709,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no028"
+    },
+    {
+        "id": 710,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no028"
+    },
+    {
+        "id": 711,
+        "characterId": 25,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res025_no027"
+    },
+    {
+        "id": 714,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no029"
+    },
+    {
+        "id": 715,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no028"
+    },
+    {
+        "id": 716,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no027"
+    },
+    {
+        "id": 717,
+        "characterId": 14,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res014_no029"
+    },
+    {
+        "id": 719,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no027"
+    },
+    {
+        "id": 720,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no028"
+    },
+    {
+        "id": 721,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no029"
+    },
+    {
+        "id": 722,
+        "characterId": 13,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res013_no027"
+    },
+    {
+        "id": 760,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no030"
+    },
+    {
+        "id": 761,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no032"
+    },
+    {
+        "id": 762,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no028"
+    },
+    {
+        "id": 763,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no027"
+    },
+    {
+        "id": 764,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no029"
+    },
+    {
+        "id": 765,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no029"
+    },
+    {
+        "id": 766,
+        "characterId": 9,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res009_no029"
+    },
+    {
+        "id": 768,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no030"
+    },
+    {
+        "id": 769,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no030"
+    },
+    {
+        "id": 770,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no031"
+    },
+    {
+        "id": 771,
+        "characterId": 12,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res012_no028"
+    },
+    {
+        "id": 773,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no030"
+    },
+    {
+        "id": 774,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no031"
+    },
+    {
+        "id": 775,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no030"
+    },
+    {
+        "id": 776,
+        "characterId": 1,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res001_no029"
+    },
+    {
+        "id": 779,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no029"
+    },
+    {
+        "id": 780,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no030"
+    },
+    {
+        "id": 781,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no030"
+    },
+    {
+        "id": 782,
+        "characterId": 23,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res023_no031"
+    },
+    {
+        "id": 785,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no030"
+    },
+    {
+        "id": 786,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no029"
+    },
+    {
+        "id": 787,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no030"
+    },
+    {
+        "id": 788,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no031"
+    },
+    {
+        "id": 791,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no030"
+    },
+    {
+        "id": 792,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no030"
+    },
+    {
+        "id": 793,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no032"
+    },
+    {
+        "id": 794,
+        "characterId": 14,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res014_no031"
+    },
+    {
+        "id": 796,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no030"
+    },
+    {
+        "id": 797,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no032"
+    },
+    {
+        "id": 798,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no032"
+    },
+    {
+        "id": 799,
+        "characterId": 10,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res010_no030"
+    },
+    {
+        "id": 801,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no045"
+    },
+    {
+        "id": 802,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no032"
+    },
+    {
+        "id": 803,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no031"
+    },
+    {
+        "id": 804,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no030"
+    },
+    {
+        "id": 805,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no032"
+    },
+    {
+        "id": 806,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no031"
+    },
+    {
+        "id": 828,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no030"
+    },
+    {
+        "id": 829,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no032"
+    },
+    {
+        "id": 830,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no033"
+    },
+    {
+        "id": 831,
+        "characterId": 1,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res001_no031"
+    },
+    {
+        "id": 833,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no032"
+    },
+    {
+        "id": 834,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no031"
+    },
+    {
+        "id": 835,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no034"
+    },
+    {
+        "id": 836,
+        "characterId": 19,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res019_no032"
+    },
+    {
+        "id": 840,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no031"
+    },
+    {
+        "id": 841,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no032"
+    },
+    {
+        "id": 842,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no033"
+    },
+    {
+        "id": 843,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no033"
+    },
+    {
+        "id": 844,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no034"
+    },
+    {
+        "id": 845,
+        "characterId": 18,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res018_no032"
+    },
+    {
+        "id": 848,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no032"
+    },
+    {
+        "id": 849,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no032"
+    },
+    {
+        "id": 850,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no034"
+    },
+    {
+        "id": 851,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no031"
+    },
+    {
+        "id": 854,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no032"
+    },
+    {
+        "id": 855,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no032"
+    },
+    {
+        "id": 856,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no034"
+    },
+    {
+        "id": 857,
+        "characterId": 13,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res013_no032"
+    },
+    {
+        "id": 861,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no033"
+    },
+    {
+        "id": 862,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no033"
+    },
+    {
+        "id": 863,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no033"
+    },
+    {
+        "id": 864,
+        "characterId": 12,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res012_no032"
+    },
+    {
+        "id": 867,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no034"
+    },
+    {
+        "id": 868,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no032"
+    },
+    {
+        "id": 869,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no035"
+    },
+    {
+        "id": 870,
+        "characterId": 4,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res004_no035"
+    },
+    {
+        "id": 873,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no032"
+    },
+    {
+        "id": 874,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no034"
+    },
+    {
+        "id": 875,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no046"
+    },
+    {
+        "id": 876,
+        "characterId": 7,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res007_no032"
+    },
+    {
+        "id": 878,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no034"
+    },
+    {
+        "id": 879,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no033"
+    },
+    {
+        "id": 880,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no034"
+    },
+    {
+        "id": 881,
+        "characterId": 5,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res005_no033"
+    },
+    {
+        "id": 884,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no033"
+    },
+    {
+        "id": 885,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no034"
+    },
+    {
+        "id": 886,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no033"
+    },
+    {
+        "id": 887,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no033"
+    },
+    {
+        "id": 890,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no033"
+    },
+    {
+        "id": 891,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no033"
+    },
+    {
+        "id": 892,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no036"
+    },
+    {
+        "id": 893,
+        "characterId": 26,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res026_no038"
+    },
+    {
+        "id": 895,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no035"
+    },
+    {
+        "id": 896,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no034"
+    },
+    {
+        "id": 897,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no035"
+    },
+    {
+        "id": 898,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no035"
+    },
+    {
+        "id": 899,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no035"
+    },
+    {
+        "id": 900,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no039"
+    },
+    {
+        "id": 901,
+        "characterId": 5,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res005_no034"
+    },
+    {
+        "id": 903,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no034"
+    },
+    {
+        "id": 904,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no035"
+    },
+    {
+        "id": 905,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no036"
+    },
+    {
+        "id": 906,
+        "characterId": 17,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res017_no035"
+    },
+    {
+        "id": 909,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no036"
+    },
+    {
+        "id": 910,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no036"
+    },
+    {
+        "id": 911,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no037"
+    },
+    {
+        "id": 912,
+        "characterId": 1,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res001_no034"
+    },
+    {
+        "id": 915,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no034"
+    },
+    {
+        "id": 916,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no036"
+    },
+    {
+        "id": 917,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no034"
+    },
+    {
+        "id": 918,
+        "characterId": 24,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res024_no036"
+    },
+    {
+        "id": 921,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no036"
+    },
+    {
+        "id": 922,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no035"
+    },
+    {
+        "id": 923,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no035"
+    },
+    {
+        "id": 924,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no034"
+    },
+    {
+        "id": 927,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no036"
+    },
+    {
+        "id": 928,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no036"
+    },
+    {
+        "id": 929,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no037"
+    },
+    {
+        "id": 930,
+        "characterId": 16,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res016_no035"
+    },
+    {
+        "id": 933,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no037"
+    },
+    {
+        "id": 934,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no035"
+    },
+    {
+        "id": 935,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no037"
+    },
+    {
+        "id": 936,
+        "characterId": 4,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res004_no037"
+    },
+    {
+        "id": 938,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no036"
+    },
+    {
+        "id": 939,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no035"
+    },
+    {
+        "id": 940,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no040"
+    },
+    {
+        "id": 941,
+        "characterId": 7,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res007_no036"
+    },
+    {
+        "id": 943,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no036"
+    },
+    {
+        "id": 944,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no035"
+    },
+    {
+        "id": 945,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no036"
+    },
+    {
+        "id": 946,
+        "characterId": 19,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res019_no037"
+    },
+    {
+        "id": 949,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no037"
+    },
+    {
+        "id": 950,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no038"
+    },
+    {
+        "id": 951,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no037"
+    },
+    {
+        "id": 952,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no037"
+    },
+    {
+        "id": 953,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no047"
+    },
+    {
+        "id": 954,
+        "characterId": 10,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res010_no035"
+    },
+    {
+        "id": 956,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no037"
+    },
+    {
+        "id": 957,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no037"
+    },
+    {
+        "id": 958,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no038"
+    },
+    {
+        "id": 959,
+        "characterId": 14,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res014_no037"
+    },
+    {
+        "id": 961,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no035"
+    },
+    {
+        "id": 962,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no038"
+    },
+    {
+        "id": 963,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no037"
+    },
+    {
+        "id": 964,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no038"
+    },
+    {
+        "id": 968,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no037"
+    },
+    {
+        "id": 969,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no037"
+    },
+    {
+        "id": 970,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no036"
+    },
+    {
+        "id": 971,
+        "characterId": 22,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res022_no037"
+    },
+    {
+        "id": 973,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no037"
+    },
+    {
+        "id": 974,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no038"
+    },
+    {
+        "id": 975,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no037"
+    },
+    {
+        "id": 976,
+        "characterId": 18,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res018_no037"
+    },
+    {
+        "id": 979,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no048"
+    },
+    {
+        "id": 980,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no038"
+    },
+    {
+        "id": 981,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no039"
+    },
+    {
+        "id": 982,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no040"
+    },
+    {
+        "id": 983,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no039"
+    },
+    {
+        "id": 984,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no041"
+    },
+    {
+        "id": 987,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no038"
+    },
+    {
+        "id": 988,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no038"
+    },
+    {
+        "id": 989,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no038"
+    },
+    {
+        "id": 990,
+        "characterId": 8,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res008_no037"
+    },
+    {
+        "id": 993,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no038"
+    },
+    {
+        "id": 994,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no038"
+    },
+    {
+        "id": 995,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no038"
+    },
+    {
+        "id": 996,
+        "characterId": 25,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res025_no040"
+    },
+    {
+        "id": 998,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no037"
+    },
+    {
+        "id": 999,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no040"
+    },
+    {
+        "id": 1000,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no040"
+    },
+    {
+        "id": 1001,
+        "characterId": 3,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res003_no039"
+    },
+    {
+        "id": 1003,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no038"
+    },
+    {
+        "id": 1004,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no039"
+    },
+    {
+        "id": 1005,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no038"
+    },
+    {
+        "id": 1006,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no040"
+    },
+    {
+        "id": 1007,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no038"
+    },
+    {
+        "id": 1008,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no038"
+    },
+    {
+        "id": 1009,
+        "characterId": 19,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res019_no038"
+    },
+    {
+        "id": 1011,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no038"
+    },
+    {
+        "id": 1012,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no039"
+    },
+    {
+        "id": 1013,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no042"
+    },
+    {
+        "id": 1014,
+        "characterId": 18,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res018_no039"
+    },
+    {
+        "id": 1016,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no039"
+    },
+    {
+        "id": 1017,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no038"
+    },
+    {
+        "id": 1018,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no039"
+    },
+    {
+        "id": 1019,
+        "characterId": 26,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res026_no043"
+    },
+    {
+        "id": 1022,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no041"
+    },
+    {
+        "id": 1023,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no038"
+    },
+    {
+        "id": 1024,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no041"
+    },
+    {
+        "id": 1025,
+        "characterId": 24,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res024_no041"
+    },
+    {
+        "id": 1028,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no042"
+    },
+    {
+        "id": 1029,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no038"
+    },
+    {
+        "id": 1030,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no040"
+    },
+    {
+        "id": 1031,
+        "characterId": 2,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res002_no042"
+    },
+    {
+        "id": 1034,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no039"
+    },
+    {
+        "id": 1035,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no040"
+    },
+    {
+        "id": 1036,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no041"
+    },
+    {
+        "id": 1037,
+        "characterId": 13,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res013_no040"
+    },
+    {
+        "id": 1039,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no040"
+    },
+    {
+        "id": 1040,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no039"
+    },
+    {
+        "id": 1041,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no042"
+    },
+    {
+        "id": 1042,
+        "characterId": 17,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res017_no040"
+    },
+    {
+        "id": 1045,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no040"
+    },
+    {
+        "id": 1046,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no039"
+    },
+    {
+        "id": 1047,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no050"
+    },
+    {
+        "id": 1048,
+        "characterId": 6,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res006_no040"
+    },
+    {
+        "id": 1050,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no040"
+    },
+    {
+        "id": 1051,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no039"
+    },
+    {
+        "id": 1052,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no042"
+    },
+    {
+        "id": 1053,
+        "characterId": 11,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res011_no041"
+    },
+    {
+        "id": 1057,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no041"
+    },
+    {
+        "id": 1058,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no040"
+    },
+    {
+        "id": 1059,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no042"
+    },
+    {
+        "id": 1060,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no040"
+    },
+    {
+        "id": 1061,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no044"
+    },
+    {
+        "id": 1062,
+        "characterId": 12,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res012_no040"
+    },
+    {
+        "id": 1065,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no041"
+    },
+    {
+        "id": 1066,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no040"
+    },
+    {
+        "id": 1067,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no043"
+    },
+    {
+        "id": 1068,
+        "characterId": 11,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res011_no043"
+    },
+    {
+        "id": 1096,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no052"
+    },
+    {
+        "id": 1097,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no042"
+    },
+    {
+        "id": 1098,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no044"
+    },
+    {
+        "id": 1099,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no043"
+    },
+    {
+        "id": 1100,
+        "characterId": 9,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res009_no042"
+    },
+    {
+        "id": 1104,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no042"
+    },
+    {
+        "id": 1105,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no043"
+    },
+    {
+        "id": 1106,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no045"
+    },
+    {
+        "id": 1107,
+        "characterId": 20,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res020_no041"
+    },
+    {
+        "id": 1110,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no044"
+    },
+    {
+        "id": 1111,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no041"
+    },
+    {
+        "id": 1112,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no045"
+    },
+    {
+        "id": 1113,
+        "characterId": 8,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res008_no043"
+    },
+    {
+        "id": 1115,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no045"
+    },
+    {
+        "id": 1116,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no043"
+    },
+    {
+        "id": 1117,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no042"
+    },
+    {
+        "id": 1118,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no042"
+    },
+    {
+        "id": 1122,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no043"
+    },
+    {
+        "id": 1123,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no041"
+    },
+    {
+        "id": 1124,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no044"
+    },
+    {
+        "id": 1125,
+        "characterId": 1,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res001_no041"
+    },
+    {
+        "id": 1127,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no045"
+    },
+    {
+        "id": 1128,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no043"
+    },
+    {
+        "id": 1129,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no044"
+    },
+    {
+        "id": 1130,
+        "characterId": 4,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res004_no045"
+    },
+    {
+        "id": 1133,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no043"
+    },
+    {
+        "id": 1134,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no043"
+    },
+    {
+        "id": 1135,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no042"
+    },
+    {
+        "id": 1136,
+        "characterId": 15,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res015_no042"
+    },
+    {
+        "id": 1139,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no044"
+    },
+    {
+        "id": 1140,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no044"
+    },
+    {
+        "id": 1141,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no043"
+    },
+    {
+        "id": 1142,
+        "characterId": 22,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res022_no045"
+    },
+    {
+        "id": 1144,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no044"
+    },
+    {
+        "id": 1145,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no046"
+    },
+    {
+        "id": 1146,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no046"
+    },
+    {
+        "id": 1147,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no042"
+    },
+    {
+        "id": 1148,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no053"
+    },
+    {
+        "id": 1149,
+        "characterId": 2,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res002_no046"
+    },
+    {
+        "id": 1151,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no044"
+    },
+    {
+        "id": 1152,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no043"
+    },
+    {
+        "id": 1153,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no046"
+    },
+    {
+        "id": 1154,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no044"
+    },
+    {
+        "id": 1156,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no044"
+    },
+    {
+        "id": 1157,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no043"
+    },
+    {
+        "id": 1158,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no048"
+    },
+    {
+        "id": 1159,
+        "characterId": 16,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res016_no044"
+    },
+    {
+        "id": 1162,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no045"
+    },
+    {
+        "id": 1163,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no045"
+    },
+    {
+        "id": 1164,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no047"
+    },
+    {
+        "id": 1165,
+        "characterId": 20,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res020_no044"
+    },
+    {
+        "id": 1167,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no054"
+    },
+    {
+        "id": 1169,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no045"
+    },
+    {
+        "id": 1170,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no045"
+    },
+    {
+        "id": 1171,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no044"
+    },
+    {
+        "id": 1172,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no045"
+    },
+    {
+        "id": 1174,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no045"
+    },
+    {
+        "id": 1175,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no044"
+    },
+    {
+        "id": 1176,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no046"
+    },
+    {
+        "id": 1177,
+        "characterId": 6,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res006_no045"
+    },
+    {
+        "id": 1180,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no045"
+    },
+    {
+        "id": 1181,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no046"
+    },
+    {
+        "id": 1182,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no055"
+    },
+    {
+        "id": 1183,
+        "characterId": 11,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res011_no047"
+    },
+    {
+        "id": 1185,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no046"
+    },
+    {
+        "id": 1186,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no046"
+    },
+    {
+        "id": 1187,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no046"
+    },
+    {
+        "id": 1188,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no045"
+    },
+    {
+        "id": 1189,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no043"
+    },
+    {
+        "id": 1190,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no048"
+    },
+    {
+        "id": 1191,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no045"
+    },
+    {
+        "id": 1192,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no047"
+    },
+    {
+        "id": 1194,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no047"
+    },
+    {
+        "id": 1195,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no049"
+    },
+    {
+        "id": 1196,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no047"
+    },
+    {
+        "id": 1197,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no047"
+    },
+    {
+        "id": 1198,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no045"
+    },
+    {
+        "id": 1199,
+        "characterId": 24,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res024_no047"
+    },
+    {
+        "id": 1201,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no046"
+    },
+    {
+        "id": 1202,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no044"
+    },
+    {
+        "id": 1203,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no047"
+    },
+    {
+        "id": 1204,
+        "characterId": 4,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res004_no048"
+    },
+    {
+        "id": 1207,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no045"
+    },
+    {
+        "id": 1208,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no046"
+    },
+    {
+        "id": 1209,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no045"
+    },
+    {
+        "id": 1210,
+        "characterId": 7,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res007_no046"
+    },
+    {
+        "id": 1213,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no046"
+    },
+    {
+        "id": 1214,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no047"
+    },
+    {
+        "id": 1215,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no048"
+    },
+    {
+        "id": 1216,
+        "characterId": 9,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res009_no046"
+    },
+    {
+        "id": 1218,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no046"
+    },
+    {
+        "id": 1219,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no047"
+    },
+    {
+        "id": 1220,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no047"
+    },
+    {
+        "id": 1221,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no046"
+    },
+    {
+        "id": 1223,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no046"
+    },
+    {
+        "id": 1224,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no048"
+    },
+    {
+        "id": 1225,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no048"
+    },
+    {
+        "id": 1226,
+        "characterId": 17,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res017_no047"
+    },
+    {
+        "id": 1229,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no048"
+    },
+    {
+        "id": 1230,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no047"
+    },
+    {
+        "id": 1231,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no048"
+    },
+    {
+        "id": 1232,
+        "characterId": 21,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res021_no056"
+    },
+    {
+        "id": 1235,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no058"
+    },
+    {
+        "id": 1236,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no048"
+    },
+    {
+        "id": 1237,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no049"
+    },
+    {
+        "id": 1238,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no049"
+    },
+    {
+        "id": 1239,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no048"
+    },
+    {
+        "id": 1240,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no051"
+    },
+    {
+        "id": 1242,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no059"
+    },
+    {
+        "id": 1243,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no049"
+    },
+    {
+        "id": 1244,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no047"
+    },
+    {
+        "id": 1245,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no048"
+    },
+    {
+        "id": 1252,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no047"
+    },
+    {
+        "id": 1253,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no049"
+    },
+    {
+        "id": 1254,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no048"
+    },
+    {
+        "id": 1255,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no049"
+    },
+    {
+        "id": 1256,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no048"
+    },
+    {
+        "id": 1257,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no049"
+    },
+    {
+        "id": 1258,
+        "characterId": 14,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res014_no049"
+    },
+    {
+        "id": 1261,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no046"
+    },
+    {
+        "id": 1262,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no048"
+    },
+    {
+        "id": 1263,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no050"
+    },
+    {
+        "id": 1264,
+        "characterId": 25,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res025_no050"
+    },
+    {
+        "id": 1266,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no048"
+    },
+    {
+        "id": 1267,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no048"
+    },
+    {
+        "id": 1268,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no051"
+    },
+    {
+        "id": 1269,
+        "characterId": 5,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res005_no048"
+    },
+    {
+        "id": 1272,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no049"
+    },
+    {
+        "id": 1273,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no048"
+    },
+    {
+        "id": 1274,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no052"
+    },
+    {
+        "id": 1275,
+        "characterId": 21,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res021_no061"
+    },
+    {
+        "id": 1279,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no049"
+    },
+    {
+        "id": 1280,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no050"
+    },
+    {
+        "id": 1281,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no049"
+    },
+    {
+        "id": 1282,
+        "characterId": 13,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res013_no049"
+    },
+    {
+        "id": 1284,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no051"
+    },
+    {
+        "id": 1285,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no048"
+    },
+    {
+        "id": 1286,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no049"
+    },
+    {
+        "id": 1287,
+        "characterId": 23,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res023_no050"
+    },
+    {
+        "id": 1289,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no051"
+    },
+    {
+        "id": 1290,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no047"
+    },
+    {
+        "id": 1291,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no050"
+    },
+    {
+        "id": 1292,
+        "characterId": 24,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res024_no050"
+    },
+    {
+        "id": 1295,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no049"
+    },
+    {
+        "id": 1296,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no049"
+    },
+    {
+        "id": 1297,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no051"
+    },
+    {
+        "id": 1298,
+        "characterId": 14,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res014_no051"
+    },
+    {
+        "id": 1300,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no051"
+    },
+    {
+        "id": 1301,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no049"
+    },
+    {
+        "id": 1302,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no051"
+    },
+    {
+        "id": 1303,
+        "characterId": 8,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res008_no050"
+    },
+    {
+        "id": 1307,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no052"
+    },
+    {
+        "id": 1308,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no052"
+    },
+    {
+        "id": 1309,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no050"
+    },
+    {
+        "id": 1310,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no049"
+    },
+    {
+        "id": 1311,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no051"
+    },
+    {
+        "id": 1312,
+        "characterId": 13,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res013_no050"
+    },
+    {
+        "id": 1315,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no049"
+    },
+    {
+        "id": 1316,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no050"
+    },
+    {
+        "id": 1317,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no053"
+    },
+    {
+        "id": 1318,
+        "characterId": 20,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res020_no050"
+    },
+    {
+        "id": 1320,
+        "characterId": 12,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res012_no050"
+    },
+    {
+        "id": 1321,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no050"
+    },
+    {
+        "id": 1322,
+        "characterId": 26,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res026_no053"
+    },
+    {
+        "id": 1323,
+        "characterId": 11,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res011_no052"
+    },
+    {
+        "id": 1327,
+        "characterId": 13,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res013_no051"
+    },
+    {
+        "id": 1328,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no053"
+    },
+    {
+        "id": 1329,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no051"
+    },
+    {
+        "id": 1330,
+        "characterId": 16,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res016_no051"
+    },
+    {
+        "id": 1333,
+        "characterId": 4,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res004_no054"
+    },
+    {
+        "id": 1334,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no052"
+    },
+    {
+        "id": 1335,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no053"
+    },
+    {
+        "id": 1336,
+        "characterId": 1,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res001_no049"
+    },
+    {
+        "id": 1339,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no053"
+    },
+    {
+        "id": 1340,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no052"
+    },
+    {
+        "id": 1341,
+        "characterId": 22,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res022_no052"
+    },
+    {
+        "id": 1342,
+        "characterId": 15,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res015_no050"
+    },
+    {
+        "id": 1345,
+        "characterId": 19,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res019_no051"
+    },
+    {
+        "id": 1346,
+        "characterId": 9,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res009_no053"
+    },
+    {
+        "id": 1347,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no053"
+    },
+    {
+        "id": 1348,
+        "characterId": 3,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res003_no052"
+    },
+    {
+        "id": 1350,
+        "characterId": 7,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res007_no050"
+    },
+    {
+        "id": 1351,
+        "characterId": 5,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res005_no051"
+    },
+    {
+        "id": 1352,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no051"
+    },
+    {
+        "id": 1353,
+        "characterId": 6,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res006_no052"
+    },
+    {
+        "id": 1356,
+        "characterId": 20,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res020_no052"
+    },
+    {
+        "id": 1357,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no052"
+    },
+    {
+        "id": 1358,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no062"
+    },
+    {
+        "id": 1359,
+        "characterId": 18,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res018_no052"
+    },
+    {
+        "id": 1361,
+        "characterId": 8,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res008_no052"
+    },
+    {
+        "id": 1362,
+        "characterId": 18,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res018_no053"
+    },
+    {
+        "id": 1363,
+        "characterId": 16,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res016_no053"
+    },
+    {
+        "id": 1364,
+        "characterId": 15,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res015_no051"
+    },
+    {
+        "id": 1365,
+        "characterId": 25,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res025_no054"
+    },
+    {
+        "id": 1366,
+        "characterId": 13,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res013_no053"
+    },
+    {
+        "id": 1368,
+        "characterId": 10,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res010_no051"
+    },
+    {
+        "id": 1369,
+        "characterId": 11,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res011_no054"
+    },
+    {
+        "id": 1370,
+        "characterId": 24,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res024_no054"
+    },
+    {
+        "id": 1371,
+        "characterId": 9,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res009_no054"
+    },
+    {
+        "id": 1374,
+        "characterId": 21,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res021_no063"
+    },
+    {
+        "id": 1375,
+        "characterId": 1,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res001_no050"
+    },
+    {
+        "id": 1376,
+        "characterId": 6,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res006_no053"
+    },
+    {
+        "id": 1377,
+        "characterId": 14,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res014_no055"
+    },
+    {
+        "id": 1378,
+        "characterId": 17,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res017_no053"
+    },
+    {
+        "id": 1380,
+        "characterId": 3,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res003_no053"
+    },
+    {
+        "id": 1381,
+        "characterId": 2,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res002_no053"
+    },
+    {
+        "id": 1382,
+        "characterId": 23,
+        "cardRarityType": "rarity_4",
+        "assetbundleName": "res023_no054"
+    },
+    {
+        "id": 1383,
+        "characterId": 4,
+        "cardRarityType": "rarity_3",
+        "assetbundleName": "res004_no055"
+    }
+]

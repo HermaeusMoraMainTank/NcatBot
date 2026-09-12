@@ -1,0 +1,6 @@
+name = "Universalis"
+version = "1.0.0"
+main = "Universalis.py"
+entry_class = "Universalis"
+
+[dependencies]

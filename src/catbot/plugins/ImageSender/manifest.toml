@@ -1,0 +1,10 @@
+name = "ImageSender"
+version = "1.2.0"
+main = "ImageSender.py"
+entry_class = "ImageSender"
+
+[pip_dependencies]
+requests = "*"
+Pillow = "*"
+
+[dependencies]

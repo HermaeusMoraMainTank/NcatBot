@@ -1,0 +1,4126 @@
+[
+  {
+    "characterId": "1001",
+    "name": "日和",
+    "fullName": "日和",
+    "fullNameChinese": "日和",
+    "aliases": [
+      "日和",
+      "ヒヨリ",
+      "Hiyori",
+      "日和莉",
+      "猫拳",
+      "东山",
+      "🐱👊"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1002",
+    "name": "优衣",
+    "fullName": "优衣",
+    "fullNameChinese": "优衣",
+    "aliases": [
+      "优衣",
+      "ユイ",
+      "Yui",
+      "种田",
+      "普田",
+      "由衣",
+      "结衣",
+      "ue",
+      "↗↘↗↘"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1003",
+    "name": "怜",
+    "fullName": "怜",
+    "fullNameChinese": "怜",
+    "aliases": [
+      "怜",
+      "レイ",
+      "Rei",
+      "剑圣",
+      "普怜",
+      "伶"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1004",
+    "name": "禊",
+    "fullName": "禊",
+    "fullNameChinese": "禊",
+    "aliases": [
+      "禊",
+      "ミソギ",
+      "Misogi",
+      "未奏希",
+      "炸弹",
+      "炸弹人",
+      "熊孩子",
+      "💣"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1005",
+    "name": "茉莉",
+    "fullName": "茉莉",
+    "fullNameChinese": "茉莉",
+    "aliases": [
+      "茉莉",
+      "マツリ",
+      "Matsuri",
+      "跳跳虎",
+      "老虎",
+      "虎",
+      "跳刀虎",
+      "🐅"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1006",
+    "name": "茜里",
+    "fullName": "茜里",
+    "fullNameChinese": "茜里",
+    "aliases": [
+      "茜里",
+      "アカリ",
+      "Akari",
+      "妹法",
+      "阿卡丽",
+      "妹妹法"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1007",
+    "name": "宫子",
+    "fullName": "宫子",
+    "fullNameChinese": "宫子",
+    "aliases": [
+      "宫子",
+      "ミヤコ",
+      "Miyako",
+      "布丁",
+      "布",
+      "幽灵",
+      "🍮"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1008",
+    "name": "雪",
+    "fullName": "雪",
+    "fullNameChinese": "雪",
+    "aliases": [
+      "雪",
+      "ユキ",
+      "Yuki",
+      "小雪",
+      "镜子",
+      "镜法",
+      "伪娘",
+      "男孩子",
+      "男孩纸",
+      "雪哥"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1009",
+    "name": "杏奈",
+    "fullName": "杏奈",
+    "fullNameChinese": "杏奈",
+    "aliases": [
+      "杏奈",
+      "アンナ",
+      "Anna",
+      "中二",
+      "煤气罐"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1010",
+    "name": "真步",
+    "fullName": "真步",
+    "fullNameChinese": "真步",
+    "aliases": [
+      "真步",
+      "マホ",
+      "Maho",
+      "狐狸",
+      "真扎",
+      "咕噜灵波",
+      "真布",
+      "🦊"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1011",
+    "name": "璃乃",
+    "fullName": "璃乃",
+    "fullNameChinese": "璃乃",
+    "aliases": [
+      "璃乃",
+      "リノ",
+      "Rino",
+      "妹弓"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1012",
+    "name": "初音",
+    "fullName": "初音",
+    "fullNameChinese": "初音",
+    "aliases": [
+      "初音",
+      "ハツネ",
+      "Hatsune",
+      "hego",
+      "星法",
+      "星星法",
+      "⭐法",
+      "睡法",
+      "拍大星"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1013",
+    "name": "七七香",
+    "fullName": "七七香",
+    "fullNameChinese": "七七香",
+    "aliases": [
+      "七七香",
+      "ナナカ",
+      "Nanaka",
+      "娜娜卡",
+      "77k",
+      "77香",
+      "十十力"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1014",
+    "name": "霞",
+    "fullName": "霞",
+    "fullNameChinese": "霞",
+    "aliases": [
+      "霞",
+      "カスミ",
+      "Kasumi",
+      "香澄",
+      "侦探",
+      "杜宾犬",
+      "驴",
+      "驴子",
+      "驴妹",
+      "🔍"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1015",
+    "name": "美里",
+    "fullName": "美里",
+    "fullNameChinese": "美里",
+    "aliases": [
+      "美里",
+      "ミサト",
+      "Misato",
+      "圣母"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1016",
+    "name": "铃奈",
+    "fullName": "铃奈",
+    "fullNameChinese": "铃奈",
+    "aliases": [
+      "铃奈",
+      "スズナ",
+      "Suzuna",
+      "暴击弓",
+      "暴弓",
+      "爆击弓",
+      "爆弓",
+      "辣妹弓",
+      "政委"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1017",
+    "name": "香织",
+    "fullName": "香织",
+    "fullNameChinese": "香织",
+    "aliases": [
+      "香织",
+      "カオリ",
+      "Kaori",
+      "琉球犬",
+      "狗子",
+      "狗",
+      "狗拳",
+      "🐶",
+      "🐕",
+      "🐶👊🏻",
+      "🐶👊"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1018",
+    "name": "伊绪",
+    "fullName": "伊绪",
+    "fullNameChinese": "伊绪",
+    "aliases": [
+      "伊绪",
+      "イオ",
+      "Io",
+      "老师",
+      "魅魔",
+      "依绪"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1020",
+    "name": "美美",
+    "fullName": "美美",
+    "fullNameChinese": "美美",
+    "aliases": [
+      "美美",
+      "ミミ",
+      "Mimi",
+      "兔子",
+      "兔兔",
+      "兔剑",
+      "萝卜霸断剑",
+      "人参霸断剑",
+      "天兔霸断剑",
+      "🐇",
+      "🐰"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1021",
+    "name": "胡桃",
+    "fullName": "胡桃",
+    "fullNameChinese": "胡桃",
+    "aliases": [
+      "胡桃",
+      "クルミ",
+      "Kurumi",
+      "铃铛",
+      "🔔"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1022",
+    "name": "依里",
+    "fullName": "依里",
+    "fullNameChinese": "依里",
+    "aliases": [
+      "依里",
+      "ヨリ",
+      "Yori",
+      "姐法",
+      "姐姐法"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1023",
+    "name": "绫音",
+    "fullName": "绫音",
+    "fullNameChinese": "绫音",
+    "aliases": [
+      "绫音",
+      "アヤネ",
+      "Ayane",
+      "熊锤",
+      "🐻🔨",
+      "🐻"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1025",
+    "name": "铃莓",
+    "fullName": "铃莓",
+    "fullNameChinese": "铃莓",
+    "aliases": [
+      "铃莓",
+      "スズメ",
+      "Suzume",
+      "女仆",
+      "妹抖",
+      "悠木碧",
+      "umb",
+      "雀"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1026",
+    "name": "铃",
+    "fullName": "铃",
+    "fullNameChinese": "铃",
+    "aliases": [
+      "铃",
+      "リン",
+      "Rin",
+      "松鼠",
+      "🐿",
+      "🐿️"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1027",
+    "name": "惠理子",
+    "fullName": "惠理子",
+    "fullNameChinese": "惠理子",
+    "aliases": [
+      "惠理子",
+      "エリコ",
+      "Eriko",
+      "病娇"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1028",
+    "name": "咲恋",
+    "fullName": "咲恋",
+    "fullNameChinese": "咲恋",
+    "aliases": [
+      "咲恋",
+      "サレン",
+      "Saren",
+      "充电宝",
+      "青梅竹马",
+      "幼驯染",
+      "院长",
+      "园长",
+      "🔋",
+      "普电"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1029",
+    "name": "望",
+    "fullName": "望",
+    "fullNameChinese": "望",
+    "aliases": [
+      "望",
+      "ノゾミ",
+      "Nozomi",
+      "偶像",
+      "小望",
+      "🎤"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1030",
+    "name": "妮诺",
+    "fullName": "妮诺",
+    "fullNameChinese": "妮诺",
+    "aliases": [
+      "妮诺",
+      "ニノン",
+      "Ninon",
+      "妮侬",
+      "扇子"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1031",
+    "name": "忍",
+    "fullName": "忍",
+    "fullNameChinese": "忍",
+    "aliases": [
+      "忍",
+      "シノブ",
+      "Shinobu",
+      "普忍",
+      "鬼父",
+      "💀"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1032",
+    "name": "秋乃",
+    "fullName": "秋乃",
+    "fullNameChinese": "秋乃",
+    "aliases": [
+      "秋乃",
+      "アキノ",
+      "Akino",
+      "哈哈剑"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1033",
+    "name": "真阳",
+    "fullName": "真阳",
+    "fullNameChinese": "真阳",
+    "aliases": [
+      "真阳",
+      "マヒル",
+      "Mahiru",
+      "奶牛",
+      "🐄",
+      "🐮",
+      "真☀"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1034",
+    "name": "优花梨",
+    "fullName": "优花梨",
+    "fullNameChinese": "优花梨",
+    "aliases": [
+      "优花梨",
+      "ユカリ",
+      "Yukari",
+      "由加莉",
+      "黄骑",
+      "酒鬼",
+      "奶骑",
+      "圣骑",
+      "🍺",
+      "🍺👻",
+      "油咖喱"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1036",
+    "name": "镜华",
+    "fullName": "镜华",
+    "fullNameChinese": "镜华",
+    "aliases": [
+      "镜华",
+      "キョウカ",
+      "Kyouka",
+      "小仓唯",
+      "xcw",
+      "小苍唯",
+      "8岁",
+      "八岁",
+      "喷水萝",
+      "八岁喷水萝",
+      "8岁喷水萝"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1037",
+    "name": "智",
+    "fullName": "智",
+    "fullNameChinese": "智",
+    "aliases": [
+      "智",
+      "トモ",
+      "Tomo",
+      "卜毛",
+      "脱毛",
+      "智爷"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1038",
+    "name": "栞",
+    "fullName": "栞",
+    "fullNameChinese": "栞",
+    "aliases": [
+      "栞",
+      "シオリ",
+      "Shiori",
+      "tp弓",
+      "小栞",
+      "白虎弓",
+      "白虎妹",
+      "栞栞",
+      "白虎"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1040",
+    "name": "碧",
+    "fullName": "碧",
+    "fullNameChinese": "碧",
+    "aliases": [
+      "碧",
+      "アオイ",
+      "Aoi",
+      "香菜",
+      "香菜弓",
+      "绿毛弓",
+      "毒弓",
+      "绿帽弓",
+      "绿帽"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1042",
+    "name": "千歌",
+    "fullName": "千歌",
+    "fullNameChinese": "千歌",
+    "aliases": [
+      "千歌",
+      "チカ",
+      "Chika",
+      "绿毛奶",
+      "精灵奶"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1043",
+    "name": "真琴",
+    "fullName": "真琴",
+    "fullNameChinese": "真琴",
+    "aliases": [
+      "真琴",
+      "マコト",
+      "Makoto",
+      "狼",
+      "🐺",
+      "月月",
+      "朋",
+      "狼姐"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1044",
+    "name": "伊莉亚",
+    "fullName": "伊莉亚",
+    "fullNameChinese": "伊莉亚",
+    "aliases": [
+      "伊莉亚",
+      "イリヤ",
+      "Iriya",
+      "伊利亚",
+      "伊莉雅",
+      "伊利雅",
+      "yly",
+      "吸血鬼",
+      "那个女人"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1045",
+    "name": "空花",
+    "fullName": "空花",
+    "fullNameChinese": "空花",
+    "aliases": [
+      "空花",
+      "クウカ",
+      "Kuuka",
+      "抖m",
+      "抖"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1046",
+    "name": "珠希",
+    "fullName": "珠希",
+    "fullNameChinese": "珠希",
+    "aliases": [
+      "珠希",
+      "タマキ",
+      "Tamaki",
+      "猫剑",
+      "🐱剑",
+      "🐱🗡️"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1047",
+    "name": "纯",
+    "fullName": "纯",
+    "fullNameChinese": "纯",
+    "aliases": [
+      "纯",
+      "ジュン",
+      "Jun",
+      "黑骑",
+      "saber"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1048",
+    "name": "美冬",
+    "fullName": "美冬",
+    "fullNameChinese": "美冬",
+    "aliases": [
+      "美冬",
+      "ミフユ",
+      "Mifuyu",
+      "子龙",
+      "赵子龙"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1049",
+    "name": "静流",
+    "fullName": "静流",
+    "fullNameChinese": "静流",
+    "aliases": [
+      "静流",
+      "シズル",
+      "Shizuru",
+      "姐姐"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1050",
+    "name": "美咲",
+    "fullName": "美咲",
+    "fullNameChinese": "美咲",
+    "aliases": [
+      "美咲",
+      "ミサキ",
+      "Misaki",
+      "大眼",
+      "眼球法",
+      "👀",
+      "👁️",
+      "👁"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1051",
+    "name": "深月",
+    "fullName": "深月",
+    "fullNameChinese": "深月",
+    "aliases": [
+      "深月",
+      "ミツキ",
+      "Mitsuki",
+      "眼罩",
+      "抖s",
+      "医生"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1052",
+    "name": "莉玛",
+    "fullName": "莉玛",
+    "fullNameChinese": "莉玛",
+    "aliases": [
+      "莉玛",
+      "リマ",
+      "Rima",
+      "Lima",
+      "草泥马",
+      "羊驼",
+      "🦙",
+      "🐐"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1053",
+    "name": "莫妮卡",
+    "fullName": "莫妮卡",
+    "fullNameChinese": "莫妮卡",
+    "aliases": [
+      "莫妮卡",
+      "モニカ",
+      "Monika",
+      "毛二力",
+      "莫尼卡"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1054",
+    "name": "纺希",
+    "fullName": "纺希",
+    "fullNameChinese": "纺希",
+    "aliases": [
+      "纺希",
+      "ツムギ",
+      "Tsumugi",
+      "裁缝",
+      "蜘蛛侠",
+      "🕷️",
+      "🕸️"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1055",
+    "name": "步未",
+    "fullName": "步未",
+    "fullNameChinese": "步未",
+    "aliases": [
+      "步未",
+      "アユミ",
+      "Ayumi",
+      "步美",
+      "路人",
+      "路人妹"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1056",
+    "name": "流夏",
+    "fullName": "流夏",
+    "fullNameChinese": "流夏",
+    "aliases": [
+      "流夏",
+      "ルカ",
+      "Ruka",
+      "大姐",
+      "大姐头",
+      "儿力",
+      "luka",
+      "刘夏",
+      "露卡",
+      "卢卡"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1057",
+    "name": "吉塔",
+    "fullName": "吉塔",
+    "fullNameChinese": "吉塔",
+    "aliases": [
+      "吉塔",
+      "ジータ",
+      "Jiita",
+      "姬塔",
+      "团长",
+      "吉他",
+      "🎸",
+      "骑空士",
+      "qks"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1058",
+    "name": "贪吃佩可",
+    "fullName": "贪吃佩可",
+    "fullNameChinese": "贪吃佩可",
+    "aliases": [
+      "贪吃佩可",
+      "ペコリーヌ",
+      "Pecorine",
+      "Pekoriinu",
+      "佩可莉姆",
+      "吃货",
+      "佩可",
+      "公主",
+      "饭团",
+      "🍙"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1059",
+    "name": "可可萝",
+    "fullName": "可可萝",
+    "fullNameChinese": "可可萝",
+    "aliases": [
+      "可可萝",
+      "コッコロ",
+      "Kokkoro",
+      "可可罗",
+      "妈",
+      "普白",
+      "普妈",
+      "kkr"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1060",
+    "name": "凯留",
+    "fullName": "凯留",
+    "fullNameChinese": "凯留",
+    "aliases": [
+      "凯留",
+      "キャル",
+      "Karyl",
+      "Kyaru",
+      "凯露",
+      "百地希留耶",
+      "希留耶",
+      "Kiruya",
+      "黑猫",
+      "臭鼬",
+      "普黑",
+      "接头霸王",
+      "街头霸王",
+      "猫猫",
+      "猫猫头"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1061",
+    "name": "矛依未",
+    "fullName": "矛依未",
+    "fullNameChinese": "矛依未",
+    "aliases": [
+      "矛依未",
+      "ムイミ",
+      "Muimi",
+      "诺维姆",
+      "Noemu",
+      "夏娜",
+      "511",
+      "无意义",
+      "天楼霸断剑",
+      "姆咪",
+      "母咪"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1063",
+    "name": "亚里莎",
+    "fullName": "亚里莎",
+    "fullNameChinese": "亚里莎",
+    "aliases": [
+      "亚里莎",
+      "アリサ",
+      "Arisa",
+      "鸭梨瞎",
+      "瞎子",
+      "亚里沙",
+      "鸭梨傻",
+      "亚丽莎",
+      "亚莉莎",
+      "瞎子弓",
+      "🍐🦐",
+      "yls"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1064",
+    "name": "雪菲",
+    "fullName": "雪菲",
+    "fullNameChinese": "雪菲",
+    "aliases": [
+      "雪菲",
+      "シェフィ",
+      "Shephy",
+      "Shefi",
+      "紫布菜",
+      "冰龙"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1065",
+    "name": "嘉夜",
+    "fullName": "嘉夜",
+    "fullNameChinese": "嘉夜",
+    "aliases": [
+      "嘉夜",
+      "カヤ",
+      "Kaya",
+      "憨憨龙",
+      "龙拳",
+      "🐲👊🏻",
+      "🐉👊🏻",
+      "接龙笨比",
+      "鬼道嘉夜",
+      "卡雅",
+      "卡亚",
+      "卡娅"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1066",
+    "name": "祈梨",
+    "fullName": "祈梨",
+    "fullNameChinese": "祈梨",
+    "aliases": [
+      "祈梨",
+      "イノリ",
+      "Inori",
+      "梨老八",
+      "李老八",
+      "龙锤",
+      "🐲🔨"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1067",
+    "name": "帆稀",
+    "fullName": "帆稀",
+    "fullNameChinese": "帆稀",
+    "aliases": [
+      "帆稀",
+      "ホマレ",
+      "Homare",
+      "穗希",
+      "龙妈",
+      "龙王",
+      "大仓唯"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1068",
+    "name": "拉比林斯达",
+    "fullName": "拉比林斯达",
+    "fullNameChinese": "拉比林斯达",
+    "aliases": [
+      "拉比林斯达",
+      "ラビリスタ",
+      "Labyrista",
+      "Rabirisuta",
+      "迷宫女王",
+      "模索路晶",
+      "模索路",
+      "晶",
+      "迷宫女",
+      "王晶",
+      "晶姐",
+      "日日日"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1069",
+    "name": "真那",
+    "fullName": "真那",
+    "fullNameChinese": "真那",
+    "aliases": [
+      "真那",
+      "マナ",
+      "Mana",
+      "霸瞳皇帝",
+      "千里真那",
+      "千里",
+      "霸瞳",
+      "霸铜"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1070",
+    "name": "似似花",
+    "fullName": "似似花",
+    "fullNameChinese": "似似花",
+    "aliases": [
+      "似似花",
+      "ネネカ",
+      "Neneka",
+      "变貌大妃",
+      "现士实似似花",
+      "現士実似々花",
+      "現士実",
+      "现士实",
+      "nnk",
+      "448",
+      "捏捏卡",
+      "变貌",
+      "大妃",
+      "奶奶卡"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1071",
+    "name": "克莉丝提娜",
+    "fullName": "克莉丝提娜",
+    "fullNameChinese": "克莉丝提娜",
+    "aliases": [
+      "克莉丝提娜",
+      "クリスティーナ",
+      "Kurisutiina",
+      "誓约女君",
+      "克莉丝提娜·摩根",
+      "Christina",
+      "Cristina",
+      "克总",
+      "女帝",
+      "克",
+      "摩根",
+      "克姐"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1075",
+    "name": "贪吃佩可(夏日)",
+    "fullName": "贪吃佩可(夏日)",
+    "fullNameChinese": "贪吃佩可(夏日)",
+    "aliases": [
+      "贪吃佩可(夏日)",
+      "ペコリーヌ(サマー)",
+      "Pecorine(Summer)",
+      "Pekoriinu(Summer)",
+      "佩可莉姆(夏日)",
+      "水吃",
+      "水饭",
+      "水吃货",
+      "水佩可",
+      "水公主",
+      "水饭团",
+      "水🍙",
+      "泳吃",
+      "泳饭",
+      "泳吃货",
+      "泳佩可",
+      "泳公主",
+      "泳饭团",
+      "泳🍙",
+      "泳装吃货",
+      "泳装公主",
+      "泳装饭团",
+      "泳装🍙",
+      "佩可(夏日)",
+      "🥡",
+      "👙🍙",
+      "泼妇"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1076",
+    "name": "可可萝(夏日)",
+    "fullName": "可可萝(夏日)",
+    "fullNameChinese": "可可萝(夏日)",
+    "aliases": [
+      "可可萝(夏日)",
+      "コッコロ(サマー)",
+      "Kokkoro(Summer)",
+      "水白",
+      "水妈",
+      "水可",
+      "水可可",
+      "水可可萝",
+      "水可可罗",
+      "泳装妈",
+      "泳装可可萝",
+      "泳装可可罗"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1077",
+    "name": "铃莓(夏日)",
+    "fullName": "铃莓(夏日)",
+    "fullNameChinese": "铃莓(夏日)",
+    "aliases": [
+      "铃莓(夏日)",
+      "スズメ(サマー)",
+      "Suzume(Summer)",
+      "水女仆",
+      "水妹抖"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1078",
+    "name": "凯留(夏日)",
+    "fullName": "凯留(夏日)",
+    "fullNameChinese": "凯留(夏日)",
+    "aliases": [
+      "凯留(夏日)",
+      "キャル(サマー)",
+      "Karyl(Summer)",
+      "Kyaru(Summer)",
+      "凯露(夏日)",
+      "水黑",
+      "水黑猫",
+      "水臭鼬",
+      "泳装黑猫",
+      "泳装臭鼬",
+      "潶",
+      "溴",
+      "💧黑",
+      "流泪猫猫头"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1079",
+    "name": "珠希(夏日)",
+    "fullName": "珠希(夏日)",
+    "fullNameChinese": "珠希(夏日)",
+    "aliases": [
+      "珠希(夏日)",
+      "タマキ(サマー)",
+      "Tamaki(Summer)",
+      "水猫剑",
+      "水猫",
+      "渵",
+      "💧🐱",
+      "💧🐱🗡️",
+      "水🐱🗡️"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1080",
+    "name": "美冬(夏日)",
+    "fullName": "美冬(夏日)",
+    "fullNameChinese": "美冬(夏日)",
+    "aliases": [
+      "美冬(夏日)",
+      "ミフユ(サマー)",
+      "Mifuyu(Summer)",
+      "水子龙",
+      "水美冬"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1081",
+    "name": "忍(万圣节)",
+    "fullName": "忍(万圣节)",
+    "fullNameChinese": "忍(万圣节)",
+    "aliases": [
+      "忍(万圣节)",
+      "シノブ(ハロウィン)",
+      "Shinobu(Halloween)",
+      "万圣忍",
+      "瓜忍",
+      "鬼忍",
+      "🎃忍",
+      "🎃💀"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1082",
+    "name": "宫子(万圣节)",
+    "fullName": "宫子(万圣节)",
+    "fullNameChinese": "宫子(万圣节)",
+    "aliases": [
+      "宫子(万圣节)",
+      "ミヤコ(ハロウィン)",
+      "Miyako(Halloween)",
+      "万圣宫子",
+      "万圣布丁",
+      "狼丁",
+      "狼布丁",
+      "万圣🍮",
+      "🐺🍮",
+      "🎃🍮",
+      "👻🍮"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1083",
+    "name": "美咲(万圣节)",
+    "fullName": "美咲(万圣节)",
+    "fullNameChinese": "美咲(万圣节)",
+    "aliases": [
+      "美咲(万圣节)",
+      "ミサキ(ハロウィン)",
+      "Misaki(Halloween)",
+      "万圣美咲",
+      "万圣大眼",
+      "瓜眼",
+      "🎃眼",
+      "🎃👀",
+      "🎃👁️",
+      "🎃👁"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1084",
+    "name": "千歌(圣诞节)",
+    "fullName": "千歌(圣诞节)",
+    "fullNameChinese": "千歌(圣诞节)",
+    "aliases": [
+      "千歌(圣诞节)",
+      "チカ(クリスマス)",
+      "Chika(Xmas)",
+      "圣诞千歌",
+      "圣千",
+      "蛋鸽",
+      "🎄💰🎶",
+      "🎄千🎶",
+      "🎄1000🎶"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1085",
+    "name": "胡桃(圣诞节)",
+    "fullName": "胡桃(圣诞节)",
+    "fullNameChinese": "胡桃(圣诞节)",
+    "aliases": [
+      "胡桃(圣诞节)",
+      "クルミ(クリスマス)",
+      "Kurumi(Xmas)",
+      "圣诞胡桃",
+      "圣诞铃铛"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1086",
+    "name": "绫音(圣诞节)",
+    "fullName": "绫音(圣诞节)",
+    "fullNameChinese": "绫音(圣诞节)",
+    "aliases": [
+      "绫音(圣诞节)",
+      "アヤネ(クリスマス)",
+      "Ayane(Xmas)",
+      "圣诞熊锤",
+      "蛋锤",
+      "圣锤",
+      "🎄🐻🔨",
+      "🎄🐻"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1087",
+    "name": "日和(新年)",
+    "fullName": "日和(新年)",
+    "fullNameChinese": "日和(新年)",
+    "aliases": [
+      "日和(新年)",
+      "ヒヨリ(ニューイヤー)",
+      "Hiyori(NewYear)",
+      "新年日和",
+      "春猫",
+      "👘🐱"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1088",
+    "name": "优衣(新年)",
+    "fullName": "优衣(新年)",
+    "fullNameChinese": "优衣(新年)",
+    "aliases": [
+      "优衣(新年)",
+      "ユイ(ニューイヤー)",
+      "Yui(NewYear)",
+      "新年优衣",
+      "春田",
+      "新年由衣"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1089",
+    "name": "怜(新年)",
+    "fullName": "怜(新年)",
+    "fullNameChinese": "怜(新年)",
+    "aliases": [
+      "怜(新年)",
+      "レイ(ニューイヤー)",
+      "Rei(NewYear)",
+      "春剑",
+      "春怜",
+      "春伶",
+      "新春剑圣",
+      "新年怜",
+      "新年剑圣"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1090",
+    "name": "惠理子(情人节)",
+    "fullName": "惠理子(情人节)",
+    "fullNameChinese": "惠理子(情人节)",
+    "aliases": [
+      "惠理子(情人节)",
+      "エリコ(バレンタイン)",
+      "Eriko(Valentine)",
+      "情人节病娇",
+      "恋病",
+      "情病",
+      "恋病娇",
+      "情病娇",
+      "青椒"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1091",
+    "name": "静流(情人节)",
+    "fullName": "静流(情人节)",
+    "fullNameChinese": "静流(情人节)",
+    "aliases": [
+      "静流(情人节)",
+      "シズル(バレンタイン)",
+      "Shizuru(Valentine)",
+      "情人节静流",
+      "情姐",
+      "情人节姐姐",
+      "恋姐"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1092",
+    "name": "安",
+    "fullName": "安",
+    "fullNameChinese": "安",
+    "aliases": [
+      "安",
+      "アン",
+      "An",
+      "胖安",
+      "55kg",
+      "小安"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1093",
+    "name": "露",
+    "fullName": "露",
+    "fullNameChinese": "露",
+    "aliases": [
+      "露",
+      "ルゥ",
+      "Ruu",
+      "逃课女王",
+      "补考女帝"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1094",
+    "name": "古蕾娅",
+    "fullName": "古蕾娅",
+    "fullNameChinese": "古蕾娅",
+    "aliases": [
+      "古蕾娅",
+      "グレア",
+      "Gurea",
+      "龙姬",
+      "古雷娅",
+      "古蕾亚",
+      "古雷亚",
+      "古蕾雅",
+      "🐲🐔",
+      "🐉🐔"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1095",
+    "name": "空花(大江户)",
+    "fullName": "空花(大江户)",
+    "fullNameChinese": "空花(大江户)",
+    "aliases": [
+      "空花(大江户)",
+      "クウカ(オーエド)",
+      "Kuuka(Ooedo)",
+      "江户空花",
+      "江户抖m",
+      "江m",
+      "花m",
+      "江花",
+      "大江m",
+      "花抖"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1096",
+    "name": "妮诺(大江户)",
+    "fullName": "妮诺(大江户)",
+    "fullNameChinese": "妮诺(大江户)",
+    "aliases": [
+      "妮诺(大江户)",
+      "ニノン(オーエド)",
+      "Ninon(Ooedo)",
+      "江户扇子",
+      "忍扇"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1097",
+    "name": "雷姆",
+    "fullName": "雷姆",
+    "fullNameChinese": "雷姆",
+    "aliases": [
+      "雷姆",
+      "レム",
+      "Remu",
+      "蕾姆"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1098",
+    "name": "拉姆",
+    "fullName": "拉姆",
+    "fullNameChinese": "拉姆",
+    "aliases": [
+      "拉姆",
+      "ラム",
+      "Ramu"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1099",
+    "name": "爱蜜莉雅",
+    "fullName": "爱蜜莉雅",
+    "fullNameChinese": "爱蜜莉雅",
+    "aliases": [
+      "爱蜜莉雅",
+      "エミリア",
+      "Emiria",
+      "艾米莉亚",
+      "emt"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1100",
+    "name": "铃奈(夏日)",
+    "fullName": "铃奈(夏日)",
+    "fullNameChinese": "铃奈(夏日)",
+    "aliases": [
+      "铃奈(夏日)",
+      "スズナ(サマー)",
+      "Suzuna(Summer)",
+      "瀑击弓",
+      "水爆",
+      "水爆弓",
+      "水暴",
+      "瀑",
+      "水暴弓",
+      "水暴击弓",
+      "水政委",
+      "瀑弓",
+      "泳装暴弓",
+      "泳装爆弓",
+      "泳装政委"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1101",
+    "name": "伊绪(夏日)",
+    "fullName": "伊绪(夏日)",
+    "fullNameChinese": "伊绪(夏日)",
+    "aliases": [
+      "伊绪(夏日)",
+      "イオ(サマー)",
+      "Io(Summer)",
+      "水魅魔",
+      "水老师",
+      "泳装魅魔",
+      "泳装老师",
+      "水io"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1103",
+    "name": "咲恋(夏日)",
+    "fullName": "咲恋(夏日)",
+    "fullNameChinese": "咲恋(夏日)",
+    "aliases": [
+      "咲恋(夏日)",
+      "サレン(サマー)",
+      "Saren(Summer)",
+      "水电",
+      "泳装充电宝",
+      "泳装咲恋",
+      "水着咲恋",
+      "水电站",
+      "水电宝",
+      "水充",
+      "👙🔋"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1104",
+    "name": "真琴(夏日)",
+    "fullName": "真琴(夏日)",
+    "fullNameChinese": "真琴(夏日)",
+    "aliases": [
+      "真琴(夏日)",
+      "マコト(サマー)",
+      "Makoto(Summer)",
+      "水狼",
+      "浪",
+      "水🐺",
+      "泳狼",
+      "泳月",
+      "泳月月",
+      "泳朋",
+      "水月",
+      "水月月",
+      "水朋",
+      "👙🐺"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1105",
+    "name": "香织(夏日)",
+    "fullName": "香织(夏日)",
+    "fullNameChinese": "香织(夏日)",
+    "aliases": [
+      "香织(夏日)",
+      "カオリ(サマー)",
+      "Kaori(Summer)",
+      "水狗",
+      "泃",
+      "水🐶",
+      "水🐕",
+      "泳狗",
+      "水狗拳"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1106",
+    "name": "真步(夏日)",
+    "fullName": "真步(夏日)",
+    "fullNameChinese": "真步(夏日)",
+    "aliases": [
+      "真步(夏日)",
+      "マホ(サマー)",
+      "Maho(Summer)",
+      "水狐狸",
+      "水狐",
+      "水壶",
+      "水真步",
+      "水maho",
+      "氵🦊",
+      "水🦊",
+      "💧🦊"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1107",
+    "name": "碧(插班生)",
+    "fullName": "碧(插班生)",
+    "fullNameChinese": "碧(插班生)",
+    "aliases": [
+      "碧(插班生)",
+      "アオイ(編入生)",
+      "Aoi(Hennyuusei)",
+      "生菜",
+      "插班碧",
+      "学院碧",
+      "转校弓",
+      "转学弓"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1108",
+    "name": "克萝依",
+    "fullName": "克萝依",
+    "fullNameChinese": "克萝依",
+    "aliases": [
+      "克萝依",
+      "クロエ",
+      "Kuroe",
+      "克罗依",
+      "华哥",
+      "黑江",
+      "黑江花子",
+      "花子"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1109",
+    "name": "琪爱儿",
+    "fullName": "琪爱儿",
+    "fullNameChinese": "琪爱儿",
+    "aliases": [
+      "琪爱儿",
+      "チエル",
+      "Chieru",
+      "千爱瑠",
+      "切露",
+      "茄露",
+      "茄噜",
+      "切噜",
+      "佐仓"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1110",
+    "name": "优妮",
+    "fullName": "优妮",
+    "fullNameChinese": "优妮",
+    "aliases": [
+      "优妮",
+      "ユニ",
+      "Yuni",
+      "真行寺由仁",
+      "由仁",
+      "优尼",
+      "u2",
+      "优妮辈先",
+      "辈先",
+      "书记",
+      "uni",
+      "先辈",
+      "仙贝",
+      "油腻",
+      "优妮先辈",
+      "学姐",
+      "18岁黑丝学姐",
+      "咖啡人"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1111",
+    "name": "镜华(万圣节)",
+    "fullName": "镜华(万圣节)",
+    "fullNameChinese": "镜华(万圣节)",
+    "aliases": [
+      "镜华(万圣节)",
+      "キョウカ(ハロウィン)",
+      "Kyouka(Halloween)",
+      "万圣镜华",
+      "万圣小仓唯",
+      "万圣xcw",
+      "猫仓唯",
+      "黑猫仓唯",
+      "mcw",
+      "猫唯",
+      "猫仓",
+      "喵唯"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1112",
+    "name": "禊(万圣节)",
+    "fullName": "禊(万圣节)",
+    "fullNameChinese": "禊(万圣节)",
+    "aliases": [
+      "禊(万圣节)",
+      "ミソギ(ハロウィン)",
+      "Misogi(Halloween)",
+      "万圣禊",
+      "万圣炸弹人",
+      "瓜炸弹人",
+      "万圣炸弹",
+      "万圣炸",
+      "瓜炸",
+      "南瓜炸",
+      "万圣节禊",
+      "万圣熊孩",
+      "🎃💣"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1113",
+    "name": "美美(万圣节)",
+    "fullName": "美美(万圣节)",
+    "fullNameChinese": "美美(万圣节)",
+    "aliases": [
+      "美美(万圣节)",
+      "ミミ(ハロウィン)",
+      "Mimi(Halloween)",
+      "万圣兔",
+      "万圣兔子",
+      "万圣兔兔",
+      "绷带兔",
+      "绷带兔子",
+      "万圣美美",
+      "绷带美美",
+      "瓜兔",
+      "万圣🐰",
+      "绷带🐰",
+      "🎃🐰",
+      "万圣🐇",
+      "绷带🐇",
+      "🎃🐇"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1114",
+    "name": "露娜",
+    "fullName": "露娜",
+    "fullNameChinese": "露娜",
+    "aliases": [
+      "露娜",
+      "ルナ",
+      "Runa",
+      "Luna",
+      "露仓唯",
+      "露cw"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1115",
+    "name": "克莉丝提娜(圣诞节)",
+    "fullName": "克莉丝提娜(圣诞节)",
+    "fullNameChinese": "克莉丝提娜(圣诞节)",
+    "aliases": [
+      "克莉丝提娜(圣诞节)",
+      "クリスティーナ(クリスマス)",
+      "Kurisutiina(Xmas)",
+      "Christina(Xmas)",
+      "Cristina(Xmas)",
+      "圣诞克",
+      "圣诞克总",
+      "圣诞女帝",
+      "蛋克",
+      "蛋壳",
+      "圣克",
+      "必胜客"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1116",
+    "name": "望(圣诞节)",
+    "fullName": "望(圣诞节)",
+    "fullNameChinese": "望(圣诞节)",
+    "aliases": [
+      "望(圣诞节)",
+      "ノゾミ(クリスマス)",
+      "Nozomi(Xmas)",
+      "圣诞望",
+      "圣诞偶像",
+      "蛋偶像",
+      "蛋望"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1117",
+    "name": "伊莉亚(圣诞节)",
+    "fullName": "伊莉亚(圣诞节)",
+    "fullNameChinese": "伊莉亚(圣诞节)",
+    "aliases": [
+      "伊莉亚(圣诞节)",
+      "イリヤ(クリスマス)",
+      "Iriya(Xmas)",
+      "圣诞伊莉亚",
+      "圣诞伊利亚",
+      "圣诞伊莉雅",
+      "圣诞伊利雅",
+      "圣诞yly",
+      "圣诞吸血鬼",
+      "圣伊",
+      "圣yly",
+      "伊利丹"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1118",
+    "name": "贪吃佩可(新年)",
+    "fullName": "贪吃佩可(新年)",
+    "fullNameChinese": "贪吃佩可(新年)",
+    "aliases": [
+      "贪吃佩可(新年)",
+      "ペコリーヌ(ニューイヤー)",
+      "Pecorine(NewYear)",
+      "佩可莉姆(新年)",
+      "春吃",
+      "新吃",
+      "新年吃货",
+      "年货"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1119",
+    "name": "可可萝(新年)",
+    "fullName": "可可萝(新年)",
+    "fullNameChinese": "可可萝(新年)",
+    "aliases": [
+      "可可萝(新年)",
+      "コッコロ(ニューイヤー)",
+      "Kokkoro(NewYear)",
+      "春可可",
+      "春白",
+      "新年妈",
+      "春妈"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1120",
+    "name": "凯留(新年)",
+    "fullName": "凯留(新年)",
+    "fullNameChinese": "凯留(新年)",
+    "aliases": [
+      "凯留(新年)",
+      "キャル(ニューイヤー)",
+      "Karyl(NewYear)",
+      "Kyaru(NewYear)",
+      "凯露(新年)",
+      "春凯留",
+      "春黑猫",
+      "春黑",
+      "春臭鼬",
+      "新年凯留",
+      "新年黑猫",
+      "新年臭鼬",
+      "唯一神",
+      "神"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1121",
+    "name": "铃莓(新年)",
+    "fullName": "铃莓(新年)",
+    "fullNameChinese": "铃莓(新年)",
+    "aliases": [
+      "铃莓(新年)",
+      "スズメ(ニューイヤー)",
+      "Suzume(NewYear)",
+      "春铃莓",
+      "春女仆",
+      "春妹抖",
+      "新年铃莓",
+      "新年女仆",
+      "新年妹抖"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1122",
+    "name": "霞(魔法少女)",
+    "fullName": "霞(魔法少女)",
+    "fullNameChinese": "霞(魔法少女)",
+    "aliases": [
+      "霞(魔法少女)",
+      "カスミ(マジカル)",
+      "Kasumi(MagiGirl)",
+      "魔法少女霞",
+      "魔法侦探",
+      "魔法杜宾犬",
+      "魔法驴",
+      "魔法驴子",
+      "魔驴",
+      "魔法霞",
+      "魔法少驴"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1123",
+    "name": "栞(魔法少女)",
+    "fullName": "栞(魔法少女)",
+    "fullNameChinese": "栞(魔法少女)",
+    "aliases": [
+      "栞(魔法少女)",
+      "シオリ(マジカル)",
+      "Shiori(MagiGirl)",
+      "魔法少女栞",
+      "魔法tp弓",
+      "魔法小栞",
+      "魔法白虎弓",
+      "魔法白虎妹",
+      "魔法白虎",
+      "魔栞",
+      "魔弓",
+      "魔法弓",
+      "法弓"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1124",
+    "name": "卯月(NGs)",
+    "fullName": "卯月(NGs)",
+    "fullNameChinese": "卯月(NGs)",
+    "aliases": [
+      "卯月(NGs)",
+      "ウヅキ(デレマス)",
+      "Udsuki(DEREM@S)",
+      "卯月(偶像大师)",
+      "卯月",
+      "卵用",
+      "Udsuki(DEREMAS)",
+      "岛村卯月",
+      "Udsuki"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1125",
+    "name": "凛(NGs)",
+    "fullName": "凛(NGs)",
+    "fullNameChinese": "凛(NGs)",
+    "aliases": [
+      "凛(NGs)",
+      "リン(デレマス)",
+      "Rin(DEREM@S)",
+      "凛(偶像大师)",
+      "凛",
+      "Rin(DEREMAS)",
+      "涩谷凛",
+      "西部凛"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1126",
+    "name": "未央(NGs)",
+    "fullName": "未央(NGs)",
+    "fullNameChinese": "未央(NGs)",
+    "aliases": [
+      "未央(NGs)",
+      "ミオ(デレマス)",
+      "Mio(DEREM@S)",
+      "未央(偶像大师)",
+      "未央",
+      "Mio(DEREMAS)",
+      "本田未央",
+      "Mio"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1127",
+    "name": "铃(游侠)",
+    "fullName": "铃(游侠)",
+    "fullNameChinese": "铃(游侠)",
+    "aliases": [
+      "铃(游侠)",
+      "リン(レンジャー)",
+      "Rin(Ranger)",
+      "骑兵松鼠",
+      "游侠松鼠",
+      "游骑兵松鼠",
+      "护林员松鼠",
+      "护林松鼠",
+      "游侠🐿️",
+      "武松",
+      "钻头松鼠"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1128",
+    "name": "真阳(游侠)",
+    "fullName": "真阳(游侠)",
+    "fullNameChinese": "真阳(游侠)",
+    "aliases": [
+      "真阳(游侠)",
+      "マヒル(レンジャー)",
+      "Mahiru(Ranger)",
+      "骑兵奶牛",
+      "游侠奶牛",
+      "游骑兵奶牛",
+      "护林员奶牛",
+      "护林奶牛",
+      "游侠🐄",
+      "游侠🐮",
+      "牛叉"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1129",
+    "name": "璃乃(奇幻)",
+    "fullName": "璃乃(奇幻)",
+    "fullNameChinese": "璃乃(奇幻)",
+    "aliases": [
+      "璃乃(奇幻)",
+      "リノ(ワンダー)",
+      "Rino(Wonder)",
+      "璃乃(奇境)",
+      "璃乃(仙境)",
+      "爽弓",
+      "爱丽丝弓",
+      "爱弓",
+      "兔弓",
+      "奇境妹弓",
+      "奇幻妹弓",
+      "奇幻璃乃",
+      "仙境妹弓",
+      "白丝妹弓",
+      "爱丽丝妹弓"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1130",
+    "name": "步未(奇幻)",
+    "fullName": "步未(奇幻)",
+    "fullNameChinese": "步未(奇幻)",
+    "aliases": [
+      "步未(奇幻)",
+      "アユミ(ワンダー)",
+      "Ayumi(Wonder)",
+      "步未(奇境)",
+      "步未(仙境)",
+      "路人兔",
+      "兔人妹",
+      "爱丽丝路人",
+      "奇境路人",
+      "奇幻路人",
+      "奇幻步未",
+      "仙境路人",
+      "爱丽丝路人妹",
+      "梦路"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1131",
+    "name": "流夏(夏日)",
+    "fullName": "流夏(夏日)",
+    "fullNameChinese": "流夏(夏日)",
+    "aliases": [
+      "流夏(夏日)",
+      "ルカ(サマー)",
+      "Ruka(Summer)",
+      "泳装流夏",
+      "水流夏",
+      "泳装刘夏",
+      "水刘夏",
+      "泳装大姐",
+      "泳装大姐头",
+      "水大姐",
+      "水大姐头",
+      "水儿力",
+      "泳装儿力",
+      "水流"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1132",
+    "name": "杏奈(夏日)",
+    "fullName": "杏奈(夏日)",
+    "fullNameChinese": "杏奈(夏日)",
+    "aliases": [
+      "杏奈(夏日)",
+      "アンナ(サマー)",
+      "Anna(Summer)",
+      "泳装中二",
+      "泳装煤气罐",
+      "水中二",
+      "水煤气罐",
+      "冲",
+      "冲二"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1133",
+    "name": "七七香(夏日)",
+    "fullName": "七七香(夏日)",
+    "fullNameChinese": "七七香(夏日)",
+    "aliases": [
+      "七七香(夏日)",
+      "ナナカ(サマー)",
+      "Nanaka(Summer)",
+      "泳装娜娜卡",
+      "泳装77k",
+      "泳装77香",
+      "水娜娜卡",
+      "水77k",
+      "水77香",
+      "水七七香",
+      "泳装七七香",
+      "水七"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1134",
+    "name": "初音(夏日)",
+    "fullName": "初音(夏日)",
+    "fullNameChinese": "初音(夏日)",
+    "aliases": [
+      "初音(夏日)",
+      "ハツネ(サマー)",
+      "Hatsune(Summer)",
+      "水星",
+      "海星",
+      "水hego",
+      "水星法",
+      "泳装星法",
+      "水⭐法",
+      "水睡法",
+      "湦",
+      "泳装初音",
+      "水初音",
+      "夏日初音"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1135",
+    "name": "美里(夏日)",
+    "fullName": "美里(夏日)",
+    "fullNameChinese": "美里(夏日)",
+    "aliases": [
+      "美里(夏日)",
+      "ミサト(サマー)",
+      "Misato(Summer)",
+      "水母",
+      "泳装圣母",
+      "水圣母"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1136",
+    "name": "纯(夏日)",
+    "fullName": "纯(夏日)",
+    "fullNameChinese": "纯(夏日)",
+    "aliases": [
+      "纯(夏日)",
+      "ジュン(サマー)",
+      "Jun(Summer)",
+      "泳装黑骑",
+      "水黑骑",
+      "泳装纯",
+      "水纯",
+      "小次郎"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1137",
+    "name": "茜里(天使)",
+    "fullName": "茜里(天使)",
+    "fullNameChinese": "茜里(天使)",
+    "aliases": [
+      "茜里(天使)",
+      "アカリ(エンジェル)",
+      "Akari(Angel)",
+      "天使妹法",
+      "天使茜里",
+      "丘比特妹法",
+      "天妹"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1138",
+    "name": "依里(天使)",
+    "fullName": "依里(天使)",
+    "fullNameChinese": "依里(天使)",
+    "aliases": [
+      "依里(天使)",
+      "ヨリ(エンジェル)",
+      "Yori(Angel)",
+      "天使姐法",
+      "天使依里",
+      "丘比特姐法",
+      "天姐"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1139",
+    "name": "纺希(万圣节)",
+    "fullName": "纺希(万圣节)",
+    "fullNameChinese": "纺希(万圣节)",
+    "aliases": [
+      "纺希(万圣节)",
+      "ツムギ(ハロウィン)",
+      "Tsumugi(Halloween)",
+      "万圣裁缝",
+      "万圣蜘蛛侠",
+      "🎃🕷️",
+      "🎃🕸️",
+      "万裁",
+      "瓜裁",
+      "鬼裁",
+      "鬼才"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1140",
+    "name": "怜(万圣节)",
+    "fullName": "怜(万圣节)",
+    "fullNameChinese": "怜(万圣节)",
+    "aliases": [
+      "怜(万圣节)",
+      "レイ(ハロウィン)",
+      "Rei(Halloween)",
+      "万圣剑圣",
+      "万剑",
+      "瓜剑",
+      "瓜怜",
+      "万圣怜",
+      "鬼剑",
+      "鬼怜"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1141",
+    "name": "茉莉(万圣节)",
+    "fullName": "茉莉(万圣节)",
+    "fullNameChinese": "茉莉(万圣节)",
+    "aliases": [
+      "茉莉(万圣节)",
+      "マツリ(ハロウィン)",
+      "Matsuri(Halloween)",
+      "万圣跳跳虎",
+      "万圣老虎",
+      "瓜虎",
+      "万圣虎",
+      "🎃🐅"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1142",
+    "name": "莫妮卡(魔法少女)",
+    "fullName": "莫妮卡(魔法少女)",
+    "fullNameChinese": "莫妮卡(魔法少女)",
+    "aliases": [
+      "莫妮卡(魔法少女)",
+      "モニカ(マジカル)",
+      "Monika(MagiGirl)",
+      "魔法少女莫妮卡",
+      "魔二力",
+      "魔卡少女"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1143",
+    "name": "智(魔法少女)",
+    "fullName": "智(魔法少女)",
+    "fullNameChinese": "智(魔法少女)",
+    "aliases": [
+      "智(魔法少女)",
+      "トモ(マジカル)",
+      "Tomo(MagiGirl)",
+      "魔法少女智",
+      "琪露诺",
+      "9智",
+      "⑨"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1144",
+    "name": "秋乃(圣诞节)",
+    "fullName": "秋乃(圣诞节)",
+    "fullNameChinese": "秋乃(圣诞节)",
+    "aliases": [
+      "秋乃(圣诞节)",
+      "アキノ(クリスマス)",
+      "Akino(Xmas)",
+      "圣剑",
+      "生煎",
+      "圣诞哈哈剑",
+      "哈哈剑(圣诞节)",
+      "圣哈",
+      "蛋哈",
+      "蛋剑"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1145",
+    "name": "咲恋(圣诞节)",
+    "fullName": "咲恋(圣诞节)",
+    "fullNameChinese": "咲恋(圣诞节)",
+    "aliases": [
+      "咲恋(圣诞节)",
+      "サレン(クリスマス)",
+      "Saren(Xmas)",
+      "圣诞充电宝",
+      "圣电",
+      "圣诞咲恋"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1146",
+    "name": "优花梨(圣诞节)",
+    "fullName": "优花梨(圣诞节)",
+    "fullNameChinese": "优花梨(圣诞节)",
+    "aliases": [
+      "优花梨(圣诞节)",
+      "ユカリ(クリスマス)",
+      "Yukari(Xmas)",
+      "蛋黄",
+      "由加莉(圣诞节)",
+      "圣诞黄骑",
+      "圣诞圣骑",
+      "蛋骑",
+      "黄骑(圣诞节)",
+      "圣黄"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1147",
+    "name": "矛依未(新年)",
+    "fullName": "矛依未(新年)",
+    "fullNameChinese": "矛依未(新年)",
+    "aliases": [
+      "矛依未(新年)",
+      "ムイミ(ニューイヤー)",
+      "Muimi(NewYear)",
+      "新年511",
+      "春511",
+      "春11",
+      "春矛",
+      "512"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1150",
+    "name": "似似花(新年)",
+    "fullName": "似似花(新年)",
+    "fullNameChinese": "似似花(新年)",
+    "aliases": [
+      "似似花(新年)",
+      "ネネカ(ニューイヤー)",
+      "Neneka(NewYear)",
+      "新年似似花",
+      "春似似花",
+      "春nnk",
+      "春花",
+      "新年nnk",
+      "春妃",
+      "春448"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1155",
+    "name": "可可萝(祭服)",
+    "fullName": "可可萝(祭服)",
+    "fullNameChinese": "可可萝(祭服)",
+    "aliases": [
+      "可可萝(祭服)",
+      "コッコロ(儀装束)",
+      "Kokkoro(Costume)",
+      "可可萝(仪装束)",
+      "礼妈",
+      "仪妈",
+      "仪装妈",
+      "姨妈",
+      "礼白"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1156",
+    "name": "优衣(祭服)",
+    "fullName": "优衣(祭服)",
+    "fullNameChinese": "优衣(祭服)",
+    "aliases": [
+      "优衣(祭服)",
+      "ユイ(儀装束)",
+      "Yui(Costume)",
+      "优衣(仪装束)",
+      "礼ue",
+      "礼装ue",
+      "礼装优衣",
+      "仪装ue",
+      "礼衣",
+      "礼田"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1157",
+    "name": "霞(夏日)",
+    "fullName": "霞(夏日)",
+    "fullNameChinese": "霞(夏日)",
+    "aliases": [
+      "霞(夏日)",
+      "カスミ(サマー)",
+      "Kasumi(Summer)",
+      "水驴",
+      "泳装驴",
+      "沪"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1158",
+    "name": "莉玛(灰姑娘)",
+    "fullName": "莉玛(灰姑娘)",
+    "fullNameChinese": "莉玛(灰姑娘)",
+    "aliases": [
+      "莉玛(灰姑娘)",
+      "リマ(シンデレラ)",
+      "Rima(Cinderella)",
+      "人形羊驼",
+      "人驼",
+      "灰驼",
+      "灰姑娘羊驼",
+      "灰羊"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1159",
+    "name": "真琴(灰姑娘)",
+    "fullName": "真琴(灰姑娘)",
+    "fullNameChinese": "真琴(灰姑娘)",
+    "aliases": [
+      "真琴(灰姑娘)",
+      "マコト(シンデレラ)",
+      "Makoto(Cinderella)",
+      "灰姑娘狼",
+      "灰狼"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1160",
+    "name": "真步(灰姑娘)",
+    "fullName": "真步(灰姑娘)",
+    "fullNameChinese": "真步(灰姑娘)",
+    "aliases": [
+      "真步(灰姑娘)",
+      "マホ(シンデレラ)",
+      "Maho(Cinderella)",
+      "灰姑娘狐狸",
+      "灰狐狸",
+      "灰狐",
+      "灰壶",
+      "茶狐",
+      "茶壶"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1162",
+    "name": "克萝依(圣学祭)",
+    "fullName": "克萝依(圣学祭)",
+    "fullNameChinese": "克萝依(圣学祭)",
+    "aliases": [
+      "克萝依(圣学祭)",
+      "クロエ(聖学祭)",
+      "Kuroe(Seigakusai)",
+      "运动华",
+      "运动华哥",
+      "圣学祭华",
+      "圣学祭克萝依",
+      "圣华"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1163",
+    "name": "琪爱儿(圣学祭)",
+    "fullName": "琪爱儿(圣学祭)",
+    "fullNameChinese": "琪爱儿(圣学祭)",
+    "aliases": [
+      "琪爱儿(圣学祭)",
+      "チエル(聖学祭)",
+      "Chieru(Seigakusai)",
+      "千爱瑠(圣学祭)",
+      "运动切噜",
+      "圣学祭切噜",
+      "圣学祭琪爱儿",
+      "圣学祭千爱瑠",
+      "圣爱瑠"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1164",
+    "name": "优妮(圣学祭)",
+    "fullName": "优妮(圣学祭)",
+    "fullNameChinese": "优妮(圣学祭)",
+    "aliases": [
+      "优妮(圣学祭)",
+      "ユニ(聖学祭)",
+      "Yuni(Seigakusai)",
+      "圣优妮",
+      "圣uni",
+      "运动优妮",
+      "运动服",
+      "罗塞塔"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1165",
+    "name": "祈梨(时间旅行)",
+    "fullName": "祈梨(时间旅行)",
+    "fullNameChinese": "祈梨(时间旅行)",
+    "aliases": [
+      "祈梨(时间旅行)",
+      "イノリ(タイムトラベル)",
+      "Inori(TimeTravel)",
+      "时间旅行龙锤",
+      "穿越龙锤",
+      "穿越梨老八",
+      "军装龙锤",
+      "元首龙锤",
+      "元首",
+      "元老八"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1166",
+    "name": "嘉夜(时间旅行)",
+    "fullName": "嘉夜(时间旅行)",
+    "fullNameChinese": "嘉夜(时间旅行)",
+    "aliases": [
+      "嘉夜(时间旅行)",
+      "カヤ(タイムトラベル)",
+      "Kaya(TimeTravel)",
+      "时间旅行龙拳",
+      "穿越龙拳",
+      "水手龙",
+      "水手龙拳",
+      "时空龙拳"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1167",
+    "name": "碧(作业服)",
+    "fullName": "碧(作业服)",
+    "fullNameChinese": "碧(作业服)",
+    "aliases": [
+      "碧(作业服)",
+      "アオイ(作業服)",
+      "Aoi(Sagyoufuku)",
+      "碧(工作服)",
+      "工菜",
+      "韭菜",
+      "工作碧",
+      "贡菜"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1168",
+    "name": "珠希(作业服)",
+    "fullName": "珠希(作业服)",
+    "fullNameChinese": "珠希(作业服)",
+    "aliases": [
+      "珠希(作业服)",
+      "タマキ(作業服)",
+      "Tamaki(Sagyoufuku)",
+      "珠希(工作服)",
+      "工猫贼",
+      "工猫剑",
+      "工贼",
+      "工珠希"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1169",
+    "name": "美冬(作业服)",
+    "fullName": "美冬(作业服)",
+    "fullNameChinese": "美冬(作业服)",
+    "aliases": [
+      "美冬(作业服)",
+      "ミフユ(作業服)",
+      "Mifuyu(Sagyoufuku)",
+      "美冬(工作服)",
+      "电子龙",
+      "工子龙",
+      "工龙",
+      "工头"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1170",
+    "name": "惠理子(夏日)",
+    "fullName": "惠理子(夏日)",
+    "fullNameChinese": "惠理子(夏日)",
+    "aliases": [
+      "惠理子(夏日)",
+      "エリコ(サマー)",
+      "Eriko(Summer)",
+      "泳装惠理子",
+      "泳装病娇",
+      "水病",
+      "水病娇",
+      "水饺",
+      "水娇"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1171",
+    "name": "静流(夏日)",
+    "fullName": "静流(夏日)",
+    "fullNameChinese": "静流(夏日)",
+    "aliases": [
+      "静流(夏日)",
+      "シズル(サマー)",
+      "Shizuru(Summer)",
+      "泳装静流",
+      "泳装姐姐",
+      "水姐",
+      "水姐姐",
+      "水解",
+      "沮"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1172",
+    "name": "望(夏日)",
+    "fullName": "望(夏日)",
+    "fullNameChinese": "望(夏日)",
+    "aliases": [
+      "望(夏日)",
+      "ノゾミ(サマー)",
+      "Nozomi(Summer)",
+      "泳装偶像",
+      "泳装望",
+      "水望",
+      "水偶像",
+      "夏日偶像",
+      "夏日望",
+      "潒"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1173",
+    "name": "千歌(夏日)",
+    "fullName": "千歌(夏日)",
+    "fullNameChinese": "千歌(夏日)",
+    "aliases": [
+      "千歌(夏日)",
+      "チカ(サマー)",
+      "Chika(Summer)",
+      "泳装千歌",
+      "水千",
+      "汘",
+      "泳千"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1174",
+    "name": "纺希(夏日)",
+    "fullName": "纺希(夏日)",
+    "fullNameChinese": "纺希(夏日)",
+    "aliases": [
+      "纺希(夏日)",
+      "ツムギ(サマー)",
+      "Tsumugi(Summer)",
+      "泳装裁缝",
+      "泳装纺希",
+      "水裁缝",
+      "水裁",
+      "水彩",
+      "水纺希",
+      "漨"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1175",
+    "name": "深月(大江户)",
+    "fullName": "深月(大江户)",
+    "fullNameChinese": "深月(大江户)",
+    "aliases": [
+      "深月(大江户)",
+      "ミツキ(オーエド)",
+      "Mitsuki(Ooedo)",
+      "江月",
+      "江S",
+      "江户深月",
+      "大江户深月"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1176",
+    "name": "雪(大江户)",
+    "fullName": "雪(大江户)",
+    "fullNameChinese": "雪(大江户)",
+    "aliases": [
+      "雪(大江户)",
+      "ユキ(オーエド)",
+      "Yuki(Ooedo)",
+      "江雪",
+      "江哥",
+      "江户雪",
+      "江户小雪",
+      "江户雪哥",
+      "大江户雪"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1177",
+    "name": "香织(万圣节)",
+    "fullName": "香织(万圣节)",
+    "fullNameChinese": "香织(万圣节)",
+    "aliases": [
+      "香织(万圣节)",
+      "カオリ(ハロウィン)",
+      "Kaori(Halloween)",
+      "万圣狗",
+      "瓜狗",
+      "万圣狗拳"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1178",
+    "name": "妮诺(万圣节)",
+    "fullName": "妮诺(万圣节)",
+    "fullNameChinese": "妮诺(万圣节)",
+    "aliases": [
+      "妮诺(万圣节)",
+      "ニノン(ハロウィン)",
+      "Ninon(Halloween)",
+      "万圣扇",
+      "瓜扇",
+      "万圣扇子"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1179",
+    "name": "铃奈(万圣节)",
+    "fullName": "铃奈(万圣节)",
+    "fullNameChinese": "铃奈(万圣节)",
+    "aliases": [
+      "铃奈(万圣节)",
+      "スズナ(ハロウィン)",
+      "Suzuna(Halloween)",
+      "万圣暴弓",
+      "瓜弓",
+      "瓜暴弓",
+      "万圣爆弓",
+      "瓜爆弓"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1180",
+    "name": "克蕾琪塔",
+    "fullName": "克蕾琪塔",
+    "fullNameChinese": "克蕾琪塔",
+    "aliases": [
+      "克蕾琪塔",
+      "クレジッタ",
+      "Kurejitta",
+      "富婆",
+      "信用卡"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1181",
+    "name": "兰法",
+    "fullName": "兰法",
+    "fullNameChinese": "兰法",
+    "aliases": [
+      "兰法",
+      "ランファ",
+      "Ranfa",
+      "Ranpha",
+      "兰法妈妈",
+      "兰妈妈",
+      "兰妈"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1182",
+    "name": "美空",
+    "fullName": "美空",
+    "fullNameChinese": "美空",
+    "aliases": [
+      "美空",
+      "ミソラ",
+      "Misora",
+      "坏女人",
+      "魅空",
+      "流魅空",
+      "流美空"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1185",
+    "name": "花凛",
+    "fullName": "花凛",
+    "fullNameChinese": "花凛",
+    "aliases": [
+      "花凛",
+      "カリン",
+      "Karin",
+      "佳凛",
+      "绿色恶魔",
+      "绿魔",
+      "绿毛恶魔"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1190",
+    "name": "伊绪(黑暗)",
+    "fullName": "伊绪(黑暗)",
+    "fullNameChinese": "伊绪(黑暗)",
+    "aliases": [
+      "伊绪(黑暗)",
+      "イオ(ノワール)",
+      "Io(Noir)",
+      "黑老师",
+      "黑魅魔"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1191",
+    "name": "空花(黑暗)",
+    "fullName": "空花(黑暗)",
+    "fullNameChinese": "空花(黑暗)",
+    "aliases": [
+      "空花(黑暗)",
+      "クウカ(ノワール)",
+      "Kuuka(Noir)",
+      "黑m",
+      "暗m"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1192",
+    "name": "真阳(圣诞节)",
+    "fullName": "真阳(圣诞节)",
+    "fullNameChinese": "真阳(圣诞节)",
+    "aliases": [
+      "真阳(圣诞节)",
+      "マヒル(クリスマス)",
+      "Mahiru(Xmas)",
+      "圣牛",
+      "蛋牛",
+      "圣诞奶牛",
+      "圣诞牛"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1193",
+    "name": "璃乃(圣诞节)",
+    "fullName": "璃乃(圣诞节)",
+    "fullNameChinese": "璃乃(圣诞节)",
+    "aliases": [
+      "璃乃(圣诞节)",
+      "リノ(クリスマス)",
+      "Rino(Xmas)",
+      "圣诞妹弓",
+      "圣诞璃乃",
+      "弹弓",
+      "蛋弓",
+      "诞弓"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1199",
+    "name": "宫子(圣诞节)",
+    "fullName": "宫子(圣诞节)",
+    "fullNameChinese": "宫子(圣诞节)",
+    "aliases": [
+      "宫子(圣诞节)",
+      "ミヤコ(クリスマス)",
+      "Miyako(Xmas)",
+      "圣诞布丁",
+      "圣诞宫子",
+      "诞丁",
+      "蛋丁",
+      "但丁"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1200",
+    "name": "静流(黑暗)",
+    "fullName": "静流(黑暗)",
+    "fullNameChinese": "静流(黑暗)",
+    "aliases": [
+      "静流(黑暗)",
+      "シズル(ノワール)",
+      "黑姐姐",
+      "黑姐"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1207",
+    "name": "雪菲(新年)",
+    "fullName": "雪菲(新年)",
+    "fullNameChinese": "雪菲(新年)",
+    "aliases": [
+      "雪菲(新年)",
+      "シェフィ(ニューイヤー)",
+      "Shephy(NewYear)",
+      "Shefi(NewYear)",
+      "新年雪菲",
+      "春雪菲",
+      "春菲",
+      "春冰龙"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1208",
+    "name": "流夏(新年)",
+    "fullName": "流夏(新年)",
+    "fullNameChinese": "流夏(新年)",
+    "aliases": [
+      "流夏(新年)",
+      "ルカ(ニューイヤー)",
+      "Ruka(NewYear)",
+      "春流夏",
+      "春流"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1209",
+    "name": "伊莉亚(新年)",
+    "fullName": "伊莉亚(新年)",
+    "fullNameChinese": "伊莉亚(新年)",
+    "aliases": [
+      "伊莉亚(新年)",
+      "イリヤ(ニューイヤー)",
+      "Iriya(NewYear)",
+      "新年伊莉亚",
+      "新年伊利亚",
+      "新年伊莉雅",
+      "新年伊利雅",
+      "新年yly",
+      "新年吸血鬼",
+      "春伊",
+      "春yly",
+      "伊莉旦"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1210",
+    "name": "贪吃佩可(超载)",
+    "fullName": "贪吃佩可(超载)",
+    "fullNameChinese": "贪吃佩可(超载)",
+    "aliases": [
+      "贪吃佩可(超载)",
+      "ペコリーヌ(オーバーロード)",
+      "Pecorine(Overload)",
+      "Pekoriinu(Overload)",
+      "超载吃",
+      "超吃",
+      "超载佩可",
+      "超载佩",
+      "超佩"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1211",
+    "name": "凯留(超载)",
+    "fullName": "凯留(超载)",
+    "fullNameChinese": "凯留(超载)",
+    "aliases": [
+      "凯留(超载)",
+      "キャル(オーバーロード)",
+      "Karyl(Overload)",
+      "凯露(超载)",
+      "Kyaru(Overload)",
+      "超载凯留",
+      "超凯留",
+      "超载黑猫",
+      "超黑",
+      "超猫",
+      "超威蓝猫"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1212",
+    "name": "拉比林斯达(超载)",
+    "fullName": "拉比林斯达(超载)",
+    "fullNameChinese": "拉比林斯达(超载)",
+    "aliases": [
+      "拉比林斯达(超载)",
+      "ラビリスタ(オーバーロード)",
+      "Labyrista(Overload)",
+      "Rabirisuta(Overload)",
+      "超载晶",
+      "超晶"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1213",
+    "name": "胡桃(舞台)",
+    "fullName": "胡桃(舞台)",
+    "fullNameChinese": "胡桃(舞台)",
+    "aliases": [
+      "胡桃(舞台)",
+      "クルミ(ステージ)",
+      "Kurumi(Stage)",
+      "舞台胡桃",
+      "舞桃",
+      "演员",
+      "舞胡",
+      "芜湖",
+      "舞铃",
+      "舞台铃",
+      "戏铃"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1214",
+    "name": "美咲(舞台)",
+    "fullName": "美咲(舞台)",
+    "fullNameChinese": "美咲(舞台)",
+    "aliases": [
+      "美咲(舞台)",
+      "ミサキ(ステージ)",
+      "Misaki(Satge)",
+      "舞台大眼",
+      "舞台眼",
+      "舞台美咲",
+      "泥头车大眼",
+      "车眼"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1215",
+    "name": "步未(怪盗)",
+    "fullName": "步未(怪盗)",
+    "fullNameChinese": "步未(怪盗)",
+    "aliases": [
+      "步未(怪盗)",
+      "アユミ(怪盗)",
+      "Ayumi(Kaitou)",
+      "怪盗路人",
+      "怪盗路人妹"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1216",
+    "name": "祈梨(怪盗)",
+    "fullName": "祈梨(怪盗)",
+    "fullNameChinese": "祈梨(怪盗)",
+    "aliases": [
+      "祈梨(怪盗)",
+      "イノリ(怪盗)",
+      "Inori(Kaitou)",
+      "怪盗祈梨",
+      "怪盗龙锤",
+      "忍龙",
+      "忍龙锤"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1219",
+    "name": "杏奈(海盗)",
+    "fullName": "杏奈(海盗)",
+    "fullNameChinese": "杏奈(海盗)",
+    "aliases": [
+      "杏奈(海盗)",
+      "アンナ(パイレーツ)",
+      "Anna(Pirates)",
+      "海盗中二",
+      "海盗杏奈",
+      "船长中二",
+      "船二"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1220",
+    "name": "忍(海盗)",
+    "fullName": "忍(海盗)",
+    "fullNameChinese": "忍(海盗)",
+    "aliases": [
+      "忍(海盗)",
+      "シノブ(パイレーツ)",
+      "Shinobu(Pirates)",
+      "海盗忍",
+      "海贼忍",
+      "海忍",
+      "水手忍",
+      "手忍"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1221",
+    "name": "碧(露营)",
+    "fullName": "碧(露营)",
+    "fullNameChinese": "碧(露营)",
+    "aliases": [
+      "碧(露营)",
+      "アオイ(キャンプ)",
+      "Aoi(Camp)",
+      "露营碧",
+      "露碧",
+      "野菜"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1222",
+    "name": "优花梨(露营)",
+    "fullName": "优花梨(露营)",
+    "fullNameChinese": "优花梨(露营)",
+    "aliases": [
+      "优花梨(露营)",
+      "ユカリ(キャンプ)",
+      "Yukari(Camp)",
+      "露营优花梨",
+      "露优花梨",
+      "露花梨",
+      "露营黄骑",
+      "露黄骑",
+      "露黄"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1223",
+    "name": "斑比",
+    "fullName": "斑比",
+    "fullNameChinese": "斑比",
+    "aliases": [
+      "斑比",
+      "ヴァンピィ",
+      "Vampy",
+      "Vania",
+      "斑比酱",
+      "钉宫"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1224",
+    "name": "日和(夏日)",
+    "fullName": "日和(夏日)",
+    "fullNameChinese": "日和(夏日)",
+    "aliases": [
+      "日和(夏日)",
+      "ヒヨリ(サマー)",
+      "Hiyori(Summer)",
+      "水猫拳",
+      "水日和"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1225",
+    "name": "怜(夏日)",
+    "fullName": "怜(夏日)",
+    "fullNameChinese": "怜(夏日)",
+    "aliases": [
+      "怜(夏日)",
+      "レイ(サマー)",
+      "Rei(Summer)",
+      "水怜",
+      "水剑圣"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1226",
+    "name": "优衣(夏日)",
+    "fullName": "优衣(夏日)",
+    "fullNameChinese": "优衣(夏日)",
+    "aliases": [
+      "优衣(夏日)",
+      "ユイ(サマー)",
+      "Yui(Summer)",
+      "水优衣",
+      "水ue",
+      "水田",
+      "泳衣",
+      "游依",
+      "水草"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1227",
+    "name": "镜华(夏日)",
+    "fullName": "镜华(夏日)",
+    "fullNameChinese": "镜华(夏日)",
+    "aliases": [
+      "镜华(夏日)",
+      "キョウカ(サマー)",
+      "Kyouka(Summer)",
+      "泳装镜华",
+      "水镜华",
+      "水xcw",
+      "水仓唯",
+      "水cw",
+      "scw"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1228",
+    "name": "禊(夏日)",
+    "fullName": "禊(夏日)",
+    "fullNameChinese": "禊(夏日)",
+    "aliases": [
+      "禊(夏日)",
+      "ミソギ(サマー)",
+      "Misogi(Summer)",
+      "未奏希(夏日)",
+      "水禊",
+      "水炸弹人",
+      "水炸",
+      "水未奏希",
+      "泳装炸弹人",
+      "泳装未奏希"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1229",
+    "name": "美美(夏日)",
+    "fullName": "美美(夏日)",
+    "fullNameChinese": "美美(夏日)",
+    "aliases": [
+      "美美(夏日)",
+      "ミミ(サマー)",
+      "Mimi(Summer)",
+      "水美美",
+      "泳装美美",
+      "水兔",
+      "水兔兔",
+      "水兔子"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1230",
+    "name": "爱梅斯",
+    "fullName": "爱梅斯",
+    "fullNameChinese": "爱梅斯",
+    "aliases": [
+      "爱梅斯",
+      "アメス",
+      "Amesu",
+      "菲欧",
+      "爱美斯",
+      "艾美斯",
+      "艾梅斯"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1231",
+    "name": "真步(探险家)",
+    "fullName": "真步(探险家)",
+    "fullNameChinese": "真步(探险家)",
+    "aliases": [
+      "真步(探险家)",
+      "マホ(エクスプローラー)",
+      "Maho(Explorer)",
+      "野狐",
+      "探狐",
+      "尻狐",
+      "屁狐",
+      "屁胡"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1232",
+    "name": "绫音(探险家)",
+    "fullName": "绫音(探险家)",
+    "fullNameChinese": "绫音(探险家)",
+    "aliases": [
+      "绫音(探险家)",
+      "アヤネ(エクスプローラー)",
+      "Ayane(Explorer)",
+      "野锤",
+      "野炊"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1233",
+    "name": "涅娅",
+    "fullName": "涅娅",
+    "fullNameChinese": "涅娅",
+    "aliases": [
+      "涅娅",
+      "ネア",
+      "Nea",
+      "小黄",
+      "史莱姆",
+      "黄史莱姆"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1235",
+    "name": "铃(万圣节)",
+    "fullName": "铃(万圣节)",
+    "fullNameChinese": "铃(万圣节)",
+    "aliases": [
+      "铃(万圣节)",
+      "リン(ハロウィン)",
+      "Rin(Halloween)",
+      "瓜松鼠",
+      "鬼松鼠",
+      "万圣松鼠"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1236",
+    "name": "智(万圣节)",
+    "fullName": "智(万圣节)",
+    "fullNameChinese": "智(万圣节)",
+    "aliases": [
+      "智(万圣节)",
+      "トモ(ハロウィン)",
+      "Tomo(Halloween)",
+      "瓜智",
+      "鬼智",
+      "万圣智"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1237",
+    "name": "七七香(万圣节)",
+    "fullName": "七七香(万圣节)",
+    "fullNameChinese": "七七香(万圣节)",
+    "aliases": [
+      "七七香(万圣节)",
+      "ナナカ(ハロウィン)",
+      "Nanaka(Halloween)",
+      "鬼七",
+      "瓜七",
+      "万圣七七香",
+      "鬼泣"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1238",
+    "name": "克莉丝提娜(野性)",
+    "fullName": "克莉丝提娜(野性)",
+    "fullNameChinese": "克莉丝提娜(野性)",
+    "aliases": [
+      "克莉丝提娜(野性)",
+      "クリスティーナ(ワイルド)",
+      "Kurisutiina(Wild)",
+      "兔克",
+      "兔女郎克",
+      "野克"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1239",
+    "name": "茉莉(野性)",
+    "fullName": "茉莉(野性)",
+    "fullNameChinese": "茉莉(野性)",
+    "aliases": [
+      "茉莉(野性)",
+      "マツリ(ワイルド)",
+      "Matsuri(Wild)",
+      "小虎",
+      "野老虎"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1240",
+    "name": "茜里(圣诞节)",
+    "fullName": "茜里(圣诞节)",
+    "fullNameChinese": "茜里(圣诞节)",
+    "aliases": [
+      "茜里(圣诞节)",
+      "アカリ(クリスマス)",
+      "Akari(Xmas)",
+      "圣妹",
+      "圣诞妹法"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1241",
+    "name": "依里(圣诞节)",
+    "fullName": "依里(圣诞节)",
+    "fullNameChinese": "依里(圣诞节)",
+    "aliases": [
+      "依里(圣诞节)",
+      "ヨリ(クリスマス)",
+      "Yori(Xmas)",
+      "圣姐",
+      "圣诞姐法"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1242",
+    "name": "纯(圣诞节)",
+    "fullName": "纯(圣诞节)",
+    "fullNameChinese": "纯(圣诞节)",
+    "aliases": [
+      "纯(圣诞节)",
+      "ジュン(クリスマス)",
+      "Jun(Xmas)",
+      "圣骑",
+      "白骑",
+      "圣黑骑",
+      "圣诞黑骑"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1245",
+    "name": "帆稀(新年)",
+    "fullName": "帆稀(新年)",
+    "fullNameChinese": "帆稀(新年)",
+    "aliases": [
+      "帆稀(新年)",
+      "ホマレ(ニューイヤー)",
+      "Homare(NewYear)",
+      "春龙妈",
+      "新年龙妈"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1246",
+    "name": "美里(新年)",
+    "fullName": "美里(新年)",
+    "fullNameChinese": "美里(新年)",
+    "aliases": [
+      "美里(新年)",
+      "ミサト(ニューイヤー)",
+      "Misato(NewYear)",
+      "春母",
+      "新母",
+      "新年圣母"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1247",
+    "name": "深月(新年)",
+    "fullName": "深月(新年)",
+    "fullNameChinese": "深月(新年)",
+    "aliases": [
+      "深月(新年)",
+      "ミツキ(ニューイヤー)",
+      "Mitsuki(NewYear)",
+      "春月",
+      "新月",
+      "新年深月"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1251",
+    "name": "珠希(咖啡馆)",
+    "fullName": "珠希(咖啡馆)",
+    "fullNameChinese": "珠希(咖啡馆)",
+    "aliases": [
+      "珠希(咖啡馆)",
+      "タマキ(カフェ)",
+      "Tamaki(Cafe)",
+      "猫咖",
+      "咖啡猫"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1252",
+    "name": "莫妮卡(咖啡馆)",
+    "fullName": "莫妮卡(咖啡馆)",
+    "fullNameChinese": "莫妮卡(咖啡馆)",
+    "aliases": [
+      "莫妮卡(咖啡馆)",
+      "モニカ(カフェ)",
+      "Monika(Cafe)",
+      "莫妮咖",
+      "咖二力"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1253",
+    "name": "可可萝(游侠)",
+    "fullName": "可可萝(游侠)",
+    "fullNameChinese": "可可萝(游侠)",
+    "aliases": [
+      "可可萝(游侠)",
+      "コッコロ(レンジャー)",
+      "Kokkoro(Ranger)",
+      "游妈",
+      "狗妈",
+      "游侠可可萝",
+      "游侠妈",
+      "游白"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1254",
+    "name": "栞(游侠)",
+    "fullName": "栞(游侠)",
+    "fullNameChinese": "栞(游侠)",
+    "aliases": [
+      "栞(游侠)",
+      "シオリ(レンジャー)",
+      "Shiori(Ranger)",
+      "游栞",
+      "游侠栞",
+      "游侠tp弓"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1701",
+    "name": "环奈",
+    "fullName": "环奈",
+    "fullNameChinese": "环奈",
+    "aliases": [
+      "环奈",
+      "カンナ",
+      "Kanna",
+      "桥本环奈",
+      "红二力",
+      "毛大力",
+      "毛小力",
+      "毛六力",
+      "可大萝",
+      "大可萝",
+      "缝合怪",
+      "一环"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1702",
+    "name": "环奈(振袖)",
+    "fullName": "环奈(振袖)",
+    "fullNameChinese": "环奈(振袖)",
+    "aliases": [
+      "环奈(振袖)",
+      "カンナ(振袖)",
+      "Kanna(Furisode)",
+      "振袖环奈",
+      "春环",
+      "春奈",
+      "春环奈",
+      "二环",
+      "振环奈",
+      "振环",
+      "甄嬛",
+      "震动环",
+      "年糕环奈",
+      "年糕环"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1801",
+    "name": "日和(公主)",
+    "fullName": "日和(公主)",
+    "fullNameChinese": "日和(公主)",
+    "aliases": [
+      "日和(公主)",
+      "ヒヨリ(プリンセス)",
+      "Hiyori(Princess)",
+      "公主日和",
+      "公猫",
+      "炎拳猫",
+      "火猫",
+      "炎拳"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1802",
+    "name": "优衣(公主)",
+    "fullName": "优衣(公主)",
+    "fullNameChinese": "优衣(公主)",
+    "aliases": [
+      "优衣(公主)",
+      "ユイ(プリンセス)",
+      "Yui(Princess)",
+      "公主优衣",
+      "公主yui",
+      "公主种田",
+      "公主田",
+      "公主ue",
+      "掉毛优衣",
+      "掉毛yui",
+      "掉毛ue",
+      "掉毛",
+      "飞翼优衣",
+      "飞翼ue",
+      "飞翼",
+      "飞翼高达",
+      "飞田",
+      "羽田",
+      "羽衣",
+      "毛衣",
+      "pfue"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1803",
+    "name": "怜(公主)",
+    "fullName": "怜(公主)",
+    "fullNameChinese": "怜(公主)",
+    "aliases": [
+      "怜(公主)",
+      "レイ(プリンセス)",
+      "Rei(Princess)",
+      "公主怜",
+      "公剑",
+      "风剑",
+      "pf怜"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1804",
+    "name": "贪吃佩可(公主)",
+    "fullName": "贪吃佩可(公主)",
+    "fullNameChinese": "贪吃佩可(公主)",
+    "aliases": [
+      "贪吃佩可(公主)",
+      "ペコリーヌ(プリンセス)",
+      "Pecorine(Princess)",
+      "佩可莉姆(公主)",
+      "Pekoriinu(Princess)",
+      "公主吃",
+      "公主饭",
+      "公主吃货",
+      "公主佩可",
+      "公主饭团",
+      "公主🍙",
+      "命运高达",
+      "高达",
+      "命运公主",
+      "高达公主",
+      "命吃",
+      "春哥高达",
+      "🤖🍙",
+      "🤖",
+      "公吃",
+      "pf吃"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1805",
+    "name": "可可萝(公主)",
+    "fullName": "可可萝(公主)",
+    "fullNameChinese": "可可萝(公主)",
+    "aliases": [
+      "可可萝(公主)",
+      "コッコロ(プリンセス)",
+      "Kokkoro(Princess)",
+      "公主妈",
+      "月光妈",
+      "蝶妈",
+      "蝴蝶妈",
+      "月光蝶妈",
+      "公主可",
+      "公主可萝",
+      "公主可可萝",
+      "月光可",
+      "月光可萝",
+      "月光可可萝",
+      "蝶可",
+      "蝶可萝",
+      "蝶可可萝",
+      "公可",
+      "pf妈",
+      "飞妈"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1806",
+    "name": "凯留(公主)",
+    "fullName": "凯留(公主)",
+    "fullNameChinese": "凯留(公主)",
+    "aliases": [
+      "凯留(公主)",
+      "キャル(プリンセス)",
+      "Karyl(Princess)",
+      "Kyaru(Princess)",
+      "凯露(公主)",
+      "公主黑猫",
+      "公主猫",
+      "公主猫猫头",
+      "白猫"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1807",
+    "name": "初音&栞",
+    "fullName": "初音&栞",
+    "fullNameChinese": "初音&栞",
+    "aliases": [
+      "初音&栞",
+      "ハツネ&シオリ",
+      "Hatsune&Shiori",
+      "星弓",
+      "星栞",
+      "双子弓",
+      "姐妹弓",
+      "姊妹弓",
+      "姐妹丼",
+      "姊妹丼",
+      "姐妹井",
+      "贴贴弓",
+      "替身弓",
+      "白金之星",
+      "食堂泼辣酱",
+      "初音栞",
+      "星法栞"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1808",
+    "name": "禊&美美&镜华",
+    "fullName": "禊&美美&镜华",
+    "fullNameChinese": "禊&美美&镜华",
+    "aliases": [
+      "禊&美美&镜华",
+      "ミソギ&ミミ&キョウカ",
+      "Misogi&Mimi&Kyouka",
+      "小小甜心",
+      "狱三家",
+      "小御三家"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1809",
+    "name": "秋乃&咲恋",
+    "fullName": "秋乃&咲恋",
+    "fullNameChinese": "秋乃&咲恋",
+    "aliases": [
+      "秋乃&咲恋",
+      "アキノ&サレン",
+      "Akino&Saren",
+      "咲哈哈",
+      "哈哈电",
+      "哈哈咲",
+      "哈电",
+      "电哈",
+      "光焰"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1810",
+    "name": "安&古蕾雅",
+    "fullName": "安&古蕾雅",
+    "fullNameChinese": "安&古蕾雅",
+    "aliases": [
+      "安&古蕾雅",
+      "アン＆グレア",
+      "An&Gurea",
+      "双姬",
+      "古安",
+      "龙安"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1900",
+    "name": "爱梅斯",
+    "fullName": "爱梅斯",
+    "fullNameChinese": "爱梅斯",
+    "aliases": [
+      "爱梅斯",
+      "アメス",
+      "Amesu"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1901",
+    "name": "菲欧",
+    "fullName": "菲欧",
+    "fullNameChinese": "菲欧",
+    "aliases": [
+      "菲欧",
+      "フィオ",
+      "Fio"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1907",
+    "name": "大古",
+    "fullName": "大古",
+    "fullNameChinese": "大古",
+    "aliases": [
+      "大古",
+      "タイゴ",
+      "Taigo",
+      "大吾",
+      "鬼道大吾"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1908",
+    "name": "花凛",
+    "fullName": "花凛",
+    "fullNameChinese": "花凛",
+    "aliases": [
+      "花凛",
+      "カリン",
+      "Karin",
+      "绿毛恶魔"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1909",
+    "name": "涅比亚",
+    "fullName": "涅比亚",
+    "fullNameChinese": "涅比亚",
+    "aliases": [
+      "涅比亚",
+      "ネビア",
+      "Nevia",
+      "Nebia"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1910",
+    "name": "真崎",
+    "fullName": "真崎",
+    "fullNameChinese": "真崎",
+    "aliases": [
+      "真崎",
+      "マサキ",
+      "Masaki"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1911",
+    "name": "米涅尔β",
+    "fullName": "米涅尔β",
+    "fullNameChinese": "米涅尔β",
+    "aliases": [
+      "米涅尔β",
+      "ミネルβ",
+      "MineruBeta",
+      "米涅尔",
+      "ミネル",
+      "Mineru"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1913",
+    "name": "和正",
+    "fullName": "和正",
+    "fullNameChinese": "和正",
+    "aliases": [
+      "和正",
+      "カズマサ",
+      "Kazumasa"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1914",
+    "name": "豪绅",
+    "fullName": "豪绅",
+    "fullNameChinese": "豪绅",
+    "aliases": [
+      "豪绅",
+      "ゴウシン",
+      "Goushin"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1915",
+    "name": "克蕾琪塔",
+    "fullName": "克蕾琪塔",
+    "fullNameChinese": "克蕾琪塔",
+    "aliases": [
+      "克蕾琪塔",
+      "クレジッタ",
+      "Kurejitta"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1916",
+    "name": "基洛",
+    "fullName": "基洛",
+    "fullNameChinese": "基洛",
+    "aliases": [
+      "基洛",
+      "キイロ",
+      "Kiiro"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1917",
+    "name": "赞恩",
+    "fullName": "赞恩",
+    "fullNameChinese": "赞恩",
+    "aliases": [
+      "赞恩",
+      "ゼーン",
+      "Seen",
+      "大舅哥",
+      "Zane"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1918",
+    "name": "兰法",
+    "fullName": "兰法",
+    "fullNameChinese": "兰法",
+    "aliases": [
+      "兰法",
+      "ランファ",
+      "Ranfa",
+      "Ranpha"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1919",
+    "name": "阿佐尔德",
+    "fullName": "阿佐尔德",
+    "fullNameChinese": "阿佐尔德",
+    "aliases": [
+      "阿佐尔德",
+      "アンゾールド",
+      "Anzoorudo",
+      "猪哥",
+      "Azold"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "1920",
+    "name": "美空",
+    "fullName": "美空",
+    "fullNameChinese": "美空",
+    "aliases": [
+      "美空",
+      "ミソラ",
+      "Misora"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "4031",
+    "name": "骷髅",
+    "fullName": "骷髅",
+    "fullNameChinese": "骷髅",
+    "aliases": [
+      "骷髅",
+      "髑髏",
+      "Dokuro",
+      "骷髅老爹",
+      "老爹"
+    ],
+    "rarity": 3
+  },
+  {
+    "characterId": "9000",
+    "name": "祐树",
+    "fullName": "祐树",
+    "fullNameChinese": "祐树",
+    "aliases": [
+      "祐树",
+      "ユウキ",
+      "Yuuki",
+      "骑士",
+      "骑士君"
+    ],
+    "rarity": 3
+  }
+]

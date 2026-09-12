@@ -1,0 +1,11 @@
+name = "MemeToRGB"
+version = "1.0.0"
+main = "MemeToRGB.py"
+entry_class = "MemeToRGB"
+
+[pip_dependencies]
+pillow = "*"
+numpy = "*"
+requests = "*"
+
+[dependencies]

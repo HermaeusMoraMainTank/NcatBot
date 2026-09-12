@@ -1,0 +1,6 @@
+name = "MemberLeave"
+version = "1.0.0"
+main = "MemberLeave.py"
+entry_class = "MemberLeave"
+
+[dependencies]

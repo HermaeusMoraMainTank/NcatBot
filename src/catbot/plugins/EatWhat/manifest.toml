@@ -1,0 +1,6 @@
+name = "EatWhat"
+version = "1.0.0"
+main = "EatWhat.py"
+entry_class = "EatWhat"
+
+[dependencies]

@@ -1,0 +1,6073 @@
+[
+  {
+    "characterId": 800100,
+    "collectionNo": 1,
+    "name": "mashkyrielight",
+    "fullName": "マシュ・キリエライト",
+    "fullNameChinese": "玛修·基列莱特",
+    "aliases": [
+      "Mash Kyrielight",
+      "MashKyrielight"
+    ],
+    "className": "shielder",
+    "rarity": 3
+  },
+  {
+    "characterId": 100100,
+    "collectionNo": 2,
+    "name": "altriapendragon",
+    "fullName": "アルトリア・ペンドラゴン",
+    "fullNameChinese": "阿尔托莉雅·潘德拉贡",
+    "aliases": [
+      "Altria Pendragon",
+      "AltriaPendragon"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 100200,
+    "collectionNo": 3,
+    "name": "altriapendragon(alter)",
+    "fullName": "アルトリア・ペンドラゴン〔オルタ〕",
+    "fullNameChinese": "阿尔托莉雅·潘德拉贡〔Alter〕",
+    "aliases": [
+      "Altria Pendragon (Alter)",
+      "AltriaPendragonAlter",
+      "黑呆",
+      "amp;黑无毛"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 100300,
+    "collectionNo": 4,
+    "name": "altriapendragon(lily)",
+    "fullName": "アルトリア・ペンドラゴン〔リリィ〕",
+    "fullNameChinese": "阿尔托莉雅·潘德拉贡〔Lily〕",
+    "aliases": [
+      "Altria Pendragon (Lily)",
+      "AltriaPendragonLily"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 100500,
+    "collectionNo": 5,
+    "name": "neroclaudius",
+    "fullName": "ネロ・クラウディウス",
+    "fullNameChinese": "尼禄·克劳狄乌斯",
+    "aliases": [
+      "Nero Claudius",
+      "NeroClaudius",
+      "尼禄",
+      "amp;红Saber"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 100800,
+    "collectionNo": 6,
+    "name": "siegfried",
+    "fullName": "ジークフリート",
+    "fullNameChinese": "齐格飞",
+    "aliases": [
+      "Siegfried",
+      "飞哥"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 101300,
+    "collectionNo": 7,
+    "name": "gaiusjuliuscaesar",
+    "fullName": "ガイウス・ユリウス・カエサル",
+    "fullNameChinese": "盖乌斯·尤利乌斯·恺撒",
+    "aliases": [
+      "Gaius Julius Caesar",
+      "GaiusJuliusCaesar",
+      "红Saber",
+      "amp;胖尼禄",
+      "amp;凯撒"
+    ],
+    "className": "saber",
+    "rarity": 3
+  },
+  {
+    "characterId": 101800,
+    "collectionNo": 8,
+    "name": "altera",
+    "fullName": "アルテラ",
+    "fullNameChinese": "阿蒂拉",
+    "aliases": [
+      "Altera"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 102200,
+    "collectionNo": 9,
+    "name": "gillesderais",
+    "fullName": "ジル・ド・レェ",
+    "fullNameChinese": "吉尔·德·雷",
+    "aliases": [
+      "Gilles de Rais",
+      "GillesdeRais",
+      "剑元帅"
+    ],
+    "className": "saber",
+    "rarity": 3
+  },
+  {
+    "characterId": 102600,
+    "collectionNo": 10,
+    "name": "chevalierd'eon",
+    "fullName": "シュヴァリエ・デオン",
+    "fullNameChinese": "骑士迪昂",
+    "aliases": [
+      "Chevalier d'Eon",
+      "ChevalierdEon"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 200100,
+    "collectionNo": 11,
+    "name": "emiya",
+    "fullName": "エミヤ",
+    "fullNameChinese": "卫宫",
+    "aliases": [
+      "Emiya",
+      "红A",
+      "amp;红茶",
+      "amp;核弹剑仙",
+      "amp;阿茶",
+      "amp;背影男"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 200200,
+    "collectionNo": 12,
+    "name": "gilgamesh",
+    "fullName": "ギルガメッシュ",
+    "fullNameChinese": "吉尔伽美什",
+    "aliases": [
+      "Gilgamesh",
+      "金闪闪",
+      "amp;二闪",
+      "amp;乌鲁克村长"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 200300,
+    "collectionNo": 13,
+    "name": "robinhood",
+    "fullName": "ロビンフッド",
+    "fullNameChinese": "罗宾汉",
+    "aliases": [
+      "Robin Hood",
+      "RobinHood",
+      "绿茶",
+      "amp;罗宾"
+    ],
+    "className": "archer",
+    "rarity": 3
+  },
+  {
+    "characterId": 200500,
+    "collectionNo": 14,
+    "name": "atalante",
+    "fullName": "アタランテ",
+    "fullNameChinese": "阿塔兰忒",
+    "aliases": [
+      "Atalante",
+      "阿塔",
+      "amp;塔喵",
+      "amp;猫茶"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 201200,
+    "collectionNo": 15,
+    "name": "euryale",
+    "fullName": "エウリュアレ",
+    "fullNameChinese": "尤瑞艾莉",
+    "aliases": [
+      "Euryale",
+      "二姐"
+    ],
+    "className": "archer",
+    "rarity": 3
+  },
+  {
+    "characterId": 300100,
+    "collectionNo": 17,
+    "name": "cúchulainn",
+    "fullName": "クー・フーリン",
+    "fullNameChinese": "库·丘林",
+    "aliases": [
+      "Cú Chulainn",
+      "CChulainn",
+      "汪酱",
+      "amp;大狗"
+    ],
+    "className": "lancer",
+    "rarity": 3
+  },
+  {
+    "characterId": 300500,
+    "collectionNo": 18,
+    "name": "elisabethbáthory",
+    "fullName": "エリザベート・バートリー",
+    "fullNameChinese": "伊丽莎白·巴托里",
+    "aliases": [
+      "Elisabeth Báthory",
+      "ElisabethBthory",
+      "龙娘"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 300700,
+    "collectionNo": 20,
+    "name": "cúchulainn(prototype)",
+    "fullName": "クー・フーリン〔プロトタイプ〕",
+    "fullNameChinese": "库·丘林〔Prototype〕",
+    "aliases": [
+      "Cú Chulainn (Prototype)",
+      "CChulainnPrototype",
+      "旧狗"
+    ],
+    "className": "lancer",
+    "rarity": 3
+  },
+  {
+    "characterId": 301000,
+    "collectionNo": 22,
+    "name": "romulus",
+    "fullName": "ロムルス",
+    "fullNameChinese": "罗穆路斯",
+    "aliases": [
+      "Romulus",
+      "罗马",
+      "amp;神祖"
+    ],
+    "className": "lancer",
+    "rarity": 3
+  },
+  {
+    "characterId": 400100,
+    "collectionNo": 23,
+    "name": "medusa",
+    "fullName": "メドゥーサ",
+    "fullNameChinese": "美杜莎",
+    "aliases": [
+      "Medusa",
+      "R姐",
+      "amp;歌果"
+    ],
+    "className": "rider",
+    "rarity": 3
+  },
+  {
+    "characterId": 401100,
+    "collectionNo": 26,
+    "name": "boudica",
+    "fullName": "ブーディカ",
+    "fullNameChinese": "布狄卡",
+    "aliases": [
+      "Boudica",
+      "布妈"
+    ],
+    "className": "rider",
+    "rarity": 3
+  },
+  {
+    "characterId": 401400,
+    "collectionNo": 27,
+    "name": "ushiwakamaru",
+    "fullName": "牛若丸",
+    "fullNameChinese": "牛若丸",
+    "aliases": [
+      "Ushiwakamaru",
+      "牛肉丸"
+    ],
+    "className": "rider",
+    "rarity": 3
+  },
+  {
+    "characterId": 401500,
+    "collectionNo": 28,
+    "name": "alexander",
+    "fullName": "アレキサンダー",
+    "fullNameChinese": "亚历山大",
+    "aliases": [
+      "Alexander",
+      "幼帝"
+    ],
+    "className": "rider",
+    "rarity": 3
+  },
+  {
+    "characterId": 401700,
+    "collectionNo": 29,
+    "name": "marieantoinette",
+    "fullName": "マリー・アントワネット",
+    "fullNameChinese": "玛丽·安托瓦内特",
+    "aliases": [
+      "Marie Antoinette",
+      "MarieAntoinette",
+      "王后",
+      "amp;蛋糕"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 401900,
+    "collectionNo": 30,
+    "name": "martha",
+    "fullName": "マルタ",
+    "fullNameChinese": "玛尔达",
+    "aliases": [
+      "Martha",
+      "马大",
+      "amp;圣女"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 500100,
+    "collectionNo": 31,
+    "name": "medea",
+    "fullName": "メディア",
+    "fullNameChinese": "美狄亚",
+    "aliases": [
+      "Medea",
+      "C妈"
+    ],
+    "className": "caster",
+    "rarity": 3
+  },
+  {
+    "characterId": 500200,
+    "collectionNo": 32,
+    "name": "gillesderais",
+    "fullName": "ジル・ド・レェ",
+    "fullNameChinese": "吉尔·德·雷",
+    "aliases": [
+      "Gilles de Rais",
+      "GillesdeRais"
+    ],
+    "className": "caster",
+    "rarity": 3
+  },
+  {
+    "characterId": 501400,
+    "collectionNo": 35,
+    "name": "mephistopheles",
+    "fullName": "メフィストフェレス",
+    "fullNameChinese": "梅菲斯托费勒斯",
+    "aliases": [
+      "Mephistopheles",
+      "恶魔"
+    ],
+    "className": "caster",
+    "rarity": 3
+  },
+  {
+    "characterId": 501900,
+    "collectionNo": 37,
+    "name": "zhugeliang(lordel-melloiii)",
+    "fullName": "諸葛孔明〔エルメロイⅡ世〕",
+    "fullNameChinese": "诸葛孔明〔埃尔梅罗Ⅱ世〕",
+    "aliases": [
+      "Zhuge Liang (Lord El-Melloi II)",
+      "ZhugeLiangLordElMelloiII",
+      "孔老师",
+      "amp;拐"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 502100,
+    "collectionNo": 38,
+    "name": "cúchulainn",
+    "fullName": "クー・フーリン",
+    "fullNameChinese": "库·丘林",
+    "aliases": [
+      "Cú Chulainn",
+      "CChulainn",
+      "C狗",
+      "amp;法狗"
+    ],
+    "className": "caster",
+    "rarity": 3
+  },
+  {
+    "characterId": 601000,
+    "collectionNo": 41,
+    "name": "stheno",
+    "fullName": "ステンノ",
+    "fullNameChinese": "斯忒诺",
+    "aliases": [
+      "Stheno",
+      "大姐"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 601100,
+    "collectionNo": 42,
+    "name": "jingke",
+    "fullName": "荊軻",
+    "fullNameChinese": "荆轲",
+    "aliases": [
+      "Jing Ke",
+      "JingKe",
+      "匕见"
+    ],
+    "className": "assassin",
+    "rarity": 3
+  },
+  {
+    "characterId": 601700,
+    "collectionNo": 46,
+    "name": "carmilla",
+    "fullName": "カーミラ",
+    "fullNameChinese": "卡米拉",
+    "aliases": [
+      "Carmilla",
+      "大龙娘"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 700100,
+    "collectionNo": 47,
+    "name": "heracles",
+    "fullName": "ヘラクレス",
+    "fullNameChinese": "赫拉克勒斯",
+    "aliases": [
+      "Heracles",
+      "B叔",
+      "amp;海叔"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 700200,
+    "collectionNo": 48,
+    "name": "lancelot",
+    "fullName": "ランスロット",
+    "fullNameChinese": "兰斯洛特",
+    "aliases": [
+      "Lancelot",
+      "长江",
+      "amp;狂兰",
+      "amp;岳父"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 700300,
+    "collectionNo": 49,
+    "name": "lubufengxian",
+    "fullName": "呂布奉先",
+    "fullNameChinese": "吕布奉先",
+    "aliases": [
+      "Lu Bu Fengxian",
+      "LuBuFengxian",
+      "吕布",
+      "amp;吕高达",
+      "amp;虎狼"
+    ],
+    "className": "berserker",
+    "rarity": 3
+  },
+  {
+    "characterId": 700600,
+    "collectionNo": 51,
+    "name": "sakatakintoki",
+    "fullName": "坂田金時",
+    "fullNameChinese": "坂田金时",
+    "aliases": [
+      "Sakata Kintoki",
+      "SakataKintoki",
+      "B金时",
+      "amp;狗蛋"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 700700,
+    "collectionNo": 52,
+    "name": "vladiii",
+    "fullName": "ヴラド三世",
+    "fullNameChinese": "弗拉德三世",
+    "aliases": [
+      "Vlad III",
+      "VladIII",
+      "大公",
+      "amp;穿刺公",
+      "amp;刺绣公",
+      "amp;二胡公"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 701100,
+    "collectionNo": 55,
+    "name": "dariusiii",
+    "fullName": "ダレイオス三世",
+    "fullNameChinese": "大流士三世",
+    "aliases": [
+      "Darius III",
+      "DariusIII",
+      "酋长"
+    ],
+    "className": "berserker",
+    "rarity": 3
+  },
+  {
+    "characterId": 701300,
+    "collectionNo": 56,
+    "name": "kiyohime",
+    "fullName": "清姫",
+    "fullNameChinese": "清姬",
+    "aliases": [
+      "Kiyohime"
+    ],
+    "className": "berserker",
+    "rarity": 3
+  },
+  {
+    "characterId": 701600,
+    "collectionNo": 58,
+    "name": "tamamocat",
+    "fullName": "タマモキャット",
+    "fullNameChinese": "玉藻猫",
+    "aliases": [
+      "Tamamo Cat",
+      "TamamoCat",
+      "B玉",
+      "amp;B狐"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 900100,
+    "collectionNo": 59,
+    "name": "jeanned'arc",
+    "fullName": "ジャンヌ・ダルク",
+    "fullNameChinese": "贞德",
+    "aliases": [
+      "Jeanne d'Arc",
+      "JeannedArc",
+      "村姑",
+      "amp;贞日天"
+    ],
+    "className": "ruler",
+    "rarity": 5
+  },
+  {
+    "characterId": 200900,
+    "collectionNo": 60,
+    "name": "orion",
+    "fullName": "オリオン",
+    "fullNameChinese": "俄里翁",
+    "aliases": [
+      "Orion",
+      "月神"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 502600,
+    "collectionNo": 61,
+    "name": "elisabethbáthory(halloween)",
+    "fullName": "エリザベート・バートリー〔ハロウィン〕",
+    "fullNameChinese": "伊丽莎白·巴托里〔万圣节〕",
+    "aliases": [
+      "Elisabeth Báthory (Halloween)",
+      "ElisabethBthoryHalloween",
+      "C龙娘",
+      "amp;术龙娘"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 500300,
+    "collectionNo": 62,
+    "name": "tamamo-no-mae",
+    "fullName": "玉藻の前",
+    "fullNameChinese": "玉藻前",
+    "aliases": [
+      "Tamamo-no-Mae",
+      "TamamonoMae",
+      "C狐",
+      "amp;C玉",
+      "amp;Miko",
+      "amp;咪咕"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 200600,
+    "collectionNo": 63,
+    "name": "david",
+    "fullName": "ダビデ",
+    "fullNameChinese": "大卫",
+    "aliases": [
+      "David",
+      "所罗门爹"
+    ],
+    "className": "archer",
+    "rarity": 3
+  },
+  {
+    "characterId": 301600,
+    "collectionNo": 64,
+    "name": "hektor",
+    "fullName": "ヘクトール",
+    "fullNameChinese": "赫克托耳",
+    "aliases": [
+      "Hektor",
+      "赫叔"
+    ],
+    "className": "lancer",
+    "rarity": 3
+  },
+  {
+    "characterId": 400300,
+    "collectionNo": 65,
+    "name": "francisdrake",
+    "fullName": "フランシス・ドレイク",
+    "fullNameChinese": "弗朗西斯·德雷克",
+    "aliases": [
+      "Francis Drake",
+      "FrancisDrake",
+      "船长",
+      "amp;BBA"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 400900,
+    "collectionNo": 66,
+    "name": "annebonny&maryread",
+    "fullName": "アン・ボニー＆メアリー・リード",
+    "fullNameChinese": "安妮·伯妮＆玛莉·瑞德",
+    "aliases": [
+      "Anne Bonny & Mary Read",
+      "AnneBonnyMaryRead",
+      "双子"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 501700,
+    "collectionNo": 67,
+    "name": "medea(lily)",
+    "fullName": "メディア〔リリィ〕",
+    "fullNameChinese": "美狄亚〔Lily〕",
+    "aliases": [
+      "Medea (Lily)",
+      "MedeaLily",
+      "C子"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 102700,
+    "collectionNo": 68,
+    "name": "okitasouji",
+    "fullName": "沖田総司",
+    "fullNameChinese": "冲田总司",
+    "aliases": [
+      "Okita Souji",
+      "OkitaSouji",
+      "樱Saber",
+      "amp;冲太"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 202400,
+    "collectionNo": 69,
+    "name": "odanobunaga",
+    "fullName": "織田信長",
+    "fullNameChinese": "织田信长",
+    "aliases": [
+      "Oda Nobunaga",
+      "OdaNobunaga",
+      "信长",
+      "amp;Nobu"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 301300,
+    "collectionNo": 70,
+    "name": "scáthach",
+    "fullName": "スカサハ",
+    "fullNameChinese": "斯卡哈",
+    "aliases": [
+      "Scáthach",
+      "Scthach",
+      "师匠",
+      "amp;BBA",
+      "amp;紫发美少女"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 300200,
+    "collectionNo": 71,
+    "name": "diarmuiduaduibhne",
+    "fullName": "ディルムッド・オディナ",
+    "fullNameChinese": "迪尔姆德·奥迪那",
+    "aliases": [
+      "Diarmuid Ua Duibhne",
+      "DiarmuidUaDuibhne",
+      "刷子"
+    ],
+    "className": "lancer",
+    "rarity": 3
+  },
+  {
+    "characterId": 101400,
+    "collectionNo": 72,
+    "name": "fergusmacróich",
+    "fullName": "フェルグス・マック・ロイ",
+    "fullNameChinese": "弗格斯·马克·罗伊",
+    "aliases": [
+      "Fergus mac Róich",
+      "FergusmacRich",
+      "小刚"
+    ],
+    "className": "saber",
+    "rarity": 3
+  },
+  {
+    "characterId": 402200,
+    "collectionNo": 73,
+    "name": "altriapendragon(santaalter)",
+    "fullName": "アルトリア・ペンドラゴン〔サンタオルタ〕",
+    "fullNameChinese": "阿尔托莉雅·潘德拉贡〔圣诞Alter〕",
+    "aliases": [
+      "Altria Pendragon (Santa Alter)",
+      "AltriaPendragonSantaAlter",
+      "Raber",
+      "amp;raber"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 500400,
+    "collectionNo": 74,
+    "name": "nurseryrhyme",
+    "fullName": "ナーサリー・ライム",
+    "fullNameChinese": "童谣",
+    "aliases": [
+      "Nursery Rhyme",
+      "NurseryRhyme",
+      "爱丽丝"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 600500,
+    "collectionNo": 75,
+    "name": "jacktheripper",
+    "fullName": "ジャック・ザ・リッパー",
+    "fullNameChinese": "开膛手杰克",
+    "aliases": [
+      "Jack the Ripper",
+      "JacktheRipper",
+      "女儿",
+      "amp;雾都弃子"
+    ],
+    "className": "assassin",
+    "rarity": 5
+  },
+  {
+    "characterId": 100900,
+    "collectionNo": 76,
+    "name": "mordred",
+    "fullName": "モードレッド",
+    "fullNameChinese": "莫德雷德",
+    "aliases": [
+      "Mordred",
+      "小莫"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 201100,
+    "collectionNo": 77,
+    "name": "nikolatesla",
+    "fullName": "ニコラ・テスラ",
+    "fullNameChinese": "尼古拉·特斯拉",
+    "aliases": [
+      "Nikola Tesla",
+      "NikolaTesla",
+      "特总",
+      "amp;祖师爷"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 301900,
+    "collectionNo": 78,
+    "name": "altriapendragon(alter)",
+    "fullName": "アルトリア・ペンドラゴン〔オルタ〕",
+    "fullNameChinese": "阿尔托莉雅·潘德拉贡〔Alter〕",
+    "aliases": [
+      "Altria Pendragon (Alter)",
+      "AltriaPendragonAlter",
+      "黑枪呆",
+      "amp;乳上",
+      "amp;南半球"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 501000,
+    "collectionNo": 79,
+    "name": "paracelsusvonhohenheim",
+    "fullName": "ヴァン・ホーエンハイム・パラケルスス",
+    "fullNameChinese": "冯·霍恩海姆·帕拉塞尔苏斯",
+    "aliases": [
+      "Paracelsus von Hohenheim",
+      "ParacelsusvonHohenheim",
+      "豆爸"
+    ],
+    "className": "caster",
+    "rarity": 3
+  },
+  {
+    "characterId": 501100,
+    "collectionNo": 80,
+    "name": "charlesbabbage",
+    "fullName": "チャールズ・バベッジ",
+    "fullNameChinese": "查尔斯·巴贝奇",
+    "aliases": [
+      "Charles Babbage",
+      "CharlesBabbage",
+      "蒸汽王"
+    ],
+    "className": "caster",
+    "rarity": 3
+  },
+  {
+    "characterId": 600700,
+    "collectionNo": 81,
+    "name": "henryjekyll&hyde",
+    "fullName": "ヘンリー・ジキル＆ハイド",
+    "fullNameChinese": "亨利·杰基尔＆海德",
+    "aliases": [
+      "Henry Jekyll & Hyde",
+      "HenryJekyllHyde",
+      "海德",
+      "amp;化身博士"
+    ],
+    "className": "assassin",
+    "rarity": 3
+  },
+  {
+    "characterId": 700400,
+    "collectionNo": 82,
+    "name": "frankenstein",
+    "fullName": "フランケンシュタイン",
+    "fullNameChinese": "弗兰肯斯坦",
+    "aliases": [
+      "Frankenstein",
+      "肯娘",
+      "amp;弗兰"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 201500,
+    "collectionNo": 84,
+    "name": "arjuna",
+    "fullName": "アルジュナ",
+    "fullNameChinese": "阿周那",
+    "aliases": [
+      "Arjuna",
+      "周黑鸭",
+      "amp;娜娜子"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 300400,
+    "collectionNo": 85,
+    "name": "karna",
+    "fullName": "カルナ",
+    "fullNameChinese": "迦尔纳",
+    "aliases": [
+      "Karna",
+      "小太阳"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 601800,
+    "collectionNo": 86,
+    "name": "mysteriousheroinex",
+    "fullName": "謎のヒロインX",
+    "fullNameChinese": "谜之女主角X",
+    "aliases": [
+      "Mysterious Heroine X",
+      "MysteriousHeroineX",
+      "X毛"
+    ],
+    "className": "assassin",
+    "rarity": 5
+  },
+  {
+    "characterId": 301100,
+    "collectionNo": 87,
+    "name": "fionnmaccumhaill",
+    "fullName": "フィン・マックール",
+    "fullNameChinese": "芬恩·麦克库尔",
+    "aliases": [
+      "Fionn mac Cumhaill",
+      "FionnmacCumhaill"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 301200,
+    "collectionNo": 88,
+    "name": "brynhild",
+    "fullName": "ブリュンヒルデ",
+    "fullNameChinese": "布伦希尔德",
+    "aliases": [
+      "Brynhild",
+      "布姐"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 700800,
+    "collectionNo": 89,
+    "name": "beowulf",
+    "fullName": "ベオウルフ",
+    "fullNameChinese": "贝奥武夫",
+    "aliases": [
+      "Beowulf",
+      "狼叔",
+      "amp;贝爷"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 100600,
+    "collectionNo": 90,
+    "name": "neroclaudius(bride)",
+    "fullName": "ネロ・クラウディウス〔ブライド〕",
+    "fullNameChinese": "尼禄·克劳狄乌斯〔新娘〕",
+    "aliases": [
+      "Nero Claudius (Bride)",
+      "NeroClaudiusBride",
+      "花嫁",
+      "amp;嫁王"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 102800,
+    "collectionNo": 91,
+    "name": "ryougishiki",
+    "fullName": "両儀式",
+    "fullNameChinese": "两仪式",
+    "aliases": [
+      "Ryougi Shiki",
+      "RyougiShiki",
+      "剑式",
+      "amp;根源式",
+      "amp;215"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 602300,
+    "collectionNo": 92,
+    "name": "ryougishiki",
+    "fullName": "両儀式",
+    "fullNameChinese": "两仪式",
+    "aliases": [
+      "Ryougi Shiki",
+      "RyougiShiki",
+      "杀式",
+      "amp;214",
+      "amp;式姐"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 900200,
+    "collectionNo": 93,
+    "name": "amakusashirou",
+    "fullName": "天草四郎",
+    "fullNameChinese": "天草四郎",
+    "aliases": [
+      "Amakusa Shirou",
+      "AmakusaShirou",
+      "天草",
+      "amp;小神父",
+      "amp;言峰士郎"
+    ],
+    "className": "ruler",
+    "rarity": 5
+  },
+  {
+    "characterId": 400400,
+    "collectionNo": 94,
+    "name": "astolfo",
+    "fullName": "アストルフォ",
+    "fullNameChinese": "阿斯托尔福",
+    "aliases": [
+      "Astolfo",
+      "阿福",
+      "amp;伪娘"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 201800,
+    "collectionNo": 95,
+    "name": "gilgamesh(child)",
+    "fullName": "子ギル",
+    "fullNameChinese": "幼吉尔",
+    "aliases": [
+      "Gilgamesh (Child)",
+      "GilgameshChild",
+      "幼闪"
+    ],
+    "className": "archer",
+    "rarity": 3
+  },
+  {
+    "characterId": 1100200,
+    "collectionNo": 96,
+    "name": "edmonddantès",
+    "fullName": "巌窟王",
+    "fullNameChinese": "岩窟王",
+    "aliases": [
+      "Edmond Dantès",
+      "EdmondDants",
+      "伯爵",
+      "amp;超高校级的伯爵",
+      "amp;哈哈队成员"
+    ],
+    "className": "avenger",
+    "rarity": 5
+  },
+  {
+    "characterId": 701400,
+    "collectionNo": 97,
+    "name": "florencenightingale",
+    "fullName": "ナイチンゲール",
+    "fullNameChinese": "南丁格尔",
+    "aliases": [
+      "Florence Nightingale",
+      "FlorenceNightingale",
+      "南丁",
+      "amp;护士"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 702000,
+    "collectionNo": 98,
+    "name": "cúchulainn(alter)",
+    "fullName": "クー・フーリン〔オルタ〕",
+    "fullNameChinese": "库·丘林〔Alter〕",
+    "aliases": [
+      "Cú Chulainn (Alter)",
+      "CChulainnAlter",
+      "黑狗",
+      "amp;狂狗",
+      "amp;狂王"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 401300,
+    "collectionNo": 99,
+    "name": "queenmedb",
+    "fullName": "女王メイヴ",
+    "fullNameChinese": "女王梅芙",
+    "aliases": [
+      "Queen Medb",
+      "QueenMedb"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 502300,
+    "collectionNo": 100,
+    "name": "helenablavatsky",
+    "fullName": "エレナ・ブラヴァツキー",
+    "fullNameChinese": "海伦娜·布拉瓦茨基",
+    "aliases": [
+      "Helena Blavatsky",
+      "HelenaBlavatsky",
+      "海伦娜",
+      "amp;海妈"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 101900,
+    "collectionNo": 101,
+    "name": "rama",
+    "fullName": "ラーマ",
+    "fullNameChinese": "罗摩",
+    "aliases": [
+      "Rama"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 301700,
+    "collectionNo": 102,
+    "name": "lishuwen",
+    "fullName": "李書文",
+    "fullNameChinese": "李书文",
+    "aliases": [
+      "Li Shuwen",
+      "LiShuwen",
+      "李大师"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 502500,
+    "collectionNo": 103,
+    "name": "thomasedison",
+    "fullName": "トーマス・エジソン",
+    "fullNameChinese": "托马斯·爱迪生",
+    "aliases": [
+      "Thomas Edison",
+      "ThomasEdison",
+      "爱迪狮"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 501600,
+    "collectionNo": 104,
+    "name": "geronimo",
+    "fullName": "ジェロニモ",
+    "fullNameChinese": "杰罗尼莫",
+    "aliases": [
+      "Geronimo",
+      "萨满"
+    ],
+    "className": "caster",
+    "rarity": 3
+  },
+  {
+    "characterId": 201000,
+    "collectionNo": 105,
+    "name": "billythekid",
+    "fullName": "ビリー・ザ・キッド",
+    "fullNameChinese": "比利小子",
+    "aliases": [
+      "Billy the Kid",
+      "BillytheKid"
+    ],
+    "className": "archer",
+    "rarity": 3
+  },
+  {
+    "characterId": 1100300,
+    "collectionNo": 106,
+    "name": "jeanned'arc(alter)",
+    "fullName": "ジャンヌ・ダルク〔オルタ〕",
+    "fullNameChinese": "贞德〔Alter〕",
+    "aliases": [
+      "Jeanne d'Arc (Alter)",
+      "JeannedArcAlter",
+      "黑贞"
+    ],
+    "className": "avenger",
+    "rarity": 5
+  },
+  {
+    "characterId": 400200,
+    "collectionNo": 108,
+    "name": "iskandar",
+    "fullName": "イスカンダル",
+    "fullNameChinese": "伊斯坎达尔",
+    "aliases": [
+      "Iskandar",
+      "亚历山大大帝",
+      "amp;征服王"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 601500,
+    "collectionNo": 109,
+    "name": "emiya(assassin)",
+    "fullName": "エミヤ〔アサシン〕",
+    "fullNameChinese": "卫宫〔Assassin〕",
+    "aliases": [
+      "Emiya (Assassin)",
+      "EmiyaAssassin",
+      "切嗣",
+      "amp;切丝",
+      "amp;Papa"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 600300,
+    "collectionNo": 110,
+    "name": "hassanofthehundredpersonas",
+    "fullName": "百貌のハサン",
+    "fullNameChinese": "百貌哈桑",
+    "aliases": [
+      "Hassan of the Hundred Personas",
+      "HassanoftheHundredPersonas"
+    ],
+    "className": "assassin",
+    "rarity": 3
+  },
+  {
+    "characterId": 502000,
+    "collectionNo": 111,
+    "name": "irisviel(holygrail)",
+    "fullName": "アイリスフィール〔天の衣〕",
+    "fullNameChinese": "爱丽丝菲尔〔天之衣〕",
+    "aliases": [
+      "Irisviel (Holy Grail)",
+      "IrisvielHolyGrail",
+      "太太",
+      "amp;爱丽"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 602100,
+    "collectionNo": 112,
+    "name": "shuten-douji",
+    "fullName": "酒呑童子",
+    "fullNameChinese": "酒吞童子",
+    "aliases": [
+      "Shuten-Douji",
+      "ShutenDouji"
+    ],
+    "className": "assassin",
+    "rarity": 5
+  },
+  {
+    "characterId": 502200,
+    "collectionNo": 113,
+    "name": "xuanzangsanzang",
+    "fullName": "玄奘三蔵",
+    "fullNameChinese": "玄奘三藏",
+    "aliases": [
+      "Xuanzang Sanzang",
+      "XuanzangSanzang",
+      "西行者"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 702300,
+    "collectionNo": 114,
+    "name": "minamoto-no-raikou",
+    "fullName": "源頼光",
+    "fullNameChinese": "源赖光",
+    "aliases": [
+      "Minamoto-no-Raikou",
+      "MinamotonoRaikou",
+      "奶光",
+      "amp;光妈"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 402300,
+    "collectionNo": 115,
+    "name": "sakatakintoki",
+    "fullName": "坂田金時",
+    "fullNameChinese": "坂田金时",
+    "aliases": [
+      "Sakata Kintoki",
+      "SakataKintoki",
+      "R金时"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 702200,
+    "collectionNo": 116,
+    "name": "ibaraki-douji",
+    "fullName": "茨木童子",
+    "fullNameChinese": "茨木童子",
+    "aliases": [
+      "Ibaraki-Douji",
+      "IbarakiDouji",
+      "脚神"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 601900,
+    "collectionNo": 117,
+    "name": "fuuma\"evil-wind\"kotarou",
+    "fullName": "風魔小太郎",
+    "fullNameChinese": "风魔小太郎",
+    "aliases": [
+      "Fuuma \"Evil-wind\" Kotarou",
+      "FuumaEvilwindKotarou"
+    ],
+    "className": "assassin",
+    "rarity": 3
+  },
+  {
+    "characterId": 401200,
+    "collectionNo": 118,
+    "name": "ozymandias",
+    "fullName": "オジマンディアス",
+    "fullNameChinese": "奥斯曼狄斯",
+    "aliases": [
+      "Ozymandias",
+      "拉二",
+      "amp;奥兹曼迪亚斯"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 302000,
+    "collectionNo": 119,
+    "name": "altriapendragon",
+    "fullName": "アルトリア・ペンドラゴン",
+    "fullNameChinese": "阿尔托莉雅·潘德拉贡",
+    "aliases": [
+      "Altria Pendragon",
+      "AltriaPendragon",
+      "白枪呆"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 501200,
+    "collectionNo": 120,
+    "name": "nitocris",
+    "fullName": "ニトクリス",
+    "fullNameChinese": "尼托克丽丝",
+    "aliases": [
+      "Nitocris",
+      "尼托"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 102000,
+    "collectionNo": 121,
+    "name": "lancelot",
+    "fullName": "ランスロット",
+    "fullNameChinese": "兰斯洛特",
+    "aliases": [
+      "Lancelot",
+      "剑兰",
+      "amp;剑长江"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 200800,
+    "collectionNo": 122,
+    "name": "tristan",
+    "fullName": "トリスタン",
+    "fullNameChinese": "崔斯坦",
+    "aliases": [
+      "Tristan",
+      "小崔",
+      "amp;老崔",
+      "amp;崔悲伤",
+      "amp;特里斯坦",
+      "amp;崔卿",
+      "amp;特卿"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 100700,
+    "collectionNo": 123,
+    "name": "gawain",
+    "fullName": "ガウェイン",
+    "fullNameChinese": "高文",
+    "aliases": [
+      "Gawain",
+      "大猩猩"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 600900,
+    "collectionNo": 124,
+    "name": "hassanoftheserenity",
+    "fullName": "静謐のハサン",
+    "fullNameChinese": "静谧哈桑",
+    "aliases": [
+      "Hassan of the Serenity",
+      "HassanoftheSerenity"
+    ],
+    "className": "assassin",
+    "rarity": 3
+  },
+  {
+    "characterId": 201400,
+    "collectionNo": 125,
+    "name": "tawaratouta",
+    "fullName": "俵藤太",
+    "fullNameChinese": "俵藤太",
+    "aliases": [
+      "Tawara Touta",
+      "TawaraTouta",
+      "表藤太",
+      "amp;送米弓"
+    ],
+    "className": "archer",
+    "rarity": 3
+  },
+  {
+    "characterId": 101200,
+    "collectionNo": 126,
+    "name": "bedivere",
+    "fullName": "ベディヴィエール",
+    "fullNameChinese": "贝德维尔",
+    "aliases": [
+      "Bedivere",
+      "小贝",
+      "amp;贝卿"
+    ],
+    "className": "saber",
+    "rarity": 3
+  },
+  {
+    "characterId": 500900,
+    "collectionNo": 127,
+    "name": "leonardodavinci",
+    "fullName": "レオナルド・ダ・ヴィンチ",
+    "fullNameChinese": "莱昂纳多·达·芬奇",
+    "aliases": [
+      "Leonardo da Vinci",
+      "LeonardodaVinci",
+      "达芬奇亲",
+      "amp;大碧池"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 302400,
+    "collectionNo": 128,
+    "name": "tamamo-no-mae",
+    "fullName": "玉藻の前",
+    "fullNameChinese": "玉藻前",
+    "aliases": [
+      "Tamamo-no-Mae",
+      "TamamonoMae",
+      "枪狐",
+      "amp;水狐",
+      "amp;枪玉"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 202600,
+    "collectionNo": 129,
+    "name": "altriapendragon",
+    "fullName": "アルトリア・ペンドラゴン",
+    "fullNameChinese": "阿尔托莉雅·潘德拉贡",
+    "aliases": [
+      "Altria Pendragon",
+      "AltriaPendragon",
+      "弓呆"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 502700,
+    "collectionNo": 130,
+    "name": "marieantoinette",
+    "fullName": "マリー・アントワネット",
+    "fullNameChinese": "玛丽·安托瓦内特",
+    "aliases": [
+      "Marie Antoinette",
+      "MarieAntoinette",
+      "水马",
+      "amp;水母",
+      "amp;C玛丽"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 202500,
+    "collectionNo": 131,
+    "name": "annebonny&maryread",
+    "fullName": "アン・ボニー＆メアリー・リード",
+    "fullNameChinese": "安妮·伯妮＆玛莉·瑞德",
+    "aliases": [
+      "Anne Bonny & Mary Read",
+      "AnneBonnyMaryRead",
+      "弓双子"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 402400,
+    "collectionNo": 132,
+    "name": "mordred",
+    "fullName": "モードレッド",
+    "fullNameChinese": "莫德雷德",
+    "aliases": [
+      "Mordred",
+      "R莫",
+      "amp;冲莫",
+      "amp;泳莫",
+      "amp;泳装小莫"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 602400,
+    "collectionNo": 133,
+    "name": "scáthach",
+    "fullName": "スカサハ",
+    "fullNameChinese": "斯卡哈",
+    "aliases": [
+      "Scáthach",
+      "Scthach",
+      "杀师匠",
+      "amp;水师匠",
+      "amp;杀阶BBA"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 302500,
+    "collectionNo": 134,
+    "name": "kiyohime",
+    "fullName": "清姫",
+    "fullNameChinese": "清姬",
+    "aliases": [
+      "Kiyohime",
+      "L清姬",
+      "amp;枪清姬"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 900400,
+    "collectionNo": 135,
+    "name": "martha",
+    "fullName": "マルタ",
+    "fullNameChinese": "玛尔达",
+    "aliases": [
+      "Martha",
+      "铁拳圣女"
+    ],
+    "className": "ruler",
+    "rarity": 4
+  },
+  {
+    "characterId": 502800,
+    "collectionNo": 136,
+    "name": "illyasvielvoneinzbern",
+    "fullName": "イリヤスフィール・フォン・アインツベルン",
+    "fullNameChinese": "伊莉雅丝菲尔·冯·爱因兹贝伦",
+    "aliases": [
+      "Illyasviel von Einzbern",
+      "IllyasvielvonEinzbern",
+      "伊莉雅",
+      "amp;小学生"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 202700,
+    "collectionNo": 137,
+    "name": "chloevoneinzbern",
+    "fullName": "クロエ・フォン・アインツベルン",
+    "fullNameChinese": "克洛伊·冯·爱因兹贝伦",
+    "aliases": [
+      "Chloe von Einzbern",
+      "ChloevonEinzbern",
+      "小黑"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 101000,
+    "collectionNo": 138,
+    "name": "elisabethbáthory(brave)",
+    "fullName": "エリザベート・バートリー〔ブレイブ〕",
+    "fullNameChinese": "伊丽莎白·巴托里〔勇者〕",
+    "aliases": [
+      "Elisabeth Báthory (Brave)",
+      "ElisabethBthoryBrave",
+      "S龙娘",
+      "amp;剑龙娘"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 600800,
+    "collectionNo": 139,
+    "name": "cleopatra",
+    "fullName": "クレオパトラ",
+    "fullNameChinese": "克娄巴特拉",
+    "aliases": [
+      "Cleopatra",
+      "艳后"
+    ],
+    "className": "assassin",
+    "rarity": 5
+  },
+  {
+    "characterId": 300300,
+    "collectionNo": 140,
+    "name": "vladiii(extra)",
+    "fullName": "ヴラド三世〔EXTRA〕",
+    "fullNameChinese": "弗拉德三世〔EXTRA〕",
+    "aliases": [
+      "Vlad III (EXTRA)",
+      "VladIIIEXTRA",
+      "枪大公"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 302600,
+    "collectionNo": 141,
+    "name": "jeanned'arcaltersantalily",
+    "fullName": "ジャンヌ・ダルク・オルタ・サンタ・リリィ",
+    "fullNameChinese": "贞德·Alter·Santa·Lily",
+    "aliases": [
+      "Jeanne d'Arc Alter Santa Lily",
+      "JeannedArcAlterSantaLily",
+      "童贞",
+      "amp;幼贞",
+      "amp;黑贞Lily",
+      "amp;香香香"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 202000,
+    "collectionNo": 142,
+    "name": "ishtar",
+    "fullName": "イシュタル",
+    "fullNameChinese": "伊什塔尔",
+    "aliases": [
+      "Ishtar",
+      "弓凛",
+      "amp;伊什塔凛"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 300800,
+    "collectionNo": 143,
+    "name": "enkidu",
+    "fullName": "エルキドゥ",
+    "fullNameChinese": "恩奇都",
+    "aliases": [
+      "Enkidu",
+      "小恩"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 401800,
+    "collectionNo": 144,
+    "name": "quetzalcoatl",
+    "fullName": "ケツァル・コアトル",
+    "fullNameChinese": "魁札尔·科亚特尔",
+    "aliases": [
+      "Quetzalcoatl",
+      "羽蛇神",
+      "amp;大姐姐"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 501800,
+    "collectionNo": 145,
+    "name": "gilgamesh",
+    "fullName": "ギルガメッシュ",
+    "fullNameChinese": "吉尔伽美什",
+    "aliases": [
+      "Gilgamesh",
+      "C闪",
+      "amp;贤王"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 302700,
+    "collectionNo": 146,
+    "name": "medusa",
+    "fullName": "メドゥーサ",
+    "fullNameChinese": "美杜莎",
+    "aliases": [
+      "Medusa",
+      "R子",
+      "amp;安娜",
+      "amp;美杜莎Lily",
+      "amp;幼r"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 1100400,
+    "collectionNo": 147,
+    "name": "gorgon",
+    "fullName": "ゴルゴーン",
+    "fullNameChinese": "戈耳工",
+    "aliases": [
+      "Gorgon",
+      "魔神R姐",
+      "amp;复仇R姐"
+    ],
+    "className": "avenger",
+    "rarity": 4
+  },
+  {
+    "characterId": 302800,
+    "collectionNo": 148,
+    "name": "jaguarwarrior",
+    "fullName": "ジャガーマン",
+    "fullNameChinese": "豹人",
+    "aliases": [
+      "Jaguar Warrior",
+      "JaguarWarrior",
+      "老虎",
+      "amp;大河",
+      "amp;藤姐"
+    ],
+    "className": "lancer",
+    "rarity": 3
+  },
+  {
+    "characterId": 500800,
+    "collectionNo": 150,
+    "name": "merlin",
+    "fullName": "マーリン",
+    "fullNameChinese": "梅林",
+    "aliases": [
+      "Merlin",
+      "魔法☆梅莉",
+      "amp;红拐"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 101700,
+    "collectionNo": 153,
+    "name": "miyamotomusashi",
+    "fullName": "宮本武蔵",
+    "fullNameChinese": "宫本武藏",
+    "aliases": [
+      "Miyamoto Musashi",
+      "MiyamotoMusashi",
+      "武藏"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 602500,
+    "collectionNo": 154,
+    "name": "\"firsthassan\"",
+    "fullName": "“山の翁”",
+    "fullNameChinese": "“山中老人”",
+    "aliases": [
+      "\"First Hassan\"",
+      "FirstHassan",
+      "王哈",
+      "amp;爷爷"
+    ],
+    "className": "assassin",
+    "rarity": 5
+  },
+  {
+    "characterId": 702400,
+    "collectionNo": 155,
+    "name": "mysteriousheroinex(alter)",
+    "fullName": "謎のヒロインX〔オルタ〕",
+    "fullNameChinese": "谜之女主角X〔Alter〕",
+    "aliases": [
+      "Mysterious Heroine X (Alter)",
+      "MysteriousHeroineXAlter",
+      "BX",
+      "amp;BX毛",
+      "amp;B呆"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 202300,
+    "collectionNo": 156,
+    "name": "jamesmoriarty",
+    "fullName": "ジェームズ・モリアーティ",
+    "fullNameChinese": "詹姆斯·莫里亚蒂",
+    "aliases": [
+      "James Moriarty",
+      "JamesMoriarty",
+      "教授",
+      "amp;詹姆斯·莫里亚蒂",
+      "amp;James Moriarty"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 201600,
+    "collectionNo": 157,
+    "name": "emiya(alter)",
+    "fullName": "エミヤ〔オルタ〕",
+    "fullNameChinese": "卫宫〔Alter〕",
+    "aliases": [
+      "Emiya (Alter)",
+      "EmiyaAlter",
+      "黑A",
+      "amp;黑茶"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 1100500,
+    "collectionNo": 158,
+    "name": "hessianlobo",
+    "fullName": "ヘシアン・ロボ",
+    "fullNameChinese": "黑森·罗伯",
+    "aliases": [
+      "Hessian Lobo",
+      "HessianLobo",
+      "狼王",
+      "amp;黑森·罗伯",
+      "amp;Hessian Lobo"
+    ],
+    "className": "avenger",
+    "rarity": 4
+  },
+  {
+    "characterId": 602600,
+    "collectionNo": 159,
+    "name": "yanqing",
+    "fullName": "燕青",
+    "fullNameChinese": "燕青",
+    "aliases": [
+      "Yan Qing",
+      "YanQing",
+      "小乙哥",
+      "amp;燕青"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 102900,
+    "collectionNo": 160,
+    "name": "arthurpendragon(prototype)",
+    "fullName": "アーサー・ペンドラゴン〔プロトタイプ〕",
+    "fullNameChinese": "亚瑟·潘德拉贡〔Prototype〕",
+    "aliases": [
+      "Arthur Pendragon (Prototype)",
+      "ArthurPendragonPrototype",
+      "旧剑"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 702500,
+    "collectionNo": 161,
+    "name": "hijikatatoshizo",
+    "fullName": "土方歳三",
+    "fullNameChinese": "土方岁三",
+    "aliases": [
+      "Hijikata Toshizo",
+      "HijikataToshizo",
+      "副长"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 702600,
+    "collectionNo": 162,
+    "name": "chacha",
+    "fullName": "茶々",
+    "fullNameChinese": "茶茶",
+    "aliases": [
+      "Chacha",
+      "浅井茶茶",
+      "amp;淀殿"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 1000200,
+    "collectionNo": 163,
+    "name": "meltryllis",
+    "fullName": "メルトリリス",
+    "fullNameChinese": "Meltryllis",
+    "aliases": [
+      "溶解莉莉丝",
+      "amp;梅尔特莉莉丝",
+      "amp;Melt Lilith",
+      "amp;孤挺花"
+    ],
+    "className": "alterEgo",
+    "rarity": 5
+  },
+  {
+    "characterId": 1000100,
+    "collectionNo": 164,
+    "name": "passionlip",
+    "fullName": "パッションリップ",
+    "fullNameChinese": "Passionlip",
+    "aliases": [
+      "Lip",
+      "amp;帕森莉普",
+      "amp;热情迷唇",
+      "amp;西番莲",
+      "amp;郁金香"
+    ],
+    "className": "alterEgo",
+    "rarity": 4
+  },
+  {
+    "characterId": 103000,
+    "collectionNo": 165,
+    "name": "suzukagozen",
+    "fullName": "鈴鹿御前",
+    "fullNameChinese": "铃鹿御前",
+    "aliases": [
+      "Suzuka Gozen",
+      "SuzukaGozen",
+      "JK狐"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 2300100,
+    "collectionNo": 166,
+    "name": "bb",
+    "fullName": "ＢＢ",
+    "fullNameChinese": "BB",
+    "aliases": [],
+    "className": "moonCancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 1000300,
+    "collectionNo": 167,
+    "name": "sessyoinkiara",
+    "fullName": "殺生院キアラ",
+    "fullNameChinese": "杀生院祈荒",
+    "aliases": [
+      "Sessyoin Kiara",
+      "SessyoinKiara",
+      "妖尼姑",
+      "amp;瞑生院祈荒"
+    ],
+    "className": "alterEgo",
+    "rarity": 5
+  },
+  {
+    "characterId": 503000,
+    "collectionNo": 169,
+    "name": "scheherazade",
+    "fullName": "シェヘラザード",
+    "fullNameChinese": "山鲁佐德",
+    "aliases": [
+      "Scheherazade",
+      "amp;山鲁佐德"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 602700,
+    "collectionNo": 170,
+    "name": "wuzetian",
+    "fullName": "武則天",
+    "fullNameChinese": "武则天",
+    "aliases": [
+      "Wu Zetian",
+      "WuZetian",
+      "amp;周照"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 702700,
+    "collectionNo": 171,
+    "name": "penthesilea",
+    "fullName": "ペンテシレイア",
+    "fullNameChinese": "彭忒西勒亚",
+    "aliases": [
+      "Penthesilea",
+      "CEO",
+      "amp;亚马逊",
+      "amp;彭忒西勒亚"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 402500,
+    "collectionNo": 172,
+    "name": "christophercolumbus",
+    "fullName": "クリストファー・コロンブス",
+    "fullNameChinese": "克里斯托弗·哥伦布",
+    "aliases": [
+      "Christopher Columbus",
+      "ChristopherColumbus",
+      "amp;Christopher Columbus"
+    ],
+    "className": "rider",
+    "rarity": 3
+  },
+  {
+    "characterId": 900500,
+    "collectionNo": 173,
+    "name": "sherlockholmes",
+    "fullName": "シャーロック・ホームズ",
+    "fullNameChinese": "夏洛克·福尔摩斯",
+    "aliases": [
+      "Sherlock Holmes",
+      "SherlockHolmes",
+      "老福"
+    ],
+    "className": "ruler",
+    "rarity": 5
+  },
+  {
+    "characterId": 503200,
+    "collectionNo": 175,
+    "name": "neroclaudius",
+    "fullName": "ネロ・クラウディウス",
+    "fullNameChinese": "尼禄·克劳狄乌斯",
+    "aliases": [
+      "Nero Claudius",
+      "NeroClaudius",
+      "术尼禄",
+      "amp;泳装尼禄",
+      "amp;水尼禄",
+      "amp;水泥路"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 103100,
+    "collectionNo": 176,
+    "name": "frankenstein",
+    "fullName": "フランケンシュタイン",
+    "fullNameChinese": "弗兰肯斯坦",
+    "aliases": [
+      "Frankenstein",
+      "剑肯娘"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 602800,
+    "collectionNo": 177,
+    "name": "nitocris",
+    "fullName": "ニトクリス",
+    "fullNameChinese": "尼托克丽丝",
+    "aliases": [
+      "Nitocris",
+      "杀尼托",
+      "amp;水泥",
+      "amp;水尼托"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 702900,
+    "collectionNo": 178,
+    "name": "odanobunaga",
+    "fullName": "織田信長",
+    "fullNameChinese": "织田信长",
+    "aliases": [
+      "Oda Nobunaga",
+      "OdaNobunaga",
+      "狂信长"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 402700,
+    "collectionNo": 179,
+    "name": "altriapendragon(alter)",
+    "fullName": "アルトリア・ペンドラゴン〔オルタ〕",
+    "fullNameChinese": "阿尔托莉雅·潘德拉贡〔Alter〕",
+    "aliases": [
+      "Altria Pendragon (Alter)",
+      "AltriaPendragonAlter",
+      "水黑呆",
+      "amp;女仆呆"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 202800,
+    "collectionNo": 180,
+    "name": "helenablavatsky",
+    "fullName": "エレナ・ブラヴァツキー",
+    "fullNameChinese": "海伦娜·布拉瓦茨基",
+    "aliases": [
+      "Helena Blavatsky",
+      "HelenaBlavatsky",
+      "弓海"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 302900,
+    "collectionNo": 181,
+    "name": "minamoto-no-raikou",
+    "fullName": "源頼光",
+    "fullNameChinese": "源赖光",
+    "aliases": [
+      "Minamoto-no-Raikou",
+      "MinamotonoRaikou",
+      "枪奶光",
+      "amp;枪赖光"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 402600,
+    "collectionNo": 182,
+    "name": "ishtar",
+    "fullName": "イシュタル",
+    "fullNameChinese": "伊什塔尔",
+    "aliases": [
+      "Ishtar",
+      "R凛",
+      "amp;骑凛",
+      "amp;水凛"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 303000,
+    "collectionNo": 183,
+    "name": "pārvatī",
+    "fullName": "パールヴァティー",
+    "fullNameChinese": "帕尔瓦蒂",
+    "aliases": [
+      "Pārvatī",
+      "Prvat",
+      "雪山樱"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 202100,
+    "collectionNo": 184,
+    "name": "tomoegozen",
+    "fullName": "巴御前",
+    "fullNameChinese": "巴御前",
+    "aliases": [
+      "Tomoe Gozen",
+      "TomoeGozen"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 602900,
+    "collectionNo": 185,
+    "name": "mochizukichiyome",
+    "fullName": "望月千代女",
+    "fullNameChinese": "望月千代女",
+    "aliases": [
+      "Mochizuki Chiyome",
+      "MochizukiChiyome"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 301400,
+    "collectionNo": 186,
+    "name": "houzouininshun",
+    "fullName": "宝蔵院胤舜",
+    "fullNameChinese": "宝藏院胤舜",
+    "aliases": [
+      "Houzouin Inshun",
+      "HouzouinInshun"
+    ],
+    "className": "lancer",
+    "rarity": 3
+  },
+  {
+    "characterId": 103200,
+    "collectionNo": 187,
+    "name": "yagyutajima-no-kamimunenori",
+    "fullName": "柳生但馬守宗矩",
+    "fullNameChinese": "柳生但马守宗矩",
+    "aliases": [
+      "Yagyu Tajima-no-kami Munenori",
+      "YagyuTajimanokamiMunenori",
+      "剑圣",
+      "amp;柳但",
+      "amp;榴弹",
+      "amp;柳糖",
+      "amp;老爷"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 603000,
+    "collectionNo": 188,
+    "name": "katou\"blackkite\"danzo",
+    "fullName": "加藤段蔵",
+    "fullNameChinese": "加藤段藏",
+    "aliases": [
+      "Katou \"Black Kite\" Danzo",
+      "KatouBlackKiteDanzo"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 603100,
+    "collectionNo": 189,
+    "name": "osakabehime",
+    "fullName": "刑部姫",
+    "fullNameChinese": "刑部姬",
+    "aliases": [
+      "Osakabehime",
+      "宅姬",
+      "amp;NEET姬",
+      "amp;家里蹲",
+      "amp;绿拐",
+      "amp;邢捕头"
+    ],
+    "className": "assassin",
+    "rarity": 5
+  },
+  {
+    "characterId": 1000400,
+    "collectionNo": 190,
+    "name": "mechaeli-chan",
+    "fullName": "メカエリチャン",
+    "fullNameChinese": "机械伊丽亲",
+    "aliases": [
+      "Mecha Eli-chan",
+      "MechaElichan",
+      "机械龙娘",
+      "amp;1号机",
+      "amp;机械小伊丽"
+    ],
+    "className": "alterEgo",
+    "rarity": 4
+  },
+  {
+    "characterId": 1000500,
+    "collectionNo": 191,
+    "name": "mechaeli-chanmk.ii",
+    "fullName": "メカエリチャンⅡ号機",
+    "fullNameChinese": "机械伊丽亲Ⅱ号机",
+    "aliases": [
+      "Mecha Eli-chan Mk.II",
+      "MechaElichanMkII",
+      "机械龙娘",
+      "amp;2号机",
+      "amp;机械小伊丽"
+    ],
+    "className": "alterEgo",
+    "rarity": 4
+  },
+  {
+    "characterId": 503300,
+    "collectionNo": 192,
+    "name": "circe",
+    "fullName": "キルケー",
+    "fullNameChinese": "喀耳刻",
+    "aliases": [
+      "Circe",
+      "姑姑",
+      "amp;喀耳刻"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 303100,
+    "collectionNo": 193,
+    "name": "nezha",
+    "fullName": "哪吒",
+    "fullNameChinese": "哪吒",
+    "aliases": [
+      "Nezha",
+      "三太子",
+      "amp;莲偶"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 503400,
+    "collectionNo": 194,
+    "name": "queenofsheba",
+    "fullName": "シバの女王",
+    "fullNameChinese": "示巴女王",
+    "aliases": [
+      "Queen of Sheba",
+      "QueenofSheba"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 2500100,
+    "collectionNo": 195,
+    "name": "abigailwilliams",
+    "fullName": "アビゲイル・ウィリアムズ",
+    "fullNameChinese": "阿比盖尔·威廉姆斯",
+    "aliases": [
+      "Abigail Williams",
+      "AbigailWilliams",
+      "阿比",
+      "amp;泡泡",
+      "amp;银钥匙"
+    ],
+    "className": "foreigner",
+    "rarity": 5
+  },
+  {
+    "characterId": 303200,
+    "collectionNo": 196,
+    "name": "ereshkigal",
+    "fullName": "エレシュキガル",
+    "fullNameChinese": "埃列什基伽勒",
+    "aliases": [
+      "Ereshkigal",
+      "艾蕾",
+      "amp;枪凛"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 202200,
+    "collectionNo": 197,
+    "name": "attilathesan(ta)",
+    "fullName": "アルテラ・ザ・サン〔タ〕",
+    "fullNameChinese": "阿蒂拉·the·San〔ta〕",
+    "aliases": [
+      "Attila the San(ta)",
+      "AttilatheSanta",
+      "弓大王"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 2500200,
+    "collectionNo": 198,
+    "name": "katsushikahokusai",
+    "fullName": "葛飾北斎",
+    "fullNameChinese": "葛饰北斋",
+    "aliases": [
+      "Katsushika Hokusai",
+      "KatsushikaHokusai",
+      "阿荣"
+    ],
+    "className": "foreigner",
+    "rarity": 5
+  },
+  {
+    "characterId": 603200,
+    "collectionNo": 199,
+    "name": "semiramis",
+    "fullName": "セミラミス",
+    "fullNameChinese": "塞弥拉弥斯",
+    "aliases": [
+      "Semiramis",
+      "女帝"
+    ],
+    "className": "assassin",
+    "rarity": 5
+  },
+  {
+    "characterId": 202900,
+    "collectionNo": 200,
+    "name": "asagamifujino",
+    "fullName": "浅上藤乃",
+    "fullNameChinese": "浅上藤乃",
+    "aliases": [
+      "Asagami Fujino",
+      "AsagamiFujino"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 503500,
+    "collectionNo": 201,
+    "name": "anastasia",
+    "fullName": "アナスタシア",
+    "fullNameChinese": "阿纳斯塔西娅",
+    "aliases": [
+      "Anastasia",
+      "皇女"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 703000,
+    "collectionNo": 202,
+    "name": "atalante(alter)",
+    "fullName": "アタランテ〔オルタ〕",
+    "fullNameChinese": "阿塔兰忒〔Alter〕",
+    "aliases": [
+      "Atalante (Alter)",
+      "AtalanteAlter",
+      "狂塔",
+      "amp;黑塔",
+      "amp;黑塔喵"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 503600,
+    "collectionNo": 203,
+    "name": "avicebron",
+    "fullName": "アヴィケブロン",
+    "fullNameChinese": "阿维斯布隆",
+    "aliases": [
+      "Avicebron",
+      "黑C"
+    ],
+    "className": "caster",
+    "rarity": 3
+  },
+  {
+    "characterId": 1100600,
+    "collectionNo": 204,
+    "name": "antoniosalieri",
+    "fullName": "アントニオ・サリエリ",
+    "fullNameChinese": "安东尼奥·萨列里",
+    "aliases": [
+      "Antonio Salieri",
+      "AntonioSalieri",
+      "萨老师"
+    ],
+    "className": "avenger",
+    "rarity": 3
+  },
+  {
+    "characterId": 402800,
+    "collectionNo": 205,
+    "name": "ivantheterrible",
+    "fullName": "イヴァン雷帝",
+    "fullNameChinese": "伊凡雷帝",
+    "aliases": [
+      "Ivan the Terrible",
+      "IvantheTerrible",
+      "雷帝"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 402900,
+    "collectionNo": 206,
+    "name": "achilles",
+    "fullName": "アキレウス",
+    "fullNameChinese": "阿喀琉斯",
+    "aliases": [
+      "Achilles",
+      "脚后跟"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 203000,
+    "collectionNo": 207,
+    "name": "chiron",
+    "fullName": "ケイローン",
+    "fullNameChinese": "喀戎",
+    "aliases": [
+      "Chiron",
+      "师匠",
+      "amp;马老师"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 503800,
+    "collectionNo": 208,
+    "name": "sieg",
+    "fullName": "ジーク",
+    "fullNameChinese": "齐格",
+    "aliases": [
+      "Sieg",
+      "奥特飞"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 1000700,
+    "collectionNo": 209,
+    "name": "okitasouji(alter)",
+    "fullName": "沖田総司〔オルタ〕",
+    "fullNameChinese": "冲田总司〔Alter〕",
+    "aliases": [
+      "Okita Souji (Alter)",
+      "OkitaSoujiAlter",
+      "魔神总司",
+      "amp;炼狱Alter"
+    ],
+    "className": "alterEgo",
+    "rarity": 5
+  },
+  {
+    "characterId": 603300,
+    "collectionNo": 210,
+    "name": "okadaizo",
+    "fullName": "岡田以蔵",
+    "fullNameChinese": "冈田以藏",
+    "aliases": [
+      "Okada Izo",
+      "OkadaIzo"
+    ],
+    "className": "assassin",
+    "rarity": 3
+  },
+  {
+    "characterId": 403000,
+    "collectionNo": 211,
+    "name": "sakamotoryouma",
+    "fullName": "坂本龍馬",
+    "fullNameChinese": "坂本龙马",
+    "aliases": [
+      "Sakamoto Ryouma",
+      "SakamotoRyouma"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 203100,
+    "collectionNo": 212,
+    "name": "napoleon",
+    "fullName": "ナポレオン",
+    "fullNameChinese": "拿破仑",
+    "aliases": [
+      "Napoleon",
+      "拿皇"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 103300,
+    "collectionNo": 213,
+    "name": "sigurd",
+    "fullName": "シグルド",
+    "fullNameChinese": "齐格鲁德",
+    "aliases": [
+      "Sigurd",
+      "西哥"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 303300,
+    "collectionNo": 214,
+    "name": "valkyrie",
+    "fullName": "ワルキューレ",
+    "fullNameChinese": "瓦尔基里",
+    "aliases": [
+      "Valkyrie",
+      "女武神"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 503900,
+    "collectionNo": 215,
+    "name": "scáthach-skadi",
+    "fullName": "スカサハ＝スカディ",
+    "fullNameChinese": "斯卡哈·斯卡蒂",
+    "aliases": [
+      "Scáthach-Skadi",
+      "ScthachSkadi",
+      "cba",
+      "amp;绿拐"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 203200,
+    "collectionNo": 216,
+    "name": "jeanned'arc",
+    "fullName": "ジャンヌ・ダルク",
+    "fullNameChinese": "贞德",
+    "aliases": [
+      "Jeanne d'Arc",
+      "JeannedArc",
+      "鲸贞姑",
+      "amp;水白贞",
+      "amp;弓白贞",
+      "amp;贞环转"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 303400,
+    "collectionNo": 217,
+    "name": "ibaraki-douji",
+    "fullName": "茨木童子",
+    "fullNameChinese": "茨木童子",
+    "aliases": [
+      "Ibaraki-Douji",
+      "IbarakiDouji",
+      "枪茨木"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 603400,
+    "collectionNo": 218,
+    "name": "ushiwakamaru",
+    "fullName": "牛若丸",
+    "fullNameChinese": "牛若丸",
+    "aliases": [
+      "Ushiwakamaru",
+      "杀牛若"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 703100,
+    "collectionNo": 219,
+    "name": "jeanned'arc(alter)",
+    "fullName": "ジャンヌ・ダルク〔オルタ〕",
+    "fullNameChinese": "贞德〔Alter〕",
+    "aliases": [
+      "Jeanne d'Arc (Alter)",
+      "JeannedArcAlter",
+      "水黑贞",
+      "amp;狂黑贞"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 2300200,
+    "collectionNo": 220,
+    "name": "bb",
+    "fullName": "ＢＢ",
+    "fullNameChinese": "BB",
+    "aliases": [
+      "水B"
+    ],
+    "className": "moonCancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 103400,
+    "collectionNo": 221,
+    "name": "queenmedb",
+    "fullName": "女王メイヴ",
+    "fullNameChinese": "女王梅芙",
+    "aliases": [
+      "Queen Medb",
+      "QueenMedb",
+      "剑梅芙"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 2500300,
+    "collectionNo": 222,
+    "name": "mysteriousheroinexx",
+    "fullName": "謎のヒロインXX",
+    "fullNameChinese": "谜之女主角XX",
+    "aliases": [
+      "Mysterious Heroine XX",
+      "MysteriousHeroineXX",
+      "水枪X",
+      "amp;XX毛"
+    ],
+    "className": "foreigner",
+    "rarity": 4
+  },
+  {
+    "characterId": 103500,
+    "collectionNo": 223,
+    "name": "diarmuiduaduibhne",
+    "fullName": "ディルムッド・オディナ",
+    "fullNameChinese": "迪尔姆德·奥迪那",
+    "aliases": [
+      "Diarmuid Ua Duibhne",
+      "DiarmuidUaDuibhne",
+      "剑刷"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 1000800,
+    "collectionNo": 224,
+    "name": "sitonai",
+    "fullName": "シトナイ",
+    "fullNameChinese": "志度内",
+    "aliases": [
+      "Sitonai",
+      "AE伊莉雅",
+      "amp;西托奈"
+    ],
+    "className": "alterEgo",
+    "rarity": 5
+  },
+  {
+    "characterId": 504000,
+    "collectionNo": 225,
+    "name": "shuten-douji",
+    "fullName": "酒呑童子",
+    "fullNameChinese": "酒吞童子",
+    "aliases": [
+      "Shuten-Douji",
+      "ShutenDouji",
+      "术酒吞"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 703200,
+    "collectionNo": 226,
+    "name": "xiangyu",
+    "fullName": "項羽",
+    "fullNameChinese": "项羽",
+    "aliases": [
+      "Xiang Yu",
+      "XiangYu",
+      "西楚霸王",
+      "amp;重瞳"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 103600,
+    "collectionNo": 227,
+    "name": "princeoflanling",
+    "fullName": "蘭陵王",
+    "fullNameChinese": "兰陵王",
+    "aliases": [
+      "Prince of Lan Ling",
+      "PrinceofLanLing"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 303500,
+    "collectionNo": 228,
+    "name": "qinliangyu",
+    "fullName": "秦良玉",
+    "fullNameChinese": "秦良玉",
+    "aliases": [
+      "Qin Liangyu",
+      "QinLiangyu",
+      "忠贞"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 900600,
+    "collectionNo": 229,
+    "name": "qinshihuang",
+    "fullName": "始皇帝",
+    "fullNameChinese": "始皇帝",
+    "aliases": [
+      "Qin Shi Huang",
+      "QinShiHuang",
+      "嬴政",
+      "amp;秦始皇",
+      "amp;祖政"
+    ],
+    "className": "ruler",
+    "rarity": 5
+  },
+  {
+    "characterId": 603500,
+    "collectionNo": 230,
+    "name": "yumei-ren",
+    "fullName": "虞美人",
+    "fullNameChinese": "虞美人",
+    "aliases": [
+      "Yu Mei-ren",
+      "YuMeiren",
+      "虞姬",
+      "amp;雏罂"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 403100,
+    "collectionNo": 231,
+    "name": "redhare",
+    "fullName": "赤兎馬",
+    "fullNameChinese": "赤兔马",
+    "aliases": [
+      "Red Hare",
+      "RedHare",
+      "丹驹"
+    ],
+    "className": "rider",
+    "rarity": 3
+  },
+  {
+    "characterId": 303600,
+    "collectionNo": 232,
+    "name": "bradamante",
+    "fullName": "ブラダマンテ",
+    "fullNameChinese": "布拉达曼特",
+    "aliases": [
+      "Bradamante",
+      "布妹"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 900700,
+    "collectionNo": 233,
+    "name": "quetzalcoatl(samba/santa)",
+    "fullName": "ケツァル・コアトル〔サンバ／サンタ〕",
+    "fullNameChinese": "魁札尔·科亚特尔〔桑巴／圣诞〕",
+    "aliases": [
+      "Quetzalcoatl (Samba/Santa)",
+      "QuetzalcoatlSambaSanta",
+      "圣诞羽蛇神"
+    ],
+    "className": "ruler",
+    "rarity": 4
+  },
+  {
+    "characterId": 103700,
+    "collectionNo": 234,
+    "name": "beni-enma",
+    "fullName": "紅閻魔",
+    "fullNameChinese": "红阎魔",
+    "aliases": [
+      "Beni-Enma",
+      "BeniEnma",
+      "小麻雀"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 603600,
+    "collectionNo": 235,
+    "name": "lishuwen",
+    "fullName": "李書文",
+    "fullNameChinese": "李书文",
+    "aliases": [
+      "Li Shuwen",
+      "LiShuwen",
+      "李大师",
+      "amp;杀阶李书文",
+      "amp;老李"
+    ],
+    "className": "assassin",
+    "rarity": 5
+  },
+  {
+    "characterId": 504100,
+    "collectionNo": 236,
+    "name": "miyuedelfelt",
+    "fullName": "美遊・エーデルフェルト",
+    "fullNameChinese": "美游·艾德费尔特",
+    "aliases": [
+      "Miyu Edelfelt",
+      "MiyuEdelfelt"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 504200,
+    "collectionNo": 237,
+    "name": "murasakishikibu",
+    "fullName": "紫式部",
+    "fullNameChinese": "紫式部",
+    "aliases": [
+      "Murasaki Shikibu",
+      "MurasakiShikibu"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 1000900,
+    "collectionNo": 238,
+    "name": "kingprotea",
+    "fullName": "キングプロテア",
+    "fullNameChinese": "Kingprotea",
+    "aliases": [
+      "帝王花"
+    ],
+    "className": "alterEgo",
+    "rarity": 5
+  },
+  {
+    "characterId": 603700,
+    "collectionNo": 239,
+    "name": "kama",
+    "fullName": "カーマ",
+    "fullNameChinese": "迦摩",
+    "aliases": [
+      "Kama",
+      "黑樱",
+      "amp;杀库拉",
+      "amp;撒库拉"
+    ],
+    "className": "assassin",
+    "rarity": 5
+  },
+  {
+    "characterId": 403200,
+    "collectionNo": 241,
+    "name": "simayi(reines)",
+    "fullName": "司馬懿〔ライネス〕",
+    "fullNameChinese": "司马懿〔莱妮丝〕",
+    "aliases": [
+      "Sima Yi (Reines)",
+      "SimaYiReines"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 900800,
+    "collectionNo": 242,
+    "name": "astraea",
+    "fullName": "アストライア",
+    "fullNameChinese": "阿斯特赖亚",
+    "aliases": [
+      "Astraea",
+      "金钻头",
+      "amp;露维亚"
+    ],
+    "className": "ruler",
+    "rarity": 4
+  },
+  {
+    "characterId": 603900,
+    "collectionNo": 243,
+    "name": "gray",
+    "fullName": "グレイ",
+    "fullNameChinese": "格蕾",
+    "aliases": [
+      "Gray",
+      "小灰"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 2300300,
+    "collectionNo": 244,
+    "name": "greatstonestatuegod",
+    "fullName": "大いなる石像神",
+    "fullNameChinese": "伟大的石像神",
+    "aliases": [
+      "Great Stone Statue God",
+      "GreatStoneStatueGod",
+      "吉娜可·加里吉利",
+      "amp;大象"
+    ],
+    "className": "moonCancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 103900,
+    "collectionNo": 245,
+    "name": "lakshmibai",
+    "fullName": "ラクシュミー・バーイー",
+    "fullNameChinese": "拉克什米·芭伊",
+    "aliases": [
+      "Lakshmi Bai",
+      "LakshmiBai",
+      "印度贞德",
+      "amp;章西女王",
+      "amp;詹西女王"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 203400,
+    "collectionNo": 246,
+    "name": "williamtell",
+    "fullName": "ウィリアム・テル",
+    "fullNameChinese": "威廉·退尔",
+    "aliases": [
+      "William Tell",
+      "WilliamTell"
+    ],
+    "className": "archer",
+    "rarity": 3
+  },
+  {
+    "characterId": 703300,
+    "collectionNo": 247,
+    "name": "arjuna(alter)",
+    "fullName": "アルジュナ〔オルタ〕",
+    "fullNameChinese": "阿周那〔Alter〕",
+    "aliases": [
+      "Arjuna (Alter)",
+      "ArjunaAlter",
+      "芭娜娜",
+      "amp;狂娜"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 203300,
+    "collectionNo": 248,
+    "name": "aśvatthāman",
+    "fullName": "アシュヴァッターマン",
+    "fullNameChinese": "马嘶",
+    "aliases": [
+      "Aśvatthāman",
+      "Avatthman"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 504300,
+    "collectionNo": 249,
+    "name": "asclepius",
+    "fullName": "アスクレピオス",
+    "fullNameChinese": "阿斯克勒庇俄斯",
+    "aliases": [
+      "Asclepius",
+      "医神"
+    ],
+    "className": "caster",
+    "rarity": 3
+  },
+  {
+    "characterId": 1100700,
+    "collectionNo": 250,
+    "name": "odanobunaga",
+    "fullName": "織田信長",
+    "fullNameChinese": "织田信长",
+    "aliases": [
+      "Oda Nobunaga",
+      "OdaNobunaga",
+      "仇信"
+    ],
+    "className": "avenger",
+    "rarity": 5
+  },
+  {
+    "characterId": 703500,
+    "collectionNo": 251,
+    "name": "morinagayoshi",
+    "fullName": "森長可",
+    "fullNameChinese": "森长可",
+    "aliases": [
+      "Mori Nagayoshi",
+      "MoriNagayoshi"
+    ],
+    "className": "berserker",
+    "rarity": 3
+  },
+  {
+    "characterId": 303800,
+    "collectionNo": 252,
+    "name": "nagaokagetora",
+    "fullName": "長尾景虎",
+    "fullNameChinese": "长尾景虎",
+    "aliases": [
+      "Nagao Kagetora",
+      "NagaoKagetora",
+      "上杉谦信"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 403500,
+    "collectionNo": 253,
+    "name": "leonardodavinci",
+    "fullName": "レオナルド・ダ・ヴィンチ",
+    "fullNameChinese": "莱昂纳多·达·芬奇",
+    "aliases": [
+      "Leonardo da Vinci",
+      "LeonardodaVinci",
+      "达芬奇lily",
+      "amp;小芬奇",
+      "amp;小达芬奇",
+      "amp;达芬骑"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 703600,
+    "collectionNo": 261,
+    "name": "miyamotomusashi",
+    "fullName": "宮本武蔵",
+    "fullNameChinese": "宫本武藏",
+    "aliases": [
+      "Miyamoto Musashi",
+      "MiyamotoMusashi",
+      "狂武藏"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 203600,
+    "collectionNo": 262,
+    "name": "osakabehime",
+    "fullName": "刑部姫",
+    "fullNameChinese": "刑部姬",
+    "aliases": [
+      "Osakabehime",
+      "弓刑部姬"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 403600,
+    "collectionNo": 263,
+    "name": "carmilla",
+    "fullName": "カーミラ",
+    "fullNameChinese": "卡米拉",
+    "aliases": [
+      "Carmilla",
+      "骑大龙娘"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 104000,
+    "collectionNo": 264,
+    "name": "katsushikahokusai",
+    "fullName": "葛飾北斎",
+    "fullNameChinese": "葛饰北斋",
+    "aliases": [
+      "Katsushika Hokusai",
+      "KatsushikaHokusai",
+      "剑北斋"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 900900,
+    "collectionNo": 265,
+    "name": "altriapendragon",
+    "fullName": "アルトリア・ペンドラゴン",
+    "fullNameChinese": "阿尔托莉雅·潘德拉贡",
+    "aliases": [
+      "Altria Pendragon",
+      "AltriaPendragon",
+      "尺呆",
+      "amp;兔子王",
+      "amp;荷官"
+    ],
+    "className": "ruler",
+    "rarity": 5
+  },
+  {
+    "characterId": 304000,
+    "collectionNo": 266,
+    "name": "mysteriousalteregoλ",
+    "fullName": "謎のアルターエゴ・Λ",
+    "fullNameChinese": "谜之Alterego·Λ",
+    "aliases": [
+      "Mysterious Alter Ego Λ",
+      "MysteriousAlterEgo",
+      "枪莉莉丝"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 604000,
+    "collectionNo": 267,
+    "name": "okitaj.souji",
+    "fullName": "オキタ・Ｊ・ソウジ",
+    "fullNameChinese": "冲田·J·总司",
+    "aliases": [
+      "Okita J. Souji",
+      "OkitaJSouji",
+      "杀总司"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 1100900,
+    "collectionNo": 268,
+    "name": "spaceishtar",
+    "fullName": "スペース・イシュタル",
+    "fullNameChinese": "太空伊什塔尔",
+    "aliases": [
+      "Space Ishtar",
+      "SpaceIshtar",
+      "宇宙凛",
+      "amp;太空凛",
+      "amp;S凛"
+    ],
+    "className": "avenger",
+    "rarity": 5
+  },
+  {
+    "characterId": 203700,
+    "collectionNo": 269,
+    "name": "calamityjane",
+    "fullName": "カラミティ・ジェーン",
+    "fullNameChinese": "灾星简",
+    "aliases": [
+      "Calamity Jane",
+      "CalamityJane"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 104100,
+    "collectionNo": 270,
+    "name": "astolfo",
+    "fullName": "アストルフォ",
+    "fullNameChinese": "阿斯托尔福",
+    "aliases": [
+      "Astolfo",
+      "剑阿福",
+      "amp;剑福"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 203900,
+    "collectionNo": 271,
+    "name": "florencenightingale(santa)",
+    "fullName": "ナイチンゲール〔サンタ〕",
+    "fullNameChinese": "南丁格尔〔圣诞〕",
+    "aliases": [
+      "Florence Nightingale (Santa)",
+      "FlorenceNightingaleSanta",
+      "弓南丁"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 203800,
+    "collectionNo": 272,
+    "name": "superorion",
+    "fullName": "超人オリオン",
+    "fullNameChinese": "超人俄里翁",
+    "aliases": [
+      "Super Orion",
+      "SuperOrion",
+      "超人熊"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 403900,
+    "collectionNo": 273,
+    "name": "mandricardo",
+    "fullName": "マンドリカルド",
+    "fullNameChinese": "曼迪卡尔多",
+    "aliases": [
+      "Mandricardo",
+      "大老师"
+    ],
+    "className": "rider",
+    "rarity": 3
+  },
+  {
+    "characterId": 404000,
+    "collectionNo": 274,
+    "name": "europa",
+    "fullName": "エウロペ",
+    "fullNameChinese": "欧罗巴",
+    "aliases": [
+      "Europa"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 2500400,
+    "collectionNo": 275,
+    "name": "yangguifei",
+    "fullName": "楊貴妃",
+    "fullNameChinese": "杨贵妃",
+    "aliases": [
+      "Yang Guifei",
+      "YangGuifei",
+      "杨玉环",
+      "amp;琰女"
+    ],
+    "className": "foreigner",
+    "rarity": 5
+  },
+  {
+    "characterId": 204000,
+    "collectionNo": 276,
+    "name": "seishounagon",
+    "fullName": "清少納言",
+    "fullNameChinese": "清少纳言",
+    "aliases": [
+      "Sei Shounagon",
+      "SeiShounagon"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 403800,
+    "collectionNo": 277,
+    "name": "odysseus",
+    "fullName": "オデュッセウス",
+    "fullNameChinese": "奥德修斯",
+    "aliases": [
+      "Odysseus"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 104200,
+    "collectionNo": 278,
+    "name": "dioscuri",
+    "fullName": "ディオスクロイ",
+    "fullNameChinese": "狄俄斯库里",
+    "aliases": [
+      "Dioscuri",
+      "双子座"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 304100,
+    "collectionNo": 279,
+    "name": "caenis",
+    "fullName": "カイニス",
+    "fullNameChinese": "凯妮斯",
+    "aliases": [
+      "Caenis",
+      "沸羊羊"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 304200,
+    "collectionNo": 280,
+    "name": "romulus=quirinus",
+    "fullName": "ロムルス＝クィリヌス",
+    "fullNameChinese": "罗穆路斯·奎里努斯",
+    "aliases": [
+      "Romulus=Quirinus",
+      "RomulusQuirinus",
+      "神祖"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 2500500,
+    "collectionNo": 281,
+    "name": "voyager",
+    "fullName": "ボイジャー",
+    "fullNameChinese": "旅行者",
+    "aliases": [
+      "Voyager",
+      "小王子"
+    ],
+    "className": "foreigner",
+    "rarity": 5
+  },
+  {
+    "characterId": 703700,
+    "collectionNo": 282,
+    "name": "kijyokoyo",
+    "fullName": "鬼女紅葉",
+    "fullNameChinese": "鬼女红叶",
+    "aliases": [
+      "Kijyo Koyo",
+      "KijyoKoyo",
+      "恐龙"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 304300,
+    "collectionNo": 283,
+    "name": "utsumierice",
+    "fullName": "宇津見エリセ",
+    "fullNameChinese": "宇津见绘里濑",
+    "aliases": [
+      "Utsumi Erice",
+      "UtsumiErice",
+      "宇津见绘里世",
+      "amp;艾莉瑟"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 504500,
+    "collectionNo": 284,
+    "name": "altriacaster",
+    "fullName": "アルトリア・キャスター",
+    "fullNameChinese": "阿尔托莉雅·卡斯特",
+    "aliases": [
+      "Altria Caster",
+      "AltriaCaster",
+      "C呆",
+      "amp;术呆"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 2300400,
+    "collectionNo": 285,
+    "name": "sessyoinkiara",
+    "fullName": "殺生院キアラ",
+    "fullNameChinese": "杀生院祈荒",
+    "aliases": [
+      "Sessyoin Kiara",
+      "SessyoinKiara",
+      "瞑生院祈荒"
+    ],
+    "className": "moonCancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 204200,
+    "collectionNo": 286,
+    "name": "illyasvielvoneinzbern",
+    "fullName": "イリヤスフィール・フォン・アインツベルン",
+    "fullNameChinese": "伊莉雅丝菲尔·冯·爱因兹贝伦",
+    "aliases": [
+      "Illyasviel von Einzbern",
+      "IllyasvielvonEinzbern",
+      "弓伊莉雅"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 703800,
+    "collectionNo": 287,
+    "name": "brynhild",
+    "fullName": "ブリュンヒルデ",
+    "fullNameChinese": "布伦希尔德",
+    "aliases": [
+      "Brynhild",
+      "狂布姐"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 304400,
+    "collectionNo": 288,
+    "name": "yumei-ren",
+    "fullName": "虞美人",
+    "fullNameChinese": "虞美人",
+    "aliases": [
+      "Yu Mei-ren",
+      "YuMeiren",
+      "枪虞姬",
+      "amp;枪雏罂"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 2500700,
+    "collectionNo": 289,
+    "name": "abigailwilliams(summer)",
+    "fullName": "アビゲイル・ウィリアムズ〔夏〕",
+    "fullNameChinese": "阿比盖尔·威廉姆斯〔夏〕",
+    "aliases": [
+      "Abigail Williams (Summer)",
+      "AbigailWilliamsSummer"
+    ],
+    "className": "foreigner",
+    "rarity": 5
+  },
+  {
+    "characterId": 104500,
+    "collectionNo": 290,
+    "name": "tomoegozen",
+    "fullName": "巴御前",
+    "fullNameChinese": "巴御前",
+    "aliases": [
+      "Tomoe Gozen",
+      "TomoeGozen",
+      "剑巴御前"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 404100,
+    "collectionNo": 291,
+    "name": "murasakishikibu",
+    "fullName": "紫式部",
+    "fullNameChinese": "紫式部",
+    "aliases": [
+      "Murasaki Shikibu",
+      "MurasakiShikibu",
+      "骑紫式部"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 901000,
+    "collectionNo": 292,
+    "name": "himiko",
+    "fullName": "卑弥呼",
+    "fullNameChinese": "卑弥呼",
+    "aliases": [
+      "Himiko",
+      "邪马台国女王"
+    ],
+    "className": "ruler",
+    "rarity": 5
+  },
+  {
+    "characterId": 104400,
+    "collectionNo": 293,
+    "name": "saitohajime",
+    "fullName": "斎藤一",
+    "fullNameChinese": "斋藤一",
+    "aliases": [
+      "Saito Hajime",
+      "SaitoHajime"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 2500600,
+    "collectionNo": 295,
+    "name": "vangogh",
+    "fullName": "ヴァン・ゴッホ",
+    "fullNameChinese": "梵高",
+    "aliases": [
+      "Van Gogh",
+      "VanGogh"
+    ],
+    "className": "foreigner",
+    "rarity": 5
+  },
+  {
+    "characterId": 403700,
+    "collectionNo": 296,
+    "name": "nemo",
+    "fullName": "ネモ",
+    "fullNameChinese": "尼莫",
+    "aliases": [
+      "Nemo",
+      "船长"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 1001000,
+    "collectionNo": 297,
+    "name": "ashiyadouman",
+    "fullName": "蘆屋道満",
+    "fullNameChinese": "芦屋道满",
+    "aliases": [
+      "Ashiya Douman",
+      "AshiyaDouman"
+    ],
+    "className": "alterEgo",
+    "rarity": 5
+  },
+  {
+    "characterId": 104700,
+    "collectionNo": 298,
+    "name": "watanabe-no-tsuna",
+    "fullName": "渡辺綱",
+    "fullNameChinese": "渡边纲",
+    "aliases": [
+      "Watanabe-no-Tsuna",
+      "WatanabenoTsuna"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 104600,
+    "collectionNo": 299,
+    "name": "ibuki-douji",
+    "fullName": "伊吹童子",
+    "fullNameChinese": "伊吹童子",
+    "aliases": [
+      "Ibuki-Douji",
+      "IbukiDouji"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 304600,
+    "collectionNo": 300,
+    "name": "vritra",
+    "fullName": "ヴリトラ",
+    "fullNameChinese": "弗栗多",
+    "aliases": [
+      "Vritra",
+      "福利多"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 104800,
+    "collectionNo": 301,
+    "name": "karna(santa)",
+    "fullName": "カルナ〔サンタ〕",
+    "fullNameChinese": "迦尔纳〔圣诞〕",
+    "aliases": [
+      "Karna (Santa)",
+      "KarnaSanta"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 104900,
+    "collectionNo": 302,
+    "name": "senjimuramasa",
+    "fullName": "千子村正",
+    "fullNameChinese": "千子村正",
+    "aliases": [
+      "Senji Muramasa",
+      "SenjiMuramasa",
+      "士郎"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 1101000,
+    "collectionNo": 303,
+    "name": "taira-no-kagekiyo",
+    "fullName": "平景清",
+    "fullNameChinese": "平景清",
+    "aliases": [
+      "Taira-no-Kagekiyo",
+      "TairanoKagekiyo"
+    ],
+    "className": "avenger",
+    "rarity": 5
+  },
+  {
+    "characterId": 604100,
+    "collectionNo": 304,
+    "name": "kiichihogen",
+    "fullName": "鬼一法眼",
+    "fullNameChinese": "鬼一法眼",
+    "aliases": [
+      "Kiichi Hogen",
+      "KiichiHogen"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 901100,
+    "collectionNo": 305,
+    "name": "amor(caren)",
+    "fullName": "アムール〔カレン〕",
+    "fullNameChinese": "阿摩耳〔卡莲〕",
+    "aliases": [
+      "Amor (Caren)",
+      "AmorCaren"
+    ],
+    "className": "ruler",
+    "rarity": 5
+  },
+  {
+    "characterId": 703900,
+    "collectionNo": 306,
+    "name": "galatea",
+    "fullName": "ガラテア",
+    "fullNameChinese": "伽拉忒亚",
+    "aliases": [
+      "Galatea"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 504600,
+    "collectionNo": 307,
+    "name": "misscrane",
+    "fullName": "ミス・クレーン",
+    "fullNameChinese": "克莱恩小姐",
+    "aliases": [
+      "Miss Crane",
+      "MissCrane",
+      "鹤小姐"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 2500800,
+    "collectionNo": 308,
+    "name": "mysteriousidolx(alter)",
+    "fullName": "謎のアイドルX〔オルタ〕",
+    "fullNameChinese": "谜之偶像X〔Alter〕",
+    "aliases": [
+      "Mysterious Idol X (Alter)",
+      "MysteriousIdolXAlter"
+    ],
+    "className": "foreigner",
+    "rarity": 4
+  },
+  {
+    "characterId": 704000,
+    "collectionNo": 309,
+    "name": "morgan",
+    "fullName": "モルガン",
+    "fullNameChinese": "摩根",
+    "aliases": [
+      "Morgan"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 105000,
+    "collectionNo": 310,
+    "name": "tamlingawain",
+    "fullName": "妖精騎士ガウェイン",
+    "fullNameChinese": "妖精骑士高文",
+    "aliases": [
+      "Tam Lin Gawain",
+      "TamLinGawain",
+      "妖高"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 204300,
+    "collectionNo": 311,
+    "name": "tamlintristan",
+    "fullName": "妖精騎士トリスタン",
+    "fullNameChinese": "妖精骑士崔斯坦",
+    "aliases": [
+      "Tam Lin Tristan",
+      "TamLinTristan",
+      "妖崔"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 304800,
+    "collectionNo": 312,
+    "name": "tamlinlancelot",
+    "fullName": "妖精騎士ランスロット",
+    "fullNameChinese": "妖精骑士兰斯洛特",
+    "aliases": [
+      "Tam Lin Lancelot",
+      "TamLinLancelot",
+      "妖兰"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 304700,
+    "collectionNo": 313,
+    "name": "percival",
+    "fullName": "パーシヴァル",
+    "fullNameChinese": "珀西瓦尔",
+    "aliases": [
+      "Percival",
+      "帕西瓦尔"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 604200,
+    "collectionNo": 314,
+    "name": "koyanskayaoflight",
+    "fullName": "光のコヤンスカヤ",
+    "fullNameChinese": "光之高扬斯卡娅",
+    "aliases": [
+      "Koyanskaya of Light",
+      "KoyanskayaofLight",
+      "杀狐",
+      "amp;光狐",
+      "amp;红拐",
+      "amp;杀兔",
+      "amp;光兔"
+    ],
+    "className": "assassin",
+    "rarity": 5
+  },
+  {
+    "characterId": 404200,
+    "collectionNo": 315,
+    "name": "habetrot",
+    "fullName": "ハベトロット",
+    "fullNameChinese": "哈贝特洛特",
+    "aliases": [
+      "Habetrot",
+      "哈贝喵"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 2800100,
+    "collectionNo": 316,
+    "name": "oberon",
+    "fullName": "オベロン",
+    "fullNameChinese": "奥伯龙",
+    "aliases": [
+      "Oberon",
+      "蛾子",
+      "amp;奥博龙",
+      "amp;奥贝龙",
+      "amp;奥伯隆"
+    ],
+    "className": "pretender",
+    "rarity": 5
+  },
+  {
+    "characterId": 105100,
+    "collectionNo": 317,
+    "name": "okitasouji(alter)",
+    "fullName": "沖田総司〔オルタ〕",
+    "fullNameChinese": "冲田总司〔Alter〕",
+    "aliases": [
+      "Okita Souji (Alter)",
+      "OkitaSoujiAlter"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 204400,
+    "collectionNo": 318,
+    "name": "anastasia&viy",
+    "fullName": "アナスタシア＆ヴィイ",
+    "fullNameChinese": "阿纳斯塔西娅＆维",
+    "aliases": [
+      "Anastasia & Viy",
+      "AnastasiaViy"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 504800,
+    "collectionNo": 319,
+    "name": "charlottecorday",
+    "fullName": "シャルロット・コルデー",
+    "fullNameChinese": "夏洛特·科黛",
+    "aliases": [
+      "Charlotte Corday",
+      "CharlotteCorday"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 901200,
+    "collectionNo": 320,
+    "name": "leonardodavinci",
+    "fullName": "レオナルド・ダ・ヴィンチ",
+    "fullNameChinese": "莱昂纳多·达·芬奇",
+    "aliases": [
+      "Leonardo da Vinci",
+      "LeonardodaVinci"
+    ],
+    "className": "ruler",
+    "rarity": 4
+  },
+  {
+    "characterId": 1101100,
+    "collectionNo": 321,
+    "name": "kama",
+    "fullName": "カーマ",
+    "fullNameChinese": "迦摩",
+    "aliases": [
+      "Kama",
+      "泡馍"
+    ],
+    "className": "avenger",
+    "rarity": 5
+  },
+  {
+    "characterId": 404500,
+    "collectionNo": 322,
+    "name": "caenis",
+    "fullName": "カイニス",
+    "fullNameChinese": "凯妮斯",
+    "aliases": [
+      "Caenis"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 704100,
+    "collectionNo": 323,
+    "name": "seishounagon",
+    "fullName": "清少納言",
+    "fullNameChinese": "清少纳言",
+    "aliases": [
+      "Sei Shounagon",
+      "SeiShounagon"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 2501000,
+    "collectionNo": 324,
+    "name": "jacquesdemolay",
+    "fullName": "ジャック・ド・モレー",
+    "fullNameChinese": "雅克·德·莫莱",
+    "aliases": [
+      "Jacques de Molay",
+      "JacquesdeMolay",
+      "女团长"
+    ],
+    "className": "foreigner",
+    "rarity": 5
+  },
+  {
+    "characterId": 204500,
+    "collectionNo": 325,
+    "name": "zenobia",
+    "fullName": "ゼノビア",
+    "fullNameChinese": "芝诺比阿",
+    "aliases": [
+      "Zenobia"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 404600,
+    "collectionNo": 326,
+    "name": "elisabethbáthory(cinderella)",
+    "fullName": "エリザベート・バートリー〔シンデレラ〕",
+    "fullNameChinese": "伊丽莎白·巴托里〔灰姑娘〕",
+    "aliases": [
+      "Elisabeth Báthory (Cinderella)",
+      "ElisabethBthoryCinderella",
+      "童话龙娘",
+      "amp;R龙娘"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 504900,
+    "collectionNo": 327,
+    "name": "izumo-no-okuni",
+    "fullName": "出雲阿国",
+    "fullNameChinese": "出云阿国",
+    "aliases": [
+      "Izumo-no-Okuni",
+      "IzumonoOkuni"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 1101200,
+    "collectionNo": 328,
+    "name": "mysteriousranmarux",
+    "fullName": "謎の蘭丸X",
+    "fullNameChinese": "谜之兰丸X",
+    "aliases": [
+      "Mysterious Ranmaru X",
+      "MysteriousRanmaruX",
+      "森兰丸"
+    ],
+    "className": "avenger",
+    "rarity": 4
+  },
+  {
+    "characterId": 305000,
+    "collectionNo": 329,
+    "name": "sakamotoryouma",
+    "fullName": "坂本龍馬",
+    "fullNameChinese": "坂本龙马",
+    "aliases": [
+      "Sakamoto Ryouma",
+      "SakamotoRyouma",
+      "枪龙马"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 505000,
+    "collectionNo": 330,
+    "name": "martha(santa)",
+    "fullName": "マルタ〔サンタ〕",
+    "fullNameChinese": "玛尔达〔圣诞〕",
+    "aliases": [
+      "Martha (Santa)",
+      "MarthaSanta",
+      "术马达",
+      "amp;术马大"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 404300,
+    "collectionNo": 331,
+    "name": "taigongwang",
+    "fullName": "太公望",
+    "fullNameChinese": "太公望",
+    "aliases": [
+      "Taigong Wang",
+      "TaigongWang",
+      "姜太公",
+      "amp;钓鱼佬"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 404400,
+    "collectionNo": 332,
+    "name": "dobrynyanikitich",
+    "fullName": "ドブルイニャ・ニキチッチ",
+    "fullNameChinese": "多布雷尼亚·尼基季奇",
+    "aliases": [
+      "Dobrynya Nikitich",
+      "DobrynyaNikitich"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 2500900,
+    "collectionNo": 334,
+    "name": "koyanskayaofdark",
+    "fullName": "闇のコヤンスカヤ",
+    "fullNameChinese": "暗之高扬斯卡娅",
+    "aliases": [
+      "Koyanskaya of Dark",
+      "KoyanskayaofDark",
+      "暗狐",
+      "amp;暗兔"
+    ],
+    "className": "foreigner",
+    "rarity": 5
+  },
+  {
+    "characterId": 2800200,
+    "collectionNo": 335,
+    "name": "hephaistíon",
+    "fullName": "ヘファイスティオン",
+    "fullNameChinese": "赫费斯提翁",
+    "aliases": [
+      "Hephaistíon",
+      "Hephaiston",
+      "faker",
+      "amp;Faker"
+    ],
+    "className": "pretender",
+    "rarity": 4
+  },
+  {
+    "characterId": 1001100,
+    "collectionNo": 336,
+    "name": "manannanmaclir(bazett)",
+    "fullName": "マナナン・マク・リール〔バゼット〕",
+    "fullNameChinese": "马纳南·麦克·利尔〔巴泽特〕",
+    "aliases": [
+      "Manannan mac Lir (Bazett)",
+      "ManannanmacLirBazett"
+    ],
+    "className": "alterEgo",
+    "rarity": 5
+  },
+  {
+    "characterId": 105300,
+    "collectionNo": 337,
+    "name": "haibàtrưng",
+    "fullName": "徴姉妹",
+    "fullNameChinese": "征氏姐妹",
+    "aliases": [
+      "Hai Bà Trưng",
+      "HaiBTrng",
+      "二征"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 1001200,
+    "collectionNo": 338,
+    "name": "taisuixingjun",
+    "fullName": "太歳星君",
+    "fullNameChinese": "太岁星君",
+    "aliases": [
+      "Taisui Xingjun",
+      "TaisuiXingjun"
+    ],
+    "className": "alterEgo",
+    "rarity": 4
+  },
+  {
+    "characterId": 1001300,
+    "collectionNo": 339,
+    "name": "superbunyan",
+    "fullName": "スーパーバニヤン",
+    "fullNameChinese": "超级班扬",
+    "aliases": [
+      "Super Bunyan",
+      "SuperBunyan"
+    ],
+    "className": "alterEgo",
+    "rarity": 5
+  },
+  {
+    "characterId": 504700,
+    "collectionNo": 340,
+    "name": "daikokuten",
+    "fullName": "大黒天",
+    "fullNameChinese": "大黑天",
+    "aliases": [
+      "Daikokuten"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 404700,
+    "collectionNo": 342,
+    "name": "kōnstantînosxi",
+    "fullName": "コンスタンティノス11世",
+    "fullNameChinese": "君士坦丁十一世",
+    "aliases": [
+      "Kōnstantînos XI",
+      "KnstantnosXI",
+      "君十一"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 105200,
+    "collectionNo": 343,
+    "name": "charlemagne",
+    "fullName": "シャルルマーニュ",
+    "fullNameChinese": "查理曼",
+    "aliases": [
+      "Charlemagne",
+      "夏露露"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 104300,
+    "collectionNo": 344,
+    "name": "roland",
+    "fullName": "ローラン",
+    "fullNameChinese": "罗兰",
+    "aliases": [
+      "Roland",
+      "脱衣男"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 704200,
+    "collectionNo": 345,
+    "name": "kriemhild",
+    "fullName": "クリームヒルト",
+    "fullNameChinese": "克里姆希尔德",
+    "aliases": [
+      "Kriemhild",
+      "飞嫂",
+      "amp;克琳希德"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 901300,
+    "collectionNo": 346,
+    "name": "jamesmoriarty",
+    "fullName": "ジェームズ・モリアーティ",
+    "fullNameChinese": "詹姆斯·莫里亚蒂",
+    "aliases": [
+      "James Moriarty",
+      "JamesMoriarty",
+      "教授lily",
+      "amp;莫里亚蒂lily",
+      "amp;茉莉"
+    ],
+    "className": "ruler",
+    "rarity": 5
+  },
+  {
+    "characterId": 305100,
+    "collectionNo": 347,
+    "name": "donquixote",
+    "fullName": "ドン・キホーテ",
+    "fullNameChinese": "堂·吉诃德",
+    "aliases": [
+      "Don Quixote",
+      "DonQuixote"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 505100,
+    "collectionNo": 348,
+    "name": "zhangjue",
+    "fullName": "張角",
+    "fullNameChinese": "张角",
+    "aliases": [
+      "Zhang Jue",
+      "ZhangJue",
+      "黄巾"
+    ],
+    "className": "caster",
+    "rarity": 3
+  },
+  {
+    "characterId": 404800,
+    "collectionNo": 349,
+    "name": "kyokuteibakin",
+    "fullName": "曲亭馬琴",
+    "fullNameChinese": "曲亭马琴",
+    "aliases": [
+      "Kyokutei Bakin",
+      "KyokuteiBakin",
+      "阿路"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 204600,
+    "collectionNo": 350,
+    "name": "minamoto-no-tametomo",
+    "fullName": "源為朝",
+    "fullNameChinese": "源为朝",
+    "aliases": [
+      "Minamoto-no-Tametomo",
+      "MinamotonoTametomo"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 2300500,
+    "collectionNo": 351,
+    "name": "archetype:earth",
+    "fullName": "アーキタイプ：アース",
+    "fullNameChinese": "Archetype：Earth",
+    "aliases": [
+      "Archetype: EARTH",
+      "ArchetypeEARTH",
+      "爱尔奎特·布伦史塔德",
+      "amp;地球姬",
+      "amp;公主"
+    ],
+    "className": "moonCancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 1001400,
+    "collectionNo": 352,
+    "name": "xufu",
+    "fullName": "徐福",
+    "fullNameChinese": "徐福",
+    "aliases": [
+      "Xu Fu",
+      "XuFu",
+      "方巿"
+    ],
+    "className": "alterEgo",
+    "rarity": 3
+  },
+  {
+    "characterId": 2800300,
+    "collectionNo": 353,
+    "name": "ladyavalon",
+    "fullName": "レディ・アヴァロン",
+    "fullNameChinese": "阿瓦隆女士",
+    "aliases": [
+      "Lady Avalon",
+      "LadyAvalon",
+      "女梅林"
+    ],
+    "className": "pretender",
+    "rarity": 5
+  },
+  {
+    "characterId": 105400,
+    "collectionNo": 354,
+    "name": "gareth",
+    "fullName": "ガレス",
+    "fullNameChinese": "加雷斯",
+    "aliases": [
+      "Gareth"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 704300,
+    "collectionNo": 355,
+    "name": "ibuki-douji",
+    "fullName": "伊吹童子",
+    "fullNameChinese": "伊吹童子",
+    "aliases": [
+      "Ibuki-Douji",
+      "IbukiDouji"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 1101400,
+    "collectionNo": 356,
+    "name": "utsumierice",
+    "fullName": "宇津見エリセ",
+    "fullNameChinese": "宇津见绘里濑",
+    "aliases": [
+      "Utsumi Erice",
+      "UtsumiErice"
+    ],
+    "className": "avenger",
+    "rarity": 4
+  },
+  {
+    "characterId": 901400,
+    "collectionNo": 357,
+    "name": "scáthach-skadi",
+    "fullName": "スカサハ＝スカディ",
+    "fullNameChinese": "斯卡哈·斯卡蒂",
+    "aliases": [
+      "Scáthach-Skadi",
+      "ScthachSkadi",
+      "rba"
+    ],
+    "className": "ruler",
+    "rarity": 5
+  },
+  {
+    "characterId": 505200,
+    "collectionNo": 358,
+    "name": "wuzetian",
+    "fullName": "武則天",
+    "fullNameChinese": "武则天",
+    "aliases": [
+      "Wu Zetian",
+      "WuZetian",
+      "周照"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 604500,
+    "collectionNo": 359,
+    "name": "thrúd",
+    "fullName": "スルーズ",
+    "fullNameChinese": "斯露德",
+    "aliases": [
+      "Thrúd",
+      "Thrd",
+      "女武神"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 604400,
+    "collectionNo": 360,
+    "name": "hildr",
+    "fullName": "ヒルド",
+    "fullNameChinese": "希露德",
+    "aliases": [
+      "Hildr",
+      "女武神"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 604300,
+    "collectionNo": 361,
+    "name": "ortlinde",
+    "fullName": "オルトリンデ",
+    "fullNameChinese": "奥特琳德",
+    "aliases": [
+      "Ortlinde",
+      "女武神"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 704400,
+    "collectionNo": 362,
+    "name": "sen-no-rikyu",
+    "fullName": "千利休",
+    "fullNameChinese": "千利休",
+    "aliases": [
+      "Sen-no-Rikyu",
+      "SennoRikyu"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 105500,
+    "collectionNo": 363,
+    "name": "yamanamikeisuke",
+    "fullName": "山南敬助",
+    "fullNameChinese": "山南敬助",
+    "aliases": [
+      "Yamanami Keisuke",
+      "YamanamiKeisuke"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 901500,
+    "collectionNo": 364,
+    "name": "iyo",
+    "fullName": "壱与",
+    "fullNameChinese": "壹与",
+    "aliases": [
+      "Iyo"
+    ],
+    "className": "ruler",
+    "rarity": 4
+  },
+  {
+    "characterId": 604600,
+    "collectionNo": 365,
+    "name": "huyanzhuo",
+    "fullName": "呼延灼",
+    "fullNameChinese": "呼延灼",
+    "aliases": [
+      "Huyan Zhuo",
+      "HuyanZhuo",
+      "吾绰"
+    ],
+    "className": "assassin",
+    "rarity": 5
+  },
+  {
+    "characterId": 404900,
+    "collectionNo": 366,
+    "name": "huangfeihu",
+    "fullName": "黄飛虎",
+    "fullNameChinese": "黄飞虎",
+    "aliases": [
+      "Huang Feihu",
+      "HuangFeihu"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 2800400,
+    "collectionNo": 367,
+    "name": "elisathenine-tattooeddragon",
+    "fullName": "九紋竜エリザ",
+    "fullNameChinese": "九纹龙伊丽莎",
+    "aliases": [
+      "Elisa the Nine-Tattooed Dragon",
+      "ElisatheNineTattooedDragon"
+    ],
+    "className": "pretender",
+    "rarity": 4
+  },
+  {
+    "characterId": 305300,
+    "collectionNo": 368,
+    "name": "britomart",
+    "fullName": "ブリトマート",
+    "fullNameChinese": "布里托玛特",
+    "aliases": [
+      "Britomart"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 1001500,
+    "collectionNo": 369,
+    "name": "grigorirasputin",
+    "fullName": "グレゴリー・ラスプーチン",
+    "fullNameChinese": "格里戈里·拉斯普京",
+    "aliases": [
+      "Grigori Rasputin",
+      "GrigoriRasputin",
+      "言峰绮礼",
+      "amp;言峰神父",
+      "amp;麻婆"
+    ],
+    "className": "alterEgo",
+    "rarity": 5
+  },
+  {
+    "characterId": 1101500,
+    "collectionNo": 370,
+    "name": "nitocris(alter)",
+    "fullName": "ニトクリス〔オルタ〕",
+    "fullNameChinese": "尼托克丽丝〔Alter〕",
+    "aliases": [
+      "Nitocris (Alter)",
+      "NitocrisAlter",
+      "黑尼托",
+      "amp;仇尼托"
+    ],
+    "className": "avenger",
+    "rarity": 5
+  },
+  {
+    "characterId": 604700,
+    "collectionNo": 371,
+    "name": "tezcatlipoca",
+    "fullName": "テスカトリポカ",
+    "fullNameChinese": "特斯卡特利波卡",
+    "aliases": [
+      "Tezcatlipoca",
+      "烟雾镜"
+    ],
+    "className": "assassin",
+    "rarity": 5
+  },
+  {
+    "characterId": 2800500,
+    "collectionNo": 372,
+    "name": "tlāloc",
+    "fullName": "トラロック",
+    "fullNameChinese": "特拉洛克",
+    "aliases": [
+      "Tlāloc",
+      "Tlloc",
+      "维齐洛波奇特利",
+      "amp;特诺奇蒂特兰",
+      "amp;雨神"
+    ],
+    "className": "pretender",
+    "rarity": 4
+  },
+  {
+    "characterId": 2501100,
+    "collectionNo": 373,
+    "name": "kukulcan",
+    "fullName": "ククルカン",
+    "fullNameChinese": "库库尔坎",
+    "aliases": [
+      "Kukulcan",
+      "羽蛇神"
+    ],
+    "className": "foreigner",
+    "rarity": 5
+  },
+  {
+    "characterId": 901600,
+    "collectionNo": 374,
+    "name": "popejohanna",
+    "fullName": "女教皇ヨハンナ",
+    "fullNameChinese": "女教皇若安",
+    "aliases": [
+      "Pope Johanna",
+      "PopeJohanna"
+    ],
+    "className": "ruler",
+    "rarity": 5
+  },
+  {
+    "characterId": 204700,
+    "collectionNo": 375,
+    "name": "takasugishinsaku",
+    "fullName": "高杉晋作",
+    "fullNameChinese": "高杉晋作",
+    "aliases": [
+      "Takasugi Shinsaku",
+      "TakasugiShinsaku",
+      "社长"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 1001600,
+    "collectionNo": 376,
+    "name": "larva/tiamat",
+    "fullName": "ラーヴァ／ティアマト",
+    "fullNameChinese": "幼体／提亚马特",
+    "aliases": [
+      "Larva/Tiamat",
+      "LarvaTiamat",
+      "提妈"
+    ],
+    "className": "alterEgo",
+    "rarity": 5
+  },
+  {
+    "characterId": 3300100,
+    "collectionNo": 377,
+    "name": "sodom'sbeast/draco",
+    "fullName": "ソドムズビースト／ドラコー",
+    "fullNameChinese": "所多玛之兽／德拉科",
+    "aliases": [
+      "Sodom's Beast/Draco",
+      "SodomsBeastDraco",
+      "兽尼禄"
+    ],
+    "className": "beast",
+    "rarity": 5
+  },
+  {
+    "characterId": 604800,
+    "collectionNo": 378,
+    "name": "locusta",
+    "fullName": "ロクスタ",
+    "fullNameChinese": "洛库斯塔",
+    "aliases": [
+      "Locusta"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 105700,
+    "collectionNo": 379,
+    "name": "sétanta",
+    "fullName": "セタンタ",
+    "fullNameChinese": "瑟坦特",
+    "aliases": [
+      "Sétanta",
+      "Stanta",
+      "幼狗"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 604900,
+    "collectionNo": 380,
+    "name": "kashinkoji",
+    "fullName": "果心居士",
+    "fullNameChinese": "果心居士",
+    "aliases": [
+      "Kashin Koji",
+      "KashinKoji"
+    ],
+    "className": "assassin",
+    "rarity": 5
+  },
+  {
+    "characterId": 305400,
+    "collectionNo": 381,
+    "name": "bhīma",
+    "fullName": "ビーマ",
+    "fullNameChinese": "怖军",
+    "aliases": [
+      "Bhīma",
+      "Bhma"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 704600,
+    "collectionNo": 382,
+    "name": "duryodhana",
+    "fullName": "ドゥリーヨダナ",
+    "fullNameChinese": "难敌",
+    "aliases": [
+      "Duryodhana"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 204800,
+    "collectionNo": 383,
+    "name": "durgā",
+    "fullName": "ドゥルガー",
+    "fullNameChinese": "杜尔伽",
+    "aliases": [
+      "Durgā",
+      "Durg",
+      "黑樱",
+      "amp;迦梨"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 105600,
+    "collectionNo": 384,
+    "name": "medusa",
+    "fullName": "メドゥーサ",
+    "fullNameChinese": "美杜莎",
+    "aliases": [
+      "Medusa",
+      "剑R姐"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 505300,
+    "collectionNo": 385,
+    "name": "aesctherainwitch",
+    "fullName": "雨の魔女トネリコ",
+    "fullNameChinese": "雨之魔女梣",
+    "aliases": [
+      "Aesc the Rain Witch",
+      "AesctheRainWitch",
+      "水摩根",
+      "amp;术摩根"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 704700,
+    "collectionNo": 386,
+    "name": "altriacaster",
+    "fullName": "アルトリア・キャスター",
+    "fullNameChinese": "阿尔托莉雅·卡斯特",
+    "aliases": [
+      "Altria Caster",
+      "AltriaCaster",
+      "水C呆",
+      "amp;汇呆",
+      "amp;呆B"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 405000,
+    "collectionNo": 387,
+    "name": "suzukagozen(vacay)",
+    "fullName": "鈴鹿御前〔サマバケ〕",
+    "fullNameChinese": "铃鹿御前〔暑假〕",
+    "aliases": [
+      "Suzuka Gozen (Vacay)",
+      "SuzukaGozenVacay"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 1101600,
+    "collectionNo": 388,
+    "name": "chloevoneinzbern",
+    "fullName": "クロエ・フォン・アインツベルン",
+    "fullNameChinese": "克洛伊·冯·爱因兹贝伦",
+    "aliases": [
+      "Chloe von Einzbern",
+      "ChloevonEinzbern",
+      "仇小黑"
+    ],
+    "className": "avenger",
+    "rarity": 4
+  },
+  {
+    "characterId": 2501200,
+    "collectionNo": 389,
+    "name": "cnocnariabhyaraändoo",
+    "fullName": "ノクナレア・ヤラアーンドゥ",
+    "fullNameChinese": "诺克娜蕾·雅兰杜",
+    "aliases": [
+      "Cnoc na Riabh Yaraändoo",
+      "CnocnaRiabhYarandoo",
+      "梅芙"
+    ],
+    "className": "foreigner",
+    "rarity": 4
+  },
+  {
+    "characterId": 901700,
+    "collectionNo": 390,
+    "name": "mélusine",
+    "fullName": "メリュジーヌ",
+    "fullNameChinese": "梅柳齐娜",
+    "aliases": [
+      "Mélusine",
+      "Mlusine",
+      "梅柳齐娜·翁蒂娜",
+      "amp;妖精骑士兰斯洛特",
+      "amp;妖兰"
+    ],
+    "className": "ruler",
+    "rarity": 5
+  },
+  {
+    "characterId": 204900,
+    "collectionNo": 391,
+    "name": "udk-barghest",
+    "fullName": "ＵＤＫ－バーゲスト",
+    "fullNameChinese": "ＵＤＫ－巴格斯特",
+    "aliases": [
+      "UDK-Barghest",
+      "UDKBarghest",
+      "妖精骑士巴格斯特",
+      "amp;妖精骑士高文",
+      "amp;妖高"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 2800600,
+    "collectionNo": 392,
+    "name": "caitcúmikocer",
+    "fullName": "ケット・クー・ミコケル",
+    "fullNameChinese": "凯特·库·米可科尔",
+    "aliases": [
+      "Cait Cú MikoCer",
+      "CaitCMikoCer",
+      "芭万·希",
+      "amp;妖精骑士崔斯坦",
+      "amp;妖崔"
+    ],
+    "className": "pretender",
+    "rarity": 4
+  },
+  {
+    "characterId": 2501300,
+    "collectionNo": 393,
+    "name": "wandjina",
+    "fullName": "ワンジナ",
+    "fullNameChinese": "旺吉娜",
+    "aliases": [
+      "Wandjina"
+    ],
+    "className": "foreigner",
+    "rarity": 5
+  },
+  {
+    "characterId": 205000,
+    "collectionNo": 394,
+    "name": "ptolemaîos",
+    "fullName": "プトレマイオス",
+    "fullNameChinese": "托勒密",
+    "aliases": [
+      "Ptolemaîos",
+      "Ptolemaos"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 205100,
+    "collectionNo": 395,
+    "name": "sugitanizenjubou",
+    "fullName": "杉谷善住坊",
+    "fullNameChinese": "杉谷善住坊",
+    "aliases": [
+      "Sugitani Zenjubou",
+      "SugitaniZenjubou"
+    ],
+    "className": "archer",
+    "rarity": 3
+  },
+  {
+    "characterId": 105800,
+    "collectionNo": 396,
+    "name": "thēseus",
+    "fullName": "テセウス",
+    "fullNameChinese": "忒修斯",
+    "aliases": [
+      "Thēseus",
+      "Thseus"
+    ],
+    "className": "saber",
+    "rarity": 3
+  },
+  {
+    "characterId": 405200,
+    "collectionNo": 397,
+    "name": "takedaharunobu",
+    "fullName": "武田晴信",
+    "fullNameChinese": "武田晴信",
+    "aliases": [
+      "Takeda Harunobu",
+      "TakedaHarunobu",
+      "武田信玄"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 704800,
+    "collectionNo": 398,
+    "name": "nagakurashinpachi",
+    "fullName": "永倉新八",
+    "fullNameChinese": "永仓新八",
+    "aliases": [
+      "Nagakura Shinpachi",
+      "NagakuraShinpachi"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 205200,
+    "collectionNo": 399,
+    "name": "saikamagoichi",
+    "fullName": "雑賀孫一",
+    "fullNameChinese": "杂贺孙一",
+    "aliases": [
+      "Saika Magoichi",
+      "SaikaMagoichi",
+      "杂贺孙市",
+      "amp;杂贺萤"
+    ],
+    "className": "archer",
+    "rarity": 4
+  },
+  {
+    "characterId": 901800,
+    "collectionNo": 400,
+    "name": "uesugikenshin",
+    "fullName": "上杉謙信",
+    "fullNameChinese": "上杉谦信",
+    "aliases": [
+      "Uesugi Kenshin",
+      "UesugiKenshin",
+      "裁谦信"
+    ],
+    "className": "ruler",
+    "rarity": 5
+  },
+  {
+    "characterId": 405300,
+    "collectionNo": 401,
+    "name": "nemo(santa)",
+    "fullName": "ネモ〔サンタ〕",
+    "fullNameChinese": "尼莫〔圣诞〕",
+    "aliases": [
+      "Nemo (Santa)",
+      "NemoSanta"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 105900,
+    "collectionNo": 402,
+    "name": "yamatotakeru",
+    "fullName": "ヤマトタケル",
+    "fullNameChinese": "大和武尊",
+    "aliases": [
+      "Yamato Takeru",
+      "YamatoTakeru",
+      "日本武尊"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 1101800,
+    "collectionNo": 403,
+    "name": "minamoto-no-raikou/ushigozen",
+    "fullName": "源頼光／丑御前",
+    "fullNameChinese": "源赖光／丑御前",
+    "aliases": [
+      "Minamoto-no-Raikou/Ushi Gozen",
+      "MinamotonoRaikouUshiGozen",
+      "仇奶光",
+      "amp;仇赖光"
+    ],
+    "className": "avenger",
+    "rarity": 5
+  },
+  {
+    "characterId": 505400,
+    "collectionNo": 404,
+    "name": "yuishousetsu",
+    "fullName": "由井正雪",
+    "fullNameChinese": "由井正雪",
+    "aliases": [
+      "Yui Shousetsu",
+      "YuiShousetsu"
+    ],
+    "className": "caster",
+    "rarity": 4
+  },
+  {
+    "characterId": 106000,
+    "collectionNo": 405,
+    "name": "miyamotoiori",
+    "fullName": "宮本伊織",
+    "fullNameChinese": "宫本伊织",
+    "aliases": [
+      "Miyamoto Iori",
+      "MiyamotoIori"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 405500,
+    "collectionNo": 406,
+    "name": "andromeda",
+    "fullName": "アンドロメダ",
+    "fullNameChinese": "安德洛墨达",
+    "aliases": [
+      "Andromeda",
+      "仙女座"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 1101300,
+    "collectionNo": 407,
+    "name": "marieantoinette(alter)",
+    "fullName": "マリー・アントワネット〔オルタ〕",
+    "fullNameChinese": "玛丽·安托瓦内特〔Alter〕",
+    "aliases": [
+      "Marie Antoinette (Alter)",
+      "MarieAntoinetteAlter",
+      "仇玛丽",
+      "amp;黑玛丽"
+    ],
+    "className": "avenger",
+    "rarity": 5
+  },
+  {
+    "characterId": 605000,
+    "collectionNo": 408,
+    "name": "hassanoftheshiningstar",
+    "fullName": "耀星のハサン",
+    "fullNameChinese": "耀星哈桑",
+    "aliases": [
+      "Hassan of the Shining Star",
+      "HassanoftheShiningStar"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 1101700,
+    "collectionNo": 409,
+    "name": "montecristo",
+    "fullName": "巌窟王　モンテ・クリスト",
+    "fullNameChinese": "岩窟王　基督山",
+    "aliases": [
+      "Monte Cristo",
+      "MonteCristo",
+      "新伯爵"
+    ],
+    "className": "avenger",
+    "rarity": 5
+  },
+  {
+    "characterId": 2800700,
+    "collectionNo": 410,
+    "name": "alessandrodicagliostro",
+    "fullName": "アレッサンドロ・ディ・カリオストロ",
+    "fullNameChinese": "亚历山德罗·迪·卡利奥斯特罗",
+    "aliases": [
+      "Alessandro di Cagliostro",
+      "AlessandrodiCagliostro",
+      "卡伯爵"
+    ],
+    "className": "pretender",
+    "rarity": 4
+  },
+  {
+    "characterId": 2501400,
+    "collectionNo": 413,
+    "name": "aozakiaoko",
+    "fullName": "蒼崎青子",
+    "fullNameChinese": "苍崎青子",
+    "aliases": [
+      "Aozaki Aoko",
+      "AozakiAoko",
+      "第五魔法使"
+    ],
+    "className": "foreigner",
+    "rarity": 5
+  },
+  {
+    "characterId": 704900,
+    "collectionNo": 414,
+    "name": "sizukisoujyuro",
+    "fullName": "静希草十郎",
+    "fullNameChinese": "静希草十郎",
+    "aliases": [
+      "Sizuki Soujyuro",
+      "SizukiSoujyuro"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 505500,
+    "collectionNo": 415,
+    "name": "kuonjialice",
+    "fullName": "久遠寺有珠",
+    "fullNameChinese": "久远寺有珠",
+    "aliases": [
+      "Kuonji Alice",
+      "KuonjiAlice"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 1001700,
+    "collectionNo": 416,
+    "name": "hibiki&chikagi",
+    "fullName": "ひびき＆千鍵",
+    "fullNameChinese": "响＆千键",
+    "aliases": [
+      "Hibiki & Chikagi",
+      "HibikiChikagi",
+      "阿昙矶良"
+    ],
+    "className": "alterEgo",
+    "rarity": 5
+  },
+  {
+    "characterId": 3300200,
+    "collectionNo": 417,
+    "name": "ereshkigal",
+    "fullName": "エレシュキガル",
+    "fullNameChinese": "埃列什基伽勒",
+    "aliases": [
+      "Ereshkigal",
+      "安基埃列什基伽勒",
+      "amp;太空埃列什基伽勒",
+      "amp;兽艾蕾",
+      "amp;泳装艾蕾",
+      "amp;水艾蕾"
+    ],
+    "className": "beastEresh",
+    "rarity": 5
+  },
+  {
+    "characterId": 2300900,
+    "collectionNo": 418,
+    "name": "mysteriousexecutorc.i.e.l",
+    "fullName": "謎の代行者C.I.E.L",
+    "fullNameChinese": "谜之代行者C.I.E.L",
+    "aliases": [
+      "Mysterious Executor C.I.E.L",
+      "MysteriousExecutorCIEL",
+      "教教我吧！希耶尔老师",
+      "amp;星之希耶尔",
+      "amp;学姐"
+    ],
+    "className": "moonCancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 305500,
+    "collectionNo": 419,
+    "name": "dobrynyanikitich",
+    "fullName": "ドブルイニャ・ニキチッチ",
+    "fullNameChinese": "多布雷尼亚·尼基季奇",
+    "aliases": [
+      "Dobrynya Nikitich",
+      "DobrynyaNikitich"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 1101900,
+    "collectionNo": 420,
+    "name": "xufu",
+    "fullName": "徐福",
+    "fullNameChinese": "徐福",
+    "aliases": [
+      "Xu Fu",
+      "XuFu",
+      "泳装徐福",
+      "amp;水徐福",
+      "amp;仇徐福"
+    ],
+    "className": "avenger",
+    "rarity": 4
+  },
+  {
+    "characterId": 2300600,
+    "collectionNo": 421,
+    "name": "bbdubai",
+    "fullName": "ＢＢドバイ",
+    "fullNameChinese": "ＢＢ迪拜",
+    "aliases": [
+      "BB Dubai",
+      "BBDubai",
+      "BB宇宙",
+      "amp;黄金BB"
+    ],
+    "className": "moonCancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 2301000,
+    "collectionNo": 422,
+    "name": "tenochtitlan",
+    "fullName": "テノチティトラン",
+    "fullNameChinese": "特诺奇蒂特兰",
+    "aliases": [
+      "Tenochtitlan",
+      "泳装特拉洛克",
+      "amp;维齐洛波奇特利",
+      "amp;雨神"
+    ],
+    "className": "moonCancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 2501600,
+    "collectionNo": 423,
+    "name": "mysteriousheroinexx(alter)",
+    "fullName": "謎のヒロインXX〔オルタ〕",
+    "fullNameChinese": "谜之女主角XX〔Alter〕",
+    "aliases": [
+      "Mysterious Heroine XX (Alter)",
+      "MysteriousHeroineXXAlter"
+    ],
+    "className": "foreigner",
+    "rarity": 4
+  },
+  {
+    "characterId": 2300700,
+    "collectionNo": 424,
+    "name": "kishinamihakuno",
+    "fullName": "岸波白野",
+    "fullNameChinese": "岸波白野",
+    "aliases": [
+      "Kishinami Hakuno",
+      "KishinamiHakuno",
+      "扎比夫"
+    ],
+    "className": "moonCancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 2300800,
+    "collectionNo": 425,
+    "name": "kishinamihakuno",
+    "fullName": "岸波白野",
+    "fullNameChinese": "岸波白野",
+    "aliases": [
+      "Kishinami Hakuno",
+      "KishinamiHakuno",
+      "扎比子"
+    ],
+    "className": "moonCancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 1001800,
+    "collectionNo": 426,
+    "name": "kazuradrop",
+    "fullName": "カズラドロップ",
+    "fullNameChinese": "Kazuradrop",
+    "aliases": [
+      "缪瑞恩",
+      "amp;糖果藤蔓",
+      "amp;藤蔓之滴",
+      "amp;猪笼草"
+    ],
+    "className": "alterEgo",
+    "rarity": 5
+  },
+  {
+    "characterId": 205300,
+    "collectionNo": 427,
+    "name": "tutankhamun",
+    "fullName": "ツタンカーメン",
+    "fullNameChinese": "图坦卡蒙",
+    "aliases": [
+      "Tutankhamun"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 305600,
+    "collectionNo": 428,
+    "name": "vangogh(miner)",
+    "fullName": "ヴァン・ゴッホ〔マイナー〕",
+    "fullNameChinese": "梵高〔矿工〕",
+    "aliases": [
+      "Van Gogh (Miner)",
+      "VanGoghMiner"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 705000,
+    "collectionNo": 429,
+    "name": "louhi",
+    "fullName": "ロウヒ",
+    "fullNameChinese": "娄希",
+    "aliases": [
+      "Louhi"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 2800800,
+    "collectionNo": 430,
+    "name": "abigailwilliams(santa)",
+    "fullName": "アビゲイル・ウィリアムズ〔サンタ〕",
+    "fullNameChinese": "阿比盖尔·威廉姆斯〔圣诞〕",
+    "aliases": [
+      "Abigail Williams (Santa)",
+      "AbigailWilliamsSanta",
+      "圣诞阿比"
+    ],
+    "className": "pretender",
+    "rarity": 4
+  },
+  {
+    "characterId": 2800900,
+    "collectionNo": 431,
+    "name": "phantasmoon",
+    "fullName": "ファンタズムーン",
+    "fullNameChinese": "Phantasmoon",
+    "aliases": [
+      "Space PhantasmoonⅤ",
+      "amp;Santasmoon",
+      "amp;幻月",
+      "amp;白月姬",
+      "amp;白公主",
+      "amp;魔法少女",
+      "amp;月披"
+    ],
+    "className": "pretender",
+    "rarity": 5
+  },
+  {
+    "characterId": 106100,
+    "collectionNo": 432,
+    "name": "richardi",
+    "fullName": "リチャードⅠ世",
+    "fullNameChinese": "理查一世",
+    "aliases": [
+      "Richard I",
+      "RichardI",
+      "狮心王理查",
+      "amp;理查1世",
+      "amp;理查一世"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 305700,
+    "collectionNo": 433,
+    "name": "biscione",
+    "fullName": "ビショーネ",
+    "fullNameChinese": "比肖内",
+    "aliases": [
+      "Biscione",
+      "纹章蛇",
+      "amp;纹章龙",
+      "amp;毒龙",
+      "amp;绿龙"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 106200,
+    "collectionNo": 434,
+    "name": "kurohime",
+    "fullName": "黒姫",
+    "fullNameChinese": "黑姬",
+    "aliases": [
+      "Kurohime"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 505800,
+    "collectionNo": 435,
+    "name": "ononokomachi",
+    "fullName": "小野小町",
+    "fullNameChinese": "小野小町",
+    "aliases": [
+      "Ono no Komachi",
+      "OnonoKomachi"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 2801000,
+    "collectionNo": 437,
+    "name": "dantealighieri",
+    "fullName": "ダンテ・アリギエーリ",
+    "fullNameChinese": "但丁·阿利吉耶里",
+    "aliases": [
+      "Dante Alighieri",
+      "DanteAlighieri"
+    ],
+    "className": "pretender",
+    "rarity": 5
+  },
+  {
+    "characterId": 901900,
+    "collectionNo": 438,
+    "name": "metatronjeanne",
+    "fullName": "メタトロン・ジャンヌ",
+    "fullNameChinese": "梅塔特隆·贞德",
+    "aliases": [
+      "Metatron Jeanne",
+      "MetatronJeanne",
+      "神贞德",
+      "amp;睡贞"
+    ],
+    "className": "ruler",
+    "rarity": 5
+  },
+  {
+    "characterId": 305800,
+    "collectionNo": 439,
+    "name": "kingashoka",
+    "fullName": "アショカ王",
+    "fullNameChinese": "阿育王",
+    "aliases": [
+      "King Ashoka",
+      "KingAshoka"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 705100,
+    "collectionNo": 440,
+    "name": "lilith",
+    "fullName": "リリス",
+    "fullNameChinese": "莉莉丝",
+    "aliases": [
+      "Lilith"
+    ],
+    "className": "berserker",
+    "rarity": 5
+  },
+  {
+    "characterId": 2801100,
+    "collectionNo": 441,
+    "name": "typhonephemeros",
+    "fullName": "テュフォン・エフェメロス",
+    "fullNameChinese": "堤丰·厄斐墨洛斯",
+    "aliases": [
+      "Typhon Ephemeros",
+      "TyphonEphemeros",
+      "果子龙"
+    ],
+    "className": "pretender",
+    "rarity": 5
+  },
+  {
+    "characterId": 305900,
+    "collectionNo": 442,
+    "name": "indra",
+    "fullName": "インドラ",
+    "fullNameChinese": "因陀罗",
+    "aliases": [
+      "Indra"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 4000100,
+    "collectionNo": 444,
+    "name": "u-olgamarie",
+    "fullName": "Ｕ－オルガマリー",
+    "fullNameChinese": "U－奥尔加玛丽",
+    "aliases": [
+      "U-Olga Marie",
+      "UOlgaMarie",
+      "所长"
+    ],
+    "className": "unBeastOlgaMarie",
+    "rarity": 5
+  },
+  {
+    "characterId": 106300,
+    "collectionNo": 445,
+    "name": "passionlip",
+    "fullName": "パッションリップ",
+    "fullNameChinese": "Passionlip",
+    "aliases": [
+      "水Lip",
+      "amp;泳装Lip"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 405800,
+    "collectionNo": 446,
+    "name": "kriemhild",
+    "fullName": "クリームヒルト",
+    "fullNameChinese": "克里姆希尔德",
+    "aliases": [
+      "Kriemhild",
+      "水飞嫂",
+      "amp;泳装飞嫂"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 705200,
+    "collectionNo": 447,
+    "name": "huyanzhuo",
+    "fullName": "呼延灼",
+    "fullNameChinese": "呼延灼",
+    "aliases": [
+      "Huyan Zhuo",
+      "HuyanZhuo",
+      "水呼延灼",
+      "amp;泳装呼延灼"
+    ],
+    "className": "berserker",
+    "rarity": 4
+  },
+  {
+    "characterId": 2301100,
+    "collectionNo": 448,
+    "name": "jaderabbit",
+    "fullName": "玉兎",
+    "fullNameChinese": "玉兔",
+    "aliases": [
+      "Jade Rabbit",
+      "JadeRabbit",
+      "水式姐",
+      "amp;泳装式姐",
+      "amp;212",
+      "amp;216"
+    ],
+    "className": "moonCancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 306000,
+    "collectionNo": 449,
+    "name": "miyuedelfelt",
+    "fullName": "美遊・エーデルフェルト",
+    "fullNameChinese": "美游·艾德费尔特",
+    "aliases": [
+      "Miyu Edelfelt",
+      "MiyuEdelfelt",
+      "水美游",
+      "amp;泳装美游"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 205400,
+    "collectionNo": 450,
+    "name": "larva/tiamat",
+    "fullName": "ラーヴァ／ティアマト",
+    "fullNameChinese": "幼体／提亚马特",
+    "aliases": [
+      "Larva/Tiamat",
+      "LarvaTiamat",
+      "弓提亚马特",
+      "amp;弓提妈"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 1001900,
+    "collectionNo": 451,
+    "name": "jeunessecrane",
+    "fullName": "ジュネス・クレーン",
+    "fullNameChinese": "热内斯·克莱恩",
+    "aliases": [
+      "Jeunesse Crane",
+      "JeunesseCrane",
+      "鹤Lily"
+    ],
+    "className": "alterEgo",
+    "rarity": 4
+  },
+  {
+    "characterId": 405700,
+    "collectionNo": 452,
+    "name": "nemo/noah",
+    "fullName": "ネモ／ノア",
+    "fullNameChinese": "尼莫／诺亚",
+    "aliases": [
+      "Nemo/Noah",
+      "NemoNoah",
+      "大尼莫"
+    ],
+    "className": "rider",
+    "rarity": 5
+  },
+  {
+    "characterId": 605100,
+    "collectionNo": 453,
+    "name": "kawakamigensai",
+    "fullName": "河上彦斎",
+    "fullNameChinese": "河上彦斋",
+    "aliases": [
+      "Kawakami Gensai",
+      "KawakamiGensai",
+      "剑心"
+    ],
+    "className": "assassin",
+    "rarity": 5
+  },
+  {
+    "characterId": 1102100,
+    "collectionNo": 454,
+    "name": "tōdōheisuke",
+    "fullName": "藤堂平助",
+    "fullNameChinese": "藤堂平助",
+    "aliases": [
+      "Tōdō Heisuke",
+      "TdHeisuke"
+    ],
+    "className": "avenger",
+    "rarity": 4
+  },
+  {
+    "characterId": 306100,
+    "collectionNo": 455,
+    "name": "haradasanosuke",
+    "fullName": "原田左之助",
+    "fullNameChinese": "原田左之助",
+    "aliases": [
+      "Harada Sanosuke",
+      "HaradaSanosuke"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  },
+  {
+    "characterId": 106400,
+    "collectionNo": 456,
+    "name": "kondoisami",
+    "fullName": "近藤勇",
+    "fullNameChinese": "近藤勇",
+    "aliases": [
+      "Kondo Isami",
+      "KondoIsami",
+      "组长",
+      "amp;局长",
+      "amp;大猩猩"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 306200,
+    "collectionNo": 457,
+    "name": "elisabethbáthory",
+    "fullName": "エリザベート・バートリー",
+    "fullNameChinese": "伊丽莎白·巴托里",
+    "aliases": [
+      "Elisabeth Báthory",
+      "ElisabethBthory",
+      "龙娘",
+      "amp;五星龙娘"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 1102200,
+    "collectionNo": 458,
+    "name": "elisabethoftheend",
+    "fullName": "終わりのエリザベート",
+    "fullNameChinese": "终结之伊丽莎白",
+    "aliases": [
+      "Elisabeth of the End",
+      "ElisabethoftheEnd",
+      "仇龙娘"
+    ],
+    "className": "avenger",
+    "rarity": 4
+  },
+  {
+    "characterId": 2801200,
+    "collectionNo": 459,
+    "name": "solomon",
+    "fullName": "ソロモン",
+    "fullNameChinese": "所罗门",
+    "aliases": [
+      "Solomon"
+    ],
+    "className": "pretender",
+    "rarity": 5
+  },
+  {
+    "characterId": 106500,
+    "collectionNo": 461,
+    "name": "lordlogres",
+    "fullName": "ロード・ログレス",
+    "fullNameChinese": "领主洛格雷斯",
+    "aliases": [
+      "Lord Logres",
+      "LordLogres",
+      "冠呆毛"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 505900,
+    "collectionNo": 462,
+    "name": "hanasakanookina",
+    "fullName": "花咲翁",
+    "fullNameChinese": "花咲翁",
+    "aliases": [
+      "Hanasaka no Okina",
+      "HanasakanoOkina",
+      "开花爷爷"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 605200,
+    "collectionNo": 463,
+    "name": "hebinyōbō",
+    "fullName": "蛇女房",
+    "fullNameChinese": "蛇女房",
+    "aliases": [
+      "Hebi Nyōbō",
+      "HebiNyb",
+      "蛇妻"
+    ],
+    "className": "assassin",
+    "rarity": 4
+  },
+  {
+    "characterId": 1002000,
+    "collectionNo": 464,
+    "name": "flora",
+    "fullName": "フローラ",
+    "fullNameChinese": "芙萝拉",
+    "aliases": [
+      "Flora"
+    ],
+    "className": "alterEgo",
+    "rarity": 4
+  },
+  {
+    "characterId": 306400,
+    "collectionNo": 465,
+    "name": "demeter",
+    "fullName": "デメテル",
+    "fullNameChinese": "得墨忒耳",
+    "aliases": [
+      "Demeter",
+      "农神",
+      "amp;德墨忒尔"
+    ],
+    "className": "lancer",
+    "rarity": 5
+  },
+  {
+    "characterId": 106600,
+    "collectionNo": 466,
+    "name": "jacquesdemolay",
+    "fullName": "ジャック・ド・モレー",
+    "fullNameChinese": "雅克·德·莫莱",
+    "aliases": [
+      "Jacques de Molay",
+      "JacquesdeMolay",
+      "男团长",
+      "amp;雅雅"
+    ],
+    "className": "saber",
+    "rarity": 5
+  },
+  {
+    "characterId": 505600,
+    "collectionNo": 467,
+    "name": "françoisprélat",
+    "fullName": "フランソワ・プレラーティ",
+    "fullNameChinese": "弗朗索瓦·普勒拉蒂",
+    "aliases": [
+      "François Prélat",
+      "FranoisPrlat"
+    ],
+    "className": "caster",
+    "rarity": 5
+  },
+  {
+    "characterId": 405600,
+    "collectionNo": 468,
+    "name": "hippolyte",
+    "fullName": "ヒッポリュテ",
+    "fullNameChinese": "希波吕忒",
+    "aliases": [
+      "Hippolyte"
+    ],
+    "className": "rider",
+    "rarity": 4
+  },
+  {
+    "characterId": 1102000,
+    "collectionNo": 469,
+    "name": "johnlackland",
+    "fullName": "ジョン・ラックランド",
+    "fullNameChinese": "无地王约翰",
+    "aliases": [
+      "John Lackland",
+      "JohnLackland"
+    ],
+    "className": "avenger",
+    "rarity": 5
+  },
+  {
+    "characterId": 205500,
+    "collectionNo": 470,
+    "name": "archeroftheapocalypse",
+    "fullName": "ウルズ",
+    "fullNameChinese": "乌尔德",
+    "aliases": [
+      "Archer of the Apocalypse",
+      "ArcheroftheApocalypse",
+      "amp;羊弓"
+    ],
+    "className": "archer",
+    "rarity": 5
+  },
+  {
+    "characterId": 1002200,
+    "collectionNo": 471,
+    "name": "ascalaphus",
+    "fullName": "アスカラポス",
+    "fullNameChinese": "阿斯卡拉福斯",
+    "aliases": [
+      "Ascalaphus",
+      "小福"
+    ],
+    "className": "alterEgo",
+    "rarity": 5
+  },
+  {
+    "characterId": 106700,
+    "collectionNo": 472,
+    "name": "graylily",
+    "fullName": "グレイ・リリィ",
+    "fullNameChinese": "格蕾·Lily",
+    "aliases": [
+      "Gray Lily",
+      "GrayLily",
+      "剑格蕾"
+    ],
+    "className": "saber",
+    "rarity": 4
+  },
+  {
+    "characterId": 306300,
+    "collectionNo": 473,
+    "name": "graylily",
+    "fullName": "グレイ・リリィ",
+    "fullNameChinese": "格蕾·Lily",
+    "aliases": [
+      "Gray Lily",
+      "GrayLily",
+      "枪格蕾"
+    ],
+    "className": "lancer",
+    "rarity": 4
+  }
+]

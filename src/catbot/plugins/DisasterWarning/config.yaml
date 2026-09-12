@@ -1,0 +1,112 @@
+enabled: true
+admin_users: []
+target_groups: []
+data_sources:
+  fan_studio:
+    enabled: true
+    china_earthquake_warning: true
+    taiwan_cwa_earthquake: true
+    china_cenc_earthquake: true
+    japan_jma_eew: true
+    usgs_earthquake: true
+    china_weather_alarm: true
+    china_tsunami: true
+  p2p_earthquake:
+    enabled: true
+    japan_jma_eew: true
+    japan_jma_earthquake: true
+    japan_jma_tsunami: true
+  wolfx:
+    enabled: true
+    japan_jma_eew: true
+    china_cenc_eew: true
+    taiwan_cwa_eew: true
+    japan_jma_earthquake: true
+    china_cenc_earthquake: true
+  global_quake:
+    enabled: true
+earthquake_filters:
+  intensity_filter:
+    enabled: true
+    min_magnitude: 2.0
+    min_intensity: 4.0
+  scale_filter:
+    enabled: true
+    min_magnitude: 2.0
+    min_scale: 1.0
+  magnitude_only_filter:
+    enabled: true
+    min_magnitude: 4.5
+  global_quake_filter:
+    enabled: true
+    min_magnitude: 4.5
+    min_intensity: 5.0
+push_frequency_control:
+  cea_cwa_report_n: 1
+  jma_report_n: 3
+  gq_report_n: 5
+  final_report_always_push: true
+  ignore_non_final_reports: false
+event_deduplication:
+  time_window_minutes: 1
+  location_tolerance_km: 20.0
+  magnitude_tolerance: 0.5
+local_monitoring:
+  enabled: false
+  latitude: 0.0
+  longitude: 0.0
+  intensity_threshold: 3.0
+  strict_mode: false
+  place_name: 本地
+regional_restriction:
+  enabled: true
+  keywords:
+  - 深圳
+  use_bounding_box: true
+  bounding_box:
+    min_lat: 22.4
+    max_lat: 22.9
+    min_lon: 113.7
+    max_lon: 114.7
+weather_config:
+  max_description_length: 384
+  render_card: true
+  card_width: 880
+  card_padding: 28
+  card_max_body_lines: 16
+  font_title_size: 26
+  font_body_size: 20
+  font_label_size: 17
+  font_paths: []
+  weather_filter:
+    enabled: true
+    provinces: []
+    keywords:
+    - 深圳
+    min_color_level: 白色
+message_format:
+  include_map: false
+  include_map_image: false
+  include_map_link: false
+  map_provider: baidu
+  map_source: ''
+  map_zoom_level: 5
+  detailed_jma_intensity: false
+  use_global_quake_card: false
+  global_quake_template: Aurora
+  global_quake_caption: 🚨 [地震预警] Global Quake
+  playwright_mode: local
+  playwright_server_url: ''
+  browser_pool_size: 2
+websocket_config:
+  heartbeat_interval: 120
+  connection_timeout: 15
+  max_message_size: 1048576
+  max_reconnect_retries: 3
+  reconnect_interval: 10
+  fallback_retry_enabled: true
+  fallback_retry_interval: 1800
+  fallback_retry_max_count: -1
+debug_config:
+  enable_raw_message_logging: false
+  startup_silence_duration: 0

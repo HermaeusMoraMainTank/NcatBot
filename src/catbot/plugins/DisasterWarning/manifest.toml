@@ -1,0 +1,12 @@
+name = "DisasterWarning"
+version = "1.0.0"
+main = "DisasterWarning.py"
+entry_class = "DisasterWarning"
+
+[pip_dependencies]
+jinja2 = ">=3.0.0"
+playwright = ">=1.30.0"
+httpx = ">=0.27.0"
+pillow = ">=10.0.0"
+
+[dependencies]

@@ -1,0 +1,5128 @@
+[
+  {
+    "characterId": "c1144",
+    "name": "abigail",
+    "fullName": "Abigail",
+    "fullNameChinese": "雅碧凯",
+    "aliases": [
+      "Abigail",
+      "雅碧凯"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2016",
+    "name": "abyssalyufine",
+    "fullName": "Abyssal Yufine",
+    "fullNameChinese": "深渊优芬妮",
+    "aliases": [
+      "Abyssal Yufine",
+      "AbyssalYufine",
+      "深渊优芬妮"
+    ],
+    "className": "knight",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1017",
+    "name": "achates",
+    "fullName": "Achates",
+    "fullNameChinese": "雅卡泰丝",
+    "aliases": [
+      "Achates",
+      "雅卡泰丝"
+    ],
+    "className": "manauser",
+    "attribute": "fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "c3143",
+    "name": "adin",
+    "fullName": "Adin",
+    "fullNameChinese": "艾庭",
+    "aliases": [
+      "Adin",
+      "艾庭"
+    ],
+    "className": "assassin",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3043",
+    "name": "adlay",
+    "fullName": "Adlay",
+    "fullNameChinese": "亚迪赖",
+    "aliases": [
+      "Adlay",
+      "亚迪赖"
+    ],
+    "className": "mage",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c5001",
+    "name": "adventurerras",
+    "fullName": "Adventurer Ras",
+    "fullNameChinese": "冒险家拉斯",
+    "aliases": [
+      "Adventurer Ras",
+      "AdventurerRas",
+      "冒险家拉斯"
+    ],
+    "className": "knight",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1138",
+    "name": "ae-giselle",
+    "fullName": "ae-GISELLE",
+    "fullNameChinese": "ae-GISELLE",
+    "aliases": [
+      "ae-GISELLE",
+      "aeGISELLE"
+    ],
+    "className": "mage",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1137",
+    "name": "ae-karina",
+    "fullName": "ae-KARINA",
+    "fullNameChinese": "ae-KARINA",
+    "aliases": [
+      "ae-KARINA",
+      "aeKARINA"
+    ],
+    "className": "knight",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1140",
+    "name": "ae-ningning",
+    "fullName": "ae-NINGNING",
+    "fullNameChinese": "ae-NINGNING",
+    "aliases": [
+      "ae-NINGNING",
+      "aeNINGNING"
+    ],
+    "className": "manauser",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1139",
+    "name": "ae-winter",
+    "fullName": "ae-WINTER",
+    "fullNameChinese": "ae-WINTER",
+    "aliases": [
+      "ae-WINTER",
+      "aeWINTER"
+    ],
+    "className": "assassin",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c5110",
+    "name": "afternoonsoakflan",
+    "fullName": "Afternoon Soak Flan",
+    "fullNameChinese": "午时戏水芙兰",
+    "aliases": [
+      "Afternoon Soak Flan",
+      "AfternoonSoakFlan",
+      "午时戏水芙兰"
+    ],
+    "className": "ranger",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3105",
+    "name": "ainos",
+    "fullName": "Ainos",
+    "fullNameChinese": "艾诺斯",
+    "aliases": [
+      "Ainos",
+      "艾诺斯"
+    ],
+    "className": "manauser",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c4105",
+    "name": "ainos2.0",
+    "fullName": "Ainos 2.0",
+    "fullNameChinese": "艾诺斯2.0",
+    "aliases": [
+      "Ainos 2.0",
+      "Ainos20",
+      "艾诺斯2.0"
+    ],
+    "className": "manauser",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3093",
+    "name": "ains",
+    "fullName": "Ains",
+    "fullNameChinese": "艾因兹",
+    "aliases": [
+      "Ains",
+      "艾因兹"
+    ],
+    "className": "warrior",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1155",
+    "name": "ainzooalgown",
+    "fullName": "Ainz Ooal Gown",
+    "fullNameChinese": "安兹·乌尔·恭",
+    "aliases": [
+      "Ainz Ooal Gown",
+      "AinzOoalGown",
+      "安兹·乌尔·恭"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1018",
+    "name": "aither",
+    "fullName": "Aither",
+    "fullNameChinese": "埃德勒",
+    "aliases": [
+      "Aither",
+      "埃德勒"
+    ],
+    "className": "manauser",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1179",
+    "name": "aki",
+    "fullName": "Aki",
+    "fullNameChinese": "亚奇",
+    "aliases": [
+      "Aki",
+      "亚奇"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1156",
+    "name": "albedo",
+    "fullName": "Albedo",
+    "fullNameChinese": "雅儿贝德",
+    "aliases": [
+      "Albedo",
+      "雅儿贝德"
+    ],
+    "className": "knight",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1100",
+    "name": "alencia",
+    "fullName": "Alencia",
+    "fullNameChinese": "艾莲西雅",
+    "aliases": [
+      "Alencia",
+      "艾莲西雅"
+    ],
+    "className": "warrior",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3012",
+    "name": "alexa",
+    "fullName": "Alexa",
+    "fullNameChinese": "雅莉莎",
+    "aliases": [
+      "Alexa",
+      "雅莉莎"
+    ],
+    "className": "assassin",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c4065",
+    "name": "all-rounderwanda",
+    "fullName": "All-Rounder Wanda",
+    "fullNameChinese": "疑难杂症专家汪达",
+    "aliases": [
+      "All-Rounder Wanda",
+      "AllRounderWanda",
+      "疑难杂症专家汪达"
+    ],
+    "className": "ranger",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2042",
+    "name": "ambitioustywin",
+    "fullName": "Ambitious Tywin",
+    "fullNameChinese": "野心分子泰温",
+    "aliases": [
+      "Ambitious Tywin",
+      "AmbitiousTywin",
+      "野心分子泰温"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1143",
+    "name": "amid",
+    "fullName": "Amid",
+    "fullNameChinese": "雅咪德",
+    "aliases": [
+      "Amid",
+      "雅咪德"
+    ],
+    "className": "manauser",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3158",
+    "name": "amiki",
+    "fullName": "Amiki",
+    "fullNameChinese": "雅蜜琪",
+    "aliases": [
+      "Amiki",
+      "雅蜜琪"
+    ],
+    "className": "warrior",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c6062",
+    "name": "angeloflightangelica",
+    "fullName": "Angel of Light Angelica",
+    "fullNameChinese": "光之天使安洁莉卡",
+    "aliases": [
+      "Angel of Light Angelica",
+      "AngelofLightAngelica",
+      "光之天使安洁莉卡"
+    ],
+    "className": "mage",
+    "attribute": "light",
+    "rarity": 4
+  },
+  {
+    "characterId": "c4042",
+    "name": "angelicmontmorancy",
+    "fullName": "Angelic Montmorancy",
+    "fullNameChinese": "守护天使蒙茉朗西",
+    "aliases": [
+      "Angelic Montmorancy",
+      "AngelicMontmorancy",
+      "守护天使蒙茉朗西"
+    ],
+    "className": "manauser",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1062",
+    "name": "angelica",
+    "fullName": "Angelica",
+    "fullNameChinese": "安洁莉卡",
+    "aliases": [
+      "Angelica",
+      "安洁莉卡"
+    ],
+    "className": "manauser",
+    "attribute": "ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2019",
+    "name": "apocalypseravi",
+    "fullName": "Apocalypse Ravi",
+    "fullNameChinese": "末日萝菲",
+    "aliases": [
+      "Apocalypse Ravi",
+      "ApocalypseRavi",
+      "末日萝菲"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c5175",
+    "name": "aram",
+    "fullName": "Aram",
+    "fullNameChinese": "亚澜",
+    "aliases": [
+      "Aram",
+      "亚澜"
+    ],
+    "className": "manauser",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1048",
+    "name": "aramintha",
+    "fullName": "Aramintha",
+    "fullNameChinese": "雅拉敏塔",
+    "aliases": [
+      "Aramintha",
+      "雅拉敏塔"
+    ],
+    "className": "mage",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2007",
+    "name": "arbitervildred",
+    "fullName": "Arbiter Vildred",
+    "fullNameChinese": "执行官维德瑞",
+    "aliases": [
+      "Arbiter Vildred",
+      "ArbiterVildred",
+      "执行官维德瑞"
+    ],
+    "className": "assassin",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c5004",
+    "name": "archdemon'sshadow",
+    "fullName": "Archdemon's Shadow",
+    "fullNameChinese": "魔神的暗影",
+    "aliases": [
+      "Archdemon's Shadow",
+      "ArchdemonsShadow",
+      "魔神的暗影"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2099",
+    "name": "architectlaika",
+    "fullName": "Architect Laika",
+    "fullNameChinese": "策划者莱伊卡",
+    "aliases": [
+      "Architect Laika",
+      "ArchitectLaika",
+      "策划者莱伊卡"
+    ],
+    "className": "mage",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c5128",
+    "name": "argentwaveshwayoung",
+    "fullName": "Argent Waves Hwayoung",
+    "fullNameChinese": "银光海啸和英",
+    "aliases": [
+      "Argent Waves Hwayoung",
+      "ArgentWavesHwayoung",
+      "银光海啸和英"
+    ],
+    "className": "assassin",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1129",
+    "name": "aria",
+    "fullName": "Aria",
+    "fullNameChinese": "艾莉雅",
+    "aliases": [
+      "Aria",
+      "艾莉雅"
+    ],
+    "className": "mage",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1008",
+    "name": "armin",
+    "fullName": "Armin",
+    "fullNameChinese": "亚敏",
+    "aliases": [
+      "Armin",
+      "亚敏"
+    ],
+    "className": "knight",
+    "attribute": "wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "c3004",
+    "name": "arowell",
+    "fullName": "Arowell",
+    "fullNameChinese": "雅洛薇",
+    "aliases": [
+      "Arowell",
+      "雅洛薇"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1124",
+    "name": "arunka",
+    "fullName": "Arunka",
+    "fullNameChinese": "亚露嘉",
+    "aliases": [
+      "Arunka",
+      "亚露嘉"
+    ],
+    "className": "warrior",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2013",
+    "name": "assassincartuja",
+    "fullName": "Assassin Cartuja",
+    "fullNameChinese": "杀手卡尔图哈",
+    "aliases": [
+      "Assassin Cartuja",
+      "AssassinCartuja",
+      "杀手卡尔图哈"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2014",
+    "name": "assassincidd",
+    "fullName": "Assassin Cidd",
+    "fullNameChinese": "杀手席德",
+    "aliases": [
+      "Assassin Cidd",
+      "AssassinCidd",
+      "杀手席德"
+    ],
+    "className": "assassin",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2033",
+    "name": "assassincoli",
+    "fullName": "Assassin Coli",
+    "fullNameChinese": "杀手可丽",
+    "aliases": [
+      "Assassin Coli",
+      "AssassinColi",
+      "杀手可丽"
+    ],
+    "className": "assassin",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2091",
+    "name": "astromancerelena",
+    "fullName": "Astromancer Elena",
+    "fullNameChinese": "星辰神谕艾蕾娜",
+    "aliases": [
+      "Astromancer Elena",
+      "AstromancerElena",
+      "星辰神谕艾蕾娜"
+    ],
+    "className": "ranger",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c5069",
+    "name": "aubadeludwig",
+    "fullName": "Aubade Ludwig",
+    "fullNameChinese": "黎明序曲鲁特比",
+    "aliases": [
+      "Aubade Ludwig",
+      "AubadeLudwig",
+      "黎明序曲鲁特比"
+    ],
+    "className": "ranger",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2031",
+    "name": "auxiliarylots",
+    "fullName": "Auxiliary Lots",
+    "fullNameChinese": "辅助型拉兹",
+    "aliases": [
+      "Auxiliary Lots",
+      "AuxiliaryLots",
+      "辅助型拉兹"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c3031",
+    "name": "azalea",
+    "fullName": "Azalea",
+    "fullNameChinese": "亚洁理亚",
+    "aliases": [
+      "Azalea",
+      "亚洁理亚"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1015",
+    "name": "baal&sezan",
+    "fullName": "Baal & Sezan",
+    "fullNameChinese": "巴尔＆塞尚",
+    "aliases": [
+      "Baal & Sezan",
+      "BaalSezan",
+      "巴尔＆塞尚"
+    ],
+    "className": "mage",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c6008",
+    "name": "badcatarmin",
+    "fullName": "Bad Cat Armin",
+    "fullNameChinese": "坏坏猫亚敏",
+    "aliases": [
+      "Bad Cat Armin",
+      "BadCatArmin",
+      "坏坏猫亚敏"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1093",
+    "name": "baiken",
+    "fullName": "Baiken",
+    "fullNameChinese": "梅喧",
+    "aliases": [
+      "Baiken",
+      "梅喧"
+    ],
+    "className": "assassin",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1053",
+    "name": "basar",
+    "fullName": "Basar",
+    "fullNameChinese": "巴萨尔",
+    "aliases": [
+      "Basar",
+      "巴萨尔"
+    ],
+    "className": "mage",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3006",
+    "name": "bask",
+    "fullName": "Bask",
+    "fullNameChinese": "巴思克",
+    "aliases": [
+      "Bask",
+      "巴思克"
+    ],
+    "className": "knight",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3095",
+    "name": "batisse",
+    "fullName": "Batisse",
+    "fullNameChinese": "巴托斯",
+    "aliases": [
+      "Batisse",
+      "巴托斯"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1141",
+    "name": "beehoo",
+    "fullName": "Beehoo",
+    "fullNameChinese": "雨修",
+    "aliases": [
+      "Beehoo",
+      "雨修"
+    ],
+    "className": "ranger",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1117",
+    "name": "belian",
+    "fullName": "Belian",
+    "fullNameChinese": "伯里安",
+    "aliases": [
+      "Belian",
+      "伯里安"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1071",
+    "name": "bellona",
+    "fullName": "Bellona",
+    "fullNameChinese": "维尔萝娜",
+    "aliases": [
+      "Bellona",
+      "维尔萝娜"
+    ],
+    "className": "ranger",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2043",
+    "name": "benevolentromann",
+    "fullName": "Benevolent Romann",
+    "fullNameChinese": "仁慈的洛曼",
+    "aliases": [
+      "Benevolent Romann",
+      "BenevolentRomann",
+      "仁慈的洛曼"
+    ],
+    "className": "mage",
+    "attribute": "light",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1146",
+    "name": "benimaru",
+    "fullName": "Benimaru",
+    "fullNameChinese": "红丸",
+    "aliases": [
+      "Benimaru",
+      "红丸"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3162",
+    "name": "bernard",
+    "fullName": "Bernard",
+    "fullNameChinese": "伯纳德",
+    "aliases": [
+      "Bernard",
+      "伯纳德"
+    ],
+    "className": "manauser",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1160",
+    "name": "birgitta",
+    "fullName": "Birgitta",
+    "fullNameChinese": "碧儿姬达",
+    "aliases": [
+      "Birgitta",
+      "碧儿姬达"
+    ],
+    "className": "manauser",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2021",
+    "name": "blazedingo",
+    "fullName": "Blaze Dingo",
+    "fullNameChinese": "烈火汀果",
+    "aliases": [
+      "Blaze Dingo",
+      "BlazeDingo",
+      "烈火汀果"
+    ],
+    "className": "manauser",
+    "attribute": "light",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2011",
+    "name": "bloodbladekarin",
+    "fullName": "Blood Blade Karin",
+    "fullNameChinese": "血剑卡琳",
+    "aliases": [
+      "Blood Blade Karin",
+      "BloodBladeKarin",
+      "血剑卡琳"
+    ],
+    "className": "assassin",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2039",
+    "name": "bloodmoonhaste",
+    "fullName": "Blood Moon Haste",
+    "fullNameChinese": "赤月贵族海斯特",
+    "aliases": [
+      "Blood Moon Haste",
+      "BloodMoonHaste",
+      "赤月贵族海斯特"
+    ],
+    "className": "manauser",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c5046",
+    "name": "bloominglidica",
+    "fullName": "Blooming Lidica",
+    "fullNameChinese": "花园丽迪卡",
+    "aliases": [
+      "Blooming Lidica",
+      "BloomingLidica",
+      "花园丽迪卡"
+    ],
+    "className": "assassin",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1097",
+    "name": "bombmodelkanna",
+    "fullName": "Bomb Model Kanna",
+    "fullNameChinese": "暴击型卡农",
+    "aliases": [
+      "Bomb Model Kanna",
+      "BombModelKanna",
+      "暴击型卡农"
+    ],
+    "className": "ranger",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2124",
+    "name": "bossarunka",
+    "fullName": "Boss Arunka",
+    "fullNameChinese": "组长亚露嘉",
+    "aliases": [
+      "Boss Arunka",
+      "BossArunka",
+      "组长亚露嘉"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2024",
+    "name": "briarwitchiseria",
+    "fullName": "Briar Witch Iseria",
+    "fullNameChinese": "灰光森林的伊赛丽亚",
+    "aliases": [
+      "Briar Witch Iseria",
+      "BriarWitchIseria",
+      "灰光森林的伊赛丽亚"
+    ],
+    "className": "ranger",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1145",
+    "name": "brieg",
+    "fullName": "Brieg",
+    "fullNameChinese": "布里克",
+    "aliases": [
+      "Brieg",
+      "布里克"
+    ],
+    "className": "knight",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3001",
+    "name": "butchercorpsinquisitor",
+    "fullName": "Butcher Corps Inquisitor",
+    "fullNameChinese": "屠杀部队员",
+    "aliases": [
+      "Butcher Corps Inquisitor",
+      "ButcherCorpsInquisitor",
+      "屠杀部队员"
+    ],
+    "className": "knight",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1154",
+    "name": "byblis",
+    "fullName": "Byblis",
+    "fullNameChinese": "维波里丝",
+    "aliases": [
+      "Byblis",
+      "维波里丝"
+    ],
+    "className": "ranger",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2128",
+    "name": "bystanderhwayoung",
+    "fullName": "Bystander Hwayoung",
+    "fullNameChinese": "旁观者和英",
+    "aliases": [
+      "Bystander Hwayoung",
+      "BystanderHwayoung",
+      "旁观者和英"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3124",
+    "name": "camilla",
+    "fullName": "Camilla",
+    "fullNameChinese": "卡蜜拉",
+    "aliases": [
+      "Camilla",
+      "卡蜜拉"
+    ],
+    "className": "warrior",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c4034",
+    "name": "captainrikoris",
+    "fullName": "Captain Rikoris",
+    "fullNameChinese": "先锋队长里科黎司",
+    "aliases": [
+      "Captain Rikoris",
+      "CaptainRikoris",
+      "先锋队长里科黎司"
+    ],
+    "className": "warrior",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3071",
+    "name": "carmainerose",
+    "fullName": "Carmainerose",
+    "fullNameChinese": "卡麦萝兹",
+    "aliases": [
+      "Carmainerose",
+      "卡麦萝兹"
+    ],
+    "className": "mage",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3051",
+    "name": "carrot",
+    "fullName": "Carrot",
+    "fullNameChinese": "卡萝",
+    "aliases": [
+      "Carrot",
+      "卡萝"
+    ],
+    "className": "mage",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1013",
+    "name": "cartuja",
+    "fullName": "Cartuja",
+    "fullNameChinese": "卡尔图哈",
+    "aliases": [
+      "Cartuja",
+      "卡尔图哈"
+    ],
+    "className": "warrior",
+    "attribute": "wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1002",
+    "name": "cecilia",
+    "fullName": "Cecilia",
+    "fullNameChinese": "赛西莉亚",
+    "aliases": [
+      "Cecilia",
+      "赛西莉亚"
+    ],
+    "className": "knight",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3064",
+    "name": "celeste",
+    "fullName": "Celeste",
+    "fullNameChinese": "赛雷斯特",
+    "aliases": [
+      "Celeste",
+      "赛雷斯特"
+    ],
+    "className": "ranger",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2005",
+    "name": "celestialmercedes",
+    "fullName": "Celestial Mercedes",
+    "fullNameChinese": "外太空的玫勒赛德丝",
+    "aliases": [
+      "Celestial Mercedes",
+      "CelestialMercedes",
+      "外太空的玫勒赛德丝"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1103",
+    "name": "celine",
+    "fullName": "Celine",
+    "fullNameChinese": "瑟琳",
+    "aliases": [
+      "Celine",
+      "瑟琳"
+    ],
+    "className": "assassin",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1081",
+    "name": "cerise",
+    "fullName": "Cerise",
+    "fullNameChinese": "赛瑞丝",
+    "aliases": [
+      "Cerise",
+      "赛瑞丝"
+    ],
+    "className": "ranger",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1079",
+    "name": "cermia",
+    "fullName": "Cermia",
+    "fullNameChinese": "洁若米亚",
+    "aliases": [
+      "Cermia",
+      "洁若米亚"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2037",
+    "name": "challengerdominiel",
+    "fullName": "Challenger Dominiel",
+    "fullNameChinese": "挑战者多米妮尔",
+    "aliases": [
+      "Challenger Dominiel",
+      "ChallengerDominiel",
+      "挑战者多米妮尔"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2010",
+    "name": "championzerato",
+    "fullName": "Champion Zerato",
+    "fullNameChinese": "终结者杰拉图",
+    "aliases": [
+      "Champion Zerato",
+      "ChampionZerato",
+      "终结者杰拉图"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c4001",
+    "name": "chaosinquisitor",
+    "fullName": "Chaos Inquisitor",
+    "fullNameChinese": "混沌教屠杀追击者",
+    "aliases": [
+      "Chaos Inquisitor",
+      "ChaosInquisitor",
+      "混沌教屠杀追击者"
+    ],
+    "className": "knight",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c4025",
+    "name": "chaossectaxe",
+    "fullName": "Chaos Sect Axe",
+    "fullNameChinese": "混沌教巨斧大将军",
+    "aliases": [
+      "Chaos Sect Axe",
+      "ChaosSectAxe",
+      "混沌教巨斧大将军"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1027",
+    "name": "charles",
+    "fullName": "Charles",
+    "fullNameChinese": "查尔斯",
+    "aliases": [
+      "Charles",
+      "查尔斯"
+    ],
+    "className": "knight",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1009",
+    "name": "charlotte",
+    "fullName": "Charlotte",
+    "fullNameChinese": "夏绿蒂",
+    "aliases": [
+      "Charlotte",
+      "夏绿蒂"
+    ],
+    "className": "knight",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1049",
+    "name": "chloe",
+    "fullName": "Chloe",
+    "fullNameChinese": "克萝爱",
+    "aliases": [
+      "Chloe",
+      "克萝爱"
+    ],
+    "className": "warrior",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1101",
+    "name": "choux",
+    "fullName": "Choux",
+    "fullNameChinese": "小泡芙",
+    "aliases": [
+      "Choux",
+      "小泡芙"
+    ],
+    "className": "warrior",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3123",
+    "name": "christy",
+    "fullName": "Christy",
+    "fullNameChinese": "克莉丝媞",
+    "aliases": [
+      "Christy",
+      "克莉丝媞"
+    ],
+    "className": "knight",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3025",
+    "name": "churchofilryosaxe",
+    "fullName": "Church of Ilryos Axe",
+    "fullNameChinese": "伊利欧斯教斧兵",
+    "aliases": [
+      "Church of Ilryos Axe",
+      "ChurchofIlryosAxe",
+      "伊利欧斯教斧兵"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1014",
+    "name": "cidd",
+    "fullName": "Cidd",
+    "fullNameChinese": "席德",
+    "aliases": [
+      "Cidd",
+      "席德"
+    ],
+    "className": "assassin",
+    "attribute": "wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1028",
+    "name": "clarissa",
+    "fullName": "Clarissa",
+    "fullNameChinese": "克莱莉莎",
+    "aliases": [
+      "Clarissa",
+      "克莱莉莎"
+    ],
+    "className": "warrior",
+    "attribute": "ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "c3156",
+    "name": "claudia",
+    "fullName": "Claudia",
+    "fullNameChinese": "克劳蒂亚",
+    "aliases": [
+      "Claudia",
+      "克劳蒂亚"
+    ],
+    "className": "knight",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2027",
+    "name": "closercharles",
+    "fullName": "Closer Charles",
+    "fullNameChinese": "末日指挥官查尔斯",
+    "aliases": [
+      "Closer Charles",
+      "CloserCharles",
+      "末日指挥官查尔斯"
+    ],
+    "className": "assassin",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1033",
+    "name": "coli",
+    "fullName": "Coli",
+    "fullNameChinese": "可丽",
+    "aliases": [
+      "Coli",
+      "可丽"
+    ],
+    "className": "assassin",
+    "attribute": "ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1099",
+    "name": "commandmodellaika",
+    "fullName": "Command Model Laika",
+    "fullNameChinese": "指挥型莱伊卡",
+    "aliases": [
+      "Command Model Laika",
+      "CommandModelLaika",
+      "指挥型莱伊卡"
+    ],
+    "className": "ranger",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4035",
+    "name": "commanderlorina",
+    "fullName": "Commander Lorina",
+    "fullNameChinese": "指挥官萝里娜",
+    "aliases": [
+      "Commander Lorina",
+      "CommanderLorina",
+      "指挥官萝里娜"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2080",
+    "name": "commanderpavel",
+    "fullName": "Commander Pavel",
+    "fullNameChinese": "司令官帕贝尔",
+    "aliases": [
+      "Commander Pavel",
+      "CommanderPavel",
+      "司令官帕贝尔"
+    ],
+    "className": "ranger",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2089",
+    "name": "conquerorlilias",
+    "fullName": "Conqueror Lilias",
+    "fullNameChinese": "支配者莉莉亚斯",
+    "aliases": [
+      "Conqueror Lilias",
+      "ConquerorLilias",
+      "支配者莉莉亚斯"
+    ],
+    "className": "warrior",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1012",
+    "name": "corvus",
+    "fullName": "Corvus",
+    "fullNameChinese": "科尔布思",
+    "aliases": [
+      "Corvus",
+      "科尔布思"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2054",
+    "name": "crescentmoonrin",
+    "fullName": "Crescent Moon Rin",
+    "fullNameChinese": "新月舞姬铃儿",
+    "aliases": [
+      "Crescent Moon Rin",
+      "CrescentMoonRin",
+      "新月舞姬铃儿"
+    ],
+    "className": "assassin",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2008",
+    "name": "crimsonarmin",
+    "fullName": "Crimson Armin",
+    "fullNameChinese": "红焰亚敏",
+    "aliases": [
+      "Crimson Armin",
+      "CrimsonArmin",
+      "红焰亚敏"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1036",
+    "name": "crozet",
+    "fullName": "Crozet",
+    "fullNameChinese": "克罗泽",
+    "aliases": [
+      "Crozet",
+      "克罗泽"
+    ],
+    "className": "knight",
+    "attribute": "ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2012",
+    "name": "darkcorvus",
+    "fullName": "Dark Corvus",
+    "fullNameChinese": "黑暗的科尔布思",
+    "aliases": [
+      "Dark Corvus",
+      "DarkCorvus",
+      "黑暗的科尔布思"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2090",
+    "name": "deathdealerray",
+    "fullName": "Death Dealer Ray",
+    "fullNameChinese": "死亡探究者雷伊",
+    "aliases": [
+      "Death Dealer Ray",
+      "DeathDealerRay",
+      "死亡探究者雷伊"
+    ],
+    "className": "manauser",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2053",
+    "name": "desertjewelbasar",
+    "fullName": "Desert Jewel Basar",
+    "fullNameChinese": "沙漠宝石巴萨尔",
+    "aliases": [
+      "Desert Jewel Basar",
+      "DesertJewelBasar",
+      "沙漠宝石巴萨尔"
+    ],
+    "className": "manauser",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2095",
+    "name": "designerlilibet",
+    "fullName": "Designer Lilibet",
+    "fullNameChinese": "设计师莉莉贝",
+    "aliases": [
+      "Designer Lilibet",
+      "DesignerLilibet",
+      "设计师莉莉贝"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2022",
+    "name": "destina",
+    "fullName": "Destina",
+    "fullNameChinese": "戴丝蒂娜",
+    "aliases": [
+      "Destina",
+      "戴丝蒂娜"
+    ],
+    "className": "manauser",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1076",
+    "name": "diene",
+    "fullName": "Diene",
+    "fullNameChinese": "迪埃妮",
+    "aliases": [
+      "Diene",
+      "迪埃妮"
+    ],
+    "className": "manauser",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1021",
+    "name": "dingo",
+    "fullName": "Dingo",
+    "fullNameChinese": "汀果",
+    "aliases": [
+      "Dingo",
+      "汀果"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2129",
+    "name": "disciplinaryprefectaria",
+    "fullName": "Disciplinary Prefect Aria",
+    "fullNameChinese": "风纪委员艾莉雅",
+    "aliases": [
+      "Disciplinary Prefect Aria",
+      "DisciplinaryPrefectAria",
+      "风纪委员艾莉雅"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1094",
+    "name": "dizzy",
+    "fullName": "Dizzy",
+    "fullNameChinese": "蒂姬",
+    "aliases": [
+      "Dizzy",
+      "蒂姬"
+    ],
+    "className": "mage",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4073",
+    "name": "dollmakerpearlhorizon",
+    "fullName": "Doll Maker Pearlhorizon",
+    "fullNameChinese": "制偶师波萝莱珍",
+    "aliases": [
+      "Doll Maker Pearlhorizon",
+      "DollMakerPearlhorizon",
+      "制偶师波萝莱珍"
+    ],
+    "className": "mage",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1037",
+    "name": "dominiel",
+    "fullName": "Dominiel",
+    "fullNameChinese": "多米妮尔",
+    "aliases": [
+      "Dominiel",
+      "多米妮尔"
+    ],
+    "className": "mage",
+    "attribute": "ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "c3044",
+    "name": "doris",
+    "fullName": "Doris",
+    "fullNameChinese": "朵莉思",
+    "aliases": [
+      "Doris",
+      "朵莉思"
+    ],
+    "className": "manauser",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2106",
+    "name": "dragonbridesenya",
+    "fullName": "Dragon Bride Senya",
+    "fullNameChinese": "龙之伴侣赛娜",
+    "aliases": [
+      "Dragon Bride Senya",
+      "DragonBrideSenya",
+      "龙之伴侣赛娜"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2132",
+    "name": "dragonkingsharun",
+    "fullName": "Dragon King Sharun",
+    "fullNameChinese": "龙王莎伦",
+    "aliases": [
+      "Dragon King Sharun",
+      "DragonKingSharun",
+      "龙王莎伦"
+    ],
+    "className": "manauser",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3094",
+    "name": "eaton",
+    "fullName": "Eaton",
+    "fullNameChinese": "伊顿",
+    "aliases": [
+      "Eaton",
+      "伊顿"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1111",
+    "name": "eda",
+    "fullName": "Eda",
+    "fullNameChinese": "艾妲",
+    "aliases": [
+      "Eda",
+      "艾妲"
+    ],
+    "className": "mage",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1134",
+    "name": "edwardelric",
+    "fullName": "Edward Elric",
+    "fullNameChinese": "爱德华·爱力克",
+    "aliases": [
+      "Edward Elric",
+      "EdwardElric",
+      "爱德华·爱力克"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1091",
+    "name": "elena",
+    "fullName": "Elena",
+    "fullNameChinese": "艾蕾娜",
+    "aliases": [
+      "Elena",
+      "艾蕾娜"
+    ],
+    "className": "manauser",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1142",
+    "name": "eligos",
+    "fullName": "Eligos",
+    "fullNameChinese": "艾利戈斯",
+    "aliases": [
+      "Eligos",
+      "艾利戈斯"
+    ],
+    "className": "ranger",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1105",
+    "name": "elphelt",
+    "fullName": "Elphelt",
+    "fullNameChinese": "爱尔菲特",
+    "aliases": [
+      "Elphelt",
+      "爱尔菲特"
+    ],
+    "className": "ranger",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3054",
+    "name": "elson",
+    "fullName": "Elson",
+    "fullNameChinese": "艾尔森",
+    "aliases": [
+      "Elson",
+      "艾尔森"
+    ],
+    "className": "manauser",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1148",
+    "name": "elvira",
+    "fullName": "Elvira",
+    "fullNameChinese": "艾碧拉",
+    "aliases": [
+      "Elvira",
+      "艾碧拉"
+    ],
+    "className": "assassin",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1116",
+    "name": "emilia",
+    "fullName": "Emilia",
+    "fullNameChinese": "爱蜜莉雅",
+    "aliases": [
+      "Emilia",
+      "爱蜜莉雅"
+    ],
+    "className": "manauser",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2113",
+    "name": "empyreanilynav",
+    "fullName": "Empyrean Ilynav",
+    "fullNameChinese": "苍穹伊莉娜芙",
+    "aliases": [
+      "Empyrean Ilynav",
+      "EmpyreanIlynav",
+      "苍穹伊莉娜芙"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3022",
+    "name": "enott",
+    "fullName": "Enott",
+    "fullNameChinese": "艾诺特",
+    "aliases": [
+      "Enott",
+      "艾诺特"
+    ],
+    "className": "warrior",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1108",
+    "name": "ervalen",
+    "fullName": "Ervalen",
+    "fullNameChinese": "艾尔巴伦",
+    "aliases": [
+      "Ervalen",
+      "艾尔巴伦"
+    ],
+    "className": "assassin",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1183",
+    "name": "estelle",
+    "fullName": "Estelle",
+    "fullNameChinese": "艾丝黛",
+    "aliases": [
+      "Estelle",
+      "艾丝黛"
+    ],
+    "className": "knight",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2069",
+    "name": "eternalwandererludwig",
+    "fullName": "Eternal Wanderer Ludwig",
+    "fullNameChinese": "永劫漂流者鲁特比",
+    "aliases": [
+      "Eternal Wanderer Ludwig",
+      "EternalWandererLudwig",
+      "永劫漂流者鲁特比"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c5147",
+    "name": "eyeoftheabyssfumyr",
+    "fullName": "Eye of the Abyss Fumyr",
+    "fullNameChinese": "深海之眼芙米尔",
+    "aliases": [
+      "Eye of the Abyss Fumyr",
+      "EyeoftheAbyssFumyr",
+      "深海之眼芙米尔"
+    ],
+    "className": "mage",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3157",
+    "name": "ezra",
+    "fullName": "Ezra",
+    "fullNameChinese": "艾自拉",
+    "aliases": [
+      "Ezra",
+      "艾自拉"
+    ],
+    "className": "assassin",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c5050",
+    "name": "fairytaletenebria",
+    "fullName": "Fairytale Tenebria",
+    "fullNameChinese": "童话泰妮布里雅",
+    "aliases": [
+      "Fairytale Tenebria",
+      "FairytaleTenebria",
+      "童话泰妮布里雅"
+    ],
+    "className": "mage",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2046",
+    "name": "faithlesslidica",
+    "fullName": "Faithless Lidica",
+    "fullNameChinese": "无神论者丽迪卡",
+    "aliases": [
+      "Faithless Lidica",
+      "FaithlessLidica",
+      "无神论者丽迪卡"
+    ],
+    "className": "ranger",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4003",
+    "name": "falconerkluri",
+    "fullName": "Falconer Kluri",
+    "fullNameChinese": "鹰猎人可露莉",
+    "aliases": [
+      "Falconer Kluri",
+      "FalconerKluri",
+      "鹰猎人可露莉"
+    ],
+    "className": "knight",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2002",
+    "name": "fallencecilia",
+    "fullName": "Fallen Cecilia",
+    "fullNameChinese": "堕落的赛西莉亚",
+    "aliases": [
+      "Fallen Cecilia",
+      "FallenCecilia",
+      "堕落的赛西莉亚"
+    ],
+    "className": "knight",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1170",
+    "name": "fenne",
+    "fullName": "Fenne",
+    "fullNameChinese": "斐妮",
+    "aliases": [
+      "Fenne",
+      "斐妮"
+    ],
+    "className": "manauser",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1158",
+    "name": "fenris",
+    "fullName": "Fenris",
+    "fullNameChinese": "佩里斯",
+    "aliases": [
+      "Fenris",
+      "佩里斯"
+    ],
+    "className": "ranger",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1173",
+    "name": "fern",
+    "fullName": "Fern",
+    "fullNameChinese": "菲伦",
+    "aliases": [
+      "Fern",
+      "菲伦"
+    ],
+    "className": "mage",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c5111",
+    "name": "festiveeda",
+    "fullName": "Festive Eda",
+    "fullNameChinese": "庆典艾妲",
+    "aliases": [
+      "Festive Eda",
+      "FestiveEda",
+      "庆典艾妲"
+    ],
+    "className": "mage",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2032",
+    "name": "fightermaya",
+    "fullName": "Fighter Maya",
+    "fullNameChinese": "战斗型玛雅",
+    "aliases": [
+      "Fighter Maya",
+      "FighterMaya",
+      "战斗型玛雅"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1110",
+    "name": "flan",
+    "fullName": "Flan",
+    "fullNameChinese": "芙兰",
+    "aliases": [
+      "Flan",
+      "芙兰"
+    ],
+    "className": "ranger",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3026",
+    "name": "freespirittieria",
+    "fullName": "Free Spirit Tieria",
+    "fullNameChinese": "永恒不变的黛莉亚",
+    "aliases": [
+      "Free Spirit Tieria",
+      "FreeSpiritTieria",
+      "永恒不变的黛莉亚"
+    ],
+    "className": "warrior",
+    "attribute": "light",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1163",
+    "name": "frida",
+    "fullName": "Frida",
+    "fullNameChinese": "弗莉达",
+    "aliases": [
+      "Frida",
+      "弗莉达"
+    ],
+    "className": "manauser",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1172",
+    "name": "frieren",
+    "fullName": "Frieren",
+    "fullNameChinese": "芙莉莲",
+    "aliases": [
+      "Frieren",
+      "芙莉莲"
+    ],
+    "className": "mage",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1147",
+    "name": "fumyr",
+    "fullName": "Fumyr",
+    "fullNameChinese": "芙米尔",
+    "aliases": [
+      "Fumyr",
+      "芙米尔"
+    ],
+    "className": "mage",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1087",
+    "name": "furious",
+    "fullName": "Furious",
+    "fullNameChinese": "尤贝乌斯",
+    "aliases": [
+      "Furious",
+      "尤贝乌斯"
+    ],
+    "className": "ranger",
+    "attribute": "ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2035",
+    "name": "generalpurrgis",
+    "fullName": "General Purrgis",
+    "fullNameChinese": "大将法济斯",
+    "aliases": [
+      "General Purrgis",
+      "GeneralPurrgis",
+      "大将法济斯"
+    ],
+    "className": "warrior",
+    "attribute": "light",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2001",
+    "name": "genesisras",
+    "fullName": "Genesis Ras",
+    "fullNameChinese": "起源拉斯",
+    "aliases": [
+      "Genesis Ras",
+      "GenesisRas",
+      "起源拉斯"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3103",
+    "name": "glenn",
+    "fullName": "Glenn",
+    "fullNameChinese": "格伦",
+    "aliases": [
+      "Glenn",
+      "格伦"
+    ],
+    "className": "ranger",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3074",
+    "name": "gloomyrain",
+    "fullName": "Gloomyrain",
+    "fullNameChinese": "格鲁美兰",
+    "aliases": [
+      "Gloomyrain",
+      "格鲁美兰"
+    ],
+    "className": "mage",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3101",
+    "name": "godmother",
+    "fullName": "Godmother",
+    "fullNameChinese": "教母",
+    "aliases": [
+      "Godmother",
+      "教母"
+    ],
+    "className": "ranger",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2086",
+    "name": "greatchiefkhawana",
+    "fullName": "Great Chief Khawana",
+    "fullNameChinese": "大族长卡瓦娜",
+    "aliases": [
+      "Great Chief Khawana",
+      "GreatChiefKhawana",
+      "大族长卡瓦娜"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c5070",
+    "name": "guardcaptainkrau",
+    "fullName": "Guard Captain Krau",
+    "fullNameChinese": "护卫队长克劳乌",
+    "aliases": [
+      "Guard Captain Krau",
+      "GuardCaptainKrau",
+      "护卫队长克劳乌"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2018",
+    "name": "guideraither",
+    "fullName": "Guider Aither",
+    "fullNameChinese": "求道者埃德勒",
+    "aliases": [
+      "Guider Aither",
+      "GuiderAither",
+      "求道者埃德勒"
+    ],
+    "className": "mage",
+    "attribute": "light",
+    "rarity": 4
+  },
+  {
+    "characterId": "c3024",
+    "name": "gunther",
+    "fullName": "Gunther",
+    "fullNameChinese": "坤特",
+    "aliases": [
+      "Gunther",
+      "坤特"
+    ],
+    "className": "warrior",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1153",
+    "name": "harsetti",
+    "fullName": "Harsetti",
+    "fullNameChinese": "赫尔赛蒂",
+    "aliases": [
+      "Harsetti",
+      "赫尔赛蒂"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3135",
+    "name": "hasol",
+    "fullName": "Hasol",
+    "fullNameChinese": "夏率",
+    "aliases": [
+      "Hasol",
+      "夏率"
+    ],
+    "className": "knight",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1039",
+    "name": "haste",
+    "fullName": "Haste",
+    "fullNameChinese": "海斯特",
+    "aliases": [
+      "Haste",
+      "海斯特"
+    ],
+    "className": "assassin",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3091",
+    "name": "hataan",
+    "fullName": "Hataan",
+    "fullNameChinese": "哈坦",
+    "aliases": [
+      "Hataan",
+      "哈坦"
+    ],
+    "className": "assassin",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3041",
+    "name": "hazel",
+    "fullName": "Hazel",
+    "fullNameChinese": "海兹",
+    "aliases": [
+      "Hazel",
+      "海兹"
+    ],
+    "className": "manauser",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1178",
+    "name": "hecate",
+    "fullName": "Hecate",
+    "fullNameChinese": "赫卡特",
+    "aliases": [
+      "Hecate",
+      "赫卡特"
+    ],
+    "className": "warrior",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3122",
+    "name": "helen",
+    "fullName": "Helen",
+    "fullNameChinese": "海伦",
+    "aliases": [
+      "Helen",
+      "海伦"
+    ],
+    "className": "knight",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3023",
+    "name": "helga",
+    "fullName": "Helga",
+    "fullNameChinese": "赫尔嘉",
+    "aliases": [
+      "Helga",
+      "赫尔嘉"
+    ],
+    "className": "warrior",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2126",
+    "name": "hellionlua",
+    "fullName": "Hellion Lua",
+    "fullNameChinese": "小恶魔路雅",
+    "aliases": [
+      "Hellion Lua",
+      "HellionLua",
+      "小恶魔路雅"
+    ],
+    "className": "ranger",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c5016",
+    "name": "holidayyufine",
+    "fullName": "Holiday Yufine",
+    "fullNameChinese": "度假风优芬妮",
+    "aliases": [
+      "Holiday Yufine",
+      "HolidayYufine",
+      "度假风优芬妮"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4141",
+    "name": "holyflameadin",
+    "fullName": "Holy Flame Adin",
+    "fullNameChinese": "圣炎的艾庭",
+    "aliases": [
+      "Holy Flame Adin",
+      "HolyFlameAdin",
+      "圣炎的艾庭"
+    ],
+    "className": "assassin",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3055",
+    "name": "hurado",
+    "fullName": "Hurado",
+    "fullNameChinese": "修拉杜",
+    "aliases": [
+      "Hurado",
+      "修拉杜"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1128",
+    "name": "hwayoung",
+    "fullName": "Hwayoung",
+    "fullNameChinese": "和英",
+    "aliases": [
+      "Hwayoung",
+      "和英"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3102",
+    "name": "ian",
+    "fullName": "Ian",
+    "fullNameChinese": "伊安",
+    "aliases": [
+      "Ian",
+      "伊安"
+    ],
+    "className": "ranger",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1113",
+    "name": "ilynav",
+    "fullName": "Ilynav",
+    "fullNameChinese": "伊莉娜芙",
+    "aliases": [
+      "Ilynav",
+      "伊莉娜芙"
+    ],
+    "className": "knight",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1161",
+    "name": "immortalwukong",
+    "fullName": "Immortal Wukong",
+    "fullNameChinese": "不灭神机悟空",
+    "aliases": [
+      "Immortal Wukong",
+      "ImmortalWukong",
+      "不灭神机悟空"
+    ],
+    "className": "warrior",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2085",
+    "name": "infernokhawazu",
+    "fullName": "Inferno Khawazu",
+    "fullNameChinese": "烈焰的卡瓦朱",
+    "aliases": [
+      "Inferno Khawazu",
+      "InfernoKhawazu",
+      "烈焰的卡瓦朱"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c6017",
+    "name": "infinitehorizonachates",
+    "fullName": "Infinite Horizon Achates",
+    "fullNameChinese": "未知可能性雅卡泰丝",
+    "aliases": [
+      "Infinite Horizon Achates",
+      "InfiniteHorizonAchates",
+      "未知可能性雅卡泰丝"
+    ],
+    "className": "manauser",
+    "attribute": "light",
+    "rarity": 4
+  },
+  {
+    "characterId": "c4158",
+    "name": "inheritoramiki",
+    "fullName": "Inheritor Amiki",
+    "fullNameChinese": "传承雅蜜琪",
+    "aliases": [
+      "Inheritor Amiki",
+      "InheritorAmiki",
+      "传承雅蜜琪"
+    ],
+    "className": "warrior",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1024",
+    "name": "iseria",
+    "fullName": "Iseria",
+    "fullNameChinese": "伊赛丽亚",
+    "aliases": [
+      "Iseria",
+      "伊赛丽亚"
+    ],
+    "className": "ranger",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1182",
+    "name": "ivana",
+    "fullName": "Ivana",
+    "fullNameChinese": "伊凡娜",
+    "aliases": [
+      "Ivana",
+      "伊凡娜"
+    ],
+    "className": "manauser",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1130",
+    "name": "jack-o",
+    "fullName": "Jack-O",
+    "fullNameChinese": "洁克‧欧",
+    "aliases": [
+      "Jack-O",
+      "JackO",
+      "洁克‧欧"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3131",
+    "name": "januta",
+    "fullName": "Januta",
+    "fullNameChinese": "扎努塔",
+    "aliases": [
+      "Januta",
+      "扎努塔"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3053",
+    "name": "jecht",
+    "fullName": "Jecht",
+    "fullNameChinese": "杰克托",
+    "aliases": [
+      "Jecht",
+      "杰克托"
+    ],
+    "className": "manauser",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3052",
+    "name": "jena",
+    "fullName": "Jena",
+    "fullNameChinese": "捷娜",
+    "aliases": [
+      "Jena",
+      "捷娜"
+    ],
+    "className": "mage",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1055",
+    "name": "jenua",
+    "fullName": "Jenua",
+    "fullNameChinese": "济纽亚",
+    "aliases": [
+      "Jenua",
+      "济纽亚"
+    ],
+    "className": "assassin",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2006",
+    "name": "judgekise",
+    "fullName": "Judge Kise",
+    "fullNameChinese": "审判者绮世",
+    "aliases": [
+      "Judge Kise",
+      "JudgeKise",
+      "审判者绮世"
+    ],
+    "className": "warrior",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3011",
+    "name": "judith",
+    "fullName": "Judith",
+    "fullNameChinese": "茱迪丝",
+    "aliases": [
+      "Judith",
+      "茱迪丝"
+    ],
+    "className": "assassin",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3151",
+    "name": "juni",
+    "fullName": "Juni",
+    "fullNameChinese": "珠妮",
+    "aliases": [
+      "Juni",
+      "珠妮"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1152",
+    "name": "kane",
+    "fullName": "Kane",
+    "fullNameChinese": "该隐",
+    "aliases": [
+      "Kane",
+      "该隐"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1011",
+    "name": "karin",
+    "fullName": "Karin",
+    "fullNameChinese": "卡琳",
+    "aliases": [
+      "Karin",
+      "卡琳"
+    ],
+    "className": "assassin",
+    "attribute": "ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1073",
+    "name": "kawerik",
+    "fullName": "Kawerik",
+    "fullNameChinese": "卡威利",
+    "aliases": [
+      "Kawerik",
+      "卡威利"
+    ],
+    "className": "mage",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1023",
+    "name": "kayron",
+    "fullName": "Kayron",
+    "fullNameChinese": "凯隆",
+    "aliases": [
+      "Kayron",
+      "凯隆"
+    ],
+    "className": "assassin",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1047",
+    "name": "ken",
+    "fullName": "Ken",
+    "fullNameChinese": "肯恩",
+    "aliases": [
+      "Ken",
+      "肯恩"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1086",
+    "name": "khawana",
+    "fullName": "Khawana",
+    "fullNameChinese": "卡瓦娜",
+    "aliases": [
+      "Khawana",
+      "卡瓦娜"
+    ],
+    "className": "assassin",
+    "attribute": "fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1085",
+    "name": "khawazu",
+    "fullName": "Khawazu",
+    "fullNameChinese": "卡瓦朱",
+    "aliases": [
+      "Khawazu",
+      "卡瓦朱"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "c3084",
+    "name": "kikiratv2",
+    "fullName": "Kikirat v2",
+    "fullNameChinese": "奇奇拉特V.2",
+    "aliases": [
+      "Kikirat v2",
+      "Kikiratv2",
+      "奇奇拉特V.2"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3063",
+    "name": "kiris",
+    "fullName": "Kiris",
+    "fullNameChinese": "奇丽丝",
+    "aliases": [
+      "Kiris",
+      "奇丽丝"
+    ],
+    "className": "ranger",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1006",
+    "name": "kise",
+    "fullName": "Kise",
+    "fullNameChinese": "绮世",
+    "aliases": [
+      "Kise",
+      "绮世"
+    ],
+    "className": "assassin",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2028",
+    "name": "kittyclarissa",
+    "fullName": "Kitty Clarissa",
+    "fullNameChinese": "猫咪克莱莉莎",
+    "aliases": [
+      "Kitty Clarissa",
+      "KittyClarissa",
+      "猫咪克莱莉莎"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1107",
+    "name": "kizunaai",
+    "fullName": "Kizuna AI",
+    "fullNameChinese": "绊爱",
+    "aliases": [
+      "Kizuna AI",
+      "KizunaAI",
+      "绊爱"
+    ],
+    "className": "manauser",
+    "attribute": "fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "c3003",
+    "name": "kluri",
+    "fullName": "Kluri",
+    "fullNameChinese": "可露莉",
+    "aliases": [
+      "Kluri",
+      "可露莉"
+    ],
+    "className": "knight",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1070",
+    "name": "krau",
+    "fullName": "Krau",
+    "fullNameChinese": "克劳乌",
+    "aliases": [
+      "Krau",
+      "克劳乌"
+    ],
+    "className": "knight",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c6005",
+    "name": "ladyofthescales",
+    "fullName": "Lady of the Scales",
+    "fullNameChinese": "天秤之主",
+    "aliases": [
+      "Lady of the Scales",
+      "LadyoftheScales",
+      "天秤之主"
+    ],
+    "className": "manauser",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1159",
+    "name": "laia",
+    "fullName": "Laia",
+    "fullNameChinese": "莱娅",
+    "aliases": [
+      "Laia",
+      "莱娅"
+    ],
+    "className": "warrior",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1109",
+    "name": "landy",
+    "fullName": "Landy",
+    "fullNameChinese": "兰蒂",
+    "aliases": [
+      "Landy",
+      "兰蒂"
+    ],
+    "className": "ranger",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c6011",
+    "name": "lastpiecekarin",
+    "fullName": "Last Piece Karin",
+    "fullNameChinese": "最后的碎片卡琳",
+    "aliases": [
+      "Last Piece Karin",
+      "LastPieceKarin",
+      "最后的碎片卡琳"
+    ],
+    "className": "assassin",
+    "attribute": "light",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2070",
+    "name": "lastriderkrau",
+    "fullName": "Last Rider Krau",
+    "fullNameChinese": "最后的骑士克劳乌",
+    "aliases": [
+      "Last Rider Krau",
+      "LastRiderKrau",
+      "最后的骑士克劳乌"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3163",
+    "name": "leah",
+    "fullName": "Leah",
+    "fullNameChinese": "蕾娅",
+    "aliases": [
+      "Leah",
+      "蕾娅"
+    ],
+    "className": "ranger",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3092",
+    "name": "lena",
+    "fullName": "Lena",
+    "fullNameChinese": "雷娜",
+    "aliases": [
+      "Lena",
+      "雷娜"
+    ],
+    "className": "warrior",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1029",
+    "name": "leo",
+    "fullName": "Leo",
+    "fullNameChinese": "雷欧",
+    "aliases": [
+      "Leo",
+      "雷欧"
+    ],
+    "className": "ranger",
+    "attribute": "wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "c5149",
+    "name": "lethe",
+    "fullName": "Lethe",
+    "fullNameChinese": "丽希",
+    "aliases": [
+      "Lethe",
+      "丽希"
+    ],
+    "className": "warrior",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1046",
+    "name": "lidica",
+    "fullName": "Lidica",
+    "fullNameChinese": "丽迪卡",
+    "aliases": [
+      "Lidica",
+      "丽迪卡"
+    ],
+    "className": "ranger",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1089",
+    "name": "lilias",
+    "fullName": "Lilias",
+    "fullNameChinese": "莉莉亚斯",
+    "aliases": [
+      "Lilias",
+      "莉莉亚斯"
+    ],
+    "className": "knight",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1095",
+    "name": "lilibet",
+    "fullName": "Lilibet",
+    "fullNameChinese": "莉莉贝",
+    "aliases": [
+      "Lilibet",
+      "莉莉贝"
+    ],
+    "className": "warrior",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3153",
+    "name": "lilka",
+    "fullName": "Lilka",
+    "fullNameChinese": "莉珈",
+    "aliases": [
+      "Lilka",
+      "莉珈"
+    ],
+    "className": "ranger",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2079",
+    "name": "lionheartcermia",
+    "fullName": "Lionheart Cermia",
+    "fullNameChinese": "狮心王洁若米亚",
+    "aliases": [
+      "Lionheart Cermia",
+      "LionheartCermia",
+      "狮心王洁若米亚"
+    ],
+    "className": "warrior",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2009",
+    "name": "littlequeencharlotte",
+    "fullName": "Little Queen Charlotte",
+    "fullNameChinese": "年轻的女王夏绿蒂",
+    "aliases": [
+      "Little Queen Charlotte",
+      "LittleQueenCharlotte",
+      "年轻的女王夏绿蒂"
+    ],
+    "className": "warrior",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2071",
+    "name": "lonecrescentbellona",
+    "fullName": "Lone Crescent Bellona",
+    "fullNameChinese": "一轮孤月维尔萝娜",
+    "aliases": [
+      "Lone Crescent Bellona",
+      "LoneCrescentBellona",
+      "一轮孤月维尔萝娜"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2125",
+    "name": "lonewolfpeira",
+    "fullName": "Lone Wolf Peira",
+    "fullNameChinese": "孤狼沛伊拉",
+    "aliases": [
+      "Lone Wolf Peira",
+      "LoneWolfPeira",
+      "孤狼沛伊拉"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3035",
+    "name": "lorina",
+    "fullName": "Lorina",
+    "fullNameChinese": "萝里娜",
+    "aliases": [
+      "Lorina",
+      "萝里娜"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1031",
+    "name": "lots",
+    "fullName": "Lots",
+    "fullNameChinese": "拉兹",
+    "aliases": [
+      "Lots",
+      "拉兹"
+    ],
+    "className": "manauser",
+    "attribute": "wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1126",
+    "name": "lua",
+    "fullName": "Lua",
+    "fullNameChinese": "路雅",
+    "aliases": [
+      "Lua",
+      "路雅"
+    ],
+    "className": "ranger",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3113",
+    "name": "lucy",
+    "fullName": "Lucy",
+    "fullNameChinese": "露西",
+    "aliases": [
+      "Lucy",
+      "露西"
+    ],
+    "className": "manauser",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1069",
+    "name": "ludwig",
+    "fullName": "Ludwig",
+    "fullNameChinese": "鲁特比",
+    "aliases": [
+      "Ludwig",
+      "鲁特比"
+    ],
+    "className": "mage",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1082",
+    "name": "luluca",
+    "fullName": "Luluca",
+    "fullNameChinese": "璐璐卡",
+    "aliases": [
+      "Luluca",
+      "璐璐卡"
+    ],
+    "className": "mage",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1066",
+    "name": "luna",
+    "fullName": "Luna",
+    "fullNameChinese": "露娜",
+    "aliases": [
+      "Luna",
+      "露娜"
+    ],
+    "className": "warrior",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4044",
+    "name": "magicscholardoris",
+    "fullName": "Magic Scholar Doris",
+    "fullNameChinese": "魔法学者朵莉思",
+    "aliases": [
+      "Magic Scholar Doris",
+      "MagicScholarDoris",
+      "魔法学者朵莉思"
+    ],
+    "className": "manauser",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2049",
+    "name": "maidchloe",
+    "fullName": "Maid Chloe",
+    "fullNameChinese": "仆人克萝爱",
+    "aliases": [
+      "Maid Chloe",
+      "MaidChloe",
+      "仆人克萝爱"
+    ],
+    "className": "manauser",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2047",
+    "name": "martialartistken",
+    "fullName": "Martial Artist Ken",
+    "fullNameChinese": "武斗家肯恩",
+    "aliases": [
+      "Martial Artist Ken",
+      "MartialArtistKen",
+      "武斗家肯恩"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4041",
+    "name": "mascothazel",
+    "fullName": "Mascot Hazel",
+    "fullNameChinese": "吉祥物海兹",
+    "aliases": [
+      "Mascot Hazel",
+      "MascotHazel",
+      "吉祥物海兹"
+    ],
+    "className": "manauser",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1032",
+    "name": "maya",
+    "fullName": "Maya",
+    "fullNameChinese": "玛雅",
+    "aliases": [
+      "Maya",
+      "玛雅"
+    ],
+    "className": "knight",
+    "attribute": "fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2073",
+    "name": "mediatorkawerik",
+    "fullName": "Mediator Kawerik",
+    "fullNameChinese": "协调者卡威利",
+    "aliases": [
+      "Mediator Kawerik",
+      "MediatorKawerik",
+      "协调者卡威利"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3121",
+    "name": "melany",
+    "fullName": "Melany",
+    "fullNameChinese": "玫拉妮",
+    "aliases": [
+      "Melany",
+      "玫拉妮"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1096",
+    "name": "melissa",
+    "fullName": "Melissa",
+    "fullNameChinese": "梅丽莎",
+    "aliases": [
+      "Melissa",
+      "梅丽莎"
+    ],
+    "className": "mage",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c0002",
+    "name": "mercedes",
+    "fullName": "Mercedes",
+    "fullNameChinese": "玫勒赛德丝",
+    "aliases": [
+      "Mercedes",
+      "玫勒赛德丝"
+    ],
+    "className": "mage",
+    "attribute": "fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "c4023",
+    "name": "mercenaryhelga",
+    "fullName": "Mercenary Helga",
+    "fullNameChinese": "自由自在的佣兵赫尔嘉",
+    "aliases": [
+      "Mercenary Helga",
+      "MercenaryHelga",
+      "自由自在的佣兵赫尔嘉"
+    ],
+    "className": "warrior",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c5089",
+    "name": "midnightgalalilias",
+    "fullName": "Midnight Gala Lilias",
+    "fullNameChinese": "夜宴莉莉亚斯",
+    "aliases": [
+      "Midnight Gala Lilias",
+      "MidnightGalaLilias",
+      "夜宴莉莉亚斯"
+    ],
+    "className": "assassin",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1122",
+    "name": "milim",
+    "fullName": "Milim",
+    "fullNameChinese": "米莉姆",
+    "aliases": [
+      "Milim",
+      "米莉姆"
+    ],
+    "className": "mage",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3014",
+    "name": "mirsa",
+    "fullName": "Mirsa",
+    "fullNameChinese": "米勒莎",
+    "aliases": [
+      "Mirsa",
+      "米勒莎"
+    ],
+    "className": "assassin",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3072",
+    "name": "mistychain",
+    "fullName": "Mistychain",
+    "fullNameChinese": "美丝缇彩",
+    "aliases": [
+      "Mistychain",
+      "美丝缇彩"
+    ],
+    "className": "mage",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c6024",
+    "name": "monarchoftheswordiseria",
+    "fullName": "Monarch of the Sword Iseria",
+    "fullNameChinese": "宝剑君主伊赛丽亚",
+    "aliases": [
+      "Monarch of the Sword Iseria",
+      "MonarchoftheSwordIseria",
+      "宝剑君主伊赛丽亚"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3042",
+    "name": "montmorancy",
+    "fullName": "Montmorancy",
+    "fullNameChinese": "蒙茉朗西",
+    "aliases": [
+      "Montmorancy",
+      "蒙茉朗西"
+    ],
+    "className": "manauser",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c6037",
+    "name": "moonbunnydominiel",
+    "fullName": "Moon Bunny Dominiel",
+    "fullNameChinese": "月兔多米妮尔",
+    "aliases": [
+      "Moon Bunny Dominiel",
+      "MoonBunnyDominiel",
+      "月兔多米妮尔"
+    ],
+    "className": "manauser",
+    "attribute": "light",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1104",
+    "name": "mort",
+    "fullName": "Mort",
+    "fullNameChinese": "魔勒",
+    "aliases": [
+      "Mort",
+      "魔勒"
+    ],
+    "className": "knight",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3033",
+    "name": "mucacha",
+    "fullName": "Mucacha",
+    "fullNameChinese": "穆卡察",
+    "aliases": [
+      "Mucacha",
+      "穆卡察"
+    ],
+    "className": "warrior",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1044",
+    "name": "mui",
+    "fullName": "Mui",
+    "fullNameChinese": "缪伊",
+    "aliases": [
+      "Mui",
+      "缪伊"
+    ],
+    "className": "warrior",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4062",
+    "name": "muserima",
+    "fullName": "Muse Rima",
+    "fullNameChinese": "缪斯黎玛",
+    "aliases": [
+      "Muse Rima",
+      "MuseRima",
+      "缪斯黎玛"
+    ],
+    "className": "ranger",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3132",
+    "name": "muwi",
+    "fullName": "Muwi",
+    "fullNameChinese": "武蔚",
+    "aliases": [
+      "Muwi",
+      "武蔚"
+    ],
+    "className": "assassin",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1151",
+    "name": "nahkwol",
+    "fullName": "Nahkwol",
+    "fullNameChinese": "落月",
+    "aliases": [
+      "Nahkwol",
+      "落月"
+    ],
+    "className": "ranger",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2109",
+    "name": "navycaptainlandy",
+    "fullName": "Navy Captain Landy",
+    "fullNameChinese": "海军上校兰蒂",
+    "aliases": [
+      "Navy Captain Landy",
+      "NavyCaptainLandy",
+      "海军上校兰蒂"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3061",
+    "name": "nemunas",
+    "fullName": "Nemunas",
+    "fullNameChinese": "尼姆拉斯",
+    "aliases": [
+      "Nemunas",
+      "尼姆拉斯"
+    ],
+    "className": "ranger",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2165",
+    "name": "newkidadin",
+    "fullName": "New Kid Adin",
+    "fullNameChinese": "转学生艾庭",
+    "aliases": [
+      "New Kid Adin",
+      "NewKidAdin",
+      "转学生艾庭"
+    ],
+    "className": "assassin",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2066",
+    "name": "newmoonluna",
+    "fullName": "New Moon Luna",
+    "fullNameChinese": "新月露娜",
+    "aliases": [
+      "New Moon Luna",
+      "NewMoonLuna",
+      "新月露娜"
+    ],
+    "className": "mage",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2181",
+    "name": "notos",
+    "fullName": "Notos",
+    "fullNameChinese": "诺托斯",
+    "aliases": [
+      "Notos",
+      "诺托斯"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c5082",
+    "name": "oceanbreezeluluca",
+    "fullName": "Ocean Breeze Luluca",
+    "fullNameChinese": "海洋香气璐璐卡",
+    "aliases": [
+      "Ocean Breeze Luluca",
+      "OceanBreezeLuluca",
+      "海洋香气璐璐卡"
+    ],
+    "className": "manauser",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2072",
+    "name": "operatorsigret",
+    "fullName": "Operator Sigret",
+    "fullNameChinese": "操作员赛珂兰特",
+    "aliases": [
+      "Operator Sigret",
+      "OperatorSigret",
+      "操作员赛珂兰特"
+    ],
+    "className": "ranger",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3133",
+    "name": "orte",
+    "fullName": "Orte",
+    "fullNameChinese": "奥乐缇",
+    "aliases": [
+      "Orte",
+      "奥乐缇"
+    ],
+    "className": "assassin",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3045",
+    "name": "otillie",
+    "fullName": "Otillie",
+    "fullNameChinese": "奥缇莉尔",
+    "aliases": [
+      "Otillie",
+      "奥缇莉尔"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1080",
+    "name": "pavel",
+    "fullName": "Pavel",
+    "fullNameChinese": "帕贝尔",
+    "aliases": [
+      "Pavel",
+      "帕贝尔"
+    ],
+    "className": "ranger",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2087",
+    "name": "peacemakerfurious",
+    "fullName": "Peacemaker Furious",
+    "fullNameChinese": "平衡的尤贝乌斯",
+    "aliases": [
+      "Peacemaker Furious",
+      "PeacemakerFurious",
+      "平衡的尤贝乌斯"
+    ],
+    "className": "ranger",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c3073",
+    "name": "pearlhorizon",
+    "fullName": "Pearlhorizon",
+    "fullNameChinese": "波萝莱珍",
+    "aliases": [
+      "Pearlhorizon",
+      "波萝莱珍"
+    ],
+    "className": "mage",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1125",
+    "name": "peira",
+    "fullName": "Peira",
+    "fullNameChinese": "沛伊拉",
+    "aliases": [
+      "Peira",
+      "沛伊拉"
+    ],
+    "className": "assassin",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3125",
+    "name": "penelope",
+    "fullName": "Penelope",
+    "fullNameChinese": "潘尼罗佩",
+    "aliases": [
+      "Penelope",
+      "潘尼罗佩"
+    ],
+    "className": "assassin",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c5154",
+    "name": "perfumerbyblis",
+    "fullName": "Perfumer Byblis",
+    "fullNameChinese": "调香师维波里丝",
+    "aliases": [
+      "Perfumer Byblis",
+      "PerfumerByblis",
+      "调香师维波里丝"
+    ],
+    "className": "manauser",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3165",
+    "name": "pernilla",
+    "fullName": "Pernilla",
+    "fullNameChinese": "培妮拉",
+    "aliases": [
+      "Pernilla",
+      "培妮拉"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2110",
+    "name": "piratecaptainflan",
+    "fullName": "Pirate Captain Flan",
+    "fullNameChinese": "海盗船长芙兰",
+    "aliases": [
+      "Pirate Captain Flan",
+      "PirateCaptainFlan",
+      "海盗船长芙兰"
+    ],
+    "className": "ranger",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1112",
+    "name": "politis",
+    "fullName": "Politis",
+    "fullNameChinese": "佛里蒂丝",
+    "aliases": [
+      "Politis",
+      "佛里蒂丝"
+    ],
+    "className": "mage",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1035",
+    "name": "purrgis",
+    "fullName": "Purrgis",
+    "fullNameChinese": "法济斯",
+    "aliases": [
+      "Purrgis",
+      "法济斯"
+    ],
+    "className": "warrior",
+    "attribute": "wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "c3005",
+    "name": "pyllis",
+    "fullName": "Pyllis",
+    "fullNameChinese": "费莉丝",
+    "aliases": [
+      "Pyllis",
+      "费莉丝"
+    ],
+    "className": "knight",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3164",
+    "name": "ragnvald",
+    "fullName": "Ragnvald",
+    "fullNameChinese": "朗巴特",
+    "aliases": [
+      "Ragnvald",
+      "朗巴特"
+    ],
+    "className": "assassin",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1115",
+    "name": "ram",
+    "fullName": "Ram",
+    "fullNameChinese": "拉姆",
+    "aliases": [
+      "Ram",
+      "拉姆"
+    ],
+    "className": "mage",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1118",
+    "name": "ran",
+    "fullName": "Ran",
+    "fullNameChinese": "岚",
+    "aliases": [
+      "Ran",
+      "岚"
+    ],
+    "className": "assassin",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1001",
+    "name": "ras",
+    "fullName": "Ras",
+    "fullNameChinese": "拉斯",
+    "aliases": [
+      "Ras",
+      "拉斯"
+    ],
+    "className": "knight",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1019",
+    "name": "ravi",
+    "fullName": "Ravi",
+    "fullNameChinese": "萝菲",
+    "aliases": [
+      "Ravi",
+      "萝菲"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1090",
+    "name": "ray",
+    "fullName": "Ray",
+    "fullNameChinese": "雷伊",
+    "aliases": [
+      "Ray",
+      "雷伊"
+    ],
+    "className": "manauser",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1114",
+    "name": "rem",
+    "fullName": "Rem",
+    "fullNameChinese": "雷姆",
+    "aliases": [
+      "Rem",
+      "雷姆"
+    ],
+    "className": "warrior",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2074",
+    "name": "remnantviolet",
+    "fullName": "Remnant Violet",
+    "fullNameChinese": "残影的菲奥雷托",
+    "aliases": [
+      "Remnant Violet",
+      "RemnantViolet",
+      "残影的菲奥雷托"
+    ],
+    "className": "assassin",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2102",
+    "name": "requiemroana",
+    "fullName": "Requiem Roana",
+    "fullNameChinese": "镇魂罗安纳",
+    "aliases": [
+      "Requiem Roana",
+      "RequiemRoana",
+      "镇魂罗安纳"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3075",
+    "name": "requiemroar",
+    "fullName": "Requiemroar",
+    "fullNameChinese": "雷奎姆洛",
+    "aliases": [
+      "Requiemroar",
+      "雷奎姆洛"
+    ],
+    "className": "manauser",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c4051",
+    "name": "researchercarrot",
+    "fullName": "Researcher Carrot",
+    "fullNameChinese": "研究者卡萝",
+    "aliases": [
+      "Researcher Carrot",
+      "ResearcherCarrot",
+      "研究者卡萝"
+    ],
+    "className": "mage",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3160",
+    "name": "revna",
+    "fullName": "Revna",
+    "fullNameChinese": "蕾芙娜",
+    "aliases": [
+      "Revna",
+      "蕾芙娜"
+    ],
+    "className": "assassin",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2185",
+    "name": "rhiannaandluciella",
+    "fullName": "Rhianna and Luciella",
+    "fullNameChinese": "里安娜路西艾拉",
+    "aliases": [
+      "Rhianna and Luciella",
+      "RhiannaandLuciella",
+      "里安娜路西艾拉"
+    ],
+    "className": "assassin",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4013",
+    "name": "righteousthiefroozid",
+    "fullName": "Righteous Thief Roozid",
+    "fullNameChinese": "义贼鲁兹德",
+    "aliases": [
+      "Righteous Thief Roozid",
+      "RighteousThiefRoozid",
+      "义贼鲁兹德"
+    ],
+    "className": "assassin",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3034",
+    "name": "rikoris",
+    "fullName": "Rikoris",
+    "fullNameChinese": "里科黎司",
+    "aliases": [
+      "Rikoris",
+      "里科黎司"
+    ],
+    "className": "warrior",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3062",
+    "name": "rima",
+    "fullName": "Rima",
+    "fullNameChinese": "黎玛",
+    "aliases": [
+      "Rima",
+      "黎玛"
+    ],
+    "className": "ranger",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1121",
+    "name": "rimuru",
+    "fullName": "Rimuru",
+    "fullNameChinese": "利姆鲁",
+    "aliases": [
+      "Rimuru",
+      "利姆鲁"
+    ],
+    "className": "warrior",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1054",
+    "name": "rin",
+    "fullName": "Rin",
+    "fullNameChinese": "铃儿",
+    "aliases": [
+      "Rin",
+      "铃儿"
+    ],
+    "className": "manauser",
+    "attribute": "wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1168",
+    "name": "rinak",
+    "fullName": "Rinak",
+    "fullNameChinese": "利纳柯",
+    "aliases": [
+      "Rinak",
+      "利纳柯"
+    ],
+    "className": "assassin",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1136",
+    "name": "rizahawkeye",
+    "fullName": "Riza Hawkeye",
+    "fullNameChinese": "莉莎·霍克爱",
+    "aliases": [
+      "Riza Hawkeye",
+      "RizaHawkeye",
+      "莉莎·霍克爱"
+    ],
+    "className": "ranger",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2029",
+    "name": "roamingwarriorleo",
+    "fullName": "Roaming Warrior Leo",
+    "fullNameChinese": "流浪勇士雷欧",
+    "aliases": [
+      "Roaming Warrior Leo",
+      "RoamingWarriorLeo",
+      "流浪勇士雷欧"
+    ],
+    "className": "ranger",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1102",
+    "name": "roana",
+    "fullName": "Roana",
+    "fullNameChinese": "罗安纳",
+    "aliases": [
+      "Roana",
+      "罗安纳"
+    ],
+    "className": "manauser",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1169",
+    "name": "robin",
+    "fullName": "Robin",
+    "fullNameChinese": "露彬",
+    "aliases": [
+      "Robin",
+      "露彬"
+    ],
+    "className": "ranger",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1043",
+    "name": "romann",
+    "fullName": "Romann",
+    "fullNameChinese": "洛曼",
+    "aliases": [
+      "Romann",
+      "洛曼"
+    ],
+    "className": "mage",
+    "attribute": "ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "c3013",
+    "name": "roozid",
+    "fullName": "Roozid",
+    "fullNameChinese": "鲁兹德",
+    "aliases": [
+      "Roozid",
+      "鲁兹德"
+    ],
+    "className": "assassin",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1003",
+    "name": "rose",
+    "fullName": "Rose",
+    "fullNameChinese": "萝季",
+    "aliases": [
+      "Rose",
+      "萝季"
+    ],
+    "className": "knight",
+    "attribute": "ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1135",
+    "name": "roymustang",
+    "fullName": "Roy Mustang",
+    "fullNameChinese": "罗伊·马斯坦古",
+    "aliases": [
+      "Roy Mustang",
+      "RoyMustang",
+      "罗伊·马斯坦古"
+    ],
+    "className": "mage",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1022",
+    "name": "rueleoflight",
+    "fullName": "Ruele of Light",
+    "fullNameChinese": "光之瑞儿",
+    "aliases": [
+      "Ruele of Light",
+      "RueleofLight",
+      "光之瑞儿"
+    ],
+    "className": "manauser",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1180",
+    "name": "ruiza",
+    "fullName": "Ruiza",
+    "fullNameChinese": "露易莎",
+    "aliases": [
+      "Ruiza",
+      "露易莎"
+    ],
+    "className": "ranger",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2015",
+    "name": "sagebaal&sezan",
+    "fullName": "Sage Baal & Sezan",
+    "fullNameChinese": "贤者巴尔＆塞尚",
+    "aliases": [
+      "Sage Baal & Sezan",
+      "SageBaalSezan",
+      "贤者巴尔＆塞尚"
+    ],
+    "className": "mage",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2184",
+    "name": "salome",
+    "fullName": "Salome",
+    "fullNameChinese": "萨洛美",
+    "aliases": [
+      "Salome",
+      "萨洛美"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1177",
+    "name": "saria",
+    "fullName": "Saria",
+    "fullNameChinese": "萨若米亚",
+    "aliases": [
+      "Saria",
+      "萨若米亚"
+    ],
+    "className": "ranger",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4144",
+    "name": "savioradin",
+    "fullName": "Savior Adin",
+    "fullNameChinese": "救援者艾庭",
+    "aliases": [
+      "Savior Adin",
+      "SaviorAdin",
+      "救援者艾庭"
+    ],
+    "className": "assassin",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1060",
+    "name": "schniel",
+    "fullName": "Schniel",
+    "fullNameChinese": "修尼尔",
+    "aliases": [
+      "Schniel",
+      "修尼尔"
+    ],
+    "className": "manauser",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2131",
+    "name": "schoolnurseyulha",
+    "fullName": "School Nurse Yulha",
+    "fullNameChinese": "保健室老师律荷",
+    "aliases": [
+      "School Nurse Yulha",
+      "SchoolNurseYulha",
+      "保健室老师律荷"
+    ],
+    "className": "assassin",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1020",
+    "name": "schuri",
+    "fullName": "Schuri",
+    "fullNameChinese": "修里",
+    "aliases": [
+      "Schuri",
+      "修里"
+    ],
+    "className": "ranger",
+    "attribute": "fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2112",
+    "name": "seaphantompolitis",
+    "fullName": "Sea Phantom Politis",
+    "fullNameChinese": "海上幽灵佛里蒂丝",
+    "aliases": [
+      "Sea Phantom Politis",
+      "SeaPhantomPolitis",
+      "海上幽灵佛里蒂丝"
+    ],
+    "className": "ranger",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c6065",
+    "name": "sealedeyesurin",
+    "fullName": "Sealed Eye Surin",
+    "fullNameChinese": "封眼苏琳",
+    "aliases": [
+      "Sealed Eye Surin",
+      "SealedEyeSurin",
+      "封眼苏琳"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c5071",
+    "name": "seasidebellona",
+    "fullName": "Seaside Bellona",
+    "fullNameChinese": "海边的维尔萝娜",
+    "aliases": [
+      "Seaside Bellona",
+      "SeasideBellona",
+      "海边的维尔萝娜"
+    ],
+    "className": "ranger",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1106",
+    "name": "senya",
+    "fullName": "Senya",
+    "fullNameChinese": "赛娜",
+    "aliases": [
+      "Senya",
+      "赛娜"
+    ],
+    "className": "knight",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4142",
+    "name": "serenepurityadin",
+    "fullName": "Serene Purity Adin",
+    "fullNameChinese": "清玄的艾庭",
+    "aliases": [
+      "Serene Purity Adin",
+      "SerenePurityAdin",
+      "清玄的艾庭"
+    ],
+    "className": "assassin",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1040",
+    "name": "serila",
+    "fullName": "Serila",
+    "fullNameChinese": "塞丽拉",
+    "aliases": [
+      "Serila",
+      "塞丽拉"
+    ],
+    "className": "mage",
+    "attribute": "fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1176",
+    "name": "setsuka",
+    "fullName": "Setsuka",
+    "fullNameChinese": "雪花",
+    "aliases": [
+      "Setsuka",
+      "雪花"
+    ],
+    "className": "assassin",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1038",
+    "name": "sez",
+    "fullName": "Sez",
+    "fullNameChinese": "赛兹",
+    "aliases": [
+      "Sez",
+      "赛兹"
+    ],
+    "className": "assassin",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4005",
+    "name": "shadowknightpyllis",
+    "fullName": "Shadow Knight Pyllis",
+    "fullNameChinese": "黑骑士费莉丝",
+    "aliases": [
+      "Shadow Knight Pyllis",
+      "ShadowKnightPyllis",
+      "黑骑士费莉丝"
+    ],
+    "className": "knight",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2003",
+    "name": "shadowrose",
+    "fullName": "Shadow Rose",
+    "fullNameChinese": "暗影萝季",
+    "aliases": [
+      "Shadow Rose",
+      "ShadowRose",
+      "暗影萝季"
+    ],
+    "className": "knight",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1157",
+    "name": "shalltear",
+    "fullName": "Shalltear",
+    "fullNameChinese": "夏提雅",
+    "aliases": [
+      "Shalltear",
+      "夏提雅"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1132",
+    "name": "sharun",
+    "fullName": "Sharun",
+    "fullNameChinese": "莎伦",
+    "aliases": [
+      "Sharun",
+      "莎伦"
+    ],
+    "className": "manauser",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4052",
+    "name": "shepherdjena",
+    "fullName": "Shepherd Jena",
+    "fullNameChinese": "引导者捷娜",
+    "aliases": [
+      "Shepherd Jena",
+      "ShepherdJena",
+      "引导者捷娜"
+    ],
+    "className": "mage",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2076",
+    "name": "shepherdofthedarkdiene",
+    "fullName": "Shepherd of the Dark Diene",
+    "fullNameChinese": "黑暗牧者迪埃妮",
+    "aliases": [
+      "Shepherd of the Dark Diene",
+      "ShepherdoftheDarkDiene",
+      "黑暗牧者迪埃妮"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2017",
+    "name": "shootingstarachates",
+    "fullName": "Shooting Star Achates",
+    "fullNameChinese": "流星雅卡泰丝",
+    "aliases": [
+      "Shooting Star Achates",
+      "ShootingStarAchates",
+      "流星雅卡泰丝"
+    ],
+    "className": "manauser",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1123",
+    "name": "shuna",
+    "fullName": "Shuna",
+    "fullNameChinese": "朱菜",
+    "aliases": [
+      "Shuna",
+      "朱菜"
+    ],
+    "className": "manauser",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1072",
+    "name": "sigret",
+    "fullName": "Sigret",
+    "fullNameChinese": "赛珂兰特",
+    "aliases": [
+      "Sigret",
+      "赛珂兰特"
+    ],
+    "className": "warrior",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1004",
+    "name": "silk",
+    "fullName": "Silk",
+    "fullNameChinese": "席可",
+    "aliases": [
+      "Silk",
+      "席可"
+    ],
+    "className": "ranger",
+    "attribute": "wind",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2048",
+    "name": "silverbladearamintha",
+    "fullName": "Silver Blade Aramintha",
+    "fullNameChinese": "白银刀刃的雅拉敏塔",
+    "aliases": [
+      "Silver Blade Aramintha",
+      "SilverBladeAramintha",
+      "白银刀刃的雅拉敏塔"
+    ],
+    "className": "mage",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4123",
+    "name": "silvertidechristy",
+    "fullName": "Silvertide Christy",
+    "fullNameChinese": "银波克莉丝媞",
+    "aliases": [
+      "Silvertide Christy",
+      "SilvertideChristy",
+      "银波克莉丝媞"
+    ],
+    "className": "knight",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2062",
+    "name": "sinfulangelica",
+    "fullName": "Sinful Angelica",
+    "fullNameChinese": "罪戾的安洁莉卡",
+    "aliases": [
+      "Sinful Angelica",
+      "SinfulAngelica",
+      "罪戾的安洁莉卡"
+    ],
+    "className": "manauser",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1092",
+    "name": "sol",
+    "fullName": "Sol",
+    "fullNameChinese": "索尔",
+    "aliases": [
+      "Sol",
+      "索尔"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2111",
+    "name": "solitariaofthesnow",
+    "fullName": "Solitaria of the Snow",
+    "fullNameChinese": "雪国的苏莉塔妮亚",
+    "aliases": [
+      "Solitaria of the Snow",
+      "SolitariaoftheSnow",
+      "雪国的苏莉塔妮亚"
+    ],
+    "className": "mage",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3104",
+    "name": "sonia",
+    "fullName": "Sonia",
+    "fullNameChinese": "苏尼娅",
+    "aliases": [
+      "Sonia",
+      "苏尼娅"
+    ],
+    "className": "manauser",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2038",
+    "name": "specimensez",
+    "fullName": "Specimen Sez",
+    "fullNameChinese": "实验体赛兹",
+    "aliases": [
+      "Specimen Sez",
+      "SpecimenSez",
+      "实验体赛兹"
+    ],
+    "className": "assassin",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2050",
+    "name": "spectertenebria",
+    "fullName": "Specter Tenebria",
+    "fullNameChinese": "幻影的泰妮布里雅",
+    "aliases": [
+      "Specter Tenebria",
+      "SpecterTenebria",
+      "幻影的泰妮布里雅"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2103",
+    "name": "spiriteyeceline",
+    "fullName": "Spirit Eye Celine",
+    "fullNameChinese": "灵眼的瑟琳",
+    "aliases": [
+      "Spirit Eye Celine",
+      "SpiritEyeCeline",
+      "灵眼的瑟琳"
+    ],
+    "className": "assassin",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1174",
+    "name": "stark",
+    "fullName": "Stark",
+    "fullNameChinese": "休塔尔克",
+    "aliases": [
+      "Stark",
+      "休塔尔克"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1034",
+    "name": "straze",
+    "fullName": "Straze",
+    "fullNameChinese": "史瑞杰思",
+    "aliases": [
+      "Straze",
+      "史瑞杰思"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2127",
+    "name": "successortaeyou",
+    "fullName": "Successor Taeyou",
+    "fullNameChinese": "继承人太悟",
+    "aliases": [
+      "Successor Taeyou",
+      "SuccessorTaeyou",
+      "继承人太悟"
+    ],
+    "className": "warrior",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c5009",
+    "name": "summerbreakcharlotte",
+    "fullName": "Summer Break Charlotte",
+    "fullNameChinese": "暑假夏绿蒂",
+    "aliases": [
+      "Summer Break Charlotte",
+      "SummerBreakCharlotte",
+      "暑假夏绿蒂"
+    ],
+    "className": "knight",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4012",
+    "name": "summer'sdisciplealexa",
+    "fullName": "Summer's Disciple Alexa",
+    "fullNameChinese": "夏日学生雅莉莎",
+    "aliases": [
+      "Summer's Disciple Alexa",
+      "SummersDiscipleAlexa",
+      "夏日学生雅莉莎"
+    ],
+    "className": "assassin",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c5024",
+    "name": "summertimeiseria",
+    "fullName": "Summertime Iseria",
+    "fullNameChinese": "南国的伊赛丽亚",
+    "aliases": [
+      "Summertime Iseria",
+      "SummertimeIseria",
+      "南国的伊赛丽亚"
+    ],
+    "className": "ranger",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1065",
+    "name": "surin",
+    "fullName": "Surin",
+    "fullNameChinese": "苏琳",
+    "aliases": [
+      "Surin",
+      "苏琳"
+    ],
+    "className": "assassin",
+    "attribute": "fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "c3155",
+    "name": "suthan",
+    "fullName": "Suthan",
+    "fullNameChinese": "斯坦",
+    "aliases": [
+      "Suthan",
+      "斯坦"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3015",
+    "name": "sven",
+    "fullName": "Sven",
+    "fullNameChinese": "史宾",
+    "aliases": [
+      "Sven",
+      "史宾"
+    ],
+    "className": "assassin",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c5072",
+    "name": "swiftflagbearersigret",
+    "fullName": "Swift Flagbearer Sigret",
+    "fullNameChinese": "疾速赛车手赛珂兰特",
+    "aliases": [
+      "Swift Flagbearer Sigret",
+      "SwiftFlagbearerSigret",
+      "疾速赛车手赛珂兰特"
+    ],
+    "className": "assassin",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2088",
+    "name": "sylvansagevivian",
+    "fullName": "Sylvan Sage Vivian",
+    "fullNameChinese": "森之贤者薇薇安",
+    "aliases": [
+      "Sylvan Sage Vivian",
+      "SylvanSageVivian",
+      "森之贤者薇薇安"
+    ],
+    "className": "mage",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c5033",
+    "name": "tacticalarchetypecoli",
+    "fullName": "Tactical Archetype Coli",
+    "fullNameChinese": "战术型可丽",
+    "aliases": [
+      "Tactical Archetype Coli",
+      "TacticalArchetypeColi",
+      "战术型可丽"
+    ],
+    "className": "assassin",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1127",
+    "name": "taeyou",
+    "fullName": "Taeyou",
+    "fullNameChinese": "太悟",
+    "aliases": [
+      "Taeyou",
+      "太悟"
+    ],
+    "className": "warrior",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3152",
+    "name": "talaz",
+    "fullName": "Talaz",
+    "fullNameChinese": "达拉士",
+    "aliases": [
+      "Talaz",
+      "达拉士"
+    ],
+    "className": "warrior",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3154",
+    "name": "talia",
+    "fullName": "Talia",
+    "fullNameChinese": "达黎儿",
+    "aliases": [
+      "Talia",
+      "达黎儿"
+    ],
+    "className": "assassin",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1067",
+    "name": "tamarinne",
+    "fullName": "Tamarinne",
+    "fullNameChinese": "塔玛林尔",
+    "aliases": [
+      "Tamarinne",
+      "塔玛林尔"
+    ],
+    "className": "manauser",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3032",
+    "name": "taranorguard",
+    "fullName": "Taranor Guard",
+    "fullNameChinese": "塔拉诺尔禁卫队员",
+    "aliases": [
+      "Taranor Guard",
+      "TaranorGuard",
+      "塔拉诺尔禁卫队员"
+    ],
+    "className": "warrior",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c3002",
+    "name": "taranorroyalguard",
+    "fullName": "Taranor Royal Guard",
+    "fullNameChinese": "塔拉诺尔王宫士兵",
+    "aliases": [
+      "Taranor Royal Guard",
+      "TaranorRoyalGuard",
+      "塔拉诺尔王宫士兵"
+    ],
+    "className": "knight",
+    "attribute": "ice",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2065",
+    "name": "tempestsurin",
+    "fullName": "Tempest Surin",
+    "fullNameChinese": "风云苏琳",
+    "aliases": [
+      "Tempest Surin",
+      "TempestSurin",
+      "风云苏琳"
+    ],
+    "className": "assassin",
+    "attribute": "light",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1050",
+    "name": "tenebria",
+    "fullName": "Tenebria",
+    "fullNameChinese": "泰妮布里雅",
+    "aliases": [
+      "Tenebria",
+      "泰妮布里雅"
+    ],
+    "className": "mage",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3021",
+    "name": "tieria",
+    "fullName": "Tieria",
+    "fullNameChinese": "黛莉亚",
+    "aliases": [
+      "Tieria",
+      "黛莉亚"
+    ],
+    "className": "warrior",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2082",
+    "name": "topmodelluluca",
+    "fullName": "Top Model Luluca",
+    "fullNameChinese": "最强模特璐璐卡",
+    "aliases": [
+      "Top Model Luluca",
+      "TopModelLuluca",
+      "最强模特璐璐卡"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1171",
+    "name": "tori",
+    "fullName": "Tori",
+    "fullNameChinese": "兔菈玫",
+    "aliases": [
+      "Tori",
+      "兔菈玫"
+    ],
+    "className": "assassin",
+    "attribute": "fire",
+    "rarity": 5
+  },
+  {
+    "characterId": "c2036",
+    "name": "troublemakercrozet",
+    "fullName": "Troublemaker Crozet",
+    "fullNameChinese": "不法之徒克罗泽",
+    "aliases": [
+      "Troublemaker Crozet",
+      "TroublemakerCrozet",
+      "不法之徒克罗泽"
+    ],
+    "className": "knight",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2023",
+    "name": "twistedeidolonkayron",
+    "fullName": "Twisted Eidolon Kayron",
+    "fullNameChinese": "扭曲亡灵凯隆",
+    "aliases": [
+      "Twisted Eidolon Kayron",
+      "TwistedEidolonKayron",
+      "扭曲亡灵凯隆"
+    ],
+    "className": "assassin",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1042",
+    "name": "tywin",
+    "fullName": "Tywin",
+    "fullNameChinese": "泰温",
+    "aliases": [
+      "Tywin",
+      "泰温"
+    ],
+    "className": "knight",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4004",
+    "name": "unboundknightarowell",
+    "fullName": "Unbound Knight Arowell",
+    "fullNameChinese": "自由骑士雅洛薇",
+    "aliases": [
+      "Unbound Knight Arowell",
+      "UnboundKnightArowell",
+      "自由骑士雅洛薇"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2101",
+    "name": "urbanshadowchoux",
+    "fullName": "Urban Shadow Choux",
+    "fullNameChinese": "都市暗影小泡芙",
+    "aliases": [
+      "Urban Shadow Choux",
+      "UrbanShadowChoux",
+      "都市暗影小泡芙"
+    ],
+    "className": "warrior",
+    "attribute": "dark",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4143",
+    "name": "verdantadin",
+    "fullName": "Verdant Adin",
+    "fullNameChinese": "新绿的艾庭",
+    "aliases": [
+      "Verdant Adin",
+      "VerdantAdin",
+      "新绿的艾庭"
+    ],
+    "className": "assassin",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1150",
+    "name": "veronica",
+    "fullName": "Veronica",
+    "fullNameChinese": "贝洛妮卡",
+    "aliases": [
+      "Veronica",
+      "贝洛妮卡"
+    ],
+    "className": "ranger",
+    "attribute": "fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1166",
+    "name": "victorika",
+    "fullName": "Victorika",
+    "fullNameChinese": "维多丽卡",
+    "aliases": [
+      "Victorika",
+      "维多丽卡"
+    ],
+    "className": "knight",
+    "attribute": "fire",
+    "rarity": 4
+  },
+  {
+    "characterId": "c4103",
+    "name": "vigilanteleaderglenn",
+    "fullName": "Vigilante Leader Glenn",
+    "fullNameChinese": "自卫队队长格伦",
+    "aliases": [
+      "Vigilante Leader Glenn",
+      "VigilanteLeaderGlenn",
+      "自卫队队长格伦"
+    ],
+    "className": "ranger",
+    "attribute": "wind",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1007",
+    "name": "vildred",
+    "fullName": "Vildred",
+    "fullNameChinese": "维德瑞",
+    "aliases": [
+      "Vildred",
+      "维德瑞"
+    ],
+    "className": "assassin",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1074",
+    "name": "violet",
+    "fullName": "Violet",
+    "fullNameChinese": "菲奥雷托",
+    "aliases": [
+      "Violet",
+      "菲奥雷托"
+    ],
+    "className": "assassin",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1088",
+    "name": "vivian",
+    "fullName": "Vivian",
+    "fullNameChinese": "薇薇安",
+    "aliases": [
+      "Vivian",
+      "薇薇安"
+    ],
+    "className": "mage",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c3065",
+    "name": "wanda",
+    "fullName": "Wanda",
+    "fullNameChinese": "汪达",
+    "aliases": [
+      "Wanda",
+      "汪达"
+    ],
+    "className": "ranger",
+    "attribute": "dark",
+    "rarity": 3
+  },
+  {
+    "characterId": "c2004",
+    "name": "wanderersilk",
+    "fullName": "Wanderer Silk",
+    "fullNameChinese": "流浪者席可",
+    "aliases": [
+      "Wanderer Silk",
+      "WandererSilk",
+      "流浪者席可"
+    ],
+    "className": "ranger",
+    "attribute": "light",
+    "rarity": 4
+  },
+  {
+    "characterId": "c6014",
+    "name": "wanderingprincecidd",
+    "fullName": "Wandering Prince Cidd",
+    "fullNameChinese": "流浪王子席德",
+    "aliases": [
+      "Wandering Prince Cidd",
+      "WanderingPrinceCidd",
+      "流浪王子席德"
+    ],
+    "className": "mage",
+    "attribute": "light",
+    "rarity": 4
+  },
+  {
+    "characterId": "c2020",
+    "name": "watcherschuri",
+    "fullName": "Watcher Schuri",
+    "fullNameChinese": "注视者修里",
+    "aliases": [
+      "Watcher Schuri",
+      "WatcherSchuri",
+      "注视者修里"
+    ],
+    "className": "ranger",
+    "attribute": "light",
+    "rarity": 4
+  },
+  {
+    "characterId": "c6020",
+    "name": "westwindexecutionerschuri",
+    "fullName": "Westwind Executioner Schuri",
+    "fullNameChinese": "西风处刑者修里",
+    "aliases": [
+      "Westwind Executioner Schuri",
+      "WestwindExecutionerSchuri",
+      "西风处刑者修里"
+    ],
+    "className": "ranger",
+    "attribute": "dark",
+    "rarity": 4
+  },
+  {
+    "characterId": "c6050",
+    "name": "witchofthemeretenebria",
+    "fullName": "Witch of the Mere Tenebria",
+    "fullNameChinese": "湖畔魔女泰妮布里雅",
+    "aliases": [
+      "Witch of the Mere Tenebria",
+      "WitchoftheMereTenebria",
+      "湖畔魔女泰妮布里雅"
+    ],
+    "className": "mage",
+    "attribute": "light",
+    "rarity": 5
+  },
+  {
+    "characterId": "c6003",
+    "name": "wretchedrose",
+    "fullName": "Wretched Rose",
+    "fullNameChinese": "悲叹萝季",
+    "aliases": [
+      "Wretched Rose",
+      "WretchedRose",
+      "悲叹萝季"
+    ],
+    "className": "manauser",
+    "attribute": "light",
+    "rarity": 4
+  },
+  {
+    "characterId": "c3134",
+    "name": "yoonryoung",
+    "fullName": "Yoonryoung",
+    "fullNameChinese": "尹凌",
+    "aliases": [
+      "Yoonryoung",
+      "尹凌"
+    ],
+    "className": "knight",
+    "attribute": "light",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1162",
+    "name": "youngsenya",
+    "fullName": "Young Senya",
+    "fullNameChinese": "小小赛娜",
+    "aliases": [
+      "Young Senya",
+      "YoungSenya",
+      "小小赛娜"
+    ],
+    "className": "manauser",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1016",
+    "name": "yufine",
+    "fullName": "Yufine",
+    "fullNameChinese": "优芬妮",
+    "aliases": [
+      "Yufine",
+      "优芬妮"
+    ],
+    "className": "warrior",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1131",
+    "name": "yulha",
+    "fullName": "Yulha",
+    "fullNameChinese": "律荷",
+    "aliases": [
+      "Yulha",
+      "律荷"
+    ],
+    "className": "knight",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1030",
+    "name": "yuna",
+    "fullName": "Yuna",
+    "fullNameChinese": "尤娜",
+    "aliases": [
+      "Yuna",
+      "尤娜"
+    ],
+    "className": "ranger",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1119",
+    "name": "zahhak",
+    "fullName": "Zahhak",
+    "fullNameChinese": "札哈克",
+    "aliases": [
+      "Zahhak",
+      "札哈克"
+    ],
+    "className": "warrior",
+    "attribute": "wind",
+    "rarity": 5
+  },
+  {
+    "characterId": "c4071",
+    "name": "zealotcarmainerose",
+    "fullName": "Zealot Carmainerose",
+    "fullNameChinese": "传道者卡麦萝兹",
+    "aliases": [
+      "Zealot Carmainerose",
+      "ZealotCarmainerose",
+      "传道者卡麦萝兹"
+    ],
+    "className": "mage",
+    "attribute": "fire",
+    "rarity": 3
+  },
+  {
+    "characterId": "c1083",
+    "name": "zeno",
+    "fullName": "Zeno",
+    "fullNameChinese": "杰诺",
+    "aliases": [
+      "Zeno",
+      "杰诺"
+    ],
+    "className": "mage",
+    "attribute": "ice",
+    "rarity": 5
+  },
+  {
+    "characterId": "c1010",
+    "name": "zerato",
+    "fullName": "Zerato",
+    "fullNameChinese": "杰拉图",
+    "aliases": [
+      "Zerato",
+      "杰拉图"
+    ],
+    "className": "mage",
+    "attribute": "ice",
+    "rarity": 4
+  },
+  {
+    "characterId": "c1133",
+    "name": "zio",
+    "fullName": "Zio",
+    "fullNameChinese": "智武",
+    "aliases": [
+      "Zio",
+      "智武"
+    ],
+    "className": "mage",
+    "attribute": "dark",
+    "rarity": 5
+  }
+]

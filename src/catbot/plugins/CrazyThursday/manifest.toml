@@ -1,0 +1,6 @@
+name = "CrazyThursday"
+version = "1.0.0"
+main = "CrazyThursday.py"
+entry_class = "CrazyThursday"
+
+[dependencies]

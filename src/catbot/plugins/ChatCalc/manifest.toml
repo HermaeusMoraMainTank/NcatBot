@@ -1,0 +1,6 @@
+name = "ChatCalc"
+version = "1.0.0"
+main = "ChatCalc.py"
+entry_class = "ChatCalc"
+
+[dependencies]

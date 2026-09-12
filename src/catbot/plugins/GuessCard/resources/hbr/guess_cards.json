@@ -1,0 +1,614 @@
+[
+  {
+    "id": 965903533,
+    "characterId": "hbr_31a_01",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31a_01",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31a/img_stand_01.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31a/img_stand_01.png"
+    ],
+    "kind": "portrait",
+    "className": "31A"
+  },
+  {
+    "id": 425478775,
+    "characterId": "hbr_31a_02",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31a_02",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31a/img_stand_02.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31a/img_stand_02.png"
+    ],
+    "kind": "portrait",
+    "className": "31A"
+  },
+  {
+    "id": 210307024,
+    "characterId": "hbr_31a_03",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31a_03",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31a/img_stand_03.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31a/img_stand_03.png"
+    ],
+    "kind": "portrait",
+    "className": "31A"
+  },
+  {
+    "id": 964279197,
+    "characterId": "hbr_31a_04",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31a_04",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31a/img_stand_04.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31a/img_stand_04.png"
+    ],
+    "kind": "portrait",
+    "className": "31A"
+  },
+  {
+    "id": 956175064,
+    "characterId": "hbr_31a_05",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31a_05",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31a/img_stand_05.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31a/img_stand_05.png"
+    ],
+    "kind": "portrait",
+    "className": "31A"
+  },
+  {
+    "id": 963222672,
+    "characterId": "hbr_31a_06",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31a_06",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31a/img_stand_06.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31a/img_stand_06.png"
+    ],
+    "kind": "portrait",
+    "className": "31A"
+  },
+  {
+    "id": 997004580,
+    "characterId": "hbr_31b_01",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31b_01",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31b/img_stand_01.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31b/img_stand_01.png"
+    ],
+    "kind": "portrait",
+    "className": "31B"
+  },
+  {
+    "id": 700873726,
+    "characterId": "hbr_31b_02",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31b_02",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31b/img_stand_02.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31b/img_stand_02.png"
+    ],
+    "kind": "portrait",
+    "className": "31B"
+  },
+  {
+    "id": 454968953,
+    "characterId": "hbr_31b_03",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31b_03",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31b/img_stand_03.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31b/img_stand_03.png"
+    ],
+    "kind": "portrait",
+    "className": "31B"
+  },
+  {
+    "id": 538995292,
+    "characterId": "hbr_31b_04",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31b_04",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31b/img_stand_04.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31b/img_stand_04.png"
+    ],
+    "kind": "portrait",
+    "className": "31B"
+  },
+  {
+    "id": 397890594,
+    "characterId": "hbr_31b_05",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31b_05",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31b/img_stand_05.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31b/img_stand_05.png"
+    ],
+    "kind": "portrait",
+    "className": "31B"
+  },
+  {
+    "id": 745783581,
+    "characterId": "hbr_31b_06",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31b_06",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31b/img_stand_06.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31b/img_stand_06.png"
+    ],
+    "kind": "portrait",
+    "className": "31B"
+  },
+  {
+    "id": 527292393,
+    "characterId": "hbr_31c_01",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31c_01",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31c/img_stand_01.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31c/img_stand_01.png"
+    ],
+    "kind": "portrait",
+    "className": "31C"
+  },
+  {
+    "id": 118558644,
+    "characterId": "hbr_31c_02",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31c_02",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31c/img_stand_02.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31c/img_stand_02.png"
+    ],
+    "kind": "portrait",
+    "className": "31C"
+  },
+  {
+    "id": 162076501,
+    "characterId": "hbr_31c_03",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31c_03",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31c/img_stand_03.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31c/img_stand_03.png"
+    ],
+    "kind": "portrait",
+    "className": "31C"
+  },
+  {
+    "id": 936924608,
+    "characterId": "hbr_31c_04",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31c_04",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31c/img_stand_04.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31c/img_stand_04.png"
+    ],
+    "kind": "portrait",
+    "className": "31C"
+  },
+  {
+    "id": 930360104,
+    "characterId": "hbr_31c_05",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31c_05",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31c/img_stand_05.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31c/img_stand_05.png"
+    ],
+    "kind": "portrait",
+    "className": "31C"
+  },
+  {
+    "id": 962974922,
+    "characterId": "hbr_31c_06",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31c_06",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31c/img_stand_06.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31c/img_stand_06.png"
+    ],
+    "kind": "portrait",
+    "className": "31C"
+  },
+  {
+    "id": 141682569,
+    "characterId": "hbr_30g_01",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_30g_01",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/30g/img_stand_01.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/30g/img_stand_01.png"
+    ],
+    "kind": "portrait",
+    "className": "30G"
+  },
+  {
+    "id": 894077617,
+    "characterId": "hbr_30g_02",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_30g_02",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/30g/img_stand_02.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/30g/img_stand_02.png"
+    ],
+    "kind": "portrait",
+    "className": "30G"
+  },
+  {
+    "id": 915464457,
+    "characterId": "hbr_30g_03",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_30g_03",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/30g/img_stand_03.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/30g/img_stand_03.png"
+    ],
+    "kind": "portrait",
+    "className": "30G"
+  },
+  {
+    "id": 671608087,
+    "characterId": "hbr_30g_04",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_30g_04",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/30g/img_stand_04.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/30g/img_stand_04.png"
+    ],
+    "kind": "portrait",
+    "className": "30G"
+  },
+  {
+    "id": 170631372,
+    "characterId": "hbr_30g_05",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_30g_05",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/30g/img_stand_05.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/30g/img_stand_05.png"
+    ],
+    "kind": "portrait",
+    "className": "30G"
+  },
+  {
+    "id": 927212282,
+    "characterId": "hbr_30g_06",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_30g_06",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/30g/img_stand_06.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/30g/img_stand_06.png"
+    ],
+    "kind": "portrait",
+    "className": "30G"
+  },
+  {
+    "id": 582936107,
+    "characterId": "hbr_31d_01",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31d_01",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31d/img_stand_01.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31d/img_stand_01.png"
+    ],
+    "kind": "portrait",
+    "className": "31D"
+  },
+  {
+    "id": 223411698,
+    "characterId": "hbr_31d_02",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31d_02",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31d/img_stand_02.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31d/img_stand_02.png"
+    ],
+    "kind": "portrait",
+    "className": "31D"
+  },
+  {
+    "id": 609450849,
+    "characterId": "hbr_31d_03",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31d_03",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31d/img_stand_03.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31d/img_stand_03.png"
+    ],
+    "kind": "portrait",
+    "className": "31D"
+  },
+  {
+    "id": 325175857,
+    "characterId": "hbr_31d_04",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31d_04",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31d/img_stand_04.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31d/img_stand_04.png"
+    ],
+    "kind": "portrait",
+    "className": "31D"
+  },
+  {
+    "id": 767915085,
+    "characterId": "hbr_31d_05",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31d_05",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31d/img_stand_05.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31d/img_stand_05.png"
+    ],
+    "kind": "portrait",
+    "className": "31D"
+  },
+  {
+    "id": 815446668,
+    "characterId": "hbr_31d_06",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31d_06",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31d/img_stand_06.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31d/img_stand_06.png"
+    ],
+    "kind": "portrait",
+    "className": "31D"
+  },
+  {
+    "id": 462734646,
+    "characterId": "hbr_31e_01",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31e_01",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31e/img_stand_01.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31e/img_stand_01.png"
+    ],
+    "kind": "portrait",
+    "className": "31E"
+  },
+  {
+    "id": 4603270,
+    "characterId": "hbr_31e_02",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31e_02",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31e/img_stand_02.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31e/img_stand_02.png"
+    ],
+    "kind": "portrait",
+    "className": "31E"
+  },
+  {
+    "id": 298684250,
+    "characterId": "hbr_31e_03",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31e_03",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31e/img_stand_03.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31e/img_stand_03.png"
+    ],
+    "kind": "portrait",
+    "className": "31E"
+  },
+  {
+    "id": 90410314,
+    "characterId": "hbr_31e_04",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31e_04",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31e/img_stand_04.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31e/img_stand_04.png"
+    ],
+    "kind": "portrait",
+    "className": "31E"
+  },
+  {
+    "id": 495358550,
+    "characterId": "hbr_31e_05",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31e_05",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31e/img_stand_05.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31e/img_stand_05.png"
+    ],
+    "kind": "portrait",
+    "className": "31E"
+  },
+  {
+    "id": 28574073,
+    "characterId": "hbr_31e_06",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31e_06",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31e/img_stand_06.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31e/img_stand_06.png"
+    ],
+    "kind": "portrait",
+    "className": "31E"
+  },
+  {
+    "id": 796824190,
+    "characterId": "hbr_31f_01",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31f_01",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31f/img_stand_01.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31f/img_stand_01.png"
+    ],
+    "kind": "portrait",
+    "className": "31F"
+  },
+  {
+    "id": 725963436,
+    "characterId": "hbr_31f_02",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31f_02",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31f/img_stand_02.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31f/img_stand_02.png"
+    ],
+    "kind": "portrait",
+    "className": "31F"
+  },
+  {
+    "id": 619126796,
+    "characterId": "hbr_31f_03",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31f_03",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31f/img_stand_03.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31f/img_stand_03.png"
+    ],
+    "kind": "portrait",
+    "className": "31F"
+  },
+  {
+    "id": 142544079,
+    "characterId": "hbr_31f_04",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31f_04",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31f/img_stand_04.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31f/img_stand_04.png"
+    ],
+    "kind": "portrait",
+    "className": "31F"
+  },
+  {
+    "id": 325917401,
+    "characterId": "hbr_31f_05",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31f_05",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31f/img_stand_05.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31f/img_stand_05.png"
+    ],
+    "kind": "portrait",
+    "className": "31F"
+  },
+  {
+    "id": 575080059,
+    "characterId": "hbr_31f_06",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31f_06",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31f/img_stand_06.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31f/img_stand_06.png"
+    ],
+    "kind": "portrait",
+    "className": "31F"
+  },
+  {
+    "id": 221203573,
+    "characterId": "hbr_31x_01",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31x_01",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31x/img_stand_01.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31x/img_stand_01.png"
+    ],
+    "kind": "portrait",
+    "className": "31X"
+  },
+  {
+    "id": 10231944,
+    "characterId": "hbr_31x_02",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31x_02",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31x/img_stand_02.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31x/img_stand_02.png"
+    ],
+    "kind": "portrait",
+    "className": "31X"
+  },
+  {
+    "id": 312581514,
+    "characterId": "hbr_31x_03",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31x_03",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31x/img_stand_03.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31x/img_stand_03.png"
+    ],
+    "kind": "portrait",
+    "className": "31X"
+  },
+  {
+    "id": 913169006,
+    "characterId": "hbr_31x_04",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31x_04",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31x/img_stand_04.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31x/img_stand_04.png"
+    ],
+    "kind": "portrait",
+    "className": "31X"
+  },
+  {
+    "id": 496626853,
+    "characterId": "hbr_31x_05",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31x_05",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31x/img_stand_05.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31x/img_stand_05.png"
+    ],
+    "kind": "portrait",
+    "className": "31X"
+  },
+  {
+    "id": 839315476,
+    "characterId": "hbr_31x_06",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_31x_06",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/31x/img_stand_06.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/31x/img_stand_06.png"
+    ],
+    "kind": "portrait",
+    "className": "31X"
+  },
+  {
+    "id": 449397973,
+    "characterId": "hbr_other_01",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_other_01",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/other/img_stand_01.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/other/img_stand_01.png"
+    ],
+    "kind": "portrait",
+    "className": "OTHER"
+  },
+  {
+    "id": 73484578,
+    "characterId": "hbr_other_02",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_other_02",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/other/img_stand_02.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/other/img_stand_02.png"
+    ],
+    "kind": "portrait",
+    "className": "OTHER"
+  },
+  {
+    "id": 731438579,
+    "characterId": "hbr_other_03",
+    "cardRarityType": "rarity_4",
+    "assetbundleName": "hbr_other_03",
+    "image_url": "https://tw.heaven-burns-red.com/assets/images/common/character/other/img_stand_03.png",
+    "image_urls": [
+      "https://tw.heaven-burns-red.com/assets/images/common/character/other/img_stand_03.png"
+    ],
+    "kind": "portrait",
+    "className": "OTHER"
+  }
+]

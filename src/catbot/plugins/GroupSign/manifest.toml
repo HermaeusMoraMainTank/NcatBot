@@ -1,0 +1,6 @@
+name = "GroupSign"
+version = "2.0.0"
+main = "GroupSign.py"
+entry_class = "GroupSign"
+
+[dependencies]

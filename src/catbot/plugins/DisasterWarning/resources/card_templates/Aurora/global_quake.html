@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Quake Aurora Card</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- D3.js & TopoJSON -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+
+    <style>
+        /* --- Aurora Theme Tokens --- */
+        :root {
+            --aurora-low: #34d399;
+            /* Mint */
+            --aurora-med: #fbbf24;
+            /* Amber */
+            --aurora-high: #f43f5e;
+            /* Rose */
+
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+            --text-light: #94a3b8;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: fit-content;
+            height: fit-content;
+            background-color: transparent !important;
+            overflow: hidden;
+        }
+
+        #card-wrapper {
+            display: inline-block;
+            padding: 40px;
+            position: relative;
+        }
+
+        /* --- Aurora Glow --- */
+        .aurora-glow {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.6;
+            z-index: 0;
+            background: var(--aurora-low);
+        }
+
+        .glow-low {
+            background: var(--aurora-low);
+        }
+
+        .glow-med {
+            background: var(--aurora-med);
+        }
+
+        .glow-high {
+            background: var(--aurora-high);
+        }
+
+        /* --- Glass Card --- */
+        .glass-card {
+            width: 540px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.02);
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Components --- */
+        .header-section {
+            padding: 32px 32px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .region-name {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .time-label {
+            display: inline-flex;
+            font-size: 13px;
+            color: var(--text-sub);
+            font-weight: 500;
+            background: rgba(0, 0, 0, 0.03);
+            padding: 6px 12px;
+            border-radius: 12px;
+        }
+
+        .status-pill {
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .pill-new {
+            background: #ecfdf5;
+            color: #059669;
+            border: 1px solid #a7f3d0;
+        }
+
+        .pill-update {
+            background: #eff6ff;
+            color: #2563eb;
+            border: 1px solid #bfdbfe;
+        }
+
+        .hero-grid {
+            padding: 0 32px 24px;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .mag-capsule {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 130px;
+            height: 140px;
+            border-radius: 24px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .bg-low {
+            background: linear-gradient(135deg, #34d399, #10b981);
+        }
+
+        .bg-med {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+        }
+
+        .bg-high {
+            background: linear-gradient(135deg, #f87171, #ef4444);
+        }
+
+        .mag-number {
+            font-size: 46px;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 4px;
+            letter-spacing: -1px;
+        }
+
+        .mag-label-small {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .intensity-mini {
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.35);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 800;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .key-data-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .data-block {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .data-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .data-content {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .unit {
+            font-size: 14px;
+            color: var(--text-sub);
+            font-weight: 500;
+        }
+
+        /* --- Globe Container --- */
+        #globe-container {
+            height: 180px;
+            width: calc(100% - 64px);
+            margin: 0 32px 24px;
+            /* 上 左右 下 */
+            border-radius: 20px;
+            z-index: 10;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* SVG Styles */
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .land {
+            fill: #ffffff;
+            stroke: #cbd5e1;
+            stroke-width: 1px;
+        }
+
+        /* 震中环动画 */
+        .quake-ring {
+            fill: none;
+            stroke: var(--aurora-high);
+            stroke-width: 2px;
+            opacity: 0.8;
+            transform-box: fill-box;
+            transform-origin: center;
+        }
+
+        .footer-grid {
+            background: rgba(248, 250, 252, 0.6);
+            border-top: 1px solid rgba(0, 0, 0, 0.03);
+            padding: 16px 32px 10px 32px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .footer-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .f-label {
+            font-size: 10px;
+            color: var(--text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .f-val {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-sub);
+        }
+
+        .bottom-bar {
+            background: rgba(248, 250, 252, 0.9);
+            padding: 8px 32px 14px;
+            border-top: 1px solid rgba(0, 0, 0, 0.02);
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="card-wrapper">
+        {% set glow_class = 'glow-high' if mag_class == 'bg-high' else ('glow-med' if mag_class == 'bg-med' else
+        'glow-low') %}
+        <div class="aurora-glow {{ glow_class }}"></div>
+
+        <div class="glass-card">
+            <div class="header-section">
+                <div>
+                    <div class="region-name">{{ region }}</div>
+                    <div class="time-label">{{ time_str }}</div>
+                </div>
+                <div>
+                    {% if is_update %}<div class="status-pill pill-update">Update {{ revision }}</div>
+                    {% else %}<div class="status-pill pill-new">New Event</div>{% endif %}
+                </div>
+            </div>
+
+            <div class="hero-grid">
+                <div class="mag-capsule {{ mag_class }}">
+                    <span class="mag-number">{{ magnitude }}</span>
+                    <span class="mag-label-small">震级 (Mag)</span>
+                    {% if intensity %}<div class="intensity-mini">MMI {{ intensity }}</div>{% endif %}
+                </div>
+                <div class="key-data-list">
+                    <div class="data-block">
+                        <span class="data-title">深度 (Depth)</span>
+                        <span class="data-content">{{ depth }} <span class="unit">km</span></span>
+                    </div>
+                    <div class="data-block">
+                        <span class="data-title">数据拟合 (Quality)</span>
+                        <span class="data-content">{{ quality_pct }}</span>
+                    </div>
+                    <div class="data-block" style="grid-column: span 2;">
+                        <span class="data-title">震中位置 (Epicenter)</span>
+                        <span class="data-content" style="font-size:16px">{{ epicenter_str }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vector Globe Container -->
+            <div id="globe-container"></div>
+
+            <div class="footer-grid">
+                <div class="footer-item">
+                    <span class="f-label">台站 (Used/Total)</span>
+                    <span class="f-val">{{ stations_used }} / {{ stations_total }}</span>
+                </div>
+                <div class="footer-item">
+                    <span class="f-label">最大加速度 (PGA)</span>
+                    <span class="f-val">{{ pga }}</span>
+                </div>
+                <div class="footer-item">
+                    <span class="f-label">定位误差 (Loc Err)</span>
+                    <span class="f-val">{{ location_error }}</span>
+                </div>
+            </div>
+
+            <div class="bottom-bar">
+                <span>ID: {{ event_id }}</span>
+                <span>Source: Global Quake</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- D3 Globe Script -->
+    <script>
+        const width = 480;
+        const height = 180;
+
+        const lat = Number("{{ latitude }}");
+        const lng = Number("{{ longitude }}");
+
+        const svg = d3.select("#globe-container")
+            .append("svg")
+            .attr("viewBox", `0 0 ${width} ${height}`)
+            .attr("preserveAspectRatio", "xMidYMid meet");
+
+        // 1. 定义投影：【绝对稳健修正版】
+        // 此设置确保震中始终位于画布正中央 (240, 90)
+        // 拒绝一切位移偏移，防止红点跑偏
+        const projection = d3.geoOrthographic()
+            .scale(300)
+            .translate([width / 2, height / 2]) // 居中
+            .rotate([-lng, -lat]) // 正对
+            .clipAngle(90);
+
+        const path = d3.geoPath().projection(projection);
+
+        function markReady() {
+            document.body.classList.add('d3-ready');
+            console.log("D3 Render Complete");
+        }
+
+        function drawEpicenter() {
+            const center = projection([lng, lat]);
+            if (center) {
+                const size = 10; // 叉的大小
+
+                // 叉形震源标记 (X)
+                const crossGroup = svg.append("g")
+                    .attr("transform", `translate(${center[0]}, ${center[1]})`);
+
+                const outlineWidth = 8;
+                const strokeColor = "#FFF1AA";
+
+                // 绘制描边 (淡黄色)
+                crossGroup.append("line")
+                    .attr("x1", -size).attr("y1", -size)
+                    .attr("x2", size).attr("y2", size)
+                    .attr("stroke", strokeColor)
+                    .attr("stroke-width", outlineWidth)
+                    .attr("stroke-linecap", "round");
+
+                crossGroup.append("line")
+                    .attr("x1", size).attr("y1", -size)
+                    .attr("x2", -size).attr("y2", size)
+                    .attr("stroke", strokeColor)
+                    .attr("stroke-width", outlineWidth)
+                    .attr("stroke-linecap", "round");
+
+                // 第一条线 (\)
+                crossGroup.append("line")
+                    .attr("x1", -size).attr("y1", -size)
+                    .attr("x2", size).attr("y2", size)
+                    .attr("stroke", "#f43f5e")
+                    .attr("stroke-width", 4)
+                    .attr("stroke-linecap", "round");
+
+                // 第二条线 (/)
+                crossGroup.append("line")
+                    .attr("x1", size).attr("y1", -size)
+                    .attr("x2", -size).attr("y2", size)
+                    .attr("stroke", "#f43f5e")
+                    .attr("stroke-width", 4)
+                    .attr("stroke-linecap", "round");
+            }
+        }
+
+        // 2. 加载世界地图数据
+        d3.json("https://unpkg.com/world-atlas@2.0.2/land-110m.json").then(function (world) {
+            svg.append("path")
+                .datum(topojson.feature(world, world.objects.land))
+                .attr("class", "land")
+                .attr("d", path);
+
+            drawEpicenter();
+            markReady();
+        }).catch(err => {
+            console.error("Map load failed", err);
+            // 失败时也画点
+            drawEpicenter();
+            markReady();
+        });
+    </script>
+</body>
+
+</html>

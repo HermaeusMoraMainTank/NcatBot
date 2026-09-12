@@ -1,0 +1,9 @@
+name = "Tarot"
+version = "1.0.0"
+main = "Tarot.py"
+entry_class = "Tarot"
+
+[pip_dependencies]
+Pillow = "*"
+
+[dependencies]

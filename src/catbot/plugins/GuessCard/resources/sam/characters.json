@@ -1,0 +1,4445 @@
+[
+  {
+    "characterId": "i52312",
+    "name": "帕拉佐钻石刀",
+    "fullName": "帕拉佐钻石刀",
+    "fullNameChinese": "帕拉佐钻石刀",
+    "aliases": [
+      "帕拉佐钻石刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 795,
+    "equipLevel": 100,
+    "itemId": 52312,
+    "damagePhys": 158,
+    "damageMag": 79,
+    "iconId": 36584
+  },
+  {
+    "characterId": "i49671",
+    "name": "总冠军武士刀",
+    "fullName": "总冠军武士刀",
+    "fullNameChinese": "总冠军武士刀",
+    "aliases": [
+      "总冠军武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 795,
+    "equipLevel": 100,
+    "itemId": 49671,
+    "damagePhys": 158,
+    "damageMag": 79,
+    "iconId": 36578
+  },
+  {
+    "characterId": "i49594",
+    "name": "改良型王国黄铜武士刀",
+    "fullName": "改良型王国黄铜武士刀",
+    "fullNameChinese": "改良型王国黄铜武士刀",
+    "aliases": [
+      "改良型王国黄铜武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 790,
+    "equipLevel": 100,
+    "itemId": 49594,
+    "damagePhys": 157,
+    "damageMag": 79,
+    "iconId": 36580
+  },
+  {
+    "characterId": "i50906",
+    "name": "虚王武士刀",
+    "fullName": "虚王武士刀",
+    "fullNameChinese": "虚王武士刀",
+    "aliases": [
+      "虚王武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 785,
+    "equipLevel": 100,
+    "itemId": 50906,
+    "damagePhys": 156,
+    "damageMag": 78,
+    "iconId": 36583
+  },
+  {
+    "characterId": "i51123",
+    "name": "改良型宫廷爱人武士刀",
+    "fullName": "改良型宫廷爱人武士刀",
+    "fullNameChinese": "改良型宫廷爱人武士刀",
+    "aliases": [
+      "改良型宫廷爱人武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 780,
+    "equipLevel": 100,
+    "itemId": 51123,
+    "damagePhys": 139,
+    "damageMag": 70,
+    "iconId": 36581
+  },
+  {
+    "characterId": "i49517",
+    "name": "王国黄铜武士刀",
+    "fullName": "王国黄铜武士刀",
+    "fullNameChinese": "王国黄铜武士刀",
+    "aliases": [
+      "王国黄铜武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 780,
+    "equipLevel": 100,
+    "itemId": 49517,
+    "damagePhys": 155,
+    "damageMag": 78,
+    "iconId": 36580
+  },
+  {
+    "characterId": "i50045",
+    "name": "幻境武士刀·黯影",
+    "fullName": "幻境武士刀·黯影",
+    "fullNameChinese": "幻境武士刀·黯影",
+    "aliases": [
+      "幻境武士刀·黯影",
+      "幻境武士刀黯影"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 775,
+    "equipLevel": 100,
+    "itemId": 50045,
+    "damagePhys": 154,
+    "damageMag": 77,
+    "iconId": 36577
+  },
+  {
+    "characterId": "i49495",
+    "name": "狂奔武士刀",
+    "fullName": "狂奔武士刀",
+    "fullNameChinese": "狂奔武士刀",
+    "aliases": [
+      "狂奔武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 775,
+    "equipLevel": 100,
+    "itemId": 49495,
+    "damagePhys": 154,
+    "damageMag": 77,
+    "iconId": 36579
+  },
+  {
+    "characterId": "i49262",
+    "name": "宫廷爱人武士刀",
+    "fullName": "宫廷爱人武士刀",
+    "fullNameChinese": "宫廷爱人武士刀",
+    "aliases": [
+      "宫廷爱人武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 770,
+    "equipLevel": 100,
+    "itemId": 49262,
+    "damagePhys": 138,
+    "damageMag": 69,
+    "iconId": 36581
+  },
+  {
+    "characterId": "i46643",
+    "name": "正派冠军武士刀",
+    "fullName": "正派冠军武士刀",
+    "fullNameChinese": "正派冠军武士刀",
+    "aliases": [
+      "正派冠军武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 765,
+    "equipLevel": 100,
+    "itemId": 46643,
+    "damagePhys": 152,
+    "damageMag": 76,
+    "iconId": 36571
+  },
+  {
+    "characterId": "i47019",
+    "name": "幻境武士刀·本影",
+    "fullName": "幻境武士刀·本影",
+    "fullNameChinese": "幻境武士刀·本影",
+    "aliases": [
+      "幻境武士刀·本影",
+      "幻境武士刀本影"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 760,
+    "equipLevel": 100,
+    "itemId": 47019,
+    "damagePhys": 151,
+    "damageMag": 76,
+    "iconId": 36572
+  },
+  {
+    "characterId": "i47325",
+    "name": "改良型护锁刃刀",
+    "fullName": "改良型护锁刃刀",
+    "fullNameChinese": "改良型护锁刃刀",
+    "aliases": [
+      "改良型护锁刃刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 760,
+    "equipLevel": 100,
+    "itemId": 47325,
+    "damagePhys": 151,
+    "damageMag": 76,
+    "iconId": 36573
+  },
+  {
+    "characterId": "i46566",
+    "name": "改良型王国传奇武士刀",
+    "fullName": "改良型王国传奇武士刀",
+    "fullNameChinese": "改良型王国传奇武士刀",
+    "aliases": [
+      "改良型王国传奇武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 760,
+    "equipLevel": 100,
+    "itemId": 46566,
+    "damagePhys": 151,
+    "damageMag": 76,
+    "iconId": 36570
+  },
+  {
+    "characterId": "i47063",
+    "name": "圣礼武士刀",
+    "fullName": "圣礼武士刀",
+    "fullNameChinese": "圣礼武士刀",
+    "aliases": [
+      "圣礼武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 755,
+    "equipLevel": 100,
+    "itemId": 47063,
+    "damagePhys": 150,
+    "damageMag": 75,
+    "iconId": 36575
+  },
+  {
+    "characterId": "i46997",
+    "name": "死暗武士刀",
+    "fullName": "死暗武士刀",
+    "fullNameChinese": "死暗武士刀",
+    "aliases": [
+      "死暗武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 755,
+    "equipLevel": 100,
+    "itemId": 46997,
+    "damagePhys": 150,
+    "damageMag": 75,
+    "iconId": 36576
+  },
+  {
+    "characterId": "i47041",
+    "name": "光耀武士刀",
+    "fullName": "光耀武士刀",
+    "fullNameChinese": "光耀武士刀",
+    "aliases": [
+      "光耀武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 750,
+    "equipLevel": 100,
+    "itemId": 47041,
+    "damagePhys": 149,
+    "damageMag": 75,
+    "iconId": 36574
+  },
+  {
+    "characterId": "i46908",
+    "name": "改良型仪仗曲刃刀",
+    "fullName": "改良型仪仗曲刃刀",
+    "fullNameChinese": "改良型仪仗曲刃刀",
+    "aliases": [
+      "改良型仪仗曲刃刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 750,
+    "equipLevel": 100,
+    "itemId": 46908,
+    "damagePhys": 134,
+    "damageMag": 68,
+    "iconId": 36568
+  },
+  {
+    "characterId": "i46489",
+    "name": "王国传奇武士刀",
+    "fullName": "王国传奇武士刀",
+    "fullNameChinese": "王国传奇武士刀",
+    "aliases": [
+      "王国传奇武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 750,
+    "equipLevel": 100,
+    "itemId": 46489,
+    "damagePhys": 149,
+    "damageMag": 75,
+    "iconId": 36570
+  },
+  {
+    "characterId": "i46467",
+    "name": "女王骑士武士刀",
+    "fullName": "女王骑士武士刀",
+    "fullNameChinese": "女王骑士武士刀",
+    "aliases": [
+      "女王骑士武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 745,
+    "equipLevel": 100,
+    "itemId": 46467,
+    "damagePhys": 148,
+    "damageMag": 74,
+    "iconId": 36569
+  },
+  {
+    "characterId": "i47882",
+    "name": "幻境武士刀·半影",
+    "fullName": "幻境武士刀·半影",
+    "fullNameChinese": "幻境武士刀·半影",
+    "aliases": [
+      "幻境武士刀·半影",
+      "幻境武士刀半影"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 745,
+    "equipLevel": 100,
+    "itemId": 47882,
+    "damagePhys": 148,
+    "damageMag": 74,
+    "iconId": 36572
+  },
+  {
+    "characterId": "i47085",
+    "name": "护锁刃刀",
+    "fullName": "护锁刃刀",
+    "fullNameChinese": "护锁刃刀",
+    "aliases": [
+      "护锁刃刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 745,
+    "equipLevel": 100,
+    "itemId": 47085,
+    "damagePhys": 148,
+    "damageMag": 74,
+    "iconId": 36573
+  },
+  {
+    "characterId": "i46023",
+    "name": "仪仗曲刃刀",
+    "fullName": "仪仗曲刃刀",
+    "fullNameChinese": "仪仗曲刃刀",
+    "aliases": [
+      "仪仗曲刃刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 740,
+    "equipLevel": 100,
+    "itemId": 46023,
+    "damagePhys": 132,
+    "damageMag": 67,
+    "iconId": 36568
+  },
+  {
+    "characterId": "i44734",
+    "name": "绝境伊甸之晨武士刀",
+    "fullName": "绝境伊甸之晨武士刀",
+    "fullNameChinese": "绝境伊甸之晨武士刀",
+    "aliases": [
+      "绝境伊甸之晨武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 735,
+    "equipLevel": 100,
+    "itemId": 44734,
+    "damagePhys": 146,
+    "damageMag": 73,
+    "iconId": 36565
+  },
+  {
+    "characterId": "i43114",
+    "name": "黑马冠军武士刀",
+    "fullName": "黑马冠军武士刀",
+    "fullNameChinese": "黑马冠军武士刀",
+    "aliases": [
+      "黑马冠军武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 735,
+    "equipLevel": 100,
+    "itemId": 43114,
+    "damagePhys": 146,
+    "damageMag": 73,
+    "iconId": 36554
+  },
+  {
+    "characterId": "i43037",
+    "name": "改良型绿咬鹃武士刀",
+    "fullName": "改良型绿咬鹃武士刀",
+    "fullNameChinese": "改良型绿咬鹃武士刀",
+    "aliases": [
+      "改良型绿咬鹃武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 730,
+    "equipLevel": 100,
+    "itemId": 43037,
+    "damagePhys": 145,
+    "damageMag": 73,
+    "iconId": 36555
+  },
+  {
+    "characterId": "i44709",
+    "name": "永恒女王武士刀",
+    "fullName": "永恒女王武士刀",
+    "fullNameChinese": "永恒女王武士刀",
+    "aliases": [
+      "永恒女王武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 725,
+    "equipLevel": 100,
+    "itemId": 44709,
+    "damagePhys": 144,
+    "damageMag": 72,
+    "iconId": 36566
+  },
+  {
+    "characterId": "i44757",
+    "name": "改良型旧日王国武士刀",
+    "fullName": "改良型旧日王国武士刀",
+    "fullNameChinese": "改良型旧日王国武士刀",
+    "aliases": [
+      "改良型旧日王国武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 720,
+    "equipLevel": 100,
+    "itemId": 44757,
+    "damagePhys": 129,
+    "damageMag": 65,
+    "iconId": 36559
+  },
+  {
+    "characterId": "i42960",
+    "name": "绿咬鹃武士刀",
+    "fullName": "绿咬鹃武士刀",
+    "fullNameChinese": "绿咬鹃武士刀",
+    "aliases": [
+      "绿咬鹃武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 720,
+    "equipLevel": 100,
+    "itemId": 42960,
+    "damagePhys": 143,
+    "damageMag": 72,
+    "iconId": 36555
+  },
+  {
+    "characterId": "i42883",
+    "name": "旧日王国武士刀",
+    "fullName": "旧日王国武士刀",
+    "fullNameChinese": "旧日王国武士刀",
+    "aliases": [
+      "旧日王国武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 710,
+    "equipLevel": 100,
+    "itemId": 42883,
+    "damagePhys": 127,
+    "damageMag": 64,
+    "iconId": 36559
+  },
+  {
+    "characterId": "i42786",
+    "name": "艳翼武士刀",
+    "fullName": "艳翼武士刀",
+    "fullNameChinese": "艳翼武士刀",
+    "aliases": [
+      "艳翼武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 710,
+    "equipLevel": 100,
+    "itemId": 42786,
+    "damagePhys": 141,
+    "damageMag": 71,
+    "iconId": 36561
+  },
+  {
+    "characterId": "i42709",
+    "name": "新生王国武士刀",
+    "fullName": "新生王国武士刀",
+    "fullNameChinese": "新生王国武士刀",
+    "aliases": [
+      "新生王国武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 700,
+    "equipLevel": 100,
+    "itemId": 42709,
+    "damagePhys": 139,
+    "damageMag": 70,
+    "iconId": 36552
+  },
+  {
+    "characterId": "i42582",
+    "name": "小鸦丸",
+    "fullName": "小鸦丸",
+    "fullNameChinese": "小鸦丸",
+    "aliases": [
+      "小鸦丸"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 690,
+    "equipLevel": 99,
+    "itemId": 42582,
+    "damagePhys": 137,
+    "damageMag": 69,
+    "iconId": 36550
+  },
+  {
+    "characterId": "i42465",
+    "name": "卡扎纳尔武士刀",
+    "fullName": "卡扎纳尔武士刀",
+    "fullNameChinese": "卡扎纳尔武士刀",
+    "aliases": [
+      "卡扎纳尔武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 675,
+    "equipLevel": 98,
+    "itemId": 42465,
+    "damagePhys": 121,
+    "damageMag": 60,
+    "iconId": 36564
+  },
+  {
+    "characterId": "i42388",
+    "name": "先锋武士刀",
+    "fullName": "先锋武士刀",
+    "fullNameChinese": "先锋武士刀",
+    "aliases": [
+      "先锋武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 672,
+    "equipLevel": 97,
+    "itemId": 42388,
+    "damagePhys": 133,
+    "damageMag": 67,
+    "iconId": 36562
+  },
+  {
+    "characterId": "i42311",
+    "name": "钛金武士刀",
+    "fullName": "钛金武士刀",
+    "fullNameChinese": "钛金武士刀",
+    "aliases": [
+      "钛金武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 669,
+    "equipLevel": 96,
+    "itemId": 42311,
+    "damagePhys": 119,
+    "damageMag": 59,
+    "iconId": 36551
+  },
+  {
+    "characterId": "i42234",
+    "name": "深空武士刀",
+    "fullName": "深空武士刀",
+    "fullNameChinese": "深空武士刀",
+    "aliases": [
+      "深空武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 666,
+    "equipLevel": 95,
+    "itemId": 42234,
+    "damagePhys": 132,
+    "damageMag": 66,
+    "iconId": 36560
+  },
+  {
+    "characterId": "i41692",
+    "name": "彼岸此岸·优雅",
+    "fullName": "彼岸此岸·优雅",
+    "fullNameChinese": "彼岸此岸·优雅",
+    "aliases": [
+      "彼岸此岸·优雅",
+      "彼岸此岸优雅"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 665,
+    "equipLevel": 90,
+    "itemId": 41692,
+    "damagePhys": 132,
+    "damageMag": 66,
+    "iconId": 36547
+  },
+  {
+    "characterId": "i40178",
+    "name": "成神之武士刀",
+    "fullName": "成神之武士刀",
+    "fullNameChinese": "成神之武士刀",
+    "aliases": [
+      "成神之武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 665,
+    "equipLevel": 90,
+    "itemId": 40178,
+    "damagePhys": 132,
+    "damageMag": 66,
+    "iconId": 36546
+  },
+  {
+    "characterId": "i40945",
+    "name": "曼德维尔盈满武士刀",
+    "fullName": "曼德维尔盈满武士刀",
+    "fullNameChinese": "曼德维尔盈满武士刀",
+    "aliases": [
+      "曼德维尔盈满武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 665,
+    "equipLevel": 90,
+    "itemId": 40945,
+    "damagePhys": 132,
+    "damageMag": 66,
+    "iconId": 36548
+  },
+  {
+    "characterId": "i42157",
+    "name": "钴钨武士刀",
+    "fullName": "钴钨武士刀",
+    "fullNameChinese": "钴钨武士刀",
+    "aliases": [
+      "钴钨武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 663,
+    "equipLevel": 94,
+    "itemId": 42157,
+    "damagePhys": 118,
+    "damageMag": 59,
+    "iconId": 36558
+  },
+  {
+    "characterId": "i42080",
+    "name": "佐莫太刀",
+    "fullName": "佐莫太刀",
+    "fullNameChinese": "佐莫太刀",
+    "aliases": [
+      "佐莫太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 660,
+    "equipLevel": 93,
+    "itemId": 42080,
+    "damagePhys": 131,
+    "damageMag": 66,
+    "iconId": 36563
+  },
+  {
+    "characterId": "i40103",
+    "name": "改良型彼岸此岸",
+    "fullName": "改良型彼岸此岸",
+    "fullNameChinese": "改良型彼岸此岸",
+    "aliases": [
+      "改良型彼岸此岸"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 660,
+    "equipLevel": 90,
+    "itemId": 40103,
+    "damagePhys": 131,
+    "damageMag": 66,
+    "iconId": 36547
+  },
+  {
+    "characterId": "i42003",
+    "name": "钌金武士刀",
+    "fullName": "钌金武士刀",
+    "fullNameChinese": "钌金武士刀",
+    "aliases": [
+      "钌金武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 655,
+    "equipLevel": 92,
+    "itemId": 42003,
+    "damagePhys": 117,
+    "damageMag": 58,
+    "iconId": 36556
+  },
+  {
+    "characterId": "i41046",
+    "name": "虚器武士刀",
+    "fullName": "虚器武士刀",
+    "fullNameChinese": "虚器武士刀",
+    "aliases": [
+      "虚器武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 655,
+    "equipLevel": 90,
+    "itemId": 41046,
+    "damagePhys": 130,
+    "damageMag": 65,
+    "iconId": 36549
+  },
+  {
+    "characterId": "i41926",
+    "name": "河流之息武士刀",
+    "fullName": "河流之息武士刀",
+    "fullNameChinese": "河流之息武士刀",
+    "aliases": [
+      "河流之息武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 650,
+    "equipLevel": 91,
+    "itemId": 41926,
+    "damagePhys": 129,
+    "damageMag": 65,
+    "iconId": 36557
+  },
+  {
+    "characterId": "i40028",
+    "name": "彼岸此岸",
+    "fullName": "彼岸此岸",
+    "fullNameChinese": "彼岸此岸",
+    "aliases": [
+      "彼岸此岸"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 650,
+    "equipLevel": 90,
+    "itemId": 40028,
+    "damagePhys": 129,
+    "damageMag": 65,
+    "iconId": 36547
+  },
+  {
+    "characterId": "i40833",
+    "name": "改良型继业者武士刀",
+    "fullName": "改良型继业者武士刀",
+    "fullNameChinese": "改良型继业者武士刀",
+    "aliases": [
+      "改良型继业者武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 650,
+    "equipLevel": 90,
+    "itemId": 40833,
+    "damagePhys": 116,
+    "damageMag": 59,
+    "iconId": 36545
+  },
+  {
+    "characterId": "i41849",
+    "name": "奥阔铬铁武士刀",
+    "fullName": "奥阔铬铁武士刀",
+    "fullNameChinese": "奥阔铬铁武士刀",
+    "aliases": [
+      "奥阔铬铁武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 645,
+    "equipLevel": 90,
+    "itemId": 41849,
+    "damagePhys": 115,
+    "damageMag": 58,
+    "iconId": 36553
+  },
+  {
+    "characterId": "i39933",
+    "name": "曼德维尔威严武士刀",
+    "fullName": "曼德维尔威严武士刀",
+    "fullNameChinese": "曼德维尔威严武士刀",
+    "aliases": [
+      "曼德维尔威严武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 645,
+    "equipLevel": 90,
+    "itemId": 39933,
+    "damagePhys": 128,
+    "damageMag": 64,
+    "iconId": 36543
+  },
+  {
+    "characterId": "i39953",
+    "name": "虚无武士刀",
+    "fullName": "虚无武士刀",
+    "fullNameChinese": "虚无武士刀",
+    "aliases": [
+      "虚无武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 645,
+    "equipLevel": 90,
+    "itemId": 39953,
+    "damagePhys": 128,
+    "damageMag": 64,
+    "iconId": 36544
+  },
+  {
+    "characterId": "i39643",
+    "name": "继业者武士刀",
+    "fullName": "继业者武士刀",
+    "fullNameChinese": "继业者武士刀",
+    "aliases": [
+      "继业者武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 640,
+    "equipLevel": 90,
+    "itemId": 39643,
+    "damagePhys": 114,
+    "damageMag": 58,
+    "iconId": 36545
+  },
+  {
+    "characterId": "i38094",
+    "name": "深壑武士刀",
+    "fullName": "深壑武士刀",
+    "fullNameChinese": "深壑武士刀",
+    "aliases": [
+      "深壑武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 635,
+    "equipLevel": 90,
+    "itemId": 38094,
+    "damagePhys": 126,
+    "damageMag": 63,
+    "iconId": 36535
+  },
+  {
+    "characterId": "i39177",
+    "name": "绝境欧米茄武士刀",
+    "fullName": "绝境欧米茄武士刀",
+    "fullNameChinese": "绝境欧米茄武士刀",
+    "aliases": [
+      "绝境欧米茄武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 635,
+    "equipLevel": 90,
+    "itemId": 39177,
+    "damagePhys": 126,
+    "damageMag": 63,
+    "iconId": 36542
+  },
+  {
+    "characterId": "i38019",
+    "name": "改良型月使武士刀",
+    "fullName": "改良型月使武士刀",
+    "fullNameChinese": "改良型月使武士刀",
+    "aliases": [
+      "改良型月使武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 630,
+    "equipLevel": 90,
+    "itemId": 38019,
+    "damagePhys": 125,
+    "damageMag": 63,
+    "iconId": 36536
+  },
+  {
+    "characterId": "i39157",
+    "name": "曼德维尔惊异武士刀",
+    "fullName": "曼德维尔惊异武士刀",
+    "fullNameChinese": "曼德维尔惊异武士刀",
+    "aliases": [
+      "曼德维尔惊异武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 630,
+    "equipLevel": 90,
+    "itemId": 39157,
+    "damagePhys": 125,
+    "damageMag": 63,
+    "iconId": 36539
+  },
+  {
+    "characterId": "i39137",
+    "name": "炀火武士刀",
+    "fullName": "炀火武士刀",
+    "fullNameChinese": "炀火武士刀",
+    "aliases": [
+      "炀火武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 625,
+    "equipLevel": 90,
+    "itemId": 39137,
+    "damagePhys": 124,
+    "damageMag": 62,
+    "iconId": 36538
+  },
+  {
+    "characterId": "i39217",
+    "name": "高尚武士刀",
+    "fullName": "高尚武士刀",
+    "fullNameChinese": "高尚武士刀",
+    "aliases": [
+      "高尚武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 625,
+    "equipLevel": 90,
+    "itemId": 39217,
+    "damagePhys": 124,
+    "damageMag": 62,
+    "iconId": 36541
+  },
+  {
+    "characterId": "i39025",
+    "name": "改良型复兴武士刀",
+    "fullName": "改良型复兴武士刀",
+    "fullNameChinese": "改良型复兴武士刀",
+    "aliases": [
+      "改良型复兴武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 620,
+    "equipLevel": 90,
+    "itemId": 39025,
+    "damagePhys": 111,
+    "damageMag": 56,
+    "iconId": 36534
+  },
+  {
+    "characterId": "i37944",
+    "name": "月使武士刀",
+    "fullName": "月使武士刀",
+    "fullNameChinese": "月使武士刀",
+    "aliases": [
+      "月使武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 620,
+    "equipLevel": 90,
+    "itemId": 37944,
+    "damagePhys": 123,
+    "damageMag": 62,
+    "iconId": 36536
+  },
+  {
+    "characterId": "i39197",
+    "name": "正统武士刀",
+    "fullName": "正统武士刀",
+    "fullNameChinese": "正统武士刀",
+    "aliases": [
+      "正统武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 620,
+    "equipLevel": 90,
+    "itemId": 39197,
+    "damagePhys": 123,
+    "damageMag": 62,
+    "iconId": 36540
+  },
+  {
+    "characterId": "i38413",
+    "name": "曼德维尔武士刀",
+    "fullName": "曼德维尔武士刀",
+    "fullNameChinese": "曼德维尔武士刀",
+    "aliases": [
+      "曼德维尔武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 615,
+    "equipLevel": 90,
+    "itemId": 38413,
+    "damagePhys": 122,
+    "damageMag": 61,
+    "iconId": 36533
+  },
+  {
+    "characterId": "i37869",
+    "name": "煞风武士刀",
+    "fullName": "煞风武士刀",
+    "fullNameChinese": "煞风武士刀",
+    "aliases": [
+      "煞风武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 615,
+    "equipLevel": 90,
+    "itemId": 37869,
+    "damagePhys": 122,
+    "damageMag": 61,
+    "iconId": 36537
+  },
+  {
+    "characterId": "i37755",
+    "name": "复兴武士刀",
+    "fullName": "复兴武士刀",
+    "fullNameChinese": "复兴武士刀",
+    "aliases": [
+      "复兴武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 610,
+    "equipLevel": 90,
+    "itemId": 37755,
+    "damagePhys": 109,
+    "damageMag": 55,
+    "iconId": 36534
+  },
+  {
+    "characterId": "i35258",
+    "name": "日影兰武士刀",
+    "fullName": "日影兰武士刀",
+    "fullNameChinese": "日影兰武士刀",
+    "aliases": [
+      "日影兰武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 605,
+    "equipLevel": 90,
+    "itemId": 35258,
+    "damagePhys": 120,
+    "damageMag": 60,
+    "iconId": 36527
+  },
+  {
+    "characterId": "i36956",
+    "name": "绝境苍穹之太刀",
+    "fullName": "绝境苍穹之太刀",
+    "fullNameChinese": "绝境苍穹之太刀",
+    "aliases": [
+      "绝境苍穹之太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 605,
+    "equipLevel": 90,
+    "itemId": 36956,
+    "damagePhys": 120,
+    "damageMag": 60,
+    "iconId": 36532
+  },
+  {
+    "characterId": "i35183",
+    "name": "改良型星战士武士刀",
+    "fullName": "改良型星战士武士刀",
+    "fullNameChinese": "改良型星战士武士刀",
+    "aliases": [
+      "改良型星战士武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 600,
+    "equipLevel": 90,
+    "itemId": 35183,
+    "damagePhys": 119,
+    "damageMag": 60,
+    "iconId": 36518
+  },
+  {
+    "characterId": "i36936",
+    "name": "蓝羽太刀",
+    "fullName": "蓝羽太刀",
+    "fullNameChinese": "蓝羽太刀",
+    "aliases": [
+      "蓝羽太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 595,
+    "equipLevel": 90,
+    "itemId": 36936,
+    "damagePhys": 118,
+    "damageMag": 59,
+    "iconId": 36530
+  },
+  {
+    "characterId": "i36731",
+    "name": "改良型古典风格武士刀",
+    "fullName": "改良型古典风格武士刀",
+    "fullNameChinese": "改良型古典风格武士刀",
+    "aliases": [
+      "改良型古典风格武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 590,
+    "equipLevel": 90,
+    "itemId": 36731,
+    "damagePhys": 105,
+    "damageMag": 53,
+    "iconId": 36526
+  },
+  {
+    "characterId": "i35108",
+    "name": "星战士武士刀",
+    "fullName": "星战士武士刀",
+    "fullNameChinese": "星战士武士刀",
+    "aliases": [
+      "星战士武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 590,
+    "equipLevel": 90,
+    "itemId": 35108,
+    "damagePhys": 117,
+    "damageMag": 59,
+    "iconId": 36518
+  },
+  {
+    "characterId": "i35033",
+    "name": "古典风格武士刀",
+    "fullName": "古典风格武士刀",
+    "fullNameChinese": "古典风格武士刀",
+    "aliases": [
+      "古典风格武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 580,
+    "equipLevel": 90,
+    "itemId": 35033,
+    "damagePhys": 103,
+    "damageMag": 52,
+    "iconId": 36526
+  },
+  {
+    "characterId": "i34938",
+    "name": "圣光武士刀",
+    "fullName": "圣光武士刀",
+    "fullNameChinese": "圣光武士刀",
+    "aliases": [
+      "圣光武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 580,
+    "equipLevel": 90,
+    "itemId": 34938,
+    "damagePhys": 115,
+    "damageMag": 58,
+    "iconId": 36515
+  },
+  {
+    "characterId": "i34863",
+    "name": "月卫武士刀",
+    "fullName": "月卫武士刀",
+    "fullNameChinese": "月卫武士刀",
+    "aliases": [
+      "月卫武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 570,
+    "equipLevel": 90,
+    "itemId": 34863,
+    "damagePhys": 113,
+    "damageMag": 57,
+    "iconId": 36517
+  },
+  {
+    "characterId": "i48186",
+    "name": "圣辉武士刀",
+    "fullName": "圣辉武士刀",
+    "fullNameChinese": "圣辉武士刀",
+    "aliases": [
+      "圣辉武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 560,
+    "equipLevel": 90,
+    "itemId": 48186,
+    "damagePhys": 100,
+    "damageMag": 50,
+    "iconId": 36515
+  },
+  {
+    "characterId": "i34055",
+    "name": "村雨",
+    "fullName": "村雨",
+    "fullNameChinese": "村雨",
+    "aliases": [
+      "村雨"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 560,
+    "equipLevel": 89,
+    "itemId": 34055,
+    "damagePhys": 111,
+    "damageMag": 56,
+    "iconId": 36519
+  },
+  {
+    "characterId": "i34693",
+    "name": "球粒陨石魔导武士刀",
+    "fullName": "球粒陨石魔导武士刀",
+    "fullNameChinese": "球粒陨石魔导武士刀",
+    "aliases": [
+      "球粒陨石魔导武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 545,
+    "equipLevel": 88,
+    "itemId": 34693,
+    "damagePhys": 97,
+    "damageMag": 49,
+    "iconId": 36525
+  },
+  {
+    "characterId": "i34618",
+    "name": "造物院武士刀",
+    "fullName": "造物院武士刀",
+    "fullNameChinese": "造物院武士刀",
+    "aliases": [
+      "造物院武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 542,
+    "equipLevel": 87,
+    "itemId": 34618,
+    "damagePhys": 107,
+    "damageMag": 54,
+    "iconId": 36523
+  },
+  {
+    "characterId": "i34543",
+    "name": "锰钢打刀",
+    "fullName": "锰钢打刀",
+    "fullNameChinese": "锰钢打刀",
+    "aliases": [
+      "锰钢打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 539,
+    "equipLevel": 86,
+    "itemId": 34543,
+    "damagePhys": 95,
+    "damageMag": 48,
+    "iconId": 36521
+  },
+  {
+    "characterId": "i34468",
+    "name": "波洛伽曲刃刀",
+    "fullName": "波洛伽曲刃刀",
+    "fullNameChinese": "波洛伽曲刃刀",
+    "aliases": [
+      "波洛伽曲刃刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 536,
+    "equipLevel": 85,
+    "itemId": 34468,
+    "damagePhys": 106,
+    "damageMag": 53,
+    "iconId": 36529
+  },
+  {
+    "characterId": "i32289",
+    "name": "伊甸之晨武士刀",
+    "fullName": "伊甸之晨武士刀",
+    "fullNameChinese": "伊甸之晨武士刀",
+    "aliases": [
+      "伊甸之晨武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 535,
+    "equipLevel": 80,
+    "itemId": 32289,
+    "damagePhys": 106,
+    "damageMag": 53,
+    "iconId": 36511
+  },
+  {
+    "characterId": "i33475",
+    "name": "女王之忠诚",
+    "fullName": "女王之忠诚",
+    "fullNameChinese": "女王之忠诚",
+    "aliases": [
+      "女王之忠诚"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 535,
+    "equipLevel": 80,
+    "itemId": 33475,
+    "damagePhys": 106,
+    "damageMag": 53,
+    "iconId": 36513
+  },
+  {
+    "characterId": "i34393",
+    "name": "铋金打刀",
+    "fullName": "铋金打刀",
+    "fullNameChinese": "铋金打刀",
+    "aliases": [
+      "铋金打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 533,
+    "equipLevel": 84,
+    "itemId": 34393,
+    "damagePhys": 94,
+    "damageMag": 48,
+    "iconId": 36516
+  },
+  {
+    "characterId": "i34318",
+    "name": "帝国魔导武士刀",
+    "fullName": "帝国魔导武士刀",
+    "fullNameChinese": "帝国魔导武士刀",
+    "aliases": [
+      "帝国魔导武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 530,
+    "equipLevel": 83,
+    "itemId": 34318,
+    "damagePhys": 105,
+    "damageMag": 53,
+    "iconId": 36524
+  },
+  {
+    "characterId": "i32511",
+    "name": "改良型圣堂潜行武士刀",
+    "fullName": "改良型圣堂潜行武士刀",
+    "fullNameChinese": "改良型圣堂潜行武士刀",
+    "aliases": [
+      "改良型圣堂潜行武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 530,
+    "equipLevel": 80,
+    "itemId": 32511,
+    "damagePhys": 105,
+    "damageMag": 53,
+    "iconId": 36508
+  },
+  {
+    "characterId": "i34243",
+    "name": "辉翠银打刀",
+    "fullName": "辉翠银打刀",
+    "fullNameChinese": "辉翠银打刀",
+    "aliases": [
+      "辉翠银打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 525,
+    "equipLevel": 82,
+    "itemId": 34243,
+    "damagePhys": 94,
+    "damageMag": 48,
+    "iconId": 36522
+  },
+  {
+    "characterId": "i33495",
+    "name": "钻石神兵武士刀",
+    "fullName": "钻石神兵武士刀",
+    "fullNameChinese": "钻石神兵武士刀",
+    "aliases": [
+      "钻石神兵武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 525,
+    "equipLevel": 80,
+    "itemId": 33495,
+    "damagePhys": 105,
+    "damageMag": 53,
+    "iconId": 36514
+  },
+  {
+    "characterId": "i34168",
+    "name": "异怪武士刀",
+    "fullName": "异怪武士刀",
+    "fullNameChinese": "异怪武士刀",
+    "aliases": [
+      "异怪武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 520,
+    "equipLevel": 81,
+    "itemId": 34168,
+    "damagePhys": 104,
+    "damageMag": 52,
+    "iconId": 36520
+  },
+  {
+    "characterId": "i32431",
+    "name": "圣堂潜行武士刀",
+    "fullName": "圣堂潜行武士刀",
+    "fullNameChinese": "圣堂潜行武士刀",
+    "aliases": [
+      "圣堂潜行武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 520,
+    "equipLevel": 80,
+    "itemId": 32431,
+    "damagePhys": 104,
+    "damageMag": 52,
+    "iconId": 36508
+  },
+  {
+    "characterId": "i33372",
+    "name": "改良型总督武士刀",
+    "fullName": "改良型总督武士刀",
+    "fullNameChinese": "改良型总督武士刀",
+    "aliases": [
+      "改良型总督武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 520,
+    "equipLevel": 80,
+    "itemId": 33372,
+    "damagePhys": 94,
+    "damageMag": 47,
+    "iconId": 36510
+  },
+  {
+    "characterId": "i32682",
+    "name": "改良型裁决武士刀",
+    "fullName": "改良型裁决武士刀",
+    "fullNameChinese": "改良型裁决武士刀",
+    "aliases": [
+      "改良型裁决武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 515,
+    "equipLevel": 80,
+    "itemId": 32682,
+    "damagePhys": 104,
+    "damageMag": 52,
+    "iconId": 36509
+  },
+  {
+    "characterId": "i32271",
+    "name": "绿宝石武士刀",
+    "fullName": "绿宝石武士刀",
+    "fullNameChinese": "绿宝石武士刀",
+    "aliases": [
+      "绿宝石武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 515,
+    "equipLevel": 80,
+    "itemId": 32271,
+    "damagePhys": 104,
+    "damageMag": 52,
+    "iconId": 36512
+  },
+  {
+    "characterId": "i34093",
+    "name": "辉翠银武士刀",
+    "fullName": "辉翠银武士刀",
+    "fullNameChinese": "辉翠银武士刀",
+    "aliases": [
+      "辉翠银武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 515,
+    "equipLevel": 80,
+    "itemId": 34093,
+    "damagePhys": 94,
+    "damageMag": 47,
+    "iconId": 36528
+  },
+  {
+    "characterId": "i31826",
+    "name": "总督武士刀",
+    "fullName": "总督武士刀",
+    "fullNameChinese": "总督武士刀",
+    "aliases": [
+      "总督武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 510,
+    "equipLevel": 80,
+    "itemId": 31826,
+    "damagePhys": 93,
+    "damageMag": 47,
+    "iconId": 36510
+  },
+  {
+    "characterId": "i32664",
+    "name": "裁决武士刀",
+    "fullName": "裁决武士刀",
+    "fullNameChinese": "裁决武士刀",
+    "aliases": [
+      "裁决武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 510,
+    "equipLevel": 80,
+    "itemId": 32664,
+    "damagePhys": 103,
+    "damageMag": 52,
+    "iconId": 36509
+  },
+  {
+    "characterId": "i29050",
+    "name": "伊甸之律武士刀",
+    "fullName": "伊甸之律武士刀",
+    "fullNameChinese": "伊甸之律武士刀",
+    "aliases": [
+      "伊甸之律武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 505,
+    "equipLevel": 80,
+    "itemId": 29050,
+    "damagePhys": 103,
+    "damageMag": 52,
+    "iconId": 36505
+  },
+  {
+    "characterId": "i30780",
+    "name": "改良型星切",
+    "fullName": "改良型星切",
+    "fullNameChinese": "改良型星切",
+    "aliases": [
+      "改良型星切"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 500,
+    "equipLevel": 80,
+    "itemId": 30780,
+    "damagePhys": 102,
+    "damageMag": 51,
+    "iconId": 36502
+  },
+  {
+    "characterId": "i29272",
+    "name": "改良型水晶都武士刀",
+    "fullName": "改良型水晶都武士刀",
+    "fullNameChinese": "改良型水晶都武士刀",
+    "aliases": [
+      "改良型水晶都武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 500,
+    "equipLevel": 80,
+    "itemId": 29272,
+    "damagePhys": 102,
+    "damageMag": 51,
+    "iconId": 36503
+  },
+  {
+    "characterId": "i30798",
+    "name": "星切·回忆",
+    "fullName": "星切·回忆",
+    "fullNameChinese": "星切·回忆",
+    "aliases": [
+      "星切·回忆",
+      "星切回忆"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 500,
+    "equipLevel": 80,
+    "itemId": 30798,
+    "damagePhys": 102,
+    "damageMag": 51,
+    "iconId": 36502
+  },
+  {
+    "characterId": "i30610",
+    "name": "光之刀",
+    "fullName": "光之刀",
+    "fullNameChinese": "光之刀",
+    "aliases": [
+      "光之刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 495,
+    "equipLevel": 80,
+    "itemId": 30610,
+    "damagePhys": 102,
+    "damageMag": 51,
+    "iconId": 36506
+  },
+  {
+    "characterId": "i30521",
+    "name": "改良型伊修加德新型武士刀",
+    "fullName": "改良型伊修加德新型武士刀",
+    "fullNameChinese": "改良型伊修加德新型武士刀",
+    "aliases": [
+      "改良型伊修加德新型武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 490,
+    "equipLevel": 80,
+    "itemId": 30521,
+    "damagePhys": 91,
+    "damageMag": 46,
+    "iconId": 36501
+  },
+  {
+    "characterId": "i29192",
+    "name": "水晶都武士刀",
+    "fullName": "水晶都武士刀",
+    "fullNameChinese": "水晶都武士刀",
+    "aliases": [
+      "水晶都武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 490,
+    "equipLevel": 80,
+    "itemId": 29192,
+    "damagePhys": 101,
+    "damageMag": 51,
+    "iconId": 36503
+  },
+  {
+    "characterId": "i30241",
+    "name": "星切",
+    "fullName": "星切",
+    "fullNameChinese": "星切",
+    "aliases": [
+      "星切"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 485,
+    "equipLevel": 80,
+    "itemId": 30241,
+    "damagePhys": 101,
+    "damageMag": 51,
+    "iconId": 36502
+  },
+  {
+    "characterId": "i29015",
+    "name": "红宝石武士刀",
+    "fullName": "红宝石武士刀",
+    "fullNameChinese": "红宝石武士刀",
+    "aliases": [
+      "红宝石武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 485,
+    "equipLevel": 80,
+    "itemId": 29015,
+    "damagePhys": 101,
+    "damageMag": 51,
+    "iconId": 36504
+  },
+  {
+    "characterId": "i29417",
+    "name": "伊修加德新型武士刀",
+    "fullName": "伊修加德新型武士刀",
+    "fullNameChinese": "伊修加德新型武士刀",
+    "aliases": [
+      "伊修加德新型武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 480,
+    "equipLevel": 80,
+    "itemId": 29417,
+    "damagePhys": 90,
+    "damageMag": 45,
+    "iconId": 36501
+  },
+  {
+    "characterId": "i26948",
+    "name": "伊甸之恩武士刀",
+    "fullName": "伊甸之恩武士刀",
+    "fullNameChinese": "伊甸之恩武士刀",
+    "aliases": [
+      "伊甸之恩武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 475,
+    "equipLevel": 80,
+    "itemId": 26948,
+    "damagePhys": 100,
+    "damageMag": 50,
+    "iconId": 36483
+  },
+  {
+    "characterId": "i28302",
+    "name": "绝境噬骨",
+    "fullName": "绝境噬骨",
+    "fullNameChinese": "绝境噬骨",
+    "aliases": [
+      "绝境噬骨"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 475,
+    "equipLevel": 80,
+    "itemId": 28302,
+    "damagePhys": 100,
+    "damageMag": 50,
+    "iconId": 36500
+  },
+  {
+    "characterId": "i25561",
+    "name": "改良型影渊武士刀",
+    "fullName": "改良型影渊武士刀",
+    "fullNameChinese": "改良型影渊武士刀",
+    "aliases": [
+      "改良型影渊武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 470,
+    "equipLevel": 80,
+    "itemId": 25561,
+    "damagePhys": 99,
+    "damageMag": 50,
+    "iconId": 36488
+  },
+  {
+    "characterId": "i28284",
+    "name": "身败名裂之惧",
+    "fullName": "身败名裂之惧",
+    "fullNameChinese": "身败名裂之惧",
+    "aliases": [
+      "身败名裂之惧"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 465,
+    "equipLevel": 80,
+    "itemId": 28284,
+    "damagePhys": 99,
+    "damageMag": 50,
+    "iconId": 36499
+  },
+  {
+    "characterId": "i25481",
+    "name": "影渊武士刀",
+    "fullName": "影渊武士刀",
+    "fullNameChinese": "影渊武士刀",
+    "aliases": [
+      "影渊武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 460,
+    "equipLevel": 80,
+    "itemId": 25481,
+    "damagePhys": 98,
+    "damageMag": 49,
+    "iconId": 36488
+  },
+  {
+    "characterId": "i28394",
+    "name": "改良型行蕴",
+    "fullName": "改良型行蕴",
+    "fullNameChinese": "改良型行蕴",
+    "aliases": [
+      "改良型行蕴"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 460,
+    "equipLevel": 80,
+    "itemId": 28394,
+    "damagePhys": 88,
+    "damageMag": 44,
+    "iconId": 36486
+  },
+  {
+    "characterId": "i27609",
+    "name": "妖灵王刀",
+    "fullName": "妖灵王刀",
+    "fullNameChinese": "妖灵王刀",
+    "aliases": [
+      "妖灵王刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 450,
+    "equipLevel": 80,
+    "itemId": 27609,
+    "damagePhys": 97,
+    "damageMag": 49,
+    "iconId": 36484
+  },
+  {
+    "characterId": "i26441",
+    "name": "行蕴",
+    "fullName": "行蕴",
+    "fullNameChinese": "行蕴",
+    "aliases": [
+      "行蕴"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 450,
+    "equipLevel": 80,
+    "itemId": 26441,
+    "damagePhys": 87,
+    "damageMag": 44,
+    "iconId": 36486
+  },
+  {
+    "characterId": "i25401",
+    "name": "隆卡武士刀",
+    "fullName": "隆卡武士刀",
+    "fullNameChinese": "隆卡武士刀",
+    "aliases": [
+      "隆卡武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 440,
+    "equipLevel": 80,
+    "itemId": 25401,
+    "damagePhys": 96,
+    "damageMag": 48,
+    "iconId": 36494
+  },
+  {
+    "characterId": "i33900",
+    "name": "再陷身败名裂之惧",
+    "fullName": "再陷身败名裂之惧",
+    "fullNameChinese": "再陷身败名裂之惧",
+    "aliases": [
+      "再陷身败名裂之惧"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 430,
+    "equipLevel": 80,
+    "itemId": 33900,
+    "damagePhys": 85,
+    "damageMag": 43,
+    "iconId": 36499
+  },
+  {
+    "characterId": "i38554",
+    "name": "梦羽妖灵王刀",
+    "fullName": "梦羽妖灵王刀",
+    "fullNameChinese": "梦羽妖灵王刀",
+    "aliases": [
+      "梦羽妖灵王刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 430,
+    "equipLevel": 80,
+    "itemId": 38554,
+    "damagePhys": 85,
+    "damageMag": 43,
+    "iconId": 36484
+  },
+  {
+    "characterId": "i44989",
+    "name": "皓光武士刀",
+    "fullName": "皓光武士刀",
+    "fullNameChinese": "皓光武士刀",
+    "aliases": [
+      "皓光武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 430,
+    "equipLevel": 80,
+    "itemId": 44989,
+    "damagePhys": 85,
+    "damageMag": 43,
+    "iconId": 36514
+  },
+  {
+    "characterId": "i25231",
+    "name": "童子切安纲",
+    "fullName": "童子切安纲",
+    "fullNameChinese": "童子切安纲",
+    "aliases": [
+      "童子切安纲"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 430,
+    "equipLevel": 80,
+    "itemId": 25231,
+    "damagePhys": 95,
+    "damageMag": 48,
+    "iconId": 36485
+  },
+  {
+    "characterId": "i39562",
+    "name": "绯光武士刀",
+    "fullName": "绯光武士刀",
+    "fullNameChinese": "绯光武士刀",
+    "aliases": [
+      "绯光武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 430,
+    "equipLevel": 80,
+    "itemId": 39562,
+    "damagePhys": 85,
+    "damageMag": 43,
+    "iconId": 36504
+  },
+  {
+    "characterId": "i41613",
+    "name": "翠光武士刀",
+    "fullName": "翠光武士刀",
+    "fullNameChinese": "翠光武士刀",
+    "aliases": [
+      "翠光武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 430,
+    "equipLevel": 80,
+    "itemId": 41613,
+    "damagePhys": 85,
+    "damageMag": 43,
+    "iconId": 36512
+  },
+  {
+    "characterId": "i26361",
+    "name": "宽恕武士刀",
+    "fullName": "宽恕武士刀",
+    "fullNameChinese": "宽恕武士刀",
+    "aliases": [
+      "宽恕武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 418,
+    "equipLevel": 79,
+    "itemId": 26361,
+    "damagePhys": 94,
+    "damageMag": 47,
+    "iconId": 36490
+  },
+  {
+    "characterId": "i26281",
+    "name": "矮人银打刀",
+    "fullName": "矮人银打刀",
+    "fullNameChinese": "矮人银打刀",
+    "aliases": [
+      "矮人银打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 415,
+    "equipLevel": 78,
+    "itemId": 26281,
+    "damagePhys": 85,
+    "damageMag": 42,
+    "iconId": 36491
+  },
+  {
+    "characterId": "i26201",
+    "name": "拿巴示艾兰武士刀",
+    "fullName": "拿巴示艾兰武士刀",
+    "fullNameChinese": "拿巴示艾兰武士刀",
+    "aliases": [
+      "拿巴示艾兰武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 412,
+    "equipLevel": 77,
+    "itemId": 26201,
+    "damagePhys": 93,
+    "damageMag": 47,
+    "iconId": 36495
+  },
+  {
+    "characterId": "i26121",
+    "name": "钛铜打刀",
+    "fullName": "钛铜打刀",
+    "fullNameChinese": "钛铜打刀",
+    "aliases": [
+      "钛铜打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 409,
+    "equipLevel": 76,
+    "itemId": 26121,
+    "damagePhys": 84,
+    "damageMag": 42,
+    "iconId": 36487
+  },
+  {
+    "characterId": "i26041",
+    "name": "奇坦那守卫者武士刀",
+    "fullName": "奇坦那守卫者武士刀",
+    "fullNameChinese": "奇坦那守卫者武士刀",
+    "aliases": [
+      "奇坦那守卫者武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 406,
+    "equipLevel": 75,
+    "itemId": 26041,
+    "damagePhys": 93,
+    "damageMag": 47,
+    "iconId": 36493
+  },
+  {
+    "characterId": "i23579",
+    "name": "欧米茄武士刀",
+    "fullName": "欧米茄武士刀",
+    "fullNameChinese": "欧米茄武士刀",
+    "aliases": [
+      "欧米茄武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 405,
+    "equipLevel": 70,
+    "itemId": 23579,
+    "damagePhys": 93,
+    "damageMag": 47,
+    "iconId": 36473
+  },
+  {
+    "characterId": "i24704",
+    "name": "鸟头太刀·优雷卡",
+    "fullName": "鸟头太刀·优雷卡",
+    "fullNameChinese": "鸟头太刀·优雷卡",
+    "aliases": [
+      "鸟头太刀·优雷卡",
+      "鸟头太刀优雷卡"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 405,
+    "equipLevel": 70,
+    "itemId": 24704,
+    "damagePhys": 93,
+    "damageMag": 47,
+    "iconId": 36481
+  },
+  {
+    "characterId": "i24720",
+    "name": "鸟头太刀·改",
+    "fullName": "鸟头太刀·改",
+    "fullNameChinese": "鸟头太刀·改",
+    "aliases": [
+      "鸟头太刀·改",
+      "鸟头太刀改"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 405,
+    "equipLevel": 70,
+    "itemId": 24720,
+    "damagePhys": 93,
+    "damageMag": 47,
+    "iconId": 36481
+  },
+  {
+    "characterId": "i25961",
+    "name": "灵青打刀",
+    "fullName": "灵青打刀",
+    "fullNameChinese": "灵青打刀",
+    "aliases": [
+      "灵青打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 403,
+    "equipLevel": 74,
+    "itemId": 25961,
+    "damagePhys": 83,
+    "damageMag": 41,
+    "iconId": 36497
+  },
+  {
+    "characterId": "i25881",
+    "name": "妖灵武士刀",
+    "fullName": "妖灵武士刀",
+    "fullNameChinese": "妖灵武士刀",
+    "aliases": [
+      "妖灵武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 400,
+    "equipLevel": 73,
+    "itemId": 25881,
+    "damagePhys": 92,
+    "damageMag": 46,
+    "iconId": 36492
+  },
+  {
+    "characterId": "i23485",
+    "name": "改良型斯卡艾瓦魔导武士刀",
+    "fullName": "改良型斯卡艾瓦魔导武士刀",
+    "fullNameChinese": "改良型斯卡艾瓦魔导武士刀",
+    "aliases": [
+      "改良型斯卡艾瓦魔导武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 400,
+    "equipLevel": 70,
+    "itemId": 23485,
+    "damagePhys": 92,
+    "damageMag": 46,
+    "iconId": 36471
+  },
+  {
+    "characterId": "i24688",
+    "name": "鸟头太刀",
+    "fullName": "鸟头太刀",
+    "fullNameChinese": "鸟头太刀",
+    "aliases": [
+      "鸟头太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 400,
+    "equipLevel": 70,
+    "itemId": 24688,
+    "damagePhys": 92,
+    "damageMag": 46,
+    "iconId": 36478
+  },
+  {
+    "characterId": "i25801",
+    "name": "深金打刀",
+    "fullName": "深金打刀",
+    "fullNameChinese": "深金打刀",
+    "aliases": [
+      "深金打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 395,
+    "equipLevel": 72,
+    "itemId": 25801,
+    "damagePhys": 83,
+    "damageMag": 41,
+    "iconId": 36489
+  },
+  {
+    "characterId": "i24672",
+    "name": "丰水武士刀+1",
+    "fullName": "丰水武士刀+1",
+    "fullNameChinese": "丰水武士刀+1",
+    "aliases": [
+      "丰水武士刀+1"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 395,
+    "equipLevel": 70,
+    "itemId": 24672,
+    "damagePhys": 92,
+    "damageMag": 46,
+    "iconId": 36468
+  },
+  {
+    "characterId": "i24485",
+    "name": "青龙鳞纹刀",
+    "fullName": "青龙鳞纹刀",
+    "fullNameChinese": "青龙鳞纹刀",
+    "aliases": [
+      "青龙鳞纹刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 395,
+    "equipLevel": 70,
+    "itemId": 24485,
+    "damagePhys": 92,
+    "damageMag": 46,
+    "iconId": 36479
+  },
+  {
+    "characterId": "i25721",
+    "name": "雷克兰德武士刀",
+    "fullName": "雷克兰德武士刀",
+    "fullNameChinese": "雷克兰德武士刀",
+    "aliases": [
+      "雷克兰德武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 390,
+    "equipLevel": 71,
+    "itemId": 25721,
+    "damagePhys": 91,
+    "damageMag": 46,
+    "iconId": 36498
+  },
+  {
+    "characterId": "i24656",
+    "name": "丰水武士刀",
+    "fullName": "丰水武士刀",
+    "fullNameChinese": "丰水武士刀",
+    "aliases": [
+      "丰水武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 390,
+    "equipLevel": 70,
+    "itemId": 24656,
+    "damagePhys": 91,
+    "damageMag": 46,
+    "iconId": 36468
+  },
+  {
+    "characterId": "i24923",
+    "name": "夜摩刀",
+    "fullName": "夜摩刀",
+    "fullNameChinese": "夜摩刀",
+    "aliases": [
+      "夜摩刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 390,
+    "equipLevel": 70,
+    "itemId": 24923,
+    "damagePhys": 82,
+    "damageMag": 41,
+    "iconId": 36474
+  },
+  {
+    "characterId": "i23407",
+    "name": "斯卡艾瓦魔导武士刀",
+    "fullName": "斯卡艾瓦魔导武士刀",
+    "fullNameChinese": "斯卡艾瓦魔导武士刀",
+    "aliases": [
+      "斯卡艾瓦魔导武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 390,
+    "equipLevel": 70,
+    "itemId": 23407,
+    "damagePhys": 91,
+    "damageMag": 46,
+    "iconId": 36471
+  },
+  {
+    "characterId": "i23563",
+    "name": "朱雀直刀",
+    "fullName": "朱雀直刀",
+    "fullNameChinese": "朱雀直刀",
+    "aliases": [
+      "朱雀直刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 385,
+    "equipLevel": 70,
+    "itemId": 23563,
+    "damagePhys": 91,
+    "damageMag": 46,
+    "iconId": 36472
+  },
+  {
+    "characterId": "i24084",
+    "name": "涌火武士刀",
+    "fullName": "涌火武士刀",
+    "fullNameChinese": "涌火武士刀",
+    "aliases": [
+      "涌火武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 385,
+    "equipLevel": 70,
+    "itemId": 24084,
+    "damagePhys": 91,
+    "damageMag": 46,
+    "iconId": 36468
+  },
+  {
+    "characterId": "i25641",
+    "name": "深金武士刀",
+    "fullName": "深金武士刀",
+    "fullNameChinese": "深金武士刀",
+    "aliases": [
+      "深金武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 385,
+    "equipLevel": 70,
+    "itemId": 25641,
+    "damagePhys": 82,
+    "damageMag": 41,
+    "iconId": 36496
+  },
+  {
+    "characterId": "i24068",
+    "name": "元素武士刀+2",
+    "fullName": "元素武士刀+2",
+    "fullNameChinese": "元素武士刀+2",
+    "aliases": [
+      "元素武士刀+2"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 380,
+    "equipLevel": 70,
+    "itemId": 24068,
+    "damagePhys": 90,
+    "damageMag": 45,
+    "iconId": 36468
+  },
+  {
+    "characterId": "i23781",
+    "name": "罗刹刀",
+    "fullName": "罗刹刀",
+    "fullNameChinese": "罗刹刀",
+    "aliases": [
+      "罗刹刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 380,
+    "equipLevel": 70,
+    "itemId": 23781,
+    "damagePhys": 81,
+    "damageMag": 40,
+    "iconId": 36474
+  },
+  {
+    "characterId": "i24052",
+    "name": "元素武士刀+1",
+    "fullName": "元素武士刀+1",
+    "fullNameChinese": "元素武士刀+1",
+    "aliases": [
+      "元素武士刀+1"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 375,
+    "equipLevel": 70,
+    "itemId": 24052,
+    "damagePhys": 90,
+    "damageMag": 45,
+    "iconId": 36468
+  },
+  {
+    "characterId": "i22881",
+    "name": "天座·究极",
+    "fullName": "天座·究极",
+    "fullNameChinese": "天座·究极",
+    "aliases": [
+      "天座·究极",
+      "天座究极"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 375,
+    "equipLevel": 70,
+    "itemId": 22881,
+    "damagePhys": 90,
+    "damageMag": 45,
+    "iconId": 36470
+  },
+  {
+    "characterId": "i21506",
+    "name": "钻石刀",
+    "fullName": "钻石刀",
+    "fullNameChinese": "钻石刀",
+    "aliases": [
+      "钻石刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 375,
+    "equipLevel": 70,
+    "itemId": 21506,
+    "damagePhys": 90,
+    "damageMag": 45,
+    "iconId": 36464
+  },
+  {
+    "characterId": "i22970",
+    "name": "元素武士刀",
+    "fullName": "元素武士刀",
+    "fullNameChinese": "元素武士刀",
+    "aliases": [
+      "元素武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 4,
+    "rarityLabel": "极品",
+    "itemLevel": 370,
+    "equipLevel": 70,
+    "itemId": 22970,
+    "damagePhys": 89,
+    "damageMag": 45,
+    "iconId": 36468
+  },
+  {
+    "characterId": "i21412",
+    "name": "兼定·改",
+    "fullName": "兼定·改",
+    "fullNameChinese": "兼定·改",
+    "aliases": [
+      "兼定·改",
+      "兼定改"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 370,
+    "equipLevel": 70,
+    "itemId": 21412,
+    "damagePhys": 89,
+    "damageMag": 45,
+    "iconId": 36465
+  },
+  {
+    "characterId": "i22990",
+    "name": "天之太刀",
+    "fullName": "天之太刀",
+    "fullNameChinese": "天之太刀",
+    "aliases": [
+      "天之太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 365,
+    "equipLevel": 70,
+    "itemId": 22990,
+    "damagePhys": 89,
+    "damageMag": 45,
+    "iconId": 36467
+  },
+  {
+    "characterId": "i22865",
+    "name": "月读命直刀",
+    "fullName": "月读命直刀",
+    "fullNameChinese": "月读命直刀",
+    "aliases": [
+      "月读命直刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 365,
+    "equipLevel": 70,
+    "itemId": 22865,
+    "damagePhys": 89,
+    "damageMag": 45,
+    "iconId": 36469
+  },
+  {
+    "characterId": "i22954",
+    "name": "菊一文字·恒冰+1",
+    "fullName": "菊一文字·恒冰+1",
+    "fullNameChinese": "菊一文字·恒冰+1",
+    "aliases": [
+      "菊一文字·恒冰+1",
+      "菊一文字恒冰+1"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 365,
+    "equipLevel": 70,
+    "itemId": 22954,
+    "damagePhys": 89,
+    "damageMag": 45,
+    "iconId": 36412
+  },
+  {
+    "characterId": "i21334",
+    "name": "兼定",
+    "fullName": "兼定",
+    "fullNameChinese": "兼定",
+    "aliases": [
+      "兼定"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 360,
+    "equipLevel": 70,
+    "itemId": 21334,
+    "damagePhys": 88,
+    "damageMag": 44,
+    "iconId": 36465
+  },
+  {
+    "characterId": "i23244",
+    "name": "改良型夜钢刀",
+    "fullName": "改良型夜钢刀",
+    "fullNameChinese": "改良型夜钢刀",
+    "aliases": [
+      "改良型夜钢刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 360,
+    "equipLevel": 70,
+    "itemId": 23244,
+    "damagePhys": 79,
+    "damageMag": 40,
+    "iconId": 36463
+  },
+  {
+    "characterId": "i22938",
+    "name": "菊一文字·恒冰",
+    "fullName": "菊一文字·恒冰",
+    "fullNameChinese": "菊一文字·恒冰",
+    "aliases": [
+      "菊一文字·恒冰",
+      "菊一文字恒冰"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 360,
+    "equipLevel": 70,
+    "itemId": 22938,
+    "damagePhys": 88,
+    "damageMag": 44,
+    "iconId": 36412
+  },
+  {
+    "characterId": "i21490",
+    "name": "白虎刀",
+    "fullName": "白虎刀",
+    "fullNameChinese": "白虎刀",
+    "aliases": [
+      "白虎刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 355,
+    "equipLevel": 70,
+    "itemId": 21490,
+    "damagePhys": 88,
+    "damageMag": 44,
+    "iconId": 36466
+  },
+  {
+    "characterId": "i22003",
+    "name": "菊一文字·常风",
+    "fullName": "菊一文字·常风",
+    "fullNameChinese": "菊一文字·常风",
+    "aliases": [
+      "菊一文字·常风",
+      "菊一文字常风"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 355,
+    "equipLevel": 70,
+    "itemId": 22003,
+    "damagePhys": 88,
+    "damageMag": 44,
+    "iconId": 36412
+  },
+  {
+    "characterId": "i21708",
+    "name": "夜钢刀",
+    "fullName": "夜钢刀",
+    "fullNameChinese": "夜钢刀",
+    "aliases": [
+      "夜钢刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 350,
+    "equipLevel": 70,
+    "itemId": 21708,
+    "damagePhys": 78,
+    "damageMag": 40,
+    "iconId": 36463
+  },
+  {
+    "characterId": "i19372",
+    "name": "源氏之刀",
+    "fullName": "源氏之刀",
+    "fullNameChinese": "源氏之刀",
+    "aliases": [
+      "源氏之刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 345,
+    "equipLevel": 70,
+    "itemId": 19372,
+    "damagePhys": 87,
+    "damageMag": 44,
+    "iconId": 36420
+  },
+  {
+    "characterId": "i20972",
+    "name": "绝境龙神刀",
+    "fullName": "绝境龙神刀",
+    "fullNameChinese": "绝境龙神刀",
+    "aliases": [
+      "绝境龙神刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 345,
+    "equipLevel": 70,
+    "itemId": 20972,
+    "damagePhys": 87,
+    "damageMag": 44,
+    "iconId": 36462
+  },
+  {
+    "characterId": "i21987",
+    "name": "菊一文字+2",
+    "fullName": "菊一文字+2",
+    "fullNameChinese": "菊一文字+2",
+    "aliases": [
+      "菊一文字+2"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 345,
+    "equipLevel": 70,
+    "itemId": 21987,
+    "damagePhys": 87,
+    "damageMag": 44,
+    "iconId": 36412
+  },
+  {
+    "characterId": "i19294",
+    "name": "改良型亚拉戈失传武士刀",
+    "fullName": "改良型亚拉戈失传武士刀",
+    "fullNameChinese": "改良型亚拉戈失传武士刀",
+    "aliases": [
+      "改良型亚拉戈失传武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 340,
+    "equipLevel": 70,
+    "itemId": 19294,
+    "damagePhys": 86,
+    "damageMag": 43,
+    "iconId": 36424
+  },
+  {
+    "characterId": "i21971",
+    "name": "菊一文字+1",
+    "fullName": "菊一文字+1",
+    "fullNameChinese": "菊一文字+1",
+    "aliases": [
+      "菊一文字+1"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 340,
+    "equipLevel": 70,
+    "itemId": 21971,
+    "damagePhys": 86,
+    "damageMag": 43,
+    "iconId": 36412
+  },
+  {
+    "characterId": "i20956",
+    "name": "神龙刀",
+    "fullName": "神龙刀",
+    "fullNameChinese": "神龙刀",
+    "aliases": [
+      "神龙刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 335,
+    "equipLevel": 70,
+    "itemId": 20956,
+    "damagePhys": 86,
+    "damageMag": 43,
+    "iconId": 36461
+  },
+  {
+    "characterId": "i21955",
+    "name": "菊一文字",
+    "fullName": "菊一文字",
+    "fullNameChinese": "菊一文字",
+    "aliases": [
+      "菊一文字"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 335,
+    "equipLevel": 70,
+    "itemId": 21955,
+    "damagePhys": 86,
+    "damageMag": 43,
+    "iconId": 36412
+  },
+  {
+    "characterId": "i19216",
+    "name": "亚拉戈失传武士刀",
+    "fullName": "亚拉戈失传武士刀",
+    "fullNameChinese": "亚拉戈失传武士刀",
+    "aliases": [
+      "亚拉戈失传武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 330,
+    "equipLevel": 70,
+    "itemId": 19216,
+    "damagePhys": 85,
+    "damageMag": 43,
+    "iconId": 36424
+  },
+  {
+    "characterId": "i18982",
+    "name": "铬铁打刀",
+    "fullName": "铬铁打刀",
+    "fullNameChinese": "铬铁打刀",
+    "aliases": [
+      "铬铁打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 320,
+    "equipLevel": 70,
+    "itemId": 18982,
+    "damagePhys": 76,
+    "damageMag": 38,
+    "iconId": 36407
+  },
+  {
+    "characterId": "i19784",
+    "name": "须佐之男太刀",
+    "fullName": "须佐之男太刀",
+    "fullNameChinese": "须佐之男太刀",
+    "aliases": [
+      "须佐之男太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 320,
+    "equipLevel": 70,
+    "itemId": 19784,
+    "damagePhys": 84,
+    "damageMag": 42,
+    "iconId": 36421
+  },
+  {
+    "characterId": "i19138",
+    "name": "阿拉米格武士刀",
+    "fullName": "阿拉米格武士刀",
+    "fullNameChinese": "阿拉米格武士刀",
+    "aliases": [
+      "阿拉米格武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 310,
+    "equipLevel": 70,
+    "itemId": 19138,
+    "damagePhys": 83,
+    "damageMag": 42,
+    "iconId": 36447
+  },
+  {
+    "characterId": "i18826",
+    "name": "红莲打刀",
+    "fullName": "红莲打刀",
+    "fullNameChinese": "红莲打刀",
+    "aliases": [
+      "红莲打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 300,
+    "equipLevel": 70,
+    "itemId": 18826,
+    "damagePhys": 82,
+    "damageMag": 41,
+    "iconId": 36422
+  },
+  {
+    "characterId": "i17830",
+    "name": "旧化的菊一文字",
+    "fullName": "旧化的菊一文字",
+    "fullNameChinese": "旧化的菊一文字",
+    "aliases": [
+      "旧化的菊一文字"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 290,
+    "equipLevel": 70,
+    "itemId": 17830,
+    "damagePhys": 81,
+    "damageMag": 41,
+    "iconId": 36412
+  },
+  {
+    "characterId": "i30824",
+    "name": "月读命幽夜直刀",
+    "fullName": "月读命幽夜直刀",
+    "fullNameChinese": "月读命幽夜直刀",
+    "aliases": [
+      "月读命幽夜直刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 290,
+    "equipLevel": 70,
+    "itemId": 30824,
+    "damagePhys": 73,
+    "damageMag": 37,
+    "iconId": 36469
+  },
+  {
+    "characterId": "i30840",
+    "name": "朱焰直刀",
+    "fullName": "朱焰直刀",
+    "fullNameChinese": "朱焰直刀",
+    "aliases": [
+      "朱焰直刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 290,
+    "equipLevel": 70,
+    "itemId": 30840,
+    "damagePhys": 73,
+    "damageMag": 37,
+    "iconId": 36472
+  },
+  {
+    "characterId": "i33610",
+    "name": "白帝刀",
+    "fullName": "白帝刀",
+    "fullNameChinese": "白帝刀",
+    "aliases": [
+      "白帝刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 290,
+    "equipLevel": 70,
+    "itemId": 33610,
+    "damagePhys": 73,
+    "damageMag": 37,
+    "iconId": 36466
+  },
+  {
+    "characterId": "i30081",
+    "name": "神龙梦幻刀",
+    "fullName": "神龙梦幻刀",
+    "fullNameChinese": "神龙梦幻刀",
+    "aliases": [
+      "神龙梦幻刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 290,
+    "equipLevel": 70,
+    "itemId": 30081,
+    "damagePhys": 73,
+    "damageMag": 37,
+    "iconId": 36461
+  },
+  {
+    "characterId": "i37330",
+    "name": "豪勇太刀",
+    "fullName": "豪勇太刀",
+    "fullNameChinese": "豪勇太刀",
+    "aliases": [
+      "豪勇太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 290,
+    "equipLevel": 70,
+    "itemId": 37330,
+    "damagePhys": 73,
+    "damageMag": 37,
+    "iconId": 36421
+  },
+  {
+    "characterId": "i30856",
+    "name": "青君鳞纹刀",
+    "fullName": "青君鳞纹刀",
+    "fullNameChinese": "青君鳞纹刀",
+    "aliases": [
+      "青君鳞纹刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 290,
+    "equipLevel": 70,
+    "itemId": 30856,
+    "damagePhys": 73,
+    "damageMag": 37,
+    "iconId": 36479
+  },
+  {
+    "characterId": "i18748",
+    "name": "虎彻",
+    "fullName": "虎彻",
+    "fullNameChinese": "虎彻",
+    "aliases": [
+      "虎彻"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 288,
+    "equipLevel": 69,
+    "itemId": 18748,
+    "damagePhys": 81,
+    "damageMag": 41,
+    "iconId": 36442
+  },
+  {
+    "characterId": "i18670",
+    "name": "钼钢打刀",
+    "fullName": "钼钢打刀",
+    "fullNameChinese": "钼钢打刀",
+    "aliases": [
+      "钼钢打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 285,
+    "equipLevel": 68,
+    "itemId": 18670,
+    "damagePhys": 73,
+    "damageMag": 37,
+    "iconId": 36404
+  },
+  {
+    "characterId": "i18592",
+    "name": "大包平·真打",
+    "fullName": "大包平·真打",
+    "fullNameChinese": "大包平·真打",
+    "aliases": [
+      "大包平·真打",
+      "大包平真打"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 282,
+    "equipLevel": 67,
+    "itemId": 18592,
+    "damagePhys": 80,
+    "damageMag": 40,
+    "iconId": 36449
+  },
+  {
+    "characterId": "i20454",
+    "name": "女巫会之刀",
+    "fullName": "女巫会之刀",
+    "fullNameChinese": "女巫会之刀",
+    "aliases": [
+      "女巫会之刀"
+    ],
+    "className": "武士刀",
+    "rarity": 7,
+    "rarityLabel": "绝品",
+    "itemLevel": 280,
+    "equipLevel": 60,
+    "itemId": 20454,
+    "damagePhys": 80,
+    "damageMag": 40,
+    "iconId": 36458
+  },
+  {
+    "characterId": "i18514",
+    "name": "玉钢太刀",
+    "fullName": "玉钢太刀",
+    "fullNameChinese": "玉钢太刀",
+    "aliases": [
+      "玉钢太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 279,
+    "equipLevel": 66,
+    "itemId": 18514,
+    "damagePhys": 72,
+    "damageMag": 36,
+    "iconId": 36437
+  },
+  {
+    "characterId": "i18436",
+    "name": "清澈的天空",
+    "fullName": "清澈的天空",
+    "fullNameChinese": "清澈的天空",
+    "aliases": [
+      "清澈的天空"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 276,
+    "equipLevel": 65,
+    "itemId": 18436,
+    "damagePhys": 80,
+    "damageMag": 40,
+    "iconId": 36426
+  },
+  {
+    "characterId": "i20452",
+    "name": "亚历山大金属太刀",
+    "fullName": "亚历山大金属太刀",
+    "fullNameChinese": "亚历山大金属太刀",
+    "aliases": [
+      "亚历山大金属太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 275,
+    "equipLevel": 60,
+    "itemId": 20452,
+    "damagePhys": 80,
+    "damageMag": 40,
+    "iconId": 36452
+  },
+  {
+    "characterId": "i18358",
+    "name": "卸铁打刀",
+    "fullName": "卸铁打刀",
+    "fullNameChinese": "卸铁打刀",
+    "aliases": [
+      "卸铁打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 273,
+    "equipLevel": 64,
+    "itemId": 18358,
+    "damagePhys": 71,
+    "damageMag": 36,
+    "iconId": 36440
+  },
+  {
+    "characterId": "i18280",
+    "name": "红玉打刀",
+    "fullName": "红玉打刀",
+    "fullNameChinese": "红玉打刀",
+    "aliases": [
+      "红玉打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 270,
+    "equipLevel": 63,
+    "itemId": 18280,
+    "damagePhys": 79,
+    "damageMag": 40,
+    "iconId": 36423
+  },
+  {
+    "characterId": "i20422",
+    "name": "改良型田园刀",
+    "fullName": "改良型田园刀",
+    "fullNameChinese": "改良型田园刀",
+    "aliases": [
+      "改良型田园刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 270,
+    "equipLevel": 60,
+    "itemId": 20422,
+    "damagePhys": 79,
+    "damageMag": 40,
+    "iconId": 36409
+  },
+  {
+    "characterId": "i18202",
+    "name": "硬钢打刀",
+    "fullName": "硬钢打刀",
+    "fullNameChinese": "硬钢打刀",
+    "aliases": [
+      "硬钢打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 265,
+    "equipLevel": 62,
+    "itemId": 18202,
+    "damagePhys": 71,
+    "damageMag": 36,
+    "iconId": 36430
+  },
+  {
+    "characterId": "i20446",
+    "name": "鬼神之太刀",
+    "fullName": "鬼神之太刀",
+    "fullNameChinese": "鬼神之太刀",
+    "aliases": [
+      "鬼神之太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 265,
+    "equipLevel": 60,
+    "itemId": 20446,
+    "damagePhys": 79,
+    "damageMag": 40,
+    "iconId": 36418
+  },
+  {
+    "characterId": "i18124",
+    "name": "鬼船武士刀",
+    "fullName": "鬼船武士刀",
+    "fullNameChinese": "鬼船武士刀",
+    "aliases": [
+      "鬼船武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 260,
+    "equipLevel": 61,
+    "itemId": 18124,
+    "damagePhys": 78,
+    "damageMag": 39,
+    "iconId": 36451
+  },
+  {
+    "characterId": "i20420",
+    "name": "田园刀",
+    "fullName": "田园刀",
+    "fullNameChinese": "田园刀",
+    "aliases": [
+      "田园刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 260,
+    "equipLevel": 60,
+    "itemId": 20420,
+    "damagePhys": 78,
+    "damageMag": 39,
+    "iconId": 36409
+  },
+  {
+    "characterId": "i20444",
+    "name": "女神之刀",
+    "fullName": "女神之刀",
+    "fullNameChinese": "女神之刀",
+    "aliases": [
+      "女神之刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 255,
+    "equipLevel": 60,
+    "itemId": 20444,
+    "damagePhys": 78,
+    "damageMag": 39,
+    "iconId": 36443
+  },
+  {
+    "characterId": "i18046",
+    "name": "硬钢太刀",
+    "fullName": "硬钢太刀",
+    "fullNameChinese": "硬钢太刀",
+    "aliases": [
+      "硬钢太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 255,
+    "equipLevel": 60,
+    "itemId": 18046,
+    "damagePhys": 70,
+    "damageMag": 35,
+    "iconId": 36435
+  },
+  {
+    "characterId": "i20458",
+    "name": "闪熠太刀",
+    "fullName": "闪熠太刀",
+    "fullNameChinese": "闪熠太刀",
+    "aliases": [
+      "闪熠太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 255,
+    "equipLevel": 60,
+    "itemId": 20458,
+    "damagePhys": 78,
+    "damageMag": 39,
+    "iconId": 36446
+  },
+  {
+    "characterId": "i20450",
+    "name": "弥达斯金属太刀",
+    "fullName": "弥达斯金属太刀",
+    "fullNameChinese": "弥达斯金属太刀",
+    "aliases": [
+      "弥达斯金属太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 245,
+    "equipLevel": 60,
+    "itemId": 20450,
+    "damagePhys": 77,
+    "damageMag": 39,
+    "iconId": 36411
+  },
+  {
+    "characterId": "i20418",
+    "name": "改良型狱炎刀",
+    "fullName": "改良型狱炎刀",
+    "fullNameChinese": "改良型狱炎刀",
+    "aliases": [
+      "改良型狱炎刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 240,
+    "equipLevel": 60,
+    "itemId": 20418,
+    "damagePhys": 76,
+    "damageMag": 38,
+    "iconId": 36408
+  },
+  {
+    "characterId": "i20456",
+    "name": "角尊太刀",
+    "fullName": "角尊太刀",
+    "fullNameChinese": "角尊太刀",
+    "aliases": [
+      "角尊太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 235,
+    "equipLevel": 60,
+    "itemId": 20456,
+    "damagePhys": 76,
+    "damageMag": 38,
+    "iconId": 36431
+  },
+  {
+    "characterId": "i20442",
+    "name": "邪龙太刀",
+    "fullName": "邪龙太刀",
+    "fullNameChinese": "邪龙太刀",
+    "aliases": [
+      "邪龙太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 235,
+    "equipLevel": 60,
+    "itemId": 20442,
+    "damagePhys": 76,
+    "damageMag": 38,
+    "iconId": 36401
+  },
+  {
+    "characterId": "i20416",
+    "name": "狱炎刀",
+    "fullName": "狱炎刀",
+    "fullNameChinese": "狱炎刀",
+    "aliases": [
+      "狱炎刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 230,
+    "equipLevel": 60,
+    "itemId": 20416,
+    "damagePhys": 75,
+    "damageMag": 38,
+    "iconId": 36408
+  },
+  {
+    "characterId": "i20438",
+    "name": "魔神之太刀",
+    "fullName": "魔神之太刀",
+    "fullNameChinese": "魔神之太刀",
+    "aliases": [
+      "魔神之太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 220,
+    "equipLevel": 60,
+    "itemId": 20438,
+    "damagePhys": 74,
+    "damageMag": 37,
+    "iconId": 36453
+  },
+  {
+    "characterId": "i20448",
+    "name": "戈耳狄太刀",
+    "fullName": "戈耳狄太刀",
+    "fullNameChinese": "戈耳狄太刀",
+    "aliases": [
+      "戈耳狄太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 210,
+    "equipLevel": 60,
+    "itemId": 20448,
+    "damagePhys": 73,
+    "damageMag": 37,
+    "iconId": 36406
+  },
+  {
+    "characterId": "i20410",
+    "name": "光阴神打刀",
+    "fullName": "光阴神打刀",
+    "fullNameChinese": "光阴神打刀",
+    "aliases": [
+      "光阴神打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 205,
+    "equipLevel": 60,
+    "itemId": 20410,
+    "damagePhys": 73,
+    "damageMag": 37,
+    "iconId": 36457
+  },
+  {
+    "characterId": "i20434",
+    "name": "苍穹之太刀",
+    "fullName": "苍穹之太刀",
+    "fullNameChinese": "苍穹之太刀",
+    "aliases": [
+      "苍穹之太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 205,
+    "equipLevel": 60,
+    "itemId": 20434,
+    "damagePhys": 73,
+    "damageMag": 37,
+    "iconId": 36410
+  },
+  {
+    "characterId": "i20430",
+    "name": "武神太刀",
+    "fullName": "武神太刀",
+    "fullNameChinese": "武神太刀",
+    "aliases": [
+      "武神太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 190,
+    "equipLevel": 60,
+    "itemId": 20430,
+    "damagePhys": 71,
+    "damageMag": 36,
+    "iconId": 36416
+  },
+  {
+    "characterId": "i20432",
+    "name": "偃武太刀",
+    "fullName": "偃武太刀",
+    "fullNameChinese": "偃武太刀",
+    "aliases": [
+      "偃武太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 180,
+    "equipLevel": 60,
+    "itemId": 20432,
+    "damagePhys": 63,
+    "damageMag": 31,
+    "iconId": 36416
+  },
+  {
+    "characterId": "i20436",
+    "name": "圆桌之太刀",
+    "fullName": "圆桌之太刀",
+    "fullNameChinese": "圆桌之太刀",
+    "aliases": [
+      "圆桌之太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 180,
+    "equipLevel": 60,
+    "itemId": 20436,
+    "damagePhys": 63,
+    "damageMag": 31,
+    "iconId": 36410
+  },
+  {
+    "characterId": "i20414",
+    "name": "大包平·改",
+    "fullName": "大包平·改",
+    "fullNameChinese": "大包平·改",
+    "aliases": [
+      "大包平·改",
+      "大包平改"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 180,
+    "equipLevel": 60,
+    "itemId": 20414,
+    "damagePhys": 70,
+    "damageMag": 35,
+    "iconId": 36448
+  },
+  {
+    "characterId": "i20428",
+    "name": "无尽云神刀",
+    "fullName": "无尽云神刀",
+    "fullNameChinese": "无尽云神刀",
+    "aliases": [
+      "无尽云神刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 180,
+    "equipLevel": 60,
+    "itemId": 20428,
+    "damagePhys": 63,
+    "damageMag": 31,
+    "iconId": 36441
+  },
+  {
+    "characterId": "i25051",
+    "name": "无限鬼神之太刀",
+    "fullName": "无限鬼神之太刀",
+    "fullNameChinese": "无限鬼神之太刀",
+    "aliases": [
+      "无限鬼神之太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 180,
+    "equipLevel": 60,
+    "itemId": 25051,
+    "damagePhys": 63,
+    "damageMag": 31,
+    "iconId": 36418
+  },
+  {
+    "characterId": "i20440",
+    "name": "生命之太刀",
+    "fullName": "生命之太刀",
+    "fullNameChinese": "生命之太刀",
+    "aliases": [
+      "生命之太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 180,
+    "equipLevel": 60,
+    "itemId": 20440,
+    "damagePhys": 63,
+    "damageMag": 31,
+    "iconId": 36453
+  },
+  {
+    "characterId": "i25035",
+    "name": "神圣女神之刀",
+    "fullName": "神圣女神之刀",
+    "fullNameChinese": "神圣女神之刀",
+    "aliases": [
+      "神圣女神之刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 180,
+    "equipLevel": 60,
+    "itemId": 25035,
+    "damagePhys": 63,
+    "damageMag": 31,
+    "iconId": 36443
+  },
+  {
+    "characterId": "i24333",
+    "name": "邪龙怨影太刀",
+    "fullName": "邪龙怨影太刀",
+    "fullNameChinese": "邪龙怨影太刀",
+    "aliases": [
+      "邪龙怨影太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 180,
+    "equipLevel": 60,
+    "itemId": 24333,
+    "damagePhys": 63,
+    "damageMag": 31,
+    "iconId": 36401
+  },
+  {
+    "characterId": "i20408",
+    "name": "龙华之刀",
+    "fullName": "龙华之刀",
+    "fullNameChinese": "龙华之刀",
+    "aliases": [
+      "龙华之刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 180,
+    "equipLevel": 60,
+    "itemId": 20408,
+    "damagePhys": 70,
+    "damageMag": 35,
+    "iconId": 36419
+  },
+  {
+    "characterId": "i20426",
+    "name": "云神刀",
+    "fullName": "云神刀",
+    "fullNameChinese": "云神刀",
+    "aliases": [
+      "云神刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 175,
+    "equipLevel": 60,
+    "itemId": 20426,
+    "damagePhys": 70,
+    "damageMag": 35,
+    "iconId": 36441
+  },
+  {
+    "characterId": "i20412",
+    "name": "大包平",
+    "fullName": "大包平",
+    "fullNameChinese": "大包平",
+    "aliases": [
+      "大包平"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 170,
+    "equipLevel": 60,
+    "itemId": 20412,
+    "damagePhys": 69,
+    "damageMag": 35,
+    "iconId": 36448
+  },
+  {
+    "characterId": "i20424",
+    "name": "神光太刀",
+    "fullName": "神光太刀",
+    "fullNameChinese": "神光太刀",
+    "aliases": [
+      "神光太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 160,
+    "equipLevel": 60,
+    "itemId": 20424,
+    "damagePhys": 68,
+    "damageMag": 34,
+    "iconId": 36403
+  },
+  {
+    "characterId": "i20406",
+    "name": "景秀",
+    "fullName": "景秀",
+    "fullNameChinese": "景秀",
+    "aliases": [
+      "景秀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 148,
+    "equipLevel": 59,
+    "itemId": 20406,
+    "damagePhys": 67,
+    "damageMag": 34,
+    "iconId": 36450
+  },
+  {
+    "characterId": "i20396",
+    "name": "精金打刀",
+    "fullName": "精金打刀",
+    "fullNameChinese": "精金打刀",
+    "aliases": [
+      "精金打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 145,
+    "equipLevel": 58,
+    "itemId": 20396,
+    "damagePhys": 60,
+    "damageMag": 31,
+    "iconId": 36429
+  },
+  {
+    "characterId": "i20404",
+    "name": "战女神修士打刀",
+    "fullName": "战女神修士打刀",
+    "fullNameChinese": "战女神修士打刀",
+    "aliases": [
+      "战女神修士打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 142,
+    "equipLevel": 57,
+    "itemId": 20404,
+    "damagePhys": 66,
+    "damageMag": 33,
+    "iconId": 36438
+  },
+  {
+    "characterId": "i20394",
+    "name": "硬银太刀",
+    "fullName": "硬银太刀",
+    "fullNameChinese": "硬银太刀",
+    "aliases": [
+      "硬银太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 139,
+    "equipLevel": 56,
+    "itemId": 20394,
+    "damagePhys": 59,
+    "damageMag": 30,
+    "iconId": 36433
+  },
+  {
+    "characterId": "i20402",
+    "name": "片山一文字",
+    "fullName": "片山一文字",
+    "fullNameChinese": "片山一文字",
+    "aliases": [
+      "片山一文字"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 136,
+    "equipLevel": 55,
+    "itemId": 20402,
+    "damagePhys": 66,
+    "damageMag": 33,
+    "iconId": 36439
+  },
+  {
+    "characterId": "i20975",
+    "name": "龙神刀",
+    "fullName": "龙神刀",
+    "fullNameChinese": "龙神刀",
+    "aliases": [
+      "龙神刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 135,
+    "equipLevel": 50,
+    "itemId": 20975,
+    "damagePhys": 66,
+    "damageMag": 33,
+    "iconId": 36460
+  },
+  {
+    "characterId": "i20392",
+    "name": "硬银打刀",
+    "fullName": "硬银打刀",
+    "fullNameChinese": "硬银打刀",
+    "aliases": [
+      "硬银打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 133,
+    "equipLevel": 54,
+    "itemId": 20392,
+    "damagePhys": 58,
+    "damageMag": 30,
+    "iconId": 36428
+  },
+  {
+    "characterId": "i20400",
+    "name": "群狼丸",
+    "fullName": "群狼丸",
+    "fullNameChinese": "群狼丸",
+    "aliases": [
+      "群狼丸"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 130,
+    "equipLevel": 53,
+    "itemId": 20400,
+    "damagePhys": 65,
+    "damageMag": 33,
+    "iconId": 36425
+  },
+  {
+    "characterId": "i20386",
+    "name": "改良型加隆德魔导武士刀",
+    "fullName": "改良型加隆德魔导武士刀",
+    "fullNameChinese": "改良型加隆德魔导武士刀",
+    "aliases": [
+      "改良型加隆德魔导武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 130,
+    "equipLevel": 50,
+    "itemId": 20386,
+    "damagePhys": 65,
+    "damageMag": 33,
+    "iconId": 36454
+  },
+  {
+    "characterId": "i23957",
+    "name": "正漩尉太刀",
+    "fullName": "正漩尉太刀",
+    "fullNameChinese": "正漩尉太刀",
+    "aliases": [
+      "正漩尉太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 130,
+    "equipLevel": 50,
+    "itemId": 23957,
+    "damagePhys": 65,
+    "damageMag": 33,
+    "iconId": 36477
+  },
+  {
+    "characterId": "i23956",
+    "name": "正牙尉太刀",
+    "fullName": "正牙尉太刀",
+    "fullNameChinese": "正牙尉太刀",
+    "aliases": [
+      "正牙尉太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 130,
+    "equipLevel": 50,
+    "itemId": 23956,
+    "damagePhys": 65,
+    "damageMag": 33,
+    "iconId": 36476
+  },
+  {
+    "characterId": "i23958",
+    "name": "正耀尉武士刀",
+    "fullName": "正耀尉武士刀",
+    "fullNameChinese": "正耀尉武士刀",
+    "aliases": [
+      "正耀尉武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 130,
+    "equipLevel": 50,
+    "itemId": 23958,
+    "damagePhys": 65,
+    "damageMag": 33,
+    "iconId": 36475
+  },
+  {
+    "characterId": "i20390",
+    "name": "灵银太刀",
+    "fullName": "灵银太刀",
+    "fullNameChinese": "灵银太刀",
+    "aliases": [
+      "灵银太刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 125,
+    "equipLevel": 52,
+    "itemId": 20390,
+    "damagePhys": 58,
+    "damageMag": 30,
+    "iconId": 36432
+  },
+  {
+    "characterId": "i20398",
+    "name": "军用刀",
+    "fullName": "军用刀",
+    "fullNameChinese": "军用刀",
+    "aliases": [
+      "军用刀"
+    ],
+    "className": "武士刀",
+    "rarity": 2,
+    "rarityLabel": "稀有",
+    "itemLevel": 120,
+    "equipLevel": 51,
+    "itemId": 20398,
+    "damagePhys": 64,
+    "damageMag": 32,
+    "iconId": 36436
+  },
+  {
+    "characterId": "i20384",
+    "name": "加隆德魔导武士刀",
+    "fullName": "加隆德魔导武士刀",
+    "fullNameChinese": "加隆德魔导武士刀",
+    "aliases": [
+      "加隆德魔导武士刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 120,
+    "equipLevel": 50,
+    "itemId": 20384,
+    "damagePhys": 64,
+    "damageMag": 32,
+    "iconId": 36454
+  },
+  {
+    "characterId": "i20382",
+    "name": "冰神钻石打刀",
+    "fullName": "冰神钻石打刀",
+    "fullNameChinese": "冰神钻石打刀",
+    "aliases": [
+      "冰神钻石打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 115,
+    "equipLevel": 50,
+    "itemId": 20382,
+    "damagePhys": 64,
+    "damageMag": 32,
+    "iconId": 36415
+  },
+  {
+    "characterId": "i20388",
+    "name": "灵银打刀",
+    "fullName": "灵银打刀",
+    "fullNameChinese": "灵银打刀",
+    "aliases": [
+      "灵银打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 115,
+    "equipLevel": 50,
+    "itemId": 20388,
+    "damagePhys": 58,
+    "damageMag": 29,
+    "iconId": 36427
+  },
+  {
+    "characterId": "i20380",
+    "name": "冰神寒冰打刀",
+    "fullName": "冰神寒冰打刀",
+    "fullNameChinese": "冰神寒冰打刀",
+    "aliases": [
+      "冰神寒冰打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 110,
+    "equipLevel": 50,
+    "itemId": 20380,
+    "damagePhys": 63,
+    "damageMag": 32,
+    "iconId": 36415
+  },
+  {
+    "characterId": "i20378",
+    "name": "惊雷震霆",
+    "fullName": "惊雷震霆",
+    "fullNameChinese": "惊雷震霆",
+    "aliases": [
+      "惊雷震霆"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 110,
+    "equipLevel": 50,
+    "itemId": 20378,
+    "damagePhys": 57,
+    "damageMag": 29,
+    "iconId": 36445
+  },
+  {
+    "characterId": "i20374",
+    "name": "渊水打刀",
+    "fullName": "渊水打刀",
+    "fullNameChinese": "渊水打刀",
+    "aliases": [
+      "渊水打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 100,
+    "equipLevel": 50,
+    "itemId": 20374,
+    "damagePhys": 62,
+    "damageMag": 31,
+    "iconId": 36417
+  },
+  {
+    "characterId": "i20376",
+    "name": "雷神震霆",
+    "fullName": "雷神震霆",
+    "fullNameChinese": "雷神震霆",
+    "aliases": [
+      "雷神震霆"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 100,
+    "equipLevel": 50,
+    "itemId": 20376,
+    "damagePhys": 62,
+    "damageMag": 31,
+    "iconId": 36445
+  },
+  {
+    "characterId": "i20366",
+    "name": "厚土打刀",
+    "fullName": "厚土打刀",
+    "fullNameChinese": "厚土打刀",
+    "aliases": [
+      "厚土打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 95,
+    "equipLevel": 50,
+    "itemId": 20366,
+    "damagePhys": 56,
+    "damageMag": 28,
+    "iconId": 36405
+  },
+  {
+    "characterId": "i20362",
+    "name": "旋风神血",
+    "fullName": "旋风神血",
+    "fullNameChinese": "旋风神血",
+    "aliases": [
+      "旋风神血"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 95,
+    "equipLevel": 50,
+    "itemId": 20362,
+    "damagePhys": 56,
+    "damageMag": 28,
+    "iconId": 36444
+  },
+  {
+    "characterId": "i20372",
+    "name": "水神打刀",
+    "fullName": "水神打刀",
+    "fullNameChinese": "水神打刀",
+    "aliases": [
+      "水神打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 95,
+    "equipLevel": 50,
+    "itemId": 20372,
+    "damagePhys": 62,
+    "damageMag": 31,
+    "iconId": 36417
+  },
+  {
+    "characterId": "i20358",
+    "name": "狱火打刀",
+    "fullName": "狱火打刀",
+    "fullNameChinese": "狱火打刀",
+    "aliases": [
+      "狱火打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 95,
+    "equipLevel": 50,
+    "itemId": 20358,
+    "damagePhys": 56,
+    "damageMag": 28,
+    "iconId": 36402
+  },
+  {
+    "characterId": "i20370",
+    "name": "贤王莫古打刀",
+    "fullName": "贤王莫古打刀",
+    "fullNameChinese": "贤王莫古打刀",
+    "aliases": [
+      "贤王莫古打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 95,
+    "equipLevel": 50,
+    "itemId": 20370,
+    "damagePhys": 56,
+    "damageMag": 28,
+    "iconId": 36413
+  },
+  {
+    "characterId": "i20364",
+    "name": "土神打刀",
+    "fullName": "土神打刀",
+    "fullNameChinese": "土神打刀",
+    "aliases": [
+      "土神打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 80,
+    "equipLevel": 50,
+    "itemId": 20364,
+    "damagePhys": 60,
+    "damageMag": 30,
+    "iconId": 36405
+  },
+  {
+    "characterId": "i20368",
+    "name": "莫古莫古打刀",
+    "fullName": "莫古莫古打刀",
+    "fullNameChinese": "莫古莫古打刀",
+    "aliases": [
+      "莫古莫古打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 75,
+    "equipLevel": 50,
+    "itemId": 20368,
+    "damagePhys": 60,
+    "damageMag": 30,
+    "iconId": 36413
+  },
+  {
+    "characterId": "i20360",
+    "name": "风神血",
+    "fullName": "风神血",
+    "fullNameChinese": "风神血",
+    "aliases": [
+      "风神血"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 70,
+    "equipLevel": 50,
+    "itemId": 20360,
+    "damagePhys": 59,
+    "damageMag": 30,
+    "iconId": 36444
+  },
+  {
+    "characterId": "i20356",
+    "name": "火神打刀",
+    "fullName": "火神打刀",
+    "fullNameChinese": "火神打刀",
+    "aliases": [
+      "火神打刀"
+    ],
+    "className": "武士刀",
+    "rarity": 3,
+    "rarityLabel": "上品",
+    "itemLevel": 60,
+    "equipLevel": 50,
+    "itemId": 20356,
+    "damagePhys": 58,
+    "damageMag": 29,
+    "iconId": 36402
+  },
+  {
+    "characterId": "i20512",
+    "name": "仙人刺先生的光刀",
+    "fullName": "仙人刺先生的光刀",
+    "fullNameChinese": "仙人刺先生的光刀",
+    "aliases": [
+      "仙人刺先生的光刀"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 50,
+    "equipLevel": 50,
+    "itemId": 20512,
+    "damagePhys": 57,
+    "damageMag": 29,
+    "iconId": 36414
+  },
+  {
+    "characterId": "i30807",
+    "name": "怪刀·浮世丸",
+    "fullName": "怪刀·浮世丸",
+    "fullNameChinese": "怪刀·浮世丸",
+    "aliases": [
+      "怪刀·浮世丸",
+      "怪刀浮世丸"
+    ],
+    "className": "武士刀",
+    "rarity": 1,
+    "rarityLabel": "普通",
+    "itemLevel": 30,
+    "equipLevel": 30,
+    "itemId": 30807,
+    "damagePhys": 36,
+    "damageMag": 18,
+    "iconId": 36507
+  }
+]

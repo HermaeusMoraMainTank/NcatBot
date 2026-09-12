@@ -1,0 +1,469 @@
+{
+  "by_id": {},
+  "by_name": {
+    "青眼白龙": [
+      "蓝眼白龙",
+      "青眼",
+      "蓝眼",
+      "Blue-Eyes White Dragon",
+      "BEWD",
+      "白龙"
+    ],
+    "黑魔术师": [
+      "黑魔导",
+      "黑魔導",
+      "Dark Magician",
+      "黑麦"
+    ],
+    "黑魔术女孩": [
+      "黑魔导女孩",
+      "魔导女孩",
+      "Dark Magician Girl",
+      "DMG"
+    ],
+    "真红眼黑龙": [
+      "红眼黑龙",
+      "红眼",
+      "真红眼",
+      "Red-Eyes Black Dragon",
+      "REBD"
+    ],
+    "被封印的艾克佐迪亚": [
+      "艾克佐迪亚",
+      "Exodia",
+      "埃克佐迪亚",
+      "Exodia the Forbidden One"
+    ],
+    "欧西里斯的天空龙": [
+      "天空龙",
+      "欧西里斯",
+      "奥西里斯",
+      "Slifer the Sky Dragon"
+    ],
+    "欧贝利斯克的巨神兵": [
+      "巨神兵",
+      "欧贝利斯克",
+      "Obelisk the Tormentor",
+      "Obelisk"
+    ],
+    "太阳神的翼神龙": [
+      "翼神龙",
+      "拉神",
+      "The Winged Dragon of Ra",
+      "Ra"
+    ],
+    "青眼究极龙": [
+      "蓝眼究极龙",
+      "究极龙",
+      "Blue-Eyes Ultimate Dragon"
+    ],
+    "青眼亚白龙": [
+      "亚白龙",
+      "Blue-Eyes Alternative White Dragon"
+    ],
+    "电子龙": [
+      "电龙",
+      "Cyber Dragon"
+    ],
+    "星尘龙": [
+      "Stardust Dragon",
+      "星尘"
+    ],
+    "黑玫瑰龙": [
+      "Black Rose Dragon"
+    ],
+    "红莲魔龙": [
+      "红莲",
+      "Red Dragon Archfiend"
+    ],
+    "访问码语者": [
+      "访问码",
+      "Accesscode Talker"
+    ],
+    "防火墙龙": [
+      "Firewall Dragon"
+    ],
+    "万物创世龙": [
+      "Ten Thousand Dragon",
+      "万创"
+    ],
+    "灰流丽": [
+      "灰流",
+      "Ash Blossom & Joyous Spring",
+      "Ash",
+      "灰"
+    ],
+    "效果遮蒙者": [
+      "毛衣",
+      "Effect Veiler",
+      "遮蒙"
+    ],
+    "增殖的G": [
+      "增G",
+      "Maxx C",
+      "Maxx \"C\"",
+      "G"
+    ],
+    "浮幽樱": [
+      "浮游樱",
+      "Ghost Ogre & Snow Rabbit",
+      "幽樱"
+    ],
+    "幽鬼兔": [
+      "幽鬼",
+      "Ghost Belle & Haunted Mansion"
+    ],
+    "屋敷童": [
+      "屋敷",
+      "Droll & Lock Bird",
+      "droll"
+    ],
+    "抹杀之指名者": [
+      "指名者",
+      "Called by the Grave",
+      "墓地指名"
+    ],
+    "无限泡影": [
+      "泡影",
+      "Infinite Impermanence",
+      "imperm"
+    ],
+    "神之宣告": [
+      "神宣",
+      "Solemn Judgment"
+    ],
+    "神之通告": [
+      "通告",
+      "Solemn Strike"
+    ],
+    "强制脱出装置": [
+      "船骨",
+      "Compulsory Evacuation Device"
+    ],
+    "死者苏生": [
+      "复活",
+      "Monster Reborn"
+    ],
+    "黑洞": [
+      "Dark Hole"
+    ],
+    "融合": [
+      "Polymerization"
+    ],
+    "原始生命态尼比鲁": [
+      "尼比鲁",
+      "Nibiru",
+      "陨石"
+    ],
+    "混沌战士 －开辟的使者－": [
+      "混沌战士",
+      "开辟",
+      "Black Luster Soldier"
+    ],
+    "破坏剑士的守护者－破坏之剑士": [
+      "破坏剑士",
+      "Buster Blader"
+    ],
+    "英雄挑战者 火花人": [
+      "火花人"
+    ],
+    "元素英雄 新生侠": [
+      "新生侠",
+      "Neos"
+    ],
+    "蓝眼白龙": [
+      "青眼白龙"
+    ],
+    "青眼": [
+      "青眼白龙"
+    ],
+    "蓝眼": [
+      "青眼白龙"
+    ],
+    "Blue-Eyes White Dragon": [
+      "青眼白龙"
+    ],
+    "BEWD": [
+      "青眼白龙"
+    ],
+    "白龙": [
+      "青眼白龙"
+    ],
+    "黑魔导": [
+      "黑魔术师"
+    ],
+    "黑魔導": [
+      "黑魔术师"
+    ],
+    "Dark Magician": [
+      "黑魔术师"
+    ],
+    "黑麦": [
+      "黑魔术师"
+    ],
+    "黑魔导女孩": [
+      "黑魔术女孩"
+    ],
+    "魔导女孩": [
+      "黑魔术女孩"
+    ],
+    "Dark Magician Girl": [
+      "黑魔术女孩"
+    ],
+    "DMG": [
+      "黑魔术女孩"
+    ],
+    "红眼黑龙": [
+      "真红眼黑龙"
+    ],
+    "红眼": [
+      "真红眼黑龙"
+    ],
+    "真红眼": [
+      "真红眼黑龙"
+    ],
+    "Red-Eyes Black Dragon": [
+      "真红眼黑龙"
+    ],
+    "REBD": [
+      "真红眼黑龙"
+    ],
+    "艾克佐迪亚": [
+      "被封印的艾克佐迪亚"
+    ],
+    "Exodia": [
+      "被封印的艾克佐迪亚"
+    ],
+    "埃克佐迪亚": [
+      "被封印的艾克佐迪亚"
+    ],
+    "Exodia the Forbidden One": [
+      "被封印的艾克佐迪亚"
+    ],
+    "天空龙": [
+      "欧西里斯的天空龙"
+    ],
+    "欧西里斯": [
+      "欧西里斯的天空龙"
+    ],
+    "奥西里斯": [
+      "欧西里斯的天空龙"
+    ],
+    "Slifer the Sky Dragon": [
+      "欧西里斯的天空龙"
+    ],
+    "巨神兵": [
+      "欧贝利斯克的巨神兵"
+    ],
+    "欧贝利斯克": [
+      "欧贝利斯克的巨神兵"
+    ],
+    "Obelisk the Tormentor": [
+      "欧贝利斯克的巨神兵"
+    ],
+    "Obelisk": [
+      "欧贝利斯克的巨神兵"
+    ],
+    "翼神龙": [
+      "太阳神的翼神龙"
+    ],
+    "拉神": [
+      "太阳神的翼神龙"
+    ],
+    "The Winged Dragon of Ra": [
+      "太阳神的翼神龙"
+    ],
+    "Ra": [
+      "太阳神的翼神龙"
+    ],
+    "蓝眼究极龙": [
+      "青眼究极龙"
+    ],
+    "究极龙": [
+      "青眼究极龙"
+    ],
+    "Blue-Eyes Ultimate Dragon": [
+      "青眼究极龙"
+    ],
+    "亚白龙": [
+      "青眼亚白龙"
+    ],
+    "Blue-Eyes Alternative White Dragon": [
+      "青眼亚白龙"
+    ],
+    "电龙": [
+      "电子龙"
+    ],
+    "Cyber Dragon": [
+      "电子龙"
+    ],
+    "Stardust Dragon": [
+      "星尘龙"
+    ],
+    "星尘": [
+      "星尘龙"
+    ],
+    "Black Rose Dragon": [
+      "黑玫瑰龙"
+    ],
+    "红莲": [
+      "红莲魔龙"
+    ],
+    "Red Dragon Archfiend": [
+      "红莲魔龙"
+    ],
+    "访问码": [
+      "访问码语者"
+    ],
+    "Accesscode Talker": [
+      "访问码语者"
+    ],
+    "Firewall Dragon": [
+      "防火墙龙"
+    ],
+    "Ten Thousand Dragon": [
+      "万物创世龙"
+    ],
+    "万创": [
+      "万物创世龙"
+    ],
+    "灰流": [
+      "灰流丽"
+    ],
+    "Ash Blossom & Joyous Spring": [
+      "灰流丽"
+    ],
+    "Ash": [
+      "灰流丽"
+    ],
+    "灰": [
+      "灰流丽"
+    ],
+    "毛衣": [
+      "效果遮蒙者"
+    ],
+    "Effect Veiler": [
+      "效果遮蒙者"
+    ],
+    "遮蒙": [
+      "效果遮蒙者"
+    ],
+    "增G": [
+      "增殖的G"
+    ],
+    "Maxx C": [
+      "增殖的G"
+    ],
+    "Maxx \"C\"": [
+      "增殖的G"
+    ],
+    "G": [
+      "增殖的G"
+    ],
+    "浮游樱": [
+      "浮幽樱"
+    ],
+    "Ghost Ogre & Snow Rabbit": [
+      "浮幽樱"
+    ],
+    "幽樱": [
+      "浮幽樱"
+    ],
+    "幽鬼": [
+      "幽鬼兔"
+    ],
+    "Ghost Belle & Haunted Mansion": [
+      "幽鬼兔"
+    ],
+    "屋敷": [
+      "屋敷童"
+    ],
+    "Droll & Lock Bird": [
+      "屋敷童"
+    ],
+    "droll": [
+      "屋敷童"
+    ],
+    "指名者": [
+      "抹杀之指名者"
+    ],
+    "Called by the Grave": [
+      "抹杀之指名者"
+    ],
+    "墓地指名": [
+      "抹杀之指名者"
+    ],
+    "泡影": [
+      "无限泡影"
+    ],
+    "Infinite Impermanence": [
+      "无限泡影"
+    ],
+    "imperm": [
+      "无限泡影"
+    ],
+    "神宣": [
+      "神之宣告"
+    ],
+    "Solemn Judgment": [
+      "神之宣告"
+    ],
+    "通告": [
+      "神之通告"
+    ],
+    "Solemn Strike": [
+      "神之通告"
+    ],
+    "船骨": [
+      "强制脱出装置"
+    ],
+    "Compulsory Evacuation Device": [
+      "强制脱出装置"
+    ],
+    "复活": [
+      "死者苏生"
+    ],
+    "Monster Reborn": [
+      "死者苏生"
+    ],
+    "Dark Hole": [
+      "黑洞"
+    ],
+    "Polymerization": [
+      "融合"
+    ],
+    "尼比鲁": [
+      "原始生命态尼比鲁"
+    ],
+    "Nibiru": [
+      "原始生命态尼比鲁"
+    ],
+    "陨石": [
+      "原始生命态尼比鲁"
+    ],
+    "混沌战士": [
+      "混沌战士 －开辟的使者－"
+    ],
+    "开辟": [
+      "混沌战士 －开辟的使者－"
+    ],
+    "Black Luster Soldier": [
+      "混沌战士 －开辟的使者－"
+    ],
+    "破坏剑士": [
+      "破坏剑士的守护者－破坏之剑士"
+    ],
+    "Buster Blader": [
+      "破坏剑士的守护者－破坏之剑士"
+    ],
+    "火花人": [
+      "英雄挑战者 火花人"
+    ],
+    "新生侠": [
+      "元素英雄 新生侠"
+    ],
+    "Neos": [
+      "元素英雄 新生侠"
+    ]
+  }
+}

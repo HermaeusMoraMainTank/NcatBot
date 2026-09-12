@@ -1,0 +1,2407 @@
+[
+  {
+    "characterId": "lor_Alloc",
+    "name": "阿洛科",
+    "fullName": "Alloc",
+    "fullNameChinese": "阿洛科",
+    "aliases": [
+      "阿洛科",
+      "Alloc"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "AllocFullBody.png"
+  },
+  {
+    "characterId": "lor_Alpha",
+    "name": "阿尔法",
+    "fullName": "Alpha",
+    "fullNameChinese": "阿尔法",
+    "aliases": [
+      "阿尔法",
+      "Alpha"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "AlphaFullBody.png"
+  },
+  {
+    "characterId": "lor_Angela",
+    "name": "安吉拉",
+    "fullName": "Angela",
+    "fullNameChinese": "安吉拉",
+    "aliases": [
+      "Angela",
+      "安吉拉",
+      "앤젤라"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "AngelaFullBody.png"
+  },
+  {
+    "characterId": "lor_Anton",
+    "name": "安东",
+    "fullName": "Anton",
+    "fullNameChinese": "安东",
+    "aliases": [
+      "安东",
+      "Anton"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "AntonFullBody.png"
+  },
+  {
+    "characterId": "lor_Argalia",
+    "name": "阿尔加利亚",
+    "fullName": "Argalia",
+    "fullNameChinese": "阿尔加利亚",
+    "aliases": [
+      "阿尔加利亚",
+      "Argalia",
+      "아르갈리아"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "ArgaliaFullBody.png"
+  },
+  {
+    "characterId": "lor_Arnold",
+    "name": "阿诺德",
+    "fullName": "Arnold",
+    "fullNameChinese": "阿诺德",
+    "aliases": [
+      "阿诺德",
+      "錒鍩鍀",
+      "Arnold",
+      "아놀드"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "ArnoldFullBody.png"
+  },
+  {
+    "characterId": "lor_Bada",
+    "name": "巴达",
+    "fullName": "Bada",
+    "fullNameChinese": "巴达",
+    "aliases": [
+      "巴达",
+      "Bada",
+      "바다"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "BadaFullBody.png"
+  },
+  {
+    "characterId": "lor_Baral",
+    "name": "巴拉尔",
+    "fullName": "Baral",
+    "fullNameChinese": "巴拉尔",
+    "aliases": [
+      "巴拉尔",
+      "Baral"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "BaralFullBody.png"
+  },
+  {
+    "characterId": "lor_Beta",
+    "name": "贝塔",
+    "fullName": "Beta",
+    "fullNameChinese": "贝塔",
+    "aliases": [
+      "贝塔",
+      "Beta"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "BetaFullBody.png"
+  },
+  {
+    "characterId": "lor_Binah",
+    "name": "Binah",
+    "fullName": "Binah",
+    "fullNameChinese": "Binah",
+    "aliases": [
+      "Binah",
+      "锁妈",
+      "비나"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "BinahFullBody.png"
+  },
+  {
+    "characterId": "lor_Bono",
+    "name": "波诺",
+    "fullName": "Bono",
+    "fullNameChinese": "波诺",
+    "aliases": [
+      "波诺",
+      "Bono"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "BonoFullBody.png"
+  },
+  {
+    "characterId": "lor_Boris",
+    "name": "鲍里斯",
+    "fullName": "Boris",
+    "fullNameChinese": "鲍里斯",
+    "aliases": [
+      "鲍里斯",
+      "Boris",
+      "보리스"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "BorisFullBody.png"
+  },
+  {
+    "characterId": "lor_Bremen",
+    "name": "不来梅",
+    "fullName": "Bremen",
+    "fullNameChinese": "不来梅",
+    "aliases": [
+      "不来梅",
+      "Bremen"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "BremenFullBody.png"
+  },
+  {
+    "characterId": "lor_Carmen",
+    "name": "卡门",
+    "fullName": "Carmen",
+    "fullNameChinese": "卡门",
+    "aliases": [
+      "卡门",
+      "Carmen",
+      "카르멘"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "CarmenFullBody.png"
+  },
+  {
+    "characterId": "lor_Cecil",
+    "name": "塞希尔",
+    "fullName": "Cecil",
+    "fullNameChinese": "塞希尔",
+    "aliases": [
+      "塞希尔",
+      "Cecil"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "CecilFullBody.png"
+  },
+  {
+    "characterId": "lor_Chesed",
+    "name": "Chesed",
+    "fullName": "Chesed",
+    "fullNameChinese": "Chesed",
+    "aliases": [
+      "Chesed",
+      "헤세드"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "ChesedFullBody.png"
+  },
+  {
+    "characterId": "lor_Chun",
+    "name": "椿",
+    "fullName": "Chun",
+    "fullNameChinese": "椿",
+    "aliases": [
+      "椿",
+      "Chun"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "ChunFullBody.png"
+  },
+  {
+    "characterId": "lor_Consta",
+    "name": "康斯塔",
+    "fullName": "Consta",
+    "fullNameChinese": "康斯塔",
+    "aliases": [
+      "康斯塔",
+      "鏮鍶錔",
+      "Consta",
+      "콘스타"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "ConstaFullBody.png"
+  },
+  {
+    "characterId": "lor_Dalloc",
+    "name": "达罗克",
+    "fullName": "Dalloc",
+    "fullNameChinese": "达罗克",
+    "aliases": [
+      "达罗克",
+      "Dalloc"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "DallocFullBody.png"
+  },
+  {
+    "characterId": "lor_Denis",
+    "name": "丹尼斯",
+    "fullName": "Denis",
+    "fullNameChinese": "丹尼斯",
+    "aliases": [
+      "丹尼斯",
+      "Denis",
+      "데니스"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "DenisFullBody.png"
+  },
+  {
+    "characterId": "lor_Dino",
+    "name": "迪诺",
+    "fullName": "Dino",
+    "fullNameChinese": "迪诺",
+    "aliases": [
+      "迪诺",
+      "Dino"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "DinoFullBody.png"
+  },
+  {
+    "characterId": "lor_Eileen",
+    "name": "艾琳",
+    "fullName": "Eileen",
+    "fullNameChinese": "艾琳",
+    "aliases": [
+      "艾琳",
+      "Eileen",
+      "아일린"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "Eileen1GearFullBody.png"
+  },
+  {
+    "characterId": "lor_Elena",
+    "name": "伊莲娜",
+    "fullName": "Elena",
+    "fullNameChinese": "伊莲娜",
+    "aliases": [
+      "伊莲娜",
+      "Elena",
+      "엘레나"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "ElenaFullBody.png"
+  },
+  {
+    "characterId": "lor_Emma",
+    "name": "艾玛",
+    "fullName": "Emma",
+    "fullNameChinese": "艾玛",
+    "aliases": [
+      "艾玛",
+      "Emma",
+      "에마"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "EmmaFullBody.png"
+  },
+  {
+    "characterId": "lor_Eri",
+    "name": "艾莉",
+    "fullName": "Eri",
+    "fullNameChinese": "艾莉",
+    "aliases": [
+      "艾莉",
+      "Eri",
+      "에리"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "EriFullBody.png"
+  },
+  {
+    "characterId": "lor_Esther",
+    "name": "以斯帖",
+    "fullName": "Esther",
+    "fullNameChinese": "以斯帖",
+    "aliases": [
+      "以斯帖",
+      "Esther",
+      "에스더"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "EstherFullBody.png"
+  },
+  {
+    "characterId": "lor_Finn",
+    "name": "芬恩",
+    "fullName": "Finn",
+    "fullNameChinese": "芬恩",
+    "aliases": [
+      "芬恩",
+      "Finn",
+      "핀"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "FinnFullBody.png"
+  },
+  {
+    "characterId": "lor_Gamma",
+    "name": "伽马",
+    "fullName": "Gamma",
+    "fullNameChinese": "伽马",
+    "aliases": [
+      "伽马",
+      "Gamma"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "GammaFullBody.png"
+  },
+  {
+    "characterId": "lor_Gebura",
+    "name": "Gebura",
+    "fullName": "Gebura",
+    "fullNameChinese": "Gebura",
+    "aliases": [
+      "Gebura",
+      "红姐",
+      "게부라"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "GeburaFullBody.png"
+  },
+  {
+    "characterId": "lor_Gin",
+    "name": "銀",
+    "fullName": "Gin",
+    "fullNameChinese": "銀",
+    "aliases": [
+      "銀",
+      "Gin"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "GinFullBody.png"
+  },
+  {
+    "characterId": "lor_Gloria",
+    "name": "格洛丽亚",
+    "fullName": "Gloria",
+    "fullNameChinese": "格洛丽亚",
+    "aliases": [
+      "格洛丽亚",
+      "Gloria",
+      "글로리아"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "GloriaFullBody.png"
+  },
+  {
+    "characterId": "lor_Greta",
+    "name": "格蕾塔",
+    "fullName": "Greta",
+    "fullNameChinese": "格蕾塔",
+    "aliases": [
+      "格蕾塔",
+      "Greta"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "GretaFullBody.png"
+  },
+  {
+    "characterId": "lor_Gyeong_mi",
+    "name": "景美",
+    "fullName": "Gyeong-mi",
+    "fullNameChinese": "景美",
+    "aliases": [
+      "景美",
+      "Gyeong-mi"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "Gyeong-miFullBody.png"
+  },
+  {
+    "characterId": "lor_Harold",
+    "name": "哈罗德",
+    "fullName": "Harold",
+    "fullNameChinese": "哈罗德",
+    "aliases": [
+      "哈罗德",
+      "Harold",
+      "해롤드"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "HaroldFullBody.png"
+  },
+  {
+    "characterId": "lor_Hod",
+    "name": "Hod",
+    "fullName": "Hod",
+    "fullNameChinese": "Hod",
+    "aliases": [
+      "Hod",
+      "호드"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "HodFullBody.png"
+  },
+  {
+    "characterId": "lor_Hokma",
+    "name": "Hokma",
+    "fullName": "Hokma",
+    "fullNameChinese": "Hokma",
+    "aliases": [
+      "Hokma",
+      "호크마"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "HokmaFullBody.png"
+  },
+  {
+    "characterId": "lor_Hubert",
+    "name": "休伯特",
+    "fullName": "Hubert",
+    "fullNameChinese": "休伯特",
+    "aliases": [
+      "休伯特",
+      "Hubert",
+      "휴버트"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "HubertFullBody.png"
+  },
+  {
+    "characterId": "lor_Iori",
+    "name": "伊織",
+    "fullName": "Iori",
+    "fullNameChinese": "伊織",
+    "aliases": [
+      "伊織",
+      "Iori"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "IoriFullBody.png"
+  },
+  {
+    "characterId": "lor_Isadora",
+    "name": "伊莎多拉",
+    "fullName": "Isadora",
+    "fullNameChinese": "伊莎多拉",
+    "aliases": [
+      "伊莎多拉",
+      "Isadora"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "IsadoraFullBody.png"
+  },
+  {
+    "characterId": "lor_Jack",
+    "name": "杰克",
+    "fullName": "Jack",
+    "fullNameChinese": "杰克",
+    "aliases": [
+      "杰克",
+      "Jack"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "JackFullBody.png"
+  },
+  {
+    "characterId": "lor_Jae_heon",
+    "name": "在宪",
+    "fullName": "Jae-heon",
+    "fullNameChinese": "在宪",
+    "aliases": [
+      "在宪",
+      "Jae-heon",
+      "재헌"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "Jae-heonFullBody.png"
+  },
+  {
+    "characterId": "lor_Jin",
+    "name": "津",
+    "fullName": "Jin",
+    "fullNameChinese": "津",
+    "aliases": [
+      "津",
+      "Jin",
+      "진"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "JinFullBody.png"
+  },
+  {
+    "characterId": "lor_Julia",
+    "name": "茱莉亚",
+    "fullName": "Julia",
+    "fullNameChinese": "茱莉亚",
+    "aliases": [
+      "茱莉亚",
+      "Julia"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "JuliaFullBody.png"
+  },
+  {
+    "characterId": "lor_Kali",
+    "name": "卡莉",
+    "fullName": "Kali",
+    "fullNameChinese": "卡莉",
+    "aliases": [
+      "卡莉",
+      "Kali",
+      "칼리"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "KaliFullBody.png"
+  },
+  {
+    "characterId": "lor_Kalo",
+    "name": "卡洛",
+    "fullName": "Kalo",
+    "fullNameChinese": "卡洛",
+    "aliases": [
+      "卡洛",
+      "Kalo",
+      "칼로"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "KaloFullBody.png"
+  },
+  {
+    "characterId": "lor_Katriel",
+    "name": "卡特丽尔",
+    "fullName": "Katriel",
+    "fullNameChinese": "卡特丽尔",
+    "aliases": [
+      "卡特丽尔",
+      "Katriel",
+      "카트리엘"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "KatrielFullBody.png"
+  },
+  {
+    "characterId": "lor_Lenny",
+    "name": "莱尼",
+    "fullName": "Lenny",
+    "fullNameChinese": "莱尼",
+    "aliases": [
+      "莱尼",
+      "Lenny",
+      "레니"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "LennyFullBody.png"
+  },
+  {
+    "characterId": "lor_Lesti",
+    "name": "莱斯蒂",
+    "fullName": "Lesti",
+    "fullNameChinese": "莱斯蒂",
+    "aliases": [
+      "莱斯蒂",
+      "Lesti",
+      "레스티"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "LestiFullBody.png"
+  },
+  {
+    "characterId": "lor_Liwei",
+    "name": "李伟",
+    "fullName": "Liwei",
+    "fullNameChinese": "李伟",
+    "aliases": [
+      "李伟",
+      "Liwei",
+      "리웨이"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "LiweiFullBody.png"
+  },
+  {
+    "characterId": "lor_Lowell",
+    "name": "罗威尔",
+    "fullName": "Lowell",
+    "fullNameChinese": "罗威尔",
+    "aliases": [
+      "罗威尔",
+      "Lowell",
+      "로웰"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "LowellFullBody.png"
+  },
+  {
+    "characterId": "lor_Luda",
+    "name": "鲁妲",
+    "fullName": "Luda",
+    "fullNameChinese": "鲁妲",
+    "aliases": [
+      "鲁妲",
+      "Luda"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "LudaFullBody.png"
+  },
+  {
+    "characterId": "lor_Lulu",
+    "name": "璐璐",
+    "fullName": "Lulu",
+    "fullNameChinese": "璐璐",
+    "aliases": [
+      "璐璐",
+      "Lulu"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "LuluFullBody.png"
+  },
+  {
+    "characterId": "lor_Lyla",
+    "name": "莱拉",
+    "fullName": "Lyla",
+    "fullNameChinese": "莱拉",
+    "aliases": [
+      "莱拉",
+      "Lyla"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "LylaFullBody.png"
+  },
+  {
+    "characterId": "lor_Malkuth",
+    "name": "Malkuth",
+    "fullName": "Malkuth",
+    "fullNameChinese": "Malkuth",
+    "aliases": [
+      "Malkuth",
+      "马库库",
+      "말쿠트"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "MalkuthFullBody.png"
+  },
+  {
+    "characterId": "lor_Mang_chi",
+    "name": "锤哥",
+    "fullName": "Mang-chi",
+    "fullNameChinese": "锤哥",
+    "aliases": [
+      "锤哥",
+      "Mang-chi",
+      "망치"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "Mang-chiFullBody.png"
+  },
+  {
+    "characterId": "lor_Mars",
+    "name": "马斯",
+    "fullName": "Mars",
+    "fullNameChinese": "马斯",
+    "aliases": [
+      "马斯",
+      "Mars"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "MarsFullBody.png"
+  },
+  {
+    "characterId": "lor_Martina",
+    "name": "玛蒂娜",
+    "fullName": "Martina",
+    "fullNameChinese": "玛蒂娜",
+    "aliases": [
+      "玛蒂娜",
+      "Martina",
+      "마르티나"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "MartinaFullBody.png"
+  },
+  {
+    "characterId": "lor_Maxim",
+    "name": "马克西姆",
+    "fullName": "Maxim",
+    "fullNameChinese": "马克西姆",
+    "aliases": [
+      "马克西姆",
+      "Maxim"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "MaximFullBody.png"
+  },
+  {
+    "characterId": "lor_McCullin",
+    "name": "麦奎林",
+    "fullName": "McCullin",
+    "fullNameChinese": "麦奎林",
+    "aliases": [
+      "麦奎林",
+      "McCullin"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "McCullinFullBody.png"
+  },
+  {
+    "characterId": "lor_Mei",
+    "name": "梅",
+    "fullName": "Mei",
+    "fullNameChinese": "梅",
+    "aliases": [
+      "梅",
+      "Mei"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "MeiFullBody.png"
+  },
+  {
+    "characterId": "lor_Meow",
+    "name": "喵呜",
+    "fullName": "Meow",
+    "fullNameChinese": "喵呜",
+    "aliases": [
+      "喵呜",
+      "Meow"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "MeowFullBody.png"
+  },
+  {
+    "characterId": "lor_Merry",
+    "name": "玛丽",
+    "fullName": "Merry",
+    "fullNameChinese": "玛丽",
+    "aliases": [
+      "玛丽",
+      "Merry"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "MerryFullBody.png"
+  },
+  {
+    "characterId": "lor_Mi",
+    "name": "美",
+    "fullName": "Mi",
+    "fullNameChinese": "美",
+    "aliases": [
+      "美",
+      "Mi",
+      "미"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "MiFullBody.png"
+  },
+  {
+    "characterId": "lor_Mika",
+    "name": "美香",
+    "fullName": "Mika",
+    "fullNameChinese": "美香",
+    "aliases": [
+      "美香",
+      "Mika"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "MikaFullBody.png"
+  },
+  {
+    "characterId": "lor_Mirinae",
+    "name": "美里奈",
+    "fullName": "Mirinae",
+    "fullNameChinese": "美里奈",
+    "aliases": [
+      "美里奈",
+      "Mirinae",
+      "미리내"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "MirinaeFullBody.png"
+  },
+  {
+    "characterId": "lor_Miris",
+    "name": "米里斯",
+    "fullName": "Miris",
+    "fullNameChinese": "米里斯",
+    "aliases": [
+      "米里斯",
+      "Miris"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "MirisFullBody.png"
+  },
+  {
+    "characterId": "lor_Mo",
+    "name": "莫",
+    "fullName": "Mo",
+    "fullNameChinese": "莫",
+    "aliases": [
+      "莫",
+      "鏌",
+      "Mo",
+      "모"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "MoFullBody.png"
+  },
+  {
+    "characterId": "lor_Moirai",
+    "name": "莫伊莱",
+    "fullName": "Moirai",
+    "fullNameChinese": "莫伊莱",
+    "aliases": [
+      "莫伊莱",
+      "Moirai",
+      "모이라이"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "MoiraiFullBody.png"
+  },
+  {
+    "characterId": "lor_MuMu",
+    "name": "姆姆",
+    "fullName": "MuMu",
+    "fullNameChinese": "姆姆",
+    "aliases": [
+      "姆姆",
+      "MuMu"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "MuMuFullBody.png"
+  },
+  {
+    "characterId": "lor_Myo",
+    "name": "缪",
+    "fullName": "Myo",
+    "fullNameChinese": "缪",
+    "aliases": [
+      "缪",
+      "Myo",
+      "묘"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "MyoFullBody.png"
+  },
+  {
+    "characterId": "lor_Naimon",
+    "name": "奈蒙",
+    "fullName": "Naimon",
+    "fullNameChinese": "奈蒙",
+    "aliases": [
+      "奈蒙",
+      "Naimon"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "NaimonFullBody.png"
+  },
+  {
+    "characterId": "lor_Naoki",
+    "name": "直树",
+    "fullName": "Naoki",
+    "fullNameChinese": "直树",
+    "aliases": [
+      "直树",
+      "Naoki"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "NaokiFullBody.png"
+  },
+  {
+    "characterId": "lor_Nemo",
+    "name": "尼莫",
+    "fullName": "Nemo",
+    "fullNameChinese": "尼莫",
+    "aliases": [
+      "尼莫",
+      "Nemo",
+      "네모"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "NemoFullBody.png"
+  },
+  {
+    "characterId": "lor_Netzach",
+    "name": "Netzach",
+    "fullName": "Netzach",
+    "fullNameChinese": "Netzach",
+    "aliases": [
+      "Netzach",
+      "네짜흐"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "NetzachFullBody.png"
+  },
+  {
+    "characterId": "lor_Nikolai",
+    "name": "尼可莱",
+    "fullName": "Nikolai",
+    "fullNameChinese": "尼可莱",
+    "aliases": [
+      "尼可莱",
+      "Nikolai",
+      "니콜라이"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "NikolaiFullBody.png"
+  },
+  {
+    "characterId": "lor_Nimble_Puppet",
+    "name": "灵活傀儡",
+    "fullName": "Nimble Puppet",
+    "fullNameChinese": "灵活傀儡",
+    "aliases": [
+      "灵活傀儡",
+      "Nimble Puppet",
+      "NimblePuppet"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "NimblePuppetFullBody.png"
+  },
+  {
+    "characterId": "lor_Noah",
+    "name": "诺亚",
+    "fullName": "Noah",
+    "fullNameChinese": "诺亚",
+    "aliases": [
+      "诺亚",
+      "Noah",
+      "노아"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "NoahFullBody.png"
+  },
+  {
+    "characterId": "lor_Ogier",
+    "name": "奥吉耶",
+    "fullName": "Ogier",
+    "fullNameChinese": "奥吉耶",
+    "aliases": [
+      "奥吉耶",
+      "Ogier"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "OgierFullBody.png"
+  },
+  {
+    "characterId": "lor_Oink",
+    "name": "奥因克",
+    "fullName": "Oink",
+    "fullNameChinese": "奥因克",
+    "aliases": [
+      "奥因克",
+      "Oink"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "OinkFullBody.png"
+  },
+  {
+    "characterId": "lor_Olga",
+    "name": "奥尔佳",
+    "fullName": "Olga",
+    "fullNameChinese": "奥尔佳",
+    "aliases": [
+      "奥尔佳",
+      "Olga"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "OlgaFullBody.png"
+  },
+  {
+    "characterId": "lor_Olivier",
+    "name": "奥利维耶",
+    "fullName": "Olivier",
+    "fullNameChinese": "奥利维耶",
+    "aliases": [
+      "奥利维耶",
+      "Olivier",
+      "올리비에"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "OlivierFullBody.png"
+  },
+  {
+    "characterId": "lor_Oscar",
+    "name": "奥斯卡",
+    "fullName": "Oscar",
+    "fullNameChinese": "奥斯卡",
+    "aliases": [
+      "奥斯卡",
+      "Oscar",
+      "오스카"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "OscarFullBody.png"
+  },
+  {
+    "characterId": "lor_Oswald",
+    "name": "奥斯瓦尔德",
+    "fullName": "Oswald",
+    "fullNameChinese": "奥斯瓦尔德",
+    "aliases": [
+      "奥斯瓦尔德",
+      "Oswald"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "OswaldFullBody.png"
+  },
+  {
+    "characterId": "lor_Pamela",
+    "name": "帕梅菈",
+    "fullName": "Pamela",
+    "fullNameChinese": "帕梅菈",
+    "aliases": [
+      "帕梅菈",
+      "Pamela"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "PamelaFullBody.png"
+  },
+  {
+    "characterId": "lor_Pameli",
+    "name": "帕梅莉",
+    "fullName": "Pameli",
+    "fullNameChinese": "帕梅莉",
+    "aliases": [
+      "帕梅莉",
+      "Pameli"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "PameliFullBody.png"
+  },
+  {
+    "characterId": "lor_Pete",
+    "name": "皮特",
+    "fullName": "Pete",
+    "fullNameChinese": "皮特",
+    "aliases": [
+      "皮特",
+      "Pete",
+      "피트"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "PeteFullBody.png"
+  },
+  {
+    "characterId": "lor_Philip",
+    "name": "菲利普",
+    "fullName": "Philip",
+    "fullNameChinese": "菲利普",
+    "aliases": [
+      "菲利普",
+      "Philip",
+      "필립"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "PhilipFullBody.png"
+  },
+  {
+    "characterId": "lor_Pierre",
+    "name": "皮埃尔",
+    "fullName": "Pierre",
+    "fullNameChinese": "皮埃尔",
+    "aliases": [
+      "皮埃尔",
+      "Pierre"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "PierreFullBody.png"
+  },
+  {
+    "characterId": "lor_Pluto",
+    "name": "普鲁托",
+    "fullName": "Pluto",
+    "fullNameChinese": "普鲁托",
+    "aliases": [
+      "普鲁托",
+      "Pluto"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "PlutoFullBody.png"
+  },
+  {
+    "characterId": "lor_Puppet",
+    "name": "傀儡",
+    "fullName": "Puppet",
+    "fullNameChinese": "傀儡",
+    "aliases": [
+      "傀儡",
+      "Puppet"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "PuppetFullBody.png"
+  },
+  {
+    "characterId": "lor_Rain",
+    "name": "雷恩",
+    "fullName": "Rain",
+    "fullNameChinese": "雷恩",
+    "aliases": [
+      "雷恩",
+      "Rain"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "RainFullBody.png"
+  },
+  {
+    "characterId": "lor_Renaud",
+    "name": "雷诺",
+    "fullName": "Renaud",
+    "fullNameChinese": "雷诺",
+    "aliases": [
+      "雷诺",
+      "Renaud"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "RenaudFullBody.png"
+  },
+  {
+    "characterId": "lor_Roland",
+    "name": "罗兰",
+    "fullName": "Roland",
+    "fullNameChinese": "罗兰",
+    "aliases": [
+      "Roland",
+      "罗兰",
+      "롤랑"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "RolandFullBody.png"
+  },
+  {
+    "characterId": "lor_Rose",
+    "name": "萝丝",
+    "fullName": "Rose",
+    "fullNameChinese": "萝丝",
+    "aliases": [
+      "萝丝",
+      "Rose",
+      "로즈"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "RoseFullBody.png"
+  },
+  {
+    "characterId": "lor_Rudolph",
+    "name": "鲁道夫",
+    "fullName": "Rudolph",
+    "fullNameChinese": "鲁道夫",
+    "aliases": [
+      "鲁道夫",
+      "Rudolph"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "RudolphFullBody.png"
+  },
+  {
+    "characterId": "lor_Salvador",
+    "name": "萨尔瓦多",
+    "fullName": "Salvador",
+    "fullNameChinese": "萨尔瓦多",
+    "aliases": [
+      "萨尔瓦多",
+      "Salvador",
+      "살바도르"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "SalvadorFullBody.png"
+  },
+  {
+    "characterId": "lor_San",
+    "name": "衫",
+    "fullName": "San",
+    "fullNameChinese": "衫",
+    "aliases": [
+      "衫",
+      "San"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "SanFullBody.png"
+  },
+  {
+    "characterId": "lor_Sayo",
+    "name": "紗世",
+    "fullName": "Sayo",
+    "fullNameChinese": "紗世",
+    "aliases": [
+      "紗世",
+      "Sayo"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "SayoFullBody.png"
+  },
+  {
+    "characterId": "lor_Sen",
+    "name": "森",
+    "fullName": "Sen",
+    "fullNameChinese": "森",
+    "aliases": [
+      "森",
+      "Sen",
+      "센"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "SenFullBody.png"
+  },
+  {
+    "characterId": "lor_Stephan",
+    "name": "史蒂芬",
+    "fullName": "Stephan",
+    "fullNameChinese": "史蒂芬",
+    "aliases": [
+      "史蒂芬",
+      "Stephan",
+      "스테판"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "StephanFullBody.png"
+  },
+  {
+    "characterId": "lor_Taein",
+    "name": "泰仁",
+    "fullName": "Taein",
+    "fullNameChinese": "泰仁",
+    "aliases": [
+      "泰仁",
+      "Taein"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "TaeinFullBody.png"
+  },
+  {
+    "characterId": "lor_Tamaki",
+    "name": "玉树",
+    "fullName": "Tamaki",
+    "fullNameChinese": "玉树",
+    "aliases": [
+      "玉树",
+      "Tamaki",
+      "타마키"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "TamakiFullBody.png"
+  },
+  {
+    "characterId": "lor_Tanya",
+    "name": "塔尼娅",
+    "fullName": "Tanya",
+    "fullNameChinese": "塔尼娅",
+    "aliases": [
+      "塔尼娅",
+      "Tanya",
+      "타냐"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "TanyaFullBody.png"
+  },
+  {
+    "characterId": "lor_Tenma",
+    "name": "天満",
+    "fullName": "Tenma",
+    "fullNameChinese": "天満",
+    "aliases": [
+      "天満",
+      "Tenma"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "TenmaFullBody.png"
+  },
+  {
+    "characterId": "lor_Tiphereth",
+    "name": "Tiphereth",
+    "fullName": "Tiphereth",
+    "fullNameChinese": "Tiphereth",
+    "aliases": [
+      "Tiphereth",
+      "티페리트"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "TipherethFullBody.png"
+  },
+  {
+    "characterId": "lor_Tomerry",
+    "name": "汤吗丽",
+    "fullName": "Tomerry",
+    "fullNameChinese": "汤吗丽",
+    "aliases": [
+      "汤吗丽",
+      "Tomerry",
+      "토머리"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "TomerryFullBody.png"
+  },
+  {
+    "characterId": "lor_Tommy",
+    "name": "汤咪",
+    "fullName": "Tommy",
+    "fullNameChinese": "汤咪",
+    "aliases": [
+      "汤咪",
+      "Tommy"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "TommyFullBody.png"
+  },
+  {
+    "characterId": "lor_Valentin",
+    "name": "瓦伦汀",
+    "fullName": "Valentin",
+    "fullNameChinese": "瓦伦汀",
+    "aliases": [
+      "瓦伦汀",
+      "Valentin"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "ValentinFullBody.png"
+  },
+  {
+    "characterId": "lor_Valerie",
+    "name": "瓦列里",
+    "fullName": "Valerie",
+    "fullNameChinese": "瓦列里",
+    "aliases": [
+      "瓦列里",
+      "Valerie"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "ValerieFullBody.png"
+  },
+  {
+    "characterId": "lor_Walter",
+    "name": "沃尔特",
+    "fullName": "Walter",
+    "fullNameChinese": "沃尔特",
+    "aliases": [
+      "沃尔特",
+      "Walter"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "WalterFullBody.png"
+  },
+  {
+    "characterId": "lor_Wang",
+    "name": "王",
+    "fullName": "Wang",
+    "fullNameChinese": "王",
+    "aliases": [
+      "王",
+      "Wang",
+      "왕"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "WangFullBody.png"
+  },
+  {
+    "characterId": "lor_Xiao",
+    "name": "邵",
+    "fullName": "Xiao",
+    "fullNameChinese": "邵",
+    "aliases": [
+      "邵",
+      "Xiao",
+      "샤오"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "XiaoFullBody.png"
+  },
+  {
+    "characterId": "lor_Yan",
+    "name": "阳",
+    "fullName": "Yan",
+    "fullNameChinese": "阳",
+    "aliases": [
+      "阳",
+      "Yan",
+      "얀 비스모크"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "YanFullBody.png"
+  },
+  {
+    "characterId": "lor_Yesod",
+    "name": "Yesod",
+    "fullName": "Yesod",
+    "fullNameChinese": "Yesod",
+    "aliases": [
+      "Yesod",
+      "예소드"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "YesodFullBody.png"
+  },
+  {
+    "characterId": "lor_Yujin",
+    "name": "柳真",
+    "fullName": "Yujin",
+    "fullNameChinese": "柳真",
+    "aliases": [
+      "柳真",
+      "Yujin",
+      "유진"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "YujinFullBody.png"
+  },
+  {
+    "characterId": "lor_Yun",
+    "name": "潤",
+    "fullName": "Yun",
+    "fullNameChinese": "潤",
+    "aliases": [
+      "潤",
+      "Yun",
+      "윤"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "YunFullBody.png"
+  },
+  {
+    "characterId": "lor_Yuna",
+    "name": "尤娜",
+    "fullName": "Yuna",
+    "fullNameChinese": "尤娜",
+    "aliases": [
+      "尤娜",
+      "Yuna",
+      "유나"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "YunaFullBody.png"
+  },
+  {
+    "characterId": "lor_Zena",
+    "name": "珍娜",
+    "fullName": "Zena",
+    "fullNameChinese": "珍娜",
+    "aliases": [
+      "珍娜",
+      "Zena"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "ZenaFullBody.png"
+  },
+  {
+    "characterId": "lor_Zulu",
+    "name": "祖鲁",
+    "fullName": "Zulu",
+    "fullNameChinese": "祖鲁",
+    "aliases": [
+      "祖鲁",
+      "Zulu",
+      "줄루"
+    ],
+    "className": "Characters",
+    "kind": "character",
+    "portraitFile": "ZuluFullBody.png"
+  },
+  {
+    "characterId": "lor_abno_Bloodbath",
+    "name": "血浴缸",
+    "fullName": "割腕",
+    "fullNameChinese": "血浴缸",
+    "aliases": [
+      "血浴缸",
+      "割腕",
+      "Bloodbath",
+      "Wrist Cutter"
+    ],
+    "className": "Floor Realization (总类层)",
+    "kind": "abno_realization",
+    "portraitFile": "Wrist Cutter Realization Sprite.png",
+    "floor": "总类层",
+    "egoName": "割腕"
+  },
+  {
+    "characterId": "lor_abno_Heart_of_Aspiration",
+    "name": "渴望之心",
+    "fullName": "热望",
+    "fullNameChinese": "渴望之心",
+    "aliases": [
+      "渴望之心",
+      "热望",
+      "Heart of Aspiration",
+      "Aspiration"
+    ],
+    "className": "Floor Realization (总类层)",
+    "kind": "abno_realization",
+    "portraitFile": "Aspiration Realization Sprite.png",
+    "floor": "总类层",
+    "egoName": "热望"
+  },
+  {
+    "characterId": "lor_abno_Pinocchio",
+    "name": "匹诺曹",
+    "fullName": "提线木偶",
+    "fullNameChinese": "匹诺曹",
+    "aliases": [
+      "匹诺曹",
+      "提线木偶",
+      "Pinocchio",
+      "Marionette"
+    ],
+    "className": "Floor Realization (总类层)",
+    "kind": "abno_realization",
+    "portraitFile": "Marionette Realization Sprite.png",
+    "floor": "总类层",
+    "egoName": "提线木偶"
+  },
+  {
+    "characterId": "lor_abno_The_Snow_Queen",
+    "name": "冰雪女皇",
+    "fullName": "霜雕",
+    "fullNameChinese": "冰雪女皇",
+    "aliases": [
+      "冰雪女皇",
+      "霜雕",
+      "The Snow Queen",
+      "Frost Splinter"
+    ],
+    "className": "Floor Realization (总类层)",
+    "kind": "abno_realization",
+    "portraitFile": "Frost Splinter Realization Sprite.png",
+    "floor": "总类层",
+    "egoName": "霜雕"
+  },
+  {
+    "characterId": "lor_abno_Silent_Girl",
+    "name": "噤默处子",
+    "fullName": "罪恶感",
+    "fullNameChinese": "噤默处子",
+    "aliases": [
+      "噤默处子",
+      "罪恶感",
+      "Silent Girl",
+      "Remorse"
+    ],
+    "className": "Floor Realization (总类层)",
+    "kind": "abno_realization",
+    "portraitFile": "Remorse Realization Sprite.png",
+    "floor": "总类层",
+    "egoName": "罪恶感"
+  },
+  {
+    "characterId": "lor_abno_Scorched_Girl",
+    "name": "焦化少女",
+    "fullName": "终末之光",
+    "fullNameChinese": "焦化少女",
+    "aliases": [
+      "焦化少女",
+      "终末之光",
+      "Scorched Girl",
+      "Fourth Match Flame"
+    ],
+    "className": "Floor Realization (历史层)",
+    "kind": "abno_realization",
+    "portraitFile": "Fourth Match Flame Realization Sprite.png",
+    "floor": "历史层",
+    "egoName": "终末之光"
+  },
+  {
+    "characterId": "lor_abno_Happy_Teddy_Bear",
+    "name": "快乐泰迪",
+    "fullName": "忘却",
+    "fullNameChinese": "快乐泰迪",
+    "aliases": [
+      "快乐泰迪",
+      "忘却",
+      "Happy Teddy Bear",
+      "The Forgotten"
+    ],
+    "className": "Floor Realization (历史层)",
+    "kind": "abno_realization",
+    "portraitFile": "The Forgotten Realization Sprite.png",
+    "floor": "历史层",
+    "egoName": "忘却"
+  },
+  {
+    "characterId": "lor_abno_Fairy_Festival",
+    "name": "精灵盛宴",
+    "fullName": "翅振",
+    "fullNameChinese": "精灵盛宴",
+    "aliases": [
+      "精灵盛宴",
+      "翅振",
+      "Fairy Festival",
+      "Wingbeat"
+    ],
+    "className": "Floor Realization (历史层)",
+    "kind": "abno_realization",
+    "portraitFile": "Wingbeat Realization Sprite.png",
+    "floor": "历史层",
+    "egoName": "翅振"
+  },
+  {
+    "characterId": "lor_abno_Queen_Bee",
+    "name": "蜂后",
+    "fullName": "黄蜂",
+    "fullNameChinese": "蜂后",
+    "aliases": [
+      "蜂后",
+      "黄蜂",
+      "Queen Bee",
+      "Hornet"
+    ],
+    "className": "Floor Realization (历史层)",
+    "kind": "abno_realization",
+    "portraitFile": "Hornet Realization Sprite.png",
+    "floor": "历史层",
+    "egoName": "黄蜂"
+  },
+  {
+    "characterId": "lor_abno_Snow_White_s_Apple",
+    "name": "白雪公主的苹果",
+    "fullName": "翠枝",
+    "fullNameChinese": "白雪公主的苹果",
+    "aliases": [
+      "白雪公主的苹果",
+      "翠枝",
+      "Snow White's Apple",
+      "Green Stem",
+      "白雪公主苹果"
+    ],
+    "className": "Floor Realization (历史层)",
+    "kind": "abno_realization",
+    "portraitFile": "Green Stem Realization Sprite.png",
+    "floor": "历史层",
+    "egoName": "翠枝"
+  },
+  {
+    "characterId": "lor_abno_Forsaken_Murderer",
+    "name": "被遗弃的杀人魔",
+    "fullName": "悔恨",
+    "fullNameChinese": "被遗弃的杀人魔",
+    "aliases": [
+      "被遗弃的杀人魔",
+      "悔恨",
+      "Forsaken Murderer",
+      "Regret",
+      "被遗弃杀人魔"
+    ],
+    "className": "Floor Realization (科技层)",
+    "kind": "abno_realization",
+    "portraitFile": "Regret Realization Sprite.png",
+    "floor": "科技层",
+    "egoName": "悔恨"
+  },
+  {
+    "characterId": "lor_abno_All_Around_Helper",
+    "name": "小帮手",
+    "fullName": "研削机Mk5-2",
+    "fullNameChinese": "小帮手",
+    "aliases": [
+      "小帮手",
+      "研削机Mk5-2",
+      "All-Around Helper",
+      "Grinder Mk. 5-2",
+      "研削机",
+      "研削机Mk4",
+      "Grinder"
+    ],
+    "className": "Floor Realization (科技层)",
+    "kind": "abno_realization",
+    "portraitFile": "Grinder Mk. 5-2 Realization Sprite.png",
+    "floor": "科技层",
+    "egoName": "研削机Mk5-2"
+  },
+  {
+    "characterId": "lor_abno_Singing_Machine",
+    "name": "歌唱机",
+    "fullName": "和弦",
+    "fullNameChinese": "歌唱机",
+    "aliases": [
+      "歌唱机",
+      "和弦",
+      "Singing Machine",
+      "Harmony"
+    ],
+    "className": "Floor Realization (科技层)",
+    "kind": "abno_realization",
+    "portraitFile": "Harmony Realization Sprite.png",
+    "floor": "科技层",
+    "egoName": "和弦"
+  },
+  {
+    "characterId": "lor_abno_Funeral_of_the_Dead_Butterflies",
+    "name": "亡蝶葬仪",
+    "fullName": "庄严哀悼",
+    "fullNameChinese": "亡蝶葬仪",
+    "aliases": [
+      "亡蝶葬仪",
+      "庄严哀悼",
+      "Funeral of the Dead Butterflies",
+      "Solemn Lament"
+    ],
+    "className": "Floor Realization (科技层)",
+    "kind": "abno_realization",
+    "portraitFile": "Solemn Lament Realization Sprite.png",
+    "floor": "科技层",
+    "egoName": "庄严哀悼"
+  },
+  {
+    "characterId": "lor_abno_Der_Freisch_tz",
+    "name": "魔弹射手",
+    "fullName": "魔弹",
+    "fullNameChinese": "魔弹射手",
+    "aliases": [
+      "魔弹射手",
+      "魔弹",
+      "Der Freischütz",
+      "Magic Bullet"
+    ],
+    "className": "Floor Realization (科技层)",
+    "kind": "abno_realization",
+    "portraitFile": "Magic Bullet Realization Sprite.png",
+    "floor": "科技层",
+    "egoName": "魔弹"
+  },
+  {
+    "characterId": "lor_abno_Today_s_Shy_Look",
+    "name": "今天也很害羞",
+    "fullName": "此刻的神情",
+    "fullNameChinese": "今天也很害羞",
+    "aliases": [
+      "今天也很害羞",
+      "此刻的神情",
+      "Today's Shy Look",
+      "Today's Expression"
+    ],
+    "className": "Floor Realization (文学层)",
+    "kind": "abno_realization",
+    "portraitFile": "Today's Expression Realization Sprite.png",
+    "floor": "文学层",
+    "egoName": "此刻的神情"
+  },
+  {
+    "characterId": "lor_abno_The_Red_Shoes",
+    "name": "红舞鞋",
+    "fullName": "血欲",
+    "fullNameChinese": "红舞鞋",
+    "aliases": [
+      "红舞鞋",
+      "血欲",
+      "The Red Shoes",
+      "Sanguine Desire"
+    ],
+    "className": "Floor Realization (文学层)",
+    "kind": "abno_realization",
+    "portraitFile": "Sanguine Desire Realization Sprite.png",
+    "floor": "文学层",
+    "egoName": "血欲"
+  },
+  {
+    "characterId": "lor_abno_Spider_Bud",
+    "name": "蜘蛛巢",
+    "fullName": "赤瞳",
+    "fullNameChinese": "蜘蛛巢",
+    "aliases": [
+      "蜘蛛巢",
+      "赤瞳",
+      "Spider Bud",
+      "Red Eyes"
+    ],
+    "className": "Floor Realization (文学层)",
+    "kind": "abno_realization",
+    "portraitFile": "Red Eyes Realization Sprite.png",
+    "floor": "文学层",
+    "egoName": "赤瞳"
+  },
+  {
+    "characterId": "lor_abno_Laetitia",
+    "name": "蕾蒂希娅",
+    "fullName": "Laetitia",
+    "fullNameChinese": "蕾蒂希娅",
+    "aliases": [
+      "蕾蒂希娅",
+      "Laetitia",
+      "蕾提希娅"
+    ],
+    "className": "Floor Realization (文学层)",
+    "kind": "abno_realization",
+    "portraitFile": "Laetitia Realization Sprite.png",
+    "floor": "文学层",
+    "egoName": "Laetitia"
+  },
+  {
+    "characterId": "lor_abno_Dream_of_a_Black_Swan",
+    "name": "黑天鹅之梦",
+    "fullName": "黑天鹅",
+    "fullNameChinese": "黑天鹅之梦",
+    "aliases": [
+      "黑天鹅之梦",
+      "黑天鹅",
+      "Dream of a Black Swan",
+      "Black Swan"
+    ],
+    "className": "Floor Realization (文学层)",
+    "kind": "abno_realization",
+    "portraitFile": "Black Swan Realization Sprite.png",
+    "floor": "文学层",
+    "egoName": "黑天鹅"
+  },
+  {
+    "characterId": "lor_abno_Fragment_of_the_Universe",
+    "name": "宇宙碎片",
+    "fullName": "彼方的碎片",
+    "fullNameChinese": "宇宙碎片",
+    "aliases": [
+      "宇宙碎片",
+      "彼方的碎片",
+      "Fragment of the Universe",
+      "Fragments from Somewhere"
+    ],
+    "className": "Floor Realization (艺术层)",
+    "kind": "abno_realization",
+    "portraitFile": "Fragments from Somewhere Realization Sprite.png",
+    "floor": "艺术层",
+    "egoName": "彼方的碎片"
+  },
+  {
+    "characterId": "lor_abno_Child_of_the_Galaxy",
+    "name": "银河之子",
+    "fullName": "我们的小小银河",
+    "fullNameChinese": "银河之子",
+    "aliases": [
+      "银河之子",
+      "我们的小小银河",
+      "Child of the Galaxy",
+      "Our Galaxy"
+    ],
+    "className": "Floor Realization (艺术层)",
+    "kind": "abno_realization",
+    "portraitFile": "Our Galaxy Realization Sprite.png",
+    "floor": "艺术层",
+    "egoName": "我们的小小银河"
+  },
+  {
+    "characterId": "lor_abno_Porccubus",
+    "name": "棘刺公交",
+    "fullName": "欢愉",
+    "fullNameChinese": "棘刺公交",
+    "aliases": [
+      "棘刺公交",
+      "欢愉",
+      "Porccubus",
+      "Pleasure"
+    ],
+    "className": "Floor Realization (艺术层)",
+    "kind": "abno_realization",
+    "portraitFile": "Pleasure Realization Sprite.png",
+    "floor": "艺术层",
+    "egoName": "欢愉"
+  },
+  {
+    "characterId": "lor_abno_Alriune",
+    "name": "爱娜温",
+    "fullName": "余香",
+    "fullNameChinese": "爱娜温",
+    "aliases": [
+      "爱娜温",
+      "余香",
+      "Alriune",
+      "Faint Aroma"
+    ],
+    "className": "Floor Realization (艺术层)",
+    "kind": "abno_realization",
+    "portraitFile": "Faint Aroma Realization Sprite.png",
+    "floor": "艺术层",
+    "egoName": "余香"
+  },
+  {
+    "characterId": "lor_abno_The_Silent_Orchestra",
+    "name": "沉默乐团",
+    "fullName": "Da Capo",
+    "fullNameChinese": "沉默乐团",
+    "aliases": [
+      "沉默乐团",
+      "Da Capo",
+      "The Silent Orchestra"
+    ],
+    "className": "Floor Realization (艺术层)",
+    "kind": "abno_realization",
+    "portraitFile": "Da Capo Realization Sprite.png",
+    "floor": "艺术层",
+    "egoName": "Da Capo"
+  },
+  {
+    "characterId": "lor_abno_The_Queen_of_Hatred",
+    "name": "憎恶皇后",
+    "fullName": "以爱与憎之名",
+    "fullNameChinese": "憎恶皇后",
+    "aliases": [
+      "憎恶皇后",
+      "以爱与憎之名",
+      "The Queen of Hatred",
+      "In the Name of Love and Hate"
+    ],
+    "className": "Floor Realization (自然层)",
+    "kind": "abno_realization",
+    "portraitFile": "In the Name of Love and Hate Realization Sprite.png",
+    "floor": "自然层",
+    "egoName": "以爱与憎之名"
+  },
+  {
+    "characterId": "lor_abno_The_Knight_of_Despair",
+    "name": "绝望骑士",
+    "fullName": "泪锋之剑",
+    "fullNameChinese": "绝望骑士",
+    "aliases": [
+      "绝望骑士",
+      "泪锋之剑",
+      "The Knight of Despair",
+      "The Sword Sharpened with Tears"
+    ],
+    "className": "Floor Realization (自然层)",
+    "kind": "abno_realization",
+    "portraitFile": "The Sword Sharpened by Tears Realization Sprite.png",
+    "floor": "自然层",
+    "egoName": "泪锋之剑"
+  },
+  {
+    "characterId": "lor_abno_The_King_of_Greed",
+    "name": "贪婪国王",
+    "fullName": "闪金冲锋",
+    "fullNameChinese": "贪婪国王",
+    "aliases": [
+      "贪婪国王",
+      "闪金冲锋",
+      "The King of Greed",
+      "Gold Rush"
+    ],
+    "className": "Floor Realization (自然层)",
+    "kind": "abno_realization",
+    "portraitFile": "Gold Rush Realization Sprite.png",
+    "floor": "自然层",
+    "egoName": "闪金冲锋"
+  },
+  {
+    "characterId": "lor_abno_The_Servant_of_Wrath",
+    "name": "愤怒侍从",
+    "fullName": "盲眼怒火",
+    "fullNameChinese": "愤怒侍从",
+    "aliases": [
+      "愤怒侍从",
+      "盲眼怒火",
+      "The Servant of Wrath",
+      "Blind Wrath"
+    ],
+    "className": "Floor Realization (自然层)",
+    "kind": "abno_realization",
+    "portraitFile": "Blind Wrath Realization Sprite.png",
+    "floor": "自然层",
+    "egoName": "盲眼怒火"
+  },
+  {
+    "characterId": "lor_abno_The_Jester_of_Nihil",
+    "name": "虚无弄臣",
+    "fullName": "虚无缥缈",
+    "fullNameChinese": "虚无弄臣",
+    "aliases": [
+      "虚无弄臣",
+      "虚无缥缈",
+      "The Jester of Nihil",
+      "Nihil"
+    ],
+    "className": "Floor Realization (自然层)",
+    "kind": "abno_realization",
+    "portraitFile": "Nihil Realization Sprite.png",
+    "floor": "自然层",
+    "egoName": "虚无缥缈"
+  },
+  {
+    "characterId": "lor_abno_Little_Red_Riding_Hooded_Mercenary",
+    "name": "小红帽雇佣兵",
+    "fullName": "猩红创痕",
+    "fullNameChinese": "小红帽雇佣兵",
+    "aliases": [
+      "小红帽雇佣兵",
+      "猩红创痕",
+      "Little Red Riding Hooded Mercenary",
+      "Crimson Scar"
+    ],
+    "className": "Floor Realization (语言层)",
+    "kind": "abno_realization",
+    "portraitFile": "Crimson Scar Realization Sprite.png",
+    "floor": "语言层",
+    "egoName": "猩红创痕"
+  },
+  {
+    "characterId": "lor_abno_Big_and_Will_be_Bad_Wolf",
+    "name": "大坏狼",
+    "fullName": "郁蓝创痕",
+    "fullNameChinese": "大坏狼",
+    "aliases": [
+      "大坏狼",
+      "郁蓝创痕",
+      "Big and Will be Bad Wolf",
+      "Cobalt Scar"
+    ],
+    "className": "Floor Realization (语言层)",
+    "kind": "abno_realization",
+    "portraitFile": "Cobalt Scar Realization Sprite.png",
+    "floor": "语言层",
+    "egoName": "郁蓝创痕"
+  },
+  {
+    "characterId": "lor_abno_Mountain_of_Smiling_Bodies",
+    "name": "微笑的尸山",
+    "fullName": "笑靥",
+    "fullNameChinese": "微笑的尸山",
+    "aliases": [
+      "微笑的尸山",
+      "笑靥",
+      "Mountain of Smiling Bodies",
+      "Smile",
+      "微笑尸山"
+    ],
+    "className": "Floor Realization (语言层)",
+    "kind": "abno_realization",
+    "portraitFile": "Smile Realization Sprite.png",
+    "floor": "语言层",
+    "egoName": "笑靥"
+  },
+  {
+    "characterId": "lor_abno_Nosferatu",
+    "name": "诺斯费拉图",
+    "fullName": "渴血症",
+    "fullNameChinese": "诺斯费拉图",
+    "aliases": [
+      "诺斯费拉图",
+      "渴血症",
+      "Nosferatu",
+      "Dipsia"
+    ],
+    "className": "Floor Realization (语言层)",
+    "kind": "abno_realization",
+    "portraitFile": "Dipsia Realization Sprite.png",
+    "floor": "语言层",
+    "egoName": "渴血症"
+  },
+  {
+    "characterId": "lor_abno_Nothing_There",
+    "name": "一无所有",
+    "fullName": "拟态",
+    "fullNameChinese": "一无所有",
+    "aliases": [
+      "一无所有",
+      "拟态",
+      "Nothing There",
+      "Mimicry",
+      "拟态最终"
+    ],
+    "className": "Floor Realization (语言层)",
+    "kind": "abno_realization",
+    "portraitFile": "Mimicry Final Realization Sprite.png",
+    "floor": "语言层",
+    "egoName": "拟态"
+  },
+  {
+    "characterId": "lor_abno_Scarecrow_Searching_for_Wisdom",
+    "name": "求知的稻草人",
+    "fullName": "丰收",
+    "fullNameChinese": "求知的稻草人",
+    "aliases": [
+      "求知的稻草人",
+      "丰收",
+      "Scarecrow Searching for Wisdom",
+      "Harvest",
+      "求知稻草人"
+    ],
+    "className": "Floor Realization (社会层)",
+    "kind": "abno_realization",
+    "portraitFile": "Harvest Realization Sprite.png",
+    "floor": "社会层",
+    "egoName": "丰收"
+  },
+  {
+    "characterId": "lor_abno_Warm_hearted_Woodsman",
+    "name": "热心的樵夫",
+    "fullName": "滥伐",
+    "fullNameChinese": "热心的樵夫",
+    "aliases": [
+      "热心的樵夫",
+      "滥伐",
+      "Warm-hearted Woodsman",
+      "Lumber",
+      "热心樵夫"
+    ],
+    "className": "Floor Realization (社会层)",
+    "kind": "abno_realization",
+    "portraitFile": "Lumber Realization Sprite.png",
+    "floor": "社会层",
+    "egoName": "滥伐"
+  },
+  {
+    "characterId": "lor_abno_The_Road_Home",
+    "name": "归家的路途与胆小的猫咪",
+    "fullName": "归巢本能",
+    "fullNameChinese": "归家的路途与胆小的猫咪",
+    "aliases": [
+      "归家的路途与胆小的猫咪",
+      "归巢本能",
+      "The Road Home",
+      "Homing Instinct",
+      "归家路途与胆小猫咪",
+      "归家的路途",
+      "胆小的猫咪",
+      "Scaredy Cat"
+    ],
+    "className": "Floor Realization (社会层)",
+    "kind": "abno_realization",
+    "portraitFile": "Roland HomingInstinct.png",
+    "floor": "社会层",
+    "egoName": "归巢本能"
+  },
+  {
+    "characterId": "lor_abno_Ozma",
+    "name": "奥兹玛",
+    "fullName": "褪色记忆",
+    "fullNameChinese": "奥兹玛",
+    "aliases": [
+      "奥兹玛",
+      "褪色记忆",
+      "Ozma",
+      "Faded Memories"
+    ],
+    "className": "Floor Realization (社会层)",
+    "kind": "abno_realization",
+    "portraitFile": "Faded Memories Realization Sprite.png",
+    "floor": "社会层",
+    "egoName": "褪色记忆"
+  },
+  {
+    "characterId": "lor_abno_The_Adult_who_Tells_Lies",
+    "name": "说谎的大人",
+    "fullName": "虚伪王座",
+    "fullNameChinese": "说谎的大人",
+    "aliases": [
+      "说谎的大人",
+      "虚伪王座",
+      "The Adult who Tells Lies",
+      "False Throne",
+      "说谎大人"
+    ],
+    "className": "Floor Realization (社会层)",
+    "kind": "abno_realization",
+    "portraitFile": "False Throne Realization Sprite.png",
+    "floor": "社会层",
+    "egoName": "虚伪王座"
+  },
+  {
+    "characterId": "lor_abno_Big_Bird",
+    "name": "大鸟",
+    "fullName": "目灯",
+    "fullNameChinese": "大鸟",
+    "aliases": [
+      "大鸟",
+      "目灯",
+      "Big Bird",
+      "Lamp"
+    ],
+    "className": "Floor Realization (哲学层)",
+    "kind": "abno_realization",
+    "portraitFile": "Lamp Realization Sprite.png",
+    "floor": "哲学层",
+    "egoName": "目灯"
+  },
+  {
+    "characterId": "lor_abno_Punishing_Bird",
+    "name": "惩戒鸟",
+    "fullName": "尖喙",
+    "fullNameChinese": "惩戒鸟",
+    "aliases": [
+      "惩戒鸟",
+      "尖喙",
+      "Punishing Bird",
+      "Beak"
+    ],
+    "className": "Floor Realization (哲学层)",
+    "kind": "abno_realization",
+    "portraitFile": "Beak Realization Sprite.png",
+    "floor": "哲学层",
+    "egoName": "尖喙"
+  },
+  {
+    "characterId": "lor_abno_Judgement_Bird",
+    "name": "审判鸟",
+    "fullName": "正义裁决",
+    "fullNameChinese": "审判鸟",
+    "aliases": [
+      "审判鸟",
+      "正义裁决",
+      "Judgement Bird",
+      "Justitia"
+    ],
+    "className": "Floor Realization (哲学层)",
+    "kind": "abno_realization",
+    "portraitFile": "Justicia Realization Sprite.png",
+    "floor": "哲学层",
+    "egoName": "正义裁决"
+  },
+  {
+    "characterId": "lor_abno_Apocalypse_Bird",
+    "name": "终末鸟",
+    "fullName": "薄暝",
+    "fullNameChinese": "终末鸟",
+    "aliases": [
+      "终末鸟",
+      "薄暝",
+      "Apocalypse Bird",
+      "Twilight"
+    ],
+    "className": "Floor Realization (哲学层)",
+    "kind": "abno_realization",
+    "portraitFile": "Twilight Realization Sprite.png",
+    "floor": "哲学层",
+    "egoName": "薄暝"
+  },
+  {
+    "characterId": "lor_abno_Plague_Doctor",
+    "name": "渗透天堂",
+    "fullName": "先知",
+    "fullNameChinese": "渗透天堂",
+    "aliases": [
+      "渗透天堂",
+      "先知",
+      "Plague Doctor",
+      "Prophet",
+      "Heaven"
+    ],
+    "className": "Floor Realization (宗教层)",
+    "kind": "abno_realization",
+    "portraitFile": "Prophet Realization Sprite V1.png",
+    "floor": "宗教层",
+    "egoName": "先知"
+  },
+  {
+    "characterId": "lor_abno_WhiteNight",
+    "name": "白夜",
+    "fullName": "失乐园",
+    "fullNameChinese": "白夜",
+    "aliases": [
+      "白夜",
+      "失乐园",
+      "WhiteNight",
+      "Paradise Lost",
+      "White Night"
+    ],
+    "className": "Floor Realization (宗教层)",
+    "kind": "abno_realization",
+    "portraitFile": "Paradise Lost Realization Sprite.png",
+    "floor": "宗教层",
+    "egoName": "失乐园"
+  }
+]

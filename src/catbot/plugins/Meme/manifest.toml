@@ -1,0 +1,9 @@
+name = "Meme"
+version = "1.0.0"
+main = "Meme.py"
+entry_class = "Meme"
+
+[pip_dependencies]
+requests = "*"
+
+[dependencies]

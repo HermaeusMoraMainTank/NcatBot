@@ -1,0 +1,6 @@
+name = "RussianRoulette"
+version = "1.0.0"
+main = "RussianRoulette.py"
+entry_class = "RussianRoulette"
+
+[dependencies]

@@ -1,0 +1,13 @@
+{
+  "case_sensitive": true,
+  "default_role": null,
+  "roles": {},
+  "users": {},
+  "role_users": {},
+  "role_inheritance": {},
+  "permissions": {
+    "groupsign": {
+      "manage": {}
+    }
+  }
+}

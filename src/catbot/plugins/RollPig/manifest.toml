@@ -1,0 +1,9 @@
+name = "RollPig"
+version = "1.0.0"
+main = "RollPig.py"
+entry_class = "RollPig"
+
+[pip_dependencies]
+Pillow = "*"
+
+[dependencies]

@@ -1,0 +1,561 @@
+[
+  {
+    "characterId": "Aalto",
+    "name": "秋水",
+    "fullName": "Aalto",
+    "fullNameChinese": "秋水",
+    "aliases": [
+      "Aalto",
+      "秋水"
+    ]
+  },
+  {
+    "characterId": "Aemeath",
+    "name": "爱弥斯",
+    "fullName": "Aemeath",
+    "fullNameChinese": "爱弥斯",
+    "aliases": [
+      "Aemeath",
+      "爱弥斯"
+    ]
+  },
+  {
+    "characterId": "Augusta",
+    "name": "奥古斯塔",
+    "fullName": "Augusta",
+    "fullNameChinese": "奥古斯塔",
+    "aliases": [
+      "Augusta",
+      "奥古斯塔"
+    ]
+  },
+  {
+    "characterId": "Baizhi",
+    "name": "Baizhi",
+    "fullName": "Baizhi",
+    "fullNameChinese": "Baizhi",
+    "aliases": [
+      "Baizhi"
+    ]
+  },
+  {
+    "characterId": "Brant",
+    "name": "布兰特",
+    "fullName": "Brant",
+    "fullNameChinese": "布兰特",
+    "aliases": [
+      "Brant",
+      "布兰特"
+    ]
+  },
+  {
+    "characterId": "Buling",
+    "name": "卜灵",
+    "fullName": "Buling",
+    "fullNameChinese": "卜灵",
+    "aliases": [
+      "Buling",
+      "卜灵"
+    ]
+  },
+  {
+    "characterId": "Calcharo",
+    "name": "卡卡罗",
+    "fullName": "Calcharo",
+    "fullNameChinese": "卡卡罗",
+    "aliases": [
+      "Calcharo",
+      "卡卡罗"
+    ]
+  },
+  {
+    "characterId": "Camellya",
+    "name": "椿",
+    "fullName": "Camellya",
+    "fullNameChinese": "椿",
+    "aliases": [
+      "Camellya",
+      "椿"
+    ]
+  },
+  {
+    "characterId": "Cantarella",
+    "name": "坎特蕾拉",
+    "fullName": "Cantarella",
+    "fullNameChinese": "坎特蕾拉",
+    "aliases": [
+      "Cantarella",
+      "坎特蕾拉"
+    ]
+  },
+  {
+    "characterId": "Carlotta",
+    "name": "珂莱塔",
+    "fullName": "Carlotta",
+    "fullNameChinese": "珂莱塔",
+    "aliases": [
+      "Carlotta",
+      "珂莱塔"
+    ]
+  },
+  {
+    "characterId": "Cartethyia",
+    "name": "卡提希娅",
+    "fullName": "Cartethyia",
+    "fullNameChinese": "卡提希娅",
+    "aliases": [
+      "Cartethyia",
+      "卡提希娅"
+    ]
+  },
+  {
+    "characterId": "Changli",
+    "name": "长离",
+    "fullName": "Changli",
+    "fullNameChinese": "长离",
+    "aliases": [
+      "Changli",
+      "长离"
+    ]
+  },
+  {
+    "characterId": "Chisa",
+    "name": "千咲",
+    "fullName": "Chisa",
+    "fullNameChinese": "千咲",
+    "aliases": [
+      "Chisa",
+      "千咲"
+    ]
+  },
+  {
+    "characterId": "Chixia",
+    "name": "Chixia",
+    "fullName": "Chixia",
+    "fullNameChinese": "Chixia",
+    "aliases": [
+      "Chixia"
+    ]
+  },
+  {
+    "characterId": "Ciaccona",
+    "name": "夏空",
+    "fullName": "Ciaccona",
+    "fullNameChinese": "夏空",
+    "aliases": [
+      "Ciaccona",
+      "夏空"
+    ]
+  },
+  {
+    "characterId": "Danjin",
+    "name": "丹瑾",
+    "fullName": "Danjin",
+    "fullNameChinese": "丹瑾",
+    "aliases": [
+      "Danjin",
+      "丹瑾"
+    ]
+  },
+  {
+    "characterId": "Denia",
+    "name": "达妮娅",
+    "fullName": "Denia",
+    "fullNameChinese": "达妮娅",
+    "aliases": [
+      "Denia",
+      "达妮娅"
+    ]
+  },
+  {
+    "characterId": "Encore",
+    "name": "Encore",
+    "fullName": "Encore",
+    "fullNameChinese": "Encore",
+    "aliases": [
+      "Encore"
+    ]
+  },
+  {
+    "characterId": "Galbrena",
+    "name": "嘉贝莉娜",
+    "fullName": "Galbrena",
+    "fullNameChinese": "嘉贝莉娜",
+    "aliases": [
+      "Galbrena",
+      "嘉贝莉娜"
+    ]
+  },
+  {
+    "characterId": "Hiyuki",
+    "name": "绯雪",
+    "fullName": "Hiyuki",
+    "fullNameChinese": "绯雪",
+    "aliases": [
+      "Hiyuki",
+      "绯雪"
+    ]
+  },
+  {
+    "characterId": "Hsin",
+    "name": "心",
+    "fullName": "Hsin",
+    "fullNameChinese": "心",
+    "aliases": [
+      "Hsin",
+      "心"
+    ]
+  },
+  {
+    "characterId": "Iuno",
+    "name": "尤诺",
+    "fullName": "Iuno",
+    "fullNameChinese": "尤诺",
+    "aliases": [
+      "Iuno",
+      "尤诺"
+    ]
+  },
+  {
+    "characterId": "Jianxin",
+    "name": "Jianxin",
+    "fullName": "Jianxin",
+    "fullNameChinese": "Jianxin",
+    "aliases": [
+      "Jianxin"
+    ]
+  },
+  {
+    "characterId": "Jingran",
+    "name": "景燃",
+    "fullName": "Jingran",
+    "fullNameChinese": "景燃",
+    "aliases": [
+      "Jingran",
+      "景燃"
+    ]
+  },
+  {
+    "characterId": "Jinhsi",
+    "name": "今汐",
+    "fullName": "Jinhsi",
+    "fullNameChinese": "今汐",
+    "aliases": [
+      "Jinhsi",
+      "今汐"
+    ]
+  },
+  {
+    "characterId": "Jiyan",
+    "name": "忌炎",
+    "fullName": "Jiyan",
+    "fullNameChinese": "忌炎",
+    "aliases": [
+      "Jiyan",
+      "忌炎"
+    ]
+  },
+  {
+    "characterId": "Lingyang",
+    "name": "凌阳",
+    "fullName": "Lingyang",
+    "fullNameChinese": "凌阳",
+    "aliases": [
+      "Lingyang",
+      "凌阳"
+    ]
+  },
+  {
+    "characterId": "Lucilla",
+    "name": "洛瑟菈",
+    "fullName": "Lucilla",
+    "fullNameChinese": "洛瑟菈",
+    "aliases": [
+      "Lucilla",
+      "洛瑟菈"
+    ]
+  },
+  {
+    "characterId": "Lucy",
+    "name": "露西",
+    "fullName": "Lucy",
+    "fullNameChinese": "露西",
+    "aliases": [
+      "Lucy",
+      "露西"
+    ]
+  },
+  {
+    "characterId": "Lumi",
+    "name": "Lumi",
+    "fullName": "Lumi",
+    "fullNameChinese": "Lumi",
+    "aliases": [
+      "Lumi"
+    ]
+  },
+  {
+    "characterId": "Lupa",
+    "name": "露帕",
+    "fullName": "Lupa",
+    "fullNameChinese": "露帕",
+    "aliases": [
+      "Lupa",
+      "露帕"
+    ]
+  },
+  {
+    "characterId": "Luuk_Herssen",
+    "name": "陆·赫斯",
+    "fullName": "Luuk Herssen",
+    "fullNameChinese": "陆·赫斯",
+    "aliases": [
+      "Luuk Herssen",
+      "陆·赫斯",
+      "LuukHerssen"
+    ]
+  },
+  {
+    "characterId": "Lynae",
+    "name": "琳奈",
+    "fullName": "Lynae",
+    "fullNameChinese": "琳奈",
+    "aliases": [
+      "Lynae",
+      "琳奈"
+    ]
+  },
+  {
+    "characterId": "Mornye",
+    "name": "莫宁",
+    "fullName": "Mornye",
+    "fullNameChinese": "莫宁",
+    "aliases": [
+      "Mornye",
+      "莫宁"
+    ]
+  },
+  {
+    "characterId": "Mortefi",
+    "name": "Mortefi",
+    "fullName": "Mortefi",
+    "fullNameChinese": "Mortefi",
+    "aliases": [
+      "Mortefi"
+    ]
+  },
+  {
+    "characterId": "Phoebe",
+    "name": "菲比",
+    "fullName": "Phoebe",
+    "fullNameChinese": "菲比",
+    "aliases": [
+      "Phoebe",
+      "菲比"
+    ]
+  },
+  {
+    "characterId": "Phrolova",
+    "name": "弗洛洛",
+    "fullName": "Phrolova",
+    "fullNameChinese": "弗洛洛",
+    "aliases": [
+      "Phrolova",
+      "弗洛洛"
+    ]
+  },
+  {
+    "characterId": "Qingxiao",
+    "name": "清宵",
+    "fullName": "Qingxiao",
+    "fullNameChinese": "清宵",
+    "aliases": [
+      "Qingxiao",
+      "清宵"
+    ]
+  },
+  {
+    "characterId": "Qiuyuan",
+    "name": "仇远",
+    "fullName": "Qiuyuan",
+    "fullNameChinese": "仇远",
+    "aliases": [
+      "Qiuyuan",
+      "仇远"
+    ]
+  },
+  {
+    "characterId": "Rebecca",
+    "name": "丽贝卡",
+    "fullName": "Rebecca",
+    "fullNameChinese": "丽贝卡",
+    "aliases": [
+      "Rebecca",
+      "丽贝卡"
+    ]
+  },
+  {
+    "characterId": "Roccia",
+    "name": "Roccia",
+    "fullName": "Roccia",
+    "fullNameChinese": "Roccia",
+    "aliases": [
+      "Roccia"
+    ]
+  },
+  {
+    "characterId": "Rover",
+    "name": "漂泊者",
+    "fullName": "Rover",
+    "fullNameChinese": "漂泊者",
+    "aliases": [
+      "Rover",
+      "漂泊者"
+    ]
+  },
+  {
+    "characterId": "Sanhua",
+    "name": "Sanhua",
+    "fullName": "Sanhua",
+    "fullNameChinese": "Sanhua",
+    "aliases": [
+      "Sanhua"
+    ]
+  },
+  {
+    "characterId": "Shorekeeper",
+    "name": "守岸人",
+    "fullName": "Shorekeeper",
+    "fullNameChinese": "守岸人",
+    "aliases": [
+      "Shorekeeper",
+      "守岸人"
+    ]
+  },
+  {
+    "characterId": "Sigrika",
+    "name": "西格莉卡",
+    "fullName": "Sigrika",
+    "fullNameChinese": "西格莉卡",
+    "aliases": [
+      "Sigrika",
+      "西格莉卡"
+    ]
+  },
+  {
+    "characterId": "Suisui",
+    "name": "穗穗",
+    "fullName": "Suisui",
+    "fullNameChinese": "穗穗",
+    "aliases": [
+      "Suisui",
+      "穗穗"
+    ]
+  },
+  {
+    "characterId": "Suoming",
+    "name": "锁暝",
+    "fullName": "Suoming",
+    "fullNameChinese": "锁暝",
+    "aliases": [
+      "Suoming",
+      "锁暝"
+    ]
+  },
+  {
+    "characterId": "Taoqi",
+    "name": "桃祈",
+    "fullName": "Taoqi",
+    "fullNameChinese": "桃祈",
+    "aliases": [
+      "Taoqi",
+      "桃祈"
+    ]
+  },
+  {
+    "characterId": "Verina",
+    "name": "Verina",
+    "fullName": "Verina",
+    "fullNameChinese": "Verina",
+    "aliases": [
+      "Verina"
+    ]
+  },
+  {
+    "characterId": "Xiangli_Yao",
+    "name": "Xiangli Yao",
+    "fullName": "Xiangli Yao",
+    "fullNameChinese": "Xiangli Yao",
+    "aliases": [
+      "Xiangli Yao",
+      "XiangliYao"
+    ]
+  },
+  {
+    "characterId": "Yangyang",
+    "name": "Yangyang",
+    "fullName": "Yangyang",
+    "fullNameChinese": "Yangyang",
+    "aliases": [
+      "Yangyang"
+    ]
+  },
+  {
+    "characterId": "Yangyang_Xuanling",
+    "name": "秧秧·玄翎",
+    "fullName": "Yangyang: Xuanling",
+    "fullNameChinese": "秧秧·玄翎",
+    "aliases": [
+      "Yangyang: Xuanling",
+      "秧秧·玄翎",
+      "Yangyang:Xuanling"
+    ]
+  },
+  {
+    "characterId": "Yinlin",
+    "name": "吟霖",
+    "fullName": "Yinlin",
+    "fullNameChinese": "吟霖",
+    "aliases": [
+      "Yinlin",
+      "吟霖"
+    ]
+  },
+  {
+    "characterId": "Youhu",
+    "name": "Youhu",
+    "fullName": "Youhu",
+    "fullNameChinese": "Youhu",
+    "aliases": [
+      "Youhu"
+    ]
+  },
+  {
+    "characterId": "Yuanwu",
+    "name": "Yuanwu",
+    "fullName": "Yuanwu",
+    "fullNameChinese": "Yuanwu",
+    "aliases": [
+      "Yuanwu"
+    ]
+  },
+  {
+    "characterId": "Zani",
+    "name": "赞妮",
+    "fullName": "Zani",
+    "fullNameChinese": "赞妮",
+    "aliases": [
+      "Zani",
+      "赞妮"
+    ]
+  },
+  {
+    "characterId": "Zhezhi",
+    "name": "Zhezhi",
+    "fullName": "Zhezhi",
+    "fullNameChinese": "Zhezhi",
+    "aliases": [
+      "Zhezhi"
+    ]
+  }
+]

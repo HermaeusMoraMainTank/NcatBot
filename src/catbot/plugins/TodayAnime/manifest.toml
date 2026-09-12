@@ -1,0 +1,6 @@
+name = "TodayAnime"
+version = "1.0.0"
+main = "TodayAnime.py"
+entry_class = "TodayAnime"
+
+[dependencies]

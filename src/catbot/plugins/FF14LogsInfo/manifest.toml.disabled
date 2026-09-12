@@ -1,0 +1,9 @@
+name = "FF14LogsInfo"
+version = "1.0.0"
+main = "FF14LogsInfo.py"
+entry_class = "FF14LogsInfo"
+
+[pip_dependencies]
+Pillow = "*"
+
+[dependencies]

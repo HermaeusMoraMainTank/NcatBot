@@ -1,0 +1,6 @@
+name = "HttpCat"
+version = "1.0.0"
+main = "HttpCat.py"
+entry_class = "HttpCat"
+
+[dependencies]

@@ -1,0 +1,11 @@
+name = "SteamPrice"
+version = "1.0.0"
+main = "SteamPrice.py"
+entry_class = "SteamPrice"
+author = "penguin-madagascar / NcatBot"
+description = "Steam 价格查询（小黑盒）：当前价、史低、促销、跨区价格与游戏资料"
+
+[dependencies]
+
+[pip_dependencies]
+httpx = ">=0.27.0"

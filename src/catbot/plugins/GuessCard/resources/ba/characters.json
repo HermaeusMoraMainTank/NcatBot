@@ -1,0 +1,2768 @@
+[
+  {
+    "characterId": "10000",
+    "name": "爱露",
+    "fullName": "爱露",
+    "fullNameChinese": "爱露",
+    "aliases": [
+      "爱露",
+      "陆八魔",
+      "Aru"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "10001",
+    "name": "艾米",
+    "fullName": "艾米",
+    "fullNameChinese": "艾米",
+    "aliases": [
+      "艾米",
+      "和泉元",
+      "Eimi"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10002",
+    "name": "晴奈",
+    "fullName": "晴奈",
+    "fullNameChinese": "晴奈",
+    "aliases": [
+      "晴奈",
+      "黑馆",
+      "Haruna"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "10003",
+    "name": "日富美",
+    "fullName": "日富美",
+    "fullNameChinese": "日富美",
+    "aliases": [
+      "日富美",
+      "阿慈谷",
+      "Hifumi"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "10004",
+    "name": "日奈",
+    "fullName": "日奈",
+    "fullNameChinese": "日奈",
+    "aliases": [
+      "日奈",
+      "空崎",
+      "Hina"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "10005",
+    "name": "星野",
+    "fullName": "星野",
+    "fullNameChinese": "星野",
+    "aliases": [
+      "星野",
+      "小鸟游",
+      "Hoshino"
+    ],
+    "className": "Abydos",
+    "rarity": 3
+  },
+  {
+    "characterId": "10006",
+    "name": "伊织",
+    "fullName": "伊织",
+    "fullNameChinese": "伊织",
+    "aliases": [
+      "伊织",
+      "银镜",
+      "Iori"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "10007",
+    "name": "真纪",
+    "fullName": "真纪",
+    "fullNameChinese": "真纪",
+    "aliases": [
+      "真纪",
+      "小涂",
+      "Maki"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10008",
+    "name": "妮露",
+    "fullName": "妮露",
+    "fullNameChinese": "妮露",
+    "aliases": [
+      "妮露",
+      "美甘",
+      "Neru"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10009",
+    "name": "泉",
+    "fullName": "泉",
+    "fullNameChinese": "泉",
+    "aliases": [
+      "泉",
+      "狮子堂",
+      "Izumi"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "10010",
+    "name": "白子",
+    "fullName": "白子",
+    "fullNameChinese": "白子",
+    "aliases": [
+      "白子",
+      "砂狼",
+      "Shiroko"
+    ],
+    "className": "Abydos",
+    "rarity": 3
+  },
+  {
+    "characterId": "10011",
+    "name": "瞬",
+    "fullName": "瞬",
+    "fullNameChinese": "瞬",
+    "aliases": [
+      "瞬",
+      "春原",
+      "Shun"
+    ],
+    "className": "Shanhaijing",
+    "rarity": 3
+  },
+  {
+    "characterId": "10012",
+    "name": "堇",
+    "fullName": "堇",
+    "fullNameChinese": "堇",
+    "aliases": [
+      "堇",
+      "乙花",
+      "Sumire"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10013",
+    "name": "鹤城",
+    "fullName": "鹤城",
+    "fullNameChinese": "鹤城",
+    "aliases": [
+      "鹤城",
+      "剑先",
+      "Tsurugi"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "13000",
+    "name": "茜",
+    "fullName": "茜",
+    "fullNameChinese": "茜",
+    "aliases": [
+      "茜",
+      "室笠",
+      "Akane"
+    ],
+    "className": "Millennium",
+    "rarity": 2
+  },
+  {
+    "characterId": "13001",
+    "name": "千世",
+    "fullName": "千世",
+    "fullNameChinese": "千世",
+    "aliases": [
+      "千世",
+      "和乐",
+      "Chise"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 2
+  },
+  {
+    "characterId": "13002",
+    "name": "明里",
+    "fullName": "明里",
+    "fullNameChinese": "明里",
+    "aliases": [
+      "明里",
+      "鳄渊",
+      "Akari"
+    ],
+    "className": "Gehenna",
+    "rarity": 2
+  },
+  {
+    "characterId": "13003",
+    "name": "莲见",
+    "fullName": "莲见",
+    "fullNameChinese": "莲见",
+    "aliases": [
+      "莲见",
+      "羽川",
+      "Hasumi"
+    ],
+    "className": "Trinity",
+    "rarity": 2
+  },
+  {
+    "characterId": "13004",
+    "name": "野宫",
+    "fullName": "野宫",
+    "fullNameChinese": "野宫",
+    "aliases": [
+      "野宫",
+      "十六夜",
+      "Nonomi"
+    ],
+    "className": "Abydos",
+    "rarity": 2
+  },
+  {
+    "characterId": "13005",
+    "name": "佳代子",
+    "fullName": "佳代子",
+    "fullNameChinese": "佳代子",
+    "aliases": [
+      "佳代子",
+      "鬼方",
+      "Kayoko"
+    ],
+    "className": "Gehenna",
+    "rarity": 2
+  },
+  {
+    "characterId": "13006",
+    "name": "睦月",
+    "fullName": "睦月",
+    "fullNameChinese": "睦月",
+    "aliases": [
+      "睦月",
+      "浅黄",
+      "Mutsuki"
+    ],
+    "className": "Gehenna",
+    "rarity": 2
+  },
+  {
+    "characterId": "13007",
+    "name": "纯子",
+    "fullName": "纯子",
+    "fullNameChinese": "纯子",
+    "aliases": [
+      "纯子",
+      "赤司",
+      "Junko"
+    ],
+    "className": "Gehenna",
+    "rarity": 2
+  },
+  {
+    "characterId": "13008",
+    "name": "芹香",
+    "fullName": "芹香",
+    "fullNameChinese": "芹香",
+    "aliases": [
+      "芹香",
+      "黑见",
+      "Serika"
+    ],
+    "className": "Abydos",
+    "rarity": 2
+  },
+  {
+    "characterId": "13009",
+    "name": "椿",
+    "fullName": "椿",
+    "fullNameChinese": "椿",
+    "aliases": [
+      "椿",
+      "春日",
+      "Tsubaki"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 2
+  },
+  {
+    "characterId": "13010",
+    "name": "优香",
+    "fullName": "优香",
+    "fullNameChinese": "优香",
+    "aliases": [
+      "优香",
+      "早濑",
+      "Yuuka"
+    ],
+    "className": "Millennium",
+    "rarity": 2
+  },
+  {
+    "characterId": "16000",
+    "name": "春香",
+    "fullName": "春香",
+    "fullNameChinese": "春香",
+    "aliases": [
+      "春香",
+      "伊草",
+      "Haruka"
+    ],
+    "className": "Gehenna",
+    "rarity": 1
+  },
+  {
+    "characterId": "16001",
+    "name": "明日奈",
+    "fullName": "明日奈",
+    "fullNameChinese": "明日奈",
+    "aliases": [
+      "明日奈",
+      "一之濑",
+      "Asuna"
+    ],
+    "className": "Millennium",
+    "rarity": 1
+  },
+  {
+    "characterId": "16002",
+    "name": "琴里",
+    "fullName": "琴里",
+    "fullNameChinese": "琴里",
+    "aliases": [
+      "琴里",
+      "丰见",
+      "Kotori"
+    ],
+    "className": "Millennium",
+    "rarity": 1
+  },
+  {
+    "characterId": "16003",
+    "name": "铃美",
+    "fullName": "铃美",
+    "fullNameChinese": "铃美",
+    "aliases": [
+      "铃美",
+      "守月",
+      "Suzumi"
+    ],
+    "className": "Trinity",
+    "rarity": 1
+  },
+  {
+    "characterId": "16004",
+    "name": "菲娜",
+    "fullName": "菲娜",
+    "fullNameChinese": "菲娜",
+    "aliases": [
+      "菲娜",
+      "朝比奈",
+      "Pina"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 1
+  },
+  {
+    "characterId": "20000",
+    "name": "响",
+    "fullName": "响",
+    "fullNameChinese": "响",
+    "aliases": [
+      "响",
+      "猫冢",
+      "Hibiki"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "20001",
+    "name": "花凛",
+    "fullName": "花凛",
+    "fullNameChinese": "花凛",
+    "aliases": [
+      "花凛",
+      "角楯",
+      "Karin"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "20002",
+    "name": "纱绫",
+    "fullName": "纱绫",
+    "fullNameChinese": "纱绫",
+    "aliases": [
+      "纱绫",
+      "药子",
+      "Saya"
+    ],
+    "className": "Shanhaijing",
+    "rarity": 3
+  },
+  {
+    "characterId": "23000",
+    "name": "爱理",
+    "fullName": "爱理",
+    "fullNameChinese": "爱理",
+    "aliases": [
+      "爱理",
+      "栗村",
+      "Airi"
+    ],
+    "className": "Trinity",
+    "rarity": 2
+  },
+  {
+    "characterId": "23001",
+    "name": "风香",
+    "fullName": "风香",
+    "fullNameChinese": "风香",
+    "aliases": [
+      "风香",
+      "爱清",
+      "Fuuka"
+    ],
+    "className": "Gehenna",
+    "rarity": 2
+  },
+  {
+    "characterId": "23002",
+    "name": "花江",
+    "fullName": "花江",
+    "fullNameChinese": "花江",
+    "aliases": [
+      "花江",
+      "朝颜",
+      "Hanae"
+    ],
+    "className": "Trinity",
+    "rarity": 2
+  },
+  {
+    "characterId": "23003",
+    "name": "晴",
+    "fullName": "晴",
+    "fullNameChinese": "晴",
+    "aliases": [
+      "晴",
+      "小钩",
+      "Hare"
+    ],
+    "className": "Millennium",
+    "rarity": 2
+  },
+  {
+    "characterId": "23004",
+    "name": "歌原",
+    "fullName": "歌原",
+    "fullNameChinese": "歌原",
+    "aliases": [
+      "歌原",
+      "白石",
+      "Utaha"
+    ],
+    "className": "Millennium",
+    "rarity": 2
+  },
+  {
+    "characterId": "23005",
+    "name": "绫音",
+    "fullName": "绫音",
+    "fullNameChinese": "绫音",
+    "aliases": [
+      "绫音",
+      "奥空",
+      "Ayane"
+    ],
+    "className": "Abydos",
+    "rarity": 2
+  },
+  {
+    "characterId": "26000",
+    "name": "千夏",
+    "fullName": "千夏",
+    "fullNameChinese": "千夏",
+    "aliases": [
+      "千夏",
+      "火宫",
+      "Chinatsu"
+    ],
+    "className": "Gehenna",
+    "rarity": 1
+  },
+  {
+    "characterId": "26001",
+    "name": "小玉",
+    "fullName": "小玉",
+    "fullNameChinese": "小玉",
+    "aliases": [
+      "小玉",
+      "音濑",
+      "Kotama"
+    ],
+    "className": "Millennium",
+    "rarity": 1
+  },
+  {
+    "characterId": "26002",
+    "name": "朱莉",
+    "fullName": "朱莉",
+    "fullNameChinese": "朱莉",
+    "aliases": [
+      "朱莉",
+      "牛牧",
+      "Juri"
+    ],
+    "className": "Gehenna",
+    "rarity": 1
+  },
+  {
+    "characterId": "26003",
+    "name": "芹娜",
+    "fullName": "芹娜",
+    "fullNameChinese": "芹娜",
+    "aliases": [
+      "芹娜",
+      "鹫见",
+      "Serina"
+    ],
+    "className": "Trinity",
+    "rarity": 1
+  },
+  {
+    "characterId": "26004",
+    "name": "志美子",
+    "fullName": "志美子",
+    "fullNameChinese": "志美子",
+    "aliases": [
+      "志美子",
+      "圆堂",
+      "Shimiko"
+    ],
+    "className": "Trinity",
+    "rarity": 1
+  },
+  {
+    "characterId": "26005",
+    "name": "好美",
+    "fullName": "好美",
+    "fullNameChinese": "好美",
+    "aliases": [
+      "好美",
+      "伊原木",
+      "Yoshimi"
+    ],
+    "className": "Trinity",
+    "rarity": 1
+  },
+  {
+    "characterId": "20003",
+    "name": "真白",
+    "fullName": "真白",
+    "fullNameChinese": "真白",
+    "aliases": [
+      "真白",
+      "静山",
+      "Mashiro"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "10014",
+    "name": "泉奈",
+    "fullName": "泉奈",
+    "fullNameChinese": "泉奈",
+    "aliases": [
+      "泉奈",
+      "久田",
+      "Izuna"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 3
+  },
+  {
+    "characterId": "23006",
+    "name": "静子",
+    "fullName": "静子",
+    "fullNameChinese": "静子",
+    "aliases": [
+      "静子",
+      "河和",
+      "Shizuko"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 2
+  },
+  {
+    "characterId": "10015",
+    "name": "爱丽丝",
+    "fullName": "爱丽丝",
+    "fullNameChinese": "爱丽丝",
+    "aliases": [
+      "爱丽丝",
+      "天童",
+      "Aris"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10016",
+    "name": "绿",
+    "fullName": "绿",
+    "fullNameChinese": "绿",
+    "aliases": [
+      "绿",
+      "才羽",
+      "Midori"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "13011",
+    "name": "桃",
+    "fullName": "桃",
+    "fullNameChinese": "桃",
+    "aliases": [
+      "桃",
+      "才羽",
+      "Momoi"
+    ],
+    "className": "Millennium",
+    "rarity": 2
+  },
+  {
+    "characterId": "10017",
+    "name": "切里诺",
+    "fullName": "切里诺",
+    "fullNameChinese": "切里诺",
+    "aliases": [
+      "切里诺",
+      "连河",
+      "Cherino"
+    ],
+    "className": "RedWinter",
+    "rarity": 3
+  },
+  {
+    "characterId": "26006",
+    "name": "和香",
+    "fullName": "和香",
+    "fullNameChinese": "和香",
+    "aliases": [
+      "和香",
+      "天见",
+      "Nodoka"
+    ],
+    "className": "RedWinter",
+    "rarity": 1
+  },
+  {
+    "characterId": "10018",
+    "name": "柚子",
+    "fullName": "柚子",
+    "fullNameChinese": "柚子",
+    "aliases": [
+      "柚子",
+      "花冈",
+      "Yuzu"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10019",
+    "name": "梓",
+    "fullName": "梓",
+    "fullNameChinese": "梓",
+    "aliases": [
+      "梓",
+      "白洲",
+      "Azusa"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "23007",
+    "name": "花子",
+    "fullName": "花子",
+    "fullNameChinese": "花子",
+    "aliases": [
+      "花子",
+      "浦和",
+      "Hanako"
+    ],
+    "className": "Trinity",
+    "rarity": 2
+  },
+  {
+    "characterId": "10020",
+    "name": "小春",
+    "fullName": "小春",
+    "fullNameChinese": "小春",
+    "aliases": [
+      "小春",
+      "下江",
+      "Koharu"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "10021",
+    "name": "梓（泳装）",
+    "fullName": "梓（泳装）",
+    "fullNameChinese": "梓（泳装）",
+    "aliases": [
+      "梓（泳装）",
+      "梓",
+      "白洲",
+      "Azusa (Swimsuit)",
+      "Azusa_Swimsuit",
+      "Azusa"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "20004",
+    "name": "真白（泳装）",
+    "fullName": "真白（泳装）",
+    "fullNameChinese": "真白（泳装）",
+    "aliases": [
+      "真白（泳装）",
+      "真白",
+      "静山",
+      "Mashiro (Swimsuit)",
+      "Mashiro_Swimsuit",
+      "Mashiro"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "16005",
+    "name": "鹤城（泳装）",
+    "fullName": "鹤城（泳装）",
+    "fullNameChinese": "鹤城（泳装）",
+    "aliases": [
+      "鹤城（泳装）",
+      "鹤城",
+      "剑先",
+      "Tsurugi (Swimsuit)",
+      "Tsurugi_Swimsuit",
+      "Tsurugi"
+    ],
+    "className": "Trinity",
+    "rarity": 1
+  },
+  {
+    "characterId": "20005",
+    "name": "日富美（泳装）",
+    "fullName": "日富美（泳装）",
+    "fullNameChinese": "日富美（泳装）",
+    "aliases": [
+      "日富美（泳装）",
+      "日富美",
+      "阿慈谷",
+      "Hifumi (Swimsuit)",
+      "Hifumi_Swimsuit",
+      "Hifumi"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "10022",
+    "name": "日奈（泳装）",
+    "fullName": "日奈（泳装）",
+    "fullNameChinese": "日奈（泳装）",
+    "aliases": [
+      "日奈（泳装）",
+      "日奈",
+      "空崎",
+      "Hina (Swimsuit)",
+      "Hina_Swimsuit",
+      "Hina"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "10023",
+    "name": "伊织（泳装）",
+    "fullName": "伊织（泳装）",
+    "fullNameChinese": "伊织（泳装）",
+    "aliases": [
+      "伊织（泳装）",
+      "伊织",
+      "银镜",
+      "Iori (Swimsuit)",
+      "Iori_Swimsuit",
+      "Iori"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "16006",
+    "name": "泉（泳装）",
+    "fullName": "泉（泳装）",
+    "fullNameChinese": "泉（泳装）",
+    "aliases": [
+      "泉（泳装）",
+      "泉",
+      "狮子堂",
+      "Izumi (Swimsuit)",
+      "Izumi_Swimsuit",
+      "Izumi"
+    ],
+    "className": "Gehenna",
+    "rarity": 1
+  },
+  {
+    "characterId": "10024",
+    "name": "白子（骑行）",
+    "fullName": "白子（骑行）",
+    "fullNameChinese": "白子（骑行）",
+    "aliases": [
+      "白子（骑行）",
+      "白子",
+      "砂狼",
+      "Shiroko (Cycling)",
+      "Shiroko_Cycling",
+      "Shiroko"
+    ],
+    "className": "Abydos",
+    "rarity": 3
+  },
+  {
+    "characterId": "10025",
+    "name": "瞬（小）",
+    "fullName": "瞬（小）",
+    "fullNameChinese": "瞬（小）",
+    "aliases": [
+      "瞬（小）",
+      "瞬",
+      "春原",
+      "Shun (Small)",
+      "Shun_Small",
+      "Shun"
+    ],
+    "className": "Shanhaijing",
+    "rarity": 3
+  },
+  {
+    "characterId": "13012",
+    "name": "桐乃",
+    "fullName": "桐乃",
+    "fullNameChinese": "桐乃",
+    "aliases": [
+      "桐乃",
+      "中务",
+      "Kirino"
+    ],
+    "className": "Valkyrie",
+    "rarity": 2
+  },
+  {
+    "characterId": "20006",
+    "name": "纱绫（便服）",
+    "fullName": "纱绫（便服）",
+    "fullNameChinese": "纱绫（便服）",
+    "aliases": [
+      "纱绫（便服）",
+      "纱绫",
+      "药子",
+      "Saya (Casual)",
+      "Saya_Casual",
+      "Saya"
+    ],
+    "className": "Shanhaijing",
+    "rarity": 3
+  },
+  {
+    "characterId": "10026",
+    "name": "妮露（邦妮）",
+    "fullName": "妮露（邦妮）",
+    "fullNameChinese": "妮露（邦妮）",
+    "aliases": [
+      "妮露（邦妮）",
+      "妮露",
+      "美甘",
+      "Neru (Bunny)",
+      "Neru_Bunny",
+      "Neru"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10027",
+    "name": "花凛（邦妮）",
+    "fullName": "花凛（邦妮）",
+    "fullNameChinese": "花凛（邦妮）",
+    "aliases": [
+      "花凛（邦妮）",
+      "花凛",
+      "角楯",
+      "Karin (Bunny)",
+      "Karin_Bunny",
+      "Karin"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10028",
+    "name": "明日奈（邦妮）",
+    "fullName": "明日奈（邦妮）",
+    "fullNameChinese": "明日奈（邦妮）",
+    "aliases": [
+      "明日奈（邦妮）",
+      "明日奈",
+      "一之濑",
+      "Asuna (Bunny)",
+      "Asuna_Bunny",
+      "Asuna"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10029",
+    "name": "夏",
+    "fullName": "夏",
+    "fullNameChinese": "夏",
+    "aliases": [
+      "夏",
+      "柚鸟",
+      "Natsu"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "23008",
+    "name": "玛丽",
+    "fullName": "玛丽",
+    "fullNameChinese": "玛丽",
+    "aliases": [
+      "玛丽",
+      "伊落",
+      "Mari"
+    ],
+    "className": "Trinity",
+    "rarity": 2
+  },
+  {
+    "characterId": "20007",
+    "name": "初音未来",
+    "fullName": "初音未来",
+    "fullNameChinese": "初音未来",
+    "aliases": [
+      "初音未来",
+      "未来",
+      "初音",
+      "Hatsune Miku",
+      "Hatsune_Miku"
+    ],
+    "className": "ETC",
+    "rarity": 3
+  },
+  {
+    "characterId": "20008",
+    "name": "亚子",
+    "fullName": "亚子",
+    "fullNameChinese": "亚子",
+    "aliases": [
+      "亚子",
+      "天雨",
+      "Ako"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "20009",
+    "name": "切里诺（温泉）",
+    "fullName": "切里诺（温泉）",
+    "fullNameChinese": "切里诺（温泉）",
+    "aliases": [
+      "切里诺（温泉）",
+      "切里诺",
+      "连河",
+      "Cherino (Hot Spring)",
+      "Cherino_HotSpring",
+      "Cherino"
+    ],
+    "className": "RedWinter",
+    "rarity": 3
+  },
+  {
+    "characterId": "10030",
+    "name": "千夏（温泉）",
+    "fullName": "千夏（温泉）",
+    "fullNameChinese": "千夏（温泉）",
+    "aliases": [
+      "千夏（温泉）",
+      "千夏",
+      "火宫",
+      "Chinatsu (Hot Spring)",
+      "Chinatsu_HotSpring",
+      "Chinatsu"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "16007",
+    "name": "巴",
+    "fullName": "巴",
+    "fullNameChinese": "巴",
+    "aliases": [
+      "巴",
+      "佐城",
+      "Tomoe"
+    ],
+    "className": "RedWinter",
+    "rarity": 1
+  },
+  {
+    "characterId": "20010",
+    "name": "和香（温泉）",
+    "fullName": "和香（温泉）",
+    "fullNameChinese": "和香（温泉）",
+    "aliases": [
+      "和香（温泉）",
+      "和香",
+      "天见",
+      "Nodoka (Hot Spring)",
+      "Nodoka_HotSpring",
+      "Nodoka"
+    ],
+    "className": "RedWinter",
+    "rarity": 3
+  },
+  {
+    "characterId": "10031",
+    "name": "爱露（新年）",
+    "fullName": "爱露（新年）",
+    "fullNameChinese": "爱露（新年）",
+    "aliases": [
+      "爱露（新年）",
+      "爱露",
+      "陆八魔",
+      "Aru (New Year)",
+      "Aru_NewYear",
+      "Aru"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "10032",
+    "name": "睦月（新年）",
+    "fullName": "睦月（新年）",
+    "fullNameChinese": "睦月（新年）",
+    "aliases": [
+      "睦月（新年）",
+      "睦月",
+      "浅黄",
+      "Mutsuki (New Year)",
+      "Mutsuki_NewYear",
+      "Mutsuki"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "20011",
+    "name": "芹香（新年）",
+    "fullName": "芹香（新年）",
+    "fullNameChinese": "芹香（新年）",
+    "aliases": [
+      "芹香（新年）",
+      "芹香",
+      "黑见",
+      "Serika (New Year)",
+      "Serika_NewYear",
+      "Serika"
+    ],
+    "className": "Abydos",
+    "rarity": 3
+  },
+  {
+    "characterId": "10033",
+    "name": "若藻",
+    "fullName": "若藻",
+    "fullNameChinese": "若藻",
+    "aliases": [
+      "若藻",
+      "狐坂",
+      "Wakamo"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 3
+  },
+  {
+    "characterId": "16008",
+    "name": "吹雪",
+    "fullName": "吹雪",
+    "fullNameChinese": "吹雪",
+    "aliases": [
+      "吹雪",
+      "合欢垣",
+      "Fubuki"
+    ],
+    "className": "Valkyrie",
+    "rarity": 1
+  },
+  {
+    "characterId": "20012",
+    "name": "濑名",
+    "fullName": "濑名",
+    "fullNameChinese": "濑名",
+    "aliases": [
+      "濑名",
+      "冰室",
+      "Sena"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "20013",
+    "name": "千寻",
+    "fullName": "千寻",
+    "fullNameChinese": "千寻",
+    "aliases": [
+      "千寻",
+      "各务",
+      "Chihiro"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10034",
+    "name": "三森",
+    "fullName": "三森",
+    "fullNameChinese": "三森",
+    "aliases": [
+      "三森",
+      "水羽",
+      "Mimori"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 3
+  },
+  {
+    "characterId": "10035",
+    "name": "忧",
+    "fullName": "忧",
+    "fullNameChinese": "忧",
+    "aliases": [
+      "忧",
+      "古关",
+      "Ui"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "10036",
+    "name": "日向",
+    "fullName": "日向",
+    "fullNameChinese": "日向",
+    "aliases": [
+      "日向",
+      "若叶",
+      "Hinata"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "10037",
+    "name": "真里奈",
+    "fullName": "真里奈",
+    "fullNameChinese": "真里奈",
+    "aliases": [
+      "真里奈",
+      "池仓",
+      "Marina"
+    ],
+    "className": "RedWinter",
+    "rarity": 3
+  },
+  {
+    "characterId": "10038",
+    "name": "宫子",
+    "fullName": "宫子",
+    "fullNameChinese": "宫子",
+    "aliases": [
+      "宫子",
+      "月雪",
+      "Miyako"
+    ],
+    "className": "SRT",
+    "rarity": 3
+  },
+  {
+    "characterId": "20014",
+    "name": "咲",
+    "fullName": "咲",
+    "fullNameChinese": "咲",
+    "aliases": [
+      "咲",
+      "空井",
+      "Saki"
+    ],
+    "className": "SRT",
+    "rarity": 3
+  },
+  {
+    "characterId": "10039",
+    "name": "美游",
+    "fullName": "美游",
+    "fullNameChinese": "美游",
+    "aliases": [
+      "美游",
+      "霞泽",
+      "Miyu"
+    ],
+    "className": "SRT",
+    "rarity": 3
+  },
+  {
+    "characterId": "20015",
+    "name": "枫",
+    "fullName": "枫",
+    "fullNameChinese": "枫",
+    "aliases": [
+      "枫",
+      "勇美",
+      "Kaede"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 3
+  },
+  {
+    "characterId": "20016",
+    "name": "伊吕波",
+    "fullName": "伊吕波",
+    "fullNameChinese": "伊吕波",
+    "aliases": [
+      "伊吕波",
+      "枣",
+      "Iroha"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "16009",
+    "name": "满",
+    "fullName": "满",
+    "fullNameChinese": "满",
+    "aliases": [
+      "满",
+      "千鸟",
+      "Michiru"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 1
+  },
+  {
+    "characterId": "10040",
+    "name": "月咏",
+    "fullName": "月咏",
+    "fullNameChinese": "月咏",
+    "aliases": [
+      "月咏",
+      "大野",
+      "Tsukuyo"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 3
+  },
+  {
+    "characterId": "10041",
+    "name": "美咲",
+    "fullName": "美咲",
+    "fullNameChinese": "美咲",
+    "aliases": [
+      "美咲",
+      "戒野",
+      "Misaki"
+    ],
+    "className": "Arius",
+    "rarity": 3
+  },
+  {
+    "characterId": "20017",
+    "name": "日和",
+    "fullName": "日和",
+    "fullNameChinese": "日和",
+    "aliases": [
+      "日和",
+      "槌永",
+      "Hiyori"
+    ],
+    "className": "Arius",
+    "rarity": 3
+  },
+  {
+    "characterId": "10042",
+    "name": "亚津子",
+    "fullName": "亚津子",
+    "fullNameChinese": "亚津子",
+    "aliases": [
+      "亚津子",
+      "秤",
+      "Atsuko"
+    ],
+    "className": "Arius",
+    "rarity": 3
+  },
+  {
+    "characterId": "10043",
+    "name": "若藻（泳装）",
+    "fullName": "若藻（泳装）",
+    "fullNameChinese": "若藻（泳装）",
+    "aliases": [
+      "若藻（泳装）",
+      "若藻",
+      "狐坂",
+      "Wakamo (Swimsuit)",
+      "Wakamo_Swimsuit",
+      "Wakamo"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 3
+  },
+  {
+    "characterId": "10044",
+    "name": "野宫（泳装）",
+    "fullName": "野宫（泳装）",
+    "fullNameChinese": "野宫（泳装）",
+    "aliases": [
+      "野宫（泳装）",
+      "野宫",
+      "十六夜",
+      "Nonomi (Swimsuit)",
+      "Nonomi_Swimsuit",
+      "Nonomi"
+    ],
+    "className": "Abydos",
+    "rarity": 3
+  },
+  {
+    "characterId": "26007",
+    "name": "绫音（泳装）",
+    "fullName": "绫音（泳装）",
+    "fullNameChinese": "绫音（泳装）",
+    "aliases": [
+      "绫音（泳装）",
+      "绫音",
+      "奥空",
+      "Ayane (Swimsuit)",
+      "Ayane_Swimsuit",
+      "Ayane"
+    ],
+    "className": "Abydos",
+    "rarity": 1
+  },
+  {
+    "characterId": "10045",
+    "name": "星野（泳装）",
+    "fullName": "星野（泳装）",
+    "fullNameChinese": "星野（泳装）",
+    "aliases": [
+      "星野（泳装）",
+      "星野",
+      "小鸟游",
+      "Hoshino (Swimsuit)",
+      "Hoshino_Swimsuit",
+      "Hoshino"
+    ],
+    "className": "Abydos",
+    "rarity": 3
+  },
+  {
+    "characterId": "26008",
+    "name": "静子（泳装）",
+    "fullName": "静子（泳装）",
+    "fullNameChinese": "静子（泳装）",
+    "aliases": [
+      "静子（泳装）",
+      "静子",
+      "河和",
+      "Shizuko (Swimsuit)",
+      "Shizuko_Swimsuit",
+      "Shizuko"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 1
+  },
+  {
+    "characterId": "10046",
+    "name": "泉奈（泳装）",
+    "fullName": "泉奈（泳装）",
+    "fullNameChinese": "泉奈（泳装）",
+    "aliases": [
+      "泉奈（泳装）",
+      "泉奈",
+      "久田",
+      "Izuna (Swimsuit)",
+      "Izuna_Swimsuit",
+      "Izuna"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 3
+  },
+  {
+    "characterId": "10047",
+    "name": "千世（泳装）",
+    "fullName": "千世（泳装）",
+    "fullNameChinese": "千世（泳装）",
+    "aliases": [
+      "千世（泳装）",
+      "千世",
+      "和乐",
+      "Chise (Swimsuit)",
+      "Chise_Swimsuit",
+      "Chise"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 3
+  },
+  {
+    "characterId": "10048",
+    "name": "纱织",
+    "fullName": "纱织",
+    "fullNameChinese": "纱织",
+    "aliases": [
+      "纱织",
+      "锭前",
+      "Saori"
+    ],
+    "className": "Arius",
+    "rarity": 3
+  },
+  {
+    "characterId": "20018",
+    "name": "萌绘",
+    "fullName": "萌绘",
+    "fullNameChinese": "萌绘",
+    "aliases": [
+      "萌绘",
+      "风仓",
+      "Moe"
+    ],
+    "className": "SRT",
+    "rarity": 3
+  },
+  {
+    "characterId": "10049",
+    "name": "和纱",
+    "fullName": "和纱",
+    "fullNameChinese": "和纱",
+    "aliases": [
+      "和纱",
+      "杏山",
+      "Kazusa"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "10050",
+    "name": "心奈",
+    "fullName": "心奈",
+    "fullNameChinese": "心奈",
+    "aliases": [
+      "心奈",
+      "春原",
+      "Kokona"
+    ],
+    "className": "Shanhaijing",
+    "rarity": 3
+  },
+  {
+    "characterId": "10051",
+    "name": "歌原（应援团）",
+    "fullName": "歌原（应援团）",
+    "fullNameChinese": "歌原（应援团）",
+    "aliases": [
+      "歌原（应援团）",
+      "歌原",
+      "白石",
+      "Utaha (Cheer Squad)",
+      "Utaha_Cheerleader",
+      "Utaha"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10052",
+    "name": "诺亚",
+    "fullName": "诺亚",
+    "fullNameChinese": "诺亚",
+    "aliases": [
+      "诺亚",
+      "生盐",
+      "Noa"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "16010",
+    "name": "响（应援团）",
+    "fullName": "响（应援团）",
+    "fullNameChinese": "响（应援团）",
+    "aliases": [
+      "响（应援团）",
+      "响",
+      "猫冢",
+      "Hibiki (Cheer Squad)",
+      "Hibiki_Cheerleader",
+      "Hibiki"
+    ],
+    "className": "Millennium",
+    "rarity": 1
+  },
+  {
+    "characterId": "20019",
+    "name": "茜（兔女郎）",
+    "fullName": "茜（兔女郎）",
+    "fullNameChinese": "茜（兔女郎）",
+    "aliases": [
+      "茜（兔女郎）",
+      "茜",
+      "室笠",
+      "Akane (Bunny)",
+      "Akane_Bunny",
+      "Akane"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10053",
+    "name": "优香（体操服）",
+    "fullName": "优香（体操服）",
+    "fullNameChinese": "优香（体操服）",
+    "aliases": [
+      "优香（体操服）",
+      "优香",
+      "早濑",
+      "Yuuka (Track)",
+      "Yuuka_Track",
+      "Yuuka"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10054",
+    "name": "玛丽（体操服）",
+    "fullName": "玛丽（体操服）",
+    "fullNameChinese": "玛丽（体操服）",
+    "aliases": [
+      "玛丽（体操服）",
+      "玛丽",
+      "伊落",
+      "Mari (Track)",
+      "Mari_Track",
+      "Mari"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "16011",
+    "name": "莲见（体操服）",
+    "fullName": "莲见（体操服）",
+    "fullNameChinese": "莲见（体操服）",
+    "aliases": [
+      "莲见（体操服）",
+      "莲见",
+      "羽川",
+      "Hasumi (Track)",
+      "Hasumi_Track",
+      "Hasumi"
+    ],
+    "className": "Trinity",
+    "rarity": 1
+  },
+  {
+    "characterId": "20020",
+    "name": "日鞠",
+    "fullName": "日鞠",
+    "fullNameChinese": "日鞠",
+    "aliases": [
+      "日鞠",
+      "明星",
+      "Himari"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10055",
+    "name": "时雨",
+    "fullName": "时雨",
+    "fullNameChinese": "时雨",
+    "aliases": [
+      "时雨",
+      "间宵",
+      "Shigure"
+    ],
+    "className": "RedWinter",
+    "rarity": 3
+  },
+  {
+    "characterId": "10056",
+    "name": "芹娜（圣诞节）",
+    "fullName": "芹娜（圣诞节）",
+    "fullNameChinese": "芹娜（圣诞节）",
+    "aliases": [
+      "芹娜（圣诞节）",
+      "芹娜",
+      "鹫见",
+      "Serina (Christmas)",
+      "Serina_Christmas",
+      "Serina"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "20021",
+    "name": "花江（圣诞节）",
+    "fullName": "花江（圣诞节）",
+    "fullNameChinese": "花江（圣诞节）",
+    "aliases": [
+      "花江（圣诞节）",
+      "花江",
+      "朝颜",
+      "Hanae (Christmas)",
+      "Hanae_Christmas",
+      "Hanae"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "10057",
+    "name": "晴奈（正月）",
+    "fullName": "晴奈（正月）",
+    "fullNameChinese": "晴奈（正月）",
+    "aliases": [
+      "晴奈（正月）",
+      "晴奈",
+      "黑馆",
+      "Haruna (New Year)",
+      "Haruna_NewYear",
+      "Haruna"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "20022",
+    "name": "风香(正月)",
+    "fullName": "风香(正月)",
+    "fullNameChinese": "风香(正月)",
+    "aliases": [
+      "风香(正月)",
+      "风香",
+      "爱清",
+      "Fuuka (New Year)",
+      "Fuuka_NewYear",
+      "Fuuka"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "16012",
+    "name": "纯子(正月)",
+    "fullName": "纯子(正月)",
+    "fullNameChinese": "纯子(正月)",
+    "aliases": [
+      "纯子(正月)",
+      "纯子",
+      "赤司",
+      "Junko (New Year)",
+      "Junko_NewYear",
+      "Junko"
+    ],
+    "className": "Gehenna",
+    "rarity": 1
+  },
+  {
+    "characterId": "10058",
+    "name": "峰",
+    "fullName": "峰",
+    "fullNameChinese": "峰",
+    "aliases": [
+      "峰",
+      "苍森",
+      "Mine"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "10059",
+    "name": "未花",
+    "fullName": "未花",
+    "fullNameChinese": "未花",
+    "aliases": [
+      "未花",
+      "圣园",
+      "Mika"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "10060",
+    "name": "惠久",
+    "fullName": "惠久",
+    "fullNameChinese": "惠久",
+    "aliases": [
+      "惠久",
+      "下仓",
+      "Megu"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "20023",
+    "name": "叶渚",
+    "fullName": "叶渚",
+    "fullNameChinese": "叶渚",
+    "aliases": [
+      "叶渚",
+      "尾刃",
+      "Kanna"
+    ],
+    "className": "Valkyrie",
+    "rarity": 3
+  },
+  {
+    "characterId": "10061",
+    "name": "樱子",
+    "fullName": "樱子",
+    "fullNameChinese": "樱子",
+    "aliases": [
+      "樱子",
+      "歌住",
+      "Sakurako"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "10062",
+    "name": "时",
+    "fullName": "时",
+    "fullNameChinese": "时",
+    "aliases": [
+      "时",
+      "飞鸟马",
+      "Toki"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "20024",
+    "name": "渚",
+    "fullName": "渚",
+    "fullNameChinese": "渚",
+    "aliases": [
+      "渚",
+      "桐藤",
+      "Nagisa"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "10063",
+    "name": "小雪",
+    "fullName": "小雪",
+    "fullNameChinese": "小雪",
+    "aliases": [
+      "小雪",
+      "黑崎",
+      "Koyuki"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10064",
+    "name": "佳代子（正月）",
+    "fullName": "佳代子（正月）",
+    "fullNameChinese": "佳代子（正月）",
+    "aliases": [
+      "佳代子（正月）",
+      "佳代子",
+      "鬼方",
+      "Kayoko (New Year)",
+      "Kayoko_NewYear",
+      "Kayoko"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "20025",
+    "name": "春香(正月)",
+    "fullName": "春香(正月)",
+    "fullNameChinese": "春香(正月)",
+    "aliases": [
+      "春香(正月)",
+      "春香",
+      "伊草",
+      "Haruka (New Year)",
+      "Haruka_NewYear",
+      "Haruka"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "10065",
+    "name": "果穗",
+    "fullName": "果穗",
+    "fullNameChinese": "果穗",
+    "aliases": [
+      "果穗",
+      "桑上",
+      "Kaho"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 3
+  },
+  {
+    "characterId": "10066",
+    "name": "爱丽丝（女仆）",
+    "fullName": "爱丽丝（女仆）",
+    "fullNameChinese": "爱丽丝（女仆）",
+    "aliases": [
+      "爱丽丝（女仆）",
+      "爱丽丝",
+      "天童",
+      "Aris (Maid)",
+      "Aris_Maid",
+      "Aris"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10067",
+    "name": "时（兔女郎）",
+    "fullName": "时（兔女郎）",
+    "fullNameChinese": "时（兔女郎）",
+    "aliases": [
+      "时（兔女郎）",
+      "时",
+      "飞鸟马",
+      "Toki (Bunny)",
+      "Toki_Bunny",
+      "Toki"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "26009",
+    "name": "柚子（女仆）",
+    "fullName": "柚子（女仆）",
+    "fullNameChinese": "柚子（女仆）",
+    "aliases": [
+      "柚子（女仆）",
+      "柚子",
+      "花冈",
+      "Yuzu (Maid)",
+      "Yuzu_Maid",
+      "Yuzu"
+    ],
+    "className": "Millennium",
+    "rarity": 1
+  },
+  {
+    "characterId": "10068",
+    "name": "玲纱",
+    "fullName": "玲纱",
+    "fullNameChinese": "玲纱",
+    "aliases": [
+      "玲纱",
+      "宇泽",
+      "Reisa"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "10069",
+    "name": "流美",
+    "fullName": "流美",
+    "fullNameChinese": "流美",
+    "aliases": [
+      "流美",
+      "朱城",
+      "Rumi"
+    ],
+    "className": "Shanhaijing",
+    "rarity": 3
+  },
+  {
+    "characterId": "10070",
+    "name": "弥奈",
+    "fullName": "弥奈",
+    "fullNameChinese": "弥奈",
+    "aliases": [
+      "弥奈",
+      "近卫",
+      "Mina"
+    ],
+    "className": "Shanhaijing",
+    "rarity": 3
+  },
+  {
+    "characterId": "20026",
+    "name": "实里",
+    "fullName": "实里",
+    "fullNameChinese": "实里",
+    "aliases": [
+      "实里",
+      "安守",
+      "Minori"
+    ],
+    "className": "RedWinter",
+    "rarity": 3
+  },
+  {
+    "characterId": "10071",
+    "name": "宫子（泳装）",
+    "fullName": "宫子（泳装）",
+    "fullNameChinese": "宫子（泳装）",
+    "aliases": [
+      "宫子（泳装）",
+      "宫子",
+      "月雪",
+      "Miyako (Swimsuit)",
+      "Miyako_Swimsuit",
+      "Miyako"
+    ],
+    "className": "SRT",
+    "rarity": 3
+  },
+  {
+    "characterId": "10072",
+    "name": "咲（泳装）",
+    "fullName": "咲（泳装）",
+    "fullNameChinese": "咲（泳装）",
+    "aliases": [
+      "咲（泳装）",
+      "咲",
+      "空井",
+      "Saki (Swimsuit)",
+      "Saki_Swimsuit",
+      "Saki"
+    ],
+    "className": "SRT",
+    "rarity": 3
+  },
+  {
+    "characterId": "26010",
+    "name": "美游（泳装）",
+    "fullName": "美游（泳装）",
+    "fullNameChinese": "美游（泳装）",
+    "aliases": [
+      "美游（泳装）",
+      "美游",
+      "霞泽",
+      "Miyu (Swimsuit)",
+      "Miyu_Swimsuit",
+      "Miyu"
+    ],
+    "className": "SRT",
+    "rarity": 1
+  },
+  {
+    "characterId": "20027",
+    "name": "白子（泳装）",
+    "fullName": "白子（泳装）",
+    "fullNameChinese": "白子（泳装）",
+    "aliases": [
+      "白子（泳装）",
+      "白子",
+      "砂狼",
+      "Shiroko (Swimsuit)",
+      "Shiroko_Swimsuit",
+      "Shiroko"
+    ],
+    "className": "Abydos",
+    "rarity": 3
+  },
+  {
+    "characterId": "10073",
+    "name": "忧（泳装）",
+    "fullName": "忧（泳装）",
+    "fullNameChinese": "忧（泳装）",
+    "aliases": [
+      "忧（泳装）",
+      "忧",
+      "古关",
+      "Ui (Swimsuit)",
+      "Ui_Swimsuit",
+      "Ui"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "20028",
+    "name": "日向（泳装）",
+    "fullName": "日向（泳装）",
+    "fullNameChinese": "日向（泳装）",
+    "aliases": [
+      "日向（泳装）",
+      "日向",
+      "若叶",
+      "Hinata (Swimsuit)",
+      "Hinata_Swimsuit",
+      "Hinata"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "16013",
+    "name": "小春（泳装）",
+    "fullName": "小春（泳装）",
+    "fullNameChinese": "小春（泳装）",
+    "aliases": [
+      "小春（泳装）",
+      "小春",
+      "下江",
+      "Koharu (Swimsuit)",
+      "Koharu_Swimsuit",
+      "Koharu"
+    ],
+    "className": "Trinity",
+    "rarity": 1
+  },
+  {
+    "characterId": "10074",
+    "name": "花子（泳装）",
+    "fullName": "花子（泳装）",
+    "fullNameChinese": "花子（泳装）",
+    "aliases": [
+      "花子（泳装）",
+      "花子",
+      "浦和",
+      "Hanako (Swimsuit)",
+      "Hanako_Swimsuit",
+      "Hanako"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "20029",
+    "name": "三森（泳装）",
+    "fullName": "三森（泳装）",
+    "fullNameChinese": "三森（泳装）",
+    "aliases": [
+      "三森（泳装）",
+      "三森",
+      "水羽",
+      "Mimori (Swimsuit)",
+      "Mimori_Swimsuit",
+      "Mimori"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 3
+  },
+  {
+    "characterId": "10075",
+    "name": "芽留",
+    "fullName": "芽留",
+    "fullNameChinese": "芽留",
+    "aliases": [
+      "芽留",
+      "姫木",
+      "Meru"
+    ],
+    "className": "RedWinter",
+    "rarity": 3
+  },
+  {
+    "characterId": "13013",
+    "name": "红叶",
+    "fullName": "红叶",
+    "fullNameChinese": "红叶",
+    "aliases": [
+      "红叶",
+      "秋泉",
+      "Momiji"
+    ],
+    "className": "RedWinter",
+    "rarity": 2
+  },
+  {
+    "characterId": "10076",
+    "name": "琴里(应援团)",
+    "fullName": "琴里(应援团)",
+    "fullNameChinese": "琴里(应援团)",
+    "aliases": [
+      "琴里(应援团)",
+      "琴里",
+      "丰见",
+      "Kotori (Cheer Squad)",
+      "Kotori_Cheerleader",
+      "Kotori"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "20030",
+    "name": "晴奈（运动服）",
+    "fullName": "晴奈（运动服）",
+    "fullNameChinese": "晴奈（运动服）",
+    "aliases": [
+      "晴奈（运动服）",
+      "晴奈",
+      "黑馆",
+      "Haruna (Track)",
+      "Haruna_Track",
+      "Haruna"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "10077",
+    "name": "一花",
+    "fullName": "一花",
+    "fullNameChinese": "一花",
+    "aliases": [
+      "一花",
+      "仲正",
+      "Ichika"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "10078",
+    "name": "霞",
+    "fullName": "霞",
+    "fullNameChinese": "霞",
+    "aliases": [
+      "霞",
+      "鬼怒川",
+      "Kasumi"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "20031",
+    "name": "时雨（温泉）",
+    "fullName": "时雨（温泉）",
+    "fullNameChinese": "时雨（温泉）",
+    "aliases": [
+      "时雨（温泉）",
+      "时雨",
+      "间宵",
+      "Shigure (Hot Spring)",
+      "Shigure_HotSpring",
+      "Shigure"
+    ],
+    "className": "RedWinter",
+    "rarity": 3
+  },
+  {
+    "characterId": "10079",
+    "name": "御坂美琴",
+    "fullName": "御坂美琴",
+    "fullNameChinese": "御坂美琴",
+    "aliases": [
+      "御坂美琴",
+      "美琴",
+      "御坂",
+      "Misaka Mikoto",
+      "Misaka_Mikoto"
+    ],
+    "className": "Tokiwadai",
+    "rarity": 3
+  },
+  {
+    "characterId": "10080",
+    "name": "食蜂操祈",
+    "fullName": "食蜂操祈",
+    "fullNameChinese": "食蜂操祈",
+    "aliases": [
+      "食蜂操祈",
+      "操祈",
+      "食蜂",
+      "Shokuhou Misaki",
+      "Shokuhou_Misaki"
+    ],
+    "className": "Tokiwadai",
+    "rarity": 3
+  },
+  {
+    "characterId": "26011",
+    "name": "佐天泪子",
+    "fullName": "佐天泪子",
+    "fullNameChinese": "佐天泪子",
+    "aliases": [
+      "佐天泪子",
+      "泪子",
+      "佐天",
+      "Saten Ruiko",
+      "Saten_Ruiko"
+    ],
+    "className": "Sakugawa",
+    "rarity": 1
+  },
+  {
+    "characterId": "10081",
+    "name": "紫草",
+    "fullName": "紫草",
+    "fullNameChinese": "紫草",
+    "aliases": [
+      "紫草",
+      "勘解由小路",
+      "Yukari"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 3
+  },
+  {
+    "characterId": "10082",
+    "name": "莲华",
+    "fullName": "莲华",
+    "fullNameChinese": "莲华",
+    "aliases": [
+      "莲华",
+      "不破",
+      "Renge"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 3
+  },
+  {
+    "characterId": "10083",
+    "name": "桔梗",
+    "fullName": "桔梗",
+    "fullNameChinese": "桔梗",
+    "aliases": [
+      "桔梗",
+      "桐生",
+      "Kikyou"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 3
+  },
+  {
+    "characterId": "20032",
+    "name": "艾米（泳装）",
+    "fullName": "艾米（泳装）",
+    "fullNameChinese": "艾米（泳装）",
+    "aliases": [
+      "艾米（泳装）",
+      "艾米",
+      "和泉元",
+      "Eimi (Swimsuit)",
+      "Eimi_Swimsuit",
+      "Eimi"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10084",
+    "name": "小玉（露营）",
+    "fullName": "小玉（露营）",
+    "fullNameChinese": "小玉（露营）",
+    "aliases": [
+      "小玉（露营）",
+      "小玉",
+      "音濑",
+      "Kotama (Camp)",
+      "Kotama_Camp",
+      "Kotama"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10085",
+    "name": "晴（露营）",
+    "fullName": "晴（露营）",
+    "fullNameChinese": "晴（露营）",
+    "aliases": [
+      "晴（露营）",
+      "晴",
+      "小钩",
+      "Hare (Camp)",
+      "Hare_Camp",
+      "Hare"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10087",
+    "name": "亚子（礼服）",
+    "fullName": "亚子（礼服）",
+    "fullNameChinese": "亚子（礼服）",
+    "aliases": [
+      "亚子（礼服）",
+      "亚子",
+      "天雨",
+      "Ako (Dress)",
+      "Ako_Dress",
+      "Ako"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "16014",
+    "name": "伊吹",
+    "fullName": "伊吹",
+    "fullNameChinese": "伊吹",
+    "aliases": [
+      "伊吹",
+      "丹花",
+      "Ibuki"
+    ],
+    "className": "Gehenna",
+    "rarity": 1
+  },
+  {
+    "characterId": "20033",
+    "name": "真琴",
+    "fullName": "真琴",
+    "fullNameChinese": "真琴",
+    "aliases": [
+      "真琴",
+      "羽沼",
+      "Makoto"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "10086",
+    "name": "日奈（礼服）",
+    "fullName": "日奈（礼服）",
+    "fullNameChinese": "日奈（礼服）",
+    "aliases": [
+      "日奈（礼服）",
+      "日奈",
+      "空崎",
+      "Hina (Dress)",
+      "Hina_Dress",
+      "Hina"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "10088",
+    "name": "佳代子（礼服）",
+    "fullName": "佳代子（礼服）",
+    "fullNameChinese": "佳代子（礼服）",
+    "aliases": [
+      "佳代子（礼服）",
+      "佳代子",
+      "鬼方",
+      "Kayoko (Dress)",
+      "Kayoko_Dress",
+      "Kayoko"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "10089",
+    "name": "阿露（礼服）",
+    "fullName": "阿露（礼服）",
+    "fullNameChinese": "阿露（礼服）",
+    "aliases": [
+      "阿露（礼服）",
+      "阿露",
+      "陆八魔",
+      "Aru (Dress)",
+      "Aru_Dress",
+      "Aru"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "20034",
+    "name": "明里（正月）",
+    "fullName": "明里（正月）",
+    "fullNameChinese": "明里（正月）",
+    "aliases": [
+      "明里（正月）",
+      "明里",
+      "鳄渕",
+      "Akari (New Year)",
+      "Akari_NewYear",
+      "Akari"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "10090",
+    "name": "海香",
+    "fullName": "海香",
+    "fullNameChinese": "海香",
+    "aliases": [
+      "海香",
+      "里浜",
+      "Umika"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 3
+  },
+  {
+    "characterId": "20035",
+    "name": "椿（导游）",
+    "fullName": "椿（导游）",
+    "fullNameChinese": "椿（导游）",
+    "aliases": [
+      "椿（导游）",
+      "椿",
+      "春日",
+      "Tsubaki (Guide)",
+      "Tsubaki_Guide",
+      "Tsubaki"
+    ],
+    "className": "Hyakkiyako",
+    "rarity": 3
+  },
+  {
+    "characterId": "10091",
+    "name": "和纱（乐队）",
+    "fullName": "和纱（乐队）",
+    "fullNameChinese": "和纱（乐队）",
+    "aliases": [
+      "和纱（乐队）",
+      "和纱",
+      "杏山",
+      "Kazusa (Band)",
+      "Kazusa_Band",
+      "Kazusa"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "10092",
+    "name": "好美（乐队）",
+    "fullName": "好美（乐队）",
+    "fullNameChinese": "好美（乐队）",
+    "aliases": [
+      "好美（乐队）",
+      "好美",
+      "伊原木",
+      "Yoshimi (Band)",
+      "Yoshimi_Band",
+      "Yoshimi"
+    ],
+    "className": "Trinity",
+    "rarity": 3
+  },
+  {
+    "characterId": "16015",
+    "name": "爱莉（乐队）",
+    "fullName": "爱莉（乐队）",
+    "fullNameChinese": "爱莉（乐队）",
+    "aliases": [
+      "爱莉（乐队）",
+      "爱莉",
+      "栗村",
+      "Airi (Band)",
+      "Airi_Band",
+      "Airi"
+    ],
+    "className": "Trinity",
+    "rarity": 1
+  },
+  {
+    "characterId": "10093",
+    "name": "绮罗罗",
+    "fullName": "绮罗罗",
+    "fullNameChinese": "绮罗罗",
+    "aliases": [
+      "绮罗罗",
+      "夜樱",
+      "Kirara"
+    ],
+    "className": "Gehenna",
+    "rarity": 3
+  },
+  {
+    "characterId": "10094",
+    "name": "桃井（女仆）",
+    "fullName": "桃井（女仆）",
+    "fullNameChinese": "桃井（女仆）",
+    "aliases": [
+      "桃井（女仆）",
+      "桃井",
+      "才羽",
+      "Momoi (Maid)",
+      "Momoi_Maid",
+      "Momoi"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "10095",
+    "name": "绿（女仆）",
+    "fullName": "绿（女仆）",
+    "fullNameChinese": "绿（女仆）",
+    "aliases": [
+      "绿（女仆）",
+      "绿",
+      "才羽",
+      "Midori (Maid)",
+      "Midori_Maid",
+      "Midori"
+    ],
+    "className": "Millennium",
+    "rarity": 3
+  },
+  {
+    "characterId": "20036",
+    "name": "芹香（泳装）",
+    "fullName": "芹香（泳装）",
+    "fullNameChinese": "芹香（泳装）",
+    "aliases": [
+      "芹香（泳装）",
+      "芹香",
+      "黑见",
+      "Serika (Swimsuit)",
+      "Serika_Swimsuit",
+      "Serika"
+    ],
+    "className": "Abydos",
+    "rarity": 3
+  },
+  {
+    "characterId": "10096",
+    "name": "叶渚（泳装）",
+    "fullName": "叶渚（泳装）",
+    "fullNameChinese": "叶渚（泳装）",
+    "aliases": [
+      "叶渚（泳装）",
+      "叶渚",
+      "尾刃",
+      "Kanna (Swimsuit)",
+      "Kanna_Swimsuit",
+      "Kanna"
+    ],
+    "className": "Valkyrie",
+    "rarity": 3
+  },
+  {
+    "characterId": "20037",
+    "name": "吹雪（泳装）",
+    "fullName": "吹雪（泳装）",
+    "fullNameChinese": "吹雪（泳装）",
+    "aliases": [
+      "吹雪（泳装）",
+      "吹雪",
+      "合欢垣",
+      "Fubuki (Swimsuit)",
+      "Fubuki_Swimsuit",
+      "Fubuki"
+    ],
+    "className": "Valkyrie",
+    "rarity": 3
+  },
+  {
+    "characterId": "26012",
+    "name": "桐乃（泳装）",
+    "fullName": "桐乃（泳装）",
+    "fullNameChinese": "桐乃（泳装）",
+    "aliases": [
+      "桐乃（泳装）",
+      "桐乃",
+      "中务",
+      "Kirino (Swimsuit)",
+      "Kirino_Swimsuit",
+      "Kirino"
+    ],
+    "className": "Valkyrie",
+    "rarity": 1
+  },
+  {
+    "characterId": "10097",
+    "name": "萌绘（泳装）",
+    "fullName": "萌绘（泳装）",
+    "fullNameChinese": "萌绘（泳装）",
+    "aliases": [
+      "萌绘（泳装）",
+      "萌绘",
+      "风仓",
+      "Moe (Swimsuit)",
+      "Moe_Swimsuit",
+      "Moe"
+    ],
+    "className": "SRT",
+    "rarity": 3
+  },
+  {
+    "characterId": "10098",
+    "name": "星野（临战）",
+    "fullName": "星野（临战）",
+    "fullNameChinese": "星野（临战）",
+    "aliases": [
+      "星野（临战）",
+      "星野",
+      "小鸟游",
+      "Hoshino (Battle)",
+      "Hoshino_Battle_Tank",
+      "Hoshino"
+    ],
+    "className": "Abydos",
+    "rarity": 3
+  },
+  {
+    "characterId": "10099",
+    "name": "星野（临战）",
+    "fullName": "星野（临战）",
+    "fullNameChinese": "星野（临战）",
+    "aliases": [
+      "星野（临战）",
+      "星野",
+      "小鸟游",
+      "Hoshino (Battle)",
+      "Hoshino_Battle_Dealer",
+      "Hoshino"
+    ],
+    "className": "Abydos",
+    "rarity": 3
+  },
+  {
+    "characterId": "10100",
+    "name": "白子＊恐怖",
+    "fullName": "白子＊恐怖",
+    "fullNameChinese": "白子＊恐怖",
+    "aliases": [
+      "白子＊恐怖",
+      "白子",
+      "砂狼",
+      "Shiroko Terror",
+      "Shiroko_Terror"
+    ],
+    "className": "Abydos",
+    "rarity": 3
+  },
+  {
+    "characterId": "26013",
+    "name": "亚津子（泳装）",
+    "fullName": "亚津子（泳装）",
+    "fullNameChinese": "亚津子（泳装）",
+    "aliases": [
+      "亚津子（泳装）",
+      "亚津子",
+      "秤",
+      "Atsuko (Swimsuit)",
+      "Atsuko_Swimsuit",
+      "Atsuko"
+    ],
+    "className": "Arius",
+    "rarity": 1
+  },
+  {
+    "characterId": "10101",
+    "name": "纱织（泳装）",
+    "fullName": "纱织（泳装）",
+    "fullNameChinese": "纱织（泳装）",
+    "aliases": [
+      "纱织（泳装）",
+      "纱织",
+      "锭前",
+      "Saori (Swimsuit)",
+      "Saori_Swimsuit",
+      "Saori"
+    ],
+    "className": "Arius",
+    "rarity": 3
+  },
+  {
+    "characterId": "10102",
+    "name": "日和（泳装）",
+    "fullName": "日和（泳装）",
+    "fullNameChinese": "日和（泳装）",
+    "aliases": [
+      "日和（泳装）",
+      "日和",
+      "槌永",
+      "Hiyori (Swimsuit)",
+      "Hiyori_Swimsuit",
+      "Hiyori"
+    ],
+    "className": "Arius",
+    "rarity": 3
+  }
+]
