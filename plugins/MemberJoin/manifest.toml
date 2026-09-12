@@ -1,6 +1,0 @@
-name = "MemberJoin"
-version = "1.0.0"
-main = "MemberJoin.py"
-entry_class = "MemberJoin"
-
-[dependencies]

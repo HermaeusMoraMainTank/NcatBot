@@ -1,9 +1,0 @@
-name = "McFish"
-version = "1.0.0"
-main = "McFish.py"
-entry_class = "McFish"
-author = "NcatBot"
-description = "钓鱼模拟器"
-
-[dependencies]
-GroupEconomy = ">=1.0.0"

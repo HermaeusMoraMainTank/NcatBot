@@ -1,6 +1,0 @@
-name = "TodayAnimeWaifu"
-version = "1.0.0"
-main = "TodayAnimeWaifu.py"
-entry_class = "TodayAnimeWaifu"
-
-[dependencies]

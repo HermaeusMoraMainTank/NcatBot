@@ -1,9 +1,0 @@
-name = "Robbery"
-version = "1.0.0"
-main = "Robbery.py"
-entry_class = "Robbery"
-author = "NcatBot"
-description = "打劫群友钱包"
-
-[dependencies]
-GroupEconomy = ">=1.0.0"

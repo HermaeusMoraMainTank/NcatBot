@@ -1,9 +1,0 @@
-name = "FF14RisingStoneInfo"
-version = "1.0.0"
-main = "FF14RisingStoneInfo.py"
-entry_class = "FF14RisingStoneInfo"
-
-[pip_dependencies]
-Pillow = "*"
-
-[dependencies]
