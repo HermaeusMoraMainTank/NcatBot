@@ -1,0 +1,195 @@
+{
+  "母肥": {
+    "triggers": [
+      "母肥",
+      "肥肥"
+    ],
+    "path": "C:\\lalafell\\lalafell",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "doro": {
+    "triggers": [
+      "doro"
+    ],
+    "path": "data/image/doro",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "llm": {
+    "triggers": [
+      "llm",
+      "迷茫的时候 不如听听llm说的话"
+    ],
+    "path": "data/image/llm",
+    "allowed_users": [
+      "273421673",
+      "2779893879",
+      "361432025",
+      "837089951",
+      "3398902282",
+      "10123121",
+      "541518108",
+      "724592874"
+    ],
+    "recall_time": null
+  },
+  "耄耋": {
+    "triggers": [
+      "耄耋"
+    ],
+    "path": "data/image/耄耋",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "xysk": {
+    "triggers": [
+      "咲夜saki",
+      "迷茫的时候 不如听听咲夜saki说的话",
+      "xysk",
+      "xtxy"
+    ],
+    "path": "data/image/咲夜saki",
+    "allowed_users": [
+      "273421673",
+      "635773721",
+      "1506123340",
+      "10123121",
+      "1508864751",
+      "2034756660",
+      "1824159516"
+    ],
+    "recall_time": null
+  },
+  "alice": {
+    "triggers": [
+      "alice"
+    ],
+    "path": "data/image/alice",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "kipfel": {
+    "triggers": [
+      "kipfel"
+    ],
+    "path": "data/image/kipfel",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "darkdog": {
+    "triggers": [
+      "darkdog"
+    ],
+    "path": "data/image/darkdog",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "whitecat": {
+    "triggers": [
+      "whitecat"
+    ],
+    "path": "data/image/whitecat",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "ybxa": {
+    "triggers": [
+      "ybxa"
+    ],
+    "path": "data/image/ybxa",
+    "allowed_users": [
+      "273421673",
+      "1310043427",
+      "1079454672"
+    ],
+    "recall_time": null
+  },
+  "blb": {
+    "triggers": [
+      "blb",
+      "菠萝包"
+    ],
+    "path": "data/image/blb",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "猪": {
+    "triggers": [
+      "猪"
+    ],
+    "path": "data/image/imagesender/猪",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "xqs": {
+    "triggers": [
+      "xqs"
+    ],
+    "path": "data/image/xqs",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "qqb": {
+    "triggers": [
+      "qqb",
+      "千千坂",
+      "干饭饭"
+    ],
+    "path": "data/image/qqb",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "df": {
+    "triggers": [
+      "df"
+    ],
+    "path": "data/image/df",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "xxt": {
+    "triggers": [
+      "xxt",
+      "小小兔",
+      "小小猪",
+      "xxz"
+    ],
+    "path": "data/image/xxt",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "zzl": {
+    "triggers": [
+      "zzl"
+    ],
+    "path": "data/image/zzl",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "pgly": {
+    "triggers": [
+      "pgly"
+    ],
+    "path": "data/image/pgly",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "喜多": {
+    "triggers": [
+      "喜多"
+    ],
+    "path": "data/image/喜多",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "符号": {
+    "triggers": [
+      "符号",
+      "symbol"
+    ],
+    "path": "data/image/imagesender/符号",
+    "allowed_users": null,
+    "recall_time": null
+  }
+}

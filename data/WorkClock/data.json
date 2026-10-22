@@ -1,0 +1,690 @@
+{
+  "by_user": {
+    "273421673": {
+      "last_closed": {
+        "work_date": "2026-10-08",
+        "clock_in": "2026-10-08T20:04:52",
+        "clock_out": "2026-10-09T20:04:00",
+        "auto_closed": true
+      }
+    },
+    "1607928177": {
+      "last_closed": {
+        "work_date": "2026-10-16",
+        "clock_in": "2026-10-16T14:22:48",
+        "clock_out": "2026-10-16T23:04:13"
+      }
+    },
+    "2448564447": {
+      "last_closed": {
+        "work_date": "2026-09-14",
+        "clock_in": "2026-09-15T00:06:04",
+        "clock_out": "2026-09-16T00:06:00",
+        "auto_closed": true
+      }
+    },
+    "1119272006": {
+      "last_closed": {
+        "work_date": "2026-10-21",
+        "clock_in": "2026-10-21T07:12:21",
+        "clock_out": "2026-10-21T18:44:24"
+      },
+      "active": {
+        "work_date": "2026-10-22",
+        "clock_in": "2026-10-22T07:10:50",
+        "clock_out": null
+      }
+    },
+    "747050506": {
+      "last_closed": {
+        "work_date": "2026-08-17",
+        "clock_in": "2026-08-17T07:23:56",
+        "clock_out": "2026-08-18T07:23:00",
+        "auto_closed": true
+      }
+    },
+    "3026374130": {
+      "last_closed": {
+        "work_date": "2026-08-07",
+        "clock_in": "2026-08-07T09:07:17",
+        "clock_out": "2026-08-08T09:07:00",
+        "auto_closed": true
+      }
+    },
+    "724592874": {
+      "last_closed": {
+        "work_date": "2026-06-22",
+        "clock_in": "2026-06-23T00:00:00",
+        "clock_out": "2026-06-23T19:43:40"
+      }
+    },
+    "1211330825": {
+      "last_closed": {
+        "work_date": "2026-08-28",
+        "clock_in": "2026-08-28T23:48:54",
+        "clock_out": "2026-08-29T23:48:00",
+        "auto_closed": true
+      }
+    },
+    "361432025": {
+      "last_closed": {
+        "work_date": "2026-09-07",
+        "clock_in": "2026-09-07T07:13:07",
+        "clock_out": "2026-09-08T07:13:00",
+        "auto_closed": true
+      }
+    },
+    "541518108": {
+      "last_closed": {
+        "work_date": "2026-08-03",
+        "clock_in": "2026-08-03T07:52:28",
+        "clock_out": "2026-08-04T07:52:00",
+        "auto_closed": true
+      }
+    },
+    "1918904607": {
+      "last_closed": {
+        "work_date": "2026-06-20",
+        "clock_in": "2026-06-20T02:01:55",
+        "clock_out": "2026-06-21T02:01:00",
+        "auto_closed": true
+      }
+    },
+    "984456390": {
+      "last_closed": {
+        "work_date": "2026-06-18",
+        "clock_in": "2026-06-18T07:09:32",
+        "clock_out": "2026-06-19T07:09:00",
+        "auto_closed": true
+      }
+    },
+    "10123121": {
+      "last_closed": {
+        "work_date": "2026-10-16",
+        "clock_in": "2026-10-16T09:00:00",
+        "clock_out": "2026-10-17T09:00:00",
+        "auto_closed": true
+      }
+    },
+    "1534564671": {
+      "last_closed": {
+        "work_date": "2026-06-18",
+        "clock_in": "2026-06-18T08:35:24",
+        "clock_out": "2026-06-19T08:35:00",
+        "auto_closed": true
+      }
+    },
+    "416139782": {
+      "last_closed": {
+        "work_date": "2026-06-18",
+        "clock_in": "2026-06-18T17:25:11",
+        "clock_out": "2026-06-19T17:25:00",
+        "auto_closed": true
+      }
+    },
+    "635773721": {
+      "last_closed": {
+        "work_date": "2026-09-18",
+        "clock_in": "2026-09-19T02:06:04",
+        "clock_out": "2026-09-20T02:06:00",
+        "auto_closed": true
+      }
+    },
+    "2214784017": {
+      "last_closed": {
+        "work_date": "2026-06-20",
+        "clock_in": "2026-06-20T15:42:49",
+        "clock_out": "2026-06-20T15:42:53"
+      }
+    },
+    "794383252": {
+      "last_closed": {
+        "work_date": "2026-07-30",
+        "clock_in": "2026-07-30T08:16:16",
+        "clock_out": "2026-07-30T17:03:04"
+      }
+    },
+    "348251245": {
+      "last_closed": {
+        "work_date": "2026-06-18",
+        "clock_in": "2026-06-18T06:00:00",
+        "clock_out": "2026-06-18T18:24:24"
+      }
+    },
+    "2432896620": {
+      "last_closed": {
+        "work_date": "2026-06-17",
+        "clock_in": "2026-06-17T09:00:00",
+        "clock_out": "2026-06-18T09:00:00",
+        "auto_closed": true
+      }
+    },
+    "344860632": {
+      "last_closed": {
+        "work_date": "2026-08-12",
+        "clock_in": "2026-08-12T18:06:40",
+        "clock_out": "2026-08-13T18:06:00",
+        "auto_closed": true
+      }
+    },
+    "1429458119": {
+      "last_closed": {
+        "work_date": "2026-06-17",
+        "clock_in": "2026-06-17T11:53:05",
+        "clock_out": "2026-06-18T11:53:00",
+        "auto_closed": true
+      }
+    },
+    "350498396": {
+      "last_closed": {
+        "work_date": "2026-08-04",
+        "clock_in": "2026-08-04T18:20:46",
+        "clock_out": "2026-08-05T18:20:00",
+        "auto_closed": true
+      }
+    },
+    "491326161": {
+      "last_closed": {
+        "work_date": "2026-07-02",
+        "clock_in": "2026-07-02T08:16:05",
+        "clock_out": "2026-07-02T23:57:52"
+      }
+    },
+    "1141419351": {
+      "last_closed": {
+        "work_date": "2026-07-18",
+        "clock_in": "2026-07-18T09:47:08",
+        "clock_out": "2026-07-19T09:47:00",
+        "auto_closed": true
+      }
+    },
+    "376579332": {
+      "last_closed": {
+        "work_date": "2026-09-05",
+        "clock_in": "2026-09-05T06:26:19",
+        "clock_out": "2026-09-06T06:26:00",
+        "auto_closed": true
+      }
+    },
+    "3271570733": {
+      "last_closed": {
+        "work_date": "2026-06-19",
+        "clock_in": "2026-06-19T09:55:12",
+        "clock_out": "2026-06-20T09:55:00",
+        "auto_closed": true
+      }
+    },
+    "1871512203": {
+      "last_closed": {
+        "work_date": "2026-10-14",
+        "clock_in": "2026-10-14T07:13:06",
+        "clock_out": "2026-10-15T07:13:00",
+        "auto_closed": true
+      }
+    },
+    "603797856": {
+      "last_closed": {
+        "work_date": "2026-09-08",
+        "clock_in": "2026-09-08T08:27:35",
+        "clock_out": "2026-09-09T08:27:00",
+        "auto_closed": true
+      }
+    },
+    "770027190": {
+      "last_closed": {
+        "work_date": "2026-06-17",
+        "clock_in": "2026-06-17T08:00:00",
+        "clock_out": "2026-06-18T08:00:00",
+        "auto_closed": true
+      }
+    },
+    "1036065530": {
+      "last_closed": {
+        "work_date": "2026-06-17",
+        "clock_in": "2026-06-17T10:58:22",
+        "clock_out": "2026-06-18T10:58:00",
+        "auto_closed": true
+      }
+    },
+    "2524545973": {
+      "last_closed": {
+        "work_date": "2026-06-18",
+        "clock_in": "2026-06-18T01:28:54",
+        "clock_out": "2026-06-18T11:43:02"
+      }
+    },
+    "2813495232": {
+      "last_closed": {
+        "work_date": "2026-08-10",
+        "clock_in": "2026-08-10T08:15:41",
+        "clock_out": "2026-08-11T08:15:00",
+        "auto_closed": true
+      }
+    },
+    "3637026925": {
+      "last_closed": {
+        "work_date": "2026-08-18",
+        "clock_in": "2026-08-18T16:19:18",
+        "clock_out": "2026-08-19T16:19:00",
+        "auto_closed": true
+      }
+    },
+    "895423859": {
+      "last_closed": {
+        "work_date": "2026-07-23",
+        "clock_in": "2026-07-23T08:57:52",
+        "clock_out": "2026-07-24T08:57:00",
+        "auto_closed": true
+      }
+    },
+    "1439833119": {
+      "last_closed": {
+        "work_date": "2026-07-01",
+        "clock_in": "2026-07-02T02:24:27",
+        "clock_out": "2026-07-03T02:24:00",
+        "auto_closed": true
+      }
+    },
+    "1908545345": {
+      "last_closed": {
+        "work_date": "2026-09-28",
+        "clock_in": "2026-09-28T07:23:51",
+        "clock_out": "2026-09-29T07:23:00",
+        "auto_closed": true
+      }
+    },
+    "158855742": {
+      "last_closed": {
+        "work_date": "2026-09-25",
+        "clock_in": "2026-09-26T00:05:04",
+        "clock_out": "2026-09-27T00:05:00",
+        "auto_closed": true
+      }
+    },
+    "1079454672": {
+      "last_closed": {
+        "work_date": "2026-07-02",
+        "clock_in": "2026-07-02T08:27:53",
+        "clock_out": "2026-07-02T15:20:45"
+      }
+    },
+    "2935157186": {
+      "last_closed": {
+        "work_date": "2026-07-01",
+        "clock_in": "2026-07-01T10:12:26",
+        "clock_out": "2026-07-02T10:12:00",
+        "auto_closed": true
+      }
+    },
+    "494111722": {
+      "last_closed": {
+        "work_date": "2026-09-20",
+        "clock_in": "2026-09-20T07:06:40",
+        "clock_out": "2026-09-21T07:06:00",
+        "auto_closed": true
+      }
+    },
+    "865971249": {
+      "last_closed": {
+        "work_date": "2026-09-18",
+        "clock_in": "2026-09-18T14:17:01",
+        "clock_out": "2026-09-19T14:17:00",
+        "auto_closed": true
+      }
+    },
+    "3424310495": {
+      "last_closed": {
+        "work_date": "2026-09-15",
+        "clock_in": "2026-09-15T08:30:02",
+        "clock_out": "2026-09-16T08:30:00",
+        "auto_closed": true
+      }
+    },
+    "784828131": {},
+    "510337095": {
+      "last_closed": {
+        "work_date": "2026-07-20",
+        "clock_in": "2026-07-20T22:58:46",
+        "clock_out": "2026-07-21T22:58:00",
+        "auto_closed": true
+      }
+    },
+    "1054080494": {
+      "last_closed": {
+        "work_date": "2026-07-20",
+        "clock_in": "2026-07-20T12:18:12",
+        "clock_out": "2026-07-21T12:18:00",
+        "auto_closed": true
+      }
+    },
+    "406505552": {
+      "last_closed": {
+        "work_date": "2026-07-20",
+        "clock_in": "2026-07-20T12:23:02",
+        "clock_out": "2026-07-21T12:23:00",
+        "auto_closed": true
+      }
+    },
+    "1206438520": {
+      "last_closed": {
+        "work_date": "2026-08-20",
+        "clock_in": "2026-08-20T18:32:38",
+        "clock_out": "2026-08-21T18:32:00",
+        "auto_closed": true
+      }
+    },
+    "450227707": {
+      "last_closed": {
+        "work_date": "2026-06-25",
+        "clock_in": "2026-06-26T02:00:00",
+        "clock_out": "2026-06-27T02:00:00",
+        "auto_closed": true
+      }
+    },
+    "564945700": {},
+    "1076998306": {
+      "last_closed": {
+        "work_date": "2026-09-29",
+        "clock_in": "2026-09-29T19:22:00",
+        "clock_out": "2026-09-30T19:22:00",
+        "auto_closed": true
+      }
+    },
+    "632282641": {
+      "last_closed": {
+        "work_date": "2026-07-20",
+        "clock_in": "2026-07-20T08:05:47",
+        "clock_out": "2026-07-21T08:05:00",
+        "auto_closed": true
+      }
+    },
+    "2637024946": {},
+    "1601032383": {
+      "last_closed": {
+        "work_date": "2026-08-08",
+        "clock_in": "2026-08-08T14:01:33",
+        "clock_out": "2026-08-09T14:01:00",
+        "auto_closed": true
+      }
+    },
+    "2523148917": {},
+    "81000624": {
+      "last_closed": {
+        "work_date": "2026-07-21",
+        "clock_in": "2026-07-21T15:47:54",
+        "clock_out": "2026-07-22T01:33:31"
+      }
+    },
+    "710150544": {
+      "last_closed": {
+        "work_date": "2026-06-26",
+        "clock_in": "2026-06-27T02:34:33",
+        "clock_out": "2026-06-28T02:34:00",
+        "auto_closed": true
+      }
+    },
+    "1310043427": {
+      "last_closed": {
+        "work_date": "2026-08-26",
+        "clock_in": "2026-08-26T07:09:17",
+        "clock_out": "2026-08-26T18:53:39"
+      }
+    },
+    "1741809231": {
+      "last_closed": {
+        "work_date": "2026-07-03",
+        "clock_in": "2026-07-03T06:28:36",
+        "clock_out": "2026-07-04T06:28:00",
+        "auto_closed": true
+      }
+    },
+    "295101882": {
+      "last_closed": {
+        "work_date": "2026-08-03",
+        "clock_in": "2026-08-03T08:55:56",
+        "clock_out": "2026-08-04T08:55:00",
+        "auto_closed": true
+      }
+    },
+    "499228596": {
+      "last_closed": {
+        "work_date": "2026-06-29",
+        "clock_in": "2026-06-29T09:53:23",
+        "clock_out": "2026-06-30T09:53:00",
+        "auto_closed": true
+      }
+    },
+    "864772045": {
+      "last_closed": {
+        "work_date": "2026-07-30",
+        "clock_in": "2026-07-30T08:14:01",
+        "clock_out": "2026-07-31T08:14:00",
+        "auto_closed": true
+      }
+    },
+    "262229759": {},
+    "957873450": {
+      "last_closed": {
+        "work_date": "2026-09-03",
+        "clock_in": "2026-09-03T07:35:25",
+        "clock_out": "2026-09-03T18:57:28"
+      }
+    },
+    "1281104": {
+      "last_closed": {
+        "work_date": "2026-09-05",
+        "clock_in": "2026-09-05T08:32:51",
+        "clock_out": "2026-09-06T08:32:00",
+        "auto_closed": true
+      }
+    },
+    "3246707418": {
+      "last_closed": {
+        "work_date": "2026-07-01",
+        "clock_in": "2026-07-01T08:09:37",
+        "clock_out": "2026-07-02T08:09:00",
+        "auto_closed": true
+      }
+    },
+    "3398902282": {
+      "last_closed": {
+        "work_date": "2026-07-01",
+        "clock_in": "2026-07-01T10:12:02",
+        "clock_out": "2026-07-02T10:12:00",
+        "auto_closed": true
+      }
+    },
+    "619314678": {
+      "last_closed": {
+        "work_date": "2026-07-01",
+        "clock_in": "2026-07-02T02:24:48",
+        "clock_out": "2026-07-03T02:24:00",
+        "auto_closed": true
+      }
+    },
+    "779832198": {
+      "last_closed": {
+        "work_date": "2026-09-08",
+        "clock_in": "2026-09-08T07:58:38",
+        "clock_out": "2026-09-09T07:58:00",
+        "auto_closed": true
+      }
+    },
+    "1909467345": {},
+    "2232116047": {},
+    "3219643700": {
+      "last_closed": {
+        "work_date": "2026-08-08",
+        "clock_in": "2026-08-08T13:20:11",
+        "clock_out": "2026-08-09T13:20:00",
+        "auto_closed": true
+      }
+    },
+    "1803177822": {
+      "last_closed": {
+        "work_date": "2026-09-08",
+        "clock_in": "2026-09-08T07:48:51",
+        "clock_out": "2026-09-09T07:48:00",
+        "auto_closed": true
+      }
+    },
+    "835823635": {},
+    "370615667": {
+      "last_closed": {
+        "work_date": "2026-10-01",
+        "clock_in": "2026-10-01T06:54:28",
+        "clock_out": "2026-10-02T06:54:00",
+        "auto_closed": true
+      }
+    },
+    "724846654": {
+      "active": {
+        "work_date": "2026-10-17",
+        "clock_in": "2026-10-17T13:06:49",
+        "clock_out": null
+      }
+    },
+    "1457728664": {
+      "last_closed": {
+        "work_date": "2026-09-01",
+        "clock_in": "2026-09-01T08:25:17",
+        "clock_out": "2026-09-02T08:25:00",
+        "auto_closed": true
+      }
+    },
+    "1506123340": {
+      "last_closed": {
+        "work_date": "2026-10-09",
+        "clock_in": "2026-10-09T15:52:29",
+        "clock_out": "2026-10-10T15:52:00",
+        "auto_closed": true
+      }
+    },
+    "1310414336": {
+      "last_closed": {
+        "work_date": "2026-07-25",
+        "clock_in": "2026-07-25T08:57:02",
+        "clock_out": "2026-07-26T08:57:00",
+        "auto_closed": true
+      }
+    },
+    "2243216588": {},
+    "1874264047": {},
+    "1174616729": {},
+    "1519325944": {},
+    "2261868372": {
+      "last_closed": {
+        "work_date": "2026-08-20",
+        "clock_in": "2026-08-20T12:37:31",
+        "clock_out": "2026-08-21T12:37:00",
+        "auto_closed": true
+      }
+    },
+    "995954190": {
+      "last_closed": {
+        "work_date": "2026-09-17",
+        "clock_in": "2026-09-17T08:18:36",
+        "clock_out": "2026-09-18T08:18:00",
+        "auto_closed": true
+      }
+    },
+    "2503449236": {
+      "last_closed": {
+        "work_date": "2026-08-07",
+        "clock_in": "2026-08-07T20:09:24",
+        "clock_out": "2026-08-08T20:09:00",
+        "auto_closed": true
+      }
+    },
+    "1061670897": {
+      "last_closed": {
+        "work_date": "2026-08-07",
+        "clock_in": "2026-08-07T20:10:19",
+        "clock_out": "2026-08-08T20:10:00",
+        "auto_closed": true
+      }
+    },
+    "2965725603": {},
+    "2663646956": {},
+    "593898045": {},
+    "2514624910": {
+      "last_closed": {
+        "work_date": "2026-08-24",
+        "clock_in": "2026-08-24T08:46:08",
+        "clock_out": "2026-08-25T08:46:00",
+        "auto_closed": true
+      }
+    },
+    "3204644596": {},
+    "493262707": {
+      "last_closed": {
+        "work_date": "2026-08-24",
+        "clock_in": "2026-08-24T08:44:39",
+        "clock_out": "2026-08-24T19:12:54"
+      }
+    },
+    "948674818": {
+      "last_closed": {
+        "work_date": "2026-08-21",
+        "clock_in": "2026-08-21T08:23:54",
+        "clock_out": "2026-08-21T20:15:46"
+      }
+    },
+    "2868538133": {
+      "last_closed": {
+        "work_date": "2026-08-19",
+        "clock_in": "2026-08-19T16:33:01",
+        "clock_out": "2026-08-20T16:33:00",
+        "auto_closed": true
+      }
+    },
+    "616572768": {},
+    "1410415906": {
+      "last_closed": {
+        "work_date": "2026-08-20",
+        "clock_in": "2026-08-20T19:31:08",
+        "clock_out": "2026-08-21T19:31:00",
+        "auto_closed": true
+      }
+    },
+    "1363021751": {},
+    "3260138443": {},
+    "469351812": {
+      "last_closed": {
+        "work_date": "2026-10-08",
+        "clock_in": "2026-10-08T19:51:46",
+        "clock_out": "2026-10-09T19:51:00",
+        "auto_closed": true
+      }
+    },
+    "2180617534": {
+      "last_closed": {
+        "work_date": "2026-09-05",
+        "clock_in": "2026-09-05T07:19:53",
+        "clock_out": "2026-09-06T07:19:00",
+        "auto_closed": true
+      }
+    },
+    "2354476529": {},
+    "690939970": {},
+    "603579108": {},
+    "3025982055": {
+      "last_closed": {
+        "work_date": "2026-10-08",
+        "clock_in": "2026-10-08T13:39:47",
+        "clock_out": "2026-10-09T13:39:00",
+        "auto_closed": true
+      }
+    },
+    "1226158433": {},
+    "3159752879": {},
+    "1007717267": {
+      "active": {
+        "work_date": "2026-10-20",
+        "clock_in": "2026-10-20T11:39:48",
+        "clock_out": null
+      }
+    },
+    "739708315": {}
+  }
+}

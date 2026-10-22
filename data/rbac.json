@@ -1,0 +1,58 @@
+{
+  "case_sensitive": true,
+  "default_role": null,
+  "roles": {
+    "full_bot_admin": {
+      "whitelist": [
+        "full_bot.admin"
+      ],
+      "blacklist": []
+    },
+    "rbac_admin": {
+      "whitelist": [
+        "rbac.admin",
+        "rbac.user"
+      ],
+      "blacklist": []
+    },
+    "rbac_user": {
+      "whitelist": [
+        "rbac.user"
+      ],
+      "blacklist": []
+    }
+  },
+  "users": {
+    "12345": {
+      "whitelist": [],
+      "blacklist": [],
+      "roles": [
+        "rbac_admin"
+      ]
+    }
+  },
+  "role_users": {
+    "full_bot_admin": [],
+    "rbac_admin": [
+      "12345"
+    ],
+    "rbac_user": []
+  },
+  "role_inheritance": {
+    "full_bot_admin": [],
+    "rbac_admin": [],
+    "rbac_user": []
+  },
+  "permissions": {
+    "groupsign": {
+      "manage": {}
+    },
+    "full_bot": {
+      "admin": {}
+    },
+    "rbac": {
+      "admin": {},
+      "user": {}
+    }
+  }
+}

@@ -1,0 +1,261 @@
+{
+  "母肥": {
+    "triggers": [
+      "母肥",
+      "肥肥"
+    ],
+    "path": "C:/lalafell/lalafell",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "doro": {
+    "triggers": [
+      "doro"
+    ],
+    "path": "data/image/imagesender/doro",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "llm": {
+    "triggers": [
+      "llm",
+      "迷茫的时候 不如听听llm说的话"
+    ],
+    "path": "data/image/imagesender/llm",
+    "allowed_users": [
+      "273421673",
+      "2779893879",
+      "361432025",
+      "837089951",
+      "3398902282",
+      "10123121",
+      "541518108",
+      "724592874"
+    ],
+    "recall_time": null
+  },
+  "耄耋": {
+    "triggers": [
+      "耄耋"
+    ],
+    "path": "data/image/imagesender/耄耋",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "xysk": {
+    "triggers": [
+      "咲夜saki",
+      "迷茫的时候 不如听听咲夜saki说的话",
+      "xysk",
+      "xtxy"
+    ],
+    "path": "data/image/imagesender/咲夜saki",
+    "allowed_users": [
+      "273421673",
+      "635773721",
+      "1506123340",
+      "10123121",
+      "1508864751",
+      "2034756660",
+      "1824159516"
+    ],
+    "recall_time": null
+  },
+  "alice": {
+    "triggers": [
+      "alice"
+    ],
+    "path": "data/image/imagesender/alice",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "kipfel": {
+    "triggers": [
+      "kipfel"
+    ],
+    "path": "data/image/imagesender/kipfel",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "darkdog": {
+    "triggers": [
+      "darkdog",
+      "黑狗"
+    ],
+    "path": "data/image/imagesender/darkdog",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "whitecat": {
+    "triggers": [
+      "whitecat"
+    ],
+    "path": "data/image/imagesender/whitecat",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "ybxa": {
+    "triggers": [
+      "ybxa"
+    ],
+    "path": "data/image/imagesender/ybxa",
+    "allowed_users": [
+      "273421673",
+      "1310043427",
+      "1079454672"
+    ],
+    "recall_time": null
+  },
+  "blb": {
+    "triggers": [
+      "blb",
+      "菠萝包"
+    ],
+    "path": "data/image/imagesender/blb",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "猪": {
+    "triggers": [
+      "猪"
+    ],
+    "path": "data/image/imagesender/猪",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "xqs": {
+    "triggers": [
+      "xqs"
+    ],
+    "path": "data/image/imagesender/xqs",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "qqb": {
+    "triggers": [
+      "qqb",
+      "千千坂",
+      "干饭饭"
+    ],
+    "path": "data/image/imagesender/qqb",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "df": {
+    "triggers": [
+      "df"
+    ],
+    "path": "data/image/imagesender/df",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "xxt": {
+    "triggers": [
+      "xxt",
+      "小小兔",
+      "小小猪",
+      "xxz"
+    ],
+    "path": "data/image/imagesender/xxt",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "zzl": {
+    "triggers": [
+      "zzl"
+    ],
+    "path": "data/image/imagesender/zzl",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "pgly": {
+    "triggers": [
+      "pgly"
+    ],
+    "path": "data/image/imagesender/pgly",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "喜多": {
+    "triggers": [
+      "喜多"
+    ],
+    "path": "data/image/imagesender/喜多",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "jsz": {
+    "triggers": [
+      "jsz",
+      "堇桑梓"
+    ],
+    "path": "data/image/imagesender/jsz",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "符号": {
+    "triggers": [
+      "符号",
+      "symbol"
+    ],
+    "path": "data/image/imagesender/符号",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "oz": {
+    "triggers": [
+      "oz"
+    ],
+    "path": "data/image/imagesender/oz",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "atri": {
+    "triggers": [
+      "atri"
+    ],
+    "path": "data/image/imagesender/atri",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "嘉嘉": {
+    "triggers": [
+      "嘉嘉"
+    ],
+    "path": "data/image/imagesender/嘉嘉",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "rk": {
+    "triggers": [
+      "rk"
+    ],
+    "path": "data/image/imagesender/rk",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "怪兽": {
+    "triggers": [
+      "怪兽"
+    ],
+    "path": "data/image/imagesender/怪兽",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "轩莹": {
+    "triggers": [
+      "轩莹"
+    ],
+    "path": "data/image/imagesender/轩莹",
+    "allowed_users": null,
+    "recall_time": null
+  },
+  "小零": {
+    "triggers": [
+      "小零"
+    ],
+    "path": "data/image/imagesender/小零",
+    "allowed_users": null,
+    "recall_time": null
+  }
+}
