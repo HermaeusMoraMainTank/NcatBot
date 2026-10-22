@@ -119,6 +119,18 @@ exposed_commands: []   # 允许模型代发的前缀命令，例：["今日老�
 - Agent：手动跑一个任务，查看每一步工具调用与完整对话。
 - 审计：技能调用、后台操作、耗时与错误。
 - `POST /mcp`：MCP JSON-RPC（`initialize` / `tools/list` / `tools/call`），给外部 MCP 客户端用。
+  自动插件入口需要活会话，调用时在 `arguments._context` 里带 `group_id` / `user_id`：
+
+```json
+{
+  "name": "plugin_Tarot_run",
+  "arguments": {
+    "text": "占卜",
+    "_context": { "group_id": "853963912", "user_id": "273421673" }
+  }
+}
+```
+
 
 ## 六、写一个 skill
 

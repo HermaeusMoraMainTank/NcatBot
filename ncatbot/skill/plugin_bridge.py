@@ -159,6 +159,14 @@ class PluginBridge:
                         "type": "boolean",
                         "description": "是否在消息里 @ 机器人，默认 false",
                     },
+                    "_context": {
+                        "type": "object",
+                        "description": "MCP/后台调用时传 group_id、user_id；聊天中不需要",
+                        "properties": {
+                            "group_id": {"type": "string"},
+                            "user_id": {"type": "string"},
+                        },
+                    },
                 },
                 "required": ["text"],
             },
@@ -168,7 +176,7 @@ class PluginBridge:
             side_effects="message",
             requires=("event",),
             timeout=120,
-            mcp_exposed=False,
+            mcp_exposed=True,
             source=f"auto:{name}",
         )
         self.registry.register(spec)
@@ -297,6 +305,7 @@ class PluginBridge:
         ctx: SkillContext,
         text: str,
         at_bot: bool = False,
+        _context: dict | None = None,
         *,
         plugin_name: str,
     ) -> SkillResult:

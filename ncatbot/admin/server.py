@@ -661,13 +661,22 @@ class AdminServer:
             arguments = params.get("arguments") or {}
             if not isinstance(arguments, dict):
                 return error(-32602, "arguments 必须是对象")
+            arguments = dict(arguments)
+            context = arguments.pop("_context", None) or {}
+            if not isinstance(context, dict):
+                context = {}
             from ncatbot.skill import SkillContext
 
+            capabilities = {"network", "fs.read", "fs.write", "llm", "media", "event"}
+            if getattr(self.bot.agents.runner, "allow_subprocess", False):
+                capabilities.add("subprocess")
             ctx = SkillContext(
-                session_key="mcp",
+                session_key=str(context.get("session_key") or "mcp"),
                 run_id="mcp",
                 roles={"owner"},
-                capabilities={"network", "fs.read", "fs.write", "llm", "media"},
+                group_id=str(context.get("group_id") or ""),
+                user_id=str(context.get("user_id") or ""),
+                capabilities=capabilities,
             )
             result = await self.bot.skills.invoke(spec.name, arguments, ctx=ctx)
             self._record_plain("mcp.call", {"skill": spec.name, "ok": result.ok}, operator="mcp")
