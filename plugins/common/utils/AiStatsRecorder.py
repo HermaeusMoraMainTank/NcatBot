@@ -58,10 +58,16 @@ MODEL_PRICING_CNY: Dict[str, Dict[str, float]] = {
         "input_cache_miss": 1.0,
         "output": 2.0,
     },
+    "deepseek-flash": {
+        # 空闲时段价格；高峰时段（工作日 9-12 / 14-18）为 2 倍
+        "input_cache_hit": 0.02,
+        "input_cache_miss": 1.0,
+        "output": 4.0,
+    },
     "deepseek-v4-pro": {
-        "input_cache_hit": 0.025,
-        "input_cache_miss": 3.0,
-        "output": 6.0,
+        "input_cache_hit": 0.15,
+        "input_cache_miss": 4.5,
+        "output": 13.5,
     },
     "meta/llama-4-maverick-17b-128e-instruct": {},
 }
@@ -90,7 +96,7 @@ def estimate_cost_cny(
     completion_tokens: int = 0,
     prompt_cache_hit_tokens: int = 0,
     total_tokens: int = 0,
-    model: str = "deepseek-chat",
+    model: str = "deepseek-flash",
 ) -> float:
     pricing = MODEL_PRICING_CNY.get(model)
     if not pricing:
@@ -171,7 +177,7 @@ def record_from_response(
     user_id: Optional[str],
     source: str,
     ai_response: Optional[dict],
-    model: str = "deepseek-chat",
+    model: str = "deepseek-flash",
 ) -> None:
     """从 AI 响应 dict 中提取 usage 并记录。"""
     if not ai_response or not isinstance(ai_response, dict):
@@ -196,7 +202,7 @@ def record_ai_usage(
     prompt_tokens: int = 0,
     completion_tokens: int = 0,
     prompt_cache_hit_tokens: int = 0,
-    model: str = "deepseek-chat",
+    model: str = "deepseek-flash",
     source: str = SOURCE_ACTIVE,
     trigger_type: str = None,
 ) -> None:

@@ -12,6 +12,7 @@ from ncatbot.core import registrar
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.types import At, Image, MessageArray
 from ncatbot.utils import get_log
+from common.utils.CommonUtil import CommonUtil
 
 from .ai import AIParseError, analyze_assessment, parse_meal, parse_profile
 from .calculations import (
@@ -81,6 +82,15 @@ class HealthDiet(NcatBotPlugin):
         self.data.setdefault(HEALTH_ENABLED_KEY, True)
         self.image_dir = Path(self.workspace) / "images"
         self.image_dir.mkdir(parents=True, exist_ok=True)
+        CommonUtil.cleanup_old_files(self.image_dir, max_age_seconds=3600)
+        CommonUtil.cleanup_backup_files([self.workspace], keep_seconds=86400)
+        self.add_scheduled_task(
+            "healthdiet_temp_cleanup",
+            "1h",
+            callback=lambda: CommonUtil.cleanup_old_files(
+                self.image_dir, max_age_seconds=3600
+            ),
+        )
         self.store = HealthStore(Path(self.workspace) / "health_diet.db")
         abnormal_users = self.store.audit_abnormal_users()
         if abnormal_users:
@@ -119,10 +129,13 @@ class HealthDiet(NcatBotPlugin):
         return self.image_dir / f"{prefix}_{time.time_ns()}.png"
 
     async def _send_image(self, event: Any, path: Path) -> None:
-        await event.reply(
-            rtf=MessageArray([Image(file=str(path))]),
-            at_sender=False,
-        )
+        try:
+            await event.reply(
+                rtf=MessageArray([Image(file=str(path))]),
+                at_sender=False,
+            )
+        finally:
+            CommonUtil.cleanup_paths([path])
 
     async def _notice(self, event: Any, title: str, lines: list[str]) -> None:
         path = await asyncio.to_thread(

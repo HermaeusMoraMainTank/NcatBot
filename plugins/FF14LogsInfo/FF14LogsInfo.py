@@ -12,6 +12,7 @@ from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from common.utils.plugin_commands import format_help, is_help_message
+from common.utils.CommonUtil import CommonUtil
 
 
 _log = logging.getLogger(__name__)
@@ -371,7 +372,7 @@ class FF14LogsInfo(NcatBotPlugin):
             return (30, 255, 0)
         return (128, 128, 128)
 
-        # @registrar.qq.on_group_message()  # disabled: migrated to Tataru\n    async def handle_ff14_logs(self, input: GroupMessage):
+    async def handle_ff14_logs(self, input: GroupMessage):
         message_parts = input.raw_message.split(" ")
         if len(message_parts) != 3 or message_parts[0] != "搜索玩家logs":
             return
@@ -408,15 +409,18 @@ class FF14LogsInfo(NcatBotPlugin):
                 group_id=input.group_id,
                 text="提醒:请谨慎使用该功能，用户使用引起其他玩家不快将会被禁止使用该功能。",
             )
-            await self.api.qq.post_group_msg(
-                group_id=input.group_id,
-                rtf=MessageChain(
-                    [
-                        Image(file=image_path),
-                        Reply(id=input.message_id),
-                    ]
-                ),
-            )
+            try:
+                await self.api.qq.post_group_msg(
+                    group_id=input.group_id,
+                    rtf=MessageChain(
+                        [
+                            Image(file=image_path),
+                            Reply(id=input.message_id),
+                        ]
+                    ),
+                )
+            finally:
+                CommonUtil.cleanup_paths([image_path])
 
     @registrar.qq.on_group_message()
     async def handle_help(self, input: GroupMessage):
@@ -429,4 +433,14 @@ class FF14LogsInfo(NcatBotPlugin):
     async def on_load(self):
         """异步加载插件"""
         _log.info(f"开始加载 {self.name} 插件 v{self.version}")
+        CommonUtil.cleanup_old_files(
+            "data/image/ff14/logs", max_age_seconds=86400
+        )
+        self.add_scheduled_task(
+            "ff14_logs_cleanup",
+            "24h",
+            callback=lambda: CommonUtil.cleanup_old_files(
+                "data/image/ff14/logs", max_age_seconds=86400
+            ),
+        )
         _log.info(f"{self.name} 插件加载完成")

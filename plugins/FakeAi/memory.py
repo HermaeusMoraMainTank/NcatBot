@@ -1844,7 +1844,9 @@ async def generate_summary_from_messages(
         from common.utils.AiUtil import AiUtil
 
         prompt = SUMMARY_PROMPT.format(chat_history=chat_history)
-        response = await AiUtil.search_deepseek("请分析并总结", prompt)
+        response = await AiUtil.search_deepseek(
+            "请分析并总结", prompt, capability="memory"
+        )
 
         if group_id is not None:
             try:
@@ -1949,7 +1951,9 @@ async def generate_user_impression(
         prompt = IMPRESSION_PROMPT.format(
             user_name=user_info, user_messages=user_messages
         )
-        response = await AiUtil.search_deepseek("请分析用户特点", prompt)
+        response = await AiUtil.search_deepseek(
+            "请分析用户特点", prompt, capability="memory"
+        )
 
         if group_id is not None:
             try:

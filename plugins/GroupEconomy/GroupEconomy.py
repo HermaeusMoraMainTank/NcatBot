@@ -57,6 +57,16 @@ class GroupEconomy(NcatBotPlugin):
         self.cache_dir = self.data_dir / "cache"
         self.card_dir = self.data_dir / "cards"
         self.store = EconomyStore(self.data_dir / "economy.db")
+        CommonUtil.cleanup_old_files(self.card_dir, max_age_seconds=3600)
+        CommonUtil.cleanup_backup_files([self.data_dir], keep_seconds=86400)
+        self.add_scheduled_task(
+            "economy_temp_cleanup",
+            "1h",
+            callback=lambda: (
+                CommonUtil.cleanup_old_files(self.card_dir, max_age_seconds=3600),
+                CommonUtil.cleanup_backup_files([self.data_dir], keep_seconds=86400),
+            ),
+        )
 
     async def on_close(self) -> None:
         self.store.close()
@@ -128,7 +138,10 @@ class GroupEconomy(NcatBotPlugin):
             streak=int(result.get("streak", 1)),
             output_path=output,
         )
-        await self.api.qq.post_group_msg(group_id=event.group_id, rtf=MessageArray([Image(file=str(output))]))
+        try:
+            await self.api.qq.post_group_msg(group_id=event.group_id, rtf=MessageArray([Image(file=str(output))]))
+        finally:
+            CommonUtil.cleanup_paths([output])
 
     async def _send_wallet_card(
         self,
@@ -165,10 +178,13 @@ class GroupEconomy(NcatBotPlugin):
             notice=notice,
             output_path=output,
         )
-        await self.api.qq.post_group_msg(
-            group_id=event.group_id,
-            rtf=MessageArray([Image(file=str(output))]),
-        )
+        try:
+            await self.api.qq.post_group_msg(
+                group_id=event.group_id,
+                rtf=MessageArray([Image(file=str(output))]),
+            )
+        finally:
+            CommonUtil.cleanup_paths([output])
 
     async def _checkin(self, event) -> None:
         low = max(0, int(self.cfg("checkin_min_reward") or 10))
@@ -323,7 +339,10 @@ class GroupEconomy(NcatBotPlugin):
             wallet=wallet,
             title="金币财富榜" if wallet else "跨群等级榜",
         )
-        await self.api.qq.post_group_msg(group_id=event.group_id, rtf=MessageArray([Image(file=str(output))]))
+        try:
+            await self.api.qq.post_group_msg(group_id=event.group_id, rtf=MessageArray([Image(file=str(output))]))
+        finally:
+            CommonUtil.cleanup_paths([output])
 
     @registrar.qq.on_group_message(priority=35)
     async def handle_message(self, event: GroupMessage) -> None:

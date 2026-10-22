@@ -14,6 +14,8 @@ from pathlib import Path
 from typing import Any, Awaitable, Callable, List, Optional, Sequence, TypeVar
 
 from ncatbot.adapter import BaseAdapter, adapter_registry
+from ncatbot.admin import AdminServer
+from ncatbot.agent import AgentRuntime, OpenAICompatibleLLM, RunStore
 from ncatbot.api import BotAPIClient, QQAPIClient, MiscAPI
 from ncatbot.core import (
     AsyncEventDispatcher,
@@ -22,7 +24,9 @@ from ncatbot.core import (
     flush_pending,
 )
 from ncatbot.plugin import PluginLoader
+from ncatbot.sandbox import SandboxRunner, WorkspaceManager
 from ncatbot.service import ServiceManager
+from ncatbot.skill import SkillRegistry
 from ncatbot.utils import (
     get_config_manager,
     get_log,
@@ -95,6 +99,41 @@ class BotClient:
         self._running = False
         self._listen_task: Optional[asyncio.Task] = None
         self._listen_tasks: List[asyncio.Task] = []
+        self._maintenance_task: Optional[asyncio.Task] = None
+
+        cfg = mgr.config
+        sandbox_cfg = getattr(cfg, "sandbox", None)
+        agent_cfg = getattr(cfg, "agent", None)
+        self._skills = SkillRegistry()
+        self._agents = AgentRuntime(
+            self._skills,
+            llm=OpenAICompatibleLLM.from_config(cfg),
+            store=RunStore(
+                "data/agent/runs.jsonl",
+                keep=int(getattr(agent_cfg, "keep_runs", 200) or 200),
+            ),
+            workspaces=WorkspaceManager(
+                getattr(sandbox_cfg, "root", "data/sandbox") or "data/sandbox",
+                max_files=int(getattr(sandbox_cfg, "max_files", 200) or 200),
+                max_bytes=int(
+                    getattr(sandbox_cfg, "max_bytes", 50 * 1024 * 1024)
+                    or 50 * 1024 * 1024
+                ),
+            ),
+            runner=SandboxRunner(
+                allow_subprocess=bool(getattr(sandbox_cfg, "allow_subprocess", False)),
+                backend=str(getattr(sandbox_cfg, "backend", "auto") or "auto"),
+                network=bool(getattr(sandbox_cfg, "network", False)),
+            ),
+            max_rounds=int(getattr(agent_cfg, "max_rounds", 8) or 8),
+            max_tool_calls=int(getattr(agent_cfg, "max_tool_calls", 20) or 20),
+            run_timeout=float(getattr(agent_cfg, "run_timeout", 180) or 180),
+            max_depth=int(getattr(agent_cfg, "max_depth", 1) or 0),
+            max_tokens_per_run=int(
+                getattr(agent_cfg, "max_tokens_per_run", 60000) or 0
+            ),
+        )
+        self._admin = AdminServer(self)
 
         # 待注册的 handler（在 run 之前通过 @bot.on() 收集）
         self._pending_handlers: list[tuple[str, object, dict]] = []
@@ -131,6 +170,22 @@ class BotClient:
     @property
     def plugin_loader(self) -> PluginLoader:
         return self._plugin_loader
+
+    @property
+    def config(self):
+        return get_config_manager().config
+
+    @property
+    def skills(self) -> SkillRegistry:
+        return self._skills
+
+    @property
+    def agents(self) -> AgentRuntime:
+        return self._agents
+
+    @property
+    def admin(self) -> AdminServer:
+        return self._admin
 
     @property
     def service_manager(self) -> ServiceManager:
@@ -241,6 +296,19 @@ class BotClient:
 
         await self._execute_lifecycle_callbacks(self._close_callbacks, "关闭")
 
+        try:
+            await self._admin.stop()
+        except Exception as e:
+            LOG.error("关闭管理后台异常: %s", e)
+
+        if self._maintenance_task is not None and not self._maintenance_task.done():
+            self._maintenance_task.cancel()
+            try:
+                await self._maintenance_task
+            except (asyncio.CancelledError, Exception):
+                pass
+            self._maintenance_task = None
+
         # 优先断开适配器（释放端口等网络资源），使 listen 循环自然退出
         for adapter in self._adapters:
             try:
@@ -330,11 +398,30 @@ class BotClient:
         finally:
             await self.shutdown()
 
+    async def _maintenance_loop(self) -> None:
+        """每天清理过期的 agent 工作区，避免 sandbox 无限增长。"""
+        while self._running:
+            try:
+                removed = self._agents.workspaces.cleanup(max_age_seconds=7 * 86400)
+                if removed:
+                    LOG.info("已清理 %d 个过期 agent 工作区", removed)
+            except Exception as e:
+                LOG.warning("清理 agent 工作区失败: %s", e)
+            try:
+                await asyncio.sleep(86400)
+            except asyncio.CancelledError:
+                raise
+
     async def _startup(self) -> None:
-        """引导启动：adapter → API → dispatcher → 服务 → 插件 → 热重载"""
+        """引导启动：adapter → API → dispatcher → 服务 → 插件 → 后台"""
         await self._startup_core()
         await self._setup_plugins()
         self._running = True
+        try:
+            await self._admin.start()
+        except Exception as e:
+            LOG.error("管理后台启动失败: %s", e)
+        self._maintenance_task = asyncio.create_task(self._maintenance_loop())
         await self._execute_lifecycle_callbacks(self._startup_callbacks, "启动")
 
     async def _startup_core(self) -> None:
@@ -428,14 +515,44 @@ class BotClient:
         flush_pending(self.handler_dispatcher, "__global__")
 
         def _inject_plugin_deps(plugin, manifest):
-            plugin.services = self._service_manager
-            plugin.api = self._api
-            plugin._dispatcher = self._dispatcher
-            plugin._plugin_loader = self._plugin_loader
+            for attr, value in (
+                ("services", self._service_manager),
+                ("api", self._api),
+                ("_dispatcher", self._dispatcher),
+                ("_plugin_loader", self._plugin_loader),
+                ("skills", self._skills),
+                ("agents", self._agents),
+                ("sandbox", self._agents.runner),
+                ("admin", self._admin),
+            ):
+                try:
+                    setattr(plugin, attr, value)
+                except Exception as e:
+                    LOG.debug(
+                        "插件 %s 注入 %s 失败: %s",
+                        getattr(plugin, "name", "?"),
+                        attr,
+                        e,
+                    )
+
+        def _on_plugin_loaded(plugin):
+            try:
+                self._skills.discover_plugin(plugin)
+            except Exception as e:
+                LOG.error("插件 %s 的 skill 发现失败: %s", getattr(plugin, "name", "?"), e)
+
+        def _on_plugin_unloaded(name):
+            self._skills.unregister_plugin(name)
 
         self._plugin_loader._on_plugin_init = _inject_plugin_deps
+        self._plugin_loader._on_plugin_loaded = _on_plugin_loaded
+        self._plugin_loader._on_plugin_unloaded = _on_plugin_unloaded
         await self._plugin_loader.load_builtin_plugins()
         await self._plugin_loader.load_all(self._plugins_dir)
+        try:
+            self._agents.store.load_tail()
+        except Exception as e:
+            LOG.debug("恢复历史 Agent 运行记录失败: %s", e)
 
         mgr = get_config_manager()
         if mgr.effective_hot_reload() and self._service_manager.has("file_watcher"):

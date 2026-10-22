@@ -3,6 +3,7 @@ import asyncio
 import base64
 import json
 import os
+import time
 from io import BytesIO
 from pathlib import Path
 from typing import Any, List, Optional, Tuple
@@ -32,13 +33,33 @@ def _load_secret(json_key: str, env_key: str) -> str:
         return ""
 
 
-# NVIDIA API 配置
+# NVIDIA API 配置（保留兼容，仅旧链路使用）
 NVIDIA_API_URL = "https://integrate.api.nvidia.com/v1"
 NVIDIA_API_KEY = _load_secret("nvidia_api_key", "NVIDIA_API_KEY")
 
-# DeepSeek 账户查询配置（仅用于余额查询，不参与当前聊天请求）
+# DeepSeek 官方 API
 DEEPSEEK_API_URL = "https://api.deepseek.com"
 DEEPSEEK_API_KEY = _load_secret("deepseek_api_key", "DEEPSEEK_API_KEY")
+
+# 按能力拆分的 Key：平台侧可按 Key 单独查看用量
+DEEPSEEK_CHAT_KEY = (
+    _load_secret("deepseek_chat_key", "DEEPSEEK_CHAT_KEY") or DEEPSEEK_API_KEY
+)
+DEEPSEEK_VISION_KEY = (
+    _load_secret("deepseek_vision_key", "DEEPSEEK_VISION_KEY") or DEEPSEEK_CHAT_KEY
+)
+DEEPSEEK_JUDGE_KEY = (
+    _load_secret("deepseek_judge_key", "DEEPSEEK_JUDGE_KEY") or DEEPSEEK_CHAT_KEY
+)
+DEEPSEEK_SEARCH_KEY = (
+    _load_secret("deepseek_search_key", "DEEPSEEK_SEARCH_KEY") or DEEPSEEK_CHAT_KEY
+)
+DEEPSEEK_MEMORY_KEY = (
+    _load_secret("deepseek_memory_key", "DEEPSEEK_MEMORY_KEY") or DEEPSEEK_CHAT_KEY
+)
+DEEPSEEK_PRO_KEY = (
+    _load_secret("deepseek_pro_key", "DEEPSEEK_PRO_KEY") or DEEPSEEK_CHAT_KEY
+)
 
 # MiMo Token Plan API 配置（OpenAI 兼容接口）
 MIMO_API_URL = "https://token-plan-cn.xiaomimimo.com/v1"
@@ -50,17 +71,62 @@ MIMO_TTS_API_URL = MIMO_API_URL
 MIMO_TTS_API_KEY = MIMO_API_KEY
 MIMO_TTS_MODEL = "mimo-v2.5-tts"
 
-# DeepSeek 官方文本对话配置（OpenAI 兼容接口）
-DEEPSEEK_CHAT_MODEL = "deepseek-chat"
+# DeepSeek 官方模型
+DEEPSEEK_CHAT_MODEL = "deepseek-flash"
+DEEPSEEK_PRO_MODEL = "deepseek-v4-pro"
+VISION_MODEL = "deepseek-flash"
 
-# 多模态模型（llama-4-maverick 已于 2026-07-27 EOL）
-# 候选实测：kimi-k2.6 本账号 404；ministral-14b 同日 EOL；
-# nemotron-omni 可用；默认会 reasoning 偏慢，关闭 thinking 后约 1.5–3s。
-VISION_MODEL = "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning"
-
-# 文本对话（NVIDIA NIM OpenAI 兼容）：厂商前缀 + 模型名
-# CHAT_MODEL = "minimaxai/minimax-m2.7"  # 暂禁用：响应过慢
+# 文本对话（NVIDIA NIM OpenAI 兼容）：厂商前缀 + 模型名（旧链路保留）
 CHAT_MODEL = "minimaxai/minimax-m2.7"
+
+_CAPABILITY_KEYS = {
+    "chat": DEEPSEEK_CHAT_KEY,
+    "vision": DEEPSEEK_VISION_KEY,
+    "judge": DEEPSEEK_JUDGE_KEY,
+    "search": DEEPSEEK_SEARCH_KEY,
+    "memory": DEEPSEEK_MEMORY_KEY,
+    "pro": DEEPSEEK_PRO_KEY,
+}
+_CAPABILITY_MODELS = {
+    "chat": DEEPSEEK_CHAT_MODEL,
+    "vision": DEEPSEEK_CHAT_MODEL,
+    "judge": DEEPSEEK_CHAT_MODEL,
+    "search": DEEPSEEK_CHAT_MODEL,
+    "memory": DEEPSEEK_CHAT_MODEL,
+    "pro": DEEPSEEK_PRO_MODEL,
+}
+
+
+def _capability_key(capability: str) -> str:
+    return _CAPABILITY_KEYS.get(capability, DEEPSEEK_CHAT_KEY)
+
+
+def _capability_model(capability: str, override: Optional[str] = None) -> str:
+    return override or _CAPABILITY_MODELS.get(capability, DEEPSEEK_CHAT_MODEL)
+
+
+# 搜索/抓取按次计费，重复查询走 TTL 缓存，避免重复花钱
+_TOOLS_CACHE: dict = {}
+_TOOLS_CACHE_TTL = 15 * 60
+_TOOLS_CACHE_MAX = 128
+
+
+def _tools_cache_get(key: str) -> Optional[dict]:
+    item = _TOOLS_CACHE.get(key)
+    if not item:
+        return None
+    ts, value = item
+    if time.time() - ts > _TOOLS_CACHE_TTL:
+        _TOOLS_CACHE.pop(key, None)
+        return None
+    return value
+
+
+def _tools_cache_set(key: str, value: dict) -> None:
+    if len(_TOOLS_CACHE) >= _TOOLS_CACHE_MAX:
+        oldest = min(_TOOLS_CACHE, key=lambda k: _TOOLS_CACHE[k][0])
+        _TOOLS_CACHE.pop(oldest, None)
+    _TOOLS_CACHE[key] = (time.time(), value)
 
 
 def _completion_to_result(completion: Any, model: str) -> dict:
@@ -287,20 +353,22 @@ class AiUtil:
         keyword: str,
         prompt: str,
         max_tokens: int | None = None,
-        temperature: float = 1.2,
+        temperature: float | None = None,
         *,
         request_timeout: float | None = None,
         retries: int = 3,
+        capability: str = "chat",
+        model: str | None = None,
+        thinking: bool = False,
     ) -> Optional[dict]:
-        """文本对话：使用 DeepSeek 官方接口，并按调用方参数重试。"""
-        _log.info(keyword)
+        """文本对话：按能力选择 Key/模型，默认关闭思考模式。"""
+        api_key = _capability_key(capability)
+        model = _capability_model(capability, model)
+        if temperature is None:
+            temperature = 0.9 if capability == "chat" else 0.3
+        _log.info("[Chat] capability=%s model=%s", capability, model)
 
-        provider = (
-            "DeepSeek",
-            DEEPSEEK_API_URL,
-            DEEPSEEK_API_KEY,
-            DEEPSEEK_CHAT_MODEL,
-        )
+        provider = ("DeepSeek", DEEPSEEK_API_URL, api_key, model)
         providers = [provider] * max(1, retries)
         delay = 2
 
@@ -320,9 +388,15 @@ class AiUtil:
                             {"role": "system", "content": prompt},
                             {"role": "user", "content": keyword},
                         ],
-                        "temperature": temperature,
                         "stream": False,
+                        "extra_body": {
+                            "thinking": {
+                                "type": "enabled" if thinking else "disabled"
+                            }
+                        },
                     }
+                    if not thinking:
+                        completion_kwargs["temperature"] = temperature
                     if max_tokens is not None:
                         completion_kwargs["max_tokens"] = max_tokens
                     completion_kwargs["timeout"] = request_timeout
@@ -349,10 +423,91 @@ class AiUtil:
         return None
 
     @staticmethod
+    async def chat_completion(
+        messages: List[dict],
+        *,
+        tools: Optional[List[dict]] = None,
+        capability: str = "chat",
+        model: str | None = None,
+        thinking: bool = False,
+        temperature: float | None = None,
+        max_tokens: int | None = None,
+        request_timeout: float | None = 90,
+    ) -> Optional[dict]:
+        """OpenAI 兼容 Chat Completions，支持 tools / tool_calls。
+
+        返回 content、tool_calls、reasoning_content、usage、model。
+        注意：思考模式 + tools 时，多轮请求必须把 reasoning_content 一并回传。
+        """
+        api_key = _capability_key(capability)
+        model = _capability_model(capability, model)
+        if temperature is None:
+            temperature = 0.9 if capability == "chat" else 0.3
+        payload = {
+            "model": model,
+            "messages": messages,
+            "stream": False,
+            "extra_body": {
+                "thinking": {"type": "enabled" if thinking else "disabled"}
+            },
+        }
+        if tools:
+            payload["tools"] = tools
+            payload["tool_choice"] = "auto"
+        if not thinking:
+            payload["temperature"] = temperature
+        if max_tokens is not None:
+            payload["max_tokens"] = max_tokens
+
+        try:
+            async with AsyncOpenAI(
+                api_key=api_key,
+                base_url=DEEPSEEK_API_URL,
+                max_retries=0,
+                timeout=request_timeout,
+            ) as client:
+                completion = await client.chat.completions.create(**payload)
+        except Exception as e:
+            _log.error("[Chat] chat_completion 失败: %s: %s", type(e).__name__, e)
+            return None
+
+        msg = completion.choices[0].message
+        usage_info = completion.usage
+        usage = {
+            "prompt_tokens": getattr(usage_info, "prompt_tokens", 0),
+            "completion_tokens": getattr(usage_info, "completion_tokens", 0),
+            "total_tokens": getattr(usage_info, "total_tokens", 0),
+        }
+        for key in ("prompt_cache_hit_tokens", "prompt_cache_miss_tokens"):
+            val = getattr(usage_info, key, None)
+            if val is not None:
+                usage[key] = val
+
+        tool_calls = []
+        for tc in msg.tool_calls or []:
+            tool_calls.append(
+                {
+                    "id": tc.id,
+                    "type": "function",
+                    "function": {
+                        "name": tc.function.name,
+                        "arguments": tc.function.arguments,
+                    },
+                }
+            )
+        return {
+            "content": msg.content or "",
+            "tool_calls": tool_calls,
+            "reasoning_content": getattr(msg, "reasoning_content", None),
+            "usage": usage,
+            "model": model,
+        }
+
+    @staticmethod
     async def get_deepseek_balance() -> dict:
         """查询 DeepSeek API 余额"""
         url = f"{DEEPSEEK_API_URL}/user/balance"
-        api_key = DEEPSEEK_API_KEY
+        api_key = _capability_key("chat")
 
         headers = {"Accept": "application/json", "Authorization": f"Bearer {api_key}"}
 
@@ -404,45 +559,44 @@ class AiUtil:
         image_base64_list: List[str] = None,
         system_prompt: str = None,
         max_tokens: int = 2048,
-        temperature: float = 0.7,
+        temperature: float = 0.3,
+        *,
+        capability: str = "vision",
+        model: str | None = None,
     ) -> Optional[dict]:
-        """多模态模型调用（NVIDIA NIM Vision / Omni）
+        """DeepSeek 多模态调用（deepseek-flash 原生图像理解）。
 
         Args:
             prompt: 用户提问文本
-            image_urls: 图片URL列表
-            image_base64_list: 图片base64编码列表（纯base64或data:image/xxx;base64,xxx格式）
+            image_urls: 图片 URL 列表
+            image_base64_list: 图片 base64 列表（纯 base64 或 data:image/... 前缀）
             system_prompt: 系统提示词
-            max_tokens: 最大生成token数
+            max_tokens: 最大生成 token 数
             temperature: 温度参数
+            capability: 使用的 Key 能力（默认 vision）
+            model: 覆盖模型（默认 deepseek-flash）
 
         Returns:
             包含 content 和 usage 的字典，或 None
         """
-        _log.info(f"[Vision] 调用多模态模型: {VISION_MODEL}")
+        api_key = _capability_key(capability)
+        model = _capability_model(capability, model)
+        _log.info("[Vision] 调用 DeepSeek 多模态模型: %s", model)
 
-        # 构建消息内容
-        content_parts = []
+        content_parts = [{"type": "text", "text": prompt}]
 
-        # 添加文本
-        content_parts.append({"type": "text", "text": prompt})
-
-        # 添加图片URL
         if image_urls:
             for url in image_urls:
                 content_parts.append({"type": "image_url", "image_url": {"url": url}})
 
-        # 添加base64图片
         if image_base64_list:
             for img_b64 in image_base64_list:
-                # 如果不是完整的 data URI，补全
                 if not img_b64.startswith("data:"):
                     img_b64 = f"data:image/jpeg;base64,{img_b64}"
                 content_parts.append(
                     {"type": "image_url", "image_url": {"url": img_b64}}
                 )
 
-        # 构建消息
         messages = []
         if system_prompt:
             messages.append({"role": "system", "content": system_prompt})
@@ -450,22 +604,21 @@ class AiUtil:
 
         try:
             async with AsyncOpenAI(
-                api_key=NVIDIA_API_KEY,
-                base_url=NVIDIA_API_URL,
+                api_key=api_key,
+                base_url=DEEPSEEK_API_URL,
                 timeout=60.0,
             ) as client:
                 completion = await client.chat.completions.create(
-                    model=VISION_MODEL,
+                    model=model,
                     messages=messages,
                     max_tokens=max_tokens,
                     temperature=temperature,
                     stream=False,
                     timeout=45.0,
-                    # Nemotron Omni 默认会先 reasoning，关闭后延迟从 ~13s 降到 ~2s
-                    extra_body={"chat_template_kwargs": {"enable_thinking": False}},
+                    extra_body={"thinking": {"type": "disabled"}},
                 )
 
-            result = _completion_to_result(completion, VISION_MODEL)
+            result = _completion_to_result(completion, model)
             _log.info(f"[Vision] 响应内容: {result['content'][:100]}...")
             _log.info(f"[Vision] Token使用: {result['usage']}")
             return result
@@ -477,3 +630,51 @@ class AiUtil:
         except Exception as e:
             _log.error(f"[Vision] 异常: {e}")
             return None
+
+    @staticmethod
+    async def _post_tools_api(path: str, payload: dict, *, timeout: int = 60) -> dict:
+        """调用 DeepSeek Search/Fetch 工具 API（按次计费）。"""
+        url = f"{DEEPSEEK_API_URL}{path}"
+        headers = {
+            "Authorization": f"Bearer {_capability_key('search')}",
+            "Content-Type": "application/json",
+        }
+        async with aiohttp.ClientSession() as session:
+            async with session.post(
+                url, json=payload, headers=headers, timeout=timeout
+            ) as response:
+                text = await response.text()
+                if response.status != 200:
+                    raise RuntimeError(
+                        f"DeepSeek tools API {path} HTTP {response.status}: {text[:300]}"
+                    )
+                return json.loads(text)
+
+    @staticmethod
+    async def search_web(
+        query: str, *, count: int = 10, need_content: bool = False
+    ) -> dict:
+        """DeepSeek 自研搜索：返回标题/URL/摘要/正文（15 分钟缓存）。"""
+        key = f"search:{query}|{count}|{int(need_content)}"
+        cached = _tools_cache_get(key)
+        if cached is not None:
+            _log.info("[ToolsCache] search hit: %s", query[:40])
+            return cached
+        data = await AiUtil._post_tools_api(
+            "/v1/tools/search",
+            {"query": query, "count": count, "need_content": need_content},
+        )
+        _tools_cache_set(key, data)
+        return data
+
+    @staticmethod
+    async def fetch_web(url: str) -> dict:
+        """DeepSeek 网页抓取：返回 Markdown 正文（15 分钟缓存）。"""
+        key = f"fetch:{url}"
+        cached = _tools_cache_get(key)
+        if cached is not None:
+            _log.info("[ToolsCache] fetch hit: %s", url[:60])
+            return cached
+        data = await AiUtil._post_tools_api("/v1/tools/fetch", {"url": url})
+        _tools_cache_set(key, data)
+        return data

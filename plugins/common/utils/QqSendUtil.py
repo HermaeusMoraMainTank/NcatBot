@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+from pathlib import Path
 from typing import Any, Callable, List, Optional, Union
 
 from ncatbot.types import Image, MessageArray, PlainText
@@ -58,24 +59,44 @@ class QqSendUtil:
         report_retries: int = 3,
     ) -> None:
         """发送计数器 GIF + 统计长图（分两条，带重试与间隔）。"""
+        counter_elements = number_to_counter(total_count)
         elements: List = []
         if header:
             elements.append(PlainText(text=header))
-        elements.extend(number_to_counter(total_count))
+        elements.extend(counter_elements)
 
-        await QqSendUtil.post_group_msg_retry(
-            qq_api,
-            group_id,
-            rtf=MessageArray(elements),
-            reply=reply_id,
-        )
-        if not report_path:
-            return
-        await asyncio.sleep(0.8)
-        await QqSendUtil.post_group_msg_retry(
-            qq_api,
-            group_id,
-            rtf=MessageArray([Image(file=report_path)]),
-            reply=reply_id,
-            retries=report_retries,
-        )
+        try:
+            await QqSendUtil.post_group_msg_retry(
+                qq_api,
+                group_id,
+                rtf=MessageArray(elements),
+                reply=reply_id,
+            )
+            if not report_path:
+                return
+            await asyncio.sleep(0.8)
+            await QqSendUtil.post_group_msg_retry(
+                qq_api,
+                group_id,
+                rtf=MessageArray([Image(file=report_path)]),
+                reply=reply_id,
+                retries=report_retries,
+            )
+        finally:
+            QqSendUtil.cleanup_message_images(counter_elements)
+            QqSendUtil.cleanup_message_images([Image(file=report_path)] if report_path else [])
+
+    @staticmethod
+    def cleanup_message_images(elements: List) -> int:
+        """删除消息链中引用的临时图片文件。"""
+        removed = 0
+        for element in elements or []:
+            path = getattr(element, "file", None)
+            if not path:
+                continue
+            try:
+                Path(path).unlink()
+                removed += 1
+            except (OSError, TypeError, ValueError):
+                pass
+        return removed

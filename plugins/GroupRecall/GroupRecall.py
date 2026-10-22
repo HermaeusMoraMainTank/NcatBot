@@ -71,8 +71,8 @@ class GroupRecallPlugin(NcatBotPlugin):
     # 数据保存控制
     _save_lock = threading.Lock()
 
-    # 2天 = 48小时 = 172800秒
-    EXPIRATION_TIME = 2 * 24 * 3600
+    # 6小时 = 21600秒
+    EXPIRATION_TIME = 6 * 3600
 
     # 记录上一次清理的日期
     last_cleanup_date: date = None

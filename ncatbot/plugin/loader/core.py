@@ -64,6 +64,9 @@ class PluginLoader:
         self._on_plugin_init: Optional[Callable[[BasePlugin, PluginManifest], None]] = (
             None
         )
+        # 插件加载完成 / 卸载完成回调（用于 skill 发现与清理）
+        self._on_plugin_loaded: Optional[Callable[[BasePlugin], None]] = None
+        self._on_plugin_unloaded: Optional[Callable[[str], None]] = None
 
         # Handler 分发器（由 BotClient 注入）
         self._handler_dispatcher: Optional["HandlerDispatcher"] = None
@@ -200,6 +203,11 @@ class PluginLoader:
                 flush_pending(self._handler_dispatcher, name, plugin_instance=plugin)
 
             self.plugins[name] = plugin
+            if self._on_plugin_loaded is not None:
+                try:
+                    self._on_plugin_loaded(plugin)
+                except Exception as e:
+                    LOG.error("插件 %s 加载回调异常: %s", name, e)
             LOG.info("插件加载成功: %s v%s", name, manifest.version)
             return plugin
 
@@ -237,6 +245,11 @@ class PluginLoader:
             self._importer.unload_module(manifest)
 
         del self.plugins[name]
+        if self._on_plugin_unloaded is not None:
+            try:
+                self._on_plugin_unloaded(name)
+            except Exception as e:
+                LOG.error("插件 %s 卸载回调异常: %s", name, e)
         LOG.info("插件已卸载: %s", name)
         return True
 

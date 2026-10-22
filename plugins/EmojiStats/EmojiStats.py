@@ -27,6 +27,7 @@ from common.stats_render.helpers import (
     period_display_label,
     sum_daily_by_period,
 )
+from common.stats_render.paths import cleanup_temp as cleanup_stats_temp
 from common.utils.plugin_commands import format_help, is_help_message
 
 # 禁用 SSL 警告
@@ -134,11 +135,15 @@ class EmojiStatsPlugin(NcatBotPlugin):
     # 简化的数据保存控制
     _save_lock = threading.Lock()
 
-    # 清理策略配置
-    # 保留最近N天内有使用记录的图片（覆盖"本月"统计，并给一些缓冲）
-    CLEANUP_KEEP_DAYS = 60
-    # 保留使用次数排名前N的图片（因为统计显示TOP10，保留更多一些作为缓冲）
-    CLEANUP_KEEP_TOP_COUNT = 30
+    # 清理策略：保留报告实际展示的图片 + 常青热点
+    # 每个群每个统计周期展示 TOP N
+    CLEANUP_TOP_PER_GROUP = 10
+    # 报告支持的统计周期：今日 / 本周 / 本月 / 全部
+    CLEANUP_TOP_PERIODS = (1, 7, 30, None)
+    # 常青热点：在至少 N 个不同月份出现过
+    CLEANUP_HOT_MONTHS = 6
+    # 且总使用次数不低于该值
+    CLEANUP_HOT_MIN_COUNT = 50
 
     # 使用说明
     usage_instructions = """表情包统计指令：
@@ -213,6 +218,13 @@ class EmojiStatsPlugin(NcatBotPlugin):
             callback=self._scheduled_persist,
         ):
             _log.warning("[EmojiStats] 5 分钟刷盘定时任务注册失败")
+        cleanup_stats_temp(keep_hours=1, max_files=50)
+        if not self.add_scheduled_task(
+            "emoji_stats_temp_cleanup",
+            "1h",
+            callback=lambda: cleanup_stats_temp(keep_hours=1, max_files=50),
+        ):
+            _log.warning("[EmojiStats] 统计临时图清理任务注册失败")
         _log.info(
             "[EmojiStats] 定时任务已注册: %s",
             self.list_scheduled_tasks(),
@@ -684,136 +696,90 @@ class EmojiStatsPlugin(NcatBotPlugin):
         cleanup_thread.start()
 
     def _cleanup_unused_images(self):
-        """清理不在统计数据中引用的图片文件
+        """只保留报告实际展示的图片，以及横跨多个月的常青热点。
 
-        清理策略：
-        1. 保留最近N天内有使用记录的图片（覆盖"本月"统计，并给一些缓冲）
-        2. 同时保留使用次数排名前N的图片（因为统计显示TOP10，保留更多一些作为缓冲）
-        这样可以避免删除频率低但最近有使用的图片，以及删除后突然变热门的图片
+        报告会针对每个群分别展示 今日/本周/本月/全部 的 TOP10，因此保留：
+        1. 每个群在 CLEANUP_TOP_PERIODS 各周期下的 TOP10 并集；
+        2. 在 CLEANUP_HOT_MONTHS 个不同月份出现过，且总次数 >= CLEANUP_HOT_MIN_COUNT 的表情。
+        其余长尾表情只保留统计数据，不再缓存图片；再次出现时会自动重新下载。
         """
         try:
-            # 确保缓存目录存在
             if not os.path.exists(self.CACHE_DIR):
                 return
 
-            # 收集所有需要保留的图片文件名
-            keep_filenames = set()
+            keep = set()
+            hot = {}
+            today = date.today()
 
-            # 策略1：收集最近N天内有使用记录的图片
-            cutoff_date = date.today() - timedelta(days=self.CLEANUP_KEEP_DAYS)
+            for emojis in (self.group_stats or {}).values():
+                rows = []
+                for stats in emojis.values():
+                    filename = os.path.basename(
+                        getattr(stats, "cache_path", "") or ""
+                    )
+                    if not filename:
+                        continue
+                    daily = getattr(stats, "daily_counts", {}) or {}
+                    total = int(sum(daily.values()))
+                    if total <= 0:
+                        continue
 
-            # 从群组统计中收集最近使用的图片
-            for group_id, emojis in self.group_stats.items():
-                for emoji_key, emoji_stats in emojis.items():
-                    # 检查最近是否有使用记录
-                    has_recent_use = False
-                    if emoji_stats.daily_counts:
-                        for date_str, count in emoji_stats.daily_counts.items():
-                            try:
-                                use_date = date.fromisoformat(date_str)
-                                if use_date >= cutoff_date and count > 0:
-                                    has_recent_use = True
-                                    break
-                            except (ValueError, TypeError):
-                                continue
+                    months = {str(d)[:7] for d, c in daily.items() if c > 0}
+                    rec = hot.setdefault(filename, [0, set()])
+                    rec[0] += total
+                    rec[1].update(months)
 
-                    # 如果最近有使用，保留
-                    if has_recent_use:
-                        if emoji_key:
-                            keep_filenames.add(emoji_key)
-                        if (
-                            hasattr(emoji_stats, "cache_path")
-                            and emoji_stats.cache_path
-                        ):
-                            filename = os.path.basename(emoji_stats.cache_path)
-                            if filename:
-                                keep_filenames.add(filename)
+                    for days in self.CLEANUP_TOP_PERIODS:
+                        if days is None:
+                            count = total
+                        else:
+                            cutoff = (today - timedelta(days=days)).isoformat()
+                            count = sum(
+                                v for d, v in daily.items() if str(d) >= cutoff
+                            )
+                        rows.append((days, count, filename))
 
-            # 从用户统计中收集最近使用的图片
-            for group_id, users in self.user_stats.items():
-                for user_id, emojis in users.items():
-                    for emoji_key, emoji_stats in emojis.items():
-                        # 检查最近是否有使用记录
-                        has_recent_use = False
-                        if emoji_stats.daily_counts:
-                            for date_str, count in emoji_stats.daily_counts.items():
-                                try:
-                                    use_date = date.fromisoformat(date_str)
-                                    if use_date >= cutoff_date and count > 0:
-                                        has_recent_use = True
-                                        break
-                                except (ValueError, TypeError):
-                                    continue
+                for days in self.CLEANUP_TOP_PERIODS:
+                    ranked = sorted(
+                        ((c, f) for d, c, f in rows if d == days and c > 0),
+                        reverse=True,
+                    )
+                    for _, filename in ranked[: self.CLEANUP_TOP_PER_GROUP]:
+                        keep.add(filename)
 
-                        # 如果最近有使用，保留
-                        if has_recent_use:
-                            if emoji_key:
-                                keep_filenames.add(emoji_key)
-                            if (
-                                hasattr(emoji_stats, "cache_path")
-                                and emoji_stats.cache_path
-                            ):
-                                filename = os.path.basename(emoji_stats.cache_path)
-                                if filename:
-                                    keep_filenames.add(filename)
+            for filename, (count, months) in hot.items():
+                if (
+                    count >= self.CLEANUP_HOT_MIN_COUNT
+                    and len(months) >= self.CLEANUP_HOT_MONTHS
+                ):
+                    keep.add(filename)
 
-            # 策略2：收集使用次数排名前N的图片（按群组统计）
-            # 收集所有表情包及其总使用次数
-            all_emojis_with_count = []
-            for group_id, emojis in self.group_stats.items():
-                for emoji_key, emoji_stats in emojis.items():
-                    total_count = emoji_stats.get_count()  # 获取总使用次数
-                    if total_count > 0:
-                        all_emojis_with_count.append(
-                            (emoji_key, emoji_stats, total_count)
-                        )
-
-            # 按使用次数排序，取前N个
-            all_emojis_with_count.sort(key=lambda x: x[2], reverse=True)
-            top_emojis = all_emojis_with_count[: self.CLEANUP_KEEP_TOP_COUNT]
-
-            # 将排名前N的图片加入保留列表
-            for emoji_key, emoji_stats, _ in top_emojis:
-                if emoji_key:
-                    keep_filenames.add(emoji_key)
-                if hasattr(emoji_stats, "cache_path") and emoji_stats.cache_path:
-                    filename = os.path.basename(emoji_stats.cache_path)
-                    if filename:
-                        keep_filenames.add(filename)
-
-            # 扫描缓存目录中的所有图片文件
             deleted_count = 0
             total_size_freed = 0
-
-            if os.path.exists(self.CACHE_DIR):
-                for filename in os.listdir(self.CACHE_DIR):
-                    file_path = os.path.join(self.CACHE_DIR, filename)
-                    if not os.path.isfile(file_path):
-                        continue
-
-                    # 只处理图片文件（.jpg, .png, .gif等）
-                    if not filename.lower().endswith(
-                        (".jpg", ".jpeg", ".png", ".gif", ".webp")
-                    ):
-                        continue
-
-                    # 如果文件不在保留列表中，删除它
-                    if filename not in keep_filenames:
-                        try:
-                            file_size = os.path.getsize(file_path)
-                            os.remove(file_path)
-                            deleted_count += 1
-                            total_size_freed += file_size
-                            _log.debug(f"[EmojiStats] 删除未引用的图片: {file_path}")
-                        except Exception as e:
-                            _log.error(f"[EmojiStats] 删除图片失败 {file_path}: {e}")
+            for filename in os.listdir(self.CACHE_DIR):
+                file_path = os.path.join(self.CACHE_DIR, filename)
+                if not os.path.isfile(file_path):
+                    continue
+                if filename in keep:
+                    continue
+                if not filename.lower().endswith(
+                    (".jpg", ".jpeg", ".png", ".gif", ".webp")
+                ):
+                    continue
+                try:
+                    file_size = os.path.getsize(file_path)
+                    os.remove(file_path)
+                    deleted_count += 1
+                    total_size_freed += file_size
+                except OSError as e:
+                    _log.error(f"[EmojiStats] 删除图片失败 {file_path}: {e}")
 
             if deleted_count > 0:
                 size_mb = total_size_freed / (1024 * 1024)
                 _log.info(
-                    f"[EmojiStats] 清理了 {deleted_count} 张未引用的图片，释放了 {size_mb:.2f} MB 空间"
+                    f"[EmojiStats] 清理了 {deleted_count} 张非展示/非热点表情图，"
+                    f"释放了 {size_mb:.2f} MB 空间"
                 )
-
         except Exception as e:
             _log.error(f"[EmojiStats] 清理图片时发生异常: {e}")
 
@@ -870,6 +836,11 @@ class EmojiStatsPlugin(NcatBotPlugin):
         # 检查图片是否已经存在于统计中
         for emoji in self.group_stats.get(group_id, {}).values():
             if emoji.url == image_url:
+                # 低频图片可能已被清理，重新出现时补回缓存
+                if not os.path.exists(emoji.cache_path):
+                    restored = await self._download_and_cache_image(image_url)
+                    if restored:
+                        emoji.cache_path = restored
                 # 找到现有表情包，更新统计
                 # 更新群组统计
                 emoji.increment_count(today)

@@ -15,6 +15,7 @@ from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING
 from ncatbot.event import create_entity as platform_create_entity
 from ncatbot.utils import get_log
 
+from ..dispatcher.event import Event
 from .hook import Hook, HookAction, HookContext, HookStage, get_hooks
 
 if TYPE_CHECKING:
@@ -189,6 +190,20 @@ class HandlerDispatcher:
         return removed
 
     # ==================== 核心分发 ====================
+
+    async def dispatch_event(self, data: Any, *, platform: str | None = None) -> None:
+        """直接分发一条合成事件（不经过 AsyncEventDispatcher 广播）。
+
+        用于「模型代发命令」这类需要等 handler 执行完、又不想让事件
+        进入所有事件流的场景。
+        """
+        event_type = data.resolve_type()
+        event = Event(
+            type=event_type,
+            data=data,
+            platform=platform or getattr(data, "platform", "unknown"),
+        )
+        await self._dispatch(event)
 
     async def _dispatch(self, event: "Event") -> None:
         """接收 Event 并分发到匹配的 handlers。"""

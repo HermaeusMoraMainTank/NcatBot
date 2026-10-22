@@ -257,10 +257,16 @@ class AiStats(NcatBotPlugin):
             self.user_stats = {}
         # 不要清空内存中的数据，保持现有数据
         self._load_ai_stats_json()
+        cleanup_stats_temp(keep_hours=1, max_files=50)
         tasks = [
             ("ai_balance_poll", "30m", self._poll_balance),
             ("ai_daily_balance_finalize", "00:05", self._finalize_daily_balance),
             ("ai_stats_persist", "5m", self._scheduled_persist),
+            (
+                "ai_stats_temp_cleanup",
+                "1h",
+                lambda: cleanup_stats_temp(keep_hours=1, max_files=50),
+            ),
         ]
         for name, interval, cb in tasks:
             if not self.add_scheduled_task(name, interval, callback=cb):
@@ -2076,11 +2082,14 @@ class AiStats(NcatBotPlugin):
             await input.reply("生成明细图表失败，请稍后重试")
             return
 
-        await self.api.qq.post_group_msg(
-            input.group_id,
-            rtf=MessageChain([Image(file=card_path)]),
-            reply=input.message_id,
-        )
+        try:
+            await self.api.qq.post_group_msg(
+                input.group_id,
+                rtf=MessageChain([Image(file=card_path)]),
+                reply=input.message_id,
+            )
+        finally:
+            QqSendUtil.cleanup_message_images([Image(file=card_path)])
 
     async def _send_flip_and_report(
         self, group_id, reply_id, total_count, report_path, header=""
@@ -2141,16 +2150,22 @@ class AiStats(NcatBotPlugin):
         elements = [
             PlainText(text="=== 全群 AI 使用总览 ===\n总调用次数:\n"),
         ]
-        for img in self._number_to_counter(total_count):
-            elements.append(img)
-        await self.api.qq.post_group_msg(
-            input.group_id, rtf=MessageChain(elements), reply=input.message_id
-        )
-        for report_path in report_paths:
+        counter_images = self._number_to_counter(total_count)
+        elements.extend(counter_images)
+        try:
             await self.api.qq.post_group_msg(
-                input.group_id,
-                rtf=MessageChain([Image(file=report_path)]),
-                reply=input.message_id,
+                input.group_id, rtf=MessageChain(elements), reply=input.message_id
+            )
+            for report_path in report_paths:
+                await self.api.qq.post_group_msg(
+                    input.group_id,
+                    rtf=MessageChain([Image(file=report_path)]),
+                    reply=input.message_id,
+                )
+        finally:
+            QqSendUtil.cleanup_message_images(counter_images)
+            QqSendUtil.cleanup_message_images(
+                [Image(file=path) for path in report_paths]
             )
 
     async def _show_stats(

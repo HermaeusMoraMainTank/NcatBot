@@ -37,6 +37,13 @@ FAKEAI_CONFIG_DEFAULTS: Dict[str, Any] = {
     "callback_timeout": 15,
     "enable_typing_delay": False,
     "typing_delay_per_char": 0.1,
+    "agent_enabled": True,
+    "skills_enabled": True,
+    "agent_max_tokens": 60000,
+    "proactive_enabled": True,
+    "proactive_quiet_minutes": 45,
+    "proactive_interval_minutes": 180,
+    "proactive_probability": 0.2,
     "interaction": asdict(InteractionConfig()),
     "cognition": asdict(CognitionConfig()),
     "expression": {
@@ -167,6 +174,26 @@ def apply_from_plugin(plugin) -> None:
 
     fakeai_mod = import_module(".FakeAi", package=__package__)
 
+    fakeai_mod.USE_DS_AGENT = bool(plugin.get_config("agent_enabled", True))
+    fakeai_mod.SKILLS_ENABLED = bool(plugin.get_config("skills_enabled", True))
+    fakeai_mod.AGENT_MAX_TOKENS = max(
+        0, int(plugin.get_config("agent_max_tokens", 60000) or 0)
+    )
+    fakeai_mod.PROACTIVE_ENABLED = bool(
+        plugin.get_config("proactive_enabled", True)
+    )
+    fakeai_mod.PROACTIVE_QUIET_SEC = (
+        max(5, int(plugin.get_config("proactive_quiet_minutes", 45) or 45)) * 60
+    )
+    fakeai_mod.PROACTIVE_INTERVAL_SEC = (
+        max(10, int(plugin.get_config("proactive_interval_minutes", 180) or 180))
+        * 60
+    )
+    try:
+        prob = float(plugin.get_config("proactive_probability", 0.2) or 0.2)
+    except (TypeError, ValueError):
+        prob = 0.2
+    fakeai_mod.PROACTIVE_PROBABILITY = min(1.0, max(0.0, prob))
     fakeai_mod.FAKEAI_GROUP_MODE = group_mode
     fakeai_mod.FAKEAI_ALLOWED_GROUPS = frozenset(allowed)
     fakeai_mod.FAKEAI_DISABLED_GROUPS = frozenset(disabled)

@@ -1,0 +1,6 @@
+name = "SkillHub"
+version = "1.0.0"
+main = "SkillHub.py"
+entry_class = "SkillHub"
+author = "NcatBot"
+description = "插件能力 skill 化：目录、渐进展开、受控调用、子智能体"

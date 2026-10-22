@@ -127,18 +127,26 @@ class Tarot(NcatBotPlugin):
                 _log.info(
                     f"Selected tarot card: {card.name}, orientation: {'正位' if i == 0 else '逆位'}"
                 )
-                await self.api.qq.post_group_msg(
-                    group_id=input.group_id,
-                    rtf=MessageChain(
-                        [
-                            At(user_id=input.sender.user_id),
-                            PlainText(text="\n"),
-                            PlainText(text=self.get_tarot_message(card, i)),
-                            Image(file=image_bytes),
-                            Reply(id=input.message_id),
-                        ]
-                    ),
-                )
+                try:
+                    await self.api.qq.post_group_msg(
+                        group_id=input.group_id,
+                        rtf=MessageChain(
+                            [
+                                At(user_id=input.sender.user_id),
+                                PlainText(text="\n"),
+                                PlainText(text=self.get_tarot_message(card, i)),
+                                Image(file=image_bytes),
+                                Reply(id=input.message_id),
+                            ]
+                        ),
+                    )
+                finally:
+                    try:
+                        rotated = Path(image_bytes)
+                        if rotated.resolve().is_relative_to(self._temp_dir.resolve()):
+                            rotated.unlink()
+                    except (OSError, ValueError):
+                        pass
 
     def get_tarot_message(self, tarot: TarotCard, i: int) -> str:
         description = "正位\n" + tarot.positive if i == 0 else "逆位\n" + tarot.negative

@@ -56,6 +56,56 @@ class BuiltinCommandsConfig(BaseConfig):
     config_toggle: bool = True
 
 
+class AdminConfig(BaseConfig):
+    """通用管理后台（插件配置 / 技能目录 / Agent 运行）。"""
+
+    enabled: bool = True
+    host: str = "127.0.0.1"
+    port: int = 8770
+    allow_remote: bool = False
+    """为 True 时才允许绑定非回环地址；默认只在本机可访问。"""
+    token: str = ""
+    """留空则自动生成并写入 ``data/admin/token.txt``。"""
+
+
+class SkillConfig(BaseConfig):
+    enabled: bool = True
+    default_timeout: float = 60.0
+    max_output_chars: int = 4000
+
+
+class AgentConfig(BaseConfig):
+    enabled: bool = True
+    max_rounds: int = 8
+    max_tool_calls: int = 20
+    run_timeout: float = 180.0
+    max_depth: int = 1
+    keep_runs: int = 200
+    max_tokens_per_run: int = 60000
+    """单次 Agent 运行的 token 上限，防止失控循环；0 表示不限制。"""
+
+
+class SandboxConfig(BaseConfig):
+    root: str = "data/sandbox"
+    max_files: int = 200
+    max_bytes: int = 50 * 1024 * 1024
+    allow_subprocess: bool = False
+    """默认禁止任意子进程；只有明确需要时才打开。"""
+    backend: str = "auto"
+    """auto / process / bwrap；auto 在 Linux 有 bwrap 时自动使用。"""
+    network: bool = False
+    """bwrap 后端是否允许子进程联网。"""
+
+
+class AIConfig(BaseConfig):
+    """框架级 Agent 使用的模型接入；留空则读环境变量 DEEPSEEK_API_KEY。"""
+
+    base_url: str = "https://api.deepseek.com"
+    api_key: str = ""
+    model: str = "deepseek-flash"
+
+
+
 class PluginConfig(BaseConfig):
     """插件相关配置。"""
 
@@ -237,6 +287,11 @@ class Config(BaseConfig):
     """(deprecated) 旧版 NapCat 配置。请迁移到 adapters 列表。"""
     plugin: PluginConfig = Field(default_factory=PluginConfig)
     logging: LoggingConfig = Field(default_factory=LoggingConfig)
+    admin: AdminConfig = Field(default_factory=AdminConfig)
+    skills: SkillConfig = Field(default_factory=SkillConfig)
+    agent: AgentConfig = Field(default_factory=AgentConfig)
+    sandbox: SandboxConfig = Field(default_factory=SandboxConfig)
+    ai: AIConfig = Field(default_factory=AIConfig)
     bot_uin: str = DEFAULT_BOT_UIN
     root: str = DEFAULT_ROOT
     debug: bool = False

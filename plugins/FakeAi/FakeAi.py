@@ -26,6 +26,7 @@ from .memory import (
     generate_summary_from_messages,
     generate_user_impression,
 )
+from .agent import AgentAction, AgentResult, run_agent
 from .favorability import (
     can_view_relation_tag,
     format_favorability,
@@ -63,6 +64,27 @@ def _stamp_reply_dict(payload: dict) -> str:
     if "ts" not in payload:
         payload["ts"] = time.time()
     return json.dumps(payload, ensure_ascii=False)
+
+
+def _collect_image_urls(content: list) -> list:
+    """收集当前消息里的图片 URL，供 DeepSeek 原生视觉使用。"""
+    urls = []
+    for item in content or []:
+        if isinstance(item, dict) and item.get("type") == "image":
+            data = item.get("data") or {}
+            url = data.get("url") or ""
+            if url:
+                urls.append(str(url))
+    return urls
+
+
+def _mark_images_without_vision(content: list) -> list:
+    """agent 模式不再预描述图片，历史里只留 [图片] 占位。"""
+    for item in content or []:
+        if isinstance(item, dict) and item.get("type") == "image":
+            item.clear()
+            item.update({"type": "text", "data": {"text": "[图片]"}})
+    return content
 
 
 def _mask_qq_for_ranking_display(user_id: object) -> str:
@@ -122,6 +144,17 @@ enable_group_cd = True  # 群聊冷却开关（防止同群连续触发）
 enable_user_cd = False  # 用户冷却开关
 enable_callback = False  # 回调功能开关
 callback_timeout = 15  # 回调超时时间（秒）
+
+# 主动机会：群里安静足够久时，低概率自己起话题；可配置关闭
+PROACTIVE_ENABLED = True
+PROACTIVE_QUIET_SEC = 45 * 60
+PROACTIVE_INTERVAL_SEC = 3 * 3600
+PROACTIVE_PROBABILITY = 0.2
+_proactive_last: Dict[int, float] = {}
+
+# 最近消息持久化：重启后仍能接上刚才的聊天，只保留 6 小时内
+RECENT_CACHE_PATH = Path("data/FakeAi/recent_cache.json")
+RECENT_CACHE_MAX_AGE = 6 * 3600
 # 同群生成中互斥：LLM 耗时常超过群 CD，避免并发展开第二条回复流水线
 _inflight_groups: set = set()
 
@@ -152,6 +185,14 @@ def _is_fakeai_group_allowed(group_id) -> bool:
 enable_typing_delay = False
 # 每个字符的延迟时间（秒）
 typing_delay_per_char = 0.1
+
+# 工具型 agent：模型自己决定发消息/表情/拍一拍/搜索/沉默
+USE_DS_AGENT = True
+AGENT_YAML_PATH = "plugins/FakeAi/prompts/lanqing_agent.yml"
+# 是否把插件能力目录（SkillHub）接进 agent 工具循环
+SKILLS_ENABLED = True
+# 单轮对话的 token 上限，防止工具循环失控
+AGENT_MAX_TOKENS = 60000
 
 
 # 回调状态管理
@@ -342,6 +383,20 @@ class FakeAi(NcatBotPlugin):
 
         # 初始化长期记忆数据库
         await memory_manager.init_db()
+        self._load_recent_caches()
+        self.add_scheduled_task(
+            "fakeai_recent_persist",
+            "5m",
+            callback=self._persist_recent_caches,
+        )
+        CommonUtil.cleanup_backup_files(["data/db"], keep_seconds=86400)
+        self.add_scheduled_task(
+            "fakeai_db_backup_cleanup",
+            "24h",
+            callback=lambda: CommonUtil.cleanup_backup_files(
+                ["data/db"], keep_seconds=86400
+            ),
+        )
         _log.info("[FakeAi] 长期记忆数据库初始化完成")
 
         # 清理知识库中的重复数据
@@ -375,6 +430,14 @@ class FakeAi(NcatBotPlugin):
                 callback=self._consolidate_memories,
             )
             _log.info("[FakeAi] 记忆巩固任务已注册")
+
+        if PROACTIVE_ENABLED and USE_DS_AGENT:
+            self.add_scheduled_task(
+                "fakeai_proactive",
+                "30m",
+                callback=self._proactive_tick,
+            )
+            _log.info("[FakeAi] 主动机会任务已注册")
 
         # 贴纸目录：apply_from_plugin 已 reload；此处仅兜底再扫一次
         try:
@@ -436,6 +499,109 @@ class FakeAi(NcatBotPlugin):
                 self._user_message_buffer[user_id]["messages"] = (
                     self._user_message_buffer[user_id]["messages"][-50:]
                 )
+
+    async def on_close(self) -> None:
+        """正常退出时落盘最近消息。"""
+        self._persist_recent_caches()
+
+    def _load_recent_caches(self) -> None:
+        """启动时恢复最近消息缓存（只保留 6 小时内）。"""
+        try:
+            if not RECENT_CACHE_PATH.is_file():
+                return
+            data = json.loads(RECENT_CACHE_PATH.read_text(encoding="utf-8"))
+            if not isinstance(data, dict):
+                return
+            now = time.time()
+            restored = 0
+            for raw_gid, entries in data.items():
+                try:
+                    gid = int(raw_gid)
+                except (TypeError, ValueError):
+                    continue
+                cache = ReplyCache()
+                for raw in entries or []:
+                    try:
+                        ts = float(json.loads(raw).get("ts") or 0)
+                    except (json.JSONDecodeError, TypeError, ValueError):
+                        continue
+                    if ts and now - ts <= RECENT_CACHE_MAX_AGE:
+                        cache.add_reply(raw)
+                if cache.get_replies():
+                    group_reply_caches[gid] = cache
+                    restored += 1
+            if restored:
+                _log.info("[FakeAi] 已恢复最近消息缓存 groups=%s", restored)
+        except Exception as e:
+            _log.warning("[FakeAi] 恢复最近消息失败: %s", e)
+
+    def _persist_recent_caches(self) -> None:
+        """把最近消息缓存写盘，供重启后接上上下文。"""
+        try:
+            RECENT_CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
+            now = time.time()
+            data = {}
+            for gid, cache in group_reply_caches.items():
+                kept = []
+                for raw in cache.get_replies():
+                    try:
+                        ts = float(json.loads(raw).get("ts") or 0)
+                    except (json.JSONDecodeError, TypeError, ValueError):
+                        continue
+                    if ts and now - ts <= RECENT_CACHE_MAX_AGE:
+                        kept.append(raw)
+                if kept:
+                    data[str(gid)] = kept[-20:]
+            tmp = RECENT_CACHE_PATH.with_suffix(".tmp")
+            tmp.write_text(
+                json.dumps(data, ensure_ascii=False), encoding="utf-8"
+            )
+            tmp.replace(RECENT_CACHE_PATH)
+        except Exception as e:
+            _log.warning("[FakeAi] 保存最近消息失败: %s", e)
+
+    async def _proactive_tick(self) -> None:
+        """群里安静足够久时，低概率主动起一个话题。"""
+        if not PROACTIVE_ENABLED or not USE_DS_AGENT:
+            return
+        now = time.time()
+        groups = set(group_reply_caches.keys())
+        if FAKEAI_GROUP_MODE != "all":
+            groups &= set(FAKEAI_ALLOWED_GROUPS)
+        for gid in list(groups):
+            if gid in _inflight_groups:
+                continue
+            cache = group_reply_caches.get(gid)
+            if not cache:
+                continue
+            last_ts = 0.0
+            for raw in reversed(cache.get_replies()):
+                try:
+                    ts = float(json.loads(raw).get("ts") or 0)
+                except (json.JSONDecodeError, TypeError, ValueError):
+                    continue
+                if ts:
+                    last_ts = ts
+                    break
+            if not last_ts or now - last_ts < PROACTIVE_QUIET_SEC:
+                continue
+            if now - _proactive_last.get(gid, 0) < PROACTIVE_INTERVAL_SEC:
+                continue
+            if random.random() > PROACTIVE_PROBABILITY:
+                continue
+            _proactive_last[gid] = now
+            try:
+                result = await answer_ai(
+                    gid, group_reply_caches, None, "proactive"
+                )
+                if isinstance(result, AgentResult) and result.actions:
+                    await send_agent_result(self, None, result, group_id=gid)
+                    _log.info("[FakeAi] 主动机会发言 group=%s", gid)
+                else:
+                    _log.info("[FakeAi] 主动机会选择沉默 group=%s", gid)
+            except Exception as e:
+                _log.error("[FakeAi] 主动机会失败 group=%s: %s", gid, e)
+            return
 
     async def _generate_summaries(self):
         """定时任务：为活跃的群生成消息总结"""
@@ -1394,7 +1560,7 @@ class FakeAi(NcatBotPlugin):
                 group_id=input.group_id, text="正在分析图片，请稍候..."
             )
 
-            # 先下载图片转 base64（NVIDIA API 无法访问 QQ 图片服务器）
+            # 先下载图片转 base64（DeepSeek 无法直接访问 QQ 图床）
             image_base64_list = await AiUtil.download_images_as_base64(image_urls)
             if not image_base64_list:
                 await self.api.qq.post_group_msg(
@@ -1462,6 +1628,9 @@ class FakeAi(NcatBotPlugin):
         else:
             # 正常 (plugin, event) 调用时刷新引用，便于热重载后恢复
             _fake_ai_plugin_instance[0] = self
+        # 模型代发的原插件命令：只让命令插件处理，AI 不插嘴
+        if getattr(getattr(input, "_data", None), "synthetic", False):
+            return
         # 检查消息是否来自排除的插件
         if await self._is_from_excluded_plugin(input):
             return
@@ -1529,10 +1698,15 @@ class FakeAi(NcatBotPlugin):
                 # 直接回复，不检查CD
                 reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
 
-                # 对图片进行识别描述
-                content = await self._process_image_descriptions(
-                    content, group_id=group_id, user_id=sender_id
-                )
+                # agent 模式把原图直接交给 DeepSeek；旧链路继续用文字描述
+                image_urls = []
+                if USE_DS_AGENT:
+                    image_urls = _collect_image_urls(content)
+                    content = _mark_images_without_vision(content)
+                else:
+                    content = await self._process_image_descriptions(
+                        content, group_id=group_id, user_id=sender_id
+                    )
 
                 reply_json = _stamp_reply_dict(
                     {
@@ -1540,6 +1714,8 @@ class FakeAi(NcatBotPlugin):
                         "id": sender_id,
                         "content": content,
                         "group_nickname": input.sender.card or sender_name,
+                        "image_urls": image_urls,
+                        "message_id": input.message_id,
                     }
                 )
                 reply_cache.add_reply(reply_json)
@@ -1632,15 +1808,22 @@ class FakeAi(NcatBotPlugin):
 
         # —— 统一入账后走状态机（取消裸 8% 抽卡）——
         reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
-        content = await self._process_image_descriptions(
-            content, group_id=group_id, user_id=sender_id
-        )
+        image_urls = []
+        if USE_DS_AGENT:
+            image_urls = _collect_image_urls(content)
+            content = _mark_images_without_vision(content)
+        else:
+            content = await self._process_image_descriptions(
+                content, group_id=group_id, user_id=sender_id
+            )
         reply_json = _stamp_reply_dict(
             {
                 "name": sender_name,
                 "id": sender_id,
                 "content": content,
                 "group_nickname": input.sender.card or sender_name,
+                "image_urls": image_urls,
+                "message_id": input.message_id,
             }
         )
         reply_cache.add_reply(reply_json)
@@ -1754,7 +1937,23 @@ class FakeAi(NcatBotPlugin):
                 decision=decision,
             )
             _log.info(answer)
-            if not answer or str(answer).strip() in ("", '""'):
+            if isinstance(answer, AgentResult):
+                if not answer.actions:
+                    if det.state == InteractionState.SUMMONED:
+                        answer = AgentResult(
+                            actions=[
+                                AgentAction(
+                                    kind="text",
+                                    messages=[random.choice(["？", "在", "咋了"])],
+                                )
+                            ],
+                            usage=answer.usage,
+                            model=answer.model,
+                        )
+                    else:
+                        state_store.enter_not_present(gid)
+                        return
+            elif not answer or str(answer).strip() in ("", '""'):
                 state_store.enter_not_present(gid)
                 return
 
@@ -1780,7 +1979,79 @@ class FakeAi(NcatBotPlugin):
             _inflight_groups.discard(gid)
 
 
-async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -> None:
+async def send_agent_result(
+    self: FakeAi,
+    input: Optional[GroupMessage],
+    result: AgentResult,
+    *,
+    group_id: Optional[int] = None,
+) -> None:
+    """执行 agent 产出的动作：文字、表情、拍一拍，并写回 ReplyCache。"""
+    group_id = group_id or (input.group_id if input else None)
+    if group_id is None:
+        return
+    message_id = getattr(input, "message_id", None) if input else None
+    sent_texts: List[str] = []
+    for action in result.actions:
+        try:
+            if action.kind == "text":
+                for i, text in enumerate(action.messages):
+                    elements = []
+                    reply_id = action.reply_to or (
+                        str(message_id) if action.quote and message_id else None
+                    )
+                    if i == 0 and reply_id:
+                        elements.append(Reply(id=str(reply_id)))
+                    if i == 0 and action.at_user:
+                        elements.append(At(user_id=str(action.at_user)))
+                        elements.append(PlainText(text=" "))
+                    elements.append(PlainText(text=str(text)))
+                    await self.api.qq.post_group_msg(
+                        group_id=group_id, rtf=MessageChain(elements)
+                    )
+                    sent_texts.append(str(text))
+                    await asyncio.sleep(random.uniform(0.7, 1.6))
+            elif action.kind == "sticker":
+                if action.sticker:
+                    await self.api.qq.send_group_sticker(group_id, str(action.sticker))
+                    await asyncio.sleep(random.uniform(0.6, 1.2))
+            elif action.kind == "poke":
+                if action.user_id:
+                    await self.api.qq.send_poke(group_id, str(action.user_id))
+                    await asyncio.sleep(random.uniform(0.4, 0.8))
+            elif action.kind == "react":
+                mid = action.message_id or message_id
+                if mid:
+                    await self.api.qq.set_msg_emoji_like(
+                        message_id=mid,
+                        emoji_id=action.emoji_id or "289",
+                        set=True,
+                    )
+                    await asyncio.sleep(random.uniform(0.2, 0.5))
+        except Exception as e:
+            _log.error("[FakeAi] agent 动作发送失败 kind=%s: %s", action.kind, e)
+
+    if sent_texts:
+        reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
+        reply_cache.add_reply(
+            _stamp_reply_dict(
+                {"name": "蓝晴", "id": "0", "content": " ".join(sent_texts)}
+            )
+        )
+    _log.info(
+        "[FakeAi] agent 动作执行完成 text=%s sticker=%s poke=%s",
+        len(sent_texts),
+        sum(1 for a in result.actions if a.kind == "sticker"),
+        sum(1 for a in result.actions if a.kind == "poke"),
+    )
+
+
+async def send_typing_response(
+    self: FakeAi, input: GroupMessage, answer: Union[str, AgentResult]
+) -> None:
+    if isinstance(answer, AgentResult):
+        await send_agent_result(self, input, answer)
+        return
     try:
         # 尝试解析 JSON
         try:
@@ -1901,7 +2172,7 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
         members = CommonUtil.parse_group_member_list(members_response)
 
         # 遍历句子
-        for sentence in sentences:
+        for idx, sentence in enumerate(sentences):
             message_elements = []  # 为每个句子创建新的消息元素列表
             last_match_end = 0
 
@@ -1934,9 +2205,14 @@ async def send_typing_response(self: FakeAi, input: GroupMessage, answer: str) -
             if text_after_last_at:
                 message_elements.append(PlainText(text=text_after_last_at))
 
-            # 模拟打字的延时，根据句子的字符数设置延时（可通过开关控制）
+            # 分条发送时给一点真人式间隔；开启 typing delay 则按字数计算
             if enable_typing_delay:
                 delay = len(sentence) * typing_delay_per_char
+            elif idx > 0:
+                delay = random.uniform(0.7, 1.6)
+            else:
+                delay = 0.0
+            if delay > 0:
                 await asyncio.sleep(delay)
 
             # 发送消息
@@ -2033,7 +2309,7 @@ def record_ai_usage_to_json(
     prompt_tokens: int = 0,
     completion_tokens: int = 0,
     prompt_cache_hit_tokens: int = 0,
-    model: str = "deepseek-chat",
+    model: str = "deepseek-flash",
 ):
     """保存 AI 使用统计（委托 AiStatsRecorder）。"""
     from common.utils.AiStatsRecorder import record_ai_usage
@@ -2052,6 +2328,8 @@ def record_ai_usage_to_json(
 
 
 async def load_yaml_data(group_id) -> Dict:
+    if USE_DS_AGENT and Path(AGENT_YAML_PATH).is_file():
+        return await load_yaml(AGENT_YAML_PATH)
     # if group_id == 719518427:
     #     return await load_yaml("data/yml/lanqingv1_ai.yml")
     return await load_yaml("data/yml/lanqingv1.yml")
@@ -2082,8 +2360,15 @@ def _reply_content_to_text(content) -> str:
     return str(content) if content else ""
 
 
-def update_yaml_with_replies(yaml_data: Dict, reply_cache: ReplyCache) -> Dict:
+def update_yaml_with_replies(
+    yaml_data: Dict, reply_cache: ReplyCache, limit: int | None = None
+) -> Dict:
     replies = reply_cache.get_replies()
+    if limit:
+        replies = replies[-limit:]
+    if not replies:
+        replace_placeholder(yaml_data, "{history_new}", "（暂无）")
+        replace_placeholder(yaml_data, "{history_last}", "（暂无）")
     if replies:
         # 可读发言人格式（轻量 I2）+ 保留 JSON 行供兼容
         lines = []
@@ -2211,6 +2496,165 @@ async def maybe_auto_remember(
     _log.info("[FakeAi] auto_remember %s scope=%s → %s", judgment, scope, result)
 
 
+WEB_TOOLS = [
+    {
+        "type": "function",
+        "function": {
+            "name": "web_search",
+            "description": "联网搜索实时信息、新闻、新梗或不确定的事实时使用。返回标题、URL、摘要。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "description": "搜索词"}
+                },
+                "required": ["query"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "web_fetch",
+            "description": "抓取网页正文（Markdown），用于阅读搜索结果或群友发来的链接。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "url": {"type": "string", "description": "http(s) URL"}
+                },
+                "required": ["url"],
+            },
+        },
+    },
+]
+
+WEB_TOOL_PROMPT = (
+    "\n\n【联网工具】遇到实时信息、新闻、新梗或你自己不确定的事实，"
+    "先调用 web_search；需要读正文时调用 web_fetch。普通闲聊不要搜，"
+    "搜索完直接回答，不要汇报搜索过程。"
+)
+
+
+async def _chat_with_web_tools(messages: list) -> dict | None:
+    """带 web_search / web_fetch 的小工具循环（最多 4 轮）。"""
+    usage_total = {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0,
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 0,
+    }
+    last = None
+    for _ in range(4):
+        res = await AiUtil.chat_completion(
+            messages,
+            tools=WEB_TOOLS,
+            capability="chat",
+            max_tokens=800,
+            temperature=0.9,
+        )
+        if not res:
+            return None
+        usage = res.get("usage") or {}
+        for key in usage_total:
+            usage_total[key] += int(usage.get(key, 0) or 0)
+        last = res
+        calls = res.get("tool_calls") or []
+        if not calls:
+            res["usage"] = usage_total
+            return res
+
+        messages.append(
+            {
+                "role": "assistant",
+                "content": res.get("content") or "",
+                "tool_calls": calls,
+            }
+        )
+        for call in calls:
+            name = call.get("function", {}).get("name", "")
+            try:
+                args = json.loads(call.get("function", {}).get("arguments") or "{}")
+            except json.JSONDecodeError:
+                args = {}
+            try:
+                if name == "web_search":
+                    data = await AiUtil.search_web(
+                        str(args.get("query", "")), count=5
+                    )
+                    items = [
+                        {
+                            "title": item.get("title"),
+                            "url": item.get("url"),
+                            "summary": item.get("summary"),
+                            "date": item.get("date"),
+                        }
+                        for item in (data.get("results") or [])
+                    ]
+                    text = json.dumps(items, ensure_ascii=False)
+                elif name == "web_fetch":
+                    data = await AiUtil.fetch_web(str(args.get("url", "")))
+                    text = (
+                        f"{data.get('title', '')}\n\n"
+                        f"{(data.get('content') or '')[:6000]}"
+                    )
+                else:
+                    text = f"unknown tool: {name}"
+            except Exception as e:
+                text = f"tool error: {type(e).__name__}: {e}"
+            messages.append(
+                {"role": "tool", "tool_call_id": call.get("id"), "content": text}
+            )
+    if last:
+        last["usage"] = usage_total
+    return last
+
+
+SKILL_HINT = (
+    "\n\n【动手能力】要发语音、生成带字图片、发图库、写文件或拉起子智能体时："
+    "先 list_skills 看目录，再 describe_skills 确认参数，最后 invoke_skill 执行。"
+    "不要假装已经做过。"
+)
+
+
+def _build_skill_bridge(group_id: int, user_id: Optional[str]):
+    """给 agent 循环接上 SkillHub；返回 (bridge, 提示词片段)。"""
+    if not SKILLS_ENABLED:
+        return None, ""
+    plugin = _fake_ai_plugin_instance[0]
+    registry = getattr(plugin, "skills", None) if plugin else None
+    if registry is None:
+        return None, ""
+    try:
+        from ncatbot.skill import SkillBridge, SkillContext
+
+        runtime = getattr(plugin, "agents", None)
+        workspace = (
+            runtime.workspaces.get(f"group:{group_id}")
+            if runtime is not None
+            else None
+        )
+        skill_ctx = SkillContext(
+            session_key=f"group:{group_id}",
+            user_id=str(user_id or ""),
+            group_id=str(group_id or ""),
+            roles={"user"},
+            api=getattr(plugin, "api", None),
+            runtime=runtime,
+            workspace=workspace,
+            sandbox=runtime.runner if runtime is not None else None,
+        )
+        bridge = SkillBridge(
+            registry,
+            skill_ctx,
+            deny={"message.send"},
+            max_calls=12,
+        )
+        return bridge, SKILL_HINT
+    except Exception as e:
+        _log.debug("[FakeAi] skill bridge 初始化失败: %s", e)
+        return None, ""
+
+
 async def answer_ai(
     group_id: int,
     group_reply_caches: Dict[int, ReplyCache],
@@ -2224,11 +2668,18 @@ async def answer_ai(
     # 加载 YAML 数据
     yaml_data = await load_yaml_data(group_id)
     replace_time_in_system(yaml_data)
-    update_yaml_with_replies(yaml_data, group_reply_caches.get(group_id, ReplyCache()))
+    context_limit = 8 if trigger_type in ("passive", "proactive") else 14
+    update_yaml_with_replies(
+        yaml_data,
+        group_reply_caches.get(group_id, ReplyCache()),
+        limit=context_limit if USE_DS_AGENT else None,
+    )
 
     # 注入长期记忆
     try:
-        long_term_memory = await memory_manager.get_long_term_memory(group_id)
+        long_term_memory = await memory_manager.get_long_term_memory(
+            group_id, max_length=300 if USE_DS_AGENT else 500
+        )
         replace_placeholder(yaml_data, "{long_term_memory}", long_term_memory)
     except Exception as e:
         _log.debug(f"[FakeAi] 获取长期记忆失败: {e}")
@@ -2248,8 +2699,13 @@ async def answer_ai(
             except (json.JSONDecodeError, ValueError):
                 continue
 
+        if USE_DS_AGENT and user_id and str(user_id).isdigit():
+            impression_ids = [int(user_id)]
+        else:
+            impression_ids = list(active_user_ids) if active_user_ids else None
         user_impressions = await memory_manager.get_user_impressions_text(
-            user_ids=list(active_user_ids) if active_user_ids else None
+            user_ids=impression_ids,
+            max_length=400 if USE_DS_AGENT else 800,
         )
         replace_placeholder(yaml_data, "{user_impressions}", user_impressions)
     except Exception as e:
@@ -2258,8 +2714,16 @@ async def answer_ai(
 
     # 注入相关主动记忆
     mem_text = ""
+    skip_passive = USE_DS_AGENT and trigger_type in ("passive", "proactive")
     try:
-        if (
+        if skip_passive:
+            replace_placeholder(
+                yaml_data,
+                "{related_memories}",
+                "（闲聊模式未加载，需要时用 memory_query）",
+            )
+            mem_text = ""
+        elif (
             DEFAULT_COGNITION.memory_record_enabled
             and DEFAULT_COGNITION.auto_recall_enabled
         ):
@@ -2337,7 +2801,11 @@ async def answer_ai(
             f"[FakeAi] 知识检索查询文本: {query_text[:200] if query_text else '空'}..."
         )
 
-        if query_text:
+        if skip_passive:
+            replace_placeholder(
+                yaml_data, "{related_knowledge}", "（需要时用 web_search）"
+            )
+        elif query_text:
             related_knowledge = await memory_manager.get_knowledge_text(
                 query_text, max_length=DEFAULT_COGNITION.knowledge_inject_max_chars
             )
@@ -2354,17 +2822,92 @@ async def answer_ai(
         _log.error(f"[FakeAi] 获取相关知识失败: {e}")
         replace_placeholder(yaml_data, "{related_knowledge}", "（暂无相关知识）")
 
-    # 调用 AIUtil 的 search_deepseek 方法
+    # 系统提示保持静态（利于前缀缓存），动态内容全部放进 user 消息
     keyword = yaml_data.get("input", "")
     prompt = yaml_data.get("system", "")
+    agent_dynamic = []
+
+    try:
+        recent_entries = []
+        for raw in group_reply_caches.get(group_id, ReplyCache()).get_replies()[-10:]:
+            try:
+                recent_entries.append(json.loads(raw))
+            except (json.JSONDecodeError, TypeError):
+                continue
+        human_lengths = []
+        human_texts = []
+        self_texts = []
+        for entry in recent_entries:
+            text = _reply_content_to_text(entry.get("content", "")).strip()
+            if not text:
+                continue
+            if str(entry.get("id")) == "0":
+                self_texts.append(text[:40])
+            elif text not in ("[图片]", "[表情]"):
+                human_lengths.append(len(text))
+                human_texts.append(text)
+        if human_lengths:
+            avg_len = max(4, min(60, int(sum(human_lengths) / len(human_lengths))))
+            agent_dynamic.append(
+                f"【群聊语感】最近大家发言平均约 {avg_len} 字，你的回复别明显更长。"
+            )
+        stop_words = {
+            "什么", "怎么", "可以", "没有", "我们", "你们", "他们",
+            "今天", "现在", "感觉", "真的", "不是", "还是", "就是",
+            "这个", "那个", "一个", "一下", "知道", "觉得",
+        }
+        phrase_counts = {}
+        for text in human_texts:
+            for phrase in re.findall(r"[\u4e00-\u9fff]{2,6}", text):
+                if phrase in stop_words:
+                    continue
+                phrase_counts[phrase] = phrase_counts.get(phrase, 0) + 1
+        top_phrases = [
+            p
+            for p, c in sorted(
+                phrase_counts.items(), key=lambda x: -x[1]
+            )[:5]
+            if c >= 2
+        ]
+        if top_phrases:
+            agent_dynamic.append("【群聊常用】" + "、".join(top_phrases))
+        if self_texts:
+            agent_dynamic.append(
+                "【你最近说过】"
+                + "；".join(self_texts[-3:])
+                + "。不要重复同样的说法或口头禅。"
+            )
+    except Exception as e:
+        _log.debug("[FakeAi] 群聊语感计算失败: %s", e)
+
+    if trigger_type == "proactive":
+        agent_dynamic.append(
+            "（主动机会）群里安静很久了。可以主动抛一个自然的话题，"
+            "也可以 finish 安静结束，不要硬找话。"
+        )
+
     if decision is not None and decision.should_reply:
         inject = decision.inject_block()
         if inject:
-            prompt = (prompt or "") + inject
+            if USE_DS_AGENT:
+                agent_dynamic.append(inject.strip())
+            else:
+                prompt = (prompt or "") + inject
     # YAML 若无 {related_memories} 占位，追加一块，避免静默丢失
-    if mem_text and "{related_memories}" not in (yaml_data.get("system") or ""):
+    if (
+        mem_text
+        and not USE_DS_AGENT
+        and "{related_memories}" not in (yaml_data.get("system") or "")
+    ):
         prompt = (prompt or "") + f"\n\n【相关记忆】\n{mem_text}"
-    if EXPRESSION_ENABLED:
+    if USE_DS_AGENT:
+        names = sticker_catalog.names()
+        if names:
+            prompt = (prompt or "") + (
+                "\n\n【可用贴纸】想发时调用 send_sticker(name)，可用："
+                + "、".join(names[:60])
+            )
+    elif EXPRESSION_ENABLED:
         sticker_block = sticker_catalog.prompt_block()
         if sticker_block:
             prompt = (prompt or "") + sticker_block
@@ -2374,7 +2917,68 @@ async def answer_ai(
             )
         else:
             _log.warning("[FakeAi] 贴纸目录为空，跳过表情注入")
-    ai_response = await AiUtil.search_deepseek(keyword, prompt)
+
+    if USE_DS_AGENT and Path(AGENT_YAML_PATH).is_file():
+        if agent_dynamic:
+            keyword = (keyword or "") + "\n\n" + "\n\n".join(agent_dynamic)
+        image_base64_list = []
+        history_entries = []
+        try:
+            replies = group_reply_caches.get(group_id, ReplyCache()).get_replies()
+            for raw in replies:
+                try:
+                    history_entries.append(json.loads(raw))
+                except (json.JSONDecodeError, TypeError):
+                    continue
+            if history_entries and trigger_type != "proactive":
+                image_urls = history_entries[-1].get("image_urls") or []
+                if image_urls:
+                    image_base64_list = await AiUtil.download_images_as_base64(
+                        image_urls[:3]
+                    )
+        except Exception as e:
+            _log.debug("[FakeAi] agent 图片加载失败: %s", e)
+
+        skill_bridge, skill_hint = _build_skill_bridge(group_id, user_id)
+        if skill_hint:
+            prompt = (prompt or "") + skill_hint
+        agent_result = await run_agent(
+            prompt or "",
+            keyword,
+            group_id=group_id,
+            user_id=user_id,
+            sticker_catalog=sticker_catalog,
+            image_base64_list=image_base64_list,
+            history_entries=history_entries,
+            max_total_tokens=AGENT_MAX_TOKENS,
+            skill_bridge=skill_bridge,
+        )
+        if agent_result is not None and (
+            agent_result.actions or agent_result.usage.get("total_tokens")
+        ):
+            if group_id:
+                try:
+                    from common.utils.AiStatsRecorder import record_from_response
+
+                    record_from_response(
+                        str(group_id),
+                        str(user_id) if user_id else None,
+                        trigger_type,
+                        {
+                            "usage": agent_result.usage,
+                            "model": agent_result.model,
+                        },
+                    )
+                except Exception as e:
+                    _log.error("[FakeAi] 记录 agent 用量失败: %s", e)
+            return agent_result
+
+    prompt = (prompt or "") + WEB_TOOL_PROMPT
+    messages = [
+        {"role": "system", "content": prompt},
+        {"role": "user", "content": keyword},
+    ]
+    ai_response = await _chat_with_web_tools(messages)
 
     # 处理AI响应
     if isinstance(ai_response, dict):
@@ -2384,7 +2988,7 @@ async def answer_ai(
         usage_info.get("prompt_tokens", 0)
         usage_info.get("completion_tokens", 0)
         usage_info.get("prompt_cache_hit_tokens", 0)
-        ai_response.get("model", "deepseek-chat")
+        ai_response.get("model", "deepseek-flash")
     else:
         response = ai_response or ""
 

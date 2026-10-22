@@ -367,7 +367,7 @@ class FF14House(NcatBotPlugin):
 
         return image
 
-        # @registrar.qq.on_group_message()  # disabled: migrated to Tataru\n    async def handle_ff14house(self, input: GroupMessage):
+    async def handle_ff14house(self, input: GroupMessage):
         message_parts = input.raw_message.split(" ")
         if message_parts[0] != "搜索房屋":
             return

@@ -1,4 +1,4 @@
-﻿import asyncio
+import asyncio
 import logging
 import textwrap
 from io import BytesIO
@@ -18,6 +18,7 @@ from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 from common.utils.plugin_commands import format_help, is_help_message
 from common.utils.temp_cleanup import cleanup_old_files
+from common.utils.CommonUtil import CommonUtil
 
 from .draw import CardMaker
 from .field_mapping import FIELD_MAPPING, LABEL_TO_KEY, DEFAULT_DISPLAY_OPTIONS
@@ -68,7 +69,7 @@ class Box(NcatBotPlugin):
 
         # 清理过期缓存（保留30天内的文件，最多200个）
         try:
-            deleted = cleanup_old_files(self.cache_dir, keep_hours=720, max_files=200)
+            deleted = cleanup_old_files(self.cache_dir, keep_hours=24, max_files=50)
             if deleted > 0:
                 _log.info(f"[Box] 清理了 {deleted} 个过期缓存文件")
         except Exception as e:
@@ -242,14 +243,17 @@ class Box(NcatBotPlugin):
         # 发送消息
         message = MessageChain([NcatImage(file=str(temp_path))])
 
-        if self.recall_time > 0:
-            # 发送并设置撤回
-            result = await self.api.qq.post_group_msg(group_id=group_id, rtf=message)
-            if result and result.get("data", {}).get("message_id"):
-                message_id = result["data"]["message_id"]
-                asyncio.create_task(self._recall_message(message_id, self.recall_time))
-        else:
-            await self.api.qq.post_group_msg(group_id=group_id, rtf=message)
+        try:
+            if self.recall_time > 0:
+                # 发送并设置撤回
+                result = await self.api.qq.post_group_msg(group_id=group_id, rtf=message)
+                if result and result.get("data", {}).get("message_id"):
+                    message_id = result["data"]["message_id"]
+                    asyncio.create_task(self._recall_message(message_id, self.recall_time))
+            else:
+                await self.api.qq.post_group_msg(group_id=group_id, rtf=message)
+        finally:
+            CommonUtil.cleanup_paths([temp_path])
 
     async def _recall_message(self, message_id: int, delay: int):
         """延时撤回消息"""

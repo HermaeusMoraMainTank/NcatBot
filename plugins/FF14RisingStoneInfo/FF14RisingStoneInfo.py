@@ -10,6 +10,7 @@ from io import BytesIO
 
 from curl_cffi import requests  # 替换为 curl_cffi 的 requests
 from common.constants.HMMT import HMMT
+from common.utils.CommonUtil import CommonUtil
 from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.types import Image, MessageArray as MessageChain, Reply
 from ncatbot.plugin import NcatBotPlugin
@@ -20,6 +21,18 @@ _log = logging.getLogger(__name__)
 class FF14RisingStoneInfo(NcatBotPlugin):
     name = "FF14RisingStoneInfo"  # 插件名称
     version = "1.0"  # 插件版本
+
+    async def on_load(self):
+        CommonUtil.cleanup_old_files(
+            "data/image/ff14/userInfo", max_age_seconds=86400
+        )
+        self.add_scheduled_task(
+            "ff14_userinfo_cleanup",
+            "24h",
+            callback=lambda: CommonUtil.cleanup_old_files(
+                "data/image/ff14/userInfo", max_age_seconds=86400
+            ),
+        )
 
     # API endpoints
     API_URL_SEARCH = "https://apiff14risingstones.web.sdo.com/api/common/search"
@@ -592,15 +605,18 @@ class FF14RisingStoneInfo(NcatBotPlugin):
                     image_path = await asyncio.to_thread(
                         self.generate_image, user_info.get("data", {})
                     )
-                    await self.api.qq.post_group_msg(
-                        group_id=input.group_id,
-                        rtf=MessageChain(
-                            [
-                                Image(file=image_path),
-                                Reply(id=input.message_id),
-                            ]
-                        ),
-                    )
+                    try:
+                        await self.api.qq.post_group_msg(
+                            group_id=input.group_id,
+                            rtf=MessageChain(
+                                [
+                                    Image(file=image_path),
+                                    Reply(id=input.message_id),
+                                ]
+                            ),
+                        )
+                    finally:
+                        CommonUtil.cleanup_paths([image_path])
                 else:
                     await self.api.qq.post_group_msg(
                         group_id=input.group_id, text="获取玩家信息失败"
@@ -621,15 +637,18 @@ class FF14RisingStoneInfo(NcatBotPlugin):
                 image_path = await asyncio.to_thread(
                     self.generate_image, user_info.get("data", {})
                 )
-                await self.api.qq.post_group_msg(
-                    group_id=input.group_id,
-                    rtf=MessageChain(
-                        [
-                            Image(file=image_path),
-                            Reply(id=input.message_id),
-                        ]
-                    ),
-                )
+                try:
+                    await self.api.qq.post_group_msg(
+                        group_id=input.group_id,
+                        rtf=MessageChain(
+                            [
+                                Image(file=image_path),
+                                Reply(id=input.message_id),
+                            ]
+                        ),
+                    )
+                finally:
+                    CommonUtil.cleanup_paths([image_path])
             else:
                 await self.api.qq.post_group_msg(
                     group_id=input.group_id, text="获取玩家信息失败"

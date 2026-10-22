@@ -140,6 +140,7 @@ async def decide(
             ANALYST_SYSTEM,
             max_tokens=cfg.analyst_max_tokens,
             temperature=cfg.analyst_temperature,
+            capability="judge",
         )
     except Exception as e:
         _log.error("[FakeAi] analyst 调用异常: %s", e)

@@ -1598,7 +1598,7 @@ class ImageSender(NcatBotPlugin):
             return [
                 os.path.join(folder_path, f)
                 for f in os.listdir(folder_path)
-                if f.lower().endswith((".jpg", ".png", ".jpeg", ".gif"))
+                if f.lower().endswith((".jpg", ".png", ".jpeg", ".gif", ".webp"))
             ]
         return []
 

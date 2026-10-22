@@ -104,7 +104,11 @@ class _McFishEvent:
                 str(text),
             )
             kwargs["rtf"] = MessageArray([Image(file=str(output))])
-        return await self._event.reply(*args, **kwargs)
+        outgoing = kwargs.get("rtf")
+        try:
+            return await self._event.reply(*args, **kwargs)
+        finally:
+            self._plugin._cleanup_message_images(outgoing)
 
 
 def _is_blocked_group(event) -> bool:
@@ -471,6 +475,22 @@ class McFish(NcatBotPlugin):
         self._user_locks: dict[str, asyncio.Lock] = {}
         self._fishing_tasks: dict[str, asyncio.Task] = {}
         self._closing = False
+        CommonUtil.cleanup_old_files(
+            Path(self.workspace) / "images", max_age_seconds=3600
+        )
+        CommonUtil.cleanup_backup_files([Path(self.workspace)], keep_seconds=86400)
+        self.add_scheduled_task(
+            "mcfish_temp_cleanup",
+            "1h",
+            callback=lambda: (
+                CommonUtil.cleanup_old_files(
+                    Path(self.workspace) / "images", max_age_seconds=3600
+                ),
+                CommonUtil.cleanup_backup_files(
+                    [Path(self.workspace)], keep_seconds=86400
+                ),
+            ),
+        )
         self._load_original_data()
         self._ensure_fish_windows()
         self._repair_abnormal_pole_trades()
@@ -2478,16 +2498,36 @@ class McFish(NcatBotPlugin):
         held_count = len(held) if name in POLES else held
         await event.reply(text=f"已为 {target_id} 发放 {name} ×{number}，当前背包 {name}：{held_count}")
 
+    def _cleanup_message_images(self, message) -> int:
+        """删除本次发送产生的渲染图，避免 McFish 图片目录无限增长。"""
+        rendered_root = Path(self.workspace) / "images"
+        removed = 0
+        for segment in message or []:
+            path = getattr(segment, "file", None)
+            if not path:
+                continue
+            try:
+                candidate = Path(path)
+                if candidate.resolve().is_relative_to(rendered_root.resolve()):
+                    candidate.unlink()
+                    removed += 1
+            except (OSError, TypeError, ValueError):
+                pass
+        return removed
+
     async def _send_original_message(self, event, message: MessageArray) -> None:
         """Send a raw message chain, matching upstream ctx.Send without auto Reply/At."""
         if _is_blocked_group(event):
             return
         message = await self._message_array_as_images(event, message)
         api = getattr(getattr(self, "api", None), "qq", None)
-        if api is not None and getattr(event, "group_id", None) is not None:
-            await api.post_group_msg(group_id=event.group_id, rtf=message)
-            return
-        await event.reply(rtf=message, at_sender=False)
+        try:
+            if api is not None and getattr(event, "group_id", None) is not None:
+                await api.post_group_msg(group_id=event.group_id, rtf=message)
+                return
+            await event.reply(rtf=message, at_sender=False)
+        finally:
+            self._cleanup_message_images(message)
 
     async def _message_array_as_images(self, event, message: MessageArray) -> MessageArray:
         """Replace text segments in an outgoing McFish message with PNGs."""
@@ -2558,16 +2598,26 @@ class McFish(NcatBotPlugin):
             await event.reply(text="暂无上次钓鱼结果", at_sender=False)
             return
         image = result.get("image")
-        if image:
-            await event.reply(rtf=MessageArray([PlainText(text=str(result["text"])), Image(file=str(image))]))
-        else:
-            await event.reply(text=str(result["text"]), at_sender=False)
+        if image and not Path(image).exists():
+            image = None
+        try:
+            if image:
+                await event.reply(rtf=MessageArray([PlainText(text=str(result["text"])), Image(file=str(image))]))
+            else:
+                await event.reply(text=str(result["text"]), at_sender=False)
+        finally:
+            if image:
+                self._cleanup_message_images([Image(file=str(image))])
 
     async def _send_fishing_result(self, event, result_text: str, image: Path | None = None) -> None:
-        if image:
-            await event.reply(rtf=MessageArray([PlainText(text=result_text), Image(file=str(image))]))
-        else:
-            await event.reply(text=result_text)
+        try:
+            if image:
+                await event.reply(rtf=MessageArray([PlainText(text=result_text), Image(file=str(image))]))
+            else:
+                await event.reply(text=result_text)
+        finally:
+            if image:
+                self._cleanup_message_images([Image(file=str(image))])
 
     def _has_pole(self, state: dict) -> bool:
         return bool(state.get("equip")) or any(

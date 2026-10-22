@@ -271,6 +271,13 @@ class MessageStatsPlugin(NcatBotPlugin):
             callback=self._scheduled_persist,
         ):
             _log.warning("[MessageStats] 5 分钟刷盘定时任务注册失败")
+        cleanup_stats_temp(keep_hours=1, max_files=50)
+        if not self.add_scheduled_task(
+            "message_stats_temp_cleanup",
+            "1h",
+            callback=lambda: cleanup_stats_temp(keep_hours=1, max_files=50),
+        ):
+            _log.warning("[MessageStats] 统计临时图清理任务注册失败")
         _log.info(
             "[MessageStats] 定时任务已注册: %s",
             self.list_scheduled_tasks(),

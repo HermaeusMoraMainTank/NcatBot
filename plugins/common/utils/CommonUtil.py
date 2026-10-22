@@ -34,8 +34,58 @@ class CommonUtil:
                 pass
         return removed
 
+    _avatar_sweep_at: float = 0.0
+
+    @staticmethod
+    def cleanup_paths(paths) -> int:
+        """删除指定的临时文件，忽略不存在的路径。"""
+        removed = 0
+        for raw in paths or []:
+            if not raw:
+                continue
+            try:
+                Path(raw).unlink()
+                removed += 1
+            except (OSError, TypeError, ValueError):
+                pass
+        return removed
+
+    @staticmethod
+    def cleanup_backup_files(directories, *, keep_seconds: float = 86400) -> int:
+        """删除目录中过期的数据库备份（*.bak-* / *.backup-*）。"""
+        cutoff = time.time() - keep_seconds
+        removed = 0
+        for directory in directories:
+            root = Path(directory)
+            if not root.is_dir():
+                continue
+            for entry in root.iterdir():
+                if not entry.is_file():
+                    continue
+                if ".bak-" not in entry.name and ".backup-" not in entry.name:
+                    continue
+                try:
+                    if entry.stat().st_mtime < cutoff:
+                        entry.unlink()
+                        removed += 1
+                except OSError:
+                    pass
+        return removed
+
+    @staticmethod
+    def cleanup_avatar_cache(*, max_age_seconds: float = 86400) -> int:
+        """全量清理过期头像，每小时最多扫描一次。"""
+        now = time.time()
+        if now - CommonUtil._avatar_sweep_at < 3600:
+            return 0
+        CommonUtil._avatar_sweep_at = now
+        return CommonUtil.cleanup_old_files(
+            "data/image/avatar", max_age_seconds=max_age_seconds
+        )
+
     @staticmethod
     def get_avatar(user_id):
+        CommonUtil.cleanup_avatar_cache()
         avatar_dir = os.path.join("data", "image", "avatar")
         os.makedirs(avatar_dir, exist_ok=True)
         avatar_path = os.path.join(avatar_dir, f"{user_id}.jpg")
