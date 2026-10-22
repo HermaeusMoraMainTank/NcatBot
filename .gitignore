@@ -79,6 +79,8 @@ data/json/ai_balance_history.json
 data/json/*.bak
 data/media_parser/douyin_cookies.json
 data/txt/cookie.txt
+data/*/data.json
+data/RollPig/rollpig_today.json
 data/FakeAi/recent_cache.json
 data/FakeAi/memory.db
 
