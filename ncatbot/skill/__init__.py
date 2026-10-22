@@ -2,6 +2,7 @@
 
 from .registry import SkillRegistry, skill
 from .bridge import BRIDGE_TOOL_NAMES, BRIDGE_TOOLS, SkillBridge
+from .plugin_bridge import PluginBridge
 from .spec import (
     Param,
     SkillContext,

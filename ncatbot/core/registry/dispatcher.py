@@ -38,6 +38,18 @@ class HandlerEntry:
     metadata: Dict[str, Any] = field(default_factory=dict)
 
 
+@dataclass
+class DispatchResult:
+    """一次分发的执行统计。"""
+
+    executed: int = 0
+    errors: int = 0
+
+    @property
+    def ok(self) -> bool:
+        return self.executed > 0 and self.errors < self.executed
+
+
 class HandlerDispatcher:
     """
     纯机械分发器
@@ -191,11 +203,20 @@ class HandlerDispatcher:
 
     # ==================== 核心分发 ====================
 
-    async def dispatch_event(self, data: Any, *, platform: str | None = None) -> None:
+    async def dispatch_event(
+        self,
+        data: Any,
+        *,
+        platform: str | None = None,
+        plugin_filter: str | None = None,
+    ) -> "DispatchResult":
         """直接分发一条合成事件（不经过 AsyncEventDispatcher 广播）。
 
         用于「模型代发命令」这类需要等 handler 执行完、又不想让事件
-        进入所有事件流的场景。
+        进入所有事件流的场景。``plugin_filter`` 只运行指定插件的 handler。
+
+        Returns:
+            实际尝试执行的 handler 数与其中报错的数量。
         """
         event_type = data.resolve_type()
         event = Event(
@@ -203,9 +224,11 @@ class HandlerDispatcher:
             data=data,
             platform=platform or getattr(data, "platform", "unknown"),
         )
-        await self._dispatch(event)
+        return await self._dispatch(event, plugin_filter=plugin_filter)
 
-    async def _dispatch(self, event: "Event") -> None:
+    async def _dispatch(
+        self, event: "Event", *, plugin_filter: str | None = None
+    ) -> "DispatchResult":
         """接收 Event 并分发到匹配的 handlers。"""
         event_type = event.type
 
@@ -218,6 +241,8 @@ class HandlerDispatcher:
 
         # snapshot 防止并发修改
         handlers = self._collect_handlers(event_type)
+        if plugin_filter is not None:
+            handlers = [e for e in handlers if e.plugin_name == plugin_filter]
         LOG.debug(
             "_dispatch(%s): 收集到 %d 个 handler — %s",
             event_type,
@@ -225,6 +250,8 @@ class HandlerDispatcher:
             [(e.func.__name__, e.event_type, e.plugin_name, id(e)) for e in handlers],
         )
 
+        executed = 0
+        errors = 0
         for entry in handlers:
             if getattr(event.data, "_propagation_stopped", False):
                 break
@@ -286,6 +313,7 @@ class HandlerDispatcher:
                 entry.event_type,
                 id(entry),
             )
+            executed += 1
             try:
                 result = await self._execute(entry, entity, **ctx.kwargs)
                 ctx.result = result
@@ -304,6 +332,7 @@ class HandlerDispatcher:
                         )
 
             except Exception as e:
+                errors += 1
                 ctx.error = e
                 # --- ON_ERROR hooks ---
                 error_hooks = get_hooks(entry.func, HookStage.ON_ERROR)
@@ -316,6 +345,8 @@ class HandlerDispatcher:
                         LOG.exception("ON_ERROR hook %s 自身异常: %s", hook, hook_err)
                 if not handled:
                     LOG.exception("Handler %s 执行异常: %s", entry.func.__name__, e)
+
+        return DispatchResult(executed=executed, errors=errors)
 
     def _collect_handlers(self, event_type: str) -> List[HandlerEntry]:
         """收集匹配的 handlers (snapshot)。

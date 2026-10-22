@@ -26,7 +26,7 @@ from ncatbot.core import (
 from ncatbot.plugin import PluginLoader
 from ncatbot.sandbox import SandboxRunner, WorkspaceManager
 from ncatbot.service import ServiceManager
-from ncatbot.skill import SkillRegistry
+from ncatbot.skill import PluginBridge, SkillRegistry
 from ncatbot.utils import (
     get_config_manager,
     get_log,
@@ -104,6 +104,7 @@ class BotClient:
         cfg = mgr.config
         sandbox_cfg = getattr(cfg, "sandbox", None)
         agent_cfg = getattr(cfg, "agent", None)
+        skill_cfg = getattr(cfg, "skills", None)
         self._skills = SkillRegistry()
         self._agents = AgentRuntime(
             self._skills,
@@ -134,6 +135,13 @@ class BotClient:
             ),
         )
         self._admin = AdminServer(self)
+        self._plugin_bridge = PluginBridge(
+            self._plugin_loader,
+            self._skills,
+            enabled=bool(getattr(skill_cfg, "auto_expose_plugins", True)),
+            deny=getattr(skill_cfg, "plugin_denylist", []) or [],
+            allow=getattr(skill_cfg, "plugin_allowlist", None) or None,
+        )
 
         # 待注册的 handler（在 run 之前通过 @bot.on() 收集）
         self._pending_handlers: list[tuple[str, object, dict]] = []
@@ -186,6 +194,10 @@ class BotClient:
     @property
     def admin(self) -> AdminServer:
         return self._admin
+
+    @property
+    def plugin_bridge(self) -> PluginBridge:
+        return self._plugin_bridge
 
     @property
     def service_manager(self) -> ServiceManager:
@@ -540,8 +552,13 @@ class BotClient:
                 self._skills.discover_plugin(plugin)
             except Exception as e:
                 LOG.error("插件 %s 的 skill 发现失败: %s", getattr(plugin, "name", "?"), e)
+            try:
+                self._plugin_bridge.upsert(plugin)
+            except Exception as e:
+                LOG.error("插件 %s 的自动 skill 注册失败: %s", getattr(plugin, "name", "?"), e)
 
         def _on_plugin_unloaded(name):
+            self._plugin_bridge.remove(name)
             self._skills.unregister_plugin(name)
 
         self._plugin_loader._on_plugin_init = _inject_plugin_deps
@@ -549,6 +566,10 @@ class BotClient:
         self._plugin_loader._on_plugin_unloaded = _on_plugin_unloaded
         await self._plugin_loader.load_builtin_plugins()
         await self._plugin_loader.load_all(self._plugins_dir)
+        try:
+            self._plugin_bridge.sync()
+        except Exception as e:
+            LOG.error("同步插件 skill 失败: %s", e)
         try:
             self._agents.store.load_tail()
         except Exception as e:

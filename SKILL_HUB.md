@@ -26,7 +26,7 @@ QQ 消息
 | `ncatbot/agent` | 工具循环、运行记录、子智能体、模型接入 |
 | `ncatbot/admin` | 通用后台：插件配置、技能目录、运行记录、审计、MCP |
 
-插件在 `on_load` 之后自动扫描 `@skill` 方法；热重载会同步注销/重注册。
+插件在 `on_load` 之后自动扫描 `@skill` 方法；框架还会为每个有消息 handler 的已加载插件生成 `plugin.<Name>.run`。热重载会同步注销/重注册。
 
 ## 三、无 Docker 的权限模型
 
@@ -67,6 +67,9 @@ admin:
 skills:
   enabled: true
   default_timeout: 60
+  auto_expose_plugins: true   # 每个已加载插件自动生成 plugin.<Name>.run
+  plugin_allowlist: []        # 非空时只暴露这些插件
+  plugin_denylist: ["_system_manager", "Administrator_plugin", "FakeAi", "SkillHub"]
 
 agent:
   max_rounds: 8
@@ -160,6 +163,19 @@ class MyPlugin(NcatBotPlugin):
 - `plugin.command.run`（只有 `exposed_commands` 里显式开放的命令，模型才能代发；默认空）
 - `sandbox.status` / `sandbox.run`（默认关闭）
 
+除此之外，框架会自动为**每个有消息 handler 的已加载插件**注册一个通用入口：
+
+```
+plugin.<插件名>.run(text="要发的消息", at_bot=false)
+```
+
+它会构造一条合成消息，只分发给该插件的 handler，由插件按自己的触发词、权限和冷却处理。
+触发词从 `CommandHook` / `StartsWithHook` / `KeywordHook`、`commands` 图库、
+`HELP_TEXT`、`COMMAND_*` 常量里自动提取；提取不到时才保守扫描源码。
+`FakeAi`、`SkillHub`、内置 `_system_manager` 默认在 denylist 里，避免递归和管理命令被代发。
+
+这些自动入口在后台的“技能”页会显示为 `plugin.<插件名>.run`，可以单独启停。
+
 示例链路：
 
 > @机器人 先发语音说「哈哈，我是咕咕白」，然后生成一张写着 2236 的图，最后让子智能体写个 txt 发群里。
@@ -168,7 +184,9 @@ class MyPlugin(NcatBotPlugin):
 
 ## 八、边界
 
-- 前缀命令默认只读发现；要模型代发，必须在 `exposed_commands` 里显式开放，并且只会以当前说话人的身份、在当前群执行。
+- 每个有消息 handler 的插件默认自动获得 `plugin.<Name>.run`；只有后台定时/服务、没有消息入口的插件没有可调用面。
+- `FakeAi`、`SkillHub`、内置 `_system_manager` 默认在 denylist，避免递归和管理命令被代发；可以用 `plugin_allowlist` 收窄。
+- 逐条前缀命令仍可用 `exposed_commands` 精确开放，且只会以当前说话人的身份、在当前群执行。
 - 子智能体是进程内受限 agent，不是独立进程；真正需要跑不可信代码时再启用 `sandbox.run` / bwrap / Docker。
 - 图库、图片生成依赖原有插件；TTS 优先 MiMo，失败会自动回退本机语音（Windows SAPI / espeak / macOS say），本机也没有语音后端时才明确失败。
 - 浏览器渲染、ComfyUI 绘图、按会话代理令牌尚未接入；现有 `web.search/fetch` 已覆盖大部分联网需求。

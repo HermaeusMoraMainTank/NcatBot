@@ -160,11 +160,27 @@ class PluginCatalogSkills:
             synthetic=True,
         )
         try:
-            await handler_dispatcher.dispatch_event(data, platform="qq")
+            result = await handler_dispatcher.dispatch_event(data, platform="qq")
         except Exception as exc:
             return SkillResult.fail(f"投递命令失败：{type(exc).__name__}: {exc}")
+        if result.executed <= 0:
+            return SkillResult.fail(
+                f"命令「{command}」没有匹配到插件 handler；请检查命令名。"
+            )
+        if result.errors >= result.executed:
+            return SkillResult.fail(
+                f"命令「{command}」执行失败（{result.errors}/{result.executed}）。"
+            )
+        content = f"已执行命令「{command}」，插件已按自己的逻辑处理。不要重复执行同样的命令。"
+        if result.errors:
+            content += f" 其中 {result.errors} 个 handler 报错。"
         return SkillResult(
             ok=True,
-            content=f"已执行命令「{command}」，插件已按自己的逻辑处理。不要重复执行同样的命令。",
-            data={"command": command, "group_id": gid},
+            content=content,
+            data={
+                "command": command,
+                "group_id": gid,
+                "handlers": result.executed,
+                "errors": result.errors,
+            },
         )

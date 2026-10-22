@@ -72,6 +72,19 @@ class SkillConfig(BaseConfig):
     enabled: bool = True
     default_timeout: float = 60.0
     max_output_chars: int = 4000
+    auto_expose_plugins: bool = True
+    """是否自动把每个已加载插件的消息处理入口包装成 skill。"""
+    plugin_allowlist: List[str] = Field(default_factory=list)
+    """非空时只自动暴露这些插件。"""
+    plugin_denylist: List[str] = Field(
+        default_factory=lambda: [
+            "_system_manager",
+            "Administrator_plugin",
+            "FakeAi",
+            "SkillHub",
+        ]
+    )
+    """永不自动暴露的插件（内置管理命令、AI 编排器本身等）。"""
 
 
 class AgentConfig(BaseConfig):

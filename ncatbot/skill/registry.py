@@ -185,14 +185,21 @@ class SkillRegistry:
     def unregister_plugin(self, plugin_name: str) -> int:
         names = [n for n, s in self._skills.items() if s.plugin == plugin_name]
         for name in names:
-            spec = self._skills.pop(name)
-            for alias in spec.aliases:
-                self._aliases.pop(alias, None)
-            self._stats.pop(name, None)
-            self._locks.pop(name, None)
+            self.unregister(name)
         if names:
             LOG.info("插件 %s 卸载，移除 %d 个 skill", plugin_name, len(names))
         return len(names)
+
+    def unregister(self, name: str) -> bool:
+        """移除单个 skill（别名、统计和锁一并清理）。"""
+        spec = self._skills.pop(name, None)
+        if spec is None:
+            return False
+        for alias in spec.aliases:
+            self._aliases.pop(alias, None)
+        self._stats.pop(name, None)
+        self._locks.pop(name, None)
+        return True
 
     def set_enabled(self, name: str, enabled: bool) -> SkillSpec:
         spec = self.resolve(name)

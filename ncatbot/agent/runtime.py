@@ -37,7 +37,7 @@ META_TOOLS: list[dict[str, Any]] = [
                     "query": {"type": "string", "description": "搜索词，可空"},
                     "tag": {"type": "string", "description": "按标签过滤，可空"},
                     "plugin": {"type": "string", "description": "按插件过滤，可空"},
-                    "limit": {"type": "integer", "description": "最多返回多少条，默认 30"},
+                    "limit": {"type": "integer", "description": "最多返回多少条，默认 120"},
                 },
             },
         },
@@ -560,18 +560,22 @@ class AgentRuntime:
     def _list_skills(
         self, args: dict[str, Any], available: set[str], deny: set[str]
     ) -> str:
-        limit = max(1, min(60, int(args.get("limit") or 30)))
+        limit = max(1, min(200, int(args.get("limit") or 120)))
         entries = [
             entry
             for entry in self.registry.catalog(
                 query=str(args.get("query") or ""),
                 tag=str(args.get("tag") or ""),
                 plugin=str(args.get("plugin") or ""),
-                limit=80,
+                limit=200,
             )
             if entry["name"] in available and entry["name"] not in deny
         ][:limit]
-        return json.dumps(entries, ensure_ascii=False)
+        compact = [
+            {"name": e["name"], "summary": e["summary"], "plugin": e["plugin"]}
+            for e in entries
+        ]
+        return json.dumps(compact, ensure_ascii=False)
 
     def _describe_skills(
         self, args: dict[str, Any], available: set[str], deny: set[str]
