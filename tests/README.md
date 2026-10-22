@@ -12,7 +12,7 @@ tests/
 │   ├── api/           # API 客户端 + 错误层级 + Sugar (A-01 ~ A-02, AE-01 ~ AE-07, SG-01 ~ SG-06, FL-01 ~ FL-06)
 │   ├── core/          # 核心分发与注册 + 谓词 (D-01 ~ D-09, K-01 ~ K-21, H-01 ~ H-11, R-01 ~ R-09, PR-01 ~ PR-06)
 │   ├── service/       # 服务管理 + RBAC + 调度 (SM-01 ~ SM-08, SC-01 ~ SC-12, TS-01 ~ TS-06)
-│   ├── plugin/        # 插件 Mixin + 导入去重 + Loader + FakeAi 缓存 + 经济与钱包打劫 + 命令帮助匹配 (M-01 ~ M-41, ID-01 ~ ID-02, LD-01 ~ LD-08, VC-01 ~ VC-06, GE-01 ~ GE-03, RB-01 ~ RB-04, PC-01 ~ PC-03)
+│   ├── plugin/        # 插件 Mixin + 导入去重 + Loader + FakeAi 缓存/消息引用 + 经济与钱包打劫 + 命令帮助匹配 (M-01 ~ M-41, ID-01 ~ ID-02, LD-01 ~ LD-08, VC-01 ~ VC-06, FA-REF-01 ~ FA-REF-02, GE-01 ~ GE-03, RB-01 ~ RB-04, PC-01 ~ PC-03)
 │   ├── adapter/       # 适配器解析 + 注册表 + 真实数据 + 事件日志格式 (P-01 ~ P-07, RF-01 ~ RF-08, AR-01 ~ AR-05, SL-01 ~ SL-04, GM-01 ~ GM-05, BL-01 ~ BL-25, GH-01 ~ GH-11, LK-01 ~ LK-09, LKP-01 ~ LKP-10, ELS-01 ~ ELS-17)
 │   ├── config/        # 配置迁移 + 安全 + 分层 + 事件日志格式 (CF-01 ~ CF-05, CS-01 ~ CS-05, CE-01 ~ CE-05, BQ-01 ~ BQ-11, AI-03 ~ AI-31, ELF-01 ~ ELF-06)
 │   ├── cli/           # CLI 冒烟 (CX-01 ~ CX-22)
@@ -92,7 +92,9 @@ python tests/e2e/napcat/run.py
 | RB | 钱包打劫与失败赔偿 | RB-01 ~ RB-04 |
 | GE | GroupEconomy 钱包充值与扣减 | GE-01 ~ GE-03 |
 | PC | 插件命令帮助匹配 | PC-01 ~ PC-03 |
+| MCF | McFish 钓鱼规则 | MCF-01 ~ MCF-38 |
 | VC | FakeAi 图片识别缓存 | VC-01 ~ VC-06 |
+| FA-REF | FakeAi 引用与合并转发 | FA-REF-01 ~ FA-REF-02 |
 | CS | Config 安全检查 | CS-01 ~ CS-05 |
 | SG | QQ Sugar 便捷方法 | SG-01 ~ SG-06 |
 | MA | MessageArray 容器 | MA-01 ~ MA-04 |

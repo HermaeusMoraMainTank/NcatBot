@@ -4,9 +4,6 @@ from __future__ import annotations
 
 from typing import Any
 
-RAPE_COMMAND_USER_ID = "794383252"
-RAPE_COMMAND_TARGET_ID = "1211330825"
-
 DEFAULT_CONFIG: dict[str, Any] = {
     "daily_limit": 1,
     "force_marry_cd": 3,
@@ -50,7 +47,6 @@ KEYWORD_ROUTES: dict[str, str] = {
     "抽取历史": "history",
     "强娶": "force_marry",
     "qiangqu": "force_marry",
-    "强奸": "rape_marry",
     "关系图": "graph",
     "羁绊图谱": "graph",
     "gxt": "graph",

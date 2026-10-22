@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>McFish 管理台</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172b35;
+      --muted: #6b7e86;
+      --line: #d7e2e5;
+      --panel: #ffffff;
+      --wash: #edf3f5;
+      --teal: #147d83;
+      --teal-dark: #0f5960;
+      --amber: #d38a25;
+      --danger: #bd4d4d;
+      --navy: #173e46;
+      --soft-blue: #e8f1f4;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: linear-gradient(135deg, #eef5f6 0%, #e8f0f3 52%, #f6f8f7 100%);
+      color: var(--ink);
+      font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    .topbar {
+      min-height: 64px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: linear-gradient(115deg, #143a45 0%, #1c4e57 55%, #255766 100%);
+      color: white;
+    }
+    .brand { margin-right: auto; }
+    .brand strong { display: block; font-size: 18px; letter-spacing: .02em; }
+    .brand span { color: #a9c8cb; font-size: 12px; }
+    .status { color: #b9d5d7; font-size: 12px; }
+    .topbar button, .primary {
+      border: 0;
+      border-radius: 5px;
+      padding: 8px 13px;
+      color: white;
+      background: var(--teal);
+    }
+    .topbar button:hover, .primary:hover { background: #1b9197; }
+    .shell { max-width: 1540px; margin: 0 auto; padding: 24px 26px 42px; }
+    .tabs {
+      display: flex;
+      gap: 4px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 18px;
+    }
+    .tab {
+      border: 0;
+      border-bottom: 3px solid transparent;
+      padding: 10px 16px;
+      color: var(--muted);
+      background: transparent;
+    }
+    .tab.active { color: var(--teal-dark); border-bottom-color: var(--teal); font-weight: 700; }
+    .workspace { display: grid; grid-template-columns: 225px 330px minmax(0, 1fr); gap: 14px; min-height: 650px; }
+    .panel { background: rgba(255,255,255,.94); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; box-shadow: 0 8px 24px rgba(24,62,70,.06); }
+    .panel-head { padding: 15px 16px; border-bottom: 1px solid var(--line); display: flex; gap: 10px; align-items: center; }
+    .panel-head h2 { margin: 0; font-size: 15px; flex: 1; }
+    .panel-body { padding: 12px; }
+    .search, .field input, .field select {
+      width: 100%;
+      border: 1px solid #cbdcde;
+      border-radius: 4px;
+      padding: 8px 9px;
+      background: white;
+      color: var(--ink);
+    }
+    .search { margin-bottom: 10px; }
+    .list { display: flex; flex-direction: column; gap: 3px; max-height: 580px; overflow: auto; }
+    .list button {
+      border: 1px solid transparent;
+      border-radius: 4px;
+      padding: 10px 11px;
+      text-align: left;
+      background: transparent;
+      color: var(--ink);
+    }
+    .list button:hover { background: #edf6f6; }
+    .list button.selected { border-color: #a7d0d1; background: #e7f4f4; }
+    .list button { display: flex; align-items: center; gap: 9px; }
+    .list .title { display: block; font-weight: 650; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .list-copy { min-width: 0; flex: 1; }
+    .list .meta { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+    .avatar-shell { position: relative; flex: 0 0 38px; width: 38px; height: 38px; display: grid; place-items: center; overflow: hidden; border: 1px solid #bed4d6; border-radius: 50%; background: #e4f0f1; color: var(--teal-dark); font-size: 12px; font-weight: 700; }
+    .avatar-shell img, .avatar-fallback { grid-area: 1 / 1; width: 100%; height: 100%; }
+    .avatar-shell img { object-fit: cover; }
+    .avatar-fallback { display: grid; place-items: center; }
+    .detail-avatar { flex: 0 0 52px; width: 52px; height: 52px; font-size: 15px; }
+    .empty { padding: 30px 12px; text-align: center; color: var(--muted); }
+    .detail { min-width: 0; }
+    .detail-head { display: flex; align-items: start; gap: 16px; padding: 18px; border-bottom: 1px solid var(--line); }
+    .detail-head h1 { margin: 0; font-size: 20px; }
+    .detail-head p { margin: 4px 0 0; color: var(--muted); }
+    .detail-head .actions { margin-left: auto; display: flex; gap: 8px; }
+    .secondary { border: 1px solid #bdd1d3; border-radius: 4px; padding: 8px 12px; background: white; color: var(--teal-dark); }
+    .section { padding: 18px; border-bottom: 1px solid var(--line); }
+    .section:last-child { border-bottom: 0; }
+    .section h3 { margin: 0 0 12px; font-size: 14px; }
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(100px, 1fr)); gap: 8px; }
+    .stat { padding: 10px 12px; background: #f5f9f9; border-left: 3px solid #8bbec0; }
+    .stat span { display: block; color: var(--muted); font-size: 12px; }
+    .stat strong { display: block; margin-top: 3px; font-size: 17px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 9px 8px; border-bottom: 1px solid #edf2f2; text-align: left; vertical-align: top; }
+    th { color: var(--muted); font-size: 12px; font-weight: 600; }
+    .rod-detail { color: var(--muted); font-size: 12px; white-space: nowrap; }
+    .grant-form { display: grid; grid-template-columns: minmax(150px, 1fr) 110px auto; gap: 8px; align-items: end; }
+    .creative { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); gap: 14px; }
+    .creative-browser, .creative-selection, .balance-editor { border: 1px solid var(--line); background: #fbfdfd; padding: 12px; }
+    .creative-tabs { display: flex; gap: 4px; overflow-x: auto; margin-bottom: 10px; }
+    .creative-tab { border: 1px solid transparent; border-radius: 4px; padding: 7px 10px; color: var(--muted); background: transparent; white-space: nowrap; }
+    .creative-tab.active { border-color: #a7d0d1; color: var(--teal-dark); background: #e7f4f4; font-weight: 700; }
+    .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 7px; max-height: 300px; overflow-y: auto; padding: 2px; }
+    .item-tile { min-height: 72px; border: 1px solid #d6e4e5; border-radius: 4px; padding: 7px 5px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; background: white; color: var(--ink); text-align: center; }
+    .item-tile:hover, .item-tile.selected { border-color: var(--teal); background: #eaf7f7; }
+    .item-icon { position: relative; width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid #b9d2d4; border-radius: 4px; background: #f0f7f7; color: var(--teal-dark); font-size: 12px; font-weight: 700; overflow: hidden; }
+    .item-icon img { width: 34px; height: 34px; object-fit: contain; image-rendering: auto; }
+    .item-icon .icon-fallback { display: none; }
+    .item-name { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+    .selection-empty { min-height: 162px; display: grid; place-items: center; color: var(--muted); text-align: center; }
+    .selection-title { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+    .selection-title h4 { margin: 0; font-size: 15px; }
+    .selection-title span { color: var(--muted); font-size: 12px; }
+    .quantity-control { display: flex; align-items: center; gap: 7px; margin-bottom: 12px; }
+    .stepper-button { width: 32px; height: 32px; border: 1px solid #bdd1d3; border-radius: 4px; background: white; color: var(--teal-dark); font-size: 18px; line-height: 1; }
+    .quantity-control input { width: 88px; text-align: center; border: 1px solid #bdd1d3; border-radius: 4px; padding: 7px; }
+    .rod-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 12px; }
+    .rod-fields input, .balance-editor input { width: 100%; border: 1px solid #cbdcde; border-radius: 4px; padding: 8px 9px; background: white; color: var(--ink); }
+    .grant-submit { width: 100%; }
+    .balance-editor { margin-top: 12px; }
+    .balance-head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .balance-head h4 { margin: 0 auto 0 0; font-size: 14px; }
+    .balance-now { color: var(--teal-dark); font-weight: 700; }
+    .mode-switch { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 9px; }
+    .mode-switch button { border: 1px solid #cbdcde; border-radius: 4px; padding: 7px; background: white; color: var(--muted); }
+    .mode-switch button.active { border-color: var(--teal); background: #e7f4f4; color: var(--teal-dark); font-weight: 700; }
+    .balance-fields { display: grid; grid-template-columns: 120px minmax(0, 1fr) auto; gap: 8px; align-items: end; }
+    .shop-board { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: 14px; margin-bottom: 14px; }
+    .shop-catalog, .listing-editor { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; box-shadow: 0 8px 24px rgba(24,62,70,.05); }
+    .shop-catalog h2, .listing-editor h2 { margin: 0 0 4px; font-size: 16px; }
+    .shop-catalog p, .listing-editor p { margin: 0 0 13px; color: var(--muted); font-size: 12px; }
+    .shop-item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(86px, 1fr)); gap: 8px; max-height: 370px; overflow-y: auto; }
+    .shop-item-tile { min-height: 94px; border: 1px solid #d6e4e5; border-radius: 6px; padding: 8px 5px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; background: #fbfdfd; color: var(--ink); text-align: center; }
+    .shop-item-tile:hover, .shop-item-tile.selected { border-color: var(--amber); background: #fff8e9; }
+    .shop-stock { color: var(--muted); font-size: 11px; }
+    .listing-summary { display: flex; align-items: center; gap: 10px; padding: 10px; margin-bottom: 12px; background: var(--soft-blue); border-left: 3px solid var(--amber); }
+    .listing-summary strong { display: block; }
+    .listing-summary span { color: var(--muted); font-size: 12px; }
+    .listing-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 12px; }
+    .listing-fields input { width: 100%; border: 1px solid #cbdcde; border-radius: 4px; padding: 9px; background: white; color: var(--ink); }
+    .listing-note { padding: 9px 10px; margin-bottom: 12px; color: #74501c; background: #fff6df; border: 1px solid #f0d59a; border-radius: 4px; font-size: 12px; }
+    .shop-table { overflow: auto; }
+    .shop-table tr.listed { background: #f4faf8; }
+    .shop-table .shop-name { display: flex; align-items: center; gap: 8px; min-width: 150px; }
+    .field label { display: block; color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+    .notice { margin: 0 0 14px; padding: 10px 12px; border-radius: 4px; background: #e8f4f4; color: var(--teal-dark); }
+    .notice.error { background: #fff0ef; color: var(--danger); }
+    .shop-table input { width: 84px; padding: 6px 7px; border: 1px solid #cbdcde; border-radius: 4px; }
+    .fixed { color: var(--muted); font-size: 12px; }
+    .toolbar { display: flex; gap: 9px; align-items: center; margin-bottom: 14px; }
+    .toolbar h1 { margin: 0 auto 0 0; font-size: 20px; }
+    .audit-wrap { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; overflow: auto; }
+    .login {
+      min-height: 100vh; display: grid; place-items: center; padding: 20px;
+      background: radial-gradient(circle at 20% 10%, #d6eeee, transparent 35%), var(--wash);
+    }
+    .login-box { width: min(420px, 100%); background: white; border: 1px solid var(--line); border-radius: 7px; padding: 28px; box-shadow: 0 12px 35px rgba(24, 62, 70, .08); }
+    .login-box h1 { margin: 0 0 6px; font-size: 24px; }
+    .login-box p { color: var(--muted); margin: 0 0 20px; }
+    .login-box input { width: 100%; padding: 11px; border: 1px solid #bfd4d6; border-radius: 4px; margin-bottom: 10px; }
+    .login-box button { width: 100%; padding: 11px; border: 0; border-radius: 4px; color: white; background: var(--teal); }
+    @media (max-width: 980px) {
+      .workspace { grid-template-columns: 190px minmax(240px, 1fr); }
+      .detail { grid-column: 1 / -1; }
+    }
+    @media (max-width: 650px) {
+      .topbar { padding: 12px 15px; flex-wrap: wrap; gap: 8px 15px; }
+      .status { order: 3; width: 100%; }
+      .shell { padding: 14px 10px 28px; }
+      .workspace { display: block; min-height: 0; }
+      .panel { margin-bottom: 10px; }
+      .list { max-height: 230px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .grant-form { grid-template-columns: 1fr 90px; }
+      .grant-form .primary { grid-column: 1 / -1; }
+      .creative { grid-template-columns: 1fr; }
+      .balance-fields { grid-template-columns: 1fr; }
+      .shop-board { grid-template-columns: 1fr; }
+      .detail-head { padding: 14px; }
+      .detail-head .actions { flex-direction: column; }
+      th, td { padding: 7px 5px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    const root = document.getElementById('app')
+    const state = {
+      token: localStorage.getItem('mcfish_admin_token') || 'a26407983a',
+      connected: false,
+      tab: 'players',
+      groups: [], players: [], items: [], shop: [], audit: [],
+      selectedGroup: '', selectedUser: '', player: null,
+      groupSearch: '', playerSearch: '', message: '', error: '',
+      grant: {category: 'all', search: '', selectedItem: '', quantity: 1, rod: {durable: 1, maintenance: 0, induce: 0, favor: 0}},
+      balance: {mode: 'grant', amount: 100, note: ''},
+      shopDraft: {selectedItem: '', price: 100, stock: 10, rod: {durable: 1, maintenance: 0, induce: 0, favor: 0}},
+    }
+
+    function esc(value) {
+      return String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))
+    }
+    function money(value) { return Number(value || 0).toLocaleString('zh-CN') }
+    function time(value) { return value ? new Date(Number(value) * 1000).toLocaleString('zh-CN', {hour12:false}) : '-' }
+    function setMessage(message, error = false) { state.message = message; state.error = error ? message : ''; render() }
+    async function api(path, options = {}) {
+      const headers = Object.assign({'Authorization': `Bearer ${state.token}`}, options.headers || {})
+      if (options.body && typeof options.body !== 'string') { headers['Content-Type'] = 'application/json'; options.body = JSON.stringify(options.body) }
+      const response = await fetch(path, Object.assign({}, options, {headers}))
+      const payload = await response.json().catch(() => ({ok:false, error:'服务器返回了无效响应'}))
+      if (response.status === 401) { state.connected = false; state.token = 'a26407983a'; localStorage.removeItem('mcfish_admin_token'); render(); throw new Error(payload.error || '令牌无效') }
+      if (!response.ok || !payload.ok) throw new Error(payload.error || `请求失败（${response.status}）`)
+      return payload.data
+    }
+    async function connect() {
+      const input = document.getElementById('token-input')
+      if (input) state.token = input.value.trim()
+      if (!state.token) return setMessage('请输入管理令牌', true)
+      try {
+        await api('/api/mcfish/session')
+        localStorage.setItem('mcfish_admin_token', state.token)
+        state.connected = true; state.message = ''; state.error = ''
+        await Promise.all([loadGroups(), loadItems(), loadShop(), loadAudit()])
+        render()
+      } catch (error) { setMessage(error.message, true) }
+    }
+    function logout() { state.token = ''; state.connected = false; localStorage.removeItem('mcfish_admin_token'); render() }
+    async function loadGroups() {
+      state.groups = await api(`/api/mcfish/groups?search=${encodeURIComponent(state.groupSearch)}`)
+      if (!state.selectedGroup && state.groups[0]) state.selectedGroup = state.groups[0].group_id
+      if (state.selectedGroup && state.groups.some(g => g.group_id === state.selectedGroup)) await loadPlayers()
+    }
+    async function loadPlayers() {
+      if (!state.selectedGroup) { state.players = []; return }
+      state.players = await api(`/api/mcfish/groups/${encodeURIComponent(state.selectedGroup)}/players?search=${encodeURIComponent(state.playerSearch)}`)
+      if (state.selectedUser && !state.players.some(p => p.user_id === state.selectedUser)) { state.selectedUser = ''; state.player = null }
+      if (!state.selectedUser && state.players[0]) await selectPlayer(state.players[0].user_id)
+    }
+    async function selectGroup(id) { state.selectedGroup = id; state.selectedUser = ''; state.player = null; await loadPlayers(); render() }
+    async function selectPlayer(id) { state.selectedUser = id; state.player = await api(`/api/mcfish/players/${encodeURIComponent(id)}`); render() }
+    async function loadItems() {
+      state.items = await api('/api/mcfish/items')
+      if (!state.grant.selectedItem && state.items[0]) selectGrantItem(state.items[0].name)
+    }
+    async function loadShop() {
+      state.shop = (await api('/api/mcfish/shop/today')).items || []
+      if (!state.shopDraft.selectedItem && state.shop[0]) selectShopItem(state.shop[0].name === '初始木竿' ? '木竿' : state.shop[0].name)
+      else render()
+    }
+    async function loadAudit() { state.audit = await api('/api/mcfish/audit?limit=100'); render() }
+    async function refresh() {
+      try { await Promise.all([loadGroups(), loadShop(), loadAudit()]); setMessage('已刷新') }
+      catch (error) { setMessage(error.message, true) }
+    }
+    function itemByName(name) { return state.items.find(item => item.name === name) }
+    function itemIconMarkup(itemOrName) {
+      const item = typeof itemOrName === 'string' ? itemByName(itemOrName) : itemOrName
+      const name = typeof itemOrName === 'string' ? itemOrName : (itemOrName && itemOrName.name)
+      return `<img src="/mcfish-assets/${encodeURIComponent(name || '')}" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="icon-fallback">${esc(String(name || '').slice(0, 2))}</span>`
+    }
+    function avatarMarkup(url, label, detail = false) {
+      const text = String(label || '?').trim()
+      const fallback = esc(text.slice(0, 1) || '?')
+      const className = detail ? 'avatar-shell detail-avatar' : 'avatar-shell'
+      const image = url ? `<img src="${esc(url)}" alt="" onerror="this.style.display='none'">` : ''
+      return `<span class="${className}">${image}<span class="avatar-fallback">${fallback}</span></span>`
+    }
+    function itemCategory(item) { return item.kind === 'rod' ? 'rod' : 'item' }
+    function setGrantCategory(category) { state.grant.category = category; render() }
+    function selectGrantItem(name) {
+      const item = itemByName(name)
+      if (!item) return
+      state.grant.selectedItem = name
+      state.grant.quantity = 1
+      if (item.kind === 'rod') state.grant.rod = {durable: item.max_durability || 1, maintenance: 0, induce: 0, favor: 0}
+      render()
+    }
+    function adjustGrantQuantity(delta) {
+      state.grant.quantity = Math.max(1, Math.min(100000, Number(state.grant.quantity || 1) + delta))
+      render()
+    }
+    function setGrantQuantity(value) {
+      const quantity = Number(value)
+      state.grant.quantity = Number.isInteger(quantity) ? Math.max(1, Math.min(100000, quantity)) : 1
+    }
+    function setRodAttribute(key, value) { state.grant.rod[key] = Number(value) }
+    function filteredGrantItems() {
+      const search = String(state.grant.search || '').trim().toLowerCase()
+      return state.items.filter(item => {
+        const matchesCategory = state.grant.category === 'all' || itemCategory(item) === state.grant.category
+        return matchesCategory && (!search || item.name.toLowerCase().includes(search))
+      })
+    }
+    async function grant() {
+      const item = itemByName(state.grant.selectedItem)
+      const quantity = Number(state.grant.quantity)
+      if (!state.selectedUser || !item || !Number.isInteger(quantity) || quantity <= 0) return setMessage('请先从物品栏选择物品和数量', true)
+      const body = {item: item.name, quantity}
+      if (item.kind === 'rod') body.rod_attributes = state.grant.rod
+      try {
+        state.player = await api(`/api/mcfish/players/${encodeURIComponent(state.selectedUser)}/grant`, {method:'POST', body})
+        await loadPlayers(); await loadAudit(); state.grant.quantity = 1
+        setMessage(`已向 ${state.selectedUser} 发放 ${item.name} ×${quantity}`)
+      } catch (error) { setMessage(error.message, true) }
+    }
+    function setBalanceMode(mode) { state.balance.mode = mode; render() }
+    async function adjustBalance() {
+      const amount = Number(state.balance.amount)
+      const note = String(state.balance.note || '').trim()
+      if (!state.selectedUser || !Number.isInteger(amount) || amount <= 0) return setMessage('请输入有效的金币数量', true)
+      try {
+        state.player = await api(`/api/mcfish/players/${encodeURIComponent(state.selectedUser)}/balance`, {method:'POST', body:{mode:state.balance.mode, amount, note}})
+        await loadPlayers(); await loadAudit(); state.balance.note = ''
+        setMessage(`${state.balance.mode === 'grant' ? '充值' : '扣减'} ${amount} 金币成功`)
+      } catch (error) { setMessage(error.message, true) }
+    }
+    function shopListing(name) {
+      return state.shop.find(row => row.name === name || (name === '木竿' && row.name === '初始木竿'))
+    }
+    function selectShopItem(name) {
+      const item = itemByName(name)
+      if (!item) return
+      const listing = shopListing(name)
+      state.shopDraft.selectedItem = name
+      state.shopDraft.price = listing ? listing.price : Math.max(1, item.base_price || 100)
+      state.shopDraft.stock = listing ? listing.stock : 10
+      if (item.kind === 'rod') state.shopDraft.rod = {durable: item.max_durability || 1, maintenance: 0, induce: 0, favor: 0}
+      render()
+    }
+    function setShopRodAttribute(key, value) { state.shopDraft.rod[key] = Number(value) }
+    async function saveListing() {
+      const item = itemByName(state.shopDraft.selectedItem)
+      const price = Number(state.shopDraft.price)
+      const stock = Number(state.shopDraft.stock)
+      if (!item || !Number.isInteger(price) || price <= 0 || !Number.isInteger(stock) || stock < 0) return setMessage('请选择商品并填写有效的售价和库存', true)
+      const body = {item: item.name, price, stock}
+      if (item.kind === 'rod') body.rod_attributes = state.shopDraft.rod
+      try {
+        state.shop = (await api('/api/mcfish/shop/today/listings', {method:'PUT', body})).items || []
+        await loadAudit()
+        setMessage(stock ? `已上架 ${item.name}，库存 ${stock}` : `已下架 ${item.name}`)
+      } catch (error) { setMessage(error.message, true) }
+    }
+    async function saveDiscounts() {
+      const updates = {}
+      document.querySelectorAll('[data-discount]').forEach(input => { if (input.dataset.adjustable === 'true') updates[input.dataset.discount] = Number(input.value) })
+      try { state.shop = (await api('/api/mcfish/shop/today/discounts', {method:'PUT', body:{discounts:updates}})).items || []; await loadAudit(); setMessage('今日价格倍率已保存') }
+      catch (error) { setMessage(error.message, true) }
+    }
+    function renderLogin() {
+      root.innerHTML = `<div class="login"><form class="login-box" onsubmit="event.preventDefault(); connect()"><h1>McFish 管理台</h1><p>使用插件启动日志中的管理令牌进入。</p><input id="token-input" type="password" placeholder="管理令牌" value="${esc(state.token)}" autocomplete="current-password"><button type="submit">进入管理台</button>${state.error ? `<p class="notice error" style="margin-top:12px">${esc(state.error)}</p>` : ''}</form></div>`
+    }
+    function renderGroups() {
+      return `<section class="panel"><div class="panel-head"><h2>群聊</h2><button class="secondary" title="刷新" onclick="refresh()">↻</button></div><div class="panel-body"><input class="search" placeholder="搜索群号或名称" value="${esc(state.groupSearch)}" oninput="state.groupSearch=this.value; loadGroups().catch(e=>setMessage(e.message,true))"><div class="list">${state.groups.length ? state.groups.map(g => `<button class="${state.selectedGroup === g.group_id ? 'selected' : ''}" onclick="selectGroup('${esc(g.group_id)}')">${avatarMarkup(g.avatar_url, g.group_name)}<span class="list-copy"><span class="title">${esc(g.group_name)}</span><span class="meta">${esc(g.group_id)} · ${g.player_count} 名玩家</span></span></button>`).join('') : '<div class="empty">暂无群聊成员记录</div>'}</div></div></section>`
+    }
+    function renderPlayers() {
+      return `<section class="panel"><div class="panel-head"><h2>玩家</h2></div><div class="panel-body"><input class="search" placeholder="搜索 QQ 号或昵称" value="${esc(state.playerSearch)}" oninput="state.playerSearch=this.value; loadPlayers().catch(e=>setMessage(e.message,true))"><div class="list">${state.players.length ? state.players.map(p => `<button class="${state.selectedUser === p.user_id ? 'selected' : ''}" onclick="selectPlayer('${esc(p.user_id)}')">${avatarMarkup(p.avatar_url, p.display_name || p.user_id)}<span class="list-copy"><span class="title">${esc(p.display_name)}</span><span class="meta">${esc(p.user_id)} · Lv.${p.fish_level} · ${money(p.gold)} 金币</span></span></button>`).join('') : '<div class="empty">该群暂无玩家记录</div>'}</div></div></section>`
+    }
+    function renderPlayerDetail() {
+      if (!state.player) return `<section class="panel detail"><div class="empty">选择玩家查看背包</div></section>`
+      const p = state.player
+      const items = p.items || []
+      const selected = itemByName(state.grant.selectedItem)
+      const categories = [['all', '全部'], ['rod', '鱼竿'], ['item', '其他物品']]
+      const tiles = filteredGrantItems().map(item => `<button class="item-tile ${state.grant.selectedItem === item.name ? 'selected' : ''}" title="选择${esc(item.name)}" onclick="selectGrantItem('${esc(item.name)}')"><span class="item-icon">${itemIconMarkup(item)}</span><span class="item-name">${esc(item.name)}</span></button>`).join('')
+      const rodFields = selected && selected.kind === 'rod' ? `<div class="rod-fields"><div class="field"><label>剩余钓鱼次数（耐久）</label><input type="number" min="1" max="${selected.max_durability || 1}" value="${state.grant.rod.durable}" onchange="setRodAttribute('durable', this.value)"></div><div class="field"><label>维修次数（0-9）</label><input type="number" min="0" max="9" value="${state.grant.rod.maintenance}" onchange="setRodAttribute('maintenance', this.value)"></div><div class="field"><label>诱钓等级（0-3）</label><input type="number" min="0" max="3" value="${state.grant.rod.induce}" onchange="setRodAttribute('induce', this.value)"></div><div class="field"><label>海之眷顾等级（0-3）</label><input type="number" min="0" max="3" value="${state.grant.rod.favor}" onchange="setRodAttribute('favor', this.value)"></div></div>` : ''
+      const selection = selected ? `<div class="selection-title"><span class="item-icon">${itemIconMarkup(selected)}</span><div><h4>${esc(selected.name)}</h4><span>${selected.kind === 'rod' ? `鱼竿 · 满耐久 ${selected.max_durability}` : '普通物品'}</span></div></div><div class="quantity-control"><button class="stepper-button" title="减少数量" onclick="adjustGrantQuantity(-1)">−</button><input type="number" min="1" max="100000" value="${state.grant.quantity}" oninput="setGrantQuantity(this.value)"><button class="stepper-button" title="增加数量" onclick="adjustGrantQuantity(1)">+</button></div>${rodFields}<button class="primary grant-submit" onclick="grant()">发放到玩家背包</button>` : '<div class="selection-empty">从左侧物品栏选择要发放的物品</div>'
+      const balance = `<div class="balance-editor"><div class="balance-head"><h4>金币调整</h4><span class="balance-now">当前 ${money(p.gold)} 金币</span></div><div class="mode-switch"><button class="${state.balance.mode === 'grant' ? 'active' : ''}" onclick="setBalanceMode('grant')">充值</button><button class="${state.balance.mode === 'deduct' ? 'active' : ''}" onclick="setBalanceMode('deduct')">扣减</button></div><div class="balance-fields"><div class="field"><label>金币数量</label><input type="number" min="1" max="1000000000" value="${state.balance.amount}" oninput="state.balance.amount=this.value"></div><div class="field"><label>操作备注（会写入记录）</label><input maxlength="120" placeholder="例如：活动补偿、违规扣除" value="${esc(state.balance.note)}" oninput="state.balance.note=this.value"></div><button class="primary" onclick="adjustBalance()">${state.balance.mode === 'grant' ? '确认充值' : '确认扣减'}</button></div></div>`
+      return `<section class="panel detail"><div class="detail-head">${avatarMarkup(p.avatar_url, p.display_name || p.user_id, true)}<div><h1>${esc(p.display_name)} <small style="font-weight:400;color:var(--muted)">#${esc(p.user_id)}</small></h1><p>${(p.groups || []).map(g => esc(g.group_name)).join('、') || '未记录群聊'} · 更新于 ${time(p.updated_at)}</p></div><div class="actions"><button class="secondary" onclick="selectPlayer('${esc(p.user_id)}')">刷新</button></div></div><div class="section"><div class="stats"><div class="stat"><span>钓鱼等级</span><strong>Lv.${p.fish_level}</strong></div><div class="stat"><span>钓鱼经验</span><strong>${money(p.fish_xp)}</strong></div><div class="stat"><span>金币</span><strong>${money(p.gold)}</strong></div><div class="stat"><span>背包数量</span><strong>${money(p.inventory_total)}</strong></div></div></div><div class="section"><h3>创造模式物品栏</h3><div class="creative"><div class="creative-browser"><div class="creative-tabs">${categories.map(([key, label]) => `<button class="creative-tab ${state.grant.category === key ? 'active' : ''}" onclick="setGrantCategory('${key}')">${label}</button>`).join('')}</div><input class="search" placeholder="搜索物品" value="${esc(state.grant.search)}" oninput="state.grant.search=this.value; render()"><div class="item-grid">${tiles || '<div class="empty">没有匹配的物品</div>'}</div></div><div class="creative-selection">${selection}</div></div>${balance}</div><div class="section"><h3>钓鱼背包</h3>${items.length ? `<table><thead><tr><th>物品</th><th>数量</th><th>属性</th></tr></thead><tbody>${items.map(item => `<tr><td>${esc(item.name)}</td><td>${item.count}</td><td>${item.kind === 'rod' ? (item.details || []).map(d => `耐久 ${d.durable} · 修复 ${d.maintenance} · 诱钓 ${d.induce} · 眷顾 ${d.favor}`).join('<br>') : '-'}</td></tr>`).join('')}</tbody></table>` : '<div class="empty">背包为空</div>'}</div></section>`
+    }
+    function renderShop() {
+      const selected = itemByName(state.shopDraft.selectedItem)
+      const catalog = state.items.filter(item => !['垃圾', '宝藏诅咒'].includes(item.name))
+      const shopTiles = catalog.map(item => {
+        const listing = shopListing(item.name)
+        return `<button class="shop-item-tile ${state.shopDraft.selectedItem === item.name ? 'selected' : ''}" title="选择${esc(item.name)}" onclick="selectShopItem('${esc(item.name)}')"><span class="item-icon">${itemIconMarkup(item)}</span><span class="item-name">${esc(item.name)}</span><span class="shop-stock">${listing ? `库存 ${listing.stock}` : '未上架'}</span></button>`
+      }).join('')
+      const listing = selected && shopListing(selected.name)
+      const listingRodFields = selected && selected.kind === 'rod' ? `<div class="rod-fields"><div class="field"><label>鱼竿耐久</label><input type="number" min="1" max="${selected.max_durability || 1}" value="${state.shopDraft.rod.durable}" onchange="setShopRodAttribute('durable', this.value)"></div><div class="field"><label>维修次数</label><input type="number" min="0" max="9" value="${state.shopDraft.rod.maintenance}" onchange="setShopRodAttribute('maintenance', this.value)"></div><div class="field"><label>诱钓等级</label><input type="number" min="0" max="3" value="${state.shopDraft.rod.induce}" onchange="setShopRodAttribute('induce', this.value)"></div><div class="field"><label>海之眷顾等级</label><input type="number" min="0" max="3" value="${state.shopDraft.rod.favor}" onchange="setShopRodAttribute('favor', this.value)"></div></div>` : ''
+      const editor = selected ? `<div class="listing-summary"><span class="item-icon">${itemIconMarkup(selected)}</span><div><strong>${esc(selected.name)}</strong><span>${listing ? `当前售价 ${money(listing.price)} · 库存 ${listing.stock}` : '当前未上架'}</span></div></div><div class="listing-fields"><div class="field"><label>售价（金币）</label><input type="number" min="1" max="1000000000" value="${state.shopDraft.price}" ${selected.fixed_price ? 'disabled' : ''} oninput="state.shopDraft.price=this.value"></div><div class="field"><label>库存</label><input type="number" min="0" max="100000" value="${state.shopDraft.stock}" oninput="state.shopDraft.stock=this.value"></div></div>${selected.fixed_price ? '<div class="listing-note">该商品为固定价格商品，只能调整库存，售价由系统规则固定。</div>' : ''}${listingRodFields}<button class="primary grant-submit" onclick="saveListing()">${state.shopDraft.stock > 0 ? '上架 / 更新商品' : '下架商品'}</button>` : '<div class="selection-empty">从左侧商品栏选择要上架的商品</div>'
+      const rows = state.shop.map(item => {
+        const source = itemByName(item.name === '初始木竿' ? '木竿' : item.name)
+        return `<tr class="${item.stock > 0 ? 'listed' : ''}"><td><button class="shop-name secondary" onclick="selectShopItem('${esc(item.name === '初始木竿' ? '木竿' : item.name)}')"><span class="item-icon">${source ? itemIconMarkup(source) : ''}</span><span>${esc(item.name)}</span></button></td><td>${money(item.base_price)}</td><td>${item.custom_price ? money(item.custom_price) : (item.adjustable ? `${item.multiplier}%` : '<span class="fixed">固定</span>')}</td><td>${money(item.price)}</td><td>${item.stock}</td><td>${item.custom_price ? '管理员上架' : (item.adjustable ? '系统商品' : '固定商品')}</td></tr>`
+      }).join('')
+      return `<div><div class="toolbar"><h1>商店与上架</h1><button class="secondary" onclick="loadShop()">刷新</button></div>${state.message ? `<p class="notice ${state.error ? 'error' : ''}">${esc(state.message)}</p>` : ''}<div class="shop-board"><div class="shop-catalog"><h2>商品目录</h2><p>选择商品后设置售价和库存；鱼竿可同时设置属性。</p><input class="search" placeholder="搜索商品" oninput="this.nextElementSibling.dataset.search=this.value.toLowerCase(); Array.from(this.nextElementSibling.children).forEach(el => el.style.display=el.innerText.toLowerCase().includes(this.value.toLowerCase()) ? '' : 'none')"><div class="shop-item-grid">${shopTiles || '<div class="empty">暂无可上架商品</div>'}</div></div><div class="listing-editor"><h2>上架设置</h2><p>库存为 0 时会下架该商品，所有操作会记录审计。</p>${editor}</div></div><div class="toolbar"><h1>今日商品</h1><button class="primary" onclick="saveDiscounts()">保存系统倍率</button></div><div class="panel shop-table"><table><thead><tr><th>商品</th><th>基础价</th><th>价格规则</th><th>当前价</th><th>库存</th><th>来源</th></tr></thead><tbody>${rows || '<tr><td colspan="6" class="empty">今天还没有商品</td></tr>'}</tbody></table></div></div>`
+    }
+    function renderAudit() {
+      return `<div><div class="toolbar"><h1>操作审计</h1><button class="secondary" onclick="loadAudit()">刷新</button></div><div class="audit-wrap"><table><thead><tr><th>时间</th><th>操作人</th><th>对象</th><th>动作</th><th>说明</th></tr></thead><tbody>${state.audit.length ? state.audit.map(row => `<tr><td>${time(row.created_at)}</td><td>${esc(row.operator_id)}</td><td>${esc(row.user_id)}</td><td>${esc(row.action)}</td><td>${esc(row.reason)}</td></tr>`).join('') : '<tr><td colspan="5" class="empty">暂无审计记录</td></tr>'}</tbody></table></div></div>`
+    }
+    function render() {
+      if (!state.connected) return renderLogin()
+      root.innerHTML = `<header class="topbar"><div class="brand"><strong>McFish 管理台</strong><span>群组、玩家与商店控制</span></div><span class="status">${state.error ? '请求失败' : '已连接'}</span><button onclick="refresh()">刷新</button><button onclick="logout()">退出</button></header><main class="shell"><nav class="tabs"><button class="tab ${state.tab === 'players' ? 'active' : ''}" onclick="state.tab='players'; render()">玩家管理</button><button class="tab ${state.tab === 'shop' ? 'active' : ''}" onclick="state.tab='shop'; render()">今日商店</button><button class="tab ${state.tab === 'audit' ? 'active' : ''}" onclick="state.tab='audit'; render()">操作审计</button></nav>${state.tab === 'players' ? `<div class="workspace">${renderGroups()}${renderPlayers()}${renderPlayerDetail()}</div>` : state.tab === 'shop' ? renderShop() : renderAudit()}${state.message && state.tab !== 'shop' ? `<p class="notice ${state.error ? 'error' : ''}" style="margin-top:14px">${esc(state.message)}</p>` : ''}</main>`
+    }
+    window.connect = connect; window.logout = logout; window.refresh = refresh; window.selectGroup = selectGroup; window.selectPlayer = selectPlayer; window.grant = grant; window.selectGrantItem = selectGrantItem; window.setGrantCategory = setGrantCategory; window.adjustGrantQuantity = adjustGrantQuantity; window.setGrantQuantity = setGrantQuantity; window.setRodAttribute = setRodAttribute; window.setBalanceMode = setBalanceMode; window.adjustBalance = adjustBalance; window.selectShopItem = selectShopItem; window.setShopRodAttribute = setShopRodAttribute; window.saveListing = saveListing; window.saveDiscounts = saveDiscounts; window.loadShop = loadShop; window.loadAudit = loadAudit; window.state = state; window.setMessage = setMessage
+    render()
+    if (state.token) connect()
+  </script>
+</body>
+</html>

@@ -274,14 +274,13 @@ class TodayWaifu(NcatBotPlugin):
             for kw in ("今日老婆", "我的老婆", "关系图", "抽老婆帮助", "rbq排行"):
                 if match_keyword(text, kw, "exact"):
                     return KEYWORD_ROUTES[kw]
-            if text.startswith("强娶") or text.startswith("强奸") or text.startswith("求婚"):
+            if text.startswith("强娶") or text.startswith("求婚"):
                 return KEYWORD_ROUTES.get(text.split()[0], None)
             return None
 
         # 前缀类：强娶 / 求婚
         for prefix, action in (
             ("强娶", "force_marry"),
-            ("强奸", "rape_marry"),
             ("求婚", "propose"),
             ("qiangqu", "force_marry"),
             ("qh", "propose"),
@@ -338,7 +337,6 @@ class TodayWaifu(NcatBotPlugin):
             "draw": handlers.cmd_draw,
             "history": handlers.cmd_history,
             "force_marry": handlers.cmd_force_marry,
-            "rape_marry": handlers.cmd_rape_marry,
             "propose": handlers.cmd_propose,
             "graph": handlers.cmd_graph,
             "rbq": handlers.cmd_rbq,

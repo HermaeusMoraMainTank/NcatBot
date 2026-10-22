@@ -22,6 +22,16 @@ class Robbery(NcatBotPlugin):
             "victim_min_balance": 1000,
             "daily_limit": True,
             "guaranteed_failure_users": ["273421673", "635773721"],
+            # Backend-only test profile. These fields are never included in user replies.
+            "test_user_profiles": {
+                "10123121": {
+                    "is_test_account": True,
+                    "victim_success_rate": 0.60,
+                    "stolen_balance_ratio": 0.10,
+                    "loss_stolen_ratio": 0.10,
+                    "robbery_failure_rate": 0.75,
+                },
+            },
         })
         self._economy = self.get_plugin("GroupEconomy")
         if self._economy is None:
@@ -63,9 +73,32 @@ class Robbery(NcatBotPlugin):
             self._economy = economy
         return self._economy
 
+    def _test_profile(self, user_id: str) -> dict:
+        profiles = self.get_config("test_user_profiles", {}) or {}
+        profile = profiles.get(str(user_id), {})
+        return profile if isinstance(profile, dict) and profile.get("is_test_account") else {}
+
     @staticmethod
-    def _robbery_amount(victim_balance: int) -> int:
-        return min(random.randint(0, max(0, int(victim_balance) // 20)) + 500, 10000)
+    def _rate(value: object, default: float) -> float:
+        try:
+            return min(1.0, max(0.0, float(value)))
+        except (TypeError, ValueError):
+            return default
+
+    @classmethod
+    def _profile_rate(cls, profile: dict, key: str, default: float) -> float:
+        return cls._rate(profile.get(key, default), default)
+
+    @staticmethod
+    def _robbery_amount(victim_balance: int, balance_ratio: float = 0.05) -> int:
+        ratio_limit = int(max(0, int(victim_balance)) * max(0.0, balance_ratio))
+        return min(random.randint(0, ratio_limit) + 500, 10000)
+
+    @staticmethod
+    def _loss_amount(stolen: int, loss_ratio: float | None = None) -> int:
+        if loss_ratio is None:
+            loss_ratio = 1 / random.randint(1, 4)
+        return max(1, int(stolen * min(1.0, max(0.0, loss_ratio))))
 
     @registrar.qq.on_group_message(priority=30)
     async def handle_message(self, event) -> None:
@@ -104,18 +137,31 @@ class Robbery(NcatBotPlugin):
         if victim_balance < minimum:
             await event.reply(text="对方太穷了！打劫失败")
             return
-        stolen = self._robbery_amount(victim_balance)
+        victim_profile = self._test_profile(victim_id)
+        robber_profile = self._test_profile(robber_id)
+        stolen = self._robbery_amount(
+            victim_balance,
+            self._profile_rate(victim_profile, "stolen_balance_ratio", 0.05),
+        )
         guaranteed_failure = self.get_config(
             "guaranteed_failure_users", ["273421673", "635773721"]
         ) or []
-        if victim_id in {str(value) for value in guaranteed_failure} or random.random() >= float(self.get_config("success_rate", 0.4)):
+        base_success_rate = self._rate(self.get_config("success_rate", 0.4), 0.4)
+        success_rate = self._profile_rate(victim_profile, "victim_success_rate", base_success_rate)
+        failure_rate = self._profile_rate(
+            robber_profile, "robbery_failure_rate", 1.0 - success_rate
+        )
+        if victim_id in {str(value) for value in guaranteed_failure} or random.random() < failure_rate:
             compensation = min(random.randint(1, max(1, stolen // 2)), robber_balance)
             economy.transfer_balance(robber_id, victim_id, compensation, reason="robbery_failure")
             await event.reply(text=f"打劫失败，赔偿对方 {compensation} 金币")
             return
-        loss = stolen // random.randint(1, 4)
-        if loss <= 0:
-            loss = 1
+        loss = self._loss_amount(
+            stolen,
+            float(victim_profile["loss_stolen_ratio"])
+            if "loss_stolen_ratio" in victim_profile
+            else None,
+        )
         economy.change_balance(victim_id, -loss, reason="robbery_loss", related_user_id=robber_id)
         economy.change_balance(robber_id, stolen, reason="robbery_reward", related_user_id=victim_id)
         self._record(victim_id, robber_id)

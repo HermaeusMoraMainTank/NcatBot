@@ -90,7 +90,7 @@ def estimate_cost_cny(
     completion_tokens: int = 0,
     prompt_cache_hit_tokens: int = 0,
     total_tokens: int = 0,
-    model: str = "mimo-v2.5-pro",
+    model: str = "deepseek-chat",
 ) -> float:
     pricing = MODEL_PRICING_CNY.get(model)
     if not pricing:
@@ -171,7 +171,7 @@ def record_from_response(
     user_id: Optional[str],
     source: str,
     ai_response: Optional[dict],
-    model: str = "mimo-v2.5-pro",
+    model: str = "deepseek-chat",
 ) -> None:
     """从 AI 响应 dict 中提取 usage 并记录。"""
     if not ai_response or not isinstance(ai_response, dict):
@@ -196,7 +196,7 @@ def record_ai_usage(
     prompt_tokens: int = 0,
     completion_tokens: int = 0,
     prompt_cache_hit_tokens: int = 0,
-    model: str = "mimo-v2.5-pro",
+    model: str = "deepseek-chat",
     source: str = SOURCE_ACTIVE,
     trigger_type: str = None,
 ) -> None:

@@ -39,14 +39,66 @@ HOOK_SKILL_BONUS = {
     "burst_reel": 0.18,
 }
 
+# Lower bounds inside each king's configured length range. Higher-risk hooksets
+# produce larger fish, so they remain useful when the path is already complete.
+HOOK_SKILL_SIZE_FLOORS = {
+    "precision_hookset": 0.55,
+    "powerful_hookset": 0.40,
+    "patient_control": 0.20,
+    "burst_reel": 0.00,
+}
 EQUIPMENT = {
     "财富浮标": {"kind": "permanent", "fragments": 120, "uses": None, "effects": {"treasure_rate": 1.35, "king_clue_rate": 1.20}},
     "坚韧钓组": {"kind": "permanent", "fragments": 160, "uses": None, "effects": {"king_hook_success_points": 12, "minimum_success": 5}},
-    "黄金磁石": {"kind": "permanent", "fragments": 220, "uses": None, "effects": {"treasure_quality": 1, "treasure_price": 1.25}},
+    "黄金磁石": {"kind": "permanent", "fragments": 220, "uses": None, "effects": {"treasure_quality": 1, "treasure_price": 1.25, "fish_price": 1.08, "king_price": 10.0}},
     "魔法鱼饵": {"kind": "consumable", "fragments": 24, "uses": 10, "effects": {"wait_rate": 0.85, "rare_weight": 1.25}},
     "幸运海星": {"kind": "permanent", "fragments": 300, "uses": None, "effects": {"fragment_points": 8}},
     "隐秘诱饵": {"kind": "consumable", "fragments": 42, "uses": 6, "effects": {"hidden_clue_rate": 1.50}},
     "万能鱼饵": {"kind": "consumable", "fragments": 50, "uses": 5, "effects": {"ordinary_limit_bypass": 1}},
+}
+ACCESSORY_MAX_LEVEL = 3
+ACCESSORY_SLOT_UNLOCKS = {
+    3: {"level": 10, "fragments": 80},
+    4: {"level": 20, "fragments": 180},
+}
+ACCESSORY_UPGRADE_COSTS = {
+    "财富浮标": (60, 120),
+    "坚韧钓组": (80, 160),
+    "黄金磁石": (110, 220),
+    "幸运海星": (150, 300),
+}
+PERMANENT_ACCESSORY_EFFECTS = {
+    "财富浮标": {
+        1: {"treasure_rate": 1.35, "king_clue_rate": 1.20},
+        2: {"treasure_rate": 1.50, "king_clue_rate": 1.28},
+        3: {"treasure_rate": 1.65, "king_clue_rate": 1.36},
+    },
+    "坚韧钓组": {
+        1: {"king_hook_success_points": 12, "minimum_success": 5},
+        2: {"king_hook_success_points": 16, "minimum_success": 5},
+        3: {"king_hook_success_points": 20, "minimum_success": 5},
+    },
+    "黄金磁石": {
+        1: {"treasure_quality": 1, "treasure_price": 1.25, "fish_price": 1.08, "king_price": 10.0},
+        2: {"treasure_quality": 2, "treasure_price": 1.35, "fish_price": 1.12, "king_price": 30.0},
+        3: {"treasure_quality": 3, "treasure_price": 1.50, "fish_price": 1.16, "king_price": 100.0},
+    },
+    "幸运海星": {
+        1: {"fragment_points": 8},
+        2: {"fragment_points": 12},
+        3: {"fragment_points": 16},
+    },
+}
+# Gold fees are deliberately separate from fragment costs: fragments gate access,
+# while the fee provides a meaningful sink for established players.
+EQUIPMENT_CRAFT_FEES = {
+    "财富浮标": 30000,
+    "坚韧钓组": 50000,
+    "黄金磁石": 80000,
+    "幸运海星": 120000,
+    "魔法鱼饵": 100,
+    "隐秘诱饵": 160,
+    "万能鱼饵": 220,
 }
 
 FISH_KINGS = {
@@ -58,6 +110,49 @@ FISH_KINGS = {
     "遗迹金鳞鱼": {"chain": "遗迹链", "zone": "ruin", "kind": "final", "path": ("4", "4", "4"), "requires": "遗迹铜鳞", "length": (120, 320), "base_price": 980, "asset_id": "mcfish_ruin_gold_scale_king"},
     "风暴幼龙": {"chain": "风暴链", "zone": "storm", "kind": "prerequisite", "path": ("4", "4"), "requires": None, "length": (90, 220), "base_price": 520, "asset_id": "mcfish_storm_whelp_king"},
     "风暴海龙": {"chain": "风暴链", "zone": "storm", "kind": "final", "path": ("4", "4", "4", "4"), "requires": "风暴幼龙", "length": (180, 500), "base_price": 1600, "asset_id": "mcfish_storm_seadragon_king"},
+}
+
+FISH_KING_PROMPTS = {
+    "月影巨鲤": {
+        "trigger": "水面下的月光忽明忽暗……",
+        "disappear": "水面下的月光沉回黑暗……",
+        "success": "钓起了水底月影的主人！成功钓起鱼王【月影巨鲤】！长度：{length} cm，售价：{price}。",
+    },
+    "河湾巨鲤": {
+        "trigger": "河面传来沉重的拍击声，波纹层层散开……",
+        "disappear": "沉重的拍击声戛然而止……",
+        "success": "钓起了河湾的古老霸主！成功钓起鱼王【河湾巨鲤】！长度：{length} cm，售价：{price}。",
+    },
+    "深海黑鳍": {
+        "trigger": "深处亮起一点幽蓝的光……",
+        "disappear": "幽蓝的光熄灭了……",
+        "success": "钓起了深渊里的漆黑闪光！成功钓起鱼王【深海黑鳍】！长度：{length} cm，售价：{price}。",
+    },
+    "深海灯笼鱼": {
+        "trigger": "黑暗中有庞大的影子缓缓游过，光点随之摇晃……",
+        "disappear": "庞大的影子隐回黑暗，光点不再摇晃……",
+        "success": "钓起了提灯游进深渊的主人！成功钓起鱼王【深海灯笼鱼】！长度：{length} cm，售价：{price}。",
+    },
+    "遗迹铜鳞": {
+        "trigger": "水中闪过一缕暗红色的光……",
+        "disappear": "暗红色的光沉入水中……",
+        "success": "钓起了遗迹里的铜色闪光！成功钓起鱼王【遗迹铜鳞】！长度：{length} cm，售价：{price}。",
+    },
+    "遗迹金鳞鱼": {
+        "trigger": "水底传来金属般的回响，碎金般的鳞光浮起……",
+        "disappear": "金属回响远去，碎金般的鳞光熄灭……",
+        "success": "钓起了遗迹深处最耀眼的金光！成功钓起鱼王【遗迹金鳞鱼】！长度：{length} cm，售价：{price}。",
+    },
+    "风暴幼龙": {
+        "trigger": "远处水面开始剧烈翻涌，风里带着细小电鸣……",
+        "disappear": "翻涌的水面恢复平静，电鸣散去……",
+        "success": "钓起了风暴的小小主宰！成功钓起鱼王【风暴幼龙】！长度：{length} cm，售价：{price}。",
+    },
+    "风暴海龙": {
+        "trigger": "雷光映出巨大的轮廓，海面被压出深谷般的浪痕……",
+        "disappear": "雷光散去，巨大的轮廓沉入深海……",
+        "success": "钓起了驾驭风暴的巨影！成功钓起鱼王【风暴海龙】！长度：{length} cm，售价：{price}。",
+    },
 }
 
 HIDDEN_FISH = {
@@ -83,6 +178,21 @@ ROD_UNLOCK_LEVELS = {
 }
 
 ROD_LEVELS = tuple(ROD_UNLOCK_LEVELS)
+POLE_FRAGMENT_COSTS = {
+    "木竿": 12,
+    "铁竿": 24,
+    "金竿": 56,
+    "钻石竿": 120,
+    "下界合金竿": 240,
+}
+POLE_DISMANTLE_FRAGMENTS = {
+    "木竿": 1,
+    "铁竿": 2,
+    "金竿": 4,
+    "钻石竿": 8,
+    "下界合金竿": 16,
+    "三叉戟": 32,
+}
 MIN_FISH_WAIT_SECONDS = 30
 BASE_FISH_WAIT_SECONDS = 180
 FISHING_ZONES = ("bay", "deep", "ruin", "storm")
@@ -254,6 +364,13 @@ def rod_level_index(rod_name: str) -> int:
     return max(0, min(len(ROD_LEVELS) - 1, ROD_LEVELS.index(rod_name))) if rod_name in ROD_LEVELS else 0
 
 
+def rod_drop_allowed(current_rod: str, dropped_rod: str) -> bool:
+    """Allow the equipped rod to catch itself, lower rods, or the next tier."""
+    if current_rod not in ROD_LEVELS or dropped_rod not in ROD_LEVELS:
+        return True
+    return rod_level_index(dropped_rod) <= rod_level_index(current_rod) + 1
+
+
 def fish_king_probabilities(king_name: str, rod_name: str, *, prerequisite_caught: bool = False) -> tuple[float, float]:
     king = FISH_KINGS.get(king_name)
     if king and king["kind"] == "final" and not prerequisite_caught:
@@ -326,6 +443,17 @@ def hook_skill_bonus(skill: str) -> float:
     return HOOK_SKILL_BONUS.get(skill, 0.0)
 
 
+def king_length_for_hook(king_name: str, hook_skill: str, *, rng: random.Random | None = None) -> int:
+    """Return a king length whose lower bound depends on the hookset skill."""
+    king = FISH_KINGS.get(king_name)
+    if not king:
+        return 0
+    lower, upper = king["length"]
+    floor = HOOK_SKILL_SIZE_FLOORS.get(hook_skill, 0.0)
+    minimum = int(lower + (upper - lower) * floor)
+    return (rng or random).randint(minimum, upper)
+
+
 def generate_week_windows(week_start: datetime, seed: int | None = None) -> list[FishKingWindow]:
     """Generate irregular, overlapping windows for one Monday-based week."""
     rng = random.Random(seed)
@@ -392,24 +520,38 @@ def path_progress(state: dict, king_name: str, strategy: str) -> dict:
     return progress
 
 
-def king_success_rate(base: float, *, guaranteed: bool = False, tough_tackle: bool = False) -> float:
+def king_success_rate(base: float, *, guaranteed: bool = False, tough_tackle: bool | int = False) -> float:
     value = 0.95 if guaranteed else base
     if tough_tackle:
-        value += 0.12
+        value += 0.12 if isinstance(tough_tackle, bool) else int(tough_tackle) / 100
     return min(0.95, max(0.05, value))
 
 
-def king_bite_rate(base: float, *, wealth_bobber: bool = False, hidden_lure: bool = False, hidden_target: bool = False) -> float:
+def king_bite_rate(base: float, *, wealth_bobber: bool | float = False, hidden_lure: bool = False, hidden_target: bool = False) -> float:
     """Apply clue modifiers without changing windows or prerequisite checks."""
-    value = base * (1.20 if wealth_bobber else 1.0)
+    wealth_multiplier = 1.20 if wealth_bobber is True else float(wealth_bobber or 1.0)
+    value = base * wealth_multiplier
     if hidden_lure and hidden_target:
         value *= 1.50
     return min(1.0, value)
 
 
-def treasure_sale_price(base: int, *, gold_magnet: bool = False) -> int:
+def treasure_sale_price(base: int, *, gold_magnet: bool | float = False) -> int:
     """黄金磁石 raises treasure value by exactly 25 percent."""
-    return int(base * (1.25 if gold_magnet else 1.0))
+    multiplier = 1.25 if gold_magnet is True else float(gold_magnet or 1.0)
+    return int(base * multiplier)
+
+
+def fish_sale_price(base: int, *, gold_magnet: bool | float = False) -> int:
+    """Apply the smaller Gold Magnet bonus to ordinary fish sale value."""
+    multiplier = 1.08 if gold_magnet is True else float(gold_magnet or 1.0)
+    return int(base * multiplier)
+
+
+def king_sale_price(base: int, *, gold_magnet: bool | float = False) -> int:
+    """Apply the larger Gold Magnet bonus to fish-king sale value."""
+    multiplier = 10.0 if gold_magnet is True else float(gold_magnet or 1.0)
+    return int(base * multiplier)
 
 
 def hidden_fish_trigger(*, zone: str, hidden_lure: bool, rng: random.Random | None = None) -> str | None:

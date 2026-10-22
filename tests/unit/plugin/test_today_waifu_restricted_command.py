@@ -1,38 +1,34 @@
-"""TodayWaifu 受限「强奸」命令测试。"""
+"""TodayWaifu 已移除敏感命令的回归测试。"""
 
-from types import SimpleNamespace
-from unittest.mock import AsyncMock, patch
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "plugins"))
 
-from ncatbot.types import At  # noqa: E402
-from TodayWaifu.commands import handlers  # noqa: E402
+from TodayWaifu.commands import handlers
+from TodayWaifu.config import KEYWORD_ROUTES
+from TodayWaifu.TodayWaifu import TodayWaifu
 
 
-def _event(user_id: str, target_id: str):
+def _plugin(keyword_trigger_enabled: bool = True):
     return SimpleNamespace(
-        sender=SimpleNamespace(user_id=user_id),
-        message=[At(user_id=target_id)],
+        cfg_dict=lambda: {
+            "keyword_trigger_enabled": keyword_trigger_enabled,
+            "keyword_trigger_mode": "exact",
+        }
     )
 
 
-@pytest.mark.asyncio
-async def test_rape_command_only_delegates_for_exact_user_and_target():
-    plugin = SimpleNamespace()
-    with patch.object(handlers, "cmd_force_marry", new=AsyncMock()) as force_marry:
-        await handlers.cmd_rape_marry(plugin, _event("794383252", "1211330825"))
-        force_marry.assert_awaited_once()
+def test_rape_command_is_not_registered():
+    assert "强奸" not in KEYWORD_ROUTES
+    assert not hasattr(handlers, "cmd_rape_marry")
 
 
-@pytest.mark.asyncio
-async def test_rape_command_rejects_other_user_or_target():
-    plugin = SimpleNamespace()
-    with patch.object(handlers, "cmd_force_marry", new=AsyncMock()) as force_marry:
-        await handlers.cmd_rape_marry(plugin, _event("794383252", "123"))
-        await handlers.cmd_rape_marry(plugin, _event("123", "1211330825"))
-        force_marry.assert_not_awaited()
+@pytest.mark.parametrize("enabled", [True, False])
+def test_rape_command_is_not_resolved(enabled: bool):
+    plugin = _plugin(enabled)
+    assert TodayWaifu._resolve_action(plugin, "强奸 @1211330825") is None

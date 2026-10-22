@@ -27,7 +27,6 @@ from ..core import (
     upsert_draw_record,
     user_draw_count,
 )
-from ..config import RAPE_COMMAND_TARGET_ID, RAPE_COMMAND_USER_ID
 from ..render import render_rbq_ranking, render_relation_graph, render_waifu_status
 
 if TYPE_CHECKING:
@@ -290,15 +289,6 @@ async def cmd_force_marry(plugin: "TodayWaifu", event) -> None:
         favor=favor,
         favor_delta=favor_gain,
     )
-
-
-async def cmd_rape_marry(plugin: "TodayWaifu", event) -> None:
-    """受限的强娶别名：仅允许指定发起人针对指定目标使用。"""
-    user_id = str(event.sender.user_id)
-    target_id = extract_at_user_id(event)
-    if user_id != RAPE_COMMAND_USER_ID or target_id != RAPE_COMMAND_TARGET_ID:
-        return
-    await cmd_force_marry(plugin, event)
 
 
 async def _complete_proposal(

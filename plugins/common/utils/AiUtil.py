@@ -50,8 +50,8 @@ MIMO_TTS_API_URL = MIMO_API_URL
 MIMO_TTS_API_KEY = MIMO_API_KEY
 MIMO_TTS_MODEL = "mimo-v2.5-tts"
 
-# 兼容旧调用方的模型常量名；实际聊天请求使用 MiMo 端点和密钥。
-DEEPSEEK_CHAT_MODEL = MIMO_CHAT_MODEL
+# DeepSeek 官方文本对话配置（OpenAI 兼容接口）
+DEEPSEEK_CHAT_MODEL = "deepseek-chat"
 
 # 多模态模型（llama-4-maverick 已于 2026-07-27 EOL）
 # 候选实测：kimi-k2.6 本账号 404；ministral-14b 同日 EOL；
@@ -286,34 +286,48 @@ class AiUtil:
     async def search_deepseek(
         keyword: str,
         prompt: str,
-        max_tokens: int = 2048,
+        max_tokens: int | None = None,
         temperature: float = 1.2,
+        *,
+        request_timeout: float | None = None,
+        retries: int = 3,
     ) -> Optional[dict]:
-        """文本对话：使用 MiMo，失败重试 3 次。"""
+        """文本对话：使用 DeepSeek 官方接口，并按调用方参数重试。"""
         _log.info(keyword)
 
-        provider = ("MiMo", MIMO_API_URL, MIMO_API_KEY, MIMO_CHAT_MODEL)
-        providers = [provider] * 3
+        provider = (
+            "DeepSeek",
+            DEEPSEEK_API_URL,
+            DEEPSEEK_API_KEY,
+            DEEPSEEK_CHAT_MODEL,
+        )
+        providers = [provider] * max(1, retries)
         delay = 2
 
         for attempt, (name, url, api_key, model) in enumerate(providers, start=1):
             try:
                 _log.info(f"[Chat] 第 {attempt} 次尝试，使用 {name} ({model})")
-                async with AsyncOpenAI(
-                    api_key=api_key,
-                    base_url=url,
-                    timeout=30.0,
-                ) as client:
-                    completion = await client.chat.completions.create(
-                        model=model,
-                        messages=[
+                client_kwargs = {
+                    "api_key": api_key,
+                    "base_url": url,
+                    "max_retries": 0,
+                }
+                client_kwargs["timeout"] = request_timeout
+                async with AsyncOpenAI(**client_kwargs) as client:
+                    completion_kwargs = {
+                        "model": model,
+                        "messages": [
                             {"role": "system", "content": prompt},
                             {"role": "user", "content": keyword},
                         ],
-                        max_tokens=max_tokens,
-                        temperature=temperature,
-                        stream=False,
-                        timeout=20.0,
+                        "temperature": temperature,
+                        "stream": False,
+                    }
+                    if max_tokens is not None:
+                        completion_kwargs["max_tokens"] = max_tokens
+                    completion_kwargs["timeout"] = request_timeout
+                    completion = await client.chat.completions.create(
+                        **completion_kwargs,
                     )
 
                 result = _completion_to_result(completion, model)
@@ -322,12 +336,16 @@ class AiUtil:
                 return result
 
             except Exception as e:
-                _log.error(f"[Chat] {name} 请求失败: {e}")
+                cause = e.__cause__ or e.__context__
+                detail = f"{type(e).__name__}: {e}"
+                if cause is not None and cause is not e:
+                    detail += f"; cause={type(cause).__name__}: {cause}"
+                _log.error(f"[Chat] {name} 请求失败（{url}）: {detail}")
                 if attempt < len(providers):
-                    _log.info("[Chat] 降级到下一提供商...")
+                    _log.info(f"[Chat] {name} 将在 {delay} 秒后进行第 {attempt + 1} 次尝试...")
                     await asyncio.sleep(delay)
 
-        _log.error("[Chat] 三次尝试均已失败，返回 None")
+        _log.error(f"[Chat] {len(providers)} 次尝试均已失败，返回 None")
         return None
 
     @staticmethod

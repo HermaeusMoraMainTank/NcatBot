@@ -16,6 +16,7 @@ from common.utils.async_io import load_json, load_yaml
 from common.utils.CommonUtil import CommonUtil
 from ncatbot.event.qq import GroupMessageEvent as GroupMessage
 from ncatbot.types import At, MessageArray as MessageChain, PlainText, Reply, Image
+from ncatbot.types.qq import Forward
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.core import registrar
 from ncatbot.utils import get_log
@@ -45,7 +46,13 @@ from .interaction import (
     state_store,
 )
 from .interaction.analyst import AnalystDecision
-from .settings import FAVOR_SKIP_IDS, FROZEN_USERS, apply_from_plugin, is_admin
+from .settings import (
+    FAVOR_SKIP_IDS,
+    FROZEN_USERS,
+    apply_from_plugin,
+    is_admin,
+    set_group_enabled,
+)
 
 _log = get_log()
 BOT_QQ = DEFAULT_CONFIG.bot_qq
@@ -122,17 +129,23 @@ _inflight_groups: set = set()
 PASSIVE_TRIGGER_BASE_PROB = 0.0  # noqa: F841  # 保留名以免外部引用炸；实际不再使用
 
 # 允许 FakeAi 响应的群号（空集合表示不限制）— on_load / settings 会覆盖
+FAKEAI_GROUP_MODE = "allowlist"
 FAKEAI_ALLOWED_GROUPS = frozenset({853963912, 719518427, 585479130, 1064163905})
+FAKEAI_DISABLED_GROUPS = frozenset()
+FAKEAI_GROUP_ADMIN_ID = "273421673"
 
 
 def _is_fakeai_group_allowed(group_id) -> bool:
-    """群白名单：FAKEAI_ALLOWED_GROUPS 非空时仅允许列表内群号。"""
-    if not FAKEAI_ALLOWED_GROUPS:
-        return True
+    """按配置判断群是否启用 FakeAi。"""
     try:
-        return int(group_id) in FAKEAI_ALLOWED_GROUPS
+        group = int(group_id)
     except (TypeError, ValueError):
         return False
+    if group in FAKEAI_DISABLED_GROUPS:
+        return False
+    if FAKEAI_GROUP_MODE == "all":
+        return True
+    return group in FAKEAI_ALLOWED_GROUPS
 
 
 # 模拟打字延迟开关（默认关闭）
@@ -530,6 +543,127 @@ class FakeAi(NcatBotPlugin):
 
         except Exception as e:
             _log.error(f"[FakeAi] 更新用户印象失败: {e}")
+
+    @staticmethod
+    def _text_content(text: str) -> dict:
+        return {"type": "text", "data": {"text": text}}
+
+    @staticmethod
+    def _message_field(message: object, field: str, default=None):
+        if isinstance(message, dict):
+            return message.get(field, default)
+        return getattr(message, field, default)
+
+    @classmethod
+    def _sender_label(cls, message: object) -> str:
+        sender = cls._message_field(message, "sender")
+        if sender is None:
+            sender = message
+        nickname = cls._message_field(sender, "nickname") or cls._message_field(
+            sender, "card"
+        )
+        user_id = cls._message_field(sender, "user_id", "")
+        return str(nickname or user_id or "未知用户")
+
+    @staticmethod
+    def _raw_message_chain(raw_message: object) -> Optional[MessageChain]:
+        if isinstance(raw_message, MessageChain):
+            return raw_message
+        if not isinstance(raw_message, (list, str)):
+            return None
+        try:
+            return MessageChain.from_any(raw_message)
+        except (TypeError, ValueError, KeyError):
+            return None
+
+    async def _content_from_message_data(
+        self, message_data: object, depth: int
+    ) -> list:
+        raw_segments = self._message_field(message_data, "message")
+        if raw_segments is None:
+            raw_segments = self._message_field(message_data, "content")
+        message_chain = self._raw_message_chain(raw_segments)
+        if message_chain is not None:
+            return await self._build_message_content(message_chain, depth=depth)
+
+        raw_message = self._message_field(message_data, "raw_message", "")
+        if raw_message:
+            return [self._text_content(str(raw_message))]
+        return []
+
+    async def _read_reply_content(self, segment: Reply, depth: int) -> list:
+        if depth >= 2:
+            return [self._text_content("[引用消息内容层级过深]")]
+        try:
+            message_data = await self.api.qq.query.get_msg(segment.id)
+            content = await self._content_from_message_data(message_data, depth + 1)
+            if not content:
+                content = [self._text_content("[空消息]")]
+            return [
+                self._text_content(f"[引用消息] {self._sender_label(message_data)}：")
+            ] + content + [self._text_content("\n")]
+        except Exception as e:
+            _log.debug("[FakeAi] 读取引用消息失败 message_id=%s: %s", segment.id, e)
+            return [self._text_content(f"[引用消息 {segment.id}]")]
+
+    async def _read_forward_content(self, segment: Forward, depth: int) -> list:
+        if depth >= 2:
+            return [self._text_content("[合并转发内容层级过深]")]
+
+        nodes = list(segment.content or [])
+        if not nodes and segment.id:
+            try:
+                forward_data = await self.api.qq.query.get_forward_msg(segment.id)
+                nodes = list(self._message_field(forward_data, "messages", []) or [])
+            except Exception as e:
+                _log.debug(
+                    "[FakeAi] 读取合并转发失败 message_id=%s: %s", segment.id, e
+                )
+                return [self._text_content(f"[合并转发消息 {segment.id}]")]
+
+        if not nodes:
+            return [self._text_content("[空合并转发]")]
+
+        content = [self._text_content("[合并转发]\n")]
+        for node in nodes:
+            node_content = await self._content_from_message_data(node, depth + 1)
+            if not node_content:
+                node_content = [self._text_content("[空消息]")]
+            content.append(self._text_content(f"{self._sender_label(node)}："))
+            content.extend(node_content)
+            content.append(self._text_content("\n"))
+        return content
+
+    async def _build_message_content(
+        self, message: MessageChain, *, depth: int = 0
+    ) -> list:
+        """将消息段转换为 AI 上下文，并展开引用消息和合并转发。"""
+        content = []
+        for msg_segment in message:
+            if isinstance(msg_segment, Reply):
+                content.extend(await self._read_reply_content(msg_segment, depth))
+            elif isinstance(msg_segment, Forward):
+                content.extend(await self._read_forward_content(msg_segment, depth))
+            elif isinstance(msg_segment, PlainText):
+                content.append(self._text_content(msg_segment.text))
+            elif isinstance(msg_segment, At):
+                content.append({"type": "at", "data": {"qq": msg_segment.user_id}})
+            elif isinstance(msg_segment, Image):
+                content.append(
+                    {
+                        "type": "image",
+                        "data": {
+                            "url": getattr(msg_segment, "url", ""),
+                            "file": getattr(msg_segment, "file", ""),
+                            "summary": getattr(msg_segment, "summary", ""),
+                        },
+                    }
+                )
+            elif hasattr(msg_segment, "data") and "image" in str(
+                msg_segment.data
+            ).lower():
+                content.append({"type": "image", "data": {"raw": str(msg_segment)}})
+        return content
 
     async def _is_from_excluded_plugin(self, input: GroupMessage) -> bool:
         """检查消息是否来自排除的插件"""
@@ -1335,39 +1469,35 @@ class FakeAi(NcatBotPlugin):
         group_id = input.group_id
         sender_id = input.sender.user_id
         sender_name = input.sender.nickname
+        clean_message = re.sub(r"\[CQ:[^\]]+\]", "", input.raw_message).strip()
+
+        if clean_message in {"蓝晴启用", "蓝晴关闭"}:
+            if str(sender_id) != FAKEAI_GROUP_ADMIN_ID:
+                await self.api.qq.post_group_msg(
+                    group_id=group_id, text="只有管理员 273421673 可以修改蓝晴群组状态。"
+                )
+                return
+            enabled = clean_message == "蓝晴启用"
+            try:
+                set_group_enabled(self, group_id, enabled)
+            except (TypeError, ValueError):
+                await self.api.qq.post_group_msg(
+                    group_id=group_id, text="无法识别当前群号，蓝晴群组状态未修改。"
+                )
+                return
+            await self.api.qq.post_group_msg(
+                group_id=group_id,
+                text=f"本群蓝晴已{'启用' if enabled else '关闭'}。",
+            )
+            return
 
         if not _is_fakeai_group_allowed(group_id):
             return
 
-        # 将 MessageArray 转换为可序列化的格式
-        content = []
-        for msg_segment in input.message:
-            if isinstance(msg_segment, PlainText):
-                content.append({"type": "text", "data": {"text": msg_segment.text}})
-            elif isinstance(msg_segment, At):
-                content.append({"type": "at", "data": {"qq": msg_segment.user_id}})
-            elif isinstance(msg_segment, Image):
-                content.append(
-                    {
-                        "type": "image",
-                        "data": {
-                            "url": getattr(msg_segment, "url", ""),
-                            "file": getattr(msg_segment, "file", ""),
-                            "summary": getattr(msg_segment, "summary", ""),
-                        },
-                    }
-                )
-            else:
-                # 尝试处理其他类型的消息
-                if (
-                    hasattr(msg_segment, "data")
-                    and "image" in str(msg_segment.data).lower()
-                ):
-                    content.append({"type": "image", "data": {"raw": str(msg_segment)}})
+        # 将 MessageArray 转换为可序列化的格式，并读取引用/合并转发正文
+        content = await self._build_message_content(input.message)
 
         is_at_message = f"[CQ:at,qq={BOT_QQ}]" in input.raw_message
-        clean_message = re.sub(r"\[CQ:[^\]]+\]", "", input.raw_message).strip()
-
         # 管理员回复「撤回」为管理指令，不触发 AI
         if (
             is_admin(sender_id)
@@ -1903,7 +2033,7 @@ def record_ai_usage_to_json(
     prompt_tokens: int = 0,
     completion_tokens: int = 0,
     prompt_cache_hit_tokens: int = 0,
-    model: str = "mimo-v2.5-pro",
+    model: str = "deepseek-chat",
 ):
     """保存 AI 使用统计（委托 AiStatsRecorder）。"""
     from common.utils.AiStatsRecorder import record_ai_usage
@@ -2254,7 +2384,7 @@ async def answer_ai(
         usage_info.get("prompt_tokens", 0)
         usage_info.get("completion_tokens", 0)
         usage_info.get("prompt_cache_hit_tokens", 0)
-        ai_response.get("model", "mimo-v2.5-pro")
+        ai_response.get("model", "deepseek-chat")
     else:
         response = ai_response or ""
 

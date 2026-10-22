@@ -1,0 +1,11 @@
+name = "HealthDiet"
+version = "1.0.0"
+main = "main.py"
+entry_class = "HealthDiet"
+author = "NcatBot"
+description = "AI 健康饮食记录、热量评估和图片面板"
+
+[pip_dependencies]
+Pillow = "*"
+
+[dependencies]

@@ -23,6 +23,7 @@ VISION_CACHE_RETENTION_DAYS: int = 3
 
 FAKEAI_CONFIG_DEFAULTS: Dict[str, Any] = {
     "allowed_groups": [853963912, 719518427, 585479130, 1064163905],
+    "disabled_groups": [],
     "bot_qq": "3555202423",
     "aliases": ["蓝晴"],
     "admin_ids": ["273421673"],
@@ -52,6 +53,13 @@ def is_admin(user_id: object) -> bool:
 
 def should_skip_favor(user_id: object) -> bool:
     return str(user_id) in FAVOR_SKIP_IDS or str(user_id) in ADMIN_IDS
+
+
+def _group_mode(plugin, allowed: List[int]) -> str:
+    configured = str(plugin.get_config("group_mode", "") or "").strip().lower()
+    if configured in {"all", "allowlist"}:
+        return configured
+    return "allowlist" if allowed else "all"
 
 
 def _as_str_list(raw: Any) -> List[str]:
@@ -93,6 +101,8 @@ def apply_from_plugin(plugin) -> None:
     plugin.init_defaults(FAKEAI_CONFIG_DEFAULTS)
 
     allowed = _as_int_list(plugin.get_config("allowed_groups", []))
+    disabled = _as_int_list(plugin.get_config("disabled_groups", []))
+    group_mode = _group_mode(plugin, allowed)
     bot_qq = str(plugin.get_config("bot_qq", BOT_QQ) or BOT_QQ)
     aliases = _as_str_list(plugin.get_config("aliases", ["蓝晴"])) or ["蓝晴"]
     admin_ids = set(_as_str_list(plugin.get_config("admin_ids", ["273421673"])))
@@ -157,7 +167,9 @@ def apply_from_plugin(plugin) -> None:
 
     fakeai_mod = import_module(".FakeAi", package=__package__)
 
+    fakeai_mod.FAKEAI_GROUP_MODE = group_mode
     fakeai_mod.FAKEAI_ALLOWED_GROUPS = frozenset(allowed)
+    fakeai_mod.FAKEAI_DISABLED_GROUPS = frozenset(disabled)
     fakeai_mod.trigger_interval = float(new_inter.group_cd_sec)
     fakeai_mod.enable_group_cd = bool(plugin.get_config("enable_group_cd", True))
     fakeai_mod.enable_user_cd = bool(plugin.get_config("enable_user_cd", False))
@@ -179,7 +191,7 @@ def apply_from_plugin(plugin) -> None:
             "[FakeAi] 配置已加载 groups=%s aliases=%s obs=%ss cd=%ss "
             "stickers=%s vision_cache=%s/%sd"
         ),
-        list(allowed) if allowed else "ALL",
+        list(allowed) if group_mode == "allowlist" else "ALL",
         aliases,
         new_inter.observation_sec,
         new_inter.group_cd_sec,
@@ -187,3 +199,29 @@ def apply_from_plugin(plugin) -> None:
         "ON" if VISION_CACHE_ENABLED else "OFF",
         VISION_CACHE_RETENTION_DAYS,
     )
+
+
+def set_group_enabled(plugin, group_id: object, enabled: bool) -> None:
+    """更新单个群的 FakeAi 启停状态并刷新运行时配置。"""
+    group = int(group_id)
+    allowed = _as_int_list(plugin.get_config("allowed_groups", []))
+    disabled = _as_int_list(plugin.get_config("disabled_groups", []))
+    mode = _group_mode(plugin, allowed)
+
+    if enabled:
+        disabled = [item for item in disabled if item != group]
+        if mode == "allowlist" and group not in allowed:
+            allowed.append(group)
+    elif mode == "allowlist":
+        allowed = [item for item in allowed if item != group]
+    elif group not in disabled:
+        disabled.append(group)
+
+    plugin.update_config(
+        {
+            "group_mode": mode,
+            "allowed_groups": allowed,
+            "disabled_groups": disabled,
+        }
+    )
+    apply_from_plugin(plugin)

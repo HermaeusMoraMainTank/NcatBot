@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import copy
 import json
+import math
 import random
 import re
 import sqlite3
@@ -20,8 +21,13 @@ from ncatbot.utils import get_log
 from common.utils.CommonUtil import CommonUtil
 
 from .mcfish_rules import (
+    ACCESSORY_MAX_LEVEL,
+    ACCESSORY_SLOT_UNLOCKS,
+    ACCESSORY_UPGRADE_COSTS,
     EQUIPMENT,
+    EQUIPMENT_CRAFT_FEES,
     FISH_KINGS,
+    FISH_KING_PROMPTS,
     HIDDEN_FISH,
     FishKingWindow,
     active_window,
@@ -36,22 +42,33 @@ from .mcfish_rules import (
     bite_skill_from_reply,
     hook_skill_bonus,
     hook_skill_from_reply,
+    king_length_for_hook,
     fragment_roll,
     fragment_jackpot,
     generate_week_windows,
     king_success_rate,
+    PERMANENT_ACCESSORY_EFFECTS,
     king_bite_rate,
     level_for_xp,
+    POLE_FRAGMENT_COSTS,
+    POLE_DISMANTLE_FRAGMENTS,
     xp_required_for_level,
     rod_unlock_level,
+    rod_drop_allowed,
+    FISHING_ZONE_LABELS,
+    fish_sale_price,
     hidden_fish_trigger,
+    king_sale_price,
     path_progress,
     parse_count_token,
     treasure_sale_price,
 )
+from .admin_server import DEFAULT_ADMIN_TOKEN, McFishAdminServer
 
 
 LOG = get_log("McFish")
+BLOCKED_GROUP_ID = "853963912"
+ITEM_GRANT_USERS = {"273421673"}
 
 # 用于区分“状态里没有这个键”和“键的值就是 None”。
 _MISSING = object()
@@ -60,15 +77,52 @@ _MISSING = object()
 class _McFishEvent:
     """Keep the upstream message style without NcatBot's default sender mention."""
 
-    def __init__(self, event):
+    def __init__(self, event, plugin):
         self._event = event
+        self._plugin = plugin
 
     def __getattr__(self, name):
         return getattr(self._event, name)
 
     async def reply(self, *args, **kwargs):
+        if _is_blocked_group(self._event):
+            return None
         kwargs.setdefault("at_sender", False)
+        positional_text = args[0] if args and isinstance(args[0], str) else None
+        text = kwargs.get("text", positional_text)
+        if "rtf" in kwargs:
+            kwargs["rtf"] = await self._plugin._message_array_as_images(
+                self._event, kwargs["rtf"]
+            )
+        elif text is not None and getattr(self._plugin, "workspace", None):
+            if positional_text is not None:
+                args = args[1:]
+            kwargs.pop("text", None)
+            output = await asyncio.to_thread(
+                self._plugin._render_text_image,
+                str(self._event.sender.user_id),
+                str(text),
+            )
+            kwargs["rtf"] = MessageArray([Image(file=str(output))])
         return await self._event.reply(*args, **kwargs)
+
+
+def _is_blocked_group(event) -> bool:
+    return str(getattr(event, "group_id", "")) == BLOCKED_GROUP_ID
+
+
+def _same_conversation(incoming, source_event) -> bool:
+    incoming = getattr(incoming, "data", incoming)
+    source_user = getattr(source_event, "user_id", None) or getattr(
+        getattr(source_event, "sender", None), "user_id", ""
+    )
+    incoming_user = getattr(incoming, "user_id", None) or getattr(
+        getattr(incoming, "sender", None), "user_id", ""
+    )
+    if str(incoming_user) != str(source_user):
+        return False
+    source_group = getattr(source_event, "group_id", None)
+    return source_group is None or str(getattr(incoming, "group_id", "")) == str(source_group)
 
 
 POLES = {
@@ -86,16 +140,177 @@ POLE_ALIASES = {
     "钻石杆": "钻石竿",
     "下界合金杆": "下界合金竿",
 }
+# Fishing drops use their own attribute roll. Shop, exchange, and crafting rods
+# intentionally continue to use their existing fixed or inherited attributes.
+POLE_DROP_ATTRIBUTE_LIMITS = {
+    "maintenance": 10,
+    "induce": 3,
+    "favor": 2,
+}
 FISH = {
     "鳕鱼": 10, "鲑鱼": 50, "热带鱼": 100, "河豚": 300, "鹦鹉螺": 500, "墨鱼": 500,
     "鲤鱼": 80, "鳗鱼": 180, "水晶虾": 260, "深海鱼": 320, "银鱼": 400, "金鳞鱼": 600,
 }
 ITEMS = {"诱钓": 1000, "海之眷顾": 2500, "唱片": 3000, "美西螈": 3000, "海豚": 1000, "净化书": 5000, "宝藏诅咒": 0, "垃圾": 10}
-SHOP_EQUIPMENT_PRICES = {"魔法鱼饵": 1800, "隐秘诱饵": 2600, "万能鱼饵": 3200}
-SHOP_EQUIPMENT_STOCK = {"魔法鱼饵": 5, "隐秘诱饵": 3, "万能鱼饵": 2}
+SHOP_EQUIPMENT_PRICES = {
+    "魔法鱼饵": 1800,
+    "隐秘诱饵": 2600,
+    "万能鱼饵": 3200,
+    "诱钓": 500,
+    "海之眷顾": 1000,
+}
+SHOP_EQUIPMENT_STOCK = {
+    "魔法鱼饵": 5,
+    "隐秘诱饵": 3,
+    "万能鱼饵": 2,
+    "诱钓": 5,
+    "海之眷顾": 3,
+}
 SHOP_WOOD_PRICE = 180
+SHOP_ROD_PRICES = {
+    "铁竿": 540,
+    "金竿": 900,
+    "钻石竿": 1260,
+    "下界合金竿": 1620,
+}
 AXOLOTL = "美西螈"
 UPGRADES = {"铁竿": "木竿", "金竿": "铁竿", "钻石竿": "金竿", "下界合金竿": "钻石竿", "三叉戟": "下界合金竿"}
+
+# 任务无需接取。任务池按难度和钓鱼等级分档，周期开始时抽取并保存任务快照。
+# 低档任务仍可能出现在高等级玩家的任务板上，但不领取就不会产生消耗。
+TASK_STATE_VERSION = 5
+PERMANENT_TASK_STATE_VERSION = 1
+TASK_DIFFICULTY_LABELS = {"simple": "简单", "medium": "中等", "complex": "复杂"}
+TASK_LEVEL_TIERS = (
+    {"id": "1-5", "label": "1-5级", "min": 1, "max": 5},
+    {"id": "6-10", "label": "5-10级", "min": 6, "max": 10},
+    {"id": "11-20", "label": "10-20级", "min": 11, "max": 20},
+    {"id": "21-30", "label": "20-30级", "min": 21, "max": 30},
+    {"id": "31+", "label": "30级+", "min": 31, "max": 9999},
+)
+
+# 每个池条目同时提供每日/每周版本，实际任务由 _task_definitions 组合抽取。
+TASK_POOL = (
+    {
+        "id": "starter_cod_supply", "type": "delivery", "difficulty": "simple", "level_tier": "1-5", "label": "河湾基础补给",
+        "requirements": {"daily": {"鳕鱼": 6}, "weekly": {"鳕鱼": 18}},
+        "rewards": {"daily": {"xp": 20, "items": {"鳕鱼": 10}}, "weekly": {"xp": 70, "items": {"鳕鱼": 30}}},
+    },
+    {
+        "id": "starter_salmon_order", "type": "delivery", "difficulty": "simple", "level_tier": "1-5", "label": "河湾鲜鱼单",
+        "requirements": {"daily": {"鲑鱼": 4}, "weekly": {"鲑鱼": 12}},
+        "rewards": {"daily": {"xp": 25, "gold": 35}, "weekly": {"xp": 80, "gold": 120}},
+    },
+    {
+        "id": "starter_mixed_order", "type": "delivery", "difficulty": "medium", "level_tier": "1-5", "label": "小型混合订单",
+        "requirements": {"daily": {"鳕鱼": 10, "鲑鱼": 4}, "weekly": {"鳕鱼": 30, "鲑鱼": 12}},
+        "rewards": {"daily": {"xp": 45, "fragments": 4}, "weekly": {"xp": 140, "fragments": 12}},
+    },
+    {
+        "id": "starter_purification", "type": "delivery", "difficulty": "complex", "level_tier": "1-5", "label": "初级净化供奉",
+        "requirements": {"daily": {"鳕鱼": 20, "鲑鱼": 8}, "weekly": {"鳕鱼": 50, "鲑鱼": 20}},
+        "rewards": {"daily": {"xp": 80, "items": {"魔法鱼饵": 1, "木竿": 1}}, "weekly": {"xp": 220, "items": {"魔法鱼饵": 2}}},
+    },
+    {
+        "id": "apprentice_cod_order", "type": "delivery", "difficulty": "simple", "level_tier": "6-10", "label": "熟练渔户鳕鱼单",
+        "requirements": {"daily": {"鳕鱼": 12}, "weekly": {"鳕鱼": 36}},
+        "rewards": {"daily": {"xp": 60, "gold": 70}, "weekly": {"xp": 180, "gold": 240}},
+    },
+    {
+        "id": "apprentice_mixed_order", "type": "delivery", "difficulty": "medium", "level_tier": "6-10", "label": "熟练渔户混合单",
+        "requirements": {"daily": {"鲑鱼": 15, "热带鱼": 5}, "weekly": {"鲑鱼": 45, "热带鱼": 15}},
+        "rewards": {"daily": {"xp": 120, "fragments": 8}, "weekly": {"xp": 320, "fragments": 22}},
+    },
+    {
+        "id": "apprentice_purification", "type": "delivery", "difficulty": "complex", "level_tier": "6-10", "label": "进阶净化供奉",
+        "requirements": {"daily": {"鳕鱼": 30, "鲑鱼": 15}, "weekly": {"鳕鱼": 75, "鲑鱼": 35}},
+        "rewards": {"daily": {"xp": 180, "items": {"隐秘诱饵": 1, "铁竿": 1}}, "weekly": {"xp": 480, "items": {"隐秘诱饵": 2}}},
+    },
+    {
+        "id": "expert_salmon_order", "type": "delivery", "difficulty": "simple", "level_tier": "11-20", "label": "专家鲑鱼订单",
+        "requirements": {"daily": {"鲑鱼": 15}, "weekly": {"鲑鱼": 45}},
+        "rewards": {"daily": {"xp": 120, "gold": 150}, "weekly": {"xp": 360, "gold": 500}},
+    },
+    {
+        "id": "expert_mixed_order", "type": "delivery", "difficulty": "medium", "level_tier": "11-20", "label": "专家混合订单",
+        "requirements": {"daily": {"鳕鱼": 25, "鲑鱼": 10}, "weekly": {"鳕鱼": 75, "鲑鱼": 30}},
+        "rewards": {"daily": {"xp": 220, "fragments": 14, "gold": 100}, "weekly": {"xp": 650, "fragments": 35, "gold": 320}},
+    },
+    {
+        "id": "expert_purification", "type": "delivery", "difficulty": "complex", "level_tier": "11-20", "label": "净化仪式",
+        "requirements": {"daily": {"鳕鱼": 40, "鲑鱼": 20}, "weekly": {"鳕鱼": 100, "鲑鱼": 50}},
+        "rewards": {"daily": {"xp": 350, "items": {"净化书": 1, "金竿": 1}}, "weekly": {"xp": 1000, "items": {"净化书": 2}}},
+    },
+    {
+        "id": "master_cod_order", "type": "delivery", "difficulty": "simple", "level_tier": "21-30", "label": "大师鳕鱼订单",
+        "requirements": {"daily": {"鳕鱼": 25}, "weekly": {"鳕鱼": 75}},
+        "rewards": {"daily": {"xp": 200, "gold": 280}, "weekly": {"xp": 600, "gold": 900}},
+    },
+    {
+        "id": "master_mixed_order", "type": "delivery", "difficulty": "medium", "level_tier": "21-30", "label": "大师混合订单",
+        "requirements": {"daily": {"鲑鱼": 35, "热带鱼": 15}, "weekly": {"鲑鱼": 105, "热带鱼": 45}},
+        "rewards": {"daily": {"xp": 380, "fragments": 25, "items": {"万能鱼饵": 1}}, "weekly": {"xp": 1100, "fragments": 65, "items": {"万能鱼饵": 2}}},
+    },
+    {
+        "id": "master_purification", "type": "delivery", "difficulty": "complex", "level_tier": "21-30", "label": "大师净化仪式",
+        "requirements": {"daily": {"鳕鱼": 70, "鲑鱼": 35}, "weekly": {"鳕鱼": 200, "鲑鱼": 100}},
+        "rewards": {"daily": {"xp": 650, "items": {"净化书": 1, "隐秘诱饵": 1, "钻石竿": 1}}, "weekly": {"xp": 1900, "items": {"净化书": 3}}},
+    },
+    {
+        "id": "legend_cod_order", "type": "delivery", "difficulty": "simple", "level_tier": "31+", "label": "传说鳕鱼订单",
+        "requirements": {"daily": {"鳕鱼": 35}, "weekly": {"鳕鱼": 105}},
+        "rewards": {"daily": {"xp": 320, "gold": 450}, "weekly": {"xp": 950, "gold": 1400}},
+    },
+    {
+        "id": "legend_mixed_order", "type": "delivery", "difficulty": "medium", "level_tier": "31+", "label": "传说混合订单",
+        "requirements": {"daily": {"鳕鱼": 50, "鲑鱼": 25}, "weekly": {"鳕鱼": 150, "鲑鱼": 75}},
+        "rewards": {"daily": {"xp": 600, "fragments": 45, "items": {"万能鱼饵": 1}}, "weekly": {"xp": 1800, "fragments": 110, "items": {"万能鱼饵": 3}}},
+    },
+    {
+        "id": "legend_purification", "type": "delivery", "difficulty": "complex", "level_tier": "31+", "label": "传说净化仪式",
+        "requirements": {"daily": {"鳕鱼": 100, "鲑鱼": 50}, "weekly": {"鳕鱼": 300, "鲑鱼": 150}},
+        "rewards": {"daily": {"xp": 1200, "items": {"净化书": 2, "下界合金竿": 1}}, "weekly": {"xp": 3600, "items": {"净化书": 5}}},
+    },
+    {
+        "id": "maintenance", "type": "spend", "difficulty": "medium", "level_tier": "1-5", "label": "渔具维护",
+        "requirements": {"weekly": {"金币": 300}},
+        "rewards": {"weekly": {"xp": 50, "fragments": 3}},
+    },
+    {
+        "id": "maintenance_apprentice", "type": "spend", "difficulty": "medium", "level_tier": "6-10", "label": "熟练渔具维护",
+        "requirements": {"weekly": {"金币": 700}},
+        "rewards": {"weekly": {"xp": 140, "fragments": 8, "items": {"魔法鱼饵": 1}}},
+    },
+    {
+        "id": "maintenance_expert", "type": "spend", "difficulty": "medium", "level_tier": "11-20", "label": "专家渔具维护",
+        "requirements": {"weekly": {"金币": 1200}},
+        "rewards": {"weekly": {"xp": 260, "fragments": 16, "items": {"隐秘诱饵": 1}}},
+    },
+    {
+        "id": "maintenance_master", "type": "spend", "difficulty": "medium", "level_tier": "21-30", "label": "大师渔具维护",
+        "requirements": {"weekly": {"金币": 1800}},
+        "rewards": {"weekly": {"xp": 450, "fragments": 25, "items": {"万能鱼饵": 1}}},
+    },
+    {
+        "id": "maintenance_legend", "type": "spend", "difficulty": "medium", "level_tier": "31+", "label": "传说渔具维护",
+        "requirements": {"weekly": {"金币": 2600}},
+        "rewards": {"weekly": {"xp": 700, "fragments": 40, "items": {"万能鱼饵": 2}}},
+    },
+)
+PERMANENT_TASK = {
+    "id": "permanent_all_fish_kings",
+    "pool_id": "permanent_all_fish_kings",
+    "type": "collection",
+    "difficulty": "milestone",
+    "difficulty_label": "里程碑",
+    "level_tier": "永久",
+    "level_tier_label": "永久",
+    "label": "鱼王全收集",
+    "level_required": rod_unlock_level("三叉戟"),
+    "requirements": {name: 1 for name in FISH_KINGS},
+    "reward": {"items": {"三叉戟": 1}},
+}
+TASK_KIND_LABELS = {"daily": "每日任务", "weekly": "每周任务", "permanent": "常驻任务"}
 
 # 2026-09-10 数据修复：移植时把“背包里鱼的总数超过 100 只会改变概率区间”误写成“一次获得 5 个”，
 # 下面两位玩家因此多领了物品和经验。清单来自服务器日志里的逐竿上钩记录（09-09 完整日志 + 09-10
@@ -172,93 +387,49 @@ CONCURRENT_OVERWRITE_LATE_REPAIRS = {
 
 MCFISH_HELP = """一款钓鱼模拟器
 ----------指令----------
-- 钓鱼看板 / 钓鱼商店 / 钓鱼背包
-- 钓鱼时钟（只在查询时发送图片，显示当前和最近5次鱼王窗口，不主动通知）
-- 钓鱼图鉴 或 钓鱼图鉴 鱼名
-- 查看上次钓鱼结果
-- 购买xxx [数量]
-- 出售xxx [数量]，可一次出售多个物品
-- 出售所有垃圾
-- 装备[xx竿|三叉戟|美西螈|永久饰品|消耗品]
-- 附魔[诱钓|海之眷顾]
-- 修复鱼竿
-- 合成[xx竿|三叉戟|七件新装备]
-- 消除[绑定|宝藏]诅咒 [数量]
-- 进行钓鱼 / 进行n次钓鱼（支持“进行十次钓鱼”等中文数量）
-- 当前装备概率明细 / 查看钓鱼规则
+- 钓鱼 / 进行钓鱼 / 进行n次钓鱼（支持中文数量，单次最多10竿）
+- 钓鱼看板 / 钓鱼商店 / 钓鱼背包 / 钓鱼时钟 / 钓鱼概率 / 钓鱼图鉴
+- 钓鱼任务（查看每日、每周和常驻任务）
+- 领取钓鱼任务 编号（每日/每周任务提交鱼获；常驻任务只检查历史记录）
+- 购买xxx [数量] / 出售xxx [数量] / 出售所有垃圾（可一次出售多个物品）
+- 装备鱼竿或装备，卸下饰品，购买饰品槽位，升级饰品，修复鱼竿，附魔诱钓或海之眷顾（细节见下方）
+- 合成鱼竿 / 分解鱼竿 / 合成财富浮标 / 合成坚韧钓组 / 合成黄金磁石 / 合成幸运海星
+- 合成魔法鱼饵 / 合成隐秘诱饵 / 合成万能鱼饵，消除宝藏诅咒，查看上次结果和当前装备概率明细
+- 钓鱼发放 @用户 物品 数量 / 钓鱼充值 @用户 物品 数量（仅限管理员）
 
-规则V6.0:
-1. 钓鱼规则
--> 每次钓鱼按一竿独立结算；进行n次钓鱼会立即生成并保存结果，再按隐藏上钩时间延时发送汇总，不会把n次结果视为同一时刻。
--> 同一玩家已有钓鱼任务时再次发送钓鱼，会提示“你正在钓鱼，请稍后再试”；其他玩家不受影响。
--> 钓鱼经验用于升级：1→2级需要100经验，之后每级升级所需经验增加50；每日总次数按等级为50/60/70/80/100次，单次指令最多进行10次，鱼竿按等级逐级解锁。
--> 不同鱼种经验不同：普通鱼5–50点，隐藏鱼80–120点，鱼王成功300–900点；鱼王脱钩不获得捕获经验。
--> 每竿保存自己的虚拟时间、鱼竿、鱼饵、鱼王窗口和结果类型；只有虚拟时间落在鱼王窗口内才有鱼王机会。
--> 钓鱼结束时会逐竿显示隐藏上钩时间、结果和该竿获得的经验，并同时显示本次经验总计。
--> 普通鱼直接结算。鱼王分为咬钩阶段和上钩阶段：前者决定保留、牺牲当前鱼王尝试后置鱼王或放弃，后者使用精准提竿、强力提竿、耐心控鱼、爆发收线四种技能。
--> 没有鱼竿且余额不足时，每3天最多补偿1根木竿；有鱼竿时必须先装备，不能重复领取补偿。无装备且有余额时可花费100购买鱼竿，最多可以购买3次。
-
-2. 鱼竿
--> 木竿：耐久30，金币商店常驻价180；铁竿：耐久50，均价300；金竿：耐久70，均价700。
--> 钻石竿：耐久100，均价1500；下界合金竿：耐久150，均价3100。
--> 三叉戟：耐久301，可使1次钓鱼视为3竿，只能合成、修复和交易。
--> 三叉戟 : 可使1次钓鱼视为3次钓鱼。耐久上限:301，只能合成、修复和交易。
--> 合成鱼竿需要3根上一等级鱼竿，合成成功率90%(包括梭哈)。
-
-3. 新装备：只能用钓鱼碎片合成，不能直接从钓鱼结果获得
--> 财富浮标：永久，120碎片。宝藏概率区间乘1.35，鱼王咬钩率乘1.20。
--> 坚韧钓组：永久，160碎片。鱼王上钩成功率增加12个百分点，失败率最低保留5%。
--> 黄金磁石：永久，220碎片。宝藏品质提高1档，宝藏出售价格乘1.25。
--> 幸运海星：永久，300碎片。普通碎片概率由8%提高至16%，不改变鱼王碎片数量。
--> 魔法鱼饵：消耗品，24碎片，10竿；金币商店价1800。每竿等待时间乘0.85，稀有普通鱼权重乘1.25。
--> 隐秘诱饵：消耗品，42碎片，6竿；金币商店价2600。仅在对应鱼点判定隐藏鱼，触发率乘1.50。
--> 万能鱼饵：消耗品，50碎片，5竿；金币商店价3200。每竿可兜底一个普通鱼点/鱼饵限制，不影响鱼王窗口、前置状态和鱼竿门槛。
--> 永久饰品最多同时装备2件；消耗品按实际完成的每一竿扣除1次。
-
-4. 碎片
--> 普通鱼：基础8%获得1–2个；连续12次未获得时第13次必得。
--> 稀有鱼或宝藏：22%获得2–4个，并重置个人保底计数。
--> 鱼王成功：必得5–9个。
--> 每竿另有0.1%概率触发碎片宝藏，额外获得50个碎片，并显示特殊提示。
--> 碎片只用于合成装备和后续图鉴/任务奖励，不能直接钓出新装备。
-
-5. 鱼王时钟
--> 鱼王每周生成非整点、短时长窗口，全部位于北京时间09:00–21:00；每组前置鱼王和后置鱼王窗口会部分重合。
--> 窗口每周重新生成并持久化，不是固定整点，也不会创建定时任务或主动群通知。
--> 发送“钓鱼时钟”查看当前环境、当前鱼王和最近5次鱼王窗口；不会显示钓鱼方法或可能鱼种。
-
-6. 图鉴、鱼类和旧规则
--> “钓鱼图鉴”显示捕获数量、占比、首次捕获、鱼王咬钩/成功/脱钩统计及长度记录。
--> 普通鱼包括鳕鱼、鲑鱼、热带鱼、河豚、鹦鹉螺、墨鱼；隐藏鱼包括幽光鳐、星砂鳗、云潮鲨。
--> 诱钓和海之眷顾仍保留为旧鱼竿附魔兼容项，每级最高3级；宝藏诅咒无法交易，可用净化书消除。
--> 鱼竿数量大于50不能购买，大于30不能钓鱼；每天最多交易鱼竿10把、购买物品30件（垃圾除外）。"""
+规则V6.2:
+- 每竿独立结算并按隐藏上钩时间发送结果；同一玩家已有任务时不能重复开始，其他玩家不受影响。
+- 普通鱼直接结算；鱼王有咬钩和上钩两个阶段，鱼王窗口只在对应鱼点和时间内生效。
+- 经验用于升级：1→2级需要100经验，之后每级增加50；每日次数按等级为50/60/70/80/100次，鱼竿按等级解锁。
+- 无鱼竿且余额不足时每3天最多补偿1根木竿；有余额可发送“花费100购买鱼竿”，最多可以购买3次。
+- 三叉戟：达到35级后，完成常驻“鱼王全收集”任务（8条鱼王各成功获得1次）领取。耐久上限301，可使1次钓鱼视为3次钓鱼；任务奖励三叉戟不会损坏，耐久归零后可直接支付金币修复，不需要消耗同名鱼竿。
+- 合成鱼竿需要3根上一等级鱼竿，合成成功率90%；使用碎片兑换时必须确认，未明确选择不会默认消耗碎片；合成和修复会收取金币手续费。
+- 碎片可兑换鱼竿或合成装备；普通鱼基础8%获得1–2个，第13次未获得时保底，鱼王成功必得5–9个。
+- 饰品合成：发送“合成财富浮标/合成坚韧钓组/合成黄金磁石/合成幸运海星”，分别需要120/160/220/300个钓鱼碎片，并支付30000/50000/80000/120000金币手续费；永久饰品默认2格。
+- 饰品槽位：发送“购买饰品槽位”解锁下一格；钓鱼等级10级并支付80个碎片解锁第3格，20级并支付180个碎片解锁第4格，最多4格。
+- 饰品升级：发送“升级财富浮标 / 升级坚韧钓组 / 升级黄金磁石 / 升级幸运海星”升级，升级只消耗钓鱼碎片、不消耗金币，最高Ⅲ级；同名永久饰品不能重复装备。
+- 饰品管理：发送“卸下财富浮标 / 卸下坚韧钓组 / 卸下黄金磁石 / 卸下幸运海星”或“卸下全部饰品”取消装备，卸下不会丢失饰品。
+- 消耗品合成：魔法鱼饵需要24个碎片（100金币手续费，10竿），隐秘诱饵需要42个碎片（160金币手续费，6竿），万能鱼饵需要50个碎片（220金币手续费，5竿）；合成后发送“装备魔法鱼饵”等命令启用，每完成1竿消耗1次。
+- 永久饰品效果：财富浮标Ⅰ/Ⅱ/Ⅲ级为宝藏×1.35/1.50/1.65、鱼王咬钩×1.20/1.28/1.36；坚韧钓组为上钩率+12/16/20个百分点；黄金磁石为宝藏品质+1/2/3档、宝藏售价×1.25/1.35/1.50、普通鱼售价×1.08/1.12/1.16、鱼王售价×10/30/100（钓起显示和出售结算均生效）；幸运海星为普通碎片概率16%/20%/24%。
+- 掉落鱼竿随机生成耐久、维修和附魔；合成与修复的手续费由钱包实际扣除。
+- 达到对应等级后，商店常驻出售铁竿/金竿/钻石竿/下界合金竿，价格分别为540/900/1260/1620金币；商店购买鱼竿不能作为合成材料，掉落、任务奖励、碎片兑换和合成鱼竿仍可合成。
+- 每日和每周任务从简单/中等/复杂任务池按等级档位组合生成；达到35级后才显示“鱼王全收集”常驻任务，要求成功获得全部8条鱼王各1次，完成后奖励不可损坏的三叉戟。常驻任务只检查历史成功捕获记录，不扣除或上交鱼王。发送“钓鱼任务”查看编号和奖励，发送“领取钓鱼任务 编号”领取奖励；任务跨日、跨周自动刷新，常驻任务不会刷新。
+- 宝藏诅咒不能交易，可用净化书消除；鱼竿超过30支不能钓鱼，超过50支不能购买。"""
 
 
-# 帮助图片里的“已确认的特殊机制”清单：每条渲染成一行，超宽时自动折行。
+# 帮助图片里的特殊机制。每条只放进“特殊机制”卡片一次，避免和规则正文重复。
 MCFISH_SPECIAL_MECHANICS = (
-    "掉落基础概率：宝藏1%、鱼竿4%、鱼25%、垃圾30%，其余40%为空竿（赛博空气，不给物品也不给经验）。",
-    "背包里鱼的总数超过100条时，区间变为宝藏2%、鱼竿8%、鱼35%、垃圾45%，只改变概率、不改变数量；此时海之眷顾仍然生效，把剩余空竿转化为宝藏/鱼竿/鱼。",
-    "海之眷顾每级把6%的空竿转化为宝藏1%、鱼竿2%、鱼3%；诱钓每级把上钩等待按(等级+1)等分缩短。",
-    "钓到鱼竿时会自动换成1–2个钓鱼碎片，鱼竿只能通过合成、修复和交易获得。",
-    "美西螈：宝藏掉落；装备后区间同样变为2/8/35/45，并且除鱼竿与美西螈本身外，其他物品一次获得5个。",
-    "美西螈不消耗耐久，也不受鱼竿等级限制，但不能修复、附魔；每竿要吃3条鱼（按背包里的鱼类顺序扣除），鱼不够时它直接离开，永久失去并自动卸下。",
-    "海豚：背包里放着海豚时，空竿区间会全部并入垃圾区间。",
-    "隐藏鱼：幽光鳐（深海）、星砂鳗（遗迹水域）、云潮鲨（风暴海域）；需要隐秘诱饵且与当天鱼点匹配，4.5%概率出现，经验80–120。",
-    "鱼点每天轮换（河湾/深海/遗迹水域/风暴海域），鱼王只在对应鱼点的窗口内出现。",
-    "鱼王窗口每周重新生成，都在09:00–21:00的非整点时段，前置鱼王与后置鱼王的窗口部分重合。",
-    "后置鱼王需要它的前置鱼王咬钩过一次才会出现；咬钩时回复2可牺牲前置鱼王换取后置鱼王的机会。",
-    "咬钩阶段：1保留目标、2以小钓大、3见好就收；上钩阶段1/2/3/4依次为+0/+8/+12/+18个百分点，上限95%。",
-    "每条鱼王的路径按次数分别累计，累计满足后下一次上钩率锁定95%，进度长期保存在个人数据里。",
-    "每完成1竿累计1点祝福，满75点自动获得1本净化书，超出部分计入下一轮。",
-    "买卖鱼竿都会累计鱼竿交易次数，每满10次获得1个宝藏诅咒；每层诅咒让买入价+10%、卖出价-10%。",
-    "诅咒不可交易，用净化书1:1消除（例如“消除宝藏诅咒 3”）；身上没有诅咒时不能购买净化书。",
-    "商店折扣每天重新生成（约50%–199%），库存跨天延续；木竿固定180金币，卖出的物品会回到商店库存（鱼竿与垃圾除外）。",
-    "出售按商店收购价的80%结算（20%税）；出售时可以用1个唱片让本次售价翻倍。",
-    "每天最多交易鱼竿10把、购买物品30件（垃圾除外）；鱼竿超过50支不能购买、超过30支不能钓鱼。",
+    "美西螈：宝藏掉落；装备后区间同样变为2/8/35/45；每竿要吃3条鱼，鱼不够时永久失去；其他物品一次获得5个，鱼竿和美西螈除外。",
+    "海豚：背包里放着海豚时，空竿区间全部并入垃圾区间。",
+    "鱼数超过100条：区间变为宝藏2%、鱼竿8%、鱼35%、垃圾45%，只改变概率、不改变数量。",
+    "净化书：每完成1竿累计1点祝福，满75点自动获得1本净化书，超出部分计入下一轮。",
+    "交易诅咒：买卖鱼竿每满10次获得1个宝藏诅咒；买入价+10%、卖出价-10%；可用净化书1:1消除。",
+    "商店折扣每天重新生成（约50%–199%），库存跨天延续；木竿固定180金币；出售按收购价80%结算，可用唱片翻倍。",
+    "高级鱼竿按等级常驻出售：铁竿540、金竿900、钻石竿1260、下界合金竿1620金币；商店购买杆不能参与合成。",
     "半价福利：每买满20次非鱼竿物品获得3次半价，单次购买最多抵3件，鱼竿不参与。",
-    "修复：消耗背包里1根同名鱼竿，维修度+1（上限10），耐久增加材料耐久的80%（背包鱼竿10支以内）或100%。",
-    "附魔：诱钓、海之眷顾约50%成功，最高3级，超出上限会浪费一本附魔书；修复时材料的附魔有50%概率继承。",
-    "合成：3根同等级鱼竿合成上一级，成功率90%，耐久回满、维修归零，附魔取三根材料的平均值（向下取整）。",
+    "修复：消耗1根同名鱼竿和金币，维修度+1；耐久增加材料耐久的80%（鱼竿≤10支）或100%。",
+    "附魔：诱钓、海之眷顾约50%成功，最高3级；修复时材料附魔有50%概率继承。",
+    "合成：3根同等级鱼竿或碎片兑换均需金币手续费；鱼竿合成成功率90%，失败仍只扣一次手续费。",
 )
 
 
@@ -270,20 +441,36 @@ class McFish(NcatBotPlugin):
     MAX_FISH_BATCH = 10
 
     async def on_load(self) -> None:
-        self.init_defaults({"fish_limit": 50, "success_rate": 0.6, "starting_pole_price": 100, "sell_tax": 0.8})
+        self.init_defaults({
+            "fish_limit": 50,
+            "success_rate": 0.6,
+            "starting_pole_price": 100,
+            "sell_tax": 0.8,
+            "admin_enabled": True,
+            "admin_host": "127.0.0.1",
+            "admin_port": 8766,
+            "admin_token": DEFAULT_ADMIN_TOKEN,
+        })
         self._economy = self.get_plugin("GroupEconomy")
         if self._economy is None:
             raise RuntimeError("McFish requires GroupEconomy")
         self._db = sqlite3.connect(str(Path(self.workspace) / "mcfish.db"), check_same_thread=False)
         self._db.execute("CREATE TABLE IF NOT EXISTS players (user_id TEXT PRIMARY KEY, state TEXT NOT NULL, updated_at REAL NOT NULL)")
-        self._db.execute("CREATE TABLE IF NOT EXISTS shop (day TEXT PRIMARY KEY, discounts TEXT NOT NULL, inventory TEXT NOT NULL)")
+        self._db.execute("CREATE TABLE IF NOT EXISTS shop (day TEXT PRIMARY KEY, discounts TEXT NOT NULL, inventory TEXT NOT NULL, custom_prices TEXT NOT NULL DEFAULT '{}')")
+        shop_columns = {str(row[1]) for row in self._db.execute("PRAGMA table_info(shop)").fetchall()}
+        if "custom_prices" not in shop_columns:
+            self._db.execute("ALTER TABLE shop ADD COLUMN custom_prices TEXT NOT NULL DEFAULT '{}'")
         self._db.execute("CREATE TABLE IF NOT EXISTS admin_adjustments (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id TEXT NOT NULL, reason TEXT NOT NULL, old_state TEXT NOT NULL, new_state TEXT NOT NULL, created_at REAL NOT NULL)")
+        self._ensure_admin_adjustment_columns()
+        self._db.execute("CREATE TABLE IF NOT EXISTS fishing_groups (group_id TEXT PRIMARY KEY, group_name TEXT NOT NULL DEFAULT '', updated_at REAL NOT NULL)")
+        self._db.execute("CREATE TABLE IF NOT EXISTS fishing_group_members (group_id TEXT NOT NULL, user_id TEXT NOT NULL, display_name TEXT NOT NULL DEFAULT '', last_seen_at REAL NOT NULL, PRIMARY KEY (group_id, user_id))")
         self._db.execute("CREATE TABLE IF NOT EXISTS migrations (migration_id TEXT PRIMARY KEY, applied_at REAL NOT NULL, details TEXT NOT NULL)")
         self._db.execute("CREATE TABLE IF NOT EXISTS fish_windows (week_start TEXT NOT NULL, chain TEXT NOT NULL, king_name TEXT NOT NULL, starts_at TEXT NOT NULL, ends_at TEXT NOT NULL, PRIMARY KEY (week_start, king_name))")
         self._db.execute("CREATE TABLE IF NOT EXISTS fishing_attempts (user_id TEXT NOT NULL, attempt_index INTEGER NOT NULL, scheduled_at TEXT NOT NULL, rod_id TEXT NOT NULL, bait_id TEXT NOT NULL, active_window_id TEXT, result_type TEXT NOT NULL, created_at REAL NOT NULL)")
         self._db.commit()
         self._user_locks: dict[str, asyncio.Lock] = {}
         self._fishing_tasks: dict[str, asyncio.Task] = {}
+        self._closing = False
         self._load_original_data()
         self._ensure_fish_windows()
         self._repair_abnormal_pole_trades()
@@ -294,14 +481,80 @@ class McFish(NcatBotPlugin):
         self._top_up_excessive_drop_quantities()
         self._repair_concurrent_overwrite_losses()
         self._top_up_concurrent_overwrite_losses()
+        self._admin_server = None
+        if bool(self.get_config("admin_enabled", True)):
+            self._admin_server = McFishAdminServer(
+                self,
+                host=str(self.get_config("admin_host", "127.0.0.1")),
+                port=int(self.get_config("admin_port", 8766)),
+                token=str(self.get_config("admin_token", DEFAULT_ADMIN_TOKEN) or DEFAULT_ADMIN_TOKEN),
+            )
+            try:
+                await self._admin_server.start()
+            except OSError as exc:
+                LOG.error("McFish 管理界面启动失败，请检查 admin_host/admin_port：%s", exc)
+                self._admin_server = None
 
     async def on_close(self) -> None:
-        for task in getattr(self, "_fishing_tasks", {}).values():
-            if not task.done():
-                task.cancel()
+        # 热更新会触发插件卸载。钓鱼任务跨等待时间运行，直接取消会让最后一竿
+        # 和最终结果丢失；这里先停止新任务，再等现有任务完成自己的结算。
+        self._closing = True
+        tasks = [
+            task
+            for task in getattr(self, "_fishing_tasks", {}).values()
+            if task is not None and not task.done()
+        ]
+        if tasks:
+            await asyncio.gather(*tasks, return_exceptions=True)
         self._fishing_tasks = {}
+        if getattr(self, "_admin_server", None) is not None:
+            await self._admin_server.stop()
         if hasattr(self, "_db"):
             self._db.close()
+
+    def _ensure_admin_adjustment_columns(self) -> None:
+        columns = {
+            "operator_id": "TEXT NOT NULL DEFAULT ''",
+            "action": "TEXT NOT NULL DEFAULT 'legacy'",
+        }
+        existing = {
+            str(row[1])
+            for row in self._db.execute("PRAGMA table_info(admin_adjustments)").fetchall()
+        }
+        for name, definition in columns.items():
+            if name not in existing:
+                self._db.execute(f"ALTER TABLE admin_adjustments ADD COLUMN {name} {definition}")
+        self._db.commit()
+
+    @staticmethod
+    def _ensure_accessory_state(state: dict) -> None:
+        state.setdefault("accessories", [])
+        if not isinstance(state["accessories"], list):
+            state["accessories"] = []
+        levels = state.setdefault("accessory_levels", {})
+        if not isinstance(levels, dict):
+            state["accessory_levels"] = levels = {}
+        slots = state.get("accessory_slots", 2)
+        try:
+            state["accessory_slots"] = max(2, min(4, int(slots)))
+        except (TypeError, ValueError):
+            state["accessory_slots"] = 2
+        for name in PERMANENT_ACCESSORY_EFFECTS:
+            if name in state["accessories"] or int(state.get("pack", {}).get(name, 0)) > 0:
+                try:
+                    levels[name] = max(1, min(ACCESSORY_MAX_LEVEL, int(levels.get(name, 1))))
+                except (TypeError, ValueError):
+                    levels[name] = 1
+
+    def _accessory_level(self, state: dict, name: str) -> int:
+        self._ensure_accessory_state(state)
+        if name not in state["accessories"] and int(state.get("pack", {}).get(name, 0)) <= 0:
+            return 0
+        return int(state["accessory_levels"].get(name, 1))
+
+    def _accessory_effect(self, state: dict, name: str, key: str, default):
+        level = self._accessory_level(state, name)
+        return PERMANENT_ACCESSORY_EFFECTS.get(name, {}).get(level, {}).get(key, default)
 
     def _state(self, user_id: str) -> dict:
         row = self._db.execute("SELECT state FROM players WHERE user_id = ?", (str(user_id),)).fetchone()
@@ -324,9 +577,11 @@ class McFish(NcatBotPlugin):
         state.setdefault("equip", None)
         state.setdefault("king_paths", {})
         state.setdefault("king_stats", {})
+        if not isinstance(state.get("king_sale_prices"), dict):
+            state["king_sale_prices"] = {}
         state.setdefault("fish_stats", {})
         state.setdefault("fragment_misses", 0)
-        state.setdefault("accessories", [])
+        self._ensure_accessory_state(state)
         state.setdefault("active_consumables", {})
         state.setdefault("trade_day", date.today().isoformat())
         state.setdefault("trade_count", 0)
@@ -350,6 +605,35 @@ class McFish(NcatBotPlugin):
             state["trade_day"], state["trade_count"] = date.today().isoformat(), 0
             state["pole_trade_count"], state["item_buy_count"] = 0, 0
         return state
+
+    def _record_group_member(self, event) -> None:
+        """Keep a lightweight group-to-player index for the admin panel."""
+        group_id = getattr(event, "group_id", None)
+        sender = getattr(event, "sender", None)
+        user_id = getattr(sender, "user_id", None) or getattr(event, "user_id", None)
+        if group_id is None or user_id is None or not hasattr(self, "_db"):
+            return
+        group_id = str(group_id)
+        user_id = str(user_id)
+        display_name = str(
+            getattr(sender, "card", None)
+            or getattr(sender, "nickname", None)
+            or getattr(event, "display_name", None)
+            or user_id
+        )
+        group_name = str(getattr(event, "group_name", None) or group_id)
+        now = time.time()
+        self._db.execute(
+            "INSERT INTO fishing_groups(group_id, group_name, updated_at) VALUES (?, ?, ?) "
+            "ON CONFLICT(group_id) DO UPDATE SET group_name = excluded.group_name, updated_at = excluded.updated_at",
+            (group_id, group_name, now),
+        )
+        self._db.execute(
+            "INSERT INTO fishing_group_members(group_id, user_id, display_name, last_seen_at) VALUES (?, ?, ?, ?) "
+            "ON CONFLICT(group_id, user_id) DO UPDATE SET display_name = excluded.display_name, last_seen_at = excluded.last_seen_at",
+            (group_id, user_id, display_name, now),
+        )
+        self._db.commit()
 
     def _ensure_fish_windows(self) -> None:
         """Persist one irregular schedule per week; this method never sends messages."""
@@ -450,54 +734,61 @@ class McFish(NcatBotPlugin):
         current_zone = fishing_zone_label(daily_fishing_zone(now))
         next_zone = fishing_zone_label(daily_fishing_zone(next_zone_at))
 
-        row_height = 76
-        height = 500 + max(1, len(upcoming)) * row_height
-        image = PILImage.new("RGBA", (1200, height), (150, 150, 150, 255))
+        width = 1240
+        margin = 42
+        gap = 22
+        card_width = (width - margin * 2 - gap * 2) // 3
+        row_height = 78
+        table_top = 390
+        table_height = 106 + max(1, len(upcoming)) * row_height
+        height = table_top + table_height + 42
+        image = PILImage.new("RGBA", (width, height), (244, 248, 249, 255))
         draw = ImageDraw.Draw(image)
-        draw.rectangle((10, 10, image.width - 11, image.height - 11), fill=(255, 255, 255, 255), outline="black", width=3)
-        title_font = self._font(82, bold=True)
-        section_font = self._font(48, bold=True)
-        body_font = self._font(36)
-        small_font = self._font(28)
+        header_height = 170
+        draw.rounded_rectangle((0, 0, width, header_height), radius=26, fill=(33, 68, 82, 255))
+        draw.rectangle((0, header_height - 20, width, header_height), fill=(33, 68, 82, 255))
+        draw.text((margin, 32), "钓鱼时钟", fill=(250, 252, 252, 255), font=self._font(64, bold=True))
+        draw.text((margin, 112), "鱼点轮换与鱼王窗口", fill=(190, 222, 225, 255), font=self._font(25))
+        draw.text((width - margin, 116), f"北京时间 {now:%m月%d日 %H:%M}", fill=(220, 234, 235, 255), font=self._font(23), anchor="ra")
 
-        draw.text((35, 25), "钓鱼时钟", fill="black", font=title_font)
-        draw.text((1160, 48), f"北京时间 {now:%m月%d日 %H:%M}", fill="black", font=small_font, anchor="ra")
-        draw.line((35, 125, image.width - 35, 125), fill="black", width=3)
-        draw.text((45, 145), f"当前鱼点：{current_zone}", fill="black", font=body_font)
-        draw.text((500, 145), f"下一鱼点：{next_zone}", fill="black", font=body_font)
-        draw.text((500, 190), f"开始：{next_zone_at:%m月%d日 %H:%M}", fill="black", font=body_font)
+        card_y = header_height + 28
+        card_titles = ("当前鱼点", "下一鱼点", "当前状态")
+        card_values = (
+            (current_zone, "今日持续至 24:00"),
+            (next_zone, f"{next_zone_at:%m月%d日 %H:%M} 开始"),
+            ("水面出现异动" if current else "水面平静", current.king_name if current else "当前没有鱼王窗口"),
+        )
+        accents = ((38, 144, 158), (78, 116, 176), (61, 145, 112) if current else (145, 155, 160))
+        for index, (title, values, accent) in enumerate(zip(card_titles, card_values, accents)):
+            x = margin + index * (card_width + gap)
+            self._card(draw, (x, card_y, x + card_width, card_y + 142))
+            draw.rounded_rectangle((x, card_y, x + 9, card_y + 142), radius=4, fill=(*accent, 255))
+            draw.text((x + 28, card_y + 20), title, fill=(92, 112, 117, 255), font=self._font(23))
+            draw.text((x + 28, card_y + 57), values[0], fill=(40, 61, 68, 255), font=self._font(33, bold=True))
+            draw.text((x + 28, card_y + 106), values[1], fill=(92, 112, 117, 255), font=self._font(20))
 
-        if current:
-            draw.text((45, 245), "当前状态：水面出现异动", fill="black", font=body_font)
-            draw.text(
-                (500, 245),
-                f"当前鱼王：{current.king_name}",
-                fill="black",
-                font=body_font,
-            )
-            draw.text((500, 290), f"窗口剩余：{format_duration((current.ends_at - now).total_seconds())}", fill="black", font=body_font)
-        else:
-            draw.text((45, 245), "当前状态：水面平静", fill="black", font=body_font)
-            draw.text((500, 245), "当前没有鱼王窗口", fill="black", font=body_font)
-        draw.line((35, 350, image.width - 35, 350), fill="black", width=3)
-        draw.text((45, 367), "最近5次鱼王窗口", fill="black", font=section_font)
-
-        columns = ((55, "序号"), (170, "鱼王"), (470, "开始"), (760, "结束"), (930, "距离开始"))
-        header_y = 430
+        table_y = table_top
+        self._card(draw, (margin, table_y, width - margin, table_y + table_height))
+        draw.text((margin + 28, table_y + 22), "最近 5 次鱼王窗口", fill=(40, 61, 68, 255), font=self._font(34, bold=True))
+        draw.text((width - margin - 28, table_y + 30), "按开始时间排序", fill=(92, 112, 117, 255), font=self._font(20), anchor="ra")
+        header_y = table_y + 78
+        columns = ((margin + 30, "序号"), (margin + 125, "鱼王"), (margin + 410, "开始"), (margin + 665, "结束"), (width - margin - 30, "距离开始"))
         for x, label in columns:
-            draw.text((x, header_y), label, fill="black", font=small_font)
-        draw.line((45, 470, image.width - 45, 470), fill="black", width=2)
+            draw.text((x, header_y), label, fill=(92, 112, 117, 255), font=self._font(21), anchor="rs" if x == width - margin - 30 else "ls")
+        draw.line((margin + 26, table_y + 101, width - margin - 26, table_y + 101), fill=(205, 220, 222, 255), width=2)
         if upcoming:
             for index, window in enumerate(upcoming):
-                y = 485 + index * row_height
+                y = table_y + 119 + index * row_height
+                if index % 2 == 0:
+                    draw.rounded_rectangle((margin + 20, y - 14, width - margin - 20, y + 46), radius=10, fill=(246, 250, 250, 255))
                 until = format_duration((window.starts_at - now).total_seconds())
-                draw.text((55, y), str(index + 1), fill="black", font=body_font)
-                draw.text((170, y), window.king_name, fill="black", font=body_font)
-                draw.text((470, y), f"{window.starts_at:%m月%d日 %H:%M}", fill="black", font=body_font)
-                draw.text((760, y), f"{window.ends_at:%H:%M}", fill="black", font=body_font)
-                draw.text((930, y), until, fill="black", font=body_font)
+                draw.text((margin + 34, y), str(index + 1), fill=(70, 83, 88, 255), font=self._font(25))
+                draw.text((margin + 125, y), window.king_name, fill=(40, 61, 68, 255), font=self._font(25, bold=True))
+                draw.text((margin + 410, y), f"{window.starts_at:%m月%d日 %H:%M}", fill=(70, 83, 88, 255), font=self._font(23))
+                draw.text((margin + 665, y), f"{window.ends_at:%H:%M}", fill=(70, 83, 88, 255), font=self._font(23))
+                draw.text((width - margin - 34, y), until, fill=(38, 144, 158, 255), font=self._font(23, bold=True), anchor="ra")
         else:
-            draw.text((55, 495), "本周暂无后续鱼王窗口", fill="black", font=body_font)
+            draw.text((margin + 30, table_y + 128), "本周暂无后续鱼王窗口", fill=(92, 112, 117, 255), font=self._font(25))
 
         output = Path(self.workspace) / "images" / f"clock_{uid}.png"
         output.parent.mkdir(parents=True, exist_ok=True)
@@ -505,55 +796,234 @@ class McFish(NcatBotPlugin):
         return output
 
     def _render_help_image(self, uid: str) -> Path:
-        """Render the fishing rules as an image using the live game parameters."""
-        lines = [line.strip() for line in MCFISH_HELP.splitlines() if line.strip()]
-        lines.extend([
-            "",
-            "当前装备说明（以代码实际参数为准）",
-        ])
-        lines.extend(
-            f"{name}：耐久{durability}，均价{price}金币，解锁等级{rod_unlock_level(name)}级。"
-            for name, (durability, price) in POLES.items()
-        )
-        lines.append("三叉戟：耐久301，只能通过合成、修复和交易获得；每次钓鱼按3竿计算。")
-        for name, info in EQUIPMENT.items():
-            kind_text = "永久饰品" if info["kind"] == "permanent" else f"消耗品，{info['uses']}竿"
-            effect_text = {
-                "财富浮标": "宝藏概率区间×1.35，鱼王咬钩率×1.20",
-                "坚韧钓组": "鱼王上钩成功率+12个百分点，最低成功率保留5%",
-                "黄金磁石": "宝藏品质提高1档，宝藏售价×1.25",
-                "魔法鱼饵": "每竿等待时间×0.85，稀有普通鱼权重×1.25",
-                "幸运海星": "普通碎片概率由8%提高至16%",
-                "隐秘诱饵": "对应鱼点隐藏鱼触发率×1.50",
-                "万能鱼饵": "每竿兜底一个普通鱼点或鱼饵限制",
-            }.get(name, "暂无效果说明")
-            shop_text = f"，金币商店价{SHOP_EQUIPMENT_PRICES[name]}" if name in SHOP_EQUIPMENT_PRICES else ""
-            lines.append(f"{name}：{kind_text}，合成需要{info['fragments']}碎片{shop_text}；效果：{effect_text}。")
-        lines.extend([
-            "",
-            "已确认的特殊机制",
-            *MCFISH_SPECIAL_MECHANICS,
-        ])
-        body_font = self._font(50)
+        """Render concise fishing help as a two-column card layout."""
+        width = 1600
+        margin = 56
+        gap = 32
+        column_width = (width - margin * 2 - gap) // 2
+        title_font = self._font(78, bold=True)
+        subtitle_font = self._font(28)
+        section_font = self._font(34, bold=True)
+        body_font = self._font(25)
+        small_font = self._font(22)
         measure = ImageDraw.Draw(PILImage.new("RGB", (1, 1)))
-        wrapped: list[str] = []
-        for line in lines:
-            if not line:
-                wrapped.append("")
-                continue
+
+        def wrap(text: str, font: ImageFont.FreeTypeFont, max_width: int) -> list[str]:
+            result: list[str] = []
             current = ""
-            for char in line:
+            for char in text:
+                if char == "\n":
+                    result.append(current)
+                    current = ""
+                    continue
                 candidate = current + char
-                if current and measure.textbbox((0, 0), candidate, font=body_font)[2] > 900:
-                    wrapped.append(current)
+                if current and measure.textbbox((0, 0), candidate, font=font)[2] > max_width:
+                    result.append(current)
                     current = char
                 else:
                     current = candidate
             if current:
-                wrapped.append(current)
+                result.append(current)
+            return result or [""]
+
+        equipment_effects = {
+            "财富浮标": "Ⅰ/Ⅱ/Ⅲ级：宝藏×1.35/1.50/1.65，鱼王咬钩×1.20/1.28/1.36",
+            "坚韧钓组": "Ⅰ/Ⅱ/Ⅲ级：鱼王上钩率+12/16/20个百分点，最低成功率5%",
+            "黄金磁石": "Ⅰ/Ⅱ/Ⅲ级：宝藏品质+1/2/3档；宝藏售价×1.25/1.35/1.50；普通鱼售价×1.08/1.12/1.16；鱼王售价×10/30/100",
+            "魔法鱼饵": "等待时间×0.85，稀有鱼权重×1.25",
+            "幸运海星": "Ⅰ/Ⅱ/Ⅲ级：普通碎片概率16%/20%/24%",
+            "隐秘诱饵": "对应鱼点隐藏鱼触发率×1.50",
+            "万能鱼饵": "每竿兜底一个普通鱼点或鱼饵限制",
+        }
+        rod_rows = []
+        for name, (durability, price) in POLES.items():
+            special = "  · 1次钓鱼按3竿计算  · 鱼王全收集任务奖励" if name == "三叉戟" else ""
+            rod_rows.append(
+                f"{name}  · 耐久{durability}  · 均价{price}金币  · Lv{rod_unlock_level(name)}{special}"
+            )
+        equipment_rows = []
+        for name, info in EQUIPMENT.items():
+            kind_text = "永久" if info["kind"] == "permanent" else f"{info['uses']}竿消耗品"
+            equipment_rows.append(
+                f"{name}  · {kind_text}  · {info['fragments']}碎片  · 手续费{EQUIPMENT_CRAFT_FEES[name]}金币  · {equipment_effects[name]}"
+            )
+        sections = [
+            (
+                "指令入口",
+                [
+                    "开始：钓鱼 / 进行钓鱼 / 进行N次钓鱼（支持中文数量，单次最多10竿）",
+                    "查询：钓鱼看板 / 钓鱼商店 / 钓鱼背包 / 钓鱼时钟 / 钓鱼概率 / 钓鱼图鉴 / 查看上次钓鱼结果",
+                    "任务查看：钓鱼任务（查看编号、难度、等级档位、鱼种和奖励）",
+                    "任务领取：领取钓鱼任务 编号（自动检查背包并提交，完成后领取奖励）",
+                    "物品：购买xxx [数量]、出售xxx [数量]、出售所有垃圾（可一次出售多个）、分解鱼竿（回收碎片）",
+                    "装备：装备鱼竿/饰品、卸下饰品、修复鱼竿、附魔诱钓/海之眷顾",
+                    "饰品槽位：购买饰品槽位（按等级和碎片解锁下一格）",
+                    "饰品升级：升级财富浮标 / 升级坚韧钓组 / 升级黄金磁石 / 升级幸运海星",
+                    "成长：合成鱼竿/装备、分解鱼竿、消除宝藏诅咒、当前装备概率明细",
+                ],
+                (38, 144, 164),
+            ),
+            (
+                "核心循环",
+                [
+                    "每竿独立结算并按隐藏上钩时间发送结果；完成后显示上钩时间、结果和经验。",
+                    "普通鱼直接结算；鱼王分咬钩和上钩两个阶段，回复选项会影响后续机会和鱼体大小。",
+                    "经验用于升级：1→2级需要100点，之后每级增加50点；每日次数按等级为50/60/70/80/100次。",
+                    "鱼王成功获得300–900经验，隐藏鱼80–120经验，普通鱼5–50经验；脱钩不获得捕获经验。",
+                    "同一玩家已有钓鱼任务时不能重复开始，其他玩家不受影响。",
+                ],
+                (86, 122, 174),
+            ),
+            (
+                "任务与金币循环",
+                [
+                    "任务池分简单/中等/复杂，并按1-5、5-10、10-20、20-30、30+级分档；高等级任务目标更大，奖励会增加经验、金币、碎片、消耗品或鱼竿。",
+                    "每日/每周任务从任务池排列组合生成；任务板可能保留1-5级低档任务，不想领取不会产生任何消耗。",
+                    "达到35级后，常驻鱼王全收集要求8条鱼王各成功获得1次，只检查历史记录、不扣鱼王，完成后奖励不可损坏的三叉戟。",
+                    "修复鱼竿和合成会按等级收取金币手续费，消费任务只统计成功扣款。",
+                ],
+                (176, 119, 64),
+            ),
+            ("鱼竿与升级", rod_rows, (239, 145, 76)),
+            (
+                "碎片与装备",
+                [
+                    "碎片来源：普通鱼基础8%得1–2个，第13次保底；稀有鱼/宝藏22%得2–4个；鱼王成功必得5–9个。",
+                    "另有0.1%碎片宝藏，额外获得50个碎片；碎片可兑换鱼竿或合成装备。",
+                    "合成方式：发送“合成财富浮标”等对应命令；永久饰品需碎片和金币手续费，默认2格。",
+                    "槽位扩展：10级+80碎片解锁第3格，20级+180碎片解锁第4格；升级不消耗金币。",
+                    "饰品管理：发送“升级财富浮标”升级，发送“卸下财富浮标”取消装备；同名永久饰品不能重复装备。",
+                    "鱼竿也可分解回收碎片：木1、铁2、金4、钻石8、下界合金16、三叉戟32；分解前会列出属性并确认。",
+                    "消耗品合成后发送“装备魔法鱼饵”等命令启用，每完成1竿消耗1次；剩余次数可在钓鱼背包查看。",
+                    "商店常驻出售诱钓500金币（5个）和海之眷顾1000金币（3个）；附魔成功率严格为50%，满3级不会消耗附魔书。",
+                    *equipment_rows,
+                ],
+                (112, 96, 164),
+            ),
+            (
+                "掉落与概率",
+                [
+                    "基础区间：宝藏1% / 鱼竿4% / 普通鱼25% / 垃圾30% / 空竿40%。",
+                    "鱼总数超过100条时：宝藏2% / 鱼竿8% / 普通鱼35% / 垃圾45%，只改变概率不改变数量。",
+                    "鱼竿掉落绝对概率：木70% / 铁20% / 金6% / 钻石3% / 下界合金1%。",
+                    "当前鱼竿最多只能钓到下一等级；越级区间转为空竿。掉落鱼竿随机生成耐久、维修和附魔。",
+                    "海之眷顾每级把6%空竿转为宝藏1%、鱼竿2%、鱼3%；诱钓按等级缩短等待。",
+                    "隐藏鱼：幽光鳐（深海）、星砂鳗（遗迹水域）、云潮鲨（风暴海域）；需对应鱼点和隐秘诱饵，4.5%触发。",
+                ],
+                (49, 132, 190),
+            ),
+            (
+                "鱼王与鱼点",
+                [
+                    "鱼点每日轮换：河湾、深海、遗迹水域、风暴海域；鱼王只在对应鱼点的窗口内出现。",
+                    "鱼王窗口每周重新生成，位于09:00–21:00的非整点时段，前置和后置窗口可能重合。",
+                    "后置鱼王需要前置鱼王咬钩过一次；咬钩阶段回复2可牺牲前置鱼王尝试后置目标。",
+                    "鱼王路径按次数分别累计；满足条件后下一次上钩率锁定95%，进度长期保存。",
+                    "发送钓鱼时钟查看当前环境和最近5次窗口，不会主动通知。",
+                ],
+                (61, 145, 112),
+            ),
+            ("特殊机制", list(MCFISH_SPECIAL_MECHANICS), (229, 112, 118)),
+        ]
+
+        def prepare_section(title: str, rows: list[str], accent: tuple[int, int, int]):
+            wrapped_rows: list[list[str]] = []
+            for row in rows:
+                row_lines = wrap(f"• {row}", body_font, column_width - 48)
+                wrapped_rows.append(row_lines)
+            line_height = 34
+            height = 82 + sum(len(lines) * line_height + 10 for lines in wrapped_rows) + 20
+            return (title, wrapped_rows, accent, height)
+
+        prepared = [prepare_section(*section) for section in sections]
+        # Pack whole cards into two near-equal columns. There are only seven
+        # cards, so exhaustive partitioning keeps the layout stable when one
+        # section grows without adding a general-purpose layout dependency.
+        section_totals = [section[3] + 22 for section in prepared]
+        total_height = sum(section_totals)
+        best_mask = 1
+        best_difference = total_height
+        for mask in range(1, 1 << len(prepared)):
+            if not mask & 1:
+                continue
+            left_height = sum(
+                section_totals[index]
+                for index in range(len(prepared))
+                if mask & (1 << index)
+            )
+            difference = abs(total_height - left_height * 2)
+            if difference < best_difference:
+                best_mask = mask
+                best_difference = difference
+        left_sections = [
+            section for index, section in enumerate(prepared) if best_mask & (1 << index)
+        ]
+        right_sections = [
+            section for index, section in enumerate(prepared) if not best_mask & (1 << index)
+        ]
+        header_height = 230
+        footer_height = 92
+        column_height = max(
+            sum(section[3] + 22 for section in column)
+            for column in (left_sections, right_sections)
+        )
+        height = header_height + column_height + footer_height
+        image = PILImage.new("RGBA", (width, height), (244, 248, 249, 255))
+        draw = ImageDraw.Draw(image)
+
+        draw.rounded_rectangle((0, 0, width, header_height), radius=28, fill=(33, 68, 82, 255))
+        draw.rectangle((0, header_height - 22, width, header_height), fill=(33, 68, 82, 255))
+        draw.text((margin, 42), "钓鱼帮助", font=title_font, fill=(250, 252, 252, 255))
+        draw.text((margin, 137), "McFish  ·  指令、掉落、鱼王与装备规则", font=subtitle_font, fill=(190, 222, 225, 255))
+        draw.text(
+            (width - margin - 470, 148),
+            f"{len(POLES)} 种鱼竿  ·  {len(EQUIPMENT)} 件装备  ·  规则 V6.2",
+            font=small_font,
+            fill=(220, 234, 235, 255),
+        )
+        for index, name in enumerate(("木竿", "金竿", "下界合金竿")):
+            icon = self._resource_image(name, (86, 86))
+            if icon:
+                image.alpha_composite(icon, (width - margin - 310 + index * 105, 38))
+
+        def draw_section(section, x: int, y: int) -> int:
+            title, wrapped_rows, accent, card_height = section
+            draw.rounded_rectangle(
+                (x, y, x + column_width, y + card_height),
+                radius=18,
+                fill=(255, 255, 255, 255),
+                outline=(222, 231, 233, 255),
+                width=2,
+            )
+            draw.rounded_rectangle((x, y, x + 10, y + card_height), radius=4, fill=(*accent, 255))
+            draw.text((x + 30, y + 24), title, font=section_font, fill=(40, 61, 68, 255))
+            draw.line((x + 30, y + 72, x + column_width - 28, y + 72), fill=(*accent, 100), width=2)
+            current_y = y + 92
+            for lines in wrapped_rows:
+                for line in lines:
+                    draw.text((x + 30, current_y), line, font=body_font, fill=(70, 83, 88, 255))
+                    current_y += 34
+                current_y += 10
+            return y + card_height + 22
+
+        y_left = header_height + 28
+        for section in left_sections:
+            y_left = draw_section(section, margin, y_left)
+        y_right = header_height + 28
+        for section in right_sections:
+            y_right = draw_section(section, margin + column_width + gap, y_right)
+
+        footer_y = height - footer_height
+        draw.line((margin, footer_y + 10, width - margin, footer_y + 10), fill=(184, 202, 205, 255), width=2)
+        draw.text(
+            (margin, footer_y + 30),
+            "发送“钓鱼概率”查看实时概率  ·  发送“钓鱼图鉴”查看个人捕获记录  ·  发送“钓鱼时钟”查看鱼王窗口",
+            font=small_font,
+            fill=(92, 112, 117, 255),
+        )
+
         output = Path(self.workspace) / "images" / f"help_{uid}.png"
         output.parent.mkdir(parents=True, exist_ok=True)
-        image = self._panel("钓鱼帮助", wrapped, max(500, 150 + len(wrapped) * 70 + 90))
         image.save(output, "PNG")
         return output
 
@@ -617,7 +1087,9 @@ class McFish(NcatBotPlugin):
                 state["fragment_misses"] = 0
                 self._add(state, "钓鱼碎片", 50)
                 return 50
-            fragment_rate = 0.16 if "幸运海星" in state.get("accessories", []) else 0.08
+            fragment_rate = 0.08 + self._accessory_effect(
+                state, "幸运海星", "fragment_points", 0
+            ) / 100
             amount, misses = fragment_roll(int(state.get("fragment_misses", 0)), rate=fragment_rate)
             state["fragment_misses"] = misses
         if amount:
@@ -636,7 +1108,516 @@ class McFish(NcatBotPlugin):
         economy = self._plugin_loader.get_plugin("GroupEconomy") if hasattr(self, "_plugin_loader") else None
         if economy is not None:
             self._economy = economy
+        if not getattr(self, "_economy", None):
+            return True
         return bool(self._economy.store.change_balance(user_id, delta, reason=reason)["ok"])
+
+    def _charge_fee(self, user_id: str, amount: int, reason: str) -> bool:
+        """Charge a production wallet; isolated direct unit tests may omit GroupEconomy."""
+        if not getattr(self, "_economy", None):
+            return True
+        return self._economy_change(user_id, -int(amount), reason)
+
+    @staticmethod
+    def _task_period(kind: str, today: date | None = None) -> str:
+        current = today or date.today()
+        if kind == "weekly":
+            current -= timedelta(days=current.weekday())
+        return current.isoformat()
+
+    @staticmethod
+    def _task_level_tier(level: int) -> dict:
+        level = max(1, int(level))
+        return next(tier for tier in TASK_LEVEL_TIERS if tier["min"] <= level <= tier["max"])
+
+    @staticmethod
+    def _task_pool_candidates(kind: str, *, tier_id: str | None = None, difficulty: str | None = None, task_type: str | None = None) -> list[dict]:
+        return [
+            task for task in TASK_POOL
+            if kind in task.get("requirements", {})
+            and (tier_id is None or task["level_tier"] == tier_id)
+            and (difficulty is None or task["difficulty"] == difficulty)
+            and (task_type is None or task["type"] == task_type)
+        ]
+
+    @staticmethod
+    def _task_content_key(task: dict, kind: str | None = None) -> tuple:
+        requirements = task.get("requirements", {})
+        if kind and isinstance(requirements.get(kind), dict):
+            requirements = requirements[kind]
+        return (
+            task.get("type"),
+            tuple(sorted((str(name), int(number)) for name, number in requirements.items())),
+        )
+
+    @staticmethod
+    def _materialize_task(pool_task: dict, kind: str) -> dict:
+        return {
+            "id": f"{kind}_{pool_task['id']}",
+            "pool_id": pool_task["id"],
+            "type": pool_task["type"],
+            "difficulty": pool_task["difficulty"],
+            "difficulty_label": TASK_DIFFICULTY_LABELS[pool_task["difficulty"]],
+            "level_tier": pool_task["level_tier"],
+            "level_tier_label": next(
+                tier["label"] for tier in TASK_LEVEL_TIERS if tier["id"] == pool_task["level_tier"]
+            ),
+            "label": pool_task["label"],
+            "requirements": copy.deepcopy(pool_task["requirements"][kind]),
+            "reward": copy.deepcopy(pool_task["rewards"][kind]),
+        }
+
+    def _task_definitions(self, kind: str, period: str, state: dict) -> list[dict]:
+        """Compose a period board from the task pool and freeze it in player state."""
+        level = int(state.get("fish_level", level_for_xp(int(state.get("fish_xp", 0)))))
+        current_tier = self._task_level_tier(level)
+        period_number = date.fromisoformat(period).toordinal()
+        used_ids: set[str] = set()
+        used_contents: set[tuple] = set()
+
+        # The low-tier slot stays visible for every player so the board can contain
+        # cheap tasks that a high-level player may deliberately ignore.
+        slots = [("simple", "1-5", None), ("medium", current_tier["id"], None), ("complex", current_tier["id"], None)]
+        if kind == "weekly":
+            slots.append(("medium", current_tier["id"], "spend"))
+        candidate_sets: list[list[dict]] = []
+        for index, (difficulty, tier_id, task_type) in enumerate(slots):
+            candidates = self._task_pool_candidates(
+                kind, tier_id=tier_id, difficulty=difficulty, task_type=task_type
+            )
+            if task_type is None and kind == "weekly":
+                # Keep a future slot's only possible entry available, while
+                # allowing the current slot to use any task type otherwise.
+                reserved: set[str] = set()
+                for future_type, future_tier, future_task_type in slots[index + 1:]:
+                    if not future_task_type:
+                        continue
+                    future_candidates = self._task_pool_candidates(
+                        kind,
+                        tier_id=future_tier,
+                        difficulty=future_type,
+                        task_type=future_task_type,
+                    )
+                    if len(future_candidates) == 1:
+                        reserved.add(future_candidates[0]["id"])
+                candidates = [candidate for candidate in candidates if candidate["id"] not in reserved]
+            if not candidates and task_type:
+                candidates = self._task_pool_candidates(kind, tier_id=tier_id, difficulty=difficulty)
+            if not candidates:
+                candidates = self._task_pool_candidates(kind, difficulty=difficulty)
+            candidate_sets.append(candidates)
+
+        def choose(index: int) -> list[dict] | None:
+            if index == len(candidate_sets):
+                return []
+            candidates = candidate_sets[index]
+            start = (period_number + index) % len(candidates)
+            ordered = candidates[start:] + candidates[:start]
+            for candidate in ordered:
+                content_key = self._task_content_key(candidate, kind)
+                if candidate["id"] in used_ids or content_key in used_contents:
+                    continue
+                used_ids.add(candidate["id"])
+                used_contents.add(content_key)
+                remainder = choose(index + 1)
+                if remainder is not None:
+                    return [candidate, *remainder]
+                used_ids.remove(candidate["id"])
+                used_contents.remove(content_key)
+            return None
+
+        selected = choose(0)
+        if selected is None:
+            raise ValueError(f"{kind} task pool cannot create unique task contents")
+        materialized = [self._materialize_task(task, kind) for task in selected]
+        if kind == "daily":
+            # Keep daily rod income bounded even if more rod-reward entries are added later.
+            rod_rewards = [
+                task for task in materialized
+                if any(name in POLES for name in task.get("reward", {}).get("items", {}))
+            ]
+            for task in rod_rewards[1:]:
+                task["reward"]["items"] = {
+                    name: number
+                    for name, number in task["reward"].get("items", {}).items()
+                    if name not in POLES
+                }
+        return materialized
+
+    @staticmethod
+    def _task_progress_template(tasks: list[dict]) -> dict:
+        return {
+            task["id"]: {name: 0 for name in task.get("requirements", {})}
+            for task in tasks
+        }
+
+    @staticmethod
+    def _refresh_permanent_task_progress(state: dict, bucket: dict) -> None:
+        progress = bucket.setdefault("progress", {})
+        task = bucket["tasks"][0]
+        task_progress = progress.setdefault(task["id"], {})
+        king_stats = state.get("king_stats", {})
+        for name in task.get("requirements", {}):
+            task_progress[name] = min(1, int(king_stats.get(name, {}).get("caught", 0)))
+
+    def _ensure_permanent_task_state(self, state: dict) -> None:
+        key = "fishing_permanent_tasks"
+        bucket = state.get(key)
+        if (
+            not isinstance(bucket, dict)
+            or bucket.get("version") != PERMANENT_TASK_STATE_VERSION
+            or bucket.get("period") != "永久"
+            or not isinstance(bucket.get("tasks"), list)
+            or len(bucket["tasks"]) != 1
+        ):
+            task = copy.deepcopy(PERMANENT_TASK)
+            bucket = {
+                "version": PERMANENT_TASK_STATE_VERSION,
+                "period": "永久",
+                "tasks": [task],
+                "progress": self._task_progress_template([task]),
+                "claimed": [],
+            }
+            state[key] = bucket
+        bucket.setdefault("claimed", [])
+        self._refresh_permanent_task_progress(state, bucket)
+
+    def _ensure_task_state(self, state: dict, today: date | None = None) -> None:
+        self._ensure_permanent_task_state(state)
+        for kind in ("daily", "weekly"):
+            period = self._task_period(kind, today)
+            key = f"fishing_{kind}_tasks"
+            bucket = state.get(key)
+            if (
+                isinstance(bucket, dict)
+                and bucket.get("period") == period
+                and isinstance(bucket.get("tasks"), list)
+                and bucket.get("version") != TASK_STATE_VERSION
+            ):
+                pool_by_id = {task["id"]: task for task in TASK_POOL}
+                upgraded_tasks = []
+                for task in bucket["tasks"]:
+                    pool_task = pool_by_id.get(task.get("pool_id"))
+                    if pool_task is None or kind not in pool_task.get("rewards", {}):
+                        upgraded_tasks = []
+                        break
+                    upgraded = copy.deepcopy(task)
+                    upgraded["reward"] = copy.deepcopy(pool_task["rewards"][kind])
+                    upgraded_tasks.append(upgraded)
+                if upgraded_tasks:
+                    bucket["version"] = TASK_STATE_VERSION
+                    bucket["tasks"] = upgraded_tasks
+                    bucket.setdefault("progress", self._task_progress_template(upgraded_tasks))
+                    bucket.setdefault("claimed", [])
+                    state[key] = bucket
+            if (
+                not isinstance(bucket, dict)
+                or bucket.get("version") != TASK_STATE_VERSION
+                or bucket.get("period") != period
+                or not isinstance(bucket.get("tasks"), list)
+            ):
+                tasks = self._task_definitions(kind, period, state)
+                state[key] = {
+                    "version": TASK_STATE_VERSION,
+                    "period": period,
+                    "tasks": tasks,
+                    "progress": self._task_progress_template(tasks),
+                    "claimed": [],
+                }
+                continue
+            task_ids = [task.get("id") for task in bucket["tasks"]]
+            pool_ids = [task.get("pool_id") for task in bucket["tasks"]]
+            content_keys = [self._task_content_key(task) for task in bucket["tasks"]]
+            if (
+                len(task_ids) != len(set(task_ids))
+                or len(pool_ids) != len(set(pool_ids))
+                or len(content_keys) != len(set(content_keys))
+            ):
+                repaired_tasks = self._task_definitions(kind, period, state)
+                old_progress = bucket.get("progress", {})
+                old_claimed = set(bucket.get("claimed", []))
+                state[key] = {
+                    "version": TASK_STATE_VERSION,
+                    "period": period,
+                    "tasks": repaired_tasks,
+                    "progress": {
+                        task["id"]: copy.deepcopy(old_progress.get(task["id"], {}))
+                        for task in repaired_tasks
+                    },
+                    "claimed": [
+                        task["id"] for task in repaired_tasks if task["id"] in old_claimed
+                    ],
+                }
+                continue
+            bucket.setdefault("progress", self._task_progress_template(bucket["tasks"]))
+            bucket.setdefault("claimed", [])
+
+    @staticmethod
+    def _task_complete(task: dict, progress: dict) -> bool:
+        return all(
+            int(progress.get(name, 0)) >= int(target)
+            for name, target in task.get("requirements", {}).items()
+        )
+
+    def _advance_tasks(
+        self,
+        state: dict,
+        *,
+        casts: int = 0,
+        catches: dict[str, int] | None = None,
+        spend: int = 0,
+        king: int = 0,
+    ) -> None:
+        self._ensure_task_state(state)
+        catches = catches or {}
+        changes = {"casts": max(0, int(casts)), "spend": max(0, int(spend)), "king": max(0, int(king))}
+        for kind in ("daily", "weekly"):
+            bucket = state[f"fishing_{kind}_tasks"]
+            for task in bucket["tasks"]:
+                task_type = task.get("type")
+                if task_type == "delivery":
+                    continue
+                progress = bucket["progress"].setdefault(task["id"], {})
+                for name, target in task.get("requirements", {}).items():
+                    if task_type == "casts" and name == "次数":
+                        amount = changes["casts"]
+                    elif task_type == "spend" and name == "金币":
+                        amount = changes["spend"]
+                    elif task_type == "king" and name == "鱼王":
+                        amount = changes["king"]
+                    else:
+                        amount = max(0, int(catches.get(name, 0))) if task_type == "catch" else 0
+                    if amount:
+                        progress[name] = min(int(target), int(progress.get(name, 0)) + amount)
+
+    @staticmethod
+    def _task_reward_text(reward: dict) -> str:
+        parts = []
+        if int(reward.get("xp", 0)):
+            parts.append(f"经验+{int(reward['xp'])}")
+        if int(reward.get("gold", 0)):
+            parts.append(f"{int(reward['gold'])}金币")
+        if int(reward.get("fragments", 0)):
+            parts.append(f"{int(reward['fragments'])}个钓鱼碎片")
+        for name, number in reward.get("items", {}).items():
+            if int(number):
+                parts.append(f"{name}×{int(number)}")
+        return "、".join(parts) or "无"
+
+    def _task_board(self, state: dict) -> list[tuple[int, str, dict, dict]]:
+        self._ensure_task_state(state)
+        board = []
+        index = 1
+        for kind in ("daily", "weekly", "permanent"):
+            if kind == "permanent" and int(state.get("fish_level", 1)) < int(PERMANENT_TASK["level_required"]):
+                continue
+            bucket = state[f"fishing_{kind}_tasks"]
+            for task in bucket["tasks"]:
+                board.append((index, kind, bucket, task))
+                index += 1
+        return board
+
+    @staticmethod
+    def _task_display_progress(state: dict, task: dict, progress: dict) -> dict:
+        """Show current fish in the backpack without treating it as submitted."""
+        display = {
+            name: min(int(target), int(progress.get(name, 0)))
+            for name, target in task.get("requirements", {}).items()
+        }
+        if task.get("type") == "collection":
+            king_stats = state.get("king_stats", {})
+            return {
+                name: min(1, int(king_stats.get(name, {}).get("caught", 0)))
+                for name in task.get("requirements", {})
+            }
+        if task.get("type") != "delivery":
+            return display
+        pack = state.get("pack", {})
+        for name in task.get("requirements", {}):
+            display[name] = max(display[name], int(pack.get(name, 0)))
+        return display
+
+    @staticmethod
+    def _task_period_text(kind: str, period: str) -> str:
+        if kind == "permanent":
+            return "永久"
+        start = date.fromisoformat(period)
+        end = start if kind == "daily" else start + timedelta(days=6)
+        return f"{start:%m月%d日}" if kind == "daily" else f"{start:%m月%d日}-{end:%m月%d日}"
+
+    def _task_lines(self, state: dict, kind: str, start_index: int = 1) -> list[str]:
+        self._ensure_task_state(state)
+        bucket = state[f"fishing_{kind}_tasks"]
+        tasks = bucket["tasks"]
+        period_text = self._task_period_text(kind, bucket["period"])
+        lines = [f"{TASK_KIND_LABELS[kind]}（{period_text}）"]
+        for offset, task in enumerate(tasks):
+            task_index = start_index + offset
+            progress = bucket["progress"].setdefault(task["id"], {})
+            display_progress = self._task_display_progress(state, task, progress)
+            if task["id"] in bucket["claimed"]:
+                status = "已领取"
+            else:
+                if task.get("type") == "collection":
+                    collected = sum(
+                        int(display_progress.get(name, 0))
+                        for name in task.get("requirements", {})
+                    )
+                    total = len(task.get("requirements", {}))
+                    missing = [
+                        name for name, target in task.get("requirements", {}).items()
+                        if int(display_progress.get(name, 0)) < int(target)
+                    ]
+                    status = f"已获得鱼王 {collected}/{total}（只检查获得记录，不上交鱼王）"
+                    if missing:
+                        status += "；还缺 " + "、".join(missing)
+                else:
+                    requirement_text = "、".join(
+                        (
+                            f"钓鱼次数 {display_progress.get(name, 0)}/{int(target)}"
+                            if name == "次数" else
+                            f"消费金币 {display_progress.get(name, 0)}/{int(target)}"
+                            if name == "金币" else
+                            f"{name} {display_progress.get(name, 0)}/{int(target)}"
+                        )
+                        for name, target in task.get("requirements", {}).items()
+                    )
+                    status = requirement_text
+            tier_text = f"[{task.get('difficulty_label', TASK_DIFFICULTY_LABELS['simple'])}·{task.get('level_tier_label', task.get('level_tier', '未分档'))}]"
+            lines.append(
+                f"{task_index}. {tier_text}{task['label']}：{status} · 奖励 {self._task_reward_text(task['reward'])}"
+            )
+        return lines
+
+    async def _show_tasks(self, event, state: dict) -> None:
+        self._ensure_task_state(state)
+        self._save(str(event.sender.user_id), state)
+        daily_count = len(state["fishing_daily_tasks"]["tasks"])
+        weekly_count = len(state["fishing_weekly_tasks"]["tasks"])
+        level = int(state.get("fish_level", 1))
+        permanent_visible = level >= int(PERMANENT_TASK["level_required"])
+        lines = [
+            f"钓鱼任务（当前等级 {level}）",
+            "操作：领取钓鱼任务 编号（每日/每周任务会检查并提交鱼获；常驻任务只检查历史获得记录）",
+            *self._task_lines(state, "daily", 1),
+            "",
+            *self._task_lines(state, "weekly", daily_count + 1),
+        ]
+        if permanent_visible:
+            lines.extend(("", *self._task_lines(state, "permanent", daily_count + weekly_count + 1)))
+        await event.reply(text="\n".join(lines))
+
+    async def _claim_tasks(self, event, state: dict, task_index: int | None = None) -> None:
+        uid = str(event.sender.user_id)
+        self._ensure_task_state(state)
+        board = self._task_board(state)
+        if task_index is not None and not any(index == task_index for index, *_ in board):
+            await event.reply(text=f"任务编号不存在，请发送“钓鱼任务”查看有效编号（1-{len(board)}）")
+            return
+        claimed: list[str] = []
+        total_xp = 0
+        total_gold = 0
+        total_fragments = 0
+        total_items: dict[str, int] = {}
+        failed_delivery: list[str] = []
+        for index, kind, bucket, task in board:
+            if task_index is not None and index != task_index:
+                continue
+            progress = bucket["progress"].setdefault(task["id"], {})
+            if task["id"] in bucket["claimed"]:
+                continue
+            if task.get("type") == "delivery":
+                missing = {
+                    name: int(target) - int(state.get("pack", {}).get(name, 0))
+                    for name, target in task.get("requirements", {}).items()
+                    if int(state.get("pack", {}).get(name, 0)) < int(target)
+                }
+                if missing:
+                    failed_delivery.append(
+                        f"任务{index}缺少：" + "、".join(f"{name}×{number}" for name, number in missing.items())
+                    )
+                    continue
+            elif not self._task_complete(task, progress):
+                continue
+            reward = task["reward"]
+            gold = int(reward.get("gold", 0))
+            reason = f"mcfish_task_{kind}_{bucket['period']}_{task['id']}"
+            if gold and not self._economy_change(uid, gold, reason):
+                continue
+            if task.get("type") == "delivery":
+                for name, target in task.get("requirements", {}).items():
+                    self._remove(state, name, int(target))
+                    progress[name] = int(target)
+            xp = int(reward.get("xp", 0))
+            if xp:
+                self._add_fishing_xp(state, xp)
+                total_xp += xp
+            fragments = int(reward.get("fragments", 0))
+            if fragments:
+                self._add(state, "钓鱼碎片", fragments)
+            for name, number in reward.get("items", {}).items():
+                number = int(number)
+                if number:
+                    if name in POLES:
+                        for _ in range(number):
+                            if kind == "permanent" and name == "三叉戟":
+                                self._add(
+                                    state,
+                                    name,
+                                    pole=True,
+                                    pole_data={
+                                        "durable": POLES[name][0],
+                                        "maintenance": 0,
+                                        "induce": 0,
+                                        "favor": 0,
+                                        "unbreakable": True,
+                                    },
+                                )
+                            else:
+                                self._add(state, name, pole=True)
+                    else:
+                        self._add(state, name, number)
+                    total_items[name] = total_items.get(name, 0) + number
+            bucket["claimed"].append(task["id"])
+            claimed.append(task["label"])
+            total_gold += gold
+            total_fragments += fragments
+        self._save(uid, state)
+        if not claimed:
+            suffix = f"任务{task_index}" if task_index is not None else ""
+            if failed_delivery:
+                await event.reply(text="\n".join(failed_delivery) + "\n鱼获不足，本次未领取成功")
+            else:
+                await event.reply(text=f"当前没有已完成且未领取的钓鱼任务{suffix}")
+            return
+        reward_text = []
+        if total_xp:
+            reward_text.append(f"经验+{total_xp}")
+        if total_gold:
+            reward_text.append(f"金币+{total_gold}")
+        if total_fragments:
+            reward_text.append(f"钓鱼碎片+{total_fragments}")
+        reward_text.extend(f"{name}×{number}" for name, number in total_items.items())
+        response = f"已领取：{'、'.join(claimed)}\n获得：{'、'.join(reward_text)}"
+        if failed_delivery:
+            response += "\n未领取：" + "；".join(failed_delivery)
+        await event.reply(text=response)
+
+    @staticmethod
+    def _repair_fee(pole_name: str, durable: int) -> int:
+        maximum = POLES[pole_name][0]
+        missing = max(0, maximum - int(durable))
+        return min(600, max(20, POLES[pole_name][1] // 10 + missing // 10))
+
+    @staticmethod
+    def _craft_fee(name: str, mode: str, groups: int = 1) -> int:
+        if mode == "fragments":
+            base = max(20, POLE_FRAGMENT_COSTS[name] // 3) if name in POLE_FRAGMENT_COSTS else 20
+        elif mode == "poles":
+            base = max(20, POLES[name][1] // 10)
+        else:
+            base = EQUIPMENT_CRAFT_FEES[name]
+        return base * max(1, int(groups))
 
     def _load_original_data(self) -> None:
         """读取 ZeroBot 原插件的物品表；资源缺失时保留内置兼容数据。"""
@@ -647,7 +1628,13 @@ class McFish(NcatBotPlugin):
                 self._catalog = json.loads(path.read_text(encoding="utf-8"))
             except (OSError, json.JSONDecodeError):
                 self.logger.warning("无法读取原 McFish 物品表: %s", path)
-        self._prices = dict(FISH) | {name: price for name, (_, price) in POLES.items()} | ITEMS | SHOP_EQUIPMENT_PRICES
+        self._prices = (
+            dict(FISH)
+            | {name: price for name, (_, price) in POLES.items()}
+            | {name: int(item["base_price"]) for name, item in FISH_KINGS.items()}
+            | ITEMS
+            | SHOP_EQUIPMENT_PRICES
+        )
         self._types = {}
         for name, item in HIDDEN_FISH.items():
             self._prices[name] = int(item["price"])
@@ -665,40 +1652,118 @@ class McFish(NcatBotPlugin):
             if self._types[name] == "waste":
                 self._wastes.append(name)
 
+    @staticmethod
+    def _shop_custom_price_items(raw_prices: object, inventory: dict) -> dict[str, int]:
+        if not isinstance(raw_prices, dict):
+            return {}
+        result: dict[str, int] = {}
+        for raw_name, raw_price in raw_prices.items():
+            name = str(raw_name)
+            if name not in inventory and not (name == "木竿" and "初始木竿" in inventory):
+                continue
+            try:
+                price = int(raw_price)
+            except (TypeError, ValueError):
+                continue
+            if price > 0:
+                result[name] = price
+        return result
+
     def _shop_data(self) -> tuple[dict[str, int], dict[str, int]]:
         """返回当天价格倍率和跨天延续的库存。"""
         today = date.today().isoformat()
-        prices = getattr(self, "_prices", dict(FISH) | {name: price for name, (_, price) in POLES.items()} | ITEMS)
+        prices = getattr(
+            self,
+            "_prices",
+            dict(FISH) | {name: price for name, (_, price) in POLES.items()} | ITEMS,
+        )
         prices.update(SHOP_EQUIPMENT_PRICES)
+        prices.update(SHOP_ROD_PRICES)
         if not hasattr(self, "_db"):
-            discounts = {name: random.randint(50, 199) for name in prices if name not in ("垃圾", "宝藏诅咒") and name not in HIDDEN_FISH}
-            discounts.update({"木竿": 100, **{name: 100 for name in SHOP_EQUIPMENT_PRICES}})
+            self._shop_custom_prices = {}
+            discounts = {
+                name: random.randint(50, 199)
+                for name in prices
+                if name not in ("垃圾", "宝藏诅咒") and name not in HIDDEN_FISH
+            }
+            discounts.update({"木竿": 100, **{name: 100 for name in SHOP_EQUIPMENT_PRICES}, **{name: 100 for name in SHOP_ROD_PRICES}})
             fish = random.choice(list(FISH))
             inventory = {"初始木竿": [{"durable": 30, "maintenance": 0, "induce": 0, "favor": 0}], fish: max(1, 100 - discounts.get(fish, 100))}
             inventory.update(SHOP_EQUIPMENT_STOCK)
             return discounts, inventory
-        row = self._db.execute("SELECT discounts, inventory FROM shop WHERE day = ?", (today,)).fetchone()
+        try:
+            row = self._db.execute(
+                "SELECT discounts, inventory, custom_prices FROM shop WHERE day = ?",
+                (today,),
+            ).fetchone()
+            has_custom_prices = True
+        except sqlite3.OperationalError as exc:
+            if "no such column: custom_prices" not in str(exc):
+                raise
+            row = self._db.execute(
+                "SELECT discounts, inventory FROM shop WHERE day = ?", (today,)
+            ).fetchone()
+            self._db.execute(
+                "ALTER TABLE shop ADD COLUMN custom_prices TEXT NOT NULL DEFAULT '{}'"
+            )
+            self._db.commit()
+            has_custom_prices = row is None
         if row:
             discounts = json.loads(row[0])
             inventory = json.loads(row[1])
+            try:
+                custom_prices = json.loads(row[2] or "{}") if has_custom_prices else {}
+            except (TypeError, ValueError, json.JSONDecodeError):
+                custom_prices = {}
+            self._shop_custom_prices = self._shop_custom_price_items(custom_prices, inventory)
             listed_equipment = {name: name in inventory for name in SHOP_EQUIPMENT_STOCK}
             if "初始木竿" in inventory and isinstance(inventory["初始木竿"], int):
                 inventory["初始木竿"] = self._shop_poles(inventory["初始木竿"], "木竿")
             inventory = self._normalize_shop_inventory(inventory)
+            self._shop_custom_prices = {
+                name: price
+                for name, price in self._shop_custom_prices.items()
+                if name in inventory or (name == "木竿" and "初始木竿" in inventory)
+            }
+            for name in inventory:
+                if name != "初始木竿":
+                    discounts.setdefault(name, 100)
             inventory.setdefault("初始木竿", [{"durable": 30, "maintenance": 0, "induce": 0, "favor": 0}])
             for name, stock in SHOP_EQUIPMENT_STOCK.items():
                 if not listed_equipment[name]:
                     inventory[name] = stock
             discounts.setdefault("木竿", 100)
             discounts.update({name: 100 for name in SHOP_EQUIPMENT_PRICES})
+            discounts.update({name: 100 for name in SHOP_ROD_PRICES})
             self._db.execute(
                 "UPDATE shop SET inventory = ? WHERE day = ?",
                 (json.dumps(inventory, ensure_ascii=False), today),
             )
             self._db.commit()
             return discounts, inventory
-        previous = self._db.execute("SELECT discounts, inventory FROM shop ORDER BY day DESC LIMIT 1").fetchone()
+        try:
+            previous = self._db.execute(
+                "SELECT discounts, inventory, custom_prices FROM shop ORDER BY day DESC LIMIT 1"
+            ).fetchone()
+            has_custom_prices = True
+        except sqlite3.OperationalError as exc:
+            if "no such column: custom_prices" not in str(exc):
+                raise
+            previous = self._db.execute(
+                "SELECT discounts, inventory FROM shop ORDER BY day DESC LIMIT 1"
+            ).fetchone()
+            self._db.execute(
+                "ALTER TABLE shop ADD COLUMN custom_prices TEXT NOT NULL DEFAULT '{}'"
+            )
+            self._db.commit()
+            has_custom_prices = True
         previous_inventory = json.loads(previous[1]) if previous else {}
+        try:
+            previous_custom_prices = (
+                json.loads(previous[2] or "{}") if previous and has_custom_prices else {}
+            )
+        except (TypeError, ValueError, json.JSONDecodeError):
+            previous_custom_prices = {}
         if "初始木竿" in previous_inventory and isinstance(previous_inventory["初始木竿"], int):
             previous_inventory["初始木竿"] = self._shop_poles(previous_inventory["初始木竿"], "木竿")
         previous_inventory = self._normalize_shop_inventory(previous_inventory)
@@ -711,7 +1776,11 @@ class McFish(NcatBotPlugin):
             discounts[name] = random.randint(90, 109) if count > 150 else random.randint(50, 199)
         discounts["木竿"] = 100
         discounts.update({name: 100 for name in SHOP_EQUIPMENT_PRICES})
+        discounts.update({name: 100 for name in SHOP_ROD_PRICES})
         inventory = dict(previous_inventory)
+        self._shop_custom_prices = self._shop_custom_price_items(
+            previous_custom_prices, inventory
+        )
         fish = random.choice(list(FISH))
         inventory[fish] = int(inventory.get(fish, 0)) + 100 - discounts.get(fish, 100)
         if inventory[fish] < 1:
@@ -721,9 +1790,17 @@ class McFish(NcatBotPlugin):
         inventory["初始木竿"] = wood if len(wood) <= 5 else wood[-1:]
         for name, stock in SHOP_EQUIPMENT_STOCK.items():
             inventory.setdefault(name, stock)
+        for name in inventory:
+            if name != "初始木竿":
+                discounts.setdefault(name, 100)
         self._db.execute(
-            "INSERT INTO shop(day, discounts, inventory) VALUES (?, ?, ?)",
-            (today, json.dumps(discounts, ensure_ascii=False), json.dumps(inventory, ensure_ascii=False)),
+            "INSERT INTO shop(day, discounts, inventory, custom_prices) VALUES (?, ?, ?, ?)",
+            (
+                today,
+                json.dumps(discounts, ensure_ascii=False),
+                json.dumps(inventory, ensure_ascii=False),
+                json.dumps(self._shop_custom_prices, ensure_ascii=False),
+            ),
         )
         self._db.commit()
         return discounts, inventory
@@ -748,6 +1825,9 @@ class McFish(NcatBotPlugin):
         return normalized
 
     def _shop_price(self, name: str, discounts: dict[str, int]) -> int:
+        custom_prices = getattr(self, "_shop_custom_prices", {})
+        if name in custom_prices:
+            return int(custom_prices[name])
         prices = getattr(self, "_prices", dict(FISH) | {pole: price for pole, (_, price) in POLES.items()} | ITEMS)
         if name == "初始木竿":
             return SHOP_WOOD_PRICE
@@ -755,9 +1835,15 @@ class McFish(NcatBotPlugin):
             return SHOP_WOOD_PRICE
         if name in SHOP_EQUIPMENT_PRICES:
             return SHOP_EQUIPMENT_PRICES[name]
+        if name in SHOP_ROD_PRICES:
+            return SHOP_ROD_PRICES[name]
         return prices.get(name, ITEMS.get(name, 0)) * discounts.get(name, 100) // 100
 
     def _pole_price(self, pole: dict, discounts: dict[str, int], name: str = "木竿") -> int:
+        if pole.get("craftable", True) is False:
+            # Shop rods are sold back below their fixed purchase price. Their
+            # generated attributes must not create an arbitrage route.
+            return self._shop_price(name, discounts)
         base_price = POLES[name][1]
         value = base_price - (POLES[name][0] - int(pole.get("durable", 0))) - int(pole.get("maintenance", 0)) * 2
         enchant_levels = int(pole.get("induce", 0)) + int(pole.get("favor", 0))
@@ -1158,13 +2244,26 @@ class McFish(NcatBotPlugin):
         )
         if int(state.get("pack", {}).get("海豚", 0)) > 0:
             boundaries = (*boundaries[:4], 100)
-        if "财富浮标" in state.get("accessories", []) and boundaries[1] > boundaries[0]:
-            extra = int((boundaries[1] - boundaries[0]) * 0.35)
-            boundaries = tuple(min(100, value + (extra if index else 0)) for index, value in enumerate(boundaries))
+        wealth_multiplier = self._accessory_effect(state, "财富浮标", "treasure_rate", 1.0)
+        if wealth_multiplier > 1.0 and boundaries[1] > boundaries[0]:
+            extra = (boundaries[1] - boundaries[0]) * (wealth_multiplier - 1.0)
+            boundaries = tuple(
+                min(100, value + (extra if index else 0))
+                for index, value in enumerate(boundaries)
+            )
         return boundaries
 
-    def _original_drop(self, state: dict, boundaries: tuple[int, int, int, int, int] | None = None, rod_name: str | None = None) -> tuple[str | None, int]:
+    def _original_drop(
+        self,
+        state: dict,
+        boundaries: tuple[int, int, int, int, int] | None = None,
+        rod_name: str | None = None,
+        *,
+        magic_bait: bool | None = None,
+    ) -> tuple[str | None, int]:
         rod_name = rod_name or str((state.get("equip") or {}).get("name", "木竿"))
+        if magic_bait is None:
+            magic_bait = int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0
         catalog = getattr(self, "_catalog", {})
         zones = catalog.get("分类", [])
         items = catalog.get("物品", [])
@@ -1194,14 +2293,14 @@ class McFish(NcatBotPlugin):
             return None, 1
         if zone == "fish" and "fishing_zone" in state:
             weights = fish_zone_weights(str(state.get("fishing_zone", daily_fishing_zone())), rod_name)
-            if int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0:
+            if magic_bait:
                 for name in ("水晶虾", "深海鱼", "银鱼", "金鳞鱼"):
                     if name in weights:
                         weights[name] = int(weights[name] * 1.25)
             names = [name for name, weight in weights.items() if weight > 0]
             selected_name = random.choices(names, weights=[weights[name] for name in names], k=1)[0]
             return selected_name, drop_quantity(selected_name)
-        if zone == "fish" and int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0:
+        if zone == "fish" and magic_bait:
             rare_names = {"水晶虾", "深海鱼", "银鱼", "金鳞鱼"}
             weights = [
                 int(item.get("概率[0-100)", 0)) * (1.25 if str(item.get("名称")) in rare_names else 1.0)
@@ -1210,6 +2309,13 @@ class McFish(NcatBotPlugin):
             selected = random.choices(candidates, weights=weights, k=1)[0]
             quantity = drop_quantity(str(selected["名称"]))
             return str(selected["名称"]), quantity
+        if zone == "pole" and rod_name != AXOLOTL:
+            candidates = [
+                item for item in candidates
+                if rod_drop_allowed(rod_name, str(item.get("名称", "")))
+            ]
+            if not candidates:
+                return None, 1
         roll = random.randrange(100)
         lower = 0
         for item in candidates:
@@ -1218,7 +2324,7 @@ class McFish(NcatBotPlugin):
                 quantity = drop_quantity(str(item["名称"]))
                 return str(item["名称"]), quantity
             lower = upper
-        return str(candidates[-1]["名称"]), 1
+        return None, 1
 
     def _item_image(self, name: str) -> Path | None:
         icon_ids = {
@@ -1229,6 +2335,14 @@ class McFish(NcatBotPlugin):
             "幸运海星": "mcfish_lucky_starfish",
             "隐秘诱饵": "mcfish_hidden_lure",
             "万能鱼饵": "mcfish_universal_bait",
+            "钓鱼碎片": "mcfish_fishing_fragment",
+            "水晶虾": "mcfish_crystal_shrimp",
+            "深海鱼": "mcfish_deep_fish",
+            "金鳞鱼": "mcfish_goldfish",
+            "银鱼": "mcfish_silverfish",
+            "鲤鱼": "mcfish_carp",
+            "鳗鱼": "mcfish_eel",
+            "垃圾": "mcfish_junk",
             **{name: item["asset_id"] for name, item in FISH_KINGS.items()},
             **{name: item["asset_id"] for name, item in HIDDEN_FISH.items()},
         }
@@ -1239,16 +2353,33 @@ class McFish(NcatBotPlugin):
         path = Path(__file__).parent / "resources" / filename
         return path if path.is_file() else None
 
-    def _add(self, state: dict, name: str, number: int = 1, *, pole: bool = False, pole_data: dict | None = None, random_pole: bool = False) -> None:
+    @staticmethod
+    def _random_pole_data(name: str) -> dict[str, int]:
+        """Create the random attributes used only by a fishing rod drop."""
+        return {
+            "durable": random.randrange(POLES[name][0]) + 1,
+            "maintenance": random.randrange(POLE_DROP_ATTRIBUTE_LIMITS["maintenance"]),
+            "induce": random.randrange(POLE_DROP_ATTRIBUTE_LIMITS["induce"]),
+            "favor": random.randrange(POLE_DROP_ATTRIBUTE_LIMITS["favor"]),
+        }
+
+    def _add(
+        self,
+        state: dict,
+        name: str,
+        number: int = 1,
+        *,
+        pole: bool = False,
+        pole_data: dict | None = None,
+        random_pole: bool = False,
+        craftable: bool = True,
+    ) -> None:
         if pole:
-            value = pole_data or {"durable": POLES[name][0], "maintenance": 0, "induce": 0, "favor": 0}
+            value = dict(pole_data or {"durable": POLES[name][0], "maintenance": 0, "induce": 0, "favor": 0})
             if random_pole:
-                value = {
-                    "durable": random.randrange(POLES[name][0]) + 1,
-                    "maintenance": random.randrange(10),
-                    "induce": random.randrange(3),
-                    "favor": random.randrange(2),
-                }
+                value = self._random_pole_data(name)
+            if not craftable:
+                value["craftable"] = False
             state["pack"].setdefault(name, []).append(value)
         else:
             state["pack"][name] = int(state["pack"].get(name, 0)) + number
@@ -1272,13 +2403,119 @@ class McFish(NcatBotPlugin):
     def _text(self, event) -> str:
         return "".join(str(getattr(seg, "text", "") or "") for seg in event.message or [])
 
+    def _grantable_item_names(self) -> set[str]:
+        """Return item names that can be represented in a player's fishing pack."""
+        names = set(FISH) | set(FISH_KINGS) | set(HIDDEN_FISH)
+        names.update(POLES)
+        names.update(ITEMS)
+        names.update(SHOP_EQUIPMENT_PRICES)
+        names.update(EQUIPMENT)
+        names.update(getattr(self, "_thing_order", ()))
+        names.add("钓鱼碎片")
+        return names
+
+    def _grant_target_id(self, event) -> str | None:
+        for segment in event.message or []:
+            if isinstance(segment, At) and str(segment.user_id) != str(getattr(event, "self_id", "")):
+                return str(segment.user_id)
+        return None
+
+    async def _grant_item(self, event, text: str) -> None:
+        """Add a valid fishing item to another player's pack for the designated admin."""
+        if str(event.sender.user_id) not in ITEM_GRANT_USERS:
+            return
+
+        target_id = self._grant_target_id(event)
+        if not target_id:
+            await event.reply(text="用法：钓鱼发放 @用户 物品 数量")
+            return
+
+        checker = getattr(getattr(self, "_economy", None), "_target_in_group", None)
+        if checker is not None and getattr(event, "group_id", None) is not None:
+            in_group = await checker(event, target_id)
+            if in_group is not True:
+                message = (
+                    "找不到对方，发放目标必须是当前群成员"
+                    if in_group is False
+                    else "暂时无法确认对方是否在群内，请稍后再试"
+                )
+                await event.reply(text=message)
+                return
+
+        payload = self._text(event).strip() or text
+        for prefix in ("钓鱼发放", "钓鱼充值"):
+            if payload == prefix or payload.startswith(prefix + " "):
+                payload = payload[len(prefix):].strip()
+                break
+        payload = re.sub(r"\[CQ:at,qq=\d+(?:,[^\]]+)?\]", "", payload)
+        payload = " ".join(payload.split())
+        match = re.fullmatch(r"(.+?)\s+(\d+)", payload)
+        if not match or int(match.group(2)) <= 0:
+            await event.reply(text="用法：钓鱼发放 @用户 物品 数量，数量必须是正整数")
+            return
+
+        requested_name, number_text = match.groups()
+        name = POLE_ALIASES.get(requested_name.strip(), requested_name.strip())
+        if name not in self._grantable_item_names():
+            await event.reply(text=f"钓鱼背包不存在可发放物品：{requested_name.strip()}")
+            return
+        number = int(number_text)
+        target_state = self._state(target_id)
+        old_state = json.dumps(target_state, ensure_ascii=False, sort_keys=True)
+        if name in POLES:
+            for _ in range(number):
+                self._add(target_state, name, pole=True)
+        else:
+            self._add(target_state, name, number)
+        self._save(target_id, target_state)
+        new_state = json.dumps(target_state, ensure_ascii=False, sort_keys=True)
+        self._db.execute(
+            "INSERT INTO admin_adjustments(user_id, reason, old_state, new_state, created_at) VALUES (?, ?, ?, ?, ?)",
+            (target_id, "admin_item_grant", old_state, new_state, time.time()),
+        )
+        self._db.commit()
+        held = target_state["pack"].get(name, []) if name in POLES else int(target_state["pack"].get(name, 0))
+        held_count = len(held) if name in POLES else held
+        await event.reply(text=f"已为 {target_id} 发放 {name} ×{number}，当前背包 {name}：{held_count}")
+
     async def _send_original_message(self, event, message: MessageArray) -> None:
         """Send a raw message chain, matching upstream ctx.Send without auto Reply/At."""
+        if _is_blocked_group(event):
+            return
+        message = await self._message_array_as_images(event, message)
         api = getattr(getattr(self, "api", None), "qq", None)
-        if api is not None:
+        if api is not None and getattr(event, "group_id", None) is not None:
             await api.post_group_msg(group_id=event.group_id, rtf=message)
             return
         await event.reply(rtf=message, at_sender=False)
+
+    async def _message_array_as_images(self, event, message: MessageArray) -> MessageArray:
+        """Replace text segments in an outgoing McFish message with PNGs."""
+        if not getattr(self, "workspace", None):
+            return message
+        segments = []
+        for segment in message:
+            if isinstance(segment, PlainText):
+                output = await asyncio.to_thread(
+                    self._render_text_image,
+                    str(event.sender.user_id),
+                    segment.text,
+                )
+                segments.append(Image(file=str(output)))
+            else:
+                segments.append(segment)
+        return MessageArray(segments)
+
+    def _render_text_image(self, uid: str, text: str) -> Path:
+        body_font = self._font(34)
+        wrapped: list[str] = []
+        for line in str(text).splitlines() or [""]:
+            wrapped.extend(self._wrap_text(line, body_font, 900))
+        output = Path(self.workspace) / "images" / f"message_{uid}_{time.time_ns()}.png"
+        output.parent.mkdir(parents=True, exist_ok=True)
+        image = self._panel("钓鱼消息", wrapped, max(300, 180 + len(wrapped) * 52 + 70))
+        image.save(output, "PNG")
+        return output
 
     def _user_lock(self, user_id: str) -> asyncio.Lock:
         locks = getattr(self, "_user_locks", None)
@@ -1289,6 +2526,9 @@ class McFish(NcatBotPlugin):
     async def _start_fishing(self, event, state: dict, text: str) -> None:
         """Start fishing in the background so the message handler stays responsive."""
         uid = str(event.sender.user_id)
+        if getattr(self, "_closing", False):
+            await event.reply(text="插件正在热更新，请稍后再开始钓鱼", at_sender=False)
+            return
         task = getattr(self, "_fishing_tasks", {}).get(uid)
         if task is not None and not task.done():
             await event.reply(text="你正在钓鱼，请稍后再试", at_sender=False)
@@ -1376,6 +2616,243 @@ class McFish(NcatBotPlugin):
         state["fish_level"] = level_for_xp(state["fish_xp"])
         return old_level, state["fish_level"]
 
+    @staticmethod
+    def _probability_value(value: float) -> str:
+        return f"{value:.2f}%"
+
+    def _probability_catalog(self) -> tuple[dict[str, int], dict[str, int]]:
+        raw_items = getattr(self, "_catalog", {}).get("物品", [])
+        item_ranges: dict[str, int] = {}
+        type_totals: dict[str, int] = {}
+        for item in raw_items:
+            item_type = str(item.get("类型", ""))
+            item_ranges[str(item.get("名称", ""))] = int(item.get("概率[0-100)", 0))
+            type_totals[item_type] = type_totals.get(item_type, 0) + int(item.get("概率[0-100)", 0))
+        return item_ranges, type_totals
+
+    def _probability_item_map(self, item_type: str, category_probability: int) -> dict[str, float]:
+        item_ranges, type_totals = self._probability_catalog()
+        total = type_totals.get(item_type, 0)
+        if not total:
+            return {}
+        return {
+            name: raw * category_probability / total
+            for name, raw in item_ranges.items()
+            if name and raw and self._item_type(name) == item_type
+        }
+
+    def _item_type(self, name: str) -> str:
+        return next(
+            (str(item.get("类型", "")) for item in getattr(self, "_catalog", {}).get("物品", []) if str(item.get("名称", "")) == name),
+            "",
+        )
+
+    @staticmethod
+    def _fish_count(state: dict) -> int:
+        return sum(
+            int(value) for name, value in state.get("pack", {}).items()
+            if name in FISH and isinstance(value, int)
+        )
+
+    def _fish_probability_map(self, rod_name: str, zone: str, category_probability: int, *, magic_bait: bool = False) -> dict[str, float]:
+        weights = fish_zone_weights(zone, rod_name)
+        if magic_bait:
+            for name in ("水晶虾", "深海鱼", "银鱼", "金鳞鱼"):
+                if name in weights:
+                    weights[name] = int(weights[name] * 1.25)
+        total = sum(weight for weight in weights.values() if weight > 0)
+        if not total:
+            return {}
+        return {
+            name: category_probability * weight / total
+            for name, weight in weights.items()
+            if weight > 0
+        }
+
+    def _rod_probability_map(self, rod_name: str, category_probability: int) -> tuple[dict[str, float], float]:
+        item_ranges, type_totals = self._probability_catalog()
+        total = type_totals.get("pole", 0)
+        if not total:
+            return {}, 0.0
+        values: dict[str, float] = {}
+        blocked = 0.0
+        for name in POLES:
+            raw = item_ranges.get(name, 0)
+            if not raw:
+                values[name] = 0.0
+            elif rod_name == AXOLOTL or rod_drop_allowed(rod_name, name):
+                values[name] = raw * category_probability / total
+            else:
+                values[name] = 0.0
+                blocked += raw * category_probability / total
+        return values, blocked
+
+    def _probability_sections(self, uid: str, state: dict) -> tuple[list[tuple[str, str]], list[tuple[str, str]]]:
+        """Build the two probability columns from the live drop rules."""
+        boundaries = self._zone_boundaries(state)
+        categories = tuple(boundaries[index + 1] - boundaries[index] for index in range(4))
+        equip_name = str((state.get("equip") or {}).get("name", ""))
+        rod_name = equip_name if equip_name in POLES or equip_name == AXOLOTL else "木竿"
+        zone = str(state.get("fishing_zone", daily_fishing_zone()))
+        fish_count = self._fish_count(state)
+        magic_bait = int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0
+        rod_values, blocked_pole = self._rod_probability_map(rod_name, categories[1])
+        treasure_values = self._probability_item_map("treasure", categories[0])
+        waste_values = self._probability_item_map("waste", categories[3])
+        fish_values = self._fish_probability_map(rod_name, zone, categories[2], magic_bait=magic_bait)
+        air = max(0, 100 - sum(categories)) + blocked_pole
+
+        current: list[tuple[str, str]] = [
+            ("heading", "第一部分 当前用户概率"),
+            ("body", f"用户：{uid}    鱼竿：{equip_name or '未装备（按木竿限制计算）'}"),
+            ("body", f"鱼点：{FISHING_ZONE_LABELS.get(zone, zone)}    鱼总数：{fish_count}    {'强化区间' if fish_count > 100 or equip_name == AXOLOTL else '基础区间'}"),
+            ("body", f"饰品槽位：{len(state.get('accessories', []))}/{state.get('accessory_slots', 2)}    饰品：{'、'.join(f'{name}{self._enchant_label(self._accessory_level(state, name))}' for name in state.get('accessories', [])) or '无'}    鱼饵：{'、'.join(name for name, count in state.get('active_consumables', {}).items() if int(count) > 0) or '无'}"),
+            ("body", f"大类：宝藏 {categories[0]}% / 鱼竿 {categories[1]}% / 普通鱼 {categories[2]}% / 垃圾 {categories[3]}% / 空竿 {air:.2f}%"),
+            ("heading", "鱼竿"),
+        ]
+        current.extend(
+            ("body", f"{name}：{self._probability_value(value)}" + ("（不可越级）" if value == 0 and name != "三叉戟" and name != rod_name else ""))
+            for name, value in rod_values.items()
+        )
+        current.append(("heading", "宝藏"))
+        current.extend(("body", f"{name}：{self._probability_value(value)}") for name, value in treasure_values.items())
+        current.append(("heading", "当前鱼点普通鱼"))
+        current.extend(("body", f"{name}：{self._probability_value(value)}") for name, value in fish_values.items())
+        current.append(("heading", "垃圾"))
+        current.append(("body", "、".join(f"{name} {self._probability_value(value)}" for name, value in waste_values.items())))
+        hidden_names = [name for name, item in HIDDEN_FISH.items() if item["zone"] == zone]
+        current.append(("heading", "隐藏鱼与鱼王"))
+        if int(state.get("active_consumables", {}).get("隐秘诱饵", 0)) > 0 and hidden_names:
+            current.append(("body", "隐秘诱饵：" + "、".join(f"{name} 4.50%" for name in hidden_names)))
+        else:
+            current.append(("body", "隐藏鱼：当前未满足隐秘诱饵与鱼点条件"))
+        king_lines = []
+        for king_name, king in FISH_KINGS.items():
+            if king["zone"] != zone:
+                continue
+            required = king.get("requires")
+            ready = not required or int(state.get("king_stats", {}).get(required, {}).get("bitten", 0)) > 0
+            bite, hook = fish_king_probabilities(king_name, rod_name, prerequisite_caught=ready)
+            wealth_multiplier = self._accessory_effect(state, "财富浮标", "king_clue_rate", 1.0)
+            if wealth_multiplier > 1.0:
+                bite = king_bite_rate(bite, wealth_bobber=wealth_multiplier)
+            tough_points = self._accessory_effect(state, "坚韧钓组", "king_hook_success_points", 0)
+            if tough_points:
+                hook = king_success_rate(hook, tough_tackle=tough_points)
+            king_lines.append(f"{king_name}：咬钩 {bite * 100:.2f}% / 基础上钩 {hook * 100:.2f}%")
+        current.extend(("body", line) for line in king_lines or ["鱼王：当前鱼点没有对应鱼王"])
+        current.append(("note", "鱼王概率仅在对应窗口内生效；最终上钩率还受回复技能和路径影响。"))
+
+        standard_categories = (1, 4, 25, 30)
+        enhanced_categories = (2, 8, 35, 45)
+        all_lines: list[tuple[str, str]] = [
+            ("heading", "第二部分 所有鱼竿概率"),
+            ("note", "鱼竿/宝藏/垃圾显示为：基础区间 / 强化区间（鱼总数超过100条时）。普通鱼按鱼点列出，强化区间为表中概率×1.4。"),
+            ("heading", "鱼竿掉落（越级部分为空竿）"),
+        ]
+        for candidate in POLES:
+            base_values, _ = self._rod_probability_map(candidate, standard_categories[1])
+            enhanced_values, _ = self._rod_probability_map(candidate, enhanced_categories[1])
+            details = "、".join(
+                f"{name}{self._probability_value(base_values[name])}/{self._probability_value(enhanced_values[name])}"
+                for name in POLES
+                if base_values[name] or name == "三叉戟"
+            )
+            _, base_blocked = self._rod_probability_map(candidate, standard_categories[1])
+            _, enhanced_blocked = self._rod_probability_map(candidate, enhanced_categories[1])
+            all_lines.append(("body", f"{candidate}：{details}；额外空竿 {self._probability_value(base_blocked)}/{self._probability_value(enhanced_blocked)}"))
+        all_lines.append(("heading", "宝藏"))
+        all_treasures = self._probability_item_map("treasure", standard_categories[0])
+        enhanced_treasures = self._probability_item_map("treasure", enhanced_categories[0])
+        all_lines.append(("body", "、".join(f"{name}{self._probability_value(all_treasures[name])}/{self._probability_value(enhanced_treasures[name])}" for name in all_treasures)))
+        all_lines.append(("heading", "垃圾"))
+        all_wastes = self._probability_item_map("waste", standard_categories[3])
+        enhanced_wastes = self._probability_item_map("waste", enhanced_categories[3])
+        all_lines.append(("body", "、".join(f"{name}{self._probability_value(all_wastes[name])}/{self._probability_value(enhanced_wastes[name])}" for name in all_wastes)))
+        all_lines.append(("heading", "普通鱼（基础区间）"))
+        for candidate_zone in ("bay", "deep", "ruin", "storm"):
+            all_lines.append(("body", f"{FISHING_ZONE_LABELS[candidate_zone]}："))
+            for candidate in POLES:
+                values = self._fish_probability_map(candidate, candidate_zone, standard_categories[2])
+                all_lines.append(("body", f"{candidate}：" + "、".join(f"{name}{self._probability_value(value)}" for name, value in values.items())))
+        all_lines.append(("heading", "鱼王（咬钩率 / 基础上钩率）"))
+        for king_name in FISH_KINGS:
+            values = []
+            for candidate in POLES:
+                bite, hook = fish_king_probabilities(king_name, candidate, prerequisite_caught=True)
+                values.append(f"{candidate}{bite * 100:.1f}/{hook * 100:.1f}")
+            all_lines.append(("body", f"{king_name}：" + "、".join(values)))
+        all_lines.extend([
+            ("heading", "隐藏鱼与不可直接钓出的装备"),
+            ("body", "深海：幽光鳐 4.50%；遗迹水域：星砂鳗 4.50%；风暴海域：云潮鲨 4.50%；河湾：无隐藏鱼。均需对应鱼点和隐秘诱饵。"),
+            ("body", "财富浮标、坚韧钓组、黄金磁石、幸运海星、魔法鱼饵、隐秘诱饵、万能鱼饵：直接钓出概率均为0，需要合成或商店获得。"),
+            ("note", "鱼王必须在对应鱼点和鱼王窗口内；后置鱼王未满足前置条件时为0。"),
+        ])
+        return current, all_lines
+
+    def _render_probability_image(self, uid: str, state: dict) -> Path:
+        current, all_probabilities = self._probability_sections(uid, state)
+        width = 1600
+        margin = 42
+        gap = 28
+        column_width = (width - margin * 2 - gap) // 2
+        header_height = 176
+        heading_font = self._font(29, bold=True)
+        body_font = self._font(24)
+        note_font = self._font(20)
+
+        def prepare(entries: list[tuple[str, str]]) -> tuple[list[tuple[str, list[str]]], int]:
+            prepared: list[tuple[str, list[str]]] = []
+            height = 44
+            for kind, text in entries:
+                font = heading_font if kind == "heading" else note_font if kind == "note" else body_font
+                lines = self._wrap_text(text, font, column_width - 72)
+                prepared.append((kind, lines))
+                line_height = 40 if kind == "heading" else 32 if kind == "body" else 28
+                height += len(lines) * line_height + (18 if kind == "heading" else 12)
+            return prepared, height + 28
+
+        current_prepared, current_height = prepare(current)
+        all_prepared, all_height = prepare(all_probabilities)
+        card_height = max(current_height, all_height)
+        height = header_height + card_height + 64
+        image = PILImage.new("RGBA", (width, height), (244, 248, 249, 255))
+        draw = ImageDraw.Draw(image)
+        draw.rounded_rectangle((0, 0, width, header_height), radius=26, fill=(33, 68, 82, 255))
+        draw.rectangle((0, header_height - 20, width, header_height), fill=(33, 68, 82, 255))
+        draw.text((margin, 34), "钓鱼概率", fill=(250, 252, 252, 255), font=self._font(64, bold=True))
+        draw.text((margin, 113), "当前装备明细 · 全部鱼竿对照", fill=(190, 222, 225, 255), font=self._font(25))
+        draw.text((width - margin, 116), "实际掉落按当前鱼点与鱼竿限制结算", fill=(220, 234, 235, 255), font=self._font(21), anchor="ra")
+
+        def draw_column(prepared: list[tuple[str, list[str]]], x: int, accent: tuple[int, int, int], own_height: int) -> None:
+            y = header_height + 28
+            self._card(draw, (x, y, x + column_width, y + own_height))
+            y += 24
+            for entry_index, (kind, lines) in enumerate(prepared):
+                if kind == "heading":
+                    block_height = max(42, len(lines) * 40 + 8)
+                    draw.rounded_rectangle((x + 18, y, x + column_width - 18, y + block_height), radius=10, fill=(*accent, 28))
+                    draw.rounded_rectangle((x + 18, y, x + 26, y + block_height), radius=4, fill=(*accent, 255))
+                    for line_index, line in enumerate(lines):
+                        draw.text((x + 38, y + 7 + line_index * 40), line, fill=(40, 61, 68, 255), font=heading_font)
+                    y += block_height + 12
+                    continue
+                font = note_font if kind == "note" else body_font
+                line_height = 28 if kind == "note" else 32
+                for line in lines:
+                    if entry_index % 2 == 0 and kind == "body":
+                        draw.rounded_rectangle((x + 24, y - 3, x + column_width - 24, y + line_height - 2), radius=6, fill=(247, 250, 250, 255))
+                    draw.text((x + 38, y), line, fill=(70, 83, 88, 255) if kind == "body" else (92, 112, 117, 255), font=font)
+                    y += line_height
+                y += 12
+
+        draw_column(current_prepared, margin, (38, 144, 158), current_height)
+        draw_column(all_prepared, margin + column_width + gap, (78, 116, 176), all_height)
+        output = Path(self.workspace) / "images" / f"probability_{uid}.png"
+        output.parent.mkdir(parents=True, exist_ok=True)
+        image.save(output, "PNG")
+        return output
+
     def _probability_detail_text(self, state: dict) -> str:
         # 大类概率直接取自 _zone_boundaries，保证展示与实际掉落完全一致。
         boundaries = self._zone_boundaries(state)
@@ -1420,10 +2897,14 @@ class McFish(NcatBotPlugin):
             str(item.get("名称")) for item in raw_items
             if str(item.get("类型")) == "pole" or str(item.get("名称")) == AXOLOTL
         ]
+        current_rod = str((state.get("equip") or {}).get("name", "木竿"))
         for name in pole_names:
             probability_category = category[0] if name == AXOLOTL else category[1]
             probability_type = "treasure" if name == AXOLOTL else "pole"
-            lines.append(f"{name} : {item_probability(name, probability_type, probability_category)}")
+            if name != AXOLOTL and not rod_drop_allowed(current_rod, name):
+                lines.append(f"{name} : 0.00%（当前{current_rod}不可越级钓到）")
+            else:
+                lines.append(f"{name} : {item_probability(name, probability_type, probability_category)}")
         lines.extend(["-----------", "鱼类概率:"])
         fish_names = [
             str(item.get("名称")) for item in raw_items
@@ -1452,6 +2933,7 @@ class McFish(NcatBotPlugin):
         if not self._economy_change(uid, -price, "mcfish_starting_pole"):
             await event.reply(text="钱包余额不足")
             return False
+        self._advance_tasks(state, spend=price)
         state["equip"] = {"name": "木竿", "durable": 30, "maintenance": 0, "induce": 0, "favor": 0}
         state["emergency_pole_count"] = int(state.get("emergency_pole_count", 0)) + 1
         self._save(uid, state)
@@ -1475,16 +2957,11 @@ class McFish(NcatBotPlugin):
         """兼容未提供 session_choose 的旧版 NcatBot。"""
         if parse_response is not None:
             await source_event.reply(text=prompt, at_sender=False)
-            source_user = str(source_event.sender.user_id)
-            source_group = str(source_event.group_id)
             last_text = ""
             for attempt in range(2):
                 try:
                     incoming = await self.wait_event(
-                        predicate=lambda event: (
-                            str(getattr(getattr(event, "data", event), "group_id", "")) == source_group
-                            and str(getattr(getattr(event, "data", event), "user_id", "")) == source_user
-                        ),
+                        predicate=lambda event: _same_conversation(event, source_event),
                         timeout=timeout,
                     )
                 except (asyncio.TimeoutError, TimeoutError):
@@ -1503,25 +2980,19 @@ class McFish(NcatBotPlugin):
             return SimpleNamespace(ok=False, key=None, text=last_text, timed_out=False)
         session_choose = getattr(self, "session_choose", None)
         if session_choose is not None:
-            try:
-                return await session_choose(
-                    prompt, source_event, choices=choices, timeout=timeout,
-                    timeout_reply=timeout_reply, cancel_reply=cancel_reply,
-                )
-            except TypeError as error:
-                if "cancel_reply" not in str(error):
-                    raise
+            result = await session_choose(
+                prompt, source_event, choices=choices, timeout=timeout,
+                timeout_reply=timeout_reply,
+            )
+            if getattr(result, "key", None) == "cancel":
+                await source_event.reply(text=cancel_reply, at_sender=False)
+            return result
         await source_event.reply(text=prompt, at_sender=False)
-        source_user = str(source_event.sender.user_id)
-        source_group = str(source_event.group_id)
         last_text = ""
         for attempt in range(2):
             try:
                 incoming = await self.wait_event(
-                    predicate=lambda event: (
-                        str(getattr(getattr(event, "data", event), "group_id", "")) == source_group
-                        and str(getattr(getattr(event, "data", event), "user_id", "")) == source_user
-                    ),
+                    predicate=lambda event: _same_conversation(event, source_event),
                     timeout=timeout,
                 )
             except (asyncio.TimeoutError, TimeoutError):
@@ -1536,22 +3007,64 @@ class McFish(NcatBotPlugin):
         await source_event.reply(text=cancel_reply, at_sender=False)
         return SimpleNamespace(ok=False, key=None, text=last_text, timed_out=False)
 
-    @registrar.qq.on_group_command("钓鱼", priority=80)
+    @registrar.qq.on_command("钓鱼", priority=80)
     async def handle_short_fishing(self, event) -> None:
         """兼容原群内常用的短指令，并优先于普通消息处理器执行。"""
+        if _is_blocked_group(event):
+            return
+        self._record_group_member(event)
         text = (event.raw_message or self._text(event)).strip()
         if text != "钓鱼":
             return
         uid = str(event.sender.user_id)
         async with self._user_lock(uid):
-            await self._start_fishing(event, self._state(uid), "进行钓鱼")
+            state = self._state(uid)
+            if "_fish" in getattr(self, "__dict__", {}):
+                await self._fish(event, state, "进行钓鱼")
+            else:
+                await self._start_fishing(event, state, "进行钓鱼")
+
+    @registrar.qq.on_group_increase(priority=29)
+    async def handle_group_increase(self, event) -> None:
+        if not _is_blocked_group(event):
+            self._record_group_member(event)
+
+    @registrar.qq.on_group_decrease(priority=29)
+    async def handle_group_decrease(self, event) -> None:
+        if _is_blocked_group(event) or not hasattr(self, "_db"):
+            return
+        group_id = getattr(event, "group_id", None)
+        user_id = getattr(event, "user_id", None)
+        if group_id is None or user_id is None:
+            return
+        self._db.execute(
+            "DELETE FROM fishing_group_members WHERE group_id = ? AND user_id = ?",
+            (str(group_id), str(user_id)),
+        )
+        self._db.commit()
+
+    @staticmethod
+    def _task_command_index(text: str, prefix: str) -> int | None | object:
+        if text == prefix:
+            return None
+        if not text.startswith(prefix + " "):
+            return _MISSING
+        suffix = text[len(prefix):].strip()
+        return int(suffix) if suffix.isdigit() and int(suffix) > 0 else 0
 
     async def _handle_message(self, event) -> None:
         text = (event.raw_message or self._text(event)).strip()
-        if not text or not (text.startswith(("进行", "购买", "出售", "装备", "附魔", "合成", "消除", "修复", "维修")) or text in ("花费100购买鱼竿", "钓鱼帮助", "钓鱼背包", "钓鱼商店", "钓鱼看板", "钓鱼时钟", "钓鱼图鉴", "查看上次钓鱼结果", "出售所有垃圾", "当前装备概率明细", "查看钓鱼规则") or text.startswith("钓鱼图鉴 ")):
+        task_prefixes = ("领取钓鱼任务",)
+        is_task_command = any(text == prefix or text.startswith(prefix + " ") for prefix in task_prefixes)
+        item_grant_prefixes = ("钓鱼发放", "钓鱼充值")
+        is_item_grant_command = any(text == prefix or text.startswith(prefix + " ") for prefix in item_grant_prefixes)
+        if not text or not (text.startswith(("进行", "购买", "出售", "装备", "卸下", "升级", "附魔", "合成", "消除", "修复", "维修", "分解")) or text in ("花费100购买鱼竿", "购买饰品槽位", "解锁饰品槽位", "钓鱼帮助", "钓鱼概率", "钓鱼背包", "钓鱼商店", "钓鱼看板", "钓鱼时钟", "钓鱼图鉴", "钓鱼任务", "查看上次钓鱼结果", "出售所有垃圾", "当前装备概率明细", "查看钓鱼规则") or text.startswith("钓鱼图鉴 ") or is_task_command or is_item_grant_command):
             return
         uid = str(event.sender.user_id)
         state = self._state(uid)
+        if is_item_grant_command:
+            await self._grant_item(event, text)
+            return
         if text == "查看上次钓鱼结果":
             await self._show_last_fishing_result(event, state); return
         if text in ("钓鱼背包",):
@@ -1566,6 +3079,18 @@ class McFish(NcatBotPlugin):
         if text in ("钓鱼帮助", "查看钓鱼规则"):
             output = await asyncio.to_thread(self._render_help_image, uid)
             await self._send_original_message(event, MessageArray([Image(file=str(output))])); return
+        if text == "钓鱼概率":
+            output = await asyncio.to_thread(self._render_probability_image, uid, state)
+            await self._send_original_message(event, MessageArray([Image(file=str(output))])); return
+        if text == "钓鱼任务":
+            await self._show_tasks(event, state); return
+        task_index = self._task_command_index(text, "领取钓鱼任务")
+        if task_index is not _MISSING:
+            if task_index == 0:
+                await event.reply(text="任务编号格式错误，请使用“领取钓鱼任务 2”")
+            else:
+                await self._claim_tasks(event, state, task_index)
+            return
         if text == "花费100购买鱼竿":
             await self._buy_emergency_pole(event, state); return
         if text == "当前装备概率明细":
@@ -1584,24 +3109,35 @@ class McFish(NcatBotPlugin):
             await self._sell(event, state, "垃圾"); return
         if text.startswith("进行") and text.endswith("钓鱼"):
             await self._start_fishing(event, state, text); return
+        if text in ("购买饰品槽位", "解锁饰品槽位"):
+            await self._buy_accessory_slot(event, state); return
         if text.startswith("购买"):
             await self._buy(event, state, text[2:].strip()); return
         if text.startswith("出售"):
             await self._sell(event, state, text[2:].strip()); return
         if text.startswith("装备"):
             await self._equip(event, state, text[2:].strip()); return
+        if text.startswith("卸下"):
+            await self._unequip(event, state, text[2:].strip()); return
+        if text.startswith("升级"):
+            await self._upgrade_accessory(event, state, text[2:].strip()); return
         if text in ("修复鱼竿", "维修鱼竿"):
             await self._repair(event, state); return
         if text.startswith("附魔"):
             await self._enchant(event, state, text[2:].strip()); return
         if text.startswith("合成"):
             await self._craft(event, state, text[2:].strip()); return
+        if text.startswith("分解"):
+            await self._dismantle(event, state, text[2:].strip()); return
         if text.startswith("消除"):
             await self._purify(event, state, text); return
 
-    @registrar.qq.on_group_message(priority=29)
+    @registrar.qq.on_message(priority=29)
     async def handle_message(self, event) -> None:
-        event = _McFishEvent(event)
+        if _is_blocked_group(event):
+            return
+        self._record_group_member(event)
+        event = _McFishEvent(event, self)
         uid = str(event.sender.user_id)
         async with self._user_lock(uid):
             await self._handle_message(event)
@@ -1618,42 +3154,110 @@ class McFish(NcatBotPlugin):
         stats = state.get("fish_stats", {})
         king_stats = state.get("king_stats", {})
         total = sum(int(item.get("count", 0)) for item in stats.values())
-        lines = [f"总捕获：{total}", f"已发现：{sum(1 for item in stats.values() if int(item.get('count', 0)) > 0)}/{len(FISH) + len(FISH_KINGS)}"]
         names = [requested] if requested and requested in stats else list(FISH)
-        for name in names:
-            item = stats.get(name, {})
-            count = int(item.get("count", 0))
-            ratio = (count / total * 100) if total else 0
-            first = item.get("first_caught", "未捕获")
-            lines.append(f"{name}：{count}（{ratio:.1f}%） 首次：{first}")
-        for name in FISH_KINGS:
-            item = king_stats.get(name, {})
-            if requested and requested != name:
-                continue
-            lines.append(f"{name}：咬钩{item.get('bitten', 0)} 成功{item.get('caught', 0)} 脱钩{item.get('escaped', 0)}")
-        body_font = self._font(50)
-        draw = ImageDraw.Draw(PILImage.new("RGB", (1, 1)))
-        wrapped: list[str] = []
-        for line in lines:
-            current = ""
-            for char in line:
-                candidate = current + char
-                if current and draw.textbbox((0, 0), candidate, font=body_font)[2] > 900:
-                    wrapped.append(current)
-                    current = char
-                else:
-                    current = candidate
-            if current:
-                wrapped.append(current)
+
+        requested_king = requested in FISH_KINGS
+        if requested_king:
+            fish_names: list[str] = []
+            king_names = [requested]
+        else:
+            fish_names = names
+            king_names = [name for name in FISH_KINGS if not requested or requested == name]
+
+        discovered_fish = sum(1 for name in FISH if int(stats.get(name, {}).get("count", 0)) > 0)
+        discovered_kings = sum(1 for name in FISH_KINGS if int(king_stats.get(name, {}).get("caught", 0)) > 0)
+        width = 1440
+        margin = 46
+        gap = 24
+        card_width = (width - margin * 2 - gap) // 2
+        header_height = 186
+        summary_height = 142
+        fish_card_height = 126
+        king_card_height = 118
+        fish_rows = max(1, (len(fish_names) + 1) // 2) if fish_names else 0
+        king_rows = max(1, (len(king_names) + 1) // 2) if king_names else 0
+        section_height = 68 + fish_rows * fish_card_height + (king_rows * king_card_height + 68 if king_names else 0) + 34
+        height = header_height + 26 + summary_height + 22 + section_height + 42
+        image = PILImage.new("RGBA", (width, height), (244, 248, 249, 255))
+        draw = ImageDraw.Draw(image)
+        draw.rounded_rectangle((0, 0, width, header_height), radius=26, fill=(33, 68, 82, 255))
+        draw.rectangle((0, header_height - 20, width, header_height), fill=(33, 68, 82, 255))
+        title = "钓鱼图鉴" if not requested else f"钓鱼图鉴 · {requested}"
+        draw.text((margin, 36), title, fill=(250, 252, 252, 255), font=self._font(62, bold=True))
+        draw.text((margin, 120), "个人捕获记录与鱼王战绩", fill=(190, 222, 225, 255), font=self._font(25))
+
+        summary_y = header_height + 26
+        summary_values = (
+            ("总捕获", str(total), (38, 144, 158)),
+            ("鱼类发现", f"{discovered_fish}/{len(FISH)}", (78, 116, 176)),
+            ("鱼王成功", f"{discovered_kings}/{len(FISH_KINGS)}", (61, 145, 112)),
+        )
+        summary_gap = 18
+        summary_width = (width - margin * 2 - summary_gap * 2) // 3
+        for index, (label, value, accent) in enumerate(summary_values):
+            x = margin + index * (summary_width + summary_gap)
+            self._card(draw, (x, summary_y, x + summary_width, summary_y + summary_height))
+            draw.rounded_rectangle((x, summary_y, x + 9, summary_y + summary_height), radius=4, fill=(*accent, 255))
+            draw.text((x + 28, summary_y + 23), label, fill=(92, 112, 117, 255), font=self._font(23))
+            draw.text((x + 28, summary_y + 62), value, fill=(40, 61, 68, 255), font=self._font(36, bold=True))
+
+        section_y = summary_y + summary_height + 22
+        fish_section_height = 68 + fish_rows * fish_card_height + 18 if fish_names else 0
+        if fish_names:
+            self._card(draw, (margin, section_y, width - margin, section_y + fish_section_height))
+            draw.text((margin + 28, section_y + 20), "普通鱼", fill=(40, 61, 68, 255), font=self._font(31, bold=True))
+            draw.text((width - margin - 28, section_y + 28), "数量 · 占比 · 首次捕获", fill=(92, 112, 117, 255), font=self._font(19), anchor="ra")
+            for index, name in enumerate(fish_names):
+                col, row = index % 2, index // 2
+                x = margin + 20 + col * (card_width + gap)
+                y = section_y + 62 + row * fish_card_height
+                self._card(draw, (x, y, x + card_width - 20, y + fish_card_height - 14), fill=(248, 251, 251, 255), radius=12)
+                icon = self._resource_image(name, (66, 66))
+                if icon:
+                    image.alpha_composite(icon, (x + 18, y + 26))
+                text_x = x + 98
+                item = stats.get(name, {})
+                count = int(item.get("count", 0))
+                ratio = (count / total * 100) if total else 0
+                first = str(item.get("first_caught", "未捕获"))
+                draw.text((text_x, y + 14), name, fill=(40, 61, 68, 255), font=self._font(26, bold=True))
+                draw.text((text_x, y + 53), f"{count} 条  ·  {ratio:.1f}%", fill=(38, 144, 158, 255), font=self._font(22))
+                draw.text((text_x, y + 82), f"首次：{first[:18]}", fill=(92, 112, 117, 255), font=self._font(18))
+
+        king_section_y = section_y + fish_section_height + 18 if fish_names else section_y
+        if king_names:
+            king_section_height = 68 + king_rows * king_card_height + 18
+            self._card(draw, (margin, king_section_y, width - margin, king_section_y + king_section_height))
+            draw.text((margin + 28, king_section_y + 20), "鱼王战绩", fill=(40, 61, 68, 255), font=self._font(31, bold=True))
+            for index, name in enumerate(king_names):
+                col, row = index % 2, index // 2
+                x = margin + 20 + col * (card_width + gap)
+                y = king_section_y + 62 + row * king_card_height
+                self._card(draw, (x, y, x + card_width - 20, y + king_card_height - 14), fill=(249, 249, 246, 255), radius=12)
+                icon = self._item_image(name)
+                if icon:
+                    king_icon = self._resource_image(name, (58, 58))
+                    if king_icon:
+                        image.alpha_composite(king_icon, (x + 18, y + 23))
+                item = king_stats.get(name, {})
+                draw.text((x + 92, y + 14), name, fill=(40, 61, 68, 255), font=self._font(25, bold=True))
+                draw.text(
+                    (x + 92, y + 54),
+                    f"咬钩 {int(item.get('bitten', 0))}  ·  成功 {int(item.get('caught', 0))}  ·  脱钩 {int(item.get('escaped', 0))}",
+                    fill=(112, 96, 54, 255),
+                    font=self._font(20),
+                )
+
         output = Path(self.workspace) / "images" / f"catalog_{uid}.png"
         output.parent.mkdir(parents=True, exist_ok=True)
-        # Keep the final row clear of the panel border when the catalogue grows.
-        image = self._panel("钓鱼图鉴", wrapped, max(360, 150 + len(wrapped) * 70 + 90))
         image.save(output, "PNG")
         return output
 
     def _shop_text(self) -> str:
-        return "钓鱼商店：\n" + "\n".join(f"{name}: {price} 金币" for name, (_, price) in POLES.items()) + "\n" + "\n".join(f"{name}: {price} 金币" for name, price in ITEMS.items() if price)
+        rod_prices = {"木竿": SHOP_WOOD_PRICE, **SHOP_ROD_PRICES}
+        item_prices = dict(ITEMS)
+        item_prices.update(SHOP_EQUIPMENT_PRICES)
+        return "钓鱼商店：\n" + "\n".join(f"{name}: {price} 金币" for name, price in rod_prices.items()) + "\n" + "\n".join(f"{name}: {price} 金币" for name, price in item_prices.items() if price)
 
     @staticmethod
     def _font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
@@ -1664,19 +3268,50 @@ class McFish(NcatBotPlugin):
         return ImageFont.load_default()
 
     @classmethod
+    def _wrap_text(cls, text: str, font: ImageFont.FreeTypeFont, max_width: int) -> list[str]:
+        measure = ImageDraw.Draw(PILImage.new("RGB", (1, 1)))
+        lines: list[str] = []
+        for paragraph in str(text).splitlines() or [""]:
+            current = ""
+            for char in paragraph:
+                candidate = current + char
+                if current and measure.textbbox((0, 0), candidate, font=font)[2] > max_width:
+                    lines.append(current)
+                    current = char
+                else:
+                    current = candidate
+            lines.append(current)
+        return lines or [""]
+
+    @classmethod
+    def _card(
+        cls,
+        draw: ImageDraw.ImageDraw,
+        box: tuple[int, int, int, int],
+        *,
+        fill: tuple[int, int, int, int] = (255, 255, 255, 255),
+        outline: tuple[int, int, int, int] = (220, 231, 233, 255),
+        radius: int = 18,
+    ) -> None:
+        draw.rounded_rectangle(box, radius=radius, fill=fill, outline=outline, width=2)
+
+    @classmethod
     def _panel(cls, title: str, lines: list[str], height: int = 300) -> PILImage.Image:
-        image = PILImage.new("RGBA", (1000, height), (255, 255, 255, 150))
+        width = 1000
+        height = max(250, height)
+        image = PILImage.new("RGBA", (width, height), (244, 248, 249, 255))
         draw = ImageDraw.Draw(image)
-        draw.rectangle((0, 0, 999, height - 1), outline="black", width=3)
-        title_font = cls._font(100)
-        body_font = cls._font(50)
-        draw.text((10, 0), title, fill="black", font=title_font)
-        title_box = draw.textbbox((10, 0), title, font=title_font)
-        draw.line((10, title_box[3] + 8, title_box[2], title_box[3] + 8), fill="black", width=3)
-        y = max(title_box[3] + 45, 150)
+        header_height = 132
+        draw.rounded_rectangle((0, 0, width, header_height), radius=24, fill=(33, 68, 82, 255))
+        draw.rectangle((0, header_height - 20, width, header_height), fill=(33, 68, 82, 255))
+        title_font = cls._font(58, bold=True)
+        body_font = cls._font(34)
+        draw.text((34, 28), title, fill=(250, 252, 252, 255), font=title_font)
+        cls._card(draw, (24, header_height + 18, width - 24, height - 24))
+        y = header_height + 48
         for line in lines:
-            draw.text((50, y), line, fill="black", font=body_font)
-            y += 70
+            draw.text((48, y), line, fill=(70, 83, 88, 255), font=body_font)
+            y += 52
         return image
 
     def _resource_image(self, name: str, size: tuple[int, int]) -> PILImage.Image | None:
@@ -1693,50 +3328,25 @@ class McFish(NcatBotPlugin):
     @classmethod
     def _draw_bar(cls, draw: ImageDraw.ImageDraw, xy: tuple[int, int, int, int], value: float) -> None:
         left, top, right, bottom = xy
-        draw.rectangle(xy, fill=(150, 150, 150))
-        draw.rectangle((left, top, left + int(max(0.0, min(1.0, value)) * (right - left)), bottom), fill=(102, 102, 102))
+        draw.rounded_rectangle(xy, radius=max(2, (bottom - top) // 2), fill=(224, 234, 236, 255))
+        filled_right = left + int(max(0.0, min(1.0, value)) * (right - left))
+        if filled_right > left:
+            draw.rounded_rectangle(
+                (left, top, filled_right, bottom),
+                radius=max(2, (bottom - top) // 2),
+                fill=(58, 163, 150, 255),
+            )
+
+    @staticmethod
+    def _pack_item_label(name: str, item: dict) -> str:
+        if name in POLES and item.get("craftable", True) is False:
+            return f"{name}（不可合成）"
+        return name
 
     def _render_pack_image(self, uid: str, state: dict) -> Path:
+        self._ensure_accessory_state(state)
         equip = state.get("equip")
-        if equip:
-            title_font = self._font(100)
-            body_font = self._font(50)
-            equip_height = 470
-            equip_block = PILImage.new("RGBA", (1000, equip_height), (255, 255, 255, 150))
-            draw = ImageDraw.Draw(equip_block)
-            draw.rectangle((0, 0, 999, equip_height - 1), outline="black", width=3)
-            draw.text((10, 0), "装备信息", fill="black", font=title_font)
-            title_box = draw.textbbox((10, 0), "装备信息", font=title_font)
-            draw.line((10, title_box[3] + 8, title_box[2], title_box[3] + 8), fill="black", width=3)
-
-            # Keep the icon area and text origin aligned with the original renderer.
-            icon_size = 300
-            icon = self._resource_image(equip["name"], (icon_size, icon_size))
-            if icon:
-                equip_block.paste(icon, (10, 150), icon)
-            text_x = 320
-            name_font = self._font(75)
-            draw.text((text_x, 150), equip["name"], fill="black", font=name_font)
-            max_durable = 999 if equip["name"] == AXOLOTL else POLES[equip["name"]][0]
-            metric_y = 235
-            label_box = draw.textbbox((0, 0), "装备耐久", font=body_font)
-            label_width = label_box[2] - label_box[0]
-            bar_left = text_x + label_width + 5
-            value_width = draw.textbbox((0, 0), "100", font=body_font)[2]
-            bar_right = 1000 - 10 - value_width - 10
-            draw.text((text_x, metric_y), "装备耐久", fill="black", font=body_font)
-            self._draw_bar(draw, (bar_left, metric_y + 5, bar_right, metric_y + 5 + 42), int(equip.get("durable", 0)) / max_durable)
-            draw.text((bar_right + 5, metric_y), str(equip.get("durable", 0)), fill="black", font=body_font)
-            metric_y = 315
-            draw.text((text_x, metric_y), "维修次数", fill="black", font=body_font)
-            self._draw_bar(draw, (bar_left, metric_y + 5, bar_right, metric_y + 5 + 42), int(equip.get("maintenance", 0)) / 10)
-            draw.text((bar_right + 5, metric_y), str(equip.get("maintenance", 0)), fill="black", font=body_font)
-            metric_y = 395
-            draw.text((text_x, metric_y), f" 附魔: 诱钓{self._enchant_label(equip.get('induce', 0))}  海之眷顾{self._enchant_label(equip.get('favor', 0))}", fill="black", font=body_font)
-        else:
-            equip_block = self._panel("装备信息", ["没有装备任何鱼竿"], 300)
-
-        entries: list[tuple[str, int]] = []
+        entries: list[tuple[str, str, int, str, bool, tuple[int, int] | None]] = []
         fish_count = 0
         pole_count = 0
         type_order = {"article": 0, "fish": 1, "pole": 2, "treasure": 3, "waste": 4}
@@ -1753,50 +3363,42 @@ class McFish(NcatBotPlugin):
                 )
                 entries.extend(
                     (
-                        f"{name}({item.get('durable', 0)}/{item.get('maintenance', 0)}"
-                        f"/{item.get('induce', 0)}/{item.get('favor', 0)})",
+                        self._pack_item_label(name, item),
+                        name,
                         1,
+                        f"耐久 {item.get('durable', 0)}  ·  修复 {item.get('maintenance', 0)}\n"
+                        f"诱钓 {self._enchant_label(item.get('induce', 0))}  · 眷顾 {self._enchant_label(item.get('favor', 0))}",
+                        True,
+                        None,
                     )
                     for item in sorted_poles
                 )
             elif int(value) > 0:
-                entries.append((name, int(value)))
+                active_uses = int(state.get("active_consumables", {}).get(name, 0))
+                progress = None
+                if name in EQUIPMENT and EQUIPMENT[name]["kind"] == "consumable" and active_uses > 0:
+                    uses = int(EQUIPMENT[name]["uses"])
+                    capacity = max(uses, ((active_uses + uses - 1) // uses) * uses)
+                    progress = (active_uses, capacity)
+                display_name = name
+                detail = ""
+                if name in PERMANENT_ACCESSORY_EFFECTS:
+                    accessory_level = self._accessory_level(state, name)
+                    display_name = f"{name}（{self._enchant_label(accessory_level)}级）"
+                    detail = "已装备" if name in state["accessories"] else "未装备"
+                entries.append((display_name, name, int(value), detail, False, progress))
                 if name in FISH:
                     fish_count += int(value)
-        if entries:
-            rows = (len(entries) + 1) // 2
-            measure = ImageDraw.Draw(PILImage.new("RGB", (1, 1)))
-            font = self._font(45)
-            value_width = measure.textbbox((0, 0), "10000", font=font)[2]
-            column_widths = [0, 0]
-            for index, (entry, _count) in enumerate(entries):
-                column_widths[index % 2] = max(column_widths[index % 2], measure.textbbox((0, 0), entry, font=font)[2])
-            if sum(10 + width + 10 + value_width + 10 for width in column_widths) > 980:
-                font = self._font(32)
-                value_width = measure.textbbox((0, 0), "10000", font=font)[2]
-                column_widths = [0, 0]
-                for index, (entry, _count) in enumerate(entries):
-                    column_widths[index % 2] = max(column_widths[index % 2], measure.textbbox((0, 0), entry, font=font)[2])
-            text_height = measure.textbbox((0, 0), "高度", font=font)[3]
-            row_step = int(text_height * 2)
-            pack_height = max(500, 10 + 115 + 10 + row_step * (rows + 1))
-            pack_block = self._panel("背包信息", [], pack_height)
-            draw = ImageDraw.Draw(pack_block)
-            wall_width = max(0, (980 - sum(10 + width + 10 + value_width + 10 for width in column_widths)) // 2)
-            first_x = wall_width + 20
-            second_x = first_x + column_widths[0] + 10 + value_width + 10
-            for x, width in ((first_x, column_widths[0]), (second_x, column_widths[1])):
-                draw.text((x + width // 2, 150), "名称", fill="black", font=font, anchor="ma")
-                draw.text((x + width + 10 + value_width // 2, 150), "数量", fill="black", font=font, anchor="ma")
-            for index, (entry, count) in enumerate(entries):
-                col, row = index % 2, index // 2
-                x = first_x if col == 0 else second_x
-                name_width = column_widths[col]
-                y = 215 + row * row_step
-                draw.text((x + name_width // 2, y), entry, fill="black", font=font, anchor="ma")
-                draw.text((x + name_width + 10 + value_width // 2, y), str(count), fill="black", font=font, anchor="ma")
-        else:
-            pack_block = self._panel("背包信息", ["背包没有存放任何东西"], 300)
+
+        for name, info in EQUIPMENT.items():
+            if info["kind"] != "consumable":
+                continue
+            active_uses = int(state.get("active_consumables", {}).get(name, 0))
+            if active_uses <= 0 or any(entry[1] == name for entry in entries):
+                continue
+            uses = int(info["uses"])
+            capacity = max(uses, ((active_uses + uses - 1) // uses) * uses)
+            entries.append((name, name, 0, "", False, (active_uses, capacity)))
 
         economy = self._plugin_loader.get_plugin("GroupEconomy") if hasattr(self, "_plugin_loader") else None
         if economy is not None:
@@ -1809,57 +3411,128 @@ class McFish(NcatBotPlugin):
         level_span = max(1, next_level_xp - current_level_xp)
         level_progress = max(0.0, min(1.0, (total_xp - current_level_xp) / level_span))
         daily_limit = daily_attempt_limit(level)
-        profile_block = PILImage.new("RGBA", (1000, 290), (255, 255, 255, 150))
-        profile_draw = ImageDraw.Draw(profile_block)
-        profile_draw.rectangle((0, 0, 999, 289), outline="black", width=3)
+        width = 1240
+        margin = 42
+        gap = 22
+        header_height = 174
+        profile_height = 158
+        equip_height = 224
+        # Rod cards contain two attribute lines; leave enough room below the icon
+        # so the second line stays inside its card and cannot overlap the next row.
+        inventory_row_height = 106
+        inventory_rows = max(2, (len(entries) + 1) // 2)
+        inventory_height = 78 + inventory_rows * inventory_row_height + 28
+        height = header_height + 26 + profile_height + 20 + equip_height + 20 + inventory_height + 42
+        image = PILImage.new("RGBA", (width, height), (244, 248, 249, 255))
+        draw = ImageDraw.Draw(image)
+        draw.rounded_rectangle((0, 0, width, header_height), radius=26, fill=(33, 68, 82, 255))
+        draw.rectangle((0, header_height - 20, width, header_height), fill=(33, 68, 82, 255))
+        draw.text((margin, 34), "钓鱼背包", fill=(250, 252, 252, 255), font=self._font(62, bold=True))
+        draw.text((margin, 116), f"用户 {uid}  ·  物品、装备与成长状态", fill=(190, 222, 225, 255), font=self._font(25))
 
+        profile_y = header_height + 26
+        self._card(draw, (margin, profile_y, width - margin, profile_y + profile_height))
         avatar_path = CommonUtil.get_avatar(uid)
+        avatar_box = (margin + 24, profile_y + 27, margin + 124, profile_y + 127)
         try:
             avatar = PILImage.open(avatar_path).convert("RGBA")
-            avatar = avatar.resize((170, 170), PILImage.Resampling.LANCZOS)
-            mask = PILImage.new("L", (170, 170), 0)
-            ImageDraw.Draw(mask).ellipse((0, 0, 169, 169), fill=255)
-            profile_block.paste(avatar, (35, 50), mask)
+            avatar = avatar.resize((100, 100), PILImage.Resampling.LANCZOS)
+            mask = PILImage.new("L", (100, 100), 0)
+            ImageDraw.Draw(mask).ellipse((0, 0, 99, 99), fill=255)
+            image.paste(avatar, (avatar_box[0], avatar_box[1]), mask)
         except (OSError, ValueError):
-            profile_draw.ellipse((35, 50, 204, 219), fill=(205, 205, 205), outline="black", width=2)
-
-        title_font = self._font(62, bold=True)
-        body_font = self._font(34)
-        small_font = self._font(29)
-        profile_draw.text((240, 25), "钓鱼档案", fill="black", font=title_font)
-        profile_draw.text((245, 98), f"用户 {uid}", fill="black", font=body_font)
-        profile_draw.text((245, 145), f"钓鱼等级  {level}", fill="black", font=body_font)
-        profile_draw.text(
-            (245, 193),
-            f"经验 {total_xp - current_level_xp}/{level_span}",
-            fill="black",
-            font=small_font,
+            draw.ellipse(avatar_box, fill=(222, 234, 235, 255), outline=(184, 202, 205, 255), width=2)
+        draw.text((margin + 148, profile_y + 25), "钓鱼档案", fill=(40, 61, 68, 255), font=self._font(28, bold=True))
+        draw.text((margin + 148, profile_y + 68), f"等级 {level}  ·  经验 {total_xp - current_level_xp}/{level_span}", fill=(92, 112, 117, 255), font=self._font(21))
+        self._draw_bar(draw, (margin + 148, profile_y + 105, margin + 360, profile_y + 121), level_progress)
+        metrics = (
+            ("今日钓鱼", f"{min(daily_limit, int(state.get('fish_today', 0)))}/{daily_limit}"),
+            ("钱包", f"{int(account['balance'])} 金币"),
+            ("背包统计", f"{fish_count} 条鱼 · {pole_count} 支竿"),
         )
-        bar_left, bar_top, bar_right, bar_bottom = 590, 156, 965, 194
-        profile_draw.rounded_rectangle((bar_left, bar_top, bar_right, bar_bottom), 10, fill=(215, 215, 215), outline="black", width=2)
-        filled_right = bar_left + int((bar_right - bar_left) * level_progress)
-        if filled_right > bar_left:
-            profile_draw.rounded_rectangle((bar_left, bar_top, filled_right, bar_bottom), 10, fill=(70, 145, 95))
-        profile_draw.text((590, 105), "本级经验", fill="black", font=small_font)
-        profile_draw.text((590, 205), f"今日钓鱼 {min(daily_limit, int(state.get('fish_today', 0)))}/{daily_limit}", fill="black", font=small_font)
-        profile_draw.text((820, 205), f"钱包 {int(account['balance'])}", fill="black", font=small_font)
-
+        metric_width = 220
+        metric_start = margin + 410
+        for index, (label, value) in enumerate(metrics):
+            x = metric_start + index * (metric_width + 12)
+            draw.text((x, profile_y + 35), label, fill=(92, 112, 117, 255), font=self._font(20))
+            draw.text((x, profile_y + 75), value, fill=(40, 61, 68, 255), font=self._font(26, bold=True))
+        badges = []
         if fish_count > 100:
-            profile_draw.text((245, 252), "钓鱼佬[已激活]", fill="black", font=small_font)
+            badges.append("钓鱼佬")
         if pole_count > 10:
-            profile_draw.text((590, 252), "维修大师[已激活]", fill="black", font=small_font)
+            badges.append("维修大师")
+        if badges:
+            draw.text((width - margin - 28, profile_y + 127), " · ".join(badges) + " 已激活", fill=(61, 145, 112, 255), font=self._font(18), anchor="ra")
+        accessory_status = "、".join(
+            f"{name}{self._enchant_label(self._accessory_level(state, name))}"
+            for name in state["accessories"]
+        ) or "无"
+        draw.text(
+            (margin + 148, profile_y + 132),
+            f"饰品槽位 {len(state['accessories'])}/{state['accessory_slots']}：{accessory_status}",
+            fill=(38, 144, 158, 255),
+            font=self._font(18),
+        )
+
+        equip_y = profile_y + profile_height + 20
+        self._card(draw, (margin, equip_y, width - margin, equip_y + equip_height))
+        draw.text((margin + 28, equip_y + 20), "当前装备", fill=(40, 61, 68, 255), font=self._font(31, bold=True))
+        if equip:
+            icon = self._resource_image(equip["name"], (126, 126))
+            if icon:
+                image.alpha_composite(icon, (margin + 28, equip_y + 70))
+            text_x = margin + 190
+            max_durable = 999 if equip["name"] == AXOLOTL else POLES[equip["name"]][0]
+            draw.text((text_x, equip_y + 76), equip["name"], fill=(40, 61, 68, 255), font=self._font(30, bold=True))
+            draw.text((text_x, equip_y + 126), f"耐久 {equip.get('durable', 0)}/{max_durable}", fill=(92, 112, 117, 255), font=self._font(20))
+            self._draw_bar(draw, (text_x + 155, equip_y + 130, width - margin - 38, equip_y + 147), int(equip.get("durable", 0)) / max_durable)
+            draw.text((text_x, equip_y + 164), f"维修 {equip.get('maintenance', 0)}/10  ·  诱钓 {self._enchant_label(equip.get('induce', 0))}  ·  海之眷顾 {self._enchant_label(equip.get('favor', 0))}", fill=(38, 144, 158, 255), font=self._font(20))
+        else:
+            draw.text((margin + 30, equip_y + 102), "没有装备任何鱼竿", fill=(92, 112, 117, 255), font=self._font(25))
+
+        inventory_y = equip_y + equip_height + 20
+        self._card(draw, (margin, inventory_y, width - margin, inventory_y + inventory_height))
+        draw.text((margin + 28, inventory_y + 20), "背包物品", fill=(40, 61, 68, 255), font=self._font(31, bold=True))
+        draw.text((width - margin - 28, inventory_y + 28), "鱼竿属性：耐久 / 修复 / 诱钓 / 眷顾", fill=(92, 112, 117, 255), font=self._font(18), anchor="ra")
+        if entries:
+            tile_width = (width - margin * 2 - gap - 40) // 2
+            for index, (display_name, asset_name, count, detail, is_pole, progress) in enumerate(entries):
+                col, row = index % 2, index // 2
+                x = margin + 20 + col * (tile_width + gap)
+                y = inventory_y + 62 + row * inventory_row_height
+                self._card(draw, (x, y, x + tile_width, y + inventory_row_height - 10), fill=(248, 251, 251, 255), radius=12)
+                icon = self._resource_image(asset_name, (48, 48))
+                if icon:
+                    image.alpha_composite(icon, (x + 16, y + 20))
+                text_x = x + 80
+                draw.text((text_x, y + 14), display_name, fill=(40, 61, 68, 255), font=self._font(23, bold=True))
+                if is_pole:
+                    detail_font = self._font(16)
+                    for detail_index, detail_line in enumerate(detail.splitlines()):
+                        draw.text((text_x, y + 45 + detail_index * 20), detail_line, fill=(38, 144, 158, 255), font=detail_font)
+                elif progress:
+                    active_uses, capacity = progress
+                    inventory_text = (
+                        f"库存 {count}  ·  激活剩余 {active_uses}/{capacity} 次"
+                        if count
+                        else f"激活剩余 {active_uses}/{capacity} 次"
+                    )
+                    draw.text((text_x, y + 45), inventory_text, fill=(92, 112, 117, 255), font=self._font(18))
+                    self._draw_bar(
+                        draw,
+                        (text_x, y + 70, x + tile_width - 18, y + 78),
+                        active_uses / capacity,
+                    )
+                elif detail:
+                    draw.text((text_x, y + 49), detail, fill=(38, 144, 158, 255), font=self._font(20))
+                else:
+                    draw.text((text_x, y + 49), f"数量 {count}", fill=(92, 112, 117, 255), font=self._font(20))
+        else:
+            draw.text((margin + 30, inventory_y + 98), "背包没有存放任何东西", fill=(92, 112, 117, 255), font=self._font(25))
 
         output = Path(self.workspace) / "images" / f"pack_{uid}.png"
         output.parent.mkdir(parents=True, exist_ok=True)
-        result = PILImage.new("RGBA", (1020, 10 + profile_block.height + 10 + equip_block.height + 10 + pack_block.height + 10), (150, 150, 150, 255))
-        ImageDraw.Draw(result).rectangle(
-            (10, 10, result.width - 11, result.height - 11),
-            fill=(255, 255, 255, 255),
-        )
-        result.paste(profile_block, (10, 10), profile_block)
-        result.paste(equip_block, (10, 20 + profile_block.height), equip_block)
-        result.paste(pack_block, (10, 30 + profile_block.height + equip_block.height), pack_block)
-        result.save(output, "PNG")
+        image.save(output, "PNG")
         return output
 
     def _render_store_image(self, uid: str) -> Path:
@@ -1877,78 +3550,89 @@ class McFish(NcatBotPlugin):
         }
         output = Path(self.workspace) / "images" / f"store_{uid}.png"
         output.parent.mkdir(parents=True, exist_ok=True)
-        title_font = self._font(100)
-        discount_font = self._font(35)
-        body_font = self._font(30)
-        table_font = self._font(50)
-        pole_label = "下界合金竿(100/100/0/0)"
-        name_width = ImageDraw.Draw(PILImage.new("RGB", (1, 1))).textbbox((0, 0), pole_label, font=table_font)[2]
-        number_width = ImageDraw.Draw(PILImage.new("RGB", (1, 1))).textbbox((0, 0), "10000", font=table_font)[2]
-        price_width = number_width
-        image_width = max(1000, 20 + name_width + 50 + number_width + 50 + price_width + 20)
-        rows = (len(prices) + 1) // 2
-        inventory_rows: list[tuple[str, int, int]] = []
+        inventory_rows: list[tuple[str, int, int, str]] = []
         for name, count in inventory.items():
             if name == "初始木竿" or name in POLES:
                 pole_name = "木竿" if name == "初始木竿" else name
                 for pole in self._shop_poles(count, pole_name):
                     label = "木竿（常驻）" if name == "初始木竿" else f"{name}({pole.get('durable', 0)}/{pole.get('maintenance', 0)}/{pole.get('induce', 0)}/{pole.get('favor', 0)})"
                     pole_price = self._shop_price(name, discounts) if name == "初始木竿" else self._pole_price(pole, discounts, name)
-                    inventory_rows.append((label, 1, pole_price))
+                    inventory_rows.append((label, 1, pole_price, pole_name))
             else:
                 if int(count) <= 0:
                     continue
-                inventory_rows.append((name, int(count), self._shop_price(name, discounts)))
-        height = max(620, 270 + rows * 78 + 250 + max(1, len(inventory_rows)) * 72)
-        image = PILImage.new("RGB", (image_width, height), (150, 150, 150))
+                inventory_rows.append((name, int(count), self._shop_price(name, discounts), name))
+        listed_rods = {
+            asset_name for _name, _count, _price, asset_name in inventory_rows
+            if asset_name in SHOP_ROD_PRICES
+        }
+        for name in SHOP_ROD_PRICES:
+            if name not in listed_rods:
+                inventory_rows.append((f"{name}（常驻）", 1, self._shop_price(name, discounts), name))
+
+        width = 1400
+        margin = 46
+        gap = 22
+        header_height = 174
+        price_rows = max(1, (len(prices) + 1) // 2)
+        inventory_rows_count = max(1, (len(inventory_rows) + 1) // 2)
+        price_section_height = 82 + price_rows * 94 + 30
+        inventory_section_height = 82 + inventory_rows_count * 82 + 30
+        height = header_height + 24 + price_section_height + 20 + inventory_section_height + 42
+        image = PILImage.new("RGBA", (width, height), (244, 248, 249, 255))
         draw = ImageDraw.Draw(image)
-        draw.text((10, 0), "今日波动", fill="black", font=title_font)
-        title_box = draw.textbbox((10, 0), "今日波动", font=title_font)
-        draw.line((10, title_box[3] + 8, title_box[2], title_box[3] + 8), fill="black", width=3)
-        start_y = title_box[3] + 38
-        item_width = (image_width - 40) / 2
+        draw.rounded_rectangle((0, 0, width, header_height), radius=26, fill=(33, 68, 82, 255))
+        draw.rectangle((0, header_height - 20, width, header_height), fill=(33, 68, 82, 255))
+        draw.text((margin, 34), "钓鱼商店", fill=(250, 252, 252, 255), font=self._font(62, bold=True))
+        draw.text((margin, 116), "今日价格波动 · 上架库存", fill=(190, 222, 225, 255), font=self._font(25))
+        draw.text((width - margin, 116), "价格随每日折扣变化", fill=(220, 234, 235, 255), font=self._font(21), anchor="ra")
+
+        tile_width = (width - margin * 2 - gap - 40) // 2
+        price_y = header_height + 24
+        self._card(draw, (margin, price_y, width - margin, price_y + price_section_height))
+        draw.text((margin + 28, price_y + 20), "今日波动", fill=(40, 61, 68, 255), font=self._font(31, bold=True))
+        draw.text((width - margin - 28, price_y + 28), "当前价 · 均价 · 涨跌", fill=(92, 112, 117, 255), font=self._font(19), anchor="ra")
         for index, (name, price) in enumerate(prices.items()):
-            column, row = index % 2, index // 2
-            x = 20 + column * item_width
-            y = start_y + row * 78
+            col, row = index % 2, index // 2
+            x = margin + 20 + col * (tile_width + gap)
+            y = price_y + 64 + row * 94
+            self._card(draw, (x, y, x + tile_width, y + 80), fill=(248, 251, 251, 255), radius=12)
+            icon = self._resource_image(name, (44, 44))
+            if icon:
+                image.alpha_composite(icon, (x + 16, y + 18))
             average = getattr(self, "_prices", {}).get(name, POLES.get(name, (0, 0))[1])
             change = discounts.get(name, 100) - 100
             change_text = f"+{change}%" if change > 0 else f"{change}%"
-            name_text = f"{name}(均价{average})"
-            discount_row_font = discount_font
-            name_box = draw.textbbox((0, 0), name_text, font=discount_row_font)
-            change_box = draw.textbbox((0, 0), change_text, font=discount_row_font)
-            if name_box[2] + change_box[2] + 12 > item_width - 20:
-                discount_row_font = self._font(32)
-                name_box = draw.textbbox((0, 0), name_text, font=discount_row_font)
-                change_box = draw.textbbox((0, 0), change_text, font=discount_row_font)
-            draw.text((x, y), name_text, fill="black", font=discount_row_font)
-            draw.text((x + item_width - 20 - (change_box[2] - change_box[0]), y), change_text, fill=(200, 50, 50) if change > 0 else (63, 133, 55), font=discount_row_font)
-        note_y = start_y + rows * 78 + 20
-        draw.text((10, note_y), "注:出售商品将会额外扣除20%的税收,附魔鱼竿请按实际价格", fill="black", font=body_font)
-        section_y = note_y + 70
-        draw.text((10, section_y), "上架内容", fill="black", font=title_font)
-        section_box = draw.textbbox((10, section_y), "上架内容", font=title_font)
-        draw.line((10, section_box[3] + 8, section_box[2], section_box[3] + 8), fill="black", width=3)
-        table_y = section_box[3] + 32
-        draw.text((10, table_y), "名称", fill="black", font=table_font)
-        number_x = 20 + name_width + 50
-        price_x = number_x + number_width + 50
-        draw.text((number_x, table_y), "数量", fill="black", font=table_font)
-        draw.text((price_x, table_y), "价格", fill="black", font=table_font)
+            change_color = (194, 91, 86, 255) if change > 0 else (61, 145, 112, 255) if change < 0 else (92, 112, 117, 255)
+            draw.text((x + 72, y + 12), name, fill=(40, 61, 68, 255), font=self._font(21, bold=True))
+            draw.text((x + 72, y + 45), f"{price} 金币  ·  均价 {average}", fill=(92, 112, 117, 255), font=self._font(17))
+            draw.text((x + tile_width - 18, y + 23), change_text, fill=change_color, font=self._font(22, bold=True), anchor="ra")
+
+        inventory_y = price_y + price_section_height + 20
+        self._card(draw, (margin, inventory_y, width - margin, inventory_y + inventory_section_height))
+        draw.text((margin + 28, inventory_y + 20), "上架内容", fill=(40, 61, 68, 255), font=self._font(31, bold=True))
+        draw.text((width - margin - 28, inventory_y + 28), "库存 · 单价", fill=(92, 112, 117, 255), font=self._font(19), anchor="ra")
         if inventory_rows:
-            for index, (display_name, row_count, row_price) in enumerate(inventory_rows):
-                row_y = table_y + 80 + index * 72
-                draw.text((10, row_y), display_name, fill="black", font=body_font)
-                draw.text((number_x, row_y), str(row_count), fill="black", font=body_font)
-                draw.text((price_x, row_y), str(row_price), fill="black", font=body_font)
+            for index, (display_name, row_count, row_price, asset_name) in enumerate(inventory_rows):
+                col, row = index % 2, index // 2
+                x = margin + 20 + col * (tile_width + gap)
+                y = inventory_y + 64 + row * 82
+                self._card(draw, (x, y, x + tile_width, y + 68), fill=(249, 250, 247, 255), radius=12)
+                icon = self._resource_image(asset_name, (40, 40))
+                if icon:
+                    image.alpha_composite(icon, (x + 16, y + 14))
+                draw.text((x + 70, y + 11), display_name, fill=(40, 61, 68, 255), font=self._font(19))
+                draw.text((x + 70, y + 40), f"库存 {row_count}", fill=(92, 112, 117, 255), font=self._font(17))
+                draw.text((x + tile_width - 18, y + 25), f"{row_price} 金币", fill=(112, 96, 54, 255), font=self._font(20, bold=True), anchor="ra")
         else:
-            draw.text((350, table_y + 90), "当前商店并没有上架任何物品", fill="black", font=body_font)
+            draw.text((margin + 30, inventory_y + 98), "当前商店并没有上架任何物品", fill=(92, 112, 117, 255), font=self._font(25))
+        draw.text((margin, height - 28), "出售商品按收购价的 80% 结算；附魔鱼竿按实际属性计价。", fill=(92, 112, 117, 255), font=self._font(19))
         image.save(output, "PNG")
         return output
 
     async def _fish(self, event, state: dict, text: str) -> None:
-        event = _McFishEvent(event)
+        if not isinstance(event, _McFishEvent):
+            event = _McFishEvent(event, self)
         uid = str(event.sender.user_id)
         match = re.fullmatch(r"进行(?:(\d+|[零〇一二两三四五六七八九十百千]+)次)?钓鱼", text)
         if not match:
@@ -2056,10 +3740,10 @@ class McFish(NcatBotPlugin):
         state["fish_today"] += number
         # 先持久化本次预约消耗；鱼获在每一竿实际等待结束后单独结算并保存。
         base = self._save_fishing_state(uid, state, base)
-        magic_bait = int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0
-        wait_rate = EQUIPMENT["魔法鱼饵"]["effects"]["wait_rate"] if magic_bait else 1.0
+        initial_magic_bait = int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0
+        initial_wait_rate = EQUIPMENT["魔法鱼饵"]["effects"]["wait_rate"] if initial_magic_bait else 1.0
         initial_wait_seconds = fishing_wait_for_result(
-            "鳕鱼", induce=int(equip.get("induce", 0)), wait_rate=wait_rate
+            "鳕鱼", induce=int(equip.get("induce", 0)), wait_rate=initial_wait_rate
         )
         await event.reply(text="你开始去钓鱼了,每条鱼会分别等待上钩,请耐心等待")
         results = {}
@@ -2067,7 +3751,6 @@ class McFish(NcatBotPlugin):
         earned_xp = 0
         starting_level = int(state.get("fish_level", level))
         single_image: Path | None = None
-        drop_boundaries = self._zone_boundaries(state)
         fishing_started_at = datetime.now()
         current_time = fishing_started_at
         current_wait_seconds = initial_wait_seconds
@@ -2081,18 +3764,20 @@ class McFish(NcatBotPlugin):
             # 每竿开始前读回最新存档：等待期间玩家的购买/合成/装备改动不会被本竿覆盖。
             state = self._state(uid)
             equip = state.get("equip") or equip
+            # 海豚等动态背包效果必须按本竿最新存档计算，不能沿用批次开始时的边界。
+            drop_boundaries = self._zone_boundaries(state)
+            self._advance_tasks(state, casts=1)
             base = copy.deepcopy(state)
-            if magic_bait:
-                state["active_consumables"]["魔法鱼饵"] -= 1
-                state["pack"]["魔法鱼饵"] = max(0, int(state["pack"].get("魔法鱼饵", 0)) - 1)
+            magic_bait_active = int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0
             universal_bait = int(state.get("active_consumables", {}).get("万能鱼饵", 0)) > 0
+            hidden_lure_active = int(state.get("active_consumables", {}).get("隐秘诱饵", 0)) > 0
+            current_wait_rate = EQUIPMENT["魔法鱼饵"]["effects"]["wait_rate"] if magic_bait_active else 1.0
+            if magic_bait_active:
+                state["active_consumables"]["魔法鱼饵"] -= 1
             if universal_bait:
                 state["active_consumables"]["万能鱼饵"] -= 1
-                state["pack"]["万能鱼饵"] = max(0, int(state["pack"].get("万能鱼饵", 0)) - 1)
-            hidden_lure_active = int(state.get("active_consumables", {}).get("隐秘诱饵", 0)) > 0
             if hidden_lure_active:
                 state["active_consumables"]["隐秘诱饵"] -= 1
-                state["pack"]["隐秘诱饵"] = max(0, int(state["pack"].get("隐秘诱饵", 0)) - 1)
             current_zone = str(state.get("fishing_zone", daily_fishing_zone()))
             active = [
                 window for window in windows
@@ -2119,10 +3804,11 @@ class McFish(NcatBotPlugin):
                 self._add_fishing_xp(state, attempt_xp)
                 self._add(state, hidden_name)
                 self._record_capture(state, hidden_name, caught_at=scheduled_at)
+                self._advance_tasks(state, catches={hidden_name: 1})
                 results[hidden_name] = results.get(hidden_name, 0) + 1
                 attempt_results.append({"time": scheduled_at, "result": hidden_name, "quantity": 1, "xp": attempt_xp})
                 current_wait_seconds = fishing_wait_for_result(
-                    hidden_name, induce=int(equip.get("induce", 0)), wait_rate=wait_rate
+                    hidden_name, induce=int(equip.get("induce", 0)), wait_rate=current_wait_rate
                 )
                 result_note += f"\n水中出现隐秘的光影……成功钓起【{hidden_name}】！"
                 self._grant_fishing_fragments(state, "rare")
@@ -2138,7 +3824,9 @@ class McFish(NcatBotPlugin):
                 fish_king_probabilities(king_window.king_name, equip["name"], prerequisite_caught=prerequisite_ready)
                 if king else (0.0, 0.0)
             )
-            king_bites = bool(king and random.random() < king_bite_rate(bite_rate, wealth_bobber="财富浮标" in state.get("accessories", [])))
+            wealth_multiplier = self._accessory_effect(state, "财富浮标", "king_clue_rate", 1.0)
+            king_bite = king_bite_rate(bite_rate, wealth_bobber=wealth_multiplier)
+            king_bites = bool(king and random.random() < king_bite)
             if king_bites:
                 king_stats = state.setdefault("king_stats", {}).setdefault(king_window.king_name, {})
                 king_stats["bitten"] = int(king_stats.get("bitten", 0)) + 1
@@ -2151,7 +3839,7 @@ class McFish(NcatBotPlugin):
                 )
                 if king["kind"] == "prerequisite" and post_window:
                     bite_choice = await self._choose(
-                        "前置鱼王咬钩了！\n咬钩阶段技能：\n1. 保留目标（进入上钩判定）\n2. 以小钓大（牺牲当前鱼，尝试后置鱼王）\n3. 见好就收（放弃追逐）",
+                        f"{FISH_KING_PROMPTS[king_window.king_name]['trigger']}\n咬钩阶段技能：\n1. 保留目标（进入上钩判定）\n2. 以小钓大（牺牲当前鱼，尝试后置鱼王）\n3. 见好就收（放弃追逐）",
                         event,
                         choices={"1": "hold_target", "2": "mooch_post", "3": "give_up"},
                         timeout=30,
@@ -2160,7 +3848,7 @@ class McFish(NcatBotPlugin):
                     )
                 else:
                     bite_choice = await self._choose(
-                        "鱼王咬钩了！\n咬钩阶段技能：\n1. 保留目标（进入上钩判定）\n2. 见好就收（放弃追逐）",
+                        f"{FISH_KING_PROMPTS[king_window.king_name]['trigger']}\n咬钩阶段技能：\n1. 保留目标（进入上钩判定）\n2. 见好就收（放弃追逐）",
                         event,
                         choices={"1": "hold_target", "2": "give_up"},
                         timeout=30,
@@ -2172,9 +3860,9 @@ class McFish(NcatBotPlugin):
                     king_stats["escaped"] = int(king_stats.get("escaped", 0)) + 1
                     attempt_results.append({"time": scheduled_at, "result": "鱼王机会（放弃）", "quantity": 0, "xp": 0})
                     current_wait_seconds = fishing_wait_for_result(
-                        "鱼王机会（放弃）", induce=int(equip.get("induce", 0)), wait_rate=wait_rate
+                        "鱼王机会（放弃）", induce=int(equip.get("induce", 0)), wait_rate=current_wait_rate
                     )
-                    result_note += "\n你放弃了这次鱼王机会。"
+                    result_note += f"\n你放弃了这次鱼王机会。\n{FISH_KING_PROMPTS[king_window.king_name]['disappear']}"
                     self._record_attempt(uid, attempt_index, scheduled_at, equip["name"], "咬钩阶段放弃", king_window, "king_give_up")
                     base = self._save_fishing_state(uid, state, base)
                     continue
@@ -2184,10 +3872,10 @@ class McFish(NcatBotPlugin):
                     king_stats = state.setdefault("king_stats", {}).setdefault(king_window.king_name, {})
                     king_stats["bitten"] = int(king_stats.get("bitten", 0)) + 1
                     _, hook_rate = fish_king_probabilities(king_window.king_name, equip["name"], prerequisite_caught=True)
-                    result_note += "\n你牺牲了当前前置鱼王，尝试引出后置鱼王！"
+                    result_note += f"\n你牺牲了当前前置鱼王，尝试引出后置鱼王！\n{FISH_KING_PROMPTS[king_window.king_name]['trigger']}"
 
                 hook_choice = await self._choose(
-                    "已进入上钩判定。\n上钩阶段技能：\n1. 精准提竿\n2. 强力提竿\n3. 耐心控鱼\n4. 爆发收线",
+                    "已进入上钩判定。\n上钩阶段技能：\n1. 精准提竿\n2. 强力提竿\n3. 谦逊之饵\n4. 雄心之饵",
                     event,
                     choices={number: strategy for number, strategy in (("1", "direct_reel"), ("2", "small_to_large"), ("3", "humble_bait"), ("4", "ambitious_bait"))},
                     timeout=30,
@@ -2210,10 +3898,11 @@ class McFish(NcatBotPlugin):
                 }[hook_skill]
                 progress = path_progress(state, king_window.king_name, strategy)
                 guaranteed = bool(progress.get("guaranteed"))
+                tough_points = self._accessory_effect(state, "坚韧钓组", "king_hook_success_points", 0)
                 success = random.random() < king_success_rate(
                     hook_rate + hook_skill_bonus(hook_skill),
                     guaranteed=guaranteed,
-                    tough_tackle="坚韧钓组" in state.get("accessories", []),
+                    tough_tackle=tough_points,
                 )
                 if guaranteed:
                     progress["guaranteed"] = False
@@ -2221,30 +3910,40 @@ class McFish(NcatBotPlugin):
                     attempt_xp = fishing_xp(king_window.king_name)
                     earned_xp += attempt_xp
                     self._add_fishing_xp(state, attempt_xp)
-                    length = random.randint(*king["length"])
+                    length = king_length_for_hook(king_window.king_name, hook_skill)
                     self._add(state, king_window.king_name)
                     self._record_capture(state, king_window.king_name, caught_at=scheduled_at)
                     king_stats["caught"] = int(king_stats.get("caught", 0)) + 1
-                    price = int(king["base_price"] * length / ((king["length"][0] + king["length"][1]) / 2))
+                    self._advance_tasks(state, king=1)
+                    base_price = int(king["base_price"] * length / ((king["length"][0] + king["length"][1]) / 2))
+                    state.setdefault("king_sale_prices", {}).setdefault(king_window.king_name, []).append(base_price)
+                    price = base_price
+                    price = king_sale_price(
+                        price,
+                        gold_magnet=self._accessory_effect(state, "黄金磁石", "king_price", 1.0),
+                    )
                     results[king_window.king_name] = results.get(king_window.king_name, 0) + 1
                     attempt_results.append({"time": scheduled_at, "result": king_window.king_name, "quantity": 1, "xp": attempt_xp})
                     current_wait_seconds = fishing_wait_for_result(
-                        king_window.king_name, induce=int(equip.get("induce", 0)), wait_rate=wait_rate
+                        king_window.king_name, induce=int(equip.get("induce", 0)), wait_rate=current_wait_rate
                     )
                     self._grant_fishing_fragments(state, "king")
                     state.setdefault("king_results", {})[king_window.king_name] = {"length": length, "price": price}
-                    result_note += f"\n成功钓起鱼王【{king_window.king_name}】！长度：{length} cm，售价：{price}。"
+                    result_note += f"\n{FISH_KING_PROMPTS[king_window.king_name]['success'].format(length=length, price=price)}"
                     self._record_attempt(uid, attempt_index, scheduled_at, equip["name"], "鱼王策略", king_window, "king_success")
                 else:
                     king_stats["escaped"] = int(king_stats.get("escaped", 0)) + 1
                     attempt_results.append({"time": scheduled_at, "result": "鱼王脱钩", "quantity": 0, "xp": 0})
                     current_wait_seconds = fishing_wait_for_result(
-                        "鱼王脱钩", induce=int(equip.get("induce", 0)), wait_rate=wait_rate
+                        "鱼王脱钩", induce=int(equip.get("induce", 0)), wait_rate=current_wait_rate
                     )
+                    result_note += f"\n{FISH_KING_PROMPTS[king_window.king_name]['disappear']}"
                     self._record_attempt(uid, attempt_index, scheduled_at, equip["name"], "鱼王策略", king_window, "king_escape")
                 base = self._save_fishing_state(uid, state, base)
                 continue
-            name, quantity = self._original_drop(state, drop_boundaries)
+            name, quantity = self._original_drop(
+                state, drop_boundaries, magic_bait=magic_bait_active
+            )
             if universal_bait and name is None:
                 name = random.choice(list(FISH))
                 quantity = 1
@@ -2255,7 +3954,7 @@ class McFish(NcatBotPlugin):
                     single_image = None
                     attempt_results.append({"time": scheduled_at, "result": "赛博空气", "quantity": 1, "xp": 0})
                     current_wait_seconds = fishing_wait_for_result(
-                        "赛博空气", induce=int(equip.get("induce", 0)), wait_rate=wait_rate
+                        "赛博空气", induce=int(equip.get("induce", 0)), wait_rate=current_wait_rate
                     )
                     self._record_attempt(uid, attempt_index, scheduled_at, equip["name"], "默认鱼饵", king_window, "air")
                     base = self._save_fishing_state(uid, state, base)
@@ -2272,15 +3971,19 @@ class McFish(NcatBotPlugin):
                         name = "钓鱼碎片"
                         quantity = random.randint(1, 2)
             if name in POLES:
-                name, quantity = "钓鱼碎片", random.randint(1, 2)
-                self._add(state, name, quantity)
+                # Fishing drops must use a fresh roll; shop, exchange, and crafting
+                # rods intentionally keep their own fixed or inherited attributes.
+                self._add(state, name, quantity, pole=True, random_pole=True)
             else:
                 self._add(state, name, quantity)
-                if getattr(self, "_types", {}).get(name) == "treasure" and "黄金磁石" in state.get("accessories", []):
+                if getattr(self, "_types", {}).get(name) == "treasure" and self._accessory_level(state, "黄金磁石"):
                     quality = state.setdefault("treasure_quality", {})
-                    quality[name] = max(1, int(quality.get(name, 0))) + 1
+                    quality[name] = max(1, int(quality.get(name, 0))) + int(
+                        self._accessory_effect(state, "黄金磁石", "treasure_quality", 0)
+                    )
             if name in FISH:
                 self._record_capture(state, name, caught_at=scheduled_at)
+                self._advance_tasks(state, catches={name: max(1, int(quantity))})
                 fish_xp = fishing_xp(name) * max(1, int(quantity))
                 earned_xp += fish_xp
                 self._add_fishing_xp(state, fish_xp)
@@ -2288,7 +3991,7 @@ class McFish(NcatBotPlugin):
                 fish_xp = 0
             attempt_results.append({"time": scheduled_at, "result": name, "quantity": quantity, "xp": fish_xp})
             current_wait_seconds = fishing_wait_for_result(
-                name, induce=int(equip.get("induce", 0)), wait_rate=wait_rate
+                name, induce=int(equip.get("induce", 0)), wait_rate=current_wait_rate
             )
             self._grant_fishing_fragments(state, "ordinary")
             if state.pop("fragment_jackpot", False):
@@ -2298,9 +4001,17 @@ class McFish(NcatBotPlugin):
                 single_image = self._item_image(name)
             else:
                 single_image = None
-            self._record_attempt(uid, attempt_index, scheduled_at, equip["name"], "魔法鱼饵" if magic_bait else "默认鱼饵", king_window, "ordinary")
+            self._record_attempt(
+                uid,
+                attempt_index,
+                scheduled_at,
+                equip["name"],
+                "魔法鱼饵" if magic_bait_active else "默认鱼饵",
+                king_window,
+                "ordinary",
+            )
             base = self._save_fishing_state(uid, state, base)
-        if not axolotl and equip["durable"] <= 0:
+        if not axolotl and equip["durable"] <= 0 and not equip.get("unbreakable", False):
             state["equip"] = None
         state["fish_bless"] = int(state.get("fish_bless", 0)) + fish_attempts
         while state["fish_bless"] >= 75:
@@ -2335,21 +4046,24 @@ class McFish(NcatBotPlugin):
         uid = str(event.sender.user_id); match = re.fullmatch(r"(.+?)(?:\s+(\d+))?", item_text); name = match.group(1) if match else item_text; number = int(match.group(2) or 1) if match else 1
         requested_name = name
         name = POLE_ALIASES.get(name, name)
-        has_level_state = "fish_level" in state or "fish_xp" in state
         player_level = int(state.get("fish_level", level_for_xp(int(state.get("fish_xp", 0)))))
-        if has_level_state and name in POLES and player_level < rod_unlock_level(name):
+        if name in POLES and player_level < rod_unlock_level(name):
             await event.reply(text=f"你的钓鱼等级为{player_level}，{name}需要等级{rod_unlock_level(name)}才能购买")
             return
         if name in POLES and name != "木竿":
             number = 1
-        if name not in POLES and name not in FISH and name not in ITEMS and name not in SHOP_EQUIPMENT_PRICES or name in ("垃圾", "宝藏诅咒"): await event.reply(text="商店没有这个物品"); return
         discounts, inventory = self._shop_data()
+        known_item = name in POLES or name in FISH or name in ITEMS or name in SHOP_EQUIPMENT_PRICES
+        listed_item = name in inventory or (name == "木竿" and "初始木竿" in inventory)
+        if (not known_item and not listed_item and name not in SHOP_ROD_PRICES) or name in ("垃圾", "宝藏诅咒"):
+            await event.reply(text="商店没有这个物品")
+            return
         if name == "木竿":
             initial_wood = self._shop_poles(inventory.get("初始木竿", []), "木竿")
             shop_name = "初始木竿" if initial_wood else "木竿"
         else:
             shop_name = name
-        if shop_name not in inventory:
+        if shop_name not in inventory and name not in SHOP_ROD_PRICES:
             await event.reply(text="当前商店并没有上架该物品")
             return
         pole_count = sum(len(value) for pole, value in state["pack"].items() if pole in POLES and isinstance(value, list))
@@ -2382,7 +4096,15 @@ class McFish(NcatBotPlugin):
             if number > curse_count:
                 number = curse_count
         if is_pole:
-            available = self._shop_poles(inventory[shop_name], name if shop_name != "初始木竿" else "木竿")
+            if name in SHOP_ROD_PRICES:
+                available = [{
+                    "durable": POLES[name][0],
+                    "maintenance": 0,
+                    "induce": 0,
+                    "favor": 0,
+                }]
+            else:
+                available = self._shop_poles(inventory[shop_name], name if shop_name != "初始木竿" else "木竿")
             if shop_name == "初始木竿":
                 # 常驻商品：库存不足时按购买数量补足同规格木竿
                 while len(available) < number:
@@ -2403,7 +4125,12 @@ class McFish(NcatBotPlugin):
             else:
                 selected_poles = available[:number]
                 del available[:number]
-            if shop_name == "初始木竿":
+            custom_price = int(getattr(self, "_shop_custom_prices", {}).get(name, 0) or 0)
+            if custom_price:
+                price = custom_price * len(selected_poles)
+            elif name in SHOP_ROD_PRICES:
+                price = self._shop_price(name, discounts) * len(selected_poles)
+            elif shop_name == "初始木竿":
                 price = self._shop_price(shop_name, discounts) * len(selected_poles)
             else:
                 price = sum(self._pole_price(p, discounts, name) for p in selected_poles)
@@ -2430,11 +4157,18 @@ class McFish(NcatBotPlugin):
         if not self._economy_change(uid, -price, "mcfish_purchase"):
             await event.reply(text=f"你身上的钱不够支付{curse_text}")
             return
+        self._advance_tasks(state, spend=price)
         if coupon_count:
             state["half_price_count"] -= coupon_count
         if is_pole:
             for selected in selected_poles:
-                self._add(state, "木竿" if shop_name == "初始木竿" else name, pole=True, pole_data=selected)
+                self._add(
+                    state,
+                    "木竿" if shop_name == "初始木竿" else name,
+                    pole=True,
+                    pole_data=selected,
+                    craftable=name not in SHOP_ROD_PRICES,
+                )
             state["pole_trade_count"] = int(state.get("pole_trade_count", 0)) + len(selected_poles)
             state["trade_count"] = int(state.get("trade_count", 0)) + len(selected_poles)
             if state["trade_count"] % 10 == 0:
@@ -2453,7 +4187,7 @@ class McFish(NcatBotPlugin):
                 if state["buy_times"] > 20:
                     state["buy_times"] -= 20
                     state["half_price_count"] = 3
-        if is_pole:
+        if is_pole and name not in SHOP_ROD_PRICES:
             if available:
                 inventory[shop_name] = available
             else:
@@ -2585,8 +4319,37 @@ class McFish(NcatBotPlugin):
                         sold_poles.append((name, pole, unit_price))
             else:
                 unit_price = self._shop_price(name, discounts)
-                if getattr(self, "_types", {}).get(name) == "treasure":
-                    unit_price = treasure_sale_price(unit_price, gold_magnet="黄金磁石" in state.get("accessories", []))
+                if name in FISH:
+                    unit_price = fish_sale_price(
+                        unit_price,
+                        gold_magnet=self._accessory_effect(state, "黄金磁石", "fish_price", 1.0),
+                    )
+                elif name in FISH_KINGS:
+                    captured_prices = state.get("king_sale_prices", {}).get(name, [])
+                    if isinstance(captured_prices, list) and captured_prices:
+                        captured_count = min(number, len(captured_prices))
+                        gross += sum(
+                            king_sale_price(
+                                int(raw_price) * discounts.get(name, 100) // 100,
+                                gold_magnet=self._accessory_effect(state, "黄金磁石", "king_price", 1.0),
+                            )
+                            for raw_price in captured_prices[:captured_count]
+                        )
+                        if captured_count < number:
+                            gross += king_sale_price(
+                                self._shop_price(name, discounts),
+                                gold_magnet=self._accessory_effect(state, "黄金磁石", "king_price", 1.0),
+                            ) * (number - captured_count)
+                        continue
+                    unit_price = king_sale_price(
+                        unit_price,
+                        gold_magnet=self._accessory_effect(state, "黄金磁石", "king_price", 1.0),
+                    )
+                elif getattr(self, "_types", {}).get(name) == "treasure":
+                    unit_price = treasure_sale_price(
+                        unit_price,
+                        gold_magnet=self._accessory_effect(state, "黄金磁石", "treasure_price", 1.0),
+                    )
                 gross += unit_price * number
         quote = gross * 8 // 10
         sale_prompt = (
@@ -2618,6 +4381,10 @@ class McFish(NcatBotPlugin):
         gross = gross * (100 - 10 * curse) // 100
         for name, number in items:
             self._remove(state, name, number, selected_indices.get(name))
+            if name in FISH_KINGS:
+                prices_by_name = state.get("king_sale_prices", {}).get(name, [])
+                if isinstance(prices_by_name, list):
+                    del prices_by_name[:number]
         discounts, inventory = self._shop_data()
         record_multiplier = 2 if record_available > 0 and record.key == "yes" else 1
         for name, number in items:
@@ -2651,10 +4418,14 @@ class McFish(NcatBotPlugin):
             await event.reply(text=f"成功出售本次物品,你赚到了{price}{curse_text}")
 
     async def _equip(self, event, state: dict, name: str) -> None:
+        self._ensure_accessory_state(state)
         has_level_state = "fish_level" in state or "fish_xp" in state
         player_level = int(state.get("fish_level", level_for_xp(int(state.get("fish_xp", 0)))))
         if name in POLE_ALIASES:
             name = POLE_ALIASES[name]
+        if name == "三叉戟":
+            await event.reply(text="三叉戟只能通过达到35级后完成“鱼王全收集”常驻任务获得")
+            return
         if has_level_state and name in POLES and player_level < rod_unlock_level(name):
             await event.reply(text=f"你的钓鱼等级为{player_level}，{name}需要等级{rod_unlock_level(name)}才能装备")
             return
@@ -2666,14 +4437,19 @@ class McFish(NcatBotPlugin):
                 if name in state["accessories"]:
                     await event.reply(text="这个永久饰品已经装备")
                     return
-                if len(state["accessories"]) >= 2:
-                    await event.reply(text="最多同时装备2件永久饰品")
+                if len(state["accessories"]) >= state["accessory_slots"]:
+                    await event.reply(text=f"当前最多同时装备{state['accessory_slots']}件永久饰品，请先购买更多饰品槽位")
                 else:
                     state["accessories"].append(name)
                     self._save(str(event.sender.user_id), state)
-                    await event.reply(text=f"已装备{name}")
+                    level = self._accessory_level(state, name)
+                    await event.reply(text=f"已装备{name}（{self._enchant_label(level)}级）")
                 return
-            state.setdefault("active_consumables", {})[name] = int(state["pack"].get(name, 0))
+            uses = int(EQUIPMENT[name].get("uses") or 0)
+            self._remove(state, name)
+            state.setdefault("active_consumables", {})[name] = (
+                int(state["active_consumables"].get(name, 0)) + uses
+            )
             self._save(str(event.sender.user_id), state)
             await event.reply(text=f"已启用{name}，剩余{state['active_consumables'][name]}次")
             return
@@ -2688,6 +4464,7 @@ class McFish(NcatBotPlugin):
                     old_name,
                     pole=old_name in POLES,
                     pole_data=state["equip"] if old_name in POLES else None,
+                    craftable=state["equip"].get("craftable", True),
                 )
             state["equip"] = {"name": AXOLOTL, "durable": 999, "maintenance": 0, "induce": 0, "favor": 0}
             self._save(str(event.sender.user_id), state)
@@ -2717,20 +4494,179 @@ class McFish(NcatBotPlugin):
         self._remove(state, name, 1, selected_index)
         if state.get("equip"):
             old_name = state["equip"]["name"]
-            self._add(state, old_name, pole=old_name in POLES, pole_data=state["equip"] if old_name in POLES else None)
+            self._add(
+                state,
+                old_name,
+                pole=old_name in POLES,
+                pole_data=state["equip"] if old_name in POLES else None,
+                craftable=state["equip"].get("craftable", True),
+            )
         state["equip"] = {"name": name, **selected}; self._save(str(event.sender.user_id), state); await event.reply(text="装备成功")
+
+    @staticmethod
+    def _normalize_accessory_command_name(name: str) -> str:
+        name = name.strip()
+        return name[2:].strip() if name.startswith("饰品") else name
+
+    @staticmethod
+    def _accessory_upgrade_summary(name: str, level: int) -> str:
+        effects = PERMANENT_ACCESSORY_EFFECTS[name][level]
+        if name == "财富浮标":
+            return f"宝藏概率×{effects['treasure_rate']:.2f}，鱼王咬钩率×{effects['king_clue_rate']:.2f}"
+        if name == "坚韧钓组":
+            return f"鱼王上钩率+{effects['king_hook_success_points']}个百分点"
+        if name == "黄金磁石":
+            return (
+                f"宝藏品质+{effects['treasure_quality']}档，"
+                f"宝藏售价×{effects['treasure_price']:.2f}，"
+                f"普通鱼售价×{effects['fish_price']:.2f}，"
+                f"鱼王售价×{effects['king_price']:.2f}"
+            )
+        return f"普通碎片概率{8 + effects['fragment_points']}%"
+
+    async def _buy_accessory_slot(self, event, state: dict) -> None:
+        self._ensure_accessory_state(state)
+        current_slots = int(state["accessory_slots"])
+        next_slot = current_slots + 1
+        unlock = ACCESSORY_SLOT_UNLOCKS.get(next_slot)
+        if unlock is None:
+            await event.reply(text="饰品槽位已达到当前上限")
+            return
+        level = int(state.get("fish_level", level_for_xp(int(state.get("fish_xp", 0)))))
+        required_level = int(unlock["level"])
+        required_fragments = int(unlock["fragments"])
+        if level < required_level:
+            await event.reply(text=f"钓鱼等级达到{required_level}级后才能解锁第{next_slot}个饰品槽位")
+            return
+        owned = int(state.get("pack", {}).get("钓鱼碎片", 0))
+        if owned < required_fragments:
+            await event.reply(
+                text=(
+                    f"解锁第{next_slot}个饰品槽位需要{required_fragments}个钓鱼碎片，"
+                    f"你当前有{owned}个，还差{required_fragments - owned}个"
+                )
+            )
+            return
+        result = await self._choose(
+            f"解锁第{next_slot}个饰品槽位需要{required_fragments}个钓鱼碎片，确认支付吗？",
+            event,
+            choices={"确认": "confirm", "是": "confirm", "取消": "cancel"},
+            timeout=120,
+            timeout_reply="等待超时，取消解锁",
+            cancel_reply="已取消解锁",
+        )
+        if result.key != "confirm":
+            return
+        if not self._remove(state, "钓鱼碎片", required_fragments):
+            await event.reply(text="钓鱼碎片不足，无法解锁饰品槽位")
+            return
+        state["accessory_slots"] = next_slot
+        self._save(str(event.sender.user_id), state)
+        await event.reply(text=f"已解锁第{next_slot}个饰品槽位，当前共{next_slot}格")
+
+    async def _upgrade_accessory(self, event, state: dict, name: str) -> None:
+        self._ensure_accessory_state(state)
+        name = self._normalize_accessory_command_name(name)
+        if name not in ACCESSORY_UPGRADE_COSTS:
+            await event.reply(text="可升级的永久饰品：财富浮标、坚韧钓组、黄金磁石、幸运海星")
+            return
+        level = self._accessory_level(state, name)
+        if level <= 0:
+            await event.reply(text=f"你还没有{name}，请先合成{name}")
+            return
+        if level >= ACCESSORY_MAX_LEVEL:
+            await event.reply(text=f"{name}已经达到最高{self._enchant_label(ACCESSORY_MAX_LEVEL)}级")
+            return
+        required = int(ACCESSORY_UPGRADE_COSTS[name][level - 1])
+        owned = int(state.get("pack", {}).get("钓鱼碎片", 0))
+        next_level = level + 1
+        if owned < required:
+            await event.reply(
+                text=(
+                    f"升级{name}至{self._enchant_label(next_level)}级需要{required}个钓鱼碎片，"
+                    f"你当前有{owned}个，还差{required - owned}个"
+                )
+            )
+            return
+        result = await self._choose(
+            f"升级{name}至{self._enchant_label(next_level)}级需要{required}个钓鱼碎片。\n"
+            f"升级后效果：{self._accessory_upgrade_summary(name, next_level)}\n确认升级吗？",
+            event,
+            choices={"确认": "confirm", "是": "confirm", "取消": "cancel"},
+            timeout=120,
+            timeout_reply="等待超时，取消升级",
+            cancel_reply="已取消升级",
+        )
+        if result.key != "confirm":
+            return
+        if not self._remove(state, "钓鱼碎片", required):
+            await event.reply(text="钓鱼碎片不足，无法升级饰品")
+            return
+        state["accessory_levels"][name] = next_level
+        self._save(str(event.sender.user_id), state)
+        await event.reply(text=f"{name}已升级至{self._enchant_label(next_level)}级：{self._accessory_upgrade_summary(name, next_level)}")
+
+    async def _unequip(self, event, state: dict, name: str) -> None:
+        self._ensure_accessory_state(state)
+        name = self._normalize_accessory_command_name(name)
+        if name in ("全部", "全部饰品"):
+            if not state["accessories"]:
+                await event.reply(text="当前没有装备永久饰品")
+                return
+            result = await self._choose(
+                "确认卸下全部永久饰品吗？",
+                event,
+                choices={"确认": "confirm", "是": "confirm", "取消": "cancel"},
+                timeout=120,
+                timeout_reply="等待超时，取消卸下",
+                cancel_reply="已取消卸下",
+            )
+            if result.key != "confirm":
+                return
+            removed = "、".join(state["accessories"])
+            state["accessories"] = []
+            self._save(str(event.sender.user_id), state)
+            await event.reply(text=f"已卸下：{removed}")
+            return
+        if name not in PERMANENT_ACCESSORY_EFFECTS:
+            await event.reply(text="请指定已装备的永久饰品，或使用“卸下全部饰品”")
+            return
+        if name not in state["accessories"]:
+            await event.reply(text=f"当前没有装备{name}")
+            return
+        state["accessories"].remove(name)
+        self._save(str(event.sender.user_id), state)
+        await event.reply(text=f"已卸下{name}，饰品仍保留在背包中")
 
     async def _repair(self, event, state: dict) -> None:
         equip = state.get("equip")
         if not equip or equip["name"] == "美西螈":
             await event.reply(text="仅能修复装备中的鱼竿")
             return
-        if int(equip.get("maintenance", 0)) >= 10:
+        paid_trident = equip["name"] == "三叉戟" and bool(equip.get("unbreakable", False))
+        if int(equip.get("durable", 0)) >= POLES[equip["name"]][0]:
+            await event.reply(text="装备的鱼竿耐久已经满了")
+            return
+        if int(equip.get("maintenance", 0)) >= 10 and not paid_trident:
             await event.reply(text="装备的鱼竿已经达到修复上限")
             return
         materials = state.get("pack", {}).get(equip["name"], [])
-        if not materials:
+        if not materials and not paid_trident:
             await event.reply(text="你的背包不存在相同鱼竿进行修复")
+            return
+        if paid_trident:
+            repair_fee = self._repair_fee(equip["name"], int(equip.get("durable", 0)))
+            if getattr(self, "_economy", None) and int(self._economy.store.account(str(event.sender.user_id))["balance"]) < repair_fee:
+                await event.reply(text=f"本次修复需要{repair_fee}金币，你当前余额不足")
+                return
+            if not self._charge_fee(str(event.sender.user_id), repair_fee, "mcfish_trident_repair"):
+                await event.reply(text=f"本次修复需要{repair_fee}金币，你当前余额不足")
+                return
+            self._advance_tasks(state, spend=repair_fee)
+            equip["durable"] = POLES[equip["name"]][0]
+            equip["maintenance"] = int(equip.get("maintenance", 0)) + 1
+            self._save(str(event.sender.user_id), state)
+            await event.reply(text=f"永恒三叉戟修复成功，耐久恢复至{equip['durable']}，支付{repair_fee}金币")
             return
         selected_index = 0
         if len(materials) > 1:
@@ -2752,6 +4688,14 @@ class McFish(NcatBotPlugin):
             len(value) for name, value in state.get("pack", {}).items()
             if name in POLES and isinstance(value, list)
         )
+        repair_fee = self._repair_fee(equip["name"], int(equip.get("durable", 0)))
+        if getattr(self, "_economy", None) and int(self._economy.store.account(str(event.sender.user_id))["balance"]) < repair_fee:
+            await event.reply(text=f"本次修复需要{repair_fee}金币，你当前余额不足")
+            return
+        if not self._charge_fee(str(event.sender.user_id), repair_fee, "mcfish_repair"):
+            await event.reply(text=f"本次修复需要{repair_fee}金币，你当前余额不足")
+            return
+        self._advance_tasks(state, spend=repair_fee)
         factor = 8 if pole_count <= 10 else 10
         equip["durable"] = min(
             POLES[equip["name"]][0],
@@ -2765,7 +4709,7 @@ class McFish(NcatBotPlugin):
         self._remove(state, equip["name"], 1, selected_index)
         equip["maintenance"] = int(equip.get("maintenance", 0)) + 1
         self._save(str(event.sender.user_id), state)
-        await event.reply(text=f"鱼竿修复成功,耐久提高至{equip['durable']}{message}")
+        await event.reply(text=f"鱼竿修复成功,耐久提高至{equip['durable']}，支付{repair_fee}金币{message}")
 
     async def _enchant(self, event, state: dict, book: str) -> None:
         equip = state.get("equip")
@@ -2779,18 +4723,81 @@ class McFish(NcatBotPlugin):
         if int(state["pack"].get(book, 0)) < 1:
             await event.reply(text=f"你的背包不存在{book}进行附魔")
             return
+        if int(equip.get(key, 0)) >= 3:
+            await event.reply(text=f"{book}等级已达到上限，不会消耗附魔书")
+            return
         self._remove(state, book)
-        if random.randrange(100) > 50:
+        if random.randrange(100) >= 50:
             self._save(str(event.sender.user_id), state)
             await event.reply(text="附魔失败了")
             return
         equip[key] = int(equip.get(key, 0)) + 1
-        if equip[key] > 3:
-            self._save(str(event.sender.user_id), state)
-            await event.reply(text=f"{book}等级已达到上限，你浪费了一本附魔书")
-            return
         self._save(str(event.sender.user_id), state)
         await event.reply(text=f"附魔成功,{book}等级提高至{self._enchant_label(equip[key])}")
+
+    async def _dismantle(self, event, state: dict, requested_name: str = "") -> None:
+        name = POLE_ALIASES.get(requested_name.strip(), requested_name.strip())
+        if name in ("鱼竿", "鱼杆", ""):
+            name = ""
+        if name and name not in POLES:
+            await event.reply(text="请指定鱼竿名称，例如“分解铁竿”，或发送“分解鱼竿”查看全部鱼竿")
+            return
+
+        candidates: list[tuple[str, int, dict]] = []
+        for pole_name in (name,) if name else POLES:
+            for index, pole in enumerate(state.get("pack", {}).get(pole_name, [])):
+                candidates.append((pole_name, index, pole))
+        if not candidates:
+            await event.reply(text="背包中没有可分解的鱼竿")
+            return
+
+        selected: list[tuple[str, int, dict]]
+        if len(candidates) == 1:
+            selected = candidates
+        else:
+            listing = "\n".join(
+                f"[{index}] {pole_name}：耐{pole.get('durable', 0)}/修{pole.get('maintenance', 0)}"
+                f"/诱{self._enchant_label(pole.get('induce', 0))}/眷顾{self._enchant_label(pole.get('favor', 0))}"
+                for index, (pole_name, _pole_index, pole) in enumerate(candidates)
+            )
+            choices = {"全部": "all", "取消": "cancel"}
+            choices.update({str(index): f"one:{index}" for index in range(len(candidates))})
+            result = await self._choose(
+                f"找到以下可分解鱼竿：\n{listing}\n————————\n输入序号分解一根，输入“全部”分解以上全部鱼竿，或输入“取消”终止",
+                event,
+                choices=choices,
+                timeout=120,
+                timeout_reply="等待超时，取消分解",
+                cancel_reply="已取消分解",
+            )
+            if result.key == "all":
+                selected = candidates
+            elif isinstance(result.key, str) and result.key.startswith("one:"):
+                selected = [candidates[int(result.key[4:])]]
+            else:
+                return
+
+        fragments = sum(POLE_DISMANTLE_FRAGMENTS[pole_name] for pole_name, _, _ in selected)
+        summary = "、".join(
+            f"{pole_name}×{sum(1 for selected_name, _, _ in selected if selected_name == pole_name)}"
+            for pole_name in POLES
+            if any(selected_name == pole_name for selected_name, _, _ in selected)
+        )
+        confirmation = await self._choose(
+            f"确认分解{summary}吗？将获得钓鱼碎片×{fragments}，分解后无法恢复。\n回答“是”或“否”",
+            event,
+            choices={"是": "confirm", "否": "cancel"},
+            timeout=60,
+            timeout_reply="等待超时，取消分解",
+            cancel_reply="已取消分解",
+        )
+        if confirmation.key != "confirm":
+            return
+        for pole_name, pole_index, _pole in sorted(selected, key=lambda item: item[1], reverse=True):
+            self._remove(state, pole_name, 1, pole_index)
+        self._add(state, "钓鱼碎片", fragments)
+        self._save(str(event.sender.user_id), state)
+        await event.reply(text=f"已分解{summary}，获得钓鱼碎片×{fragments}")
 
     @staticmethod
     def _craft_indices(response: str, pole_count: int) -> str | None:
@@ -2802,7 +4809,29 @@ class McFish(NcatBotPlugin):
             return None
         return "group:" + ":".join(map(str, indices))
 
+    @staticmethod
+    def _craft_durable(target_name: str, source_name: str, selected: list[dict]) -> int:
+        """Scale target durability from three source rods, then add bounded variance."""
+        source_max = POLES[source_name][0]
+        target_max = POLES[target_name][0]
+        source_total = sum(
+            min(source_max, max(0, int(pole.get("durable", 0))))
+            for pole in selected
+        )
+        proportional = target_max * source_total / (source_max * 3)
+        lower = max(1, math.floor(proportional * 0.9))
+        upper = min(target_max, max(lower, math.ceil(proportional * 1.1)))
+        return lower + random.randrange(upper - lower + 1)
+
+    @staticmethod
+    def _craft_material_status(name: str, owned: int, required: int, unit: str) -> str:
+        owned = max(0, int(owned))
+        required = max(0, int(required))
+        missing = max(0, required - owned)
+        return f"{name}：已有{owned}/{required}{unit}，还差{missing}{unit}"
+
     async def _craft(self, event, state: dict, name: str) -> None:
+        self._ensure_accessory_state(state)
         has_level_state = "fish_level" in state or "fish_xp" in state
         player_level = int(state.get("fish_level", level_for_xp(int(state.get("fish_xp", 0)))))
         if name in POLE_ALIASES:
@@ -2814,21 +4843,124 @@ class McFish(NcatBotPlugin):
             required = EQUIPMENT[name]["fragments"]
             owned = int(state["pack"].get("钓鱼碎片", 0))
             if owned < required:
-                await event.reply(text=f"合成{name}需要{required}个钓鱼碎片，你只有{owned}个")
+                await event.reply(
+                    text=(
+                        f"合成{name}材料不足：\n"
+                        f"{self._craft_material_status('钓鱼碎片', owned, required, '个')}"
+                    )
+                )
                 return
             if EQUIPMENT[name]["kind"] == "permanent" and (name in state.get("accessories", []) or int(state["pack"].get(name, 0)) > 0):
                 await event.reply(text="同名永久饰品不能重复合成")
                 return
+            craft_fee = self._craft_fee(name, "equipment")
+            if getattr(self, "_economy", None) and int(self._economy.store.account(str(event.sender.user_id))["balance"]) < craft_fee:
+                await event.reply(text=f"合成{name}还需要支付{craft_fee}金币手续费")
+                return
+            if not self._charge_fee(str(event.sender.user_id), craft_fee, "mcfish_craft"):
+                await event.reply(text="金币不足，无法支付合成手续费")
+                return
+            self._advance_tasks(state, spend=craft_fee)
             self._remove(state, "钓鱼碎片", required)
             self._add(state, name)
+            if EQUIPMENT[name]["kind"] == "permanent":
+                state["accessory_levels"][name] = 1
             self._save(str(event.sender.user_id), state)
             uses = EQUIPMENT[name]["uses"]
             suffix = "永久饰品" if uses is None else f"消耗品，{uses}竿"
-            await event.reply(text=f"成功合成{name}（{suffix}）")
+            fee_note = f"，支付{craft_fee}金币手续费" if getattr(self, "_economy", None) else ""
+            await event.reply(text=f"成功合成{name}（{suffix}）{fee_note}")
             return
         source = UPGRADES.get(name)
-        poles = state.get("pack", {}).get(source, []) if source else []
-        if name not in UPGRADES or len(poles) < 3: await event.reply(text="合成材料不足"); return
+        source_inventory = state.get("pack", {}).get(source, []) if source else []
+        pole_indices = [
+            index for index, pole in enumerate(source_inventory)
+            if pole.get("craftable", True)
+        ]
+        poles = [source_inventory[index] for index in pole_indices]
+        if name in POLES:
+            required = POLE_FRAGMENT_COSTS[name]
+            owned = int(state["pack"].get("钓鱼碎片", 0))
+            can_use_fragments = owned >= required
+            can_use_poles = bool(source and len(poles) >= 3)
+            craft_mode = None
+            if can_use_fragments and can_use_poles:
+                result = await self._choose(
+                    f"合成{name}请选择合成方式：\n"
+                    f"1. 碎片合成（需要{required}个钓鱼碎片）\n"
+                    f"2. 鱼竿合成（需要3根{source}，成功率90%）\n"
+                    "回复“取消”终止本次合成",
+                    event,
+                    choices={
+                        "1": "fragments", "碎片": "fragments", "碎片合成": "fragments",
+                        "2": "poles", "鱼竿": "poles", "鱼竿合成": "poles", "取消": "cancel",
+                    },
+                    timeout=120,
+                    timeout_reply="等待超时,取消合成",
+                    cancel_reply="已取消合成",
+                )
+                if result.key not in ("fragments", "poles"):
+                    return
+                craft_mode = result.key
+            elif can_use_fragments:
+                result = await self._choose(
+                    f"合成{name}需要使用{required}个钓鱼碎片兑换，确认使用碎片吗？\n"
+                    "回复“确认”继续，回复“取消”终止本次合成",
+                    event,
+                    choices={
+                        "确认": "fragments", "是": "fragments", "1": "fragments",
+                        "碎片": "fragments", "碎片合成": "fragments", "取消": "cancel",
+                    },
+                    timeout=120,
+                    timeout_reply="等待超时,取消合成",
+                    cancel_reply="已取消合成",
+                )
+                if result.key != "fragments":
+                    return
+                craft_mode = "fragments"
+            elif can_use_poles:
+                craft_mode = "poles"
+            if craft_mode == "fragments":
+                craft_fee = self._craft_fee(name, "fragments")
+                if getattr(self, "_economy", None) and int(self._economy.store.account(str(event.sender.user_id))["balance"]) < craft_fee:
+                    await event.reply(text=f"兑换{name}还需要支付{craft_fee}金币手续费")
+                    return
+                if not self._charge_fee(str(event.sender.user_id), craft_fee, "mcfish_craft"):
+                    await event.reply(text="金币不足，无法支付兑换手续费")
+                    return
+                self._advance_tasks(state, spend=craft_fee)
+                self._remove(state, "钓鱼碎片", required)
+                self._add(state, name, pole=True)
+                self._save(str(event.sender.user_id), state)
+                fee_note = f"，支付{craft_fee}金币手续费" if getattr(self, "_economy", None) else ""
+                await event.reply(text=f"成功使用{required}个钓鱼碎片兑换{name}{fee_note}")
+                return
+            if craft_mode != "poles":
+                requirements = [self._craft_material_status("钓鱼碎片", owned, required, "个")]
+                if source:
+                    requirements.append(
+                        self._craft_material_status(source, len(poles), 3, "根")
+                    )
+                await event.reply(text=f"合成{name}材料不足：\n" + "\n".join(requirements))
+                return
+        if name not in UPGRADES or len(poles) < 3:
+            requirements = []
+            if name in POLES:
+                required = POLE_FRAGMENT_COSTS[name]
+                requirements.append(
+                    self._craft_material_status(
+                        "钓鱼碎片", state["pack"].get("钓鱼碎片", 0), required, "个"
+                    )
+                )
+                if source:
+                    requirements.append(
+                        self._craft_material_status(source, len(poles), 3, "根")
+                    )
+            if requirements:
+                await event.reply(text=f"合成{name}材料不足：\n" + "\n".join(requirements))
+            else:
+                await event.reply(text="合成材料不足")
+            return
         selected_groups: list[tuple[int, int, int]]
         if len(poles) == 3:
             selected_groups = [(0, 1, 2)]
@@ -2857,15 +4989,24 @@ class McFish(NcatBotPlugin):
                 selected_groups = [tuple(map(int, result.key[6:].split(":")))]
             else:
                 return
+        craft_fee = self._craft_fee(name, "poles", len(selected_groups))
+        if getattr(self, "_economy", None) and int(self._economy.store.account(str(event.sender.user_id))["balance"]) < craft_fee:
+            await event.reply(text=f"本次合成需要支付{craft_fee}金币手续费")
+            return
+        if not self._charge_fee(str(event.sender.user_id), craft_fee, "mcfish_craft"):
+            await event.reply(text="金币不足，无法支付合成手续费")
+            return
+        self._advance_tasks(state, spend=craft_fee)
+        fee_note = f"，支付{craft_fee}金币手续费" if getattr(self, "_economy", None) else ""
         success = 0
         failure = 0
         last_attribute = ""
         for group in selected_groups:
             selected = [poles[index] for index in group]
             for index in sorted(group, reverse=True):
-                self._remove(state, source, 1, index)
+                self._remove(state, source, 1, pole_indices[index])
             attribute = {
-                "durable": POLES[name][0],
+                "durable": self._craft_durable(name, source, selected),
                 "maintenance": 0,
                 "induce": sum(int(p.get("induce", 0)) for p in selected) // 3,
                 "favor": sum(int(p.get("favor", 0)) for p in selected) // 3,
@@ -2879,13 +5020,13 @@ class McFish(NcatBotPlugin):
         self._save(str(event.sender.user_id), state)
         if len(selected_groups) > 1:
             remaining = len(poles) % 3
-            message = f"合成完成，成功：{success} 个，失败：{failure} 个"
+            message = f"合成完成，成功：{success} 个，失败：{failure} 个{fee_note}"
             if remaining:
                 message += f"，剩余 {remaining} 根材料未参与合成"
         elif success:
-            message = f"成功合成：1 个{name}\n属性: {last_attribute}"
+            message = f"成功合成：1 个{name}\n属性: {last_attribute}{fee_note}"
         else:
-            message = "合成失败,材料已销毁"
+            message = f"合成失败,材料已销毁{fee_note}"
         await event.reply(text=message)
 
     async def _purify(self, event, state: dict, text: str) -> None:

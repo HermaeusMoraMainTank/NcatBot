@@ -2,12 +2,16 @@ from datetime import datetime, timedelta
 import random
 
 from plugins.McFish.mcfish_rules import (
+    ACCESSORY_SLOT_UNLOCKS,
+    ACCESSORY_UPGRADE_COSTS,
     FISH_KINGS,
+    FISH_KING_PROMPTS,
     EQUIPMENT,
     active_window,
     daily_attempt_limit,
     daily_fishing_zone,
     fish_king_probabilities,
+    fish_sale_price,
     fishing_xp,
     fishing_wait_for_result,
     fishing_wait_seconds,
@@ -15,13 +19,17 @@ from plugins.McFish.mcfish_rules import (
     bite_skill_from_reply,
     hook_skill_bonus,
     hook_skill_from_reply,
+    king_length_for_hook,
     fish_zone_weights,
     FISH_KING_PROBABILITIES,
     FISH_KING_UNLOCKED_PROBABILITIES,
+    POLE_FRAGMENT_COSTS,
     fragment_roll,
     fragment_jackpot,
     generate_week_windows,
     king_success_rate,
+    king_sale_price,
+    PERMANENT_ACCESSORY_EFFECTS,
     level_for_xp,
     parse_count_token,
     xp_required_for_level,
@@ -32,6 +40,7 @@ from plugins.McFish.mcfish_rules import (
     strategy_from_reply,
     treasure_sale_price,
     rod_unlock_level,
+    rod_drop_allowed,
 )
 
 
@@ -49,6 +58,22 @@ def test_fishing_levels_control_daily_attempts_and_rod_unlocks():
     assert [rod_unlock_level(name) for name in ("木竿", "铁竿", "金竿", "钻石竿", "下界合金竿", "三叉戟")] == [0, 3, 8, 15, 25, 35]
 
 
+def test_rod_drop_limit_allows_only_the_next_tier():
+    """MCF-01: 鱼竿只能钓到自身、低级或紧邻的下一级鱼竿。"""
+    assert rod_drop_allowed("木竿", "木竿")
+    assert rod_drop_allowed("木竿", "铁竿")
+    assert not rod_drop_allowed("木竿", "金竿")
+    assert not rod_drop_allowed("铁竿", "钻石竿")
+    assert rod_drop_allowed("金竿", "木竿")
+    assert POLE_FRAGMENT_COSTS == {
+        "木竿": 12,
+        "铁竿": 24,
+        "金竿": 56,
+        "钻石竿": 120,
+        "下界合金竿": 240,
+    }
+
+
 def test_fish_king_probability_table_and_zone_rotation_are_deterministic():
     assert fish_king_probabilities("月影巨鲤", "木竿") == (0.03, 0.20)
     assert fish_king_probabilities("月影巨鲤", "三叉戟") == (0.20, 0.60)
@@ -58,6 +83,16 @@ def test_fish_king_probability_table_and_zone_rotation_are_deterministic():
     assert set(fish_zone_weights("deep", "木竿")) >= {"鳕鱼", "深海鱼"}
     assert all(len(table) == 6 for table in FISH_KING_PROBABILITIES.values())
     assert set(FISH_KING_UNLOCKED_PROBABILITIES) == {"河湾巨鲤", "深海灯笼鱼", "遗迹金鳞鱼", "风暴海龙"}
+
+
+def test_fish_king_prompts_hide_identity_until_capture():
+    assert set(FISH_KING_PROMPTS) == set(FISH_KINGS)
+    for king_name, prompts in FISH_KING_PROMPTS.items():
+        assert set(prompts) == {"trigger", "disappear", "success"}
+        assert king_name not in prompts["trigger"]
+        assert king_name not in prompts["disappear"]
+        assert "{length}" in prompts["success"]
+        assert "{price}" in prompts["success"]
 
 
 def test_fishing_xp_differs_by_fish_and_king_is_much_higher():
@@ -76,6 +111,19 @@ def test_bite_and_hook_skills_are_separate():
     assert hook_skill_bonus("burst_reel") > hook_skill_bonus("precision_hookset")
 
 
+def test_hook_skills_trade_success_rate_against_king_size():
+    floors = {
+        "precision_hookset": 80,
+        "powerful_hookset": 71,
+        "patient_control": 58,
+        "burst_reel": 45,
+    }
+    for skill, minimum in floors.items():
+        rolls = [king_length_for_hook("月影巨鲤", skill, rng=random.Random(seed)) for seed in range(40)]
+        assert min(rolls) >= minimum
+        assert max(rolls) <= 110
+
+
 def test_clock_duration_format_is_readable_for_short_and_long_windows():
     assert format_duration(53) == "53秒"
     assert format_duration(63 * 60) == "1小时3分"
@@ -88,6 +136,26 @@ def test_equipment_has_fixed_cost_and_no_direct_fishing_drop():
     }
     assert [EQUIPMENT[name]["fragments"] for name in EQUIPMENT] == [120, 160, 220, 24, 300, 42, 50]
     assert all("drop_rate" not in item for item in EQUIPMENT.values())
+
+
+def test_accessory_slot_and_upgrade_costs_match_the_fragment_curve():
+    assert ACCESSORY_SLOT_UNLOCKS == {
+        3: {"level": 10, "fragments": 80},
+        4: {"level": 20, "fragments": 180},
+    }
+    assert ACCESSORY_UPGRADE_COSTS == {
+        "财富浮标": (60, 120),
+        "坚韧钓组": (80, 160),
+        "黄金磁石": (110, 220),
+        "幸运海星": (150, 300),
+    }
+    assert PERMANENT_ACCESSORY_EFFECTS["财富浮标"][3] == {
+        "treasure_rate": 1.65,
+        "king_clue_rate": 1.36,
+    }
+    assert PERMANENT_ACCESSORY_EFFECTS["幸运海星"][3]["fragment_points"] == 16
+    assert [PERMANENT_ACCESSORY_EFFECTS["黄金磁石"][level]["fish_price"] for level in (1, 2, 3)] == [1.08, 1.12, 1.16]
+    assert [PERMANENT_ACCESSORY_EFFECTS["黄金磁石"][level]["king_price"] for level in (1, 2, 3)] == [10.0, 30.0, 100.0]
 
 
 def test_numeric_strategy_mapping_and_path_guarantee():
@@ -162,8 +230,13 @@ def test_king_guarantee_keeps_failure_floor_and_tough_tackle_caps_at_95():
 
 def test_accessory_modifiers_are_scoped():
     assert king_bite_rate(0.10, wealth_bobber=True) == 0.12
+    assert king_bite_rate(0.10, wealth_bobber=1.36) == 0.136
     assert king_bite_rate(0.10, hidden_lure=True, hidden_target=False) == 0.10
+    assert king_success_rate(0.20, tough_tackle=20) == 0.40
     assert treasure_sale_price(100, gold_magnet=True) == 125
+    assert treasure_sale_price(100, gold_magnet=1.50) == 150
+    assert fish_sale_price(100, gold_magnet=1.16) == 115
+    assert king_sale_price(100, gold_magnet=100.0) == 10000
 
 
 def test_hidden_lure_requires_matching_zone():
