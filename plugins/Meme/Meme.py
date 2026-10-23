@@ -68,7 +68,7 @@ class Meme(NcatBotPlugin):
     baseurl = "http://127.0.0.1:2233/memes"
     keylist = []
     keywordslist: dict[str, DataStructure] = {}
-    timeout = 30  # 设置超时时间为30秒
+    timeout = 3  # 启动探活最多等 3 秒，避免本地 Meme 服务没开时拖慢整个启动
     session = requests.Session()  # 使用 Session 来复用连接
     banlist = ["10123121"]  # 添加 banlist
     SPECIAL_USER_ID = "273421673"  # 特殊用户ID
@@ -79,17 +79,27 @@ class Meme(NcatBotPlugin):
     async def on_load(self):
         """异步加载插件"""
         _log.info(f"开始加载 {self.name} 插件 v{self.version}")
+        available = False
         try:
             # 检查服务是否可用
             response = await self._session_request(
                 "get", f"{self.baseurl}/keys", timeout=self.timeout
             )
-            if response.status_code != 200:
+            if response.status_code == 200:
+                available = True
+                _log.info("Meme 服务连接成功")
+            else:
                 _log.error(f"Meme 服务不可用: {response.status_code}")
-                return
-            _log.info("Meme 服务连接成功")
         except Exception as e:
             _log.error(f"无法连接到 Meme 服务: {e}")
+
+        if not available:
+            # 服务没开时仍然加载本地 memeKeys，插件可用，只是不能远程刷新
+            try:
+                await self.load_meme_data()
+            except Exception as e:
+                _log.error(f"加载本地 meme 缓存失败: {e}")
+            _log.warning("Meme 服务不可用，已使用本地缓存")
             return
 
         # 获取并保存 meme 列表

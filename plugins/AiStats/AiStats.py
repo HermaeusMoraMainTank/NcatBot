@@ -273,7 +273,8 @@ class AiStats(NcatBotPlugin):
             if not self.add_scheduled_task(name, interval, callback=cb):
                 _log.warning("[AiStats] 定时任务 %s 注册失败", name)
         _log.info("[AiStats] 定时任务已注册: %s", self.list_scheduled_tasks())
-        await self._poll_balance()
+        # 余额查询放到后台，避免启动时同步等待网络
+        asyncio.create_task(self._poll_balance())
         # 插件加载完成
 
     def _reinit_(self):

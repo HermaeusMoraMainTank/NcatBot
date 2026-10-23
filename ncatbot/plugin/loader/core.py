@@ -6,6 +6,7 @@
 """
 
 import asyncio
+import time
 from pathlib import Path
 from typing import Callable, Dict, List, Optional, Type, TYPE_CHECKING
 
@@ -172,6 +173,7 @@ class PluginLoader:
         if manifest is None:
             LOG.error("插件 %s 未索引，无法加载", name)
             return None
+        started = time.perf_counter()
 
         # 单插件加载时也检查 pip 依赖
         if manifest.pip_dependencies:
@@ -208,7 +210,12 @@ class PluginLoader:
                     self._on_plugin_loaded(plugin)
                 except Exception as e:
                     LOG.error("插件 %s 加载回调异常: %s", name, e)
-            LOG.info("插件加载成功: %s v%s", name, manifest.version)
+            LOG.info(
+                "插件加载成功: %s v%s (%.2fs)",
+                name,
+                manifest.version,
+                time.perf_counter() - started,
+            )
             return plugin
 
         except Exception as e:
@@ -218,7 +225,13 @@ class PluginLoader:
                 self._importer.unload_module(manifest)
             except Exception:
                 pass
-            LOG.error("加载插件 %s 失败: %s", name, e, exc_info=True)
+            LOG.error(
+                "加载插件 %s 失败 (%.2fs): %s",
+                name,
+                time.perf_counter() - started,
+                e,
+                exc_info=True,
+            )
             return None
 
     async def unload_plugin(self, name: str) -> bool:
