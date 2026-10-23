@@ -34,6 +34,7 @@ from ncatbot.utils import (
     ncatbot_config,
     MISSING,
 )
+from ncatbot.utils.loop_watchdog import LoopWatchdog
 
 LOG = get_log("BotClient")
 
@@ -100,6 +101,8 @@ class BotClient:
         self._listen_task: Optional[asyncio.Task] = None
         self._listen_tasks: List[asyncio.Task] = []
         self._maintenance_task: Optional[asyncio.Task] = None
+        self._loop_watchdog = LoopWatchdog()
+        self._watchdog_task: Optional[asyncio.Task] = None
 
         cfg = mgr.config
         sandbox_cfg = getattr(cfg, "sandbox", None)
@@ -321,6 +324,15 @@ class BotClient:
                 pass
             self._maintenance_task = None
 
+        self._loop_watchdog.stop()
+        if self._watchdog_task is not None and not self._watchdog_task.done():
+            self._watchdog_task.cancel()
+            try:
+                await self._watchdog_task
+            except (asyncio.CancelledError, Exception):
+                pass
+            self._watchdog_task = None
+
         # 优先断开适配器（释放端口等网络资源），使 listen 循环自然退出
         for adapter in self._adapters:
             try:
@@ -424,11 +436,19 @@ class BotClient:
             except asyncio.CancelledError:
                 raise
 
+    async def _watchdog_loop(self) -> None:
+        """给 LoopWatchdog 提供事件循环心跳。"""
+        while self._running:
+            self._loop_watchdog.beat()
+            await asyncio.sleep(0.5)
+
     async def _startup(self) -> None:
         """引导启动：adapter → API → dispatcher → 服务 → 插件 → 后台"""
         await self._startup_core()
         await self._setup_plugins()
         self._running = True
+        self._loop_watchdog.start()
+        self._watchdog_task = asyncio.create_task(self._watchdog_loop())
         try:
             await self._admin.start()
         except Exception as e:
