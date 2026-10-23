@@ -332,6 +332,8 @@ async def _execute_tool(
         path = sticker_catalog.pick(sticker_name) if sticker_catalog else None
         if path is None:
             names = sticker_catalog.names()[:30] if sticker_catalog else []
+            if not names:
+                return "本地贴纸已关闭，请改用 send_meme(topic) 发网络梗图。"
             return f"没有这个贴纸：{sticker_name}。可用：{'、'.join(names)}"
         actions.append(AgentAction(kind="sticker", sticker=str(path)))
         return "表情已加入发送队列。"

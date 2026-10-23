@@ -3334,8 +3334,8 @@ async def answer_ai(
         prompt = (prompt or "") + f"\n\n【相关记忆】\n{mem_text}"
     if USE_DS_AGENT:
         names = sticker_catalog.names()
-        libs = sticker_catalog.libraries()
-        lib_text = "、".join(f"{k}({v})" for k, v in libs.items()) or "无"
+        libs = sticker_catalog.visible_libraries()
+        lib_text = "、".join(f"{k}({v})" for k, v in libs.items())
         whale_count = whale_catalog.count()
         blocks = []
         if names:
@@ -3343,6 +3343,11 @@ async def answer_ai(
                 "\n\n【表情包·本地】图库：" + lib_text + "。"
                 "想配表情就调用 send_sticker(name)，可用名："
                 + "、".join(names[:60]) + "。"
+            )
+        elif whale_count:
+            blocks.append(
+                "\n\n【表情包·本地】本地贴纸已关闭（配置为仅梗鲸），"
+                "不要调用 send_sticker，统一用 send_meme(topic)。"
             )
         if whale_count:
             blocks.append(

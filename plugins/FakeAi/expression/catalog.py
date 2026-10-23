@@ -78,10 +78,13 @@ class StickerCatalog:
         return {name: len(items) for name, items in sorted(self._libs.items())}
 
     def _visible(self) -> Dict[str, Dict[str, List[Path]]]:
-        if not self.active:
+        if self.active is None:
             return self._libs
-        picked = {k: v for k, v in self._libs.items() if k in self.active}
-        return picked or self._libs
+        return {k: v for k, v in self._libs.items() if k in self.active}
+
+    def visible_libraries(self) -> Dict[str, int]:
+        """当前启用且真的存在的库；配置成仅梗鲸时这里会是空。"""
+        return {k: len(v) for k, v in self._visible().items()}
 
     def names(self) -> List[str]:
         out: set[str] = set()
