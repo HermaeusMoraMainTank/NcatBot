@@ -21,6 +21,7 @@ from typing import Any
 CONFIG_LABELS: dict[str, str] = {
     # 后台 / 通用
     "admin_enabled": "启用管理面板",
+    "persona": "人设",
     "admin_host": "管理页监听地址",
     "admin_port": "管理页端口",
     "admin_token": "独立面板令牌",
@@ -142,6 +143,19 @@ CONFIG_LABELS: dict[str, str] = {
     "weibo_cookie": "微博 Cookie",
     # 健康
     "deficit_kcal": "热量缺口（千卡）",
+    # GroupEconomy
+    "checkin_min_reward": "签到最小奖励",
+    "checkin_max_reward": "签到最大奖励",
+    "gift_min_amount": "礼物最小数量",
+    "gift_max_amount": "礼物最大数量",
+    "gift_wallet_reserve": "礼物后钱包保留额",
+    "gift_unlimited_users": "礼物不受限用户",
+    "gift_favor_min": "礼物好感下限",
+    "gift_favor_max": "礼物好感上限",
+    "background_url": "背景图地址",
+    "background_timeout": "背景图超时（秒）",
+    "background_cache_hours": "背景图缓存（小时）",
+    "ranking_limit": "排行榜人数上限",
 }
 
 # 单词级兜底翻译
@@ -317,6 +331,95 @@ WORD_LABELS: dict[str, str] = {
     "knowledge": "知识",
     "inject": "注入",
     "chars": "字数",
+    "checkin": "签到",
+    "reward": "奖励",
+    "wallet": "钱包",
+    "reserve": "保留",
+    "background": "背景图",
+    "gift": "礼物",
+    "amount": "数量",
+    "unlimited": "不受限",
+    "address": "地址",
+    "rating": "评分",
+    "score": "分数",
+    "status": "状态",
+    "level": "等级",
+    "exp": "经验",
+    "gold": "金币",
+    "coin": "金币",
+    "coins": "金币",
+    "item": "物品",
+    "shop": "商店",
+    "trade": "交易",
+    "market": "市场",
+    "bank": "银行",
+    "cost": "花费",
+    "fee": "费用",
+    "quality": "品质",
+    "rarity": "稀有度",
+    "refresh": "刷新",
+    "sync": "同步",
+    "channel": "频道",
+    "webhook": "Webhook",
+    "notify": "通知",
+    "mention": "提及",
+    "prefix": "前缀",
+    "suffix": "后缀",
+    "template": "模板",
+    "message": "消息",
+    "messages": "消息",
+    "reply": "回复",
+    "forward": "转发",
+    "recall": "撤回",
+    "mute": "禁言",
+    "ban": "封禁",
+    "kick": "踢出",
+    "welcome": "欢迎",
+    "leave": "离开",
+    "join": "加入",
+    "member": "成员",
+    "members": "成员",
+    "owner": "拥有者",
+    "master": "主人",
+    "admin": "管理",
+    "operator": "操作者",
+    "permission": "权限",
+    "role": "角色",
+    "roles": "角色",
+    "whitelist": "白名单",
+    "blacklist": "黑名单",
+    "random": "随机",
+    "weight": "权重",
+    "ratio": "比例",
+    "scale": "缩放",
+    "width": "宽度",
+    "height": "高度",
+    "color": "颜色",
+    "style": "样式",
+    "theme": "主题",
+    "icon": "图标",
+    "image": "图片",
+    "video": "视频",
+    "audio": "音频",
+    "file": "文件",
+    "dir": "目录",
+    "folder": "目录",
+    "root": "根目录",
+    "temp": "临时",
+    "cache": "缓存",
+    "expire": "过期",
+    "expires": "过期",
+    "duration": "时长",
+    "period": "周期",
+    "schedule": "计划",
+    "cron": "定时",
+    "task": "任务",
+    "tasks": "任务",
+    "queue": "队列",
+    "worker": "工作线程",
+    "retry": "重试",
+    "times": "次数",
+    "attempt": "尝试",
     "whitelist": "白名单",
     "blacklist": "黑名单",
 }
@@ -345,15 +448,30 @@ def _is_secret(key: str) -> bool:
     return any(hint in lowered for hint in SECRET_HINTS)
 
 
+def _split_key(key: str) -> list[str]:
+    """拆 snake_case 与 camelCase，例如 giftWalletReserve -> gift wallet reserve。"""
+    spaced = re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", str(key))
+    return [p for p in re.split(r"[_\-\s]+", spaced) if p]
+
+
+def _is_ascii(ch: str) -> bool:
+    return bool(ch) and ord(ch) < 128
+
+
 def humanize(key: str) -> str:
-    """把 snake_case 配置键变成可读中文，尽量短。"""
+    """把配置键变成可读中文；认不出的英文词之间留空格，避免糊成一团。"""
     if key in CONFIG_LABELS:
         return CONFIG_LABELS[key]
-    parts = [p for p in re.split(r"[_\-\s]+", str(key)) if p]
+    parts = _split_key(key)
     if not parts:
         return str(key)
     words = [WORD_LABELS.get(p.lower(), p) for p in parts]
-    return "".join(words)
+    out = ""
+    for word in words:
+        if out and _is_ascii(out[-1]) and _is_ascii(word[0]):
+            out += " "
+        out += word
+    return out
 
 
 def _widget_for(key: str, value: Any, choices: dict[str, Any] | None) -> str:

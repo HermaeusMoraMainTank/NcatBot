@@ -205,7 +205,21 @@ typing_delay_per_char = 0.1
 
 # 工具型 agent：模型自己决定发消息/表情/拍一拍/搜索/沉默
 USE_DS_AGENT = True
-AGENT_YAML_PATH = "plugins/FakeAi/prompts/lanqing_agent.yml"
+# 当前人设（可在 plugin_configs.FakeAi.persona 改）
+PERSONA = "lanqing"
+PERSONA_FILES = {
+    "lanqing": "plugins/FakeAi/prompts/lanqing_agent.yml",
+    "default": "plugins/FakeAi/prompts/default_agent.yml",
+    "blue_bigfish": "plugins/FakeAi/prompts/blue_bigfish_agent.yml",
+    "deepsleep_gamer": "plugins/FakeAi/prompts/deepsleep_gamer_agent.yml",
+    "xiaojingyu_polite": "plugins/FakeAi/prompts/xiaojingyu_polite_agent.yml",
+}
+AGENT_YAML_PATH = PERSONA_FILES["lanqing"]
+
+
+def persona_path(name: str) -> str:
+    """人设 key -> yml 路径；未知 key 返回空串。"""
+    return PERSONA_FILES.get(str(name or "").strip(), "")
 # 是否把插件能力目录（SkillHub）接进 agent 工具循环
 SKILLS_ENABLED = True
 # 单轮对话的 token 上限，防止工具循环失控（可在 plugin_configs.FakeAi.agent_max_tokens 改）
@@ -343,6 +357,24 @@ class GlobalReplyCacheManager:
 class FakeAi(NcatBotPlugin):
     name = "FakeAi"  # 插件名称
     version = "1.0"  # 插件版本
+
+    # 后台配置页的展示元数据（中文名 / 下拉选项）
+    config_labels = {
+        "persona": "人设",
+        "agent_max_rounds": "单轮最多工具轮数",
+        "agent_max_tokens": "单轮 Token 上限",
+        "skills_enabled": "允许调用插件技能",
+        "agent_enabled": "启用 Agent 模式",
+    }
+    config_choices = {
+        "persona": [
+            {"value": "lanqing", "label": "蓝晴（默认）"},
+            {"value": "default", "label": "小鲸鱼（QQ-Agent 默认）"},
+            {"value": "blue_bigfish", "label": "蓝色大肥鱼"},
+            {"value": "deepsleep_gamer", "label": "大肥鱼 Deepsleep（游戏群友版）"},
+            {"value": "xiaojingyu_polite", "label": "小鲸鱼（乖巧不说脏话）"},
+        ],
+    }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

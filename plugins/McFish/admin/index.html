@@ -446,5 +446,15 @@
     render()
     if (state.token) connect()
   </script>
+  <script>
+    // 跟随统一后台的主题：父页面是浅色时，去掉深色覆盖样式
+    try {
+      var theme = window.parent.document.documentElement.dataset.theme;
+      if (theme !== 'dark') {
+        var dark = document.getElementById('ncatbot-unified-theme');
+        if (dark) dark.remove();
+      }
+    } catch (e) { /* 独立打开时保持默认 */ }
+  </script>
 </body>
 </html>

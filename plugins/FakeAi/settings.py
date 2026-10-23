@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import asdict
+from pathlib import Path
 from typing import Any, Dict, Iterable, List, Set
 
 from .cognition.config import DEFAULT_COGNITION, CognitionConfig
@@ -41,6 +42,7 @@ FAKEAI_CONFIG_DEFAULTS: Dict[str, Any] = {
     "skills_enabled": True,
     "agent_max_tokens": 60000,
     "agent_max_rounds": 12,
+    "persona": "lanqing",
     "proactive_enabled": True,
     "proactive_quiet_minutes": 45,
     "proactive_interval_minutes": 180,
@@ -177,6 +179,18 @@ def apply_from_plugin(plugin) -> None:
 
     fakeai_mod.USE_DS_AGENT = bool(plugin.get_config("agent_enabled", True))
     fakeai_mod.SKILLS_ENABLED = bool(plugin.get_config("skills_enabled", True))
+
+    # —— 人设切换 ——
+    persona = str(plugin.get_config("persona", "lanqing") or "lanqing").strip()
+    path = fakeai_mod.persona_path(persona)
+    if not path or not Path(path).is_file():
+        _log.warning("[FakeAi] 人设 %s 不存在，回退蓝晴", persona)
+        persona = "lanqing"
+        path = fakeai_mod.persona_path(persona)
+    fakeai_mod.PERSONA = persona
+    fakeai_mod.AGENT_YAML_PATH = path
+    _log.info("[FakeAi] 使用人设：%s（%s）", persona, path)
+
     fakeai_mod.AGENT_MAX_TOKENS = max(
         0, int(plugin.get_config("agent_max_tokens", 60000) or 0)
     )
