@@ -35,8 +35,6 @@ FAKEAI_CONFIG_DEFAULTS: Dict[str, Any] = {
     "vision_cache_days": 3,
     "enable_group_cd": True,
     "enable_user_cd": False,
-    "enable_callback": False,
-    "callback_timeout": 120,
     "enable_typing_delay": False,
     "typing_delay_per_char": 0.1,
     "agent_enabled": True,
@@ -256,8 +254,6 @@ def apply_from_plugin(plugin) -> None:
     fakeai_mod.trigger_interval = float(new_inter.group_cd_sec)
     fakeai_mod.enable_group_cd = bool(plugin.get_config("enable_group_cd", True))
     fakeai_mod.enable_user_cd = bool(plugin.get_config("enable_user_cd", False))
-    fakeai_mod.enable_callback = bool(plugin.get_config("enable_callback", False))
-    fakeai_mod.callback_timeout = int(plugin.get_config("callback_timeout", 15))
     fakeai_mod.enable_typing_delay = bool(
         plugin.get_config("enable_typing_delay", False)
     )

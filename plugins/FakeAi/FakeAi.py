@@ -39,7 +39,6 @@ from .expression import extract_stickers, sticker_catalog, whale_catalog
 from .interaction import (
     DEFAULT_CONFIG,
     InteractionState,
-    analyst_decide,
     state_store,
 )
 from .interaction.analyst import AnalystDecision
@@ -141,8 +140,6 @@ last_trigger_times: Dict[int, datetime] = {}  # 存储每个群的上次触发�
 user_trigger_times: Dict[int, datetime] = {}  # 存储每个用户的上次触发时间
 enable_group_cd = True  # 群聊冷却开关（防止同群连续触发）
 enable_user_cd = False  # 用户冷却开关
-enable_callback = False  # 回调功能开关
-callback_timeout = 15  # 回调超时时间（秒）
 
 # 主动机会：群里安静足够久时，低概率自己起话题；可配置关闭
 PROACTIVE_ENABLED = True
@@ -157,8 +154,7 @@ RECENT_CACHE_MAX_AGE = 6 * 3600
 # 同群生成中互斥：LLM 耗时常超过群 CD，避免并发展开第二条回复流水线
 _inflight_groups: set = set()
 
-# 被动触发：已改为状态机 + 分析员；裸 8% 废弃（见 interaction.config.fallback_random_prob）
-PASSIVE_TRIGGER_BASE_PROB = 0.0  # noqa: F841  # 保留名以免外部引用炸；实际不再使用
+# 被动触发：状态机 + 一个概率，不再有裸百分比
 # 普通闲聊时插嘴的概率（interaction.passive_reply_rate），1=每句都进决策
 PASSIVE_REPLY_RATE = 0.0
 # 好感度闸门开关（interaction.favorability_gate_enabled）
@@ -184,21 +180,9 @@ def _is_fakeai_group_allowed(group_id) -> bool:
     return group in FAKEAI_ALLOWED_GROUPS
 
 
-# ---- 事件感知 ----
-# 进退群 / 上传文件 / 戳一戳这类事件也进模型视野，但发言按群限流，避免连击烧钱
-EVENT_SPEAK_CD = 25  # 秒
-_event_last_spoken: Dict[int, float] = {}
+# ---- 事件感知（只记录，不触发发言）----
 _nickname_cache: Dict[tuple, tuple] = {}  # (group_id, user_id) -> (name, ts)
 NICKNAME_CACHE_TTL = 600
-
-
-def _event_can_speak(group_id: int) -> bool:
-    """事件发言的按群冷却：True=可以尝试发言并已占位。"""
-    now = time.time()
-    if now - _event_last_spoken.get(group_id, 0) < EVENT_SPEAK_CD:
-        return False
-    _event_last_spoken[group_id] = now
-    return True
 
 
 # 模拟打字延迟开关（默认关闭）
@@ -232,38 +216,6 @@ AGENT_MAX_ROUNDS = 12
 
 
 # 回调状态管理
-class CallbackState:
-    def __init__(self):
-        self.waiting_users: Dict[
-            str, Dict
-        ] = {}  # {user_id: {"group_id": group_id, "start_time": datetime}}
-
-    def add_waiting_user(self, user_id: str, group_id: int) -> None:
-        self.waiting_users[user_id] = {
-            "group_id": group_id,
-            "start_time": datetime.now(),
-        }
-
-    def remove_waiting_user(self, user_id: str) -> None:
-        if user_id in self.waiting_users:
-            del self.waiting_users[user_id]
-
-    def is_waiting(self, user_id: str) -> bool:
-        return user_id in self.waiting_users
-
-    def get_waiting_info(self, user_id: str) -> Optional[Dict]:
-        return self.waiting_users.get(user_id)
-
-    def check_timeout(self, user_id: str) -> bool:
-        if user_id not in self.waiting_users:
-            return False
-        wait_time = (
-            datetime.now() - self.waiting_users[user_id]["start_time"]
-        ).total_seconds()
-        return wait_time > callback_timeout
-
-
-callback_state = CallbackState()
 
 # 用于在「仅传入 event」调用时提供插件实例（兼容统一注册器未找到 plugin 的情况）
 _fake_ai_plugin_instance: list = [None]
@@ -1784,62 +1736,6 @@ class FakeAi(NcatBotPlugin):
         ):
             return
 
-        # 检查是否是等待回调的用户
-        if enable_callback and callback_state.is_waiting(sender_id):
-            # 检查是否超时
-            if callback_state.check_timeout(sender_id):
-                callback_state.remove_waiting_user(sender_id)
-                return
-
-            # 获取等待信息
-            wait_info = callback_state.get_waiting_info(sender_id)
-            if wait_info and wait_info["group_id"] == group_id:
-                # 如果是艾特消息，不触发回调（避免连续艾特导致的重复触发）
-                if is_at_message:
-                    callback_state.remove_waiting_user(sender_id)
-                    return
-
-                # 移除等待状态
-                callback_state.remove_waiting_user(sender_id)
-                # 直接回复，不检查CD
-                reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
-
-                # agent 模式把原图直接交给 DeepSeek；旧链路继续用文字描述
-                image_urls = []
-                if USE_DS_AGENT:
-                    image_urls = _collect_image_urls(content)
-                    content = _mark_images_without_vision(content)
-                else:
-                    content = await self._process_image_descriptions(
-                        content, group_id=group_id, user_id=sender_id
-                    )
-
-                reply_json = _stamp_reply_dict(
-                    {
-                        "name": sender_name,
-                        "id": sender_id,
-                        "content": content,
-                        "group_nickname": input.sender.card or sender_name,
-                        "image_urls": image_urls,
-                        "message_id": input.message_id,
-                    }
-                )
-                reply_cache.add_reply(reply_json)
-                # 添加到长期记忆缓冲区
-                self._add_to_message_buffer(
-                    group_id, int(sender_id), sender_name, content
-                )
-                answer = await answer_ai(
-                    group_id,
-                    group_reply_caches,
-                    str(sender_id),
-                    "callback",
-                    sender_name=sender_name,
-                )
-                _log.info(answer)
-                await send_typing_response(self, input, answer)
-                return
-
         # 判断是否是功能测试的指令
         if input.raw_message == "蓝晴说话":
             if is_admin(sender_id) or _is_fakeai_group_allowed(group_id):
@@ -1969,8 +1865,6 @@ class FakeAi(NcatBotPlugin):
         else:
             _log.debug(*_state_msg)
 
-        if det.state == InteractionState.OBSERVATION:
-            return
         if det.state == InteractionState.NOT_PRESENT:
             # 旁观态默认不插嘴；想更活跃就调高 interaction.passive_reply_rate
             if PASSIVE_REPLY_RATE <= 0 or random.random() >= PASSIVE_REPLY_RATE:
@@ -1994,75 +1888,13 @@ class FakeAi(NcatBotPlugin):
             return
         _inflight_groups.add(gid)
         try:
-            if det.state == InteractionState.NOT_PRESENT and PASSIVE_REPLY_RATE >= 1.0:
-                # 活跃度拉满：不浪费一次分析员调用，直接开口
-                decision = AnalystDecision(
-                    should_reply=True,
-                    urgency="low",
-                    reply_strategy="随口接一句，别抢戏",
-                    topic="群聊闲聊",
-                    source="force",
-                )
-            else:
-                decision = await analyst_decide(
-                    det.state,
-                    reply_cache.get_replies(),
-                    config=DEFAULT_CONFIG,
-                    is_empty_summon=False,
-                    reason=det.reason,
-                )
-
-            # FAMILIAR：分析员失败时过渡 fallback
-            if (
-                not decision.should_reply
-                and det.state == InteractionState.FAMILIAR
-                and decision.silence_reason in ("analyst_error", "parse_error")
-                and DEFAULT_CONFIG.fallback_random_prob > 0
-                and random.random() < DEFAULT_CONFIG.fallback_random_prob
-            ):
-                _log.warning(
-                    "[FakeAi] fallback used reason=%s group=%s prob=%s",
-                    decision.silence_reason,
-                    group_id,
-                    DEFAULT_CONFIG.fallback_random_prob,
-                )
-                decision = AnalystDecision(
-                    should_reply=True,
-                    urgency="low",
-                    reply_strategy="轻轻接一句氛围，别抢戏",
-                    topic="群聊热闹",
-                    source="fallback",
-                )
-
-            # 对话延续窗口：有文本、又不是在 @ 别人，就直接接一句，别让分析员把话聊死
-            if (
-                not decision.should_reply
-                and det.reason == "dialog"
-                and clean_message
-                and not _mentions_other_user(input.message, BOT_QQ)
-            ):
-                decision = AnalystDecision(
-                    should_reply=True,
-                    urgency="normal",
-                    reply_strategy=decision.reply_strategy
-                    or "接着刚才的话说一句，别自证、别客服腔",
-                    topic=decision.topic or "接着刚才的话",
-                    source="force",
-                )
-
-            # passive_reply_rate=1 视为「每句都接」，跳过分析员的沉默判定
-            if (
-                not decision.should_reply
-                and det.state == InteractionState.NOT_PRESENT
-                and PASSIVE_REPLY_RATE >= 1.0
-            ):
-                decision = AnalystDecision(
-                    should_reply=True,
-                    urgency="low",
-                    reply_strategy=decision.reply_strategy or "随口接一句，别抢戏",
-                    topic=decision.topic or "群聊闲聊",
-                    source="force",
-                )
+            # 分析员已下线：状态机 + 概率决定要不要回，这里只需要决定语气
+            decision = AnalystDecision(
+                should_reply=True,
+                urgency="normal",
+                reply_strategy="正常接一句，别自证、别客服腔",
+                source="rule",
+            )
 
             if not decision.should_reply:
                 _log.info(
@@ -2135,11 +1967,7 @@ class FakeAi(NcatBotPlugin):
                 return
 
             await send_typing_response(self, input, answer)
-            state_store.enter_observation(
-                gid,
-                from_familiar=(det.state == InteractionState.FAMILIAR),
-                dialog_seconds=DEFAULT_CONFIG.dialog_window_sec,
-            )
+            state_store.enter_dialog(gid, DEFAULT_CONFIG.dialog_window_sec)
             try:
                 await maybe_auto_remember(
                     clean_message,
@@ -2149,8 +1977,6 @@ class FakeAi(NcatBotPlugin):
             except Exception as e:
                 _log.debug("[FakeAi] auto_remember 失败: %s", e)
 
-            if enable_callback:
-                callback_state.add_waiting_user(sender_id, group_id)
             if not is_admin(sender_id):
                 user_trigger_times[sender_id] = datetime.now()
         finally:
@@ -2298,7 +2124,7 @@ class FakeAi(NcatBotPlugin):
             described = await self._describe_notice(input)
             if not described:
                 return
-            desc, speak = described
+            desc, _speak = described
             gid = int(group_id)
             cache = group_reply_caches.setdefault(gid, ReplyCache())
             cache.add_reply(
@@ -2311,23 +2137,8 @@ class FakeAi(NcatBotPlugin):
                     }
                 )
             )
-            _log.info("[FakeAi] 感知事件: %s", desc)
-            if not speak:
-                return
-            if not _event_can_speak(gid):
-                _log.debug("[FakeAi] 事件发言冷却中，仅记录：%s", desc)
-                return
-            if gid in _inflight_groups:
-                return
-            _inflight_groups.add(gid)
-            try:
-                answer = await answer_ai(gid, group_reply_caches, None, "event")
-                if isinstance(answer, AgentResult) and answer.actions:
-                    await send_agent_result(self, None, answer, group_id=gid)
-                else:
-                    _log.info("[FakeAi] 事件后选择沉默: %s", desc)
-            finally:
-                _inflight_groups.discard(gid)
+            # 事件只记录、不主动发言：避免和正常对话抢触发，也省一轮模型调用
+            _log.info("[FakeAi] 感知事件（仅记录）: %s", desc)
         except Exception as e:
             _log.error("[FakeAi] 处理事件通知失败: %s", e)
 
@@ -2415,6 +2226,38 @@ async def _send_sticker(plugin: "FakeAi", group_id: int, path: str) -> None:
     await plugin.api.qq.post_group_msg(group_id=group_id, image=Image(file=path))
 
 
+MAX_TEXT_CHARS = 600      # 单条上限，超了自动分片
+MAX_TEXT_SEGMENTS = 6     # 一轮最多几条，防刷屏
+
+
+def _split_text(text: str, limit: int = MAX_TEXT_CHARS) -> List[str]:
+    """把长文本切成不超过 limit 的几片，优先在标点处断开。"""
+    text = str(text or "")
+    if len(text) <= limit:
+        return [text] if text else []
+    chunks: List[str] = []
+    rest = text
+    while rest and len(chunks) < MAX_TEXT_SEGMENTS:
+        if len(rest) <= limit:
+            chunks.append(rest)
+            break
+        window = rest[:limit]
+        cut = max(
+            window.rfind("。"),
+            window.rfind("！"),
+            window.rfind("？"),
+            window.rfind("\n"),
+            window.rfind("，"),
+        )
+        if cut < limit // 2:
+            cut = limit - 1
+        chunks.append(rest[: cut + 1].strip())
+        rest = rest[cut + 1 :].strip()
+    if rest and chunks:
+        chunks[-1] += "…"
+    return [c for c in chunks if c]
+
+
 async def send_agent_result(
     self: FakeAi,
     input: Optional[GroupMessage],
@@ -2432,21 +2275,33 @@ async def send_agent_result(
         try:
             if action.kind == "text":
                 for i, text in enumerate(action.messages):
-                    elements = []
                     reply_id = action.reply_to or (
                         str(message_id) if action.quote and message_id else None
                     )
-                    if i == 0 and reply_id:
-                        elements.append(Reply(id=str(reply_id)))
-                    if i == 0 and action.at_user:
-                        elements.append(At(user_id=str(action.at_user)))
-                        elements.append(PlainText(text=" "))
-                    elements.append(PlainText(text=str(text)))
-                    await self.api.qq.post_group_msg(
-                        group_id=group_id, rtf=MessageChain(elements)
-                    )
-                    sent_texts.append(str(text))
-                    await asyncio.sleep(random.uniform(0.7, 1.6))
+                    for chunk in _split_text(str(text)):
+                        if chunk in sent_texts:
+                            continue
+                        elements = []
+                        if i == 0 and not sent_texts and reply_id:
+                            elements.append(Reply(id=str(reply_id)))
+                        if i == 0 and not sent_texts and action.at_user:
+                            elements.append(At(user_id=str(action.at_user)))
+                            elements.append(PlainText(text=" "))
+                        elements.append(PlainText(text=chunk))
+                        try:
+                            await self.api.qq.post_group_msg(
+                                group_id=group_id, rtf=MessageChain(elements)
+                            )
+                        except Exception as send_err:
+                            _log.warning(
+                                "[FakeAi] 文本发送失败，重试一次: %s", send_err
+                            )
+                            await asyncio.sleep(1.0)
+                            await self.api.qq.post_group_msg(
+                                group_id=group_id, rtf=MessageChain(elements)
+                            )
+                        sent_texts.append(chunk)
+                        await asyncio.sleep(random.uniform(0.7, 1.6))
             elif action.kind == "sticker":
                 if action.sticker:
                     await _send_sticker(self, group_id, str(action.sticker))
@@ -3349,32 +3204,8 @@ async def answer_ai(
         _log.debug(f"[FakeAi] 获取长期记忆失败: {e}")
         replace_placeholder(yaml_data, "{long_term_memory}", "（暂无长期记忆）")
 
-    # 注入用户印象（全局管理，根据当前群聊活跃用户获取印象）
-    try:
-        # 从群消息缓冲区提取活跃用户ID列表
-        reply_cache = group_reply_caches.get(group_id, ReplyCache())
-        active_user_ids = set()
-        for reply_json in reply_cache.get_replies():
-            try:
-                reply_data = json.loads(reply_json)
-                uid = reply_data.get("id")
-                if uid and uid != "0":  # 排除蓝晴自己
-                    active_user_ids.add(int(uid))
-            except (json.JSONDecodeError, ValueError):
-                continue
-
-        if USE_DS_AGENT and user_id and str(user_id).isdigit():
-            impression_ids = [int(user_id)]
-        else:
-            impression_ids = list(active_user_ids) if active_user_ids else None
-        user_impressions = await memory_manager.get_user_impressions_text(
-            user_ids=impression_ids,
-            max_length=400 if USE_DS_AGENT else 800,
-        )
-        replace_placeholder(yaml_data, "{user_impressions}", user_impressions)
-    except Exception as e:
-        _log.debug(f"[FakeAi] 获取用户印象失败: {e}")
-        replace_placeholder(yaml_data, "{user_impressions}", "（暂无用户印象）")
+    # 用户印象已下线：每轮注入 400 字收益低，且和长期记忆重复
+    replace_placeholder(yaml_data, "{user_impressions}", "（不注入）")
 
     # 注入相关主动记忆
     mem_text = ""
@@ -3430,135 +3261,22 @@ async def answer_ai(
         replace_placeholder(yaml_data, "{related_memories}", "（暂无相关记忆）")
         mem_text = ""
 
-    # 注入相关知识（从知识库检索与当前话题相关的知识）
-    try:
-        # 从最近的消息中提取关键内容用于检索
-        reply_cache = group_reply_caches.get(group_id, ReplyCache())
-        recent_messages = []
-        for reply_json in reply_cache.get_replies()[-10:]:  # 取最近10条消息
-            try:
-                reply_data = json.loads(reply_json)
-                content = reply_data.get("content", "")
-                if content and reply_data.get("id") != "0":  # 排除蓝晴自己的消息
-                    # 从消息内容中提取纯文本
-                    if isinstance(content, list):
-                        # content 是消息段列表，提取文本内容
-                        text_parts = []
-                        for seg in content:
-                            if isinstance(seg, dict) and seg.get("type") == "text":
-                                text = seg.get("data", {}).get("text", "")
-                                if text:
-                                    text_parts.append(text)
-                        text_content = " ".join(text_parts)
-                    elif isinstance(content, str):
-                        text_content = content
-                    else:
-                        text_content = str(content)
-
-                    if text_content.strip():
-                        recent_messages.append(text_content)
-            except json.JSONDecodeError:
-                continue
-
-        query_text = " ".join(recent_messages)
-        _log.debug(
-            f"[FakeAi] 知识检索查询文本: {query_text[:200] if query_text else '空'}..."
-        )
-
-        if skip_passive:
-            replace_placeholder(
-                yaml_data, "{related_knowledge}", "（需要时用 web_search）"
-            )
-        elif query_text:
-            related_knowledge = await memory_manager.get_knowledge_text(
-                query_text, max_length=DEFAULT_COGNITION.knowledge_inject_max_chars
-            )
-            if related_knowledge:
-                replace_placeholder(yaml_data, "{related_knowledge}", related_knowledge)
-                _log.info(f"[FakeAi] 注入相关知识: {related_knowledge[:100]}...")
-            else:
-                replace_placeholder(
-                    yaml_data, "{related_knowledge}", "（暂无相关知识）"
-                )
-        else:
-            replace_placeholder(yaml_data, "{related_knowledge}", "（暂无相关知识）")
-    except Exception as e:
-        _log.error(f"[FakeAi] 获取相关知识失败: {e}")
-        replace_placeholder(yaml_data, "{related_knowledge}", "（暂无相关知识）")
+    # 知识库注入已下线：需要时模型可以自己 web_search / 调知识命令
+    replace_placeholder(yaml_data, "{related_knowledge}", "（不注入，需要时用 web_search）")
 
     # 系统提示保持静态（利于前缀缓存），动态内容全部放进 user 消息
     keyword = yaml_data.get("input", "")
     prompt = yaml_data.get("system", "")
     agent_dynamic = []
 
-    try:
-        recent_entries = []
-        for raw in group_reply_caches.get(group_id, ReplyCache()).get_replies()[-10:]:
-            try:
-                recent_entries.append(json.loads(raw))
-            except (json.JSONDecodeError, TypeError):
-                continue
-        human_lengths = []
-        human_texts = []
-        self_texts = []
-        for entry in recent_entries:
-            text = _reply_content_to_text(entry.get("content", "")).strip()
-            if not text:
-                continue
-            if str(entry.get("id")) == "0":
-                self_texts.append(text[:40])
-            elif text not in ("[图片]", "[表情]"):
-                human_lengths.append(len(text))
-                human_texts.append(text)
-        if human_lengths:
-            avg_len = max(4, min(60, int(sum(human_lengths) / len(human_lengths))))
-            longer = max(avg_len + 10, min(90, int(avg_len * 2)))
-            agent_dynamic.append(
-                f"【群聊语感】最近大家发言平均约 {avg_len} 字。"
-                f"多数照着这个长度来，但别把自己憋成一两个字；"
-                f"讲自己的事、吐槽、解释一个东西时可以到 {longer} 字左右。"
-            )
-        agent_dynamic.append(
-            "【别只当应答机】回完话不等于这轮结束：偶尔主动带一句自己的事或新话题"
-            "（刚吃了什么、在写什么、遇到什么破事、看到什么），别永远只跟着别人的问题走。"
-        )
-        stop_words = {
-            "什么", "怎么", "可以", "没有", "我们", "你们", "他们",
-            "今天", "现在", "感觉", "真的", "不是", "还是", "就是",
-            "这个", "那个", "一个", "一下", "知道", "觉得",
-        }
-        phrase_counts = {}
-        for text in human_texts:
-            for phrase in re.findall(r"[\u4e00-\u9fff]{2,6}", text):
-                if phrase in stop_words:
-                    continue
-                phrase_counts[phrase] = phrase_counts.get(phrase, 0) + 1
-        top_phrases = [
-            p
-            for p, c in sorted(
-                phrase_counts.items(), key=lambda x: -x[1]
-            )[:5]
-            if c >= 2
-        ]
-        if top_phrases:
-            agent_dynamic.append("【群聊常用】" + "、".join(top_phrases))
-        if self_texts:
-            agent_dynamic.append(
-                "【你最近说过】"
-                + "；".join(self_texts[-3:])
-                + "。不要重复同样的说法或口头禅。"
-            )
-    except Exception as e:
-        _log.debug("[FakeAi] 群聊语感计算失败: %s", e)
-
     if wake_label:
-        agent_dynamic.append(f"【本次唤醒】{wake_label}")
-    try:
-        agent_dynamic.append(
-            _group_pulse(group_reply_caches.get(group_id, ReplyCache()))
-        )
-    except Exception as e:
-        _log.debug("[FakeAi] 群状态计算失败: %s", e)
+        pulse = ""
+        try:
+            pulse = _group_pulse(group_reply_caches.get(group_id, ReplyCache()))
+        except Exception:
+            pulse = ""
+        agent_dynamic.append(f"【本次唤醒】{wake_label}。{pulse}")
+
     if expr_pkg.EXPRESSION_ENABLED:
         agent_dynamic.append(_sticker_rhythm_hint(group_id))
 
@@ -3567,23 +3285,7 @@ async def answer_ai(
             "（主动机会）群里安静很久了。可以主动抛一个自然的话题，"
             "也可以 finish 安静结束，不要硬找话。"
         )
-    elif trigger_type == "event":
-        agent_dynamic.append(
-            "（系统事件）最近一条是群里的系统事件，不是有人在向你提问。"
-            "想接就自然接一句（新人来了可以招呼、有人退了可以吐槽、"
-            "被戳了可以回一句或戳回去），不想理就 finish，别把事件当成问题来回答。"
-            "被戳、新人进群、有人退群这类事，能随口说一句就说，真没话说再 finish。"
-            "事件不是功能请求：不要调用 list_skills / invoke_skill，"
-            "也不要发和事件无关的图片。"
-        )
 
-    if decision is not None and decision.should_reply:
-        inject = decision.inject_block()
-        if inject:
-            if USE_DS_AGENT:
-                agent_dynamic.append(inject.strip())
-            else:
-                prompt = (prompt or "") + inject
     # YAML 若无 {related_memories} 占位，追加一块，避免静默丢失
     if (
         mem_text
