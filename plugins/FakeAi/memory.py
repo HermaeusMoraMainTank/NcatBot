@@ -162,6 +162,8 @@ class MemoryManager:
     _instance: Optional["MemoryManager"] = None
     _db: Optional[aiosqlite.Connection] = None
     _database_path: Optional[Path] = None
+    # memory_record 是否建成了 FTS5 索引（失败就退回 LIKE）
+    _fts_ready: bool = False
 
     def __new__(cls):
         if cls._instance is None:
@@ -210,6 +212,71 @@ class MemoryManager:
         await self._migrate_favorability_v2()
         await self._migrate_relation_tag()
         await self._migrate_memory_record_v1()
+        await self._migrate_memory_fts()
+
+    async def _migrate_memory_fts(self):
+        """给 memory_record 建 FTS5 索引（trigram 分词，中文也能按子串检索）。
+
+        建不出来就退回 LIKE，不影响功能。
+        """
+        if self._db is None:
+            return
+        try:
+            await self._db.executescript(
+                """
+                CREATE VIRTUAL TABLE IF NOT EXISTS memory_record_fts
+                USING fts5(
+                    judgment, reasoning, tags,
+                    content='memory_record',
+                    content_rowid='id',
+                    tokenize='trigram'
+                );
+                CREATE TRIGGER IF NOT EXISTS memory_record_ai
+                AFTER INSERT ON memory_record BEGIN
+                  INSERT INTO memory_record_fts(rowid, judgment, reasoning, tags)
+                  VALUES (new.id, new.judgment, new.reasoning, new.tags);
+                END;
+                CREATE TRIGGER IF NOT EXISTS memory_record_ad
+                AFTER DELETE ON memory_record BEGIN
+                  INSERT INTO memory_record_fts(
+                      memory_record_fts, rowid, judgment, reasoning, tags
+                  ) VALUES ('delete', old.id, old.judgment, old.reasoning, old.tags);
+                END;
+                CREATE TRIGGER IF NOT EXISTS memory_record_au
+                AFTER UPDATE OF judgment, reasoning, tags ON memory_record BEGIN
+                  INSERT INTO memory_record_fts(
+                      memory_record_fts, rowid, judgment, reasoning, tags
+                  ) VALUES ('delete', old.id, old.judgment, old.reasoning, old.tags);
+                  INSERT INTO memory_record_fts(rowid, judgment, reasoning, tags)
+                  VALUES (new.id, new.judgment, new.reasoning, new.tags);
+                END;
+                """
+            )
+            await self._db.commit()
+        except Exception as e:
+            self._fts_ready = False
+            _log.warning("[FakeAi Memory] FTS5 不可用，退回 LIKE 检索: %s", e)
+            return
+
+        self._fts_ready = True
+        # 老库需要回填一次
+        try:
+            cursor = await self._db.execute(
+                "SELECT value FROM app_meta WHERE key = 'memory_fts_version'"
+            )
+            row = await cursor.fetchone()
+            if not row or row[0] != "1":
+                await self._db.execute(
+                    "INSERT INTO memory_record_fts(memory_record_fts) VALUES('rebuild')"
+                )
+                await self._db.execute(
+                    """INSERT OR REPLACE INTO app_meta(key, value)
+                       VALUES('memory_fts_version', '1')"""
+                )
+                await self._db.commit()
+                _log.info("[FakeAi Memory] 记忆全文索引已建立")
+        except Exception as e:
+            _log.debug("[FakeAi Memory] 记忆索引回填失败: %s", e)
 
     async def _migrate_memory_record_v1(self):
         """主动记忆表 + 知识库短条目列 + schema version。"""
@@ -733,8 +800,14 @@ class MemoryManager:
             row = await cur.fetchone()
             summaries = int((row or [0])[0] or 0)
 
+            scopes = ["public", f"group:{int(group_id)}"]
+            if str(user_id or "").strip().isdigit():
+                scopes.append(f"user:{int(user_id)}")
+            placeholders = ",".join("?" * len(scopes))
             cur = await self._db.execute(
-                "SELECT COUNT(*) FROM memory_record WHERE active = 1"
+                f"""SELECT COUNT(*) FROM memory_record
+                    WHERE active = 1 AND scope IN ({placeholders})""",
+                scopes,
             )
             row = await cur.fetchone()
             memories = int((row or [0])[0] or 0)
@@ -751,7 +824,7 @@ class MemoryManager:
                 if row and row[0]:
                     topic = str(row[0]).replace("\n", " ")[:60]
 
-            bits = [f"本群有 {summaries} 条近期摘要、{memories} 条记忆"]
+            bits = [f"本群有 {summaries} 条近期摘要、{memories} 条相关记忆"]
             if topic:
                 bits.append(f"最近聊到：{topic}")
             bits.append("需要细节用 memory_query 查，不要凭空编")
@@ -1351,9 +1424,18 @@ class MemoryManager:
                   WHERE active = 1 AND scope IN ({placeholders})"""
         q = (query or "").strip()
         if q:
-            like = f"%{q[:40]}%"
-            sql += " AND (judgment LIKE ? OR reasoning LIKE ? OR tags LIKE ?)"
-            params.extend([like, like, like])
+            if self._fts_ready and len(q) >= 3:
+                # trigram 分词：把整句当短语查，避免 MATCH 语法被用户输入打断
+                phrase = '"' + q[:60].replace('"', " ") + '"'
+                sql += (
+                    " AND id IN (SELECT rowid FROM memory_record_fts"
+                    " WHERE memory_record_fts MATCH ?)"
+                )
+                params.append(phrase)
+            else:
+                like = f"%{q[:40]}%"
+                sql += " AND (judgment LIKE ? OR reasoning LIKE ? OR tags LIKE ?)"
+                params.extend([like, like, like])
         sql += " ORDER BY strength DESC, last_recalled_at DESC LIMIT ?"
         params.append(limit * 3)  # 多取再按 scope 优先级裁
 
