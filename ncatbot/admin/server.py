@@ -482,6 +482,12 @@ class AdminServer:
             merged = merge_keep_secrets(self._config_dict(plugin), updates)
             for key in cleaned:
                 plugin.set_config(str(key), merged.get(key))
+            applier = getattr(plugin, "apply_config", None)
+            if callable(applier):
+                try:
+                    applier()
+                except Exception as exc:
+                    LOG.warning("插件 %s 应用新配置失败：%s", name, exc)
             self._record(request, "plugin.config", {"plugin": name, "keys": list(cleaned)})
             return {
                 "plugin": name,

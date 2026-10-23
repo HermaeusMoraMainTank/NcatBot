@@ -425,6 +425,13 @@ class FakeAi(NcatBotPlugin):
     IMPRESSION_INTERVAL = 60 * 60  # 每60分钟更新一次用户印象
     MIN_USER_MESSAGES = 10  # 至少10条消息才生成印象
 
+    def apply_config(self) -> None:
+        """后台保存配置后立即生效，不必手动重载插件。"""
+        try:
+            apply_from_plugin(self)
+        except Exception as e:
+            _log.error("[FakeAi] 应用配置失败: %s", e)
+
     async def on_load(self):
         """加载插件"""
         _fake_ai_plugin_instance[0] = self
@@ -2252,6 +2259,20 @@ class FakeAi(NcatBotPlugin):
             _log.error("[FakeAi] 处理请求事件失败: %s", e)
 
 
+async def _send_sticker(plugin: "FakeAi", group_id: int, path: str) -> None:
+    """优先按「动画表情」发，失败就退回普通图片。
+
+    QQ 的表情接口只认 gif/png 一类，webp/jpg 容易被 retcode 100 拒掉；
+    梗鲸图库下载的就是 webp，所以这里必须有回退。
+    """
+    try:
+        await plugin.api.qq.send_group_sticker(group_id, path)
+        return
+    except Exception as e:
+        _log.warning("[FakeAi] 表情接口失败，改用普通图片发送：%s", e)
+    await plugin.api.qq.post_group_msg(group_id=group_id, image=Image(file=path))
+
+
 async def send_agent_result(
     self: FakeAi,
     input: Optional[GroupMessage],
@@ -2286,7 +2307,7 @@ async def send_agent_result(
                     await asyncio.sleep(random.uniform(0.7, 1.6))
             elif action.kind == "sticker":
                 if action.sticker:
-                    await self.api.qq.send_group_sticker(group_id, str(action.sticker))
+                    await _send_sticker(self, group_id, str(action.sticker))
                     await asyncio.sleep(random.uniform(0.6, 1.2))
             elif action.kind == "poke":
                 if action.user_id:
