@@ -302,6 +302,29 @@ class AdminServer:
 
         return await self._run(request, build)
 
+    @staticmethod
+    def _config_dict(plugin: Any) -> dict[str, Any]:
+        """安全读取插件配置，兼容只有 __getitem__ 的 ConfigWrapper。
+
+        不能直接 dict()/sorted() 自定义 mapping：如果它没有 __iter__，
+        Python 会从 0 开始不断调用 __getitem__，永远等不到 IndexError。
+        """
+        config = getattr(plugin, "config", {}) or {}
+        if isinstance(config, dict):
+            return dict(config)
+        inner = getattr(config, "_config", None)
+        if isinstance(inner, dict):
+            return dict(inner)
+        try:
+            keys = config.keys()
+        except Exception:
+            return {}
+        return {str(key): config[key] for key in keys}
+
+    @classmethod
+    def _config_keys(cls, plugin: Any) -> list[str]:
+        return sorted(cls._config_dict(plugin))
+
     async def _plugins(self, request: web.Request) -> web.Response:
         def build() -> list[dict[str, Any]]:
             loader = self.bot.plugin_loader
@@ -319,7 +342,7 @@ class AdminServer:
                         "folder": manifest.folder_name,
                         "dependencies": manifest.dependencies,
                         "loaded": bool(loaded.get(name)),
-                        "config_keys": sorted(getattr(plugin, "config", {}) or {})
+                        "config_keys": self._config_keys(plugin)
                         if plugin
                         else [],
                         "skill_count": sum(
@@ -339,7 +362,7 @@ class AdminServer:
                             "folder": "",
                             "dependencies": getattr(plugin, "dependencies", {}),
                             "loaded": True,
-                            "config_keys": sorted(getattr(plugin, "config", {}) or {}),
+                            "config_keys": self._config_keys(plugin),
                             "skill_count": sum(
                                 1 for s in self.bot.skills.all() if s.plugin == name
                             ),
@@ -360,7 +383,7 @@ class AdminServer:
                 raise KeyError(name)
             config = {}
             if plugin is not None:
-                config = mask_mapping(dict(getattr(plugin, "config", {}) or {}))
+                config = mask_mapping(self._config_dict(plugin))
             elif manifest is not None:
                 path = manifest.plugin_path / "config.yaml"
                 if path.is_file():
@@ -401,14 +424,14 @@ class AdminServer:
             if not isinstance(updates, dict):
                 raise TypeError("config 必须是对象")
             cleaned = unmask_guard(updates)
-            merged = merge_keep_secrets(dict(getattr(plugin, "config", {}) or {}), updates)
+            merged = merge_keep_secrets(self._config_dict(plugin), updates)
             for key in cleaned:
                 plugin.set_config(str(key), merged.get(key))
             self._record(request, "plugin.config", {"plugin": name, "keys": list(cleaned)})
             return {
                 "plugin": name,
                 "updated": sorted(cleaned),
-                "config": mask_mapping(dict(getattr(plugin, "config", {}) or {})),
+                "config": mask_mapping(self._config_dict(plugin)),
             }
 
         return await self._run(request, action)

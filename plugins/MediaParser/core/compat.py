@@ -36,6 +36,15 @@ class ConfigWrapper:
     def __getitem__(self, key: str) -> Any:
         return self._config.get(key)
 
+    def __iter__(self):
+        return iter(self._config)
+
+    def __len__(self) -> int:
+        return len(self._config)
+
+    def keys(self):
+        return self._config.keys()
+
     def get(self, key: str, default: Any = None) -> Any:
         return self._config.get(key, default)
 
