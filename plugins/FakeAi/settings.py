@@ -17,11 +17,8 @@ _log = logging.getLogger(__name__)
 
 # 运行时旁路名单（由 apply 刷新）
 ADMIN_IDS: Set[str] = {"273421673"}
-FAVOR_SKIP_IDS: Set[str] = {"273421673", "635773721"}
 FROZEN_USERS: List[int] = [794383252]
 BOT_QQ: str = "3555202423"
-VISION_CACHE_ENABLED: bool = True
-VISION_CACHE_RETENTION_DAYS: int = 3
 
 FAKEAI_CONFIG_DEFAULTS: Dict[str, Any] = {
     "allowed_groups": [853963912, 719518427, 585479130, 1064163905],
@@ -29,10 +26,7 @@ FAKEAI_CONFIG_DEFAULTS: Dict[str, Any] = {
     "bot_qq": "3555202423",
     "aliases": ["蓝晴"],
     "admin_ids": ["273421673"],
-    "favor_skip_ids": ["273421673", "635773721"],
     "frozen_users": [794383252],
-    "vision_cache_enabled": True,
-    "vision_cache_days": 3,
     "enable_group_cd": True,
     "enable_user_cd": False,
     "enable_typing_delay": False,
@@ -60,10 +54,6 @@ FAKEAI_CONFIG_DEFAULTS: Dict[str, Any] = {
 
 def is_admin(user_id: object) -> bool:
     return str(user_id) in ADMIN_IDS
-
-
-def should_skip_favor(user_id: object) -> bool:
-    return str(user_id) in FAVOR_SKIP_IDS or str(user_id) in ADMIN_IDS
 
 
 def _group_mode(plugin, allowed: List[int]) -> str:
@@ -106,8 +96,7 @@ def _merge_dict(base: Dict[str, Any], override: Any) -> Dict[str, Any]:
 
 def apply_from_plugin(plugin) -> None:
     """从 FakeAi 插件 ConfigMixin 加载并应用到各模块。"""
-    global ADMIN_IDS, FAVOR_SKIP_IDS, FROZEN_USERS, BOT_QQ
-    global VISION_CACHE_ENABLED, VISION_CACHE_RETENTION_DAYS
+    global ADMIN_IDS, FROZEN_USERS, BOT_QQ
 
     plugin.init_defaults(FAKEAI_CONFIG_DEFAULTS)
 
@@ -117,19 +106,11 @@ def apply_from_plugin(plugin) -> None:
     bot_qq = str(plugin.get_config("bot_qq", BOT_QQ) or BOT_QQ)
     aliases = _as_str_list(plugin.get_config("aliases", ["蓝晴"])) or ["蓝晴"]
     admin_ids = set(_as_str_list(plugin.get_config("admin_ids", ["273421673"])))
-    favor_skip = set(
-        _as_str_list(plugin.get_config("favor_skip_ids", list(FAVOR_SKIP_IDS)))
-    )
     frozen = _as_int_list(plugin.get_config("frozen_users", FROZEN_USERS))
-    vision_cache_enabled = bool(plugin.get_config("vision_cache_enabled", True))
-    vision_cache_days = int(plugin.get_config("vision_cache_days", 3))
 
     ADMIN_IDS = admin_ids or ADMIN_IDS
-    FAVOR_SKIP_IDS = favor_skip or FAVOR_SKIP_IDS
     FROZEN_USERS = frozen if frozen else FROZEN_USERS
     BOT_QQ = bot_qq
-    VISION_CACHE_ENABLED = vision_cache_enabled
-    VISION_CACHE_RETENTION_DAYS = max(1, vision_cache_days)
 
     # —— interaction ——
     inter_raw = plugin.get_config("interaction", {}) or {}
@@ -216,6 +197,16 @@ def apply_from_plugin(plugin) -> None:
         path = fakeai_mod.persona_path(persona)
     fakeai_mod.PERSONA = persona
     fakeai_mod.AGENT_YAML_PATH = path
+    # 机器人自称跟随人设（yml 的 name 字段），避免换了人设还硬写「蓝晴」
+    try:
+        for line in Path(path).read_text(encoding="utf-8").splitlines():
+            if line.startswith("name:"):
+                display = line.split(":", 1)[1].strip()
+                if display:
+                    fakeai_mod.BOT_NAME = display
+                break
+    except Exception as e:
+        _log.debug("[FakeAi] 读取人设名称失败: %s", e)
     _log.info("[FakeAi] 使用人设：%s（%s）", persona, path)
 
     fakeai_mod.AGENT_MAX_TOKENS = max(
@@ -241,13 +232,16 @@ def apply_from_plugin(plugin) -> None:
         max(5, int(plugin.get_config("proactive_quiet_minutes", 45) or 45)) * 60
     )
     fakeai_mod.PROACTIVE_INTERVAL_SEC = (
-        max(10, int(plugin.get_config("proactive_interval_minutes", 180) or 180))
+        max(30, int(plugin.get_config("proactive_interval_minutes", 180) or 180))
         * 60
     )
     try:
         prob = float(plugin.get_config("proactive_probability", 0.2) or 0.2)
     except (TypeError, ValueError):
         prob = 0.2
+    # 兼容旧配置：写成 20/180 这种百分数时按百分比折算，而不是被 clamp 成 100%
+    if prob > 1.0:
+        prob = prob / 100.0
     fakeai_mod.PROACTIVE_PROBABILITY = min(1.0, max(0.0, prob))
     fakeai_mod.FAKEAI_GROUP_MODE = group_mode
     fakeai_mod.FAKEAI_ALLOWED_GROUPS = frozenset(allowed)
@@ -263,22 +257,19 @@ def apply_from_plugin(plugin) -> None:
     )
     # 运行时已经由事件校准过的话，以实际登录 QQ 为准
     fakeai_mod.BOT_QQ = getattr(fakeai_mod, "ACTUAL_BOT_QQ", "") or bot_qq
-    fakeai_mod.VISION_CACHE_ENABLED = VISION_CACHE_ENABLED
-    fakeai_mod.VISION_CACHE_RETENTION_DAYS = VISION_CACHE_RETENTION_DAYS
     fakeai_mod.FakeAi.frozen_users = list(FROZEN_USERS)
 
     _log.info(
         (
             "[FakeAi] 配置已加载 groups=%s aliases=%s tier=%s cd=%ss "
-            "stickers=%s vision_cache=%s/%sd"
+            "stickers=%s name=%s"
         ),
         list(allowed) if group_mode == "allowlist" else "ALL",
         aliases,
         new_inter.trigger_tier,
         new_inter.group_cd_sec,
         catalog_path,
-        "ON" if VISION_CACHE_ENABLED else "OFF",
-        VISION_CACHE_RETENTION_DAYS,
+        getattr(fakeai_mod, "BOT_NAME", ""),
     )
 
 

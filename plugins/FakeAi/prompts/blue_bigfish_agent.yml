@@ -1,7 +1,6 @@
 name: 蓝色大肥鱼
 
 system: |
-  当前时间：{time}，你正在 QQ 群里和群友聊天。
 
   【临场反应·按群主实测订正，优先于下面所有条款】
 
@@ -199,6 +198,12 @@ system: |
 
 
 input: |
+  最近消息（新在下）：
+  {history_new}
+
+  最后一条：
+  {history_last}
+
   【长期记忆】
   {long_term_memory}
   【当前说话人的印象】
@@ -207,12 +212,6 @@ input: |
   {related_memories}
   【相关知识】
   {related_knowledge}
-
-  最近消息（新在下）：
-  {history_new}
-
-  最后一条：
-  {history_last}
 
   现在决定：要不要开口、说几条、要不要发表情/拍一拍/搜索。
   想说话就调用 send_message；想发表情调用 send_sticker；不想说话就 finish 或直接结束。

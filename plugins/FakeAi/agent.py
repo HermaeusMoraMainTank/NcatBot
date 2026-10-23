@@ -621,8 +621,10 @@ async def _execute_tool(
     return f"未知工具：{name}"
 
 
-RUN_TIMEOUT = 90.0      # 单轮工具循环总超时（秒）
-TOOL_TIMEOUT = 15.0     # 单个工具调用超时（秒）
+RUN_TIMEOUT = 150.0      # 单轮工具循环总超时（秒）
+TOOL_TIMEOUT = 15.0      # 轻量工具调用超时（秒）
+SKILL_TIMEOUT = 45.0     # 插件/skill 调用超时（秒）：图库下载、TTS 之类本来就慢
+SPAWN_TIMEOUT = 120.0    # 子智能体超时（秒），与 agent.spawn 的 spec 对齐
 
 
 async def run_agent(
@@ -677,10 +679,20 @@ async def run_agent(
         tools = [t for t in tools if t["function"]["name"] != "finish"]
 
     deadline = time.monotonic() + RUN_TIMEOUT
-    for _ in range(max_rounds):
+    for _round in range(max_rounds):
         if time.monotonic() > deadline:
             _log.warning("[FakeAi] agent 本轮超时（%.0fs），提前收尾", RUN_TIMEOUT)
             break
+        remaining = max_rounds - _round
+        if remaining <= 2 and not actions:
+            # 快没轮次了还没开口：催一次，避免模型把话写在正文里然后静默结束
+            messages.append(
+                {
+                    "role": "user",
+                    "content": "（系统提醒）你还没有发出任何消息。要说话就调用 send_message，"
+                    "确定不说就 finish。",
+                }
+            )
         res = await AiUtil.chat_completion(
             messages,
             tools=tools,
@@ -739,19 +751,22 @@ async def run_agent(
                                 "arguments": {"task": str(args.get("task") or "")},
                             },
                         ),
-                        timeout=TOOL_TIMEOUT,
+                        timeout=SPAWN_TIMEOUT,
                     )
                 except asyncio.TimeoutError:
-                    result = f"子智能体超时（>{TOOL_TIMEOUT:.0f}s）"
+                    result = f"子智能体超时（>{SPAWN_TIMEOUT:.0f}s），先自己简单处理"
                 except Exception as e:
                     result = f"派活失败：{type(e).__name__}: {e}"
             elif skill_bridge is not None and name in bridge_names:
                 try:
                     result = await asyncio.wait_for(
-                        skill_bridge.execute(name, args), timeout=TOOL_TIMEOUT
+                        skill_bridge.execute(name, args), timeout=SKILL_TIMEOUT
                     )
                 except asyncio.TimeoutError:
-                    result = f"skill 调用超时（>{TOOL_TIMEOUT:.0f}s），换个方式或直接说话"
+                    result = (
+                        f"skill 调用超时（>{SKILL_TIMEOUT:.0f}s），"
+                        "换个方式或直接说话"
+                    )
                 except Exception as e:
                     result = f"skill 调用失败：{type(e).__name__}: {e}"
             else:
@@ -769,7 +784,11 @@ async def run_agent(
                         timeout=TOOL_TIMEOUT,
                     )
                 except asyncio.TimeoutError:
-                    result = f"工具超时（>{TOOL_TIMEOUT:.0f}s）"
+                    result = f"工具超时（>{TOOL_TIMEOUT:.0f}s），换个方式或直接说话"
+                except Exception as e:
+                    # 单个工具炸掉不能让整轮哑火，回灌给模型自己决定怎么办
+                    _log.warning("[FakeAi] 工具 %s 执行失败: %s", name, e)
+                    result = f"工具执行失败：{type(e).__name__}: {e}"
             messages.append(
                 {"role": "tool", "tool_call_id": call.get("id"), "content": result}
             )

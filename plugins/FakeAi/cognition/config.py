@@ -7,14 +7,11 @@ from dataclasses import dataclass
 
 @dataclass
 class CognitionConfig:
+    # 记忆写入总开关
     memory_record_enabled: bool = True
-    auto_recall_enabled: bool = True
-    auto_recall_limit: int = 3
-    knowledge_inject_max_chars: int = 300
-    knowledge_item_max_chars: int = 100
-    knowledge_inject_limit: int = 3
+    # 定时巩固/休眠整理任务
     sleep_enabled: bool = True
-    # 「记住」短语自动写入 memory_record（无 LLM tool 时的实用路径）
+    # 「记住…」短语自动写入 memory_record
     auto_remember_on_phrase: bool = True
 
 

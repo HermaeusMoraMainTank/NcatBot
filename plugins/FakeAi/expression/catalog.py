@@ -111,7 +111,11 @@ class StickerCatalog:
             self._save_usage()
 
     def prompt_names(self, limit: int = 30) -> List[str]:
-        """按使用次数排序，并每半小时轮换一半，避免提示词永远那一批。"""
+        """按使用次数排序；后半段每小时轮换一批，而不是每轮洗牌。
+
+        每轮洗牌会让 system/user 前缀每次都变，直接打穿 DeepSeek 的前缀缓存，
+        成本按全价走。这里用一个「小时桶 + 名单长度」做种子，同一小时内结果稳定。
+        """
         names = self.names()
         if not names:
             return []
@@ -123,8 +127,11 @@ class StickerCatalog:
             return by_use
         stable = by_use[: max(1, limit // 2)]
         pool = [n for n in by_use if n not in stable]
-        random.shuffle(pool)
-        return stable + pool[: limit - len(stable)]
+        bucket = int(time.time() // 3600)
+        rng = random.Random(f"{bucket}:{len(pool)}")
+        rotated = pool[:]
+        rng.shuffle(rotated)
+        return stable + rotated[: limit - len(stable)]
 
     def libraries(self) -> Dict[str, int]:
         """库名 -> 贴纸名数量。"""
