@@ -553,6 +553,7 @@ async def run_agent(
     history_entries: Optional[list] = None,
     max_rounds: int = 12,
     force_speak: bool = False,
+    tool_filter: Optional[set[str]] = None,
     max_total_tokens: int = 60000,
     skill_bridge=None,
 ) -> AgentResult:
@@ -585,6 +586,9 @@ async def run_agent(
     bridge_tools = skill_bridge.tools if skill_bridge is not None else []
     bridge_names = {t["function"]["name"] for t in bridge_tools}
     tools = list(AGENT_TOOLS) + bridge_tools
+    if tool_filter:
+        # 闲聊轮只暴露轻量工具，别让模型在十几个工具里乱挑
+        tools = [t for t in tools if t["function"]["name"] in tool_filter]
     if force_speak:
         # 强制开口时拿掉 finish，模型就没法用「安静结束」交差
         tools = [t for t in tools if t["function"]["name"] != "finish"]

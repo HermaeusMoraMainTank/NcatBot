@@ -14,8 +14,6 @@ class InteractionConfig:
     dialog_window_sec: float = 180.0
     # 普通闲聊（NOT_PRESENT）时插嘴的概率；0=只在被叫/熟络时回，1=每句都进决策
     passive_reply_rate: float = 0.0
-    # 好感度闸门：False 时完全不看好感度
-    favorability_gate_enabled: bool = True
     aliases: List[str] = field(default_factory=lambda: ["蓝晴"])
     bot_qq: str = "1512130053"
     # True：每条入账都打 state=…；False：仅被叫时 INFO

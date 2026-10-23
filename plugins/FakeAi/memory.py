@@ -911,7 +911,11 @@ class MemoryManager:
         return result
 
     async def get_user_impressions_text(
-        self, group_id: int = None, user_ids: List[int] = None, max_length: int = 800
+        self,
+        group_id: int = None,
+        user_ids: List[int] = None,
+        max_length: int = 800,
+        compact: bool = False,
     ) -> str:
         """获取格式化的用户印象文本（详细版本）
 
@@ -928,6 +932,21 @@ class MemoryManager:
 
         if not impressions:
             return "（暂无用户印象）"
+
+        if compact:
+            # 只给「谁 + 一句印象 + 关系」，供按相关成员注入时用
+            lines = []
+            for imp in impressions:
+                name = imp.get("username") or str(imp.get("user_id", ""))
+                text = str(imp.get("impression") or "").strip()
+                rel = str(imp.get("relation_tag") or "").strip()
+                if not text and not rel:
+                    continue
+                lines.append(f"- {name}：{text}" + (f"（{rel}）" if rel else ""))
+            if not lines:
+                return "（暂无用户印象）"
+            body = "【对群友的印象】\n" + "\n".join(lines)
+            return body[:max_length]
 
         from .favorability import format_favorability
 

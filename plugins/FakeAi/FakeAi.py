@@ -157,8 +157,6 @@ _inflight_groups: set = set()
 # 被动触发：状态机 + 一个概率，不再有裸百分比
 # 普通闲聊时插嘴的概率（interaction.passive_reply_rate），1=每句都进决策
 PASSIVE_REPLY_RATE = 0.0
-# 好感度闸门开关（interaction.favorability_gate_enabled）
-FAVORABILITY_GATE_ENABLED = True
 
 # 允许 FakeAi 响应的群号（空集合表示不限制）— on_load / settings 会覆盖
 FAKEAI_GROUP_MODE = "allowlist"
@@ -226,56 +224,6 @@ _fake_ai_loader = None
 # ========== 好感度回复概率（实现在 favorability 模块） ==========
 
 
-async def should_reply_by_favorability(user_id: int, skip_users: list = None) -> bool:
-    """根据好感度判断是否应该回复
-
-    Args:
-        user_id: 用户ID
-        skip_users: 跳过好感度检查的用户ID列表（如管理员）
-
-    Returns:
-        是否应该回复
-    """
-    # 完全关掉好感度闸门时只保留冻结用户
-    if not FAVORABILITY_GATE_ENABLED:
-        return int(user_id) not in FROZEN_USERS
-
-    # 冻结用户：回复概率为 0
-    if int(user_id) in FROZEN_USERS:
-        _log.info(f"[FakeAi] 冻结用户 {user_id}，回复概率为 0%，不回复")
-        return False
-
-    # 特定用户跳过检查（管理员等）
-    if skip_users and str(user_id) in [str(u) for u in skip_users]:
-        return True
-    if is_admin(user_id):
-        return True
-    if str(user_id) in FAVOR_SKIP_IDS:
-        return True
-
-    try:
-        impression_data = await memory_manager.get_user_impression_full(user_id)
-        if not impression_data:
-            # 没有印象数据的新用户，100%回复
-            return True
-
-        favorability = impression_data.get("favorability", 0)
-        probability = get_reply_probability(favorability)
-
-        # 随机判断是否回复
-        should_reply = random.random() < probability
-
-        if not should_reply:
-            _log.info(
-                f"[FakeAi] 用户 {user_id} 好感度 {favorability}，概率 {probability * 100:.0f}%，本次不回复"
-            )
-
-        return should_reply
-    except Exception as e:
-        _log.debug(f"[FakeAi] 获取用户好感度失败: {e}")
-        return True  # 出错时默认回复
-
-
 class ReplyCache:
     def __init__(self, max_size: int = 20):
         self.replies = []
@@ -330,7 +278,6 @@ class FakeAi(NcatBotPlugin):
         "persona",
         "interaction.passive_reply_rate",
         "interaction.dialog_window_sec",
-        "interaction.favorability_gate_enabled",
         "expression.sticker_library",
         "expression.sticker_auto_rate",
         "agent_max_rounds",
@@ -1906,15 +1853,11 @@ class FakeAi(NcatBotPlugin):
                 state_store.enter_not_present(gid)
                 return
 
-            if not await should_reply_by_favorability(
-                int(sender_id), list(FAVOR_SKIP_IDS)
-            ):
-                if not (
-                    PASSIVE_REPLY_RATE >= 1.0
-                    and det.state == InteractionState.NOT_PRESENT
-                ):
-                    state_store.enter_not_present(gid)
-                    return
+            # 好感度只做展示，不再参与"回不回"；冻结用户仍然拦
+            if int(sender_id) in FROZEN_USERS:
+                _log.info("[FakeAi] 冻结用户 %s，不回复", sender_id)
+                state_store.enter_not_present(gid)
+                return
 
             # FAMILIAR：通过决策后再占群 CD
             if det.state == InteractionState.FAMILIAR:
@@ -3035,6 +2978,76 @@ def _note_sticker_result(group_id: int, result: AgentResult) -> None:
         st["rounds"] = int(st.get("rounds") or 0) + 1
 
 
+CONTEXT_SOFT_LIMIT = 20   # 压缩后保留的条数
+CONTEXT_HARD_LIMIT = 30   # 超过这个条数就压一次
+
+# 闲聊轮只暴露这些工具，重工具（搜索/看图/记忆/梗图）留给被叫时用
+LIGHT_TOOLS = {
+    "send_message",
+    "send_sticker",
+    "sticker_vibe",
+    "send_poke",
+    "react",
+    "finish",
+    "get_recent_messages",
+    "list_skills",
+    "describe_skills",
+    "invoke_skill",
+}
+
+
+async def _compress_reply_cache(group_id: int, cache: "ReplyCache") -> None:
+    """上下文超过 30 条时，把前段压成一句摘要，避免前因被硬截断。"""
+    replies = cache.get_replies()
+    if len(replies) <= CONTEXT_HARD_LIMIT:
+        return
+    older = replies[: len(replies) - CONTEXT_SOFT_LIMIT]
+    keep = replies[-CONTEXT_SOFT_LIMIT:]
+    lines: list[str] = []
+    for raw in older:
+        try:
+            data = json.loads(raw)
+        except (json.JSONDecodeError, TypeError):
+            continue
+        text = _reply_content_to_text(data.get("content", "")).strip()
+        if text and str(data.get("id")) != "summary":
+            lines.append(f"{data.get('name', '?')}: {text}")
+    if not lines:
+        cache.replies = keep
+        return
+    transcript = "\n".join(lines)[-2000:]
+    summary = ""
+    try:
+        res = await AiUtil.chat_completion(
+            [
+                {
+                    "role": "system",
+                    "content": "把下面的群聊压缩成两句以内，保留人物、话题和结论，不要臆测。",
+                },
+                {"role": "user", "content": transcript},
+            ],
+            capability="chat",
+            max_tokens=200,
+            temperature=0.2,
+        )
+        summary = str((res or {}).get("content") or "").strip()
+    except Exception as e:
+        _log.debug("[FakeAi] 上下文压缩失败: %s", e)
+    if not summary:
+        summary = transcript[-200:] + "…"
+    cache.replies = [
+        _stamp_reply_dict(
+            {
+                "name": "系统",
+                "id": "summary",
+                "kind": "event",
+                "content": f"（更早的对话摘要）{summary}",
+            }
+        )
+    ] + keep
+    _log.info("[FakeAi] 上下文已压缩 group=%s 保留=%s", group_id, len(cache.replies))
+
+
 def _group_pulse(cache: "ReplyCache") -> str:
     """此刻状态：群里多热闹、自己多久没说话。给模型一点时间感。"""
     now = time.time()
@@ -3177,17 +3190,13 @@ async def answer_ai(
     # 加载 YAML 数据
     yaml_data = await load_yaml_data(group_id)
     replace_time_in_system(yaml_data)
-    if trigger_type in ("passive", "proactive"):
-        context_limit = 8
-    elif trigger_type == "passive" and PASSIVE_REPLY_RATE >= 1.0:
-        agent_dynamic.append(
-            "（本轮必须开口）这是群友的闲聊，接一句，哪怕只回一个字；"
-            "不要 finish、不要沉默。"
+    try:
+        await _compress_reply_cache(
+            group_id, group_reply_caches.get(group_id, ReplyCache())
         )
-    elif trigger_type == "event":
-        context_limit = 10
-    else:
-        context_limit = 14
+    except Exception as e:
+        _log.debug("[FakeAi] 上下文压缩异常: %s", e)
+    context_limit = 8 if trigger_type in ("passive", "proactive") else 14
     update_yaml_with_replies(
         yaml_data,
         group_reply_caches.get(group_id, ReplyCache()),
@@ -3204,8 +3213,28 @@ async def answer_ai(
         _log.debug(f"[FakeAi] 获取长期记忆失败: {e}")
         replace_placeholder(yaml_data, "{long_term_memory}", "（暂无长期记忆）")
 
-    # 用户印象已下线：每轮注入 400 字收益低，且和长期记忆重复
-    replace_placeholder(yaml_data, "{user_impressions}", "（不注入）")
+    # 用户印象：只注入"这次对话里真的出现的群友"，每人一句，参照 QQ-Agent 的做法
+    try:
+        cache_i = group_reply_caches.get(group_id, ReplyCache())
+        seen_ids: List[int] = []
+        for raw in cache_i.get_replies()[-8:]:
+            try:
+                data = json.loads(raw)
+            except (json.JSONDecodeError, TypeError):
+                continue
+            uid = str(data.get("id") or "")
+            if uid.isdigit() and uid != "0" and int(uid) not in seen_ids:
+                seen_ids.append(int(uid))
+        if seen_ids:
+            impression_text = await memory_manager.get_user_impressions_text(
+                user_ids=seen_ids[:4], max_length=240, compact=True
+            )
+            replace_placeholder(yaml_data, "{user_impressions}", impression_text)
+        else:
+            replace_placeholder(yaml_data, "{user_impressions}", "（暂无）")
+    except Exception as e:
+        _log.debug("[FakeAi] 获取用户印象失败: %s", e)
+        replace_placeholder(yaml_data, "{user_impressions}", "（暂无）")
 
     # 注入相关主动记忆
     mem_text = ""
@@ -3276,6 +3305,12 @@ async def answer_ai(
         except Exception:
             pulse = ""
         agent_dynamic.append(f"【本次唤醒】{wake_label}。{pulse}")
+
+    if trigger_type == "passive" and PASSIVE_REPLY_RATE >= 1.0:
+        agent_dynamic.append(
+            "（本轮必须开口）这是群友的闲聊，接一句，哪怕只回一个字；"
+            "不要 finish、不要沉默。"
+        )
 
     if expr_pkg.EXPRESSION_ENABLED:
         agent_dynamic.append(_sticker_rhythm_hint(group_id))
@@ -3380,6 +3415,7 @@ async def answer_ai(
             force_speak=bool(
                 trigger_type == "passive" and PASSIVE_REPLY_RATE >= 1.0
             ),
+            tool_filter=LIGHT_TOOLS if trigger_type != "active" else None,
             skill_bridge=skill_bridge,
         )
         if agent_result is not None and agent_result.actions:
