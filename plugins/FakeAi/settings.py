@@ -135,6 +135,10 @@ def apply_from_plugin(plugin) -> None:
 
     # —— interaction ——
     inter_raw = plugin.get_config("interaction", {}) or {}
+    if isinstance(inter_raw, dict):
+        # 新增的子键只补内存，后台才看得见；保存时才写进 config.yaml
+        for _k, _v in asdict(InteractionConfig()).items():
+            inter_raw.setdefault(_k, _v)
     inter = _merge_dict(asdict(InteractionConfig()), inter_raw)
     inter["aliases"] = aliases
     inter["bot_qq"] = bot_qq
@@ -223,6 +227,9 @@ def apply_from_plugin(plugin) -> None:
     except (TypeError, ValueError):
         passive_rate = 0.0
     fakeai_mod.PASSIVE_REPLY_RATE = min(1.0, max(0.0, passive_rate))
+    fakeai_mod.FAVORABILITY_GATE_ENABLED = bool(
+        DEFAULT_CONFIG.favorability_gate_enabled
+    )
     fakeai_mod.PROACTIVE_ENABLED = bool(
         plugin.get_config("proactive_enabled", True)
     )

@@ -158,6 +158,8 @@ _inflight_groups: set = set()
 PASSIVE_TRIGGER_BASE_PROB = 0.0  # noqa: F841  # 保留名以免外部引用炸；实际不再使用
 # 普通闲聊时插嘴的概率（interaction.passive_reply_rate），1=每句都进决策
 PASSIVE_REPLY_RATE = 0.0
+# 好感度闸门开关（interaction.favorability_gate_enabled）
+FAVORABILITY_GATE_ENABLED = True
 
 # 允许 FakeAi 响应的群号（空集合表示不限制）— on_load / settings 会覆盖
 FAKEAI_GROUP_MODE = "allowlist"
@@ -279,6 +281,10 @@ async def should_reply_by_favorability(user_id: int, skip_users: list = None) ->
     Returns:
         是否应该回复
     """
+    # 完全关掉好感度闸门时只保留冻结用户
+    if not FAVORABILITY_GATE_ENABLED:
+        return int(user_id) not in FROZEN_USERS
+
     # 冻结用户：回复概率为 0
     if int(user_id) in FROZEN_USERS:
         _log.info(f"[FakeAi] 冻结用户 {user_id}，回复概率为 0%，不回复")
