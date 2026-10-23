@@ -1728,7 +1728,11 @@ class FakeAi(NcatBotPlugin):
                     group_id, int(sender_id), sender_name, content
                 )
                 answer = await answer_ai(
-                    group_id, group_reply_caches, str(sender_id), "callback"
+                    group_id,
+                    group_reply_caches,
+                    str(sender_id),
+                    "callback",
+                    sender_name=sender_name,
                 )
                 _log.info(answer)
                 await send_typing_response(self, input, answer)
@@ -1738,7 +1742,11 @@ class FakeAi(NcatBotPlugin):
         if input.raw_message == "蓝晴说话":
             if is_admin(sender_id) or _is_fakeai_group_allowed(group_id):
                 answer = await answer_ai(
-                    group_id, group_reply_caches, str(sender_id), "test"
+                    group_id,
+                    group_reply_caches,
+                    str(sender_id),
+                    "test",
+                    sender_name=sender_name,
                 )
                 _log.info(answer)
                 await send_typing_response(self, input, answer)
@@ -1939,6 +1947,7 @@ class FakeAi(NcatBotPlugin):
                 str(sender_id),
                 trigger_type,
                 decision=decision,
+                sender_name=sender_name,
             )
             _log.info(answer)
             if isinstance(answer, AgentResult):
@@ -2623,10 +2632,15 @@ SKILL_HINT = (
     "常见对应：占卜→tarot.divine / plugin.Tarot.run；算数→plugin.ChatCalc.run；"
     "图库→plugin.ImageSender.run；FF14 查询→plugin.Tataru.run；"
     "点歌/解析链接→plugin.MediaParser.run；签到→plugin.GroupSign.run。"
+    "\nplugin.*.run 类调用成功后，插件已经自己把结果发到群里了，"
+    "不要再复述、不要发“查了/看上面”这类补充消息，直接 finish 收尾；"
+    "只有插件没有发出任何内容时，你才需要自己补一条。"
 )
 
 
-def _build_skill_bridge(group_id: int, user_id: Optional[str]):
+def _build_skill_bridge(
+    group_id: int, user_id: Optional[str], sender_name: Optional[str] = None
+):
     """给 agent 循环接上 SkillHub；返回 (bridge, 提示词片段)。"""
     if not SKILLS_ENABLED:
         return None, ""
@@ -2652,6 +2666,7 @@ def _build_skill_bridge(group_id: int, user_id: Optional[str]):
             runtime=runtime,
             workspace=workspace,
             sandbox=runtime.runner if runtime is not None else None,
+            extras={"nickname": str(sender_name or "").strip()},
         )
         bridge = SkillBridge(
             registry,
@@ -2671,6 +2686,7 @@ async def answer_ai(
     user_id: str = None,
     trigger_type: str = "active",
     decision: Optional[AnalystDecision] = None,
+    sender_name: Optional[str] = None,
 ) -> str:
     # 确保数据库已初始化
     await memory_manager.init_db()
@@ -2949,7 +2965,9 @@ async def answer_ai(
         except Exception as e:
             _log.debug("[FakeAi] agent 图片加载失败: %s", e)
 
-        skill_bridge, skill_hint = _build_skill_bridge(group_id, user_id)
+        skill_bridge, skill_hint = _build_skill_bridge(
+            group_id, user_id, sender_name
+        )
         if skill_hint:
             prompt = (prompt or "") + skill_hint
         agent_result = await run_agent(

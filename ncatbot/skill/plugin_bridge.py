@@ -305,6 +305,20 @@ class PluginBridge:
     # 调用
     # ------------------------------------------------------------------
 
+    @staticmethod
+    def _sender_name(ctx: SkillContext, user_id: str) -> str:
+        """还原调用者昵称：extras → 事件 sender → 用户 ID。"""
+        name = str(ctx.extras.get("nickname") or "").strip()
+        if name:
+            return name
+        sender = getattr(ctx.event, "sender", None)
+        if sender is not None:
+            for field in ("card", "nickname"):
+                value = str(getattr(sender, field, "") or "").strip()
+                if value:
+                    return value
+        return f"用户{user_id}" if user_id else "用户"
+
     async def _invoke(
         self,
         ctx: SkillContext,
@@ -346,7 +360,7 @@ class PluginBridge:
             raw_message = f"[CQ:at,qq={self_id}] {body}"
         segments.append(PlainText(text=body))
         message = MessageArray(segments)
-        sender_name = str(ctx.extras.get("nickname") or "模型")
+        sender_name = self._sender_name(ctx, user_id)
 
         if group_id:
             data = GroupMessageEventData(
