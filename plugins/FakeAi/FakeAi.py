@@ -14,7 +14,7 @@ from PIL import Image as PILImage, ImageDraw, ImageFont
 from common.utils.AiUtil import AiUtil, DEEPSEEK_CHAT_MODEL
 from common.utils.async_io import load_json, load_yaml
 from common.utils.CommonUtil import CommonUtil
-from ncatbot.event.qq import GroupMessageEvent as GroupMessage
+from ncatbot.event.qq import GroupMessageEvent as GroupMessage, NoticeEvent
 from ncatbot.types import At, MessageArray as MessageChain, PlainText, Reply, Image
 from ncatbot.types.qq import Forward
 from ncatbot.plugin import NcatBotPlugin
@@ -179,6 +179,23 @@ def _is_fakeai_group_allowed(group_id) -> bool:
     if FAKEAI_GROUP_MODE == "all":
         return True
     return group in FAKEAI_ALLOWED_GROUPS
+
+
+# ---- 事件感知 ----
+# 进退群 / 上传文件 / 戳一戳这类事件也进模型视野，但发言按群限流，避免连击烧钱
+EVENT_SPEAK_CD = 25  # 秒
+_event_last_spoken: Dict[int, float] = {}
+_nickname_cache: Dict[tuple, tuple] = {}  # (group_id, user_id) -> (name, ts)
+NICKNAME_CACHE_TTL = 600
+
+
+def _event_can_speak(group_id: int) -> bool:
+    """事件发言的按群冷却：True=可以尝试发言并已占位。"""
+    now = time.time()
+    if now - _event_last_spoken.get(group_id, 0) < EVENT_SPEAK_CD:
+        return False
+    _event_last_spoken[group_id] = now
+    return True
 
 
 # 模拟打字延迟开关（默认关闭）
@@ -1991,6 +2008,214 @@ class FakeAi(NcatBotPlugin):
         finally:
             _inflight_groups.discard(gid)
 
+    # ---------- 事件感知：notice / request 也进上下文 ----------
+
+    async def _event_nickname(self, group_id: str, user_id: str) -> str:
+        """带缓存的群昵称查询，失败就退回 QQ 号，不阻塞事件处理。"""
+        if not user_id:
+            return "某人"
+        key = (str(group_id or ""), str(user_id))
+        now = time.time()
+        cached = _nickname_cache.get(key)
+        if cached and now - cached[1] < NICKNAME_CACHE_TTL:
+            return cached[0]
+        name = ""
+        if group_id:
+            try:
+                info = await self.api.qq.query.get_group_member_info(
+                    group_id=int(group_id), user_id=int(user_id)
+                )
+                if info is not None:
+                    name = str(
+                        getattr(info, "card", "")
+                        or getattr(info, "nickname", "")
+                        or ""
+                    ).strip()
+            except Exception as e:
+                _log.debug("[FakeAi] 查询昵称失败 %s: %s", user_id, e)
+        if not name:
+            name = f"用户{user_id}"
+        _nickname_cache[key] = (name, now)
+        return name
+
+    async def _describe_notice(self, input: NoticeEvent) -> Optional[tuple]:
+        """把 notice 事件翻译成一行群聊里看得懂的事件描述。
+
+        返回 ``(描述, 是否值得开口)``；返回 None 表示这类事件直接忽略。
+        """
+        notice_type = str(getattr(input.notice_type, "value", input.notice_type) or "")
+        raw_sub = getattr(input, "sub_type", "")
+        sub_type = str(getattr(raw_sub, "value", raw_sub) or "")
+        group_id = str(getattr(input, "group_id", "") or "")
+        user_id = str(getattr(input, "user_id", "") or "")
+        operator_id = str(getattr(input, "operator_id", "") or "")
+
+        if notice_type == "group_increase":
+            who = await self._event_nickname(group_id, user_id)
+            if sub_type == "invite" and operator_id:
+                inviter = await self._event_nickname(group_id, operator_id)
+                return f"{who}（{user_id}）被 {inviter} 拉进了群", True
+            return f"{who}（{user_id}）加入了群聊", True
+
+        if notice_type == "group_decrease":
+            who = await self._event_nickname(group_id, user_id)
+            if sub_type == "kick" and operator_id:
+                operator = await self._event_nickname(group_id, operator_id)
+                return f"{who}（{user_id}）被 {operator} 踢出了群", True
+            if sub_type == "kick_me":
+                return f"你被踢出了群 {group_id}", False
+            return f"{who}（{user_id}）退群了", True
+
+        if notice_type == "group_upload":
+            who = await self._event_nickname(group_id, user_id)
+            file = getattr(input, "file", None)
+            name = str(
+                getattr(file, "name", "") or getattr(file, "file_name", "") or "文件"
+            )
+            size = 0
+            try:
+                size = int(getattr(file, "size", 0) or 0)
+            except (TypeError, ValueError):
+                size = 0
+            if size >= 1024 * 1024:
+                human = f"{size / 1024 / 1024:.1f} MB"
+            elif size >= 1024:
+                human = f"{size / 1024:.0f} KB"
+            else:
+                human = f"{size} B"
+            return f"{who}（{user_id}）上传了文件「{name}」（{human}）", True
+
+        if notice_type == "group_admin":
+            who = await self._event_nickname(group_id, user_id)
+            if sub_type == "set":
+                return f"{who}（{user_id}）被设成了管理员", True
+            return f"{who}（{user_id}）被撤了管理员", True
+
+        if notice_type == "group_ban":
+            who = await self._event_nickname(group_id, user_id)
+            operator = ""
+            if operator_id:
+                operator = await self._event_nickname(group_id, operator_id)
+            duration = int(getattr(input, "duration", 0) or 0)
+            if duration > 0:
+                minutes = max(1, duration // 60)
+                by = f"被 {operator} " if operator else "被"
+                return f"{who}（{user_id}）{by}禁言 {minutes} 分钟", True
+            by = f"被 {operator} " if operator else "被"
+            return f"{who}（{user_id}）{by}解除禁言", True
+
+        if notice_type == "group_recall":
+            who = await self._event_nickname(group_id, user_id or operator_id)
+            return f"{who}（{user_id or operator_id}）撤回了一条消息", False
+
+        if notice_type == "group_msg_emoji_like":
+            # 表情回应太频繁，只当作噪音，不写进上下文
+            return None
+
+        if notice_type == "notify":
+            if sub_type == "poke":
+                who = await self._event_nickname(group_id or "", user_id)
+                target = str(getattr(input, "target_id", "") or "")
+                self_id = str(getattr(input, "self_id", "") or "")
+                if target and target in {self_id, str(BOT_QQ)}:
+                    return f"{who}（{user_id}）戳了戳你", True
+                target_name = await self._event_nickname(group_id or "", target)
+                return f"{who}（{user_id}）戳了戳 {target_name}（{target}）", False
+            if sub_type == "lucky_king":
+                lucky = str(getattr(input, "target_id", "") or user_id)
+                who = await self._event_nickname(group_id, lucky)
+                return f"{who}（{lucky}）成了运气王", True
+            if sub_type == "honor":
+                who = await self._event_nickname(group_id, user_id)
+                honor = str(getattr(input, "honor_type", "") or "")
+                label = {
+                    "talkative": "龙王",
+                    "performer": "群聊之火",
+                    "emotion": "快乐源泉",
+                }.get(honor, honor or "群荣誉")
+                return f"{who}（{user_id}）拿到了「{label}」", True
+            return None
+
+        return None
+
+    @registrar.on_notice()
+    async def handle_fake_ai_notice(self, input: NoticeEvent) -> None:
+        """进退群、上传文件、戳一戳这些事件也进模型视野，由它决定接不接话。"""
+        try:
+            if getattr(getattr(input, "_data", None), "synthetic", False):
+                return
+            group_id = str(getattr(input, "group_id", "") or "")
+            if not group_id or not _is_fakeai_group_allowed(group_id):
+                return
+            described = await self._describe_notice(input)
+            if not described:
+                return
+            desc, speak = described
+            gid = int(group_id)
+            cache = group_reply_caches.setdefault(gid, ReplyCache())
+            cache.add_reply(
+                _stamp_reply_dict(
+                    {
+                        "name": "系统",
+                        "id": "event",
+                        "kind": "event",
+                        "content": desc,
+                    }
+                )
+            )
+            _log.info("[FakeAi] 感知事件: %s", desc)
+            if not speak:
+                return
+            if not _event_can_speak(gid):
+                _log.debug("[FakeAi] 事件发言冷却中，仅记录：%s", desc)
+                return
+            if gid in _inflight_groups:
+                return
+            _inflight_groups.add(gid)
+            try:
+                answer = await answer_ai(gid, group_reply_caches, None, "event")
+                if isinstance(answer, AgentResult) and answer.actions:
+                    await send_agent_result(self, None, answer, group_id=gid)
+                else:
+                    _log.info("[FakeAi] 事件后选择沉默: %s", desc)
+            finally:
+                _inflight_groups.discard(gid)
+        except Exception as e:
+            _log.error("[FakeAi] 处理事件通知失败: %s", e)
+
+    @registrar.on_request()
+    async def handle_fake_ai_request(self, input) -> None:
+        """好友/加群请求只记录进上下文，让模型知道有人来过。"""
+        try:
+            raw_type = getattr(input, "request_type", "")
+            request_type = str(getattr(raw_type, "value", raw_type) or "")
+            user_id = str(getattr(input, "user_id", "") or "")
+            group_id = str(getattr(input, "group_id", "") or "")
+            comment = str(getattr(input, "comment", "") or "").strip()
+            if request_type == "group" and group_id:
+                if not _is_fakeai_group_allowed(group_id):
+                    return
+                who = await self._event_nickname(group_id, user_id)
+                desc = f"{who}（{user_id}）请求加群"
+            elif request_type == "friend":
+                who = await self._event_nickname("", user_id)
+                desc = f"{who}（{user_id}）请求加好友"
+            else:
+                return
+            if comment:
+                desc += f"，附言：{comment[:80]}"
+            gid = int(group_id) if group_id else 0
+            if not gid:
+                return
+            group_reply_caches.setdefault(gid, ReplyCache()).add_reply(
+                _stamp_reply_dict(
+                    {"name": "系统", "id": "event", "kind": "event", "content": desc}
+                )
+            )
+            _log.info("[FakeAi] 感知请求: %s", desc)
+        except Exception as e:
+            _log.error("[FakeAi] 处理请求事件失败: %s", e)
+
 
 async def send_agent_result(
     self: FakeAi,
@@ -2400,6 +2625,11 @@ def update_yaml_with_replies(
                 else:
                     stamp = "--:--"
 
+                if str(data.get("kind") or "") == "event":
+                    readable.append(f"[{stamp}] （系统事件）{text}")
+                    lines.append(json.dumps(data, ensure_ascii=False))
+                    continue
+
                 if source:
                     sub_map = {
                         "repeat": "复读",
@@ -2745,7 +2975,12 @@ async def answer_ai(
     # 加载 YAML 数据
     yaml_data = await load_yaml_data(group_id)
     replace_time_in_system(yaml_data)
-    context_limit = 8 if trigger_type in ("passive", "proactive") else 14
+    if trigger_type in ("passive", "proactive"):
+        context_limit = 8
+    elif trigger_type == "event":
+        context_limit = 10
+    else:
+        context_limit = 14
     update_yaml_with_replies(
         yaml_data,
         group_reply_caches.get(group_id, ReplyCache()),
@@ -2962,6 +3197,15 @@ async def answer_ai(
             "（主动机会）群里安静很久了。可以主动抛一个自然的话题，"
             "也可以 finish 安静结束，不要硬找话。"
         )
+    elif trigger_type == "event":
+        agent_dynamic.append(
+            "（系统事件）最近一条是群里的系统事件，不是有人在向你提问。"
+            "想接就自然接一句（新人来了可以招呼、有人退了可以吐槽、"
+            "被戳了可以回一句或戳回去），不想理就 finish，别把事件当成问题来回答。"
+            "被戳、新人进群、有人退群这类事，能随口说一句就说，真没话说再 finish。"
+            "事件不是功能请求：不要调用 list_skills / invoke_skill，"
+            "也不要发和事件无关的图片。"
+        )
 
     if decision is not None and decision.should_reply:
         inject = decision.inject_block()
@@ -3020,6 +3264,9 @@ async def answer_ai(
         skill_bridge, skill_hint = _build_skill_bridge(
             group_id, user_id, sender_name
         )
+        if trigger_type == "event":
+            # 事件不需要动手能力：进退群、文件、戳一戳都只该接一句话
+            skill_bridge, skill_hint = None, ""
         if skill_hint:
             prompt = (prompt or "") + skill_hint + focus_hint
         agent_result = await run_agent(
