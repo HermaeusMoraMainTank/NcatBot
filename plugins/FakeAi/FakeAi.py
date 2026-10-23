@@ -1968,6 +1968,7 @@ class FakeAi(NcatBotPlugin):
                     reply_cache.get_replies(),
                     config=DEFAULT_CONFIG,
                     is_empty_summon=False,
+                    reason=det.reason,
                 )
 
             # FAMILIAR：分析员失败时过渡 fallback
@@ -2067,6 +2068,7 @@ class FakeAi(NcatBotPlugin):
             state_store.enter_observation(
                 gid,
                 from_familiar=(det.state == InteractionState.FAMILIAR),
+                dialog_seconds=DEFAULT_CONFIG.dialog_window_sec,
             )
             try:
                 await maybe_auto_remember(

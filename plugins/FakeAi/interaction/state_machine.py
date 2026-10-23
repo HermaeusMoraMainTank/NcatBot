@@ -30,6 +30,8 @@ class ChatState:
     state: InteractionState = InteractionState.NOT_PRESENT
     observation_until: float = 0.0
     familiar_cooldown_until: float = 0.0
+    # 对话延续窗口：被叫到或接上话之后，这段时间内不滑回静默
+    dialog_until: float = 0.0
 
 
 @dataclass
@@ -66,11 +68,18 @@ class ChatStateStore:
                 _log.debug("[FakeAi] group=%s OBSERVATION 超时 → NOT_PRESENT", group_id)
         return st
 
-    def enter_observation(self, group_id: int, from_familiar: bool = False) -> None:
+    def enter_observation(
+        self,
+        group_id: int,
+        from_familiar: bool = False,
+        dialog_seconds: float = 0.0,
+    ) -> None:
         st = self.get(group_id)
         now = time.time()
         st.state = InteractionState.OBSERVATION
         st.observation_until = now + self.config.observation_sec
+        if dialog_seconds > 0:
+            st.dialog_until = now + dialog_seconds
         if from_familiar:
             st.familiar_cooldown_until = now + self.config.familiar_cooldown_sec
         _log.info(
@@ -172,6 +181,13 @@ class ChatStateStore:
                 is_summoned=True,
                 is_empty_summon=is_empty_summon,
                 reason="summon",
+            )
+
+        # 对话延续窗口：刚聊过的这段时间按「熟络」处理，别一秒变回陌生人
+        if now < st.dialog_until:
+            return DetermineResult(
+                state=InteractionState.FAMILIAR,
+                reason="dialog",
             )
 
         if st.state == InteractionState.OBSERVATION and now < st.observation_until:

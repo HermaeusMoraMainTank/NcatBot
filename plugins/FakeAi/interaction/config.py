@@ -9,6 +9,9 @@ from typing import List
 @dataclass
 class InteractionConfig:
     observation_sec: float = 45.0
+    # 被叫到/接上话之后，把这轮对话延续这么久：窗口内的消息按「熟络」处理，
+    # 不再滑回 NOT_PRESENT 静默
+    dialog_window_sec: float = 180.0
     group_cd_sec: float = 10.0
     familiar_cooldown_sec: float = 120.0
     echo_window_sec: float = 30.0

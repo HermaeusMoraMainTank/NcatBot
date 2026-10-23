@@ -36,7 +36,7 @@ FAKEAI_CONFIG_DEFAULTS: Dict[str, Any] = {
     "enable_group_cd": True,
     "enable_user_cd": False,
     "enable_callback": False,
-    "callback_timeout": 15,
+    "callback_timeout": 120,
     "enable_typing_delay": False,
     "typing_delay_per_char": 0.1,
     "agent_enabled": True,

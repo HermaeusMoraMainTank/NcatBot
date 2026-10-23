@@ -76,6 +76,7 @@ CONFIG_LABELS: dict[str, str] = {
     "sticker_auto_rate": "自动配图概率",
     # 互动策略子项
     "observation_sec": "观察时长（秒）",
+    "dialog_window_sec": "对话延续窗口（秒）",
     "group_cd_sec": "群冷却（秒）",
     "familiar_cooldown_sec": "熟络冷却（秒）",
     "echo_window_sec": "复读判定窗口（秒）",
@@ -443,6 +444,7 @@ CONFIG_DESCRIPTIONS: dict[str, str] = {
     "proactive_probability": "0~1，越大越爱主动说话",
     "sticker_auto_rate": "0~1；这轮模型没发图时，按这个概率自动补一张",
     "passive_reply_rate": "0=只在被叫/熟络时回；0.3=偶尔插嘴；1=每句话都回",
+    "dialog_window_sec": "被叫到或接上话之后，这么久内继续参与对话，不会立刻转冷",
 }
 
 SECRET_HINTS = ("secret", "token", "password", "cookie", "api_key", "apikey", "private")
