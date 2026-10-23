@@ -180,6 +180,10 @@ def apply_from_plugin(plugin) -> None:
     expr_pkg.EXPRESSION_ENABLED = expr_enabled
     expr_pkg.MAX_STICKERS_PER_REPLY = max(1, min(4, expr_max))
     expr_pkg.STICKER_LIBRARY = sticker_lib
+    try:
+        sticker_activity = int(expr_raw.get("activity", 2))
+    except (TypeError, ValueError):
+        sticker_activity = 2
     expr_pkg.STICKER_AUTO_RATE = min(1.0, max(0.0, sticker_rate))
     expression_catalog_mod.sticker_catalog.root = Path(catalog_path)
     expression_catalog_mod.sticker_catalog.active = (
@@ -226,6 +230,7 @@ def apply_from_plugin(plugin) -> None:
         passive_rate = float(DEFAULT_CONFIG.passive_reply_rate or 0.0)
     except (TypeError, ValueError):
         passive_rate = 0.0
+    fakeai_mod.STICKER_ACTIVITY = max(0, min(3, sticker_activity))
     fakeai_mod.PASSIVE_REPLY_RATE = min(1.0, max(0.0, passive_rate))
     fakeai_mod.FAVORABILITY_GATE_ENABLED = bool(
         DEFAULT_CONFIG.favorability_gate_enabled

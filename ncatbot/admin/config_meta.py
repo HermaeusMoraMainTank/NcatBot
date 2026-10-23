@@ -73,6 +73,7 @@ CONFIG_LABELS: dict[str, str] = {
     "cognition": "认知参数",
     "expression": "表情包策略",
     "sticker_library": "表情包图库",
+    "activity": "表情活跃度",
     "sticker_auto_rate": "自动补表情概率",
     # 互动策略子项
     "observation_sec": "观察时长（秒）",
@@ -445,6 +446,7 @@ CONFIG_DESCRIPTIONS: dict[str, str] = {
     "proactive_probability": "冷场专用：群安静 N 分钟后，每次检查主动起话题的概率",
     "favorability_gate_enabled": "关掉后完全看好感度；被叫、对话延续都不再被好感度拦",
     "sticker_auto_rate": "0~1；这轮模型没发图时，按这个概率自动补一张",
+    "activity": "0 安静 / 1 克制 / 2 普通 / 3 活跃，直接影响模型配表情的频率",
     "passive_reply_rate": "0=只在被叫/熟络时回；0.3=偶尔插嘴；1=每句话都回",
     "dialog_window_sec": "被叫到或接上话之后，这么久内继续参与对话，不会立刻转冷",
 }

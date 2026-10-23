@@ -86,6 +86,25 @@ AGENT_TOOLS = [
     {
         "type": "function",
         "function": {
+            "name": "sticker_vibe",
+            "description": (
+                "按此刻语气一步挑一张表情发出（先梗鲸、再本地图库），"
+                "不用先查再发。topic 填情绪关键词。"
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "topic": {
+                        "type": "string",
+                        "description": "情绪/语气关键词，例如 笑死、无语、晚安",
+                    },
+                },
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "send_meme",
             "description": (
                 "从梗鲸图库（网络梗图、蓝色大肥鱼、AI 娘梗图）按话题挑一张发出。"
@@ -335,6 +354,29 @@ async def _execute_tool(
             if not names:
                 return "本地贴纸已关闭，请改用 send_meme(topic) 发网络梗图。"
             return f"没有这个贴纸：{sticker_name}。可用：{'、'.join(names)}"
+        actions.append(AgentAction(kind="sticker", sticker=str(path)))
+        return "表情已加入发送队列。"
+
+    if name == "sticker_vibe":
+        from . import expression as expr_pkg
+
+        if sum(1 for a in actions if a.kind == "sticker") >= max(
+            1, int(expr_pkg.MAX_STICKERS_PER_REPLY)
+        ):
+            return "本轮表情已经够了，不要再发。"
+        topic = str(args.get("topic") or "").strip()
+        path = None
+        try:
+            from .expression import whale_catalog
+
+            if whale_catalog.count():
+                path = await whale_catalog.fetch(topic)
+        except Exception:
+            path = None
+        if path is None and sticker_catalog is not None:
+            path = sticker_catalog.pick_any()
+        if path is None:
+            return "没有可用表情，直接说话吧。"
         actions.append(AgentAction(kind="sticker", sticker=str(path)))
         return "表情已加入发送队列。"
 

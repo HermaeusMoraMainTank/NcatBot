@@ -8,7 +8,7 @@ import tempfile
 import time
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 from PIL import Image as PILImage, ImageDraw, ImageFont
 from common.utils.AiUtil import AiUtil, DEEPSEEK_CHAT_MODEL
@@ -385,6 +385,12 @@ class FakeAi(NcatBotPlugin):
         "agent_max_tokens",
     ]
     config_choices = {
+        "activity": [
+            {"value": "0", "label": "安静（几乎不配图）"},
+            {"value": "1", "label": "克制（3~5 轮一张）"},
+            {"value": "2", "label": "普通（接梗就配）"},
+            {"value": "3", "label": "活跃（能配就配）"},
+        ],
         "sticker_library": [
             {"value": "both", "label": "本地 + 梗鲸"},
             {"value": "darkdog", "label": "仅本地（darkdog）"},
@@ -2086,6 +2092,18 @@ class FakeAi(NcatBotPlugin):
             trigger_type = (
                 "active" if det.state == InteractionState.SUMMONED else "passive"
             )
+            if is_at_bot:
+                wake_label = "有人 @ 了你"
+            elif det.state == InteractionState.SUMMONED:
+                wake_label = "有人叫了你的名字"
+            elif det.reason == "dialog":
+                wake_label = "刚才那轮对话在继续"
+            elif det.reason == "echo":
+                wake_label = "群里在复读，气氛热闹"
+            elif det.reason == "dense":
+                wake_label = "群里聊得正热"
+            else:
+                wake_label = "普通群聊，没人直接找你"
             answer = await answer_ai(
                 group_id,
                 group_reply_caches,
@@ -2093,6 +2111,7 @@ class FakeAi(NcatBotPlugin):
                 trigger_type,
                 decision=decision,
                 sender_name=sender_name,
+                wake_label=wake_label,
             )
             _log.info(answer)
             if isinstance(answer, AgentResult):
@@ -3117,9 +3136,88 @@ def _focus_skill_hint(keyword: str) -> str:
     )
 
 
+# 表情活跃度（0 安静 / 1 克制 / 2 普通 / 3 活跃），由 expression.activity 配置
+STICKER_ACTIVITY = 2
+_sticker_stats: Dict[int, Dict[str, Any]] = {}
+
+_STICKER_FREQ_HINT = {
+    0: "表情包是备选项，不勉强；纯文字回应完全没问题。",
+    1: "频率：普通闲聊不用每条都配；大约每 3~5 轮来一张就够。",
+    2: "频率：回应、吐槽、接梗时优先考虑配一个贴切的表情；别每次都用同一张。",
+    3: "频率：能配表情的地方尽量配，接梗/调侃/附和时几乎都带一张；注意换着用。",
+}
+
+
+def _sticker_rhythm_hint(group_id: int) -> str:
+    """告诉模型「你已经几轮没配图 / 刚配过 / 最近发过哪些」，让它自己判断。"""
+    st = _sticker_stats.setdefault(group_id, {"rounds": 0, "recent": []})
+    rounds = int(st.get("rounds") or 0)
+    recent = list(st.get("recent") or [])
+    level = max(0, min(3, int(STICKER_ACTIVITY)))
+    parts = [_STICKER_FREQ_HINT[level]]
+    if rounds >= 3:
+        parts.append(f"你已经连续 {rounds} 轮没配表情了，这轮可以考虑来一张。")
+    elif rounds == 0:
+        parts.append("上一轮刚配过表情，这轮别急着再发。")
+    if recent:
+        parts.append("最近发过：" + "、".join(recent[-5:]) + "，别重复。")
+    return "\n【表情节奏】" + "".join(parts)
+
+
+def _note_sticker_result(group_id: int, result: AgentResult) -> None:
+    st = _sticker_stats.setdefault(group_id, {"rounds": 0, "recent": []})
+    names = [
+        Path(a.sticker).name
+        for a in result.actions
+        if a.kind == "sticker" and a.sticker
+    ]
+    if names:
+        st["rounds"] = 0
+        recent = list(st.get("recent") or [])
+        recent.extend(names)
+        st["recent"] = recent[-8:]
+    else:
+        st["rounds"] = int(st.get("rounds") or 0) + 1
+
+
+def _group_pulse(cache: "ReplyCache") -> str:
+    """此刻状态：群里多热闹、自己多久没说话。给模型一点时间感。"""
+    now = time.time()
+    parsed: list[dict] = []
+    for raw in cache.get_replies()[-40:]:
+        try:
+            parsed.append(json.loads(raw))
+        except (json.JSONDecodeError, TypeError):
+            continue
+    recent = [
+        p for p in parsed if now - float(p.get("ts") or 0) <= 600
+    ]
+    last_ts = max(
+        (float(p.get("ts") or 0) for p in parsed if p.get("ts")), default=0.0
+    )
+    bot_ts = max(
+        (
+            float(p.get("ts") or 0)
+            for p in parsed
+            if str(p.get("id")) == "0" and p.get("ts")
+        ),
+        default=0.0,
+    )
+    bits = [f"最近 10 分钟群里 {len(recent)} 条消息"]
+    if last_ts:
+        bits.append(f"最后一条 {int(now - last_ts)} 秒前")
+    if bot_ts:
+        bits.append(f"你上次发言 {int((now - bot_ts) / 60)} 分钟前")
+    else:
+        bits.append("你还没在这个群说过话")
+    return "【此刻状态】" + "；".join(bits) + "。"
+
+
 async def _auto_pick_sticker(result: AgentResult, topic: str) -> None:
     """模型忘了配图时按配置概率补一张，避免聊天干巴巴。"""
     if not expr_pkg.EXPRESSION_ENABLED or expr_pkg.STICKER_AUTO_RATE <= 0:
+        return
+    if int(STICKER_ACTIVITY) <= 0:
         return
     if any(action.kind == "sticker" for action in result.actions):
         return
@@ -3216,6 +3314,7 @@ async def answer_ai(
     trigger_type: str = "active",
     decision: Optional[AnalystDecision] = None,
     sender_name: Optional[str] = None,
+    wake_label: str = "",
 ) -> str:
     # 确保数据库已初始化
     await memory_manager.init_db()
@@ -3452,6 +3551,17 @@ async def answer_ai(
     except Exception as e:
         _log.debug("[FakeAi] 群聊语感计算失败: %s", e)
 
+    if wake_label:
+        agent_dynamic.append(f"【本次唤醒】{wake_label}")
+    try:
+        agent_dynamic.append(
+            _group_pulse(group_reply_caches.get(group_id, ReplyCache()))
+        )
+    except Exception as e:
+        _log.debug("[FakeAi] 群状态计算失败: %s", e)
+    if expr_pkg.EXPRESSION_ENABLED:
+        agent_dynamic.append(_sticker_rhythm_hint(group_id))
+
     if trigger_type == "proactive":
         agent_dynamic.append(
             "（主动机会）群里安静很久了。可以主动抛一个自然的话题，"
@@ -3572,6 +3682,7 @@ async def answer_ai(
         )
         if agent_result is not None and agent_result.actions:
             await _auto_pick_sticker(agent_result, keyword)
+            _note_sticker_result(group_id, agent_result)
         if agent_result is not None and (
             agent_result.actions or agent_result.usage.get("total_tokens")
         ):
