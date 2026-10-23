@@ -521,16 +521,62 @@ def _type_name(value: Any) -> str:
     return "string"
 
 
+_MISSING = object()
+
+
+def _pop_path(config: dict[str, Any], path: str) -> Any:
+    """按 a.b.c 取出并移除值，用于把常用项从嵌套组里提到顶层。"""
+    parts = path.split(".")
+    node: Any = config
+    for part in parts[:-1]:
+        if not isinstance(node, dict) or part not in node:
+            return _MISSING
+        node = node[part]
+    if not isinstance(node, dict):
+        return _MISSING
+    return node.pop(parts[-1], _MISSING)
+
+
 def build_fields(
     config: dict[str, Any],
     labels: dict[str, str] | None = None,
     choices: dict[str, Any] | None = None,
     descriptions: dict[str, str] | None = None,
     prefix: str = "",
+    pinned: list[str] | None = None,
 ) -> list[dict[str, Any]]:
-    """把配置字典转成前端可渲染的字段树。"""
+    """把配置字典转成前端可渲染的字段树。
+
+    ``pinned`` 里的 ``a.b.c`` 会被提到最前面，方便常用项一眼看到。
+    """
     labels = labels or {}
     descriptions = descriptions or {}
+    pinned_fields: list[dict[str, Any]] = []
+    for path in pinned or []:
+        value = _pop_path(config, path)
+        if value is _MISSING:
+            continue
+        key = path.split(".")[-1]
+        widget = _widget_for(key, value, choices)
+        field: dict[str, Any] = {
+            "key": key,
+            "path": path,
+            "label": labels.get(path) or labels.get(key) or humanize(key),
+            "type": _type_name(value),
+            "widget": widget,
+            "value": value,
+            "secret": _is_secret(key),
+            "pinned": True,
+            "description": descriptions.get(path)
+            or descriptions.get(key)
+            or CONFIG_DESCRIPTIONS.get(path)
+            or CONFIG_DESCRIPTIONS.get(key)
+            or "",
+        }
+        if widget == "select" and choices:
+            field["choices"] = list(choices.get(key) or [])
+        pinned_fields.append(field)
+
     fields: list[dict[str, Any]] = []
     for key, value in config.items():
         full_key = f"{prefix}{key}" if not prefix else f"{prefix}.{key}"
@@ -564,4 +610,4 @@ def build_fields(
     # 布尔值和短配置排前面，长文本/对象排后面
     order = {"switch": 0, "select": 0, "number": 1, "tags": 2, "text": 3, "password": 4, "textarea": 5, "group": 6, "json": 7}
     fields.sort(key=lambda f: (order.get(f["widget"], 9), f["label"]))
-    return fields
+    return pinned_fields + fields

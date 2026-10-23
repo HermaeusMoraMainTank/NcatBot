@@ -138,6 +138,7 @@ tbody tr:hover{background:var(--row-hover)}
 .switch span:before{content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;background:#cfd8e3;border-radius:50%;transition:.18s}
 .switch input:checked+span{background:var(--accent-dim)}
 .switch input:checked+span:before{transform:translateX(18px);background:var(--accent)}
+.pin{display:inline-block;font-size:10px;padding:0 5px;margin-left:4px;border-radius:4px;background:#1f6f52;color:#a9f0cf;vertical-align:1px}
 .save-bar{position:sticky;bottom:0;background:linear-gradient(180deg,transparent,var(--savebar) 35%);padding:14px 20px;display:flex;justify-content:flex-end;gap:8px;border-top:1px solid #ffffff0f}
 
 /* 钓鱼 iframe */
@@ -463,8 +464,8 @@ function renderField(f) {
       '<summary><span>' + esc(f.label) + '</span><span class="meta">' + esc(f.key) + ' · ' + (f.children || []).length + ' 项</span></summary>' +
       '<div class="children">' + (kids || '<div class="muted">空</div>') + '</div></details>';
   }
-  return '<div class="field' + (f.secret ? ' secret' : '') + '" data-search="' + esc(f.label + ' ' + f.key + ' ' + (f.description || '')) + '">' +
-    '<div class="field-head"><label>' + esc(f.label) + '</label><code>' + esc(f.key) + '</code></div>' +
+  return '<div class="field' + (f.secret ? ' secret' : '') + (f.pinned ? ' pinned' : '') + '" data-search="' + esc(f.label + ' ' + f.key + ' ' + (f.description || '')) + '">' +
+    '<div class="field-head"><label>' + esc(f.label) + (f.pinned ? ' <span class="pin">常用</span>' : '') + '</label><code>' + esc(f.key) + '</code></div>' +
     (f.description ? '<p class="hint">' + esc(f.description) + '</p>' : '') +
     '<div class="control">' + controlFor(f) + '</div></div>';
 }
@@ -511,7 +512,8 @@ function setPath(obj, path, value) {
   cur[path[path.length - 1]] = value;
 }
 function collectConfig() {
-  const out = {};
+  // 从当前配置深拷贝，避免只提交渲染出来的字段、把没显示的配置抹掉
+  const out = JSON.parse(JSON.stringify(state.currentConfig || {}));
   document.querySelectorAll('#configBody [data-k]').forEach(el => {
     const path = el.dataset.k.split('.');
     let val;

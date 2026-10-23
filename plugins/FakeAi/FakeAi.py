@@ -370,6 +370,17 @@ class FakeAi(NcatBotPlugin):
         "skills_enabled": "允许调用插件技能",
         "agent_enabled": "启用 Agent 模式",
     }
+    # 常用项置顶，避免在几十个配置里翻
+    config_pinned = [
+        "persona",
+        "interaction.passive_reply_rate",
+        "interaction.dialog_window_sec",
+        "interaction.favorability_gate_enabled",
+        "expression.sticker_library",
+        "expression.sticker_auto_rate",
+        "agent_max_rounds",
+        "agent_max_tokens",
+    ]
     config_choices = {
         "sticker_library": [
             {"value": "both", "label": "本地 + 梗鲸"},

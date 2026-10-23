@@ -452,6 +452,7 @@ class AdminServer:
                     descriptions=getattr(plugin, "config_descriptions", None)
                     if plugin
                     else None,
+                    pinned=getattr(plugin, "config_pinned", None) if plugin else None,
                 ),
                 "skills": [
                     s.describe_entry()
