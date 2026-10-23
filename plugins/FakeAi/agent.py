@@ -37,6 +37,9 @@ class AgentResult:
     usage: dict = field(default_factory=dict)
     model: str = "deepseek-flash"
     finished: bool = False
+    # 工具调用轨迹，供后台复盘（name / args / result 都是截断后的文本）
+    tool_log: list = field(default_factory=list)
+    rounds: int = 0
 
 
 AGENT_TOOLS = [
@@ -885,6 +888,8 @@ async def run_agent(
     }
     model = "deepseek-flash"
     finished = False
+    tool_log: list = []
+    rounds_used = 0
     bridge_tools = skill_bridge.tools if skill_bridge is not None else []
     bridge_names = {t["function"]["name"] for t in bridge_tools}
     tools = list(AGENT_TOOLS) + bridge_tools
@@ -897,6 +902,7 @@ async def run_agent(
 
     deadline = time.monotonic() + RUN_TIMEOUT
     for _round in range(max_rounds):
+        rounds_used = _round + 1
         if time.monotonic() > deadline:
             _log.warning("[FakeAi] agent 本轮超时（%.0fs），提前收尾", RUN_TIMEOUT)
             break
@@ -1010,6 +1016,13 @@ async def run_agent(
             messages.append(
                 {"role": "tool", "tool_call_id": call.get("id"), "content": result}
             )
+            tool_log.append(
+                {
+                    "name": name,
+                    "args": str(call.get("function", {}).get("arguments") or "")[:200],
+                    "result": str(result or "")[:300],
+                }
+            )
         if finished:
             break
 
@@ -1018,4 +1031,6 @@ async def run_agent(
         usage=usage_total,
         model=model,
         finished=finished,
+        tool_log=tool_log,
+        rounds=rounds_used,
     )

@@ -25,6 +25,34 @@ LOG = get_log("AdminServer")
 
 _LOOPBACK = {"127.0.0.1", "::1", "localhost"}
 
+# FakeAi 每轮留档目录（JSONL，按天分文件）
+_AI_TRACE_DIR = Path("data/FakeAi/traces")
+
+
+def _read_ai_traces(limit: int = 40, group: str = "") -> list[dict[str, Any]]:
+    """读取最近的 AI 留档，新的在前；可按群号过滤。"""
+    if not _AI_TRACE_DIR.is_dir():
+        return []
+    items: list[dict[str, Any]] = []
+    for path in sorted(_AI_TRACE_DIR.glob("*.jsonl"), reverse=True):
+        try:
+            lines = path.read_text(encoding="utf-8").splitlines()
+        except OSError:
+            continue
+        for line in reversed(lines):
+            if not line.strip():
+                continue
+            try:
+                item = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if group and str(item.get("group_id")) != group:
+                continue
+            items.append(item)
+            if len(items) >= limit:
+                return items
+    return items
+
 
 class AdminServer:
     def __init__(self, bot: Any) -> None:
@@ -132,6 +160,7 @@ class AdminServer:
         app.router.add_post("/api/runs/{run_id}/cancel", self._run_cancel)
         app.router.add_post("/api/agent/run", self._agent_run)
         app.router.add_get("/api/audit", self._audit)
+        app.router.add_get("/api/ai/traces", self._ai_traces)
         app.router.add_get("/api/sandbox/workspaces", self._sandboxes)
         app.router.add_post("/api/sandbox/cleanup", self._sandbox_cleanup)
         app.router.add_get("/api/config", self._config)
@@ -796,6 +825,19 @@ class AdminServer:
     async def _runs(self, request: web.Request) -> web.Response:
         limit = max(1, min(200, int(request.query.get("limit", 50) or 50)))
         return await self._run(request, lambda: self.bot.agents.list_runs(limit=limit))
+
+    # ------------------------------------------------------------------
+    # AI 轨迹（FakeAi 每轮留档）
+    # ------------------------------------------------------------------
+
+    async def _ai_traces(self, request: web.Request) -> web.Response:
+        limit = max(1, min(200, int(request.query.get("limit", 40) or 40)))
+        group = str(request.query.get("group") or "").strip()
+
+        def collect() -> dict[str, Any]:
+            return {"items": _read_ai_traces(limit, group)}
+
+        return await self._run(request, collect)
 
     async def _run_detail(self, request: web.Request) -> web.Response:
         denied = await self._guard(request)

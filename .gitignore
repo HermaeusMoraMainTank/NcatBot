@@ -130,3 +130,6 @@ data/fakeai/whale/
 
 # 运行期临时文件
 data/**/*.tmp
+
+# AI 留档
+data/FakeAi/traces/

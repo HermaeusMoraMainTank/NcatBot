@@ -35,6 +35,7 @@ from .favorability import (
 )
 from .cognition import DEFAULT_COGNITION
 from . import expression as expr_pkg
+from . import trace as trace_mod
 from .expression import extract_stickers, sticker_catalog, whale_catalog
 from .interaction import (
     DEFAULT_CONFIG,
@@ -612,6 +613,12 @@ class FakeAi(NcatBotPlugin):
                 _log.info("[FakeAi] 已清理 %s 条过期识图缓存", purged)
         except Exception as e:
             _log.debug("[FakeAi] 清理识图缓存失败: %s", e)
+        try:
+            dropped = trace_mod.prune(7)
+            if dropped:
+                _log.info("[FakeAi] 已清理 %s 个过期留档文件", dropped)
+        except Exception as e:
+            _log.debug("[FakeAi] 清理留档失败: %s", e)
 
     async def _proactive_tick(self) -> None:
         """群里安静足够久时，低概率主动起一个话题。"""
@@ -3628,6 +3635,37 @@ async def answer_ai(
         if agent_result is not None and agent_result.actions:
             await _auto_pick_sticker(agent_result, keyword, group_id)
             _note_sticker_result(group_id, agent_result)
+        if agent_result is not None:
+            try:
+                trace_mod.record_turn(
+                    group_id=group_id,
+                    user_id=str(user_id or ""),
+                    sender=sender_name or "",
+                    trigger=trigger_type,
+                    wake=wake_label,
+                    model=agent_result.model,
+                    usage=agent_result.usage,
+                    rounds=agent_result.rounds,
+                    tools=agent_result.tool_log,
+                    actions=[
+                        {
+                            "kind": a.kind,
+                            "text": " / ".join(a.messages)[:200],
+                            "sticker": (a.sticker or "")[:80],
+                        }
+                        for a in agent_result.actions
+                    ],
+                    system_prompt=prompt or "",
+                    user_prompt=keyword or "",
+                    reply=" / ".join(
+                        m
+                        for a in agent_result.actions
+                        if a.kind == "text"
+                        for m in a.messages
+                    )[:400],
+                )
+            except Exception as e:
+                _log.debug("[FakeAi] 留档失败: %s", e)
         if agent_result is not None and (
             agent_result.actions or agent_result.usage.get("total_tokens")
         ):

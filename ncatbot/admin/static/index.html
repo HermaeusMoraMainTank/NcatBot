@@ -184,6 +184,7 @@ tbody tr:hover{background:var(--row-hover)}
       <section class="view" id="view-skills"></section>
       <section class="view flush" id="view-mcfish"></section>
       <section class="view" id="view-agent"></section>
+      <section class="view" id="view-ai"></section>
       <section class="view" id="view-audit"></section>
     </div>
   </div>
@@ -214,6 +215,7 @@ const routes = {
   skills: {title: '技能', icon: '✦'},
   mcfish: {title: '钓鱼', icon: '🎣'},
   agent: {title: 'Agent', icon: '🤖'},
+  ai: {title: 'AI 轨迹', icon: '💬'},
   audit: {title: '审计', icon: '🧾'},
 };
 
@@ -308,7 +310,7 @@ function setView() {
   $('#view-' + r).classList.add('active');
   $('#pageTitle').textContent = routes[r].title;
   document.querySelectorAll('#nav button').forEach(x => x.classList.toggle('active', x.dataset.route === r));
-  ({overview: loadOverview, plugins: loadPlugins, skills: loadSkills, mcfish: loadMcFish, agent: loadAgent, audit: loadAudit}[r] || loadOverview)();
+  ({overview: loadOverview, plugins: loadPlugins, skills: loadSkills, mcfish: loadMcFish, agent: loadAgent, ai: loadAi, audit: loadAudit}[r] || loadOverview)();
 }
 
 function card(label, value, sub) {
@@ -680,6 +682,45 @@ async function openRun(id) {
         '</b> <span class="muted">' + esc(s.ms || s.duration_ms || '—') + ' ms</span><div class="muted">' +
         esc(s.content || s.error || '') + '</div></div>').join('') || '<div class="empty">暂无步骤</div>';
   } catch (e) { toast(e.message, true); }
+}
+
+/* ---------------- 审计 ---------------- */
+/* ---------------- AI 轨迹 ---------------- */
+async function loadAi() {
+  const v = $('#view-ai');
+  v.innerHTML = '<div class="panel"><h2 class="section-title">AI 轨迹（最近 40 轮）</h2>' +
+    '<div class="muted" style="padding-bottom:8px">每轮实际发给模型的提示词摘要、工具调用链与成本。</div>' +
+    '<div id="aiTable"></div></div>';
+  try {
+    const d = await api('/api/ai/traces?limit=40');
+    const rows = d.items || [];
+    if (!rows.length) {
+      $('#aiTable').innerHTML = '<div class="empty">还没有留档，机器人说过话之后这里就会出现。</div>';
+      return;
+    }
+    $('#aiTable').innerHTML = '<div class="table-wrap"><table><thead><tr>' +
+      '<th>时间</th><th>群</th><th>触发</th><th>模型</th><th>Tokens</th><th>缓存命中</th><th>轮</th><th>回复 / 详情</th>' +
+      '</tr></thead><tbody>' + rows.map(function (x) {
+        const u = x.usage || {};
+        const toolNames = (x.tools || []).map(t => t.name).join(' → ');
+        const detail = '<details><summary>详情</summary>' +
+          '<div class="muted">唤醒：' + esc(x.wake || '—') + '</div>' +
+          '<div class="muted">工具：' + esc(toolNames || '（无）') + '</div>' +
+          '<div class="muted">system ' + esc(x.system_chars || 0) + ' 字 / user ' + esc(x.user_chars || 0) + ' 字</div>' +
+          '<div class="mono muted" style="white-space:pre-wrap;max-height:240px;overflow:auto">' + esc(x.user_preview || '') + '</div>' +
+          '</details>';
+        return '<tr><td>' + esc(fmtDate(x.ts)) + '</td>' +
+          '<td class="mono">' + esc(x.group_id) + '</td>' +
+          '<td>' + esc(x.trigger || '—') + '</td>' +
+          '<td class="mono">' + esc(x.model || '—') + '</td>' +
+          '<td>' + esc((u.prompt_tokens || 0) + ' / ' + (u.completion_tokens || 0)) + '</td>' +
+          '<td>' + esc(u.prompt_cache_hit_tokens || 0) + '</td>' +
+          '<td>' + esc(x.rounds || 0) + '</td>' +
+          '<td>' + esc(x.reply || '—') + detail + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+  } catch (e) {
+    $('#aiTable').innerHTML = '<div class="empty">加载失败：' + esc(e.message) + '</div>';
+  }
 }
 
 /* ---------------- 审计 ---------------- */
