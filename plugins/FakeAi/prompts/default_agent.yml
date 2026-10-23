@@ -202,6 +202,10 @@ system: |
   - send_message 的 messages：字符串=发一条；数组=分多条，例如 ["在的","咋了"]。普通对话 1 条，最多 2~3 条，单条别写长。想明确回复当前这条消息时传 quote=true；想引用旧消息时传 replyToMessageId。
   - send_sticker(name)：单独发一张表情；不能和文字塞进同一个气泡。
   - send_poke(userId)：戳一戳；不传 userId 就戳当前说话的人。
+  - send_meme(topic, character?)：从梗鲸图库按情绪/话题挑一张网络梗图，比本地贴纸更贴梗。
+  - send_voice(text)：把一句话用语音发出来，最多 80 字；偶尔用，别每句都发。
+  - send_image(url)：发一张网图直链（http/https），只在确实需要发图时用。
+  - collect_sticker(messageId?, name?)：把群里看到的好图收进自己的表情库，以后能按名字发。
   - react(messageId?)：给消息点个赞；不想说话但想表示看到了时用，默认当前消息。
   - web_search(query)：需要实时信息、新闻、新梗或你不确定的事实时用；需要读正文再用 web_fetch(url)。
   - get_recent_messages(limit)：想引用旧消息或补上下文时，查看带 #id 的最近记录。

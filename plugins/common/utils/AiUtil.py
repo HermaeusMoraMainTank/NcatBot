@@ -258,6 +258,27 @@ class AiUtil:
             return None
 
     @staticmethod
+    async def download_image_bytes(
+        url: str, max_bytes: int = 8 * 1024 * 1024
+    ) -> Optional[bytes]:
+        """下载图片原始字节（不转码），用于收藏表情等场景。"""
+        if not str(url or "").startswith(("http://", "https://")):
+            return None
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url, timeout=20) as response:
+                    if response.status != 200:
+                        _log.warning("[Image] 下载失败，状态码: %s", response.status)
+                        return None
+                    data = await response.read()
+                    if not data or len(data) > max_bytes:
+                        return None
+                    return data
+        except Exception as e:
+            _log.warning("[Image] 下载异常: %s", e)
+            return None
+
+    @staticmethod
     async def download_image_as_base64(url: str) -> Optional[str]:
         """下载图片并转换为 base64 编码
 

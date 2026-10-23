@@ -2361,6 +2361,44 @@ async def send_agent_result(
                 if action.sticker:
                     await _send_sticker(self, group_id, str(action.sticker))
                     await asyncio.sleep(random.uniform(0.6, 1.2))
+            elif action.kind == "voice":
+                text = str((action.messages or [""])[0])[:80]
+                if text:
+                    audio_bytes = await AiUtil.synthesize_mimo_tts(text)
+                    if not audio_bytes:
+                        _log.warning("[FakeAi] TTS 不可用，跳过语音")
+                    else:
+                        audio_path = None
+                        try:
+                            with tempfile.NamedTemporaryFile(
+                                suffix=".wav", delete=False
+                            ) as audio_file:
+                                audio_file.write(audio_bytes)
+                                audio_path = audio_file.name
+                            await self.api.qq.send_group_record(group_id, audio_path)
+                            _note_sent(group_id)
+                            budget -= 1
+                            await asyncio.sleep(random.uniform(0.8, 1.5))
+                        except Exception as e:
+                            _log.error("[FakeAi] 语音发送失败: %s", e)
+                        finally:
+                            if audio_path:
+                                try:
+                                    Path(audio_path).unlink(missing_ok=True)
+                                except OSError:
+                                    pass
+            elif action.kind == "image":
+                url = str((action.messages or [""])[0])
+                if url:
+                    try:
+                        await self.api.qq.post_group_msg(
+                            group_id=group_id, image=url
+                        )
+                        _note_sent(group_id)
+                        budget -= 1
+                        await asyncio.sleep(random.uniform(0.6, 1.2))
+                    except Exception as e:
+                        _log.error("[FakeAi] 网图发送失败: %s", e)
             elif action.kind == "poke":
                 if action.user_id:
                     await self.api.qq.send_poke(group_id, str(action.user_id))
@@ -3155,6 +3193,9 @@ LIGHT_TOOLS = {
     "send_sticker",
     "sticker_vibe",
     "send_meme",
+    "send_voice",
+    "send_image",
+    "collect_sticker",
     "send_poke",
     "react",
     "finish",

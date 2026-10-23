@@ -19,7 +19,7 @@ _log = logging.getLogger(__name__)
 
 @dataclass
 class AgentAction:
-    kind: str  # text | sticker | poke
+    kind: str  # text | sticker | poke | react | voice | image
     messages: list[str] = field(default_factory=list)
     sticker: Optional[str] = None
     user_id: Optional[str] = None
@@ -292,6 +292,57 @@ AGENT_TOOLS = [
     {
         "type": "function",
         "function": {
+            "name": "send_voice",
+            "description": "把一句话用语音发出来（TTS）。需要「发个语音」「用声音说」时用。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "description": "要念出来的内容，尽量短，不超过 80 字",
+                    }
+                },
+                "required": ["text"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "send_image",
+            "description": "发送一张网图（给定 http/https 直链）。只发确认能打开的图片地址。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "url": {"type": "string", "description": "图片直链，必须是 http(s)"}
+                },
+                "required": ["url"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "collect_sticker",
+            "description": "把群里某条消息里的图片收进自己的表情库，以后可以用 send_sticker 发。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "messageId": {
+                        "type": "string",
+                        "description": "含图片的消息 #id，不填就用最近一条带图的",
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "给这张图起个名字，方便以后按名字发；不填自动生成",
+                    },
+                },
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "finish",
             "description": "结束本次处理。看完不想说话，或说完想收尾时调用。",
             "parameters": {
@@ -487,6 +538,60 @@ async def _execute_tool(
             return "缺少 userId，无法拍一拍"
         actions.append(AgentAction(kind="poke", user_id=str(target)))
         return "拍一拍已加入队列。"
+
+    if name == "send_voice":
+        if any(a.kind == "voice" for a in actions):
+            return "本轮已经发过语音了，不要再发。"
+        text = str(args.get("text") or "").strip()[:80]
+        if not text:
+            return "缺少 text，没有发语音。"
+        actions.append(AgentAction(kind="voice", messages=[text]))
+        return "语音已加入发送队列。"
+
+    if name == "send_image":
+        url = str(args.get("url") or "").strip()
+        if not url.startswith(("http://", "https://")):
+            return "只支持 http/https 图片直链。"
+        if any(a.kind == "image" for a in actions):
+            return "本轮已经发过网图了，不要再发。"
+        actions.append(AgentAction(kind="image", messages=[url]))
+        return "图片已加入发送队列。"
+
+    if name == "collect_sticker":
+        mid = str(args.get("messageId") or "").strip()
+        entry = None
+        if mid:
+            entry = next(
+                (
+                    e
+                    for e in (history_entries or [])
+                    if str(e.get("message_id")) == mid
+                ),
+                None,
+            )
+        if entry is None:
+            entry = next(
+                (
+                    e
+                    for e in reversed(history_entries or [])
+                    if e.get("image_urls")
+                ),
+                None,
+            )
+        urls = list((entry or {}).get("image_urls") or [])
+        if not urls:
+            return "这条消息里没有图片，换一条带图的试试。"
+        if sticker_catalog is None:
+            return "本地表情库未启用，收藏不了。"
+        data = await AiUtil.download_image_bytes(urls[0])
+        if not data:
+            return "图片下载失败，可能已经过期。"
+        saved = sticker_catalog.save_image(
+            str(args.get("name") or "").strip(), data
+        )
+        if not saved:
+            return "这张图格式不支持，没收。"
+        return f"已收进表情库：{saved}。之后可以用 send_sticker(name) 发它。"
 
     if name == "react":
         mid = args.get("messageId")

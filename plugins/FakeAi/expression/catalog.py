@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 import random
+import re
 import time
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -203,6 +205,43 @@ class StickerCatalog:
         self._remember(picked)
         self.record_use(picked.stem)
         return picked
+
+    def save_image(self, name: str, data: bytes) -> Optional[str]:
+        """把外部图片收进图库（默认落在根目录的松散库）。
+
+        文件名带内容哈希：同一张图重复收藏不会产生副本。
+        返回贴纸名（stem），后续可以直接 send_sticker(name)。
+        """
+        if not data:
+            return None
+        head = data[:16]
+        if head.startswith(b"\xff\xd8"):
+            ext = ".jpg"
+        elif head.startswith(b"\x89PNG"):
+            ext = ".png"
+        elif head[:6] in (b"GIF87a", b"GIF89a"):
+            ext = ".gif"
+        elif head[:4] == b"RIFF" and data[8:12] == b"WEBP":
+            ext = ".webp"
+        else:
+            return None
+
+        digest = hashlib.md5(data).hexdigest()[:16]
+        existing = [p for p in self.root.glob(f"*{digest}*") if p.is_file()]
+        if existing:
+            return existing[0].stem
+
+        safe = re.sub(r'[\\/:*?"<>|\s]+', "_", str(name or "")).strip("_")[:24]
+        stem = f"{safe}-{digest}" if safe else digest
+        target = self.root / f"{stem}{ext}"
+        try:
+            self.root.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(data)
+        except OSError as e:
+            _log.warning("[FakeAi Stickers] 收藏失败: %s", e)
+            return None
+        self.reload()
+        return stem
 
     def prompt_block(self, max_chars: int = 800) -> str:
         names = self.names()
