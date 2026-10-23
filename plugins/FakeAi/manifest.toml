@@ -8,5 +8,6 @@ aiosqlite = "*"
 Pillow = "*"
 PyYAML = "*"
 openai = "*"
+curl_cffi = "*"
 
 [dependencies]

@@ -218,6 +218,11 @@ def apply_from_plugin(plugin) -> None:
     fakeai_mod.AGENT_MAX_ROUNDS = max(
         2, int(plugin.get_config("agent_max_rounds", 12) or 12)
     )
+    try:
+        passive_rate = float(DEFAULT_CONFIG.passive_reply_rate or 0.0)
+    except (TypeError, ValueError):
+        passive_rate = 0.0
+    fakeai_mod.PASSIVE_REPLY_RATE = min(1.0, max(0.0, passive_rate))
     fakeai_mod.PROACTIVE_ENABLED = bool(
         plugin.get_config("proactive_enabled", True)
     )

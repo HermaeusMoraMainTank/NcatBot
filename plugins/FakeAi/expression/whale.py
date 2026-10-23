@@ -16,7 +16,15 @@ import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from io import BytesIO
+
 import aiohttp
+from PIL import Image as PILImage
+
+try:  # 优先 curl_cffi：浏览器 TLS 指纹，图床才不会截断响应
+    from curl_cffi.requests import AsyncSession
+except Exception:  # pragma: no cover - 没装时退回 aiohttp
+    AsyncSession = None
 
 _log = logging.getLogger(__name__)
 
@@ -32,6 +40,50 @@ TMP_DIR = CACHE_DIR / "tmp"
 REFRESH_SECONDS = 12 * 3600
 TMP_MAX_AGE = 48 * 3600
 MAX_BYTES = 12 * 1024 * 1024
+
+
+async def _fetch_bytes(url: str) -> Optional[bytes]:
+    """用浏览器 TLS 指纹拉取。
+
+    aigengtu 的 CDN 对 aiohttp 这类非浏览器指纹会截断响应
+    （content-length 写着 21KB，实际只给 2KB），换 curl_cffi 就正常。
+    """
+    if AsyncSession is None:
+        return await _fetch_bytes_aiohttp(url)
+    try:
+        async with AsyncSession() as session:
+            resp = await session.get(
+                url,
+                impersonate="chrome",
+                headers={"User-Agent": UA},
+                timeout=30,
+                allow_redirects=True,
+            )
+            if resp.status_code != 200:
+                return None
+            data = bytes(resp.content or b"")
+            expected = resp.headers.get("content-length")
+            if expected and expected.isdigit() and len(data) < int(expected):
+                _log.warning("[Whale] 响应被截断：%s (%s/%s)", url, len(data), expected)
+                return None
+            return data
+    except Exception as exc:
+        _log.warning("[Whale] 请求失败 %s：%s", url, exc)
+        return None
+
+
+async def _fetch_bytes_aiohttp(url: str) -> Optional[bytes]:
+    """兜底实现：没有 curl_cffi 时用 aiohttp（部分图床会截断）。"""
+    try:
+        timeout = aiohttp.ClientTimeout(total=30)
+        async with aiohttp.ClientSession(timeout=timeout) as session:
+            async with session.get(url, headers={"User-Agent": UA}) as resp:
+                if resp.status != 200:
+                    return None
+                return await resp.content.read(MAX_BYTES + 1)
+    except Exception as exc:
+        _log.warning("[Whale] 请求失败 %s：%s", url, exc)
+        return None
 
 
 def _looks_like_image(data: bytes) -> bool:
@@ -98,15 +150,10 @@ class WhaleCatalog:
                 if self.load_cache():
                     return self.count()
             try:
-                timeout = aiohttp.ClientTimeout(total=25)
-                async with aiohttp.ClientSession(timeout=timeout) as session:
-                    async with session.get(
-                        INDEX_URL, headers={"User-Agent": UA}
-                    ) as resp:
-                        if resp.status != 200:
-                            raise RuntimeError(f"HTTP {resp.status}")
-                        raw = await resp.text()
-                data = json.loads(raw)
+                blob = await _fetch_bytes(INDEX_URL)
+                if not blob:
+                    raise RuntimeError("索引下载失败")
+                data = json.loads(blob.decode("utf-8"))
                 gallery = data.get("gallery") or {}
                 if not isinstance(gallery, dict) or not gallery:
                     raise RuntimeError("索引结构异常")
@@ -181,14 +228,18 @@ class WhaleCatalog:
             return None
         try:
             TMP_DIR.mkdir(parents=True, exist_ok=True)
-            timeout = aiohttp.ClientTimeout(total=25)
-            async with aiohttp.ClientSession(timeout=timeout) as session:
-                async with session.get(url, headers={"User-Agent": UA}) as resp:
-                    if resp.status != 200:
-                        return None
-                    data = await resp.content.read(MAX_BYTES + 1)
+            data = await _fetch_bytes(url)
+            if not data:
+                return None
             if len(data) > MAX_BYTES or not _looks_like_image(data):
                 _log.debug("[Whale] 下载内容不是图片：%s", url)
+                return None
+            # 图床偶尔断流，拿到半张图；必须真解码一次再发
+            try:
+                with PILImage.open(BytesIO(data)) as probe:
+                    probe.load()
+            except Exception:
+                _log.warning("[Whale] 图片不完整，丢弃：%s (%s bytes)", url, len(data))
                 return None
             suffix = ".jpg"
             if data[:4] == b"RIFF":

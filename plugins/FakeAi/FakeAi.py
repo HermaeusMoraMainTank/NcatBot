@@ -156,6 +156,8 @@ _inflight_groups: set = set()
 
 # 被动触发：已改为状态机 + 分析员；裸 8% 废弃（见 interaction.config.fallback_random_prob）
 PASSIVE_TRIGGER_BASE_PROB = 0.0  # noqa: F841  # 保留名以免外部引用炸；实际不再使用
+# 普通闲聊时插嘴的概率（interaction.passive_reply_rate），1=每句都进决策
+PASSIVE_REPLY_RATE = 0.0
 
 # 允许 FakeAi 响应的群号（空集合表示不限制）— on_load / settings 会覆盖
 FAKEAI_GROUP_MODE = "allowlist"
@@ -1926,8 +1928,12 @@ class FakeAi(NcatBotPlugin):
         else:
             _log.debug(*_state_msg)
 
-        if det.state in (InteractionState.NOT_PRESENT, InteractionState.OBSERVATION):
+        if det.state == InteractionState.OBSERVATION:
             return
+        if det.state == InteractionState.NOT_PRESENT:
+            # 旁观态默认不插嘴；想更活跃就调高 interaction.passive_reply_rate
+            if PASSIVE_REPLY_RATE <= 0 or random.random() >= PASSIVE_REPLY_RATE:
+                return
 
         if det.is_empty_summon:
             _log.info("[FakeAi] 空召唤，不回复 group=%s", group_id)
@@ -1947,12 +1953,22 @@ class FakeAi(NcatBotPlugin):
             return
         _inflight_groups.add(gid)
         try:
-            decision = await analyst_decide(
-                det.state,
-                reply_cache.get_replies(),
-                config=DEFAULT_CONFIG,
-                is_empty_summon=False,
-            )
+            if det.state == InteractionState.NOT_PRESENT and PASSIVE_REPLY_RATE >= 1.0:
+                # 活跃度拉满：不浪费一次分析员调用，直接开口
+                decision = AnalystDecision(
+                    should_reply=True,
+                    urgency="low",
+                    reply_strategy="随口接一句，别抢戏",
+                    topic="群聊闲聊",
+                    source="force",
+                )
+            else:
+                decision = await analyst_decide(
+                    det.state,
+                    reply_cache.get_replies(),
+                    config=DEFAULT_CONFIG,
+                    is_empty_summon=False,
+                )
 
             # FAMILIAR：分析员失败时过渡 fallback
             if (
@@ -1976,6 +1992,20 @@ class FakeAi(NcatBotPlugin):
                     source="fallback",
                 )
 
+            # passive_reply_rate=1 视为「每句都接」，跳过分析员的沉默判定
+            if (
+                not decision.should_reply
+                and det.state == InteractionState.NOT_PRESENT
+                and PASSIVE_REPLY_RATE >= 1.0
+            ):
+                decision = AnalystDecision(
+                    should_reply=True,
+                    urgency="low",
+                    reply_strategy=decision.reply_strategy or "随口接一句，别抢戏",
+                    topic=decision.topic or "群聊闲聊",
+                    source="force",
+                )
+
             if not decision.should_reply:
                 _log.info(
                     "[FakeAi] analyst 否决 group=%s source=%s silence=%s",
@@ -1989,8 +2019,12 @@ class FakeAi(NcatBotPlugin):
             if not await should_reply_by_favorability(
                 int(sender_id), list(FAVOR_SKIP_IDS)
             ):
-                state_store.enter_not_present(gid)
-                return
+                if not (
+                    PASSIVE_REPLY_RATE >= 1.0
+                    and det.state == InteractionState.NOT_PRESENT
+                ):
+                    state_store.enter_not_present(gid)
+                    return
 
             # FAMILIAR：通过决策后再占群 CD
             if det.state == InteractionState.FAMILIAR:
@@ -2259,7 +2293,7 @@ class FakeAi(NcatBotPlugin):
             _log.error("[FakeAi] 处理请求事件失败: %s", e)
 
 
-def _normalize_sticker(path: str) -> str:
+def _normalize_sticker(path: str) -> Optional[str]:
     """把 webp 之类的格式转成 QQ 稳定显示的 png/jpg。
 
     QQ 对 webp 支持不稳（手机端常见空白），表情接口也只认 gif/png 一类；
@@ -2287,8 +2321,8 @@ def _normalize_sticker(path: str) -> str:
                     frame.save(target, format="JPEG", quality=92)
             return str(target)
     except Exception as e:
-        _log.warning("[FakeAi] 表情转码失败，按原文件发送：%s", e)
-        return str(source)
+        _log.warning("[FakeAi] 表情文件无法解码，跳过发送：%s", e)
+        return None
 
 
 async def _send_sticker(plugin: "FakeAi", group_id: int, path: str) -> None:
@@ -2297,7 +2331,10 @@ async def _send_sticker(plugin: "FakeAi", group_id: int, path: str) -> None:
     QQ 的表情接口只认 gif/png 一类，webp/jpg 容易被 retcode 100 拒掉；
     梗鲸图库下载的就是 webp，所以先转码再发，失败再回退普通图片。
     """
-    path = _normalize_sticker(path)
+    normalized = _normalize_sticker(path)
+    if not normalized:
+        return
+    path = normalized
     try:
         await plugin.api.qq.send_group_sticker(group_id, path)
         return
@@ -3121,6 +3158,11 @@ async def answer_ai(
     replace_time_in_system(yaml_data)
     if trigger_type in ("passive", "proactive"):
         context_limit = 8
+    elif trigger_type == "passive" and PASSIVE_REPLY_RATE >= 1.0:
+        agent_dynamic.append(
+            "（本轮必须开口）这是群友的闲聊，接一句，哪怕只回一个字；"
+            "不要 finish、不要沉默。"
+        )
     elif trigger_type == "event":
         context_limit = 10
     else:
@@ -3449,6 +3491,9 @@ async def answer_ai(
             history_entries=history_entries,
             max_total_tokens=AGENT_MAX_TOKENS,
             max_rounds=AGENT_MAX_ROUNDS,
+            force_speak=bool(
+                trigger_type == "passive" and PASSIVE_REPLY_RATE >= 1.0
+            ),
             skill_bridge=skill_bridge,
         )
         if agent_result is not None and agent_result.actions:

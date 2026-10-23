@@ -21,6 +21,8 @@ class InteractionConfig:
 
     analyst_enabled: bool = True
     force_reply_when_summoned: bool = True
+    # 普通闲聊（NOT_PRESENT）时插嘴的概率；0=只在被叫/熟络时回，1=每句都进决策
+    passive_reply_rate: float = 0.0
     # 过渡期：仅 FAMILIAR + 分析员失败时抽卡；终态改 0
     fallback_random_prob: float = 0.03
     analyst_context_limit: int = 10

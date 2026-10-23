@@ -507,6 +507,7 @@ async def run_agent(
     image_base64_list: Optional[list] = None,
     history_entries: Optional[list] = None,
     max_rounds: int = 12,
+    force_speak: bool = False,
     max_total_tokens: int = 60000,
     skill_bridge=None,
 ) -> AgentResult:
@@ -539,6 +540,9 @@ async def run_agent(
     bridge_tools = skill_bridge.tools if skill_bridge is not None else []
     bridge_names = {t["function"]["name"] for t in bridge_tools}
     tools = list(AGENT_TOOLS) + bridge_tools
+    if force_speak:
+        # 强制开口时拿掉 finish，模型就没法用「安静结束」交差
+        tools = [t for t in tools if t["function"]["name"] != "finish"]
 
     for _ in range(max_rounds):
         res = await AiUtil.chat_completion(

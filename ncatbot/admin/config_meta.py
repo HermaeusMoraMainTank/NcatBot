@@ -85,6 +85,7 @@ CONFIG_LABELS: dict[str, str] = {
     "min_participants": "最少参与人数",
     "verbose_log": "详细日志",
     "fallback_random_prob": "兜底随机触发概率",
+    "passive_reply_rate": "普通聊天参与率",
     "analyst_context_limit": "分析员上下文条数",
     "analyst_temperature": "分析员温度",
     "analyst_max_tokens": "分析员最大 Token",
@@ -441,6 +442,7 @@ CONFIG_DESCRIPTIONS: dict[str, str] = {
     "disabled_groups": "这些群里不启用",
     "proactive_probability": "0~1，越大越爱主动说话",
     "sticker_auto_rate": "0~1；这轮模型没发图时，按这个概率自动补一张",
+    "passive_reply_rate": "0=只在被叫/熟络时回；0.3=偶尔插嘴；1=每句话都回",
 }
 
 SECRET_HINTS = ("secret", "token", "password", "cookie", "api_key", "apikey", "private")
