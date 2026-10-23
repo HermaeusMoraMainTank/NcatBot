@@ -107,6 +107,26 @@ AGENT_TOOLS = [
     {
         "type": "function",
         "function": {
+            "name": "spawn_agent",
+            "description": (
+                "派一个子智能体去独立工作区干活（写文件、整理资料、跑多步任务），"
+                "完成后把结果和产物带回来。适合需要好几步才能做完的事。"
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "task": {
+                        "type": "string",
+                        "description": "要子智能体完成的任务，写清楚目标与产出",
+                    },
+                },
+                "required": ["task"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "group_history",
             "description": "翻更早的群聊记录（比 get_recent_messages 更早，存在本地库）。想接旧话题、查某人以前说过什么时用。",
             "parameters": {
@@ -709,7 +729,23 @@ async def run_agent(
                 args = json.loads(call.get("function", {}).get("arguments") or "{}")
             except json.JSONDecodeError:
                 args = {}
-            if skill_bridge is not None and name in bridge_names:
+            if name == "spawn_agent" and skill_bridge is not None:
+                try:
+                    result = await asyncio.wait_for(
+                        skill_bridge.execute(
+                            "invoke_skill",
+                            {
+                                "name": "agent.spawn",
+                                "arguments": {"task": str(args.get("task") or "")},
+                            },
+                        ),
+                        timeout=TOOL_TIMEOUT,
+                    )
+                except asyncio.TimeoutError:
+                    result = f"子智能体超时（>{TOOL_TIMEOUT:.0f}s）"
+                except Exception as e:
+                    result = f"派活失败：{type(e).__name__}: {e}"
+            elif skill_bridge is not None and name in bridge_names:
                 try:
                     result = await asyncio.wait_for(
                         skill_bridge.execute(name, args), timeout=TOOL_TIMEOUT

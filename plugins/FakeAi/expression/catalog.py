@@ -150,6 +150,20 @@ class StickerCatalog:
         if len(self._recent) > 8:
             self._recent = self._recent[-8:]
 
+    def _weighted_choice(
+        self, paths: List[Path], name: Optional[str] = None
+    ) -> Path:
+        """常用的表情更容易被选中（使用次数 +1 做权重）。"""
+        if len(paths) <= 1:
+            return paths[0]
+        weights = [
+            1 + int(self._usage.get(name or p.stem) or 0) for p in paths
+        ]
+        try:
+            return random.choices(paths, weights=weights, k=1)[0]
+        except (ValueError, IndexError):
+            return random.choice(paths)
+
     def pick(self, name: str) -> Optional[Path]:
         target = str(name or "").strip()
         if not target:
@@ -157,7 +171,7 @@ class StickerCatalog:
         for items in self._visible().values():
             paths = items.get(target)
             if paths:
-                picked = random.choice(paths)
+                picked = self._weighted_choice(paths, target)
                 self._remember(picked)
                 self.record_use(target)
                 return picked
@@ -177,7 +191,8 @@ class StickerCatalog:
         if not chosen:
             return None
         fresh = [p for p in chosen if p not in self._recent]
-        picked = random.choice(fresh or chosen)
+        pool = fresh or chosen
+        picked = self._weighted_choice(pool, None)
         self._remember(picked)
         self.record_use(picked.stem)
         return picked

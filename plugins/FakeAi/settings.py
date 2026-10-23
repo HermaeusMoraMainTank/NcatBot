@@ -269,12 +269,12 @@ def apply_from_plugin(plugin) -> None:
 
     _log.info(
         (
-            "[FakeAi] 配置已加载 groups=%s aliases=%s obs=%ss cd=%ss "
+            "[FakeAi] 配置已加载 groups=%s aliases=%s tier=%s cd=%ss "
             "stickers=%s vision_cache=%s/%sd"
         ),
         list(allowed) if group_mode == "allowlist" else "ALL",
         aliases,
-        new_inter.observation_sec,
+        new_inter.trigger_tier,
         new_inter.group_cd_sec,
         catalog_path,
         "ON" if VISION_CACHE_ENABLED else "OFF",
