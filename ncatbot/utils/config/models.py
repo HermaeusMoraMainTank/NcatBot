@@ -108,6 +108,8 @@ class SandboxConfig(BaseConfig):
     """auto / process / bwrap；auto 在 Linux 有 bwrap 时自动使用。"""
     network: bool = False
     """bwrap 后端是否允许子进程联网。"""
+    allowed_commands: list[str] = []
+    """子进程命令白名单（按可执行文件名匹配）；空列表表示一个都不允许。"""
 
 
 class AIConfig(BaseConfig):

@@ -2652,17 +2652,23 @@ def replace_time_in_system(yaml_data: Dict) -> None:
         yaml_data["input"] = input_content.replace("{time}", current_time)
 
 
-def _reply_content_to_text(content) -> str:
-    """从 reply 的 content 字段（可能是 str 或消息段 list）提取纯文本用于展示"""
+def _reply_content_to_text(content, message_id: str = "") -> str:
+    """从 reply 的 content 字段提取展示文本；图片只留锚点，要看再物化。"""
     if isinstance(content, str):
         return content
     if isinstance(content, list):
         text_parts = []
         for seg in content:
-            if isinstance(seg, dict) and seg.get("type") == "text":
+            if not isinstance(seg, dict):
+                continue
+            kind = seg.get("type")
+            if kind == "text":
                 text = seg.get("data", {}).get("text", "")
                 if text:
                     text_parts.append(text)
+            elif kind == "image":
+                anchor = f"[图片#{message_id}]" if message_id else "[图片]"
+                text_parts.append(anchor)
         return " ".join(text_parts)
     return str(content) if content else ""
 
@@ -2687,7 +2693,9 @@ def update_yaml_with_replies(
                 sub_source = data.get("sub_source", "")
                 name = data.get("group_nickname") or data.get("name", "")
                 uid = str(data.get("id", ""))
-                text = _reply_content_to_text(data.get("content", ""))
+                text = _reply_content_to_text(
+                    data.get("content", ""), str(data.get("message_id") or "")
+                )
                 ts = data.get("ts")
                 if isinstance(ts, (int, float)) and ts > 0:
                     stamp = datetime.fromtimestamp(ts).strftime("%H:%M")

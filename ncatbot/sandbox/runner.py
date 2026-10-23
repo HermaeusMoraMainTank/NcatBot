@@ -86,11 +86,18 @@ class SandboxRunner:
         backend: str = "auto",
         max_output: int = 64_000,
         network: bool = False,
+        allowed_commands: list[str] | None = None,
     ) -> None:
         self.allow_subprocess = allow_subprocess
         self.backend = backend
         self.max_output = max_output
         self.network = network
+        # 命令白名单：空列表 = 一个都不许跑
+        self.allowed_commands = {
+            str(item).strip().lower()
+            for item in (allowed_commands or [])
+            if str(item).strip()
+        }
         self._bwrap = _detect_bwrap()
 
     def describe(self) -> dict[str, Any]:
@@ -100,6 +107,7 @@ class SandboxRunner:
             "effective_backend": self._effective_backend(),
             "bwrap": self._bwrap,
             "network": self.network,
+            "allowed_commands": sorted(self.allowed_commands),
         }
 
     def _effective_backend(self) -> str:
@@ -171,6 +179,17 @@ class SandboxRunner:
             )
         if not argv or not isinstance(argv, list):
             return RunResult(returncode=-1, stderr="argv 必须是非空列表", backend="process")
+        head = Path(str(argv[0])).name.lower()
+        if not self.allowed_commands or head not in self.allowed_commands:
+            return RunResult(
+                returncode=-1,
+                stderr=(
+                    f"命令 {head} 不在白名单里"
+                    f"（sandbox.allowed_commands={sorted(self.allowed_commands)}）"
+                ),
+                backend="policy",
+                argv=list(argv),
+            )
         workdir = Path(cwd).resolve()
         workdir.mkdir(parents=True, exist_ok=True)
         backend = self._effective_backend()

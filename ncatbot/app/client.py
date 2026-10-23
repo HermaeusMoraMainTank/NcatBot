@@ -128,6 +128,9 @@ class BotClient:
                 allow_subprocess=bool(getattr(sandbox_cfg, "allow_subprocess", False)),
                 backend=str(getattr(sandbox_cfg, "backend", "auto") or "auto"),
                 network=bool(getattr(sandbox_cfg, "network", False)),
+                allowed_commands=list(
+                    getattr(sandbox_cfg, "allowed_commands", []) or []
+                ),
             ),
             max_rounds=int(getattr(agent_cfg, "max_rounds", 8) or 8),
             max_tool_calls=int(getattr(agent_cfg, "max_tool_calls", 20) or 20),
