@@ -53,6 +53,9 @@ from .settings import (
 
 _log = get_log()
 BOT_QQ = DEFAULT_CONFIG.bot_qq
+# 事件里实际登录的 QQ（首次收到消息后自动校准，配置写错也不会影响 @ 识别）
+ACTUAL_BOT_QQ = ""
+_bot_qq_warned = False
 
 
 def _stamp_reply_dict(payload: dict) -> str:
@@ -1716,6 +1719,21 @@ class FakeAi(NcatBotPlugin):
         # 检查消息是否来自排除的插件
         if await self._is_from_excluded_plugin(input):
             return
+
+        # 用事件里的 self_id 校准机器人 QQ：配置里的 bot_qq 过时就识别不到 @
+        global BOT_QQ, ACTUAL_BOT_QQ, _bot_qq_warned
+        event_self_id = str(getattr(input, "self_id", "") or "")
+        if event_self_id and event_self_id != ACTUAL_BOT_QQ:
+            ACTUAL_BOT_QQ = event_self_id
+            if event_self_id != BOT_QQ:
+                if not _bot_qq_warned:
+                    _log.warning(
+                        "[FakeAi] 配置的 bot_qq=%s 与实际登录 QQ=%s 不一致，已按实际 QQ 识别 @",
+                        BOT_QQ,
+                        event_self_id,
+                    )
+                    _bot_qq_warned = True
+                BOT_QQ = event_self_id
 
         group_id = input.group_id
         sender_id = input.sender.user_id

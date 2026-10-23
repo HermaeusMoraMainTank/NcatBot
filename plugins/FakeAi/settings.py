@@ -259,7 +259,8 @@ def apply_from_plugin(plugin) -> None:
     fakeai_mod.typing_delay_per_char = float(
         plugin.get_config("typing_delay_per_char", 0.1)
     )
-    fakeai_mod.BOT_QQ = bot_qq
+    # 运行时已经由事件校准过的话，以实际登录 QQ 为准
+    fakeai_mod.BOT_QQ = getattr(fakeai_mod, "ACTUAL_BOT_QQ", "") or bot_qq
     fakeai_mod.VISION_CACHE_ENABLED = VISION_CACHE_ENABLED
     fakeai_mod.VISION_CACHE_RETENTION_DAYS = VISION_CACHE_RETENTION_DAYS
     fakeai_mod.FakeAi.frozen_users = list(FROZEN_USERS)
