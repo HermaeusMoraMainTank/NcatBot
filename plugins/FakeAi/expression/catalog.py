@@ -44,6 +44,10 @@ class StickerCatalog:
         self._usage_path = Path("data/fakeai/sticker_usage.json")
         self._usage_dirty = 0
         self._load_usage()
+        # 表情备注：模型自己写的「这张图什么意思、什么时候用」
+        self._notes: Dict[str, str] = {}
+        self._notes_path = Path("data/fakeai/sticker_notes.json")
+        self._load_notes()
 
     # ---- 加载 ----
 
@@ -85,6 +89,58 @@ class StickerCatalog:
     # ---- 查询 ----
 
     # ---- 使用次数 ----
+
+    def _load_notes(self) -> None:
+        try:
+            if self._notes_path.is_file():
+                data = json.loads(self._notes_path.read_text(encoding="utf-8"))
+                if isinstance(data, dict):
+                    self._notes = {
+                        str(k): str(v) for k, v in data.items() if str(v).strip()
+                    }
+        except Exception as e:
+            _log.debug("[FakeAi Stickers] 读取表情备注失败: %s", e)
+
+    def _save_notes(self) -> None:
+        try:
+            self._notes_path.parent.mkdir(parents=True, exist_ok=True)
+            self._notes_path.write_text(
+                json.dumps(self._notes, ensure_ascii=False, indent=1),
+                encoding="utf-8",
+            )
+        except Exception as e:
+            _log.debug("[FakeAi Stickers] 保存表情备注失败: %s", e)
+
+    def note(self, name: str) -> str:
+        return self._notes.get(str(name or "").strip(), "")
+
+    def set_note(self, name: str, note: str) -> bool:
+        """给表情写一句用途说明；名字必须在图库里，否则拒绝。"""
+        key = str(name or "").strip()
+        if not key or key not in self.names():
+            return False
+        text = str(note or "").strip()[:60]
+        if text:
+            self._notes[key] = text
+        else:
+            self._notes.pop(key, None)
+        self._save_notes()
+        return True
+
+    def label(self, name: str) -> str:
+        note = self.note(name)
+        return f"{name}（{note}）" if note else str(name)
+
+    def find(self, name: str) -> Optional[Path]:
+        """按名字找一张图（不记使用次数，供查看/备注用）。"""
+        target = str(name or "").strip()
+        if not target:
+            return None
+        for items in self._visible().values():
+            paths = items.get(target)
+            if paths:
+                return paths[0]
+        return None
 
     def _load_usage(self) -> None:
         try:
@@ -247,7 +303,7 @@ class StickerCatalog:
         names = self.names()
         if not names:
             return ""
-        listing = "、".join(names)
+        listing = "、".join(self.label(n) for n in names)
         if len(listing) > max_chars:
             listing = listing[: max_chars - 1] + "…"
         libs = "、".join(self._visible())

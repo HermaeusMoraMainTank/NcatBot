@@ -9,6 +9,7 @@ import logging
 import re
 import time
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Optional
 
 from common.utils.AiUtil import AiUtil
@@ -290,6 +291,38 @@ AGENT_TOOLS = [
                     "query": {"type": "string", "description": "检索词，可为空"},
                     "userId": {"type": "string", "description": "目标 QQ 号，可选"},
                 },
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_sticker_image",
+            "description": "看一眼自己表情库里某张图长什么样（需要图名）。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string", "description": "贴纸名"}
+                },
+                "required": ["name"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "sticker_note",
+            "description": "给表情写一句用途备注（例如「嘲讽」「无语」「晚安」），下次挑图更容易。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string", "description": "贴纸名"},
+                    "note": {
+                        "type": "string",
+                        "description": "用途或情绪，20 字以内；传空字符串表示删除备注",
+                    },
+                },
+                "required": ["name"],
             },
         },
     },
@@ -737,6 +770,47 @@ async def _execute_tool(
                 except Exception as e:
                     _log.debug("[FakeAi] 识图缓存写入失败: %s", e)
         return "\n---\n".join(descriptions) or "图片识别失败"
+
+    if name == "get_sticker_image":
+        target = str(args.get("name") or "").strip()
+        if sticker_catalog is None:
+            return "本地表情库未启用。"
+        path = sticker_catalog.find(target)
+        if path is None:
+            names = sticker_catalog.names()[:30]
+            return f"没有这个贴纸：{target}。可用：{'、'.join(names)}"
+        if not await AiUtil.vision_available():
+            return "我看不了图片，只能按名字和备注猜。"
+        try:
+            data = await asyncio.to_thread(lambda: Path(path).read_bytes())
+        except OSError as e:
+            return f"读取图片失败：{e}"
+        b64 = await asyncio.to_thread(AiUtil.image_bytes_to_base64, data)
+        if not b64:
+            return "这张图格式不支持预览。"
+        result = await AiUtil.chat_with_vision(
+            "简洁描述这张表情包：画面内容 + 传达的情绪，40 字内。",
+            image_base64_list=[b64],
+            max_tokens=120,
+        )
+        if not result or not result.get("content"):
+            return "没看出这张图是什么。"
+        desc = result["content"].strip()
+        current = sticker_catalog.note(target)
+        suffix = f"（当前备注：{current}）" if current else ""
+        return f"{target}：{desc}{suffix}"
+
+    if name == "sticker_note":
+        target = str(args.get("name") or "").strip()
+        note = str(args.get("note") or "").strip()
+        if sticker_catalog is None:
+            return "本地表情库未启用。"
+        if not sticker_catalog.set_note(target, note):
+            names = sticker_catalog.names()[:30]
+            return f"没有这个贴纸：{target}。可用：{'、'.join(names)}"
+        if note:
+            return f"已记下：{target} → {note[:60]}"
+        return f"已清掉 {target} 的备注"
 
     if name == "read_forward":
         mid = str(args.get("messageId") or "").strip()

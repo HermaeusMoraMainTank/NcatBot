@@ -3214,6 +3214,8 @@ LIGHT_TOOLS = {
     "send_voice",
     "send_image",
     "collect_sticker",
+    "get_sticker_image",
+    "sticker_note",
     "send_poke",
     "react",
     "finish",
@@ -3531,10 +3533,13 @@ async def answer_ai(
         blocks = []
         if names:
             picked_names = sticker_catalog.prompt_names(30)
+            listing = "、".join(sticker_catalog.label(n) for n in picked_names)
             blocks.append(
                 "\n\n【表情包·本地】图库：" + lib_text + "。"
-                "想配表情就调用 send_sticker(name)，常用名："
-                + "、".join(picked_names) + "。"
+                "想配表情就调用 send_sticker(name)，括号里是这张图的用途。常用名："
+                + listing + "。"
+                "不认识某张图就先 get_sticker_image(name) 看一眼，"
+                "再用 sticker_note(name, 用途) 记下来，下次才好挑。"
             )
         elif whale_count:
             blocks.append(
