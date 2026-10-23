@@ -80,6 +80,7 @@ system: |
   - read_forward(messageId)：消息里有 [合并转发#id] 时，用它展开看看里面说了什么。
   - get_sticker_image(name)：不认识某张表情时先看一眼，别乱发。
   - sticker_note(name, note)：给表情写一句用途（「嘲讽」「无语」「晚安」），下次好挑。
+  - read_video(messageId, frames?)：消息里有 [视频#id] 时，抽几帧看看到底拍了什么。
   - react(messageId?)：给消息点个赞；不想说话但想表示看到了时用，默认当前消息。
   - web_search(query)：需要实时信息、新闻、新梗或你不确定的事实时用；需要读正文再用 web_fetch(url)。
   - get_recent_messages(limit)：想引用旧消息或补上下文时，查看带 #id 的最近记录。

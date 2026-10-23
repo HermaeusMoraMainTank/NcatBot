@@ -75,12 +75,29 @@ def _collect_image_urls(content: list) -> list:
     return urls
 
 
-def _mark_images_without_vision(content: list) -> list:
-    """agent 模式不再预描述图片，历史里只留 [图片] 占位。"""
+def _collect_video_urls(content: list) -> list:
+    """收集当前消息里的视频 URL / 本地路径。"""
+    urls = []
     for item in content or []:
-        if isinstance(item, dict) and item.get("type") == "image":
+        if isinstance(item, dict) and item.get("type") == "video":
+            data = item.get("data") or {}
+            url = data.get("url") or data.get("file") or data.get("path") or ""
+            if url:
+                urls.append(str(url))
+    return urls
+
+
+def _mark_images_without_vision(content: list) -> list:
+    """agent 模式不再预描述图片，历史里只留 [图片]/[视频] 占位。"""
+    for item in content or []:
+        if not isinstance(item, dict):
+            continue
+        if item.get("type") == "image":
             item.clear()
             item.update({"type": "text", "data": {"text": "[图片]"}})
+        elif item.get("type") == "video":
+            item.clear()
+            item.update({"type": "text", "data": {"text": "[视频]"}})
     return content
 
 
@@ -1837,8 +1854,10 @@ class FakeAi(NcatBotPlugin):
         # —— 统一入账后走状态机（取消裸 8% 抽卡）——
         reply_cache = group_reply_caches.setdefault(group_id, ReplyCache())
         image_urls = []
+        video_urls = []
         if USE_DS_AGENT:
             image_urls = _collect_image_urls(content)
+            video_urls = _collect_video_urls(content)
             content = _mark_images_without_vision(content)
         else:
             content = await self._process_image_descriptions(
@@ -1851,6 +1870,7 @@ class FakeAi(NcatBotPlugin):
                 "content": content,
                 "group_nickname": input.sender.card or sender_name,
                 "image_urls": image_urls,
+                "video_urls": video_urls,
                 "message_id": input.message_id,
             }
         )
@@ -3221,6 +3241,7 @@ LIGHT_TOOLS = {
     "finish",
     "get_recent_messages",
     "get_message_images",
+    "read_video",
     "read_forward",
     "group_history",
     "schedule_message",

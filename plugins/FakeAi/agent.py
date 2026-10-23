@@ -6,7 +6,10 @@ import asyncio
 import hashlib
 import json
 import logging
+import os
 import re
+import shutil
+import tempfile
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -297,6 +300,24 @@ AGENT_TOOLS = [
     {
         "type": "function",
         "function": {
+            "name": "read_video",
+            "description": "看一段视频：自动抽几帧后描述画面内容。需要消息 #id。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "messageId": {"type": "string", "description": "含视频的消息 #id"},
+                    "frames": {
+                        "type": "integer",
+                        "description": "抽几帧，默认 4，最多 6",
+                    },
+                },
+                "required": ["messageId"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "get_sticker_image",
             "description": "看一眼自己表情库里某张图长什么样（需要图名）。",
             "parameters": {
@@ -435,6 +456,113 @@ def _clean_qq_text(text: str) -> str:
     s = re.sub(r"^\s*[-*+]\s+", "", s, flags=re.M)
     s = re.sub(r"\n{3,}", "\n\n", s)
     return s.strip()
+
+
+def _ffmpeg_bin(name: str = "ffmpeg") -> str:
+    """找 ffmpeg/ffprobe：PATH → 用户目录 → winget Links。"""
+    found = shutil.which(name)
+    if found:
+        return found
+    exe = ".exe" if os.name == "nt" else ""
+    candidates = []
+    home = os.environ.get("USERPROFILE") or os.path.expanduser("~")
+    if home:
+        candidates.append(Path(home) / "ffmpeg" / "bin" / f"{name}{exe}")
+    local = os.environ.get("LOCALAPPDATA") or ""
+    if local:
+        candidates.append(Path(local) / "ffmpeg" / "bin" / f"{name}{exe}")
+        candidates.append(
+            Path(local) / "Microsoft" / "WinGet" / "Links" / f"{name}{exe}"
+        )
+    for candidate in candidates:
+        if candidate.is_file():
+            return str(candidate)
+    return ""
+
+
+async def _run_ffmpeg(
+    args: list[str], timeout: float = 25.0, want_stdout: bool = False
+) -> tuple[int, str]:
+    try:
+        proc = await asyncio.create_subprocess_exec(
+            *args,
+            stdout=asyncio.subprocess.PIPE if want_stdout else asyncio.subprocess.DEVNULL,
+            stderr=asyncio.subprocess.PIPE,
+        )
+    except Exception as e:
+        return 127, f"{type(e).__name__}: {e}"
+    try:
+        stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=timeout)
+    except asyncio.TimeoutError:
+        proc.kill()
+        return 124, "timeout"
+    if want_stdout:
+        return proc.returncode or 0, (stdout or b"").decode("utf-8", "ignore")[:500]
+    return proc.returncode or 0, (stderr or b"").decode("utf-8", "ignore")[:300]
+
+
+async def _video_duration(path: Path) -> float:
+    ffprobe = _ffmpeg_bin("ffprobe")
+    if not ffprobe:
+        return 0.0
+    code, out = await _run_ffmpeg(
+        [
+            ffprobe,
+            "-v",
+            "error",
+            "-show_entries",
+            "format=duration",
+            "-of",
+            "csv=p=0",
+            str(path),
+        ],
+        timeout=15.0,
+        want_stdout=True,
+    )
+    if code != 0:
+        return 0.0
+    try:
+        return float(str(out).strip().splitlines()[0])
+    except (ValueError, IndexError):
+        return 0.0
+
+
+async def _video_frames(path: Path, count: int = 4) -> list[Path]:
+    """抽 count 帧到临时目录；没装 ffmpeg 返回空列表。"""
+    ffmpeg = _ffmpeg_bin("ffmpeg")
+    if not ffmpeg:
+        return []
+    count = max(1, min(6, int(count or 4)))
+    duration = await _video_duration(path)
+    if duration > 0:
+        times = [duration * (i + 1) / (count + 1) for i in range(count)]
+    else:
+        times = [0, 2, 5, 8, 12, 16][:count]
+    out_dir = Path(tempfile.mkdtemp(prefix="ncatbot-video-"))
+    frames: list[Path] = []
+    for idx, ts in enumerate(times):
+        target = out_dir / f"f{idx}.jpg"
+        code, _ = await _run_ffmpeg(
+            [
+                ffmpeg,
+                "-hide_banner",
+                "-loglevel",
+                "error",
+                "-ss",
+                f"{ts:.2f}",
+                "-i",
+                str(path),
+                "-frames:v",
+                "1",
+                "-vf",
+                "scale=640:-2",
+                "-y",
+                str(target),
+            ]
+        )
+        if code == 0 and target.is_file() and target.stat().st_size > 0:
+            frames.append(target)
+    return frames
 
 
 def _forward_res_id(content) -> str:
@@ -770,6 +898,83 @@ async def _execute_tool(
                 except Exception as e:
                     _log.debug("[FakeAi] 识图缓存写入失败: %s", e)
         return "\n---\n".join(descriptions) or "图片识别失败"
+
+    if name == "read_video":
+        mid = str(args.get("messageId") or "").strip()
+        urls: list[str] = []
+        if mid:
+            entry = next(
+                (
+                    e
+                    for e in (history_entries or [])
+                    if str(e.get("message_id")) == mid
+                ),
+                None,
+            )
+            urls = list((entry or {}).get("video_urls") or [])
+        if not urls:
+            return "这条消息里没有视频，或者视频已经过期。"
+        if not _ffmpeg_bin("ffmpeg"):
+            return "本机没装 ffmpeg，看不了视频。"
+        if not await AiUtil.vision_available():
+            return "我看不了画面，只能告诉你这里有个视频。"
+
+        url = urls[0]
+        temp_path: Optional[Path] = None
+        frame_dir: Optional[Path] = None
+        try:
+            if url.startswith(("http://", "https://")):
+                data = await AiUtil.download_image_bytes(
+                    url, max_bytes=40 * 1024 * 1024
+                )
+                if not data:
+                    return "视频下载失败，可能已经过期。"
+                fd, name = tempfile.mkstemp(prefix="ncatbot-video-", suffix=".mp4")
+                with os.fdopen(fd, "wb") as fh:
+                    fh.write(data)
+                temp_path = Path(name)
+                path = temp_path
+            else:
+                raw = url[7:] if url.startswith("file://") else url
+                path = Path(raw)
+                if not path.is_file():
+                    return "视频文件不存在，可能已经被清理。"
+
+            frames = await _video_frames(
+                path, int(args.get("frames", 4) or 4)
+            )
+            if not frames:
+                return "抽帧失败，视频可能损坏或格式不支持。"
+            frame_dir = frames[0].parent
+
+            b64s: list[str] = []
+            for frame in frames:
+                raw_bytes = await asyncio.to_thread(frame.read_bytes)
+                b64 = await asyncio.to_thread(
+                    AiUtil.image_bytes_to_base64, raw_bytes
+                )
+                if b64:
+                    b64s.append(b64)
+            if not b64s:
+                return "画面转码失败，看不了。"
+
+            result = await AiUtil.chat_with_vision(
+                f"这是一段视频按时间顺序抽的 {len(b64s)} 帧。"
+                "用两三句话说清楚画面里发生了什么、有哪些人和物。",
+                image_base64_list=b64s,
+                max_tokens=260,
+            )
+            if not result or not result.get("content"):
+                return "画面识别失败。"
+            return result["content"].strip()
+        finally:
+            if frame_dir is not None:
+                shutil.rmtree(frame_dir, ignore_errors=True)
+            if temp_path is not None:
+                try:
+                    temp_path.unlink(missing_ok=True)
+                except OSError:
+                    pass
 
     if name == "get_sticker_image":
         target = str(args.get("name") or "").strip()
