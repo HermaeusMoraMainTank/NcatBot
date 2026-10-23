@@ -19,6 +19,8 @@ from aiohttp import web
 from ncatbot.sandbox import mask_mapping, merge_keep_secrets, unmask_guard
 from ncatbot.utils import get_log
 
+from .config_meta import build_fields
+
 LOG = get_log("AdminServer")
 
 _LOOPBACK = {"127.0.0.1", "::1", "localhost"}
@@ -133,6 +135,32 @@ class AdminServer:
         app.router.add_get("/api/sandbox/workspaces", self._sandboxes)
         app.router.add_post("/api/sandbox/cleanup", self._sandbox_cleanup)
         app.router.add_get("/api/config", self._config)
+        app.router.add_post("/api/auth", self._auth)
+        # McFish 钓鱼面板（并入统一后台）
+        app.router.add_get("/api/mcfish/session", self._mcfish_session)
+        app.router.add_get("/api/mcfish/groups", self._mcfish_groups)
+        app.router.add_get(
+            "/api/mcfish/groups/{group_id}/players", self._mcfish_group_players
+        )
+        app.router.add_get("/api/mcfish/players/{user_id}", self._mcfish_player)
+        app.router.add_get("/api/mcfish/items", self._mcfish_items)
+        app.router.add_post(
+            "/api/mcfish/players/{user_id}/grant", self._mcfish_grant
+        )
+        app.router.add_post(
+            "/api/mcfish/players/{user_id}/balance", self._mcfish_balance
+        )
+        app.router.add_get("/api/mcfish/shop/today", self._mcfish_shop)
+        app.router.add_put(
+            "/api/mcfish/shop/today/listings", self._mcfish_listing
+        )
+        app.router.add_put(
+            "/api/mcfish/shop/today/discounts", self._mcfish_discounts
+        )
+        app.router.add_get("/api/mcfish/audit", self._mcfish_audit)
+        app.router.add_get("/mcfish-assets/{item_name}", self._mcfish_item_asset)
+        app.router.add_get("/mcfish-avatar/{kind}/{avatar_id}", self._mcfish_avatar)
+        app.router.add_get("/mcfish-panel", self._mcfish_panel)
         app.router.add_post("/mcp", self._mcp)
         app.router.add_get("/", self._index)
         app.router.add_get("/{path:.*}", self._index)
@@ -155,6 +183,25 @@ class AdminServer:
         if self._authorized(request):
             return None
         return web.json_response({"ok": False, "error": "未授权"}, status=401)
+
+    async def _auth(self, request: web.Request) -> web.Response:
+        """校验令牌并写入 cookie：iframe、图片等无法带 header 的请求靠它。"""
+        try:
+            body = await self._body(request)
+        except (TypeError, ValueError) as exc:
+            return self._err(str(exc), 400)
+        token = str(body.get("token") or "")
+        if not token or not hmac.compare_digest(token, self.token):
+            return self._err("令牌无效", 401)
+        response = self._ok({"ok": True})
+        response.set_cookie(
+            "ncatbot_admin",
+            self.token,
+            httponly=True,
+            samesite="Strict",
+            max_age=30 * 86400,
+        )
+        return response
 
     @staticmethod
     def _dumps(value: Any) -> str:
@@ -398,6 +445,14 @@ class AdminServer:
                 "description": getattr(plugin, "description", "")
                 or (manifest.description if manifest else ""),
                 "config": config,
+                "fields": build_fields(
+                    config,
+                    labels=getattr(plugin, "config_labels", None) if plugin else None,
+                    choices=getattr(plugin, "config_choices", None) if plugin else None,
+                    descriptions=getattr(plugin, "config_descriptions", None)
+                    if plugin
+                    else None,
+                ),
                 "skills": [
                     s.describe_entry()
                     for s in self.bot.skills.all()
@@ -452,6 +507,195 @@ class AdminServer:
             return {"plugin": name, "ok": bool(ok)}
 
         return await self._run(request, action)
+
+    # ------------------------------------------------------------------
+    # McFish 钓鱼面板（并入统一后台，不再单独开端口）
+    # ------------------------------------------------------------------
+
+    def _mcfish_service(self) -> Any:
+        plugin = self.bot.plugin_loader.plugins.get("McFish")
+        service = getattr(plugin, "admin_service", None) if plugin else None
+        if service is None:
+            raise KeyError("McFish 未加载或未启用管理面板")
+        if not bool(plugin.get_config("admin_enabled", True)):
+            raise KeyError("McFish 管理面板已关闭（admin_enabled=false）")
+        return service
+
+    @staticmethod
+    def _mcfish_operator(request: web.Request) -> str:
+        return f"admin@{request.remote or 'local'}"
+
+    async def _mcfish_session(self, request: web.Request) -> web.Response:
+        def build() -> dict[str, Any]:
+            self._mcfish_service()
+            return {"name": "McFish", "admin_enabled": True}
+
+        return await self._run(request, build)
+
+    async def _mcfish_groups(self, request: web.Request) -> web.Response:
+        return await self._run(
+            request,
+            lambda: self._mcfish_service().groups(request.query.get("search", "")),
+        )
+
+    async def _mcfish_group_players(self, request: web.Request) -> web.Response:
+        return await self._run(
+            request,
+            lambda: self._mcfish_service().group_players(
+                request.match_info["group_id"], request.query.get("search", "")
+            ),
+        )
+
+    async def _mcfish_player(self, request: web.Request) -> web.Response:
+        return await self._run(
+            request, lambda: self._mcfish_service().player(request.match_info["user_id"])
+        )
+
+    async def _mcfish_items(self, request: web.Request) -> web.Response:
+        return await self._run(request, lambda: self._mcfish_service().grantable_items())
+
+    async def _mcfish_shop(self, request: web.Request) -> web.Response:
+        return await self._run(request, lambda: self._mcfish_service().shop_today())
+
+    async def _mcfish_audit(self, request: web.Request) -> web.Response:
+        return await self._run(
+            request,
+            lambda: self._mcfish_service().audit(request.query.get("limit", 100)),
+        )
+
+    async def _mcfish_grant(self, request: web.Request) -> web.Response:
+        async def action() -> Any:
+            body = await self._body(request)
+            name = body.get("item") or body.get("name")
+            if not name:
+                raise ValueError("缺少 item 字段")
+            result = await self._mcfish_service().grant_item(
+                request.match_info["user_id"],
+                str(name),
+                int(body.get("quantity", 0)),
+                self._mcfish_operator(request),
+                rod_attributes=body.get("rod_attributes") or body.get("attributes"),
+            )
+            self._record(request, "mcfish.grant", {"item": str(name)})
+            return result
+
+        return await self._run(request, action)
+
+    async def _mcfish_balance(self, request: web.Request) -> web.Response:
+        async def action() -> Any:
+            body = await self._body(request)
+            mode = body.get("mode")
+            amount = body.get("amount")
+            if amount is None and body.get("delta") is not None:
+                delta = int(body["delta"])
+                mode = "grant" if delta > 0 else "deduct"
+                amount = abs(delta)
+            if not mode or amount is None:
+                raise ValueError("缺少金币操作类型或数量")
+            result = await self._mcfish_service().adjust_balance(
+                request.match_info["user_id"],
+                str(mode),
+                int(amount),
+                self._mcfish_operator(request),
+                str(body.get("note", "")),
+            )
+            self._record(request, "mcfish.balance", {"mode": str(mode), "amount": amount})
+            return result
+
+        return await self._run(request, action)
+
+    async def _mcfish_listing(self, request: web.Request) -> web.Response:
+        async def action() -> Any:
+            body = await self._body(request)
+            name = body.get("item") or body.get("name")
+            if not name:
+                raise ValueError("缺少 item 字段")
+            result = self._mcfish_service().set_listing(
+                str(name),
+                int(body.get("price", 0)),
+                int(body.get("stock", 0)),
+                self._mcfish_operator(request),
+                rod_attributes=body.get("rod_attributes") or body.get("attributes"),
+            )
+            self._record(request, "mcfish.listing", {"item": str(name)})
+            return result
+
+        return await self._run(request, action)
+
+    async def _mcfish_discounts(self, request: web.Request) -> web.Response:
+        async def action() -> Any:
+            body = await self._body(request)
+            updates = body.get("discounts", body)
+            if not isinstance(updates, dict):
+                raise TypeError("discounts 必须是商品名到倍率的对象")
+            result = self._mcfish_service().set_discounts(
+                updates, self._mcfish_operator(request)
+            )
+            self._record(request, "mcfish.discounts", {"count": len(updates)})
+            return result
+
+        return await self._run(request, action)
+
+    async def _mcfish_item_asset(self, request: web.Request) -> web.StreamResponse:
+        guard = await self._guard(request)
+        if guard is not None:
+            return guard
+        plugin = self.bot.plugin_loader.plugins.get("McFish")
+        if plugin is None:
+            return self._err("McFish 未加载", 404)
+        from urllib.parse import unquote
+
+        name = unquote(request.match_info["item_name"])
+        if name not in plugin._grantable_item_names():
+            return self._err("物品不存在", 404)
+        path = plugin._item_image(name)
+        if path is None or not Path(path).is_file():
+            return self._err("该物品暂无图标", 404)
+        return web.FileResponse(path)
+
+    async def _mcfish_avatar(self, request: web.Request) -> web.StreamResponse:
+        guard = await self._guard(request)
+        if guard is not None:
+            return guard
+        from urllib.parse import unquote
+
+        from common.utils.CommonUtil import CommonUtil
+
+        kind = request.match_info["kind"]
+        avatar_id = unquote(request.match_info["avatar_id"])
+        if kind not in {"user", "group"} or not avatar_id.isdigit():
+            return self._err("头像对象不存在", 404)
+        getter = CommonUtil.get_avatar if kind == "user" else CommonUtil.get_group_avatar
+        path = await asyncio.to_thread(getter, avatar_id)
+        if not path or not Path(path).is_file():
+            return self._err("头像暂不可用", 404)
+        return web.FileResponse(path)
+
+    async def _mcfish_panel(self, request: web.Request) -> web.StreamResponse:
+        plugin = self.bot.plugin_loader.plugins.get("McFish")
+        panel = None
+        if plugin is not None:
+            manifest = getattr(plugin, "_manifest", None)
+            base = getattr(manifest, "plugin_path", None)
+            if base is not None:
+                candidate = Path(base) / "admin" / "index.html"
+                if candidate.is_file():
+                    panel = candidate
+        if panel is None:
+            candidate = (
+                Path(__file__).resolve().parent.parent.parent
+                / "plugins"
+                / "McFish"
+                / "admin"
+                / "index.html"
+            )
+            if candidate.is_file():
+                panel = candidate
+        if panel is None:
+            return self._err("钓鱼面板资源不存在", 503)
+        response = web.FileResponse(panel)
+        response.headers["Cache-Control"] = "no-store"
+        return response
 
     # ------------------------------------------------------------------
     # Skills

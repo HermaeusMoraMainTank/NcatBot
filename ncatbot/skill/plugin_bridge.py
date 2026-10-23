@@ -64,6 +64,43 @@ def _safe_name(value: str) -> str:
     return cleaned or "plugin"
 
 
+# 插件配置里常见的群组白/黑名单键：命中就说明这个群没开放
+_GROUP_ALLOW_KEYS = ("allowed_groups", "target_groups", "group_whitelist", "group_list")
+_GROUP_DENY_KEYS = ("disabled_groups", "blacklist")
+
+
+def _config_lookup(config: Any, key: str) -> Any:
+    if config is None:
+        return None
+    try:
+        return config[key]
+    except Exception:
+        return None
+
+
+def _string_set(value: Any) -> set[str]:
+    if isinstance(value, (list, tuple, set, frozenset)):
+        return {str(item).strip() for item in value if str(item).strip()}
+    return set()
+
+
+def _group_block_reason(plugin: Any, group_id: str) -> str:
+    """插件配置明确排除该群时返回理由，让模型能如实转述而不是沉默。"""
+    gid = str(group_id or "").strip()
+    if not gid:
+        return ""
+    config = getattr(plugin, "config", None)
+    for key in _GROUP_ALLOW_KEYS:
+        allowed = _string_set(_config_lookup(config, key))
+        if allowed and gid not in allowed:
+            return f"白名单 {key} 未包含本群"
+    for key in _GROUP_DENY_KEYS:
+        denied = _string_set(_config_lookup(config, key))
+        if denied and gid in denied:
+            return f"黑名单 {key} 包含本群"
+    return ""
+
+
 def _looks_like_trigger(value: str) -> bool:
     text = str(value or "").strip()
     if not text or len(text) > 20 or "\n" in text:
@@ -344,6 +381,13 @@ class PluginBridge:
             user_id = str(getattr(ctx.event, "user_id", "") or "")
         if not user_id:
             return SkillResult.fail("缺少当前用户信息，无法模拟插件调用")
+
+        blocked = _group_block_reason(plugin, group_id)
+        if blocked:
+            return SkillResult.fail(
+                f"{plugin_name} 在当前群不可用：{blocked}。"
+                "请如实告诉群友这个功能在本群没有开放，不要假装已经做过。"
+            )
 
         try:
             self_id = str(get_config_manager().config.bot_uin)

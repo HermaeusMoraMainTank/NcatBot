@@ -40,6 +40,7 @@ FAKEAI_CONFIG_DEFAULTS: Dict[str, Any] = {
     "agent_enabled": True,
     "skills_enabled": True,
     "agent_max_tokens": 60000,
+    "agent_max_rounds": 12,
     "proactive_enabled": True,
     "proactive_quiet_minutes": 45,
     "proactive_interval_minutes": 180,
@@ -178,6 +179,9 @@ def apply_from_plugin(plugin) -> None:
     fakeai_mod.SKILLS_ENABLED = bool(plugin.get_config("skills_enabled", True))
     fakeai_mod.AGENT_MAX_TOKENS = max(
         0, int(plugin.get_config("agent_max_tokens", 60000) or 0)
+    )
+    fakeai_mod.AGENT_MAX_ROUNDS = max(
+        2, int(plugin.get_config("agent_max_rounds", 12) or 12)
     )
     fakeai_mod.PROACTIVE_ENABLED = bool(
         plugin.get_config("proactive_enabled", True)

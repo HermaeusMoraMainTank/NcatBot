@@ -204,13 +204,39 @@
       th, td { padding: 7px 5px; }
     }
   </style>
+  <style id="ncatbot-unified-theme">
+    /* 嵌入统一后台时使用同一套深色主题 */
+    :root {
+      color-scheme: dark;
+      --ink: #e6edf3; --muted: #8b98a5; --line: #28313b; --panel: #151a21;
+      --wash: #1a2029; --teal: #3ddc97; --teal-dark: #45d69b; --amber: #e2b341;
+      --danger: #ef6b6b; --navy: #0f1419; --soft-blue: #1a2530;
+    }
+    body { background: #0e1116; color: var(--ink); }
+    .topbar { background: linear-gradient(115deg, #101820 0%, #132029 55%, #15232d 100%); }
+    .brand span, .status { color: #8ba3ab; }
+    .topbar button, .primary, .login-box button { color: #06251a; background: var(--teal); }
+    .topbar button:hover, .primary:hover { background: #4ef0ab; }
+    .panel { background: var(--panel); box-shadow: none; }
+    .search, .field input, .field select, .rod-fields input, .balance-editor input,
+    .listing-fields input, .item-tile, .stepper-button, .mode-switch button,
+    .secondary, .login-box { background: #0f1419; color: var(--ink); border-color: var(--line); }
+    .secondary { color: var(--teal-dark); }
+    .list button:hover { background: #1a212b; }
+    .list button.selected { border-color: #2b3b4d; background: #1d2733; }
+    .stat { background: #12171e; border-left-color: #2bb47c; }
+    .avatar-shell { background: #1a2530; border-color: var(--line); color: #9fe3c6; }
+    .listing-note { color: #e2c07a; background: #241d10; border-color: #4a3a1c; }
+    .shop-table tr.listed { background: #14231d; }
+    .tabs { border-bottom-color: var(--line); }
+  </style>
 </head>
 <body>
   <div id="app"></div>
   <script>
     const root = document.getElementById('app')
     const state = {
-      token: localStorage.getItem('mcfish_admin_token') || 'a26407983a',
+      token: localStorage.getItem('ncatbot_admin_token') || localStorage.getItem('mcfish_admin_token') || '',
       connected: false,
       tab: 'players',
       groups: [], players: [], items: [], shop: [], audit: [],
@@ -232,7 +258,7 @@
       if (options.body && typeof options.body !== 'string') { headers['Content-Type'] = 'application/json'; options.body = JSON.stringify(options.body) }
       const response = await fetch(path, Object.assign({}, options, {headers}))
       const payload = await response.json().catch(() => ({ok:false, error:'服务器返回了无效响应'}))
-      if (response.status === 401) { state.connected = false; state.token = 'a26407983a'; localStorage.removeItem('mcfish_admin_token'); render(); throw new Error(payload.error || '令牌无效') }
+      if (response.status === 401) { state.connected = false; render(); throw new Error(payload.error || '后台令牌无效，请先登录统一管理后台') }
       if (!response.ok || !payload.ok) throw new Error(payload.error || `请求失败（${response.status}）`)
       return payload.data
     }
@@ -242,7 +268,8 @@
       if (!state.token) return setMessage('请输入管理令牌', true)
       try {
         await api('/api/mcfish/session')
-        localStorage.setItem('mcfish_admin_token', state.token)
+        localStorage.setItem('ncatbot_admin_token', state.token)
+        localStorage.removeItem('mcfish_admin_token')
         state.connected = true; state.message = ''; state.error = ''
         await Promise.all([loadGroups(), loadItems(), loadShop(), loadAudit()])
         render()
@@ -372,7 +399,7 @@
       catch (error) { setMessage(error.message, true) }
     }
     function renderLogin() {
-      root.innerHTML = `<div class="login"><form class="login-box" onsubmit="event.preventDefault(); connect()"><h1>McFish 管理台</h1><p>使用插件启动日志中的管理令牌进入。</p><input id="token-input" type="password" placeholder="管理令牌" value="${esc(state.token)}" autocomplete="current-password"><button type="submit">进入管理台</button>${state.error ? `<p class="notice error" style="margin-top:12px">${esc(state.error)}</p>` : ''}</form></div>`
+      root.innerHTML = `<div class="login"><form class="login-box" onsubmit="event.preventDefault(); connect()"><h1>钓鱼管理台</h1><p>使用统一管理后台的令牌进入。</p><input id="token-input" type="password" placeholder="管理令牌" value="${esc(state.token)}" autocomplete="current-password"><button type="submit">进入管理台</button>${state.error ? `<p class="notice error" style="margin-top:12px">${esc(state.error)}</p>` : ''}</form></div>`
     }
     function renderGroups() {
       return `<section class="panel"><div class="panel-head"><h2>群聊</h2><button class="secondary" title="刷新" onclick="refresh()">↻</button></div><div class="panel-body"><input class="search" placeholder="搜索群号或名称" value="${esc(state.groupSearch)}" oninput="state.groupSearch=this.value; loadGroups().catch(e=>setMessage(e.message,true))"><div class="list">${state.groups.length ? state.groups.map(g => `<button class="${state.selectedGroup === g.group_id ? 'selected' : ''}" onclick="selectGroup('${esc(g.group_id)}')">${avatarMarkup(g.avatar_url, g.group_name)}<span class="list-copy"><span class="title">${esc(g.group_name)}</span><span class="meta">${esc(g.group_id)} · ${g.player_count} 名玩家</span></span></button>`).join('') : '<div class="empty">暂无群聊成员记录</div>'}</div></div></section>`

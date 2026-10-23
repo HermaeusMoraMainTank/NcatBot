@@ -208,8 +208,10 @@ USE_DS_AGENT = True
 AGENT_YAML_PATH = "plugins/FakeAi/prompts/lanqing_agent.yml"
 # 是否把插件能力目录（SkillHub）接进 agent 工具循环
 SKILLS_ENABLED = True
-# 单轮对话的 token 上限，防止工具循环失控
+# 单轮对话的 token 上限，防止工具循环失控（可在 plugin_configs.FakeAi.agent_max_tokens 改）
 AGENT_MAX_TOKENS = 60000
+# 单轮工具循环的最大轮数（可在 plugin_configs.FakeAi.agent_max_rounds 改）
+AGENT_MAX_ROUNDS = 12
 
 
 # 回调状态管理
@@ -2866,6 +2868,8 @@ SKILL_HINT = (
     "不要再复述、不要发“查了/看上面”这类补充消息，直接 finish 收尾；"
     "只有插件没有发出任何内容时，你才需要自己补一条。"
     "\nskill 返回的图片会自动发到群里，看到结果里的「已自动发出」就不要再调用 message.send_image。"
+    "\nskill 明确报错（未开放 / 没权限 / 不匹配）时，用一句自然的话把原因告诉群友，"
+    "例如「这功能本群没开」，不要沉默，也不要假装已经做过。"
 )
 
 
@@ -3308,6 +3312,7 @@ async def answer_ai(
             image_base64_list=image_base64_list,
             history_entries=history_entries,
             max_total_tokens=AGENT_MAX_TOKENS,
+            max_rounds=AGENT_MAX_ROUNDS,
             skill_bridge=skill_bridge,
         )
         if agent_result is not None and (

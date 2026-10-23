@@ -3,55 +3,720 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NcatBot 管理工作台</title>
+<title>NcatBot 管理后台</title>
 <style>
-:root{--ink:#20252b;--muted:#69727b;--paper:#f4f1ea;--panel:#fffdf8;--line:#ddd8cc;--nav:#202832;--nav2:#2d3945;--accent:#b64d35;--ok:#2e7d5b;--bad:#b13d3d;--shadow:0 2px 12px #1f293708}
-*{box-sizing:border-box}body{margin:0;color:var(--ink);font:13px/1.5 system-ui,-apple-system,"Microsoft YaHei",sans-serif;background:var(--paper)}
-button,input,textarea,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);background:#fff;padding:6px 11px;border-radius:3px;color:var(--ink)}button:hover{border-color:var(--accent);color:var(--accent)}button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}button.danger{color:var(--bad);border-color:#d7a5a5}.muted{color:var(--muted)}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
-.app{display:flex;min-height:100vh}.side{width:220px;background:var(--nav);color:#e9edf0;padding:22px 14px;flex:none}.brand{padding:0 12px 24px;border-bottom:1px solid #ffffff1a}.brand strong{font-size:18px;letter-spacing:1px}.brand small{display:block;color:#aeb8c1;margin-top:5px}.nav{padding-top:18px}.nav button{display:block;width:100%;text-align:left;background:none;border:0;color:#bdc7cf;padding:10px 12px;margin:3px 0}.nav button.active,.nav button:hover{background:var(--nav2);color:#fff}.content{min-width:0;flex:1}.top{height:58px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 26px}.top h1{font-size:17px;margin:0;font-weight:600}.status{display:flex;align-items:center;gap:7px;color:var(--muted)}.dot{width:8px;height:8px;border-radius:50%;background:var(--ok)}.dot.off{background:var(--bad)}main{padding:24px 26px;max-width:1500px;margin:auto}.view{display:none}.view.active{display:block}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin-bottom:18px}.card,.panel{background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);padding:15px}.card label{display:block;color:var(--muted);font-size:12px}.card b{display:block;font-size:22px;margin-top:5px}.card small{color:var(--muted)}.grid2{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(280px,.7fr);gap:16px}.section-title{display:flex;justify-content:space-between;align-items:center;margin:0 0 12px;font-size:15px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.toolbar input,.toolbar select,.field input,.field textarea,.field select{border:1px solid var(--line);background:#fffdfb;padding:7px 8px;border-radius:3px;min-width:0}.toolbar input{min-width:220px}table{width:100%;border-collapse:collapse;background:var(--panel)}th,td{text-align:left;border-bottom:1px solid var(--line);padding:8px 9px;vertical-align:top}th{font-weight:600;color:var(--muted);font-size:12px;white-space:nowrap}tbody tr{cursor:pointer}tbody tr:hover{background:#faf6ed}.table-wrap{overflow:auto;border:1px solid var(--line)}.tag{display:inline-block;padding:1px 6px;border:1px solid var(--line);border-radius:2px;color:var(--muted);margin:1px 3px 1px 0;font-size:11px}.pill{font-size:11px;padding:2px 6px;border-radius:2px;background:#eee;color:#555}.pill.ok{background:#e4f1e9;color:var(--ok)}.pill.bad{background:#f8e7e7;color:var(--bad)}.detail{margin-top:16px}.detail h3{margin:0 0 12px}.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:4px}.field input,.field textarea{width:100%}.field textarea{min-height:74px;resize:vertical}.actions{display:flex;gap:8px;margin-top:13px}.pre{white-space:pre-wrap;word-break:break-word;background:#f1eee7;border:1px solid var(--line);padding:10px;max-height:310px;overflow:auto}.run-detail{display:grid;grid-template-columns:1fr 1fr;gap:15px}.timeline{border-left:2px solid var(--line);padding-left:14px}.step{margin:0 0 13px;position:relative}.step:before{content:"";position:absolute;left:-21px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--ok)}.step.fail:before{background:var(--bad)}.transcript{max-height:460px;overflow:auto}.message{padding:8px;border-bottom:1px solid var(--line)}.message .role{font-weight:600;color:var(--accent)}.empty{padding:25px;text-align:center;color:var(--muted)}.tabs{display:flex;gap:5px;margin-bottom:12px}.tabs button.active{background:var(--nav);color:white}.toast{position:fixed;right:22px;bottom:22px;z-index:20;background:#273039;color:white;padding:10px 15px;border-radius:3px;box-shadow:0 4px 18px #0003;display:none}.toast.show{display:block}.overlay{display:none;position:fixed;inset:0;background:#17202be8;z-index:30;align-items:center;justify-content:center}.overlay.show{display:flex}.login{width:min(410px,calc(100% - 32px));background:var(--panel);padding:24px;border-radius:4px}.login h2{margin:0 0 5px}.login p{color:var(--muted)}.login input{width:100%;padding:10px;border:1px solid var(--line);margin:10px 0}.login button{width:100%}.switch{position:relative;display:inline-block;width:34px;height:19px;vertical-align:middle}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;inset:0;background:#b8b8b8;border-radius:20px}.slider:before{content:"";position:absolute;width:15px;height:15px;left:2px;top:2px;background:white;border-radius:50%;transition:.15s}.switch input:checked+.slider{background:var(--ok)}.switch input:checked+.slider:before{transform:translateX(15px)}.spinner{width:15px;height:15px;border:2px solid #ffffff66;border-top-color:#fff;border-radius:50%;display:inline-block;animation:spin .8s linear infinite;vertical-align:-3px}@keyframes spin{to{transform:rotate(360deg)}}.inline{display:inline-flex;align-items:center;gap:6px}.subhead{font-weight:600;margin:14px 0 7px}.metric{font-size:12px;color:var(--muted)}
-@media(max-width:900px){.app{display:block}.side{width:100%;padding:10px 12px;display:flex;align-items:center}.brand{padding:0;border:0;flex:1}.brand small{display:none}.nav{padding:0;display:flex;overflow:auto}.nav button{white-space:nowrap;width:auto;margin:0 2px;padding:8px}.top{padding:0 15px}main{padding:16px 12px}.grid2,.run-detail{grid-template-columns:1fr}.side .brand strong{font-size:15px}}
+:root{
+  --bg:#0e1116;--panel:#151a21;--panel2:#1a2029;--line:#242c37;--line2:#2f3a47;
+  --text:#e6edf3;--muted:#8b98a5;--accent:#3ddc97;--accent-dim:#1f6f52;--blue:#5b9cf8;--danger:#ef6b6b;--warn:#e2b341;
+  --radius:10px;--shadow:0 8px 24px #00000033;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:13.5px/1.55 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;overflow:hidden}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer;border:1px solid var(--line2);background:var(--panel2);padding:7px 13px;border-radius:7px;transition:.15s}
+button:hover{border-color:var(--accent);color:var(--accent)}
+button.primary{background:var(--accent);border-color:var(--accent);color:#06251a;font-weight:600}
+button.primary:hover{background:#4ef0ab;color:#06251a}
+button.ghost{background:transparent}
+button.danger{color:var(--danger);border-color:#5a2b2b}
+button.danger:hover{border-color:var(--danger)}
+button:disabled{opacity:.5;cursor:default}
+input,textarea,select{background:#0f1419;border:1px solid var(--line2);border-radius:7px;padding:8px 10px;min-width:0;outline:none}
+input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #3ddc9718}
+input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent)}
+code,.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.muted{color:var(--muted)}
+.hint{color:var(--muted);font-size:12px;margin:4px 0 0}
+.shell{display:flex;height:100vh;overflow:hidden}
+
+/* 侧栏 */
+.sidebar{width:212px;flex:none;background:linear-gradient(180deg,#121720,#0e1116);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:16px 12px}
+.brand{display:flex;align-items:center;gap:10px;padding:6px 10px 16px}
+.brand .logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--accent),#2b8bff);display:flex;align-items:center;justify-content:center;color:#04170f;font-weight:800;font-size:15px}
+.brand strong{font-size:15px;letter-spacing:.4px}
+.brand small{display:block;color:var(--muted);font-size:11px;margin-top:1px}
+.nav{display:flex;flex-direction:column;gap:3px;margin-top:4px}
+.nav button{display:flex;align-items:center;gap:9px;text-align:left;background:none;border:0;color:#9aa7b4;padding:9px 11px;border-radius:8px;font-size:13.5px}
+.nav button .ico{width:16px;text-align:center;opacity:.9}
+.nav button:hover{background:#1a212b;color:#e6edf3}
+.nav button.active{background:#1d2733;color:#fff;box-shadow:inset 0 0 0 1px #29384a}
+.nav button.active .ico{color:var(--accent)}
+.sidebar .foot{margin-top:auto;padding:10px;border-top:1px solid var(--line);color:var(--muted);font-size:11.5px;display:flex;align-items:center;gap:7px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+.dot.off{background:var(--danger)}
+.dot.warn{background:var(--warn)}
+
+/* 主区 */
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{height:56px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid var(--line);background:#11161d}
+.topbar h1{font-size:15px;margin:0;font-weight:600}
+.topbar .tools{display:flex;align-items:center;gap:9px}
+.viewport{flex:1;min-height:0;position:relative}
+.view{display:none;height:100%;overflow:auto;padding:20px 22px}
+.view.active{display:block}
+.view.flush{padding:0;overflow:hidden}
+.view.flush.active{display:flex}
+
+/* 通用 */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+.card label{display:block;color:var(--muted);font-size:12px}
+.card b{display:block;font-size:22px;margin-top:4px;font-weight:600;letter-spacing:.3px}
+.card small{color:var(--muted);font-size:11.5px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.panel + .panel{margin-top:14px}
+.section-title{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px;font-size:14px;font-weight:600}
+.grid2{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,.6fr);gap:14px}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-size:11.5px;font-weight:600;white-space:nowrap}
+tbody tr:hover{background:#1a2029}
+.table-wrap{border:1px solid var(--line);border-radius:8px;overflow:auto;max-height:52vh}
+.pill{display:inline-block;font-size:11px;padding:2px 7px;border-radius:20px;background:#232c37;color:#a9b6c3}
+.pill.ok{background:#123528;color:#5fe0a8}
+.pill.bad{background:#3a1e1e;color:#ef8b8b}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:5px;border:1px solid var(--line2);color:var(--muted);margin:1px 4px 1px 0}
+.empty{padding:38px 16px;text-align:center;color:var(--muted)}
+.pre{white-space:pre-wrap;word-break:break-word;background:#0f1419;border:1px solid var(--line);border-radius:8px;padding:10px;max-height:320px;overflow:auto;font-family:ui-monospace,Consolas,monospace;font-size:12px}
+.spinner{width:14px;height:14px;border:2px solid #ffffff44;border-top-color:#fff;border-radius:50%;display:inline-block;animation:spin .8s linear infinite;vertical-align:-2px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.toast{position:fixed;right:20px;bottom:20px;z-index:60;background:#1d2833;border:1px solid var(--line2);color:#fff;padding:11px 16px;border-radius:9px;box-shadow:var(--shadow);opacity:0;transform:translateY(8px);transition:.2s;pointer-events:none}
+.toast.show{opacity:1;transform:none}
+.toast.bad{border-color:#5a2b2b;background:#2a1a1a}
+
+/* 插件页：左列表 + 右配置 */
+.split{display:grid;grid-template-columns:296px minmax(0,1fr);height:100%;min-height:0;flex:1;width:100%}
+.list-pane{border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;background:#11161d}
+.pane-head{padding:12px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.pane-head input{width:100%}
+.pane-head .row{display:flex;gap:8px}
+.pane-head select{flex:1}
+.list{flex:1;overflow:auto;padding:8px}
+.plugin-item{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:8px;cursor:pointer;border:1px solid transparent}
+.plugin-item:hover{background:#1a212b}
+.plugin-item.active{background:#1d2733;border-color:#2b3b4d}
+.plugin-item .pname{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}
+.plugin-item .pmeta{color:var(--muted);font-size:11px;white-space:nowrap}
+.plugin-item .dot{width:6px;height:6px}
+.detail-pane{min-height:0;overflow:auto;padding:0}
+.cfg-head{position:sticky;top:0;z-index:5;background:#11161dcc;backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cfg-head h2{margin:0;font-size:15px}
+.cfg-head .meta{color:var(--muted);font-size:12px;margin-top:3px}
+.cfg-actions{display:flex;gap:8px}
+.cfg-tools{padding:12px 20px 0;display:flex;gap:8px}
+.cfg-tools input{flex:1;max-width:340px}
+.cfg-body{padding:12px 20px 90px;display:flex;flex-direction:column;gap:10px}
+.field{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:11px 13px}
+.field:hover{border-color:#2b3644}
+.field-head{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.field-head label{font-weight:600;font-size:13px}
+.field-head code{color:var(--muted);font-size:11px;background:#0f1419;border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+.field .control{margin-top:8px}
+.field .control input[type=text],.field .control input[type=password],.field .control input[type=number],.field .control textarea,.field .control select{width:100%}
+.field .control textarea{min-height:70px;resize:vertical}
+.field.secret .control input{font-family:ui-monospace,Consolas,monospace}
+.group-box{border:1px solid var(--line);border-radius:9px;background:#12171e}
+.group-box>summary{cursor:pointer;padding:12px 14px;font-weight:600;display:flex;justify-content:space-between;align-items:center;list-style:none}
+.group-box>summary::-webkit-details-marker{display:none}
+.group-box>summary .meta{color:var(--muted);font-size:12px;font-weight:400}
+.group-box .children{padding:2px 12px 12px;display:flex;flex-direction:column;gap:9px}
+.switch{position:relative;display:inline-flex;width:40px;height:22px;flex:none}
+.switch input{opacity:0;width:0;height:0}
+.switch span{position:absolute;inset:0;background:#33404e;border-radius:20px;transition:.18s}
+.switch span:before{content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;background:#cfd8e3;border-radius:50%;transition:.18s}
+.switch input:checked+span{background:var(--accent-dim)}
+.switch input:checked+span:before{transform:translateX(18px);background:var(--accent)}
+.save-bar{position:sticky;bottom:0;background:linear-gradient(180deg,#11161d00,#11161de6 35%);padding:14px 20px;display:flex;justify-content:flex-end;gap:8px;border-top:1px solid #ffffff0f}
+
+/* 钓鱼 iframe */
+.mcfish-wrap{flex:1;min-width:0;display:flex}
+.mcfish-frame{flex:1;border:0;background:#0e1116}
+
+/* 登录 */
+.overlay{position:fixed;inset:0;background:#080b0fd9;backdrop-filter:blur(4px);z-index:80;display:none;align-items:center;justify-content:center}
+.overlay.show{display:flex}
+.login{width:min(400px,calc(100% - 32px));background:var(--panel);border:1px solid var(--line2);border-radius:14px;padding:26px;box-shadow:var(--shadow)}
+.login h2{margin:0 0 6px;font-size:18px}
+.login p{color:var(--muted);margin:0 0 14px;font-size:12.5px}
+.login input{width:100%;margin-bottom:12px}
+.login button{width:100%}
+
+@media(max-width:980px){
+  .sidebar{width:72px;padding:14px 8px}
+  .brand strong,.brand small,.nav button .label,.sidebar .foot span{display:none}
+  .nav button{justify-content:center;padding:11px}
+  .split{grid-template-columns:230px minmax(0,1fr)}
+  .grid2{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
-<div class="app"><aside class="side"><div class="brand"><strong>NcatBot</strong><small>管理工作台</small></div><nav class="nav" id="nav"></nav></aside><div class="content"><header class="top"><h1 id="title">总览</h1><div class="status"><i class="dot" id="statusDot"></i><span id="statusText">已连接</span></div></header><main>
-<section class="view" id="view-overview"></section><section class="view" id="view-plugins"></section><section class="view" id="view-skills"></section><section class="view" id="view-agent"></section><section class="view" id="view-audit"></section>
-</main></div></div><div class="toast" id="toast"></div><div class="overlay" id="loginOverlay"><form class="login" id="loginForm"><h2>管理后台登录</h2><p>请输入服务器管理令牌。</p><input id="tokenInput" type="password" autocomplete="off" placeholder="Bearer token"><button class="primary" type="submit">进入工作台</button></form></div>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">N</div><div><strong>NcatBot</strong><small>管理工作台</small></div></div>
+    <nav class="nav" id="nav"></nav>
+    <div class="foot"><i class="dot" id="statusDot"></i><span id="statusText">未连接</span></div>
+  </aside>
+  <div class="main">
+    <header class="topbar"><h1 id="pageTitle">总览</h1>
+      <div class="tools">
+        <button class="ghost" id="refreshBtn">刷新</button>
+        <button class="ghost" id="logoutBtn">退出</button>
+      </div>
+    </header>
+    <div class="viewport">
+      <section class="view" id="view-overview"></section>
+      <section class="view flush" id="view-plugins"></section>
+      <section class="view" id="view-skills"></section>
+      <section class="view flush" id="view-mcfish"></section>
+      <section class="view" id="view-agent"></section>
+      <section class="view" id="view-audit"></section>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<div class="overlay" id="loginOverlay">
+  <form class="login" id="loginForm">
+    <h2>管理后台登录</h2>
+    <p>输入管理令牌（启动日志里的 admin token，或 config.yaml 的 admin.token）。</p>
+    <input id="tokenInput" type="password" autocomplete="off" placeholder="管理令牌">
+    <button class="primary" type="submit">进入工作台</button>
+  </form>
+</div>
 <script>
 'use strict';
-const $=s=>document.querySelector(s), esc=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const state={token:localStorage.getItem('ncatbot_admin_token')||new URLSearchParams(location.search).get('token')||'',route:location.hash.slice(1)||'overview',plugin:null,skill:null,run:null,skills:[],runs:[],auditTab:'skills',poll:null};
-if(state.token)localStorage.setItem('ncatbot_admin_token',state.token);
-const routes={overview:'总览',plugins:'插件',skills:'技能',agent:'Agent',audit:'审计'};
-function toast(msg,bad=false){const el=$('#toast');el.textContent=msg;el.style.background=bad?'#9d3737':'#273039';el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2600)}
-function showLogin(){ $('#loginOverlay').classList.add('show'); $('#tokenInput').value=state.token; $('#tokenInput').focus(); $('#statusDot').classList.add('off');$('#statusText').textContent='未连接'}
-function hideLogin(){ $('#loginOverlay').classList.remove('show');$('#statusDot').classList.remove('off');$('#statusText').textContent='已连接'}
-async function api(path,opts={}){const headers=Object.assign({'Accept':'application/json','Authorization':'Bearer '+state.token},opts.body?{'Content-Type':'application/json'}:{},opts.headers||{});const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),12000);try{const res=await fetch(path,Object.assign({},opts,{headers,signal:ctrl.signal}));if(res.status===401){showLogin();throw new Error('未授权')}let body;try{body=await res.json()}catch(e){throw new Error('服务器返回无效数据')}if(!body.ok)throw new Error(body.error||'请求失败');return body.data}catch(e){if(e.name==='AbortError')throw new Error('请求超时（12s）');throw e}finally{clearTimeout(timer)}}
-function setView(){clearInterval(state.poll);state.poll=null;const r=routes[state.route]?state.route:'overview';state.route=r;location.hash=r;document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));$('#view-'+r).classList.add('active');$('#title').textContent=routes[r];document.querySelectorAll('#nav button').forEach(x=>x.classList.toggle('active',x.dataset.route===r));({overview:loadOverview,plugins:loadPlugins,skills:loadSkills,agent:loadAgent,audit:loadAudit}[r]||loadOverview)()}
-function initNav(){Object.entries(routes).forEach(([k,v])=>{const b=document.createElement('button');b.textContent=v;b.dataset.route=k;b.onclick=()=>{state.route=k;setView()};$('#nav').appendChild(b)});window.onhashchange=()=>{state.route=location.hash.slice(1)||'overview';setView()}}
-function card(label,value,sub=''){return '<div class="card"><label>'+esc(label)+'</label><b>'+esc(value)+'</b><small>'+esc(sub)+'</small></div>'}
-async function loadOverview(){const v=$('#view-overview');v.innerHTML='<div class="empty">加载中…</div>';try{const d=await api('/api/overview');v.innerHTML='<div class="cards">'+card('Bot UIN',d.bot_uin,'运行 '+fmtTime(d.uptime_seconds))+card('平台',Array.isArray(d.platforms)?d.platforms.length:0,(d.platforms||[]).join('、'))+card('插件',d.plugins.loaded+'/'+d.plugins.indexed,'已加载 / 已索引')+card('技能',d.skills.total,d.skills.enabled+' 个启用')+card('技能调用',d.skills.calls,'错误 '+d.skills.errors)+card('运行中',d.runs.active,'总计 '+d.runs.total)+card('沙箱后端',d.sandbox&&d.sandbox.backend||'—',d.sandbox&&d.sandbox.root||'')+'</div><div class="grid2"><div class="panel"><h2 class="section-title">最近运行</h2><div id="recentRuns"></div></div><div class="panel"><h2 class="section-title">平台与服务</h2><div class="subhead">平台</div><div>'+esc((d.platforms||[]).join('、')||'无')+'</div><div class="subhead">沙箱</div><div class="pre">'+esc(JSON.stringify(d.sandbox||{},null,2))+'</div></div></div>';const recent=await api('/api/runs?limit=8');renderRuns(recent, '#recentRuns', true)}catch(e){v.innerHTML='<div class="empty">加载失败：'+esc(e.message)+'</div>'}}
-function fmtTime(s){s=Number(s)||0;return Math.floor(s/86400)+'天 '+Math.floor(s%86400/3600)+'时 '+Math.floor(s%3600/60)+'分'}
-function fmtDate(v){if(!v)return '—';const n=Number(v);return new Date((n>1e12?n:n*1000)).toLocaleString('zh-CN')}
-function renderRuns(rows,target,compact=false){const el=$(target);if(!el)return;const data=rows||[];if(!data.length){el.innerHTML='<div class="empty">暂无运行记录</div>';return}el.innerHTML='<div class="table-wrap"><table><thead><tr><th>ID</th><th>状态</th><th>任务</th><th>步骤</th><th>模型</th><th>Tokens</th><th>耗时</th></tr></thead><tbody>'+data.slice(0,compact?8:100).map(r=>'<tr data-run="'+esc(r.id)+'"><td class="mono">'+esc(r.id)+'</td><td>'+status(r.status)+'</td><td>'+esc(r.task||'')+'</td><td>'+esc(r.steps||r.step_count||0)+'</td><td>'+esc(r.model||'—')+'</td><td>'+esc(r.tokens||r.total_tokens||0)+'</td><td>'+esc(r.duration_ms!=null?(r.duration_ms+' ms'):(r.duration||'—'))+'</td></tr>').join('')+'</tbody></table></div>';el.querySelectorAll('[data-run]').forEach(x=>x.onclick=()=>openRun(x.dataset.run))}
-function status(s){const good=['done','completed','success','succeeded'].includes(String(s).toLowerCase());return '<span class="pill '+(good?'ok':String(s).toLowerCase()==='failed'?'bad':'')+'">'+esc(s||'—')+'</span>'}
-async function loadPlugins(){const v=$('#view-plugins');v.innerHTML='<div class="empty">加载中…</div>';try{const rows=await api('/api/plugins');v.innerHTML='<div class="panel"><h2 class="section-title">插件目录 <button onclick="loadPlugins()">刷新</button></h2><div class="table-wrap"><table><thead><tr><th>名称</th><th>版本</th><th>状态</th><th>技能</th><th>描述</th></tr></thead><tbody>'+rows.map(p=>'<tr data-plugin="'+esc(p.name)+'"><td class="mono">'+esc(p.name)+'</td><td>'+esc(p.version)+'</td><td>'+status(p.loaded?'loaded':'unloaded')+'</td><td>'+esc(p.skill_count||0)+'</td><td>'+esc(p.description||'')+'</td></tr>').join('')+'</tbody></table></div><div id="pluginDetail"></div></div>';v.querySelectorAll('[data-plugin]').forEach(x=>x.onclick=()=>openPlugin(x.dataset.plugin))}catch(e){v.innerHTML='<div class="empty">加载失败：'+esc(e.message)+'</div>'}}
-function fieldValue(v){if(typeof v==='boolean')return '<label class="inline"><input type="checkbox" data-cfg-type="boolean" '+(v?'checked':'')+'> 启用</label>';if(typeof v==='number')return '<input type="number" data-cfg-type="number" value="'+esc(v)+'">';if(v&&typeof v==='object')return '<textarea data-cfg-type="json">'+esc(JSON.stringify(v,null,2))+'</textarea>';return '<input data-cfg-type="string" value="'+esc(v)+'">'}
-async function openPlugin(name){try{const d=await api('/api/plugins/'+encodeURIComponent(name));state.plugin=d;$('#pluginDetail').innerHTML='<div class="detail panel"><h3>插件：<span class="mono">'+esc(d.name)+'</span></h3><p class="muted">'+esc(d.description||'')+'</p><div class="form-grid" id="configFields">'+Object.entries(d.config||{}).map(([k,val])=>'<div class="field"><label>'+esc(k)+(val==='***'?'（已遮罩，不会修改）':'')+'</label><div data-cfg-key="'+esc(k)+'" data-masked="'+(val==='***')+'">'+fieldValue(val)+'</div></div>').join('')+'</div><div class="actions"><button class="primary" id="saveConfig">保存配置</button><button class="danger" id="reloadPlugin">重载插件</button></div></div>';$('#saveConfig').onclick=savePlugin;$('#reloadPlugin').onclick=async()=>{try{await api('/api/plugins/'+encodeURIComponent(name)+'/reload',{method:'POST'});toast('重载成功');loadPlugins()}catch(e){toast(e.message,true)}}}catch(e){toast(e.message,true)}}
-async function savePlugin(){const config={};document.querySelectorAll('[data-cfg-key]').forEach(w=>{if(w.dataset.masked==='true')return;const i=w.querySelector('input,textarea');let v;if(i.dataset.cfgType==='boolean')v=i.checked;else if(i.dataset.cfgType==='number')v=Number(i.value);else if(i.dataset.cfgType==='json'){try{v=JSON.parse(i.value)}catch(e){throw new Error('JSON 配置格式错误：'+w.dataset.cfgKey)}}else v=i.value;config[w.dataset.cfgKey]=v});try{await api('/api/plugins/'+encodeURIComponent(state.plugin.name)+'/config',{method:'PUT',body:JSON.stringify({config})});toast('保存成功')}catch(e){toast(e.message,true)}}
-async function loadSkills(){const v=$('#view-skills');v.innerHTML='<div class="empty">加载中…</div>';try{state.skills=await api('/api/skills');v.innerHTML='<div class="panel"><h2 class="section-title">技能目录 <button onclick="loadSkills()">刷新</button></h2><div class="toolbar"><input id="skillSearch" placeholder="搜索名称或摘要"><select id="skillPlugin"><option value="">全部插件</option></select><input id="skillTag" placeholder="标签"><button id="skillFilter">筛选</button></div><div id="skillTable"></div><div id="skillDetail"></div></div>';const sel=$('#skillPlugin');[...new Set(state.skills.map(x=>x.plugin).filter(Boolean))].sort().forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x;sel.appendChild(o)});renderSkills();$('#skillFilter').onclick=renderSkills;$('#skillSearch').onkeydown=e=>{if(e.key==='Enter')renderSkills()}}catch(e){v.innerHTML='<div class="empty">加载失败：'+esc(e.message)+'</div>'}}
-function renderSkills(){const q=($('#skillSearch')?.value||'').toLowerCase(),p=$('#skillPlugin')?.value||'',t=($('#skillTag')?.value||'').toLowerCase();const rows=state.skills.filter(s=>(!q||JSON.stringify(s).toLowerCase().includes(q))&&(!p||s.plugin===p)&&(!t||JSON.stringify(s.tags||[]).toLowerCase().includes(t)));$('#skillTable').innerHTML='<div class="table-wrap"><table><thead><tr><th>名称</th><th>插件</th><th>摘要</th><th>副作用</th><th>调用</th><th>错误</th><th>平均 ms</th><th>启用</th></tr></thead><tbody>'+rows.map(s=>'<tr data-skill="'+esc(s.name)+'"><td class="mono">'+esc(s.name)+'</td><td>'+esc(s.plugin||'')+'</td><td>'+esc(s.summary||'')+'</td><td>'+esc(Array.isArray(s.side_effects)?s.side_effects.join('、'):(s.side_effects||''))+'</td><td>'+esc(s.calls||0)+'</td><td>'+esc(s.errors||0)+'</td><td>'+esc(s.avg_ms||s.avg_duration_ms||0)+'</td><td><label class="switch"><input type="checkbox" data-toggle="'+esc(s.name)+'" '+(s.enabled?'checked':'')+'><i class="slider"></i></label></td></tr>').join('')+'</tbody></table></div>';$('#skillTable').querySelectorAll('[data-skill]').forEach(x=>x.onclick=e=>{if(e.target.closest('[data-toggle]'))return;openSkill(x.dataset.skill)});$('#skillTable').querySelectorAll('[data-toggle]').forEach(x=>x.onchange=()=>toggleSkill(x.dataset.toggle,x.checked))}
-async function toggleSkill(name,enabled){try{await api('/api/skills/'+encodeURIComponent(name),{method:'PUT',body:JSON.stringify({enabled})});toast(enabled?'技能已启用':'技能已停用')}catch(e){toast(e.message,true);renderSkills()}}
-async function openSkill(name){try{const d=await api('/api/skills/'+encodeURIComponent(name));state.skill=d;const props=d.parameters&&d.parameters.properties||{};$('#skillDetail').innerHTML='<div class="detail panel"><h3>技能：<span class="mono">'+esc(d.name)+'</span></h3><p>'+esc(d.description||d.summary||'')+'</p><div class="subhead">JSON Schema</div><pre class="pre">'+esc(JSON.stringify(d.parameters||{},null,2))+'</pre><div class="subhead">测试调用</div><div class="form-grid" id="skillCtx"><div class="field"><label>group_id</label><input data-ctx="group_id" placeholder="群号，可空"></div><div class="field"><label>user_id</label><input data-ctx="user_id" placeholder="QQ号，可空"></div></div><div class="form-grid" id="skillArgs">'+Object.entries(props).map(([k,s])=>'<div class="field"><label>'+esc(k)+(Array.isArray(d.parameters&&d.parameters.required)&&d.parameters.required.includes(k)?' *':'')+'</label>'+argInput(k,s)+'</div>').join('')+'</div><div class="actions"><button class="primary" id="invokeSkill">调用技能</button></div><div id="invokeResult"></div></div>';$('#invokeSkill').onclick=invokeSkill}catch(e){toast(e.message,true)}}
-function argInput(k,s){const typ=s.type||'string',attr='data-arg-key="'+esc(k)+'" data-arg-type="'+esc(typ)+'"';if(typ==='boolean')return '<label class="inline"><input type="checkbox" '+attr+'> 是</label>';if(typ==='object'||typ==='array')return '<textarea '+attr+' placeholder="'+esc(typ==='array'?'JSON 数组':'JSON 对象')+'"></textarea>';return '<input '+attr+' type="'+(typ==='integer'||typ==='number'?'number':'text')+'">'}
-async function invokeSkill(){const args={};try{document.querySelectorAll('[data-arg-key]').forEach(i=>{const typ=i.dataset.argType;let v=typ==='boolean'?i.checked:i.value;if(v!==''&&(typ==='integer'||typ==='number'))v=typ==='integer'?parseInt(v,10):parseFloat(v);if((typ==='object'||typ==='array')&&v!=='')v=JSON.parse(v);if(v!==''||typ==='boolean')args[i.dataset.argKey]=v});const payload={arguments:args};document.querySelectorAll('[data-ctx]').forEach(i=>{const v=i.value.trim();if(v)payload[i.dataset.ctx]=v});const d=await api('/api/skills/'+encodeURIComponent(state.skill.name)+'/invoke',{method:'POST',body:JSON.stringify(payload)});$('#invokeResult').innerHTML='<div class="subhead">调用结果</div><pre class="pre">'+esc(JSON.stringify(d,null,2))+'</pre>';toast(d.ok===false?'调用失败':'调用完成',d.ok===false)}catch(e){toast(e.message,true)}}
-async function loadAgent(){const v=$('#view-agent');v.innerHTML='<div class="grid2"><div class="panel"><h2 class="section-title">手动运行</h2><form id="runForm"><div class="field"><label>任务</label><textarea id="runTask" required style="min-height:130px;width:100%" placeholder="输入要交给 Agent 的任务"></textarea></div><div class="field" style="margin-top:10px"><label>session_key</label><input id="sessionKey" value="admin"></div><div class="actions"><button class="primary" id="runSubmit">开始运行</button></div></form></div><div class="panel"><h2 class="section-title">运行说明</h2><p class="muted">请求会等待 Agent 运行结束后返回。运行记录每 5 秒自动刷新。</p><div id="runDetail"></div></div></div><div class="panel" style="margin-top:16px"><h2 class="section-title">运行记录 <button onclick="refreshRuns()">刷新</button></h2><div id="runsTable"></div></div>';$('#runForm').onsubmit=submitRun;refreshRuns();clearInterval(state.poll);state.poll=setInterval(refreshRuns,5000)}
-async function refreshRuns(){try{state.runs=await api('/api/runs?limit=100');renderRuns(state.runs,'#runsTable')}catch(e){const el=$('#runsTable');if(el&&!el.innerHTML)el.innerHTML='<div class="empty">加载失败：'+esc(e.message)+'</div>'}}
-async function submitRun(e){e.preventDefault();const b=$('#runSubmit');b.disabled=true;b.innerHTML='<span class="spinner"></span> 运行中';try{const d=await api('/api/agent/run',{method:'POST',body:JSON.stringify({task:$('#runTask').value,session_key:$('#sessionKey').value||'admin'})});toast('运行完成');await refreshRuns();openRun(d.id)}catch(err){toast(err.message,true)}finally{b.disabled=false;b.textContent='开始运行'}}
-async function openRun(id){if(!$('#runDetail')){state.route='agent';location.hash='agent';setView()}try{const d=await api('/api/runs/'+encodeURIComponent(id));state.run=d;const steps=d.steps||[];const msgs=d.messages||d.transcript||[];$('#runDetail').innerHTML='<div class="detail"><div class="metric">'+esc(d.result||d.error||d.summary||d.task||'')+'</div><div class="actions"><button class="danger" id="cancelRun">取消运行</button></div><div class="subhead">步骤时间线</div><div class="timeline">'+(steps.length?steps.map(s=>'<div class="step '+(s.ok===false?'fail':'')+'"><b>'+esc(s.tool||s.name||'step')+'</b> <span class="metric">'+esc(s.ms||s.duration_ms||'—')+' ms</span><div>'+esc(s.content||s.error||'')+'</div></div>').join(''):'<div class="muted">暂无步骤</div>')+'</div><div class="subhead">消息记录</div><div class="transcript">'+(msgs.length?msgs.map(m=>'<div class="message"><span class="role">'+esc(m.role||'')+'</span><div>'+esc(m.content||'')+'</div>'+(m.tool_calls?'<div class="metric">工具：'+esc(m.tool_calls.map(x=>x.name||x.function?.name||'').join('、'))+'</div>':'')+'</div>').join(''):'<div class="muted">暂无消息</div>')+'</div></div>';$('#cancelRun').onclick=()=>cancelRun(id)}catch(e){toast(e.message,true)}}
-async function cancelRun(id){try{await api('/api/runs/'+encodeURIComponent(id)+'/cancel',{method:'POST'});toast('已发送取消请求');openRun(id);refreshRuns()}catch(e){toast(e.message,true)}}
-async function loadAudit(){const v=$('#view-audit');v.innerHTML='<div class="panel"><h2 class="section-title">审计日志</h2><div class="tabs"><button class="'+(state.auditTab==='skills'?'active':'')+'" data-audit="skills">技能调用</button><button class="'+(state.auditTab==='actions'?'active':'')+'" data-audit="actions">管理操作</button></div><div id="auditTable"></div></div>';v.querySelectorAll('[data-audit]').forEach(x=>x.onclick=()=>{state.auditTab=x.dataset.audit;loadAudit()});try{const d=await api('/api/audit?limit=200');const rows=d[state.auditTab]||[];$('#auditTable').innerHTML='<div class="table-wrap"><table><thead><tr><th>时间</th><th>'+(state.auditTab==='skills'?'技能':'操作')+'</th><th>操作人</th><th>结果</th><th>耗时</th></tr></thead><tbody>'+rows.map(x=>'<tr><td>'+esc(fmtDate(x.ts||x.time))+'</td><td class="mono">'+esc(x.skill||x.action||'')+'</td><td>'+esc(x.operator||'')+'</td><td>'+status(x.ok===false?'error':'ok')+(x.error?'<div class="muted">'+esc(x.error)+'</div>':'')+'</td><td>'+esc(x.ms||x.duration_ms||'—')+'</td></tr>').join('')+'</tbody></table></div>'}catch(e){$('#auditTable').innerHTML='<div class="empty">加载失败：'+esc(e.message)+'</div>'}}
-$('#loginForm').onsubmit=e=>{e.preventDefault();const t=$('#tokenInput').value.trim();if(!t)return;state.token=t;localStorage.setItem('ncatbot_admin_token',t);hideLogin();setView()};
-initNav();if(state.token)setView();else{setView();showLogin()}
+const $ = (sel) => document.querySelector(sel);
+const esc = (v) => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const state = {
+  token: localStorage.getItem('ncatbot_admin_token') || new URLSearchParams(location.search).get('token') || '',
+  route: location.hash.slice(1) || 'overview',
+  plugins: [], plugin: null, currentConfig: null, fields: [],
+  skills: [], selectedSkill: null,
+  runs: [], poll: null, authTab: 'skills', audit: null,
+};
+const routes = {
+  overview: {title: '总览', icon: '◈'},
+  plugins: {title: '插件配置', icon: '⚙'},
+  skills: {title: '技能', icon: '✦'},
+  mcfish: {title: '钓鱼', icon: '🎣'},
+  agent: {title: 'Agent', icon: '🤖'},
+  audit: {title: '审计', icon: '🧾'},
+};
+
+function toast(msg, bad = false) {
+  const el = $('#toast');
+  el.textContent = msg;
+  el.className = 'toast show' + (bad ? ' bad' : '');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), 2600);
+}
+function setStatus(ok, text) {
+  $('#statusDot').className = 'dot' + (ok ? '' : ' off');
+  $('#statusText').textContent = text;
+}
+async function api(path, opts = {}) {
+  const headers = Object.assign(
+    {Accept: 'application/json', Authorization: 'Bearer ' + state.token},
+    opts.body ? {'Content-Type': 'application/json'} : {},
+    opts.headers || {}
+  );
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 20000);
+  try {
+    const res = await fetch(path, Object.assign({}, opts, {headers, signal: ctrl.signal}));
+    if (res.status === 401) { showLogin(); throw new Error('未授权'); }
+    let body;
+    try { body = await res.json(); } catch (e) { throw new Error('服务器返回了无效数据'); }
+    if (!body.ok) throw new Error(body.error || '请求失败');
+    return body.data;
+  } catch (e) {
+    if (e.name === 'AbortError') throw new Error('请求超时');
+    throw e;
+  } finally { clearTimeout(timer); }
+}
+function showLogin() {
+  $('#loginOverlay').classList.add('show');
+  $('#tokenInput').value = state.token;
+  setStatus(false, '未连接');
+}
+function hideLogin() { $('#loginOverlay').classList.remove('show'); setStatus(true, '已连接'); }
+
+async function login(token) {
+  const res = await fetch('/api/auth', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({token}),
+  });
+  const body = await res.json().catch(() => ({ok: false, error: '服务器无响应'}));
+  if (!res.ok || !body.ok) throw new Error(body.error || '令牌无效');
+}
+async function ensureAuth() {
+  if (!state.token) { showLogin(); return false; }
+  try { await login(state.token); hideLogin(); return true; }
+  catch (e) { showLogin(); return false; }
+}
+function fmtTime(s) {
+  s = Number(s) || 0;
+  return Math.floor(s / 86400) + '天 ' + Math.floor(s % 86400 / 3600) + '时 ' + Math.floor(s % 3600 / 60) + '分';
+}
+function fmtDate(v) {
+  if (!v) return '—';
+  const n = Number(v);
+  return new Date(n > 1e12 ? n : n * 1000).toLocaleString('zh-CN', {hour12: false});
+}
+function pill(status) {
+  const s = String(status || '').toLowerCase();
+  const good = ['done', 'completed', 'success', 'succeeded', 'loaded', 'ok'].includes(s);
+  const bad = ['failed', 'error', 'unloaded'].includes(s);
+  return '<span class="pill ' + (good ? 'ok' : bad ? 'bad' : '') + '">' + esc(status || '—') + '</span>';
+}
+
+function initNav() {
+  Object.entries(routes).forEach(([k, v]) => {
+    const b = document.createElement('button');
+    b.innerHTML = '<span class="ico">' + v.icon + '</span><span class="label">' + v.title + '</span>';
+    b.dataset.route = k;
+    b.onclick = () => { state.route = k; setView(); };
+    $('#nav').appendChild(b);
+  });
+  window.onhashchange = () => {
+    state.route = location.hash.slice(1) || 'overview';
+    setView();
+  };
+}
+function setView() {
+  clearInterval(state.poll);
+  state.poll = null;
+  const r = routes[state.route] ? state.route : 'overview';
+  state.route = r;
+  if (location.hash.slice(1) !== r) location.hash = r;
+  document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
+  $('#view-' + r).classList.add('active');
+  $('#pageTitle').textContent = routes[r].title;
+  document.querySelectorAll('#nav button').forEach(x => x.classList.toggle('active', x.dataset.route === r));
+  ({overview: loadOverview, plugins: loadPlugins, skills: loadSkills, mcfish: loadMcFish, agent: loadAgent, audit: loadAudit}[r] || loadOverview)();
+}
+
+function card(label, value, sub) {
+  return '<div class="card"><label>' + esc(label) + '</label><b>' + esc(value) + '</b><small>' + esc(sub || '') + '</small></div>';
+}
+
+/* ---------------- 总览 ---------------- */
+async function loadOverview() {
+  const v = $('#view-overview');
+  v.innerHTML = '<div class="empty">加载中…</div>';
+  try {
+    const d = await api('/api/overview');
+    const plat = Array.isArray(d.platforms) ? d.platforms : [];
+    v.innerHTML =
+      '<div class="cards">' +
+        card('机器人 QQ', d.bot_uin, '已运行 ' + fmtTime(d.uptime_seconds)) +
+        card('适配器', plat.length, plat.join('、') || '无') +
+        card('插件', d.plugins.loaded + '/' + d.plugins.indexed, '已加载 / 已索引') +
+        card('技能', d.skills.total, d.skills.enabled + ' 个启用') +
+        card('技能调用', d.skills.calls, '错误 ' + d.skills.errors) +
+        card('Agent 运行', d.runs.active, '总计 ' + d.runs.total) +
+      '</div>' +
+      '<div class="grid2">' +
+        '<div class="panel"><h2 class="section-title">最近运行</h2><div id="recentRuns"></div></div>' +
+        '<div class="panel"><h2 class="section-title">沙箱</h2>' +
+          '<div class="muted">后端：' + esc((d.sandbox && d.sandbox.backend) || '—') + '</div>' +
+          '<div class="muted">目录：' + esc((d.sandbox && d.sandbox.root) || '—') + '</div>' +
+          '<div class="pre" style="margin-top:10px">' + esc(JSON.stringify(d.sandbox || {}, null, 2)) + '</div>' +
+        '</div>' +
+      '</div>';
+    const recent = await api('/api/runs?limit=8');
+    renderRuns(recent, '#recentRuns', 8);
+  } catch (e) {
+    v.innerHTML = '<div class="empty">加载失败：' + esc(e.message) + '</div>';
+  }
+}
+function renderRuns(rows, target, limit) {
+  const el = $(target);
+  if (!el) return;
+  const data = rows || [];
+  if (!data.length) { el.innerHTML = '<div class="empty">暂无运行记录</div>'; return; }
+  el.innerHTML = '<div class="table-wrap"><table><thead><tr><th>ID</th><th>状态</th><th>任务</th><th>步骤</th><th>模型</th><th>Tokens</th><th>耗时</th></tr></thead><tbody>' +
+    data.slice(0, limit || 100).map(r =>
+      '<tr data-run="' + esc(r.id) + '"><td class="mono">' + esc(r.id) + '</td><td>' + pill(r.status) +
+      '</td><td>' + esc(r.task || '') + '</td><td>' + esc(r.steps || r.step_count || 0) +
+      '</td><td>' + esc(r.model || '—') + '</td><td>' + esc(r.tokens || r.total_tokens || 0) +
+      '</td><td>' + esc(r.duration_ms != null ? r.duration_ms + ' ms' : (r.duration || '—')) + '</td></tr>'
+    ).join('') + '</tbody></table></div>';
+  el.querySelectorAll('[data-run]').forEach(x => x.onclick = () => openRun(x.dataset.run));
+}
+
+/* ---------------- 插件配置 ---------------- */
+async function loadPlugins() {
+  const v = $('#view-plugins');
+  if (!v.dataset.ready) {
+    v.innerHTML =
+      '<div class="split">' +
+        '<aside class="list-pane">' +
+          '<div class="pane-head">' +
+            '<input id="pluginSearch" placeholder="搜索插件名或描述">' +
+            '<div class="row"><select id="pluginFilter"><option value="all">全部插件</option><option value="loaded">仅已加载</option><option value="config">有配置项</option></select></div>' +
+          '</div>' +
+          '<div class="list" id="pluginList"></div>' +
+        '</aside>' +
+        '<div class="detail-pane" id="pluginPane"><div class="empty">从左侧选一个插件开始配置</div></div>' +
+      '</div>';
+    v.dataset.ready = '1';
+    $('#pluginSearch').oninput = renderPluginList;
+    $('#pluginFilter').onchange = renderPluginList;
+  }
+  try {
+    state.plugins = await api('/api/plugins');
+    renderPluginList();
+    if (!state.plugin && state.plugins.length) {
+      const preferred = state.plugins.find(p => (p.config_keys || []).length && p.name === 'FakeAi')
+        || state.plugins.find(p => (p.config_keys || []).length)
+        || state.plugins[0];
+      openPlugin(preferred.name);
+    }
+  } catch (e) {
+    $('#pluginList').innerHTML = '<div class="empty">加载失败：' + esc(e.message) + '</div>';
+  }
+}
+function renderPluginList() {
+  const el = $('#pluginList');
+  if (!el) return;
+  const q = ($('#pluginSearch') ? $('#pluginSearch').value : '').trim().toLowerCase();
+  const filter = $('#pluginFilter') ? $('#pluginFilter').value : 'all';
+  const rows = state.plugins.filter(p => {
+    if (filter === 'loaded' && !p.loaded) return false;
+    if (filter === 'config' && !(p.config_keys || []).length) return false;
+    if (!q) return true;
+    return (p.name + ' ' + (p.description || '')).toLowerCase().includes(q);
+  });
+  if (!rows.length) { el.innerHTML = '<div class="empty">没有匹配的插件</div>'; return; }
+  el.innerHTML = rows.map(p =>
+    '<div class="plugin-item' + (state.plugin === p.name ? ' active' : '') + '" data-name="' + esc(p.name) + '">' +
+      '<i class="dot' + (p.loaded ? '' : ' off') + '"></i>' +
+      '<span class="pname">' + esc(p.name) + '</span>' +
+      '<span class="pmeta">' + esc((p.config_keys || []).length ? (p.config_keys.length + ' 项') : '') + '</span>' +
+    '</div>'
+  ).join('');
+  el.querySelectorAll('[data-name]').forEach(x => x.onclick = () => openPlugin(x.dataset.name));
+}
+async function openPlugin(name) {
+  state.plugin = name;
+  renderPluginList();
+  const pane = $('#pluginPane');
+  pane.innerHTML = '<div class="empty">加载中…</div>';
+  try {
+    const d = await api('/api/plugins/' + encodeURIComponent(name));
+    state.currentConfig = d.config || {};
+    state.fields = d.fields || [];
+    pane.innerHTML =
+      '<div class="cfg-head">' +
+        '<div><h2>' + esc(d.name) + '</h2><div class="meta">' + esc(d.version || '—') +
+          ' · ' + (d.loaded ? '已加载' : '未加载') + ' · 技能 ' + (d.skills || []).length + ' 个</div></div>' +
+        '<div class="cfg-actions"><button id="reloadPlugin">重载插件</button><button class="primary" id="saveConfig">保存配置</button></div>' +
+      '</div>' +
+      '<div class="cfg-tools"><input id="fieldSearch" placeholder="搜索配置项（中文名或 key）"></div>' +
+      '<div class="cfg-body" id="configBody">' + (state.fields.length ? state.fields.map(renderField).join('') : '<div class="empty">这个插件没有可编辑的配置</div>') + '</div>' +
+      '<div class="save-bar"><button class="ghost" id="saveConfig2">保存配置</button></div>';
+    $('#saveConfig').onclick = savePluginConfig;
+    $('#saveConfig2').onclick = savePluginConfig;
+    $('#reloadPlugin').onclick = async () => {
+      try {
+        await api('/api/plugins/' + encodeURIComponent(name) + '/reload', {method: 'POST'});
+        toast('插件已重载');
+        await openPlugin(name);
+        await loadPlugins();
+      } catch (e) { toast(e.message, true); }
+    };
+    $('#fieldSearch').oninput = filterFields;
+  } catch (e) {
+    pane.innerHTML = '<div class="empty">加载失败：' + esc(e.message) + '</div>';
+  }
+}
+function filterFields() {
+  const q = ($('#fieldSearch').value || '').trim().toLowerCase();
+  document.querySelectorAll('#configBody .field').forEach(el => {
+    const text = (el.dataset.search || '').toLowerCase();
+    el.style.display = !q || text.includes(q) ? '' : 'none';
+  });
+  document.querySelectorAll('#configBody .group-box').forEach(el => {
+    const text = (el.dataset.search || '').toLowerCase();
+    el.style.display = !q || text.includes(q) ? '' : 'none';
+  });
+}
+function renderField(f) {
+  if (f.widget === 'group') {
+    const kids = (f.children || []).map(renderField).join('');
+    return '<details class="group-box" open data-search="' + esc(f.label + ' ' + f.key) + '">' +
+      '<summary><span>' + esc(f.label) + '</span><span class="meta">' + esc(f.key) + ' · ' + (f.children || []).length + ' 项</span></summary>' +
+      '<div class="children">' + (kids || '<div class="muted">空</div>') + '</div></details>';
+  }
+  return '<div class="field' + (f.secret ? ' secret' : '') + '" data-search="' + esc(f.label + ' ' + f.key + ' ' + (f.description || '')) + '">' +
+    '<div class="field-head"><label>' + esc(f.label) + '</label><code>' + esc(f.key) + '</code></div>' +
+    (f.description ? '<p class="hint">' + esc(f.description) + '</p>' : '') +
+    '<div class="control">' + controlFor(f) + '</div></div>';
+}
+function controlFor(f) {
+  const v = f.value;
+  const k = 'data-k="' + esc(f.path) + '"';
+  if (f.widget === 'switch') {
+    return '<label class="switch"><input type="checkbox" ' + k + (v ? ' checked' : '') + '><span></span></label>';
+  }
+  if (f.widget === 'number') {
+    return '<input type="number" step="any" ' + k + ' value="' + esc(v) + '">';
+  }
+  if (f.widget === 'select') {
+    const opts = (f.choices || []).map(c => '<option value="' + esc(c) + '"' + (String(c) === String(v) ? ' selected' : '') + '>' + esc(c) + '</option>').join('');
+    return '<select ' + k + '>' + opts + '</select>';
+  }
+  if (f.widget === 'tags') {
+    const text = Array.isArray(v) ? v.join(', ') : String(v || '');
+    return '<input type="text" ' + k + ' data-kind="tags" value="' + esc(text) + '" placeholder="逗号分隔，例如 853963912, 719518427">';
+  }
+  if (f.widget === 'password') {
+    const masked = v === '***';
+    return '<input type="password" ' + k + ' value="" placeholder="' + (masked ? '已遮罩，留空表示不修改' : '输入新值') + '" autocomplete="new-password">';
+  }
+  if (f.widget === 'textarea') {
+    return '<textarea ' + k + '>' + esc(v) + '</textarea>';
+  }
+  if (f.widget === 'json') {
+    return '<details><summary class="muted" style="cursor:pointer">高级 JSON</summary><textarea ' + k + ' data-kind="json" style="margin-top:8px">' + esc(JSON.stringify(v, null, 2)) + '</textarea></details>';
+  }
+  return '<input type="text" ' + k + ' value="' + esc(v) + '">';
+}
+function setPath(obj, path, value) {
+  let cur = obj;
+  for (let i = 0; i < path.length - 1; i++) {
+    const key = path[i];
+    if (!cur[key] || typeof cur[key] !== 'object') cur[key] = {};
+    cur = cur[key];
+  }
+  cur[path[path.length - 1]] = value;
+}
+function collectConfig() {
+  const out = {};
+  document.querySelectorAll('#configBody [data-k]').forEach(el => {
+    const path = el.dataset.k.split('.');
+    let val;
+    if (el.type === 'checkbox') val = el.checked;
+    else if (el.dataset.kind === 'tags') {
+      val = el.value.split(',').map(s => s.trim()).filter(Boolean).map(s => (/^-?\d+$/.test(s) ? Number(s) : s));
+    } else if (el.dataset.kind === 'json') {
+      try { val = JSON.parse(el.value || 'null'); } catch (e) { throw new Error('JSON 格式错误：' + el.dataset.k); }
+    } else if (el.type === 'number') {
+      val = el.value === '' ? 0 : Number(el.value);
+    } else if (el.type === 'password') {
+      val = el.value === '' ? '***' : el.value;
+    } else {
+      val = el.value;
+    }
+    setPath(out, path, val);
+  });
+  return out;
+}
+async function savePluginConfig() {
+  if (!state.plugin) return;
+  let payload;
+  try { payload = collectConfig(); } catch (e) { toast(e.message, true); return; }
+  try {
+    await api('/api/plugins/' + encodeURIComponent(state.plugin) + '/config', {
+      method: 'PUT',
+      body: JSON.stringify({config: payload}),
+    });
+    toast('配置已保存');
+    await openPlugin(state.plugin);
+  } catch (e) { toast(e.message, true); }
+}
+
+/* ---------------- 技能 ---------------- */
+async function loadSkills() {
+  const v = $('#view-skills');
+  if (!state.skills.length) v.innerHTML = '<div class="empty">加载中…</div>';
+  try {
+    state.skills = await api('/api/skills');
+    const plugins = [...new Set(state.skills.map(s => s.plugin).filter(Boolean))].sort();
+    v.innerHTML =
+      '<div class="panel"><h2 class="section-title">技能目录 <span class="muted">' + state.skills.length + ' 个</span></h2>' +
+      '<div class="cfg-tools" style="padding:0 0 10px"><input id="skillSearch" placeholder="搜索名称 / 摘要 / 标签" style="max-width:360px">' +
+      '<select id="skillPlugin"><option value="">全部插件</option>' + plugins.map(p => '<option value="' + esc(p) + '">' + esc(p) + '</option>').join('') + '</select></div>' +
+      '<div id="skillTable"></div></div><div id="skillDetail"></div>';
+    $('#skillSearch').oninput = renderSkills;
+    $('#skillPlugin').onchange = renderSkills;
+    renderSkills();
+  } catch (e) { v.innerHTML = '<div class="empty">加载失败：' + esc(e.message) + '</div>'; }
+}
+function renderSkills() {
+  const q = ($('#skillSearch') ? $('#skillSearch').value : '').toLowerCase();
+  const p = $('#skillPlugin') ? $('#skillPlugin').value : '';
+  const rows = state.skills.filter(s => (!p || s.plugin === p) && (!q || JSON.stringify(s).toLowerCase().includes(q)));
+  $('#skillTable').innerHTML = '<div class="table-wrap"><table><thead><tr><th>名称</th><th>插件</th><th>摘要</th><th>调用</th><th>错误</th><th>平均</th><th>启用</th></tr></thead><tbody>' +
+    rows.map(s => '<tr data-skill="' + esc(s.name) + '"><td class="mono" style="white-space:nowrap">' + esc(s.name) + '</td><td style="white-space:nowrap">' + esc(s.plugin || '') +
+      '</td><td style="width:42%">' + esc(s.summary || '') + '</td><td style="white-space:nowrap">' + esc(s.calls || 0) + '</td><td style="white-space:nowrap">' + esc(s.errors || 0) +
+      '</td><td style="white-space:nowrap">' + esc((s.avg_ms || s.avg_duration_ms || 0) + ' ms') + '</td><td><label class="switch"><input type="checkbox" data-toggle="' + esc(s.name) + '"' + (s.enabled ? ' checked' : '') + '><span></span></label></td></tr>').join('') +
+    '</tbody></table></div>';
+  $('#skillTable').querySelectorAll('[data-skill]').forEach(x => x.onclick = e => {
+    if (e.target.closest('[data-toggle]')) return;
+    openSkill(x.dataset.skill);
+  });
+  $('#skillTable').querySelectorAll('[data-toggle]').forEach(x => x.onchange = () => toggleSkill(x.dataset.toggle, x.checked));
+}
+async function toggleSkill(name, enabled) {
+  try { await api('/api/skills/' + encodeURIComponent(name), {method: 'PUT', body: JSON.stringify({enabled})}); toast(enabled ? '技能已启用' : '技能已停用'); }
+  catch (e) { toast(e.message, true); renderSkills(); }
+}
+async function openSkill(name) {
+  try {
+    const d = await api('/api/skills/' + encodeURIComponent(name));
+    state.selectedSkill = d;
+    const props = (d.parameters && d.parameters.properties) || {};
+    const required = (d.parameters && d.parameters.required) || [];
+    $('#skillDetail').innerHTML =
+      '<div class="panel" style="margin-top:14px"><h2 class="section-title">' + esc(d.name) + '</h2>' +
+      '<p class="muted">' + esc(d.description || d.summary || '') + '</p>' +
+      '<div class="cfg-tools" style="padding:6px 0"><input data-ctx="group_id" placeholder="群号（可空）" style="max-width:180px">' +
+      '<input data-ctx="user_id" placeholder="QQ 号（可空）" style="max-width:180px"></div>' +
+      '<div class="cfg-body" style="padding:4px 0">' + Object.entries(props).map(([k, s]) =>
+        '<div class="field"><div class="field-head"><label>' + esc(k) + (required.includes(k) ? ' *' : '') + '</label><code>' + esc(s.type || 'string') + '</code></div>' +
+        '<div class="control">' + argInput(k, s) + '</div></div>').join('') + '</div>' +
+      '<div style="margin-top:10px"><button class="primary" id="invokeSkill">调用技能</button></div>' +
+      '<div id="invokeResult"></div></div>';
+    $('#invokeSkill').onclick = invokeSkill;
+  } catch (e) { toast(e.message, true); }
+}
+function argInput(k, s) {
+  const attr = 'data-arg-key="' + esc(k) + '" data-arg-type="' + esc(s.type || 'string') + '"';
+  if (s.type === 'boolean') return '<label style="display:flex;align-items:center;gap:7px"><input type="checkbox" ' + attr + '> 是</label>';
+  if (s.type === 'object' || s.type === 'array') return '<textarea ' + attr + ' placeholder="JSON"></textarea>';
+  return '<input type="' + (s.type === 'number' || s.type === 'integer' ? 'number' : 'text') + '" ' + attr + '>';
+}
+async function invokeSkill() {
+  const args = {};
+  try {
+    document.querySelectorAll('[data-arg-key]').forEach(i => {
+      const typ = i.dataset.argType;
+      let v = typ === 'boolean' ? i.checked : i.value;
+      if (v !== '' && (typ === 'integer' || typ === 'number')) v = typ === 'integer' ? parseInt(v, 10) : parseFloat(v);
+      if ((typ === 'object' || typ === 'array') && v !== '') v = JSON.parse(v);
+      if (v !== '' || typ === 'boolean') args[i.dataset.argKey] = v;
+    });
+  } catch (e) { toast('参数格式错误', true); return; }
+  const payload = {arguments: args};
+  document.querySelectorAll('[data-ctx]').forEach(i => { const v = i.value.trim(); if (v) payload[i.dataset.ctx] = v; });
+  try {
+    const d = await api('/api/skills/' + encodeURIComponent(state.selectedSkill.name) + '/invoke', {method: 'POST', body: JSON.stringify(payload)});
+    $('#invokeResult').innerHTML = '<div class="pre" style="margin-top:10px">' + esc(JSON.stringify(d, null, 2)) + '</div>';
+    toast(d.ok === false ? '调用失败' : '调用完成', d.ok === false);
+  } catch (e) { toast(e.message, true); }
+}
+
+/* ---------------- 钓鱼 ---------------- */
+function loadMcFish() {
+  const v = $('#view-mcfish');
+  if (!v.dataset.ready) {
+    v.innerHTML = '<div class="mcfish-wrap"><iframe class="mcfish-frame" id="mcfishFrame" src="/mcfish-panel"></iframe></div>';
+    v.dataset.ready = '1';
+  }
+}
+
+/* ---------------- Agent ---------------- */
+async function loadAgent() {
+  const v = $('#view-agent');
+  v.innerHTML =
+    '<div class="grid2"><div class="panel"><h2 class="section-title">手动运行</h2>' +
+      '<div class="field"><div class="field-head"><label>任务</label></div><div class="control"><textarea id="runTask" style="min-height:120px" placeholder="交给 Agent 的任务"></textarea></div></div>' +
+      '<div class="field" style="margin-top:10px"><div class="field-head"><label>会话标识</label><code>session_key</code></div><div class="control"><input id="sessionKey" value="admin"></div></div>' +
+      '<div style="margin-top:12px"><button class="primary" id="runSubmit">开始运行</button></div></div>' +
+    '<div class="panel"><h2 class="section-title">运行详情</h2><div id="runDetail"><div class="empty">运行后在这里查看步骤</div></div></div></div>' +
+    '<div class="panel" style="margin-top:14px"><h2 class="section-title">运行记录 <button class="ghost" id="refreshRuns">刷新</button></h2><div id="runsTable"></div></div>';
+  $('#runSubmit').onclick = submitRun;
+  $('#refreshRuns').onclick = refreshRuns;
+  refreshRuns();
+  state.poll = setInterval(refreshRuns, 5000);
+}
+async function refreshRuns() {
+  try { state.runs = await api('/api/runs?limit=100'); renderRuns(state.runs, '#runsTable'); }
+  catch (e) { const el = $('#runsTable'); if (el && !el.innerHTML) el.innerHTML = '<div class="empty">加载失败：' + esc(e.message) + '</div>'; }
+}
+async function submitRun() {
+  const b = $('#runSubmit');
+  b.disabled = true;
+  b.innerHTML = '<span class="spinner"></span> 运行中';
+  try {
+    const d = await api('/api/agent/run', {method: 'POST', body: JSON.stringify({task: $('#runTask').value, session_key: $('#sessionKey').value || 'admin'})});
+    toast('运行完成');
+    await refreshRuns();
+    openRun(d.id);
+  } catch (e) { toast(e.message, true); }
+  finally { b.disabled = false; b.textContent = '开始运行'; }
+}
+async function openRun(id) {
+  if (!$('#runDetail')) { state.route = 'agent'; setView(); }
+  try {
+    const d = await api('/api/runs/' + encodeURIComponent(id));
+    const el = $('#runDetail');
+    if (!el) return;
+    const steps = d.steps || [];
+    el.innerHTML = '<div class="muted" style="margin-bottom:8px">' + esc(d.result || d.error || d.task || '') + '</div>' +
+      steps.map(s => '<div style="border-left:2px solid var(--line2);padding:0 0 12px 12px"><b>' + esc(s.tool || s.name || 'step') +
+        '</b> <span class="muted">' + esc(s.ms || s.duration_ms || '—') + ' ms</span><div class="muted">' +
+        esc(s.content || s.error || '') + '</div></div>').join('') || '<div class="empty">暂无步骤</div>';
+  } catch (e) { toast(e.message, true); }
+}
+
+/* ---------------- 审计 ---------------- */
+async function loadAudit() {
+  const v = $('#view-audit');
+  v.innerHTML = '<div class="panel"><h2 class="section-title">审计日志</h2>' +
+    '<div class="cfg-tools" style="padding:0 0 10px"><button id="auditSkills" class="' + (state.authTab === 'skills' ? 'primary' : '') + '">技能调用</button>' +
+    '<button id="auditActions" class="' + (state.authTab === 'actions' ? 'primary' : '') + '">管理操作</button></div><div id="auditTable"></div></div>';
+  $('#auditSkills').onclick = () => { state.authTab = 'skills'; loadAudit(); };
+  $('#auditActions').onclick = () => { state.authTab = 'actions'; loadAudit(); };
+  try {
+    const d = await api('/api/audit?limit=200');
+    const rows = d[state.authTab] || [];
+    $('#auditTable').innerHTML = '<div class="table-wrap"><table><thead><tr><th>时间</th><th>' + (state.authTab === 'skills' ? '技能' : '操作') +
+      '</th><th>操作人</th><th>结果</th><th>耗时</th></tr></thead><tbody>' + rows.map(x =>
+        '<tr><td>' + esc(fmtDate(x.ts || x.time)) + '</td><td class="mono">' + esc(x.skill || x.action || '') +
+        '</td><td>' + esc(x.operator || '') + '</td><td>' + pill(x.ok === false ? 'error' : 'ok') +
+        (x.error ? '<div class="muted">' + esc(x.error) + '</div>' : '') + '</td><td>' + esc(x.ms || x.duration_ms || '—') + '</td></tr>'
+      ).join('') + '</tbody></table></div>';
+  } catch (e) { $('#auditTable').innerHTML = '<div class="empty">加载失败：' + esc(e.message) + '</div>'; }
+}
+
+/* ---------------- 启动 ---------------- */
+$('#loginForm').onsubmit = async (e) => {
+  e.preventDefault();
+  const t = $('#tokenInput').value.trim();
+  if (!t) return;
+  try {
+    await login(t);
+    state.token = t;
+    localStorage.setItem('ncatbot_admin_token', t);
+    hideLogin();
+    setView();
+  } catch (err) { toast(err.message, true); }
+};
+$('#logoutBtn').onclick = () => {
+  localStorage.removeItem('ncatbot_admin_token');
+  state.token = '';
+  showLogin();
+};
+$('#refreshBtn').onclick = () => setView();
+
+initNav();
+(async () => {
+  document.querySelectorAll('#nav button').forEach(x => x.classList.toggle('active', x.dataset.route === state.route));
+  document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
+  const view = $('#view-' + (routes[state.route] ? state.route : 'overview'));
+  if (view) view.classList.add('active');
+  $('#pageTitle').textContent = routes[state.route] ? routes[state.route].title : '总览';
+  const ok = await ensureAuth();
+  if (ok) {
+    localStorage.setItem('ncatbot_admin_token', state.token);
+    setView();
+  } else showLogin();
+})();
 </script>
 </body>
 </html>

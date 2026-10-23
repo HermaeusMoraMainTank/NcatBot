@@ -64,6 +64,7 @@ from .mcfish_rules import (
     treasure_sale_price,
 )
 from .admin_server import DEFAULT_ADMIN_TOKEN, McFishAdminServer
+from .admin_service import McFishAdminService
 
 
 LOG = get_log("McFish")
@@ -451,6 +452,7 @@ class McFish(NcatBotPlugin):
             "starting_pole_price": 100,
             "sell_tax": 0.8,
             "admin_enabled": True,
+            "standalone_admin_enabled": False,
             "admin_host": "127.0.0.1",
             "admin_port": 8766,
             "admin_token": DEFAULT_ADMIN_TOKEN,
@@ -502,7 +504,24 @@ class McFish(NcatBotPlugin):
         self._repair_concurrent_overwrite_losses()
         self._top_up_concurrent_overwrite_losses()
         self._admin_server = None
-        if bool(self.get_config("admin_enabled", True)):
+        self.admin_service = McFishAdminService(
+            self,
+            rod_names={"木竿", "铁竿", "金竿", "钻石竿", "下界合金竿", "三叉戟"},
+            fixed_price_names={
+                "木竿",
+                "铁竿",
+                "金竿",
+                "钻石竿",
+                "下界合金竿",
+                "魔法鱼饵",
+                "隐秘诱饵",
+                "万能鱼饵",
+            },
+        )
+        # 默认把面板并入统一后台（/api/mcfish/*），不再单独占一个端口。
+        # admin_enabled 只表示面板是否对统一后台开放；
+        # standalone_admin_enabled 才是旧的独立端口开关，默认关闭。
+        if bool(self.get_config("standalone_admin_enabled", False)):
             self._admin_server = McFishAdminServer(
                 self,
                 host=str(self.get_config("admin_host", "127.0.0.1")),
@@ -512,7 +531,7 @@ class McFish(NcatBotPlugin):
             try:
                 await self._admin_server.start()
             except OSError as exc:
-                LOG.error("McFish 管理界面启动失败，请检查 admin_host/admin_port：%s", exc)
+                LOG.error("McFish 独立管理界面启动失败，请检查 admin_host/admin_port：%s", exc)
                 self._admin_server = None
 
     async def on_close(self) -> None:
