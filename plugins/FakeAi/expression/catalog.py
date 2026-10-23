@@ -33,6 +33,8 @@ class StickerCatalog:
         self.root = Path(root)
         self.active: Optional[set[str]] = None
         self._libs: Dict[str, Dict[str, List[Path]]] = {}
+        # 最近发过的图，挑选时避开，避免连着两张一样
+        self._recent: List[Path] = []
 
     # ---- 加载 ----
 
@@ -92,6 +94,11 @@ class StickerCatalog:
             out.update(items)
         return sorted(out)
 
+    def _remember(self, path: Path) -> None:
+        self._recent.append(path)
+        if len(self._recent) > 8:
+            self._recent = self._recent[-8:]
+
     def pick(self, name: str) -> Optional[Path]:
         target = str(name or "").strip()
         if not target:
@@ -99,7 +106,9 @@ class StickerCatalog:
         for items in self._visible().values():
             paths = items.get(target)
             if paths:
-                return random.choice(paths)
+                picked = random.choice(paths)
+                self._remember(picked)
+                return picked
         return None
 
     def pick_any(self, library: str = "") -> Optional[Path]:
@@ -113,7 +122,12 @@ class StickerCatalog:
                 chosen.extend(paths)
         else:
             chosen = [p for items in pools.values() for paths in items.values() for p in paths]
-        return random.choice(chosen) if chosen else None
+        if not chosen:
+            return None
+        fresh = [p for p in chosen if p not in self._recent]
+        picked = random.choice(fresh or chosen)
+        self._remember(picked)
+        return picked
 
     def prompt_block(self, max_chars: int = 800) -> str:
         names = self.names()

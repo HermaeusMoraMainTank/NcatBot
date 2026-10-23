@@ -386,12 +386,15 @@ async def _execute_tool(
             mid = entry.get("message_id")
             if mid is None:
                 continue
-            who = (
-                entry.get("group_nickname")
-                or entry.get("name")
-                or entry.get("id")
-                or "?"
-            )
+            if str(entry.get("id", "")) == "0":
+                who = "你（蓝晴）"
+            else:
+                who = (
+                    entry.get("group_nickname")
+                    or entry.get("name")
+                    or entry.get("id")
+                    or "?"
+                )
             text = _entry_text(entry.get("content"))
             has_img = (
                 " [图片]"

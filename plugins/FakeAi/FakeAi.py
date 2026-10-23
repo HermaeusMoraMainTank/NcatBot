@@ -2010,6 +2010,22 @@ class FakeAi(NcatBotPlugin):
                     source="fallback",
                 )
 
+            # 对话延续窗口：有文本、又不是在 @ 别人，就直接接一句，别让分析员把话聊死
+            if (
+                not decision.should_reply
+                and det.reason == "dialog"
+                and clean_message
+                and not _mentions_other_user(input.message, BOT_QQ)
+            ):
+                decision = AnalystDecision(
+                    should_reply=True,
+                    urgency="normal",
+                    reply_strategy=decision.reply_strategy
+                    or "接着刚才的话说一句，别自证、别客服腔",
+                    topic=decision.topic or "接着刚才的话",
+                    source="force",
+                )
+
             # passive_reply_rate=1 视为「每句都接」，跳过分析员的沉默判定
             if (
                 not decision.should_reply
@@ -2787,7 +2803,8 @@ def update_yaml_with_replies(
                     data["name"] = f"{data.get('name', '')}(插件消息:{tag}，并非你生成)"
                     name = f"{name}(插件)"
 
-                who = "蓝晴" if uid == "0" else name
+                # 自己说的话标成「你」，否则模型会把历史里的「蓝晴」当成别人
+                who = "你（蓝晴）" if uid == "0" else name
                 readable.append(f"[{stamp}] {who}: {text}")
 
                 data.pop("source", None)
@@ -3023,6 +3040,19 @@ SKILL_FOCUS_RULES = (
     (("图库", "来几张", "发几张", "发三张", "发两张"), "image.package.send"),
     (("算数", "算一下", "计算一下"), "plugin.ChatCalc.run"),
 )
+
+
+def _mentions_other_user(message, self_qq: str) -> bool:
+    """消息里是否 @ 了别人（在跟第三方说话，蓝晴不该插嘴）。"""
+    try:
+        for seg in message or []:
+            if isinstance(seg, At):
+                uid = str(getattr(seg, "user_id", "") or "")
+                if uid and uid != str(self_qq):
+                    return True
+    except Exception:
+        return False
+    return False
 
 
 def _last_human_message(reply_cache: ReplyCache) -> str:
