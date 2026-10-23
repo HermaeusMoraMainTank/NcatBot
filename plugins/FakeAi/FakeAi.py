@@ -2259,12 +2259,45 @@ class FakeAi(NcatBotPlugin):
             _log.error("[FakeAi] 处理请求事件失败: %s", e)
 
 
+def _normalize_sticker(path: str) -> str:
+    """把 webp 之类的格式转成 QQ 稳定显示的 png/jpg。
+
+    QQ 对 webp 支持不稳（手机端常见空白），表情接口也只认 gif/png 一类；
+    统一转码后不管是表情接口还是普通图片都不会发出去一块空白。
+    """
+    source = Path(path)
+    if source.suffix.lower() in (".png", ".jpg", ".jpeg", ".gif"):
+        return str(source)
+    try:
+        with PILImage.open(source) as img:
+            has_alpha = "A" in img.getbands()
+            frame = img.convert("RGBA" if has_alpha else "RGB")
+            if max(frame.size) > 1200:
+                frame.thumbnail((1200, 1200))
+            # 转码文件放系统临时目录，别污染图库
+            cache_dir = Path(tempfile.gettempdir()) / "ncatbot-stickers"
+            cache_dir.mkdir(parents=True, exist_ok=True)
+            if has_alpha:
+                target = cache_dir / f"{source.stem}.png"
+                if not target.exists():
+                    frame.save(target, format="PNG")
+            else:
+                target = cache_dir / f"{source.stem}.jpg"
+                if not target.exists():
+                    frame.save(target, format="JPEG", quality=92)
+            return str(target)
+    except Exception as e:
+        _log.warning("[FakeAi] 表情转码失败，按原文件发送：%s", e)
+        return str(source)
+
+
 async def _send_sticker(plugin: "FakeAi", group_id: int, path: str) -> None:
     """优先按「动画表情」发，失败就退回普通图片。
 
     QQ 的表情接口只认 gif/png 一类，webp/jpg 容易被 retcode 100 拒掉；
-    梗鲸图库下载的就是 webp，所以这里必须有回退。
+    梗鲸图库下载的就是 webp，所以先转码再发，失败再回退普通图片。
     """
+    path = _normalize_sticker(path)
     try:
         await plugin.api.qq.send_group_sticker(group_id, path)
         return
