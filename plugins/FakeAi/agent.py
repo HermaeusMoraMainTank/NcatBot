@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 import re
+import time
 from dataclasses import dataclass, field
 from typing import Optional
 
@@ -542,6 +544,10 @@ async def _execute_tool(
     return f"未知工具：{name}"
 
 
+RUN_TIMEOUT = 90.0      # 单轮工具循环总超时（秒）
+TOOL_TIMEOUT = 15.0     # 单个工具调用超时（秒）
+
+
 async def run_agent(
     system_prompt: str,
     user_prompt: str,
@@ -593,7 +599,11 @@ async def run_agent(
         # 强制开口时拿掉 finish，模型就没法用「安静结束」交差
         tools = [t for t in tools if t["function"]["name"] != "finish"]
 
+    deadline = time.monotonic() + RUN_TIMEOUT
     for _ in range(max_rounds):
+        if time.monotonic() > deadline:
+            _log.warning("[FakeAi] agent 本轮超时（%.0fs），提前收尾", RUN_TIMEOUT)
+            break
         res = await AiUtil.chat_completion(
             messages,
             tools=tools,
@@ -644,19 +654,29 @@ async def run_agent(
                 args = {}
             if skill_bridge is not None and name in bridge_names:
                 try:
-                    result = await skill_bridge.execute(name, args)
+                    result = await asyncio.wait_for(
+                        skill_bridge.execute(name, args), timeout=TOOL_TIMEOUT
+                    )
+                except asyncio.TimeoutError:
+                    result = f"skill 调用超时（>{TOOL_TIMEOUT:.0f}s），换个方式或直接说话"
                 except Exception as e:
                     result = f"skill 调用失败：{type(e).__name__}: {e}"
             else:
-                result = await _execute_tool(
-                    name,
-                    args,
-                    actions=actions,
-                    sticker_catalog=sticker_catalog,
-                    user_id=user_id,
-                    group_id=group_id,
-                    history_entries=history_entries,
-                )
+                try:
+                    result = await asyncio.wait_for(
+                        _execute_tool(
+                            name,
+                            args,
+                            actions=actions,
+                            sticker_catalog=sticker_catalog,
+                            user_id=user_id,
+                            group_id=group_id,
+                            history_entries=history_entries,
+                        ),
+                        timeout=TOOL_TIMEOUT,
+                    )
+                except asyncio.TimeoutError:
+                    result = f"工具超时（>{TOOL_TIMEOUT:.0f}s）"
             messages.append(
                 {"role": "tool", "tool_call_id": call.get("id"), "content": result}
             )

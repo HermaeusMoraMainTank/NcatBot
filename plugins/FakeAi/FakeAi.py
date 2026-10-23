@@ -155,14 +155,26 @@ RECENT_CACHE_MAX_AGE = 6 * 3600
 _inflight_groups: set = set()
 
 # 被动触发：状态机 + 一个概率，不再有裸百分比
-# 普通闲聊时插嘴的概率（interaction.passive_reply_rate），1=每句都进决策
-PASSIVE_REPLY_RATE = 0.0
+# 触发档位（interaction.trigger_tier）：1 只回@ 2 +关键词 3 +随机 4 全回
+TRIGGER_TIER = 3
+TRIGGER_KEYWORDS: List[str] = []
+RANDOM_PERCENT = 20.0
+# 响应时带多少条历史（interaction.history_count）
+HISTORY_COUNT = 20
 
 # 允许 FakeAi 响应的群号（空集合表示不限制）— on_load / settings 会覆盖
 FAKEAI_GROUP_MODE = "allowlist"
 FAKEAI_ALLOWED_GROUPS = frozenset({853963912, 719518427, 585479130, 1064163905})
 FAKEAI_DISABLED_GROUPS = frozenset()
 FAKEAI_GROUP_ADMIN_ID = "273421673"
+
+
+def _keyword_hit(text: str) -> bool:
+    """2 档触发：消息里命中关键词表。"""
+    body = str(text or "").lower()
+    if not body:
+        return False
+    return any(k and k.lower() in body for k in TRIGGER_KEYWORDS)
 
 
 def _is_fakeai_group_allowed(group_id) -> bool:
@@ -208,9 +220,9 @@ def persona_path(name: str) -> str:
 # 是否把插件能力目录（SkillHub）接进 agent 工具循环
 SKILLS_ENABLED = True
 # 单轮对话的 token 上限，防止工具循环失控（可在 plugin_configs.FakeAi.agent_max_tokens 改）
-AGENT_MAX_TOKENS = 60000
+AGENT_MAX_TOKENS = 25000
 # 单轮工具循环的最大轮数（可在 plugin_configs.FakeAi.agent_max_rounds 改）
-AGENT_MAX_ROUNDS = 12
+AGENT_MAX_ROUNDS = 8
 
 
 # 回调状态管理
@@ -225,7 +237,7 @@ _fake_ai_loader = None
 
 
 class ReplyCache:
-    def __init__(self, max_size: int = 20):
+    def __init__(self, max_size: int = 60):
         self.replies = []
         self.max_size = max_size
 
@@ -284,6 +296,12 @@ class FakeAi(NcatBotPlugin):
         "agent_max_tokens",
     ]
     config_choices = {
+        "trigger_tier": [
+            {"value": "1", "label": "1 只回 @/叫名字"},
+            {"value": "2", "label": "2 再加关键词"},
+            {"value": "3", "label": "3 再加随机概率"},
+            {"value": "4", "label": "4 全部消息都回"},
+        ],
         "activity": [
             {"value": "0", "label": "安静（几乎不配图）"},
             {"value": "1", "label": "克制（3~5 轮一张）"},
@@ -1813,8 +1831,14 @@ class FakeAi(NcatBotPlugin):
             _log.debug(*_state_msg)
 
         if det.state == InteractionState.NOT_PRESENT:
-            # 旁观态默认不插嘴；想更活跃就调高 interaction.passive_reply_rate
-            if PASSIVE_REPLY_RATE <= 0 or random.random() >= PASSIVE_REPLY_RATE:
+            # 档位 1：只回 @/叫名字；2：+关键词；3：+随机；4：全部回
+            if TRIGGER_TIER >= 4:
+                pass
+            elif TRIGGER_TIER >= 2 and _keyword_hit(clean_message):
+                pass
+            elif TRIGGER_TIER >= 3 and random.random() * 100 < RANDOM_PERCENT:
+                pass
+            else:
                 return
 
         if det.is_empty_summon:
@@ -3196,7 +3220,7 @@ async def answer_ai(
         )
     except Exception as e:
         _log.debug("[FakeAi] 上下文压缩异常: %s", e)
-    context_limit = 8 if trigger_type in ("passive", "proactive") else 14
+    context_limit = HISTORY_COUNT
     update_yaml_with_replies(
         yaml_data,
         group_reply_caches.get(group_id, ReplyCache()),
@@ -3306,7 +3330,7 @@ async def answer_ai(
             pulse = ""
         agent_dynamic.append(f"【本次唤醒】{wake_label}。{pulse}")
 
-    if trigger_type == "passive" and PASSIVE_REPLY_RATE >= 1.0:
+    if trigger_type == "passive" and RANDOM_PERCENT >= 100:
         agent_dynamic.append(
             "（本轮必须开口）这是群友的闲聊，接一句，哪怕只回一个字；"
             "不要 finish、不要沉默。"
@@ -3413,7 +3437,7 @@ async def answer_ai(
             max_total_tokens=AGENT_MAX_TOKENS,
             max_rounds=AGENT_MAX_ROUNDS,
             force_speak=bool(
-                trigger_type == "passive" and PASSIVE_REPLY_RATE >= 1.0
+                trigger_type == "passive" and RANDOM_PERCENT >= 100
             ),
             tool_filter=LIGHT_TOOLS if trigger_type != "active" else None,
             skill_bridge=skill_bridge,

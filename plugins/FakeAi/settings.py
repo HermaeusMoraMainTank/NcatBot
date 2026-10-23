@@ -39,8 +39,8 @@ FAKEAI_CONFIG_DEFAULTS: Dict[str, Any] = {
     "typing_delay_per_char": 0.1,
     "agent_enabled": True,
     "skills_enabled": True,
-    "agent_max_tokens": 60000,
-    "agent_max_rounds": 12,
+    "agent_max_tokens": 25000,
+    "agent_max_rounds": 8,
     "persona": "lanqing",
     "proactive_enabled": True,
     "proactive_quiet_minutes": 45,
@@ -224,12 +224,16 @@ def apply_from_plugin(plugin) -> None:
     fakeai_mod.AGENT_MAX_ROUNDS = max(
         2, int(plugin.get_config("agent_max_rounds", 12) or 12)
     )
-    try:
-        passive_rate = float(DEFAULT_CONFIG.passive_reply_rate or 0.0)
-    except (TypeError, ValueError):
-        passive_rate = 0.0
     fakeai_mod.STICKER_ACTIVITY = max(0, min(3, sticker_activity))
-    fakeai_mod.PASSIVE_REPLY_RATE = min(1.0, max(0.0, passive_rate))
+    # —— 触发档位（参考 QQ-Agent）——
+    fakeai_mod.TRIGGER_TIER = max(1, min(4, int(DEFAULT_CONFIG.trigger_tier or 3)))
+    fakeai_mod.TRIGGER_KEYWORDS = list(DEFAULT_CONFIG.keywords or [])
+    try:
+        percent = float(DEFAULT_CONFIG.random_percent or 0.0)
+    except (TypeError, ValueError):
+        percent = 0.0
+    fakeai_mod.RANDOM_PERCENT = min(100.0, max(0.0, percent))
+    fakeai_mod.HISTORY_COUNT = max(4, min(40, int(DEFAULT_CONFIG.history_count or 20)))
     fakeai_mod.PROACTIVE_ENABLED = bool(
         plugin.get_config("proactive_enabled", True)
     )
