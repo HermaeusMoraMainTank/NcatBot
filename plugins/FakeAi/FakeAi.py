@@ -2610,9 +2610,15 @@ async def _chat_with_web_tools(messages: list) -> dict | None:
 
 
 SKILL_HINT = (
-    "\n\n【动手能力】要发语音、生成带字图片、发图库、写文件或拉起子智能体时："
-    "先 list_skills 看目录，再 describe_skills 确认参数，最后 invoke_skill 执行。"
-    "不要假装已经做过。"
+    "\n\n【动手能力（硬性规则）】群友让你做具体功能时（占卜、抽卡、点歌、查攻略/物价、"
+    "看群友印象、发图库、算数、签到、生成图片/语音、写文件、拉起子智能体），"
+    "必须先用 list_skills 找到对应插件或技能，再 describe_skills 确认参数，"
+    "最后 invoke_skill 执行。不要只用 send_message 口头回应，也不要假装已经做过。"
+    "例：有人说「帮我占卜」→ 在 list_skills 里找 tarot.divine 或 plugin.Tarot.run "
+    "→ describe_skills → invoke_skill；拿到牌面后再发消息/图片。"
+    "常见对应：占卜→tarot.divine / plugin.Tarot.run；算数→plugin.ChatCalc.run；"
+    "图库→plugin.ImageSender.run；FF14 查询→plugin.Tataru.run；"
+    "点歌/解析链接→plugin.MediaParser.run；签到→plugin.GroupSign.run。"
 )
 
 

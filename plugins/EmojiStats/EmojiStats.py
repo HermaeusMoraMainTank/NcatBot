@@ -280,13 +280,13 @@ class EmojiStatsPlugin(NcatBotPlugin):
         self.user_count.update(temp_user_count)
 
     async def _scheduled_persist(self) -> None:
-        self._persist_emoji_stats()
+        await asyncio.to_thread(self._persist_emoji_stats)
 
     async def on_close(self) -> None:
         for future in getattr(self, "_scheduled_futures", set()):
             future.cancel()
         getattr(self, "_scheduled_futures", set()).clear()
-        self._persist_emoji_stats()
+        await asyncio.to_thread(self._persist_emoji_stats)
 
     def _save_data_to_file(self, data: dict, file_path: str) -> bool:
         """数据保存（原子写入）。"""
@@ -886,7 +886,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
 
                 # 数据更新完成，开始保存数据
                 # 保存数据
-                self._persist_emoji_stats(group_id)
+                await asyncio.to_thread(self._persist_emoji_stats, group_id)
                 return
 
         # 未找到现有表情包，开始下载新表情包
@@ -941,7 +941,7 @@ class EmojiStatsPlugin(NcatBotPlugin):
 
         # 新表情包数据更新完成，开始保存数据
         # 保存数据
-        self._persist_emoji_stats(group_id)
+        await asyncio.to_thread(self._persist_emoji_stats, group_id)
 
     def _get_top_emojis(
         self, stats: Dict[str, EmojiStats], days: int = None

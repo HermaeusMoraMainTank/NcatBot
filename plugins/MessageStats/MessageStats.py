@@ -301,10 +301,10 @@ class MessageStatsPlugin(NcatBotPlugin):
         self.user_stats.update(temp_user_stats)
 
     async def _scheduled_persist(self) -> None:
-        self._persist_message_stats()
+        await asyncio.to_thread(self._persist_message_stats)
 
     async def on_close(self) -> None:
-        self._persist_message_stats()
+        await asyncio.to_thread(self._persist_message_stats)
 
     def _save_data_to_file(self, data: dict, file_path: str) -> bool:
         """数据保存（原子写入）。"""
@@ -543,8 +543,8 @@ class MessageStatsPlugin(NcatBotPlugin):
         )
         self.user_stats[group_id][user_id].last_message = now
 
-        # 保存数据
-        self._persist_message_stats(group_id)
+        # 不在每条消息后同步写十几 MB JSON；由 5 分钟定时任务统一落盘
+        # （同步写盘会阻塞整个 asyncio 事件循环，后台和消息都会卡住）
 
     def _extract_plain_text(self, message) -> str:
         if message is None:

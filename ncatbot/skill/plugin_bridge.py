@@ -115,7 +115,12 @@ class PluginBridge:
                 continue
             if self.upsert(plugin):
                 count += 1
-        LOG.info("PluginBridge 已同步 %d 个插件 skill", count)
+        LOG.info(
+            "PluginBridge 已同步 %d 个新插件 skill，当前共 %d 个：%s",
+            count,
+            len(self._bound),
+            "、".join(sorted(self._bound)[:12]) or "无",
+        )
         return count
 
     def upsert(self, plugin: Any) -> bool:

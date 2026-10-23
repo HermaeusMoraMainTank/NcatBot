@@ -199,12 +199,22 @@ class AdminServer:
         denied = await self._guard(request)
         if denied is not None:
             return denied
+        started = time.perf_counter()
+        LOG.debug("admin start %s %s", request.method, request.path)
         try:
             result = callback()
             if asyncio.iscoroutine(result):
                 result = await result
             if method:
                 self._record(request, method)
+            elapsed = (time.perf_counter() - started) * 1000
+            if elapsed >= 300:
+                LOG.warning(
+                    "管理接口较慢：%s %s %.0fms",
+                    request.method,
+                    request.path,
+                    elapsed,
+                )
             return self._ok(result)
         except KeyError as exc:
             return self._err(f"找不到对象：{exc}", 404)
@@ -226,6 +236,7 @@ class AdminServer:
         query_token = request.query.get("token", "")
         if query_token and hmac.compare_digest(query_token, self.token):
             response = web.FileResponse(self._index_path())
+            response.headers["Cache-Control"] = "no-store"
             response.set_cookie(
                 "ncatbot_admin",
                 self.token,
@@ -236,8 +247,12 @@ class AdminServer:
             return response
         if not self._authorized(request):
             # 未登录也返回页面，由前端弹出令牌输入框
-            return web.FileResponse(self._index_path())
-        return web.FileResponse(self._index_path())
+            response = web.FileResponse(self._index_path())
+            response.headers["Cache-Control"] = "no-store"
+            return response
+        response = web.FileResponse(self._index_path())
+        response.headers["Cache-Control"] = "no-store"
+        return response
 
     @staticmethod
     def _index_path() -> Path:

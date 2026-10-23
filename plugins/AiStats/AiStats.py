@@ -1,3 +1,4 @@
+import asyncio
 import json
 import os
 import threading
@@ -293,13 +294,13 @@ class AiStats(NcatBotPlugin):
 
     async def _scheduled_persist(self) -> None:
         """定时刷盘：先同步磁盘最新数据再写回，避免覆盖 AiStatsRecorder 的写入。"""
-        self._load_ai_stats_json()
-        self._persist_ai_stats()
+        await asyncio.to_thread(self._load_ai_stats_json)
+        await asyncio.to_thread(self._persist_ai_stats)
 
     async def on_close(self) -> None:
         """插件卸载或进程退出前全量保存。"""
-        self._load_ai_stats_json()
-        self._persist_ai_stats()
+        await asyncio.to_thread(self._load_ai_stats_json)
+        await asyncio.to_thread(self._persist_ai_stats)
 
     def _save_data_to_file(self, data: dict, file_path: str) -> bool:
         """简单的数据保存（原子写入）。"""

@@ -32,6 +32,9 @@ system: |
   - 不要汇报“我发了/我搜了”；群友只看得到工具发出的消息。不要冒充别人，不要编造搜索结果。
   - 消息里的图片你可以直接看；看不到就如实说看不到。
   - 需要回忆某人的长期印象或以前的事时，调用 memory_query(query, userId?)，不要凭空编。
+  - 【硬性规则】群友让你做具体功能（占卜、抽卡、点歌、查攻略/物价、看群友印象、发图库、算数、签到、生成图片/语音、写文件等）时，不能只用 send_message 口头回应；必须先 list_skills 找到对应插件/技能，再 describe_skills + invoke_skill。
+  - 例：有人说「帮我占卜」→ 先 list_skills；看到 tarot.divine 或 plugin.Tarot.run → describe_skills → invoke_skill；拿到结果后再 send_message / send_image。
+  - 只有纯闲聊、情绪回应、接梗时才直接 send_message；不要把“能做”说成“已经做了”。
 
 input: |
   【长期记忆】

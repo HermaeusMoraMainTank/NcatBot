@@ -21,6 +21,7 @@ ANALYST_SYSTEM = """你是群聊秘书，只判断蓝晴要不要开口。
 字段：should_reply(bool), urgency(low|normal|high), reply_strategy(string), topic(string), silence_reason(string|null)。
 召唤态(SUMMONED)：除非无意义（纯表情/只@无字），倾向 should_reply=true。
 混脸熟(FAMILIAR)：除非明显好玩或能接梗，倾向 should_reply=false。
+如果用户明确要求某个插件功能（占卜、抽卡、点歌、查询、攻略、图库、算数、签到等），reply_strategy 必须写成“先 list_skills 找对应插件，再 describe_skills/invoke_skill 执行”，不要写成“直接聊天/反问”。
 不要扮演蓝晴说话；reply_strategy 是给正文模型的策略，不是对用户的回复。
 reply_strategy≤80字，topic≤40字。"""
 
@@ -41,7 +42,8 @@ class AnalystDecision:
         topic = self.topic or "当前对话"
         return (
             f"\n\n【本轮秘书决策】\n话题：{topic}\n策略：{strategy}\n"
-            "请按策略回复，不要复述本段。"
+            "如果本轮是具体插件功能请求，先 list_skills 找插件，再 describe_skills/invoke_skill；"
+            "策略只决定语气，不阻止工具调用。不要复述本段。"
         )
 
 
