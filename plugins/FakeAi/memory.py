@@ -720,6 +720,46 @@ class MemoryManager:
         await self._db.commit()
         return int(cursor.rowcount or 0)
 
+    async def get_memory_capsule(self, group_id: int, user_id: str = "") -> str:
+        """记忆胶囊：只告诉模型"有多少、最近聊到啥"，细节让它自己查。"""
+        await self._ensure_db()
+        try:
+            window = time.time() - 48 * 3600
+            cur = await self._db.execute(
+                """SELECT COUNT(*) FROM group_summary
+                   WHERE group_id = ? AND created_at >= ?""",
+                (str(group_id), window),
+            )
+            row = await cur.fetchone()
+            summaries = int((row or [0])[0] or 0)
+
+            cur = await self._db.execute(
+                "SELECT COUNT(*) FROM memory_record WHERE active = 1"
+            )
+            row = await cur.fetchone()
+            memories = int((row or [0])[0] or 0)
+
+            topic = ""
+            if summaries:
+                cur = await self._db.execute(
+                    """SELECT summary FROM group_summary
+                       WHERE group_id = ? AND created_at >= ?
+                       ORDER BY created_at DESC LIMIT 1""",
+                    (str(group_id), window),
+                )
+                row = await cur.fetchone()
+                if row and row[0]:
+                    topic = str(row[0]).replace("\n", " ")[:60]
+
+            bits = [f"本群有 {summaries} 条近期摘要、{memories} 条记忆"]
+            if topic:
+                bits.append(f"最近聊到：{topic}")
+            bits.append("需要细节用 memory_query 查，不要凭空编")
+            return "（" + "；".join(bits) + "）"
+        except Exception as e:
+            _log.debug("[Memory] 生成记忆胶囊失败: %s", e)
+            return ""
+
     async def get_long_term_memory(self, group_id: int, max_length: int = 500) -> str:
         """获取格式化的长期记忆文本"""
         await self._ensure_db()
