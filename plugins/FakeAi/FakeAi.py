@@ -501,8 +501,12 @@ class FakeAi(NcatBotPlugin):
                 )
 
     async def on_close(self) -> None:
-        """正常退出时落盘最近消息。"""
+        """正常退出时落盘最近消息并关闭记忆库连接。"""
         self._persist_recent_caches()
+        try:
+            await memory_manager.close()
+        except Exception as e:
+            _log.debug("[FakeAi] 关闭记忆数据库失败: %s", e)
 
     def _load_recent_caches(self) -> None:
         """启动时恢复最近消息缓存（只保留 6 小时内）。"""
