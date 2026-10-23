@@ -3365,9 +3365,16 @@ async def answer_ai(
                 human_texts.append(text)
         if human_lengths:
             avg_len = max(4, min(60, int(sum(human_lengths) / len(human_lengths))))
+            longer = max(avg_len + 10, min(90, int(avg_len * 2)))
             agent_dynamic.append(
-                f"【群聊语感】最近大家发言平均约 {avg_len} 字，你的回复别明显更长。"
+                f"【群聊语感】最近大家发言平均约 {avg_len} 字。"
+                f"多数照着这个长度来，但别把自己憋成一两个字；"
+                f"讲自己的事、吐槽、解释一个东西时可以到 {longer} 字左右。"
             )
+        agent_dynamic.append(
+            "【别只当应答机】回完话不等于这轮结束：偶尔主动带一句自己的事或新话题"
+            "（刚吃了什么、在写什么、遇到什么破事、看到什么），别永远只跟着别人的问题走。"
+        )
         stop_words = {
             "什么", "怎么", "可以", "没有", "我们", "你们", "他们",
             "今天", "现在", "感觉", "真的", "不是", "还是", "就是",
