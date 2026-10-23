@@ -72,6 +72,8 @@ CONFIG_LABELS: dict[str, str] = {
     "interaction": "互动策略",
     "cognition": "认知参数",
     "expression": "表情包策略",
+    "sticker_library": "表情包图库",
+    "sticker_auto_rate": "自动配图概率",
     # 互动策略子项
     "observation_sec": "观察时长（秒）",
     "group_cd_sec": "群冷却（秒）",
@@ -97,7 +99,7 @@ CONFIG_LABELS: dict[str, str] = {
     "analyst_enabled": "启用分析员",
     "force_reply_when_summoned": "被点名必须回",
     # 表情包策略子项
-    "max_per_message": "单条最多表情",
+    "max_per_message": "每轮最多表情",
     "catalog_path": "表情目录",
     # 玩法
     "daily_limit": "每日上限",
@@ -438,6 +440,7 @@ CONFIG_DESCRIPTIONS: dict[str, str] = {
     "allowed_groups": "留空表示不限制；填了就只有这些群生效",
     "disabled_groups": "这些群里不启用",
     "proactive_probability": "0~1，越大越爱主动说话",
+    "sticker_auto_rate": "0~1；这轮模型没发图时，按这个概率自动补一张",
 }
 
 SECRET_HINTS = ("secret", "token", "password", "cookie", "api_key", "apikey", "private")

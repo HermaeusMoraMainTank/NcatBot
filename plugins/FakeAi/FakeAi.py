@@ -34,12 +34,8 @@ from .favorability import (
     get_tier,
 )
 from .cognition import DEFAULT_COGNITION
-from .expression import (
-    EXPRESSION_ENABLED,
-    MAX_STICKERS_PER_REPLY,
-    extract_stickers,
-    sticker_catalog,
-)
+from . import expression as expr_pkg
+from .expression import extract_stickers, sticker_catalog, whale_catalog
 from .interaction import (
     DEFAULT_CONFIG,
     InteractionState,
@@ -367,6 +363,11 @@ class FakeAi(NcatBotPlugin):
         "agent_enabled": "启用 Agent 模式",
     }
     config_choices = {
+        "sticker_library": [
+            {"value": "both", "label": "本地 + 梗鲸"},
+            {"value": "darkdog", "label": "仅本地（darkdog）"},
+            {"value": "gengjing", "label": "仅梗鲸（网络梗图）"},
+        ],
         "persona": [
             {"value": "lanqing", "label": "蓝晴（默认）"},
             {"value": "default", "label": "小鲸鱼（QQ-Agent 默认）"},
@@ -2334,9 +2335,9 @@ async def send_typing_response(
             content = answer
 
         sticker_paths = []
-        if EXPRESSION_ENABLED and isinstance(content, str):
+        if expr_pkg.EXPRESSION_ENABLED and isinstance(content, str):
             content, sticker_paths = extract_stickers(
-                content, max_count=MAX_STICKERS_PER_REPLY
+                content, max_count=expr_pkg.MAX_STICKERS_PER_REPLY
             )
             if sticker_paths:
                 _log.info(
@@ -2958,6 +2959,31 @@ def _focus_skill_hint(keyword: str) -> str:
     )
 
 
+async def _auto_pick_sticker(result: AgentResult, topic: str) -> None:
+    """模型忘了配图时按配置概率补一张，避免聊天干巴巴。"""
+    if not expr_pkg.EXPRESSION_ENABLED or expr_pkg.STICKER_AUTO_RATE <= 0:
+        return
+    if any(action.kind == "sticker" for action in result.actions):
+        return
+    if not any(action.kind == "text" for action in result.actions):
+        return
+    if random.random() >= expr_pkg.STICKER_AUTO_RATE:
+        return
+    lib = str(expr_pkg.STICKER_LIBRARY or "both")
+    path = None
+    if lib in ("gengjing", "both") and whale_catalog.count():
+        if lib == "gengjing" or random.random() < 0.5:
+            try:
+                path = await whale_catalog.fetch(topic)
+            except Exception as e:
+                _log.debug("[FakeAi] 梗鲸补图失败: %s", e)
+    if path is None and lib in ("darkdog", "both"):
+        path = sticker_catalog.pick_any()
+    if path is not None:
+        result.actions.append(AgentAction(kind="sticker", sticker=str(path)))
+        _log.info("[FakeAi] 自动补了一张表情：%s", Path(path).name)
+
+
 def _build_skill_bridge(
     group_id: int, user_id: Optional[str], sender_name: Optional[str] = None
 ):
@@ -3287,12 +3313,31 @@ async def answer_ai(
         prompt = (prompt or "") + f"\n\n【相关记忆】\n{mem_text}"
     if USE_DS_AGENT:
         names = sticker_catalog.names()
+        libs = sticker_catalog.libraries()
+        lib_text = "、".join(f"{k}({v})" for k, v in libs.items()) or "无"
+        whale_count = whale_catalog.count()
+        blocks = []
         if names:
-            prompt = (prompt or "") + (
-                "\n\n【可用贴纸】想发时调用 send_sticker(name)，可用："
-                + "、".join(names[:60])
+            blocks.append(
+                "\n\n【表情包·本地】图库：" + lib_text + "。"
+                "想配表情就调用 send_sticker(name)，可用名："
+                + "、".join(names[:60]) + "。"
             )
-    elif EXPRESSION_ENABLED:
+        if whale_count:
+            blocks.append(
+                "\n【表情包·梗鲸】另有 " + str(whale_count) + " 张网络梗图"
+                "（蓝色大肥鱼 / AI 娘梗图，带梗名与出处），"
+                "想发这类图用 send_meme(topic)，topic 填此刻的情绪或话题关键词。"
+            )
+        if expr_pkg.EXPRESSION_ENABLED and blocks:
+            blocks.append(
+                "\n【表情包·节奏】别憋着：普通闲聊大约每 2~3 轮就该配一张，"
+                "被戳中笑点、接梗、自嘲、无语、赢了输了、晚安时更要发；"
+                "同一张不要连续用，也别每句都发。"
+            )
+        if blocks:
+            prompt = (prompt or "") + "".join(blocks)
+    elif expr_pkg.EXPRESSION_ENABLED:
         sticker_block = sticker_catalog.prompt_block()
         if sticker_block:
             prompt = (prompt or "") + sticker_block
@@ -3347,6 +3392,8 @@ async def answer_ai(
             max_rounds=AGENT_MAX_ROUNDS,
             skill_bridge=skill_bridge,
         )
+        if agent_result is not None and agent_result.actions:
+            await _auto_pick_sticker(agent_result, keyword)
         if agent_result is not None and (
             agent_result.actions or agent_result.usage.get("total_tokens")
         ):

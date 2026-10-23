@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from dataclasses import asdict
 from pathlib import Path
@@ -53,6 +54,8 @@ FAKEAI_CONFIG_DEFAULTS: Dict[str, Any] = {
         "enabled": True,
         "catalog_path": "data/fakeai/stickers",
         "max_per_message": 1,
+        "sticker_library": "both",
+        "sticker_auto_rate": 0.4,
     },
 }
 
@@ -156,20 +159,38 @@ def apply_from_plugin(plugin) -> None:
 
     # —— expression ——
     expr_raw = plugin.get_config("expression", {}) or {}
+    if isinstance(expr_raw, dict):
+        # 默认值只补内存，保存时才会写进 config.yaml
+        expr_raw.setdefault("sticker_library", "both")
+        expr_raw.setdefault("sticker_auto_rate", 0.4)
     expr_enabled = bool(expr_raw.get("enabled", True))
     expr_max = int(expr_raw.get("max_per_message", 1))
     catalog_path = str(expr_raw.get("catalog_path", "data/fakeai/stickers"))
+    sticker_lib = str(expr_raw.get("sticker_library", "both") or "both")
+    try:
+        sticker_rate = float(expr_raw.get("sticker_auto_rate", 0.4) or 0.0)
+    except (TypeError, ValueError):
+        sticker_rate = 0.4
     from . import expression as expr_pkg
 
     expr_pkg.EXPRESSION_ENABLED = expr_enabled
-    expr_pkg.MAX_STICKERS_PER_REPLY = expr_max
-    expression_catalog_mod.sticker_catalog.root = __import__(
-        "pathlib", fromlist=["Path"]
-    ).Path(catalog_path)
+    expr_pkg.MAX_STICKERS_PER_REPLY = max(1, min(4, expr_max))
+    expr_pkg.STICKER_LIBRARY = sticker_lib
+    expr_pkg.STICKER_AUTO_RATE = min(1.0, max(0.0, sticker_rate))
+    expression_catalog_mod.sticker_catalog.root = Path(catalog_path)
+    expression_catalog_mod.sticker_catalog.active = (
+        None if sticker_lib in ("both", "all", "") else {sticker_lib}
+    )
     try:
         expression_catalog_mod.sticker_catalog.reload()
     except Exception as e:
         _log.warning("[FakeAi] 贴纸目录 reload 失败: %s", e)
+    try:
+        whale_count = expr_pkg.whale_catalog.load_cache()
+        if not whale_count:
+            asyncio.create_task(expr_pkg.whale_catalog.ensure_index())
+    except Exception as e:
+        _log.debug("[FakeAi] 梗鲸图库初始化失败: %s", e)
 
     # —— FakeAi 模块级运行时（冷却 / 白名单）——
     # 注意：from . import FakeAi 会拿到 __init__ 导出的类，必须按子模块导入

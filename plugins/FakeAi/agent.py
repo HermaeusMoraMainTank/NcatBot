@@ -73,13 +73,36 @@ AGENT_TOOLS = [
         "type": "function",
         "function": {
             "name": "send_sticker",
-            "description": "单独发一张收藏表情。name 必须是可用贴纸名。",
+            "description": "单独发一张本地收藏表情。name 必须是可用贴纸名。",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "name": {"type": "string", "description": "贴纸名"}
                 },
                 "required": ["name"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "send_meme",
+            "description": (
+                "从梗鲸图库（网络梗图、蓝色大肥鱼、AI 娘梗图）按话题挑一张发出。"
+                "想发本地贴纸以外的图时用；topic 填你此刻的情绪或话题关键词。"
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "topic": {
+                        "type": "string",
+                        "description": "情绪/话题关键词，例如 笑死、无语、晚安、破防",
+                    },
+                    "character": {
+                        "type": "string",
+                        "description": "角色筛选，可空",
+                    },
+                },
             },
         },
     },
@@ -299,7 +322,11 @@ async def _execute_tool(
         return f"已加入发送队列：{len(messages)} 条。不要重复发送，也不要汇报。"
 
     if name == "send_sticker":
-        if sum(1 for a in actions if a.kind == "sticker") >= 2:
+        from . import expression as expr_pkg
+
+        if sum(1 for a in actions if a.kind == "sticker") >= max(
+            1, int(expr_pkg.MAX_STICKERS_PER_REPLY)
+        ):
             return "本轮表情已经够了，不要再发。"
         sticker_name = str(args.get("name") or "").strip()
         path = sticker_catalog.pick(sticker_name) if sticker_catalog else None
@@ -308,6 +335,26 @@ async def _execute_tool(
             return f"没有这个贴纸：{sticker_name}。可用：{'、'.join(names)}"
         actions.append(AgentAction(kind="sticker", sticker=str(path)))
         return "表情已加入发送队列。"
+
+    if name == "send_meme":
+        from . import expression as expr_pkg
+
+        if sum(1 for a in actions if a.kind == "sticker") >= max(
+            1, int(expr_pkg.MAX_STICKERS_PER_REPLY)
+        ):
+            return "本轮表情已经够了，不要再发。"
+        topic = str(args.get("topic") or "").strip()
+        character = str(args.get("character") or "").strip()
+        try:
+            from .expression import whale_catalog
+
+            path = await whale_catalog.fetch(topic, character)
+        except Exception as e:
+            return f"梗鲸图库不可用：{type(e).__name__}: {e}"
+        if path is None:
+            return "没找到合适的梗图，换张本地贴纸或直接说话。"
+        actions.append(AgentAction(kind="sticker", sticker=str(path)))
+        return "梗图已加入发送队列。"
 
     if name == "send_poke":
         if any(a.kind == "poke" for a in actions):

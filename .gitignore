@@ -123,3 +123,7 @@ plugins/GalgameBox/data/
 
 # === Plugin secrets (API keys) ===
 plugins/common/secrets.json
+
+# === 梗鲸表情包运行态缓存 ===
+data/FakeAi/whale/
+data/fakeai/whale/
