@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import json
 import logging
 import random
+import time
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -35,6 +37,11 @@ class StickerCatalog:
         self._libs: Dict[str, Dict[str, List[Path]]] = {}
         # 最近发过的图，挑选时避开，避免连着两张一样
         self._recent: List[Path] = []
+        # 使用次数：按名字统计，用于提示里优先列常用的
+        self._usage: Dict[str, int] = {}
+        self._usage_path = Path("data/fakeai/sticker_usage.json")
+        self._usage_dirty = 0
+        self._load_usage()
 
     # ---- 加载 ----
 
@@ -75,6 +82,50 @@ class StickerCatalog:
 
     # ---- 查询 ----
 
+    # ---- 使用次数 ----
+
+    def _load_usage(self) -> None:
+        try:
+            if self._usage_path.is_file():
+                self._usage = json.loads(self._usage_path.read_text(encoding="utf-8")) or {}
+        except Exception as e:
+            _log.debug("[FakeAi Stickers] 读取使用次数失败: %s", e)
+
+    def _save_usage(self) -> None:
+        try:
+            self._usage_path.parent.mkdir(parents=True, exist_ok=True)
+            self._usage_path.write_text(
+                json.dumps(self._usage, ensure_ascii=False), encoding="utf-8"
+            )
+            self._usage_dirty = 0
+        except Exception as e:
+            _log.debug("[FakeAi Stickers] 保存使用次数失败: %s", e)
+
+    def record_use(self, name: str) -> None:
+        key = str(name or "").strip()
+        if not key:
+            return
+        self._usage[key] = int(self._usage.get(key) or 0) + 1
+        self._usage_dirty += 1
+        if self._usage_dirty >= 5:
+            self._save_usage()
+
+    def prompt_names(self, limit: int = 30) -> List[str]:
+        """按使用次数排序，并每半小时轮换一半，避免提示词永远那一批。"""
+        names = self.names()
+        if not names:
+            return []
+        limit = max(8, min(60, int(limit or 30)))
+        by_use = sorted(
+            names, key=lambda n: (-int(self._usage.get(n) or 0), n)
+        )
+        if len(by_use) <= limit:
+            return by_use
+        stable = by_use[: max(1, limit // 2)]
+        pool = [n for n in by_use if n not in stable]
+        random.shuffle(pool)
+        return stable + pool[: limit - len(stable)]
+
     def libraries(self) -> Dict[str, int]:
         """库名 -> 贴纸名数量。"""
         return {name: len(items) for name, items in sorted(self._libs.items())}
@@ -108,6 +159,7 @@ class StickerCatalog:
             if paths:
                 picked = random.choice(paths)
                 self._remember(picked)
+                self.record_use(target)
                 return picked
         return None
 
@@ -127,6 +179,7 @@ class StickerCatalog:
         fresh = [p for p in chosen if p not in self._recent]
         picked = random.choice(fresh or chosen)
         self._remember(picked)
+        self.record_use(picked.stem)
         return picked
 
     def prompt_block(self, max_chars: int = 800) -> str:

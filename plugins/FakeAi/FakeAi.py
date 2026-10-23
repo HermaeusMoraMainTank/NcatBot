@@ -421,6 +421,16 @@ class FakeAi(NcatBotPlugin):
 
         # 添加用户印象更新任务（每15分钟检查一次）
         self.add_scheduled_task(
+            "fakeai_scheduled_flush",
+            "30s",
+            callback=self._flush_scheduled_messages,
+        )
+        self.add_scheduled_task(
+            "fakeai_group_purge",
+            "24h",
+            callback=self._purge_group_messages,
+        )
+        self.add_scheduled_task(
             "fakeai_user_impression",
             "15m",
             callback=self._update_user_impressions,
@@ -567,6 +577,30 @@ class FakeAi(NcatBotPlugin):
             tmp.replace(RECENT_CACHE_PATH)
         except Exception as e:
             _log.warning("[FakeAi] 保存最近消息失败: %s", e)
+
+    async def _flush_scheduled_messages(self) -> None:
+        """到点的定时消息逐条发出。"""
+        try:
+            due = await memory_manager.due_scheduled_messages()
+        except Exception as e:
+            _log.debug("[FakeAi] 读取定时消息失败: %s", e)
+            return
+        for item in due:
+            try:
+                await self.api.qq.post_group_msg(
+                    group_id=int(item["group_id"]), text=item["content"]
+                )
+            except Exception as e:
+                _log.warning("[FakeAi] 定时消息发送失败: %s", e)
+            await memory_manager.mark_scheduled_done(item["id"])
+
+    async def _purge_group_messages(self) -> None:
+        try:
+            removed = await memory_manager.purge_group_messages(7)
+            if removed:
+                _log.info("[FakeAi] 已清理 %s 条过期群消息", removed)
+        except Exception as e:
+            _log.debug("[FakeAi] 清理群消息失败: %s", e)
 
     async def _proactive_tick(self) -> None:
         """群里安静足够久时，低概率主动起一个话题。"""
@@ -1803,6 +1837,21 @@ class FakeAi(NcatBotPlugin):
         )
         reply_cache.add_reply(reply_json)
         self._add_to_message_buffer(group_id, int(sender_id), sender_name, content)
+        # 落一份到群消息存档，供 group_history 工具翻旧账
+        try:
+            await memory_manager.save_group_message(
+                group_id,
+                str(sender_id),
+                sender_name,
+                _reply_content_to_text(content),
+                media=json.dumps(
+                    _collect_image_urls(content) if isinstance(content, list) else [],
+                    ensure_ascii=False,
+                ),
+                message_id=str(input.message_id or ""),
+            )
+        except Exception as e:
+            _log.debug("[FakeAi] 群消息存档失败: %s", e)
 
         is_at_bot = is_at_message or any(
             isinstance(s, At) and str(getattr(s, "user_id", "")) == BOT_QQ
@@ -2960,6 +3009,16 @@ def _focus_skill_hint(keyword: str) -> str:
 
 # 表情活跃度（0 安静 / 1 克制 / 2 普通 / 3 活跃），由 expression.activity 配置
 STICKER_ACTIVITY = 2
+# 每群每小时最多自动补几张（防止刷屏）
+STICKER_MAX_PER_HOUR = 10
+_sticker_sent_at: Dict[int, List[float]] = {}
+
+
+def _sticker_quota_left(group_id: int) -> bool:
+    now = time.time()
+    stamps = [t for t in _sticker_sent_at.get(group_id, []) if now - t < 3600]
+    _sticker_sent_at[group_id] = stamps
+    return len(stamps) < max(0, int(STICKER_MAX_PER_HOUR))
 _sticker_stats: Dict[int, Dict[str, Any]] = {}
 
 _STICKER_FREQ_HINT = {
@@ -2998,6 +3057,7 @@ def _note_sticker_result(group_id: int, result: AgentResult) -> None:
         recent = list(st.get("recent") or [])
         recent.extend(names)
         st["recent"] = recent[-8:]
+        _sticker_sent_at.setdefault(group_id, []).extend([time.time()] * len(names))
     else:
         st["rounds"] = int(st.get("rounds") or 0) + 1
 
@@ -3014,6 +3074,8 @@ LIGHT_TOOLS = {
     "react",
     "finish",
     "get_recent_messages",
+    "group_history",
+    "schedule_message",
     "list_skills",
     "describe_skills",
     "invoke_skill",
@@ -3105,11 +3167,15 @@ def _group_pulse(cache: "ReplyCache") -> str:
     return "【此刻状态】" + "；".join(bits) + "。"
 
 
-async def _auto_pick_sticker(result: AgentResult, topic: str) -> None:
+async def _auto_pick_sticker(
+    result: AgentResult, topic: str, group_id: int = 0
+) -> None:
     """模型忘了配图时按配置概率补一张，避免聊天干巴巴。"""
     if not expr_pkg.EXPRESSION_ENABLED or expr_pkg.STICKER_AUTO_RATE <= 0:
         return
     if int(STICKER_ACTIVITY) <= 0:
+        return
+    if not _sticker_quota_left(group_id):
         return
     if any(action.kind == "sticker" for action in result.actions):
         return
@@ -3359,10 +3425,11 @@ async def answer_ai(
         whale_count = whale_catalog.count()
         blocks = []
         if names:
+            picked_names = sticker_catalog.prompt_names(30)
             blocks.append(
                 "\n\n【表情包·本地】图库：" + lib_text + "。"
-                "想配表情就调用 send_sticker(name)，可用名："
-                + "、".join(names[:60]) + "。"
+                "想配表情就调用 send_sticker(name)，常用名："
+                + "、".join(picked_names) + "。"
             )
         elif whale_count:
             blocks.append(
@@ -3443,7 +3510,7 @@ async def answer_ai(
             skill_bridge=skill_bridge,
         )
         if agent_result is not None and agent_result.actions:
-            await _auto_pick_sticker(agent_result, keyword)
+            await _auto_pick_sticker(agent_result, keyword, group_id)
             _note_sticker_result(group_id, agent_result)
         if agent_result is not None and (
             agent_result.actions or agent_result.usage.get("total_tokens")

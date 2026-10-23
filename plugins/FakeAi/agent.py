@@ -107,6 +107,35 @@ AGENT_TOOLS = [
     {
         "type": "function",
         "function": {
+            "name": "group_history",
+            "description": "翻更早的群聊记录（比 get_recent_messages 更早，存在本地库）。想接旧话题、查某人以前说过什么时用。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "description": "关键词，可空；为空就取最近的"},
+                    "limit": {"type": "integer", "description": "条数，默认 15，最多 40"},
+                },
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "schedule_message",
+            "description": "定一条稍后自动发到当前群的消息（比如 10 分钟后提醒）。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "text": {"type": "string", "description": "到点要发的内容"},
+                    "minutes": {"type": "number", "description": "多少分钟后发，最少 1"},
+                },
+                "required": ["text", "minutes"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "send_meme",
             "description": (
                 "从梗鲸图库（网络梗图、蓝色大肥鱼、AI 娘梗图）按话题挑一张发出。"
@@ -358,6 +387,34 @@ async def _execute_tool(
             return f"没有这个贴纸：{sticker_name}。可用：{'、'.join(names)}"
         actions.append(AgentAction(kind="sticker", sticker=str(path)))
         return "表情已加入发送队列。"
+
+    if name == "group_history":
+        query = str(args.get("query") or "").strip()
+        limit = max(1, min(40, int(args.get("limit", 15) or 15)))
+        rows = await memory_manager.search_group_messages(
+            group_id, query=query, limit=limit
+        )
+        if not rows:
+            return "没有更早的记录了。"
+        lines = []
+        for row in reversed(rows):
+            stamp = time.strftime("%m-%d %H:%M", time.localtime(row["ts"]))
+            lines.append(f"[{stamp}] {row['name']}: {row['content']}")
+        return "\n".join(lines)
+
+    if name == "schedule_message":
+        text = str(args.get("text") or "").strip()
+        try:
+            minutes = float(args.get("minutes", 0) or 0)
+        except (TypeError, ValueError):
+            minutes = 0
+        if not text or minutes < 1:
+            return "需要 text，且 minutes 至少 1。"
+        due = time.time() + minutes * 60
+        await memory_manager.add_scheduled_message(
+            group_id, user_id or "", text, due
+        )
+        return f"已定在 {int(minutes)} 分钟后发送，到点会自动发出。"
 
     if name == "sticker_vibe":
         from . import expression as expr_pkg

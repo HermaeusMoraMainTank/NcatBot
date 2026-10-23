@@ -237,6 +237,29 @@ class MemoryManager:
                 key TEXT PRIMARY KEY,
                 value TEXT
             );
+            CREATE TABLE IF NOT EXISTS group_messages (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                group_id TEXT NOT NULL,
+                message_id TEXT DEFAULT '',
+                user_id TEXT DEFAULT '',
+                name TEXT DEFAULT '',
+                content TEXT DEFAULT '',
+                media TEXT DEFAULT '',
+                ts REAL NOT NULL
+            );
+            CREATE INDEX IF NOT EXISTS idx_gm_group_ts
+                ON group_messages(group_id, ts DESC);
+            CREATE TABLE IF NOT EXISTS scheduled_message (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                group_id TEXT NOT NULL,
+                user_id TEXT DEFAULT '',
+                content TEXT NOT NULL,
+                due_ts REAL NOT NULL,
+                done INTEGER NOT NULL DEFAULT 0,
+                created_ts REAL NOT NULL
+            );
+            CREATE INDEX IF NOT EXISTS idx_sm_due
+                ON scheduled_message(done, due_ts);
             """
         )
         await self._db.commit()
@@ -586,6 +609,116 @@ class MemoryManager:
                 }
             )
         return result
+
+    # ---------- 群消息存档（给 group_history 工具用）----------
+
+    async def save_group_message(
+        self,
+        group_id: int,
+        user_id: str,
+        name: str,
+        content: str,
+        media: str = "",
+        message_id: str = "",
+    ) -> None:
+        await self._ensure_db()
+        try:
+            await self._db.execute(
+                """INSERT INTO group_messages
+                   (group_id, message_id, user_id, name, content, media, ts)
+                   VALUES (?, ?, ?, ?, ?, ?, ?)""",
+                (
+                    str(group_id),
+                    str(message_id or ""),
+                    str(user_id or ""),
+                    str(name or "")[:40],
+                    str(content or "")[:1000],
+                    str(media or "")[:500],
+                    time.time(),
+                ),
+            )
+            await self._db.commit()
+        except Exception as e:
+            _log.debug("[Memory] 群消息存档失败: %s", e)
+
+    async def search_group_messages(
+        self, group_id: int, query: str = "", limit: int = 15
+    ) -> list:
+        """按关键词或最近时间翻旧账。query 为空时返回最近 N 条。"""
+        await self._ensure_db()
+        limit = max(1, min(40, int(limit or 15)))
+        try:
+            if query:
+                cursor = await self._db.execute(
+                    """SELECT name, user_id, content, ts FROM group_messages
+                       WHERE group_id = ? AND content LIKE ?
+                       ORDER BY ts DESC LIMIT ?""",
+                    (str(group_id), f"%{query}%", limit),
+                )
+            else:
+                cursor = await self._db.execute(
+                    """SELECT name, user_id, content, ts FROM group_messages
+                       WHERE group_id = ? ORDER BY ts DESC LIMIT ?""",
+                    (str(group_id), limit),
+                )
+            rows = await cursor.fetchall()
+            return [
+                {
+                    "name": r[0],
+                    "user_id": r[1],
+                    "content": r[2],
+                    "ts": r[3],
+                }
+                for r in rows
+            ]
+        except Exception as e:
+            _log.debug("[Memory] 查询群消息失败: %s", e)
+            return []
+
+    # ---------- 定时消息 ----------
+
+    async def add_scheduled_message(
+        self, group_id: int, user_id: str, content: str, due_ts: float
+    ) -> int:
+        await self._ensure_db()
+        cursor = await self._db.execute(
+            """INSERT INTO scheduled_message
+               (group_id, user_id, content, due_ts, done, created_ts)
+               VALUES (?, ?, ?, ?, 0, ?)""",
+            (str(group_id), str(user_id or ""), str(content), float(due_ts), time.time()),
+        )
+        await self._db.commit()
+        return int(cursor.lastrowid or 0)
+
+    async def due_scheduled_messages(self, now: float = None) -> list:
+        await self._ensure_db()
+        now = time.time() if now is None else now
+        cursor = await self._db.execute(
+            """SELECT id, group_id, user_id, content FROM scheduled_message
+               WHERE done = 0 AND due_ts <= ? ORDER BY due_ts ASC LIMIT 20""",
+            (now,),
+        )
+        rows = await cursor.fetchall()
+        return [
+            {"id": r[0], "group_id": r[1], "user_id": r[2], "content": r[3]}
+            for r in rows
+        ]
+
+    async def mark_scheduled_done(self, item_id: int) -> None:
+        await self._ensure_db()
+        await self._db.execute(
+            "UPDATE scheduled_message SET done = 1 WHERE id = ?", (int(item_id),)
+        )
+        await self._db.commit()
+
+    async def purge_group_messages(self, keep_days: int = 7) -> int:
+        await self._ensure_db()
+        cutoff = time.time() - max(1, int(keep_days)) * 86400
+        cursor = await self._db.execute(
+            "DELETE FROM group_messages WHERE ts < ?", (cutoff,)
+        )
+        await self._db.commit()
+        return int(cursor.rowcount or 0)
 
     async def get_long_term_memory(self, group_id: int, max_length: int = 500) -> str:
         """获取格式化的长期记忆文本"""
