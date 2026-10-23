@@ -16,7 +16,7 @@ class TarotSkills:
         summary="塔罗占卜：抽一张牌，返回牌名、正/逆位和牌面图片",
         description=(
             "直接调用 Tarot 插件抽牌；不受原插件 5% 随机触发限制。"
-            "返回的图片在工作区里，再调用 message.send_image 发出去。"
+            "牌面图片由发送层自动发出，不要重复调用 message.send_image。"
         ),
         params=[
             {"name": "question", "type": "string", "description": "想问的问题，可空"},

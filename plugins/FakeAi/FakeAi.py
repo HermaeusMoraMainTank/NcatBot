@@ -2635,7 +2635,33 @@ SKILL_HINT = (
     "\nplugin.*.run 类调用成功后，插件已经自己把结果发到群里了，"
     "不要再复述、不要发“查了/看上面”这类补充消息，直接 finish 收尾；"
     "只有插件没有发出任何内容时，你才需要自己补一条。"
+    "\nskill 返回的图片会自动发到群里，看到结果里的「已自动发出」就不要再调用 message.send_image。"
 )
+
+
+SKILL_FOCUS_RULES = (
+    (("占卜", "塔罗", "抽张牌", "抽一张牌"), "tarot.divine"),
+    (("人品",), "plugin.Jrrp.run"),
+    (("签到",), "plugin.GroupSign.run"),
+    (("图库",), "plugin.ImageSender.run"),
+    (("算数", "算一下", "计算一下"), "plugin.ChatCalc.run"),
+)
+
+
+def _focus_skill_hint(keyword: str) -> str:
+    """消息里已经点名了某个功能时，给模型一条硬性指令，别让它靠嘴编。"""
+    text = str(keyword or "")
+    if not text:
+        return ""
+    for words, skill in SKILL_FOCUS_RULES:
+        if any(word in text for word in words):
+            return (
+                f"\n\n【本次必须动手】这条消息要求「{skill}」。"
+                f"先 describe_skills(['{skill}']) 再 invoke_skill('{skill}')，"
+                "按返回结果说话，禁止自己编造牌面/数字/图片；"
+                "skill 返回的图片会自动发出，不需要你再发一次。"
+            )
+    return ""
 
 
 def _build_skill_bridge(
@@ -2668,11 +2694,36 @@ def _build_skill_bridge(
             sandbox=runtime.runner if runtime is not None else None,
             extras={"nickname": str(sender_name or "").strip()},
         )
+
+        async def _deliver_artifacts(artifacts: List[dict]) -> int:
+            """skill 产出的图片直接发到群里，不依赖模型再调一次 send_image。"""
+            api = getattr(plugin, "api", None)
+            if api is None or not group_id:
+                return 0
+            sent = 0
+            for item in artifacts:
+                if str(item.get("kind") or "") != "image":
+                    continue
+                raw = item.get("abs_path") or item.get("path")
+                if not raw:
+                    continue
+                try:
+                    await api.qq.post_group_msg(
+                        group_id=group_id, image=Image(file=str(raw))
+                    )
+                    sent += 1
+                except Exception as e:
+                    _log.error("[FakeAi] skill 产物发送失败 path=%s: %s", raw, e)
+            if sent:
+                _log.info("[FakeAi] 已自动发送 skill 图片产物 %s 个", sent)
+            return sent
+
         bridge = SkillBridge(
             registry,
             skill_ctx,
             deny={"message.send"},
             max_calls=12,
+            artifact_sink=_deliver_artifacts,
         )
         return bridge, SKILL_HINT
     except Exception as e:
@@ -2945,6 +2996,7 @@ async def answer_ai(
             _log.warning("[FakeAi] 贴纸目录为空，跳过表情注入")
 
     if USE_DS_AGENT and Path(AGENT_YAML_PATH).is_file():
+        focus_hint = _focus_skill_hint(keyword)
         if agent_dynamic:
             keyword = (keyword or "") + "\n\n" + "\n\n".join(agent_dynamic)
         image_base64_list = []
@@ -2969,7 +3021,7 @@ async def answer_ai(
             group_id, user_id, sender_name
         )
         if skill_hint:
-            prompt = (prompt or "") + skill_hint
+            prompt = (prompt or "") + skill_hint + focus_hint
         agent_result = await run_agent(
             prompt or "",
             keyword,

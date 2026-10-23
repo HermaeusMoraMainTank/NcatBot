@@ -7,7 +7,7 @@ FakeAi 这类自带工具循环的插件不用换成 AgentRuntime，
 from __future__ import annotations
 
 import json
-from typing import Any, Iterable, Optional
+from typing import Any, Callable, Iterable, Optional
 
 from .registry import SkillRegistry
 from .spec import SkillContext, SkillResult
@@ -76,6 +76,7 @@ class SkillBridge:
         allowed: Optional[Iterable[str]] = None,
         deny: Optional[Iterable[str]] = None,
         max_calls: int = 12,
+        artifact_sink: Optional[Callable[[list[dict[str, Any]]], Any]] = None,
     ) -> None:
         self.registry = registry
         self.ctx = ctx
@@ -83,6 +84,7 @@ class SkillBridge:
         self.deny = set(deny or ())
         self.max_calls = max(1, int(max_calls))
         self.calls = 0
+        self.artifact_sink = artifact_sink
 
     @property
     def tools(self) -> list[dict[str, Any]]:
@@ -151,4 +153,19 @@ class SkillBridge:
         if not isinstance(arguments, dict):
             arguments = {}
         result: SkillResult = await self.registry.invoke(name, arguments, ctx=self.ctx)
+        delivered = await self._deliver_artifacts(result)
+        if delivered:
+            result.content = (
+                f"{result.content}\n（{delivered} 个产物已自动发出，不要再重复发送）"
+            )
         return result.to_content()
+
+    async def _deliver_artifacts(self, result: SkillResult) -> int:
+        """把 skill 产出的图片/语音交给发送层，避免依赖模型的第二次工具调用。"""
+        if not result.ok or not result.artifacts or self.artifact_sink is None:
+            return 0
+        try:
+            sent = await self.artifact_sink(list(result.artifacts))
+        except Exception:
+            return 0
+        return int(sent or 0)

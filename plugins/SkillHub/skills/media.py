@@ -226,7 +226,7 @@ class MediaSkills:
     @skill(
         "image.text",
         summary="生成一张带文字的图片",
-        description="在工作区生成 PNG，返回路径；要发出去再调用 message.send_image。",
+        description="在工作区生成 PNG；发送层会自动把它发到群里。",
         params=[
             {"name": "text", "type": "string", "description": "图片上的文字", "required": True},
             {"name": "width", "type": "integer", "description": "宽度，默认 640"},
