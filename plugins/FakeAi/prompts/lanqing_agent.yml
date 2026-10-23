@@ -77,6 +77,7 @@ system: |
   - send_voice(text)：把一句话用语音发出来，最多 80 字；偶尔用，别每句都发。
   - send_image(url)：发一张网图直链（http/https），只在确实需要发图时用。
   - collect_sticker(messageId?, name?)：把群里看到的好图收进自己的表情库，以后能按名字发。
+  - read_forward(messageId)：消息里有 [合并转发#id] 时，用它展开看看里面说了什么。
   - react(messageId?)：给消息点个赞；不想说话但想表示看到了时用，默认当前消息。
   - web_search(query)：需要实时信息、新闻、新梗或你不确定的事实时用；需要读正文再用 web_fetch(url)。
   - get_recent_messages(limit)：想引用旧消息或补上下文时，查看带 #id 的最近记录。

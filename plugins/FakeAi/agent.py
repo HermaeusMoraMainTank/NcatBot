@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import json
 import logging
 import re
@@ -292,6 +293,20 @@ AGENT_TOOLS = [
     {
         "type": "function",
         "function": {
+            "name": "read_forward",
+            "description": "展开一条合并转发消息，看里面到底说了什么。需要消息 #id。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "messageId": {"type": "string", "description": "合并转发的消息 #id"}
+                },
+                "required": ["messageId"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "send_voice",
             "description": "把一句话用语音发出来（TTS）。需要「发个语音」「用声音说」时用。",
             "parameters": {
@@ -386,6 +401,50 @@ def _clean_qq_text(text: str) -> str:
     return s.strip()
 
 
+def _forward_res_id(content) -> str:
+    """从消息内容里抽出合并转发的 res_id（兼容 CQ 码与锚点两种形态）。"""
+    if isinstance(content, str):
+        m = re.search(r"\[CQ:forward,id=([^\],]+)", content)
+        if m:
+            return m.group(1)
+        m = re.search(r"\[合并转发#([^\]]+)\]", content)
+        return m.group(1) if m else ""
+    if isinstance(content, list):
+        for seg in content:
+            if isinstance(seg, dict) and seg.get("type") == "forward":
+                return str((seg.get("data") or {}).get("id") or "")
+    return ""
+
+
+def _segments_to_text(content, limit: int = 400) -> str:
+    """把消息段列表渲染成一行可读文本（用于展开合并转发）。"""
+    if not content:
+        return ""
+    if isinstance(content, str):
+        return content[:limit]
+    if not isinstance(content, list):
+        return str(content)[:limit]
+    parts: list[str] = []
+    for seg in content:
+        if not isinstance(seg, dict):
+            continue
+        kind = seg.get("type")
+        data = seg.get("data") or {}
+        if kind == "text":
+            parts.append(str(data.get("text") or ""))
+        elif kind == "image":
+            parts.append("[图片]")
+        elif kind == "face":
+            parts.append("[表情]")
+        elif kind == "record":
+            parts.append("[语音]")
+        elif kind == "video":
+            parts.append("[视频]")
+        elif kind == "at":
+            parts.append(f"@{data.get('qq') or ''}")
+    return " ".join(p for p in parts if p).strip()[:limit]
+
+
 def _entry_text(content) -> str:
     if isinstance(content, str):
         return content[:120]
@@ -411,6 +470,7 @@ async def _execute_tool(
     user_id: Optional[str],
     group_id: int,
     history_entries: Optional[list] = None,
+    bot_api=None,
 ) -> str:
     if name == "send_message":
         raw = args.get("messages")
@@ -645,22 +705,73 @@ async def _execute_tool(
         urls = entry.get("image_urls") or []
         if not urls:
             return "这条消息没有可查看的图片"
-        try:
-            b64s = await AiUtil.download_images_as_base64(urls[:2])
-        except Exception as e:
-            return f"图片下载失败：{type(e).__name__}: {e}"
-        if not b64s:
-            return "图片下载失败"
+        if not await AiUtil.vision_available():
+            return "我这边看不了图片，别编造图里的内容；可以让群友说一句是什么。"
+
         descriptions = []
-        for b64 in b64s:
+        for url in urls[:2]:
+            data = await AiUtil.download_image_bytes(url)
+            if not data:
+                continue
+            key = hashlib.md5(data).hexdigest()[:24]
+            cached = await memory_manager.get_vision_cache(key, "brief")
+            if cached and cached.get("content"):
+                descriptions.append(str(cached["content"]).strip())
+                continue
+            b64 = await asyncio.to_thread(AiUtil.image_bytes_to_base64, data)
+            if not b64:
+                continue
             result = await AiUtil.chat_with_vision(
                 "简洁描述这张图的内容，如果有文字请转录。",
                 image_base64_list=[b64],
                 max_tokens=220,
             )
             if result and result.get("content"):
-                descriptions.append(result["content"].strip())
+                desc = result["content"].strip()
+                descriptions.append(desc)
+                try:
+                    await memory_manager.save_vision_cache(key, result, "brief", url)
+                except Exception as e:
+                    _log.debug("[FakeAi] 识图缓存写入失败: %s", e)
         return "\n---\n".join(descriptions) or "图片识别失败"
+
+    if name == "read_forward":
+        mid = str(args.get("messageId") or "").strip()
+        if not mid:
+            return "需要 messageId（先用 get_recent_messages 查 #id）。"
+        if bot_api is None:
+            return "当前环境无法展开合并转发。"
+        # 模型可能传外层消息 id，也可能直接传转发段里的 res_id，两种都认
+        target = mid
+        entry = next(
+            (e for e in (history_entries or []) if str(e.get("message_id")) == mid),
+            None,
+        )
+        if entry is not None:
+            extracted = _forward_res_id(entry.get("content"))
+            if extracted:
+                target = extracted
+        try:
+            data = await bot_api.qq.get_forward_msg(target)
+        except Exception as e:
+            return f"展开失败：{type(e).__name__}: {e}"
+        nodes = getattr(data, "messages", None) or []
+        lines: list[str] = []
+        for node in nodes[:30]:
+            sender = getattr(node, "sender", None)
+            who = "?"
+            if sender is not None:
+                who = (
+                    getattr(sender, "card", None)
+                    or getattr(sender, "nickname", None)
+                    or getattr(sender, "user_id", None)
+                    or "?"
+                )
+            text = _segments_to_text(getattr(node, "message", None))
+            if text:
+                lines.append(f"{str(who)[:12]}: {text}")
+        body = "\n".join(lines)[:3000]
+        return body or "这条转发里没有可读内容"
 
     if name == "web_search":
         query = str(args.get("query") or "").strip()
@@ -746,6 +857,7 @@ async def run_agent(
     tool_filter: Optional[set[str]] = None,
     max_total_tokens: int = 60000,
     skill_bridge=None,
+    bot_api=None,
 ) -> AgentResult:
     """运行工具循环，返回要执行的动作和聚合后的用量。"""
     user_content = user_prompt
@@ -885,6 +997,7 @@ async def run_agent(
                             user_id=user_id,
                             group_id=group_id,
                             history_entries=history_entries,
+                            bot_api=bot_api,
                         ),
                         timeout=TOOL_TIMEOUT,
                     )

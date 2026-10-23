@@ -174,6 +174,44 @@ def _needs_vision_conversion(mime_type: str, image_data: bytes) -> bool:
     return image_data[:6].startswith((b"GIF87a", b"GIF89a"))
 
 
+def _shrink_for_vision(
+    image_data: bytes, mime_type: str, max_side: int = 1568
+) -> Tuple[bytes, str]:
+    """大图先缩到 1568px 再送模型：视觉 token 基本按像素算，原图很贵。"""
+    try:
+        from PIL import Image as PILImage
+    except ImportError:
+        return image_data, mime_type
+    try:
+        img = PILImage.open(BytesIO(image_data))
+    except Exception:
+        return image_data, mime_type
+    with img:
+        width, height = img.size
+        if max(width, height) <= max_side and len(image_data) <= 400_000:
+            return image_data, mime_type
+        try:
+            img.thumbnail((max_side, max_side))
+            if img.mode != "RGB":
+                img = img.convert("RGB")
+            buf = BytesIO()
+            img.save(buf, format="JPEG", quality=82)
+            out = buf.getvalue()
+        except Exception as e:
+            _log.debug("[Vision] 缩放失败，用原图: %s", e)
+            return image_data, mime_type
+    _log.info(
+        "[Vision] 图片已缩放 %sx%s → %sx%s，%s → %s bytes",
+        width,
+        height,
+        img.size[0],
+        img.size[1],
+        len(image_data),
+        len(out),
+    )
+    return out, "image/jpeg"
+
+
 def _normalize_image_for_vision(image_data: bytes, mime_type: str) -> Tuple[bytes, str]:
     """Vision API 不支持 GIF/WebP，转为 JPEG（动图取首帧）。"""
     if not _needs_vision_conversion(mime_type, image_data):
@@ -216,6 +254,63 @@ def _normalize_image_for_vision(image_data: bytes, mime_type: str) -> Tuple[byte
 
 
 class AiUtil:
+    # 识图能力探测（进程内缓存 6 小时，避免每次对话都试）
+    _VISION_CAPABILITY: Optional[bool] = None
+    _VISION_PROBED_AT: float = 0.0
+    _VISION_PROBE_TTL: float = 6 * 3600
+    _PROBE_PNG = base64.b64decode(
+        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8"
+        "z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
+    )
+
+    @staticmethod
+    async def vision_available(force: bool = False) -> bool:
+        """探测当前模型到底能不能看图，结果缓存 6 小时。
+
+        不能看图时还硬塞图片，只会白烧 token 然后让模型编造内容。
+        """
+        now = time.time()
+        if (
+            not force
+            and AiUtil._VISION_CAPABILITY is not None
+            and now - AiUtil._VISION_PROBED_AT < AiUtil._VISION_PROBE_TTL
+        ):
+            return bool(AiUtil._VISION_CAPABILITY)
+        AiUtil._VISION_PROBED_AT = now
+        try:
+            b64 = "data:image/png;base64," + base64.b64encode(
+                AiUtil._PROBE_PNG
+            ).decode()
+            res = await AiUtil.chat_with_vision(
+                "这张图是什么颜色？只回答颜色。",
+                image_base64_list=[b64],
+                max_tokens=12,
+                temperature=0.0,
+            )
+            AiUtil._VISION_CAPABILITY = bool(res and res.get("content"))
+        except Exception as e:
+            _log.debug("[Vision] 能力探测失败: %s", e)
+            AiUtil._VISION_CAPABILITY = False
+        _log.info(
+            "[Vision] 模型识图能力: %s",
+            "可用" if AiUtil._VISION_CAPABILITY else "不可用",
+        )
+        return bool(AiUtil._VISION_CAPABILITY)
+
+    @staticmethod
+    def image_bytes_to_base64(data: bytes, mime_type: str = "") -> Optional[str]:
+        """原始图片字节 → 规范化/缩放后的 data URI，避免重复下载。"""
+        if not data:
+            return None
+        try:
+            mime = mime_type or _detect_mime_type(data, "")
+            data, mime = _normalize_image_for_vision(data, mime)
+            data, mime = _shrink_for_vision(data, mime)
+            return f"data:{mime};base64," + base64.b64encode(data).decode()
+        except Exception as e:
+            _log.debug("[Vision] 图片转 base64 失败: %s", e)
+            return None
+
     @staticmethod
     async def synthesize_mimo_tts(
         text: str,
@@ -298,6 +393,9 @@ class AiUtil:
                         try:
                             image_data, mime_type = await asyncio.to_thread(
                                 _normalize_image_for_vision, image_data, mime_type
+                            )
+                            image_data, mime_type = await asyncio.to_thread(
+                                _shrink_for_vision, image_data, mime_type
                             )
                         except Exception as e:
                             _log.error(f"[Vision] 图片格式转换失败: {e}")

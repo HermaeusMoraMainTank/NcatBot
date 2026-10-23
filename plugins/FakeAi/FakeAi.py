@@ -606,6 +606,12 @@ class FakeAi(NcatBotPlugin):
                 _log.info("[FakeAi] 已清理 %s 条过期群消息", removed)
         except Exception as e:
             _log.debug("[FakeAi] 清理群消息失败: %s", e)
+        try:
+            purged = await memory_manager.cleanup_vision_cache(3)
+            if purged:
+                _log.info("[FakeAi] 已清理 %s 条过期识图缓存", purged)
+        except Exception as e:
+            _log.debug("[FakeAi] 清理识图缓存失败: %s", e)
 
     async def _proactive_tick(self) -> None:
         """群里安静足够久时，低概率主动起一个话题。"""
@@ -639,7 +645,7 @@ class FakeAi(NcatBotPlugin):
             _proactive_last[gid] = now
             try:
                 result = await answer_ai(
-                    gid, group_reply_caches, None, "proactive"
+                    gid, group_reply_caches, None, "proactive", bot_api=self.api
                 )
                 if isinstance(result, AgentResult) and result.actions:
                     await send_agent_result(self, None, result, group_id=gid)
@@ -1749,6 +1755,7 @@ class FakeAi(NcatBotPlugin):
                     str(sender_id),
                     "test",
                     sender_name=sender_name,
+                    bot_api=self.api,
                 )
                 _log.info(answer)
                 await send_typing_response(self, input, answer)
@@ -1946,6 +1953,7 @@ class FakeAi(NcatBotPlugin):
                 trigger_type,
                 sender_name=sender_name,
                 wake_label=wake_label,
+                bot_api=self.api,
             )
             _log.info(answer)
             if isinstance(answer, AgentResult):
@@ -2746,6 +2754,9 @@ def _reply_content_to_text(content, message_id: str = "") -> str:
             elif kind == "image":
                 anchor = f"[图片#{message_id}]" if message_id else "[图片]"
                 text_parts.append(anchor)
+            elif kind == "forward":
+                fid = (seg.get("data") or {}).get("id") or ""
+                text_parts.append(f"[合并转发#{fid}]" if fid else "[合并转发]")
         return " ".join(text_parts)
     return str(content) if content else ""
 
@@ -3201,6 +3212,7 @@ LIGHT_TOOLS = {
     "finish",
     "get_recent_messages",
     "get_message_images",
+    "read_forward",
     "group_history",
     "schedule_message",
     "memory_append",
@@ -3402,6 +3414,7 @@ async def answer_ai(
     trigger_type: str = "active",
     sender_name: Optional[str] = None,
     wake_label: str = "",
+    bot_api=None,
 ) -> str:
     # 确保数据库已初始化
     await memory_manager.init_db()
@@ -3575,9 +3588,15 @@ async def answer_ai(
             if history_entries and trigger_type != "proactive":
                 image_urls = history_entries[-1].get("image_urls") or []
                 if image_urls:
-                    image_base64_list = await AiUtil.download_images_as_base64(
-                        image_urls[:3]
-                    )
+                    if await AiUtil.vision_available():
+                        image_base64_list = await AiUtil.download_images_as_base64(
+                            image_urls[:3]
+                        )
+                    else:
+                        keyword = (keyword or "") + (
+                            "\n\n【看图】当前模型看不了图片，别描述图里的内容；"
+                            "需要的话让群友说一句，或直接用 get_message_images 试。"
+                        )
         except Exception as e:
             _log.debug("[FakeAi] agent 图片加载失败: %s", e)
 
@@ -3604,6 +3623,7 @@ async def answer_ai(
             ),
             tool_filter=LIGHT_TOOLS if trigger_type != "active" else None,
             skill_bridge=skill_bridge,
+            bot_api=bot_api,
         )
         if agent_result is not None and agent_result.actions:
             await _auto_pick_sticker(agent_result, keyword, group_id)
