@@ -294,22 +294,30 @@ class MediaSkills:
 
     @skill(
         "image.package.list",
-        summary="列出图库分组（名称、触发词、图片数）",
-        params=[],
+        summary="列出图库分组（名称、触发词、图片数）；发图前先用它确认图库名",
+        params=[
+            {"name": "query", "type": "string", "description": "只看名字/触发词包含该词的分组"},
+        ],
         tags=["media", "image", "read"],
         side_effects="read",
     )
-    async def skill_package_list(self, ctx: SkillContext) -> SkillResult:
+    async def skill_package_list(self, ctx: SkillContext, query: str = "") -> SkillResult:
         plugin = self.get_plugin("ImageSender") if hasattr(self, "get_plugin") else None
         if plugin is None:
             return SkillResult.fail("ImageSender 插件未加载")
+        needle = str(query or "").strip().lower()
         rows = []
         for name, config in getattr(plugin, "commands", {}).items():
+            triggers = list(config.get("triggers") or [])[:5]
+            if needle and needle not in name.lower() and not any(
+                needle in str(t).lower() for t in triggers
+            ):
+                continue
             files = plugin.get_image_files(config.get("path", ""))
             rows.append(
                 {
                     "name": name,
-                    "triggers": list(config.get("triggers") or [])[:5],
+                    "triggers": triggers,
                     "count": len(files),
                     "recall_time": config.get("recall_time"),
                 }
@@ -320,9 +328,9 @@ class MediaSkills:
 
     @skill(
         "image.package.send",
-        summary="从指定图库分组随机发图",
+        summary="从图库抽图直接发出；tag 就是图库名（llm、doro、alice…），count 张数",
         params=[
-            {"name": "tag", "type": "string", "description": "图库名或触发词", "required": True},
+            {"name": "tag", "type": "string", "description": "图库名（见 image.package.list）", "required": True},
             {"name": "count", "type": "integer", "description": "张数，默认 1，最多 9"},
         ],
         tags=["media", "image", "message", "write"],
@@ -360,6 +368,12 @@ class MediaSkills:
         if config is None:
             names = "、".join(list(commands)[:20])
             return SkillResult.fail(f"没有图库分组：{key}。可用：{names}")
+
+        allowed = config.get("allowed_users") or []
+        if allowed:
+            uid = str(ctx.user_id or "")
+            if uid not in {str(item) for item in allowed}:
+                return SkillResult.fail(f"图库 {name} 只对指定用户开放")
 
         files = plugin.get_image_files(config.get("path", ""))
         if not files:

@@ -457,7 +457,7 @@ async def run_agent(
     sticker_catalog,
     image_base64_list: Optional[list] = None,
     history_entries: Optional[list] = None,
-    max_rounds: int = 8,
+    max_rounds: int = 12,
     max_total_tokens: int = 60000,
     skill_bridge=None,
 ) -> AgentResult:

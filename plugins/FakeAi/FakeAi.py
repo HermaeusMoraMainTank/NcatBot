@@ -2873,25 +2873,53 @@ SKILL_FOCUS_RULES = (
     (("占卜", "塔罗", "抽张牌", "抽一张牌"), "tarot.divine"),
     (("人品",), "plugin.Jrrp.run"),
     (("签到",), "plugin.GroupSign.run"),
-    (("图库",), "plugin.ImageSender.run"),
+    (("图库", "来几张", "发几张", "发三张", "发两张"), "image.package.send"),
     (("算数", "算一下", "计算一下"), "plugin.ChatCalc.run"),
 )
 
 
+def _last_human_message(reply_cache: ReplyCache) -> str:
+    """取最近一条群友发言（跳过蓝晴自己、插件消息和系统事件）。"""
+    for raw in reversed(reply_cache.get_replies()):
+        try:
+            data = json.loads(raw)
+        except (json.JSONDecodeError, TypeError):
+            continue
+        if str(data.get("id", "")) == "0" or str(data.get("kind") or "") == "event":
+            continue
+        if data.get("source"):
+            continue
+        text = _reply_content_to_text(data.get("content", "")).strip()
+        if text:
+            return text
+    return ""
+
+
 def _focus_skill_hint(keyword: str) -> str:
-    """消息里已经点名了某个功能时，给模型一条硬性指令，别让它靠嘴编。"""
+    """消息里点名了功能时给模型硬性指令；一句话里有多个请求就全部列出来。"""
     text = str(keyword or "")
     if not text:
         return ""
+    hits: list[str] = []
     for words, skill in SKILL_FOCUS_RULES:
-        if any(word in text for word in words):
-            return (
-                f"\n\n【本次必须动手】这条消息要求「{skill}」。"
-                f"先 describe_skills(['{skill}']) 再 invoke_skill('{skill}')，"
-                "按返回结果说话，禁止自己编造牌面/数字/图片；"
-                "skill 返回的图片会自动发出，不需要你再发一次。"
-            )
-    return ""
+        if any(word in text for word in words) and skill not in hits:
+            hits.append(skill)
+    if not hits:
+        return ""
+    if len(hits) == 1:
+        return (
+            f"\n\n【本次必须动手】这条消息要求「{hits[0]}」。"
+            f"先 describe_skills(['{hits[0]}']) 再 invoke_skill('{hits[0]}')，"
+            "按返回结果说话，禁止自己编造牌面/数字/图片；"
+            "skill 返回的图片会自动发出，不需要你再发一次。"
+        )
+    return (
+        f"\n\n【本次必须动手】这条消息里有 {len(hits)} 个独立请求，"
+        "每个都要真的调用一次 skill，不能只做其中一两个，也不能用嘴代替："
+        + "、".join(hits)
+        + "。逐个 describe_skills 后 invoke_skill，按返回结果说话；"
+        "禁止编造结果，skill 返回的图片会自动发出。"
+    )
 
 
 def _build_skill_bridge(
@@ -3240,7 +3268,9 @@ async def answer_ai(
             _log.warning("[FakeAi] 贴纸目录为空，跳过表情注入")
 
     if USE_DS_AGENT and Path(AGENT_YAML_PATH).is_file():
-        focus_hint = _focus_skill_hint(keyword)
+        focus_hint = _focus_skill_hint(
+            _last_human_message(group_reply_caches.get(group_id, ReplyCache()))
+        )
         if agent_dynamic:
             keyword = (keyword or "") + "\n\n" + "\n\n".join(agent_dynamic)
         image_base64_list = []
