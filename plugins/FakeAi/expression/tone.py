@@ -47,6 +47,13 @@ ALREADY_SOFT = set("吧的啦嘛啊呀哦呢么吗呗")
 
 HESITATIONS = ("嗯……", "呃，", "……")
 
+# 猫娘草稿的收尾清理：删语气词与垫场词
+PET_PARTICLES = re.compile(r"[喵啦呀呢哦嘛噢呗]")
+LEAD_FILLERS = re.compile(
+    r"^(说实话|说真的|其实|讲道理|总的来说|不得不说|讲真|老实说)[，,、\s]*"
+)
+MULTI_PUNCT = re.compile(r"([。！？!?，,]){2,}")
+
 # 每种改动的触发概率（按句）。实测语病密度 1.65/千字，宁少勿多。
 _RATES = {
     "light": {"吧": 0.16, "的": 0.10, "犹豫": 0.03},
@@ -162,3 +169,19 @@ def apply_tone_many(
     texts: Iterable[str], strength: str = "light", *, seed: Optional[int] = None
 ) -> List[str]:
     return [apply_tone(t, strength, seed=seed) for t in texts]
+
+
+def strip_pet_voice(text: str) -> str:
+    """草稿第二步：删掉「喵」和多余语气词、句首垫场词。
+
+    这一步是确定性的，不花 token；第三步（删废话）交给 LLM 编辑。
+    """
+    s = str(text or "")
+    if not s:
+        return s
+    s = LEAD_FILLERS.sub("", s)
+    s = PET_PARTICLES.sub("", s)
+    s = s.replace("～", "").replace("~", "")
+    s = MULTI_PUNCT.sub(lambda m: m.group(1), s)
+    s = re.sub(r"\s{2,}", " ", s).strip()
+    return s

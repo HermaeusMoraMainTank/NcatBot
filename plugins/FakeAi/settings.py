@@ -168,6 +168,7 @@ def apply_from_plugin(plugin) -> None:
     if tone not in ("off", "light", "normal", "max"):
         tone = "light"
     expr_pkg.TONE_STRENGTH = tone
+    expr_pkg.EDITOR_PASS = bool(expr_raw.get("editor_pass", False))
     expression_catalog_mod.sticker_catalog.root = Path(catalog_path)
     expression_catalog_mod.sticker_catalog.active = (
         None if sticker_lib in ("both", "all", "") else {sticker_lib}

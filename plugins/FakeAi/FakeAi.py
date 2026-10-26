@@ -281,6 +281,7 @@ USE_DS_AGENT = True
 PERSONA = "lanqing"
 PERSONA_FILES = {
     "lanqing": "plugins/FakeAi/prompts/lanqing_agent.yml",
+    "lanqing_lab": "plugins/FakeAi/prompts/lanqing_lab_agent.yml",
     "default": "plugins/FakeAi/prompts/default_agent.yml",
 }
 AGENT_YAML_PATH = PERSONA_FILES["lanqing"]
@@ -387,6 +388,7 @@ class FakeAi(NcatBotPlugin):
         ],
         "persona": [
             {"value": "lanqing", "label": "蓝晴（默认）"},
+            {"value": "lanqing_lab", "label": "蓝晴·草稿法（实验）"},
             {"value": "default", "label": "小鲸鱼（QQ-Agent 默认）"},
         ],
     }
@@ -3425,6 +3427,53 @@ def _group_pulse(cache: "ReplyCache") -> str:
     return "【此刻状态】" + "；".join(bits) + "。"
 
 
+async def _edit_once(text: str) -> str:
+    """草稿法第三步：删掉一层撑场面的废话。失败就返回原文。"""
+    if not text.strip():
+        return ""
+    try:
+        res = await AiUtil.chat_completion(
+            [
+                {
+                    "role": "system",
+                    "content": (
+                        "把下面这句话删到最短：去掉语气词和垫场词（啦呀呢哦嘛噢、"
+                        "说实话、其实、总的来说），删掉没有具体信息的总结句，"
+                        "只保留具体的事和原意。只输出改完的一句，不要解释。"
+                    ),
+                },
+                {"role": "user", "content": text},
+            ],
+            capability="chat",
+            max_tokens=120,
+            temperature=0.2,
+        )
+    except Exception as e:
+        _log.debug("[FakeAi] 草稿删减失败: %s", e)
+        return text
+    out = str((res or {}).get("content") or "").strip().strip('"“”')
+    if not out or len(out) > len(text) + 12:
+        return text
+    return out
+
+
+async def _apply_editor_pass(result: AgentResult) -> None:
+    """草稿法第三步整轮执行：确定性命中语气词，再让模型删一层废话。"""
+    for action in result.actions:
+        if action.kind != "text":
+            continue
+        edited: List[str] = []
+        for text in action.messages:
+            cleaned = expr_pkg.strip_pet_voice(text)
+            if not cleaned.strip():
+                continue
+            edited.append(await _edit_once(cleaned))
+        action.messages = [m for m in edited if m.strip()]
+    result.actions = [
+        a for a in result.actions if a.kind != "text" or a.messages
+    ]
+
+
 async def _auto_pick_sticker(
     result: AgentResult, topic: str, group_id: int = 0
 ) -> None:
@@ -3746,6 +3795,13 @@ async def answer_ai(
             bot_api=bot_api,
         )
         if agent_result is not None and agent_result.actions:
+            if expr_pkg.EDITOR_PASS and any(
+                a.kind == "text" and a.messages for a in agent_result.actions
+            ):
+                try:
+                    await _apply_editor_pass(agent_result)
+                except Exception as e:
+                    _log.debug("[FakeAi] 编辑轮失败: %s", e)
             # 表情总额度：模型自己发的也算在内，超了这轮就不带图
             if not _sticker_quota_left(group_id):
                 dropped = [a for a in agent_result.actions if a.kind == "sticker"]
