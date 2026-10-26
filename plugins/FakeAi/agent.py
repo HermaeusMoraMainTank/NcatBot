@@ -426,6 +426,43 @@ AGENT_TOOLS = [
 ]
 
 
+_THOUGHT_MARKERS = (
+    "没点我名",
+    "没人叫我",
+    "不该接",
+    "不接",
+    "要不要",
+    "该不该",
+    "这句话",
+    "用户",
+    "群友",
+    "对方",
+    "应该回",
+    "需要回",
+    "跟我无关",
+    "内心",
+    "系统提醒",
+)
+
+
+def _looks_like_thought(text: str) -> bool:
+    """判断这段正文是不是「内心独白」而不是要发出去的话。
+
+    模型经常输出「（没点我名，漓那句就是玩梗，不接）」，这段被当成发言
+    发到群里就是灾难性的伪人感。宁可多催一轮，也不要把它发出去。
+    """
+    t = (text or "").strip()
+    if not t:
+        return False
+    if t[0] in "（(":
+        return True
+    if any(m in t for m in _THOUGHT_MARKERS):
+        return True
+    if len(t) > 80 and t.endswith("。"):
+        return True
+    return t.count("\n") >= 2
+
+
 def _extract_text(content: str) -> str:
     """兼容模型忽略工具协议、直接输出正文/JSON 的情况。"""
     text = (content or "").strip()
@@ -1169,6 +1206,7 @@ async def run_agent(
     finished = False
     tool_log: list = []
     rounds_used = 0
+    nudged = 0
     bridge_tools = skill_bridge.tools if skill_bridge is not None else []
     bridge_names = {t["function"]["name"] for t in bridge_tools}
     tools = list(AGENT_TOOLS) + bridge_tools
@@ -1222,9 +1260,24 @@ async def run_agent(
         if not calls:
             content = (res.get("content") or "").strip()
             if not actions and content:
-                text = _extract_text(content)
-                if text:
-                    actions.append(AgentAction(kind="text", messages=[text]))
+                # 模型经常把「内心活动」写成正文（括号独白、分析自己的判断）。
+                # 这不是发言，绝不能发到群里——催一次，让它改用工具。
+                if _looks_like_thought(content):
+                    nudged += 1
+                    if nudged <= 2:
+                        messages.append(
+                            {
+                                "role": "user",
+                                "content": "（系统提醒）刚才那段是内心活动，不会发出去，"
+                                "也不要发。要说话请调用 send_message；"
+                                "决定不说就调用 finish。",
+                            }
+                        )
+                        continue
+                else:
+                    text = _extract_text(content)
+                    if text:
+                        actions.append(AgentAction(kind="text", messages=[text]))
             break
 
         messages.append(
