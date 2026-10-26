@@ -47,7 +47,7 @@ FAKEAI_CONFIG_DEFAULTS: Dict[str, Any] = {
         "catalog_path": "data/fakeai/stickers",
         "max_per_message": 1,
         "sticker_library": "both",
-        "sticker_auto_rate": 0.4,
+        "sticker_auto_rate": 0.25,
     },
 }
 
@@ -145,15 +145,15 @@ def apply_from_plugin(plugin) -> None:
     if isinstance(expr_raw, dict):
         # 默认值只补内存，保存时才会写进 config.yaml
         expr_raw.setdefault("sticker_library", "both")
-        expr_raw.setdefault("sticker_auto_rate", 0.4)
+        expr_raw.setdefault("sticker_auto_rate", 0.25)
     expr_enabled = bool(expr_raw.get("enabled", True))
     expr_max = int(expr_raw.get("max_per_message", 1))
     catalog_path = str(expr_raw.get("catalog_path", "data/fakeai/stickers"))
     sticker_lib = str(expr_raw.get("sticker_library", "both") or "both")
     try:
-        sticker_rate = float(expr_raw.get("sticker_auto_rate", 0.4) or 0.0)
+        sticker_rate = float(expr_raw.get("sticker_auto_rate", 0.25) or 0.0)
     except (TypeError, ValueError):
-        sticker_rate = 0.4
+        sticker_rate = 0.25
     from . import expression as expr_pkg
 
     expr_pkg.EXPRESSION_ENABLED = expr_enabled

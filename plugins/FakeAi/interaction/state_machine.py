@@ -28,6 +28,10 @@ class ChatState:
     state: InteractionState = InteractionState.NOT_PRESENT
     # 对话延续窗口：被叫到或接上话之后，这段时间内继续参与
     dialog_until: float = 0.0
+    # 本次窗口里已经连着回了几轮（防止自问自答式无限续期）
+    dialog_rounds: int = 0
+    # 被要求闭嘴后的静默截止时间
+    silence_until: float = 0.0
 
 
 @dataclass
@@ -51,12 +55,36 @@ class ChatStateStore:
     def enter_dialog(self, group_id: int, seconds: float = 0.0) -> None:
         st = self.get(group_id)
         st.state = InteractionState.FAMILIAR
+        st.dialog_rounds = 1
         if seconds > 0:
             st.dialog_until = time.time() + seconds
+
+    def note_dialog_reply(self, group_id: int) -> None:
+        """对话窗口内又回了一轮：不续期，到上限就关窗。
+
+        以前每次发言都把 dialog_until 往后推，导致「回一句 → 窗口续 3 分钟 →
+        再回一句」自锁，群里一有动静就永远在说话。
+        """
+        st = self.get(group_id)
+        st.dialog_rounds += 1
+        limit = max(1, int(self.config.dialog_max_rounds))
+        if st.dialog_rounds >= limit:
+            self.enter_not_present(group_id)
 
     def enter_not_present(self, group_id: int) -> None:
         st = self.get(group_id)
         st.state = InteractionState.NOT_PRESENT
+        st.dialog_until = 0.0
+        st.dialog_rounds = 0
+
+    def enter_silence(self, group_id: int, seconds: float = 0.0) -> None:
+        st = self.get(group_id)
+        st.silence_until = time.time() + max(1.0, float(seconds))
+        self.enter_not_present(group_id)
+
+    def silence_left(self, group_id: int) -> float:
+        st = self.get(group_id)
+        return max(0.0, st.silence_until - time.time())
 
     def _alias_hit(self, text: str) -> bool:
         if not text:
@@ -105,7 +133,15 @@ class ChatStateStore:
                 reason="summon",
             )
 
-        if now < st.dialog_until:
+        if now < st.silence_until:
+            return DetermineResult(
+                state=InteractionState.NOT_PRESENT,
+                reason="silence",
+            )
+
+        if now < st.dialog_until and st.dialog_rounds < max(
+            1, int(self.config.dialog_max_rounds)
+        ):
             return DetermineResult(
                 state=InteractionState.FAMILIAR,
                 reason="dialog",

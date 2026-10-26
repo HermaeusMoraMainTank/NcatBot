@@ -174,7 +174,7 @@ _inflight_groups: set = set()
 # 触发档位（interaction.trigger_tier）：1 只回@ 2 +关键词 3 +随机 4 全回
 TRIGGER_TIER = 3
 TRIGGER_KEYWORDS: List[str] = []
-RANDOM_PERCENT = 20.0
+RANDOM_PERCENT = 8.0
 # 响应时带多少条历史（interaction.history_count）
 HISTORY_COUNT = 20
 
@@ -198,6 +198,58 @@ def _keyword_hit(text: str) -> bool:
     if not body:
         return False
     return any(k and k.lower() in body for k in TRIGGER_KEYWORDS)
+
+
+# —— 发言频率上限（每群）——
+REPLY_PER_10MIN = 3
+REPLY_PER_HOUR = 15
+_reply_stamps: Dict[int, List[float]] = {}
+
+
+def _reply_budget_ok(group_id: int, *, strict_window: bool = True) -> bool:
+    """10 分钟/1 小时的发言额度；strict_window=False 时只查小时级。"""
+    now = time.time()
+    stamps = [t for t in _reply_stamps.get(group_id, []) if now - t < 3600]
+    _reply_stamps[group_id] = stamps
+    if len(stamps) >= max(1, int(REPLY_PER_HOUR)):
+        return False
+    if strict_window:
+        if sum(1 for t in stamps if now - t < 600) >= max(1, int(REPLY_PER_10MIN)):
+            return False
+    return True
+
+
+def _note_reply(group_id: int) -> None:
+    _reply_stamps.setdefault(group_id, []).append(time.time())
+
+
+# —— 「闭嘴」指令：真的停，不是回一句「好」再继续说 ——
+_SILENCE_RE = re.compile(
+    r"闭嘴|别说话|不要说话|不许说话|别说了|少说两句|话太多|话痨|别刷屏"
+    r"|别回了?|不用回了?|安静点|安静一会|先安静|先别说话"
+)
+
+
+def _is_silence_request(text: str, is_at_bot: bool, reply_cache: "ReplyCache") -> bool:
+    """判断这条消息是不是在让蓝晴闭嘴。
+
+    只有「点名/接在当前对话后面」才算，避免别人互相说「别说了」也误伤。
+    """
+    body = str(text or "")
+    if not body or not _SILENCE_RE.search(body):
+        return False
+    if is_at_bot or any(a and a in body for a in DEFAULT_CONFIG.aliases):
+        return True
+    # 机器人刚说过话的 90 秒内，短句「你别说了」默认是对它说的
+    now = time.time()
+    for raw in reversed(reply_cache.get_replies()[-6:]):
+        try:
+            data = json.loads(raw)
+        except (json.JSONDecodeError, TypeError):
+            continue
+        if str(data.get("id")) == "0":
+            return now - float(data.get("ts") or 0) <= 90
+    return False
 
 
 def _is_fakeai_group_allowed(group_id) -> bool:
@@ -1896,6 +1948,19 @@ class FakeAi(NcatBotPlugin):
             isinstance(s, At) and str(getattr(s, "user_id", "")) == BOT_QQ
             for s in input.message
         )
+
+        # 被要求闭嘴：设静默期，这条也不回（回了就是「已经在闭嘴了」那种伪人）
+        if _is_silence_request(clean_message, is_at_bot, reply_cache):
+            state_store.enter_silence(
+                int(group_id), float(DEFAULT_CONFIG.silence_sec)
+            )
+            _log.info(
+                "[FakeAi] group=%s 收到闭嘴指令，静默 %.0f 秒",
+                group_id,
+                float(DEFAULT_CONFIG.silence_sec),
+            )
+            return
+
         det = state_store.determine(
             int(group_id),
             reply_cache.get_replies(),
@@ -1958,6 +2023,13 @@ class FakeAi(NcatBotPlugin):
                 if not is_admin(sender_id) and not try_acquire_group_cd(group_id):
                     return
 
+            # 频率闸门：召唤也受小时上限；闲聊另外受 10 分钟窗口限制
+            if not is_admin(sender_id) and not _reply_budget_ok(
+                gid, strict_window=det.state != InteractionState.SUMMONED
+            ):
+                _log.info("[FakeAi] group=%s 发言额度已满，本轮跳过", gid)
+                return
+
             trigger_type = (
                 "active" if det.state == InteractionState.SUMMONED else "passive"
             )
@@ -2004,7 +2076,12 @@ class FakeAi(NcatBotPlugin):
                 return
 
             await send_typing_response(self, input, answer)
-            state_store.enter_dialog(gid, DEFAULT_CONFIG.dialog_window_sec)
+            # 只有被明确召唤才开启/重置对话窗口；延续轮只累计次数，到上限自动关窗
+            if det.state == InteractionState.SUMMONED:
+                state_store.enter_dialog(gid, DEFAULT_CONFIG.dialog_window_sec)
+            else:
+                state_store.note_dialog_reply(gid)
+            _note_reply(gid)
             try:
                 await maybe_auto_remember(
                     clean_message,
@@ -3069,9 +3146,17 @@ SYSTEM_COMMON_RULES = """
 - 不要 Markdown（**、#、代码块在 QQ 里会显示成乱码）。
 - 不要每句都带「～/哦/呢/啦」。
 
+【别当解说员（最容易露馅的地方）】
+- 不要用「」引号复述群友刚说的话再点评，真人不会先引用再反驳。
+- 不要解释自己为什么说、为什么不说，也不要自我检讨或总结（「我认了」「行吧那我闭嘴」这类）。说了就说了，不补理由。
+- 别人用第三人称聊你（「这 bot 又来了」「蓝晴话真多」）不是在叫你，不要接；除非他直接 @ 你或点了你的名字。
+- 一次只回应一件事：不要「回一句 + 补一句解释」连着发。
+- 被要求闭嘴就真的安静，不要回「好」「行」再补一句。
+
 【该说 / 不该说】
 - 被 @、被叫名字、话题直接问你：回。
 - 别人互相聊、没指向你：多数时候安静看着。
+- 别人只是在评价你、聊你这个 bot：不接。
 - 刚说完一句、对方接着说：可以接，但别每句都抢。
 - 话题让你不舒服、或已经说不想聊：安静结束。
 
@@ -3168,8 +3253,8 @@ def _focus_skill_hint(keyword: str) -> str:
 
 # 表情活跃度（0 安静 / 1 克制 / 2 普通 / 3 活跃），由 expression.activity 配置
 STICKER_ACTIVITY = 2
-# 每群每小时最多自动补几张（防止刷屏）
-STICKER_MAX_PER_HOUR = 10
+# 每群每小时最多发几张表情（模型自己发的也算）
+STICKER_MAX_PER_HOUR = 6
 _sticker_sent_at: Dict[int, List[float]] = {}
 
 
@@ -3182,9 +3267,9 @@ _sticker_stats: Dict[int, Dict[str, Any]] = {}
 
 _STICKER_FREQ_HINT = {
     0: "表情包是备选项，不勉强；纯文字回应完全没问题。",
-    1: "频率：普通闲聊不用每条都配；大约每 3~5 轮来一张就够。",
-    2: "频率：回应、吐槽、接梗时优先考虑配一个贴切的表情；别每次都用同一张。",
-    3: "频率：能配表情的地方尽量配，接梗/调侃/附和时几乎都带一张；注意换着用。",
+    1: "频率：普通闲聊不用每条都配；大约每 4~6 轮来一张就够。",
+    2: "频率：普通闲聊每 3~5 轮配一张就够，别每条都带；连着两轮带图就停一轮。",
+    3: "频率：接梗/调侃时可以带，但仍然别每轮都配；连着两轮带图就停一轮。",
 }
 
 
@@ -3575,9 +3660,10 @@ async def answer_ai(
             )
         if expr_pkg.EXPRESSION_ENABLED and blocks:
             blocks.append(
-                "\n【表情包·节奏】别憋着：普通闲聊大约每 2~3 轮就该配一张，"
-                "被戳中笑点、接梗、自嘲、无语、赢了输了、晚安时更要发；"
-                "同一张不要连续用，也别每句都发。"
+                "\n【表情包·节奏】别憋着，但也别每条都配："
+                "普通闲聊大约每 3~5 轮配一张就够，一条回复最多一张；"
+                "连着两轮都带图了，这一轮就纯文字。"
+                "被戳中笑点、接梗、自嘲、无语时再发，同一张不要连续用。"
             )
         if blocks:
             # 表情清单是动态内容，放到 user 段末尾，避免打穿 system 前缀缓存
@@ -3659,6 +3745,18 @@ async def answer_ai(
             bot_api=bot_api,
         )
         if agent_result is not None and agent_result.actions:
+            # 表情总额度：模型自己发的也算在内，超了这轮就不带图
+            if not _sticker_quota_left(group_id):
+                dropped = [a for a in agent_result.actions if a.kind == "sticker"]
+                if dropped:
+                    agent_result.actions = [
+                        a for a in agent_result.actions if a.kind != "sticker"
+                    ]
+                    _log.info(
+                        "[FakeAi] group=%s 表情额度已满，跳过 %s 张",
+                        group_id,
+                        len(dropped),
+                    )
             await _auto_pick_sticker(agent_result, keyword, group_id)
             _note_sticker_result(group_id, agent_result)
         if agent_result is not None:

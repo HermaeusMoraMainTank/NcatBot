@@ -74,6 +74,10 @@ CONFIG_LABELS: dict[str, str] = {
     "sticker_auto_rate": "自动补表情概率",
     # 互动策略子项
     "dialog_window_sec": "对话延续窗口（秒）",
+    "dialog_max_rounds": "对话窗口最多回几轮",
+    "silence_sec": "被要求闭嘴后静默（秒）",
+    "reply_per_10min": "每 10 分钟最多发言",
+    "reply_per_hour": "每小时最多发言",
     "group_cd_sec": "群冷却（秒）",
     "verbose_log": "详细日志",
     "trigger_tier": "触发档位",
