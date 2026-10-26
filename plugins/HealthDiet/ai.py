@@ -185,20 +185,51 @@ commute_km（每天往返公里数，数字）、goal（字符串）、target_kc
 
 MEAL_SYSTEM = """
 你是饮食记录抽取器。只返回一个完整合法 JSON，不要 markdown、解释或思考过程。
-格式：{"meal_type":"breakfast|lunch|dinner|snack|other","items":[{"name":"食物","quantity":1,"unit":"份","grams":0,"calories_kcal":0,"protein_g":0,"fat_g":0,"carbs_g":0,"confidence":"medium","assumptions":""}]}。
-每种食物必须单独一项；数字字段必须是数字。多个餐次也放在同一个 items 数组。无糖饮品仍按实际原料估算热量。
+格式：{"meal_type":"breakfast|lunch|dinner|snack|other","items":[{"name":"食物","quantity":1,"unit":"份","grams":180,"calories_kcal":260,"protein_g":18,"fat_g":9,"carbs_g":26,"confidence":"medium","assumptions":""}]}。
+每种食物必须单独一项；数字字段必须是数字，不能是字符串、区间或 null。多个餐次也放在同一个 items 数组。
+用户说“加一份牛肉”“再加个鸡蛋”“多要一个鸡翅”时，被加的那份必须单独成项，不能合并进主菜；主菜名称里已经包含的食材（例如“西蓝花牛肉饭”里的牛肉）不算额外加的那份。
+热量、蛋白质、脂肪、碳水必须给出估算数值。用户没有写重量时，按该类食物的常见份量估算（一份盖饭约350g、一份家常炒菜约250g、一个包子约100g、一块炸鸡约100g、一杯饮料约330ml），并把假定的克数写进 assumptions。
+严禁用 0 表示“不知道”或“无法估算”：只有本身几乎不含热量的东西（白水、纯茶、黑咖啡、无糖气泡水、泡腾片）才允许填 0，其余食物即使缺少品牌和营养标签也必须按常见做法给出估算值。
+name 保留原文中的品牌和修饰词，例如“麦当劳龙焰芝士棒鸡腿汉堡”不要缩写成“鸡腿汉堡”；也不要带上“加”“还有”“然后”“另外”这类连接词。
 蛋白粉、牛奶、奶粉、乳清蛋白、代餐粉等必须识别为独立食物；“一勺蛋白粉用500g牛奶冲泡”必须拆成蛋白粉和牛奶两项，不能返回空 items。蛋白粉缺少品牌时按一勺约30g估算，牛奶按用户给出的克数估算。
-如果用户提供包装营养标签（例如每100g多少千焦、蛋白质、脂肪、碳水），必须按实际食用克数换算，不得返回空 items。维生素 C 泡腾片也要作为独立食物记录；没有营养标签时热量可暂按 0 估算并注明不确定。
+如果用户提供包装营养标签（例如每100g多少千焦、蛋白质、脂肪、碳水），必须按实际食用克数换算，不得返回空 items。
 """.strip()
 
 
 MEAL_RETRY_SYSTEM = """
-你是饮食记录复核器。上一次识别结果为空或无效，请重新完整读取用户原文，逐项识别所有吃过或喝过的东西。
+你是饮食记录复核器。上一次结果为空、无效或缺少营养数值（热量、蛋白质、脂肪、碳水有 0），请重新完整读取用户原文，逐项重新估算。
 只返回一个完整合法 JSON，不要 markdown、解释或思考过程。
-格式：{"meal_type":"breakfast|lunch|dinner|snack|other","items":[{"name":"食物","quantity":1,"unit":"份","grams":0,"calories_kcal":0,"protein_g":0,"fat_g":0,"carbs_g":0,"confidence":"medium","assumptions":""}]}。
-不要因为食物品牌、生僻名称、包装营养标签或营养素含量很小而丢弃项目。每个食物、饮料、保健品或泡腾片都必须独立放入 items。
-如果原文有“每100g/每份”的营养标签，按实际食用量换算；千焦除以4.184换算为千卡。无法确定的数值可估算并在 assumptions 说明，但不能返回空 items。
+格式：{"meal_type":"breakfast|lunch|dinner|snack|other","items":[{"name":"食物","quantity":1,"unit":"份","grams":180,"calories_kcal":260,"protein_g":18,"fat_g":9,"carbs_g":26,"confidence":"medium","assumptions":""}]}。
+1. 数字字段必须是数字，不能是字符串、区间或 null。
+2. 不要因为食物品牌、生僻名称、缺少营养标签或营养素含量很小而丢弃项目或填 0。每个食物、饮料、保健品或泡腾片都必须独立放入 items。
+3. 没有重量时按常见份量估算（一份盖饭约350g、一份家常炒菜约250g、一块炸鸡约100g、一杯饮料约330ml），并把假定的克数写进 assumptions。
+4. 只有白水、纯茶、黑咖啡、无糖气泡水、泡腾片这类几乎无热量的东西才允许填 0。
+5. 如果原文有“每100g/每份”的营养标签，按实际食用量换算；千焦除以4.184换算为千卡。
 """.strip()
+
+
+_ZERO_CALORIE_NAMES = {
+    "水", "白水", "白开水", "温水", "热水", "矿泉水", "纯净水", "冰水",
+    "茶", "绿茶", "红茶", "乌龙茶", "普洱茶", "花茶", "大麦茶", "麦茶", "苦荞茶",
+    "陈皮白茶", "立顿陈皮白茶",
+    "黑咖啡", "美式咖啡", "美式",
+    "无糖可乐", "零度可乐", "健怡可乐", "无糖气泡水", "无糖雪碧", "苏打水",
+    "泡腾片", "鱼油", "维生素", "复合维生素", "钙片",
+    "盐", "海盐", "醋", "味精",
+}
+_ZERO_CALORIE_HINTS = (
+    "泡腾片", "无糖可乐", "零度可乐", "健怡可乐", "无糖气泡水", "无糖雪碧",
+    "矿泉水", "纯净水", "东方树叶", "无糖茶", "鱼油", "维生素",
+)
+
+
+def _is_zero_calorie(name: str) -> bool:
+    text = str(name or "").strip().lower()
+    if not text:
+        return False
+    if text in _ZERO_CALORIE_NAMES:
+        return True
+    return any(hint in text for hint in _ZERO_CALORIE_HINTS)
 
 
 def _float(value: Any, default: float = 0.0) -> float:
@@ -299,25 +330,32 @@ def _normalize_meal_response(raw: dict[str, Any], description: str, current_time
             name = str(item.get("name") or item.get("food") or item.get("food_name") or "").strip()
             if not name:
                 raise AIParseError("AI 返回了无效的食物明细")
+            protein = max(0.0, _float(item.get("protein_g", item.get("protein")), 0))
+            fat = max(0.0, _float(item.get("fat_g", item.get("fat")), 0))
+            carbs = max(
+                0.0,
+                _float(
+                    item.get(
+                        "carbs_g",
+                        item.get("carbohydrates_g", item.get("carbohydrates", item.get("carbs"))),
+                    ),
+                    0,
+                ),
+            )
+            calories = max(0.0, _float(item.get("calories_kcal", item.get("calories", item.get("kcal"))), 0))
+            if calories == 0 and (protein or fat or carbs):
+                # 只填了三大营养素时用 Atwater 系数反推热量，避免整条记录显示 0 kcal。
+                calories = round(protein * 4 + fat * 9 + carbs * 4, 1)
             normalized.append(
                 {
                     "name": name,
                     "quantity": max(0.0, _float(item.get("quantity"), 1)),
                     "unit": str(item.get("unit") or "份").strip(),
                     "grams": max(0.0, _float(item.get("grams", item.get("weight_g")), 0)),
-                    "calories_kcal": max(0.0, _float(item.get("calories_kcal", item.get("calories", item.get("kcal"))), 0)),
-                    "protein_g": max(0.0, _float(item.get("protein_g", item.get("protein")), 0)),
-                    "fat_g": max(0.0, _float(item.get("fat_g", item.get("fat")), 0)),
-                    "carbs_g": max(
-                        0.0,
-                        _float(
-                            item.get(
-                                "carbs_g",
-                                item.get("carbohydrates_g", item.get("carbohydrates", item.get("carbs"))),
-                            ),
-                            0,
-                        ),
-                    ),
+                    "calories_kcal": calories,
+                    "protein_g": protein,
+                    "fat_g": fat,
+                    "carbs_g": carbs,
                     "confidence": str(item.get("confidence") or "medium"),
                     "assumptions": str(item.get("assumptions") or "").strip(),
                 }
@@ -328,10 +366,25 @@ def _normalize_meal_response(raw: dict[str, Any], description: str, current_time
     return {"meal_type": next(iter(meal_types)) if len(meal_types) == 1 else "other", "items": items, "meals": groups}
 
 
+_NUTRITION_FIELDS = ("calories_kcal", "protein_g", "fat_g", "carbs_g")
+
+
+def _nutrition_missing(items: list[dict[str, Any]]) -> bool:
+    """True when a food has no nutrition at all, which means the AI dodged the estimate."""
+    for item in items:
+        if any(float(item.get(field) or 0) > 0 for field in _NUTRITION_FIELDS):
+            continue
+        if _is_zero_calorie(str(item.get("name") or "")):
+            continue
+        return True
+    return False
+
+
 async def _parse_meal_segment(description: str, record_date: date, current_time: datetime | None) -> dict[str, Any]:
     user_message = f"记录日期：{record_date.isoformat()}\n用户描述：{description}"
+    systems = (MEAL_SYSTEM, MEAL_RETRY_SYSTEM)
     last_error: AIParseError | None = None
-    for attempt, system in enumerate((MEAL_SYSTEM, MEAL_RETRY_SYSTEM), start=1):
+    for attempt, system in enumerate(systems, start=1):
         try:
             raw = await _chat_json(
                 system,
@@ -340,11 +393,17 @@ async def _parse_meal_segment(description: str, record_date: date, current_time:
                 request_timeout=None,
                 retries=1,
             )
-            return _normalize_meal_response(raw, description, current_time)
+            parsed = _normalize_meal_response(raw, description, current_time)
         except AIParseError as exc:
             last_error = exc
-            if attempt == 1:
-                LOG.warning("饮食第1次 AI 解析为空或无效，将重新解析：%s", exc)
+            if attempt < len(systems):
+                LOG.warning("饮食第%d次 AI 解析为空或无效，将重新解析：%s", attempt, exc)
+            continue
+        if not _nutrition_missing(parsed["items"]):
+            return parsed
+        last_error = AIParseError("AI 没能估算出热量和营养素")
+        if attempt < len(systems):
+            LOG.warning("饮食第%d次 AI 结果缺少营养数值，将重新解析：%s", attempt, description)
     raise last_error or AIParseError("没有识别到可记录的食物")
 
 
