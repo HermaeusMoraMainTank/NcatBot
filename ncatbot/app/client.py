@@ -511,6 +511,17 @@ class BotClient:
 
     def _setup_dispatcher(self) -> None:
         """创建事件分发器并接通所有 Adapter 的事件回调。"""
+        # 全局屏蔽指令（协议端自带的 #sl 之类）：在分发给任何插件之前丢掉
+        try:
+            from ncatbot.core.dispatcher.dispatcher import set_blocked_commands
+
+            plugin_cfg = getattr(self.config, "plugin", None)
+            blocked = getattr(plugin_cfg, "command_blacklist", None)
+            set_blocked_commands(blocked)
+            if blocked:
+                LOG.info("全局屏蔽指令: %s", list(blocked))
+        except Exception as e:
+            LOG.debug("加载屏蔽指令失败: %s", e)
         self._dispatcher = AsyncEventDispatcher()
         for adapter in self._adapters:
             adapter.set_event_callback(self._dispatcher.callback)

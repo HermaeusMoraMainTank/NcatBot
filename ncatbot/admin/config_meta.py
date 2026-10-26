@@ -48,6 +48,7 @@ CONFIG_LABELS: dict[str, str] = {
     "group_whitelist": "群白名单",
     "whitelist_reject_message": "白名单拒绝提示",
     "blacklist": "黑名单",
+    "command_blacklist": "全局屏蔽指令",
     "super_users": "超级用户",
     "frozen_users": "冻结用户",
     # FakeAi

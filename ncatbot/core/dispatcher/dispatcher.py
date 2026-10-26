@@ -8,9 +8,11 @@
 from __future__ import annotations
 
 import asyncio
+import re
 from typing import (
     Awaitable,
     Callable,
+    FrozenSet,
     Optional,
     Set,
     Union,
@@ -27,6 +29,51 @@ if TYPE_CHECKING:
     from ncatbot.types import BaseEventData
 
 LOG = get_log("AsyncEventDispatcher")
+
+# 全局屏蔽的指令（可在 config.plugin.command_blacklist 覆盖）
+_DEFAULT_BLOCKED_COMMANDS: FrozenSet[str] = frozenset({"#sl"})
+_blocked_commands: Set[str] = set(_DEFAULT_BLOCKED_COMMANDS)
+_CQ_RE = re.compile(r"\[CQ:[^\]]+\]")
+
+
+def set_blocked_commands(commands) -> None:
+    """设置全局屏蔽指令；传空集合表示不屏蔽任何指令。"""
+    global _blocked_commands
+    if commands is None:
+        _blocked_commands = set(_DEFAULT_BLOCKED_COMMANDS)
+        return
+    _blocked_commands = {
+        str(c).strip().lower() for c in commands if str(c).strip()
+    }
+
+
+def get_blocked_commands() -> Set[str]:
+    return set(_blocked_commands)
+
+
+def _event_text(data) -> str:
+    """取事件的纯文本（优先 message.text，退化为 raw_message 去 CQ 码）。"""
+    message = getattr(data, "message", None)
+    if message is not None and hasattr(message, "text"):
+        text = str(getattr(message, "text", "") or "")
+        if text.strip():
+            return text
+    raw = str(getattr(data, "raw_message", "") or "")
+    return _CQ_RE.sub("", raw)
+
+
+def _is_blocked_text(text: str) -> bool:
+    if not _blocked_commands:
+        return False
+    t = (text or "").strip().lower()
+    if not t:
+        return False
+    for cmd in _blocked_commands:
+        if t == cmd or t.startswith(cmd + " "):
+            return True
+    # 「@xx #sl」这种带前缀的写法也要拦
+    tokens = re.split(r"\s+", t)
+    return any(tok in _blocked_commands for tok in tokens)
 
 
 class AsyncEventDispatcher:
@@ -73,6 +120,10 @@ class AsyncEventDispatcher:
     async def _on_event(self, data: "BaseEventData") -> None:
         """接收外部推送的事件数据，resolve 类型后广播。"""
         if self._closed:
+            return
+
+        if _is_blocked_text(_event_text(data)):
+            LOG.debug("屏蔽指令事件: %s", _event_text(data)[:40])
             return
 
         event_type = data.resolve_type()

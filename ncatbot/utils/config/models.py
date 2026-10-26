@@ -144,6 +144,8 @@ class PluginConfig(BaseConfig):
     """是否允许在群聊中使用 ``!`` 管理命令（默认仅私聊）。"""
     plugin_configs: Dict[str, Dict[str, Any]] = Field(default_factory=dict)
     """全局配置文件中的插件配置覆盖。键为插件名，值为配置字典。"""
+    command_blacklist: List[str] = Field(default_factory=lambda: ["#sl"])
+    """全局屏蔽的指令：命中这些文本的消息不会进入任何插件（例如协议端自带的 #sl）。"""
 
     @field_validator("plugins_dir")
     @classmethod
