@@ -164,6 +164,10 @@ def apply_from_plugin(plugin) -> None:
     except (TypeError, ValueError):
         sticker_activity = 2
     expr_pkg.STICKER_AUTO_RATE = min(1.0, max(0.0, sticker_rate))
+    tone = str(expr_raw.get("tone_strength", "light") or "light").strip().lower()
+    if tone not in ("off", "light", "normal", "max"):
+        tone = "light"
+    expr_pkg.TONE_STRENGTH = tone
     expression_catalog_mod.sticker_catalog.root = Path(catalog_path)
     expression_catalog_mod.sticker_catalog.active = (
         None if sticker_lib in ("both", "all", "") else {sticker_lib}

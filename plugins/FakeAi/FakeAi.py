@@ -282,9 +282,6 @@ PERSONA = "lanqing"
 PERSONA_FILES = {
     "lanqing": "plugins/FakeAi/prompts/lanqing_agent.yml",
     "default": "plugins/FakeAi/prompts/default_agent.yml",
-    "blue_bigfish": "plugins/FakeAi/prompts/blue_bigfish_agent.yml",
-    "deepsleep_gamer": "plugins/FakeAi/prompts/deepsleep_gamer_agent.yml",
-    "xiaojingyu_polite": "plugins/FakeAi/prompts/xiaojingyu_polite_agent.yml",
 }
 AGENT_YAML_PATH = PERSONA_FILES["lanqing"]
 
@@ -391,9 +388,6 @@ class FakeAi(NcatBotPlugin):
         "persona": [
             {"value": "lanqing", "label": "蓝晴（默认）"},
             {"value": "default", "label": "小鲸鱼（QQ-Agent 默认）"},
-            {"value": "blue_bigfish", "label": "蓝色大肥鱼"},
-            {"value": "deepsleep_gamer", "label": "大肥鱼 Deepsleep（游戏群友版）"},
-            {"value": "xiaojingyu_polite", "label": "小鲸鱼（乖巧不说脏话）"},
         ],
     }
 
@@ -2439,6 +2433,9 @@ async def send_agent_result(
                             break
                         if chunk in sent_texts or _is_duplicate_say(group_id, chunk):
                             continue
+                        chunk = expr_pkg.apply_tone(
+                            chunk, str(expr_pkg.TONE_STRENGTH)
+                        )
                         if not _send_quota_ok(group_id):
                             _log.warning(
                                 "[FakeAi] 群 %s 发送额度已满，本轮收口", group_id

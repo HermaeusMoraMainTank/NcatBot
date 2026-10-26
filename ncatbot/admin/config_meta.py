@@ -73,6 +73,7 @@ CONFIG_LABELS: dict[str, str] = {
     "sticker_library": "表情包图库",
     "activity": "表情活跃度",
     "sticker_auto_rate": "自动补表情概率",
+    "tone_strength": "人味强度（off/light/normal/max）",
     # 互动策略子项
     "dialog_window_sec": "对话延续窗口（秒）",
     "dialog_max_rounds": "对话窗口最多回几轮",
