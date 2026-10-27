@@ -1,0 +1,129 @@
+{
+ "id": "dafeiyu-001",
+ "name": "大肥鱼",
+ "version": "1.3.0",
+ "license": "personal",
+ "source": "https://github.com/yyh-001/dsh-meme-packs",
+ "images": {
+  "deyi": {
+   "mood": "happy",
+   "caption": "得意闭眼拳头，好耶，小鲸鱼娘很满意",
+   "keywords": "得意 好耶 满意 拳头 开心 大肥鱼"
+  },
+  "ganfan": {
+   "mood": "daily",
+   "caption": "捧着蓝碗干饭，星星眼吃得很香",
+   "keywords": "干饭 吃饭 饿 香 日常 大肥鱼"
+  },
+  "shengqi": {
+   "mood": "angry",
+   "caption": "气鼓鼓叉腰，额头怒气符号，蒸汽直冒",
+   "keywords": "生气 愤怒 哼 叉腰 大肥鱼"
+  },
+  "wenhao": {
+   "mood": "confused",
+   "caption": "疑惑举手，头顶大问号",
+   "keywords": "疑惑 问号 困惑 懵 大肥鱼"
+  },
+  "xia": {
+   "mood": "surprised",
+   "caption": "吓到大叫，拳头握紧，感叹号",
+   "keywords": "惊吓 震惊 啊 大叫 大肥鱼"
+  },
+  "yun": {
+   "mood": "sad",
+   "caption": "晕了，螺旋眼捂脸，脑子打结",
+   "keywords": "晕 崩溃 受不了 难过 大肥鱼"
+  },
+  "bixin": {
+   "mood": "like",
+   "caption": "双手比心卖萌，星星眼超开心",
+   "keywords": "比心 喜欢 卖萌 可爱 开心 大肥鱼"
+  },
+  "haixiu": {
+   "mood": "shy",
+   "caption": "害羞捂脸，脸红红的",
+   "keywords": "害羞 腼腆 脸红 不好意思 大肥鱼"
+  },
+  "huachi": {
+   "mood": "color",
+   "caption": "爱心眼花痴，双手托腮",
+   "keywords": "花痴 心动 喜欢 爱心眼 大肥鱼"
+  },
+  "shuijiao": {
+   "mood": "sleep",
+   "caption": "抱小枕头睡觉，嘴角口水 zzz",
+   "keywords": "睡觉 困 晚安 熬夜 大肥鱼"
+  },
+  "zaoshanghao": {
+   "mood": "morning",
+   "caption": "早上好挥手打招呼，笑得很亮",
+   "keywords": "早上好 打招呼 你好 欢迎 大肥鱼"
+  },
+  "tangping": {
+   "mood": "work",
+   "caption": "摸鱼躺平，半睁眼摊着不想动",
+   "keywords": "摸鱼 躺平 下班 不想干活 大肥鱼"
+  },
+  "wuyu": {
+   "mood": "sigh",
+   "caption": "无语死鱼脸，黑线加汗滴",
+   "keywords": "无语 无奈 叹气 黑线 大肥鱼"
+  },
+  "qiurao": {
+   "mood": "sad",
+   "caption": "哭着双手合十求饶",
+   "keywords": "求饶 哭 委屈 对不起 大肥鱼"
+  },
+  "xianqi": {
+   "mood": "baka",
+   "caption": "侧目嫌弃挥手，不想理你",
+   "keywords": "嫌弃 哼 傻瓜 吐槽 大肥鱼"
+  },
+  "jiaban": {
+   "mood": "cpu",
+   "caption": "加班崩溃，电脑加咖啡，黑眼圈",
+   "keywords": "加班 工作 累 咖啡 卡了 大肥鱼"
+  },
+  "zhenjing": {
+   "mood": "see",
+   "caption": "惊吓跳起，眼睛圆圆嘴巴大张",
+   "keywords": "惊吓 震惊 看到了 哇 大肥鱼"
+  },
+  "jiazai": {
+   "mood": "confused",
+   "caption": "托腮思考，头顶加载圈，脑子转不动",
+   "keywords": "思考 加载 卡顿 困惑 cpu 大肥鱼"
+  },
+  "ok": {
+   "mood": "happy",
+   "caption": "眨眼竖大拇指 OK，超有信心",
+   "keywords": "点赞 ok 好的 自信 开心 大肥鱼"
+  },
+  "buyao": {
+   "mood": "fool",
+   "caption": "双手交叉摇头不行，拒绝",
+   "keywords": "不行 拒绝 不要 摇头 大肥鱼"
+  },
+  "toukan": {
+   "mood": "shy",
+   "caption": "躲在鲸鱼尾巴后面偷看，害羞",
+   "keywords": "偷看 害羞 腼腆 藏起来 大肥鱼"
+  },
+  "piaole": {
+   "mood": "happy",
+   "caption": "被夸飘了，闭眼伸手星星环绕",
+   "keywords": "得意 被夸 飘了 开心 大肥鱼"
+  },
+  "maozhua": {
+   "mood": "meow",
+   "caption": "猫爪手势卖萌，小虎牙嘿嘿",
+   "keywords": "卖萌 猫爪 可爱 meow 大肥鱼"
+  },
+  "yaoqian": {
+   "mood": "givemoney",
+   "caption": "捧着小钱包亮晶晶期待，求零食钱",
+   "keywords": "求打赏 钱包 给钱 期待 大肥鱼"
+  }
+ }
+}

@@ -82,6 +82,28 @@ AGENT_TOOLS = [
     {
         "type": "function",
         "function": {
+            "name": "sticker_search",
+            "description": "按情绪或关键词找本地表情，返回候选（名字 + 画面描述）。挑中后再 send_sticker(name) 发，别全发。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "mood": {
+                        "type": "string",
+                        "enum": ["happy", "angry", "sad", "shy", "confused", "daily"],
+                        "description": "情绪桶：开心/生气/难过/害羞/困惑/日常",
+                    },
+                    "query": {
+                        "type": "string",
+                        "description": "关键词，比如「加班」「无语」「猫」",
+                    },
+                    "limit": {"type": "integer", "description": "候选数量，默认 6"},
+                },
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "send_sticker",
             "description": "单独发一张本地收藏表情。name 必须是可用贴纸名。",
             "parameters": {
@@ -107,6 +129,11 @@ AGENT_TOOLS = [
                     "topic": {
                         "type": "string",
                         "description": "情绪/语气关键词，例如 笑死、无语、晚安",
+                    },
+                    "mood": {
+                        "type": "string",
+                        "enum": ["happy", "angry", "sad", "shy", "confused", "daily"],
+                        "description": "可选情绪桶；给了就优先在本地图库里按桶挑",
                     },
                 },
             },
@@ -736,6 +763,28 @@ async def _execute_tool(
         )
         return f"已加入发送队列：{len(messages)} 条。不要重复发送，也不要汇报。"
 
+    if name == "sticker_search":
+        if sticker_catalog is None:
+            return "本地表情库未启用，改用 send_meme(topic) 发网络梗图。"
+        mood = str(args.get("mood") or "").strip()
+        query = str(args.get("query") or "").strip()
+        try:
+            limit = int(args.get("limit", 6) or 6)
+        except (TypeError, ValueError):
+            limit = 6
+        hits = sticker_catalog.search(query, mood, max(1, min(12, limit)))
+        if not hits:
+            return "没找到合适的表情。换个 mood 或关键词，或者直接用文字说。"
+        lines = [
+            f"{h['name']}｜{h.get('mood') or '?'}｜{str(h.get('caption') or '')[:36]}"
+            for h in hits
+        ]
+        return (
+            "候选（名字｜情绪｜画面）：\n"
+            + "\n".join(lines)
+            + "\n挑一张 send_sticker(名字)，只发一张。"
+        )
+
     if name == "send_sticker":
         from . import expression as expr_pkg
 
@@ -746,10 +795,16 @@ async def _execute_tool(
         sticker_name = str(args.get("name") or "").strip()
         path = sticker_catalog.pick(sticker_name) if sticker_catalog else None
         if path is None:
-            names = sticker_catalog.names()[:30] if sticker_catalog else []
-            if not names:
+            if sticker_catalog is None:
                 return "本地贴纸已关闭，请改用 send_meme(topic) 发网络梗图。"
-            return f"没有这个贴纸：{sticker_name}。可用：{'、'.join(names)}"
+            hits = sticker_catalog.search(sticker_name, limit=5)
+            if hits:
+                near = "、".join(
+                    f"{h['name']}（{str(h.get('caption') or '')[:16]}）"
+                    for h in hits
+                )
+                return f"没有叫 {sticker_name} 的贴纸。相近的：{near}"
+            return "没有这个贴纸，先用 sticker_search 查一下再发。"
         actions.append(AgentAction(kind="sticker", sticker=str(path)))
         return "表情已加入发送队列。"
 
@@ -789,14 +844,31 @@ async def _execute_tool(
         ):
             return "本轮表情已经够了，不要再发。"
         topic = str(args.get("topic") or "").strip()
+        mood = str(args.get("mood") or "").strip()
         path = None
-        try:
-            from .expression import whale_catalog
+        # 给了情绪桶：优先在本地图库里按桶挑（有描述，选得准）
+        if mood and sticker_catalog is not None:
+            hits = sticker_catalog.search("", mood, 6)
+            if hits:
+                import random as _random
 
-            if whale_catalog.count():
-                path = await whale_catalog.fetch(topic)
-        except Exception:
-            path = None
+                path = sticker_catalog.pick(
+                    str(_random.choice(hits)["name"])
+                )
+        if path is None and topic:
+            try:
+                from .expression import whale_catalog
+
+                if whale_catalog.count():
+                    path = await whale_catalog.fetch(topic)
+            except Exception:
+                path = None
+        if path is None and sticker_catalog is not None:
+            hits = sticker_catalog.search(topic, "", 6) if topic else []
+            if hits:
+                import random as _random
+
+                path = sticker_catalog.pick(str(_random.choice(hits)["name"]))
         if path is None and sticker_catalog is not None:
             path = sticker_catalog.pick_any()
         if path is None:

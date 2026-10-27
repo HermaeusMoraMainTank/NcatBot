@@ -170,9 +170,15 @@ def apply_from_plugin(plugin) -> None:
     expr_pkg.TONE_STRENGTH = tone
     expr_pkg.EDITOR_PASS = bool(expr_raw.get("editor_pass", False))
     expression_catalog_mod.sticker_catalog.root = Path(catalog_path)
-    expression_catalog_mod.sticker_catalog.active = (
-        None if sticker_lib in ("both", "all", "") else {sticker_lib}
-    )
+    # 支持多图库：sticker_library 可以用逗号/空格分隔多个库名，
+    # both / all / 空 = 全部启用
+    import re as _re
+
+    _libs = [x for x in _re.split(r"[,，\s]+", sticker_lib) if x]
+    if not _libs or any(x in ("both", "all") for x in _libs):
+        expression_catalog_mod.sticker_catalog.active = None
+    else:
+        expression_catalog_mod.sticker_catalog.active = set(_libs)
     try:
         expression_catalog_mod.sticker_catalog.reload()
     except Exception as e:

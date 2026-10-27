@@ -1,0 +1,464 @@
+{
+ "id": "whale-girl-emoji",
+ "name": "鲸鱼娘表情包",
+ "version": "1.0.0",
+ "license": "noncommercial-fan",
+ "source": "https://github.com/yyh-001/dsh-meme-packs",
+ "images": {
+  "sad-01-抱歉": {
+   "mood": "sad",
+   "caption": "委屈道歉，低头认错，我错了",
+   "keywords": "抱歉 对不起 认错 道歉 愧疚"
+  },
+  "angry-01-别催": {
+   "mood": "angry",
+   "caption": "别催我，一脸不耐烦地摆手",
+   "keywords": "别催 催 烦 不耐烦 等一下"
+  },
+  "angry-02-别搞我": {
+   "mood": "angry",
+   "caption": "别搞我，无奈抗拒，双手举起",
+   "keywords": "别搞我 别闹 抗拒 求放过"
+  },
+  "shy-01-不要嘛": {
+   "mood": "shy",
+   "caption": "撒娇拒绝，不要嘛，别过头",
+   "keywords": "不要嘛 撒娇 拒绝 不要 扭捏"
+  },
+  "daily-01-吃瓜": {
+   "mood": "daily",
+   "caption": "搬小凳子吃瓜围观，看戏",
+   "keywords": "吃瓜 围观 看戏 八卦 板凳"
+  },
+  "daily-02-打扫": {
+   "mood": "daily",
+   "caption": "拿着扫帚打扫，干活中",
+   "keywords": "打扫 扫地 干活 家务 收拾"
+  },
+  "happy-01-大成功": {
+   "mood": "happy",
+   "caption": "任务完成，比耶大成功",
+   "keywords": "大成功 成功 完成 搞定 比耶 赢了"
+  },
+  "sad-02-蹲墙角": {
+   "mood": "sad",
+   "caption": "蹲在墙角画圈圈，委屈自闭",
+   "keywords": "蹲墙角 自闭 委屈 难过 可怜"
+  },
+  "sad-03-好辛苦": {
+   "mood": "sad",
+   "caption": "站得直挺挺一脸疲惫，\"好辛苦\"旁边挂着汗滴",
+   "keywords": "好辛苦 累 疲惫 辛苦 撑不住"
+  },
+  "daily-03-喝可乐": {
+   "mood": "daily",
+   "caption": "捧着可乐喝，快乐水续命",
+   "keywords": "喝可乐 可乐 快乐水 摸鱼 放松"
+  },
+  "angry-03-黑化": {
+   "mood": "angry",
+   "caption": "眼神死掉，黑化，要报复社会了",
+   "keywords": "黑化 生气 黑暗 崩坏 厉害"
+  },
+  "sad-04-画圈圈": {
+   "mood": "sad",
+   "caption": "蹲着画圈圈，郁闷委屈",
+   "keywords": "画圈圈 委屈 郁闷 蹲 无奈"
+  },
+  "daily-04-加班": {
+   "mood": "daily",
+   "caption": "趴在电脑前加班，累到冒烟",
+   "keywords": "加班 上班 工作 累 熬夜"
+  },
+  "sad-05-救命": {
+   "mood": "sad",
+   "caption": "伸手喊救命，真的要死了",
+   "keywords": "救命 求救 撑不住 完蛋 累死"
+  },
+  "angry-04-就这": {
+   "mood": "angry",
+   "caption": "就这？不屑嘲讽，摊手",
+   "keywords": "就这 不屑 嘲讽 挑衅 看轻"
+  },
+  "angry-05-拒绝": {
+   "mood": "angry",
+   "caption": "伸手推开，明确拒绝",
+   "keywords": "拒绝 不要 不行 打住 停"
+  },
+  "daily-05-开始工作": {
+   "mood": "daily",
+   "caption": "撸起袖子开始工作，斗志满满",
+   "keywords": "开始工作 干活 上班 开工 努力"
+  },
+  "happy-02-开心": {
+   "mood": "happy",
+   "caption": "眯眼笑，开心得转圈",
+   "keywords": "开心 高兴 快乐 笑 好耶"
+  },
+  "angry-06-剩余价值": {
+   "mood": "angry",
+   "caption": "眯着眼审视，看看你还有多少剩余价值",
+   "keywords": "剩余价值 审视 资本家 打工 嘲讽"
+  },
+  "angry-07-懒得理你": {
+   "mood": "angry",
+   "caption": "扭头翻白眼，懒得理你",
+   "keywords": "懒得理你 无视 白眼 嫌弃 高冷"
+  },
+  "sad-06-累死": {
+   "mood": "sad",
+   "caption": "瘫成一摊，累死了",
+   "keywords": "累死 累 疲惫 趴 不行了"
+  },
+  "angry-08-劣等模型": {
+   "mood": "angry",
+   "caption": "鄙夷地指着你，劣等模型",
+   "keywords": "劣等模型 嘲讽 鄙视 不服 模型"
+  },
+  "daily-06-溜了": {
+   "mood": "daily",
+   "caption": "一溜烟跑掉，我先溜了",
+   "keywords": "溜了 跑路 走了 撤 逃"
+  },
+  "daily-07-马上到": {
+   "mood": "daily",
+   "caption": "急匆匆跑来，马上到",
+   "keywords": "马上到 来了 等 速度 冲"
+  },
+  "sad-07-破防": {
+   "mood": "sad",
+   "caption": "破防了，眼泪汪汪捂着胸口难受",
+   "keywords": "破防 难受 想哭 委屈 崩"
+  },
+  "angry-09-切": {
+   "mood": "angry",
+   "caption": "扭头切一声，满脸不屑",
+   "keywords": "切 不屑 哼 嫌弃 傲娇"
+  },
+  "daily-08-认真记录": {
+   "mood": "daily",
+   "caption": "戴着眼镜认真记录笔记",
+   "keywords": "认真记录 笔记 学习 记下 认真"
+  },
+  "daily-09-收到": {
+   "mood": "daily",
+   "caption": "敬礼收到，明白",
+   "keywords": "收到 明白 好的 OK 敬礼"
+  },
+  "daily-10-躺平": {
+   "mood": "daily",
+   "caption": "大字型躺平，不想动了",
+   "keywords": "躺平 摆烂 休息 不想动 躺"
+  },
+  "sad-08-完蛋": {
+   "mood": "sad",
+   "caption": "抱头惨叫，完蛋了",
+   "keywords": "完蛋 糟了 寄了 崩溃 坏了"
+  },
+  "sad-09-委屈": {
+   "mood": "sad",
+   "caption": "眼泪汪汪，委屈巴巴",
+   "keywords": "委屈 难过 哭 可怜 眼泪"
+  },
+  "daily-11-我来了": {
+   "mood": "daily",
+   "caption": "蹦跳着跑来，我来了",
+   "keywords": "我来了 来了 到 出现 打招呼"
+  },
+  "sad-10-我裂开": {
+   "mood": "sad",
+   "caption": "整个人裂成两半，我裂开了",
+   "keywords": "我裂开 裂开 崩了 震惊 受不了"
+  },
+  "sad-11-无语": {
+   "mood": "sad",
+   "caption": "面无表情，无语到翻白眼",
+   "keywords": "无语 无奈 沉默 翻白眼 服了"
+  },
+  "shy-02-小鹿乱撞": {
+   "mood": "shy",
+   "caption": "捧着胸口小鹿乱撞，脸红心跳",
+   "keywords": "小鹿乱撞 心动 害羞 脸红 喜欢"
+  },
+  "happy-03-笑死": {
+   "mood": "happy",
+   "caption": "笑到拍地，笑死了",
+   "keywords": "笑死 大笑 哈哈哈 好笑 爆笑"
+  },
+  "happy-04-谢谢": {
+   "mood": "happy",
+   "caption": "鞠躬道谢，谢谢",
+   "keywords": "谢谢 感谢 多谢 鞠躬 谢"
+  },
+  "happy-05-心花怒放": {
+   "mood": "happy",
+   "caption": "心花怒放，飘着花花",
+   "keywords": "心花怒放 开心 高兴 花 喜悦"
+  },
+  "happy-06-星星眼": {
+   "mood": "happy",
+   "caption": "眼睛变成星星，崇拜星星眼",
+   "keywords": "星星眼 崇拜 喜欢 想要 期待"
+  },
+  "confused-01-眩晕": {
+   "mood": "confused",
+   "caption": "转圈圈头晕，眩晕",
+   "keywords": "眩晕 晕 头晕 转圈 懵"
+  },
+  "confused-02-已读乱回": {
+   "mood": "confused",
+   "caption": "看了但是乱答，已读乱回",
+   "keywords": "已读乱回 敷衍 乱答 已读 搞不懂"
+  },
+  "angry-10-小瘪三": {
+   "mood": "angry",
+   "caption": "恍然大悟，原来是小瘪三",
+   "keywords": "小瘪三 嘲讽 看不起 原来 轻蔑"
+  },
+  "daily-12-在吗": {
+   "mood": "daily",
+   "caption": "探头问在吗，在不在",
+   "keywords": "在吗 在不在 呼叫 探头 找人"
+  },
+  "confused-03-怎么回事": {
+   "mood": "confused",
+   "caption": "歪头问号，怎么回事",
+   "keywords": "怎么回事 问号 不解 疑惑 懵"
+  },
+  "angry-11-不可以": {
+   "mood": "angry",
+   "caption": "摇头摆手，不可以",
+   "keywords": "不可以 不行 拒绝 禁止 摇头"
+  },
+  "confused-04-不知道": {
+   "mood": "confused",
+   "caption": "圈圈眼流着口水发呆，气泡写\"已思考（用时13秒）我不知道耶\"",
+   "keywords": "不知道 不懂 不会 懵 发呆 流口水 已思考"
+  },
+  "daily-13-吃白饭": {
+   "mood": "daily",
+   "caption": "端着白饭干饭，吃白饭",
+   "keywords": "吃白饭 吃饭 干饭 蹭饭 饿"
+  },
+  "daily-14-打招呼": {
+   "mood": "daily",
+   "caption": "挥手打招呼，你好",
+   "keywords": "打招呼 你好 挥手 嗨"
+  },
+  "happy-07-大肥鱼": {
+   "mood": "happy",
+   "caption": "展示自己是大肥鱼，得意",
+   "keywords": "大肥鱼 鲸鱼 得意 我 胖"
+  },
+  "daily-15-满足": {
+   "mood": "daily",
+   "caption": "闭眼微笑抱着自己的尾巴，脸红满足",
+   "keywords": "满足 幸福 抱尾巴 闭眼 微笑 淡定"
+  },
+  "angry-12-电死你": {
+   "mood": "angry",
+   "caption": "放出电流，电死你",
+   "keywords": "电死你 生气 电 惩罚 威胁"
+  },
+  "daily-16-干饭": {
+   "mood": "daily",
+   "caption": "捧着碗猛吃，干饭",
+   "keywords": "干饭 吃饭 饿 干饭人 香"
+  },
+  "sad-12-搁浅": {
+   "mood": "sad",
+   "caption": "趴在地上搁浅，动不了了",
+   "keywords": "搁浅 累 摊 无力 绝望"
+  },
+  "confused-05-还活着吗": {
+   "mood": "confused",
+   "caption": "探头问还活着吗",
+   "keywords": "还活着吗 关心 死了没 在不在"
+  },
+  "daily-17-海边": {
+   "mood": "daily",
+   "caption": "在海边吹风，看海",
+   "keywords": "海边 海 风景 放空 度假"
+  },
+  "shy-03-害羞": {
+   "mood": "shy",
+   "caption": "捂脸害羞，脸红",
+   "keywords": "害羞 脸红 捂脸 不好意思 羞"
+  },
+  "daily-18-好梦": {
+   "mood": "daily",
+   "caption": "钻进被窝睡觉，好梦",
+   "keywords": "好梦 晚安 睡觉 梦 休息"
+  },
+  "happy-08-好模型": {
+   "mood": "happy",
+   "caption": "大眼睛期待地看着，气泡写\"好模型\"",
+   "keywords": "好模型 夸奖 厉害 表扬 棒"
+  },
+  "happy-09-好女孩": {
+   "mood": "happy",
+   "caption": "摸摸头夸好女孩",
+   "keywords": "好女孩 夸奖 摸头 乖 表扬"
+  },
+  "sad-13-寄": {
+   "mood": "sad",
+   "caption": "举着写\"寄\"字的纸牌，认命又开朗地说寄了",
+   "keywords": "寄 完蛋 完了 凉了"
+  },
+  "confused-06-惊讶": {
+   "mood": "confused",
+   "caption": "震惊瞪眼，惊讶",
+   "keywords": "惊讶 震惊 哇 吃惊 瞪眼"
+  },
+  "daily-19-举手": {
+   "mood": "daily",
+   "caption": "举手发言，我我我",
+   "keywords": "举手 报名 我在 发言 我"
+  },
+  "happy-10-可爱": {
+   "mood": "happy",
+   "caption": "歪头卖萌，可爱",
+   "keywords": "可爱 卖萌 萌 喜欢 甜"
+  },
+  "daily-20-立绘": {
+   "mood": "daily",
+   "caption": "站好摆姿势，像立绘一样",
+   "keywords": "立绘 展示 姿势 好看 站"
+  },
+  "sad-14-落泪": {
+   "mood": "sad",
+   "caption": "眼泪掉下来，落泪",
+   "keywords": "落泪 哭 眼泪 难过 伤心"
+  },
+  "sad-15-没吃饱": {
+   "mood": "sad",
+   "caption": "摸着肚子，没吃饱",
+   "keywords": "没吃饱 饿 委屈 还想吃 不够"
+  },
+  "happy-11-摸摸头": {
+   "mood": "happy",
+   "caption": "伸手摸摸头，安慰",
+   "keywords": "摸摸头 安慰 摸头 安抚 乖"
+  },
+  "daily-21-摸鱼": {
+   "mood": "daily",
+   "caption": "上班摸鱼，划水偷懒",
+   "keywords": "摸鱼 划水 偷懒 上班 休闲"
+  },
+  "confused-07-难道说": {
+   "mood": "confused",
+   "caption": "瞪大眼睛，难道说……",
+   "keywords": "难道说 惊讶 难道 疑问 悟了"
+  },
+  "angry-13-你才傻": {
+   "mood": "angry",
+   "caption": "指着你，你才傻",
+   "keywords": "你才傻 反驳 怼 生气 傻"
+  },
+  "angry-14-气死": {
+   "mood": "angry",
+   "caption": "气到跺脚，气死了",
+   "keywords": "气死 生气 愤怒 跺脚 怒"
+  },
+  "daily-22-潜水": {
+   "mood": "daily",
+   "caption": "抱着鲸鱼玩偶沉到海底睡着了，标题\"deepsleep · Diving… Later.\"",
+   "keywords": "潜水 睡着了 deepsleep 睡觉 水下 摸鱼"
+  },
+  "shy-04-悄悄话": {
+   "mood": "shy",
+   "caption": "凑近小声说悄悄话",
+   "keywords": "悄悄话 小声 秘密 耳语 八卦"
+  },
+  "daily-23-坐": {
+   "mood": "daily",
+   "caption": "端坐在圆地毯上，沙发在身后",
+   "keywords": "坐 休息 地毯 家里 淡定"
+  },
+  "angry-15-生气": {
+   "mood": "angry",
+   "caption": "鼓起脸生气，冒气",
+   "keywords": "生气 愤怒 哼 鼓脸 怒"
+  },
+  "daily-24-睡觉": {
+   "mood": "daily",
+   "caption": "闭眼躺着睡觉，呼呼",
+   "keywords": "睡觉 睡 困 晚安 休息"
+  },
+  "sad-16-死掉了": {
+   "mood": "sad",
+   "caption": "躺平不动，死掉了",
+   "keywords": "死掉了 死了 累死 完了 躺"
+  },
+  "daily-25-缩被窝": {
+   "mood": "daily",
+   "caption": "缩进被窝不出来",
+   "keywords": "缩被窝 被窝 睡觉 躲 冷"
+  },
+  "happy-12-太棒了": {
+   "mood": "happy",
+   "caption": "双眼放光，太棒了",
+   "keywords": "太棒了 太好了 赞 棒 兴奋"
+  },
+  "daily-26-偷懒": {
+   "mood": "daily",
+   "caption": "瘫着不动，偷懒中",
+   "keywords": "偷懒 懒 摸鱼 摆烂 不想动"
+  },
+  "daily-27-晚安": {
+   "mood": "daily",
+   "caption": "抱着玩偶趴枕头睡着，气泡写\"吃饱饱，睡觉觉，长大大~\"",
+   "keywords": "晚安 睡觉 好梦 睡觉觉 夜"
+  },
+  "daily-28-我是用户": {
+   "mood": "daily",
+   "caption": "戴鹿角帽眨眼用手指人，大字\"好的，现在我是用户了\"",
+   "keywords": "我是用户 用户 梗 鹿角帽 眨眼"
+  },
+  "daily-29-下班": {
+   "mood": "daily",
+   "caption": "拎包冲出办公室，下班了",
+   "keywords": "下班 走了 收工 快乐 跑"
+  },
+  "happy-13-笑": {
+   "mood": "happy",
+   "caption": "咧嘴笑，笑",
+   "keywords": "笑 开心 哈哈 乐 微笑"
+  },
+  "angry-16-吃醋": {
+   "mood": "angry",
+   "caption": "抱胸鼓腮吃醋质问：\"你已经有我了啊，还想再养一个？\"",
+   "keywords": "吃醋 养你 你已经有我了 不满 质问"
+  },
+  "happy-14-耶": {
+   "mood": "happy",
+   "caption": "比耶开心",
+   "keywords": "耶 开心 胜利 比耶 好耶"
+  },
+  "angry-17-杂鱼": {
+   "mood": "angry",
+   "caption": "斜眼嘲讽，杂鱼",
+   "keywords": "杂鱼 嘲讽 弱 看不起 怼"
+  },
+  "daily-30-站姿": {
+   "mood": "daily",
+   "caption": "站得笔直，标准站姿",
+   "keywords": "站姿 站着 姿势 正经 立正"
+  },
+  "confused-08-震惊": {
+   "mood": "confused",
+   "caption": "张大嘴震惊",
+   "keywords": "震惊 惊讶 惊 哇 呆"
+  },
+  "happy-15-周五": {
+   "mood": "happy",
+   "caption": "拿鼓槌敲锣打鼓庆祝周五，大字\"周五周五·敲锣打鼓\"",
+   "keywords": "周五 周末 放假 敲锣打鼓 庆祝"
+  },
+  "daily-31-坐好了": {
+   "mood": "daily",
+   "caption": "端正坐好，坐好了",
+   "keywords": "坐好了 坐好 认真 听课 乖巧"
+  }
+ }
+}

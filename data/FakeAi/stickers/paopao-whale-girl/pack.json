@@ -1,0 +1,284 @@
+{
+ "id": "paopao-whale-girl",
+ "name": "泡泡表情包",
+ "version": "1.0.0",
+ "license": "CC-BY-NC-SA-4.0",
+ "source": "https://github.com/yyh-001/dsh-meme-packs",
+ "images": {
+  "angry-01-委屈": {
+   "mood": "angry",
+   "caption": "抱着鲸鱼玩偶，皱眉瞪眼，头顶冒着怒气符号",
+   "keywords": "委屈 生气 瞪眼 抱鲸鱼 怒气"
+  },
+  "angry-02-按呆毛": {
+   "mood": "angry",
+   "caption": "一只手用力按住头顶的呆毛，皱着小眉头",
+   "keywords": "按呆毛 不服气 小脾气 皱眉 头发"
+  },
+  "confused-01-疑惑": {
+   "mood": "confused",
+   "caption": "托着下巴一脸疑惑，头顶一个大问号",
+   "keywords": "疑惑 问号 不懂 思考 托腮"
+  },
+  "confused-02-疑惑": {
+   "mood": "confused",
+   "caption": "双手在下巴前交握，睁大眼睛一脸疑惑，头顶一个问号",
+   "keywords": "疑惑 问号 不懂 思考 睁眼"
+  },
+  "confused-03-疑惑": {
+   "mood": "confused",
+   "caption": "双手在下巴前交握，歪头疑惑，头顶一个问号",
+   "keywords": "疑惑 问号 不懂 歪头 呆"
+  },
+  "daily-01-系鞋带": {
+   "mood": "daily",
+   "caption": "弯腰系鞋带，一只脚踩在盒子上，尾巴翘着保持平衡",
+   "keywords": "系鞋带 出门 准备 日常 弯腰 盒子"
+  },
+  "happy-01-抱鲸鱼": {
+   "mood": "happy",
+   "caption": "抱着蓝鲸玩偶，睁大眼睛呆萌地看着你",
+   "keywords": "抱鲸鱼 呆萌 期待 可爱 蓝鲸"
+  },
+  "happy-02-开心": {
+   "mood": "happy",
+   "caption": "闭着眼睛笑，飘着爱心",
+   "keywords": "开心 笑 爱心 喜欢 眯眼"
+  },
+  "happy-03-眨眼": {
+   "mood": "happy",
+   "caption": "眨眼卖萌，旁边闪着小星星",
+   "keywords": "眨眼 卖萌 调皮 星星 可爱"
+  },
+  "happy-04-开心": {
+   "mood": "happy",
+   "caption": "张开双手开心大笑",
+   "keywords": "开心 伸手 大笑 欢迎"
+  },
+  "happy-05-开心": {
+   "mood": "happy",
+   "caption": "闭眼笑，飘着爱心",
+   "keywords": "开心 笑 爱心 甜"
+  },
+  "happy-06-眨眼": {
+   "mood": "happy",
+   "caption": "眨眼竖起食指卖萌，旁边闪着星星",
+   "keywords": "眨眼 卖萌 调皮 星星 食指"
+  },
+  "happy-07-喝": {
+   "mood": "happy",
+   "caption": "捧着杯子喝饮料",
+   "keywords": "喝 饮料 杯子 日常 安静"
+  },
+  "happy-08-吃": {
+   "mood": "happy",
+   "caption": "开心地吃草莓蛋糕",
+   "keywords": "吃 蛋糕 开心 甜 草莓"
+  },
+  "happy-09-眨眼": {
+   "mood": "happy",
+   "caption": "眨眼卖萌，旁边一颗星星",
+   "keywords": "眨眼 星星 可爱 调皮"
+  },
+  "happy-10-抱": {
+   "mood": "happy",
+   "caption": "抱着鲸鱼玩偶睁大眼睛",
+   "keywords": "抱 鲸鱼 呆萌 看"
+  },
+  "happy-11-开心": {
+   "mood": "happy",
+   "caption": "张开双手开心大笑",
+   "keywords": "开心 伸手 大笑 欢迎"
+  },
+  "happy-12-开心": {
+   "mood": "happy",
+   "caption": "闭眼笑，飘着爱心",
+   "keywords": "开心 笑 爱心 甜"
+  },
+  "happy-13-开心": {
+   "mood": "happy",
+   "caption": "伸手指着方向笑得很开心",
+   "keywords": "开心 指 笑 俏皮"
+  },
+  "happy-14-杯子": {
+   "mood": "happy",
+   "caption": "捧着鲸鱼图案的杯子微笑",
+   "keywords": "杯子 喝水 微笑 日常"
+  },
+  "happy-15-得意": {
+   "mood": "happy",
+   "caption": "叉着腰眨眼笑，尾巴翘起来，斗图赢了的小得意",
+   "keywords": "得意 叉腰 斗图 赢了 尾巴 眨眼 俏皮"
+  },
+  "happy-16-等": {
+   "mood": "happy",
+   "caption": "坐在台阶上抱着膝盖，草帽放在旁边，抬头看到你时眼睛亮起来",
+   "keywords": "等 台阶 抱膝 抬头 期待 草帽 回来"
+  },
+  "happy-17-举玩偶": {
+   "mood": "happy",
+   "caption": "双手把蓝鲸玩偶举过头顶，仰头笑得眼睛发亮",
+   "keywords": "举玩偶 鲸鱼 开心 举过头顶 炫耀"
+  },
+  "happy-18-戳水洼": {
+   "mood": "happy",
+   "caption": "蹲在水洼边伸一根手指戳水面，水花溅起来",
+   "keywords": "戳水洼 水花 蹲着 好奇 雨天"
+  },
+  "like-01-喜欢": {
+   "mood": "like",
+   "caption": "抱着鲸鱼玩偶闭眼蹭，飘着爱心",
+   "keywords": "喜欢 抱 安心 爱心 蹭"
+  },
+  "like-02-喜欢": {
+   "mood": "like",
+   "caption": "闭眼抱着大爱心笑",
+   "keywords": "喜欢 爱心 开心 抱"
+  },
+  "like-03-喜欢": {
+   "mood": "like",
+   "caption": "抱着鲸鱼玩偶眨眼，飘着爱心",
+   "keywords": "喜欢 抱 鲸鱼 眨眼 爱心"
+  },
+  "like-04-喜欢": {
+   "mood": "like",
+   "caption": "闭眼抱着鲸鱼玩偶，飘着爱心",
+   "keywords": "喜欢 抱 鲸鱼 安心"
+  },
+  "like-05-爱心": {
+   "mood": "like",
+   "caption": "双手捧着大爱心",
+   "keywords": "爱心 喜欢 抱 甜"
+  },
+  "sad-01-哭": {
+   "mood": "sad",
+   "caption": "闭眼大哭，眼泪哗哗往下掉",
+   "keywords": "哭 难过 眼泪 委屈 大哭"
+  },
+  "sad-02-大哭": {
+   "mood": "sad",
+   "caption": "张大嘴哭，眼泪直流",
+   "keywords": "大哭 难过 眼泪 委屈"
+  },
+  "sad-03-哭": {
+   "mood": "sad",
+   "caption": "哭得眼泪直流",
+   "keywords": "哭 难过 眼泪 委屈"
+  },
+  "see-01-看": {
+   "mood": "see",
+   "caption": "抱着鲸鱼玩偶睁着大眼睛看你",
+   "keywords": "看 呆 好奇 抱鲸鱼 蓝鲸"
+  },
+  "see-02-探头": {
+   "mood": "see",
+   "caption": "躲在后面探出半个头，双手托腮看着你",
+   "keywords": "探头 偷看 托腮 观察"
+  },
+  "see-03-看报": {
+   "mood": "see",
+   "caption": "举着《泡泡日报》看得眼睛发亮",
+   "keywords": "看报 泡泡日报 惊讶 认真 亮眼"
+  },
+  "see-04-探头": {
+   "mood": "see",
+   "caption": "探出半个头看着你",
+   "keywords": "探头 偷看 观察 好奇"
+  },
+  "see-05-看报": {
+   "mood": "see",
+   "caption": "举着《泡泡日报》眨眼",
+   "keywords": "看报 泡泡日报 眨眼 认真"
+  },
+  "shy-01-害羞": {
+   "mood": "shy",
+   "caption": "闭着眼低头笑，脸颊微红",
+   "keywords": "害羞 笑 温柔 低头 脸红"
+  },
+  "shy-02-侧脸": {
+   "mood": "shy",
+   "caption": "侧过脸低头，安静地垂眼看着别处",
+   "keywords": "侧脸 低头 安静 腼腆 垂眼"
+  },
+  "shy-03-害羞": {
+   "mood": "shy",
+   "caption": "闭着眼脸红，害羞地缩着肩膀",
+   "keywords": "害羞 脸红 缩肩 不好意思"
+  },
+  "shy-04-被看穿": {
+   "mood": "shy",
+   "caption": "脸红到耳朵，眼神躲开，手指绞着围裙角，被看穿了",
+   "keywords": "被看穿 害羞 脸红 围裙 躲眼神 心虚 抿嘴"
+  },
+  "shy-05-别头发": {
+   "mood": "shy",
+   "caption": "低头把长发别到耳后，手指穿过发丝",
+   "keywords": "别头发 低头 安静 害羞 长发"
+  },
+  "shy-06-被摸头": {
+   "mood": "shy",
+   "caption": "被一只手摸着头顶，双手握在胸前愣住",
+   "keywords": "被摸头 摸头 愣住 害羞 手"
+  },
+  "shy-07-被捏脸": {
+   "mood": "shy",
+   "caption": "被两只手捏住脸颊，鼓着脸颊眼睛圆圆的",
+   "keywords": "被捏脸 捏脸 鼓脸 害羞 手"
+  },
+  "sleep-01-睡觉": {
+   "mood": "sleep",
+   "caption": "抱着鲸鱼玩偶趴着睡着，旁边飘着 Zzz",
+   "keywords": "睡觉 困 趴着 zzz 睡香"
+  },
+  "sleep-02-睡觉": {
+   "mood": "sleep",
+   "caption": "抱着鲸鱼玩偶睡得很香，旁边 Zzz",
+   "keywords": "睡觉 困 抱着 睡香"
+  },
+  "sleep-03-睡觉": {
+   "mood": "sleep",
+   "caption": "趴在鲸鱼玩偶上睡着，尾巴翘起来",
+   "keywords": "睡觉 趴着 尾巴 鲸鱼 困"
+  },
+  "sleep-04-睡觉": {
+   "mood": "sleep",
+   "caption": "抱着鲸鱼玩偶睡着，旁边 Zzz",
+   "keywords": "睡觉 困 zzz 抱着"
+  },
+  "sleep-05-犯困": {
+   "mood": "sleep",
+   "caption": "趴在桌面上打瞌睡，抹布还压在手下",
+   "keywords": "犯困 趴桌子 擦桌子 打瞌睡 累"
+  },
+  "sigh-01-无语": {
+   "mood": "sigh",
+   "caption": "半睁着眼一脸无语，旁边有汗滴",
+   "keywords": "无语 汗 嫌弃 无奈 敷衍"
+  },
+  "sigh-02-无语": {
+   "mood": "sigh",
+   "caption": "半睁着眼一脸无语，旁边冒出一团气",
+   "keywords": "无语 无奈 叹气 嫌弃"
+  },
+  "sigh-03-无语": {
+   "mood": "sigh",
+   "caption": "半睁眼无语，冒出呼气团",
+   "keywords": "无语 无奈 嫌弃 呼气"
+  },
+  "surprised-01-惊讶": {
+   "mood": "surprised",
+   "caption": "睁大眼睛举起手，被惊到了",
+   "keywords": "惊讶 吓到 举手 感叹号 震惊"
+  },
+  "surprised-02-惊讶": {
+   "mood": "surprised",
+   "caption": "睁大眼睛张着嘴大惊，旁边两个蓝色感叹号",
+   "keywords": "惊讶 吓到 感叹号 震惊 张嘴"
+  },
+  "surprised-03-惊讶": {
+   "mood": "surprised",
+   "caption": "瞪大眼睛大惊，红色感叹号",
+   "keywords": "惊讶 震惊 感叹号 吓到"
+  }
+ }
+}

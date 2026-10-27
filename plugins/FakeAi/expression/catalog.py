@@ -15,6 +15,18 @@ _log = logging.getLogger(__name__)
 
 IMAGE_EXTS = {".webp", ".png", ".jpg", ".jpeg", ".gif"}
 
+# 模型只认这 6 个情绪桶；图库里的细 tag 归到桶里（参考 dsh-meme）
+MOOD_BUCKETS = {
+    "happy": ["happy", "like", "meow", "givemoney", "color", "smile", "excited"],
+    "angry": ["angry", "fool", "baka", "annoyed"],
+    "sad": ["sad", "sigh", "cry", "tired"],
+    "shy": ["shy", "blush"],
+    "confused": ["confused", "surprised", "see", "question"],
+    "daily": [
+        "daily", "sleep", "morning", "work", "cpu", "reply", "eat", "study",
+    ],
+}
+
 # 根目录下直接放图片时，归到这个库（兼容旧布局）
 LOOSE_LIBRARY = "darkdog"
 
@@ -48,11 +60,15 @@ class StickerCatalog:
         self._notes: Dict[str, str] = {}
         self._notes_path = Path("data/fakeai/sticker_notes.json")
         self._load_notes()
+        # 图库元数据（来自 pack.json）：库名 -> 名字 -> {mood, caption, keywords}
+        self._meta: Dict[str, Dict[str, Dict[str, str]]] = {}
+        self._pack_info: Dict[str, Dict[str, str]] = {}
 
     # ---- 加载 ----
 
     def reload(self) -> int:
         self._libs.clear()
+        self._meta.clear()
         if not self.root.is_dir():
             self.root.mkdir(parents=True, exist_ok=True)
             _log.info("[FakeAi Stickers] 已创建目录 %s", self.root)
@@ -75,6 +91,7 @@ class StickerCatalog:
                         variants.setdefault(f.stem, []).append(f.resolve())
                 if variants:
                     self._libs[p.name] = variants
+                    self._load_pack_meta(p.name, p)
         if loose:
             self._libs.setdefault(LOOSE_LIBRARY, {}).update(loose)
 
@@ -87,6 +104,141 @@ class StickerCatalog:
         return len(self.names())
 
     # ---- 查询 ----
+
+    def _load_pack_meta(self, lib_name: str, path: Path) -> None:
+        """读 pack.json：每张图的情绪、描述、关键词。没有就跳过。"""
+        meta_file = path / "pack.json"
+        if not meta_file.is_file():
+            return
+        try:
+            data = json.loads(meta_file.read_text(encoding="utf-8"))
+        except Exception as e:
+            _log.debug("[FakeAi Stickers] 读取 %s/pack.json 失败: %s", lib_name, e)
+            return
+        images = data.get("images")
+        if not isinstance(images, dict):
+            return
+        cleaned: Dict[str, Dict[str, str]] = {}
+        for key, item in images.items():
+            if not isinstance(item, dict):
+                continue
+            cleaned[str(key)] = {
+                "mood": str(item.get("mood") or "").lower(),
+                "caption": str(item.get("caption") or ""),
+                "keywords": str(item.get("keywords") or ""),
+            }
+        if cleaned:
+            self._meta[lib_name] = cleaned
+        self._pack_info[lib_name] = {
+            "name": str(data.get("name") or lib_name),
+            "version": str(data.get("version") or ""),
+            "license": str(data.get("license") or ""),
+        }
+
+    def _visible_meta(self, name: str) -> Dict[str, str]:
+        visible = self._visible()
+        for lib, items in self._meta.items():
+            if lib in visible and name in items:
+                return items[name]
+        return {}
+
+    def mood_of(self, name: str) -> str:
+        return self._visible_meta(name).get("mood", "")
+
+    def caption(self, name: str) -> str:
+        return self._visible_meta(name).get("caption", "")
+
+    def moods(self) -> Dict[str, int]:
+        """当前启用图库的情绪分布（按 6 个桶聚合），例如 {"happy": 53}。"""
+        counts: Dict[str, int] = {}
+        visible = self._visible()
+        for lib, items in self._meta.items():
+            if lib not in visible:
+                continue
+            for item in items.values():
+                mood = item.get("mood") or ""
+                bucket = "other"
+                for name, tags in MOOD_BUCKETS.items():
+                    if mood in tags:
+                        bucket = name
+                        break
+                counts[bucket] = counts.get(bucket, 0) + 1
+        return dict(sorted(counts.items(), key=lambda kv: (-kv[1], kv[0])))
+
+    def pack_info(self) -> Dict[str, Dict[str, str]]:
+        return {
+            lib: info for lib, info in self._pack_info.items() if lib in self._visible()
+        }
+
+    def _haystack(self, name: str, lib: str) -> str:
+        item = (self._meta.get(lib) or {}).get(name) or {}
+        return (
+            f"{name} {item.get('mood', '')} {item.get('caption', '')} "
+            f"{item.get('keywords', '')} {self._notes.get(name, '')}"
+        ).lower()
+
+    def search(
+        self, query: str = "", mood: str = "", limit: int = 8
+    ) -> List[Dict[str, str]]:
+        """按情绪桶 + 关键词找图，返回候选（名字/描述/情绪/图库）。"""
+        q = str(query or "").strip().lower()
+        mood = str(mood or "").strip().lower()
+        wanted = None
+        if mood:
+            wanted = set(MOOD_BUCKETS.get(mood) or [mood])
+        tokens = [t for t in re.split(r"[\s,，、;；/|]+", q) if t]
+        results: List[Dict[str, object]] = []
+        for lib, variants in self._visible().items():
+            for name in variants:
+                item = (self._meta.get(lib) or {}).get(name) or {}
+                if wanted is not None and item.get("mood") not in wanted:
+                    continue
+                hay = self._haystack(name, lib)
+                # 长词命中更值钱：「加班」比「累」更能定位到那张图
+                score = sum(len(t) for t in tokens if t and t in hay)
+                if tokens and score == 0:
+                    continue
+                results.append(
+                    {
+                        "name": name,
+                        "mood": item.get("mood", ""),
+                        "caption": item.get("caption", ""),
+                        "library": lib,
+                        "score": score,
+                    }
+                )
+        if tokens and results:
+            best = max(int(r["score"]) for r in results)
+            results = [r for r in results if int(r["score"]) == best]
+        results.sort(
+            key=lambda r: (
+                -int(self._usage.get(str(r["name"])) or 0),
+                str(r["name"]),
+            )
+        )
+        return results[: max(1, min(20, int(limit or 8)))]
+
+    def resolve(self, name: str) -> Optional[str]:
+        """把模型给的名字解析成真实贴纸名：先精确，再按描述/关键词模糊匹配。"""
+        target = str(name or "").strip()
+        if not target:
+            return None
+        for items in self._visible().values():
+            if target in items:
+                return target
+        hits = self.search(target, limit=5)
+        if len(hits) == 1:
+            return str(hits[0]["name"])
+        # 多个候选时，只有「整串出现在描述里」的唯一一张才算对上
+        exact = [
+            h
+            for h in hits
+            if target in str(h.get("caption", "")).lower()
+            or target in str(h.get("name", "")).lower()
+        ]
+        if len(exact) == 1:
+            return str(exact[0]["name"])
+        return None
 
     # ---- 使用次数 ----
 
@@ -129,7 +281,13 @@ class StickerCatalog:
 
     def label(self, name: str) -> str:
         note = self.note(name)
-        return f"{name}（{note}）" if note else str(name)
+        if note:
+            return f"{name}（{note}）"
+        caption = self.caption(name)
+        if caption:
+            short = caption.replace("\n", " ")[:14]
+            return f"{name}（{short}）"
+        return str(name)
 
     def find(self, name: str) -> Optional[Path]:
         """按名字找一张图（不记使用次数，供查看/备注用）。"""
@@ -230,7 +388,7 @@ class StickerCatalog:
             return random.choice(paths)
 
     def pick(self, name: str) -> Optional[Path]:
-        target = str(name or "").strip()
+        target = self.resolve(name)
         if not target:
             return None
         for items in self._visible().values():

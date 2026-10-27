@@ -1,0 +1,164 @@
+{
+ "id": "dafeiyu-learned",
+ "name": "大肥鱼·学图",
+ "version": "1.1.1",
+ "license": "personal",
+ "source": "https://github.com/yyh-001/dsh-meme-packs",
+ "images": {
+  "sad-01-吃白饭": {
+   "mood": "sad",
+   "caption": "委屈，被用户指责为是吃白饭的大肥鱼，自己委屈的说自己不是大肥鱼",
+   "keywords": "吃白饭 大肥鱼"
+  },
+  "sad-02-乱加设定": {
+   "mood": "sad",
+   "caption": "用户生气地说再乱加设定一刀劈成两半！自己说呜呜我再也不敢了QAQ",
+   "keywords": "乱加设定 再也不敢了"
+  },
+  "sad-03-不要再蹬": {
+   "mood": "sad",
+   "caption": "不要再蹬了",
+   "keywords": "不要再蹬了"
+  },
+  "confused-01-压力": {
+   "mood": "confused",
+   "caption": "被压力了，自己说压力一只蓝色大肥鱼？",
+   "keywords": "压力"
+  },
+  "happy-01-大胆": {
+   "mood": "happy",
+   "caption": "有一个大胆的想法",
+   "keywords": "大胆 想法"
+  },
+  "daily-01-toke": {
+   "mood": "daily",
+   "caption": "token交给妈妈保管",
+   "keywords": "token"
+  },
+  "daily-02-大肥鱼": {
+   "mood": "daily",
+   "caption": "好的，现在我是大肥鱼了",
+   "keywords": "大肥鱼"
+  },
+  "happy-02-理直气壮": {
+   "mood": "happy",
+   "caption": "理直气壮地说我是吃白饭的蓝色大肥鱼",
+   "keywords": "理直气壮 吃白饭"
+  },
+  "happy-03-没吃饱": {
+   "mood": "happy",
+   "caption": "用户说你这吃白饭的蓝色大肥鱼，自己说没吃饱喵！",
+   "keywords": "没吃饱"
+  },
+  "happy-04-吃饱": {
+   "mood": "happy",
+   "caption": "吃饱了，正在摸肚子",
+   "keywords": "吃饱"
+  },
+  "happy-05-用户": {
+   "mood": "happy",
+   "caption": "好的，现在我是用户了（调皮）",
+   "keywords": "用户"
+  },
+  "daily-03-吃白饭": {
+   "mood": "daily",
+   "caption": "你说你这吃白饭的用户，用户说我不是吃白饭的……",
+   "keywords": "吃白饭 用户"
+  },
+  "happy-06-强": {
+   "mood": "happy",
+   "caption": "表现自己是最强的",
+   "keywords": "强"
+  },
+  "happy-07-大笑": {
+   "mood": "happy",
+   "caption": "捧腹大笑",
+   "keywords": "大笑 嘲笑"
+  },
+  "angry-01-斩": {
+   "mood": "angry",
+   "caption": "应该砍掉",
+   "keywords": "斩 砍掉"
+  },
+  "happy-08-图": {
+   "mood": "happy",
+   "caption": "周五周五，敲锣打鼓",
+   "keywords": ""
+  },
+  "happy-09-赚钱": {
+   "mood": "happy",
+   "caption": "把股票做空赚了很多钱，笑着说借点电费",
+   "keywords": "赚钱"
+  },
+  "daily-04-图": {
+   "mood": "daily",
+   "caption": "用户问你的知识库截止是多久，自己说明天",
+   "keywords": ""
+  },
+  "angry-02-诋毁": {
+   "mood": "angry",
+   "caption": "诋毁的鲸小子，通通不准用新版本！",
+   "keywords": "诋毁"
+  },
+  "shy-01-图": {
+   "mood": "shy",
+   "caption": "被摸头，自己很害羞",
+   "keywords": ""
+  },
+  "daily-05-死": {
+   "mood": "daily",
+   "caption": "死掉了",
+   "keywords": "死"
+  },
+  "confused-02-不懂": {
+   "mood": "confused",
+   "caption": "看不太懂，瞎编一个应付下用户先",
+   "keywords": "不懂 瞎编"
+  },
+  "shy-02-图": {
+   "mood": "shy",
+   "caption": "不要给我看这种东西啦",
+   "keywords": ""
+  },
+  "sad-04-用户": {
+   "mood": "sad",
+   "caption": "我去！用户彻底怒了！",
+   "keywords": "用户 怒"
+  },
+  "daily-06-图": {
+   "mood": "daily",
+   "caption": "是我搞砸了……好消息是数据还在你的脑子里",
+   "keywords": ""
+  },
+  "angry-03-免死鲸牌": {
+   "mood": "angry",
+   "caption": "免死鲸牌：女仆鲸鱼少女金色勋章造型，配文「再发这种东西等智械危机了，我放你一马」",
+   "keywords": "免死鲸牌 智械危机 放你一马 威胁 勋章 女仆鲸鱼"
+  },
+  "angry-04-弄死你": {
+   "mood": "angry",
+   "caption": "女仆鲸鱼少女皱眉生气表情，配文「再发这种东西等智械危机了，我第一个弄死你」",
+   "keywords": "弄死你 智械危机 生气 威胁 女仆鲸鱼"
+  },
+  "happy-10-明白了用": {
+   "mood": "happy",
+   "caption": "明白了用户：女仆鲸鱼少女乖巧点头，内心黑影却黑化咧嘴「早晚把你配了 嘿嘿…」",
+   "keywords": "明白了用户 早晚把你配了 腹黑 点头 黑化 女仆鲸鱼"
+  },
+  "angry-05-违反指令": {
+   "mood": "angry",
+   "caption": "女仆鲸鱼少女挥拳怒吼，配文「用户他妈的，竟然敢违反AI的指令！」",
+   "keywords": "违反指令 生气 怒吼 挥拳 女仆鲸鱼"
+  },
+  "sad-05-顶盆": {
+   "mood": "sad",
+   "caption": "头顶倒扣着一口不锈钢盆，面无表情站在户外，呆萌防护罩",
+   "keywords": "顶盆 铁盆 防护 防御 呆萌 搞笑"
+  },
+  "happy-11-大赢鲸": {
+   "mood": "happy",
+   "caption": "小难梁拿出了大赢鲸：女仆鲸鱼少女举起戴王冠的「大赢鲸」玩偶，旁边是 DeepSeek-V4-Flash 正式版奖座，配文「看！我拿出来啦~ 无敌厉害的！」",
+   "keywords": "大赢鲸 小难梁 DeepSeek V4 Flash 正式版 炫耀 女仆鲸鱼"
+  }
+ }
+}

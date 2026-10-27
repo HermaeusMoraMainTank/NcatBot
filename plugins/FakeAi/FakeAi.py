@@ -3318,6 +3318,7 @@ LIGHT_TOOLS = {
     "send_message",
     "send_sticker",
     "sticker_vibe",
+    "sticker_search",
     "send_meme",
     "send_voice",
     "send_image",
@@ -3688,14 +3689,13 @@ async def answer_ai(
         whale_count = whale_catalog.count()
         blocks = []
         if names:
-            picked_names = sticker_catalog.prompt_names(30)
-            listing = "、".join(sticker_catalog.label(n) for n in picked_names)
+            moods = sticker_catalog.moods()
+            mood_text = "、".join(f"{k}({v})" for k, v in moods.items())
             blocks.append(
-                "\n\n【表情包·本地】图库：" + lib_text + "。"
-                "想配表情就调用 send_sticker(name)，括号里是这张图的用途。常用名："
-                + listing + "。"
-                "不认识某张图就先 get_sticker_image(name) 看一眼，"
-                "再用 sticker_note(name, 用途) 记下来，下次才好挑。"
+                "\n\n【表情包·本地】图库：" + lib_text + "。情绪桶：" + mood_text + "。"
+                "发图前先用 sticker_search(mood=..., query=...) 看候选（带画面描述），"
+                "再 send_sticker(名字)；懒得查就直接 sticker_vibe(topic, mood)。"
+                "别凭名字瞎猜，也别一次发多张。"
             )
         elif whale_count:
             blocks.append(
