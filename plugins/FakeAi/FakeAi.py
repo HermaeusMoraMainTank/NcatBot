@@ -3136,7 +3136,7 @@ SYSTEM_COMMON_RULES = """
 
 【工作方式】
 - 你的文字输出只是思考过程，不会发到 QQ；要说话必须调用 send_message。
-- 想安静就调用 finish 或直接结束，不用解释。
+- 想安静就调用 finish 工具或直接结束，不用解释；finish 是工具名，不是一句话。
 - 工具是本能动作：send_message=打字，send_sticker=发表情，get_recent_messages=翻记录。
 - 空格会原样发送，不要用空格假装分句；想发两条就传数组。
 

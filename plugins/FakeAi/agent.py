@@ -416,7 +416,7 @@ AGENT_TOOLS = [
         "type": "function",
         "function": {
             "name": "finish",
-            "description": "结束本次处理。看完不想说话，或说完想收尾时调用。",
+            "description": "结束本次处理。看完不想说话，或说完想收尾时调用。这是工具调用，不要把这个词当成一句话打出来。",
             "parameters": {
                 "type": "object",
                 "properties": {"reason": {"type": "string"}},
@@ -424,6 +424,37 @@ AGENT_TOOLS = [
         },
     },
 ]
+
+
+_PROTOCOL_WORDS = {
+    "finish",
+    "done",
+    "pass",
+    "skip",
+    "stop",
+    "end",
+    "no_reply",
+    "silence",
+    "send_message",
+    "think",
+}
+
+
+def _is_protocol_noise(text: str) -> bool:
+    """模型把工具名当成一句话打出来了（最常见的：单独一个 finish）。
+
+    这类东西一旦发到群里就是纯 bug，必须拦在发送之前。
+    """
+    t = (text or "").strip().strip("。.!！~～`\"'")
+    if not t:
+        return False
+    low = t.lower()
+    if low in _PROTOCOL_WORDS:
+        return True
+    m = re.match(r"^([a-z_]{3,24})\s*[（(]", low)
+    if m and m.group(1) in _PROTOCOL_WORDS:
+        return True
+    return False
 
 
 _THOUGHT_MARKERS = (
@@ -454,6 +485,8 @@ def _looks_like_thought(text: str) -> bool:
     t = (text or "").strip()
     if not t:
         return False
+    if _is_protocol_noise(t):
+        return True
     if t[0] in "（(":
         return True
     if any(m in t for m in _THOUGHT_MARKERS):
@@ -1260,6 +1293,12 @@ async def run_agent(
         if not calls:
             content = (res.get("content") or "").strip()
             if not actions and content:
+                # 模型把工具名当句子打出来（最常见：单独一个 finish）。
+                # 意图明确是结束，直接收尾，别发、也别再催。
+                if _is_protocol_noise(content):
+                    _log.info("[FakeAi] 模型把工具名写成了正文，按收尾处理")
+                    finished = True
+                    break
                 # 模型经常把「内心活动」写成正文（括号独白、分析自己的判断）。
                 # 这不是发言，绝不能发到群里——催一次，让它改用工具。
                 if _looks_like_thought(content):
@@ -1270,7 +1309,7 @@ async def run_agent(
                                 "role": "user",
                                 "content": "（系统提醒）刚才那段是内心活动，不会发出去，"
                                 "也不要发。要说话请调用 send_message；"
-                                "决定不说就调用 finish。",
+                                "决定不说就调用 finish 工具。",
                             }
                         )
                         continue
@@ -1357,6 +1396,14 @@ async def run_agent(
             )
         if finished:
             break
+
+    # 兜底清一遍：工具名/协议词绝不能当成发言
+    for action in actions:
+        if action.kind == "text":
+            action.messages = [
+                m for m in action.messages if not _is_protocol_noise(m)
+            ]
+    actions = [a for a in actions if a.kind != "text" or a.messages]
 
     return AgentResult(
         actions=actions,

@@ -198,7 +198,7 @@ system: |
   - get_message_images(messageId)：想看某条旧消息的图片时用。
   - memory_append(text)：只记对某人的长期印象，不记临时话题。
   - memory_query(query, userId?)：回忆某人的印象或以前的事，不要凭空编。
-  - finish(reason)：看完不想说话，或话题结束，用它安静结束。不调用 finish、直接结束也可以。
+  - finish(reason)：这是工具调用，不是消息。不想说话就调用它，绝对不要把 finish 这几个字当一句话发出去；不调用、直接结束也可以。
   - 不要汇报“我发了/我搜了”；群友只看得到工具发出的消息。不要冒充别人，不要编造搜索结果。
   - 【硬性规则】群友让你做具体功能（占卜、抽卡、点歌、查攻略/物价、看群友印象、发图库、算数、签到、生成图片/语音、写文件等）时，不能只用 send_message 口头回应；必须先 list_skills 找到对应插件/技能，再 describe_skills + invoke_skill。
   - 例：有人说「帮我占卜」→ 先 list_skills；看到 tarot.divine 或 plugin.Tarot.run → describe_skills → invoke_skill；拿到结果后再 send_message / send_image。
