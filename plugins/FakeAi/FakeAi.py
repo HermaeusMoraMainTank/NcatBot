@@ -288,7 +288,7 @@ AGENT_YAML_PATH = PERSONA_FILES["lanqing"]
 
 
 def refresh_sticker_choices() -> None:
-    """按磁盘上真实的图库刷新后台多选，新装图库不用改代码。"""
+    """按磁盘上真实的图库刷新后台选项，新装图库不用改代码。"""
     try:
         libs = sticker_catalog.libraries()
         info = sticker_catalog.pack_info()
@@ -299,10 +299,7 @@ def refresh_sticker_choices() -> None:
         pretty = (info.get(name) or {}).get("name") or name
         options.append({"value": name, "label": f"{pretty}（{count} 张）"})
     options.append({"value": "gengjing", "label": "梗鲸（网络梗图）"})
-    FakeAi.config_choices["sticker_library"] = {
-        "multi": True,
-        "options": options,
-    }
+    FakeAi.config_choices["sticker_library"] = options
 
 
 def persona_path(name: str) -> str:
@@ -386,6 +383,8 @@ class FakeAi(NcatBotPlugin):
         "agent_max_rounds",
         "agent_max_tokens",
     ]
+    # 需要多选的配置项（后台渲染成 checkbox 组，存成逗号分隔字符串）
+    config_multi_select = {"sticker_library"}
     config_choices = {
         "trigger_tier": [
             {"value": "1", "label": "1 只回 @/叫名字"},

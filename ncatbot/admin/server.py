@@ -482,6 +482,9 @@ class AdminServer:
                     if plugin
                     else None,
                     pinned=getattr(plugin, "config_pinned", None) if plugin else None,
+                    multi=getattr(plugin, "config_multi_select", None)
+                    if plugin
+                    else None,
                 ),
                 "skills": [
                     s.describe_entry()

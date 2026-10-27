@@ -474,10 +474,17 @@ def humanize(key: str) -> str:
     return out
 
 
-def _widget_for(key: str, value: Any, choices: dict[str, Any] | None) -> str:
+def _widget_for(
+    key: str,
+    value: Any,
+    choices: dict[str, Any] | None,
+    multi: set[str] | None = None,
+) -> str:
     if choices and key in choices:
         spec = choices[key]
         if isinstance(spec, dict) and spec.get("multi"):
+            return "multiselect"
+        if multi and key in multi:
             return "multiselect"
         return "select"
     if isinstance(value, bool):
@@ -538,6 +545,7 @@ def build_fields(
     descriptions: dict[str, str] | None = None,
     prefix: str = "",
     pinned: list[str] | None = None,
+    multi: set[str] | None = None,
 ) -> list[dict[str, Any]]:
     """把配置字典转成前端可渲染的字段树。
 
@@ -551,7 +559,7 @@ def build_fields(
         if value is _MISSING:
             continue
         key = path.split(".")[-1]
-        widget = _widget_for(key, value, choices)
+        widget = _widget_for(key, value, choices, multi)
         field: dict[str, Any] = {
             "key": key,
             "path": path,
@@ -579,7 +587,7 @@ def build_fields(
     for key, value in config.items():
         full_key = f"{prefix}{key}" if not prefix else f"{prefix}.{key}"
         label = labels.get(full_key) or labels.get(key) or humanize(key)
-        widget = _widget_for(key, value, choices)
+        widget = _widget_for(key, value, choices, multi)
         field: dict[str, Any] = {
             "key": key,
             "path": full_key,
@@ -607,6 +615,7 @@ def build_fields(
                 choices=choices,
                 descriptions=descriptions,
                 prefix=full_key,
+                multi=multi,
             )
         fields.append(field)
     # 布尔值和短配置排前面，长文本/对象排后面
