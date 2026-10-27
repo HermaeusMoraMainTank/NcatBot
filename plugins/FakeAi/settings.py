@@ -170,19 +170,30 @@ def apply_from_plugin(plugin) -> None:
     expr_pkg.TONE_STRENGTH = tone
     expr_pkg.EDITOR_PASS = bool(expr_raw.get("editor_pass", False))
     expression_catalog_mod.sticker_catalog.root = Path(catalog_path)
-    # 支持多图库：sticker_library 可以用逗号/空格分隔多个库名，
-    # both / all / 空 = 全部启用
-    import re as _re
-
-    _libs = [x for x in _re.split(r"[,，\s]+", sticker_lib) if x]
-    if not _libs or any(x in ("both", "all") for x in _libs):
-        expression_catalog_mod.sticker_catalog.active = None
-    else:
-        expression_catalog_mod.sticker_catalog.active = set(_libs)
+    # 先全量扫一遍，才能知道磁盘上有哪些图库
+    expression_catalog_mod.sticker_catalog.active = None
     try:
         expression_catalog_mod.sticker_catalog.reload()
     except Exception as e:
         _log.warning("[FakeAi] 贴纸目录 reload 失败: %s", e)
+
+    # 支持多图库：sticker_library 可以用逗号/空格分隔多个库名，
+    # both / all / 空 = 全部启用；all_local = 只启用本地（不含梗鲸）
+    import re as _re
+
+    _libs = [x for x in _re.split(r"[,，\s]+", sticker_lib) if x]
+    catalog = expression_catalog_mod.sticker_catalog
+    if not _libs or any(x in ("both", "all") for x in _libs):
+        catalog.active = None
+    elif "all_local" in _libs:
+        catalog.active = set(catalog.libraries().keys())
+    else:
+        known = set(catalog.libraries().keys())
+        wanted = {x for x in _libs if x in known}
+        if len(wanted) != len(_libs):
+            missing = sorted(set(_libs) - known)
+            _log.warning("[FakeAi] 未知图库 %s，可用：%s", missing, sorted(known))
+        catalog.active = wanted or None
     try:
         whale_count = expr_pkg.whale_catalog.load_cache()
         if not whale_count:
@@ -207,6 +218,11 @@ def apply_from_plugin(plugin) -> None:
         persona = "lanqing"
         path = fakeai_mod.persona_path(persona)
     fakeai_mod.PERSONA = persona
+    # 后台「表情包图库」下拉跟着磁盘上的图库走
+    try:
+        fakeai_mod.refresh_sticker_choices()
+    except Exception as e:
+        _log.debug("[FakeAi] 刷新图库选项失败: %s", e)
     fakeai_mod.AGENT_YAML_PATH = path
     # 机器人自称跟随人设（yml 的 name 字段），避免换了人设还硬写「蓝晴」
     try:

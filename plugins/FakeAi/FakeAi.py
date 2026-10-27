@@ -287,6 +287,27 @@ PERSONA_FILES = {
 AGENT_YAML_PATH = PERSONA_FILES["lanqing"]
 
 
+def refresh_sticker_choices() -> None:
+    """按磁盘上真实的图库刷新后台下拉，新装图库不用改代码。"""
+    try:
+        libs = sticker_catalog.libraries()
+    except Exception:
+        libs = {}
+    options = [
+        {"value": "both", "label": "全部（本地 + 梗鲸）"},
+        {"value": "all_local", "label": "全部本地图库（不含梗鲸）"},
+        {"value": "gengjing", "label": "仅梗鲸（网络梗图）"},
+    ]
+    try:
+        info = sticker_catalog.pack_info()
+    except Exception:
+        info = {}
+    for name, count in libs.items():
+        pretty = (info.get(name) or {}).get("name") or name
+        options.append({"value": name, "label": f"{pretty}（{count} 张）"})
+    FakeAi.config_choices["sticker_library"] = options
+
+
 def persona_path(name: str) -> str:
     """人设 key -> yml 路径；未知 key 返回空串。"""
     return PERSONA_FILES.get(str(name or "").strip(), "")
@@ -382,8 +403,8 @@ class FakeAi(NcatBotPlugin):
             {"value": "3", "label": "活跃（能配就配）"},
         ],
         "sticker_library": [
-            {"value": "both", "label": "本地 + 梗鲸"},
-            {"value": "darkdog", "label": "仅本地（darkdog）"},
+            {"value": "both", "label": "全部（本地 + 梗鲸）"},
+            {"value": "all_local", "label": "全部本地图库（不含梗鲸）"},
             {"value": "gengjing", "label": "仅梗鲸（网络梗图）"},
         ],
         "persona": [
