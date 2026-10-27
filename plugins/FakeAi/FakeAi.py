@@ -288,24 +288,21 @@ AGENT_YAML_PATH = PERSONA_FILES["lanqing"]
 
 
 def refresh_sticker_choices() -> None:
-    """按磁盘上真实的图库刷新后台下拉，新装图库不用改代码。"""
+    """按磁盘上真实的图库刷新后台多选，新装图库不用改代码。"""
     try:
         libs = sticker_catalog.libraries()
-    except Exception:
-        libs = {}
-    options = [
-        {"value": "both", "label": "全部（本地 + 梗鲸）"},
-        {"value": "all_local", "label": "全部本地图库（不含梗鲸）"},
-        {"value": "gengjing", "label": "仅梗鲸（网络梗图）"},
-    ]
-    try:
         info = sticker_catalog.pack_info()
     except Exception:
-        info = {}
+        libs, info = {}, {}
+    options = []
     for name, count in libs.items():
         pretty = (info.get(name) or {}).get("name") or name
         options.append({"value": name, "label": f"{pretty}（{count} 张）"})
-    FakeAi.config_choices["sticker_library"] = options
+    options.append({"value": "gengjing", "label": "梗鲸（网络梗图）"})
+    FakeAi.config_choices["sticker_library"] = {
+        "multi": True,
+        "options": options,
+    }
 
 
 def persona_path(name: str) -> str:
@@ -402,11 +399,10 @@ class FakeAi(NcatBotPlugin):
             {"value": "2", "label": "普通（接梗就配）"},
             {"value": "3", "label": "活跃（能配就配）"},
         ],
-        "sticker_library": [
-            {"value": "both", "label": "全部（本地 + 梗鲸）"},
-            {"value": "all_local", "label": "全部本地图库（不含梗鲸）"},
-            {"value": "gengjing", "label": "仅梗鲸（网络梗图）"},
-        ],
+        "sticker_library": {
+            "multi": True,
+            "options": [],
+        },
         "persona": [
             {"value": "lanqing", "label": "蓝晴（默认）"},
             {"value": "lanqing_lab", "label": "蓝晴·草稿法（实验）"},
@@ -3512,15 +3508,16 @@ async def _auto_pick_sticker(
         return
     if random.random() >= expr_pkg.STICKER_AUTO_RATE:
         return
-    lib = str(expr_pkg.STICKER_LIBRARY or "both")
+    whale_on = bool(getattr(expr_pkg, "USE_WHALE", True))
     path = None
-    if lib in ("gengjing", "both") and whale_catalog.count():
-        if lib == "gengjing" or random.random() < 0.5:
+    if whale_on and whale_catalog.count():
+        # 只有梗鲸时没得选，直接拿；两者都有时各一半
+        if not sticker_catalog.names() or random.random() < 0.5:
             try:
                 path = await whale_catalog.fetch(topic)
             except Exception as e:
                 _log.debug("[FakeAi] 梗鲸补图失败: %s", e)
-    if path is None and lib in ("darkdog", "both"):
+    if path is None:
         path = sticker_catalog.pick_any()
     if path is not None:
         result.actions.append(AgentAction(kind="sticker", sticker=str(path)))
@@ -3707,7 +3704,7 @@ async def answer_ai(
         names = sticker_catalog.names()
         libs = sticker_catalog.visible_libraries()
         lib_text = "、".join(f"{k}({v})" for k, v in libs.items())
-        whale_count = whale_catalog.count()
+        whale_count = whale_catalog.count() if expr_pkg.USE_WHALE else 0
         blocks = []
         if names:
             moods = sticker_catalog.moods()

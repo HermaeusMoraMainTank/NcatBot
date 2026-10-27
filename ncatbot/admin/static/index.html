@@ -124,6 +124,9 @@ tbody tr:hover{background:var(--row-hover)}
 .field-head label{font-weight:600;font-size:13px}
 .field-head code{color:var(--muted);font-size:11px;background:var(--code-bg);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
 .field .control{margin-top:8px}
+.multi{display:flex;flex-wrap:wrap;gap:6px 14px}
+.multi .chk{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text);cursor:pointer}
+.multi .chk input{width:15px;height:15px;margin:0;accent-color:var(--accent);cursor:pointer}
 .field .control input[type=text],.field .control input[type=password],.field .control input[type=number],.field .control textarea,.field .control select{width:100%}
 .field .control textarea{min-height:70px;resize:vertical}
 .field.secret .control input{font-family:ui-monospace,Consolas,monospace}
@@ -488,6 +491,18 @@ function controlFor(f) {
     }).join('');
     return '<select ' + k + '>' + opts + '</select>';
   }
+  if (f.widget === 'multiselect') {
+    const raw = String(v == null ? '' : v);
+    let cur = raw.split(/[,，\s]+/).filter(Boolean);
+    const all = cur.length === 0 || cur.includes('both') || cur.includes('all');
+    const opts = (f.choices || []).map(c => {
+      const val = (c && typeof c === 'object') ? c.value : c;
+      const label = (c && typeof c === 'object') ? (c.label || c.value) : c;
+      const checked = (all || cur.includes(String(val))) ? ' checked' : '';
+      return '<label class="chk"><input type="checkbox" data-kind="multi" data-k="' + esc(f.path) + '" value="' + esc(val) + '"' + checked + '><span>' + esc(label) + '</span></label>';
+    }).join('');
+    return '<div class="multi">' + opts + '</div>';
+  }
   if (f.widget === 'tags') {
     const text = Array.isArray(v) ? v.join(', ') : String(v || '');
     return '<input type="text" ' + k + ' data-kind="tags" value="' + esc(text) + '" placeholder="逗号分隔，例如 853963912, 719518427">';
@@ -516,7 +531,17 @@ function setPath(obj, path, value) {
 function collectConfig() {
   // 从当前配置深拷贝，避免只提交渲染出来的字段、把没显示的配置抹掉
   const out = JSON.parse(JSON.stringify(state.currentConfig || {}));
+  // 多选：同一个 data-k 的多个 checkbox 合成逗号分隔字符串
+  const multi = {};
+  document.querySelectorAll('#configBody [data-k][data-kind="multi"]').forEach(el => {
+    (multi[el.dataset.k] = multi[el.dataset.k] || []).push(el);
+  });
+  Object.entries(multi).forEach(([path, els]) => {
+    const val = els.filter(e => e.checked).map(e => e.value).join(',');
+    setPath(out, path.split('.'), val);
+  });
   document.querySelectorAll('#configBody [data-k]').forEach(el => {
+    if (el.dataset.kind === 'multi') return;
     const path = el.dataset.k.split('.');
     let val;
     if (el.type === 'checkbox') val = el.checked;

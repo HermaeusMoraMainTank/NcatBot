@@ -476,6 +476,9 @@ def humanize(key: str) -> str:
 
 def _widget_for(key: str, value: Any, choices: dict[str, Any] | None) -> str:
     if choices and key in choices:
+        spec = choices[key]
+        if isinstance(spec, dict) and spec.get("multi"):
+            return "multiselect"
         return "select"
     if isinstance(value, bool):
         return "switch"
@@ -564,8 +567,12 @@ def build_fields(
             or CONFIG_DESCRIPTIONS.get(key)
             or "",
         }
-        if widget == "select" and choices:
-            field["choices"] = list(choices.get(key) or [])
+        if widget in ("select", "multiselect") and choices:
+            spec = choices.get(key) or []
+            if isinstance(spec, dict):
+                field["choices"] = list(spec.get("options") or [])
+            else:
+                field["choices"] = list(spec)
         pinned_fields.append(field)
 
     fields: list[dict[str, Any]] = []
@@ -587,8 +594,12 @@ def build_fields(
             or CONFIG_DESCRIPTIONS.get(key)
             or "",
         }
-        if widget == "select" and choices:
-            field["choices"] = list(choices.get(key) or [])
+        if widget in ("select", "multiselect") and choices:
+            spec = choices.get(key) or []
+            if isinstance(spec, dict):
+                field["choices"] = list(spec.get("options") or [])
+            else:
+                field["choices"] = list(spec)
         if widget == "group" and isinstance(value, dict):
             field["children"] = build_fields(
                 value,
@@ -599,6 +610,6 @@ def build_fields(
             )
         fields.append(field)
     # 布尔值和短配置排前面，长文本/对象排后面
-    order = {"switch": 0, "select": 0, "number": 1, "tags": 2, "text": 3, "password": 4, "textarea": 5, "group": 6, "json": 7}
+    order = {"switch": 0, "select": 0, "multiselect": 0, "number": 1, "tags": 2, "text": 3, "password": 4, "textarea": 5, "group": 6, "json": 7}
     fields.sort(key=lambda f: (order.get(f["widget"], 9), f["label"]))
     return pinned_fields + fields

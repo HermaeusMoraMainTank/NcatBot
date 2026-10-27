@@ -149,7 +149,8 @@ def apply_from_plugin(plugin) -> None:
     expr_enabled = bool(expr_raw.get("enabled", True))
     expr_max = int(expr_raw.get("max_per_message", 1))
     catalog_path = str(expr_raw.get("catalog_path", "data/fakeai/stickers"))
-    sticker_lib = str(expr_raw.get("sticker_library", "both") or "both")
+    _raw_lib = expr_raw.get("sticker_library", "both")
+    sticker_lib = "both" if _raw_lib is None else str(_raw_lib)
     try:
         sticker_rate = float(expr_raw.get("sticker_auto_rate", 0.25) or 0.0)
     except (TypeError, ValueError):
@@ -177,23 +178,35 @@ def apply_from_plugin(plugin) -> None:
     except Exception as e:
         _log.warning("[FakeAi] 贴纸目录 reload 失败: %s", e)
 
-    # 支持多图库：sticker_library 可以用逗号/空格分隔多个库名，
-    # both / all / 空 = 全部启用；all_local = 只启用本地（不含梗鲸）
+    # 支持多图库：sticker_library 用逗号分隔库名；all_local = 全部本地；
+    # both / all / 空 = 全部本地 + 梗鲸
     import re as _re
 
     _libs = [x for x in _re.split(r"[,，\s]+", sticker_lib) if x]
     catalog = expression_catalog_mod.sticker_catalog
-    if not _libs or any(x in ("both", "all") for x in _libs):
+    whale_on = True
+    if any(x in ("both", "all") for x in _libs):
         catalog.active = None
-    elif "all_local" in _libs:
-        catalog.active = set(catalog.libraries().keys())
+        whale_on = True
+    elif not _libs:
+        # 后台把选项全取消 = 一个都不启用
+        catalog.active = set()
+        whale_on = False
     else:
-        known = set(catalog.libraries().keys())
-        wanted = {x for x in _libs if x in known}
-        if len(wanted) != len(_libs):
-            missing = sorted(set(_libs) - known)
-            _log.warning("[FakeAi] 未知图库 %s，可用：%s", missing, sorted(known))
-        catalog.active = wanted or None
+        whale_on = "gengjing" in _libs
+        local = [x for x in _libs if x != "gengjing"]
+        if "all_local" in local:
+            catalog.active = set(catalog.libraries().keys())
+        else:
+            known = set(catalog.libraries().keys())
+            wanted = {x for x in local if x in known}
+            if len(wanted) != len(local):
+                missing = sorted(set(local) - known)
+                _log.warning(
+                    "[FakeAi] 未知图库 %s，可用：%s", missing, sorted(known)
+                )
+            catalog.active = wanted or None
+    expr_pkg.USE_WHALE = whale_on
     try:
         whale_count = expr_pkg.whale_catalog.load_cache()
         if not whale_count:
