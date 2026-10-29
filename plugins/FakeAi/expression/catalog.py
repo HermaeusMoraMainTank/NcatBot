@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import logging
 import random
 import re
@@ -63,6 +64,9 @@ class StickerCatalog:
         # 图库元数据（来自 pack.json）：库名 -> 名字 -> {mood, caption, keywords}
         self._meta: Dict[str, Dict[str, Dict[str, str]]] = {}
         self._pack_info: Dict[str, Dict[str, str]] = {}
+        # 图库目录指纹：用于热更新检测
+        self._sig: tuple = ()
+        self._last_check: float = 0.0
 
     # ---- 加载 ----
 
@@ -95,6 +99,8 @@ class StickerCatalog:
         if loose:
             self._libs.setdefault(LOOSE_LIBRARY, {}).update(loose)
 
+        self._sig = self._signature()
+        self._last_check = time.time()
         _log.info(
             "[FakeAi Stickers] 已加载 %s 套图库、%s 个贴纸名 root=%s",
             len(self._libs),
@@ -102,6 +108,56 @@ class StickerCatalog:
             self.root,
         )
         return len(self.names())
+
+    # ---- 热更新 ----
+
+    def _signature(self) -> tuple:
+        """图库目录的轻量指纹：子目录名 + mtime + 文件数。
+
+        只要有人往 data/fakeai/stickers 里加了新图库或删了图，指纹就变，
+        下一次调用会自动 reload，不用重启机器人。
+        """
+        try:
+            entries = []
+            with os.scandir(self.root) as it:
+                for entry in it:
+                    if entry.name.startswith("."):
+                        continue
+                    try:
+                        st = entry.stat()
+                    except OSError:
+                        continue
+                    if entry.is_dir():
+                        try:
+                            count = sum(
+                                1
+                                for f in os.scandir(entry.path)
+                                if f.is_file() and Path(f.name).suffix.lower() in IMAGE_EXTS
+                            )
+                        except OSError:
+                            count = 0
+                        entries.append((entry.name, int(st.st_mtime), count))
+                    elif Path(entry.name).suffix.lower() in IMAGE_EXTS:
+                        entries.append((entry.name, int(st.st_mtime), 1))
+            entries.sort()
+            return tuple(entries)
+        except OSError:
+            return ()
+
+    def maybe_reload(self, min_interval: float = 20.0) -> bool:
+        """隔一段时间检查一次图库目录，有变化就重新扫描。"""
+        now = time.time()
+        if now - self._last_check < min_interval:
+            return False
+        self._last_check = now
+        if self._signature() == self._sig:
+            return False
+        before = len(self.names())
+        self.reload()
+        _log.info(
+            "[FakeAi Stickers] 图库已热更新：%s → %s 张", before, len(self.names())
+        )
+        return True
 
     # ---- 查询 ----
 
@@ -181,6 +237,7 @@ class StickerCatalog:
         self, query: str = "", mood: str = "", limit: int = 8
     ) -> List[Dict[str, str]]:
         """按情绪桶 + 关键词找图，返回候选（名字/描述/情绪/图库）。"""
+        self.maybe_reload()
         q = str(query or "").strip().lower()
         mood = str(mood or "").strip().lower()
         wanted = None
@@ -388,6 +445,7 @@ class StickerCatalog:
             return random.choice(paths)
 
     def pick(self, name: str) -> Optional[Path]:
+        self.maybe_reload()
         target = self.resolve(name)
         if not target:
             return None

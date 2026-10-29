@@ -520,6 +520,11 @@ class FakeAi(NcatBotPlugin):
             callback=self._purge_group_messages,
         )
         self.add_scheduled_task(
+            "fakeai_sticker_scan",
+            "60s",
+            callback=self._scan_sticker_dir,
+        )
+        self.add_scheduled_task(
             "fakeai_user_impression",
             "15m",
             callback=self._update_user_impressions,
@@ -682,6 +687,19 @@ class FakeAi(NcatBotPlugin):
             except Exception as e:
                 _log.warning("[FakeAi] 定时消息发送失败: %s", e)
             await memory_manager.mark_scheduled_done(item["id"])
+
+    async def _scan_sticker_dir(self) -> None:
+        """每分钟看一眼图库目录：有新图 / 删了图就热更新，不用重启。"""
+        try:
+            if sticker_catalog.maybe_reload(45.0):
+                refresh_sticker_choices()
+                _log.info(
+                    "[FakeAi] 图库热更新完成：%s 套、%s 张",
+                    len(sticker_catalog.libraries()),
+                    len(sticker_catalog.names()),
+                )
+        except Exception as e:
+            _log.debug("[FakeAi] 图库热更新失败: %s", e)
 
     async def _purge_group_messages(self) -> None:
         try:
