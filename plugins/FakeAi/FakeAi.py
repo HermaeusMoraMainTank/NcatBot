@@ -282,6 +282,7 @@ PERSONA = "lanqing"
 PERSONA_FILES = {
     "lanqing": "plugins/FakeAi/prompts/lanqing_agent.yml",
     "lanqing_lab": "plugins/FakeAi/prompts/lanqing_lab_agent.yml",
+    "sherry": "plugins/FakeAi/prompts/sherry_agent.yml",
     "default": "plugins/FakeAi/prompts/default_agent.yml",
 }
 AGENT_YAML_PATH = PERSONA_FILES["lanqing"]
@@ -405,6 +406,7 @@ class FakeAi(NcatBotPlugin):
         "persona": [
             {"value": "lanqing", "label": "蓝晴（默认）"},
             {"value": "lanqing_lab", "label": "蓝晴·草稿法（实验）"},
+            {"value": "sherry", "label": "橘雪莉（名侦探）"},
             {"value": "default", "label": "小鲸鱼（QQ-Agent 默认）"},
         ],
     }

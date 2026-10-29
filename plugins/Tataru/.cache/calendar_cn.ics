@@ -70,6 +70,19 @@ DTSTART;TZID=Asia/Shanghai:20220103T000000
 DTEND;TZID=Asia/Shanghai:20220130T235900
 END:VEVENT
 BEGIN:VEVENT
+DTSTAMP:20261027T133817Z
+SUMMARY:C-7.57版本更新维护（斗兽奇奕修复调整）
+DESCRIPTION:更新笔记：\nhttps://ff.web.sdo.com/web8/index.html#/newstab/newsco
+ nt/394093
+TZID:Asia/Shanghai
+SEQUENCE:0
+UID:055c07ba-2569-4cff-bcd3-4bdbfa92a86c
+CREATED:20261027T133817Z
+DTSTART;TZID=Asia/Shanghai:20261013T140000
+DTEND;TZID=Asia/Shanghai:20261013T180000
+URL:https://ff.web.sdo.com/web8/index.html#/newstab/newscont/393993
+END:VEVENT
+BEGIN:VEVENT
 DTSTAMP:20211109T030408Z
 SUMMARY:C-FFXV联动复刻
 DESCRIPTION:活动页面：\nhttps://actff1.web.sdo.com/project/20211115FFXV/index.
@@ -1450,6 +1463,20 @@ DTEND;TZID=Asia/Shanghai:20250423T235900
 URL:https://actff1.web.sdo.com/20240621_eorzea/index.html#/index
 END:VEVENT
 BEGIN:VEVENT
+DTSTAMP:20261027T135702Z
+SUMMARY:C-糖豆人联动复刻
+DESCRIPTION:活动页面：\nhttps://actff1.web.sdo.com/project/20260928ff14fallguy
+ s/4kkmxknj3rno/index.html
+TZID:Asia/Shanghai
+SEQUENCE:0
+UID:5eb62716-4b83-4618-a81d-446bd4dfd878
+CREATED:20261027T135702Z
+DTSTART;TZID=Asia/Shanghai:20261007T160000
+DTEND;TZID=Asia/Shanghai:20261027T225900
+URL:https://actff1.web.sdo.com/project/20260928ff14fallguys/4kkmxknj3rno/
+ index.html
+END:VEVENT
+BEGIN:VEVENT
 DTSTAMP:20250807T121606Z
 SUMMARY:C-国服十一周年庆典LIVE
 DESCRIPTION:十一周年活动特辑页面：\nhttps://actff1.web.sdo.com/project/20250806elive
@@ -1462,6 +1489,21 @@ DTSTART;TZID=Asia/Shanghai:20250817T170000
 DTEND;TZID=Asia/Shanghai:20250817T200000
 URL:https://actff1.web.sdo.com/project/20250806eliveassemble/index.html#/
  index
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261027T141545Z
+SUMMARY:C-莫古莫古★大收集 ~天文的行路 第1阶段~（呜噜怪角笛）
+DESCRIPTION:【请注意呜噜怪角笛的获取方式同时需要呜噜怪角笛的交换票据（需要在活动期间内完成莫古莫古挑战才能获得）】\n\n活动页面：\
+ nhttps://actff1.web.sdo.com/project/20260826mogmog/0by196dc8ija/index.ht
+ ml
+TZID:Asia/Shanghai
+SEQUENCE:0
+UID:60666528-ea82-473f-a7b2-7c9b4045adc4
+CREATED:20261027T141545Z
+DTSTART;TZID=Asia/Shanghai:20260909T160000
+DTEND;TZID=Asia/Shanghai:20261019T225900
+URL:https://actff1.web.sdo.com/project/20260826mogmog/0by196dc8ija/index.
+ html
 END:VEVENT
 BEGIN:VEVENT
 DTSTAMP:20260420T071610Z
@@ -1997,6 +2039,22 @@ UID:849e09df-b0ca-4871-a5a9-95fd3f79b6c4
 CREATED:20250613T123735Z
 DTSTART;TZID=Asia/Shanghai:20250613T200000
 DTEND;TZID=Asia/Shanghai:20250616T075900
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261027T134713Z
+SUMMARY:C-守护天节「穿着玩偶服的魔物！？」
+DESCRIPTION:活动奖励：\n时装-狰狞熊一套（2件）-「狰狞熊头套」、「狰狞熊服」\n家具-「狂笑守夜菇」、「瞪眼守夜菇」、「守夜鬼魂小
+ 车」（均不可染色）\n家具-壁挂-「守护天节海报2025-2」\n家具-桌上-「守护天节桌面海报2025-2」\n家具-壁挂-「守护天节海报20
+ 17」\n\n活动页面：\nhttps://actff1.web.sdo.com/project/20261005All_Saints_Wake
+ /hjwff6jkcti4/index.html
+TZID:Asia/Shanghai
+SEQUENCE:0
+UID:854b5df6-5a69-4427-8835-5f8d1ba7460f
+CREATED:20261027T134713Z
+DTSTART;TZID=Asia/Shanghai:20261015T160000
+DTEND;TZID=Asia/Shanghai:20261102T225900
+URL:https://actff1.web.sdo.com/project/20261005All_Saints_Wake/hjwff6jkct
+ i4/index.html
 END:VEVENT
 BEGIN:VEVENT
 DTSTAMP:20210603T140321Z
@@ -3693,6 +3751,19 @@ URL;VALUE=URI:https://ff.web.sdo.com/web8/index.html#/newstab/newscont/37
  5723
 END:VEVENT
 BEGIN:VEVENT
+DTSTAMP:20261027T134900Z
+SUMMARY:C-日本东京FanFest转播
+DESCRIPTION:※11月1日的节目不设转播。\n\n转播内容：\n10:00～12:00 主题演讲\n\n官方B站直播间：\nhttps:
+ //live.bilibili.com/5225
+TZID:Asia/Shanghai
+SEQUENCE:0
+UID:c6cf89b5-654b-4600-97cb-4c07bdfb3a3a
+CREATED:20261027T134900Z
+DTSTART;TZID=Asia/Shanghai:20261031T100000
+DTEND;TZID=Asia/Shanghai:20261031T120000
+URL:https://live.bilibili.com/5225
+END:VEVENT
+BEGIN:VEVENT
 DTSTAMP:20250821T153647Z
 SUMMARY:C-莫古莫古★大收集 ~奇谈探究者~（咖啡杯耳坠）
 DESCRIPTION:【到7.3更新时候结束。】\n\n活动页面：\nhttps://actff1.web.sdo.com/project/20
@@ -3804,6 +3875,20 @@ CREATED:20260127T162819Z
 DTSTART;TZID=Asia/Shanghai:20260127T130000
 DTEND;TZID=Asia/Shanghai:20260127T180000
 URL:https://ff.web.sdo.com/web8/index.html#/newstab/newscont/383894
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261027T135758Z
+SUMMARY:C-金碟游乐场「魔光键影」（第一弹FF7RE系列联动）（截止至8.0）
+DESCRIPTION:活动时间：2026年10月28日16:00～8.0版本更新维护前\n（个人猜测是词库以及奖励的获取时间是到8.0版本更新前
+ ，请注意时间。）\n\n活动页面：\nhttps://actff1.web.sdo.com/project/20261014keybound_b
+ rawler/o48khqshmn6e/index.html
+TZID:Asia/Shanghai
+SEQUENCE:0
+UID:d7145caa-773e-4eef-b12f-3ed8a31a7b9b
+CREATED:20261027T135758Z
+DTSTART;TZID=Asia/Shanghai:20261028T160000
+DTEND;TZID=Asia/Shanghai:20270126T180000
+URL:https://ff.web.sdo.com/web8/index.html#/newstab/newscont/394486
 END:VEVENT
 BEGIN:VEVENT
 DTSTAMP:20260807T080343Z
@@ -4085,6 +4170,19 @@ CREATED:20241011T093843Z
 DTSTART;TZID=Asia/Shanghai:20240927T000000
 DTEND;TZID=Asia/Shanghai:20241107T235900
 URL:https://actff1.web.sdo.com/20240621_C2_eorzea/index.html#/index
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20261027T133631Z
+SUMMARY:C-FFXV联动复刻
+DESCRIPTION:活动页面：\nhttps://actff1.web.sdo.com/project/20260915ffxv/index.
+ html
+TZID:Asia/Shanghai
+SEQUENCE:0
+UID:f536dfc3-2b8f-4871-8480-22857e655415
+CREATED:20261027T133631Z
+DTSTART;TZID=Asia/Shanghai:20260924T160000
+DTEND;TZID=Asia/Shanghai:20261013T225900
+URL:https://actff1.web.sdo.com/project/20260915ffxv/index.html
 END:VEVENT
 BEGIN:VEVENT
 DTSTAMP:20260807T080305Z

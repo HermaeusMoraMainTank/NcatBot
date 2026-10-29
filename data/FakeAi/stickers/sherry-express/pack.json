@@ -1,0 +1,54 @@
+{
+ "id": "sherry-express",
+ "name": "雪莉表情素材",
+ "version": "1.0.0",
+ "license": "非商业同人素材",
+ "source": "https://github.com/qianlandamanbo/Tachibana-Sherry-Generator",
+ "images": {
+  "express-01": {
+   "mood": "happy",
+   "caption": "舔舌头举手指（蓝发戴帽少女眨眼吐舌微笑）",
+   "keywords": "舔舌头举手指 蓝发戴帽少女眨眼吐舌微笑"
+  },
+  "express-02": {
+   "mood": "shy",
+   "caption": "眯眼微笑挠头（戴礼帽闭眼微笑）",
+   "keywords": "眯眼微笑挠头 戴礼帽闭眼微笑"
+  },
+  "express-03": {
+   "mood": "angry",
+   "caption": "握拳，加油打气（蓝发橙眼少女戴礼帽握拳微笑）",
+   "keywords": "握拳，加油打气 蓝发橙眼少女戴礼帽握拳微笑"
+  },
+  "express-04": {
+   "mood": "shy",
+   "caption": "尴尬地拒绝（蓝发帽饰少女流汗举手陪笑）",
+   "keywords": "尴尬地拒绝 蓝发帽饰少女流汗举手陪笑"
+  },
+  "express-05": {
+   "mood": "shy",
+   "caption": "惊讶地摆手拒绝（蓝发帽饰少女流汗张嘴挥手）",
+   "keywords": "惊讶地摆手拒绝 蓝发帽饰少女流汗张嘴挥手"
+  },
+  "express-06": {
+   "mood": "sad",
+   "caption": "投降（双手举头卖萌）",
+   "keywords": "投降 双手举头卖萌"
+  },
+  "express-07": {
+   "mood": "confused",
+   "caption": "惊讶地表示赞同（竖大拇指）",
+   "keywords": "惊讶地表示赞同 竖大拇指"
+  },
+  "express-08": {
+   "mood": "confused",
+   "caption": "惊讶地举起双手（双手举头张嘴卖萌）",
+   "keywords": "惊讶地举起双手 双手举头张嘴卖萌"
+  },
+  "express-09": {
+   "mood": "shy",
+   "caption": "挠头拒绝（蓝发帽饰少女微笑挥手）",
+   "keywords": "挠头拒绝 蓝发帽饰少女微笑挥手"
+  }
+ }
+}

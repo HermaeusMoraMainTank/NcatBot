@@ -1,0 +1,199 @@
+{
+ "id": "juxueli",
+ "name": "橘雪莉表情包",
+ "version": "1.0.0",
+ "license": "仅限非商业使用；素材版权归原作者",
+ "source": "https://github.com/anka-afk/juxueli-meme-pack",
+ "images": {
+  "apology-01": {
+   "mood": "shy",
+   "caption": "笑着挥手拒绝",
+   "keywords": "apology 笑着挥手拒绝"
+  },
+  "apology-02": {
+   "mood": "shy",
+   "caption": "委屈含泪",
+   "keywords": "apology 委屈含泪"
+  },
+  "approval-01": {
+   "mood": "happy",
+   "caption": "持放大镜眨眼吐舌",
+   "keywords": "approval 持放大镜眨眼吐舌"
+  },
+  "approval-02": {
+   "mood": "happy",
+   "caption": "蓝发墨镜少女竖大拇指",
+   "keywords": "approval 蓝发墨镜少女竖大拇指"
+  },
+  "approval-03": {
+   "mood": "happy",
+   "caption": "竖大拇指微笑",
+   "keywords": "approval 竖大拇指微笑"
+  },
+  "approval-04": {
+   "mood": "happy",
+   "caption": "张嘴惊讶",
+   "keywords": "approval 张嘴惊讶"
+  },
+  "approval-05": {
+   "mood": "happy",
+   "caption": "张嘴握拳问你是高手",
+   "keywords": "approval 张嘴握拳问你是高手"
+  },
+  "attack-01": {
+   "mood": "angry",
+   "caption": "挥拳张嘴大喊",
+   "keywords": "attack 挥拳张嘴大喊"
+  },
+  "attack-02": {
+   "mood": "angry",
+   "caption": "举拳张嘴",
+   "keywords": "attack 举拳张嘴"
+  },
+  "attack-03": {
+   "mood": "angry",
+   "caption": "举双拳配文字",
+   "keywords": "attack 举双拳配文字"
+  },
+  "food-01": {
+   "mood": "daily",
+   "caption": "笑着捏碎多根金箍棒",
+   "keywords": "food 笑着捏碎多根金箍棒"
+  },
+  "food-02": {
+   "mood": "daily",
+   "caption": "笑着捏碎苹果",
+   "keywords": "food 笑着捏碎苹果"
+  },
+  "food-03": {
+   "mood": "daily",
+   "caption": "蓝发厨娘持铲张嘴",
+   "keywords": "food 蓝发厨娘持铲张嘴"
+  },
+  "happy-01": {
+   "mood": "happy",
+   "caption": "蓝发帽裙女孩开心跳跃",
+   "keywords": "happy 蓝发帽裙女孩开心跳跃"
+  },
+  "happy-02": {
+   "mood": "happy",
+   "caption": "闭眼甜笑",
+   "keywords": "happy 闭眼甜笑"
+  },
+  "happy-03": {
+   "mood": "happy",
+   "caption": "戴帽张嘴呆立",
+   "keywords": "happy 戴帽张嘴呆立"
+  },
+  "happy-04": {
+   "mood": "happy",
+   "caption": "蓝发帽饰少女眨眼吐舌微笑",
+   "keywords": "happy 蓝发帽饰少女眨眼吐舌微笑"
+  },
+  "happy-05": {
+   "mood": "happy",
+   "caption": "眨眼比嘘",
+   "keywords": "happy 眨眼比嘘"
+  },
+  "interaction-01": {
+   "mood": "daily",
+   "caption": "蓝发角色举放大镜观察",
+   "keywords": "interaction 蓝发角色举放大镜观察"
+  },
+  "interaction-02": {
+   "mood": "daily",
+   "caption": "角色旁观地上冰块",
+   "keywords": "interaction 角色旁观地上冰块"
+  },
+  "interaction-03": {
+   "mood": "daily",
+   "caption": "背白发女孩大喊抗议",
+   "keywords": "interaction 背白发女孩大喊抗议"
+  },
+  "interaction-04": {
+   "mood": "daily",
+   "caption": "指铁笼催人入内",
+   "keywords": "interaction 指铁笼催人入内"
+  },
+  "interaction-05": {
+   "mood": "daily",
+   "caption": "金发女孩被蓝发女孩拿放大镜凑近观察",
+   "keywords": "interaction 金发女孩被蓝发女孩拿放大镜凑近观察"
+  },
+  "interaction-06": {
+   "mood": "daily",
+   "caption": "两个Q版女孩开心站立",
+   "keywords": "interaction 两个Q版女孩开心站立"
+  },
+  "question-01": {
+   "mood": "confused",
+   "caption": "扶帽惊讶张嘴",
+   "keywords": "question 扶帽惊讶张嘴"
+  },
+  "question-02": {
+   "mood": "confused",
+   "caption": "举手问这扯不扯",
+   "keywords": "question 举手问这扯不扯"
+  },
+  "question-03": {
+   "mood": "confused",
+   "caption": "歪头表情疑惑",
+   "keywords": "question 歪头表情疑惑"
+  },
+  "question-04": {
+   "mood": "confused",
+   "caption": "流泪委屈自问",
+   "keywords": "question 流泪委屈自问"
+  },
+  "question-05": {
+   "mood": "confused",
+   "caption": "持放大镜微笑",
+   "keywords": "question 持放大镜微笑"
+  },
+  "question-06": {
+   "mood": "confused",
+   "caption": "张嘴惊讶",
+   "keywords": "question 张嘴惊讶"
+  },
+  "question-07": {
+   "mood": "confused",
+   "caption": "张嘴仰望星空",
+   "keywords": "question 张嘴仰望星空"
+  },
+  "question-08": {
+   "mood": "confused",
+   "caption": "流汗张嘴疑惑",
+   "keywords": "question 流汗张嘴疑惑"
+  },
+  "question-09": {
+   "mood": "confused",
+   "caption": "张嘴举拳",
+   "keywords": "question 张嘴举拳"
+  },
+  "shy-01": {
+   "mood": "shy",
+   "caption": "托腮沉思",
+   "keywords": "shy 托腮沉思"
+  },
+  "shy-02": {
+   "mood": "shy",
+   "caption": "蓝发帽饰少女闭眼甜笑",
+   "keywords": "shy 蓝发帽饰少女闭眼甜笑"
+  },
+  "surprised-01": {
+   "mood": "confused",
+   "caption": "蓝发帽饰女孩张嘴伸手",
+   "keywords": "surprised 蓝发帽饰女孩张嘴伸手"
+  },
+  "surprised-02": {
+   "mood": "confused",
+   "caption": "张嘴凑近另一人",
+   "keywords": "surprised 张嘴凑近另一人"
+  },
+  "surrender-01": {
+   "mood": "sad",
+   "caption": "双手比耶甜笑",
+   "keywords": "surrender 双手比耶甜笑"
+  }
+ }
+}

@@ -8,7 +8,7 @@
 
 McFish 支持群聊和私聊；群 `853963912` 内保持静默，不处理任何钓鱼消息，也不发送任何钓鱼消息，私聊命令和交互回复不受此限制。
 
-玩法对比、金币循环诊断和分阶段改造建议见 [GAMEPLAY_REVIEW.md](GAMEPLAY_REVIEW.md)；本轮已落地内容和前后数值对比见 [GAMEPLAY_IMPLEMENTATION_REPORT.md](GAMEPLAY_IMPLEMENTATION_REPORT.md)。
+玩法对比、金币循环诊断和分阶段改造建议见 [GAMEPLAY_REVIEW.md](GAMEPLAY_REVIEW.md)；本轮已落地内容和前后数值对比见 [GAMEPLAY_IMPLEMENTATION_REPORT.md](GAMEPLAY_IMPLEMENTATION_REPORT.md)；下一期内容扩展（天气/时段、条件鱼、尺寸纪录、鱼塘、加工）见 [GAMEPLAY_EXPANSION_V2.md](GAMEPLAY_EXPANSION_V2.md)。
 
 帮助图片使用 1600px 双栏分区卡片布局，按各区块内容高度平衡分配左右列，分别展示指令入口、核心循环、鱼竿与升级、碎片与装备、掉落概率、鱼王与鱼点及特殊机制；`MCFISH_SPECIAL_MECHANICS` 只维护特殊机制卡片，避免规则重复拼接。
 

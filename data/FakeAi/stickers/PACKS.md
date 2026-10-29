@@ -9,6 +9,8 @@
 | `dafeiyu-learned` | 31 | personal | 同上，大肥鱼·学图 |
 | `whale-girl-emoji` | 91 | noncommercial-fan | 同上，鲸鱼娘表情包 |
 | `paopao-whale-girl` | 55 | CC-BY-NC-SA-4.0 | 同上，泡泡表情包（已压缩到 640px） |
+| `juxueli` | 38 | 仅限非商业使用 | [juxueli-meme-pack](https://github.com/anka-afk/juxueli-meme-pack) 橘雪莉表情包（10 类语义） |
+| `sherry-express` | 9 | 非商业同人素材 | [Tachibana-Sherry-Generator](https://github.com/qianlandamanbo/Tachibana-Sherry-Generator) 立绘表情 |
 
 ## 情绪桶
 
