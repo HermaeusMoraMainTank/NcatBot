@@ -31,13 +31,16 @@ class McFishAdminServer:
         self.token = token.strip()
         self.service = McFishAdminService(
             plugin,
-            rod_names={"木竿", "铁竿", "金竿", "钻石竿", "下界合金竿", "三叉戟"},
+            rod_names={"木竿", "铜竿", "锡竿", "铁竿", "猩红竿", "幻光竿", "星河竿", "灿阳竿", "三叉戟"},
             fixed_price_names={
                 "木竿",
+                "铜竿",
+                "锡竿",
                 "铁竿",
-                "金竿",
-                "钻石竿",
-                "下界合金竿",
+                "猩红竿",
+                "幻光竿",
+                "星河竿",
+                "灿阳竿",
                 "魔法鱼饵",
                 "隐秘诱饵",
                 "万能鱼饵",

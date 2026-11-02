@@ -45,10 +45,10 @@ class FakeMcFish:
         self._locks: dict[str, asyncio.Lock] = {}
         self.states: dict[str, dict] = {}
         self._economy = FakeEconomy()
-        self.rod_names = {"木竿", "铁竿"}
-        self.names = {"鳕鱼", "铁竿", "钓鱼碎片"}
-        self.discounts = {"鳕鱼": 100, "铁竿": 100}
-        self.inventory = {"鳕鱼": 10, "铁竿": 1}
+        self.rod_names = {"木竿", "铜竿"}
+        self.names = {"鳕鱼", "铜竿", "钓鱼碎片"}
+        self.discounts = {"鳕鱼": 100, "铜竿": 100}
+        self.inventory = {"鳕鱼": 10, "铜竿": 1}
         self._shop_custom_prices: dict[str, int] = {}
         self._db.executescript(
             """
@@ -117,7 +117,7 @@ class FakeMcFish:
     def _shop_price(self, name, discounts):
         if name in self._shop_custom_prices:
             return self._shop_custom_prices[name]
-        return (5000 if name == "铁竿" else 10) * discounts.get(name, 100) // 100
+        return (5000 if name == "铜竿" else 10) * discounts.get(name, 100) // 100
 
     def set_config(self, _key, _value):
         return None
@@ -130,7 +130,7 @@ def _service(plugin: FakeMcFish) -> McFishAdminService:
     return McFishAdminService(
         plugin,
         rod_names=plugin.rod_names,
-        fixed_price_names={"铁竿"},
+        fixed_price_names={"铜竿"},
     )
 
 
@@ -158,8 +158,8 @@ async def test_grant_item_supports_stackable_items_and_rods_and_audits(tmp_path:
 
     detail = await service.grant_item("200", "鳕鱼", 3, "webui@test")
     assert next(item for item in detail["items"] if item["name"] == "鳕鱼")["count"] == 5
-    detail = await service.grant_item("200", "铁竿", 2, "webui@test")
-    rod = next(item for item in detail["items"] if item["name"] == "铁竿")
+    detail = await service.grant_item("200", "铜竿", 2, "webui@test")
+    rod = next(item for item in detail["items"] if item["name"] == "铜竿")
     assert rod["count"] == 2
     audit = service.audit()
     assert len(audit) == 2
@@ -175,12 +175,12 @@ async def test_grant_rod_attributes_and_adjusts_balance_with_audit(tmp_path: Pat
 
     detail = await service.grant_item(
         "200",
-        "铁竿",
+        "铜竿",
         2,
         "webui@test",
         rod_attributes={"durable": 17, "maintenance": 4, "induce": 2, "favor": 3},
     )
-    rods = next(item for item in detail["items"] if item["name"] == "铁竿")
+    rods = next(item for item in detail["items"] if item["name"] == "铜竿")
     assert rods["details"] == [
         {"durable": 17, "maintenance": 4, "induce": 2, "favor": 3, "craftable": True},
         {"durable": 17, "maintenance": 4, "induce": 2, "favor": 3, "craftable": True},
@@ -235,7 +235,7 @@ def test_discount_validation_keeps_fixed_rods_and_rejects_out_of_range(tmp_path:
     plugin = FakeMcFish(tmp_path / "mcfish.db")
     service = _service(plugin)
     with pytest.raises(ValueError, match="固定价格"):
-        service.set_discounts({"铁竿": 120}, "webui@test")
+        service.set_discounts({"铜竿": 120}, "webui@test")
     with pytest.raises(ValueError, match="1% 到 300%"):
         service.set_discounts({"鳕鱼": 301}, "webui@test")
     result = service.set_discounts({"鳕鱼": 80}, "webui@test")

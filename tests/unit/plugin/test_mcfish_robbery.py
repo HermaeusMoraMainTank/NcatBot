@@ -18,6 +18,7 @@ sys.path.insert(0, str(ROOT / "plugins"))
 from GroupEconomy.store import EconomyStore  # noqa: E402
 from McFish.McFish import (  # noqa: E402
     BLOCKED_GROUP_ID,
+    FISH,
     FISH_KINGS,
     MCFISH_HELP,
     MCFISH_SPECIAL_MECHANICS,
@@ -28,7 +29,7 @@ from McFish.McFish import (  # noqa: E402
     _McFishEvent,
     _same_conversation,
 )
-from Robbery.Robbery import Robbery  # noqa: E402
+from Robbery.Robbery import DEFAULT_BASE_STOLEN_TIERS, Robbery  # noqa: E402
 from ncatbot.types import At, PlainText  # noqa: E402
 
 
@@ -69,9 +70,9 @@ async def test_mcfish_item_grant_is_restricted_to_designated_admin():
     plugin._state = lambda _uid: {"pack": {}}
     plugin._save = lambda *_args: pytest.fail("unauthorized user changed a fishing pack")
     plugin._economy = SimpleNamespace(_target_in_group=AsyncMock())
-    event = _grant_item_event("123", "200", "鳕鱼", 3)
+    event = _grant_item_event("123", "200", "刃鳍鱼", 3)
 
-    await plugin._grant_item(event, "钓鱼发放 鳕鱼 3")
+    await plugin._grant_item(event, "钓鱼发放 刃鳍鱼 3")
 
     plugin._economy._target_in_group.assert_not_awaited()
     event.reply.assert_not_awaited()
@@ -82,22 +83,22 @@ async def test_mcfish_item_grant_adds_stackable_item_and_audits_change(tmp_path:
     plugin = McFish.__new__(McFish)
     plugin._db = sqlite3.connect(tmp_path / "mcfish.db")
     plugin._db.execute("CREATE TABLE admin_adjustments (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id TEXT NOT NULL, reason TEXT NOT NULL, old_state TEXT NOT NULL, new_state TEXT NOT NULL, created_at REAL NOT NULL)")
-    state = {"pack": {"鳕鱼": 2}}
+    state = {"pack": {"刃鳍鱼": 2}}
     saved = []
     plugin._state = lambda _uid: state
     plugin._save = lambda _uid, value: saved.append(copy.deepcopy(value))
     plugin._economy = SimpleNamespace(_target_in_group=AsyncMock(return_value=True))
-    event = _grant_item_event("273421673", "200", "鳕鱼", 3)
+    event = _grant_item_event("273421673", "200", "刃鳍鱼", 3)
 
-    await plugin._grant_item(event, "钓鱼发放 鳕鱼 3")
+    await plugin._grant_item(event, "钓鱼发放 刃鳍鱼 3")
 
-    assert state["pack"]["鳕鱼"] == 5
-    assert saved[-1]["pack"]["鳕鱼"] == 5
+    assert state["pack"]["刃鳍鱼"] == 5
+    assert saved[-1]["pack"]["刃鳍鱼"] == 5
     row = plugin._db.execute("SELECT user_id, reason, old_state, new_state FROM admin_adjustments").fetchone()
     assert row[0:2] == ("200", "admin_item_grant")
-    assert json.loads(row[2])["pack"]["鳕鱼"] == 2
-    assert json.loads(row[3])["pack"]["鳕鱼"] == 5
-    assert "当前背包 鳕鱼：5" in event.reply.await_args.kwargs["text"]
+    assert json.loads(row[2])["pack"]["刃鳍鱼"] == 2
+    assert json.loads(row[3])["pack"]["刃鳍鱼"] == 5
+    assert "当前背包 刃鳍鱼：5" in event.reply.await_args.kwargs["text"]
     plugin._db.close()
 
 
@@ -106,12 +107,12 @@ async def test_mcfish_item_grant_alias_reaches_message_handler():
     plugin = McFish.__new__(McFish)
     plugin._state = lambda _uid: {"pack": {}}
     plugin._grant_item = AsyncMock()
-    event = _grant_item_event("273421673", "200", "鳕鱼", 3)
-    event.raw_message = "钓鱼充值 鳕鱼 3"
+    event = _grant_item_event("273421673", "200", "刃鳍鱼", 3)
+    event.raw_message = "钓鱼充值 刃鳍鱼 3"
 
     await plugin._handle_message(event)
 
-    plugin._grant_item.assert_awaited_once_with(event, "钓鱼充值 鳕鱼 3")
+    plugin._grant_item.assert_awaited_once_with(event, "钓鱼充值 刃鳍鱼 3")
 
 
 @pytest.mark.asyncio
@@ -144,7 +145,7 @@ def test_mcfish_tasks_advance_both_periods_and_cap_at_target():
     plugin._advance_tasks(
         state,
         casts=999,
-        catches={"鳕鱼": 999, "鲑鱼": 999, "热带鱼": 999, "河豚": 999},
+        catches={"刃鳍鱼": 999, "追踪鱼": 999, "粉色的宫殿鱼": 999, "蔚蓝色羽毛鱼": 999},
         spend=9999,
         king=2,
     )
@@ -276,49 +277,60 @@ def test_mcfish_task_board_has_one_top_claim_instruction():
     assert "提交钓鱼任务" not in text
 
 
-def test_mcfish_permanent_king_task_tracks_history_without_submitting_kings():
-    """MCF-42: 鱼王全收集是永久任务，只检查成功捕获记录，不扣背包鱼王。"""
+def test_workshop_claims_the_trident_after_delivery():
+    """P6: 三叉戟改为工坊交付，不再走常驻任务。"""
     import asyncio
 
     plugin = McFish.__new__(McFish)
     plugin._save = lambda *_args: None
+    plugin._economy = None
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
     state = {
-        "pack": {"月影巨鲤": 1},
-        "king_stats": {"月影巨鲤": {"caught": 1}},
-        "fish_level": 35,
+        "pack": {"鱼王鳞片": 8, "时砂": 5},
+        "king_stats": {name: {"caught": 1} for name in FISH_KINGS},
+        "fish_level": 60,
     }
 
-    plugin._ensure_task_state(state)
-    permanent = state["fishing_permanent_tasks"]
-    permanent_index = len(state["fishing_daily_tasks"]["tasks"]) + len(state["fishing_weekly_tasks"]["tasks"]) + 1
-    lines = plugin._task_lines(state, "permanent", permanent_index)
+    asyncio.run(plugin._deliver(event, state, "三叉戟 鱼王鳞片 8"))
+    asyncio.run(plugin._deliver(event, state, "三叉戟 时砂 5"))
+    assert state["workshop"]["trident"]["delivered"] == {"鱼王鳞片": 8, "时砂": 5}
 
-    assert permanent["tasks"][0]["requirements"] == {name: 1 for name in FISH_KINGS}
-    assert "只检查获得记录，不上交鱼王" in "\n".join(lines)
-    assert "还缺" in "\n".join(lines)
+    asyncio.run(plugin._claim_workshop(event, state, "三叉戟"))
 
-    state["king_stats"] = {name: {"caught": 1} for name in FISH_KINGS}
-    original_king_count = state["pack"]["月影巨鲤"]
-    asyncio.run(plugin._claim_tasks(event, state, permanent_index))
-
-    assert state["pack"]["月影巨鲤"] == original_king_count
+    assert state["pack"]["鱼王鳞片"] == 0
+    assert state["pack"]["时砂"] == 0
     assert len(state["pack"]["三叉戟"]) == 1
     assert state["pack"]["三叉戟"][0]["unbreakable"] is True
-    assert permanent["tasks"][0]["id"] in permanent["claimed"]
+    assert state["workshop"]["trident"]["claimed"] is True
 
-    asyncio.run(plugin._claim_tasks(event, state, permanent_index))
+    asyncio.run(plugin._claim_workshop(event, state, "三叉戟"))
     assert len(state["pack"]["三叉戟"]) == 1
 
 
-def test_mcfish_permanent_king_task_is_hidden_until_level_35():
+def test_workshop_trident_is_locked_below_level_60():
     plugin = McFish.__new__(McFish)
-    state = {"pack": {}, "fish_level": 34}
+    state = {"pack": {}, "fish_level": 59, "king_stats": {name: {"caught": 1} for name in FISH_KINGS}}
+    assert plugin._task_board(state) and all(kind != "permanent" for _, kind, *_ in plugin._task_board(state))
+    text = plugin._workshop_text(state, "三叉戟")
+    assert "未解锁" in text
 
-    assert all(kind != "permanent" for _, kind, *_ in plugin._task_board(state))
 
-    state["fish_level"] = 35
-    assert any(kind == "permanent" for _, kind, *_ in plugin._task_board(state))
+def test_workshop_oracle_deck_consumes_all_cards():
+    import asyncio
+
+    from McFish.mcfish_content import CARD_NAMES
+
+    plugin = McFish.__new__(McFish)
+    plugin._save = lambda *_args: None
+    plugin._economy = None
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {"pack": {}, "cards": {name: 1 for name in CARD_NAMES}}
+
+    asyncio.run(plugin._claim_workshop(event, state, "神谕卡组"))
+
+    assert state["cards"] == {}
+    ring = state["gear_bag"][0]
+    assert ring == {"name": "神谕卡组", "set": "神谕", "slot": "necklace", "level": 20, "fp": 20}
 
 
 def test_mcfish_reward_trident_can_be_repaired_with_gold_at_zero_durability():
@@ -382,12 +394,12 @@ def test_mcfish_tasks_reset_at_daily_and_weekly_boundaries():
 def test_mcfish_fee_scale_is_bounded_and_grows_with_rod_value():
     """MCF-25: 维修与合成手续费随鱼竿等级递增且维修费有上限。"""
     plugin = McFish.__new__(McFish)
-    repair_fees = [plugin._repair_fee(name, 0) for name in ("木竿", "铁竿", "金竿", "钻石竿", "下界合金竿")]
+    repair_fees = [plugin._repair_fee(name, 0) for name in ("木竿", "铜竿", "锡竿", "铁竿", "猩红竿")]
 
     assert repair_fees == sorted(repair_fees)
     assert repair_fees[-1] <= 600
-    assert plugin._craft_fee("铁竿", "fragments") == 20
-    assert plugin._craft_fee("下界合金竿", "poles", 2) == 620
+    assert plugin._craft_fee("铜竿", "fragments") == 20
+    assert plugin._craft_fee("猩红竿", "poles", 2) == 320
 
 
 def test_mcfish_equipment_craft_fees_are_scaled_for_the_current_economy():
@@ -434,7 +446,7 @@ def test_mcfish_completed_tasks_are_claimed_once_with_mixed_rewards():
     plugin._advance_tasks(
         state,
         casts=999,
-        catches={"鳕鱼": 999, "鲑鱼": 999, "热带鱼": 999, "河豚": 999},
+        catches={"刃鳍鱼": 999, "追踪鱼": 999, "粉色的宫殿鱼": 999, "蔚蓝色羽毛鱼": 999},
         spend=9999,
         king=1,
     )
@@ -562,11 +574,14 @@ def test_robbery_daily_record_blocks_same_victim_and_robber(tmp_path: Path):
     plugin = Robbery.__new__(Robbery)
     plugin._db = __import__("sqlite3").connect(tmp_path / "robbery.db")
     plugin._db.execute("CREATE TABLE records (victim_id TEXT, robber_id TEXT, day TEXT)")
+    # 用本地日期写入：_used_today 比较的是 date.today()，SQL 的 date('now') 是 UTC，
+    # 北京时间 0–8 点会差一天。
+    today = __import__("datetime").date.today().isoformat()
     plugin._db.execute(
-        "INSERT INTO records VALUES ('victim', 'other-robber', date('now'))"
+        "INSERT INTO records VALUES ('victim', 'other-robber', ?)", (today,)
     )
     plugin._db.execute(
-        "INSERT INTO records VALUES ('other-victim', 'robber', date('now'))"
+        "INSERT INTO records VALUES ('other-victim', 'robber', ?)", (today,)
     )
     plugin._db.commit()
 
@@ -867,7 +882,7 @@ def test_robbery_guaranteed_failure_compensates_victim(monkeypatch):
 
     assert "打劫失败" in event.reply.await_args.kwargs["text"]
     assert transfers == [
-        (("robber", "273421673", 280), {"reason": "robbery_failure"}),
+        (("robber", "273421673", 265), {"reason": "robbery_failure"}),
     ]
 
 
@@ -907,7 +922,7 @@ def test_robbery_second_guaranteed_failure_compensates_victim(monkeypatch):
 
     assert "打劫失败" in event.reply.await_args.kwargs["text"]
     assert transfers == [
-        (("robber", "635773721", 280), {"reason": "robbery_failure"}),
+        (("robber", "635773721", 265), {"reason": "robbery_failure"}),
     ]
 
 
@@ -990,10 +1005,122 @@ def test_robbery_test_profile_uses_configured_victim_rates(monkeypatch):
     asyncio.run(plugin.handle_message(event))
 
     assert transfers == [
-        (("10123121", -150), {"reason": "robbery_loss", "related_user_id": "robber"}),
-        (("robber", 1500), {"reason": "robbery_reward", "related_user_id": "10123121"}),
+        (("10123121", -200), {"reason": "robbery_loss", "related_user_id": "robber"}),
+        (("robber", 2000), {"reason": "robbery_reward", "related_user_id": "10123121"}),
     ]
-    assert "实际损失 150 金币" in event.reply.await_args.kwargs["text"]
+    assert "实际损失 200 金币" in event.reply.await_args.kwargs["text"]
+
+
+def test_robbery_amount_uses_balance_tier_base_and_ratio(monkeypatch):
+    """RB-07: 金额为 0~2.5% 加档位基础值，上限随目标余额放大。"""
+    import importlib
+
+    monkeypatch.setattr(
+        importlib.import_module("Robbery.Robbery").random, "randint", lambda _low, high: high
+    )
+    tiers = DEFAULT_BASE_STOLEN_TIERS
+
+    assert Robbery._base_stolen_amount(9_999, tiers) == 500
+    assert Robbery._base_stolen_amount(10_000, tiers) == 1_000
+    assert Robbery._base_stolen_amount(100_000, tiers) == 5_000
+    assert Robbery._base_stolen_amount(1_000_000, tiers) == 20_000
+
+    assert Robbery._robbery_amount(10_000, 0.025, 1_000) == 1_250
+    assert Robbery._robbery_amount(233_500, 0.025, 5_000) == 10_837
+    assert Robbery._robbery_amount(11_300_000, 0.025, 20_000) == 302_500
+    # 保底上限仍然生效：关掉比例上限后金额回到 10000。
+    assert Robbery._robbery_amount(11_300_000, 0.025, 20_000, 10_000, 0.0) == 10_000
+
+
+def test_robbery_loot_is_capped_by_robber_balance(monkeypatch):
+    """RB-08: 穷发起者仍可打劫富豪，但收益不超过自身余额。"""
+    import asyncio
+    import importlib
+
+    robbery_module = importlib.import_module("Robbery.Robbery")
+    monkeypatch.setattr(robbery_module.random, "random", lambda: 0.9)
+    monkeypatch.setattr(robbery_module.random, "randint", lambda _low, high: high)
+    transfers = []
+
+    class Store:
+        def account(self, user_id):
+            return {"balance": 1000 if user_id == "robber" else 10_000_000}
+
+        def change_balance(self, *args, **kwargs):
+            transfers.append((args, kwargs))
+            return {"ok": True}
+
+    plugin = Robbery.__new__(Robbery)
+    plugin._used_today = lambda *_args: (False, False)
+    plugin._record = lambda *_args: None
+    plugin._economy_plugin = lambda: SimpleNamespace(store=Store())
+    plugin.get_config = lambda key, default=None: {
+        "victim_min_balance": 1000,
+        "max_loot_balance_ratio": 1.0,
+        "loot_cap_bypass_users": [],
+        "guaranteed_failure_users": [],
+    }.get(key, default)
+    event = SimpleNamespace(
+        raw_message="打劫",
+        message=[SimpleNamespace(user_id="victim")],
+        sender=SimpleNamespace(user_id="robber"),
+        reply=AsyncMock(),
+    )
+
+    asyncio.run(plugin.handle_message(event))
+
+    text = event.reply.await_args.kwargs["text"]
+    assert "打劫成功" in text
+    assert "（受身家限制）" in text
+    assert transfers == [
+        (("victim", -250), {"reason": "robbery_loss", "related_user_id": "robber"}),
+        (("robber", 1000), {"reason": "robbery_reward", "related_user_id": "victim"}),
+    ]
+
+
+def test_robbery_loot_cap_bypass_user_keeps_full_amount(monkeypatch):
+    """RB-09: 273421673 不受身家限制，收益不缩水。"""
+    import asyncio
+    import importlib
+
+    robbery_module = importlib.import_module("Robbery.Robbery")
+    monkeypatch.setattr(robbery_module.random, "random", lambda: 0.9)
+    monkeypatch.setattr(robbery_module.random, "randint", lambda _low, high: high)
+    transfers = []
+
+    class Store:
+        def account(self, user_id):
+            return {"balance": 1000 if user_id == "273421673" else 10_000_000}
+
+        def change_balance(self, *args, **kwargs):
+            transfers.append((args, kwargs))
+            return {"ok": True}
+
+    plugin = Robbery.__new__(Robbery)
+    plugin._used_today = lambda *_args: (False, False)
+    plugin._record = lambda *_args: None
+    plugin._economy_plugin = lambda: SimpleNamespace(store=Store())
+    plugin.get_config = lambda key, default=None: {
+        "victim_min_balance": 1000,
+        "max_loot_balance_ratio": 1.0,
+        "guaranteed_failure_users": [],
+    }.get(key, default)
+    event = SimpleNamespace(
+        raw_message="打劫",
+        message=[SimpleNamespace(user_id="victim")],
+        sender=SimpleNamespace(user_id="273421673"),
+        reply=AsyncMock(),
+    )
+
+    asyncio.run(plugin.handle_message(event))
+
+    text = event.reply.await_args.kwargs["text"]
+    assert "打劫成功" in text
+    assert "（受身家限制）" not in text
+    assert transfers == [
+        (("victim", -67_500), {"reason": "robbery_loss", "related_user_id": "273421673"}),
+        (("273421673", 270_000), {"reason": "robbery_reward", "related_user_id": "victim"}),
+    ]
 
 
 def test_robbery_test_profile_uses_configured_robber_failure_rate(monkeypatch):
@@ -1085,6 +1212,63 @@ def test_mcfish_other_renderers_use_the_shared_card_canvas(tmp_path: Path):
             assert image.width >= 1000
 
 
+def test_mcfish_probability_pages_split_and_balance_columns(tmp_path: Path):
+    from PIL import Image as PILImage
+
+    plugin = McFish.__new__(McFish)
+    plugin.workspace = tmp_path
+    plugin._load_original_data()
+    plugin._economy = SimpleNamespace(store=SimpleNamespace(account=lambda _uid: {"balance": 0}))
+    plugin._fish_windows = lambda: []
+    state = {
+        "equip": None, "pack": {}, "fish_stats": {}, "king_stats": {},
+        "fishing_zone": "bay", "accessories": [], "consumables": {},
+        "active_consumables": {}, "equipment": {}, "jewelry": {}, "talents": {},
+    }
+
+    current = plugin._render_probability_image("100", state)
+    zones = plugin._render_probability_image("100", state, "鱼点")
+    full = plugin._render_probability_image("100", state, "全部")
+    assert current.name == "probability_100.png"
+    assert zones.name == "probability_100_zones.png"
+    assert full.name == "probability_100_all.png"
+    for output in (current, zones, full):
+        with PILImage.open(output) as image:
+            assert image.size[0] == 1600
+            # 当前页与鱼点页保持一屏左右；全部页是主动查询的对照表，允许更长。
+            limit = 4400 if output is full else 2400
+            assert image.size[1] < limit
+
+
+def test_mcfish_probability_lists_every_zone_and_its_fish(tmp_path: Path):
+    plugin = McFish.__new__(McFish)
+    plugin.workspace = tmp_path
+    plugin._load_original_data()
+    plugin._economy = SimpleNamespace(store=SimpleNamespace(account=lambda _uid: {"balance": 0}))
+    state = {
+        "equip": None, "pack": {}, "fish_stats": {}, "king_stats": {},
+        "fishing_zone": "bay", "accessories": [], "active_consumables": {},
+        "equipment": {}, "jewelry": {}, "talents": {},
+    }
+
+    text = "\n".join(
+        entry
+        for _kind, entry in plugin._zone_fish_entries(
+            {"equip": {"name": "木竿"}, "pack": {}}
+        )
+    )
+
+    assert "各鱼点鱼种与钓鱼力门槛" in text
+    for zone, fish in (
+        ("河湾", "岩石凶鲨0"),
+        ("深海", "粉色珊瑚蝾螈65"),
+        ("遗迹水域", "蓝绿色的宫殿鱼70"),
+        ("时之洄流", "粉角皮科鱼265"),
+    ):
+        assert zone in text
+        assert fish in text
+
+
 def test_mcfish_help_contains_original_commands_and_rules():
     assert "钓鱼背包" in MCFISH_HELP
     assert "进行n次钓鱼" in MCFISH_HELP
@@ -1092,8 +1276,8 @@ def test_mcfish_help_contains_original_commands_and_rules():
     assert "钓鱼充值 @用户 物品 数量" in MCFISH_HELP
     assert "宝藏诅咒" in MCFISH_HELP
     assert "合成成功率90%" in MCFISH_HELP
-    assert "达到35级后" in MCFISH_HELP
-    assert "不可损坏的三叉戟" in MCFISH_HELP
+    assert "工坊交付" in MCFISH_HELP
+    assert "不会损坏" in MCFISH_HELP
 
 
 def test_mcfish_help_explains_equipment_crafting_and_activation():
@@ -1202,15 +1386,15 @@ def test_mcfish_probability_detail_includes_original_breakdowns():
     plugin = McFish.__new__(McFish)
     plugin._load_original_data()
 
-    output = plugin._probability_detail_text({"pack": {}, "equip": None})
+    output = plugin._probability_detail_text({"pack": {}, "equip": None, "fishing_zone": "bay"})
 
     assert "大类概率:\n宝藏 : 1%\n鱼竿 : 4%\n鱼类 : 25%\n垃圾 : 30%\n合计 : 60%" in output
     assert "宝藏概率:" in output
     assert "诱钓 : 0.25%" in output
     assert "鱼竿概率:" in output
-    assert "木竿 : 2.80%" in output
+    assert "木竿 : 2.20%" in output
     assert "鱼类概率:" in output
-    assert "鳕鱼 : 17.25%" in output
+    assert "岩石凶鲨 : 12.50%" in output
 
 
 def test_mcfish_probability_detail_mentions_the_requesting_user():
@@ -1268,15 +1452,15 @@ def test_mcfish_switching_to_axolotl_preserves_equipped_pole_attributes():
     plugin._save = lambda *_args: None
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
     state = {
-        "equip": {"name": "金竿", "durable": 23, "maintenance": 2, "induce": 1, "favor": 1},
+        "equip": {"name": "锡竿", "durable": 23, "maintenance": 2, "induce": 1, "favor": 1},
         "pack": {"美西螈": 1},
     }
 
     asyncio.run(plugin._equip(event, state, "美西螈"))
 
     assert state["equip"]["name"] == "美西螈"
-    assert state["pack"]["金竿"] == [{
-        "name": "金竿", "durable": 23, "maintenance": 2, "induce": 1, "favor": 1,
+    assert state["pack"]["锡竿"] == [{
+        "name": "锡竿", "durable": 23, "maintenance": 2, "induce": 1, "favor": 1,
     }]
 
 
@@ -1285,7 +1469,7 @@ def test_mcfish_loads_original_catalog_and_item_images():
     plugin._load_original_data()
 
     assert "海草" in plugin._wastes
-    assert plugin._thing_order[:6] == ["木竿", "铁竿", "金竿", "钻石竿", "下界合金竿", "三叉戟"]
+    assert plugin._thing_order[:9] == ["木竿", "铜竿", "锡竿", "铁竿", "猩红竿", "幻光竿", "星河竿", "灿阳竿", "三叉戟"]
     assert plugin._prices["海草"] == 10
     assert plugin._item_image("海之眷顾").name == "book.png"
     assert plugin._item_image("海草").name == "海草.png"
@@ -1297,7 +1481,7 @@ def test_mcfish_fishing_fragment_uses_a_local_icon():
     icon = plugin._item_image("钓鱼碎片")
 
     assert icon is not None
-    assert icon.name == "mcfish_fishing_fragment.png"
+    assert icon.name == "钓鱼碎片.png"
     assert icon.is_file()
 
 
@@ -1323,15 +1507,15 @@ def test_mcfish_rod_drop_keeps_original_weights_with_next_tier_limit(monkeypatch
     module = importlib.import_module("McFish.McFish")
     boundaries = (0, 0, 4, 4, 4)
 
-    rolls = iter((0, 75))
+    rolls = iter((0, 60))
     monkeypatch.setattr(module.random, "randrange", lambda _limit: next(rolls))
-    assert plugin._original_drop({"pack": {}, "equip": {"name": "木竿"}}, boundaries) == ("铁竿", 1)
+    assert plugin._original_drop({"pack": {}, "equip": {"name": "木竿"}}, boundaries) == ("铜竿", 1)
 
     rolls = iter((0, 90))
     assert plugin._original_drop({"pack": {}, "equip": {"name": "木竿"}}, boundaries) == (None, 1)
 
-    rolls = iter((0, 98))
-    assert plugin._original_drop({"pack": {}, "equip": {"name": "金竿"}}, boundaries) == ("钻石竿", 1)
+    rolls = iter((0, 85))
+    assert plugin._original_drop({"pack": {}, "equip": {"name": "锡竿"}}, boundaries) == ("铁竿", 1)
 
 
 def test_mcfish_fishing_keeps_a_caught_rod_as_a_rod(monkeypatch):
@@ -1347,7 +1531,7 @@ def test_mcfish_fishing_keeps_a_caught_rod_as_a_rod(monkeypatch):
     plugin = McFish.__new__(McFish)
     plugin.get_config = lambda key, default=None: 50 if key == "fish_limit" else default
     plugin._item_image = lambda _name: None
-    plugin._original_drop = lambda _state, _boundaries=None, **_kwargs: ("铁竿", 1)
+    plugin._original_drop = lambda _state, _boundaries=None, **_kwargs: ("铜竿", 1)
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
     state = {
         "fish_today": 0,
@@ -1358,8 +1542,8 @@ def test_mcfish_fishing_keeps_a_caught_rod_as_a_rod(monkeypatch):
 
     asyncio.run(plugin._fish(event, state, "进行钓鱼"))
 
-    assert len(stored["pack"]["铁竿"]) == 1
-    assert stored["pack"]["铁竿"][0] == {
+    assert len(stored["pack"]["铜竿"]) == 1
+    assert stored["pack"]["铜竿"][0] == {
         "durable": 25,
         "maintenance": 7,
         "induce": 2,
@@ -1441,8 +1625,10 @@ def test_mcfish_batch_consumables_are_consumed_per_rod_and_stop_on_zero(monkeypa
 
     assert stored["active_consumables"] == {"魔法鱼饵": 0, "隐秘诱饵": 0, "万能鱼饵": 0}
     assert min(stored["active_consumables"].values()) == 0
-    assert wait_rates[0] == 0.85
-    assert wait_rates[-1] == 1.0
+    # 等待倍率还要乘上钓鱼力因子 1/(1 + FP/100)，此状态 FP=1。
+    fp_factor = 1.0 / 1.01
+    assert abs(wait_rates[0] - 0.85 * fp_factor) < 1e-9
+    assert abs(wait_rates[-1] - 1.0 * fp_factor) < 1e-9
 
 
 def test_mcfish_random_pole_attributes_respect_each_rod_limit(monkeypatch):
@@ -1455,9 +1641,9 @@ def test_mcfish_random_pole_attributes_respect_each_rod_limit(monkeypatch):
     monkeypatch.setattr(module.random, "randrange", lambda _limit: next(random_values))
     state = {"pack": {}}
 
-    plugin._add(state, "下界合金竿", pole=True, random_pole=True)
+    plugin._add(state, "猩红竿", pole=True, random_pole=True)
 
-    assert state["pack"]["下界合金竿"] == [{
+    assert state["pack"]["猩红竿"] == [{
         "durable": 150,
         "maintenance": 9,
         "induce": 2,
@@ -1492,11 +1678,11 @@ def test_mcfish_fragment_exchange_can_create_a_rod_without_materials():
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
     state = {"pack": {"钓鱼碎片": 56}}
 
-    asyncio.run(plugin._craft(event, state, "金竿"))
+    asyncio.run(plugin._craft(event, state, "锡竿"))
 
     assert state["pack"]["钓鱼碎片"] == 0
-    assert len(state["pack"]["金竿"]) == 1
-    assert state["pack"]["金竿"][0]["durable"] == 70
+    assert len(state["pack"]["锡竿"]) == 1
+    assert state["pack"]["锡竿"][0]["durable"] == 60
     assert "56个钓鱼碎片" in event.reply.await_args.kwargs["text"]
 
 
@@ -1510,13 +1696,13 @@ def test_mcfish_fragment_exchange_requires_confirmation_without_rod_materials():
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
     state = {"pack": {"钓鱼碎片": 56}}
 
-    asyncio.run(plugin._craft(event, state, "金竿"))
+    asyncio.run(plugin._craft(event, state, "锡竿"))
 
     prompt = plugin._choose.await_args.args[0]
     assert "需要使用56个钓鱼碎片兑换" in prompt
     assert "确认使用碎片吗" in prompt
     assert state["pack"]["钓鱼碎片"] == 56
-    assert "金竿" not in state["pack"]
+    assert "锡竿" not in state["pack"]
 
 
 def test_mcfish_craft_reports_missing_fragment_materials():
@@ -1528,10 +1714,10 @@ def test_mcfish_craft_reports_missing_fragment_materials():
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
     state = {"pack": {"钓鱼碎片": 20}}
 
-    asyncio.run(plugin._craft(event, state, "金竿"))
+    asyncio.run(plugin._craft(event, state, "锡竿"))
 
     message = event.reply.await_args.kwargs["text"]
-    assert "合成金竿材料不足" in message
+    assert "合成锡竿材料不足" in message
     assert "钓鱼碎片：已有20/56个，还差36个" in message
 
 
@@ -1561,15 +1747,15 @@ def test_mcfish_craft_reports_both_missing_rod_material_routes():
     state = {
         "pack": {
             "钓鱼碎片": 20,
-            "铁竿": [{"durable": 50, "maintenance": 0, "induce": 0, "favor": 0}],
+            "铜竿": [{"durable": 50, "maintenance": 0, "induce": 0, "favor": 0}],
         }
     }
 
-    asyncio.run(plugin._craft(event, state, "金竿"))
+    asyncio.run(plugin._craft(event, state, "锡竿"))
 
     message = event.reply.await_args.kwargs["text"]
     assert "钓鱼碎片：已有20/56个，还差36个" in message
-    assert "铁竿：已有1/3根，还差2根" in message
+    assert "铜竿：已有1/3根，还差2根" in message
 
 
 def test_mcfish_craft_asks_for_source_when_both_sources_are_available():
@@ -1582,20 +1768,20 @@ def test_mcfish_craft_asks_for_source_when_both_sources_are_available():
     state = {
         "pack": {
             "钓鱼碎片": 56,
-            "铁竿": [{"durable": 50, "maintenance": 0, "induce": 0, "favor": 0}] * 3,
+            "铜竿": [{"durable": 50, "maintenance": 0, "induce": 0, "favor": 0}] * 3,
         }
     }
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
 
-    asyncio.run(plugin._craft(event, state, "金竿"))
+    asyncio.run(plugin._craft(event, state, "锡竿"))
 
     prompt = plugin._choose.await_args.args[0]
-    assert "合成金竿请选择合成方式" in prompt
+    assert "合成锡竿请选择合成方式" in prompt
     assert "1. 碎片合成（需要56个钓鱼碎片）" in prompt
-    assert "2. 鱼竿合成（需要3根铁竿，成功率90%）" in prompt
+    assert "2. 鱼竿合成（需要3根铜竿，成功率90%）" in prompt
     assert state["pack"]["钓鱼碎片"] == 0
-    assert len(state["pack"]["金竿"]) == 1
-    assert len(state["pack"]["铁竿"]) == 3
+    assert len(state["pack"]["锡竿"]) == 1
+    assert len(state["pack"]["铜竿"]) == 3
 
 
 def test_mcfish_craft_can_choose_rod_material_when_both_sources_are_available(monkeypatch):
@@ -1610,16 +1796,16 @@ def test_mcfish_craft_can_choose_rod_material_when_both_sources_are_available(mo
     state = {
         "pack": {
             "钓鱼碎片": 56,
-            "铁竿": [{"durable": 50, "maintenance": 0, "induce": 0, "favor": 0} for _ in range(3)],
+            "铜竿": [{"durable": 50, "maintenance": 0, "induce": 0, "favor": 0} for _ in range(3)],
         }
     }
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
 
-    asyncio.run(plugin._craft(event, state, "金竿"))
+    asyncio.run(plugin._craft(event, state, "锡竿"))
 
     assert state["pack"]["钓鱼碎片"] == 56
-    assert state["pack"]["铁竿"] == []
-    assert len(state["pack"]["金竿"]) == 1
+    assert state["pack"]["铜竿"] == []
+    assert len(state["pack"]["锡竿"]) == 1
 
 
 def test_mcfish_craft_cancel_after_source_prompt_keeps_materials():
@@ -1631,13 +1817,13 @@ def test_mcfish_craft_cancel_after_source_prompt_keeps_materials():
     saved = []
     plugin._save = lambda *_args: saved.append(True)
     rods = [{"durable": 50, "maintenance": 0, "induce": 0, "favor": 0} for _ in range(3)]
-    state = {"pack": {"钓鱼碎片": 56, "铁竿": rods}}
+    state = {"pack": {"钓鱼碎片": 56, "铜竿": rods}}
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
 
-    asyncio.run(plugin._craft(event, state, "金竿"))
+    asyncio.run(plugin._craft(event, state, "锡竿"))
 
     assert state["pack"]["钓鱼碎片"] == 56
-    assert state["pack"]["铁竿"] == rods
+    assert state["pack"]["铜竿"] == rods
     assert saved == []
 
 
@@ -1647,11 +1833,11 @@ def test_mcfish_craft_does_not_use_fragments_before_source_choice():
 
     plugin = McFish.__new__(McFish)
     rods = [{"durable": 50, "maintenance": 0, "induce": 0, "favor": 0} for _ in range(3)]
-    state = {"pack": {"钓鱼碎片": 56, "铁竿": rods}}
+    state = {"pack": {"钓鱼碎片": 56, "铜竿": rods}}
     observed = []
 
     async def choose(*_args, **_kwargs):
-        observed.append((state["pack"]["钓鱼碎片"], len(state["pack"]["铁竿"])))
+        observed.append((state["pack"]["钓鱼碎片"], len(state["pack"]["铜竿"])))
         return SimpleNamespace(key=None)
 
     plugin._choose = choose
@@ -1662,11 +1848,11 @@ def test_mcfish_craft_does_not_use_fragments_before_source_choice():
     plugin._save = fail_save
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
 
-    asyncio.run(plugin._craft(event, state, "金竿"))
+    asyncio.run(plugin._craft(event, state, "锡竿"))
 
     assert observed == [(56, 3)]
     assert state["pack"]["钓鱼碎片"] == 56
-    assert state["pack"]["铁竿"] == rods
+    assert state["pack"]["铜竿"] == rods
 
 
 def test_mcfish_craft_real_session_choice_uses_rod_material(monkeypatch):
@@ -1683,7 +1869,7 @@ def test_mcfish_craft_real_session_choice_uses_rod_material(monkeypatch):
     plugin._dispatcher = dispatcher
     plugin._save = lambda *_args: None
     rods = [{"durable": 50, "maintenance": 0, "induce": 0, "favor": 0} for _ in range(3)]
-    state = {"pack": {"钓鱼碎片": 56, "铁竿": rods}}
+    state = {"pack": {"钓鱼碎片": 56, "铜竿": rods}}
     event = SimpleNamespace(
         user_id="100",
         sender=SimpleNamespace(user_id="100"),
@@ -1699,15 +1885,15 @@ def test_mcfish_craft_real_session_choice_uses_rod_material(monkeypatch):
 
         asyncio.create_task(inject_choice())
         try:
-            await plugin._craft(event, state, "金竿")
+            await plugin._craft(event, state, "锡竿")
         finally:
             await dispatcher.close()
 
     asyncio.run(run())
 
     assert state["pack"]["钓鱼碎片"] == 56
-    assert state["pack"]["铁竿"] == []
-    assert len(state["pack"]["金竿"]) == 1
+    assert state["pack"]["铜竿"] == []
+    assert len(state["pack"]["锡竿"]) == 1
 
 
 def test_mcfish_text_reply_is_rendered_as_image(tmp_path):
@@ -1719,7 +1905,7 @@ def test_mcfish_text_reply_is_rendered_as_image(tmp_path):
     plugin.workspace = tmp_path
     plugin._state = lambda _uid: {"pack": {}}
     raw_event = SimpleNamespace(
-        raw_message="合成金竿",
+        raw_message="合成锡竿",
         message=[],
         user_id="100",
         group_id="200",
@@ -1769,8 +1955,8 @@ def test_mcfish_probability_detail_marks_ineligible_rods():
 
     output = plugin._probability_detail_text({"pack": {}, "equip": {"name": "木竿"}})
 
-    assert "铁竿 : 0.80%" in output
-    assert "金竿 : 0.00%（当前木竿不可越级钓到）" in output
+    assert "铜竿 : 0.72%" in output
+    assert "锡竿 : 0.00%（当前木竿不可越级钓到）" in output
 
 
 def test_mcfish_probability_sections_split_current_and_all_rod_probabilities():
@@ -1778,8 +1964,8 @@ def test_mcfish_probability_sections_split_current_and_all_rod_probabilities():
     plugin = McFish.__new__(McFish)
     plugin._load_original_data()
     state = {
-        "equip": {"name": "铁竿", "favor": 0},
-        "pack": {"鳕鱼": 101},
+        "equip": {"name": "铜竿", "favor": 0},
+        "pack": {"刃鳍鱼": 101},
         "fishing_zone": "deep",
         "accessories": ["财富浮标"],
         "active_consumables": {"魔法鱼饵": 1},
@@ -1791,10 +1977,10 @@ def test_mcfish_probability_sections_split_current_and_all_rod_probabilities():
     all_text = "\n".join(text for _kind, text in all_probabilities)
 
     assert "第一部分 当前用户概率" in current_text
-    assert "鱼竿：铁竿" in current_text
+    assert "鱼竿：铜竿" in current_text
     assert "鱼点：深海" in current_text
     assert "强化区间" in current_text
-    assert "铁竿：" in all_text
+    assert "铜竿：" in all_text
     assert "三叉戟：" in all_text
     assert "隐藏鱼与不可直接钓出的装备" in all_text
 
@@ -1825,7 +2011,7 @@ def test_mcfish_probability_command_sends_an_image(tmp_path: Path):
     plugin = McFish.__new__(McFish)
     plugin._state = lambda _uid: {"pack": {}, "equip": None}
     output = tmp_path / "probability_100.png"
-    plugin._render_probability_image = lambda _uid, _state: output
+    plugin._render_probability_image = lambda _uid, _state, _page="": output
     plugin._send_original_message = AsyncMock()
     event = SimpleNamespace(
         raw_message="钓鱼概率",
@@ -1868,7 +2054,7 @@ def test_mcfish_pack_renders_each_pole_with_all_attributes(tmp_path):
         {
             "equip": None,
             "pack": {
-                "金竿": [{"durable": 70, "maintenance": 0, "induce": 0, "favor": 0}]
+                "锡竿": [{"durable": 70, "maintenance": 0, "induce": 0, "favor": 0}]
             },
         },
     )
@@ -1876,8 +2062,8 @@ def test_mcfish_pack_renders_each_pole_with_all_attributes(tmp_path):
     assert PILImage.open(output).size[0] == 1240
     entries = []
     value = {"durable": 70, "maintenance": 0, "induce": 0, "favor": 0}
-    entries.append(f"金竿({value['durable']}/{value['maintenance']}/{value['induce']}/{value['favor']})")
-    assert entries == ["金竿(70/0/0/0)"]
+    entries.append(f"锡竿({value['durable']}/{value['maintenance']}/{value['induce']}/{value['favor']})")
+    assert entries == ["锡竿(70/0/0/0)"]
 
 
 def test_mcfish_pack_gives_rod_cards_room_for_two_attribute_lines(tmp_path):
@@ -1908,14 +2094,14 @@ def test_mcfish_pack_marks_shop_rods_as_not_craftable():
     plugin = McFish.__new__(McFish)
 
     assert plugin._pack_item_label(
-        "铁竿", {"craftable": False}
-    ) == "铁竿（不可合成）"
+        "铜竿", {"craftable": False}
+    ) == "铜竿（不可合成）"
     assert plugin._pack_item_label(
-        "铁竿", {"craftable": True}
-    ) == "铁竿"
+        "铜竿", {"craftable": True}
+    ) == "铜竿"
     assert plugin._pack_item_label(
-        "铁竿", {}
-    ) == "铁竿"
+        "铜竿", {}
+    ) == "铜竿"
 
 
 def test_mcfish_pack_renders_active_consumable_progress_bar(tmp_path):
@@ -2126,44 +2312,47 @@ def test_mcfish_shop_inventory_removes_zero_stock_listings():
         {
             "初始木竿": [],
             "海豚": 0,
-            "鳕鱼": 2,
+            "刃鳍鱼": 2,
             "木竿": [],
         }
     )
 
-    assert inventory == {"鳕鱼": 2}
+    assert inventory == {"刃鳍鱼": 2}
 
 
 def test_mcfish_buy_fish_uses_listed_shop_inventory():
     import asyncio
 
     plugin = McFish.__new__(McFish)
-    plugin._prices = {"鳕鱼": 10}
+    plugin._prices = {"刃鳍鱼": 10}
     plugin._economy_change = lambda *_args: True
     plugin._save = lambda *_args: None
     plugin._choose = AsyncMock(return_value=SimpleNamespace(key="confirm"))
     plugin.get_config = lambda _key, default=None: default
-    plugin._shop_data = lambda: ({"鳕鱼": 100}, {"鳕鱼": 3})
+    plugin._shop_data = lambda: ({"刃鳍鱼": 100}, {"刃鳍鱼": 3})
     event = SimpleNamespace(
         sender=SimpleNamespace(user_id="100"),
         reply=AsyncMock(),
     )
     state = {"pack": {}}
 
-    asyncio.run(plugin._buy(event, state, "鳕鱼"))
+    asyncio.run(plugin._buy(event, state, "刃鳍鱼"))
 
-    assert state["pack"]["鳕鱼"] == 1
-    assert event.reply.await_args.kwargs["text"] == "你用10购买了1鳕鱼"
+    assert state["pack"]["刃鳍鱼"] == 1
+    assert event.reply.await_args.kwargs["text"] == "你用10购买了1刃鳍鱼"
 
 
 def test_mcfish_buy_advanced_rod_is_level_locked_and_uses_fixed_price():
     import asyncio
 
     assert SHOP_ROD_PRICES == {
-        "铁竿": 540,
-        "金竿": 900,
-        "钻石竿": 1260,
-        "下界合金竿": 1620,
+        "铜竿": 600,
+        "锡竿": 1600,
+        "铁竿": 4000,
+        "猩红竿": 9000,
+        "幻光竿": 16000,
+        "星河竿": 24000,
+        "灿阳竿": 36000,
     }
 
     plugin = McFish.__new__(McFish)
@@ -2175,22 +2364,26 @@ def test_mcfish_buy_advanced_rod_is_level_locked_and_uses_fixed_price():
     plugin._choose = AsyncMock(return_value=SimpleNamespace(key="confirm"))
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
 
-    asyncio.run(plugin._buy(event, {"fish_level": 2, "pack": {}}, "铁竿"))
+    asyncio.run(plugin._buy(event, {"fish_level": 2, "pack": {}}, "铜竿"))
     assert "需要等级3" in event.reply.await_args.kwargs["text"]
 
-    asyncio.run(plugin._buy(event, {"pack": {}}, "铁竿"))
+    asyncio.run(plugin._buy(event, {"pack": {}}, "铜竿"))
     assert "需要等级3" in event.reply.await_args.kwargs["text"]
 
     state = {"fish_level": 8, "pack": {}}
-    asyncio.run(plugin._buy(event, state, "铁竿"))
+    asyncio.run(plugin._buy(event, state, "铜竿"))
 
-    assert state["pack"]["铁竿"][0]["craftable"] is False
-    assert event.reply.await_args.kwargs["text"] == f"你用{SHOP_ROD_PRICES['铁竿']}购买了1铁竿"
+    assert state["pack"]["铜竿"][0]["craftable"] is False
+    assert event.reply.await_args.kwargs["text"] == f"你用{SHOP_ROD_PRICES['铜竿']}购买了1铜竿"
 
 
-def test_mcfish_shop_rod_cannot_be_used_as_craft_material_but_drop_rod_can():
+def test_mcfish_shop_rod_cannot_be_used_as_craft_material_but_drop_rod_can(monkeypatch):
     import asyncio
+    import importlib
 
+    # 合成成功率是 90%（randrange(100) < 90），固定随机数让“成功”分支可重复。
+    module = importlib.import_module("McFish.McFish")
+    monkeypatch.setattr(module.random, "randrange", lambda *_args: 0)
     plugin = McFish.__new__(McFish)
     plugin._choose = AsyncMock(return_value=SimpleNamespace(key="group:2:1:0"))
     plugin._save = lambda *_args: None
@@ -2198,14 +2391,14 @@ def test_mcfish_shop_rod_cannot_be_used_as_craft_material_but_drop_rod_can():
     plugin._charge_fee = lambda *_args: True
     purchased = {"durable": 50, "maintenance": 0, "induce": 0, "favor": 0, "craftable": False}
     dropped = {"durable": 50, "maintenance": 0, "induce": 0, "favor": 0}
-    state = {"pack": {"铁竿": [purchased, dropped, dropped.copy(), dropped.copy()]}}
+    state = {"pack": {"铜竿": [purchased, dropped, dropped.copy(), dropped.copy()]}}
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
 
-    asyncio.run(plugin._craft(event, state, "金竿"))
+    asyncio.run(plugin._craft(event, state, "锡竿"))
 
-    assert len(state["pack"]["铁竿"]) == 1
-    assert len(state["pack"]["金竿"]) == 1
-    assert purchased in state["pack"]["铁竿"]
+    assert len(state["pack"]["铜竿"]) == 1
+    assert len(state["pack"]["锡竿"]) == 1
+    assert purchased in state["pack"]["铜竿"]
 
 
 def test_mcfish_shop_rod_sale_uses_fixed_purchase_price():
@@ -2214,9 +2407,9 @@ def test_mcfish_shop_rod_sale_uses_fixed_purchase_price():
 
     assert plugin._pole_price(
         {"durable": 1, "maintenance": 9, "induce": 3, "favor": 3, "craftable": False},
-        {"铁竿": 100},
-        "铁竿",
-    ) == SHOP_ROD_PRICES["铁竿"]
+        {"铜竿": 100},
+        "铜竿",
+    ) == SHOP_ROD_PRICES["铜竿"]
 
 
 def test_mcfish_daily_task_board_has_at_most_one_rod_reward_and_weekly_has_none():
@@ -2231,13 +2424,13 @@ def test_mcfish_daily_task_board_has_at_most_one_rod_reward_and_weekly_has_none(
         name
         for task in daily
         for name in task["reward"].get("items", {})
-        if name in {"木竿", "铁竿", "金竿", "钻石竿", "下界合金竿", "三叉戟"}
+        if name in {"木竿", "铜竿", "锡竿", "铁竿", "猩红竿", "三叉戟"}
     ]
     weekly_rods = [
         name
         for task in weekly
         for name in task["reward"].get("items", {})
-        if name in {"木竿", "铁竿", "金竿", "钻石竿", "下界合金竿", "三叉戟"}
+        if name in {"木竿", "铜竿", "锡竿", "铁竿", "猩红竿", "三叉戟"}
     ]
 
     assert len(daily_rods) <= 1
@@ -2251,7 +2444,7 @@ def test_mcfish_enchant_at_max_level_does_not_consume_book():
     plugin._save = lambda *_args: None
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
     state = {
-        "equip": {"name": "铁竿", "durable": 50, "maintenance": 0, "induce": 3, "favor": 0},
+        "equip": {"name": "铜竿", "durable": 50, "maintenance": 0, "induce": 3, "favor": 0},
         "pack": {"诱钓": 1},
     }
 
@@ -2272,15 +2465,15 @@ def test_mcfish_dismantles_selected_rods_into_fragments():
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
     state = {
         "pack": {
-            "铁竿": [{"durable": 50, "maintenance": 0, "induce": 0, "favor": 0}],
-            "金竿": [{"durable": 70, "maintenance": 0, "induce": 0, "favor": 0}],
+            "铜竿": [{"durable": 50, "maintenance": 0, "induce": 0, "favor": 0}],
+            "锡竿": [{"durable": 70, "maintenance": 0, "induce": 0, "favor": 0}],
         }
     }
 
     asyncio.run(plugin._dismantle(event, state, "鱼竿"))
 
-    assert state["pack"]["铁竿"] == []
-    assert state["pack"]["金竿"] == []
+    assert state["pack"]["铜竿"] == []
+    assert state["pack"]["锡竿"] == []
     assert state["pack"]["钓鱼碎片"] == 6
 
 
@@ -2308,22 +2501,22 @@ def test_mcfish_sells_multiple_items_with_quantities():
     import asyncio
 
     plugin = McFish.__new__(McFish)
-    plugin._prices = {"鲑鱼": 50, "鳕鱼": 10}
+    plugin._prices = {"追踪鱼": 50, "刃鳍鱼": 10}
     plugin._economy_change = lambda *_args: True
     plugin._save = lambda *_args: None
     plugin._choose = AsyncMock(return_value=SimpleNamespace(key="confirm"))
     plugin.get_config = lambda key, default=None: 0.8 if key == "sell_tax" else default
-    plugin._shop_data = lambda: ({"鲑鱼": 136, "鳕鱼": 100}, {})
+    plugin._shop_data = lambda: ({"追踪鱼": 136, "刃鳍鱼": 100}, {})
     event = SimpleNamespace(
         sender=SimpleNamespace(user_id="100"),
         reply=AsyncMock(),
     )
-    state = {"pack": {"鲑鱼": 2, "鳕鱼": 3}}
+    state = {"pack": {"追踪鱼": 2, "刃鳍鱼": 3}}
 
-    asyncio.run(plugin._sell(event, state, "鲑鱼2 鳕鱼 3"))
+    asyncio.run(plugin._sell(event, state, "追踪鱼2 刃鳍鱼 3"))
 
-    assert state["pack"]["鲑鱼"] == 0
-    assert state["pack"]["鳕鱼"] == 0
+    assert state["pack"]["追踪鱼"] == 0
+    assert state["pack"]["刃鳍鱼"] == 0
     assert "你赚到了" in event.reply.await_args.kwargs["text"]
 
 
@@ -2331,19 +2524,19 @@ def test_mcfish_multi_sell_uses_daily_market_prices():
     import asyncio
 
     plugin = McFish.__new__(McFish)
-    plugin._prices = {"鲑鱼": 50, "鹦鹉螺": 500}
+    plugin._prices = {"追踪鱼": 50, "鹦鹉螺": 500}
     plugin._economy_change = lambda *_args: True
     plugin._save = lambda *_args: None
     plugin._choose = AsyncMock(return_value=SimpleNamespace(key="confirm"))
     plugin.get_config = lambda key, default=None: 0.8 if key == "sell_tax" else default
-    plugin._shop_data = lambda: ({"鲑鱼": 136, "鹦鹉螺": 117}, {})
+    plugin._shop_data = lambda: ({"追踪鱼": 136, "鹦鹉螺": 117}, {})
     event = SimpleNamespace(
         sender=SimpleNamespace(user_id="100"),
         reply=AsyncMock(),
     )
-    state = {"pack": {"鲑鱼": 8, "鹦鹉螺": 1}}
+    state = {"pack": {"追踪鱼": 8, "鹦鹉螺": 1}}
 
-    asyncio.run(plugin._sell(event, state, "鲑鱼8 鹦鹉螺1"))
+    asyncio.run(plugin._sell(event, state, "追踪鱼8 鹦鹉螺1"))
 
     assert "你赚到了" in event.reply.await_args.kwargs["text"]
 
@@ -2374,7 +2567,31 @@ def test_mcfish_sells_fish_king_using_captured_length_price_and_gold_magnet():
     assert state["pack"]["风暴海龙"] == 0
     assert state["king_sale_prices"]["风暴海龙"] == []
     # 2000 * 125% market * 100x magnet * 80% sale tax.
-    assert "赚到了200000" in event.reply.await_args.kwargs["text"]
+    assert "赚到了180000" in event.reply.await_args.kwargs["text"]
+
+
+def test_mcfish_sells_king_at_the_frozen_capture_price():
+    """捕获快照：出售时不再按当前磁石/折扣重算。"""
+    import asyncio
+
+    plugin = McFish.__new__(McFish)
+    plugin._prices = {"风暴海龙": 1600}
+    plugin._types = {}
+    plugin._economy_change = lambda *_args: True
+    plugin._save = lambda *_args: None
+    plugin._choose = AsyncMock(return_value=SimpleNamespace(key="confirm"))
+    plugin.get_config = lambda key, default=None: 0.8 if key == "sell_tax" else default
+    plugin._shop_data = lambda: ({"风暴海龙": 125}, {})
+    plugin._accessory_effect = lambda _state, name, key, default: 100.0 if (name, key) == ("黄金磁石", "king_price") else default
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {
+        "pack": {"风暴海龙": 1},
+        "king_sale_prices": {"风暴海龙": [{"base": 2000, "price": 123456}]},
+    }
+
+    asyncio.run(plugin._sell(event, state, "风暴海龙"))
+
+    assert "赚到了123456" in event.reply.await_args.kwargs["text"]
 
 
 def test_mcfish_sells_legacy_fish_king_without_captured_length_record():
@@ -2397,14 +2614,38 @@ def test_mcfish_sells_legacy_fish_king_without_captured_length_record():
 
     asyncio.run(plugin._sell(event, state, "风暴海龙"))
 
-    assert "赚到了160000" in event.reply.await_args.kwargs["text"]
+    assert "赚到了144000" in event.reply.await_args.kwargs["text"]
+
+
+def test_mcfish_sells_prerequisite_king_with_capped_magnet():
+    import asyncio
+
+    plugin = McFish.__new__(McFish)
+    plugin._prices = {"月影巨鲤": 60}
+    plugin._types = {}
+    plugin._economy_change = lambda *_args: True
+    plugin._save = lambda *_args: None
+    plugin._choose = AsyncMock(return_value=SimpleNamespace(key="confirm"))
+    plugin.get_config = lambda key, default=None: 0.8 if key == "sell_tax" else default
+    plugin._shop_data = lambda: ({"月影巨鲤": 100}, {})
+    plugin._accessory_effect = lambda _state, name, key, default: 100.0 if (name, key) == ("黄金磁石", "king_price") else default
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {
+        "pack": {"月影巨鲤": 1},
+        "king_sale_prices": {"月影巨鲤": [60]},
+    }
+
+    asyncio.run(plugin._sell(event, state, "月影巨鲤"))
+
+    # 60 base * 100% market * 8x capped magnet * 80% sale tax.
+    assert "赚到了384" in event.reply.await_args.kwargs["text"]
 
 
 def test_mcfish_multi_sell_is_atomic_when_one_item_is_missing():
     import asyncio
 
     plugin = McFish.__new__(McFish)
-    plugin._prices = {"鲑鱼": 50, "鳕鱼": 10}
+    plugin._prices = {"追踪鱼": 50, "刃鳍鱼": 10}
     plugin._economy_change = lambda *_args: True
     plugin._save = lambda *_args: None
     plugin.get_config = lambda _key, default=None: 0.8
@@ -2412,11 +2653,11 @@ def test_mcfish_multi_sell_is_atomic_when_one_item_is_missing():
         sender=SimpleNamespace(user_id="100"),
         reply=AsyncMock(),
     )
-    state = {"pack": {"鲑鱼": 2}}
+    state = {"pack": {"追踪鱼": 2}}
 
-    asyncio.run(plugin._sell(event, state, "鲑鱼1 鳕鱼1"))
+    asyncio.run(plugin._sell(event, state, "追踪鱼1 刃鳍鱼1"))
 
-    assert state["pack"]["鲑鱼"] == 2
+    assert state["pack"]["追踪鱼"] == 2
     assert event.reply.await_args.kwargs["text"] == "背包数量不足"
 
 
@@ -2496,10 +2737,10 @@ def test_mcfish_craft_accepts_reverse_pole_indices(monkeypatch):
     ]}}
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
 
-    asyncio.run(plugin._craft(event, state, "铁竿"))
+    asyncio.run(plugin._craft(event, state, "铜竿"))
 
     assert state["pack"]["木竿"] == []
-    assert len(state["pack"]["铁竿"]) == 1
+    assert len(state["pack"]["铜竿"]) == 1
 
 
 def test_mcfish_craft_lists_material_poles_instead_of_target_name():
@@ -2513,15 +2754,15 @@ def test_mcfish_craft_lists_material_poles_instead_of_target_name():
         {"durable": 19, "maintenance": 0, "induce": 1, "favor": 0},
         {"durable": 50, "maintenance": 0, "induce": 0, "favor": 0},
     ]
-    state = {"pack": {"铁竿": poles}}
+    state = {"pack": {"铜竿": poles}}
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
 
-    asyncio.run(plugin._craft(event, state, "金竿"))
+    asyncio.run(plugin._craft(event, state, "锡竿"))
 
     prompt = plugin._choose.await_args.args[0]
-    assert "[0] 铁竿 : 耐50/修0/诱0/眷顾0" in prompt
-    assert "[1] 铁竿 : 耐39/修5/诱Ⅱ/眷顾0" in prompt
-    assert "[0] 金竿" not in prompt
+    assert "[0] 铜竿 : 耐50/修0/诱0/眷顾0" in prompt
+    assert "[1] 铜竿 : 耐39/修5/诱Ⅱ/眷顾0" in prompt
+    assert "[0] 锡竿" not in prompt
 
 
 def test_mcfish_craft_index_parser_accepts_only_three_distinct_valid_indices():
@@ -2547,11 +2788,11 @@ def test_mcfish_craft_all_preserves_remainder_for_non_multiple_of_three(monkeypa
     state = {"pack": {"木竿": poles}}
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
 
-    asyncio.run(plugin._craft(event, state, "铁竿"))
+    asyncio.run(plugin._craft(event, state, "铜竿"))
 
     assert len(state["pack"]["木竿"]) == 1
     assert state["pack"]["木竿"][0]["durable"] == 7
-    assert len(state["pack"]["铁竿"]) == 2
+    assert len(state["pack"]["铜竿"]) == 2
     assert "剩余 1 根材料未参与合成" in event.reply.await_args.kwargs["text"]
 
 
@@ -2569,10 +2810,10 @@ def test_mcfish_craft_from_fresh_materials_scales_durability(monkeypatch):
     state = {"pack": {"木竿": [{"durable": 30, "maintenance": 0, "induce": 0, "favor": 0}] * 3}}
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
 
-    asyncio.run(plugin._craft(event, state, "铁竿"))
+    asyncio.run(plugin._craft(event, state, "铜竿"))
 
-    assert state["pack"]["铁竿"] == [{"durable": 45, "maintenance": 0, "induce": 0, "favor": 0}]
-    assert event.reply.await_args.kwargs["text"] == "成功合成：1 个铁竿\n属性: 45/0/0/0"
+    assert state["pack"]["铜竿"] == [{"durable": 40, "maintenance": 0, "induce": 0, "favor": 0}]
+    assert event.reply.await_args.kwargs["text"] == "成功合成：1 个铜竿\n属性: 40/0/0/0"
 
 
 def test_mcfish_craft_averages_material_enchant_levels_and_drops_wear(monkeypatch):
@@ -2592,26 +2833,29 @@ def test_mcfish_craft_averages_material_enchant_levels_and_drops_wear(monkeypatc
     ]}}
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
 
-    asyncio.run(plugin._craft(event, state, "铁竿"))
+    asyncio.run(plugin._craft(event, state, "铜竿"))
 
-    assert state["pack"]["铁竿"] == [{"durable": 22, "maintenance": 0, "induce": 1, "favor": 0}]
-    assert event.reply.await_args.kwargs["text"] == "成功合成：1 个铁竿\n属性: 22/0/1/0"
+    assert state["pack"]["铜竿"] == [{"durable": 20, "maintenance": 0, "induce": 1, "favor": 0}]
+    assert event.reply.await_args.kwargs["text"] == "成功合成：1 个铜竿\n属性: 20/0/1/0"
 
 
 def test_mcfish_craft_zero_durability_materials_cannot_become_full_durability(monkeypatch):
     """MCF-15: 三根零耐久材料不会凭空合成满耐久鱼竿。"""
     import asyncio
+    import importlib
 
+    mcfish_module = importlib.import_module("McFish.McFish")
+    monkeypatch.setattr(mcfish_module.random, "randrange", lambda _stop: 0)
     plugin = McFish.__new__(McFish)
     plugin._save = lambda *_args: None
     plugin._choose = AsyncMock(return_value=SimpleNamespace(key=None))
     state = {"pack": {"木竿": [{"durable": 0, "maintenance": 0, "induce": 0, "favor": 0}] * 3}}
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
 
-    asyncio.run(plugin._craft(event, state, "铁竿"))
+    asyncio.run(plugin._craft(event, state, "铜竿"))
 
-    assert state["pack"]["铁竿"][0]["durable"] == 1
-    assert state["pack"]["铁竿"][0]["durable"] < 50
+    assert state["pack"]["铜竿"][0]["durable"] == 1
+    assert state["pack"]["铜竿"][0]["durable"] < 50
 
 
 def test_mcfish_craft_durability_randomness_stays_within_proportional_bounds(monkeypatch):
@@ -2621,11 +2865,11 @@ def test_mcfish_craft_durability_randomness_stays_within_proportional_bounds(mon
     module = importlib.import_module("McFish.McFish")
     selected = [{"durable": 30}, {"durable": 30}, {"durable": 30}]
     monkeypatch.setattr(module.random, "randrange", lambda _stop: 0)
-    lower = McFish._craft_durable("铁竿", "木竿", selected)
+    lower = McFish._craft_durable("铜竿", "木竿", selected)
     monkeypatch.setattr(module.random, "randrange", lambda stop: stop - 1)
-    upper = McFish._craft_durable("铁竿", "木竿", selected)
+    upper = McFish._craft_durable("铜竿", "木竿", selected)
 
-    assert (lower, upper) == (45, 50)
+    assert (lower, upper) == (40, 45)
 
 
 def test_mcfish_craft_all_averages_each_batch_of_three_separately(monkeypatch):
@@ -2648,9 +2892,9 @@ def test_mcfish_craft_all_averages_each_batch_of_three_separately(monkeypatch):
     ]}}
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
 
-    asyncio.run(plugin._craft(event, state, "铁竿"))
+    asyncio.run(plugin._craft(event, state, "铜竿"))
 
-    assert sorted((pole["induce"], pole["favor"]) for pole in state["pack"]["铁竿"]) == [(0, 3), (3, 0)]
+    assert sorted((pole["induce"], pole["favor"]) for pole in state["pack"]["铜竿"]) == [(0, 3), (3, 0)]
 
 
 def test_mcfish_more_than_hundred_fish_only_switches_probability_ranges():
@@ -2663,9 +2907,9 @@ def test_mcfish_more_than_hundred_fish_only_switches_probability_ranges():
         {"类型": "waste", "概率[0-100)": 10},
     ], "物品": []}
 
-    assert plugin._zone_boundaries({"pack": {"鳗鱼": 101}, "equip": {"name": "木竿", "favor": 0}}) == (0, 2, 10, 45, 90)
+    assert plugin._zone_boundaries({"pack": {"蓝绿色的宫殿鱼": 101}, "equip": {"name": "木竿", "favor": 0}}) == (0, 2, 10, 45, 90)
     assert plugin._zone_boundaries({"pack": {}, "equip": {"name": "美西螈", "favor": 0}}) == (0, 2, 10, 45, 90)
-    assert plugin._zone_boundaries({"pack": {"鳗鱼": 100}, "equip": {"name": "木竿", "favor": 0}}) == (0, 10, 20, 50, 60)
+    assert plugin._zone_boundaries({"pack": {"蓝绿色的宫殿鱼": 100}, "equip": {"name": "木竿", "favor": 0}}) == (0, 10, 20, 50, 60)
 
 
 def test_mcfish_drop_quantity_is_five_only_while_equipped_with_axolotl(monkeypatch):
@@ -2679,13 +2923,13 @@ def test_mcfish_drop_quantity_is_five_only_while_equipped_with_axolotl(monkeypat
         {"类型": "fish", "概率[0-100)": 50},
         {"类型": "treasure", "概率[0-100)": 50},
     ], "物品": [
-        {"名称": "鳗鱼", "类型": "fish", "概率[0-100)": 100},
+        {"名称": "蓝绿色的宫殿鱼", "类型": "fish", "概率[0-100)": 100},
         {"名称": "美西螈", "类型": "treasure", "概率[0-100)": 100},
     ]}
 
     plugin._zone_boundaries = lambda _state, _boundaries=None: (0, 0, 0, 100, 100)
-    assert plugin._original_drop({"pack": {"鳗鱼": 101}, "equip": {"name": "木竿"}}) == ("鳗鱼", 1)
-    assert plugin._original_drop({"pack": {}, "equip": {"name": "美西螈"}}) == ("鳗鱼", 5)
+    assert plugin._original_drop({"pack": {"蓝绿色的宫殿鱼": 101}, "equip": {"name": "木竿"}}) == ("蓝绿色的宫殿鱼", 1)
+    assert plugin._original_drop({"pack": {}, "equip": {"name": "美西螈"}}) == ("蓝绿色的宫殿鱼", 5)
 
     plugin._zone_boundaries = lambda _state, _boundaries=None: (0, 100, 100, 100, 100)
     assert plugin._original_drop({"pack": {}, "equip": {"name": "美西螈"}}) == ("美西螈", 1)
@@ -2703,7 +2947,7 @@ def test_mcfish_help_documents_every_special_mechanic():
     text = "\n".join(MCFISH_SPECIAL_MECHANICS)
     for keyword in (
         "美西螈",
-        "每竿要吃3条鱼",
+        "每竿要吃3条普通鱼",
         "永久失去",
         "一次获得5个",
         "海豚",
@@ -2728,7 +2972,8 @@ def test_mcfish_help_image_renders_special_mechanics(tmp_path: Path):
     assert output.exists()
     with PILImage.open(output) as image:
         assert image.size[0] == 1600
-        assert image.size[1] < 3200
+        # 帮助图会在后续阶段拆成分页；这里只防止内容无限增长。
+        assert image.size[1] < 3500
 
     assert "掉落鱼竿随机生成耐久、维修和附魔" in MCFISH_HELP
     assert "美西螈" in "\n".join(MCFISH_SPECIAL_MECHANICS)
@@ -2801,7 +3046,7 @@ def test_mcfish_level_release_migration_resets_players_and_normalizes_equipment(
                 "fish_level": 8,
                 "fish_xp": 999,
                 "fish_today": 4,
-                "equip": {"name": "金竿", "durable": 12},
+                "equip": {"name": "锡竿", "durable": 12},
                 "pack": {},
             }, ensure_ascii=False),
             time.time(),
@@ -2814,7 +3059,7 @@ def test_mcfish_level_release_migration_resets_players_and_normalizes_equipment(
     state = json.loads(row[0])
     assert (state["fish_level"], state["fish_xp"], state["fish_today"]) == (1, 0, 0)
     assert state["equip"]["name"] == "木竿"
-    assert len(state["pack"]["金竿"]) == 1
+    assert len(state["pack"]["锡竿"]) == 1
 
     plugin._reset_fishing_progress_for_level_release()
     assert plugin._db.execute("SELECT COUNT(*) FROM migrations").fetchone()[0] == 1
@@ -2840,7 +3085,7 @@ def test_mcfish_locked_pack_pole_does_not_block_buying_a_wood_pole():
         "fish_level": 1,
         "fish_xp": 0,
         "equip": None,
-        "pack": {"铁竿": [{"durable": 30, "maintenance": 0, "induce": 0, "favor": 0}]},
+        "pack": {"铜竿": [{"durable": 30, "maintenance": 0, "induce": 0, "favor": 0}]},
     }
 
     assert plugin._has_pole(state)
@@ -2890,6 +3135,94 @@ def test_mcfish_reports_daily_limit_separately_from_pole_durability():
     assert event.reply.await_args.kwargs["text"] == "今天你已经进行50次钓鱼了.\n游戏虽好,但请不要沉迷。"
 
 
+def test_state_delta_merges_concurrent_rod_list_additions():
+    kept = {"durable": 30, "maintenance": 0, "induce": 0, "favor": 0}
+    batch = {"durable": 25, "maintenance": 1, "induce": 0, "favor": 0}
+    concurrent = {"durable": 20, "maintenance": 2, "induce": 0, "favor": 0}
+    target = {"pack": {"铜竿": [kept, concurrent]}}
+    base = {"pack": {"铜竿": [kept]}}
+    current = {"pack": {"铜竿": [kept, batch]}}
+
+    McFish._apply_state_delta(target, base, current)
+
+    assert target["pack"]["铜竿"] == [kept, concurrent, batch]
+
+
+def test_unknown_probability_page_returns_usage_instead_of_default():
+    import asyncio
+
+    plugin = McFish.__new__(McFish)
+    plugin._state = lambda _uid: {"pack": {}}
+    event = SimpleNamespace(
+        sender=SimpleNamespace(user_id="100"), raw_message="钓鱼概率 火星", reply=AsyncMock()
+    )
+
+    asyncio.run(plugin._handle_message(event))
+
+    assert "钓鱼概率分页" in event.reply.await_args.kwargs["text"]
+
+
+def test_axolotl_cannot_exceed_remaining_daily_attempts(monkeypatch):
+    """MCF-ECON: 美西螈分支也必须遵守全局每日剩余次数。"""
+    import asyncio
+    import importlib
+
+    module = importlib.import_module("McFish.McFish")
+    monkeypatch.setattr(module.asyncio, "sleep", AsyncMock())
+    plugin = McFish.__new__(McFish)
+    plugin.get_config = lambda key, default=None: 50 if key == "fish_limit" else default
+    plugin._item_image = lambda _name: None
+    plugin._original_drop = lambda _state, _boundaries=None, **_kwargs: ("垃圾", 1)
+    plugin._fish_windows = list
+    plugin._choose = AsyncMock()
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {
+        "fish_today": 98,
+        "fish_level": 30,
+        "equip": {"name": "美西螈", "durable": 1, "maintenance": 0, "induce": 0, "favor": 0},
+        "pack": {"刃鳍鱼": 6},
+        "fishing_zone": "bay",
+        "zone_fish_today": {"bay": 0},
+        "equipment": {},
+        "jewelry": {},
+    }
+    stored = _attach_fake_state_store(plugin, state)
+
+    asyncio.run(plugin._fish(event, state, "进行5次钓鱼"))
+
+    assert stored["fish_today"] == 100
+    assert stored["zone_fish_today"]["bay"] == 2
+    assert stored["pack"].get("刃鳍鱼", 0) == 0
+
+
+def test_mcfish_zone_daily_cap_blocks_further_casts():
+    import asyncio
+
+    plugin = McFish.__new__(McFish)
+    plugin.get_config = lambda key, default=None: 50 if key == "fish_limit" else default
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {
+        "fish_today": 0,
+        "fish_level": 10,
+        "equip": {"name": "木竿", "durable": 10, "maintenance": 0, "induce": 0, "favor": 0},
+        "pack": {},
+        "fishing_zone": "bay",
+        "zone_fish_today": {"bay": 60},
+    }
+
+    asyncio.run(plugin._fish(event, state, "进行1次钓鱼"))
+
+    assert "今日该鱼点已完成 60/60 次" in event.reply.await_args.kwargs["text"]
+
+
+def test_mcfish_hidden_fish_price_does_not_override_normal_fish():
+    plugin = McFish.__new__(McFish)
+    plugin._load_original_data()
+
+    assert plugin._prices["岩石凶鲨"] == FISH["岩石凶鲨"]
+    assert plugin._prices["灰色沙丘曳尾鱼"] == FISH["灰色沙丘曳尾鱼"]
+
+
 def test_mcfish_fishing_result_reports_used_and_remaining_count(monkeypatch):
     import asyncio
     import importlib
@@ -2934,7 +3267,7 @@ def test_mcfish_batch_fishing_uses_one_probability_snapshot(monkeypatch):
 
     def drop(_state, boundaries, **_kwargs):
         boundaries_seen.append(boundaries)
-        return "鲑鱼", 1
+        return "追踪鱼", 1
 
     plugin._original_drop = drop
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
@@ -2974,7 +3307,7 @@ def test_mcfish_batch_fishing_refreshes_dolphin_air_conversion(monkeypatch):
         boundaries_seen.append(boundaries)
         if len(boundaries_seen) == 1:
             stored["pack"]["海豚"] = 1
-        return "鲑鱼", 1
+        return "追踪鱼", 1
 
     plugin._original_drop = drop
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
@@ -2996,7 +3329,7 @@ def test_mcfish_batch_fishing_persists_each_catch_after_its_wait(monkeypatch):
     plugin = McFish.__new__(McFish)
     plugin.get_config = lambda key, default=None: 50 if key == "fish_limit" else default
     plugin._item_image = lambda _name: None
-    plugin._original_drop = lambda _state, _boundaries=None, **_kwargs: ("鲑鱼", 1)
+    plugin._original_drop = lambda _state, _boundaries=None, **_kwargs: ("追踪鱼", 1)
     snapshots = []
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
     state = {
@@ -3008,9 +3341,9 @@ def test_mcfish_batch_fishing_persists_each_catch_after_its_wait(monkeypatch):
 
     asyncio.run(plugin._fish(event, state, "进行2次钓鱼"))
 
-    assert snapshots[0].get("鲑鱼", 0) == 0
-    assert snapshots[1].get("鲑鱼", 0) == 1
-    assert snapshots[-1].get("鲑鱼", 0) == 2
+    assert snapshots[0].get("追踪鱼", 0) == 1
+    assert snapshots[1].get("追踪鱼", 0) == 2
+    assert snapshots[-1].get("追踪鱼", 0) == 2
 
 
 def test_wallet_help_does_not_claim_the_fishing_help_command():
@@ -3028,16 +3361,77 @@ def _make_migration_plugin(tmp_path: Path) -> McFish:
     return plugin
 
 
+def test_state_normalizes_old_fish_names_on_every_read(tmp_path: Path):
+    plugin = _make_migration_plugin(tmp_path)
+    state = {
+        "pack": {"白色珊瑚螈": 1, "鳕鱼": 2},
+        "king_stats": {"白色珊瑚螈": {"bitten": 1, "caught": 1}},
+        "fish_stats": {"鳕鱼": {"count": 2, "first_caught": "2026-01-01T00:00:00"}},
+    }
+    plugin._db.execute("INSERT INTO players VALUES (?, ?, ?)", ("100", json.dumps(state, ensure_ascii=False), time.time()))
+
+    loaded = plugin._state("100")
+
+    assert loaded["pack"]["白色珊瑚蝾螈"] == 1
+    assert loaded["pack"]["刃鳍鱼"] == 2
+    assert "白色珊瑚螈" not in loaded["pack"]
+    assert loaded["king_stats"]["白色珊瑚蝾螈"]["caught"] == 1
+    assert loaded["fish_stats"]["刃鳍鱼"]["count"] == 2
+
+
+def test_mcfish_wiki_fish_migration_renames_packs_stats_tasks_and_shop(tmp_path: Path):
+    plugin = _make_migration_plugin(tmp_path)
+    plugin._db.execute(
+        "CREATE TABLE shop (day TEXT PRIMARY KEY, discounts TEXT NOT NULL, inventory TEXT NOT NULL, custom_prices TEXT NOT NULL DEFAULT '{}')"
+    )
+    state = {
+        "pack": {"鳕鱼": 3, "荷鲤": 2, "三叉戟": []},
+        "fish_stats": {
+            "鳕鱼": {"count": 3, "first_caught": "2026-01-01T00:00:00"},
+            "荷鲤": {"count": 2, "first_caught": "2026-01-02T00:00:00"},
+        },
+        "fishing_daily_tasks": {
+            "tasks": [{"id": "t1", "requirements": {"鳕鱼": 5}}],
+            "progress": {"t1": {"鳕鱼": 2}},
+        },
+    }
+    plugin._db.execute("INSERT INTO players VALUES (?, ?, ?)", ("100", json.dumps(state, ensure_ascii=False), time.time()))
+    plugin._db.execute(
+        "INSERT INTO shop VALUES (?, ?, ?, ?)",
+        ("2026-11-02", json.dumps({"鳕鱼": 120}, ensure_ascii=False), json.dumps({"鳕鱼": 4, "荷鲤": 1}, ensure_ascii=False), "{}"),
+    )
+    plugin._db.commit()
+
+    plugin._migrate_wiki_fish()
+
+    stored = json.loads(plugin._db.execute("SELECT state FROM players WHERE user_id = '100'").fetchone()[0])
+    assert stored["pack"]["刃鳍鱼"] == 3
+    assert stored["pack"]["吸血鳗"] == 2
+    assert "三叉戟" in stored["pack"]
+    assert "鳕鱼" not in stored["pack"]
+    assert stored["fish_stats"]["刃鳍鱼"]["count"] == 3
+    assert stored["fish_stats"]["吸血鳗"]["count"] == 2
+    assert stored["fishing_daily_tasks"]["tasks"][0]["requirements"] == {"刃鳍鱼": 5}
+    assert stored["fishing_daily_tasks"]["progress"]["t1"] == {"刃鳍鱼": 2}
+    shop = plugin._db.execute("SELECT discounts, inventory FROM shop WHERE day = '2026-11-02'").fetchone()
+    assert json.loads(shop[0]) == {"刃鳍鱼": 120}
+    assert json.loads(shop[1]) == {"刃鳍鱼": 4, "吸血鳗": 1}
+    assert plugin._db.execute("SELECT 1 FROM migrations WHERE migration_id = 'mcfish-wiki-fish-2026-11-02'").fetchone()
+    # 第二次执行直接跳过，不重复改名。
+    plugin._migrate_wiki_fish()
+    assert json.loads(plugin._db.execute("SELECT inventory FROM shop WHERE day = '2026-11-02'").fetchone()[0]) == {"刃鳍鱼": 4, "吸血鳗": 1}
+
+
 def test_mcfish_drop_quantity_migration_reclaims_five_times_items_and_xp(tmp_path: Path):
     plugin = _make_migration_plugin(tmp_path)
     state = {
         "fish_level": 5,
         "fish_xp": 891,
         "pack": {
-            "鳕鱼": 58,
-            "鲑鱼": 38,
-            "河豚": 16,
-            "鳗鱼": 3,
+            "刃鳍鱼": 58,
+            "追踪鱼": 38,
+            "蔚蓝色羽毛鱼": 16,
+            "蓝绿色的宫殿鱼": 3,
             "绊线钩": 18,
             "鞋子": 8,
             "碗": 6,
@@ -3055,10 +3449,10 @@ def test_mcfish_drop_quantity_migration_reclaims_five_times_items_and_xp(tmp_pat
     repaired = json.loads(plugin._db.execute("SELECT state FROM players WHERE user_id = '1310043427'").fetchone()[0])
     assert repaired["fish_xp"] == 567
     assert repaired["fish_level"] == 4
-    assert repaired["pack"]["鳕鱼"] == 46
-    assert repaired["pack"]["鲑鱼"] == 22
-    assert repaired["pack"]["河豚"] == 12
-    assert repaired["pack"]["鳗鱼"] == 0
+    assert repaired["pack"]["刃鳍鱼"] == 46
+    assert repaired["pack"]["追踪鱼"] == 22
+    assert repaired["pack"]["蔚蓝色羽毛鱼"] == 12
+    assert repaired["pack"]["蓝绿色的宫殿鱼"] == 0
     assert repaired["pack"]["绊线钩"] == 10
     assert repaired["pack"]["鞋子"] == 4
     assert repaired["pack"]["碗"] == 2
@@ -3088,10 +3482,10 @@ def test_mcfish_drop_quantity_migration_skips_unrecorded_players(tmp_path: Path)
             "pack": {
                 "鹦鹉螺": 22,
                 "墨鱼": 12,
-                "鳕鱼": 53,
-                "河豚": 10,
-                "鲑鱼": 28,
-                "热带鱼": 11,
+                "刃鳍鱼": 53,
+                "蔚蓝色羽毛鱼": 10,
+                "追踪鱼": 28,
+                "粉色的宫殿鱼": 11,
                 "帽子": 11,
                 "木棍": 12,
                 "海草": 0,
@@ -3100,7 +3494,7 @@ def test_mcfish_drop_quantity_migration_skips_unrecorded_players(tmp_path: Path)
                 "骨头": 22,
             },
         },
-        "99999999": {"fish_level": 3, "fish_xp": 200, "pack": {"鳕鱼": 5}},
+        "99999999": {"fish_level": 3, "fish_xp": 200, "pack": {"刃鳍鱼": 5}},
     }
     for user_id, state in states.items():
         plugin._db.execute("INSERT INTO players VALUES (?, ?, ?)", (user_id, json.dumps(state, ensure_ascii=False), time.time()))
@@ -3113,10 +3507,10 @@ def test_mcfish_drop_quantity_migration_skips_unrecorded_players(tmp_path: Path)
     assert repaired["fish_level"] == 5
     assert repaired["pack"]["鹦鹉螺"] == 14
     assert repaired["pack"]["墨鱼"] == 8
-    assert repaired["pack"]["鳕鱼"] == 49
-    assert repaired["pack"]["河豚"] == 6
-    assert repaired["pack"]["鲑鱼"] == 24
-    assert repaired["pack"]["热带鱼"] == 7
+    assert repaired["pack"]["刃鳍鱼"] == 49
+    assert repaired["pack"]["蔚蓝色羽毛鱼"] == 6
+    assert repaired["pack"]["追踪鱼"] == 24
+    assert repaired["pack"]["粉色的宫殿鱼"] == 7
     assert repaired["pack"]["帽子"] == 3
     assert repaired["pack"]["木棍"] == 4
     assert repaired["pack"]["海草"] == 0
@@ -3132,7 +3526,7 @@ def test_mcfish_drop_quantity_migration_skips_unrecorded_players(tmp_path: Path)
 
 def test_mcfish_drop_quantity_migration_tops_up_partial_first_pass(tmp_path: Path):
     plugin = _make_migration_plugin(tmp_path)
-    state = {"fish_level": 4, "fish_xp": 567, "pack": {"鳕鱼": 58, "鳗鱼": 6}}
+    state = {"fish_level": 4, "fish_xp": 567, "pack": {"刃鳍鱼": 58, "蓝绿色的宫殿鱼": 6}}
     plugin._db.execute("INSERT INTO players VALUES (?, ?, ?)", ("1310043427", json.dumps(state, ensure_ascii=False), time.time()))
     plugin._db.execute(
         "INSERT INTO migrations VALUES (?, ?, ?)",
@@ -3140,7 +3534,7 @@ def test_mcfish_drop_quantity_migration_tops_up_partial_first_pass(tmp_path: Pat
             "mcfish-drop-quantity-2026-09-10",
             time.time(),
             json.dumps(
-                {"1310043427": {"removed_items": {"鲑鱼": 16, "河豚": 4}, "removed_xp": 324}},
+                {"1310043427": {"removed_items": {"追踪鱼": 16, "蔚蓝色羽毛鱼": 4}, "removed_xp": 324}},
                 ensure_ascii=False,
             ),
         ),
@@ -3150,8 +3544,8 @@ def test_mcfish_drop_quantity_migration_tops_up_partial_first_pass(tmp_path: Pat
     plugin._top_up_excessive_drop_quantities()
 
     repaired = json.loads(plugin._db.execute("SELECT state FROM players WHERE user_id = '1310043427'").fetchone()[0])
-    assert repaired["pack"]["鳕鱼"] == 46
-    assert repaired["pack"]["鳗鱼"] == 2
+    assert repaired["pack"]["刃鳍鱼"] == 46
+    assert repaired["pack"]["蓝绿色的宫殿鱼"] == 2
     assert repaired["fish_xp"] == 567
     assert repaired["fish_level"] == 4
     details = json.loads(
@@ -3159,7 +3553,7 @@ def test_mcfish_drop_quantity_migration_tops_up_partial_first_pass(tmp_path: Pat
             "SELECT details FROM migrations WHERE migration_id = 'mcfish-drop-quantity-2026-09-10-v2'"
         ).fetchone()[0]
     )
-    assert details["1310043427"]["removed_items"] == {"鳕鱼": 12, "鳗鱼": 4}
+    assert details["1310043427"]["removed_items"] == {"刃鳍鱼": 12, "蓝绿色的宫殿鱼": 4}
     assert details["1310043427"]["removed_xp"] == 0
 
     plugin._top_up_excessive_drop_quantities()
@@ -3177,7 +3571,7 @@ def test_mcfish_fishing_batch_keeps_purchase_made_while_waiting(monkeypatch):
     plugin = McFish.__new__(McFish)
     plugin.get_config = lambda key, default=None: 50 if key == "fish_limit" else default
     plugin._item_image = lambda _name: None
-    plugin._original_drop = lambda _state, _boundaries=None, **_kwargs: ("鲑鱼", 1)
+    plugin._original_drop = lambda _state, _boundaries=None, **_kwargs: ("追踪鱼", 1)
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
     state = {
         "fish_today": 0,
@@ -3199,7 +3593,7 @@ def test_mcfish_fishing_batch_keeps_purchase_made_while_waiting(monkeypatch):
     asyncio.run(run())
 
     assert len(stored["pack"]["木竿"]) == 1
-    assert stored["pack"]["鲑鱼"] == 3
+    assert stored["pack"]["追踪鱼"] == 3
 
 
 def test_mcfish_fishing_save_only_merges_the_current_cast_changes():
@@ -3208,25 +3602,25 @@ def test_mcfish_fishing_save_only_merges_the_current_cast_changes():
     initial = {
         "fish_today": 1,
         "equip": {"name": "木竿", "durable": 5, "maintenance": 0, "induce": 0, "favor": 0},
-        "pack": {"鲑鱼": 2},
+        "pack": {"追踪鱼": 2},
     }
     _attach_fake_state_store(plugin, initial)
     base = plugin._state("100")
     current = copy.deepcopy(base)
-    current["pack"]["鳕鱼"] = 3
+    current["pack"]["刃鳍鱼"] = 3
     current["fish_today"] = 2
 
     purchase = plugin._state("100")
-    plugin._add(purchase, "铁竿", pole=True)
+    plugin._add(purchase, "铜竿", pole=True)
     plugin._save("100", purchase)
 
     plugin._save_fishing_state("100", current, base)
 
     stored = plugin._state("100")
-    assert stored["pack"]["鳕鱼"] == 3
+    assert stored["pack"]["刃鳍鱼"] == 3
     assert stored["fish_today"] == 2
-    assert len(stored["pack"]["铁竿"]) == 1
-    assert stored["pack"]["鲑鱼"] == 2
+    assert len(stored["pack"]["铜竿"]) == 1
+    assert stored["pack"]["追踪鱼"] == 2
 
 
 def test_mcfish_favor_converts_air_when_king_hunter_state_is_active():
@@ -3237,11 +3631,11 @@ def test_mcfish_favor_converts_air_when_king_hunter_state_is_active():
     assert plugin._zone_boundaries({"pack": {}, "equip": None}) == (0, 1, 5, 30, 60)
     # 普通区间：每级 宝藏+1、鱼竿+2、鱼+3，空竿-6。
     assert plugin._zone_boundaries({"pack": {}, "equip": {"name": "木竿", "favor": 3}}) == (0, 4, 14, 48, 78)
-    assert plugin._zone_boundaries({"pack": {"鳕鱼": 101}, "equip": {"name": "木竿", "favor": 0}}) == (0, 2, 10, 45, 90)
+    assert plugin._zone_boundaries({"pack": {"刃鳍鱼": 101}, "equip": {"name": "木竿", "favor": 0}}) == (0, 2, 10, 45, 90)
     # 钓鱼佬只剩 10% 空竿，两级眷顾刚好把它转化完，剩下的空竿按 0 处理。
-    assert plugin._zone_boundaries({"pack": {"鳕鱼": 101}, "equip": {"name": "木竿", "favor": 1}}) == (0, 3, 13, 51, 96)
-    assert plugin._zone_boundaries({"pack": {"鳕鱼": 101}, "equip": {"name": "木竿", "favor": 2}}) == (0, 3, 14, 55, 100)
-    assert plugin._zone_boundaries({"pack": {"鳕鱼": 101}, "equip": {"name": "木竿", "favor": 3}}) == (0, 3, 14, 55, 100)
+    assert plugin._zone_boundaries({"pack": {"刃鳍鱼": 101}, "equip": {"name": "木竿", "favor": 1}}) == (0, 3, 13, 51, 96)
+    assert plugin._zone_boundaries({"pack": {"刃鳍鱼": 101}, "equip": {"name": "木竿", "favor": 2}}) == (0, 3, 14, 55, 100)
+    assert plugin._zone_boundaries({"pack": {"刃鳍鱼": 101}, "equip": {"name": "木竿", "favor": 3}}) == (0, 3, 14, 55, 100)
 
 
 def test_mcfish_probability_detail_matches_zone_boundaries():
@@ -3252,7 +3646,7 @@ def test_mcfish_probability_detail_matches_zone_boundaries():
     states = [
         {"pack": {}, "equip": None},
         {"pack": {}, "equip": {"name": "木竿", "favor": 3}},
-        {"pack": {"鳕鱼": 101}, "equip": {"name": "木竿", "favor": 2}},
+        {"pack": {"刃鳍鱼": 101}, "equip": {"name": "木竿", "favor": 2}},
         {"pack": {"海豚": 1}, "equip": {"name": "木竿", "favor": 3}},
     ]
     for state in states:
@@ -3330,3 +3724,89 @@ def test_mcfish_concurrent_overwrite_late_repair_grants_items_and_refunds_gold(t
     assert poles("10123121") == 1
     assert balance("1506123340") == 2253
     plugin._db.close()
+
+
+def test_mcfish_king_bite_without_reply_holds_and_consumes_the_path(monkeypatch):
+    """MCF-KING: 鱼王咬钩后不回复不再放弃，保证上钩会消耗本周路径。"""
+    import asyncio
+    import importlib
+
+    mcfish_module = importlib.import_module("McFish.McFish")
+    monkeypatch.setattr(mcfish_module, "fishing_wait_for_result", lambda *_args, **_kwargs: 0.01)
+    monkeypatch.setattr(mcfish_module.asyncio, "sleep", AsyncMock())
+    monkeypatch.setattr(mcfish_module.random, "random", lambda: 0.0)
+
+    plugin = McFish.__new__(McFish)
+    plugin.workspace = None
+    plugin.get_config = lambda key, default=None: 50 if key == "fish_limit" else default
+    plugin._catalog = {}
+    plugin._prices = {}
+    plugin._types = {}
+    plugin._wastes = ["垃圾"]
+    plugin._item_image = lambda _name: None
+    plugin._advance_tasks = lambda *args, **kwargs: None
+    plugin._send_fishing_result = AsyncMock()
+    plugin._original_drop = lambda *_args, **_kwargs: ("刃鳍鱼", 1)
+    plugin._shop_data = lambda: ({}, {})
+    now = datetime.now()
+    plugin._fish_windows = lambda: [
+        FishKingWindow("河湾链", "月影巨鲤", now - timedelta(minutes=1), now + timedelta(minutes=60))
+    ]
+    # 模拟批量钓鱼时玩家没有回复：超时返回空 key。
+    plugin._choose = AsyncMock(return_value=SimpleNamespace(key=None, text="", ok=False, timed_out=True))
+
+    state = {
+        "fish_today": 0,
+        "fish_xp": 0,
+        "fish_level": 30,
+        "equip": {"name": "猩红竿", "durable": 10, "maintenance": 0, "induce": 0, "favor": 0},
+        "pack": {},
+        "fish_stats": {},
+        "king_stats": {},
+        "king_paths": {"月影巨鲤": {"counts": {"4": 3}}},
+        "accessories": ["黄金磁石"],
+        "accessory_levels": {"黄金磁石": 3},
+        "accessory_slots": 2,
+        "active_consumables": {},
+        "fishing_zone": "bay",
+        "fish_day": date.today().isoformat(),
+        "trade_day": date.today().isoformat(),
+        "fishing_zone_day": date.today().isoformat(),
+    }
+    stored = _attach_fake_state_store(plugin, state)
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+
+    asyncio.run(plugin._fish(event, plugin._state("100"), "进行钓鱼"))
+
+    assert stored["king_stats"]["月影巨鲤"]["caught"] == 1
+    assert stored["king_stats"]["月影巨鲤"].get("escaped", 0) == 0
+    assert stored["king_paths"]["月影巨鲤"]["counts"] == {}
+    snapshot = stored["king_sale_prices"]["月影巨鲤"][0]
+    # 前置鱼王黄金磁石封顶 ×8；河湾出售税 20%。
+    assert snapshot["price"] == int(snapshot["base"] * 8 * 0.8)
+
+
+def test_mcfish_blocks_selling_materials_cards_keys_and_equipment():
+    import asyncio
+
+    plugin = McFish.__new__(McFish)
+    plugin._prices = {
+        "铜矿石": 4, "克己": 0, "铜钥匙": 0, "潜水头盔": 6000, "上古宝石": 3500, "铜制四芒星项链": 300,
+    }
+    plugin._types = {}
+    plugin._economy_change = lambda *_args: True
+    plugin._save = lambda *_args: None
+    plugin._choose = AsyncMock(return_value=SimpleNamespace(key="confirm"))
+    plugin.get_config = lambda key, default=None: 0.8 if key == "sell_tax" else default
+    plugin._shop_data = lambda: ({}, {})
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+
+    for name in ("铜矿石", "克己", "铜钥匙", "潜水头盔"):
+        state = {"pack": {name: 1}}
+        asyncio.run(plugin._sell(event, state, f"{name} 1"))
+        assert "不可交易" in event.reply.await_args.kwargs["text"], name
+
+    for name in ("上古宝石", "铜制四芒星项链"):
+        state = {"pack": {name: 1}}
+        asyncio.run(plugin._sell(event, state, f"{name} 1"))
+        assert "赚到了" in event.reply.await_args.kwargs["text"], name
