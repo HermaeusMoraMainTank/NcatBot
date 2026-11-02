@@ -2390,13 +2390,15 @@ class McFish(NcatBotPlugin):
             self._db.commit()
             has_custom_prices = row is None
         if row:
-            discounts = json.loads(row[0])
-            inventory = json.loads(row[1])
+            discounts = self._rename_shop_mapping(json.loads(row[0]))
+            inventory = self._rename_shop_mapping(json.loads(row[1]))
             try:
                 custom_prices = json.loads(row[2] or "{}") if has_custom_prices else {}
             except (TypeError, ValueError, json.JSONDecodeError):
                 custom_prices = {}
-            self._shop_custom_prices = self._shop_custom_price_items(custom_prices, inventory)
+            self._shop_custom_prices = self._rename_shop_mapping(
+                self._shop_custom_price_items(custom_prices, inventory)
+            )
             listed_equipment = {name: name in inventory for name in SHOP_EQUIPMENT_STOCK}
             if "初始木竿" in inventory and isinstance(inventory["初始木竿"], int):
                 inventory["初始木竿"] = self._shop_poles(inventory["初始木竿"], "木竿")
@@ -2485,6 +2487,18 @@ class McFish(NcatBotPlugin):
         )
         self._db.commit()
         return discounts, inventory
+
+    @staticmethod
+    def _rename_shop_mapping(mapping: dict) -> dict:
+        """旧鱼名合并到新鱼名，避免商店里继续出现白色珊瑚螈这类历史数据。"""
+        result: dict = {}
+        for name, value in mapping.items():
+            target = FISH_RENAMES.get(str(name), str(name))
+            if target in result and isinstance(result[target], int) and isinstance(value, int):
+                result[target] += value
+            else:
+                result.setdefault(target, value)
+        return result
 
     @staticmethod
     def _normalize_shop_inventory(inventory: dict) -> dict:
@@ -4887,103 +4901,191 @@ class McFish(NcatBotPlugin):
 
     def _render_store_image(self, uid: str, state: dict | None = None) -> Path:
         discounts, inventory = self._shop_data()
-        order = list(dict.fromkeys(
-            list(getattr(self, "_thing_order", []))
-            + list(POLES)
-            + list(SHOP_EQUIPMENT_PRICES)
-            + list(discounts)
-        ))
-        prices = {
-            name: self._shop_price(name, discounts)
-            for name in order
-            if name in discounts and name not in ("垃圾", "宝藏诅咒")
-        }
-        output = Path(self.workspace) / "images" / f"store_{uid}.png"
-        output.parent.mkdir(parents=True, exist_ok=True)
-        inventory_rows: list[tuple[str, int, int, str]] = []
+        state = state or {}
+        pack = state.get("pack", {})
+        player_level = int(state.get("fish_level", 1) or 1)
+        valuable_names = {name for table in ZONE_VALUABLES.values() for name in table}
+        wastes = set(getattr(self, "_wastes", ["垃圾"]))
+
+        def type_label(name: str) -> str:
+            if name in FISH or name in KING_INFO:
+                return "鱼与鱼王"
+            if name in valuable_names:
+                return "贵重品"
+            if name in FOOD_RESTORE:
+                return "食物"
+            if name in wastes:
+                return "垃圾"
+            if name in ITEMS:
+                return "宝藏"
+            if name in SHOP_EQUIPMENT_PRICES:
+                return "消耗品"
+            return "其他"
+
+        def sellable(name: str) -> bool:
+            if name in MATERIAL_NAMES or name in CARD_NAMES:
+                return False
+            if name in KEY_NAMES.values() or name in BOX_NAMES.values():
+                return False
+            if name in PIECE_INFO and name not in valuable_names:
+                return False
+            if name in EQUIPMENT:
+                return False
+            return (
+                name in FISH or name in KING_INFO or name in valuable_names
+                or name in FOOD_RESTORE or name in wastes or name in ITEMS
+                or name in SHOP_EQUIPMENT_PRICES
+            )
+
+        group_order = ("鱼与鱼王", "贵重品", "食物", "垃圾", "宝藏", "消耗品", "其他")
+
+        rod_names = ["木竿", *SHOP_ROD_PRICES]
+        rod_rows = [
+            (name, self._shop_price(name, discounts), max(1, rod_unlock_level(name)), ROD_POWER.get(name, 0))
+            for name in rod_names
+        ]
+
+        shop_groups: dict[str, list[tuple[str, int, int]]] = {}
         for name, count in inventory.items():
             if name == "初始木竿" or name in POLES:
-                pole_name = "木竿" if name == "初始木竿" else name
-                for pole in self._shop_poles(count, pole_name):
-                    label = "木竿（常驻）" if name == "初始木竿" else f"{name}({pole.get('durable', 0)}/{pole.get('maintenance', 0)}/{pole.get('induce', 0)}/{pole.get('favor', 0)})"
-                    pole_price = self._shop_price(name, discounts) if name == "初始木竿" else self._pole_price(pole, discounts, name)
-                    inventory_rows.append((label, 1, pole_price, pole_name))
-            else:
-                if int(count) <= 0:
-                    continue
-                inventory_rows.append((name, int(count), self._shop_price(name, discounts), name))
-        permanent_rods = ("木竿", *SHOP_ROD_PRICES)
-        listed_rods = {
-            asset_name for _name, _count, _price, asset_name in inventory_rows
-            if asset_name in permanent_rods
-        }
-        player_level = int((state or {}).get("fish_level", 1) or 1)
-        for name in permanent_rods:
-            if name in listed_rods:
                 continue
-            unlock = max(1, rod_unlock_level(name))
-            label = f"{name}（常驻 · Lv{unlock} · FP{ROD_POWER.get(name, 0)}）"
-            if player_level < unlock:
-                label = f"{name}（常驻 · Lv{unlock} · FP{ROD_POWER.get(name, 0)} 未解锁）"
-            inventory_rows.append((label, 1, self._shop_price(name, discounts), name))
+            try:
+                number = int(count)
+            except (TypeError, ValueError):
+                continue
+            if number <= 0:
+                continue
+            shop_groups.setdefault(type_label(name), []).append(
+                (name, number, self._shop_price(name, discounts))
+            )
+        for rows in shop_groups.values():
+            rows.sort(key=lambda row: row[0])
+
+        player_groups: dict[str, list[tuple[str, int, int, int]]] = {}
+        for name, value in pack.items():
+            if name in POLES or isinstance(value, list):
+                continue
+            try:
+                number = int(value)
+            except (TypeError, ValueError):
+                continue
+            if number <= 0 or not sellable(name):
+                continue
+            player_groups.setdefault(type_label(name), []).append(
+                (name, number, self._shop_price(name, discounts), int(discounts.get(name, 100)) - 100)
+            )
+        for rows in player_groups.values():
+            rows.sort(key=lambda row: row[0])
 
         width = 1400
         margin = 46
         gap = 22
         header_height = 174
-        price_rows = max(1, (len(prices) + 1) // 2)
-        inventory_rows_count = max(1, (len(inventory_rows) + 1) // 2)
-        price_section_height = 82 + price_rows * 94 + 30
-        inventory_section_height = 82 + inventory_rows_count * 82 + 30
-        height = header_height + 24 + price_section_height + 20 + inventory_section_height + 42
+        tile_width = (width - margin * 2 - gap - 40) // 2
+        rod_tile_width = (width - margin * 2 - gap * 2 - 40) // 3
+        rod_height = 70 + 3 * 88 + 20
+        shop_height = 70 + 50 + 20
+        if shop_groups:
+            shop_height = 70 + sum(
+                34 + max(1, (len(rows) + 1) // 2) * 78
+                for rows in shop_groups.values()
+            ) + 20
+        player_height = 70 + 50 + 20
+        if player_groups:
+            player_height = 70 + sum(
+                34 + max(1, (len(rows) + 1) // 2) * 76
+                for rows in player_groups.values()
+            ) + 20
+        height = header_height + 24 + rod_height + 16 + shop_height + 16 + player_height + 42
         image = PILImage.new("RGBA", (width, height), (244, 248, 249, 255))
         draw = ImageDraw.Draw(image)
         draw.rounded_rectangle((0, 0, width, header_height), radius=26, fill=(33, 68, 82, 255))
         draw.rectangle((0, header_height - 20, width, header_height), fill=(33, 68, 82, 255))
         draw.text((margin, 34), "钓鱼商店", fill=(250, 252, 252, 255), font=self._font(62, bold=True))
-        draw.text((margin, 116), "今日价格波动 · 上架库存", fill=(190, 222, 225, 255), font=self._font(25))
+        draw.text((margin, 116), "今日上架 · 你的可售物品", fill=(190, 222, 225, 255), font=self._font(25))
         draw.text((width - margin, 116), "价格随每日折扣变化", fill=(220, 234, 235, 255), font=self._font(21), anchor="ra")
 
-        tile_width = (width - margin * 2 - gap - 40) // 2
-        price_y = header_height + 24
-        self._card(draw, (margin, price_y, width - margin, price_y + price_section_height))
-        draw.text((margin + 28, price_y + 20), "今日波动", fill=(40, 61, 68, 255), font=self._font(31, bold=True))
-        draw.text((width - margin - 28, price_y + 28), "当前价 · 均价 · 涨跌", fill=(92, 112, 117, 255), font=self._font(19), anchor="ra")
-        for index, (name, price) in enumerate(prices.items()):
-            col, row = index % 2, index // 2
-            x = margin + 20 + col * (tile_width + gap)
-            y = price_y + 64 + row * 94
-            self._card(draw, (x, y, x + tile_width, y + 80), fill=(248, 251, 251, 255), radius=12)
-            icon = self._resource_image(name, (44, 44))
+        section_y = header_height + 24
+        self._card(draw, (margin, section_y, width - margin, section_y + rod_height))
+        draw.text((margin + 28, section_y + 20), "鱼竿", fill=(40, 61, 68, 255), font=self._font(31, bold=True))
+        draw.text((width - margin - 28, section_y + 28), "Lv · FP · 价格", fill=(92, 112, 117, 255), font=self._font(19), anchor="ra")
+        for index, (name, price, unlock, fp) in enumerate(rod_rows):
+            col, row = index % 3, index // 3
+            x = margin + 20 + col * (rod_tile_width + gap)
+            y = section_y + 64 + row * 88
+            self._card(draw, (x, y, x + rod_tile_width, y + 78), fill=(248, 251, 251, 255), radius=12)
+            icon = self._resource_image(name, (42, 42))
             if icon:
-                image.alpha_composite(icon, (x + 16, y + 18))
-            average = getattr(self, "_prices", {}).get(name, POLES.get(name, (0, 0))[1])
-            change = discounts.get(name, 100) - 100
-            change_text = f"+{change}%" if change > 0 else f"{change}%"
-            change_color = (194, 91, 86, 255) if change > 0 else (61, 145, 112, 255) if change < 0 else (92, 112, 117, 255)
-            draw.text((x + 72, y + 12), name, fill=(40, 61, 68, 255), font=self._font(21, bold=True))
-            draw.text((x + 72, y + 45), f"{price} 金币  ·  均价 {average}", fill=(92, 112, 117, 255), font=self._font(17))
-            draw.text((x + tile_width - 18, y + 23), change_text, fill=change_color, font=self._font(22, bold=True), anchor="ra")
+                image.alpha_composite(icon, (x + 14, y + 18))
+            draw.text((x + 66, y + 10), name, fill=(40, 61, 68, 255), font=self._font(21, bold=True))
+            level_color = (92, 112, 117, 255) if player_level >= unlock else (194, 91, 86, 255)
+            draw.text((x + 66, y + 42), f"Lv{unlock} · FP{fp}", fill=level_color, font=self._font(17))
+            draw.text((x + rod_tile_width - 16, y + 24), f"{price} 金币", fill=(112, 96, 54, 255), font=self._font(20, bold=True), anchor="ra")
 
-        inventory_y = price_y + price_section_height + 20
-        self._card(draw, (margin, inventory_y, width - margin, inventory_y + inventory_section_height))
-        draw.text((margin + 28, inventory_y + 20), "上架内容", fill=(40, 61, 68, 255), font=self._font(31, bold=True))
-        draw.text((width - margin - 28, inventory_y + 28), "库存 · 单价", fill=(92, 112, 117, 255), font=self._font(19), anchor="ra")
-        if inventory_rows:
-            for index, (display_name, row_count, row_price, asset_name) in enumerate(inventory_rows):
-                col, row = index % 2, index // 2
-                x = margin + 20 + col * (tile_width + gap)
-                y = inventory_y + 64 + row * 82
-                self._card(draw, (x, y, x + tile_width, y + 68), fill=(249, 250, 247, 255), radius=12)
-                icon = self._resource_image(asset_name, (40, 40))
-                if icon:
-                    image.alpha_composite(icon, (x + 16, y + 14))
-                draw.text((x + 70, y + 11), display_name, fill=(40, 61, 68, 255), font=self._font(19))
-                draw.text((x + 70, y + 40), f"库存 {row_count}", fill=(92, 112, 117, 255), font=self._font(17))
-                draw.text((x + tile_width - 18, y + 25), f"{row_price} 金币", fill=(112, 96, 54, 255), font=self._font(20, bold=True), anchor="ra")
+        shop_y = section_y + rod_height + 16
+        self._card(draw, (margin, shop_y, width - margin, shop_y + shop_height))
+        draw.text((margin + 28, shop_y + 20), "商店上架", fill=(40, 61, 68, 255), font=self._font(31, bold=True))
+        draw.text((width - margin - 28, shop_y + 28), "库存 · 单价", fill=(92, 112, 117, 255), font=self._font(19), anchor="ra")
+        if shop_groups:
+            cursor = shop_y + 64
+            for group in group_order:
+                rows = shop_groups.get(group)
+                if not rows:
+                    continue
+                draw.text((margin + 28, cursor), group, fill=(38, 144, 158, 255), font=self._font(22, bold=True))
+                cursor += 34
+                for index, (name, count, price) in enumerate(rows):
+                    col, row = index % 2, index // 2
+                    x = margin + 20 + col * (tile_width + gap)
+                    y = cursor + row * 78
+                    self._card(draw, (x, y, x + tile_width, y + 68), fill=(249, 250, 247, 255), radius=12)
+                    icon = self._resource_image(name, (40, 40))
+                    if icon:
+                        image.alpha_composite(icon, (x + 16, y + 14))
+                    draw.text((x + 70, y + 11), name, fill=(40, 61, 68, 255), font=self._font(19))
+                    draw.text((x + 70, y + 40), f"库存 {count}", fill=(92, 112, 117, 255), font=self._font(17))
+                    draw.text((x + tile_width - 18, y + 25), f"{price} 金币", fill=(112, 96, 54, 255), font=self._font(20, bold=True), anchor="ra")
+                cursor += max(1, (len(rows) + 1) // 2) * 78
         else:
-            draw.text((margin + 30, inventory_y + 98), "当前商店并没有上架任何物品", fill=(92, 112, 117, 255), font=self._font(25))
-        draw.text((margin, height - 28), "出售税按鱼点 20%–45% 结算；鱼竿、宝藏与非鱼点物品按 20%；附魔鱼竿按实际属性计价。", fill=(92, 112, 117, 255), font=self._font(19))
+            draw.text((margin + 30, shop_y + 98), "当前商店没有上架物品", fill=(92, 112, 117, 255), font=self._font(25))
+
+        player_y = shop_y + shop_height + 16
+        self._card(draw, (margin, player_y, width - margin, player_y + player_height))
+        draw.text((margin + 28, player_y + 20), "你的背包可出售", fill=(40, 61, 68, 255), font=self._font(31, bold=True))
+        total_value = sum(
+            price * count
+            for rows in player_groups.values()
+            for _name, count, price, _change in rows
+        )
+        draw.text((width - margin - 28, player_y + 28), f"可售总价 {total_value} 金币", fill=(112, 96, 54, 255), font=self._font(21, bold=True), anchor="ra")
+        if player_groups:
+            cursor = player_y + 64
+            for group in group_order:
+                rows = player_groups.get(group)
+                if not rows:
+                    continue
+                draw.text((margin + 28, cursor), group, fill=(38, 144, 158, 255), font=self._font(22, bold=True))
+                cursor += 34
+                for index, (name, count, price, change) in enumerate(rows):
+                    col, row = index % 2, index // 2
+                    x = margin + 20 + col * (tile_width + gap)
+                    y = cursor + row * 76
+                    self._card(draw, (x, y, x + tile_width, y + 66), fill=(248, 251, 251, 255), radius=12)
+                    icon = self._resource_image(name, (38, 38))
+                    if icon:
+                        image.alpha_composite(icon, (x + 14, y + 14))
+                    draw.text((x + 64, y + 10), name, fill=(40, 61, 68, 255), font=self._font(19))
+                    draw.text((x + 64, y + 39), f"×{count}", fill=(92, 112, 117, 255), font=self._font(17))
+                    draw.text((x + tile_width - 18, y + 22), f"{price} 金币", fill=(112, 96, 54, 255), font=self._font(19, bold=True), anchor="ra")
+                    change_text = f"+{change}%" if change > 0 else f"{change}%"
+                    change_color = (194, 91, 86, 255) if change > 0 else (61, 145, 112, 255) if change < 0 else (92, 112, 117, 255)
+                    draw.text((x + tile_width - 18, y + 45), change_text, fill=change_color, font=self._font(16), anchor="ra")
+                cursor += max(1, (len(rows) + 1) // 2) * 76
+        else:
+            draw.text((margin + 30, player_y + 98), "背包没有可出售物品", fill=(92, 112, 117, 255), font=self._font(25))
+        draw.text((margin, height - 28), "材料、装备、卡片不可出售，因此不在列表中显示；当前收购价已含当日折扣，实际出售另计鱼点税、黄金磁石与装备加成。", fill=(92, 112, 117, 255), font=self._font(18))
+        output = Path(self.workspace) / "images" / f"store_{uid}.png"
+        output.parent.mkdir(parents=True, exist_ok=True)
         image.save(output, "PNG")
         return output
 

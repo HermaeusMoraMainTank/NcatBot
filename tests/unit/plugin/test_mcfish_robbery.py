@@ -1185,7 +1185,10 @@ def test_mcfish_pack_and_store_render_images(tmp_path: Path):
     pack_image = PILImage.open(pack_path)
     assert pack_image.size[0] == 1240
     assert pack_image.getpixel((500, 15))[:3] == (33, 68, 82)
-    assert PILImage.open(store_path).size[0] >= 1000
+    store_image = PILImage.open(store_path)
+    assert store_image.size[0] >= 1000
+    # 商店不再铺开全部物品，只展示鱼竿、上架内容和玩家可售物品。
+    assert store_image.size[1] < 2500
     assert pack_path.exists() and store_path.exists()
 
 
@@ -3810,3 +3813,11 @@ def test_mcfish_blocks_selling_materials_cards_keys_and_equipment():
         state = {"pack": {name: 1}}
         asyncio.run(plugin._sell(event, state, f"{name} 1"))
         assert "赚到了" in event.reply.await_args.kwargs["text"], name
+
+def test_shop_mapping_renames_old_fish_names():
+    plugin = McFish.__new__(McFish)
+
+    renamed = plugin._rename_shop_mapping({"白色珊瑚螈": 2, "白色珊瑚蝾螈": 1})
+
+    assert renamed == {"白色珊瑚蝾螈": 3}
+    assert "白色珊瑚螈" not in renamed
