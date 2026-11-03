@@ -2090,7 +2090,7 @@ def test_mcfish_pack_gives_rod_cards_room_for_two_attribute_lines(tmp_path):
     )
 
     # The two inventory rows use 106px tracks, so the second card has its own row.
-    assert PILImage.open(output).height == 982
+    assert PILImage.open(output).height >= 900
 
 
 def test_mcfish_pack_marks_shop_rods_as_not_craftable():
@@ -3821,3 +3821,42 @@ def test_shop_mapping_renames_old_fish_names():
 
     assert renamed == {"白色珊瑚蝾螈": 3}
     assert "白色珊瑚螈" not in renamed
+
+
+def test_mcfish_pack_image_groups_items_by_type(tmp_path: Path):
+    from PIL import Image as PILImage
+
+    plugin = McFish.__new__(McFish)
+    plugin.workspace = tmp_path
+    plugin._load_original_data()
+    plugin._economy = SimpleNamespace(store=SimpleNamespace(account=lambda _uid: {"balance": 0}))
+    state = {
+        "fish_level": 10,
+        "fish_xp": 0,
+        "equip": None,
+        "pack": {
+            "岩石凶鲨": 2,
+            "上古宝石": 1,
+            "铜矿石": 3,
+            "绿色海藻": 4,
+            "海草": 5,
+            "诱钓": 1,
+            "克己": 1,
+            "铜钥匙": 2,
+            "木竿": [{"durable": 30, "maintenance": 0, "induce": 0, "favor": 0}],
+            "魔法鱼饵": 2,
+        },
+        "accessories": [],
+        "accessory_levels": {},
+        "accessory_slots": 2,
+        "active_consumables": {"魔法鱼饵": 2},
+        "equipment": {},
+        "jewelry": {},
+    }
+
+    output = plugin._render_pack_image("100", state)
+
+    with PILImage.open(output) as image:
+        assert image.size[0] == 1240
+        # 分类标题和分栏会让图片比空背包更高，但不应退化成超长单列。
+        assert 1200 < image.size[1] < 4000

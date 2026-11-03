@@ -4495,6 +4495,42 @@ class McFish(NcatBotPlugin):
             capacity = max(uses, ((active_uses + uses - 1) // uses) * uses)
             entries.append((name, name, 0, "", False, (active_uses, capacity)))
 
+        valuable_names = {name for table in ZONE_VALUABLES.values() for name in table}
+        wastes = set(getattr(self, "_wastes", ["垃圾"]))
+
+        def pack_group(name: str) -> str:
+            if name in POLES:
+                return "鱼竿"
+            if name in FISH or name in KING_INFO or name in HIDDEN_FISH:
+                return "鱼与鱼王"
+            if name in EQUIPMENT and EQUIPMENT[name]["kind"] == "consumable":
+                return "消耗品"
+            if name in EQUIPMENT or name in PERMANENT_ACCESSORY_EFFECTS or name in PIECE_INFO:
+                return "装备与饰品"
+            if name in valuable_names:
+                return "贵重品"
+            if name in MATERIAL_NAMES:
+                return "材料"
+            if name in FOOD_RESTORE:
+                return "食物"
+            if name in wastes:
+                return "垃圾"
+            if name in KEY_NAMES.values() or name in BOX_NAMES.values():
+                return "钥匙与箱子"
+            if name in CARD_NAMES:
+                return "神谕卡片"
+            if name in ITEMS:
+                return "宝藏"
+            return "其他"
+
+        group_order = (
+            "鱼竿", "鱼与鱼王", "装备与饰品", "消耗品", "贵重品", "材料",
+            "食物", "垃圾", "宝藏", "钥匙与箱子", "神谕卡片", "其他",
+        )
+        grouped = {group: [] for group in group_order}
+        for entry in entries:
+            grouped[pack_group(entry[1])].append(entry)
+
         economy = self._plugin_loader.get_plugin("GroupEconomy") if hasattr(self, "_plugin_loader") else None
         if economy is not None:
             self._economy = economy
@@ -4510,13 +4546,18 @@ class McFish(NcatBotPlugin):
         margin = 42
         gap = 22
         header_height = 174
-        profile_height = 158
+        profile_height = 168
         equip_height = 224
         # Rod cards contain two attribute lines; leave enough room below the icon
         # so the second line stays inside its card and cannot overlap the next row.
         inventory_row_height = 106
-        inventory_rows = max(2, (len(entries) + 1) // 2)
-        inventory_height = 78 + inventory_rows * inventory_row_height + 28
+        inventory_height = 78 + 50 + 28
+        if any(grouped.values()):
+            inventory_height = 78 + sum(
+                34 + max(1, (len(rows) + 1) // 2) * inventory_row_height
+                for rows in grouped.values()
+                if rows
+            ) + 28
         height = header_height + 26 + profile_height + 20 + equip_height + 20 + inventory_height + 42
         image = PILImage.new("RGBA", (width, height), (244, 248, 249, 255))
         draw = ImageDraw.Draw(image)
@@ -4538,15 +4579,16 @@ class McFish(NcatBotPlugin):
         except (OSError, ValueError):
             draw.ellipse(avatar_box, fill=(222, 234, 235, 255), outline=(184, 202, 205, 255), width=2)
         draw.text((margin + 148, profile_y + 25), "钓鱼档案", fill=(40, 61, 68, 255), font=self._font(28, bold=True))
-        draw.text((margin + 148, profile_y + 68), f"等级 {level}  ·  经验 {total_xp - current_level_xp}/{level_span}", fill=(92, 112, 117, 255), font=self._font(21))
-        self._draw_bar(draw, (margin + 148, profile_y + 105, margin + 360, profile_y + 121), level_progress)
+        draw.text((margin + 148, profile_y + 66), f"Lv {level}", fill=(40, 61, 68, 255), font=self._font(24, bold=True))
+        draw.text((margin + 148, profile_y + 96), f"经验 {max(0, total_xp - current_level_xp)}/{level_span}", fill=(92, 112, 117, 255), font=self._font(18))
+        self._draw_bar(draw, (margin + 148, profile_y + 122, margin + 360, profile_y + 136), level_progress)
         metrics = (
             ("今日钓鱼", f"{min(daily_limit, int(state.get('fish_today', 0)))}/{daily_limit}"),
             ("钱包", f"{int(account['balance'])} 金币"),
             ("背包统计", f"{fish_count} 条鱼 · {pole_count} 支竿"),
         )
-        metric_width = 220
-        metric_start = margin + 410
+        metric_width = 210
+        metric_start = margin + 478
         for index, (label, value) in enumerate(metrics):
             x = metric_start + index * (metric_width + 12)
             draw.text((x, profile_y + 35), label, fill=(92, 112, 117, 255), font=self._font(20))
@@ -4563,10 +4605,10 @@ class McFish(NcatBotPlugin):
             for name in state["accessories"]
         ) or "无"
         draw.text(
-            (margin + 148, profile_y + 132),
+            (margin + 148, profile_y + 142),
             f"饰品槽位 {len(state['accessories'])}/{state['accessory_slots']}：{accessory_status}",
             fill=(38, 144, 158, 255),
-            font=self._font(18),
+            font=self._font(17),
         )
 
         equip_y = profile_y + profile_height + 20
@@ -4590,39 +4632,47 @@ class McFish(NcatBotPlugin):
         self._card(draw, (margin, inventory_y, width - margin, inventory_y + inventory_height))
         draw.text((margin + 28, inventory_y + 20), "背包物品", fill=(40, 61, 68, 255), font=self._font(31, bold=True))
         draw.text((width - margin - 28, inventory_y + 28), "鱼竿属性：耐久 / 修复 / 诱钓 / 眷顾", fill=(92, 112, 117, 255), font=self._font(18), anchor="ra")
-        if entries:
+        if any(grouped.values()):
             tile_width = (width - margin * 2 - gap - 40) // 2
-            for index, (display_name, asset_name, count, detail, is_pole, progress) in enumerate(entries):
-                col, row = index % 2, index // 2
-                x = margin + 20 + col * (tile_width + gap)
-                y = inventory_y + 62 + row * inventory_row_height
-                self._card(draw, (x, y, x + tile_width, y + inventory_row_height - 10), fill=(248, 251, 251, 255), radius=12)
-                icon = self._resource_image(asset_name, (48, 48))
-                if icon:
-                    image.alpha_composite(icon, (x + 16, y + 20))
-                text_x = x + 80
-                draw.text((text_x, y + 14), display_name, fill=(40, 61, 68, 255), font=self._font(23, bold=True))
-                if is_pole:
-                    detail_font = self._font(16)
-                    for detail_index, detail_line in enumerate(detail.splitlines()):
-                        draw.text((text_x, y + 45 + detail_index * 20), detail_line, fill=(38, 144, 158, 255), font=detail_font)
-                elif progress:
-                    active_uses, capacity = progress
-                    inventory_text = (
-                        f"库存 {count}  ·  激活剩余 {active_uses}/{capacity} 次"
-                        if count
-                        else f"激活剩余 {active_uses}/{capacity} 次"
-                    )
-                    draw.text((text_x, y + 45), inventory_text, fill=(92, 112, 117, 255), font=self._font(18))
-                    self._draw_bar(
-                        draw,
-                        (text_x, y + 70, x + tile_width - 18, y + 78),
-                        active_uses / capacity,
-                    )
-                elif detail:
-                    draw.text((text_x, y + 49), detail, fill=(38, 144, 158, 255), font=self._font(20))
-                else:
-                    draw.text((text_x, y + 49), f"数量 {count}", fill=(92, 112, 117, 255), font=self._font(20))
+            cursor = inventory_y + 62
+            for group in group_order:
+                rows = grouped.get(group)
+                if not rows:
+                    continue
+                draw.text((margin + 28, cursor), group, fill=(38, 144, 158, 255), font=self._font(22, bold=True))
+                cursor += 34
+                for index, (display_name, asset_name, count, detail, is_pole, progress) in enumerate(rows):
+                    col, row = index % 2, index // 2
+                    x = margin + 20 + col * (tile_width + gap)
+                    y = cursor + row * inventory_row_height
+                    self._card(draw, (x, y, x + tile_width, y + inventory_row_height - 10), fill=(248, 251, 251, 255), radius=12)
+                    icon = self._resource_image(asset_name, (48, 48))
+                    if icon:
+                        image.alpha_composite(icon, (x + 16, y + 20))
+                    text_x = x + 80
+                    draw.text((text_x, y + 14), display_name, fill=(40, 61, 68, 255), font=self._font(23, bold=True))
+                    if is_pole:
+                        detail_font = self._font(16)
+                        for detail_index, detail_line in enumerate(detail.splitlines()):
+                            draw.text((text_x, y + 45 + detail_index * 20), detail_line, fill=(38, 144, 158, 255), font=detail_font)
+                    elif progress:
+                        active_uses, capacity = progress
+                        inventory_text = (
+                            f"库存 {count}  ·  激活剩余 {active_uses}/{capacity} 次"
+                            if count
+                            else f"激活剩余 {active_uses}/{capacity} 次"
+                        )
+                        draw.text((text_x, y + 45), inventory_text, fill=(92, 112, 117, 255), font=self._font(18))
+                        self._draw_bar(
+                            draw,
+                            (text_x, y + 70, x + tile_width - 18, y + 78),
+                            active_uses / capacity,
+                        )
+                    elif detail:
+                        draw.text((text_x, y + 49), detail, fill=(38, 144, 158, 255), font=self._font(20))
+                    else:
+                        draw.text((text_x, y + 49), f"数量 {count}", fill=(92, 112, 117, 255), font=self._font(20))
+                cursor += max(1, (len(rows) + 1) // 2) * inventory_row_height
         else:
             draw.text((margin + 30, inventory_y + 98), "背包没有存放任何东西", fill=(92, 112, 117, 255), font=self._font(25))
 
