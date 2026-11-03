@@ -215,6 +215,16 @@ def set_of(name: str) -> dict | None:
     return SETS.get(info["set"]) if info else None
 
 
+# 单件合成系数与额外材料：头/胸/腿/项链/戒指分别使用不同的成本结构。
+SLOT_CRAFT = {
+    "head": (0.8, {"废弃零件": 1}),
+    "body": (1.0, {"废弃零件": 2}),
+    "legs": (0.9, {"纤维": 2}),
+    "necklace": (0.6, {"纤维": 3}),
+    "ring": (0.5, {"纤维": 2}),
+}
+
+
 def craft_recipe(name: str) -> dict | None:
     info = PIECE_INFO.get(name)
     if not info:
@@ -222,10 +232,18 @@ def craft_recipe(name: str) -> dict | None:
     set_def = SETS[info["set"]]
     if not set_def.get("craftable"):
         return None
+    factor, extra = SLOT_CRAFT.get(info["slot"], (1.0, {}))
+    items = {
+        item: max(1, round(int(count) * factor))
+        for item, count in set_def.get("craft_items", {}).items()
+    }
+    for item, count in extra.items():
+        items[item] = items.get(item, 0) + int(count)
+    gold = max(1, int(set_def.get("craft_gold", 0) * factor))
     return {
         "level": int(info["start"]),
-        "gold": int(set_def["craft_gold"]),
-        "items": dict(set_def["craft_items"]),
+        "gold": gold,
+        "items": items,
     }
 
 

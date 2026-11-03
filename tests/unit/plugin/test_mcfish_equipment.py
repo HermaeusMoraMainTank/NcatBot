@@ -43,7 +43,7 @@ def test_all_sets_have_the_designed_starting_levels():
 
 def test_craft_recipe_only_exists_for_metal_sets():
     recipe = craft_recipe("铜制头盔")
-    assert recipe == {"level": 3, "gold": 6000, "items": {"铜矿石": 8, "废弃零件": 4}}
+    assert recipe == {"level": 3, "gold": 4800, "items": {"铜矿石": 6, "废弃零件": 4}}
     assert craft_recipe("潜水头盔") is None
     assert craft_recipe("木制戒指")["level"] == 1
 
@@ -96,7 +96,7 @@ def test_craft_gear_consumes_materials_and_adds_to_bag():
 
     asyncio.run(plugin._craft_gear(event, state, "铜制头盔"))
 
-    assert state["pack"]["铜矿石"] == 0
+    assert state["pack"]["铜矿石"] == 2
     assert state["pack"]["废弃零件"] == 0
     assert state["gear_bag"][0]["name"] == "铜制头盔"
     assert state["gear_bag"][0]["level"] == 3
@@ -291,3 +291,16 @@ def test_state_migrates_old_gear_names_to_wiki_equipment():
     assert state["equipment"]["head"]["name"] == "木头头盔"
     assert state["jewelry"]["necklace"]["name"] == "铜制四芒星项链"
     assert state["gear_bag"][0]["name"] == "神谕卡组"
+
+
+def test_craft_recipes_differ_by_slot():
+    head = craft_recipe("铜制头盔")
+    body = craft_recipe("铜制胸甲")
+    legs = craft_recipe("铜制裤子")
+    necklace = craft_recipe("铜制四芒星项链")
+
+    assert head["items"] != body["items"]
+    assert body["gold"] > legs["gold"] > head["gold"] > necklace["gold"]
+    assert "废弃零件" in body["items"]
+    assert "纤维" in legs["items"]
+    assert "纤维" in necklace["items"]

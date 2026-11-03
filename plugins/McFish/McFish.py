@@ -4706,11 +4706,8 @@ class McFish(NcatBotPlugin):
                 return "获取：集齐 9 张神谕卡片后，在钓鱼工坊领取"
             if not data.get("craftable"):
                 return "获取：钓鱼掉落 / 开箱"
-            items = "、".join(f"{item}×{count}" for item, count in data.get("craft_items", {}).items())
-            gold = int(data.get("craft_gold", 0))
             head = data.get("slots", {}).get("head") or f"{name}头盔"
-            gold_text = f" + {gold} 金币" if gold else ""
-            return f"获取：合成渔具 {head}（{items}{gold_text}）"
+            return f"获取：合成渔具 单件（如 {head}，材料见合成界面）"
 
         layouts = []
         for name in set_names:
@@ -4881,18 +4878,21 @@ class McFish(NcatBotPlugin):
         sets = [(name, data) for name, data in SETS.items() if data.get("craftable")]
         width = 1600
         margin = 42
-        gap = 26
-        column_width = (width - margin * 2 - gap) // 2
+        gap = 10
+        set_col_width = 210
+        slot_names = ("head", "body", "legs", "necklace", "ring")
+        slot_labels = ("头盔", "胸甲", "腿甲", "项链", "戒指")
+        cell_width = (width - margin * 2 - set_col_width - gap * len(slot_names)) // len(slot_names)
         header_height = 172
-        card_height = 168
-        rows = (len(sets) + 1) // 2
-        height = header_height + 24 + rows * (card_height + 16) + 42
+        table_header_height = 46
+        row_height = 170
+        height = header_height + 24 + table_header_height + len(sets) * row_height + 42
         image = PILImage.new("RGBA", (width, height), (244, 248, 249, 255))
         draw = ImageDraw.Draw(image)
         draw.rounded_rectangle((0, 0, width, header_height), radius=26, fill=(33, 68, 82, 255))
         draw.rectangle((0, header_height - 20, width, header_height), fill=(33, 68, 82, 255))
         draw.text((margin, 34), "合成渔具", fill=(250, 252, 252, 255), font=self._font(62, bold=True))
-        draw.text((margin, 116), "同名套装共用配方 · 材料与金币齐备即可合成", fill=(190, 222, 225, 255), font=self._font(24))
+        draw.text((margin, 116), "单件合成 · 头 / 胸 / 腿 / 项链 / 戒指可自由混搭", fill=(190, 222, 225, 255), font=self._font(24))
         draw.text((width - margin, 118), "合成渔具 铜制头盔", fill=(220, 234, 235, 255), font=self._font(21), anchor="ra")
 
         pack = state.get("pack") or {}
@@ -4903,46 +4903,63 @@ class McFish(NcatBotPlugin):
                 balance = int(economy.store.account(str(uid))["balance"])
             except Exception:
                 balance = None
-        for index, (set_name, data) in enumerate(sets):
-            col, row = index % 2, index // 2
-            x = margin + col * (column_width + gap)
-            y = header_height + 24 + row * (card_height + 16)
-            self._card(draw, (x, y, x + column_width, y + card_height), fill=(251, 252, 252, 255))
-            head_piece = data.get("slots", {}).get("head") or f"{set_name}头盔"
-            icon = self._resource_image(head_piece, (60, 60))
+
+        header_y = header_height + 24
+        self._card(draw, (margin, header_y, width - margin, header_y + table_header_height), fill=(229, 238, 240, 255), radius=12)
+        draw.text((margin + 16, header_y + 12), "套装", fill=(40, 61, 68, 255), font=self._font(21, bold=True))
+        for index, label in enumerate(slot_labels):
+            x = margin + set_col_width + gap + index * (cell_width + gap)
+            draw.text((x + 14, header_y + 12), label, fill=(40, 61, 68, 255), font=self._font(21, bold=True))
+
+        for row_index, (set_name, data) in enumerate(sets):
+            y = header_y + table_header_height + row_index * row_height
+            self._card(draw, (margin, y + 4, margin + set_col_width, y + row_height - 10), fill=(251, 252, 252, 255), radius=12)
+            set_icon_name = set_icon(set_name, data)
+            icon = self._resource_image(set_icon_name, (44, 44))
             if icon:
-                image.alpha_composite(icon, (x + 20, y + 22))
-            text_x = x + 96
-            draw.text((text_x, y + 18), set_label(set_name), fill=(40, 61, 68, 255), font=self._font(26, bold=True))
-            draw.text((text_x, y + 54), f"起始 {data['start']} 级", fill=(92, 112, 117, 255), font=self._font(19))
-            materials = []
-            enough = True
-            for item, need in data.get("craft_items", {}).items():
-                owned = int(pack.get(item, 0))
-                if owned < need:
+                image.alpha_composite(icon, (margin + 14, y + 18))
+            draw.text((margin + 68, y + 16), set_label(set_name), fill=(40, 61, 68, 255), font=self._font(20, bold=True))
+            draw.text((margin + 68, y + 48), f"起始 {data['start']} 级", fill=(92, 112, 117, 255), font=self._font(16))
+            draw.text((margin + 14, y + 92), "可单件合成", fill=(38, 144, 158, 255), font=self._font(15))
+
+            for slot_index, slot in enumerate(slot_names):
+                piece = data.get("slots", {}).get(slot)
+                x = margin + set_col_width + gap + slot_index * (cell_width + gap)
+                self._card(draw, (x, y + 4, x + cell_width, y + row_height - 10), fill=(249, 250, 247, 255), radius=12)
+                if not piece:
+                    draw.text((x + cell_width // 2, y + 54), "—", fill=(170, 185, 188, 255), font=self._font(28), anchor="mm")
+                    continue
+                recipe = craft_recipe(piece)
+                if recipe is None:
+                    draw.text((x + 12, y + 18), piece, fill=(40, 61, 68, 255), font=self._font(17, bold=True))
+                    draw.text((x + 12, y + 48), "不可合成", fill=(194, 91, 86, 255), font=self._font(15))
+                    continue
+                enough = True
+                material_parts = []
+                for item, need in recipe["items"].items():
+                    owned = int(pack.get(item, 0))
+                    if owned < need:
+                        enough = False
+                    material_parts.append(f"{item}{owned}/{need}")
+                gold = int(recipe["gold"])
+                if balance is not None and balance < gold:
                     enough = False
-                color = (61, 145, 112) if owned >= need else (194, 91, 86)
-                materials.append((f"{item} {owned}/{need}", color))
-            gold = int(data.get("craft_gold", 0))
-            if balance is not None and balance < gold:
-                enough = False
-            material_text = "  ·  ".join(text for text, _color in materials) or "无材料消耗"
-            mat_lines = self._wrap_text(material_text, self._font(18), column_width - 40)[:2]
-            for line_index, line in enumerate(mat_lines):
-                draw.text((x + 20, y + 92 + line_index * 24), line, fill=(92, 112, 117, 255), font=self._font(18))
-            draw.text(
-                (x + 20, y + 140),
-                f"{gold} 金币" if gold else "无金币消耗",
-                fill=(112, 96, 54, 255),
-                font=self._font(19),
-            )
-            draw.text(
-                (x + column_width - 20, y + 138),
-                "可合成" if enough else "材料不足",
-                fill=(61, 145, 112, 255) if enough else (194, 91, 86, 255),
-                font=self._font(21, bold=True),
-                anchor="ra",
-            )
+                icon = self._resource_image(piece, (30, 30))
+                if icon:
+                    image.alpha_composite(icon, (x + 10, y + 12))
+                draw.text((x + 44, y + 9), piece, fill=(40, 61, 68, 255), font=self._font(17, bold=True))
+                material_text = " · ".join(material_parts)
+                lines = self._wrap_text(material_text, self._font(13), cell_width - 20)[:3]
+                for line_index, line in enumerate(lines):
+                    draw.text((x + 10, y + 40 + line_index * 16), line, fill=(92, 112, 117, 255), font=self._font(13))
+                draw.text((x + 10, y + 94), f"{gold} 金币", fill=(112, 96, 54, 255), font=self._font(15, bold=True))
+                draw.text(
+                    (x + cell_width - 10, y + 116),
+                    "可合成" if enough else "材料不足",
+                    fill=(61, 145, 112, 255) if enough else (194, 91, 86, 255),
+                    font=self._font(15, bold=True),
+                    anchor="ra",
+                )
 
         output = Path(self.workspace) / "images" / f"craft_{uid}.png"
         output.parent.mkdir(parents=True, exist_ok=True)
