@@ -1303,7 +1303,7 @@ class McFish(NcatBotPlugin):
         card_width = (width - margin * 2 - gap * 2) // 3
         row_height = 78
         table_top = 390
-        table_height = 106 + max(1, len(upcoming)) * row_height
+        table_height = 124 + max(1, len(upcoming)) * row_height
         height = table_top + table_height + 42
         image = PILImage.new("RGBA", (width, height), (244, 248, 249, 255))
         draw = ImageDraw.Draw(image)
@@ -1334,14 +1334,14 @@ class McFish(NcatBotPlugin):
         self._card(draw, (margin, table_y, width - margin, table_y + table_height))
         draw.text((margin + 28, table_y + 22), "最近 5 次鱼王窗口", fill=(40, 61, 68, 255), font=self._font(34, bold=True))
         draw.text((width - margin - 28, table_y + 30), "按开始时间排序", fill=(92, 112, 117, 255), font=self._font(20), anchor="ra")
-        header_y = table_y + 78
+        header_y = table_y + 96
         columns = ((margin + 30, "序号"), (margin + 125, "鱼王"), (margin + 410, "开始"), (margin + 665, "结束"), (width - margin - 30, "距离开始"))
         for x, label in columns:
             draw.text((x, header_y), label, fill=(92, 112, 117, 255), font=self._font(21), anchor="rs" if x == width - margin - 30 else "ls")
-        draw.line((margin + 26, table_y + 101, width - margin - 26, table_y + 101), fill=(205, 220, 222, 255), width=2)
+        draw.line((margin + 26, table_y + 119, width - margin - 26, table_y + 119), fill=(205, 220, 222, 255), width=2)
         if upcoming:
             for index, window in enumerate(upcoming):
-                y = table_y + 119 + index * row_height
+                y = table_y + 137 + index * row_height
                 if index % 2 == 0:
                     draw.rounded_rectangle((margin + 20, y - 14, width - margin - 20, y + 46), radius=10, fill=(246, 250, 250, 255))
                 until = format_duration((window.starts_at - now).total_seconds())
@@ -1351,7 +1351,7 @@ class McFish(NcatBotPlugin):
                 draw.text((margin + 665, y), f"{window.ends_at:%H:%M}", fill=(70, 83, 88, 255), font=self._font(23))
                 draw.text((width - margin - 34, y), until, fill=(38, 144, 158, 255), font=self._font(23, bold=True), anchor="ra")
         else:
-            draw.text((margin + 30, table_y + 128), "本周暂无后续鱼王窗口", fill=(92, 112, 117, 255), font=self._font(25))
+            draw.text((margin + 30, table_y + 146), "本周暂无后续鱼王窗口", fill=(92, 112, 117, 255), font=self._font(25))
 
         output = Path(self.workspace) / "images" / f"clock_{uid}.png"
         output.parent.mkdir(parents=True, exist_ok=True)
@@ -1522,47 +1522,55 @@ class McFish(NcatBotPlugin):
         selected_titles = page_titles[page_key]
         sections = [section for section in sections if section[0] in selected_titles]
 
+        single_section = len(sections) == 1
+        content_width = width - margin * 2 if single_section else column_width
+
         def prepare_section(title: str, rows: list[str], accent: tuple[int, int, int]):
             wrapped_rows: list[list[str]] = []
             for row in rows:
-                row_lines = wrap(f"• {row}", body_font, column_width - 48)
+                row_lines = wrap(f"• {row}", body_font, content_width - 48 - 28)
                 wrapped_rows.append(row_lines)
             line_height = 34
-            height = 82 + sum(len(lines) * line_height + 10 for lines in wrapped_rows) + 20
+            height = 82 + sum(len(lines) * line_height + 10 for lines in wrapped_rows) + 34
             return (title, wrapped_rows, accent, height)
 
         prepared = [prepare_section(*section) for section in sections]
         # Pack whole cards into two near-equal columns. There are only seven
         # cards, so exhaustive partitioning keeps the layout stable when one
         # section grows without adding a general-purpose layout dependency.
-        section_totals = [section[3] + 22 for section in prepared]
-        total_height = sum(section_totals)
-        best_mask = 1
-        best_difference = total_height
-        for mask in range(1, 1 << len(prepared)):
-            if not mask & 1:
-                continue
-            left_height = sum(
-                section_totals[index]
-                for index in range(len(prepared))
-                if mask & (1 << index)
-            )
-            difference = abs(total_height - left_height * 2)
-            if difference < best_difference:
-                best_mask = mask
-                best_difference = difference
-        left_sections = [
-            section for index, section in enumerate(prepared) if best_mask & (1 << index)
-        ]
-        right_sections = [
-            section for index, section in enumerate(prepared) if not best_mask & (1 << index)
-        ]
         header_height = 230
         footer_height = 92
-        column_height = max(
-            sum(section[3] + 22 for section in column)
-            for column in (left_sections, right_sections)
-        )
+        if single_section:
+            left_sections = prepared
+            right_sections = []
+            column_height = sum(section[3] + 22 for section in left_sections)
+        else:
+            section_totals = [section[3] + 22 for section in prepared]
+            total_height = sum(section_totals)
+            best_mask = 1
+            best_difference = total_height
+            for mask in range(1, 1 << len(prepared)):
+                if not mask & 1:
+                    continue
+                left_height = sum(
+                    section_totals[index]
+                    for index in range(len(prepared))
+                    if mask & (1 << index)
+                )
+                difference = abs(total_height - left_height * 2)
+                if difference < best_difference:
+                    best_mask = mask
+                    best_difference = difference
+            left_sections = [
+                section for index, section in enumerate(prepared) if best_mask & (1 << index)
+            ]
+            right_sections = [
+                section for index, section in enumerate(prepared) if not best_mask & (1 << index)
+            ]
+            column_height = max(
+                sum(section[3] + 22 for section in column)
+                for column in (left_sections, right_sections)
+            )
         height = header_height + column_height + footer_height
         image = PILImage.new("RGBA", (width, height), (244, 248, 249, 255))
         draw = ImageDraw.Draw(image)
@@ -1585,7 +1593,7 @@ class McFish(NcatBotPlugin):
         def draw_section(section, x: int, y: int) -> int:
             title, wrapped_rows, accent, card_height = section
             draw.rounded_rectangle(
-                (x, y, x + column_width, y + card_height),
+                (x, y, x + content_width, y + card_height),
                 radius=18,
                 fill=(255, 255, 255, 255),
                 outline=(222, 231, 233, 255),
@@ -1593,11 +1601,11 @@ class McFish(NcatBotPlugin):
             )
             draw.rounded_rectangle((x, y, x + 10, y + card_height), radius=4, fill=(*accent, 255))
             draw.text((x + 30, y + 24), title, font=section_font, fill=(40, 61, 68, 255))
-            draw.line((x + 30, y + 72, x + column_width - 28, y + 72), fill=(*accent, 100), width=2)
+            draw.line((x + 30, y + 72, x + content_width - 28, y + 72), fill=(*accent, 100), width=2)
             current_y = y + 92
             for lines in wrapped_rows:
-                for line in lines:
-                    draw.text((x + 30, current_y), line, font=body_font, fill=(70, 83, 88, 255))
+                for line_index, line in enumerate(lines):
+                    draw.text((x + 30 + (28 if line_index else 0), current_y), line, font=body_font, fill=(70, 83, 88, 255))
                     current_y += 34
                 current_y += 10
             return y + card_height + 22
@@ -1607,7 +1615,7 @@ class McFish(NcatBotPlugin):
             y_left = draw_section(section, margin, y_left)
         y_right = header_height + 28
         for section in right_sections:
-            y_right = draw_section(section, margin + column_width + gap, y_right)
+            y_right = draw_section(section, margin + content_width + gap, y_right)
 
         footer_y = height - footer_height
         draw.line((margin, footer_y + 10, width - margin, footer_y + 10), fill=(184, 202, 205, 255), width=2)
@@ -4712,7 +4720,7 @@ class McFish(NcatBotPlugin):
                             initial = round(initial, 1)
                         parts.append(f"{format_effect(key, initial)} → {format_effect(key, value)}")
                     lines.extend(
-                        self._wrap_text(f"{needed}件：" + "，".join(parts), self._font(14), 450)
+                        self._wrap_text(f"{needed}件：" + "，".join(parts), self._font(14), 430)
                     )
                 cards.append((set_name, piece, data, start, lines))
             if cards:
@@ -4728,7 +4736,7 @@ class McFish(NcatBotPlugin):
         prepared_sections = []
         for label, cards in sections:
             max_lines = max(len(card[4]) for card in cards)
-            card_height = 96 + max_lines * 20
+            card_height = 96 + max_lines * 20 + 12
             rows = (len(cards) + 2) // 3
             section_height = 56 + rows * (card_height + 12) + 20
             prepared_sections.append((label, cards, card_height, section_height))
@@ -5062,7 +5070,7 @@ class McFish(NcatBotPlugin):
                     owned = int(pack.get(item, 0))
                     if owned < need:
                         enough = False
-                    material_parts.append(f"{item}{owned}/{need}")
+                    material_parts.append(f"{item} {owned}/{need}")
                 gold = int(recipe["gold"])
                 if balance is not None and balance < gold:
                     enough = False
@@ -5070,10 +5078,8 @@ class McFish(NcatBotPlugin):
                 if icon:
                     image.alpha_composite(icon, (x + 10, y + 12))
                 draw.text((x + 44, y + 9), piece, fill=(40, 61, 68, 255), font=self._font(17, bold=True))
-                material_text = " · ".join(material_parts)
-                lines = self._wrap_text(material_text, self._font(13), cell_width - 20)[:3]
-                for line_index, line in enumerate(lines):
-                    draw.text((x + 10, y + 40 + line_index * 16), line, fill=(92, 112, 117, 255), font=self._font(13))
+                for line_index, line in enumerate(material_parts[:4]):
+                    draw.text((x + 10, y + 36 + line_index * 14), line, fill=(92, 112, 117, 255), font=self._font(12))
                 draw.text((x + 10, y + 94), f"{gold} 金币", fill=(112, 96, 54, 255), font=self._font(15, bold=True))
                 draw.text(
                     (x + cell_width - 10, y + 116),
@@ -5182,7 +5188,7 @@ class McFish(NcatBotPlugin):
         player_height = 70 + 50 + 20
         if player_groups:
             player_height = 70 + sum(
-                34 + max(1, (len(rows) + 1) // 2) * 76
+                34 + max(1, (len(rows) + 1) // 2) * 80
                 for rows in player_groups.values()
             ) + 20
         height = header_height + 24 + rod_height + 16 + shop_height + 16 + player_height + 42
@@ -5259,17 +5265,17 @@ class McFish(NcatBotPlugin):
                     col, row = index % 2, index // 2
                     x = margin + 20 + col * (tile_width + gap)
                     y = cursor + row * 76
-                    self._card(draw, (x, y, x + tile_width, y + 66), fill=(248, 251, 251, 255), radius=12)
+                    self._card(draw, (x, y, x + tile_width, y + 70), fill=(248, 251, 251, 255), radius=12)
                     icon = self._resource_image(name, (38, 38))
                     if icon:
                         image.alpha_composite(icon, (x + 14, y + 14))
-                    draw.text((x + 64, y + 10), name, fill=(40, 61, 68, 255), font=self._font(19))
-                    draw.text((x + 64, y + 39), f"×{count}", fill=(92, 112, 117, 255), font=self._font(17))
-                    draw.text((x + tile_width - 18, y + 22), f"{price} 金币", fill=(112, 96, 54, 255), font=self._font(19, bold=True), anchor="ra")
+                    draw.text((x + 64, y + 9), name, fill=(40, 61, 68, 255), font=self._font(19))
+                    draw.text((x + 64, y + 38), f"×{count}", fill=(92, 112, 117, 255), font=self._font(17))
+                    draw.text((x + tile_width - 18, y + 20), f"{price} 金币", fill=(112, 96, 54, 255), font=self._font(19, bold=True), anchor="ra")
                     change_text = f"+{change}%" if change > 0 else f"{change}%"
                     change_color = (194, 91, 86, 255) if change > 0 else (61, 145, 112, 255) if change < 0 else (92, 112, 117, 255)
-                    draw.text((x + tile_width - 18, y + 45), change_text, fill=change_color, font=self._font(16), anchor="ra")
-                cursor += max(1, (len(rows) + 1) // 2) * 76
+                    draw.text((x + tile_width - 18, y + 44), change_text, fill=change_color, font=self._font(16), anchor="ra")
+                cursor += max(1, (len(rows) + 1) // 2) * 80
         else:
             draw.text((margin + 30, player_y + 98), "背包没有可出售物品", fill=(92, 112, 117, 255), font=self._font(25))
         draw.text((margin, height - 28), "材料、装备、卡片不可出售，因此不在列表中显示；当前收购价已含当日折扣，实际出售另计鱼点税、黄金磁石与装备加成。", fill=(92, 112, 117, 255), font=self._font(18))

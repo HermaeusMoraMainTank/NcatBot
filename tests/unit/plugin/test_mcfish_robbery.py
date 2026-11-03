@@ -3115,7 +3115,7 @@ def test_mcfish_clock_renders_the_nearest_five_future_king_windows(tmp_path: Pat
 
     assert output.exists()
     with PILImage.open(output) as image:
-        assert image.size == (1240, 928)
+        assert image.size == (1240, 946)
 
 
 def test_mcfish_reports_daily_limit_separately_from_pole_durability():
