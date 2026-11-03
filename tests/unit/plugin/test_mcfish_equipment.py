@@ -240,11 +240,11 @@ def test_gear_catalog_command_renders_sets_effects_and_sources(tmp_path: Path):
 
     message = plugin._send_original_message.await_args.args[1]
     image_path = Path(str(list(message)[0].file))
-    assert image_path.name == "gearcatalog_100.png"
+    assert image_path.name == "gearcatalog_slots_100.png"
     with PILImage.open(image_path) as image:
         assert image.size[0] == 1600
-        # 13 套装备 + 饰品区，高度必须能容纳全部卡片。
-        assert image.size[1] > 2000
+        # 按部位展示全部装备，高度必须能容纳 5 个部位与饰品区。
+        assert image.size[1] > 3000
 
 
 def test_catalog_uses_wiki_icons_for_paladin_and_oracle_sets():
@@ -304,3 +304,23 @@ def test_craft_recipes_differ_by_slot():
     assert "废弃零件" in body["items"]
     assert "纤维" in legs["items"]
     assert "纤维" in necklace["items"]
+
+def test_gear_catalog_set_overview_is_still_available(tmp_path: Path):
+    from PIL import Image as PILImage
+
+    plugin = _gear_plugin()
+    plugin.workspace = tmp_path
+    plugin._state = lambda _uid: {"pack": {}, "equipment": {}, "jewelry": {}}
+    plugin._send_original_message = AsyncMock()
+    event = SimpleNamespace(
+        sender=SimpleNamespace(user_id="100"), raw_message="装备图鉴 套装", reply=AsyncMock()
+    )
+
+    asyncio.run(plugin._handle_message(event))
+
+    message = plugin._send_original_message.await_args.args[1]
+    image_path = Path(str(list(message)[0].file))
+    assert image_path.name == "gearcatalog_100.png"
+    with PILImage.open(image_path) as image:
+        assert image.size[0] == 1600
+        assert image.size[1] > 2000

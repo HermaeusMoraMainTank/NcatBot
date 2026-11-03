@@ -574,7 +574,7 @@ CONCURRENT_OVERWRITE_LATE_REPAIRS = {
 
 MCFISH_COMMAND_ROWS_BASE = (
     "开始：钓鱼 / 进行钓鱼 / 进行n次钓鱼（支持中文数量，单次最多10竿）",
-    "查询：钓鱼看板 / 钓鱼商店 / 钓鱼背包 / 钓鱼时钟 / 钓鱼概率 [鱼点/全部] / 钓鱼图鉴 [名称] / 装备图鉴 / 查看上次钓鱼结果",
+    "查询：钓鱼看板 / 钓鱼商店 / 钓鱼背包 / 钓鱼时钟 / 钓鱼概率 [鱼点/全部] / 钓鱼图鉴 [名称] / 装备图鉴 [套装] / 查看上次钓鱼结果",
     "任务：钓鱼任务 / 领取钓鱼任务 编号",
     "鱼点：钓鱼鱼点（鱼点与常驻鱼王） / 前往 深海（切换鱼点）",
     "买卖：购买xxx [数量] / 出售xxx [数量] / 出售所有垃圾（可一次出售多个物品）",
@@ -4010,7 +4010,7 @@ class McFish(NcatBotPlugin):
         is_task_command = any(text == prefix or text.startswith(prefix + " ") for prefix in task_prefixes)
         item_grant_prefixes = ("钓鱼发放", "钓鱼充值")
         is_item_grant_command = any(text == prefix or text.startswith(prefix + " ") for prefix in item_grant_prefixes)
-        if not text or not (text.startswith(("进行", "购买", "出售", "装备", "卸下", "升级", "附魔", "合成", "消除", "修复", "维修", "分解", "前往", "开箱", "吃海藻", "强化渔具", "卸下渔具", "交付", "学习")) or text in ("花费100购买鱼竿", "购买饰品槽位", "解锁饰品槽位", "钓鱼帮助", "钓鱼概率", "钓鱼背包", "钓鱼商店", "钓鱼看板", "钓鱼时钟", "钓鱼图鉴", "钓鱼任务", "钓鱼力", "钓鱼鱼点", "鱼点", "钓鱼卡牌", "卡牌", "钓鱼装备", "装备图鉴", "饰品图鉴", "钓鱼工坊", "领取 三叉戟", "领取 神谕卡组", "钓鱼天赋", "重置钓鱼天赋", "查看上次钓鱼结果", "出售所有垃圾", "当前装备概率明细", "查看钓鱼规则") or text.startswith("钓鱼图鉴 ") or text.startswith("钓鱼帮助 ") or text.startswith("钓鱼概率 ") or is_task_command or is_item_grant_command):
+        if not text or not (text.startswith(("进行", "购买", "出售", "装备", "卸下", "升级", "附魔", "合成", "消除", "修复", "维修", "分解", "前往", "开箱", "吃海藻", "强化渔具", "卸下渔具", "交付", "学习")) or text in ("花费100购买鱼竿", "购买饰品槽位", "解锁饰品槽位", "钓鱼帮助", "钓鱼概率", "钓鱼背包", "钓鱼商店", "钓鱼看板", "钓鱼时钟", "钓鱼图鉴", "钓鱼任务", "钓鱼力", "钓鱼鱼点", "鱼点", "钓鱼卡牌", "卡牌", "钓鱼装备", "装备图鉴", "饰品图鉴", "钓鱼工坊", "领取 三叉戟", "领取 神谕卡组", "钓鱼天赋", "重置钓鱼天赋", "查看上次钓鱼结果", "出售所有垃圾", "当前装备概率明细", "查看钓鱼规则") or text.startswith("钓鱼图鉴 ") or text.startswith("装备图鉴 ") or text.startswith("钓鱼帮助 ") or text.startswith("钓鱼概率 ") or is_task_command or is_item_grant_command):
             return
         uid = str(event.sender.user_id)
         state = self._state(uid)
@@ -4098,6 +4098,9 @@ class McFish(NcatBotPlugin):
             output = await asyncio.to_thread(self._render_clock_image, uid)
             await self._send_original_message(event, MessageArray([Image(file=str(output))])); return
         if text in ("装备图鉴", "钓鱼图鉴 装备"):
+            output = await asyncio.to_thread(self._render_gear_slot_catalog_image, uid, state)
+            await self._send_original_message(event, MessageArray([Image(file=str(output))])); return
+        if text == "装备图鉴 套装":
             output = await asyncio.to_thread(self._render_gear_catalog_image, uid, state)
             await self._send_original_message(event, MessageArray([Image(file=str(output))])); return
         if text in ("饰品图鉴", "钓鱼图鉴 饰品"):
@@ -4677,6 +4680,125 @@ class McFish(NcatBotPlugin):
             draw.text((margin + 30, inventory_y + 98), "背包没有存放任何东西", fill=(92, 112, 117, 255), font=self._font(25))
 
         output = Path(self.workspace) / "images" / f"pack_{uid}.png"
+        output.parent.mkdir(parents=True, exist_ok=True)
+        image.save(output, "PNG")
+        return output
+
+    def _render_gear_slot_catalog_image(self, uid: str, state: dict) -> Path:
+        """按部位展示所有装备：初始等级/FP 与满级 FP，以及套装效果起始→最终值。"""
+        slot_order = (
+            ("head", "头盔"),
+            ("body", "胸甲"),
+            ("legs", "腿甲"),
+            ("necklace", "项链"),
+            ("ring", "戒指"),
+        )
+        sections = []
+        for slot, label in slot_order:
+            cards = []
+            for set_name, data in SETS.items():
+                piece = data.get("slots", {}).get(slot)
+                if not piece:
+                    continue
+                start = int(data.get("start", 1))
+                lines = []
+                for needed, effects in sorted(data.get("effects", {}).items()):
+                    parts = []
+                    for key, value in effects.items():
+                        initial = float(value) * start / 20.0
+                        if key == "daily":
+                            initial = float(int(initial))
+                        elif key == "fragment":
+                            initial = round(initial, 1)
+                        parts.append(f"{format_effect(key, initial)} → {format_effect(key, value)}")
+                    lines.extend(
+                        self._wrap_text(f"{needed}件：" + "，".join(parts), self._font(14), 450)
+                    )
+                cards.append((set_name, piece, data, start, lines))
+            if cards:
+                cards.sort(key=lambda item: (item[3], set_label(item[0])))
+                sections.append((label, cards))
+
+        width = 1600
+        margin = 42
+        gap = 18
+        header_height = 172
+        column_width = (width - margin * 2 - gap * 2) // 3
+        sections_height = 0
+        prepared_sections = []
+        for label, cards in sections:
+            max_lines = max(len(card[4]) for card in cards)
+            card_height = 96 + max_lines * 20
+            rows = (len(cards) + 2) // 3
+            section_height = 56 + rows * (card_height + 12) + 20
+            prepared_sections.append((label, cards, card_height, section_height))
+            sections_height += section_height + 16
+
+        accessories = {
+            "财富浮标": "Ⅰ/Ⅱ/Ⅲ：宝藏×1.35/1.50/1.65；鱼王咬钩率×1.20/1.28/1.36",
+            "坚韧钓组": "Ⅰ/Ⅱ/Ⅲ：鱼王上钩率 +12/16/20 个百分点（最低 5%）",
+            "黄金磁石": "Ⅰ/Ⅱ/Ⅲ：宝藏品质 +1/2/3；宝藏售价 ×1.25/1.35/1.50；鱼价 ×1.08/1.12/1.16；后置鱼王售价 ×10/30/100（前置与常驻封顶 ×3/5/8）",
+            "幸运海星": "Ⅰ/Ⅱ/Ⅲ：普通碎片概率 +16%/20%/24%",
+            "魔法鱼饵": "10 竿：等待 ×0.85，稀有鱼权重 ×1.25",
+            "隐秘诱饵": "6 竿：隐藏鱼触发 ×1.5",
+            "万能鱼饵": "5 竿：每竿兜底一条普通鱼",
+        }
+        accessory_height = 60 + 4 * 150
+        height = header_height + 24 + sections_height + accessory_height + 42
+        image = PILImage.new("RGBA", (width, height), (244, 248, 249, 255))
+        draw = ImageDraw.Draw(image)
+        draw.rounded_rectangle((0, 0, width, header_height), radius=26, fill=(33, 68, 82, 255))
+        draw.rectangle((0, header_height - 20, width, header_height), fill=(33, 68, 82, 255))
+        draw.text((margin, 34), "装备图鉴", fill=(250, 252, 252, 255), font=self._font(62, bold=True))
+        draw.text((margin, 116), "按部位展示 · 初始值 → 最终值（20级）", fill=(190, 222, 225, 255), font=self._font(24))
+        draw.text((width - margin, 118), "装备图鉴 套装 查看套装总览", fill=(220, 234, 235, 255), font=self._font(19), anchor="ra")
+
+        section_y = header_height + 24
+        for label, cards, card_height, section_height in prepared_sections:
+            self._card(draw, (margin, section_y, width - margin, section_y + section_height))
+            draw.text((margin + 26, section_y + 16), f"{label}（{len(cards)}）", fill=(40, 61, 68, 255), font=self._font(27, bold=True))
+            draw.text((width - margin - 26, section_y + 22), "起始 FP → 满级 FP · 套装效果 起始→最终", fill=(92, 112, 117, 255), font=self._font(16), anchor="ra")
+            for index, (set_name, piece, data, start, lines) in enumerate(cards):
+                col, row = index % 3, index // 3
+                x = margin + 20 + col * (column_width + gap)
+                y = section_y + 54 + row * (card_height + 12)
+                self._card(draw, (x, y, x + column_width, y + card_height), fill=(249, 250, 247, 255), radius=12)
+                icon = self._resource_image(piece, (40, 40))
+                if icon:
+                    image.alpha_composite(icon, (x + 12, y + 12))
+                draw.text((x + 58, y + 10), piece, fill=(40, 61, 68, 255), font=self._font(17, bold=True))
+                draw.text((x + 58, y + 36), f"{set_label(set_name)} · 起始 {start} 级", fill=(92, 112, 117, 255), font=self._font(14))
+                start_fp = fp_for_level(start)
+                final_fp = fp_for_level(20)
+                draw.text((x + 58, y + 58), f"FP {start_fp} → {final_fp}", fill=(38, 144, 158, 255), font=self._font(15, bold=True))
+                source = "获取：合成" if data.get("craftable") else "获取：掉落 / 开箱"
+                draw.text((x + column_width - 12, y + 12), source, fill=(112, 96, 54, 255), font=self._font(12), anchor="ra")
+                for line_index, line in enumerate(lines):
+                    draw.text((x + 12, y + 82 + line_index * 20), line, fill=(70, 83, 88, 255), font=self._font(14))
+            section_y += section_height + 16
+
+        self._card(draw, (margin, section_y, width - margin, section_y + accessory_height))
+        draw.text((margin + 24, section_y + 18), "饰品与消耗品", fill=(40, 61, 68, 255), font=self._font(30, bold=True))
+        draw.text((width - margin - 24, section_y + 26), "碎片合成 · 金币手续费", fill=(92, 112, 117, 255), font=self._font(19), anchor="ra")
+        cell_gap = 14
+        cell_width = (width - margin * 2 - 48 - cell_gap) // 2
+        for index, (name, effect) in enumerate(accessories.items()):
+            col, row = index % 2, index // 2
+            x = margin + 24 + col * (cell_width + cell_gap)
+            y = section_y + 58 + row * 150
+            icon = self._resource_image(name, (40, 40))
+            if icon:
+                image.alpha_composite(icon, (x, y + 2))
+            draw.text((x + 50, y), name, fill=(40, 61, 68, 255), font=self._font(21, bold=True))
+            effect_lines = self._wrap_text(effect, self._font(16), cell_width - 60)[:2]
+            for line_index, line in enumerate(effect_lines):
+                draw.text((x + 50, y + 28 + line_index * 22), line, fill=(92, 112, 117, 255), font=self._font(16))
+            source = f"获取：合成{name}（{EQUIPMENT[name]['fragments']} 碎片 + {EQUIPMENT_CRAFT_FEES[name]} 金币）"
+            source_lines = self._wrap_text(source, self._font(15), cell_width - 60)[:2]
+            for line_index, line in enumerate(source_lines):
+                draw.text((x + 50, y + 84 + line_index * 20), line, fill=(112, 96, 54, 255), font=self._font(15))
+
+        output = Path(self.workspace) / "images" / f"gearcatalog_slots_{uid}.png"
         output.parent.mkdir(parents=True, exist_ok=True)
         image.save(output, "PNG")
         return output
