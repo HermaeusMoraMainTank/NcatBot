@@ -3693,121 +3693,505 @@ class McFish(NcatBotPlugin):
         lines.append(("note", "数字为该鱼种进入掉落池所需钓鱼力；括号内为当前鱼竿下的每竿出现率，不含空竿与其他大类。"))
         return lines
 
+    def _probability_current_tables(self, uid: str, state: dict) -> list[dict]:
+        boundaries = self._zone_boundaries(state)
+        categories = tuple(boundaries[index + 1] - boundaries[index] for index in range(4))
+        equip_name = str((state.get("equip") or {}).get("name", ""))
+        rod_name = equip_name if equip_name in POLES or equip_name == AXOLOTL else "木竿"
+        zone = str(state.get("fishing_zone", daily_fishing_zone()))
+        fish_count = self._fish_count(state)
+        power = fishing_power(state)
+        magic_bait = int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0
+        rod_values, blocked_pole = self._rod_probability_map(rod_name, categories[1])
+        treasure_values = self._probability_item_map("treasure", categories[0])
+        waste_values = self._probability_item_map("waste", categories[3])
+        fish_values = self._fish_probability_map(
+            rod_name, zone, categories[2], magic_bait=magic_bait, power=power
+        )
+        air = max(0, 100 - sum(categories)) + blocked_pole
+        accessories = "、".join(
+            f"{name}{self._enchant_label(self._accessory_level(state, name))}"
+            for name in state.get("accessories", [])
+        ) or "无"
+        baits = "、".join(
+            name for name, count in state.get("active_consumables", {}).items() if int(count) > 0
+        ) or "无"
+        summary = [
+            ("用户", str(uid), "鱼竿", equip_name or "未装备（按木竿计算）"),
+            ("鱼点", FISHING_ZONE_LABELS.get(zone, zone), "鱼总数", f"{fish_count}（{'强化区间' if fish_count > 100 or equip_name == AXOLOTL else '基础区间'}）"),
+            ("钓鱼力", power_summary(state), "", ""),
+            ("饰品槽位", f"{len(state.get('accessories', []))}/{state.get('accessory_slots', 2)}", "鱼饵", baits),
+            ("饰品", accessories, "", ""),
+            ("大类", f"宝藏 {categories[0]}% / 鱼竿 {categories[1]}% / 普通鱼 {categories[2]}% / 垃圾 {categories[3]}% / 空竿 {air:.2f}%", "", ""),
+            ("垃圾内部", f"垃圾 {waste_split(zone)[0]}% / 材料 {waste_split(zone)[1]}% / 食物 {waste_split(zone)[2]}% / 贵重 {waste_split(zone)[3]}%", "", ""),
+        ]
+
+        tables: list[dict] = [{
+            "title": "鱼竿掉落",
+            "headers": ["鱼竿", "概率", "状态"],
+            "rows": [
+                [
+                    name,
+                    self._probability_value(value),
+                    "当前" if name == rod_name else "不可越级" if value == 0 and name != "三叉戟" else "可掉落",
+                ]
+                for name, value in rod_values.items()
+            ],
+            "weights": [2, 1, 1.5],
+            "aligns": ["l", "r", "l"],
+            "icons": True,
+        }, {
+            "title": "宝藏概率",
+            "headers": ["宝藏", "概率"],
+            "rows": [[name, self._probability_value(value)] for name, value in treasure_values.items()],
+            "weights": [2.2, 1],
+            "aligns": ["l", "r"],
+            "icons": True,
+        }, {
+            "title": "当前鱼点普通鱼",
+            "headers": ["鱼", "出现率", "所需 FP", "状态"],
+            "rows": [
+                [
+                    name,
+                    self._probability_value(fish_values.get(name, 0)),
+                    str(fish_min_power(zone, name)),
+                    "可钓" if fish_min_power(zone, name) <= power else "FP 不足",
+                ]
+                for name in FISH_ZONE_WEIGHTS.get(zone, ())
+            ],
+            "weights": [2.2, 1.2, 1, 1],
+            "aligns": ["l", "r", "r", "l"],
+            "icons": True,
+            "note": "出现率为每竿概率，不含空竿与其他大类。",
+        }, {
+            "title": "垃圾概率",
+            "headers": ["垃圾", "概率"],
+            "rows": [[name, self._probability_value(value)] for name, value in waste_values.items()],
+            "weights": [2.2, 1],
+            "aligns": ["l", "r"],
+            "icons": True,
+        }]
+
+        hidden_names = [name for name, item in HIDDEN_FISH.items() if item["zone"] == zone]
+        if hidden_names:
+            active = int(state.get("active_consumables", {}).get("隐秘诱饵", 0)) > 0
+            tables.append({
+                "title": "隐藏鱼",
+                "headers": ["隐藏鱼", "概率", "条件"],
+                "rows": [[name, "4.50%" if active else "0.00%", "隐秘诱饵" if active else "需隐秘诱饵"] for name in hidden_names],
+                "weights": [2, 1, 2],
+                "aligns": ["l", "r", "l"],
+                "icons": True,
+            })
+
+        king_rows = []
+        for king_name, king in FISH_KINGS.items():
+            if king["zone"] != zone:
+                continue
+            required = king.get("requires")
+            ready = not required or int(state.get("king_stats", {}).get(required, {}).get("bitten", 0)) > 0
+            base = int(king.get("base_price", 0))
+            role = "后置" if king.get("kind") == "final" else "前置"
+            cap = "×10/×30/×100" if king.get("kind") == "final" else "×3/×5/×8"
+            if not ready:
+                king_rows.append([king_name, role, "—", "—", str(base), cap, "前置未咬钩"])
+                continue
+            bite, hook = fish_king_probabilities(king_name, rod_name, prerequisite_caught=ready)
+            wealth_multiplier = self._accessory_effect(state, "财富浮标", "king_clue_rate", 1.0)
+            if wealth_multiplier > 1.0:
+                bite = king_bite_rate(bite, wealth_bobber=wealth_multiplier)
+            tough_points = self._accessory_effect(state, "坚韧钓组", "king_hook_success_points", 0)
+            if tough_points:
+                hook = king_success_rate(hook, tough_tackle=tough_points)
+            king_rows.append([king_name, role, f"{bite * 100:.2f}%", f"{hook * 100:.2f}%", str(base), cap, "可判定"])
+        if king_rows:
+            tables.append({
+                "title": "限时鱼王",
+                "headers": ["鱼王", "类型", "咬钩", "基础上钩", "基础价", "磁石上限", "状态"],
+                "rows": king_rows,
+                "weights": [1.8, 0.9, 1, 1.1, 1, 1.8, 1.2],
+                "aligns": ["l", "l", "r", "r", "r", "l", "l"],
+                "icons": True,
+                "note": "概率只在对应鱼王窗口内生效；最终上钩率还受回复技能和路径影响。",
+            })
+
+        resident_name = resident_king_for_zone(zone)
+        if resident_name:
+            resident_gear = self._gear_effects(state)
+            resident_bite = resident_king_bite_chance(
+                resident_name,
+                gear_bonus=float(resident_gear.get("king_bite", 0.0)) + float(resident_gear.get("legendary", 0.0)),
+                clue_multiplier=self._accessory_effect(state, "财富浮标", "king_clue_rate", 1.0),
+                bait_bonus=resident_king_bait_multiplier(state.get("active_consumables", {})),
+            )
+            resident_hook = resident_king_hook_chance(
+                resident_name,
+                tough_points=self._accessory_effect(state, "坚韧钓组", "king_hook_success_points", 0),
+            )
+            tables.append({
+                "title": "常驻鱼王",
+                "headers": ["鱼王", "每竿咬钩", "上钩", "钓鱼力", "每日上限", "参考售价"],
+                "rows": [[
+                    resident_name,
+                    f"{resident_bite * 100:.2f}%",
+                    f"{resident_hook * 100:.2f}%",
+                    str(resident_king_fp(resident_name)),
+                    str(RESIDENT_KING_DAILY_LIMIT),
+                    str(int(RESIDENT_KINGS[resident_name]["base_price"])),
+                ]],
+                "weights": [2, 1.2, 1, 1, 1, 1.2],
+                "aligns": ["l", "r", "r", "r", "r", "r"],
+                "icons": True,
+                "note": "常驻鱼王也属于该鱼点鱼类，但按鱼王规则单独结算，不占用每周窗口。",
+            })
+        return summary, tables
+
+    def _probability_zone_tables(self, state: dict) -> list[dict]:
+        rod_name = str((state.get("equip") or {}).get("name", "木竿"))
+        power = fishing_power(state)
+        boundaries = self._zone_boundaries(state)
+        fish_category = boundaries[3] - boundaries[2]
+        tables = []
+        for zone in FISHING_ZONES:
+            weights = fish_zone_weights(zone, rod_name, power=power)
+            total = sum(value for value in weights.values() if value > 0)
+            rows = []
+            for name in FISH_ZONE_WEIGHTS.get(zone, ()):
+                share = weights.get(name, 0) / total if total else 0
+                gate = fish_min_power(zone, name)
+                rows.append([
+                    name,
+                    "普通鱼",
+                    str(gate),
+                    f"{share * fish_category:.2f}%" if gate <= power else "0.00%",
+                    "—",
+                ])
+            resident = resident_king_for_zone(zone)
+            if resident:
+                resident_gear = self._gear_effects(state)
+                bite = resident_king_bite_chance(
+                    resident,
+                    gear_bonus=float(resident_gear.get("king_bite", 0.0)) + float(resident_gear.get("legendary", 0.0)),
+                    clue_multiplier=self._accessory_effect(state, "财富浮标", "king_clue_rate", 1.0),
+                    bait_bonus=resident_king_bait_multiplier(state.get("active_consumables", {})),
+                )
+                hook = resident_king_hook_chance(
+                    resident,
+                    tough_points=self._accessory_effect(state, "坚韧钓组", "king_hook_success_points", 0),
+                )
+                rows.append([
+                    resident,
+                    "常驻鱼王",
+                    str(resident_king_fp(resident)),
+                    f"{bite * 100:.2f}%",
+                    f"{hook * 100:.2f}%",
+                ])
+            tables.append({
+                "title": f"{fishing_zone_label(zone)}（进入 FP {fishing_zone_required_power(zone)}）",
+                "headers": ["鱼", "类型", "所需 FP", "出现率 / 咬钩", "上钩"],
+                "rows": rows,
+                "weights": [2, 1, 1, 1.6, 1],
+                "aligns": ["l", "l", "r", "r", "r"],
+                "icons": True,
+                "note": "出现率为每竿概率；常驻鱼王为每竿咬钩/上钩。",
+            })
+        return tables
+
+    def _probability_all_tables(self) -> list[dict]:
+        tables = []
+        rod_rows = []
+        for candidate in POLES:
+            values, blocked = self._rod_probability_map(candidate, 1)
+            rod_rows.append([candidate, *[self._probability_value(values[name]) for name in POLES], self._probability_value(blocked)])
+        tables.append({
+            "title": "鱼竿掉落（基础区间）",
+            "headers": ["当前竿", *POLES, "额外空竿"],
+            "rows": rod_rows,
+            "weights": [1.2, *([1] * len(POLES)), 1.1],
+            "aligns": ["l", *(["r"] * len(POLES)), "r"],
+            "icons": False,
+        })
+
+        treasures = self._probability_item_map("treasure", 1)
+        enhanced_treasures = self._probability_item_map("treasure", 2)
+        tables.append({
+            "title": "宝藏",
+            "headers": ["宝藏", "基础", "强化"],
+            "rows": [[name, self._probability_value(value), self._probability_value(enhanced_treasures.get(name, 0))] for name, value in treasures.items()],
+            "weights": [2.2, 1, 1],
+            "aligns": ["l", "r", "r"],
+            "icons": True,
+        })
+
+        wastes = self._probability_item_map("waste", 30)
+        enhanced_wastes = self._probability_item_map("waste", 45)
+        tables.append({
+            "title": "垃圾",
+            "headers": ["垃圾", "基础", "强化"],
+            "rows": [[name, self._probability_value(value), self._probability_value(enhanced_wastes.get(name, 0))] for name, value in wastes.items()],
+            "weights": [2.2, 1, 1],
+            "aligns": ["l", "r", "r"],
+            "icons": True,
+        })
+
+        for zone in ("bay", "deep", "ruin", "storm"):
+            rows = []
+            for name in FISH_ZONE_WEIGHTS.get(zone, ()):
+                rows.append([
+                    name,
+                    str(fish_min_power(zone, name)),
+                    *[
+                        self._probability_value(self._fish_probability_map(candidate, zone, 25).get(name, 0))
+                        for candidate in POLES
+                    ],
+                ])
+            tables.append({
+                "title": f"普通鱼 · {fishing_zone_label(zone)}",
+                "headers": ["鱼", "FP", *POLES],
+                "rows": rows,
+                "weights": [1.8, 0.8, *([1] * len(POLES))],
+                "aligns": ["l", "r", *(["r"] * len(POLES))],
+                "icons": True,
+                "note": "概率为每竿出现率；熔岩深渊及之后的鱼点见“钓鱼概率 鱼点”。",
+            })
+
+        king_rows = []
+        for king_name, king in FISH_KINGS.items():
+            values = []
+            for candidate in POLES:
+                bite, hook = fish_king_probabilities(king_name, candidate, prerequisite_caught=True)
+                values.append(f"{bite * 100:.1f}/{hook * 100:.1f}")
+            role = "后置" if king.get("kind") == "final" else "前置"
+            cap = "×10/×30/×100" if king.get("kind") == "final" else "×3/×5/×8"
+            king_rows.append([
+                king_name, role, str(int(king.get("base_price", 0))), cap, *values,
+            ])
+        tables.append({
+            "title": "限时鱼王（咬钩率/基础上钩率）",
+            "headers": ["鱼王", "类型", "基础价", "磁石", *POLES],
+            "rows": king_rows,
+            "weights": [1.5, 0.8, 0.9, 1.1, *([0.95] * len(POLES))],
+            "aligns": ["l", "l", "r", "l", *(["r"] * len(POLES))],
+            "icons": True,
+            "note": "后置行显示前置已咬钩后的概率；未满足前置条件时为 0。",
+        })
+
+        resident_rows = []
+        for resident in RESIDENT_KING_NAMES:
+            entry = RESIDENT_KINGS[resident]
+            resident_rows.append([
+                resident,
+                fishing_zone_label(entry["zone"]),
+                str(int(entry["fp"])),
+                f"{float(entry['bite']) * 100:.2f}%",
+                f"{float(entry['hook']) * 100:.2f}%",
+                str(int(entry["base_price"])),
+            ])
+        tables.append({
+            "title": "常驻鱼王",
+            "headers": ["鱼王", "鱼点", "钓鱼力", "咬钩", "上钩", "参考售价"],
+            "rows": resident_rows,
+            "weights": [1.8, 1, 1, 1, 1, 1.2],
+            "aligns": ["l", "l", "r", "r", "r", "r"],
+            "icons": True,
+            "note": "常驻鱼王不占用每周窗口，每日上限 1 条，不产出鱼王鳞片。",
+        })
+
+        hidden_rows = [
+            [name, fishing_zone_label(item["zone"]), "4.50%", "对应鱼点 + 隐秘诱饵"]
+            for name, item in HIDDEN_FISH.items()
+        ]
+        tables.append({
+            "title": "隐藏鱼",
+            "headers": ["隐藏鱼", "触发鱼点", "概率", "条件"],
+            "rows": hidden_rows,
+            "weights": [1.8, 1.2, 1, 2],
+            "aligns": ["l", "l", "r", "l"],
+            "icons": True,
+        })
+        return tables
+
+    def _probability_draw_table(self, image, draw, x: int, y: int, width: int, section: dict) -> int:
+        title = str(section.get("title", ""))
+        headers = list(section.get("headers", []))
+        rows = list(section.get("rows", []))
+        weights = list(section.get("weights") or [1] * len(headers))
+        aligns = list(section.get("aligns") or ["l"] * len(headers))
+        note = str(section.get("note", ""))
+        icons = bool(section.get("icons"))
+        measure = ImageDraw.Draw(PILImage.new("RGB", (1, 1)))
+        inner = width - 28
+        total_weight = sum(weights) or 1
+        col_widths = [inner * weight / total_weight for weight in weights]
+
+        def fit(text: str, font, max_width: int) -> str:
+            value = str(text)
+            if measure.textbbox((0, 0), value, font=font)[2] <= max_width:
+                return value
+            while value and measure.textbbox((0, 0), value + "…", font=font)[2] > max_width:
+                value = value[:-1]
+            return value + "…"
+
+        note_lines = self._wrap_text(note, self._font(14), inner)[:3] if note else []
+        title_height = 52
+        header_height = 30
+        row_height = 30
+        note_height = len(note_lines) * 18 + 10 if note_lines else 0
+        height = title_height + header_height + len(rows) * row_height + note_height + 16
+        self._card(draw, (x, y, x + width, y + height), fill=(251, 252, 252, 255), radius=14)
+        draw.text((x + 14, y + 10), title, fill=(40, 61, 68, 255), font=self._font(21, bold=True))
+
+        header_y = y + title_height
+        draw.rounded_rectangle((x + 8, header_y, x + width - 8, header_y + header_height), radius=8, fill=(229, 238, 240, 255))
+        cell_x = x + 14
+        header_font = self._font(15, bold=True)
+        for index, label in enumerate(headers):
+            cell_width = col_widths[index]
+            anchor = "rs" if aligns[index] == "r" else "ls"
+            text_x = cell_x + cell_width - 8 if aligns[index] == "r" else cell_x + 6
+            draw.text((text_x, header_y + 5), fit(label, header_font, cell_width - 14), fill=(40, 61, 68, 255), font=header_font, anchor=anchor)
+            cell_x += cell_width
+
+        row_y = header_y + header_height
+        row_font = self._font(15)
+        for row_index, row in enumerate(rows):
+            if row_index % 2 == 0:
+                draw.rounded_rectangle((x + 8, row_y, x + width - 8, row_y + row_height), radius=6, fill=(246, 250, 250, 255))
+            cell_x = x + 14
+            for index, value in enumerate(row):
+                cell_width = col_widths[index]
+                text_x = cell_x + 6
+                available = cell_width - 14
+                if index == 0 and icons:
+                    icon = self._resource_image(str(value), (22, 22))
+                    if icon:
+                        image.alpha_composite(icon, (cell_x + 2, row_y + 4))
+                        text_x = cell_x + 28
+                        available = cell_width - 34
+                anchor = "rs" if aligns[index] == "r" else "ls"
+                draw_x = cell_x + cell_width - 8 if aligns[index] == "r" else text_x
+                draw.text((draw_x, row_y + 5), fit(value, row_font, available), fill=(70, 83, 88, 255), font=row_font, anchor=anchor)
+                cell_x += cell_width
+            row_y += row_height
+
+        if note_lines:
+            note_y = row_y + 4
+            for line in note_lines:
+                draw.text((x + 14, note_y), line, fill=(92, 112, 117, 255), font=self._font(14))
+                note_y += 18
+        return height
+
     def _render_probability_image(self, uid: str, state: dict, page: str = "") -> Path:
-        current, all_probabilities = self._probability_sections(uid, state)
         key = page.strip()
         if key in ("鱼点", "鱼种"):
-            entries = self._zone_fish_entries(state)
             title = "钓鱼概率 · 鱼点鱼种"
-            subtitle = "每个鱼点会出的 4 条鱼与所需钓鱼力"
-            suffix = "_zones"
+            subtitle = "每个鱼点会出的鱼与所需钓鱼力"
+            summary = []
+            tables = self._probability_zone_tables(state)
+            single_column = False
         elif key in ("全部", "所有", "all"):
-            entries = all_probabilities
             title = "钓鱼概率 · 全部鱼竿"
-            subtitle = "九档鱼竿对照 · 不含当前角色加成"
-            suffix = "_all"
+            subtitle = "九档鱼竿对照 · 表格视图"
+            summary = []
+            tables = self._probability_all_tables()
+            single_column = True
         else:
-            entries = current
             title = "钓鱼概率"
-            subtitle = "当前装备明细"
-            suffix = ""
+            subtitle = "当前装备明细 · 表格视图"
+            summary, tables = self._probability_current_tables(uid, state)
+            single_column = False
+
         width = 1600
         margin = 42
-        gap = 28
+        gap = 24
         column_width = (width - margin * 2 - gap) // 2
-        header_height = 176
-        heading_font = self._font(29, bold=True)
-        body_font = self._font(24)
-        note_font = self._font(20)
+        header_height = 172
+        summary_height = 0
+        if summary:
+            summary_height = 58 + len(summary) * 32 + 18
 
-        icons_enabled = suffix != "_all"
+        def note_height(section: dict, table_width: int) -> int:
+            note = str(section.get("note", ""))
+            if not note:
+                return 0
+            return len(self._wrap_text(note, self._font(14), table_width - 28)) * 18 + 10
 
-        def icon_for(kind: str, text: str) -> str | None:
-            if kind != "body" or not icons_enabled:
-                return None
-            candidate = text.split("：", 1)[0].strip()
-            if "常驻鱼王 " in candidate:
-                candidate = candidate.split("常驻鱼王 ", 1)[1].strip()
-            candidate = candidate.split("（", 1)[0].strip()
-            if not candidate or len(candidate) > 12 or " " in candidate:
-                return None
-            return candidate if self._item_image(candidate) else None
+        def table_height(section: dict, table_width: int) -> int:
+            return 52 + 30 + len(section.get("rows", [])) * 30 + note_height(section, table_width) + 16
 
-        def prepare(entries: list[tuple[str, str]]) -> tuple[list[tuple[str, list[str], str | None]], int]:
-            prepared: list[tuple[str, list[str], str | None]] = []
-            height = 44
-            for kind, text in entries:
-                font = heading_font if kind == "heading" else note_font if kind == "note" else body_font
-                icon = icon_for(kind, text)
-                lines = self._wrap_text(text, font, column_width - 72 - (44 if icon else 0))
-                prepared.append((kind, lines, icon))
-                line_height = 40 if kind == "heading" else 42 if icon else 32 if kind == "body" else 28
-                height += len(lines) * line_height + (18 if kind == "heading" else 12)
-            return prepared, height + 28
-
-        def flow(entries: list[tuple[str, str]]) -> tuple[list, list, int, int]:
-            """把标题及其正文当成不可拆的块，按顺序填进较矮的一列。"""
-            blocks: list[list[tuple[str, str]]] = []
-            for entry in entries:
-                if entry[0] == "heading" or not blocks:
-                    blocks.append([entry])
-                else:
-                    blocks[-1].append(entry)
-            left: list[tuple[str, str]] = []
-            right: list[tuple[str, str]] = []
+        if single_column:
+            sections_height = sum(table_height(section, width - margin * 2) + 16 for section in tables)
+            height = header_height + 24 + sections_height + 42
+        else:
+            left: list[dict] = []
+            right: list[dict] = []
             left_height = right_height = 0
-            for block in blocks:
-                block_height = prepare(block)[1] - 44
+            for section in tables:
+                section_height = table_height(section, column_width) + 16
                 if left_height <= right_height:
-                    left.extend(block)
-                    left_height += block_height
+                    left.append(section)
+                    left_height += section_height
                 else:
-                    right.extend(block)
-                    right_height += block_height
-            return left, right, left_height, right_height
+                    right.append(section)
+                    right_height += section_height
+            sections_height = max(left_height, right_height)
+            height = header_height + 24 + summary_height + (18 if summary else 0) + sections_height + 42
 
-        left_entries, right_entries, left_height, right_height = flow(entries)
-        left_prepared, left_height = prepare(left_entries)
-        right_prepared, right_height = prepare(right_entries)
-        card_height = max(left_height, right_height)
-        height = header_height + card_height + 64
         image = PILImage.new("RGBA", (width, height), (244, 248, 249, 255))
         draw = ImageDraw.Draw(image)
         draw.rounded_rectangle((0, 0, width, header_height), radius=26, fill=(33, 68, 82, 255))
         draw.rectangle((0, header_height - 20, width, header_height), fill=(33, 68, 82, 255))
-        draw.text((margin, 34), title, fill=(250, 252, 252, 255), font=self._font(64, bold=True))
-        draw.text((margin, 113), subtitle, fill=(190, 222, 225, 255), font=self._font(25))
-        draw.text((width - margin, 116), "分页：钓鱼概率 鱼点 / 全部", fill=(220, 234, 235, 255), font=self._font(21), anchor="ra")
+        draw.text((margin, 34), title, fill=(250, 252, 252, 255), font=self._font(62, bold=True))
+        draw.text((margin, 116), subtitle, fill=(190, 222, 225, 255), font=self._font(24))
+        draw.text((width - margin, 118), "分页：钓鱼概率 鱼点 / 全部", fill=(220, 234, 235, 255), font=self._font(19), anchor="ra")
 
-        def draw_column(prepared: list[tuple[str, list[str], str | None]], x: int, accent: tuple[int, int, int], own_height: int) -> None:
-            y = header_height + 28
-            self._card(draw, (x, y, x + column_width, y + own_height))
-            y += 24
-            for entry_index, (kind, lines, icon) in enumerate(prepared):
-                if kind == "heading":
-                    block_height = max(42, len(lines) * 40 + 8)
-                    draw.rounded_rectangle((x + 18, y, x + column_width - 18, y + block_height), radius=10, fill=(*accent, 28))
-                    draw.rounded_rectangle((x + 18, y, x + 26, y + block_height), radius=4, fill=(*accent, 255))
-                    for line_index, line in enumerate(lines):
-                        draw.text((x + 38, y + 7 + line_index * 40), line, fill=(40, 61, 68, 255), font=heading_font)
-                    y += block_height + 12
-                    continue
-                font = note_font if kind == "note" else body_font
-                line_height = 28 if kind == "note" else 42 if icon else 32
-                icon_image = self._resource_image(icon, (34, 34)) if icon else None
-                if icon_image:
-                    image.alpha_composite(icon_image, (x + 34, y + 4))
-                text_x = x + 38 + (44 if icon else 0)
-                for line in lines:
-                    if entry_index % 2 == 0 and kind == "body":
-                        draw.rounded_rectangle((x + 24, y - 3, x + column_width - 24, y + line_height - 2), radius=6, fill=(247, 250, 250, 255))
-                    draw.text((text_x, y + 6 if icon else y), line, fill=(70, 83, 88, 255) if kind == "body" else (92, 112, 117, 255), font=font)
-                    y += line_height
-                y += 12
+        measure = ImageDraw.Draw(PILImage.new("RGB", (1, 1)))
 
-        draw_column(left_prepared, margin, (38, 144, 158), left_height)
-        draw_column(right_prepared, margin + column_width + gap, (78, 116, 176), right_height)
-        output = Path(self.workspace) / "images" / f"probability_{uid}{suffix}.png"
+        def fit(text: str, font, max_width: int) -> str:
+            value = str(text)
+            if measure.textbbox((0, 0), value, font=font)[2] <= max_width:
+                return value
+            while value and measure.textbbox((0, 0), value + "…", font=font)[2] > max_width:
+                value = value[:-1]
+            return value + "…"
+
+        content_y = header_height + 24
+        if summary:
+            self._card(draw, (margin, content_y, width - margin, content_y + summary_height), fill=(251, 252, 252, 255), radius=14)
+            draw.text((margin + 18, content_y + 12), "账号与鱼点", fill=(40, 61, 68, 255), font=self._font(22, bold=True))
+            label_font = self._font(16)
+            value_font = self._font(18, bold=True)
+            row_y = content_y + 50
+            for left_label, left_value, right_label, right_value in summary:
+                draw.text((margin + 18, row_y + 4), left_label, fill=(92, 112, 117, 255), font=label_font)
+                if right_label:
+                    left_width = column_width - 110 - 24
+                    draw.text((margin + 110, row_y), fit(left_value, value_font, left_width), fill=(40, 61, 68, 255), font=value_font)
+                    right_x = margin + column_width + 20
+                    draw.text((right_x, row_y + 4), right_label, fill=(92, 112, 117, 255), font=label_font)
+                    draw.text((right_x + 92, row_y), fit(right_value, value_font, column_width - 92 - 24), fill=(40, 61, 68, 255), font=value_font)
+                else:
+                    draw.text((margin + 110, row_y), fit(left_value, value_font, width - margin * 2 - 130), fill=(40, 61, 68, 255), font=value_font)
+                row_y += 32
+            content_y += summary_height + 18
+
+        if single_column:
+            table_y = content_y
+            for section in tables:
+                table_y += self._probability_draw_table(image, draw, margin, table_y, width - margin * 2, section) + 16
+        else:
+            left_y = content_y
+            for section in left:
+                left_y += self._probability_draw_table(image, draw, margin, left_y, column_width, section) + 16
+            right_y = content_y
+            for section in right:
+                right_y += self._probability_draw_table(image, draw, margin + column_width + gap, right_y, column_width, section) + 16
+
+        output = Path(self.workspace) / "images" / f"probability_{uid}.png"
+        if key in ("鱼点", "鱼种"):
+            output = Path(self.workspace) / "images" / f"probability_{uid}_zones.png"
+        elif key in ("全部", "所有", "all"):
+            output = Path(self.workspace) / "images" / f"probability_{uid}_all.png"
         output.parent.mkdir(parents=True, exist_ok=True)
         image.save(output, "PNG")
         return output
