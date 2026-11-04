@@ -1304,6 +1304,74 @@ def test_mcfish_probability_summary_rounds_float_artifacts(tmp_path: Path):
     assert "31.000000" not in detail
 
 
+def test_mcfish_dolphin_never_returns_an_empty_cast(tmp_path: Path, monkeypatch):
+    import importlib
+    mcfish_module = importlib.import_module("McFish.McFish")
+
+    plugin = McFish.__new__(McFish)
+    plugin.workspace = tmp_path
+    plugin._load_original_data()
+    monkeypatch.setattr(mcfish_module, "rod_drop_allowed", lambda *_args, **_kwargs: False)
+    rolls = iter([1, 0, 0])
+    monkeypatch.setattr(mcfish_module.random, "randrange", lambda _stop: next(rolls))
+
+    state = {
+        "equip": {"name": "木竿", "favor": 0},
+        "pack": {"海豚": 1},
+        "fishing_zone": "bay",
+        "active_consumables": {},
+    }
+
+    name, quantity = plugin._original_drop(state)
+
+    assert name is not None
+    assert quantity >= 1
+    assert plugin._item_type(name) == "waste"
+
+
+def test_mcfish_blocked_pole_still_becomes_air_without_dolphin(tmp_path: Path, monkeypatch):
+    import importlib
+    mcfish_module = importlib.import_module("McFish.McFish")
+
+    plugin = McFish.__new__(McFish)
+    plugin.workspace = tmp_path
+    plugin._load_original_data()
+    monkeypatch.setattr(mcfish_module, "rod_drop_allowed", lambda *_args, **_kwargs: False)
+    rolls = iter([1, 0])
+    monkeypatch.setattr(mcfish_module.random, "randrange", lambda _stop: next(rolls))
+
+    state = {
+        "equip": {"name": "木竿", "favor": 0},
+        "pack": {},
+        "fishing_zone": "bay",
+        "active_consumables": {},
+    }
+
+    assert plugin._original_drop(state) == (None, 1)
+
+
+def test_mcfish_dolphin_probability_summary_reports_zero_air(tmp_path: Path):
+    plugin = McFish.__new__(McFish)
+    plugin.workspace = tmp_path
+    plugin._load_original_data()
+    state = {
+        "equip": {"name": "木竿", "favor": 0},
+        "pack": {"海豚": 1},
+        "fishing_zone": "bay",
+        "accessories": [],
+        "active_consumables": {},
+        "equipment": {},
+        "jewelry": {},
+        "talents": {},
+    }
+
+    summary, _tables = plugin._probability_current_tables("100", state)
+    category_line = next(value for label, value, *_rest in summary if label == "大类")
+    assert "空竿 0%" in category_line
+    values = [float(part.split()[1].rstrip("%")) for part in category_line.split(" / ")]
+    assert abs(sum(values) - 100.0) < 0.01
+
+
 def test_mcfish_probability_lists_every_zone_and_its_fish(tmp_path: Path):
     plugin = McFish.__new__(McFish)
     plugin.workspace = tmp_path
@@ -3723,12 +3791,18 @@ def test_mcfish_probability_detail_matches_zone_boundaries():
             boundaries[3] - boundaries[2],
             boundaries[4] - boundaries[3],
         ]
+        rod_name = (state.get("equip") or {}).get("name") or "木竿"
+        _, blocked = plugin._rod_probability_map(rod_name, zones[1])
+        if boundaries[4] >= 100:
+            # 空竿为 0 时，越级鱼竿份额实际改出垃圾。
+            zones[1] -= blocked
+            zones[3] += blocked
         detail = plugin._probability_detail_text(state)
-        assert f"宝藏 : {zones[0]}%" in detail
-        assert f"鱼竿 : {zones[1]}%" in detail
-        assert f"鱼类 : {zones[2]}%" in detail
-        assert f"垃圾 : {zones[3]}%" in detail
-        assert f"合计 : {sum(zones)}%" in detail
+        assert f"宝藏 : {plugin._percent_text(zones[0])}" in detail
+        assert f"鱼竿 : {plugin._percent_text(zones[1])}" in detail
+        assert f"鱼类 : {plugin._percent_text(zones[2])}" in detail
+        assert f"垃圾 : {plugin._percent_text(zones[3])}" in detail
+        assert f"合计 : {plugin._percent_text(sum(zones))}" in detail
 
 
 def test_mcfish_concurrent_overwrite_repair_restores_lost_purchases(tmp_path: Path):

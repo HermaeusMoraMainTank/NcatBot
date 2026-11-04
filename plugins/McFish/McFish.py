@@ -631,7 +631,7 @@ MCFISH_HELP = """一款钓鱼模拟器
 # 帮助图片里的特殊机制。每条只放进“特殊机制”卡片一次，避免和规则正文重复。
 MCFISH_SPECIAL_MECHANICS = (
     "美西螈：宝藏掉落；装备后区间同样变为2/8/35/45；每竿要吃3条普通鱼（不含鱼王、海豚、材料等），鱼不够时永久失去；其他物品一次获得5个，鱼竿和美西螈除外。",
-    "海豚：背包里放着海豚时，空竿区间全部并入垃圾区间。",
+    "海豚：背包里放着海豚时，空竿区间全部并入垃圾区间；越级鱼竿产生的空竿同样并入垃圾。",
     "鱼数超过100条：区间变为宝藏2%、鱼竿8%、鱼35%、垃圾45%，只改变概率、不改变数量。",
     "净化书：每完成1竿累计1点祝福，满75点自动获得1本净化书，超出部分计入下一轮。",
     "交易诅咒：买卖鱼竿每满10次获得1个宝藏诅咒；买入价+10%、卖出价-10%；可用净化书1:1消除。",
@@ -1472,7 +1472,7 @@ class McFish(NcatBotPlugin):
                     "基础区间：宝藏1% / 鱼竿4% / 普通鱼25% / 垃圾30% / 空竿40%。",
                     "鱼总数超过100条时：宝藏2% / 鱼竿8% / 普通鱼35% / 垃圾45%，只改变概率不改变数量。",
                     "鱼竿段内占比：木55% / 铜18% / 锡10% / 铁7% / 猩红5% / 幻光3% / 星河1% / 灿阳1%。",
-                    "当前鱼竿最多只能钓到下一等级；越级区间转为空竿。掉落鱼竿随机生成耐久、维修和附魔。",
+                    "当前鱼竿最多只能钓到下一等级；越级区间转为空竿，背包中有海豚时这部分也并入垃圾。掉落鱼竿随机生成耐久、维修和附魔。",
                     "海之眷顾每级把6%空竿转为宝藏1%、鱼竿2%、鱼3%；诱钓按等级缩短等待。",
                     "隐藏鱼（同名鱼种在另一鱼点出现）：灰色沙丘曳尾鱼（深海）、魂灵面纱（遗迹水域）、岩石凶鲨（风暴海域）；需对应鱼点和隐秘诱饵，4.5%触发。",
                     "垃圾段内部按鱼点分为垃圾/材料/食物/贵重；贵重10%为钥匙箱。",
@@ -3087,8 +3087,6 @@ class McFish(NcatBotPlugin):
                 item for item in candidates
                 if rod_drop_allowed(rod_name, str(item.get("名称", "")))
             ]
-            if not candidates:
-                return None, 1
         roll = random.randrange(100)
         lower = 0
         for item in candidates:
@@ -3097,6 +3095,21 @@ class McFish(NcatBotPlugin):
                 quantity = drop_quantity(str(item["名称"]))
                 return str(item["名称"]), quantity
             lower = upper
+        if zone == "pole" and boundaries[4] >= 100:
+            # 海豚等效果已把空竿并入垃圾：越级鱼竿没命中的份额也改出垃圾，
+            # 否则面板显示空竿 0% 时仍会钓出空气。
+            waste_candidates = [
+                item for item in items if item.get("类型") == "waste"
+            ]
+            total = sum(int(item.get("概率[0-100)", 0)) for item in waste_candidates)
+            if total > 0:
+                waste_roll = random.randrange(total)
+                cursor = 0
+                for item in waste_candidates:
+                    cursor += int(item.get("概率[0-100)", 0))
+                    if waste_roll < cursor:
+                        quantity = drop_quantity(str(item["名称"]))
+                        return str(item["名称"]), quantity
         return None, 1
 
     def _item_image(self, name: str) -> Path | None:
@@ -3466,6 +3479,24 @@ class McFish(NcatBotPlugin):
             if name and raw and self._item_type(name) == item_type
         }
 
+    def _probability_categories(
+        self, state: dict, rod_name: str | None = None
+    ) -> tuple[tuple[float, float, float, float], float, tuple[float, float, float, float]]:
+        """返回 (展示用四大类, 实际空竿, 原始四大类)。
+
+        空竿区间为 0 时（例如背包里有海豚），越级鱼竿原本会转成空竿的那部分
+        实际改出垃圾；展示时把它从鱼竿挪到垃圾，避免总概率超过 100%。
+        原始四大类仍用于计算各鱼竿/物品的掉落权重。
+        """
+        boundaries = self._zone_boundaries(state)
+        raw = tuple(boundaries[index + 1] - boundaries[index] for index in range(4))
+        equip_name = str((state.get("equip") or {}).get("name", ""))
+        current_rod = rod_name or (equip_name if equip_name in POLES or equip_name == AXOLOTL else "木竿")
+        _, blocked = self._rod_probability_map(current_rod, raw[1])
+        if boundaries[4] >= 100:
+            return (raw[0], raw[1] - blocked, raw[2], raw[3] + blocked), 0.0, raw
+        return raw, blocked, raw
+
     def _item_type(self, name: str) -> str:
         return next(
             (str(item.get("类型", "")) for item in getattr(self, "_catalog", {}).get("物品", []) if str(item.get("名称", "")) == name),
@@ -3514,14 +3545,13 @@ class McFish(NcatBotPlugin):
 
     def _probability_sections(self, uid: str, state: dict) -> tuple[list[tuple[str, str]], list[tuple[str, str]]]:
         """Build the two probability columns from the live drop rules."""
-        boundaries = self._zone_boundaries(state)
-        categories = tuple(boundaries[index + 1] - boundaries[index] for index in range(4))
         equip_name = str((state.get("equip") or {}).get("name", ""))
         rod_name = equip_name if equip_name in POLES or equip_name == AXOLOTL else "木竿"
+        categories, blocked_pole, raw_categories = self._probability_categories(state, rod_name)
         zone = str(state.get("fishing_zone", daily_fishing_zone()))
         fish_count = self._fish_count(state)
         magic_bait = int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0
-        rod_values, blocked_pole = self._rod_probability_map(rod_name, categories[1])
+        rod_values, _ = self._rod_probability_map(rod_name, raw_categories[1])
         treasure_values = self._probability_item_map("treasure", categories[0])
         waste_values = self._probability_item_map("waste", categories[3])
         fish_values = self._fish_probability_map(
@@ -3700,15 +3730,14 @@ class McFish(NcatBotPlugin):
         return lines
 
     def _probability_current_tables(self, uid: str, state: dict) -> list[dict]:
-        boundaries = self._zone_boundaries(state)
-        categories = tuple(boundaries[index + 1] - boundaries[index] for index in range(4))
         equip_name = str((state.get("equip") or {}).get("name", ""))
         rod_name = equip_name if equip_name in POLES or equip_name == AXOLOTL else "木竿"
+        categories, blocked_pole, raw_categories = self._probability_categories(state, rod_name)
         zone = str(state.get("fishing_zone", daily_fishing_zone()))
         fish_count = self._fish_count(state)
         power = fishing_power(state)
         magic_bait = int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0
-        rod_values, blocked_pole = self._rod_probability_map(rod_name, categories[1])
+        rod_values, _ = self._rod_probability_map(rod_name, raw_categories[1])
         treasure_values = self._probability_item_map("treasure", categories[0])
         waste_values = self._probability_item_map("waste", categories[3])
         fish_values = self._fish_probability_map(
@@ -4264,14 +4293,10 @@ class McFish(NcatBotPlugin):
         return output
 
     def _probability_detail_text(self, state: dict) -> str:
-        # 大类概率直接取自 _zone_boundaries，保证展示与实际掉落完全一致。
-        boundaries = self._zone_boundaries(state)
-        category = [
-            boundaries[1] - boundaries[0],
-            boundaries[2] - boundaries[1],
-            boundaries[3] - boundaries[2],
-            boundaries[4] - boundaries[3],
-        ]
+        # 大类概率与实际掉落共用同一套口径：空竿为 0 时，越级鱼竿份额并入垃圾。
+        equip_name = str((state.get("equip") or {}).get("name", ""))
+        rod_name = equip_name if equip_name in POLES or equip_name == AXOLOTL else "木竿"
+        category, _blocked, raw_category = self._probability_categories(state, rod_name)
         lines = [
             "\n大类概率:",
             f"宝藏 : {self._percent_text(category[0])}",
@@ -4309,7 +4334,7 @@ class McFish(NcatBotPlugin):
         ]
         current_rod = str((state.get("equip") or {}).get("name", "木竿"))
         for name in pole_names:
-            probability_category = category[0] if name == AXOLOTL else category[1]
+            probability_category = category[0] if name == AXOLOTL else raw_category[1]
             probability_type = "treasure" if name == AXOLOTL else "pole"
             if name != AXOLOTL and not rod_drop_allowed(current_rod, name):
                 lines.append(f"{name} : 0.00%（当前{current_rod}不可越级钓到）")
