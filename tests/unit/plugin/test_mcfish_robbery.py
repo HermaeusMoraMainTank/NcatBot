@@ -1275,6 +1275,35 @@ def test_mcfish_all_probability_tables_merge_equal_rod_columns(tmp_path: Path):
     assert len(king_section["headers"]) == len(king_section["rows"][0])
 
 
+def test_mcfish_probability_summary_rounds_float_artifacts(tmp_path: Path):
+    plugin = McFish.__new__(McFish)
+    plugin.workspace = tmp_path
+    plugin._load_original_data()
+    # 眷顾 2 + 财富浮标Ⅲ：3% × 1.65 会得到 4.949999999999999。
+    state = {
+        "equip": {"name": "木竿", "favor": 2},
+        "pack": {},
+        "fishing_zone": "bay",
+        "accessories": ["财富浮标"],
+        "accessory_levels": {"财富浮标": 3},
+        "active_consumables": {},
+        "equipment": {},
+        "jewelry": {},
+        "talents": {},
+    }
+
+    summary, _tables = plugin._probability_current_tables("100", state)
+    category_line = next(value for label, value, *_rest in summary if label == "大类")
+    assert "宝藏 4.95%" in category_line
+    assert "4.949999" not in category_line
+    assert "31.000000" not in category_line
+
+    detail = plugin._probability_detail_text(state)
+    assert "宝藏 : 4.95%" in detail
+    assert "4.949999" not in detail
+    assert "31.000000" not in detail
+
+
 def test_mcfish_probability_lists_every_zone_and_its_fish(tmp_path: Path):
     plugin = McFish.__new__(McFish)
     plugin.workspace = tmp_path

@@ -3439,6 +3439,12 @@ class McFish(NcatBotPlugin):
     def _probability_value(value: float) -> str:
         return f"{value:.2f}%"
 
+    @staticmethod
+    def _percent_text(value: float) -> str:
+        """概率摘要：最多两位小数并去掉无意义尾零，避免把浮点尾数展示给用户。"""
+        text = f"{float(value):.2f}".rstrip("0").rstrip(".")
+        return f"{text or '0'}%"
+
     def _probability_catalog(self) -> tuple[dict[str, int], dict[str, int]]:
         raw_items = getattr(self, "_catalog", {}).get("物品", [])
         item_ranges: dict[str, int] = {}
@@ -3529,7 +3535,7 @@ class McFish(NcatBotPlugin):
             ("body", f"鱼点：{FISHING_ZONE_LABELS.get(zone, zone)}    鱼总数：{fish_count}    {'强化区间' if fish_count > 100 or equip_name == AXOLOTL else '基础区间'}"),
             ("body", f"钓鱼力：{power_summary(state)}"),
             ("body", f"饰品槽位：{len(state.get('accessories', []))}/{state.get('accessory_slots', 2)}    饰品：{'、'.join(f'{name}{self._enchant_label(self._accessory_level(state, name))}' for name in state.get('accessories', [])) or '无'}    鱼饵：{'、'.join(name for name, count in state.get('active_consumables', {}).items() if int(count) > 0) or '无'}"),
-            ("body", f"大类：宝藏 {categories[0]}% / 鱼竿 {categories[1]}% / 普通鱼 {categories[2]}% / 垃圾 {categories[3]}% / 空竿 {air:.2f}%"),
+            ("body", f"大类：宝藏 {self._percent_text(categories[0])} / 鱼竿 {self._percent_text(categories[1])} / 普通鱼 {self._percent_text(categories[2])} / 垃圾 {self._percent_text(categories[3])} / 空竿 {self._percent_text(air)}"),
             ("body", f"垃圾内部：垃圾 {waste_split(zone)[0]}% / 材料 {waste_split(zone)[1]}% / 食物 {waste_split(zone)[2]}% / 贵重 {waste_split(zone)[3]}%"),
             ("heading", "鱼竿"),
         ]
@@ -3722,7 +3728,7 @@ class McFish(NcatBotPlugin):
             ("钓鱼力", power_summary(state), "", ""),
             ("饰品槽位", f"{len(state.get('accessories', []))}/{state.get('accessory_slots', 2)}", "鱼饵", baits),
             ("饰品", accessories, "", ""),
-            ("大类", f"宝藏 {categories[0]}% / 鱼竿 {categories[1]}% / 普通鱼 {categories[2]}% / 垃圾 {categories[3]}% / 空竿 {air:.2f}%", "", ""),
+            ("大类", f"宝藏 {self._percent_text(categories[0])} / 鱼竿 {self._percent_text(categories[1])} / 普通鱼 {self._percent_text(categories[2])} / 垃圾 {self._percent_text(categories[3])} / 空竿 {self._percent_text(air)}", "", ""),
             ("垃圾内部", f"垃圾 {waste_split(zone)[0]}% / 材料 {waste_split(zone)[1]}% / 食物 {waste_split(zone)[2]}% / 贵重 {waste_split(zone)[3]}%", "", ""),
         ]
 
@@ -4268,11 +4274,11 @@ class McFish(NcatBotPlugin):
         ]
         lines = [
             "\n大类概率:",
-            f"宝藏 : {category[0]}%",
-            f"鱼竿 : {category[1]}%",
-            f"鱼类 : {category[2]}%",
-            f"垃圾 : {category[3]}%",
-            f"合计 : {sum(category)}%",
+            f"宝藏 : {self._percent_text(category[0])}",
+            f"鱼竿 : {self._percent_text(category[1])}",
+            f"鱼类 : {self._percent_text(category[2])}",
+            f"垃圾 : {self._percent_text(category[3])}",
+            f"合计 : {self._percent_text(sum(category))}",
             "-----------",
             "宝藏概率:",
         ]
