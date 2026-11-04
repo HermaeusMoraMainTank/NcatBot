@@ -4711,7 +4711,8 @@ class McFish(NcatBotPlugin):
             await event.reply(text=self._power_text(state))
             return
         if text in ("钓鱼鱼点", "鱼点"):
-            await event.reply(text=self._spot_text(state))
+            output = await asyncio.to_thread(self._render_spot_image, uid, state)
+            await self._send_original_message(event, MessageArray([Image(file=str(output))]))
             return
         if text.startswith("前往"):
             requested = text[2:].strip()
@@ -4886,31 +4887,189 @@ class McFish(NcatBotPlugin):
         rows.append(f"等待倍率 {1.0 / (1.0 + power / 100.0):.2f}（×1/(1+FP/100)）")
         return "\n".join(["钓鱼力 " + str(power), *rows])
 
-    def _spot_text(self, state: dict) -> str:
+    def _render_spot_image(self, uid: str, state: dict) -> Path:
+        """Render the fishing spot overview as image tables."""
+        width = 1600
+        margin = 42
+        gap = 24
+        column_width = (width - margin * 2 - gap) // 2
+        header_height = 172
         current = str(state.get("fishing_zone", daily_fishing_zone()))
         hot = daily_fishing_zone()
         level = int(state.get("fish_level", 1))
         power = fishing_power(state)
         caught_today = state.get("resident_king_today", {})
-        lines = [
-            f"当前鱼点：{fishing_zone_label(current)}（等级 {level} · 钓鱼力 {power}）",
-            f"活跃鱼点：{fishing_zone_label(hot)}",
-            "鱼点与常驻鱼王：",
+        total_today = int(state.get("fish_today", 0))
+        total_limit = self._daily_limit(state)
+        current_cap = FISHING_ZONE_DAILY_CAPS.get(current, 0)
+        current_used = int((state.get("zone_fish_today") or {}).get(current, 0))
+        current_resident = resident_king_for_zone(current)
+        current_resident_today = (
+            int(caught_today.get(current_resident, 0)) if current_resident else 0
+        )
+        unlocked = sum(1 for zone in FISHING_ZONES if fishing_zone_unlocked(zone, power))
+        summary = [
+            ("当前鱼点", fishing_zone_label(current), "活跃鱼点", fishing_zone_label(hot)),
+            ("等级", str(level), "钓鱼力", str(power)),
+            ("今日总次数", f"{total_today}/{total_limit}", "当前鱼点次数", f"{current_used}/{current_cap}"),
+            (
+                "常驻鱼王今日",
+                f"{current_resident_today}/{RESIDENT_KING_DAILY_LIMIT}"
+                + (f"（{current_resident}）" if current_resident else ""),
+                "可前往鱼点",
+                f"{unlocked}/{len(FISHING_ZONES)}",
+            ),
         ]
+
+        zone_rows = []
         for zone in FISHING_ZONES:
             resident = resident_king_for_zone(zone)
             gate = resident_king_fp(resident) if resident else 0
             today = int(caught_today.get(resident, 0)) if resident else 0
-            suffix = f"，今日已捕获 {today}/{RESIDENT_KING_DAILY_LIMIT}" if resident and today else ""
-            fish_names = "/".join(FISH_ZONE_WEIGHTS.get(zone, ()))
             used = int((state.get("zone_fish_today") or {}).get(zone, 0))
             cap = FISHING_ZONE_DAILY_CAPS.get(zone, 0)
-            lines.append(
-                f"{fishing_zone_label(zone)}：钓鱼力 {fishing_zone_required_power(zone)}，"
-                f"今日 {used}/{cap} 次，鱼 {fish_names}，常驻鱼王 {resident or '无'}（也属于本鱼点鱼类，钓鱼力 {gate}）{suffix}"
-            )
-        lines.append("切换：前往 深海")
-        return "\n".join(lines)
+            label = fishing_zone_label(zone)
+            if zone == current:
+                label += "（当前）"
+            elif zone == hot:
+                label += "（活跃）"
+            zone_rows.append([
+                label,
+                str(fishing_zone_required_power(zone)),
+                f"{used}/{cap}",
+                resident or "无",
+                str(gate),
+                f"{today}/{RESIDENT_KING_DAILY_LIMIT}",
+                "、".join(FISH_ZONE_WEIGHTS.get(zone, ())),
+            ])
+        zone_section = {
+            "title": "鱼点总览",
+            "headers": ["鱼点", "进入 FP", "今日次数", "常驻鱼王", "鱼王 FP", "今日捕获", "普通鱼"],
+            "rows": zone_rows,
+            "weights": [1.5, 0.8, 1.0, 1.3, 0.8, 1.0, 3.2],
+            "aligns": ["l", "r", "r", "l", "r", "r", "l"],
+            "icons": False,
+            "note": "进入 FP 不足时无法前往该鱼点；今日次数为当前鱼点已用/上限，所有鱼点共享全局次数。",
+        }
+
+        fish_rows = []
+        for name in FISH_ZONE_WEIGHTS.get(current, ()):
+            need = fish_min_power(current, name)
+            fish_rows.append([
+                name,
+                "普通鱼",
+                str(need),
+                "可钓" if power >= need else "FP 不足",
+            ])
+        if current_resident:
+            need = resident_king_fp(current_resident)
+            fish_rows.append([
+                current_resident,
+                "常驻鱼王",
+                str(need),
+                "可判定" if power >= need else "FP 不足",
+            ])
+        fish_section = {
+            "title": f"当前鱼点鱼种 · {fishing_zone_label(current)}",
+            "headers": ["鱼", "类型", "所需 FP", "状态"],
+            "rows": fish_rows,
+            "weights": [3.0, 1.2, 1.0, 1.2],
+            "aligns": ["l", "l", "r", "l"],
+            "icons": True,
+            "note": "常驻鱼王也属于本鱼点鱼类，每日最多成功 1 条；普通鱼按所需 FP 进入掉落池。",
+        }
+        tables = [zone_section, fish_section]
+
+        def table_height(section: dict) -> int:
+            note = str(section.get("note", ""))
+            note_lines = self._wrap_text(note, self._font(14), width - margin * 2 - 28)[:3] if note else []
+            return 52 + 30 + len(section.get("rows", [])) * 30 + (len(note_lines) * 18 + 10 if note_lines else 0) + 16
+
+        summary_height = 58 + len(summary) * 32 + 18
+        height = (
+            header_height + 24 + summary_height + 18
+            + sum(table_height(section) + 16 for section in tables) + 42
+        )
+        image = PILImage.new("RGBA", (width, height), (244, 248, 249, 255))
+        draw = ImageDraw.Draw(image)
+        draw.rounded_rectangle((0, 0, width, header_height), radius=26, fill=(33, 68, 82, 255))
+        draw.rectangle((0, header_height - 20, width, header_height), fill=(33, 68, 82, 255))
+        draw.text((margin, 34), "钓鱼鱼点", fill=(250, 252, 252, 255), font=self._font(62, bold=True))
+        draw.text(
+            (margin, 116),
+            "鱼点门槛、今日次数与常驻鱼王",
+            fill=(190, 222, 225, 255),
+            font=self._font(24),
+        )
+        draw.text(
+            (width - margin, 118),
+            "切换鱼点：前往 深海　·　概率：钓鱼概率 鱼点",
+            fill=(220, 234, 235, 255),
+            font=self._font(19),
+            anchor="ra",
+        )
+
+        measure = ImageDraw.Draw(PILImage.new("RGB", (1, 1)))
+
+        def fit(text: str, font, max_width: int) -> str:
+            value = str(text)
+            if measure.textbbox((0, 0), value, font=font)[2] <= max_width:
+                return value
+            while value and measure.textbbox((0, 0), value + "…", font=font)[2] > max_width:
+                value = value[:-1]
+            return value + "…"
+
+        content_y = header_height + 24
+        self._card(
+            draw,
+            (margin, content_y, width - margin, content_y + summary_height),
+            fill=(251, 252, 252, 255),
+            radius=14,
+        )
+        draw.text(
+            (margin + 18, content_y + 12),
+            "账号与鱼点",
+            fill=(40, 61, 68, 255),
+            font=self._font(22, bold=True),
+        )
+        label_font = self._font(16)
+        value_font = self._font(18, bold=True)
+        row_y = content_y + 50
+        for left_label, left_value, right_label, right_value in summary:
+            draw.text((margin + 18, row_y + 4), left_label, fill=(92, 112, 117, 255), font=label_font)
+            if right_label:
+                draw.text(
+                    (margin + 130, row_y),
+                    fit(left_value, value_font, column_width - 130 - 24),
+                    fill=(40, 61, 68, 255),
+                    font=value_font,
+                )
+                right_x = margin + column_width + 20
+                draw.text((right_x, row_y + 4), right_label, fill=(92, 112, 117, 255), font=label_font)
+                draw.text(
+                    (right_x + 120, row_y),
+                    fit(right_value, value_font, column_width - 120 - 24),
+                    fill=(40, 61, 68, 255),
+                    font=value_font,
+                )
+            else:
+                draw.text(
+                    (margin + 130, row_y),
+                    fit(left_value, value_font, width - margin * 2 - 150),
+                    fill=(40, 61, 68, 255),
+                    font=value_font,
+                )
+            row_y += 32
+        table_y = content_y + summary_height + 18
+        for section in tables:
+            table_y += self._probability_draw_table(
+                image, draw, margin, table_y, width - margin * 2, section
+            ) + 16
+
+        output = Path(self.workspace) / "images" / f"spots_{uid}.png"
+        output.parent.mkdir(parents=True, exist_ok=True)
+        image.save(output, "PNG")
+        return output
 
     def _help_revision_page(self, arguments: str) -> int:
         parts = str(arguments or "").split()

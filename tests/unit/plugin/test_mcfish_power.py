@@ -170,9 +170,13 @@ def test_forward_command_rejects_unknown_spot():
     assert event.reply.await_args.kwargs["text"] == "未知鱼点：火星"
 
 
-def test_power_and_spot_commands_render_system_summaries():
+def test_power_and_spot_commands_render_system_summaries(tmp_path: Path):
+    from PIL import Image as PILImage
+
     state = {"fish_level": 35, "equip": {"name": "铜竿"}, "fishing_zone": "bay", "pack": {}}
     plugin = _command_plugin(state)
+    plugin.workspace = tmp_path
+    plugin._cleanup_message_images = lambda _message: None
 
     power_event = _command_event("钓鱼力")
     asyncio.run(plugin._handle_message(power_event))
@@ -183,10 +187,13 @@ def test_power_and_spot_commands_render_system_summaries():
 
     spot_event = _command_event("钓鱼鱼点")
     asyncio.run(plugin._handle_message(spot_event))
-    spot_text = spot_event.reply.await_args.kwargs["text"]
-    assert "当前鱼点：河湾" in spot_text
-    assert "活跃鱼点：" in spot_text
-    assert "前往 深海" in spot_text
+    rtf = spot_event.reply.await_args.kwargs["rtf"]
+    files = [getattr(segment, "file", None) for segment in rtf]
+    files = [str(path) for path in files if path]
+    assert files
+    with PILImage.open(files[0]) as image:
+        assert image.size[0] == 1600
+        assert image.size[1] > 900
 
 
 def test_rod_ladder_migration_maps_legacy_pole_names(tmp_path):
