@@ -1,0 +1,8 @@
+name = "PrivateReminder"
+version = "1.0.0"
+main = "PrivateReminder.py"
+entry_class = "PrivateReminder"
+author = "NcatBot"
+description = "预约时间并通过私聊发送提醒"
+
+[dependencies]
