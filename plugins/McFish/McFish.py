@@ -4154,13 +4154,8 @@ class McFish(NcatBotPlugin):
         if text == "花费100购买鱼竿":
             await self._buy_emergency_pole(event, state); return
         if text == "当前装备概率明细":
-            await self._send_original_message(
-                event,
-                MessageArray([
-                    At(user_id=uid),
-                    PlainText(text=self._probability_detail_text(state)),
-                ]),
-            )
+            output = await asyncio.to_thread(self._render_probability_image, uid, state)
+            await self._send_original_message(event, MessageArray([Image(file=str(output))]))
             return
         if text in ("钓鱼商店", "钓鱼看板"):
             output = await asyncio.to_thread(self._render_store_image, uid, state)
@@ -4731,7 +4726,7 @@ class McFish(NcatBotPlugin):
         margin = 42
         gap = 18
         header_height = 172
-        column_width = (width - margin * 2 - gap * 2) // 3
+        column_width = (width - margin * 2 - 40 - gap * 2) // 3
         sections_height = 0
         prepared_sections = []
         for label, cards in sections:
@@ -5012,7 +5007,7 @@ class McFish(NcatBotPlugin):
         set_col_width = 210
         slot_names = ("head", "body", "legs", "necklace", "ring")
         slot_labels = ("头盔", "胸甲", "腿甲", "项链", "戒指")
-        cell_width = (width - margin * 2 - set_col_width - gap * len(slot_names)) // len(slot_names)
+        cell_width = (width - margin * 2 - set_col_width - gap * (len(slot_names) + 1)) // len(slot_names)
         header_height = 172
         table_header_height = 46
         row_height = 170

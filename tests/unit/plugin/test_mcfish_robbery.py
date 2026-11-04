@@ -1400,13 +1400,18 @@ def test_mcfish_probability_detail_includes_original_breakdowns():
     assert "岩石凶鲨 : 12.50%" in output
 
 
-def test_mcfish_probability_detail_mentions_the_requesting_user():
+def test_mcfish_probability_detail_command_sends_image(tmp_path):
     import asyncio
-    from ncatbot.types import At, MessageArray, PlainText
+    from ncatbot.types import Image
+
+    from PIL import Image as PILImage
 
     plugin = McFish.__new__(McFish)
     plugin._state = lambda _uid: {"pack": {}, "equip": None}
-    plugin._probability_detail_text = lambda _state: "\n大类概率:"
+    plugin._send_original_message = AsyncMock()
+    output = tmp_path / "probability.png"
+    PILImage.new("RGBA", (10, 10), (0, 0, 0, 255)).save(output)
+    plugin._render_probability_image = lambda _uid, _state: output
     event = SimpleNamespace(
         raw_message="当前装备概率明细",
         message=[],
@@ -1416,11 +1421,8 @@ def test_mcfish_probability_detail_mentions_the_requesting_user():
 
     asyncio.run(plugin._handle_message(event))
 
-    message = event.reply.await_args.kwargs["rtf"]
-    assert isinstance(message, MessageArray)
-    assert isinstance(list(message)[0], At)
-    assert list(message)[0].user_id == "100"
-    assert isinstance(list(message)[1], PlainText)
+    message = plugin._send_original_message.await_args.args[1]
+    assert isinstance(list(message)[0], Image)
 
 
 def test_mcfish_purify_clamps_requested_quantity_to_curse_count():
