@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import sys
+import tempfile
 from datetime import datetime, timedelta
 from pathlib import Path
 from types import SimpleNamespace
@@ -18,6 +19,7 @@ from PrivateReminder.PrivateReminder import (
     format_remaining,
     parse_reminder_time,
 )
+from PrivateReminder.render import render_help, render_list, render_notice, render_reminder
 
 TZ = ZoneInfo("Asia/Shanghai")
 NOW = datetime(2026, 11, 4, 20, 0, tzinfo=TZ)
@@ -32,6 +34,7 @@ def _plugin() -> PrivateReminder:
     plugin.get_config = lambda key, default=None: default
     plugin._save_data = lambda: None
     plugin._reply = AsyncMock()
+    plugin.image_dir = Path(tempfile.mkdtemp(prefix="private_reminder_test_"))
     return plugin
 
 
@@ -164,7 +167,7 @@ def test_handle_message_routes_create_and_help():
     help_event.raw_message = "预约"
     help_event.message = []
     asyncio.run(plugin.handle_message(help_event))
-    assert "预约提醒" in plugin._reply.await_args.args[1]
+    assert "image" in help_event.reply.await_args.kwargs
 
 
 def test_create_reminder_in_group_sends_private_confirmation():
@@ -186,11 +189,11 @@ def test_list_and_cancel_reminders():
     asyncio.run(plugin._create_reminder(event, "30分钟 喝水"))
     asyncio.run(plugin._create_reminder(event, "2小时 休息"))
 
-    plugin._reply.reset_mock()
+    entries = plugin._list_entries("100", NOW)
+    assert [entry["content"] for entry in entries] == ["喝水", "休息"]
+    event.reply.reset_mock()
     asyncio.run(plugin._list_reminders(event))
-    listing = plugin._reply.await_args.args[1]
-    assert "#1" in listing and "#2" in listing
-    assert "喝水" in listing and "休息" in listing
+    assert "image" in event.reply.await_args.kwargs
 
     asyncio.run(plugin._cancel_reminder(event, "1"))
     assert [item["id"] for item in plugin.data["reminders"]] == [2]
@@ -218,7 +221,7 @@ def test_due_reminder_is_sent_privately_and_removed():
     plugin.api.qq.post_private_msg.assert_awaited_once()
     kwargs = plugin.api.qq.post_private_msg.await_args.kwargs
     assert kwargs["user_id"] == "100"
-    assert "收鱼" in kwargs["text"]
+    assert "image" in kwargs
     assert plugin.data["reminders"] == []
 
 
@@ -261,3 +264,35 @@ def test_reminder_limit_is_enforced():
 
     assert len(plugin.data["reminders"]) == 20
     assert "最多同时保留 20 条预约" in plugin._reply.await_args.args[1]
+
+
+def test_rendered_panels_are_png_images(tmp_path: Path):
+    from PIL import Image as PILImage
+
+    paths = [
+        tmp_path / "notice.png",
+        tmp_path / "help.png",
+        tmp_path / "list.png",
+        tmp_path / "reminder.png",
+    ]
+    render_notice(paths[0], "预约失败", ["时间格式无法识别，例如：预约 明天9点"])
+    render_help(paths[1])
+    render_list(
+        paths[2],
+        [{
+            "id": 1,
+            "due_text": "2026-11-05 21:30",
+            "status_text": "待发送",
+            "status_detail": "还有 1 时 30 分",
+            "status_kind": "pending",
+            "content": "收鱼",
+        }],
+        20,
+    )
+    render_reminder(paths[3], "收鱼", "2026-11-05 21:30")
+
+    for path in paths:
+        assert path.exists()
+        with PILImage.open(path) as image:
+            assert image.size[0] == 1240
+            assert image.size[1] > 300

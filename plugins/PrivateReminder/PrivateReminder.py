@@ -2,42 +2,19 @@ from __future__ import annotations
 
 import asyncio
 import re
+import time
 import unicodedata
 from datetime import datetime, timedelta
+from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from ncatbot.core import registrar
 from ncatbot.plugin import NcatBotPlugin
 from ncatbot.utils import get_log
 
+from .render import render_help, render_list, render_notice, render_reminder
+
 LOG = get_log("PrivateReminder")
-
-HELP_TEXT = """预约提醒
-
-创建预约：
-预约 21:30 收鱼
-预约 明天9点 起床
-预约 明天 9:30 收鱼
-预约 11月5日 9点30分 收鱼
-预约 11月5号9点03
-预约 2026年11月5日9点30分
-预约 30分钟 喝水
-预约 半小时 休息
-预约 21:30
-
-查看与取消：
-预约列表 / 我的预约
-取消预约 3
-取消预约 全部
-
-说明：
-- 时间按北京时间计算，省略日期时今天未到就今天，已过就明天。
-- 日期与时间之间、数字与单位之间的空格可省略。
-- 支持：今天/明天/后天、11月5日/11月5号、2026年11月5日、9点/9点30分/9:00。
-- 内容可以省略，默认提醒“时间到了”。
-- 到时通过私聊发送提醒，群聊里创建的预约也会私聊提醒。
-- 最多同时保留 20 条预约；时间范围最多 365 天。
-- 私聊发送失败会自动重试；连续失败 3 次后会标记为发送失败。"""
 
 _RELATIVE_RE = re.compile(r"^(\d+)\s*(秒|分钟|分|小时|时|天)\s*(?:后)?\s*(.*)$")
 _HALF_HOUR_RE = re.compile(r"^半\s*小时\s*(?:后)?\s*(.*)$")
@@ -196,6 +173,8 @@ class PrivateReminder(NcatBotPlugin):
         if not isinstance(self.data.get("reminders"), list):
             self.data["reminders"] = []
         self.data.setdefault("next_id", 1)
+        self.image_dir = Path(self.workspace) / "images"
+        self.image_dir.mkdir(parents=True, exist_ok=True)
         self._reminder_lock = asyncio.Lock()
         interval = self.get_config("check_interval", "20s")
         self.add_scheduled_task(
@@ -251,14 +230,41 @@ class PrivateReminder(NcatBotPlugin):
             due = due.replace(tzinfo=fallback_tz)
         return due
 
+    def _image_path(self, prefix: str) -> Path:
+        self.image_dir.mkdir(parents=True, exist_ok=True)
+        return self.image_dir / f"{prefix}_{time.time_ns()}.png"
+
     async def _reply(self, event, text: str) -> None:
-        await event.reply(text=text, at_sender=False)
+        path = self._image_path("notice")
+        lines = [line for line in str(text).splitlines() if line.strip()]
+        await asyncio.to_thread(render_notice, path, "预约提醒", lines)
+        await self._reply_image(event, path)
+
+    async def _reply_image(self, event, path: Path) -> None:
+        try:
+            await event.reply(image=str(path), at_sender=False)
+        finally:
+            path.unlink(missing_ok=True)
+
+    async def _reply_help(self, event) -> None:
+        path = self._image_path("help")
+        await asyncio.to_thread(render_help, path)
+        await self._reply_image(event, path)
 
     async def _send_private(self, user_id: str, text: str) -> None:
-        await asyncio.wait_for(
-            self.api.qq.post_private_msg(user_id=user_id, text=text),
-            timeout=15,
-        )
+        path = self._image_path("confirm")
+        lines = [line for line in str(text).splitlines() if line.strip()]
+        await asyncio.to_thread(render_notice, path, "预约确认", lines)
+        await self._send_private_image(user_id, path)
+
+    async def _send_private_image(self, user_id: str, path: Path) -> None:
+        try:
+            await asyncio.wait_for(
+                self.api.qq.post_private_msg(user_id=user_id, image=str(path)),
+                timeout=15,
+            )
+        finally:
+            path.unlink(missing_ok=True)
 
     @staticmethod
     def _message_text(event) -> str:
@@ -284,7 +290,7 @@ class PrivateReminder(NcatBotPlugin):
             return
         arguments = text[2:].strip()
         if not arguments or arguments in ("帮助", "说明"):
-            await self._reply(event, HELP_TEXT)
+            await self._reply_help(event)
             return
         if arguments in ("列表", "列表。"):
             await self._list_reminders(event)
@@ -297,7 +303,10 @@ class PrivateReminder(NcatBotPlugin):
         try:
             due, content = parse_reminder_time(raw, now)
         except ValueError as exc:
-            await self._reply(event, f"预约失败：{exc}\n\n{HELP_TEXT}")
+            await self._reply(
+                event,
+                f"预约失败：{exc}\n发送“预约帮助”查看支持的日期与时间写法。",
+            )
             return
 
         horizon = timedelta(days=self._max_horizon_days())
@@ -353,37 +362,51 @@ class PrivateReminder(NcatBotPlugin):
                 confirmation += "\n已私聊发送确认。"
         await self._reply(event, confirmation)
 
-    async def _list_reminders(self, event) -> None:
-        user_id = str(event.sender.user_id)
-        now = self._now()
-        items = sorted(
+    def _list_entries(self, user_id: str, now: datetime) -> list[dict]:
+        entries = []
+        for item in sorted(
             self._user_reminders(user_id),
-            key=lambda item: str(item.get("due_at", "")),
-        )
-        if not items:
-            await self._reply(event, f"你还没有预约。\n\n{HELP_TEXT}")
-            return
-
-        lines = [f"你的预约（{len(items)}/{self._max_pending()}）"]
-        for item in items:
+            key=lambda entry: str(entry.get("due_at", "")),
+        ):
             due = self._parse_due(item, self._timezone)
             due_text = due.strftime("%Y-%m-%d %H:%M") if due else "时间异常"
             if item.get("failed_at"):
-                status = "发送失败"
-            elif due:
-                status = f"还有{format_remaining(due, now)}"
+                status_text = "发送失败"
+                status_detail = "可取消后重新预约"
+                status_kind = "failed"
+            elif due is None:
+                status_text = "时间异常"
+                status_detail = "可取消后重新预约"
+                status_kind = "failed"
             else:
-                status = "待发送"
-            lines.append(
-                f"#{item.get('id', '?')}  {due_text}  {status}\n  {item.get('content', '')}"
+                status_text = "待发送"
+                remaining = (due - now).total_seconds()
+                status_detail = "已到期，等待补发" if remaining <= 0 else f"还有 {format_remaining(due, now)}"
+                status_kind = "pending"
+            entries.append(
+                {
+                    "id": item.get("id", "?"),
+                    "due_text": due_text,
+                    "status_text": status_text,
+                    "status_detail": status_detail,
+                    "status_kind": status_kind,
+                    "content": str(item.get("content", "")),
+                }
             )
-        text = "\n".join(lines)
+        return entries
+
+    async def _list_reminders(self, event) -> None:
+        user_id = str(event.sender.user_id)
+        now = self._now()
+        entries = self._list_entries(user_id, now)
+        path = self._image_path("list")
+        await asyncio.to_thread(render_list, path, entries, self._max_pending())
 
         if getattr(event, "group_id", None) is None:
-            await self._reply(event, text)
+            await self._reply_image(event, path)
             return
         try:
-            await self._send_private(user_id, text)
+            await self._send_private_image(user_id, path)
         except Exception:
             LOG.warning("向用户 %s 发送预约列表私聊失败", user_id)
             await self._reply(event, "预约列表只能私聊查看。请先添加机器人为好友，或在私聊发送“预约列表”。")
@@ -420,16 +443,6 @@ class PrivateReminder(NcatBotPlugin):
         self._reminders().remove(item)
         self._save_data()
         await self._reply(event, f"已取消 #{reminder_id}：{item.get('content', '')}")
-
-    @staticmethod
-    def _reminder_text(item: dict, due: datetime, now: datetime) -> str:
-        prefix = "【预约提醒】"
-        if now - due > timedelta(minutes=5):
-            prefix += "（补发）"
-        return (
-            f"{prefix}\n{item.get('content', '')}\n\n"
-            f"预约时间：{due.strftime('%Y-%m-%d %H:%M')}"
-        )
 
     async def _check_reminders(self) -> None:
         lock = getattr(self, "_reminder_lock", None)
@@ -481,12 +494,19 @@ class PrivateReminder(NcatBotPlugin):
                             continue
 
                 user_id = str(item.get("user_id", ""))
+                path = self._image_path("reminder")
+                late = now - due > timedelta(minutes=5)
                 try:
-                    await self._send_private(
-                        user_id,
-                        self._reminder_text(item, due, now),
+                    await asyncio.to_thread(
+                        render_reminder,
+                        path,
+                        str(item.get("content", "")),
+                        due.strftime("%Y-%m-%d %H:%M"),
+                        late=late,
                     )
+                    await self._send_private_image(user_id, path)
                 except Exception as exc:
+                    path.unlink(missing_ok=True)
                     attempts = int(item.get("attempts", 0)) + 1
                     item["attempts"] = attempts
                     item["last_error"] = str(exc)[:200]
