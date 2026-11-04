@@ -55,13 +55,13 @@ def test_effects_skip_power_nodes_and_summary_uses_labels():
     assert any("钓鱼天赋 可用" in line for line in lines)
 
 
-def test_reset_cost_grows_and_caps():
+def test_reset_cost_is_fixed():
     state = {"talents": {"reset_count": 0}}
     assert T.reset_cost(state) == 20000
     state["talents"]["reset_count"] = 3
-    assert T.reset_cost(state) == 50000
+    assert T.reset_cost(state) == 20000
     state["talents"]["reset_count"] = 99
-    assert T.reset_cost(state) == 70000
+    assert T.reset_cost(state) == 20000
 
     T.reset(state)
     assert state["talents"]["levels"] == {}

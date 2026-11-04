@@ -43,8 +43,6 @@ TALENTS = {
 BRANCH_LABELS = {"A": "手感", "B": "眼力", "C": "收获", "D": "体力", "E": "钓鱼力"}
 MAX_POINTS = 25
 RESET_BASE = 20000
-RESET_STEP = 10000
-RESET_CAP = 70000
 
 
 def levels(state: dict) -> dict[str, int]:
@@ -118,8 +116,7 @@ def effects(state: dict) -> dict[str, float]:
 
 
 def reset_cost(state: dict) -> int:
-    count = int((state.get("talents") or {}).get("reset_count", 0))
-    return min(RESET_CAP, RESET_BASE + RESET_STEP * count)
+    return RESET_BASE
 
 
 def reset(state: dict) -> None:

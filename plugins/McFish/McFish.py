@@ -659,7 +659,7 @@ MCFISH_COMMAND_HELP_GROUPS = (
         ("领取钓鱼任务 2", "领取对应编号的任务奖励。"),
         ("钓鱼天赋", "查看树状天赋、可用点数与前置状态。"),
         ("学习 钓感", "学习或升级天赋节点；必须先点满前置。"),
-        ("重置钓鱼天赋", "花费金币重置，已用点数全部退回。"),
+        ("重置钓鱼天赋", "固定花费 2 万金币重置，已用点数全部退回。"),
         ("钓鱼卡牌 / 卡牌", "查看九个鱼点的神谕卡收集进度。"),
     )),
     ("帮助与管理员", (126, 126, 134), (
@@ -1004,10 +1004,6 @@ class McFish(NcatBotPlugin):
         if state.get("king_paths_week") != week_key:
             state["king_paths_week"] = week_key
             state["king_paths"] = {}
-        if state.get("talent_reset_week") != week_key:
-            state["talent_reset_week"] = week_key
-            if state.get("talents"):
-                state["talents"]["reset_count"] = 0
         return state
 
     def _record_group_member(self, event) -> None:
