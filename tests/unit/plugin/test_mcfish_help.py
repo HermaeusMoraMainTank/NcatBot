@@ -78,10 +78,14 @@ def test_help_quick_card_lists_every_routed_command():
     """有人反馈新指令没出现在钓鱼说明里：用路由清单反向卡住帮助文案。"""
     import inspect
 
-    from McFish.McFish import MCFISH_COMMAND_ROWS, MCFISH_HELP
+    from McFish.McFish import (
+        MCFISH_COMMAND_HELP_GROUPS,
+        MCFISH_COMMAND_ROWS,
+        MCFISH_HELP,
+    )
 
     required = (
-        "进行n次钓鱼", "钓鱼鱼点", "前往", "钓鱼力", "开箱", "吃海藻",
+        "进行n次钓鱼", "钓鱼鱼点", "前往", "钓鱼力", "开箱", "吃海藻", "吃食物",
         "钓鱼卡牌", "钓鱼装备", "装备图鉴", "合成渔具", "装备渔具", "强化渔具", "卸下渔具",
         "钓鱼工坊", "交付", "领取 三叉戟", "领取 神谕卡组",
         "钓鱼天赋", "学习", "重置钓鱼天赋",
@@ -97,8 +101,15 @@ def test_help_quick_card_lists_every_routed_command():
     # 文本版帮助与速查卡共用同一份命令清单，避免两处漂移。
     for row in MCFISH_COMMAND_ROWS:
         assert row in MCFISH_HELP
-    # 速查卡必须直接渲染这份清单，而不是另抄一份。
-    assert "MCFISH_COMMAND_ROWS" in inspect.getsource(McFish._render_help_image)
+    # 图片速查卡使用按功能分组的命令表，而不是另抄一份。
+    assert "MCFISH_COMMAND_HELP_GROUPS" in inspect.getsource(McFish._render_help_image)
+    table_text = "\n".join(
+        f"{command} {desc}"
+        for _title, _accent, rows in MCFISH_COMMAND_HELP_GROUPS
+        for command, desc in rows
+    )
+    for command in required:
+        assert command in table_text, command
 
 
 def test_help_image_splits_into_compact_pages(tmp_path: Path):

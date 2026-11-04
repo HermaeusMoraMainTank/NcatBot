@@ -21,6 +21,7 @@ from McFish.McFish import (  # noqa: E402
     FISH,
     FISH_KINGS,
     MCFISH_HELP,
+    MCFISH_COMMAND_HELP_GROUPS,
     MCFISH_SPECIAL_MECHANICS,
     SHOP_ROD_PRICES,
     SHOP_WOOD_PRICE,
@@ -1410,6 +1411,75 @@ def test_mcfish_help_contains_original_commands_and_rules():
     assert "合成成功率90%" in MCFISH_HELP
     assert "工坊交付" in MCFISH_HELP
     assert "不会损坏" in MCFISH_HELP
+
+
+def test_mcfish_help_documents_food_and_box_usage():
+    for phrase in (
+        "吃食物 绿色海藻 3",
+        "每天最多回复15次",
+        "绿色/黄色海藻回复1次",
+        "只能补回当天已经用掉的次数",
+        "上锁的铜制箱子",
+        "铜钥匙 / 铁钥匙 / 猩红金属钥匙",
+    ):
+        assert phrase in MCFISH_HELP
+
+
+def test_mcfish_help_groups_commands_into_feature_tables():
+    titles = [title for title, _accent, _rows in MCFISH_COMMAND_HELP_GROUPS]
+    assert titles == [
+        "开始与查询",
+        "鱼点与鱼王",
+        "商店与交易",
+        "食物与开箱",
+        "鱼竿",
+        "饰品与消耗品",
+        "装备与工坊",
+        "任务、天赋与卡牌",
+        "帮助与管理员",
+    ]
+    food_rows = dict(next(
+        rows for title, _accent, rows in MCFISH_COMMAND_HELP_GROUPS
+        if title == "食物与开箱"
+    ))
+    assert "吃海藻 绿色海藻 3" in food_rows
+    assert "吃食物 绿色海藻 3" in food_rows
+    assert "开箱 上锁的铜制箱子" in food_rows
+
+
+def test_mcfish_eating_food_restores_attempts_and_respects_daily_cap():
+    import asyncio
+
+    plugin = McFish.__new__(McFish)
+    plugin._gear_effects = lambda _state: {}
+    plugin._save = lambda *_args: None
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {
+        "pack": {"绿色海藻": 5},
+        "fish_today": 10,
+        "fish_level": 10,
+        "fishing_zone": "bay",
+        "zone_fish_today": {"bay": 10},
+    }
+
+    asyncio.run(plugin._eat_food(event, state, "绿色海藻 3"))
+
+    assert state["fish_today"] == 7
+    assert state["zone_fish_today"]["bay"] == 7
+    assert state["pack"]["绿色海藻"] == 2
+    assert state["food_today"] == 3
+
+    capped = {
+        "pack": {"绿色海藻": 5},
+        "fish_today": 20,
+        "food_today": 14,
+        "fish_level": 10,
+        "fishing_zone": "bay",
+        "zone_fish_today": {"bay": 20},
+    }
+    asyncio.run(plugin._eat_food(event, capped, "绿色海藻 3"))
+    assert capped["food_today"] == 15
+    assert capped["fish_today"] == 19
 
 
 def test_mcfish_help_explains_equipment_crafting_and_activation():
@@ -3950,6 +4020,28 @@ def test_mcfish_blocks_selling_materials_cards_keys_and_equipment():
         state = {"pack": {name: 1}}
         asyncio.run(plugin._sell(event, state, f"{name} 1"))
         assert "赚到了" in event.reply.await_args.kwargs["text"], name
+
+
+def test_mcfish_can_sell_consumables_but_not_permanent_accessories():
+    import asyncio
+
+    plugin = McFish.__new__(McFish)
+    plugin._prices = {"魔法鱼饵": 1800, "财富浮标": 30000}
+    plugin._types = {}
+    plugin._economy_change = lambda *_args: True
+    plugin._save = lambda *_args: None
+    plugin._choose = AsyncMock(return_value=SimpleNamespace(key="confirm"))
+    plugin.get_config = lambda key, default=None: 0.8 if key == "sell_tax" else default
+    plugin._shop_data = lambda: ({}, {})
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+
+    consumable = {"pack": {"魔法鱼饵": 1}}
+    asyncio.run(plugin._sell(event, consumable, "魔法鱼饵 1"))
+    assert "赚到了" in event.reply.await_args.kwargs["text"]
+
+    permanent = {"pack": {"财富浮标": 1}}
+    asyncio.run(plugin._sell(event, permanent, "财富浮标 1"))
+    assert "不可交易" in event.reply.await_args.kwargs["text"]
 
 def test_shop_mapping_renames_old_fish_names():
     plugin = McFish.__new__(McFish)

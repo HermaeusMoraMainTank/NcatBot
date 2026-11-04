@@ -583,7 +583,7 @@ MCFISH_COMMAND_ROWS_BASE = (
 )
 MCFISH_COMMAND_ROWS_SYSTEMS = (
     "钓鱼力：钓鱼力（查看构成与等待倍率）",
-    "收集：钓鱼卡牌 / 开箱 铜制箱子 / 吃海藻 绿色海藻 3",
+    "收集：钓鱼卡牌 / 开箱 上锁的铜制箱子 / 吃海藻 绿色海藻 3（吃食物 同义）",
     "装备：钓鱼装备 / 合成渔具 铜制头盔 / 装备渔具 铜制头盔 / 强化渔具 铜制头盔 / 卸下渔具 头盔",
     "工坊：钓鱼工坊 [配方] / 交付 三叉戟 鱼王鳞片 1 / 领取 三叉戟 / 领取 神谕卡组",
     "天赋：钓鱼天赋（树状加点与前置） / 学习 钓感 / 重置钓鱼天赋",
@@ -591,6 +591,85 @@ MCFISH_COMMAND_ROWS_SYSTEMS = (
     "管理员：钓鱼发放 @用户 物品 数量 / 钓鱼充值 @用户 物品 数量",
 )
 MCFISH_COMMAND_ROWS = MCFISH_COMMAND_ROWS_BASE + MCFISH_COMMAND_ROWS_SYSTEMS
+
+# 帮助图片的命令速查表：按功能分块，每行一条命令和对应说明。
+# 这里只写玩家实际可用的命令，避免把系统提示混进命令表。
+MCFISH_COMMAND_HELP_GROUPS = (
+    ("开始与查询", (38, 144, 164), (
+        ("钓鱼 / 进行n次钓鱼", "开始钓鱼；单次最多10竿，支持中文数字。"),
+        ("查看上次钓鱼结果", "逐竿查看最近一批的上钩时间、结果和经验。"),
+        ("钓鱼背包", "分栏查看背包、装备、饰品、消耗品剩余次数。"),
+        ("钓鱼力", "查看 FP 构成、等待倍率与当前鱼点门槛。"),
+        ("钓鱼图鉴 [鱼名]", "查看个人捕获记录与鱼王战绩；可指定鱼名或鱼王名。"),
+        ("钓鱼概率 [鱼点/全部]", "查看当前装备、各鱼点鱼种或九档鱼竿对照表。"),
+        ("当前装备概率明细", "与“钓鱼概率”当前页相同。"),
+    )),
+    ("鱼点与鱼王", (86, 122, 174), (
+        ("钓鱼鱼点 / 鱼点", "查看九个鱼点、FP 门槛、今日次数与常驻鱼王。"),
+        ("前往 深海", "切换鱼点；需要达到该鱼点的钓鱼力门槛。"),
+        ("钓鱼时钟", "查看当前活跃鱼点、当前鱼王窗口与最近5次窗口。"),
+        ("钓鱼帮助 鱼点", "打开鱼点、鱼王与钓鱼力的完整说明。"),
+    )),
+    ("商店与交易", (176, 119, 64), (
+        ("钓鱼商店 / 钓鱼看板", "查看当日上架、折扣、库存与背包可售物品。"),
+        ("购买 铜竿", "购买鱼竿；受等级、库存和每日鱼竿交易10次限制。"),
+        ("购买 绿色海藻 3", "购买普通物品；每日最多购买30件。"),
+        ("出售 岩石凶鲨 5", "出售物品并显示税后价格；鱼竿每日最多出售10次。"),
+        ("出售所有垃圾", "一次性出售全部垃圾。"),
+        ("消除宝藏诅咒 3", "用等量净化书消除宝藏诅咒。"),
+    )),
+    ("食物与开箱", (229, 112, 118), (
+        ("吃海藻 绿色海藻 3", "食用任意食物；数量省略时吃1个，每天最多回复15次。"),
+        ("吃食物 绿色海藻 3", "与“吃海藻”同义，更容易记。"),
+        ("开箱 上锁的铜制箱子", "消耗1把同档钥匙；箱名与钥匙档位必须一致。"),
+    )),
+    ("鱼竿", (239, 145, 76), (
+        ("装备 猩红竿", "装备背包中的鱼竿。"),
+        ("花费100购买鱼竿", "没有鱼竿时的应急木竿；受购买次数与冷却限制。"),
+        ("修复鱼竿 / 维修鱼竿", "消耗1根同名鱼竿和金币恢复耐久；最多维修10次。"),
+        ("附魔 诱钓 / 附魔诱钓", "给装备中的鱼竿附魔；50%成功，最高Ⅲ级，失败也消耗附魔书。"),
+        ("附魔 海之眷顾 / 附魔海之眷顾", "同上；附魔书来自商店或钓鱼掉落。"),
+        ("合成鱼竿", "3根同档鱼竿合成下一档；成功率90%，失败销毁材料。"),
+        ("分解鱼竿", "分解为钓鱼碎片；分解前确认，装备中的鱼竿不会被处理。"),
+    )),
+    ("饰品与消耗品", (112, 96, 164), (
+        ("装备 财富浮标", "装备永久饰品；同名不能重复，受饰品位数量限制。"),
+        ("卸下 财富浮标", "卸下永久饰品，饰品仍保留在背包。"),
+        ("卸下全部饰品", "一次卸下所有永久饰品。"),
+        ("升级 财富浮标 / 升级财富浮标", "消耗碎片升到Ⅲ级；升级不消耗金币。"),
+        ("购买饰品槽位 / 解锁饰品槽位", "10级+80碎片解锁第3格，20级+180碎片解锁第4格。"),
+        ("合成财富浮标", "合成永久饰品；需要碎片与金币手续费，默认2格。"),
+        ("合成 魔法鱼饵 / 合成魔法鱼饵", "合成消耗品；碎片+金币，启用后每竿消耗1次。"),
+        ("装备 魔法鱼饵", "启用消耗品，每完成1竿消耗1次；剩余次数见钓鱼背包。"),
+    )),
+    ("装备与工坊", (61, 145, 112), (
+        ("钓鱼装备", "查看六个部位的当前装备、FP 与套装效果。"),
+        ("合成渔具 铜制头盔", "单件合成；不写装备名时打开全部配方和材料。"),
+        ("装备渔具 铜制头盔", "穿戴装备；戒指会自动进入空位。"),
+        ("强化渔具 铜制头盔", "升1级，最高20级；消耗材料与金币。"),
+        ("卸下渔具 头盔", "卸到背包；部位：头盔/胸甲/腿甲/项链/戒指1/戒指2。"),
+        ("装备图鉴", "按部位查看初始/最终 FP、套装效果与获取途径。"),
+        ("装备图鉴 套装 / 饰品图鉴", "查看套装总览与永久饰品效果。"),
+        ("钓鱼工坊", "常驻交付系统；查看配方、材料进度与可领取状态。"),
+        ("交付 三叉戟 鱼王鳞片 1", "分批交付配方材料；材料齐备后领取。"),
+        ("领取 三叉戟 / 领取 神谕卡组", "领取已完成的工坊奖励。"),
+    )),
+    ("任务、天赋与卡牌", (49, 132, 190), (
+        ("钓鱼任务", "查看每日/每周任务、编号与奖励。"),
+        ("领取钓鱼任务 2", "领取对应编号的任务奖励。"),
+        ("钓鱼天赋", "查看树状天赋、可用点数与前置状态。"),
+        ("学习 钓感", "学习或升级天赋节点；必须先点满前置。"),
+        ("重置钓鱼天赋", "花费金币重置，已用点数全部退回。"),
+        ("钓鱼卡牌 / 卡牌", "查看九个鱼点的神谕卡收集进度。"),
+    )),
+    ("帮助与管理员", (126, 126, 134), (
+        ("钓鱼帮助 / 查看钓鱼规则", "打开本帮助图。"),
+        ("钓鱼帮助 鱼点", "分页：鱼点/装备/鱼竿/掉落/任务/机制/全部。"),
+        ("钓鱼帮助 改版 1", "8页改版说明，逐页介绍新系统。"),
+        ("钓鱼发放 @用户 物品 数量", "管理员发放物品。"),
+        ("钓鱼充值 @用户 物品 数量", "管理员充值物品。"),
+    )),
+)
 
 
 MCFISH_HELP = """一款钓鱼模拟器
@@ -624,6 +703,8 @@ MCFISH_HELP = """一款钓鱼模拟器
 - 掉落鱼竿随机生成耐久、维修和附魔；合成与修复的手续费由钱包实际扣除。
 - 达到对应等级后，商店常驻出售铜竿/锡竿/铁竿/猩红竿/幻光竿/星河竿/灿阳竿，价格分别为600/1600/4000/9000/16000/24000/36000金币；商店购买鱼竿不能作为合成材料，掉落、任务奖励、碎片兑换和合成鱼竿仍可合成。
 - 可出售：鱼、鱼王、鱼竿、贵重品、食物、垃圾、宝藏道具、消耗品；材料、钥匙、箱子、神谕卡片、装备、鱼王鳞片、钓鱼碎片不可出售。
+- 食物与回复：食物来自垃圾段的“食物”子类；绿色/黄色海藻回复1次，灰色/红色/苍白海藻回复2次，蓝色/水晶/深蓝色海藻回复3次。发送“吃海藻 绿色海藻 3”或“吃食物 绿色海藻 3”食用，数量省略时吃1个；每天最多回复15次，只能补回当天已经用掉的次数，并同步减少当前鱼点已用次数。装备和天赋的食物效果会提高单次回复量。
+- 开箱：发送“开箱 上锁的铜制箱子”并消耗1把同档钥匙；箱名必须完整，钥匙为铜钥匙 / 铁钥匙 / 猩红金属钥匙 / 幻光金属钥匙 / 星河金属钥匙 / 灿阳金属钥匙。箱子与钥匙档位不一致时不会消耗。
 - 每日和每周任务从简单/中等/复杂任务池按等级档位组合生成；发送“钓鱼任务”查看编号和奖励，发送“领取钓鱼任务 编号”领取奖励，任务跨日、跨周自动刷新。三叉戟改由工坊交付，不再作为任务奖励。
 - 宝藏诅咒不能交易，可用净化书消除；鱼竿超过30支不能钓鱼，超过50支不能购买。"""
 
@@ -1359,21 +1440,25 @@ class McFish(NcatBotPlugin):
         return output
 
     def _render_help_image(self, uid: str, page: str = "") -> Path:
-        """Render fishing help; the quick card is the default entry point."""
+        """Render fishing help as command tables grouped by feature."""
         width = 1600
         margin = 56
         gap = 32
         column_width = (width - margin * 2 - gap) // 2
         title_font = self._font(78, bold=True)
-        subtitle_font = self._font(28)
-        section_font = self._font(34, bold=True)
-        body_font = self._font(25)
-        small_font = self._font(22)
+        subtitle_font = self._font(27)
+        section_font = self._font(29, bold=True)
+        command_font = self._font(20, bold=True)
+        body_font = self._font(19)
+        small_font = self._font(20)
+        footer_font = self._font(18)
         measure = ImageDraw.Draw(PILImage.new("RGB", (1, 1)))
 
         def wrap(text: str, font: ImageFont.FreeTypeFont, max_width: int) -> list[str]:
             result: list[str] = []
             current = ""
+            closing = "。，、；：！？）》」』】…%,.!?;:)]}"
+            opening = "（《「『【([{"
             for char in text:
                 if char == "\n":
                     result.append(current)
@@ -1381,6 +1466,14 @@ class McFish(NcatBotPlugin):
                     continue
                 candidate = current + char
                 if current and measure.textbbox((0, 0), candidate, font=font)[2] > max_width:
+                    if char in closing and len(current) > 1:
+                        result.append(current[:-1])
+                        current = current[-1] + char
+                        continue
+                    if current[-1] in opening:
+                        result.append(current[:-1])
+                        current = current[-1] + char
+                        continue
                     result.append(current)
                     current = char
                 else:
@@ -1400,9 +1493,11 @@ class McFish(NcatBotPlugin):
         }
         rod_rows = []
         for name, (durability, price) in POLES.items():
-            special = "  · 1竿1次掉落  · 工坊交付" if name == "三叉戟" else ""
+            if name == "三叉戟":
+                rod_rows.append(f"{name}  · 耐久{durability}  · 1竿1次掉落  · 60级工坊交付")
+                continue
             rod_rows.append(
-                f"{name}  · 耐久{durability}  · 均价{price}金币  · Lv{rod_unlock_level(name)}{special}"
+                f"{name}  · 耐久{durability}  · 均价{price}金币  · Lv{rod_unlock_level(name)}"
             )
         equipment_rows = []
         for name, info in EQUIPMENT.items():
@@ -1410,50 +1505,62 @@ class McFish(NcatBotPlugin):
             equipment_rows.append(
                 f"{name}  · {kind_text}  · {info['fragments']}碎片  · 手续费{EQUIPMENT_CRAFT_FEES[name]}金币  · {equipment_effects[name]}"
             )
-        sections = [
-            (
-                "指令入口",
-                list(MCFISH_COMMAND_ROWS_BASE),
-                (38, 144, 164),
-            ),
-            (
-                "新系统与帮助",
-                list(MCFISH_COMMAND_ROWS_SYSTEMS),
-                (176, 119, 64),
-            ),
-            (
-                "核心循环",
-                [
-                    "每竿独立结算并按隐藏上钩时间发送结果；完成后显示上钩时间、结果和经验。",
+
+        command_sections = [
+            {"kind": "table", "title": title, "rows": rows, "accent": accent}
+            for title, accent, rows in MCFISH_COMMAND_HELP_GROUPS
+        ]
+        rule_sections = [
+            {
+                "kind": "bullets",
+                "title": "核心循环",
+                "rows": [
+                    "每竿独立结算，完成后显示上钩时间、结果和经验。",
                     "普通鱼直接结算；鱼王分咬钩和上钩两个阶段，回复选项会影响后续机会和鱼体大小。",
                     "鱼王窗口每周生成，只在对应鱼点和时间内生效；常驻鱼王随时可判定。",
                 ],
-                (86, 122, 174),
-            ),
-            (
-                "等级与经验",
-                [
+                "accent": (86, 122, 174),
+            },
+            {
+                "kind": "bullets",
+                "title": "等级与经验",
+                "rows": [
                     "经验用于升级：1–35级沿用旧曲线（1→2级100点，之后每级+50）；36–60级每级1200点起（每级+40），61–100级每级2600点起（每级+60）；满级100级累计224250点。",
                     "等级上限100；每5级获得1个天赋点，100级额外获得5个（满级共25点）；每日次数按等级为50/60/70/80/100次。",
                     "鱼王成功获得300–900经验，隐藏鱼80–120经验，普通鱼5–50经验；脱钩不获得捕获经验。",
                     "同一玩家已有钓鱼任务时不能重复开始，其他玩家不受影响。",
                 ],
-                (112, 96, 164),
-            ),
-            (
-                "任务与金币循环",
-                [
+                "accent": (112, 96, 164),
+            },
+            {
+                "kind": "bullets",
+                "title": "食物与回复",
+                "rows": [
+                    "食物来自垃圾段的“食物”子类；不同鱼点产出不同海藻。",
+                    "食用命令：吃海藻/吃食物 食物名 数量；省略数量时吃1个。",
+                    "回复量：绿色/黄色海藻1次，灰色/红色/苍白海藻2次，蓝色/水晶/深蓝色海藻3次；装备与天赋可提高。",
+                    "食物也可以直接出售；回复量按食用数量累计。",
+                    "每天最多回复15次，只能补回当天已经用掉的次数，并同步减少当前鱼点已用次数。",
+                    "开箱必须使用完整箱名，例如“开箱 上锁的铜制箱子”，并消耗同档钥匙（铜钥匙 / 铁钥匙 / 猩红金属钥匙 / 幻光金属钥匙 / 星河金属钥匙 / 灿阳金属钥匙）。",
+                ],
+                "accent": (229, 112, 118),
+            },
+            {
+                "kind": "bullets",
+                "title": "任务与金币循环",
+                "rows": [
                     "任务池分简单/中等/复杂，并按1-5、5-10、10-20、20-30、30+级分档；高等级任务目标更大，奖励会增加经验、金币、碎片、消耗品或鱼竿。",
                     "每日/每周任务从任务池排列组合生成；任务板可能保留1-5级低档任务，不想领取不会产生任何消耗。",
                     "达到60级并捕获全部8条限时鱼王后，工坊交付鱼王鳞片8个、时砂5个和7万金币可领取三叉戟。",
                     "修复鱼竿和合成会按等级收取金币手续费，消费任务只统计成功扣款。",
                 ],
-                (176, 119, 64),
-            ),
-            ("鱼竿与升级", rod_rows, (239, 145, 76)),
-            (
-                "碎片与装备",
-                [
+                "accent": (176, 119, 64),
+            },
+            {"kind": "bullets", "title": "鱼竿与升级", "rows": rod_rows, "accent": (239, 145, 76)},
+            {
+                "kind": "bullets",
+                "title": "碎片与装备",
+                "rows": [
                     "碎片来源：普通鱼基础8%得1–2个，第13次保底；稀有鱼/宝藏22%得2–4个；鱼王成功必得5–9个。",
                     "另有0.1%碎片宝藏，额外获得50个碎片；碎片可兑换鱼竿或合成装备。",
                     "合成方式：发送“合成财富浮标”等对应命令；永久饰品需碎片和金币手续费，默认2格。",
@@ -1464,11 +1571,12 @@ class McFish(NcatBotPlugin):
                     "商店常驻出售诱钓500金币（5个）和海之眷顾1000金币（3个）；附魔成功率严格为50%，满3级不会消耗附魔书。",
                     *equipment_rows,
                 ],
-                (112, 96, 164),
-            ),
-            (
-                "掉落与概率",
-                [
+                "accent": (112, 96, 164),
+            },
+            {
+                "kind": "bullets",
+                "title": "掉落与概率",
+                "rows": [
                     "基础区间：宝藏1% / 鱼竿4% / 普通鱼25% / 垃圾30% / 空竿40%。",
                     "鱼总数超过100条时：宝藏2% / 鱼竿8% / 普通鱼35% / 垃圾45%，只改变概率不改变数量。",
                     "鱼竿段内占比：木55% / 铜18% / 锡10% / 铁7% / 猩红5% / 幻光3% / 星河1% / 灿阳1%。",
@@ -1477,11 +1585,12 @@ class McFish(NcatBotPlugin):
                     "隐藏鱼（同名鱼种在另一鱼点出现）：灰色沙丘曳尾鱼（深海）、魂灵面纱（遗迹水域）、岩石凶鲨（风暴海域）；需对应鱼点和隐秘诱饵，4.5%触发。",
                     "垃圾段内部按鱼点分为垃圾/材料/食物/贵重；贵重10%为钥匙箱。",
                 ],
-                (49, 132, 190),
-            ),
-            (
-                "钓鱼力、鱼点与鱼王",
-                [
+                "accent": (49, 132, 190),
+            },
+            {
+                "kind": "bullets",
+                "title": "钓鱼力、鱼点与鱼王",
+                "rows": [
                     "钓鱼力：等级 + 鱼竿 + 装备 + 首饰 + 饰品 + 天赋；发送“钓鱼力”查看构成。",
                     "钓鱼力同时影响等待与稀有度：等待×1/(1+FP/100)；鱼种权重=基础×min(上限,1+(FP−min_fp)/150)，上限按稀有度1.4/1.7/1.9/2.2。",
                     "鱼点自选：钓鱼鱼点 查看，前往 深海 切换；跨天不重置。",
@@ -1498,21 +1607,22 @@ class McFish(NcatBotPlugin):
                     "改版说明按系统拆成8页：钓鱼帮助 改版 页码；每页一个系统，单页不超过12行。",
                     "发送钓鱼时钟查看当前环境和最近5次窗口，不会主动通知。",
                 ],
-                (61, 145, 112),
-            ),
-            ("特殊机制", list(MCFISH_SPECIAL_MECHANICS), (229, 112, 118)),
+                "accent": (61, 145, 112),
+            },
+            {"kind": "bullets", "title": "特殊机制", "rows": list(MCFISH_SPECIAL_MECHANICS), "accent": (229, 112, 118)},
         ]
-
+        all_sections = command_sections + rule_sections
+        command_titles = tuple(section["title"] for section in command_sections)
         page_titles = {
-            "": ("指令入口", "新系统与帮助", "核心循环", "等级与经验"),
-            "快速": ("指令入口", "新系统与帮助", "核心循环", "等级与经验"),
-            "鱼点": ("钓鱼力、鱼点与鱼王",),
-            "装备": ("碎片与装备",),
-            "鱼竿": ("鱼竿与升级",),
-            "掉落": ("掉落与概率",),
-            "任务": ("任务与金币循环",),
-            "机制": ("特殊机制",),
-            "全部": tuple(section[0] for section in sections),
+            "": command_titles + ("食物与回复", "核心循环"),
+            "快速": command_titles + ("食物与回复", "核心循环"),
+            "鱼点": ("鱼点与鱼王", "钓鱼力、鱼点与鱼王"),
+            "装备": ("装备与工坊", "饰品与消耗品", "碎片与装备"),
+            "鱼竿": ("鱼竿", "鱼竿与升级"),
+            "掉落": ("食物与开箱", "商店与交易", "食物与回复", "掉落与概率"),
+            "任务": ("任务、天赋与卡牌", "任务与金币循环"),
+            "机制": ("核心循环", "等级与经验", "特殊机制"),
+            "全部": tuple(section["title"] for section in all_sections),
         }
         page_ids = {
             "": "quick", "快速": "quick", "鱼点": "spots", "装备": "gear", "鱼竿": "rods",
@@ -1520,32 +1630,49 @@ class McFish(NcatBotPlugin):
         }
         page_key = page if page in page_titles else ""
         selected_titles = page_titles[page_key]
-        sections = [section for section in sections if section[0] in selected_titles]
+        sections = [section for section in all_sections if section["title"] in selected_titles]
 
-        single_section = len(sections) == 1
-        content_width = width - margin * 2 if single_section else column_width
+        single_column = page_key not in ("", "快速", "全部")
+        content_width = width - margin * 2 if single_column else column_width
+        section_head = 78
+        table_header_height = 34
+        row_line_height = 25
+        bullet_line_height = 29
 
-        def prepare_section(title: str, rows: list[str], accent: tuple[int, int, int]):
-            wrapped_rows: list[list[str]] = []
-            for row in rows:
-                row_lines = wrap(f"• {row}", body_font, content_width - 48 - 28)
-                wrapped_rows.append(row_lines)
-            line_height = 34
-            height = 82 + sum(len(lines) * line_height + 10 for lines in wrapped_rows) + 34
-            return (title, wrapped_rows, accent, height)
+        def prepare_section(section: dict) -> dict:
+            prepared = dict(section)
+            if section["kind"] == "table":
+                inner_width = content_width - 56
+                command_width = int(inner_width * (0.36 if single_column else 0.42))
+                desc_width = inner_width - command_width
+                rows = []
+                for command, desc in section["rows"]:
+                    command_lines = wrap(command, command_font, command_width - 24)
+                    desc_lines = wrap(desc, body_font, desc_width - 24)
+                    rows.append((
+                        command_lines,
+                        desc_lines,
+                        max(len(command_lines), len(desc_lines)) * row_line_height + 16,
+                    ))
+                prepared["prepared_rows"] = rows
+                prepared["command_width"] = command_width
+                prepared["desc_width"] = desc_width
+                prepared["height"] = section_head + table_header_height + sum(row[2] for row in rows) + 18
+            else:
+                rows = [wrap(row, body_font, content_width - 92) for row in section["rows"]]
+                prepared["prepared_rows"] = rows
+                prepared["height"] = section_head + sum(len(lines) * bullet_line_height + 8 for lines in rows) + 18
+            return prepared
 
-        prepared = [prepare_section(*section) for section in sections]
-        # Pack whole cards into two near-equal columns. There are only seven
-        # cards, so exhaustive partitioning keeps the layout stable when one
-        # section grows without adding a general-purpose layout dependency.
-        header_height = 230
-        footer_height = 92
-        if single_section:
+        prepared = [prepare_section(section) for section in sections]
+        header_height = 220
+        footer_height = 104
+        if single_column:
             left_sections = prepared
             right_sections = []
-            column_height = sum(section[3] + 22 for section in left_sections)
+            column_height = sum(section["height"] + 22 for section in left_sections)
         else:
-            section_totals = [section[3] + 22 for section in prepared]
+            section_totals = [section["height"] + 22 for section in prepared]
             total_height = sum(section_totals)
             best_mask = 1
             best_difference = total_height
@@ -1568,7 +1695,7 @@ class McFish(NcatBotPlugin):
                 section for index, section in enumerate(prepared) if not best_mask & (1 << index)
             ]
             column_height = max(
-                sum(section[3] + 22 for section in column)
+                sum(section["height"] + 22 for section in column)
                 for column in (left_sections, right_sections)
             )
         height = header_height + column_height + footer_height
@@ -1577,21 +1704,28 @@ class McFish(NcatBotPlugin):
 
         draw.rounded_rectangle((0, 0, width, header_height), radius=28, fill=(33, 68, 82, 255))
         draw.rectangle((0, header_height - 22, width, header_height), fill=(33, 68, 82, 255))
-        draw.text((margin, 42), "钓鱼帮助", font=title_font, fill=(250, 252, 252, 255))
-        draw.text((margin, 137), f"McFish  ·  指令、掉落、鱼王与装备规则  ·  {page_key or '快速'}", font=subtitle_font, fill=(190, 222, 225, 255))
+        draw.text((margin, 32), "钓鱼帮助", font=title_font, fill=(250, 252, 252, 255))
         draw.text(
-            (width - margin - 470, 148),
-            f"{len(POLES)} 种鱼竿  ·  {len(EQUIPMENT)} 件装备  ·  规则 V6.4",
+            (margin, 124),
+            f"命令速查 · 按功能分组 · 当前页：{page_key or '快速'}",
+            font=subtitle_font,
+            fill=(190, 222, 225, 255),
+        )
+        draw.text(
+            (width - margin, 128),
+            f"{len(POLES)} 种鱼竿  ·  {len(SETS)} 套装备  ·  {len(EQUIPMENT)} 件饰品/消耗品  ·  规则 V6.4",
             font=small_font,
             fill=(220, 234, 235, 255),
+            anchor="ra",
         )
         for index, name in enumerate(("木竿", "铁竿", "灿阳竿")):
-            icon = self._resource_image(name, (86, 86))
+            icon = self._resource_image(name, (76, 76))
             if icon:
-                image.alpha_composite(icon, (width - margin - 310 + index * 105, 38))
+                image.alpha_composite(icon, (width - margin - 250 + index * 88, 30))
 
-        def draw_section(section, x: int, y: int) -> int:
-            title, wrapped_rows, accent, card_height = section
+        def draw_section(section: dict, x: int, y: int) -> int:
+            card_height = section["height"]
+            accent = section["accent"]
             draw.rounded_rectangle(
                 (x, y, x + content_width, y + card_height),
                 radius=18,
@@ -1600,14 +1734,55 @@ class McFish(NcatBotPlugin):
                 width=2,
             )
             draw.rounded_rectangle((x, y, x + 10, y + card_height), radius=4, fill=(*accent, 255))
-            draw.text((x + 30, y + 24), title, font=section_font, fill=(40, 61, 68, 255))
-            draw.line((x + 30, y + 72, x + content_width - 28, y + 72), fill=(*accent, 100), width=2)
-            current_y = y + 92
-            for lines in wrapped_rows:
-                for line_index, line in enumerate(lines):
-                    draw.text((x + 30 + (28 if line_index else 0), current_y), line, font=body_font, fill=(70, 83, 88, 255))
-                    current_y += 34
-                current_y += 10
+            draw.text((x + 28, y + 20), section["title"], font=section_font, fill=(40, 61, 68, 255))
+            draw.line((x + 28, y + 64, x + content_width - 24, y + 64), fill=(*accent, 100), width=2)
+
+            if section["kind"] == "table":
+                table_x = x + 28
+                table_right = x + content_width - 28
+                command_width = section["command_width"]
+                desc_x = table_x + command_width
+                header_y = y + section_head
+                draw.rounded_rectangle(
+                    (table_x, header_y, table_right, header_y + table_header_height),
+                    radius=8,
+                    fill=(232, 241, 242, 255),
+                )
+                draw.text((table_x + 14, header_y + 6), "命令", font=self._font(19, bold=True), fill=(40, 61, 68, 255))
+                draw.text((desc_x + 14, header_y + 6), "说明", font=self._font(19, bold=True), fill=(40, 61, 68, 255))
+                row_y = header_y + table_header_height
+                for row_index, (command_lines, desc_lines, row_height) in enumerate(section["prepared_rows"]):
+                    if row_index % 2 == 0:
+                        draw.rounded_rectangle(
+                            (table_x, row_y + 2, table_right, row_y + row_height - 2),
+                            radius=6,
+                            fill=(247, 250, 251, 255),
+                        )
+                    command_y = row_y + (row_height - len(command_lines) * row_line_height) // 2
+                    for line in command_lines:
+                        draw.text((table_x + 14, command_y), line, font=command_font, fill=(33, 68, 82, 255))
+                        command_y += row_line_height
+                    desc_y = row_y + (row_height - len(desc_lines) * row_line_height) // 2
+                    for line in desc_lines:
+                        draw.text((desc_x + 14, desc_y), line, font=body_font, fill=(70, 83, 88, 255))
+                        desc_y += row_line_height
+                    draw.line(
+                        (desc_x, row_y + 8, desc_x, row_y + row_height - 8),
+                        fill=(228, 236, 238, 255),
+                        width=2,
+                    )
+                    row_y += row_height
+            else:
+                current_y = y + section_head
+                for lines in section["prepared_rows"]:
+                    draw.ellipse(
+                        (x + 34, current_y + 9, x + 42, current_y + 17),
+                        fill=(*accent, 255),
+                    )
+                    for line in lines:
+                        draw.text((x + 54, current_y), line, font=body_font, fill=(70, 83, 88, 255))
+                        current_y += bullet_line_height
+                    current_y += 8
             return y + card_height + 22
 
         y_left = header_height + 28
@@ -1618,11 +1793,42 @@ class McFish(NcatBotPlugin):
             y_right = draw_section(section, margin + content_width + gap, y_right)
 
         footer_y = height - footer_height
-        draw.line((margin, footer_y + 10, width - margin, footer_y + 10), fill=(184, 202, 205, 255), width=2)
+        draw.line((margin, footer_y + 8, width - margin, footer_y + 8), fill=(184, 202, 205, 255), width=2)
+        chip_x = margin
+        draw.text((chip_x, footer_y + 20), "图片分页", font=footer_font, fill=(92, 112, 117, 255))
+        chip_x += 92
+        chip_specs = (
+            ("快速", ""),
+            ("鱼点", "鱼点"),
+            ("装备", "装备"),
+            ("鱼竿", "鱼竿"),
+            ("掉落", "掉落"),
+            ("任务", "任务"),
+            ("机制", "机制"),
+            ("全部", "全部"),
+        )
+        for label, key in chip_specs:
+            chip_width = measure.textbbox((0, 0), label, font=footer_font)[2] + 30
+            selected = key == page_key
+            draw.rounded_rectangle(
+                (chip_x, footer_y + 14, chip_x + chip_width, footer_y + 48),
+                radius=17,
+                fill=(33, 68, 82, 255) if selected else (255, 255, 255, 255),
+                outline=(33, 68, 82, 255) if selected else (200, 216, 219, 255),
+                width=1,
+            )
+            draw.text(
+                (chip_x + chip_width / 2, footer_y + 24),
+                label,
+                font=footer_font,
+                fill=(250, 252, 252, 255) if selected else (70, 83, 88, 255),
+                anchor="ma",
+            )
+            chip_x += chip_width + 10
         draw.text(
-            (margin, footer_y + 30),
-            "图片分页：钓鱼帮助 鱼点/装备/鱼竿/掉落/任务/机制/全部　·　文字改版：钓鱼帮助 改版 1-8",
-            font=small_font,
+            (margin, footer_y + 68),
+            "改版说明：钓鱼帮助 改版 1-8　·　完整规则：钓鱼帮助 全部　·　分页命令：钓鱼帮助 鱼点 / 装备 / 鱼竿 / 掉落 / 任务 / 机制",
+            font=footer_font,
             fill=(92, 112, 117, 255),
         )
 
@@ -4494,7 +4700,7 @@ class McFish(NcatBotPlugin):
         is_task_command = any(text == prefix or text.startswith(prefix + " ") for prefix in task_prefixes)
         item_grant_prefixes = ("钓鱼发放", "钓鱼充值")
         is_item_grant_command = any(text == prefix or text.startswith(prefix + " ") for prefix in item_grant_prefixes)
-        if not text or not (text.startswith(("进行", "购买", "出售", "装备", "卸下", "升级", "附魔", "合成", "消除", "修复", "维修", "分解", "前往", "开箱", "吃海藻", "强化渔具", "卸下渔具", "交付", "学习")) or text in ("花费100购买鱼竿", "购买饰品槽位", "解锁饰品槽位", "钓鱼帮助", "钓鱼概率", "钓鱼背包", "钓鱼商店", "钓鱼看板", "钓鱼时钟", "钓鱼图鉴", "钓鱼任务", "钓鱼力", "钓鱼鱼点", "鱼点", "钓鱼卡牌", "卡牌", "钓鱼装备", "装备图鉴", "饰品图鉴", "钓鱼工坊", "领取 三叉戟", "领取 神谕卡组", "钓鱼天赋", "重置钓鱼天赋", "查看上次钓鱼结果", "出售所有垃圾", "当前装备概率明细", "查看钓鱼规则") or text.startswith("钓鱼图鉴 ") or text.startswith("装备图鉴 ") or text.startswith("钓鱼帮助 ") or text.startswith("钓鱼概率 ") or is_task_command or is_item_grant_command):
+        if not text or not (text.startswith(("进行", "购买", "出售", "装备", "卸下", "升级", "附魔", "合成", "消除", "修复", "维修", "分解", "前往", "开箱", "吃海藻", "吃食物", "强化渔具", "卸下渔具", "交付", "学习")) or text in ("花费100购买鱼竿", "购买饰品槽位", "解锁饰品槽位", "钓鱼帮助", "钓鱼概率", "钓鱼背包", "钓鱼商店", "钓鱼看板", "钓鱼时钟", "钓鱼图鉴", "钓鱼任务", "钓鱼力", "钓鱼鱼点", "鱼点", "钓鱼卡牌", "卡牌", "钓鱼装备", "装备图鉴", "饰品图鉴", "钓鱼工坊", "领取 三叉戟", "领取 神谕卡组", "钓鱼天赋", "重置钓鱼天赋", "查看上次钓鱼结果", "出售所有垃圾", "当前装备概率明细", "查看钓鱼规则") or text.startswith("钓鱼图鉴 ") or text.startswith("装备图鉴 ") or text.startswith("钓鱼帮助 ") or text.startswith("钓鱼概率 ") or is_task_command or is_item_grant_command):
             return
         uid = str(event.sender.user_id)
         state = self._state(uid)
@@ -4525,8 +4731,9 @@ class McFish(NcatBotPlugin):
         if text.startswith("开箱"):
             await self._open_box(event, state, text[2:].strip())
             return
-        if text.startswith("吃海藻"):
-            await self._eat_food(event, state, text[3:].strip())
+        if text.startswith(("吃海藻", "吃食物")):
+            prefix = "吃海藻" if text.startswith("吃海藻") else "吃食物"
+            await self._eat_food(event, state, text[len(prefix):].strip())
             return
         if text == "钓鱼工坊" or text.startswith("钓鱼工坊 "):
             await event.reply(text=self._workshop_text(state, text[4:].strip()))
@@ -6488,7 +6695,7 @@ class McFish(NcatBotPlugin):
             | set(CARD_NAMES)
             | set(KEY_NAMES.values())
             | set(BOX_NAMES.values())
-            | set(EQUIPMENT)
+            | {name for name, info in EQUIPMENT.items() if info.get("kind") != "consumable"}
             | (set(PIECE_INFO) - valuable_names)
             | {"鱼王鳞片", "钓鱼碎片"}
         )
@@ -7349,7 +7556,7 @@ class McFish(NcatBotPlugin):
     async def _eat_food(self, event, state: dict, text: str) -> None:
         parts = text.split()
         if not parts:
-            await event.reply(text="吃海藻：需要食物名，例如 吃海藻 绿色海藻 3")
+            await event.reply(text="吃海藻 / 吃食物：需要食物名，例如 吃食物 绿色海藻 3")
             return
         name = parts[0]
         number = int(parts[1]) if len(parts) > 1 and parts[1].isdigit() else 1
