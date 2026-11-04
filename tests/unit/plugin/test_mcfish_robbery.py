@@ -1243,6 +1243,38 @@ def test_mcfish_probability_pages_split_and_balance_columns(tmp_path: Path):
             assert image.size[1] < limit
 
 
+def test_mcfish_probability_merges_equal_adjacent_rod_cells(tmp_path: Path):
+    plugin = McFish.__new__(McFish)
+    plugin.workspace = tmp_path
+    plugin._load_original_data()
+
+    cells = plugin._merge_equal_cells(
+        ["岩石凶鲨", "0", "5.00%", "5.00%", "5.00%", "0.00%", "0.00%"], 2
+    )
+
+    # 前置两列保持独立；从鱼竿列开始，相邻相同值合成一个跨列单元格。
+    assert cells[:2] == [(0, 1, "岩石凶鲨"), (1, 1, "0")]
+    assert cells[2:] == [(2, 3, "5.00%"), (5, 2, "0.00%")]
+
+
+def test_mcfish_all_probability_tables_merge_equal_rod_columns(tmp_path: Path):
+    plugin = McFish.__new__(McFish)
+    plugin.workspace = tmp_path
+    plugin._load_original_data()
+
+    tables = {section["title"]: section for section in plugin._probability_all_tables()}
+
+    fish_section = tables["普通鱼 · 河湾"]
+    assert fish_section["merge_equal_from"] == 2
+    row = fish_section["rows"][0]
+    spans = [span for _index, span, _value in plugin._merge_equal_cells(row, 2)]
+    assert max(spans) >= 1
+
+    king_section = tables["限时鱼王（咬钩率/基础上钩率）"]
+    assert king_section["merge_equal_from"] == 4
+    assert len(king_section["headers"]) == len(king_section["rows"][0])
+
+
 def test_mcfish_probability_lists_every_zone_and_its_fish(tmp_path: Path):
     plugin = McFish.__new__(McFish)
     plugin.workspace = tmp_path

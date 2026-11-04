@@ -3952,7 +3952,8 @@ class McFish(NcatBotPlugin):
                 "weights": [1.8, 0.8, *([1] * len(POLES))],
                 "aligns": ["l", "r", *(["r"] * len(POLES))],
                 "icons": True,
-                "note": "概率为每竿出现率；熔岩深渊及之后的鱼点见“钓鱼概率 鱼点”。",
+                "merge_equal_from": 2,
+                "note": "概率为每竿出现率；相邻鱼竿数值相同时合并显示。熔岩深渊及之后的鱼点见“钓鱼概率 鱼点”。",
             })
 
         king_rows = []
@@ -3973,7 +3974,8 @@ class McFish(NcatBotPlugin):
             "weights": [1.5, 0.8, 0.9, 1.1, *([0.95] * len(POLES))],
             "aligns": ["l", "l", "r", "l", *(["r"] * len(POLES))],
             "icons": True,
-            "note": "后置行显示前置已咬钩后的概率；未满足前置条件时为 0。",
+            "merge_equal_from": 4,
+            "note": "后置行显示前置已咬钩后的概率；未满足前置条件时为 0。相邻鱼竿数值相同时合并显示。",
         })
 
         resident_rows = []
@@ -4011,6 +4013,20 @@ class McFish(NcatBotPlugin):
         })
         return tables
 
+    @staticmethod
+    def _merge_equal_cells(row: list, start: int | None) -> list[tuple[int, int, object]]:
+        """把从 start 列开始、相邻且相同的单元格合并成 (起始列, 跨列数, 值)。"""
+        cells: list[tuple[int, int, object]] = []
+        index = 0
+        while index < len(row):
+            span = 1
+            if start is not None and index >= start:
+                while index + span < len(row) and row[index + span] == row[index]:
+                    span += 1
+            cells.append((index, span, row[index]))
+            index += span
+        return cells
+
     def _probability_draw_table(self, image, draw, x: int, y: int, width: int, section: dict) -> int:
         title = str(section.get("title", ""))
         headers = list(section.get("headers", []))
@@ -4043,34 +4059,79 @@ class McFish(NcatBotPlugin):
 
         header_y = y + title_height
         draw.rounded_rectangle((x + 8, header_y, x + width - 8, header_y + header_height), radius=8, fill=(229, 238, 240, 255))
-        cell_x = x + 14
         header_font = self._font(15, bold=True)
+        header_mid = header_y + header_height / 2
+        cell_x = x + 14
         for index, label in enumerate(headers):
             cell_width = col_widths[index]
-            anchor = "rs" if aligns[index] == "r" else "ls"
-            text_x = cell_x + cell_width - 8 if aligns[index] == "r" else cell_x + 6
-            draw.text((text_x, header_y + 5), fit(label, header_font, cell_width - 14), fill=(40, 61, 68, 255), font=header_font, anchor=anchor)
+            if aligns[index] == "r":
+                draw.text(
+                    (cell_x + cell_width - 8, header_mid),
+                    fit(label, header_font, cell_width - 14),
+                    fill=(40, 61, 68, 255),
+                    font=header_font,
+                    anchor="rm",
+                )
+            else:
+                draw.text(
+                    (cell_x + 6, header_mid),
+                    fit(label, header_font, cell_width - 14),
+                    fill=(40, 61, 68, 255),
+                    font=header_font,
+                    anchor="lm",
+                )
             cell_x += cell_width
 
         row_y = header_y + header_height
         row_font = self._font(15)
+        merge_from = section.get("merge_equal_from")
         for row_index, row in enumerate(rows):
             if row_index % 2 == 0:
                 draw.rounded_rectangle((x + 8, row_y, x + width - 8, row_y + row_height), radius=6, fill=(246, 250, 250, 255))
+            row_mid = row_y + row_height / 2
             cell_x = x + 14
-            for index, value in enumerate(row):
-                cell_width = col_widths[index]
-                text_x = cell_x + 6
-                available = cell_width - 14
-                if index == 0 and icons:
-                    icon = self._resource_image(str(value), (22, 22))
-                    if icon:
-                        image.alpha_composite(icon, (cell_x + 2, row_y + 4))
-                        text_x = cell_x + 28
-                        available = cell_width - 34
-                anchor = "rs" if aligns[index] == "r" else "ls"
-                draw_x = cell_x + cell_width - 8 if aligns[index] == "r" else text_x
-                draw.text((draw_x, row_y + 5), fit(value, row_font, available), fill=(70, 83, 88, 255), font=row_font, anchor=anchor)
+            for index, span, value in self._merge_equal_cells(row, merge_from):
+                cell_width = sum(col_widths[index:index + span])
+                if span > 1:
+                    draw.rounded_rectangle(
+                        (cell_x + 2, row_y + 3, cell_x + cell_width - 2, row_y + row_height - 3),
+                        radius=6,
+                        fill=(236, 245, 244, 255),
+                        outline=(214, 231, 229, 255),
+                        width=1,
+                    )
+                    draw.text(
+                        (cell_x + cell_width / 2, row_mid),
+                        fit(value, row_font, cell_width - 16),
+                        fill=(70, 83, 88, 255),
+                        font=row_font,
+                        anchor="mm",
+                    )
+                else:
+                    text_x = cell_x + 6
+                    available = cell_width - 14
+                    if index == 0 and icons:
+                        icon = self._resource_image(str(value), (22, 22))
+                        if icon:
+                            image.alpha_composite(icon, (cell_x + 2, int(row_y + (row_height - 22) / 2)))
+                            text_x = cell_x + 28
+                            available = cell_width - 34
+                    if aligns[index] == "r":
+                        draw.text(
+                            (cell_x + cell_width - 8, row_mid),
+                            fit(value, row_font, available),
+                            fill=(70, 83, 88, 255),
+                            font=row_font,
+                            anchor="rm",
+                        )
+                    else:
+                        draw.text(
+                            (text_x, row_mid),
+                            fit(value, row_font, available),
+                            fill=(70, 83, 88, 255),
+                            font=row_font,
+                            anchor="lm",
+                        )
                 cell_x += cell_width
             row_y += row_height
 
