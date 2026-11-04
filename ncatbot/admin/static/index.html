@@ -186,6 +186,7 @@ tbody tr:hover{background:var(--row-hover)}
       <section class="view flush" id="view-plugins"></section>
       <section class="view" id="view-skills"></section>
       <section class="view flush" id="view-mcfish"></section>
+      <section class="view" id="view-reminders"></section>
       <section class="view" id="view-agent"></section>
       <section class="view" id="view-ai"></section>
       <section class="view" id="view-audit"></section>
@@ -217,6 +218,7 @@ const routes = {
   plugins: {title: '插件配置', icon: '⚙'},
   skills: {title: '技能', icon: '✦'},
   mcfish: {title: '钓鱼', icon: '🎣'},
+  reminders: {title: '预约提醒', icon: '⏰'},
   agent: {title: 'Agent', icon: '🤖'},
   ai: {title: 'AI 轨迹', icon: '💬'},
   audit: {title: '审计', icon: '🧾'},
@@ -313,7 +315,7 @@ function setView() {
   $('#view-' + r).classList.add('active');
   $('#pageTitle').textContent = routes[r].title;
   document.querySelectorAll('#nav button').forEach(x => x.classList.toggle('active', x.dataset.route === r));
-  ({overview: loadOverview, plugins: loadPlugins, skills: loadSkills, mcfish: loadMcFish, agent: loadAgent, ai: loadAi, audit: loadAudit}[r] || loadOverview)();
+  ({overview: loadOverview, plugins: loadPlugins, skills: loadSkills, mcfish: loadMcFish, reminders: loadReminders, agent: loadAgent, ai: loadAi, audit: loadAudit}[r] || loadOverview)();
 }
 
 function card(label, value, sub) {
@@ -662,6 +664,80 @@ function loadMcFish() {
     v.innerHTML = '<div class="mcfish-wrap"><iframe class="mcfish-frame" id="mcfishFrame" src="/mcfish-panel"></iframe></div>';
     v.dataset.ready = '1';
   }
+}
+
+/* ---------------- 预约提醒 ---------------- */
+function fmtRemain(seconds) {
+  if (seconds == null) return '—';
+  let n = Math.max(0, Math.floor(seconds));
+  if (n < 60) return n + ' 秒';
+  const d = Math.floor(n / 86400); n %= 86400;
+  const h = Math.floor(n / 3600); n %= 3600;
+  const m = Math.floor(n / 60);
+  if (d) return d + ' 天 ' + h + ' 时';
+  if (h) return h + ' 时 ' + m + ' 分';
+  return m + ' 分';
+}
+function loadReminders() {
+  const v = $('#view-reminders');
+  v.innerHTML =
+    '<div class="panel"><h2 class="section-title">预约提醒任务 <span class="cfg-tools" style="padding:0"><button class="ghost" id="reminderRefresh">刷新</button></span></h2>' +
+    '<div class="muted" id="reminderStats" style="margin-bottom:10px">加载中…</div>' +
+    '<div id="reminderTable"></div></div>';
+  $('#reminderRefresh').onclick = refreshReminders;
+  refreshReminders();
+  state.poll = setInterval(refreshReminders, 15000);
+}
+async function refreshReminders() {
+  try {
+    const d = await api('/api/private-reminder/tasks');
+    renderReminders(d);
+  } catch (e) {
+    const el = $('#reminderTable');
+    if (el) el.innerHTML = '<div class="empty">加载失败：' + esc(e.message) + '</div>';
+    const stats = $('#reminderStats');
+    if (stats) stats.textContent = '—';
+  }
+}
+function renderReminders(d) {
+  const rows = d.items || [];
+  const stats = $('#reminderStats');
+  if (stats) stats.innerHTML = '待发送 <b>' + esc(d.pending || 0) + '</b> 条 · 发送失败 <b>' + esc(d.failed || 0) + '</b> 条 · 共 ' + esc(rows.length) + ' 条';
+  const el = $('#reminderTable');
+  if (!el) return;
+  if (!rows.length) {
+    el.innerHTML = '<div class="empty">还没有预约任务。用户发送“预约 21:30 收鱼”后会出现在这里。</div>';
+    return;
+  }
+  el.innerHTML = '<div class="table-wrap"><table><thead><tr>' +
+    '<th>编号</th><th>用户</th><th>提醒内容</th><th>预约时间</th><th>剩余 / 状态</th><th>尝试</th><th>操作</th>' +
+    '</tr></thead><tbody>' + rows.map(function (x) {
+      const failed = x.status === 'failed';
+      const status = failed
+        ? '<span class="pill bad">发送失败</span>' + (x.last_error ? '<div class="muted">' + esc(x.last_error) + '</div>' : '')
+        : x.remaining_seconds != null && x.remaining_seconds <= 0
+          ? '<span class="pill">待发送</span> <span class="muted">已到期，等待补发</span>'
+          : '<span class="pill">待发送</span> <span class="muted">还有 ' + esc(fmtRemain(x.remaining_seconds)) + '</span>';
+      const due = x.due_display || (x.due_at ? new Date(x.due_at).toLocaleString('zh-CN', {hour12: false}) : '—');
+      return '<tr><td class="mono">#' + esc(x.id) + '</td>' +
+        '<td class="mono">' + esc(x.user_id) + '</td>' +
+        '<td>' + esc(x.content) + '</td>' +
+        '<td>' + esc(due) + '</td>' +
+        '<td>' + status + '</td>' +
+        '<td>' + esc(x.attempts || 0) + '</td>' +
+        '<td><button class="ghost" data-cancel-reminder="' + esc(x.id) + '">取消</button></td></tr>';
+    }).join('') + '</tbody></table></div>';
+  el.querySelectorAll('[data-cancel-reminder]').forEach(function (btn) {
+    btn.onclick = function () { cancelReminder(btn.dataset.cancelReminder); };
+  });
+}
+async function cancelReminder(id) {
+  if (!confirm('取消预约 #' + id + '？')) return;
+  try {
+    await api('/api/private-reminder/tasks/' + encodeURIComponent(id), {method: 'DELETE'});
+    toast('已取消预约 #' + id);
+    refreshReminders();
+  } catch (e) { toast(e.message, true); }
 }
 
 /* ---------------- Agent ---------------- */

@@ -11,6 +11,7 @@ import json
 import secrets
 import time
 from collections import deque
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Optional
 
@@ -190,6 +191,11 @@ class AdminServer:
         app.router.add_get("/mcfish-assets/{item_name}", self._mcfish_item_asset)
         app.router.add_get("/mcfish-avatar/{kind}/{avatar_id}", self._mcfish_avatar)
         app.router.add_get("/mcfish-panel", self._mcfish_panel)
+        # 预约提醒任务列表
+        app.router.add_get("/api/private-reminder/tasks", self._private_reminder_tasks)
+        app.router.add_delete(
+            "/api/private-reminder/tasks/{task_id}", self._private_reminder_cancel
+        )
         app.router.add_post("/mcp", self._mcp)
         app.router.add_get("/", self._index)
         app.router.add_get("/{path:.*}", self._index)
@@ -709,6 +715,77 @@ class AdminServer:
         if not path or not Path(path).is_file():
             return self._err("头像暂不可用", 404)
         return web.FileResponse(path)
+
+    def _private_reminder_plugin(self):
+        plugin = self.bot.plugin_loader.plugins.get("PrivateReminder")
+        if plugin is None:
+            raise KeyError("PrivateReminder 未加载")
+        return plugin
+
+    async def _private_reminder_tasks(self, request: web.Request) -> web.Response:
+        def build() -> dict[str, Any]:
+            plugin = self._private_reminder_plugin()
+            now = plugin._now() if callable(getattr(plugin, "_now", None)) else datetime.now().astimezone()
+            items: list[dict[str, Any]] = []
+            for item in plugin.data.get("reminders", []):
+                if not isinstance(item, dict):
+                    continue
+                due_text = str(item.get("due_at", ""))
+                due: datetime | None
+                try:
+                    due = datetime.fromisoformat(due_text)
+                except (TypeError, ValueError):
+                    due = None
+                if due is not None and due.tzinfo is None and now.tzinfo is not None:
+                    due = due.replace(tzinfo=now.tzinfo)
+                remaining = int((due - now).total_seconds()) if due is not None else None
+                items.append(
+                    {
+                        "id": int(item.get("id", 0)),
+                        "user_id": str(item.get("user_id", "")),
+                        "content": str(item.get("content", "")),
+                        "due_at": due_text,
+                        "due_display": due.strftime("%Y-%m-%d %H:%M") if due is not None else due_text,
+                        "created_at": str(item.get("created_at", "")),
+                        "status": "failed" if item.get("failed_at") else "pending",
+                        "attempts": int(item.get("attempts", 0)),
+                        "remaining_seconds": remaining,
+                        "last_error": str(item.get("last_error", "")),
+                    }
+                )
+            items.sort(key=lambda entry: entry["due_at"])
+            return {
+                "items": items,
+                "pending": sum(1 for entry in items if entry["status"] == "pending"),
+                "failed": sum(1 for entry in items if entry["status"] == "failed"),
+            }
+
+        return await self._run(request, build)
+
+    @staticmethod
+    def _remove_private_reminder(plugin, task_id: int) -> dict[str, Any]:
+        reminders = plugin.data.get("reminders") or []
+        for item in list(reminders):
+            if isinstance(item, dict) and int(item.get("id", 0)) == task_id:
+                reminders.remove(item)
+                plugin._save_data()
+                return item
+        raise KeyError(f"预约 #{task_id}")
+
+    async def _private_reminder_cancel(self, request: web.Request) -> web.Response:
+        async def action() -> dict[str, Any]:
+            plugin = self._private_reminder_plugin()
+            task_id = int(request.match_info["task_id"])
+            lock = getattr(plugin, "_reminder_lock", None)
+            if lock is not None:
+                async with lock:
+                    item = self._remove_private_reminder(plugin, task_id)
+            else:
+                item = self._remove_private_reminder(plugin, task_id)
+            self._record(request, "private_reminder.cancel", {"id": task_id})
+            return {"id": task_id, "content": str(item.get("content", ""))}
+
+        return await self._run(request, action)
 
     async def _mcfish_panel(self, request: web.Request) -> web.StreamResponse:
         plugin = self.bot.plugin_loader.plugins.get("McFish")
