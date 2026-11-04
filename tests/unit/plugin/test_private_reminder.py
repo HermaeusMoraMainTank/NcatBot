@@ -71,6 +71,50 @@ def test_reminder_time_parser_supports_common_formats():
     assert content == "时间到了"
 
 
+def test_reminder_time_parser_accepts_space_free_chinese_dates():
+    expected = datetime(2026, 11, 5, 9, 0, tzinfo=TZ)
+    for raw in ("明天9点", "明天9:00", "明天09:00"):
+        due, content = parse_reminder_time(raw, NOW)
+        assert due == expected, raw
+        assert content == "时间到了"
+
+    due, content = parse_reminder_time("明天9点30分", NOW)
+    assert due == datetime(2026, 11, 5, 9, 30, tzinfo=TZ)
+    assert content == "时间到了"
+
+    due, content = parse_reminder_time("明天9点30分收鱼", NOW)
+    assert due == datetime(2026, 11, 5, 9, 30, tzinfo=TZ)
+    assert content == "收鱼"
+
+    for raw in ("11月5日 9点30分", "11月5日9点30分"):
+        due, content = parse_reminder_time(raw, NOW)
+        assert due == datetime(2026, 11, 5, 9, 30, tzinfo=TZ), raw
+        assert content == "时间到了"
+
+    for raw in ("11月5号9点03", "11月5号 9点03"):
+        due, content = parse_reminder_time(raw, NOW)
+        assert due == datetime(2026, 11, 5, 9, 3, tzinfo=TZ), raw
+        assert content == "时间到了"
+
+    due, content = parse_reminder_time("2026年11月5日9点30分", NOW)
+    assert due == datetime(2026, 11, 5, 9, 30, tzinfo=TZ)
+    assert content == "时间到了"
+
+    due, content = parse_reminder_time("明天９：００", NOW)
+    assert due == datetime(2026, 11, 5, 9, 0, tzinfo=TZ)
+    assert content == "时间到了"
+
+
+def test_reminder_time_parser_accepts_half_hour_and_whole_hour_suffix():
+    due, content = parse_reminder_time("9点半 收鱼", NOW)
+    assert due == datetime(2026, 11, 5, 9, 30, tzinfo=TZ)
+    assert content == "收鱼"
+
+    due, content = parse_reminder_time("9点整", NOW)
+    assert due == datetime(2026, 11, 5, 9, 0, tzinfo=TZ)
+    assert content == "时间到了"
+
+
 def test_reminder_time_parser_rolls_past_month_day_to_next_year():
     due, _content = parse_reminder_time("01-01 08:00 新年", NOW)
     assert due == datetime(2027, 1, 1, 8, 0, tzinfo=TZ)

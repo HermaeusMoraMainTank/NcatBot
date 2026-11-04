@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import re
+import unicodedata
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
@@ -15,11 +16,13 @@ HELP_TEXT = """预约提醒
 
 创建预约：
 预约 21:30 收鱼
-预约 明天 08:00 起床
-预约 11-05 21:30 收鱼
-预约 2026-11-05 21:30 收鱼
+预约 明天9点 起床
+预约 明天 9:30 收鱼
+预约 11月5日 9点30分 收鱼
+预约 11月5号9点03
+预约 2026年11月5日9点30分
 预约 30分钟 喝水
-预约 2小时 休息
+预约 半小时 休息
 预约 21:30
 
 查看与取消：
@@ -29,44 +32,71 @@ HELP_TEXT = """预约提醒
 
 说明：
 - 时间按北京时间计算，省略日期时今天未到就今天，已过就明天。
+- 日期与时间之间、数字与单位之间的空格可省略。
+- 支持：今天/明天/后天、11月5日/11月5号、2026年11月5日、9点/9点30分/9:00。
 - 内容可以省略，默认提醒“时间到了”。
 - 到时通过私聊发送提醒，群聊里创建的预约也会私聊提醒。
 - 最多同时保留 20 条预约；时间范围最多 365 天。
 - 私聊发送失败会自动重试；连续失败 3 次后会标记为发送失败。"""
 
-_RELATIVE_RE = re.compile(r"^(\d+)\s*(秒|分钟|分|小时|时|天)\s*(?:后)?(?:\s+(.+))?$")
-_DAY_WORD_RE = re.compile(r"^(今天|明天|后天)\s+(\d{1,2})[:：](\d{2})(?:\s+(.+))?$")
+_RELATIVE_RE = re.compile(r"^(\d+)\s*(秒|分钟|分|小时|时|天)\s*(?:后)?\s*(.*)$")
+_HALF_HOUR_RE = re.compile(r"^半\s*小时\s*(?:后)?\s*(.*)$")
+_DAY_WORD_RE = re.compile(r"^(今天|明天|后天)\s*")
 _FULL_DATE_RE = re.compile(
-    r"^(\d{4})[-/](\d{1,2})[-/](\d{1,2})\s+(\d{1,2})[:：](\d{2})(?:\s+(.+))?$"
+    r"^(\d{4})\s*(?:年|[-/])\s*(\d{1,2})\s*(?:月|[-/])\s*(\d{1,2})\s*(?:日|号)?\s*"
 )
 _MONTH_DAY_RE = re.compile(
-    r"^(\d{1,2})[-/](\d{1,2})\s+(\d{1,2})[:：](\d{2})(?:\s+(.+))?$"
+    r"^(\d{1,2})\s*(?:月|[-/])\s*(\d{1,2})\s*(?:日|号)?\s*"
 )
-_CLOCK_RE = re.compile(r"^(\d{1,2})[:：](\d{2})(?:\s+(.+))?$")
+_CLOCK_TIME_RE = re.compile(r"^(\d{1,2})\s*[:：]\s*(\d{2})")
+_POINT_TIME_RE = re.compile(r"^(\d{1,2})\s*[点时]\s*(?:(\d{1,2})\s*分?)?")
 
 _RELATIVE_SECONDS = {"秒": 1, "分钟": 60, "分": 60, "小时": 3600, "时": 3600, "天": 86400}
 _DAY_OFFSETS = {"今天": 0, "明天": 1, "后天": 2}
 
 
+def _consume_time(text: str) -> tuple[int, int, str] | None:
+    match = _CLOCK_TIME_RE.match(text)
+    if match:
+        return int(match.group(1)), int(match.group(2)), text[match.end():]
+    match = _POINT_TIME_RE.match(text)
+    if match:
+        hour = int(match.group(1))
+        minute = int(match.group(2) or 0)
+        rest = text[match.end():]
+        if minute == 0 and rest.startswith("半"):
+            minute = 30
+            rest = rest[1:]
+        return hour, minute, rest
+    return None
+
+
+def _content_of(text: str) -> str:
+    content = text.strip()
+    content = re.sub(r"^[\s,，.。;；:：\-—、]+", "", content)
+    if content == "整":
+        return "时间到了"
+    return content or "时间到了"
+
+
 def parse_reminder_time(raw: str, now: datetime) -> tuple[datetime, str]:
-    """解析预约时间；返回带时区的提醒时间和提醒内容。"""
-    raw = str(raw or "").strip()
+    """解析预约时间；日期与时间之间、数字与单位之间都可以没有空格。"""
+    raw = unicodedata.normalize("NFKC", str(raw or "")).strip()
     if not raw:
-        raise ValueError("请在时间后写提醒内容，例如：预约 21:30 收鱼")
+        raise ValueError("请在时间后写提醒内容，例如：预约 明天9点 收鱼")
 
     def build(year: int, month: int, day: int, hour: int, minute: int, content: str | None) -> tuple[datetime, str]:
-        content = (content or "").strip() or "时间到了"
         try:
             due = datetime(year, month, day, hour, minute, tzinfo=now.tzinfo)
         except ValueError as exc:
             raise ValueError("时间无效，请检查日期和时分") from exc
-        return due, content
+        return due, _content_of(content or "")
 
     match = _RELATIVE_RE.fullmatch(raw)
     if match:
         amount = int(match.group(1))
         unit = match.group(2)
-        content = (match.group(3) or "").strip() or "时间到了"
+        content = _content_of(match.group(3))
         if amount <= 0:
             raise ValueError("提醒时间必须大于 0")
         due = now + timedelta(seconds=amount * _RELATIVE_SECONDS[unit])
@@ -74,55 +104,58 @@ def parse_reminder_time(raw: str, now: datetime) -> tuple[datetime, str]:
             raise ValueError("提醒时间至少要在 10 秒后")
         return due, content
 
-    match = _DAY_WORD_RE.fullmatch(raw)
+    match = _HALF_HOUR_RE.fullmatch(raw)
     if match:
-        day_word, hour_text, minute_text, content = match.groups()
-        target = now.date() + timedelta(days=_DAY_OFFSETS[day_word])
-        due, content = build(
-            target.year, target.month, target.day,
-            int(hour_text), int(minute_text), content,
-        )
-        if due <= now:
-            raise ValueError(f"{day_word}这个时间已经过去")
-        return due, content
+        return now + timedelta(minutes=30), _content_of(match.group(1))
 
-    match = _FULL_DATE_RE.fullmatch(raw)
+    match = _DAY_WORD_RE.match(raw)
     if match:
-        year, month, day, hour, minute, content = match.groups()
-        due, content = build(
-            int(year), int(month), int(day), int(hour), int(minute), content
-        )
-        if due <= now:
-            raise ValueError("这个时间已经过去")
-        return due, content
-
-    match = _MONTH_DAY_RE.fullmatch(raw)
-    if match:
-        month, day, hour, minute, content = match.groups()
-        due, content = build(
-            now.year, int(month), int(day), int(hour), int(minute), content
-        )
-        if due <= now:
+        time_info = _consume_time(raw[match.end():])
+        if time_info is not None:
+            hour, minute, rest = time_info
+            day_word = match.group(1)
+            target = now.date() + timedelta(days=_DAY_OFFSETS[day_word])
             due, content = build(
-                now.year + 1, int(month), int(day), int(hour), int(minute), content
+                target.year, target.month, target.day, hour, minute, rest
             )
-        return due, content
+            if due <= now:
+                raise ValueError(f"{day_word}这个时间已经过去")
+            return due, content
 
-    match = _CLOCK_RE.fullmatch(raw)
+    match = _FULL_DATE_RE.match(raw)
     if match:
-        hour, minute, content = match.groups()
-        due, content = build(
-            now.year, now.month, now.day, int(hour), int(minute), content
-        )
+        time_info = _consume_time(raw[match.end():])
+        if time_info is not None:
+            year, month, day = (int(value) for value in match.groups())
+            hour, minute, rest = time_info
+            due, content = build(year, month, day, hour, minute, rest)
+            if due <= now:
+                raise ValueError("这个时间已经过去")
+            return due, content
+
+    match = _MONTH_DAY_RE.match(raw)
+    if match:
+        time_info = _consume_time(raw[match.end():])
+        if time_info is not None:
+            month, day = (int(value) for value in match.groups())
+            hour, minute, rest = time_info
+            due, content = build(now.year, month, day, hour, minute, rest)
+            if due <= now:
+                due, content = build(now.year + 1, month, day, hour, minute, rest)
+            return due, content
+
+    time_info = _consume_time(raw)
+    if time_info is not None:
+        hour, minute, rest = time_info
+        due, content = build(now.year, now.month, now.day, hour, minute, rest)
         if due <= now:
             target = now.date() + timedelta(days=1)
             due, content = build(
-                target.year, target.month, target.day,
-                int(hour), int(minute), content,
+                target.year, target.month, target.day, hour, minute, rest
             )
         return due, content
 
-    raise ValueError("时间格式无法识别，例如：预约 21:30 收鱼")
+    raise ValueError("时间格式无法识别，例如：预约 明天9点、预约 11月5日 9点30分")
 
 
 def format_remaining(due: datetime, now: datetime) -> str:
