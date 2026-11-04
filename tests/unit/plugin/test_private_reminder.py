@@ -296,3 +296,88 @@ def test_rendered_panels_are_png_images(tmp_path: Path):
         with PILImage.open(path) as image:
             assert image.size[0] == 1240
             assert image.size[1] > 300
+
+
+def _fake_mc_with_windows(windows):
+    return SimpleNamespace(
+        upcoming_fish_king_windows=lambda _limit=50: list(windows)
+    )
+
+
+def test_fish_king_reminder_uses_next_window_and_lead_time():
+    plugin = _plugin()
+    start = NOW + timedelta(hours=2)
+    end = start + timedelta(minutes=30)
+    plugin.get_plugin = lambda _name: _fake_mc_with_windows([{
+        "chain": "河湾链",
+        "king": "月影巨鲤",
+        "zone": "bay",
+        "zone_label": "河湾",
+        "starts_at": start.isoformat(),
+        "ends_at": end.isoformat(),
+    }])
+    event = _event()
+
+    asyncio.run(plugin._create_fish_king_reminder(event, ""))
+
+    item = plugin.data["reminders"][0]
+    assert item["kind"] == "fish_king"
+    assert item["king"] == "月影巨鲤"
+    assert item["due_at"] == (start - timedelta(minutes=5)).isoformat()
+    assert "月影巨鲤" in item["content"]
+    assert "河湾" in item["content"]
+    assert "已预约下个鱼王" in plugin._reply.await_args.args[1]
+
+
+def test_fish_king_reminder_can_filter_by_zone():
+    plugin = _plugin()
+    start = NOW + timedelta(hours=1)
+    plugin.get_plugin = lambda _name: _fake_mc_with_windows([
+        {
+            "king": "月影巨鲤", "zone": "bay", "zone_label": "河湾",
+            "starts_at": start.isoformat(),
+            "ends_at": (start + timedelta(minutes=20)).isoformat(),
+        },
+        {
+            "king": "深海黑鳍", "zone": "deep", "zone_label": "深海",
+            "starts_at": (start + timedelta(hours=1)).isoformat(),
+            "ends_at": (start + timedelta(hours=1, minutes=20)).isoformat(),
+        },
+    ])
+    event = _event()
+
+    asyncio.run(plugin._create_fish_king_reminder(event, "深海"))
+
+    assert plugin.data["reminders"][0]["king"] == "深海黑鳍"
+
+
+def test_fish_king_reminder_reports_missing_plugin_or_windows():
+    plugin = _plugin()
+    plugin.get_plugin = lambda _name: None
+    event = _event()
+
+    asyncio.run(plugin._create_fish_king_reminder(event, ""))
+    assert "钓鱼插件未加载" in plugin._reply.await_args.args[1]
+
+    plugin = _plugin()
+    plugin.get_plugin = lambda _name: _fake_mc_with_windows([])
+    event = _event()
+    asyncio.run(plugin._create_fish_king_reminder(event, ""))
+    assert "近期没有可预约的鱼王窗口" in plugin._reply.await_args.args[1]
+
+
+def test_handle_message_routes_fish_king_reminder():
+    plugin = _plugin()
+    start = NOW + timedelta(hours=1)
+    plugin.get_plugin = lambda _name: _fake_mc_with_windows([{
+        "king": "月影巨鲤", "zone": "bay", "zone_label": "河湾",
+        "starts_at": start.isoformat(),
+        "ends_at": (start + timedelta(minutes=20)).isoformat(),
+    }])
+    event = _event()
+    event.raw_message = "预约下个鱼王"
+    event.message = []
+
+    asyncio.run(plugin.handle_message(event))
+
+    assert plugin.data["reminders"][0]["kind"] == "fish_king"

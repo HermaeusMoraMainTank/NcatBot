@@ -1334,6 +1334,30 @@ class McFish(NcatBotPlugin):
         ).fetchall()
         return [FishKingWindow(chain, name, datetime.fromisoformat(start), datetime.fromisoformat(end)) for chain, name, start, end in rows]
 
+    def upcoming_fish_king_windows(self, limit: int = 50) -> list[dict]:
+        """Expose future king windows to other plugins without leaking DB types."""
+        now = datetime.now()
+        result: list[dict] = []
+        for window in sorted(self._fish_windows(), key=lambda item: item.starts_at):
+            if window.ends_at <= now:
+                continue
+            king = FISH_KINGS.get(window.king_name, {})
+            zone = str(king.get("zone", ""))
+            result.append(
+                {
+                    "chain": window.chain,
+                    "king": window.king_name,
+                    "zone": zone,
+                    "zone_label": fishing_zone_label(zone) if zone else "",
+                    "starts_at": window.starts_at.astimezone().isoformat(),
+                    "ends_at": window.ends_at.astimezone().isoformat(),
+                    "active": window.starts_at <= now < window.ends_at,
+                }
+            )
+            if len(result) >= max(1, int(limit)):
+                break
+        return result
+
     def _clock_text(self) -> str:
         now = datetime.now()
         windows = self._fish_windows()

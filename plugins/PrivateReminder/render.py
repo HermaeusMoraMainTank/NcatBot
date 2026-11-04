@@ -124,7 +124,7 @@ def render_notice(path: Path, title: str, lines: list[str], *, accent=ACCENT) ->
     image.save(path, "PNG")
 
 
-def render_help(path: Path) -> None:
+def render_help(path: Path, lead_minutes: int = 5) -> None:
     sections = [
         (
             "创建预约",
@@ -147,6 +147,16 @@ def render_help(path: Path) -> None:
                 "取消预约 全部：清空自己的预约",
             ],
             (176, 119, 64),
+        ),
+        (
+            "鱼王联动",
+            [
+                "预约下个鱼王：读取钓鱼插件的下一条鱼王窗口",
+                "预约下个鱼王 河湾：只预约指定鱼点的下一条鱼王",
+                f"默认提前 {lead_minutes} 分钟私聊提醒；窗口即将开始时立即提醒。",
+                "需要钓鱼插件 McFish 已加载。",
+            ],
+            (229, 112, 118),
         ),
         (
             "规则",

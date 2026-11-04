@@ -748,6 +748,7 @@ class AdminServer:
                         "due_display": due.strftime("%Y-%m-%d %H:%M") if due is not None else due_text,
                         "created_at": str(item.get("created_at", "")),
                         "status": "failed" if item.get("failed_at") else "pending",
+                        "kind": str(item.get("kind", "reminder")),
                         "attempts": int(item.get("attempts", 0)),
                         "remaining_seconds": remaining,
                         "last_error": str(item.get("last_error", "")),

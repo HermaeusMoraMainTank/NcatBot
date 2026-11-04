@@ -163,6 +163,7 @@ class PrivateReminder(NcatBotPlugin):
                 "max_pending": 20,
                 "max_content_length": 200,
                 "max_horizon_days": 365,
+                "king_lead_minutes": 5,
             }
         )
         try:
@@ -207,6 +208,9 @@ class PrivateReminder(NcatBotPlugin):
     def _max_horizon_days(self) -> int:
         return self._config_int("max_horizon_days", 365)
 
+    def _king_lead_minutes(self) -> int:
+        return self._config_int("king_lead_minutes", 5, 0)
+
     def _reminders(self) -> list[dict]:
         reminders = self.data.setdefault("reminders", [])
         if not isinstance(reminders, list):
@@ -248,7 +252,7 @@ class PrivateReminder(NcatBotPlugin):
 
     async def _reply_help(self, event) -> None:
         path = self._image_path("help")
-        await asyncio.to_thread(render_help, path)
+        await asyncio.to_thread(render_help, path, self._king_lead_minutes())
         await self._reply_image(event, path)
 
     async def _send_private(self, user_id: str, text: str) -> None:
@@ -295,6 +299,11 @@ class PrivateReminder(NcatBotPlugin):
         if arguments in ("列表", "列表。"):
             await self._list_reminders(event)
             return
+        for prefix in ("下个鱼王", "下一条鱼王", "鱼王"):
+            if arguments == prefix or arguments.startswith(prefix):
+                zone = arguments[len(prefix):].strip()
+                await self._create_fish_king_reminder(event, zone)
+                return
         await self._create_reminder(event, arguments)
 
     async def _create_reminder(self, event, raw: str) -> None:
@@ -361,6 +370,112 @@ class PrivateReminder(NcatBotPlugin):
             else:
                 confirmation += "\n已私聊发送确认。"
         await self._reply(event, confirmation)
+
+    def _fish_king_windows(self) -> list[dict]:
+        mc_fish = None
+        try:
+            mc_fish = self.get_plugin("McFish")
+        except Exception:
+            mc_fish = None
+        if mc_fish is None:
+            raise ValueError("钓鱼插件未加载，暂时无法预约鱼王")
+        getter = getattr(mc_fish, "upcoming_fish_king_windows", None)
+        if not callable(getter):
+            raise ValueError("钓鱼插件版本不支持鱼王窗口查询")
+        windows = getter(80)
+        return [item for item in windows if isinstance(item, dict)]
+
+    async def _create_fish_king_reminder(self, event, zone_arg: str) -> None:
+        user_id = str(event.sender.user_id)
+        now = self._now()
+        try:
+            windows = self._fish_king_windows()
+        except ValueError as exc:
+            await self._reply(event, f"预约失败：{exc}")
+            return
+
+        wanted = re.sub(r"\s+", "", zone_arg)
+        candidates = []
+        for window in windows:
+            label = str(window.get("zone_label") or window.get("zone") or "")
+            if wanted and wanted not in label and label not in wanted:
+                continue
+            try:
+                start = datetime.fromisoformat(str(window.get("starts_at", "")))
+                end = datetime.fromisoformat(str(window.get("ends_at", "")))
+            except (TypeError, ValueError):
+                continue
+            if start.tzinfo is None:
+                start = start.replace(tzinfo=self._timezone)
+            if end.tzinfo is None:
+                end = end.replace(tzinfo=self._timezone)
+            start = start.astimezone(self._timezone)
+            end = end.astimezone(self._timezone)
+            if start <= now:
+                continue
+            candidates.append((start, end, window))
+        if not candidates:
+            if wanted:
+                await self._reply(event, f"没有找到鱼点“{zone_arg}”的未来鱼王窗口。")
+            else:
+                await self._reply(event, "近期没有可预约的鱼王窗口；可发送“钓鱼时钟”查看最近窗口。")
+            return
+
+        start, end, window = min(candidates, key=lambda item: item[0])
+        active_count = sum(
+            1 for item in self._user_reminders(user_id)
+            if not item.get("failed_at")
+        )
+        if active_count >= self._max_pending():
+            await self._reply(
+                event,
+                f"预约失败：最多同时保留 {self._max_pending()} 条预约，请先取消旧预约",
+            )
+            return
+
+        lead = self._king_lead_minutes()
+        due = start - timedelta(minutes=lead)
+        if due <= now + timedelta(seconds=10):
+            due = now + timedelta(seconds=10)
+        king = str(window.get("king", "未知鱼王"))
+        zone_label = str(window.get("zone_label") or window.get("zone") or "未知鱼点")
+        content = (
+            f"鱼王【{king}】将在 {start.strftime('%m月%d日 %H:%M')} 开始\n"
+            f"鱼点：{zone_label}\n"
+            f"窗口结束：{end.strftime('%H:%M')}"
+        )
+
+        reminder_id = int(self.data.get("next_id", 1))
+        self.data["next_id"] = reminder_id + 1
+        item = {
+            "id": reminder_id,
+            "user_id": user_id,
+            "content": content,
+            "due_at": due.isoformat(),
+            "created_at": now.isoformat(),
+            "attempts": 0,
+            "kind": "fish_king",
+            "king": king,
+            "zone": str(window.get("zone", "")),
+        }
+        self._reminders().append(item)
+        self._save_data()
+
+        if due <= now + timedelta(seconds=15):
+            when = "立即（鱼王窗口即将开始）"
+        elif lead:
+            when = f"{due.strftime('%m月%d日 %H:%M')}（提前 {lead} 分钟）"
+        else:
+            when = f"{due.strftime('%m月%d日 %H:%M')}（窗口开始时）"
+        await self._reply(
+            event,
+            f"已预约下个鱼王\n"
+            f"鱼王：{king}\n"
+            f"鱼点：{zone_label}\n"
+            f"窗口：{start.strftime('%m月%d日 %H:%M')} - {end.strftime('%H:%M')}\n"
+            f"提醒：{when}\n"
+            f"编号：#{reminder_id}",
+        )
 
     def _list_entries(self, user_id: str, now: datetime) -> list[dict]:
         entries = []

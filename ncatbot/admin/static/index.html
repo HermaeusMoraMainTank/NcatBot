@@ -719,9 +719,10 @@ function renderReminders(d) {
           ? '<span class="pill">待发送</span> <span class="muted">已到期，等待补发</span>'
           : '<span class="pill">待发送</span> <span class="muted">还有 ' + esc(fmtRemain(x.remaining_seconds)) + '</span>';
       const due = x.due_display || (x.due_at ? new Date(x.due_at).toLocaleString('zh-CN', {hour12: false}) : '—');
+      const source = x.kind === 'fish_king' ? '<span class="tag">鱼王</span>' : '';
       return '<tr><td class="mono">#' + esc(x.id) + '</td>' +
         '<td class="mono">' + esc(x.user_id) + '</td>' +
-        '<td>' + esc(x.content) + '</td>' +
+        '<td>' + source + esc(x.content) + '</td>' +
         '<td>' + esc(due) + '</td>' +
         '<td>' + status + '</td>' +
         '<td>' + esc(x.attempts || 0) + '</td>' +
