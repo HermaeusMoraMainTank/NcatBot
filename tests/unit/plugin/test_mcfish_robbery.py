@@ -4089,3 +4089,37 @@ def test_mcfish_pack_image_groups_items_by_type(tmp_path: Path):
         assert image.size[0] == 1240
         # 分类标题和分栏会让图片比空背包更高，但不应退化成超长单列。
         assert 1200 < image.size[1] < 4000
+
+
+def test_mcfish_buy_zero_quantity_is_rejected():
+    import asyncio
+    from types import SimpleNamespace
+
+    plugin = McFish.__new__(McFish)
+    plugin._prices = {"木竿": 100}
+    plugin._economy_change = lambda *_args: True
+    plugin._save = lambda *_args: None
+    plugin._choose = AsyncMock(return_value=SimpleNamespace(key="confirm"))
+    plugin.get_config = lambda _key, default=None: default
+    plugin._shop_data = lambda: ({"木竿": 100}, {"初始木竿": 1})
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {"pack": {}}
+
+    asyncio.run(plugin._buy(event, state, "木竿 0"))
+
+    plugin._choose.assert_not_awaited()
+    assert state["pack"] == {}
+    assert event.reply.await_args.kwargs["text"] == "购买数量至少为 1"
+
+
+def test_mcfish_shop_price_details_show_original_and_change():
+    plugin = McFish.__new__(McFish)
+    plugin._prices = {"岩石凶鲨": 10, "上古宝石": 3500, "铜竿": 600}
+    plugin._shop_custom_prices = {}
+
+    assert plugin._shop_price_details("岩石凶鲨", {"岩石凶鲨": 80}) == (8, 10, -20)
+    assert plugin._shop_price_details("上古宝石", {"上古宝石": 150}) == (5250, 3500, 50)
+    assert plugin._shop_price_details("铜竿", {"铜竿": 50}) == (600, 600, 0)
+
+    plugin._shop_custom_prices = {"岩石凶鲨": 123}
+    assert plugin._shop_price_details("岩石凶鲨", {"岩石凶鲨": 80}) == (123, 123, 0)

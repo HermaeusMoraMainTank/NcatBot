@@ -574,7 +574,7 @@ CONCURRENT_OVERWRITE_LATE_REPAIRS = {
 
 MCFISH_COMMAND_ROWS_BASE = (
     "开始：钓鱼 / 进行钓鱼 / 进行n次钓鱼（支持中文数量，单次最多10竿）",
-    "查询：钓鱼看板 / 钓鱼商店 / 钓鱼背包 / 钓鱼时钟 / 钓鱼概率 [鱼点/全部] / 钓鱼图鉴 [名称] / 装备图鉴 [套装] / 查看上次钓鱼结果",
+    "查询：钓鱼看板 / 钓鱼商店 / 钓鱼背包 / 钓鱼时钟 / 钓鱼概率 [鱼点/鱼种/全部] / 钓鱼图鉴 [名称] / 装备图鉴 [套装] / 查看上次钓鱼结果",
     "任务：钓鱼任务 / 领取钓鱼任务 编号",
     "鱼点：钓鱼鱼点（鱼点与常驻鱼王） / 前往 深海（切换鱼点）",
     "买卖：购买xxx [数量] / 出售xxx [数量] / 出售所有垃圾（可一次出售多个物品）",
@@ -587,7 +587,7 @@ MCFISH_COMMAND_ROWS_SYSTEMS = (
     "装备：钓鱼装备 / 合成渔具 铜制头盔 / 装备渔具 铜制头盔 / 强化渔具 铜制头盔 / 卸下渔具 头盔",
     "工坊：钓鱼工坊 [配方] / 交付 三叉戟 鱼王鳞片 1 / 领取 三叉戟 / 领取 神谕卡组",
     "天赋：钓鱼天赋（树状加点与前置） / 学习 钓感 / 重置钓鱼天赋",
-    "帮助：钓鱼帮助 或 查看钓鱼规则（速查卡） / 钓鱼帮助 改版 1-8 / 钓鱼帮助 鱼点/装备/鱼竿/掉落/任务/机制/全部",
+    "帮助：钓鱼帮助 或 查看钓鱼规则（速查卡） / 钓鱼帮助 快速 / 钓鱼帮助 鱼点 / 钓鱼帮助 装备/鱼竿/掉落/任务/机制/全部 / 钓鱼帮助 改版 1-8",
     "管理员：钓鱼发放 @用户 物品 数量 / 钓鱼充值 @用户 物品 数量",
 )
 MCFISH_COMMAND_ROWS = MCFISH_COMMAND_ROWS_BASE + MCFISH_COMMAND_ROWS_SYSTEMS
@@ -664,7 +664,8 @@ MCFISH_COMMAND_HELP_GROUPS = (
     )),
     ("帮助与管理员", (126, 126, 134), (
         ("钓鱼帮助 / 查看钓鱼规则", "打开本帮助图。"),
-        ("钓鱼帮助 鱼点", "分页：鱼点/装备/鱼竿/掉落/任务/机制/全部。"),
+        ("钓鱼帮助 快速", "速查卡首页：命令按功能分组，先看这一页。"),
+        ("钓鱼帮助 鱼点", "分页：快速/鱼点/装备/鱼竿/掉落/任务/机制/全部。"),
         ("钓鱼帮助 改版 1", "8页改版说明，逐页介绍新系统。"),
         ("钓鱼发放 @用户 物品 数量", "管理员发放物品。"),
         ("钓鱼充值 @用户 物品 数量", "管理员充值物品。"),
@@ -687,7 +688,7 @@ MCFISH_HELP = """一款钓鱼模拟器
 - 常驻与前置鱼王的黄金磁石售价封顶 ×3/×5/×8，后置鱼王为 ×10/×30/×100。
 - 常驻鱼王每个鱼点 1 条，钓鱼力达标后每竿独立判定，咬钩与上钩同一次结算，每日最多成功 1 条，不产出鱼王鳞片。
 - 天赋为树状：每条分支必须先满足前置等级才能继续加；不合法的旧加点会在读取存档时清除，点数退回可用池，不会丢失。
-- 鱼王咬钩后不回复默认保留目标，只有回复2才会尝试以小钓大、回复3才会放弃；上钩阶段1/2/3/4为上钩率×1.00/1.10/1.24/1.45，成功率越高的技能鱼体越小。
+- 鱼王咬钩后不回复默认保留目标，只有回复2才会尝试以小钓大、回复3（或4）才会放弃；上钩阶段1/2/3/4为上钩率×1.00/1.10/1.24/1.45，成功率越高的技能鱼体越小。
 - 鱼王路径只在成功上钩时累计；满足路径后下一次上钩率锁定95%，保证成功后路径清空，且路径不跨周继承。
 - 经验用于升级：1–35级沿用旧曲线；36–60级每级需要1200经验起（每级+40），61–100级每级需要2600经验起（每级+60），满级100级累计224250经验；每日次数按等级为50/60/70/80/100次，鱼竿按等级解锁。
 - 无鱼竿且余额不足时每3天最多补偿1根木竿；有余额可发送“花费100购买鱼竿”，最多可以购买3次。
@@ -2767,6 +2768,25 @@ class McFish(NcatBotPlugin):
         if name in SHOP_ROD_PRICES:
             return SHOP_ROD_PRICES[name]
         return prices.get(name, ITEMS.get(name, 0)) * discounts.get(name, 100) // 100
+
+    def _shop_price_details(self, name: str, discounts: dict[str, int]) -> tuple[int, int, int]:
+        """返回 (现价, 原价, 涨跌幅)；固定价和自定义价不参与每日折扣。"""
+        custom_prices = getattr(self, "_shop_custom_prices", {})
+        if name in custom_prices:
+            price = int(custom_prices[name])
+            return price, price, 0
+        prices = getattr(self, "_prices", dict(FISH) | {pole: price for pole, (_, price) in POLES.items()} | ITEMS)
+        if name in ("初始木竿", "木竿"):
+            return SHOP_WOOD_PRICE, SHOP_WOOD_PRICE, 0
+        if name in SHOP_EQUIPMENT_PRICES:
+            price = SHOP_EQUIPMENT_PRICES[name]
+            return price, price, 0
+        if name in SHOP_ROD_PRICES:
+            price = SHOP_ROD_PRICES[name]
+            return price, price, 0
+        original = int(prices.get(name, ITEMS.get(name, 0)))
+        discount = int(discounts.get(name, 100))
+        return original * discount // 100, original, discount - 100
 
     def _item_zone(self, name: str, state: dict | None = None) -> str | None:
         if state:
@@ -5993,11 +6013,16 @@ class McFish(NcatBotPlugin):
 
         rod_names = ["木竿", *SHOP_ROD_PRICES]
         rod_rows = [
-            (name, self._shop_price(name, discounts), max(1, rod_unlock_level(name)), ROD_POWER.get(name, 0))
+            (
+                name,
+                *self._shop_price_details(name, discounts),
+                max(1, rod_unlock_level(name)),
+                ROD_POWER.get(name, 0),
+            )
             for name in rod_names
         ]
 
-        shop_groups: dict[str, list[tuple[str, int, int]]] = {}
+        shop_groups: dict[str, list[tuple[str, int, int, int, int]]] = {}
         for name, count in inventory.items():
             if name == "初始木竿" or name in POLES:
                 continue
@@ -6007,8 +6032,9 @@ class McFish(NcatBotPlugin):
                 continue
             if number <= 0:
                 continue
+            price, original, change = self._shop_price_details(name, discounts)
             shop_groups.setdefault(type_label(name), []).append(
-                (name, number, self._shop_price(name, discounts))
+                (name, number, price, original, change)
             )
         for rows in shop_groups.values():
             rows.sort(key=lambda row: row[0])
@@ -6060,8 +6086,8 @@ class McFish(NcatBotPlugin):
         section_y = header_height + 24
         self._card(draw, (margin, section_y, width - margin, section_y + rod_height))
         draw.text((margin + 28, section_y + 20), "鱼竿", fill=(40, 61, 68, 255), font=self._font(31, bold=True))
-        draw.text((width - margin - 28, section_y + 28), "Lv · FP · 价格", fill=(92, 112, 117, 255), font=self._font(19), anchor="ra")
-        for index, (name, price, unlock, fp) in enumerate(rod_rows):
+        draw.text((width - margin - 28, section_y + 28), "Lv · FP · 现价 / 原价", fill=(92, 112, 117, 255), font=self._font(19), anchor="ra")
+        for index, (name, price, original, change, unlock, fp) in enumerate(rod_rows):
             col, row = index % 3, index // 3
             x = margin + 20 + col * (rod_tile_width + gap)
             y = section_y + 64 + row * 88
@@ -6072,12 +6098,28 @@ class McFish(NcatBotPlugin):
             draw.text((x + 66, y + 10), name, fill=(40, 61, 68, 255), font=self._font(21, bold=True))
             level_color = (92, 112, 117, 255) if player_level >= unlock else (194, 91, 86, 255)
             draw.text((x + 66, y + 42), f"Lv{unlock} · FP{fp}", fill=level_color, font=self._font(17))
-            draw.text((x + rod_tile_width - 16, y + 24), f"{price} 金币", fill=(112, 96, 54, 255), font=self._font(20, bold=True), anchor="ra")
+            draw.text((x + rod_tile_width - 16, y + 14), f"{price} 金币", fill=(112, 96, 54, 255), font=self._font(20, bold=True), anchor="ra")
+            change_text = f"+{change}%" if change > 0 else f"{change}%" if change < 0 else "0%"
+            change_color = (194, 91, 86, 255) if change > 0 else (61, 145, 112, 255) if change < 0 else (92, 112, 117, 255)
+            draw.text(
+                (x + rod_tile_width - 16, y + 38),
+                f"原价 {original}",
+                fill=(92, 112, 117, 255),
+                font=self._font(15),
+                anchor="ra",
+            )
+            draw.text(
+                (x + rod_tile_width - 16, y + 56),
+                change_text,
+                fill=change_color,
+                font=self._font(14),
+                anchor="ra",
+            )
 
         shop_y = section_y + rod_height + 16
         self._card(draw, (margin, shop_y, width - margin, shop_y + shop_height))
         draw.text((margin + 28, shop_y + 20), "商店上架", fill=(40, 61, 68, 255), font=self._font(31, bold=True))
-        draw.text((width - margin - 28, shop_y + 28), "库存 · 单价", fill=(92, 112, 117, 255), font=self._font(19), anchor="ra")
+        draw.text((width - margin - 28, shop_y + 28), "库存 · 现价 / 原价 · 涨跌", fill=(92, 112, 117, 255), font=self._font(19), anchor="ra")
         if shop_groups:
             cursor = shop_y + 64
             for group in group_order:
@@ -6086,7 +6128,7 @@ class McFish(NcatBotPlugin):
                     continue
                 draw.text((margin + 28, cursor), group, fill=(38, 144, 158, 255), font=self._font(22, bold=True))
                 cursor += 34
-                for index, (name, count, price) in enumerate(rows):
+                for index, (name, count, price, original, change) in enumerate(rows):
                     col, row = index % 2, index // 2
                     x = margin + 20 + col * (tile_width + gap)
                     y = cursor + row * 78
@@ -6094,9 +6136,25 @@ class McFish(NcatBotPlugin):
                     icon = self._resource_image(name, (40, 40))
                     if icon:
                         image.alpha_composite(icon, (x + 16, y + 14))
-                    draw.text((x + 70, y + 11), name, fill=(40, 61, 68, 255), font=self._font(19))
+                    draw.text((x + 70, y + 9), name, fill=(40, 61, 68, 255), font=self._font(19))
                     draw.text((x + 70, y + 40), f"库存 {count}", fill=(92, 112, 117, 255), font=self._font(17))
-                    draw.text((x + tile_width - 18, y + 25), f"{price} 金币", fill=(112, 96, 54, 255), font=self._font(20, bold=True), anchor="ra")
+                    draw.text((x + tile_width - 18, y + 6), f"{price} 金币", fill=(112, 96, 54, 255), font=self._font(19, bold=True), anchor="ra")
+                    change_text = f"+{change}%" if change > 0 else f"{change}%" if change < 0 else "0%"
+                    change_color = (194, 91, 86, 255) if change > 0 else (61, 145, 112, 255) if change < 0 else (92, 112, 117, 255)
+                    draw.text(
+                        (x + tile_width - 18, y + 29),
+                        f"原价 {original}",
+                        fill=(92, 112, 117, 255),
+                        font=self._font(14),
+                        anchor="ra",
+                    )
+                    draw.text(
+                        (x + tile_width - 18, y + 47),
+                        change_text,
+                        fill=change_color,
+                        font=self._font(14),
+                        anchor="ra",
+                    )
                 cursor += max(1, (len(rows) + 1) // 2) * 78
         else:
             draw.text((margin + 30, shop_y + 98), "当前商店没有上架物品", fill=(92, 112, 117, 255), font=self._font(25))
@@ -6399,18 +6457,28 @@ class McFish(NcatBotPlugin):
                 )
                 if king["kind"] == "prerequisite" and post_window:
                     bite_choice = await self._choose(
-                        f"{FISH_KING_PROMPTS[king_window.king_name]['trigger']}\n咬钩阶段技能：\n1. 保留目标（进入上钩判定）\n2. 以小钓大（牺牲当前鱼，尝试后置鱼王）\n3. 见好就收（放弃追逐）\n不回复将自动保留目标",
+                        f"{FISH_KING_PROMPTS[king_window.king_name]['trigger']}\n咬钩阶段技能：\n1. 保留目标（进入上钩判定）\n2. 以小钓大（牺牲当前鱼，尝试后置鱼王）\n3. 见好就收（放弃追逐）\n4. 保守收线（等同放弃）\n不回复将自动保留目标",
                         event,
-                        choices={"1": "hold_target", "2": "mooch_post", "3": "give_up"},
+                        choices={
+                            "1": "hold_target",
+                            "2": "mooch_post",
+                            "3": "give_up",
+                            "4": "give_up",
+                        },
                         timeout=30,
                         timeout_reply="等待超时，自动保留目标",
                         cancel_reply="选择无效，自动保留目标",
                     )
                 else:
                     bite_choice = await self._choose(
-                        f"{FISH_KING_PROMPTS[king_window.king_name]['trigger']}\n咬钩阶段技能：\n1. 保留目标（进入上钩判定）\n2. 见好就收（放弃追逐）\n不回复将自动保留目标",
+                        f"{FISH_KING_PROMPTS[king_window.king_name]['trigger']}\n咬钩阶段技能：\n1. 保留目标（进入上钩判定）\n2. 见好就收（放弃追逐）\n3. 保守收线（等同放弃）\n不回复将自动保留目标",
                         event,
-                        choices={"1": "hold_target", "2": "give_up"},
+                        choices={
+                            "1": "hold_target",
+                            "2": "give_up",
+                            "3": "give_up",
+                            "4": "give_up",
+                        },
                         timeout=30,
                         timeout_reply="等待超时，自动保留目标",
                         cancel_reply="选择无效，自动保留目标",
@@ -6689,6 +6757,10 @@ class McFish(NcatBotPlugin):
 
     async def _buy(self, event, state: dict, item_text: str) -> None:
         uid = str(event.sender.user_id); match = re.fullmatch(r"(.+?)(?:\s+(\d+))?", item_text); name = match.group(1) if match else item_text; number = int(match.group(2) or 1) if match else 1
+        # 数量 0 会走完购买流程却什么也没买（还能白刷 buy_times 换半价券/诅咒），直接拒掉
+        if number <= 0:
+            await event.reply(text="购买数量至少为 1")
+            return
         requested_name = name
         name = POLE_ALIASES.get(name, name)
         player_level = int(state.get("fish_level", level_for_xp(int(state.get("fish_xp", 0)))))
@@ -7701,6 +7773,9 @@ class McFish(NcatBotPlugin):
 
     async def _purify(self, event, state: dict, text: str) -> None:
         number = int(re.search(r"(\d+)$", text).group(1)) if re.search(r"(\d+)$", text) else 1
+        if number <= 0:
+            await event.reply(text="消除数量至少为 1")
+            return
         curse_count = int(state["pack"].get("宝藏诅咒", 0))
         if curse_count == 0:
             await event.reply(text="你没有绑定任何诅咒"); return
@@ -7739,6 +7814,9 @@ class McFish(NcatBotPlugin):
             return
         name = parts[0]
         number = int(parts[1]) if len(parts) > 1 and parts[1].isdigit() else 1
+        if number <= 0:
+            await event.reply(text="吃的数量至少为 1")
+            return
         restore = FOOD_RESTORE.get(name)
         if restore:
             restore = max(1, int(restore * (1.0 + self._gear_effects(state).get("food", 0.0))))
