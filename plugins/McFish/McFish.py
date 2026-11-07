@@ -3687,6 +3687,16 @@ class McFish(NcatBotPlugin):
         return False
 
     @staticmethod
+    def _stow_broken_pole(state: dict, equip: dict) -> None:
+        """Put a worn-out equipped rod back into the pack instead of deleting it."""
+        name = str(equip.get("name", ""))
+        if name not in POLES:
+            return
+        pole = dict(equip)
+        pole["durable"] = 0
+        state.setdefault("pack", {}).setdefault(name, []).append(pole)
+
+    @staticmethod
     def _starter_pole_available(state: dict, today: date | None = None) -> bool:
         last_day = str(state.get("starter_pole_day", ""))
         if not last_day:
@@ -6341,6 +6351,7 @@ class McFish(NcatBotPlugin):
         current_wait_seconds = initial_wait_seconds
         windows = self._fish_windows()
         completed_attempts = 0
+        broken_stowed = False
         for attempt_index in range(fish_attempts):
             current_time += timedelta(seconds=current_wait_seconds)
             scheduled_at = current_time
@@ -6360,8 +6371,14 @@ class McFish(NcatBotPlugin):
                 result_note += f"\n{fishing_zone_label(zone_now)}今日次数已用尽，提前结束。"
                 break
             if not axolotl and (not equip or int(equip.get("durable", 0)) <= 0):
+                if equip and equip.get("unbreakable"):
+                    result_note += "\n三叉戟耐久已耗尽，请修复后再钓鱼。"
+                    break
+                if equip:
+                    self._stow_broken_pole(state, equip)
+                    broken_stowed = True
                 state["equip"] = None
-                result_note += "\n鱼竿耐久已耗尽，提前结束。"
+                result_note += "\n鱼竿耐久已耗尽，已放回背包；请修复后再钓鱼。"
                 base = self._save_fishing_state(uid, state, base)
                 break
             # 本竿结算后立即占用次数与耐久，避免批次取消时整批预扣。
@@ -6749,9 +6766,16 @@ class McFish(NcatBotPlugin):
                 "ordinary",
             )
             base = self._save_fishing_state(uid, state, base)
-        if not axolotl and equip["durable"] <= 0 and not equip.get("unbreakable", False):
+        if (
+            not broken_stowed
+            and not axolotl
+            and equip is not None
+            and equip["durable"] <= 0
+            and not equip.get("unbreakable", False)
+        ):
+            self._stow_broken_pole(state, equip)
             state["equip"] = None
-            result_note += "\n鱼竿耐久已耗尽，装备已卸下；请修复或更换鱼竿后再钓鱼。"
+            result_note += "\n鱼竿耐久已耗尽，已放回背包；请修复或更换鱼竿后再钓鱼。"
         
         while state["fish_bless"] >= 75:
             state["fish_bless"] -= 75

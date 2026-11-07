@@ -4175,6 +4175,8 @@ def test_mcfish_reports_when_durability_limits_the_batch(monkeypatch):
 
     text = stored["last_fishing_result"]["text"]
     assert "鱼竿耐久不足，本次只能进行1次钓鱼" in text
+    assert stored["equip"] is None
+    assert stored["pack"]["木竿"][0]["durable"] == 0
 
 
 def test_mcfish_equip_command_accepts_gear_ring():
