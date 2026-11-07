@@ -4123,3 +4123,55 @@ def test_mcfish_shop_price_details_show_original_and_change():
 
     plugin._shop_custom_prices = {"岩石凶鲨": 123}
     assert plugin._shop_price_details("岩石凶鲨", {"岩石凶鲨": 80}) == (123, 123, 0)
+
+
+def test_mcfish_broken_pack_pole_reports_durability_instead_of_buying():
+    import asyncio
+
+    plugin = McFish.__new__(McFish)
+    plugin.get_config = lambda key, default=None: default
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {
+        "fish_today": 0,
+        "fish_level": 10,
+        "fish_xp": 0,
+        "equip": None,
+        "pack": {"木竿": [{"durable": 0, "maintenance": 0, "induce": 0, "favor": 0}]},
+        "fishing_zone": "bay",
+        "zone_fish_today": {"bay": 0},
+    }
+
+    asyncio.run(plugin._fish(event, state, "进行钓鱼"))
+
+    assert "耐久不足" in event.reply.await_args.kwargs["text"]
+
+
+def test_mcfish_reports_when_durability_limits_the_batch(monkeypatch):
+    import asyncio
+    import importlib
+
+    module = importlib.import_module("McFish.McFish")
+    monkeypatch.setattr(module, "fishing_wait_for_result", lambda *_args, **_kwargs: 0)
+    monkeypatch.setattr(module.asyncio, "sleep", AsyncMock())
+
+    plugin = McFish.__new__(McFish)
+    plugin.get_config = lambda key, default=None: default
+    plugin._item_image = lambda _name: None
+    plugin._original_drop = lambda _state, _boundaries=None, **_kwargs: ("垃圾", 1)
+    plugin._send_fishing_result = AsyncMock()
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {
+        "fish_today": 0,
+        "fish_level": 10,
+        "fish_xp": 0,
+        "equip": {"name": "木竿", "durable": 1, "maintenance": 0, "induce": 0, "favor": 0},
+        "pack": {},
+        "fishing_zone": "bay",
+        "zone_fish_today": {"bay": 0},
+    }
+    stored = _attach_fake_state_store(plugin, state)
+
+    asyncio.run(plugin._fish(event, state, "进行3次钓鱼"))
+
+    text = stored["last_fishing_result"]["text"]
+    assert "鱼竿耐久不足，本次只能进行1次钓鱼" in text

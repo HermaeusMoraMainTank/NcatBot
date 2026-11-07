@@ -3671,6 +3671,21 @@ class McFish(NcatBotPlugin):
                 return True
         return False
 
+    def _has_broken_pole(self, state: dict) -> bool:
+        """Return whether the player owns a level-eligible rod with zero durability."""
+        level = int(state.get("fish_level", level_for_xp(int(state.get("fish_xp", 0)))))
+        equip = state.get("equip") or {}
+        if equip:
+            name = str(equip.get("name", ""))
+            if name in POLES and rod_unlock_level(name) <= level and int(equip.get("durable", 0)) <= 0:
+                return True
+        for name, value in state.get("pack", {}).items():
+            if name not in POLES or rod_unlock_level(name) > level or not isinstance(value, list):
+                continue
+            if any(int(pole.get("durable", 0)) <= 0 for pole in value):
+                return True
+        return False
+
     @staticmethod
     def _starter_pole_available(state: dict, today: date | None = None) -> bool:
         last_day = str(state.get("starter_pole_day", ""))
@@ -6248,6 +6263,11 @@ class McFish(NcatBotPlugin):
             if self._has_usable_pole(state):
                 await event.reply(text="你背包里已有鱼竿，请先装备后再钓鱼")
                 return
+            if self._has_broken_pole(state):
+                await event.reply(
+                    text=f"当前鱼竿耐久不足，请先修复或更换鱼竿；{self._fish_count_text(state)}"
+                )
+                return
             price = int(self.get_config("starting_pole_price", 100))
             balance = int(self._economy.store.account(uid)["balance"])
             if balance < price and self._starter_pole_available(state):
@@ -6279,13 +6299,18 @@ class McFish(NcatBotPlugin):
             await event.reply(text=f"当前鱼竿没有耐久了，请先修复或更换鱼竿；{self._fish_count_text(state)}")
             return
         number = min(number, remaining_today)
+        durability_limited = False
         if not axolotl:
+            before_durability = number
             number = min(number, int(equip["durable"]))
+            durability_limited = number < before_durability
         if number <= 0:
             await event.reply(text="当前没有可用的钓鱼次数或鱼竿耐久")
             return
         fish_attempts = number
         result_note = ""
+        if durability_limited:
+            result_note += f"\n鱼竿耐久不足，本次只能进行{number}次钓鱼。"
         base = copy.deepcopy(state)
         if axolotl:
             fish_available = sum(
@@ -6726,6 +6751,7 @@ class McFish(NcatBotPlugin):
             base = self._save_fishing_state(uid, state, base)
         if not axolotl and equip["durable"] <= 0 and not equip.get("unbreakable", False):
             state["equip"] = None
+            result_note += "\n鱼竿耐久已耗尽，装备已卸下；请修复或更换鱼竿后再钓鱼。"
         
         while state["fish_bless"] >= 75:
             state["fish_bless"] -= 75
