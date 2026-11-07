@@ -645,7 +645,7 @@ MCFISH_COMMAND_HELP_GROUPS = (
     ("装备与工坊", (61, 145, 112), (
         ("钓鱼装备", "查看六个部位的当前装备、FP 与套装效果。"),
         ("合成渔具 铜制头盔", "单件合成；不写装备名时打开全部配方和材料。"),
-        ("装备渔具 铜制头盔", "穿戴装备；戒指会自动进入空位。"),
+        ("装备渔具 铜制头盔", "穿戴装备；戒指会自动进入空位。也可直接用“装备 金鱼戒指”。"),
         ("强化渔具 铜制头盔", "升1级，最高20级；消耗材料与金币。"),
         ("卸下渔具 头盔", "卸到背包；部位：头盔/胸甲/腿甲/项链/戒指1/戒指2。"),
         ("装备图鉴", "按部位查看初始/最终 FP、套装效果与获取途径。"),
@@ -7190,6 +7190,9 @@ class McFish(NcatBotPlugin):
         player_level = int(state.get("fish_level", level_for_xp(int(state.get("fish_xp", 0)))))
         if name in POLE_ALIASES:
             name = POLE_ALIASES[name]
+        if name in PIECE_INFO:
+            await self._equip_gear(event, state, name)
+            return
         if name == "三叉戟":
             await event.reply(text="三叉戟只能在工坊交付：等级60、捕获全部8条限时鱼王、鱼王鳞片8个、时砂5个、7万金币")
             return

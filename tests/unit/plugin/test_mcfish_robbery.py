@@ -4175,3 +4175,26 @@ def test_mcfish_reports_when_durability_limits_the_batch(monkeypatch):
 
     text = stored["last_fishing_result"]["text"]
     assert "鱼竿耐久不足，本次只能进行1次钓鱼" in text
+
+
+def test_mcfish_equip_command_accepts_gear_ring():
+    import asyncio
+
+    plugin = McFish.__new__(McFish)
+    plugin._save = lambda *_args: None
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {
+        "pack": {"金鱼戒指": 1},
+        "gear_bag": [],
+        "equipment": {},
+        "jewelry": {},
+        "accessories": [],
+        "accessory_levels": {},
+        "accessory_slots": 2,
+    }
+
+    asyncio.run(plugin._equip(event, state, "金鱼戒指"))
+
+    assert state["jewelry"]["ring1"]["name"] == "金鱼戒指"
+    assert state["pack"]["金鱼戒指"] == 0
+    assert "已装备 金鱼戒指" in event.reply.await_args.kwargs["text"]
