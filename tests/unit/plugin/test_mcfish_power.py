@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT / "plugins"))
 
 from McFish.McFish import McFish  # noqa: E402
 from McFish.mcfish_power import (  # noqa: E402
+    AXOLOTL_POWER,
     ROD_POWER,
     equipment_power,
     fishing_power,
@@ -41,6 +42,8 @@ def test_rod_power_matches_the_nine_tier_ladder():
         "三叉戟": 90,
     }
     assert rod_power({"equip": {"name": "三叉戟"}}) == 90
+    assert AXOLOTL_POWER == 20
+    assert rod_power({"equip": {"name": "美西螈"}}) == 20
     assert rod_power({"equip": {"name": "未知道具"}}) == 0
     assert rod_power({}) == 0
 

@@ -4232,3 +4232,35 @@ def test_mcfish_probability_panel_shows_talent_material_bonus(tmp_path: Path):
 
     detail = plugin._probability_detail_text(state)
     assert "材料专家 3/3：材料产出概率 +18%" in detail
+
+
+def test_axolotl_eats_the_cheapest_fish_first(monkeypatch):
+    import asyncio
+    import importlib
+
+    module = importlib.import_module("McFish.McFish")
+    monkeypatch.setattr(module.asyncio, "sleep", AsyncMock())
+    plugin = McFish.__new__(McFish)
+    plugin.get_config = lambda key, default=None: default
+    plugin._item_image = lambda _name: None
+    plugin._original_drop = lambda _state, _boundaries=None, **_kwargs: ("垃圾", 1)
+    plugin._fish_windows = list
+    plugin._send_fishing_result = AsyncMock()
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {
+        "fish_today": 0,
+        "fish_level": 30,
+        "equip": {"name": "美西螈", "durable": 1, "maintenance": 0, "induce": 0, "favor": 0},
+        "pack": {"岩石凶鲨": 3, "吸血鳗": 3, "粉角皮科鱼": 3},
+        "fishing_zone": "bay",
+        "zone_fish_today": {"bay": 0},
+        "equipment": {},
+        "jewelry": {},
+    }
+    stored = _attach_fake_state_store(plugin, state)
+
+    asyncio.run(plugin._fish(event, state, "进行1次钓鱼"))
+
+    assert stored["pack"].get("岩石凶鲨", 0) == 0
+    assert stored["pack"].get("吸血鳗", 0) == 3
+    assert stored["pack"].get("粉角皮科鱼", 0) == 3

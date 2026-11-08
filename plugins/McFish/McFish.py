@@ -717,7 +717,7 @@ MCFISH_HELP = """一款钓鱼模拟器
 
 # 帮助图片里的特殊机制。每条只放进“特殊机制”卡片一次，避免和规则正文重复。
 MCFISH_SPECIAL_MECHANICS = (
-    "美西螈：宝藏掉落；装备后区间同样变为2/8/35/45；每竿要吃3条普通鱼（不含鱼王、海豚、材料等），鱼不够时永久失去；其他物品一次获得5个，鱼竿和美西螈除外。",
+    "美西螈：宝藏掉落；装备后区间同样变为2/8/35/45，钓鱼力按20计算；每竿要吃3条普通鱼（按鱼价从低到高，不含鱼王、海豚、材料等），鱼不够时永久失去；其他物品一次获得5个，鱼竿和美西螈除外。",
     "海豚：背包里放着海豚时，空竿区间全部并入垃圾区间；越级鱼竿产生的空竿同样并入垃圾。",
     "鱼数超过100条：区间变为宝藏2%、鱼竿8%、鱼35%、垃圾45%，只改变概率、不改变数量。",
     "净化书：每完成1竿累计1点祝福，满75点自动获得1本净化书，超出部分计入下一轮。",
@@ -6553,7 +6553,7 @@ class McFish(NcatBotPlugin):
             completed_attempts += 1
             if axolotl:
                 need = 3
-                for fish_name in FISH:
+                for fish_name in sorted(FISH, key=lambda name: (FISH[name], name)):
                     if need <= 0:
                         break
                     take = min(need, int(state["pack"].get(fish_name, 0)))

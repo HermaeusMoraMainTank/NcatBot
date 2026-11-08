@@ -20,6 +20,8 @@ ROD_POWER = {
     "三叉戟": 90,
 }
 
+AXOLOTL_POWER = 20
+
 EQUIPMENT_SLOTS = ("head", "body", "legs")
 JEWELRY_SLOTS = ("necklace", "ring1", "ring2")
 
@@ -38,7 +40,10 @@ def level_power(state: dict) -> int:
 
 def rod_power(state: dict) -> int:
     equip = state.get("equip") or {}
-    return int(ROD_POWER.get(str(equip.get("name", "")), 0))
+    name = str(equip.get("name", ""))
+    if name == "美西螈":
+        return AXOLOTL_POWER
+    return int(ROD_POWER.get(name, 0))
 
 
 def _slot_power(state: dict, group: str, slots: tuple[str, ...]) -> int:
