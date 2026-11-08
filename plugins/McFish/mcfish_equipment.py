@@ -322,3 +322,31 @@ def scaled_effects(equipment: dict, jewelry: dict) -> dict[str, float]:
             for key, value in bonus.items():
                 effects[key] = effects.get(key, 0.0) + float(value) * scale
     return effects
+
+
+GEAR_DISMANTLE_FEE = 100
+
+
+def dismantle_materials(name: str, level: int | None = None) -> dict[str, int]:
+    """Return about half of the materials spent crafting and upgrading one piece."""
+    recipe = craft_recipe(name)
+    info = PIECE_INFO.get(name)
+    if recipe is None or info is None:
+        return {}
+    start = int(recipe["level"])
+    current = max(start, min(MAX_LEVEL, int(level or start)))
+    totals: dict[str, int] = {
+        str(item): int(count) for item, count in recipe.get("items", {}).items()
+    }
+    for target in range(start + 1, current + 1):
+        cost = upgrade_cost(name, target)
+        if cost is None:
+            continue
+        _gold, items = cost
+        for item, count in items.items():
+            totals[item] = totals.get(item, 0) + int(count)
+    return {
+        item: max(1, int(count) // 2)
+        for item, count in totals.items()
+        if int(count) > 0
+    }

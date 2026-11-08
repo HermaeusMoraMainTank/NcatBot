@@ -15,6 +15,7 @@ from McFish.mcfish_equipment import (  # noqa: E402
     PIECE_INFO,
     SETS,
     craft_recipe,
+    dismantle_materials,
     fp_for_level,
     make_piece,
     piece_info,
@@ -324,3 +325,41 @@ def test_gear_catalog_set_overview_is_still_available(tmp_path: Path):
     with PILImage.open(image_path) as image:
         assert image.size[0] == 1600
         assert image.size[1] > 2000
+
+
+def test_dismantle_materials_returns_half_of_craft_and_upgrade_investment():
+    materials = dismantle_materials("铜制头盔", 5)
+
+    recipe = craft_recipe("铜制头盔")
+    totals = dict(recipe["items"])
+    for target in (4, 5):
+        _gold, items = upgrade_cost("铜制头盔", target)
+        for item, count in items.items():
+            totals[item] = totals.get(item, 0) + count
+    assert materials == {
+        item: max(1, count // 2) for item, count in totals.items()
+    }
+    assert dismantle_materials("潜水头盔") == {}
+
+
+def test_dismantle_gear_command_returns_materials_and_removes_item():
+    plugin = McFish.__new__(McFish)
+    plugin._save = lambda *_args: None
+    plugin._charge_fee = lambda *_args: True
+    plugin._choose = AsyncMock(return_value=SimpleNamespace(key="confirm"))
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {
+        "gear_bag": [make_piece("铜制头盔", 3)],
+        "pack": {},
+        "equipment": {},
+        "jewelry": {},
+        "talents": {},
+    }
+
+    asyncio.run(plugin._dismantle_gear(event, state, "铜制头盔"))
+
+    assert state["gear_bag"] == []
+    for item, count in dismantle_materials("铜制头盔", 3).items():
+        assert state["pack"][item] == count
+    assert "已分解 铜制头盔" in event.reply.await_args.kwargs["text"]
+    assert "100 金币" in event.reply.await_args.kwargs["text"]

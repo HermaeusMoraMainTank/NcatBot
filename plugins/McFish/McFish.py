@@ -108,6 +108,7 @@ from .mcfish_content import (
 from .mcfish_effects import format_effect
 from .mcfish_equipment import (
     GEAR_ALIASES,
+    GEAR_DISMANTLE_FEE,
     GEAR_SLOTS,
     JEWELRY_SLOTS,
     PIECE_INFO,
@@ -116,6 +117,7 @@ from .mcfish_equipment import (
     set_icon,
     set_label,
     craft_recipe,
+    dismantle_materials,
     fp_for_level,
     make_piece,
     piece_info,
@@ -580,7 +582,7 @@ MCFISH_COMMAND_ROWS_BASE = (
     "鱼点：钓鱼鱼点（鱼点与常驻鱼王） / 前往 深海（切换鱼点）",
     "买卖：购买xxx [数量] / 出售xxx [数量] / 出售所有垃圾（可一次出售多个物品）",
     "旧系统：装备鱼竿或饰品、卸下饰品、购买饰品槽位/解锁饰品槽位、升级财富浮标/升级坚韧钓组/升级黄金磁石/升级幸运海星、修复鱼竿/维修鱼竿、附魔诱钓或海之眷顾",
-    "合成与分解：合成鱼竿、合成财富浮标、合成坚韧钓组、合成黄金磁石、合成幸运海星、合成魔法鱼饵、合成隐秘诱饵、合成万能鱼饵、分解鱼竿、消除宝藏诅咒、当前装备概率明细",
+    "合成与分解：合成鱼竿、合成财富浮标、合成坚韧钓组、合成黄金磁石、合成幸运海星、合成魔法鱼饵、合成隐秘诱饵、合成万能鱼饵、分解鱼竿、分解装备 铜制头盔、消除宝藏诅咒、当前装备概率明细",
 )
 MCFISH_COMMAND_ROWS_SYSTEMS = (
     "钓鱼力：钓鱼力（查看构成与等待倍率）",
@@ -648,6 +650,7 @@ MCFISH_COMMAND_HELP_GROUPS = (
         ("合成渔具 铜制头盔", "单件合成；不写装备名时打开全部配方和材料。"),
         ("装备渔具 铜制头盔", "穿戴装备；戒指会自动进入空位。也可直接用“装备 金鱼戒指”。"),
         ("强化渔具 铜制头盔", "升1级，最高20级；消耗材料与金币。"),
+        ("分解装备 铜制头盔", "分解未装备的合成装备，返还约一半投入材料；手续费100金币。"),
         ("卸下渔具 头盔", "卸到背包；部位：头盔/胸甲/腿甲/项链/戒指1/戒指2。"),
         ("装备图鉴", "按部位查看初始/最终 FP、套装效果与获取途径。"),
         ("装备图鉴 套装 / 饰品图鉴", "查看套装总览与永久饰品效果。"),
@@ -703,6 +706,7 @@ MCFISH_HELP = """一款钓鱼模拟器
 - 消耗品合成：魔法鱼饵需要24个碎片（100金币手续费，10竿），隐秘诱饵需要42个碎片（160金币手续费，6竿），万能鱼饵需要50个碎片（220金币手续费，5竿）；合成后发送“装备魔法鱼饵”等命令启用，每完成1竿消耗1次。
 - 永久饰品效果：财富浮标Ⅰ/Ⅱ/Ⅲ级为宝藏×1.35/1.50/1.65、鱼王咬钩×1.20/1.28/1.36；坚韧钓组为上钩率+12/16/20个百分点；黄金磁石为宝藏品质+1/2/3档、宝藏售价×1.25/1.35/1.50、普通鱼售价×1.08/1.12/1.16、后置鱼王售价×10/30/100（前置与常驻鱼王封顶×3/×5/×8，钓起显示和出售结算均生效）；幸运海星为普通碎片概率16%/20%/24%。
 - 掉落鱼竿随机生成耐久、维修和附魔；合成与修复的手续费由钱包实际扣除。
+- 分解装备：发送“分解装备 装备名”可分解未装备的合成装备，返还约一半已投入材料，手续费100金币；掉落装备没有合成材料，不参与分解。
 - 达到对应等级后，商店常驻出售铜竿/锡竿/铁竿/猩红竿/幻光竿/星河竿/灿阳竿，价格分别为600/1600/4000/9000/16000/24000/36000金币；商店购买鱼竿不能作为合成材料，掉落、任务奖励、碎片兑换和合成鱼竿仍可合成。
 - 可出售：鱼、鱼王、鱼竿、贵重品、食物、垃圾、宝藏道具、消耗品；材料、钥匙、箱子、神谕卡片、装备、鱼王鳞片、钓鱼碎片不可出售。
 - 食物与回复：食物来自垃圾段的“食物”子类；绿色/黄色海藻回复1次，灰色/红色/苍白海藻回复2次，蓝色/水晶/深蓝色海藻回复3次。发送“吃海藻 绿色海藻 3”或“吃食物 绿色海藻 3”食用，数量省略时吃1个；每天最多回复15次，只能补回当天已经用掉的次数，并同步减少当前鱼点已用次数。装备和天赋的食物效果会提高单次回复量。
@@ -5088,6 +5092,9 @@ class McFish(NcatBotPlugin):
             await self._enchant(event, state, text[2:].strip()); return
         if text.startswith("合成"):
             await self._craft(event, state, text[2:].strip()); return
+        if text.startswith(("分解装备", "分解渔具")):
+            prefix = "分解装备" if text.startswith("分解装备") else "分解渔具"
+            await self._dismantle_gear(event, state, text[len(prefix):].strip()); return
         if text.startswith("分解"):
             await self._dismantle(event, state, text[2:].strip()); return
         if text.startswith("消除"):
@@ -7687,8 +7694,132 @@ class McFish(NcatBotPlugin):
         self._save(str(event.sender.user_id), state)
         await event.reply(text=f"附魔成功,{book}等级提高至{self._enchant_label(equip[key])}")
 
+    def _gear_dismantle_candidates(self, state: dict, name: str) -> list[dict]:
+        candidates: list[dict] = []
+        for index, item in enumerate(state.get("gear_bag") or []):
+            if not isinstance(item, dict):
+                continue
+            piece = str(item.get("name", ""))
+            info = PIECE_INFO.get(piece)
+            if info is None or (name and piece != name):
+                continue
+            level = int(item.get("level", info["start"]))
+            materials = dismantle_materials(piece, level)
+            if materials:
+                candidates.append({
+                    "source": "bag",
+                    "index": index,
+                    "name": piece,
+                    "level": level,
+                    "materials": materials,
+                })
+        for piece in ([name] if name else list(PIECE_INFO)):
+            info = PIECE_INFO.get(piece)
+            if info is None:
+                continue
+            value = state.get("pack", {}).get(piece, 0)
+            if not isinstance(value, int) or value <= 0:
+                continue
+            level = int(info["start"])
+            materials = dismantle_materials(piece, level)
+            if materials:
+                candidates.append({
+                    "source": "pack",
+                    "name": piece,
+                    "level": level,
+                    "count": value,
+                    "materials": materials,
+                })
+        return candidates
+
+    async def _dismantle_gear(self, event, state: dict, requested_name: str = "") -> None:
+        name = requested_name.strip()
+        if name and name not in PIECE_INFO:
+            await event.reply(text=f"未知装备：{name}")
+            return
+        candidates = self._gear_dismantle_candidates(state, name)
+        equipped = [
+            item.get("name")
+            for group in ("equipment", "jewelry")
+            for item in (state.get(group) or {}).values()
+            if isinstance(item, dict)
+        ]
+        if not candidates:
+            if name and name in equipped:
+                await event.reply(text=f"{name} 正在装备中，请先发送“卸下渔具 部位”后再分解")
+            elif name:
+                await event.reply(text=f"{name}：没有可返还的合成材料，掉落装备无法分解")
+            else:
+                await event.reply(text="背包里没有可分解的合成装备")
+            return
+
+        if len(candidates) == 1:
+            selected = candidates[0]
+        else:
+            listing = []
+            for index, candidate in enumerate(candidates):
+                material_text = "、".join(
+                    f"{item}×{count}" for item, count in candidate["materials"].items()
+                )
+                count_text = f" ×{candidate['count']}" if candidate.get("count") else ""
+                listing.append(
+                    f"[{index}] {candidate['name']}（{candidate['level']}级{count_text}）"
+                    f"返还：{material_text}"
+                )
+            choices = {str(index): f"one:{index}" for index in range(len(candidates))}
+            choices["取消"] = "cancel"
+            result = await self._choose(
+                "找到以下可分解装备：\n"
+                + "\n".join(listing)
+                + "\n————————\n输入序号选择一件装备，或回复“取消”",
+                event,
+                choices=choices,
+                timeout=120,
+                timeout_reply="等待超时，取消分解",
+                cancel_reply="已取消分解",
+            )
+            if not isinstance(result.key, str) or not result.key.startswith("one:"):
+                return
+            selected = candidates[int(result.key[4:])]
+
+        materials = selected["materials"]
+        material_text = "、".join(f"{item}×{count}" for item, count in materials.items())
+        fee = self._discounted_fee(state, GEAR_DISMANTLE_FEE)
+        confirmation = await self._choose(
+            f"确认分解 {selected['name']}（{selected['level']}级）吗？\n"
+            f"返还：{material_text}\n"
+            f"手续费：{fee}金币；分解后无法恢复。\n回答“是”或“否”",
+            event,
+            choices={"是": "confirm", "否": "cancel"},
+            timeout=60,
+            timeout_reply="等待超时，取消分解",
+            cancel_reply="已取消分解",
+        )
+        if confirmation.key != "confirm":
+            return
+        if not self._charge_fee(str(event.sender.user_id), fee, "mcfish_gear_dismantle"):
+            await event.reply(text=f"金币不足（需要 {fee}）")
+            return
+
+        if selected["source"] == "bag":
+            state.setdefault("gear_bag", []).pop(selected["index"])
+        else:
+            self._remove(state, selected["name"], 1)
+        for item, count in materials.items():
+            self._add(state, item, count)
+        self._save(str(event.sender.user_id), state)
+        await event.reply(
+            text=(
+                f"已分解 {selected['name']}（{selected['level']}级），"
+                f"获得 {material_text}，支付 {fee} 金币"
+            )
+        )
+
     async def _dismantle(self, event, state: dict, requested_name: str = "") -> None:
         name = POLE_ALIASES.get(requested_name.strip(), requested_name.strip())
+        if name in PIECE_INFO:
+            await self._dismantle_gear(event, state, name)
+            return
         if name in ("鱼竿", "鱼杆", ""):
             name = ""
         if name and name not in POLES:
