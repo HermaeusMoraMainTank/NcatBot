@@ -4227,5 +4227,8 @@ def test_mcfish_probability_panel_shows_talent_material_bonus(tmp_path: Path):
     talent_table = next(section for section in tables if section["title"] == "天赋加成")
     assert ["材料专家", "3/3", "材料产出概率 +18%"] in talent_table["rows"]
 
+    source_table = next(section for section in tables if section["title"] == "概率来源")
+    assert ["垃圾·材料", f"{expected[1]}%（基础18% + 材料专家3级 +18%）"] in source_table["rows"]
+
     detail = plugin._probability_detail_text(state)
     assert "材料专家 3/3：材料产出概率 +18%" in detail

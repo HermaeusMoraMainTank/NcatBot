@@ -3769,6 +3769,36 @@ class McFish(NcatBotPlugin):
             return (raw[0], raw[1] - blocked, raw[2], raw[3] + blocked), 0.0, raw
         return raw, blocked, raw
 
+    def _base_probability_categories(self, state: dict) -> tuple[int, int, int, int]:
+        """Return the base interval for the current fish-count bracket."""
+        fish_count = self._fish_count(state)
+        if fish_count > 100 or (state.get("equip") or {}).get("name") == AXOLOTL:
+            return (2, 8, 35, 45)
+        raw_items = getattr(self, "_catalog", {}).get("分类", [])
+        values = {str(item.get("类型")): int(item.get("概率[0-100)", 0)) for item in raw_items}
+        return (
+            values.get("treasure", 1),
+            values.get("pole", 4),
+            values.get("fish", 25),
+            values.get("waste", 30),
+        )
+
+    def _talent_effect_sources(self, state: dict, effect_key: str) -> tuple[list[str], float]:
+        """Return human-readable talent sources for one effect key and their total."""
+        levels = (state.get("talents") or {}).get("levels") or {}
+        parts = []
+        total = 0.0
+        for key, node in TALENTS.items():
+            rank = int(levels.get(key, 0))
+            if rank <= 0:
+                continue
+            value = float(node["effects"].get(effect_key, 0.0)) * rank
+            if value <= 0:
+                continue
+            total += value
+            parts.append(f"{node['label']}{rank}级 +{value * 100:g}%")
+        return parts, total
+
     def _item_type(self, name: str) -> str:
         return next(
             (str(item.get("类型", "")) for item in getattr(self, "_catalog", {}).get("物品", []) if str(item.get("名称", "")) == name),
@@ -4034,13 +4064,15 @@ class McFish(NcatBotPlugin):
             valuable_bonus=float(gear_effects.get("valuable", 0.0)),
         )
         magic_bait = int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0
-        rod_values, _ = self._rod_probability_map(rod_name, raw_categories[1])
+        rod_values, blocked_raw = self._rod_probability_map(rod_name, raw_categories[1])
         treasure_values = self._probability_item_map("treasure", categories[0])
         waste_values = self._probability_item_map("waste", categories[3])
         fish_values = self._fish_probability_map(
             rod_name, zone, categories[2], magic_bait=magic_bait, power=power
         )
         air = max(0, 100 - sum(categories)) + blocked_pole
+        base_categories = self._base_probability_categories(state)
+        air_zero = max(0, 100 - sum(categories)) <= 0.01
         accessories = "、".join(
             f"{name}{self._enchant_label(self._accessory_level(state, name))}"
             for name in state.get("accessories", [])
@@ -4058,6 +4090,59 @@ class McFish(NcatBotPlugin):
             ("垃圾内部", f"垃圾 {waste[0]}% / 材料 {waste[1]}% / 食物 {waste[2]}% / 贵重 {waste[3]}%", "", ""),
         ]
 
+        source_rows: list[list[str]] = []
+        for index, label in enumerate(("宝藏", "鱼竿", "普通鱼", "垃圾")):
+            current = categories[index]
+            base = base_categories[index]
+            diff = round(current - base, 2)
+            if abs(diff) < 0.01:
+                source = f"基础{base}%"
+            elif index == 1 and blocked_raw and abs(diff + blocked_raw) < 0.05:
+                source = f"基础{base}% − 越级鱼竿{blocked_raw:.2f}%"
+            elif index == 3 and blocked_raw and air_zero and abs(diff - blocked_raw) < 0.05:
+                source = f"基础{base}% + 越级鱼竿{blocked_raw:.2f}%"
+            else:
+                source = f"基础{base}% {'+' if diff > 0 else '−'} 修正{abs(diff):.2f}%"
+            source_rows.append([label, f"{self._percent_text(current)}（{source}）"])
+
+        base_air = 100 - sum(base_categories)
+        air_parts = [f"基础{base_air}%"]
+        other_air = air - base_air
+        if blocked_raw and not air_zero:
+            air_parts.append(f"+ 越级鱼竿{blocked_raw:.2f}%")
+            other_air -= blocked_raw
+        if abs(other_air) >= 0.01:
+            air_parts.append(f"{'+' if other_air > 0 else '−'} 海豚/眷顾/装备修正{abs(other_air):.2f}%")
+        source_rows.append(["空竿", f"{self._percent_text(air)}（{' '.join(air_parts)}）"])
+
+        base_waste = waste_split(zone)
+        material_total = max(0.0, float(gear_effects.get("material", 0.0)))
+        valuable_total = max(0.0, float(gear_effects.get("valuable", 0.0)))
+        material_parts, material_talent = self._talent_effect_sources(state, "material")
+        valuable_parts, valuable_talent = self._talent_effect_sources(state, "valuable")
+        junk_source = f"基础{base_waste[0]}%"
+        junk_diff = int(waste[0]) - int(base_waste[0])
+        if junk_diff:
+            junk_source += f" {'+' if junk_diff > 0 else '−'} 材料/贵重品加成{abs(junk_diff)}%"
+        material_source = f"基础{base_waste[1]}%"
+        if material_parts:
+            material_source += " + " + "、".join(material_parts)
+        material_equip = max(0.0, material_total - material_talent)
+        if material_equip > 0.0001:
+            material_source += f" + 装备/首饰{material_equip * 100:g}%"
+        valuable_source = f"基础{base_waste[3]}%"
+        if valuable_parts:
+            valuable_source += " + " + "、".join(valuable_parts)
+        valuable_equip = max(0.0, valuable_total - valuable_talent)
+        if valuable_equip > 0.0001:
+            valuable_source += f" + 装备/首饰{valuable_equip * 100:g}%"
+        source_rows.extend([
+            ["垃圾·垃圾", f"{waste[0]}%（{junk_source}）"],
+            ["垃圾·材料", f"{waste[1]}%（{material_source}）"],
+            ["垃圾·食物", f"{waste[2]}%（基础{base_waste[2]}%，鱼点固定）"],
+            ["垃圾·贵重", f"{waste[3]}%（{valuable_source}）"],
+        ])
+
         tables: list[dict] = [{
             "title": "鱼竿掉落",
             "headers": ["鱼竿", "概率", "状态"],
@@ -4072,6 +4157,7 @@ class McFish(NcatBotPlugin):
             "weights": [2, 1, 1.5],
             "aligns": ["l", "r", "l"],
             "icons": True,
+            "note": "概率 = 鱼竿大类 × 段内占比；越级不可钓部分不计入。",
         }, {
             "title": "宝藏概率",
             "headers": ["宝藏", "概率"],
@@ -4079,6 +4165,7 @@ class McFish(NcatBotPlugin):
             "weights": [2.2, 1],
             "aligns": ["l", "r"],
             "icons": True,
+            "note": "概率 = 宝藏大类 × 目录权重；财富浮标与宝藏品质加成已计入。",
         }, {
             "title": "当前鱼点普通鱼",
             "headers": ["鱼", "出现率", "所需 FP", "状态"],
@@ -4094,7 +4181,7 @@ class McFish(NcatBotPlugin):
             "weights": [2.2, 1.2, 1, 1],
             "aligns": ["l", "r", "r", "l"],
             "icons": True,
-            "note": "出现率为每竿概率，不含空竿与其他大类。",
+            "note": "出现率 = 普通鱼大类 × 当前鱼点权重；不含空竿与其他大类。",
         }, {
             "title": "垃圾概率",
             "headers": ["垃圾", "概率"],
@@ -4102,6 +4189,7 @@ class McFish(NcatBotPlugin):
             "weights": [2.2, 1],
             "aligns": ["l", "r"],
             "icons": True,
+            "note": "概率 = 垃圾大类 × 目录权重；材料/贵重品加成只改变垃圾内部比例。",
         }]
 
         hidden_names = [name for name, item in HIDDEN_FISH.items() if item["zone"] == zone]
@@ -4144,7 +4232,7 @@ class McFish(NcatBotPlugin):
                 "weights": [1.8, 0.9, 1, 1.1, 1, 1.8, 1.2],
                 "aligns": ["l", "l", "r", "r", "r", "l", "l"],
                 "icons": True,
-                "note": "概率只在对应鱼王窗口内生效；最终上钩率还受回复技能和路径影响。",
+                "note": "咬钩/上钩已计入财富浮标、坚韧钓组等加成；最终上钩率还受回复技能和路径影响。",
             })
 
         resident_name = resident_king_for_zone(zone)
@@ -4197,6 +4285,15 @@ class McFish(NcatBotPlugin):
                 "icons": False,
                 "note": "天赋效果已计入实际掉落、等待与钓鱼力；材料/贵重品加成会改变垃圾内部比例。",
             })
+        tables.append({
+            "title": "概率来源",
+            "headers": ["项目", "概率（来源）"],
+            "rows": source_rows,
+            "weights": [1.4, 5.2],
+            "aligns": ["l", "l"],
+            "icons": False,
+            "note": "表内其他概率 = 对应大类 × 目录/鱼点权重；天赋、装备、饰品、鱼饵与越级规则已计入。",
+        })
         return summary, tables
 
     def _probability_zone_tables(self, state: dict) -> list[dict]:
