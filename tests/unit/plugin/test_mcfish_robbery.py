@@ -4200,3 +4200,32 @@ def test_mcfish_equip_command_accepts_gear_ring():
     assert state["jewelry"]["ring1"]["name"] == "金鱼戒指"
     assert state["pack"]["金鱼戒指"] == 0
     assert "已装备 金鱼戒指" in event.reply.await_args.kwargs["text"]
+
+
+def test_mcfish_probability_panel_shows_talent_material_bonus(tmp_path: Path):
+    from McFish.mcfish_content import adjusted_waste_split
+
+    plugin = McFish.__new__(McFish)
+    plugin.workspace = tmp_path
+    plugin._load_original_data()
+    state = {
+        "pack": {},
+        "equip": {"name": "木竿", "durable": 30, "maintenance": 0, "induce": 0, "favor": 0},
+        "fishing_zone": "bay",
+        "accessories": [],
+        "active_consumables": {},
+        "equipment": {},
+        "jewelry": {},
+        "talents": {"levels": {"collector": 2, "material_expert": 3}},
+    }
+
+    summary, tables = plugin._probability_current_tables("100", state)
+    waste_line = next(value for label, value, *_rest in summary if label == "垃圾内部")
+    expected = adjusted_waste_split("bay", material_bonus=0.18)
+    assert f"材料 {expected[1]}%" in waste_line
+
+    talent_table = next(section for section in tables if section["title"] == "天赋加成")
+    assert ["材料专家", "3/3", "材料产出概率 +18%"] in talent_table["rows"]
+
+    detail = plugin._probability_detail_text(state)
+    assert "材料专家 3/3：材料产出概率 +18%" in detail

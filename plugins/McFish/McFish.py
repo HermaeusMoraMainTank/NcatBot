@@ -103,6 +103,7 @@ from .mcfish_content import (
     roll_valuable,
     roll_waste_sub,
     waste_split,
+    adjusted_waste_split,
 )
 from .mcfish_effects import format_effect
 from .mcfish_equipment import (
@@ -3821,6 +3822,12 @@ class McFish(NcatBotPlugin):
         categories, blocked_pole, raw_categories = self._probability_categories(state, rod_name)
         zone = str(state.get("fishing_zone", daily_fishing_zone()))
         fish_count = self._fish_count(state)
+        gear_effects = self._gear_effects(state)
+        waste = adjusted_waste_split(
+            zone,
+            material_bonus=float(gear_effects.get("material", 0.0)),
+            valuable_bonus=float(gear_effects.get("valuable", 0.0)),
+        )
         magic_bait = int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0
         rod_values, _ = self._rod_probability_map(rod_name, raw_categories[1])
         treasure_values = self._probability_item_map("treasure", categories[0])
@@ -3837,9 +3844,22 @@ class McFish(NcatBotPlugin):
             ("body", f"钓鱼力：{power_summary(state)}"),
             ("body", f"饰品槽位：{len(state.get('accessories', []))}/{state.get('accessory_slots', 2)}    饰品：{'、'.join(f'{name}{self._enchant_label(self._accessory_level(state, name))}' for name in state.get('accessories', [])) or '无'}    鱼饵：{'、'.join(name for name, count in state.get('active_consumables', {}).items() if int(count) > 0) or '无'}"),
             ("body", f"大类：宝藏 {self._percent_text(categories[0])} / 鱼竿 {self._percent_text(categories[1])} / 普通鱼 {self._percent_text(categories[2])} / 垃圾 {self._percent_text(categories[3])} / 空竿 {self._percent_text(air)}"),
-            ("body", f"垃圾内部：垃圾 {waste_split(zone)[0]}% / 材料 {waste_split(zone)[1]}% / 食物 {waste_split(zone)[2]}% / 贵重 {waste_split(zone)[3]}%"),
-            ("heading", "鱼竿"),
+            ("body", f"垃圾内部：垃圾 {waste[0]}% / 材料 {waste[1]}% / 食物 {waste[2]}% / 贵重 {waste[3]}%"),
+            ("heading", "天赋加成"),
         ]
+        talent_levels = (state.get("talents") or {}).get("levels") or {}
+        for key, node in TALENTS.items():
+            rank = int(talent_levels.get(key, 0))
+            if rank <= 0:
+                continue
+            effects = "；".join(
+                format_effect(effect_key, float(value) * rank)
+                for effect_key, value in node["effects"].items()
+            )
+            current.append(("body", f"{node['label']} {rank}/{node['max']}：{effects}"))
+        current.extend([
+            ("heading", "鱼竿"),
+        ])
         current.extend(
             ("body", f"{name}：{self._probability_value(value)}" + ("（不可越级）" if value == 0 and name != "三叉戟" and name != rod_name else ""))
             for name, value in rod_values.items()
@@ -4007,6 +4027,12 @@ class McFish(NcatBotPlugin):
         zone = str(state.get("fishing_zone", daily_fishing_zone()))
         fish_count = self._fish_count(state)
         power = fishing_power(state)
+        gear_effects = self._gear_effects(state)
+        waste = adjusted_waste_split(
+            zone,
+            material_bonus=float(gear_effects.get("material", 0.0)),
+            valuable_bonus=float(gear_effects.get("valuable", 0.0)),
+        )
         magic_bait = int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0
         rod_values, _ = self._rod_probability_map(rod_name, raw_categories[1])
         treasure_values = self._probability_item_map("treasure", categories[0])
@@ -4029,7 +4055,7 @@ class McFish(NcatBotPlugin):
             ("饰品槽位", f"{len(state.get('accessories', []))}/{state.get('accessory_slots', 2)}", "鱼饵", baits),
             ("饰品", accessories, "", ""),
             ("大类", f"宝藏 {self._percent_text(categories[0])} / 鱼竿 {self._percent_text(categories[1])} / 普通鱼 {self._percent_text(categories[2])} / 垃圾 {self._percent_text(categories[3])} / 空竿 {self._percent_text(air)}", "", ""),
-            ("垃圾内部", f"垃圾 {waste_split(zone)[0]}% / 材料 {waste_split(zone)[1]}% / 食物 {waste_split(zone)[2]}% / 贵重 {waste_split(zone)[3]}%", "", ""),
+            ("垃圾内部", f"垃圾 {waste[0]}% / 材料 {waste[1]}% / 食物 {waste[2]}% / 贵重 {waste[3]}%", "", ""),
         ]
 
         tables: list[dict] = [{
@@ -4149,6 +4175,27 @@ class McFish(NcatBotPlugin):
                 "aligns": ["l", "r", "r", "r", "r", "r"],
                 "icons": True,
                 "note": "常驻鱼王也属于该鱼点鱼类，但按鱼王规则单独结算，不占用每周窗口。",
+            })
+        talent_levels = (state.get("talents") or {}).get("levels") or {}
+        talent_rows = []
+        for key, node in TALENTS.items():
+            rank = int(talent_levels.get(key, 0))
+            if rank <= 0:
+                continue
+            effects = [
+                format_effect(effect_key, float(value) * rank)
+                for effect_key, value in node["effects"].items()
+            ]
+            talent_rows.append([node["label"], f"{rank}/{node['max']}", "；".join(effects)])
+        if talent_rows:
+            tables.append({
+                "title": "天赋加成",
+                "headers": ["天赋", "等级", "效果"],
+                "rows": talent_rows,
+                "weights": [1.3, 0.8, 3.6],
+                "aligns": ["l", "r", "l"],
+                "icons": False,
+                "note": "天赋效果已计入实际掉落、等待与钓鱼力；材料/贵重品加成会改变垃圾内部比例。",
             })
         return summary, tables
 
@@ -4621,6 +4668,19 @@ class McFish(NcatBotPlugin):
             lines.append(f"{name} : {share * category[2]:.2f}%")
         if str((state.get("equip") or {}).get("name", "")) == AXOLOTL:
             lines.append(f"海豚 : {item_probability('海豚', 'treasure', category[0])}")
+        lines.extend(["-----------", "天赋加成:"])
+        talent_levels = (state.get("talents") or {}).get("levels") or {}
+        talent_lines = []
+        for key, node in TALENTS.items():
+            rank = int(talent_levels.get(key, 0))
+            if rank <= 0:
+                continue
+            effects = "；".join(
+                format_effect(effect_key, float(value) * rank)
+                for effect_key, value in node["effects"].items()
+            )
+            talent_lines.append(f"{node['label']} {rank}/{node['max']}：{effects}")
+        lines.extend(talent_lines or ["无"])
         lines.append("-----------")
         return "\n".join(lines)
 
