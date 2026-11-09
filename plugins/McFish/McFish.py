@@ -718,6 +718,7 @@ MCFISH_HELP = """一款钓鱼模拟器
 # 帮助图片里的特殊机制。每条只放进“特殊机制”卡片一次，避免和规则正文重复。
 MCFISH_SPECIAL_MECHANICS = (
     "美西螈：宝藏掉落；装备后区间同样变为2/8/35/45，钓鱼力按20计算；每竿要吃3条普通鱼（按鱼价从低到高，不含鱼王、海豚、材料等），鱼不够时永久失去；其他物品一次获得5个，鱼竿和美西螈除外。",
+    "冰晶：用于海钓套装（潜水头盔/海藻披风/脚蹼/尼普顿项链/金鱼戒指）2–20级强化，不参与普通合成。",
     "海豚：背包里放着海豚时，空竿区间全部并入垃圾区间；越级鱼竿产生的空竿同样并入垃圾。",
     "鱼数超过100条：区间变为宝藏2%、鱼竿8%、鱼35%、垃圾45%，只改变概率、不改变数量。",
     "净化书：每完成1竿累计1点祝福，满75点自动获得1本净化书，超出部分计入下一轮。",
@@ -5558,6 +5559,8 @@ class McFish(NcatBotPlugin):
                     accessory_level = self._accessory_level(state, name)
                     display_name = f"{name}（{self._enchant_label(accessory_level)}级）"
                     detail = "已装备" if name in state["accessories"] else "未装备"
+                elif name == "冰晶":
+                    detail = "用途：海钓套装 2–20 级强化"
                 entries.append((display_name, name, int(value), detail, False, progress))
                 if name in FISH:
                     fish_count += int(value)
