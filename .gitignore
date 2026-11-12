@@ -83,6 +83,14 @@ data/*/data.json
 data/RollPig/rollpig_today.json
 data/FakeAi/recent_cache.json
 data/FakeAi/memory.db
+data/FakeAi/mood_state.json
+data/FakeAi/style_corpus.json
+data/FakeAi/eval/
+data/FakeAi/sticker_usage.json
+data/fakeai/sticker_usage.json
+data/image/imagesender/
+data/image/fortune/output.png
+data/Box/box_cache/
 
 # === Development ===
 dev/
@@ -121,6 +129,13 @@ plugins/TodayWaifu/data/output/*
 plugins/MirageTank/data/
 plugins/GalgameBox/data/
 
+# === 开箱 / 开瓶（CaseOpening）运行态 ===
+# 物品图是运行时下载的缓存，卡片是每次指令生成的图，都不进仓库；
+# 缺图由插件启动预热（_warm_images）或渲染时自动补下载
+data/CaseOpening/**/images/
+data/CaseOpening/**/cards/
+data/CaseOpening/**/prices_*.json.gz
+
 # === Plugin secrets (API keys) ===
 plugins/common/secrets.json
 
@@ -133,3 +148,10 @@ data/**/*.tmp
 
 # AI 留档
 data/FakeAi/traces/
+
+# === 本地调试产物 ===
+/fakeai-flow-workbench.html
+/r.json
+/rods.json
+/user_*.json
+/*.lnk
