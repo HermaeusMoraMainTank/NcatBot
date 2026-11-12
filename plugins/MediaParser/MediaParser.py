@@ -818,9 +818,10 @@ class MediaParser(NcatBotPlugin):
             response += "命令：\n"
             response += "• 开启解析 - 开启当前会话的解析\n"
             response += "• 关闭解析 - 关闭当前会话的解析\n"
-            response += "• 登录B站 - 扫码登录B站\n"
+            response += "• 登录B站 / 登录b站 / blogin - 扫码登录B站\n"
+            response += "• 解析状态 - 查看解析开关与支持平台\n"
             if self.enable_search and HAS_BILI_SIGN:
-                response += "• 搜视频 关键词 - 搜索B站视频"
+                response += "• 搜视频 / 查询视频 / 搜索视频 关键词 - 搜索B站视频"
 
             if group_id:
                 await self.api.qq.post_group_msg(
