@@ -50,6 +50,8 @@ description: >-
 | [references/expression-ingest.md](references/expression-ingest.md) | 入库扩展点（默认关） |
 | [references/expression-preview.md](references/expression-preview.md) | Phase 3 表情预览（已确认） |
 | [references/integration-checklist.md](references/integration-checklist.md) | **Phase 4 实现顺序与验收** |
+| [references/humanlike-research.md](references/humanlike-research.md) | 人设「不像人」诊断、参考项目与改造方向 |
+| [references/fakeai-pipeline.md](references/fakeai-pipeline.md) | FakeAi 从输入到输出的完整链路与伪人感归因 |
 
 ## 工作流
 
@@ -104,6 +106,8 @@ description: >-
 
 ## Phase 状态
 
-- **实现**：I1～**I6 收拢完成**（贴纸待你二校改名/删留）。
+- **实现**：I1～**I6 收拢完成**；I8 人设重做已落地（I7 冷场起话已删除）。
 - 配置：`plugins/FakeAi/config.yaml`（可被全局 `plugin.plugin_configs.FakeAi` 覆盖）。
 - 贴纸：`data/fakeai/stickers/` + 清单 `CATALOG.md`；源图仍在 `data/fakeai/meme/`。
+- 语感样本：`data/FakeAi/style_corpus.json`（`scripts/build_fakeai_style_corpus.py` 生成）。
+- 体检：`scripts/eval_fakeai_persona.py`（基线在 `data/FakeAi/eval/`）。
