@@ -32,14 +32,16 @@ FAKEAI_CONFIG_DEFAULTS: Dict[str, Any] = {
     "enable_typing_delay": False,
     "typing_delay_per_char": 0.1,
     "agent_enabled": True,
+    "direct_chat_enabled": True,
+    "planner_enabled": True,
+    "ai_provider": "ds_official",
     "skills_enabled": True,
     "agent_max_tokens": 25000,
     "agent_max_rounds": 8,
     "persona": "lanqing",
-    "proactive_enabled": True,
-    "proactive_quiet_minutes": 45,
-    "proactive_interval_minutes": 180,
-    "proactive_probability": 0.2,
+    "style_corpus_enabled": True,
+    "style_corpus_count": 4,
+    "style_corpus_path": "data/FakeAi/style_corpus.json",
     "interaction": asdict(InteractionConfig()),
     "cognition": asdict(CognitionConfig()),
     "expression": {
@@ -169,7 +171,6 @@ def apply_from_plugin(plugin) -> None:
     if tone not in ("off", "light", "normal", "max"):
         tone = "light"
     expr_pkg.TONE_STRENGTH = tone
-    expr_pkg.EDITOR_PASS = bool(expr_raw.get("editor_pass", False))
     expression_catalog_mod.sticker_catalog.root = Path(catalog_path)
     # 先全量扫一遍，才能知道磁盘上有哪些图库
     expression_catalog_mod.sticker_catalog.active = None
@@ -221,7 +222,27 @@ def apply_from_plugin(plugin) -> None:
     fakeai_mod = import_module(".FakeAi", package=__package__)
 
     fakeai_mod.USE_DS_AGENT = bool(plugin.get_config("agent_enabled", True))
+    fakeai_mod.DIRECT_CHAT_ENABLED = bool(
+        plugin.get_config("direct_chat_enabled", True)
+    )
+    fakeai_mod.PLANNER_ENABLED = bool(plugin.get_config("planner_enabled", True))
     fakeai_mod.SKILLS_ENABLED = bool(plugin.get_config("skills_enabled", True))
+    fakeai_mod.REPLY_PER_10MIN = max(1, int(DEFAULT_CONFIG.reply_per_10min or 1))
+    fakeai_mod.REPLY_PER_HOUR = max(1, int(DEFAULT_CONFIG.reply_per_hour or 1))
+    fakeai_mod.USER_REPLY_PER_HOUR = max(
+        0, int(DEFAULT_CONFIG.user_reply_per_hour or 0)
+    )
+    fakeai_mod.USER_REPLY_PER_DAY = max(
+        0, int(DEFAULT_CONFIG.user_reply_per_day or 0)
+    )
+
+    # 对话供应商：DeepSeek 官方 / OpenCode Go 的 Gemini、DeepSeek 等
+    try:
+        from common.utils.AiUtil import AiUtil
+
+        AiUtil.set_provider(str(plugin.get_config("ai_provider", "ds_official")))
+    except Exception as e:
+        _log.warning("[FakeAi] 设置对话供应商失败: %s", e)
 
     # —— 人设切换 ——
     persona = str(plugin.get_config("persona", "lanqing") or "lanqing").strip()
@@ -249,6 +270,33 @@ def apply_from_plugin(plugin) -> None:
         _log.debug("[FakeAi] 读取人设名称失败: %s", e)
     _log.info("[FakeAi] 使用人设：%s（%s）", persona, path)
 
+    # —— 群友语感样本 ——
+    fakeai_mod.STYLE_CORPUS_ENABLED = bool(
+        plugin.get_config("style_corpus_enabled", True)
+    )
+    fakeai_mod.STYLE_CORPUS_COUNT = max(
+        0, min(5, int(plugin.get_config("style_corpus_count", 4) or 0))
+    )
+    try:
+        fakeai_mod.style_corpus.path = Path(
+            str(
+                plugin.get_config(
+                    "style_corpus_path", "data/FakeAi/style_corpus.json"
+                )
+                or "data/FakeAi/style_corpus.json"
+            )
+        )
+        loaded = fakeai_mod.style_corpus.reload(force=True)
+        if loaded:
+            _log.info("[FakeAi] 语感样本已加载：%s 条", loaded)
+        else:
+            _log.info(
+                "[FakeAi] 语感样本为空：可运行 "
+                "scripts/build_fakeai_style_corpus.py 生成"
+            )
+    except Exception as e:
+        _log.warning("[FakeAi] 语感样本加载失败: %s", e)
+
     fakeai_mod.AGENT_MAX_TOKENS = max(
         0, int(plugin.get_config("agent_max_tokens", 60000) or 0)
     )
@@ -265,24 +313,6 @@ def apply_from_plugin(plugin) -> None:
         percent = 0.0
     fakeai_mod.RANDOM_PERCENT = min(100.0, max(0.0, percent))
     fakeai_mod.HISTORY_COUNT = max(4, min(40, int(DEFAULT_CONFIG.history_count or 20)))
-    fakeai_mod.PROACTIVE_ENABLED = bool(
-        plugin.get_config("proactive_enabled", True)
-    )
-    fakeai_mod.PROACTIVE_QUIET_SEC = (
-        max(5, int(plugin.get_config("proactive_quiet_minutes", 45) or 45)) * 60
-    )
-    fakeai_mod.PROACTIVE_INTERVAL_SEC = (
-        max(30, int(plugin.get_config("proactive_interval_minutes", 180) or 180))
-        * 60
-    )
-    try:
-        prob = float(plugin.get_config("proactive_probability", 0.2) or 0.2)
-    except (TypeError, ValueError):
-        prob = 0.2
-    # 兼容旧配置：写成 20/180 这种百分数时按百分比折算，而不是被 clamp 成 100%
-    if prob > 1.0:
-        prob = prob / 100.0
-    fakeai_mod.PROACTIVE_PROBABILITY = min(1.0, max(0.0, prob))
     fakeai_mod.FAKEAI_GROUP_MODE = group_mode
     fakeai_mod.FAKEAI_ALLOWED_GROUPS = frozenset(allowed)
     fakeai_mod.FAKEAI_DISABLED_GROUPS = frozenset(disabled)

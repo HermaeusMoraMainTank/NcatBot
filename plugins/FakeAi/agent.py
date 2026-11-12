@@ -44,6 +44,8 @@ class AgentResult:
     # 工具调用轨迹，供后台复盘（name / args / result 都是截断后的文本）
     tool_log: list = field(default_factory=list)
     rounds: int = 0
+    # 回复策划给的情绪桶（happy/sad/angry/confused/daily），用于补表情
+    mood_hint: str = ""
 
 
 AGENT_TOOLS = [

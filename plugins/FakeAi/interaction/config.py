@@ -23,9 +23,12 @@ class InteractionConfig:
     dialog_max_rounds: int = 2
     # 被明确要求闭嘴后的静默时长（秒），期间只有 @ 能触发
     silence_sec: float = 600.0
-    # 发言频率上限：10 分钟内最多几条、1 小时内最多几条
+    # 发言频率上限：10 分钟内最多几条、1 小时内最多几条（按群）
     reply_per_10min: int = 3
     reply_per_hour: int = 15
+    # 单个人在同一个群里的发言上限：1 小时 / 1 天；0 = 不限
+    user_reply_per_hour: int = 3
+    user_reply_per_day: int = 10
 
     aliases: List[str] = field(default_factory=lambda: ["蓝晴"])
     bot_qq: str = "1512130053"
