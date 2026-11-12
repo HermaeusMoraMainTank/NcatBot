@@ -4,6 +4,7 @@ import base64
 import json
 import os
 import time
+import uuid
 from io import BytesIO
 from pathlib import Path
 from typing import Any, List, Optional, Tuple
@@ -33,33 +34,9 @@ def _load_secret(json_key: str, env_key: str) -> str:
         return ""
 
 
-# NVIDIA API 配置（保留兼容，仅旧链路使用）
-NVIDIA_API_URL = "https://integrate.api.nvidia.com/v1"
-NVIDIA_API_KEY = _load_secret("nvidia_api_key", "NVIDIA_API_KEY")
-
-# DeepSeek 官方 API
+# DeepSeek 官方 API（搜索/余额等工具接口固定走官方，不受对话供应商影响）
 DEEPSEEK_API_URL = "https://api.deepseek.com"
 DEEPSEEK_API_KEY = _load_secret("deepseek_api_key", "DEEPSEEK_API_KEY")
-
-# 按能力拆分的 Key：平台侧可按 Key 单独查看用量
-DEEPSEEK_CHAT_KEY = (
-    _load_secret("deepseek_chat_key", "DEEPSEEK_CHAT_KEY") or DEEPSEEK_API_KEY
-)
-DEEPSEEK_VISION_KEY = (
-    _load_secret("deepseek_vision_key", "DEEPSEEK_VISION_KEY") or DEEPSEEK_CHAT_KEY
-)
-DEEPSEEK_JUDGE_KEY = (
-    _load_secret("deepseek_judge_key", "DEEPSEEK_JUDGE_KEY") or DEEPSEEK_CHAT_KEY
-)
-DEEPSEEK_SEARCH_KEY = (
-    _load_secret("deepseek_search_key", "DEEPSEEK_SEARCH_KEY") or DEEPSEEK_CHAT_KEY
-)
-DEEPSEEK_MEMORY_KEY = (
-    _load_secret("deepseek_memory_key", "DEEPSEEK_MEMORY_KEY") or DEEPSEEK_CHAT_KEY
-)
-DEEPSEEK_PRO_KEY = (
-    _load_secret("deepseek_pro_key", "DEEPSEEK_PRO_KEY") or DEEPSEEK_CHAT_KEY
-)
 
 # MiMo Token Plan API 配置（OpenAI 兼容接口）
 MIMO_API_URL = "https://token-plan-cn.xiaomimimo.com/v1"
@@ -71,38 +48,221 @@ MIMO_TTS_API_URL = MIMO_API_URL
 MIMO_TTS_API_KEY = MIMO_API_KEY
 MIMO_TTS_MODEL = "mimo-v2.5-tts"
 
-# DeepSeek 官方模型
+# DeepSeek 官方模型（保持兼容；实际模型由当前供应商决定）
 DEEPSEEK_CHAT_MODEL = "deepseek-flash"
 DEEPSEEK_PRO_MODEL = "deepseek-v4-pro"
 VISION_MODEL = "deepseek-flash"
 
-# 文本对话（NVIDIA NIM OpenAI 兼容）：厂商前缀 + 模型名（旧链路保留）
-CHAT_MODEL = "minimaxai/minimax-m2.7"
+# 对话供应商预设：FakeAi 的 ai_provider 配置在这里选一个。
+# 所有 preset 都走 OpenAI 兼容接口；搜索/余额仍固定用 DeepSeek 官方。
+PROVIDER_PRESETS: dict[str, dict] = {
+    "ds_official": {
+        "label": "DeepSeek 官方 · deepseek-flash",
+        "base_url": "https://api.deepseek.com",
+        "secret": "deepseek_api_key",
+        "env": "DEEPSEEK_API_KEY",
+        "chat_model": "deepseek-flash",
+        "pro_model": "deepseek-v4-pro",
+        "vision_model": "deepseek-flash",
+        "supports_thinking": True,
+    },
+    "ocgo_gemini": {
+        "label": "OpenCode Go · Gemini 4 Argon",
+        "base_url": "https://opencode.ai/inference/go/openai/v1",
+        "secret": "opencode_api_key",
+        "env": "OPENCODE_API_KEY",
+        "chat_model": "gemini-4-argon",
+        "pro_model": "gemini-4-argon",
+        "vision_model": "deepseek-flash",
+        "vision_provider": "ds_official",
+        "supports_thinking": False,
+        "headers": {"User-Agent": "NcatBot/5.0"},
+        "session_header": True,
+    },
+    "ocgo_ds_flash": {
+        "label": "OpenCode Go · DeepSeek V4.1 Flash",
+        "base_url": "https://opencode.ai/inference/go/openai/v1",
+        "secret": "opencode_api_key",
+        "env": "OPENCODE_API_KEY",
+        "chat_model": "deepseek-v4.1-flash",
+        "pro_model": "deepseek-v4.1-flash",
+        "vision_model": "deepseek-flash",
+        "vision_provider": "ds_official",
+        "supports_thinking": False,
+        "headers": {"User-Agent": "NcatBot/5.0"},
+        "session_header": True,
+    },
+    "ocgo_ds_pro": {
+        "label": "OpenCode Go · DeepSeek V4 Pro",
+        "base_url": "https://opencode.ai/inference/go/openai/v1",
+        "secret": "opencode_api_key",
+        "env": "OPENCODE_API_KEY",
+        "chat_model": "deepseek-v4-pro",
+        "pro_model": "deepseek-v4-pro",
+        "vision_model": "deepseek-flash",
+        "vision_provider": "ds_official",
+        "supports_thinking": False,
+        "headers": {"User-Agent": "NcatBot/5.0"},
+        "session_header": True,
+    },
+    "ocgo_glm": {
+        "label": "OpenCode Go · GLM-5.3",
+        "base_url": "https://opencode.ai/inference/go/openai/v1",
+        "secret": "opencode_api_key",
+        "env": "OPENCODE_API_KEY",
+        "chat_model": "glm-5.3",
+        "pro_model": "glm-5.3",
+        "vision_model": "deepseek-flash",
+        "vision_provider": "ds_official",
+        "supports_thinking": False,
+        "headers": {"User-Agent": "NcatBot/5.0"},
+        "session_header": True,
+    },
+    "ocgo_kimi": {
+        "label": "OpenCode Go · Kimi K3",
+        "base_url": "https://opencode.ai/inference/go/openai/v1",
+        "secret": "opencode_api_key",
+        "env": "OPENCODE_API_KEY",
+        "chat_model": "kimi-k3",
+        "pro_model": "kimi-k3",
+        "vision_model": "deepseek-flash",
+        "vision_provider": "ds_official",
+        "supports_thinking": False,
+        "headers": {"User-Agent": "NcatBot/5.0"},
+        "session_header": True,
+    },
+    # 按量付费（Console 余额）：比 Go 订阅里的 Gemini 4 Argon 便宜很多
+    "ocpay_gemini_lite": {
+        "label": "OpenCode 按量 · Gemini 3.5 Flash Lite",
+        "base_url": "https://opencode.ai/inference/openai/v1",
+        "secret": "opencode_api_key",
+        "env": "OPENCODE_API_KEY",
+        "chat_model": "gemini-3.5-flash-lite",
+        "pro_model": "gemini-3.5-flash-lite",
+        "vision_model": "gemini-3.5-flash-lite",
+        "supports_thinking": False,
+        "headers": {"User-Agent": "NcatBot/5.0"},
+        "session_header": True,
+    },
+    "ocpay_gemini_flash": {
+        "label": "OpenCode 按量 · Gemini 3.8 Flash",
+        "base_url": "https://opencode.ai/inference/openai/v1",
+        "secret": "opencode_api_key",
+        "env": "OPENCODE_API_KEY",
+        "chat_model": "gemini-3.8-flash",
+        "pro_model": "gemini-3.8-flash",
+        "vision_model": "gemini-3.8-flash",
+        "supports_thinking": False,
+        "headers": {"User-Agent": "NcatBot/5.0"},
+        "session_header": True,
+    },
+}
 
-_CAPABILITY_KEYS = {
-    "chat": DEEPSEEK_CHAT_KEY,
-    "vision": DEEPSEEK_VISION_KEY,
-    "judge": DEEPSEEK_JUDGE_KEY,
-    "search": DEEPSEEK_SEARCH_KEY,
-    "memory": DEEPSEEK_MEMORY_KEY,
-    "pro": DEEPSEEK_PRO_KEY,
-}
-_CAPABILITY_MODELS = {
-    "chat": DEEPSEEK_CHAT_MODEL,
-    "vision": DEEPSEEK_CHAT_MODEL,
-    "judge": DEEPSEEK_CHAT_MODEL,
-    "search": DEEPSEEK_CHAT_MODEL,
-    "memory": DEEPSEEK_CHAT_MODEL,
-    "pro": DEEPSEEK_PRO_MODEL,
-}
+DEFAULT_PROVIDER = "ds_official"
+_active_provider = DEFAULT_PROVIDER
+# Go 要求客户端带稳定的会话头；进程内保持一个即可
+_opencode_session = f"ncatbot-{uuid.uuid4().hex[:16]}"
+_secret_cache: dict[tuple[str, str], str] = {}
+
+
+def _provider_secret(spec: dict) -> str:
+    key = (str(spec.get("secret") or ""), str(spec.get("env") or ""))
+    if key not in _secret_cache:
+        _secret_cache[key] = _load_secret(key[0], key[1])
+    return _secret_cache[key]
+
+
+def active_provider_name() -> str:
+    return _active_provider
+
+
+def active_provider() -> dict:
+    return PROVIDER_PRESETS.get(_active_provider, PROVIDER_PRESETS[DEFAULT_PROVIDER])
+
+
+def set_provider(name: str) -> str:
+    """切换对话供应商；未知名字回退到 DeepSeek 官方。"""
+    global _active_provider
+    candidate = str(name or "").strip()
+    if candidate not in PROVIDER_PRESETS:
+        _log.warning("[AI] 未知供应商 %s，回退 %s", name, DEFAULT_PROVIDER)
+        candidate = DEFAULT_PROVIDER
+    _active_provider = candidate
+    # 换了供应商，识图能力要重新探测
+    try:
+        AiUtil._VISION_CAPABILITY = None
+        AiUtil._VISION_PROBED_AT = 0.0
+    except Exception:
+        pass
+    spec = active_provider()
+    if not _provider_secret(spec):
+        _log.warning("[AI] 供应商 %s 缺少 key（%s）", candidate, spec.get("secret"))
+    _log.info("[AI] 对话供应商：%s（%s）", spec.get("label"), candidate)
+    return candidate
+
+
+def provider_label(name: str = "") -> str:
+    spec = PROVIDER_PRESETS.get(name or _active_provider)
+    return str((spec or {}).get("label") or "")
+
+
+def _provider_client_kwargs(spec: dict, timeout: float | None) -> dict:
+    kwargs = {
+        "api_key": _provider_secret(spec),
+        "base_url": spec["base_url"],
+        "max_retries": 0,
+        "timeout": timeout,
+    }
+    headers = dict(spec.get("headers") or {})
+    if spec.get("session_header"):
+        headers["x-opencode-session"] = _opencode_session
+    if headers:
+        kwargs["default_headers"] = headers
+    return kwargs
+
+
+def _provider_thinking_body(spec: dict, thinking: bool) -> dict:
+    if not spec.get("supports_thinking"):
+        return {}
+    return {"thinking": {"type": "enabled" if thinking else "disabled"}}
 
 
 def _capability_key(capability: str) -> str:
-    return _CAPABILITY_KEYS.get(capability, DEEPSEEK_CHAT_KEY)
+    """兼容旧调用：搜索/工具固定官方 key，其余用当前供应商。"""
+    if capability in ("search", "tools"):
+        return DEEPSEEK_API_KEY
+    return _provider_secret(active_provider())
 
 
-def _capability_model(capability: str, override: Optional[str] = None) -> str:
-    return override or _CAPABILITY_MODELS.get(capability, DEEPSEEK_CHAT_MODEL)
+def _resolve_spec(provider: str | None = None) -> dict:
+    if provider:
+        return PROVIDER_PRESETS.get(provider, PROVIDER_PRESETS[DEFAULT_PROVIDER])
+    return active_provider()
+
+
+def _is_auth_error(exc: Exception) -> bool:
+    status = getattr(exc, "status_code", None)
+    text = str(exc).lower()
+    return (
+        status == 401
+        or "api_key_expired" in text
+        or "authentication" in text
+    )
+
+
+def _capability_model(
+    capability: str,
+    override: Optional[str] = None,
+    spec: Optional[dict] = None,
+) -> str:
+    if override:
+        return override
+    spec = spec or active_provider()
+    if capability == "pro":
+        return str(spec.get("pro_model") or spec["chat_model"])
+    if capability == "vision":
+        return str(spec.get("vision_model") or spec["chat_model"])
+    return str(spec["chat_model"])
 
 
 # 搜索/抓取按次计费，重复查询走 TTL 缓存，避免重复花钱
@@ -262,6 +422,26 @@ class AiUtil:
         "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8"
         "z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
     )
+
+    @staticmethod
+    def set_provider(name: str) -> str:
+        """切换对话供应商（配置项 ai_provider）。"""
+        return set_provider(name)
+
+    @staticmethod
+    def current_provider() -> str:
+        return active_provider_name()
+
+    @staticmethod
+    def current_model(capability: str = "chat") -> str:
+        return _capability_model(capability)
+
+    @staticmethod
+    def provider_options() -> list[dict]:
+        return [
+            {"value": key, "label": spec["label"]}
+            for key, spec in PROVIDER_PRESETS.items()
+        ]
 
     @staticmethod
     async def vision_available(force: bool = False) -> bool:
@@ -459,7 +639,7 @@ class AiUtil:
                 description = result["content"].strip()
                 _log.info(f"[Vision] 图片描述: {description}")
                 result["content"] = description
-                result["model"] = VISION_MODEL
+                result["model"] = _capability_model("vision")
                 return result
             return None
 
@@ -479,27 +659,26 @@ class AiUtil:
         capability: str = "chat",
         model: str | None = None,
         thinking: bool = False,
+        provider: str | None = None,
+        _fallback: bool = False,
     ) -> Optional[dict]:
-        """文本对话：按能力选择 Key/模型，默认关闭思考模式。"""
-        api_key = _capability_key(capability)
-        model = _capability_model(capability, model)
+        """文本对话：按当前供应商选择模型，默认关闭思考模式。"""
+        spec = _resolve_spec(provider)
+        name = str(spec.get("label") or active_provider_name())
+        url = str(spec["base_url"])
+        requested_model = model
+        model = _capability_model(capability, model, spec)
         if temperature is None:
             temperature = 0.9 if capability == "chat" else 0.3
-        _log.info("[Chat] capability=%s model=%s", capability, model)
+        _log.info("[Chat] provider=%s capability=%s model=%s", active_provider_name(), capability, model)
 
-        provider = ("DeepSeek", DEEPSEEK_API_URL, api_key, model)
-        providers = [provider] * max(1, retries)
+        attempts = max(1, retries)
         delay = 2
 
-        for attempt, (name, url, api_key, model) in enumerate(providers, start=1):
+        for attempt in range(1, attempts + 1):
             try:
                 _log.info(f"[Chat] 第 {attempt} 次尝试，使用 {name} ({model})")
-                client_kwargs = {
-                    "api_key": api_key,
-                    "base_url": url,
-                    "max_retries": 0,
-                }
-                client_kwargs["timeout"] = request_timeout
+                client_kwargs = _provider_client_kwargs(spec, request_timeout)
                 async with AsyncOpenAI(**client_kwargs) as client:
                     completion_kwargs = {
                         "model": model,
@@ -508,12 +687,10 @@ class AiUtil:
                             {"role": "user", "content": keyword},
                         ],
                         "stream": False,
-                        "extra_body": {
-                            "thinking": {
-                                "type": "enabled" if thinking else "disabled"
-                            }
-                        },
                     }
+                    thinking_body = _provider_thinking_body(spec, thinking)
+                    if thinking_body:
+                        completion_kwargs["extra_body"] = thinking_body
                     if not thinking:
                         completion_kwargs["temperature"] = temperature
                     if max_tokens is not None:
@@ -529,16 +706,39 @@ class AiUtil:
                 return result
 
             except Exception as e:
+                if (
+                    not _fallback
+                    and provider is None
+                    and active_provider_name() != "ds_official"
+                    and _is_auth_error(e)
+                ):
+                    _log.warning(
+                        "[Chat] %s 鉴权失败，临时回退 DeepSeek 官方",
+                        active_provider_name(),
+                    )
+                    return await AiUtil.search_deepseek(
+                        keyword,
+                        prompt,
+                        max_tokens,
+                        temperature,
+                        request_timeout=request_timeout,
+                        retries=retries,
+                        capability=capability,
+                        model=requested_model,
+                        thinking=thinking,
+                        provider="ds_official",
+                        _fallback=True,
+                    )
                 cause = e.__cause__ or e.__context__
                 detail = f"{type(e).__name__}: {e}"
                 if cause is not None and cause is not e:
                     detail += f"; cause={type(cause).__name__}: {cause}"
                 _log.error(f"[Chat] {name} 请求失败（{url}）: {detail}")
-                if attempt < len(providers):
+                if attempt < attempts:
                     _log.info(f"[Chat] {name} 将在 {delay} 秒后进行第 {attempt + 1} 次尝试...")
                     await asyncio.sleep(delay)
 
-        _log.error(f"[Chat] {len(providers)} 次尝试均已失败，返回 None")
+        _log.error(f"[Chat] {attempts} 次尝试均已失败，返回 None")
         return None
 
     @staticmethod
@@ -552,24 +752,28 @@ class AiUtil:
         temperature: float | None = None,
         max_tokens: int | None = None,
         request_timeout: float | None = 90,
+        provider: str | None = None,
+        _fallback: bool = False,
     ) -> Optional[dict]:
         """OpenAI 兼容 Chat Completions，支持 tools / tool_calls。
 
         返回 content、tool_calls、reasoning_content、usage、model。
         注意：思考模式 + tools 时，多轮请求必须把 reasoning_content 一并回传。
+        供应商鉴权失败时，自动用 DeepSeek 官方兜底一次。
         """
-        api_key = _capability_key(capability)
-        model = _capability_model(capability, model)
+        spec = _resolve_spec(provider)
+        requested_model = model
+        model = _capability_model(capability, model, spec)
         if temperature is None:
             temperature = 0.9 if capability == "chat" else 0.3
         payload = {
             "model": model,
             "messages": messages,
             "stream": False,
-            "extra_body": {
-                "thinking": {"type": "enabled" if thinking else "disabled"}
-            },
         }
+        thinking_body = _provider_thinking_body(spec, thinking)
+        if thinking_body:
+            payload["extra_body"] = thinking_body
         if tools:
             payload["tools"] = tools
             payload["tool_choice"] = "auto"
@@ -580,13 +784,32 @@ class AiUtil:
 
         try:
             async with AsyncOpenAI(
-                api_key=api_key,
-                base_url=DEEPSEEK_API_URL,
-                max_retries=0,
-                timeout=request_timeout,
+                **_provider_client_kwargs(spec, request_timeout)
             ) as client:
                 completion = await client.chat.completions.create(**payload)
         except Exception as e:
+            if (
+                not _fallback
+                and provider is None
+                and active_provider_name() != "ds_official"
+                and _is_auth_error(e)
+            ):
+                _log.warning(
+                    "[Chat] %s 鉴权失败，临时回退 DeepSeek 官方",
+                    active_provider_name(),
+                )
+                return await AiUtil.chat_completion(
+                    messages,
+                    tools=tools,
+                    capability=capability,
+                    model=requested_model,
+                    thinking=thinking,
+                    temperature=temperature,
+                    max_tokens=max_tokens,
+                    request_timeout=request_timeout,
+                    provider="ds_official",
+                    _fallback=True,
+                )
             _log.error("[Chat] chat_completion 失败: %s: %s", type(e).__name__, e)
             return None
 
@@ -626,7 +849,7 @@ class AiUtil:
     async def get_deepseek_balance() -> dict:
         """查询 DeepSeek API 余额"""
         url = f"{DEEPSEEK_API_URL}/user/balance"
-        api_key = _capability_key("chat")
+        api_key = DEEPSEEK_API_KEY
 
         headers = {"Accept": "application/json", "Authorization": f"Bearer {api_key}"}
 
@@ -682,8 +905,10 @@ class AiUtil:
         *,
         capability: str = "vision",
         model: str | None = None,
+        provider: str | None = None,
+        _fallback: bool = False,
     ) -> Optional[dict]:
-        """DeepSeek 多模态调用（deepseek-flash 原生图像理解）。
+        """OpenAI 兼容多模态调用（当前供应商的 vision 模型）。
 
         Args:
             prompt: 用户提问文本
@@ -698,9 +923,18 @@ class AiUtil:
         Returns:
             包含 content 和 usage 的字典，或 None
         """
-        api_key = _capability_key(capability)
-        model = _capability_model(capability, model)
-        _log.info("[Vision] 调用 DeepSeek 多模态模型: %s", model)
+        spec = _resolve_spec(provider)
+        # Go 订阅里的 DeepSeek/GLM/Kimi 不支持识图，Gemini 在当前网络下会超时；
+        # 识图统一回落到 DeepSeek 官方，避免每次看图都等 60 秒。
+        if capability == "vision" and spec.get("vision_provider"):
+            spec = _resolve_spec(str(spec["vision_provider"]))
+        requested_model = model
+        model = _capability_model(capability, model, spec)
+        _log.info(
+            "[Vision] 调用多模态模型: %s（provider=%s）",
+            model,
+            spec.get("label") or active_provider_name(),
+        )
 
         content_parts = [{"type": "text", "text": prompt}]
 
@@ -722,20 +956,19 @@ class AiUtil:
         messages.append({"role": "user", "content": content_parts})
 
         try:
-            async with AsyncOpenAI(
-                api_key=api_key,
-                base_url=DEEPSEEK_API_URL,
-                timeout=60.0,
-            ) as client:
-                completion = await client.chat.completions.create(
-                    model=model,
-                    messages=messages,
-                    max_tokens=max_tokens,
-                    temperature=temperature,
-                    stream=False,
-                    timeout=45.0,
-                    extra_body={"thinking": {"type": "disabled"}},
-                )
+            async with AsyncOpenAI(**_provider_client_kwargs(spec, 60.0)) as client:
+                payload = {
+                    "model": model,
+                    "messages": messages,
+                    "max_tokens": max_tokens,
+                    "temperature": temperature,
+                    "stream": False,
+                    "timeout": 45.0,
+                }
+                thinking_body = _provider_thinking_body(spec, False)
+                if thinking_body:
+                    payload["extra_body"] = thinking_body
+                completion = await client.chat.completions.create(**payload)
 
             result = _completion_to_result(completion, model)
             _log.info(f"[Vision] 响应内容: {result['content'][:100]}...")
@@ -747,6 +980,28 @@ class AiUtil:
             return None
 
         except Exception as e:
+            if (
+                not _fallback
+                and provider is None
+                and active_provider_name() != "ds_official"
+                and _is_auth_error(e)
+            ):
+                _log.warning(
+                    "[Vision] %s 鉴权失败，临时回退 DeepSeek 官方",
+                    active_provider_name(),
+                )
+                return await AiUtil.chat_with_vision(
+                    prompt,
+                    image_urls,
+                    image_base64_list,
+                    system_prompt,
+                    max_tokens,
+                    temperature,
+                    capability=capability,
+                    model=requested_model,
+                    provider="ds_official",
+                    _fallback=True,
+                )
             _log.error(f"[Vision] 异常: {e}")
             return None
 
