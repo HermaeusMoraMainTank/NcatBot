@@ -11,6 +11,7 @@
 | `paopao-whale-girl` | 55 | CC-BY-NC-SA-4.0 | 同上，泡泡表情包（已压缩到 640px） |
 | `juxueli` | 38 | 仅限非商业使用 | [juxueli-meme-pack](https://github.com/anka-afk/juxueli-meme-pack) 橘雪莉表情包（10 类语义） |
 | `sherry-express` | 9 | 非商业同人素材 | [Tachibana-Sherry-Generator](https://github.com/qianlandamanbo/Tachibana-Sherry-Generator) 立绘表情 |
+| `kipfel` | 406 | fan-collected-noncommercial | [B 站文集 rl1063625](https://www.bilibili.com/read/readlist/rl1063625) kipfel 猫猫表情包（1~20 期，名字取自作者标注） |
 
 ## 情绪桶
 
@@ -50,3 +51,15 @@
 ```
 
 没有 `pack.json` 也能用，只是模型只能靠文件名猜，选图会不准。
+
+## 从 B 站文集导入
+
+`kipfel` 这套用脚本生成，作者更新新一期后重跑即可（已下过的图靠 `_sources.json` 去重，不会重复入库）：
+
+```bash
+python scripts/import_bilibili_stickers.py --readlist 1063625 --from 21 --to 25 --library kipfel
+```
+
+- 图片名取图文正文里作者标注的 `pic.comment`，同名不同图会成为 `猫猫摇`／`猫猫摇·2` 这样的变体
+- 原图常有 1080p 和 8MB 动图，入库前会缩到 512px 静态 / 320px 动图（长动图抽到 48 帧内）
+- 情绪桶和检索词由 `LEXICON` 里的词表按名字判定，改完词表用 `--rebuild-meta` 重算 `pack.json`，不用重新下载

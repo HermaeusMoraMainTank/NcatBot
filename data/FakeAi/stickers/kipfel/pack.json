@@ -1,0 +1,2045 @@
+{
+ "id": "kipfel",
+ "name": "kipfel 猫猫表情包",
+ "version": "1.0.0",
+ "license": "fan-collected-noncommercial",
+ "source": "https://www.bilibili.com/read/readlist/rl1063625",
+ "note": "图片由文集作者标注命名，原作模型 kipfel / キプフェル by かめ山（Mochiyama Kingyo）",
+ "images": {
+  "2无聊": {
+   "mood": "daily",
+   "caption": "2无聊",
+   "keywords": "2无聊"
+  },
+  "@1nupool": {
+   "mood": "daily",
+   "caption": "@1nupool",
+   "keywords": "@1nupool"
+  },
+  "@DarkCatjiafei": {
+   "mood": "daily",
+   "caption": "@DarkCatjiafei",
+   "keywords": "@DarkCatjiafei"
+  },
+  "@hapipome_vrc": {
+   "mood": "daily",
+   "caption": "@hapipome_vrc",
+   "keywords": "@hapipome_vrc"
+  },
+  "ai猫猫": {
+   "mood": "daily",
+   "caption": "ai猫猫",
+   "keywords": "ai猫猫"
+  },
+  "eee（眼睛 流汗）": {
+   "mood": "confused",
+   "caption": "冒汗",
+   "keywords": "eee（眼睛 流汗） 流汗 无语 尴尬"
+  },
+  "emmm（笑 -看）": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "emmm（笑 -看） 笑 微笑 乐 看 围着看"
+  },
+  "kipfel叠叠乐": {
+   "mood": "daily",
+   "caption": "kipfel叠叠乐",
+   "keywords": "kipfel叠叠乐"
+  },
+  "li（流汗）": {
+   "mood": "confused",
+   "caption": "冒汗",
+   "keywords": "li（流汗） 流汗 无语 尴尬"
+  },
+  "oic发的": {
+   "mood": "daily",
+   "caption": "oic发的",
+   "keywords": "oic发的"
+  },
+  "一堆猫猫": {
+   "mood": "daily",
+   "caption": "一堆猫猫",
+   "keywords": "一堆猫猫"
+  },
+  "一直戳戳": {
+   "mood": "daily",
+   "caption": "伸手戳",
+   "keywords": "一直戳戳 戳 点 碰"
+  },
+  "不屑（盯-看）": {
+   "mood": "angry",
+   "caption": "不屑",
+   "keywords": "不屑（盯-看） 不屑 鄙视 看不起 看 围着看 盯 看着"
+  },
+  "不开心": {
+   "mood": "angry",
+   "caption": "开心，不高兴",
+   "keywords": "不开心 开心 高兴 愉快 生气 摆脸"
+  },
+  "不开心（生气）": {
+   "mood": "angry",
+   "caption": "开心，生气，不高兴",
+   "keywords": "不开心（生气） 开心 高兴 愉快 生气 怒 不爽 火大 不开心 摆脸"
+  },
+  "不想活了": {
+   "mood": "sad",
+   "caption": "摆烂",
+   "keywords": "不想活了 摆烂 累 想死 崩溃"
+  },
+  "不理解（啥猫）": {
+   "mood": "daily",
+   "caption": "不理解（啥猫）",
+   "keywords": "不理解（啥猫）"
+  },
+  "不配合你": {
+   "mood": "daily",
+   "caption": "不配合你",
+   "keywords": "不配合你"
+  },
+  "不高兴": {
+   "mood": "angry",
+   "caption": "不高兴",
+   "keywords": "不高兴 生气 摆脸"
+  },
+  "中国原则": {
+   "mood": "daily",
+   "caption": "中国原则",
+   "keywords": "中国原则"
+  },
+  "举手": {
+   "mood": "daily",
+   "caption": "举手",
+   "keywords": "举手 举 我我我"
+  },
+  "举手转圈": {
+   "mood": "happy",
+   "caption": "转圈，举手",
+   "keywords": "举手转圈 转圈 旋转 举手 举 我我我"
+  },
+  "五百万美元": {
+   "mood": "daily",
+   "caption": "五百万美元",
+   "keywords": "五百万美元"
+  },
+  "什么": {
+   "mood": "daily",
+   "caption": "什么",
+   "keywords": "什么"
+  },
+  "什么玩意（流汗）": {
+   "mood": "confused",
+   "caption": "冒汗",
+   "keywords": "什么玩意（流汗） 流汗 无语 尴尬"
+  },
+  "伸手向镜头": {
+   "mood": "daily",
+   "caption": "伸手",
+   "keywords": "伸手向镜头 伸手 手 摸"
+  },
+  "何意义": {
+   "mood": "daily",
+   "caption": "何意义",
+   "keywords": "何意义"
+  },
+  "何意味（震惊）": {
+   "mood": "confused",
+   "caption": "震惊",
+   "keywords": "何意味（震惊） 震惊 吃惊 惊呆"
+  },
+  "你不诚哦-指你": {
+   "mood": "daily",
+   "caption": "你不诚哦-指你",
+   "keywords": "你不诚哦-指你"
+  },
+  "做喵💊讲良心": {
+   "mood": "daily",
+   "caption": "做喵💊讲良心",
+   "keywords": "做喵💊讲良心"
+  },
+  "偷看 美图": {
+   "mood": "daily",
+   "caption": "好看的一张图",
+   "keywords": "偷看 美图 美图 好看 画面 看 围着看 偷看 瞄 探头"
+  },
+  "偷看（汗 害怕）": {
+   "mood": "confused",
+   "caption": "冒汗，害怕",
+   "keywords": "偷看（汗 害怕） 流汗 无语 尴尬 害怕 慌 惊 看 围着看 偷看 瞄 探头"
+  },
+  "傻笑": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "傻笑 笑 微笑 乐"
+  },
+  "僵尸跳，舔舔": {
+   "mood": "happy",
+   "caption": "跳起来",
+   "keywords": "僵尸跳，舔舔 跳 蹦 兴奋"
+  },
+  "全方位查看": {
+   "mood": "daily",
+   "caption": "全方位查看",
+   "keywords": "全方位查看 看 围着看"
+  },
+  "全自动家庭闯祸机": {
+   "mood": "daily",
+   "caption": "全自动家庭闯祸机",
+   "keywords": "全自动家庭闯祸机"
+  },
+  "冒出": {
+   "mood": "daily",
+   "caption": "冒出来",
+   "keywords": "冒出 探头 出现"
+  },
+  "冒出来": {
+   "mood": "daily",
+   "caption": "冒出来",
+   "keywords": "冒出来 冒出 探头 出现"
+  },
+  "冒出（偷）": {
+   "mood": "daily",
+   "caption": "冒出来",
+   "keywords": "冒出（偷） 冒出 探头 出现"
+  },
+  "凑脸": {
+   "mood": "daily",
+   "caption": "凑脸",
+   "keywords": "凑脸"
+  },
+  "凝视": {
+   "mood": "daily",
+   "caption": "凝视",
+   "keywords": "凝视 盯着"
+  },
+  "凝视（呆 看）": {
+   "mood": "confused",
+   "caption": "发呆",
+   "keywords": "凝视（呆 看） 呆 发愣 放空 看 围着看 凝视 盯着"
+  },
+  "动态美图": {
+   "mood": "daily",
+   "caption": "好看的一张图",
+   "keywords": "动态美图 美图 好看 画面"
+  },
+  "单眼笑": {
+   "mood": "happy",
+   "caption": "在笑，单眼眨眼",
+   "keywords": "单眼笑 笑 微笑 乐 单眼 眨眼"
+  },
+  "单眼笑·2": {
+   "mood": "happy",
+   "caption": "在笑，单眼眨眼",
+   "keywords": "单眼笑 笑 微笑 乐 单眼 眨眼"
+  },
+  "单眼（比耶）": {
+   "mood": "happy",
+   "caption": "比耶，单眼眨眼",
+   "keywords": "单眼（比耶） 比耶 剪刀手 耶 单眼 眨眼"
+  },
+  "卖掉了": {
+   "mood": "daily",
+   "caption": "卖掉了",
+   "keywords": "卖掉了"
+  },
+  "厌恶-震惊": {
+   "mood": "angry",
+   "caption": "厌恶，震惊",
+   "keywords": "厌恶-震惊 厌恶 嫌弃 恶心 震惊 吃惊 惊呆"
+  },
+  "叉腰": {
+   "mood": "happy",
+   "caption": "叉腰",
+   "keywords": "叉腰 神气 得意"
+  },
+  "叉腰·2": {
+   "mood": "happy",
+   "caption": "叉腰",
+   "keywords": "叉腰 神气 得意"
+  },
+  "叉腰（开心）": {
+   "mood": "happy",
+   "caption": "开心，叉腰",
+   "keywords": "叉腰（开心） 开心 高兴 愉快 叉腰 神气 得意"
+  },
+  "双重猫格": {
+   "mood": "daily",
+   "caption": "双重猫格",
+   "keywords": "双重猫格"
+  },
+  "可乐 嘣": {
+   "mood": "daily",
+   "caption": "可乐 嘣",
+   "keywords": "可乐 嘣"
+  },
+  "可乐摇": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "可乐摇 摇 摇摆 晃"
+  },
+  "可爱": {
+   "mood": "daily",
+   "caption": "可爱",
+   "keywords": "可爱"
+  },
+  "可爱·2": {
+   "mood": "daily",
+   "caption": "可爱",
+   "keywords": "可爱"
+  },
+  "可爱猫猫": {
+   "mood": "daily",
+   "caption": "可爱猫猫",
+   "keywords": "可爱猫猫"
+  },
+  "叼笔": {
+   "mood": "daily",
+   "caption": "叼着东西",
+   "keywords": "叼笔 叼 叼着 烟"
+  },
+  "吃 开心 蹦": {
+   "mood": "happy",
+   "caption": "开心，蹦蹦跳跳，在吃",
+   "keywords": "吃 开心 蹦 开心 高兴 愉快 蹦 跳 兴奋 吃 吃瓜 干饭"
+  },
+  "吃瓜（比耶）": {
+   "mood": "happy",
+   "caption": "比耶，在吃",
+   "keywords": "吃瓜（比耶） 比耶 剪刀手 耶 吃 吃瓜 干饭"
+  },
+  "吃甜甜圈（Q）": {
+   "mood": "daily",
+   "caption": "在吃，吃甜甜圈",
+   "keywords": "吃甜甜圈（Q） 吃 吃瓜 干饭 甜甜圈 甜点"
+  },
+  "吃的": {
+   "mood": "daily",
+   "caption": "在吃",
+   "keywords": "吃的 吃 吃瓜 干饭"
+  },
+  "吃糖果": {
+   "mood": "daily",
+   "caption": "在吃",
+   "keywords": "吃糖果 吃 吃瓜 干饭"
+  },
+  "吃红薯": {
+   "mood": "daily",
+   "caption": "在吃",
+   "keywords": "吃红薯 吃 吃瓜 干饭"
+  },
+  "吃饱了": {
+   "mood": "daily",
+   "caption": "在吃",
+   "keywords": "吃饱了 吃 吃瓜 干饭"
+  },
+  "吃饼干": {
+   "mood": "daily",
+   "caption": "在吃",
+   "keywords": "吃饼干 吃 吃瓜 干饭"
+  },
+  "吃（开心）": {
+   "mood": "happy",
+   "caption": "开心，在吃",
+   "keywords": "吃（开心） 开心 高兴 愉快 吃 吃瓜 干饭"
+  },
+  "吐舌头": {
+   "mood": "daily",
+   "caption": "吐舌头",
+   "keywords": "吐舌头"
+  },
+  "吐舌头·2": {
+   "mood": "daily",
+   "caption": "吐舌头",
+   "keywords": "吐舌头"
+  },
+  "吓你": {
+   "mood": "daily",
+   "caption": "吓你",
+   "keywords": "吓你"
+  },
+  "吹起腮帮子看人": {
+   "mood": "daily",
+   "caption": "吹起腮帮子看人",
+   "keywords": "吹起腮帮子看人 看 围着看"
+  },
+  "呆看": {
+   "mood": "confused",
+   "caption": "发呆",
+   "keywords": "呆看 呆 发愣 放空 看 围着看"
+  },
+  "呜呜呜啊啊啊": {
+   "mood": "daily",
+   "caption": "呜呜呜啊啊啊",
+   "keywords": "呜呜呜啊啊啊"
+  },
+  "咀嚼": {
+   "mood": "daily",
+   "caption": "嚼东西",
+   "keywords": "咀嚼 吃 嚼"
+  },
+  "咬一口（开心）": {
+   "mood": "happy",
+   "caption": "开心，张嘴咬",
+   "keywords": "咬一口（开心） 开心 高兴 愉快 咬 撒娇 闹"
+  },
+  "咬尾巴": {
+   "mood": "happy",
+   "caption": "张嘴咬",
+   "keywords": "咬尾巴 咬 撒娇 闹"
+  },
+  "哇哇哇-张嘴": {
+   "mood": "daily",
+   "caption": "张嘴",
+   "keywords": "哇哇哇-张嘴 张嘴 说话"
+  },
+  "哇塞（大嘴）": {
+   "mood": "daily",
+   "caption": "哇塞（大嘴）",
+   "keywords": "哇塞（大嘴）"
+  },
+  "哈不了": {
+   "mood": "daily",
+   "caption": "哈不了",
+   "keywords": "哈不了"
+  },
+  "哈喽（单眼）": {
+   "mood": "happy",
+   "caption": "单眼眨眼",
+   "keywords": "哈喽（单眼） 单眼 眨眼"
+  },
+  "哈气": {
+   "mood": "angry",
+   "caption": "哈气",
+   "keywords": "哈气 凶 炸毛 警告"
+  },
+  "哈气·2": {
+   "mood": "angry",
+   "caption": "哈气",
+   "keywords": "哈气 凶 炸毛 警告"
+  },
+  "哈气方块猫": {
+   "mood": "angry",
+   "caption": "哈气",
+   "keywords": "哈气方块猫 哈气 凶 炸毛 警告"
+  },
+  "哈气爆炸": {
+   "mood": "angry",
+   "caption": "哈气",
+   "keywords": "哈气爆炸 哈气 凶 炸毛 警告"
+  },
+  "哈气（跑来跑去）": {
+   "mood": "angry",
+   "caption": "哈气",
+   "keywords": "哈气（跑来跑去） 哈气 凶 炸毛 警告"
+  },
+  "哔站玩酒精的乙醇": {
+   "mood": "daily",
+   "caption": "酒",
+   "keywords": "哔站玩酒精的乙醇 酒 喝 醉"
+  },
+  "哥哥我摔倒了": {
+   "mood": "daily",
+   "caption": "哥哥我摔倒了",
+   "keywords": "哥哥我摔倒了"
+  },
+  "哦豁-好奇-靠近-眼镜": {
+   "mood": "confused",
+   "caption": "好奇，凑近",
+   "keywords": "哦豁-好奇-靠近-眼镜 好奇 疑问 靠近 凑近 贴"
+  },
+  "哭": {
+   "mood": "sad",
+   "caption": "在哭",
+   "keywords": "哭 流泪 委屈 难过"
+  },
+  "哭哭": {
+   "mood": "sad",
+   "caption": "在哭",
+   "keywords": "哭哭 哭 流泪 委屈 难过"
+  },
+  "哭哭·2": {
+   "mood": "sad",
+   "caption": "在哭",
+   "keywords": "哭哭 哭 流泪 委屈 难过"
+  },
+  "哭哭·3": {
+   "mood": "sad",
+   "caption": "在哭",
+   "keywords": "哭哭 哭 流泪 委屈 难过"
+  },
+  "哭哭（美图）": {
+   "mood": "sad",
+   "caption": "在哭，好看的一张图",
+   "keywords": "哭哭（美图） 哭 流泪 委屈 难过 美图 好看 画面"
+  },
+  "哭哭，低头": {
+   "mood": "sad",
+   "caption": "在哭",
+   "keywords": "哭哭，低头 哭 流泪 委屈 难过"
+  },
+  "哭（流泪）": {
+   "mood": "sad",
+   "caption": "在哭，带泪",
+   "keywords": "哭（流泪） 哭 流泪 委屈 难过 泪"
+  },
+  "哭（转圈）": {
+   "mood": "sad",
+   "caption": "转圈，在哭",
+   "keywords": "哭（转圈） 转圈 旋转 哭 流泪 委屈 难过"
+  },
+  "唔": {
+   "mood": "daily",
+   "caption": "唔",
+   "keywords": "唔"
+  },
+  "啃包子": {
+   "mood": "daily",
+   "caption": "在啃",
+   "keywords": "啃包子 啃 吃 干饭"
+  },
+  "啃啃啃": {
+   "mood": "daily",
+   "caption": "在啃",
+   "keywords": "啃啃啃 啃 吃 干饭"
+  },
+  "啃龟龟": {
+   "mood": "daily",
+   "caption": "在啃",
+   "keywords": "啃龟龟 啃 吃 干饭"
+  },
+  "啥猫": {
+   "mood": "daily",
+   "caption": "啥猫",
+   "keywords": "啥猫"
+  },
+  "啥猫·2": {
+   "mood": "daily",
+   "caption": "啥猫",
+   "keywords": "啥猫"
+  },
+  "啥猫猫": {
+   "mood": "daily",
+   "caption": "啥猫猫",
+   "keywords": "啥猫猫"
+  },
+  "喜欢（爱心Q）": {
+   "mood": "happy",
+   "caption": "比心，表示喜欢",
+   "keywords": "喜欢（爱心Q） 爱心 喜欢 比心 中意"
+  },
+  "喝奶": {
+   "mood": "daily",
+   "caption": "在喝",
+   "keywords": "喝奶 喝 奶茶 茶"
+  },
+  "喝奶茶（Q）": {
+   "mood": "daily",
+   "caption": "在喝，喝茶，喝奶茶",
+   "keywords": "喝奶茶（Q） 喝 奶茶 茶 喝茶 悠闲 饮料"
+  },
+  "喝水": {
+   "mood": "daily",
+   "caption": "在喝",
+   "keywords": "喝水 喝 奶茶 茶"
+  },
+  "喝茶": {
+   "mood": "daily",
+   "caption": "在喝，喝茶",
+   "keywords": "喝茶 喝 奶茶 茶 悠闲"
+  },
+  "喝茶（眯眼）": {
+   "mood": "daily",
+   "caption": "在喝，喝茶",
+   "keywords": "喝茶（眯眼） 喝 奶茶 茶 喝茶 悠闲"
+  },
+  "嗯嗯（星星眼）": {
+   "mood": "happy",
+   "caption": "星星眼",
+   "keywords": "嗯嗯（星星眼） 星星眼 期待 崇拜"
+  },
+  "嘘": {
+   "mood": "daily",
+   "caption": "比嘘",
+   "keywords": "嘘 安静 小声"
+  },
+  "嘘·2": {
+   "mood": "daily",
+   "caption": "比嘘",
+   "keywords": "嘘 安静 小声"
+  },
+  "四面转头": {
+   "mood": "daily",
+   "caption": "转头",
+   "keywords": "四面转头 转头 回头"
+  },
+  "回眸一笑": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "回眸一笑 笑 微笑 乐"
+  },
+  "困": {
+   "mood": "daily",
+   "caption": "困了",
+   "keywords": "困 瞌睡 睡"
+  },
+  "在桶里盯": {
+   "mood": "daily",
+   "caption": "在桶里",
+   "keywords": "在桶里盯 桶 躲 探头 盯 看着"
+  },
+  "在桶里看": {
+   "mood": "daily",
+   "caption": "在桶里",
+   "keywords": "在桶里看 桶 躲 探头 看 围着看"
+  },
+  "坐在墙上": {
+   "mood": "daily",
+   "caption": "坐在墙上",
+   "keywords": "坐在墙上"
+  },
+  "夕阳转身": {
+   "mood": "daily",
+   "caption": "夕阳转身",
+   "keywords": "夕阳转身"
+  },
+  "多人照": {
+   "mood": "daily",
+   "caption": "多人照",
+   "keywords": "多人照"
+  },
+  "多种舞蹈": {
+   "mood": "daily",
+   "caption": "多种舞蹈",
+   "keywords": "多种舞蹈"
+  },
+  "大小猫猫": {
+   "mood": "daily",
+   "caption": "大小猫猫",
+   "keywords": "大小猫猫"
+  },
+  "失落": {
+   "mood": "sad",
+   "caption": "失落",
+   "keywords": "失落 沮丧 失望"
+  },
+  "好冷": {
+   "mood": "daily",
+   "caption": "好冷",
+   "keywords": "好冷"
+  },
+  "好想法": {
+   "mood": "daily",
+   "caption": "好想法",
+   "keywords": "好想法"
+  },
+  "好看": {
+   "mood": "daily",
+   "caption": "好看",
+   "keywords": "好看 看 围着看"
+  },
+  "好风景": {
+   "mood": "daily",
+   "caption": "好看背景",
+   "keywords": "好风景 风景 好看 景色"
+  },
+  "好风景（环绕）": {
+   "mood": "daily",
+   "caption": "好看背景",
+   "keywords": "好风景（环绕） 风景 好看 景色"
+  },
+  "委屈伤心": {
+   "mood": "sad",
+   "caption": "委屈，伤心",
+   "keywords": "委屈伤心 委屈 难过 求安慰 伤心"
+  },
+  "委屈垂耳": {
+   "mood": "sad",
+   "caption": "委屈，耳朵耷下来",
+   "keywords": "委屈垂耳 委屈 难过 求安慰 垂耳 没精神"
+  },
+  "委屈（一杯猫）": {
+   "mood": "sad",
+   "caption": "委屈",
+   "keywords": "委屈（一杯猫） 委屈 难过 求安慰"
+  },
+  "委屈（哭）": {
+   "mood": "sad",
+   "caption": "在哭，委屈",
+   "keywords": "委屈（哭） 哭 流泪 委屈 难过 求安慰"
+  },
+  "委屈（爆炸）": {
+   "mood": "sad",
+   "caption": "委屈",
+   "keywords": "委屈（爆炸） 委屈 难过 求安慰"
+  },
+  "委屈（郁闷）": {
+   "mood": "sad",
+   "caption": "委屈，郁闷",
+   "keywords": "委屈（郁闷） 委屈 难过 求安慰 郁闷 烦 不开心"
+  },
+  "嫌弃 厌恶": {
+   "mood": "angry",
+   "caption": "嫌弃，厌恶",
+   "keywords": "嫌弃 厌恶 嫌弃 鄙视 无语 白眼 厌恶 恶心"
+  },
+  "嫌弃（汗）": {
+   "mood": "angry",
+   "caption": "嫌弃，冒汗",
+   "keywords": "嫌弃（汗） 嫌弃 鄙视 无语 白眼 流汗 尴尬"
+  },
+  "字面意思": {
+   "mood": "daily",
+   "caption": "字面意思",
+   "keywords": "字面意思"
+  },
+  "害怕": {
+   "mood": "confused",
+   "caption": "害怕",
+   "keywords": "害怕 慌 惊"
+  },
+  "害羞": {
+   "mood": "shy",
+   "caption": "害羞",
+   "keywords": "害羞 不好意思 脸红"
+  },
+  "害羞脸红": {
+   "mood": "shy",
+   "caption": "害羞，脸红",
+   "keywords": "害羞脸红 害羞 不好意思 脸红 羞涩"
+  },
+  "对手指（心虚）": {
+   "mood": "shy",
+   "caption": "心虚，对手指",
+   "keywords": "对手指（心虚） 心虚 慌 不好意思 对手指 扭捏"
+  },
+  "小哈气": {
+   "mood": "angry",
+   "caption": "哈气",
+   "keywords": "小哈气 哈气 凶 炸毛 警告"
+  },
+  "小哭": {
+   "mood": "sad",
+   "caption": "在哭",
+   "keywords": "小哭 哭 流泪 委屈 难过"
+  },
+  "小委屈": {
+   "mood": "sad",
+   "caption": "委屈",
+   "keywords": "小委屈 委屈 难过 求安慰"
+  },
+  "小委屈（流泪）": {
+   "mood": "sad",
+   "caption": "委屈，带泪",
+   "keywords": "小委屈（流泪） 委屈 难过 求安慰 泪 哭"
+  },
+  "小委屈（流泪）·2": {
+   "mood": "sad",
+   "caption": "委屈，带泪",
+   "keywords": "小委屈（流泪） 委屈 难过 求安慰 泪 哭"
+  },
+  "小猫你可以吃芝士汉堡": {
+   "mood": "daily",
+   "caption": "在吃",
+   "keywords": "小猫你可以吃芝士汉堡 吃 吃瓜 干饭"
+  },
+  "小猫出拳": {
+   "mood": "daily",
+   "caption": "小猫出拳",
+   "keywords": "小猫出拳"
+  },
+  "小猫探头": {
+   "mood": "daily",
+   "caption": "小猫探头",
+   "keywords": "小猫探头"
+  },
+  "小猫来啦 冒头": {
+   "mood": "daily",
+   "caption": "小猫来啦 冒头",
+   "keywords": "小猫来啦 冒头"
+  },
+  "小猫踩奶": {
+   "mood": "daily",
+   "caption": "小猫踩奶",
+   "keywords": "小猫踩奶"
+  },
+  "屑屑的表情（笑）": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "屑屑的表情（笑） 笑 微笑 乐"
+  },
+  "左右看（笑）": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "左右看（笑） 笑 微笑 乐 看 围着看"
+  },
+  "带上色盘眼镜": {
+   "mood": "daily",
+   "caption": "戴彩色眼镜",
+   "keywords": "带上色盘眼镜 色盘 眼镜 调色"
+  },
+  "干嘛 不屑": {
+   "mood": "angry",
+   "caption": "不屑",
+   "keywords": "干嘛 不屑 不屑 鄙视 看不起"
+  },
+  "干饭舔碗": {
+   "mood": "daily",
+   "caption": "干饭舔碗",
+   "keywords": "干饭舔碗"
+  },
+  "废物": {
+   "mood": "daily",
+   "caption": "废物",
+   "keywords": "废物"
+  },
+  "开吃（Q）": {
+   "mood": "daily",
+   "caption": "在吃",
+   "keywords": "开吃（Q） 吃 吃瓜 干饭"
+  },
+  "开心": {
+   "mood": "happy",
+   "caption": "开心",
+   "keywords": "开心 高兴 愉快"
+  },
+  "开心·2": {
+   "mood": "happy",
+   "caption": "开心",
+   "keywords": "开心 高兴 愉快"
+  },
+  "开心·3": {
+   "mood": "happy",
+   "caption": "开心",
+   "keywords": "开心 高兴 愉快"
+  },
+  "开心吃": {
+   "mood": "happy",
+   "caption": "开心，在吃",
+   "keywords": "开心吃 开心 高兴 愉快 吃 吃瓜 干饭"
+  },
+  "开心摇（比耶）": {
+   "mood": "happy",
+   "caption": "开心，比耶，摇来摇去",
+   "keywords": "开心摇（比耶） 开心 高兴 愉快 比耶 剪刀手 耶 摇 摇摆 晃"
+  },
+  "开心笑": {
+   "mood": "happy",
+   "caption": "开心，在笑",
+   "keywords": "开心笑 开心 高兴 愉快 笑 微笑 乐"
+  },
+  "开心（伸手）": {
+   "mood": "happy",
+   "caption": "开心，伸手",
+   "keywords": "开心（伸手） 开心 高兴 愉快 伸手 手 摸"
+  },
+  "开心（星星眼）": {
+   "mood": "happy",
+   "caption": "开心，星星眼",
+   "keywords": "开心（星星眼） 开心 高兴 愉快 星星眼 期待 崇拜"
+  },
+  "弱弱的水原创（美图）": {
+   "mood": "daily",
+   "caption": "好看的一张图",
+   "keywords": "弱弱的水原创（美图） 美图 好看 画面"
+  },
+  "得意": {
+   "mood": "daily",
+   "caption": "得意",
+   "keywords": "得意"
+  },
+  "微笑": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "微笑 笑 乐"
+  },
+  "微笑·2": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "微笑 笑 乐"
+  },
+  "微笑（不屑）": {
+   "mood": "angry",
+   "caption": "在笑，不屑",
+   "keywords": "微笑（不屑） 笑 微笑 乐 不屑 鄙视 看不起"
+  },
+  "微笑（眯眼）": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "微笑（眯眼） 笑 微笑 乐"
+  },
+  "微笑（眯眼）·2": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "微笑（眯眼） 笑 微笑 乐"
+  },
+  "微笑（端正）": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "微笑（端正） 笑 微笑 乐"
+  },
+  "心虚": {
+   "mood": "shy",
+   "caption": "心虚",
+   "keywords": "心虚 慌 不好意思"
+  },
+  "快速哈气": {
+   "mood": "angry",
+   "caption": "哈气",
+   "keywords": "快速哈气 哈气 凶 炸毛 警告"
+  },
+  "快速打击": {
+   "mood": "angry",
+   "caption": "动手打",
+   "keywords": "快速打击 打击 打 揍 敲"
+  },
+  "恐慌（晕）": {
+   "mood": "confused",
+   "caption": "慌",
+   "keywords": "恐慌（晕） 恐慌 害怕 慌"
+  },
+  "悄悄话": {
+   "mood": "daily",
+   "caption": "悄悄话",
+   "keywords": "悄悄话"
+  },
+  "惊恐": {
+   "mood": "confused",
+   "caption": "惊恐",
+   "keywords": "惊恐 害怕 惊"
+  },
+  "惊恐流汗": {
+   "mood": "confused",
+   "caption": "惊恐，冒汗",
+   "keywords": "惊恐流汗 惊恐 害怕 惊 流汗 无语 尴尬"
+  },
+  "惊恐（眼镜 流汗）": {
+   "mood": "confused",
+   "caption": "惊恐，冒汗",
+   "keywords": "惊恐（眼镜 流汗） 惊恐 害怕 惊 流汗 无语 尴尬"
+  },
+  "想吐": {
+   "mood": "daily",
+   "caption": "想吐",
+   "keywords": "想吐"
+  },
+  "想要": {
+   "mood": "happy",
+   "caption": "想要",
+   "keywords": "想要 求 期待"
+  },
+  "我会一直盯着你，抹脖子": {
+   "mood": "daily",
+   "caption": "我会一直盯着你，抹脖子",
+   "keywords": "我会一直盯着你，抹脖子 盯 看着"
+  },
+  "我要紫砂": {
+   "mood": "sad",
+   "caption": "摆烂",
+   "keywords": "我要紫砂 摆烂 累 想死 崩溃"
+  },
+  "戳": {
+   "mood": "daily",
+   "caption": "伸手戳",
+   "keywords": "戳 点 碰"
+  },
+  "戳年糕": {
+   "mood": "daily",
+   "caption": "伸手戳",
+   "keywords": "戳年糕 戳 点 碰"
+  },
+  "戳戳，炸屏": {
+   "mood": "daily",
+   "caption": "伸手戳",
+   "keywords": "戳戳，炸屏 戳 点 碰"
+  },
+  "手指爆炸": {
+   "mood": "daily",
+   "caption": "手指爆炸",
+   "keywords": "手指爆炸"
+  },
+  "打伞": {
+   "mood": "daily",
+   "caption": "打伞",
+   "keywords": "打伞 下雨 撑伞"
+  },
+  "打哈欠": {
+   "mood": "daily",
+   "caption": "打哈欠",
+   "keywords": "打哈欠 困 睡"
+  },
+  "打招呼": {
+   "mood": "daily",
+   "caption": "打招呼",
+   "keywords": "打招呼"
+  },
+  "扭头看（笑）": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "扭头看（笑） 笑 微笑 乐 看 围着看"
+  },
+  "投降": {
+   "mood": "daily",
+   "caption": "投降",
+   "keywords": "投降"
+  },
+  "抱爱心": {
+   "mood": "happy",
+   "caption": "比心",
+   "keywords": "抱爱心 爱心 喜欢 比心"
+  },
+  "抽烟": {
+   "mood": "daily",
+   "caption": "抽烟",
+   "keywords": "抽烟"
+  },
+  "担心（流汗）": {
+   "mood": "confused",
+   "caption": "冒汗",
+   "keywords": "担心（流汗） 流汗 无语 尴尬"
+  },
+  "拍案无罪": {
+   "mood": "daily",
+   "caption": "拍案无罪",
+   "keywords": "拍案无罪"
+  },
+  "拍案有罪": {
+   "mood": "daily",
+   "caption": "拍案有罪",
+   "keywords": "拍案有罪"
+  },
+  "拍照": {
+   "mood": "daily",
+   "caption": "拍照",
+   "keywords": "拍照 相机 咔嚓"
+  },
+  "拿上白菜跑路": {
+   "mood": "daily",
+   "caption": "拿上白菜跑路",
+   "keywords": "拿上白菜跑路"
+  },
+  "拿饼盖脸": {
+   "mood": "daily",
+   "caption": "拿饼盖脸",
+   "keywords": "拿饼盖脸"
+  },
+  "拿鱼拍你（鼓腮）": {
+   "mood": "daily",
+   "caption": "拿鱼拍人",
+   "keywords": "拿鱼拍你（鼓腮） 拿鱼 打人 拍"
+  },
+  "指指点点": {
+   "mood": "daily",
+   "caption": "指着人",
+   "keywords": "指指点点 指 点名"
+  },
+  "挑眉 笑 眼镜": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "挑眉 笑 眼镜 笑 微笑 乐"
+  },
+  "挠头 疑惑": {
+   "mood": "confused",
+   "caption": "疑惑",
+   "keywords": "挠头 疑惑 疑惑 问号 不解 懵"
+  },
+  "捂嘴笑": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "捂嘴笑 笑 微笑 乐"
+  },
+  "捂耳朵（生气）": {
+   "mood": "angry",
+   "caption": "生气，晃耳朵",
+   "keywords": "捂耳朵（生气） 生气 怒 不爽 火大 耳朵 晃耳朵 耳"
+  },
+  "捶你（哭）": {
+   "mood": "sad",
+   "caption": "在哭，挥拳捶",
+   "keywords": "捶你（哭） 哭 流泪 委屈 难过 捶 打 揍"
+  },
+  "排饼": {
+   "mood": "daily",
+   "caption": "摆一排饼",
+   "keywords": "排饼 摆盘"
+  },
+  "揉，喜欢": {
+   "mood": "happy",
+   "caption": "表示喜欢",
+   "keywords": "揉，喜欢 喜欢 爱心 中意"
+  },
+  "摆手（嗨起来-猫猫摇）": {
+   "mood": "happy",
+   "caption": "摇来摇去，摆手打招呼",
+   "keywords": "摆手（嗨起来-猫猫摇） 摇 摇摆 晃 摆手 打招呼 嗨"
+  },
+  "摇头": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "摇头 摇 摇摆 晃"
+  },
+  "摇头（恼）": {
+   "mood": "angry",
+   "caption": "摇来摇去，恼火",
+   "keywords": "摇头（恼） 摇 摇摆 晃 恼 生气 不满"
+  },
+  "摇布丁（星星眼）": {
+   "mood": "happy",
+   "caption": "星星眼，摇来摇去",
+   "keywords": "摇布丁（星星眼） 星星眼 期待 崇拜 摇 摇摆 晃"
+  },
+  "摘眼镜": {
+   "mood": "daily",
+   "caption": "摘眼镜",
+   "keywords": "摘眼镜 眼镜"
+  },
+  "摸不着耳朵": {
+   "mood": "daily",
+   "caption": "伸手摸，晃耳朵",
+   "keywords": "摸不着耳朵 摸 手 耳朵 晃耳朵 耳"
+  },
+  "摸头": {
+   "mood": "happy",
+   "caption": "被摸头，伸手摸",
+   "keywords": "摸头 摸摸 安抚 摸 手"
+  },
+  "摸摸头": {
+   "mood": "happy",
+   "caption": "被摸头，伸手摸",
+   "keywords": "摸摸头 摸头 摸摸 安抚 摸 手"
+  },
+  "摸鱼": {
+   "mood": "daily",
+   "caption": "伸手摸",
+   "keywords": "摸鱼 摸 手"
+  },
+  "撇脸": {
+   "mood": "daily",
+   "caption": "撇脸",
+   "keywords": "撇脸"
+  },
+  "撸猫": {
+   "mood": "daily",
+   "caption": "撸猫",
+   "keywords": "撸猫"
+  },
+  "撸猫·2": {
+   "mood": "daily",
+   "caption": "撸猫",
+   "keywords": "撸猫"
+  },
+  "斜眼看": {
+   "mood": "angry",
+   "caption": "斜眼看人",
+   "keywords": "斜眼看 斜眼 瞪 不爽 看 围着看"
+  },
+  "方块猫猫转圈圈": {
+   "mood": "happy",
+   "caption": "转圈",
+   "keywords": "方块猫猫转圈圈 转圈 旋转"
+  },
+  "无助（Q）": {
+   "mood": "sad",
+   "caption": "无助",
+   "keywords": "无助（Q） 无助 可怜 求"
+  },
+  "无奈": {
+   "mood": "daily",
+   "caption": "无奈",
+   "keywords": "无奈 摊手 无语"
+  },
+  "无所谓（摊手）": {
+   "mood": "daily",
+   "caption": "无所谓（摊手）",
+   "keywords": "无所谓（摊手）"
+  },
+  "无限旋转举手": {
+   "mood": "happy",
+   "caption": "转圈，举手",
+   "keywords": "无限旋转举手 转圈 旋转 举手 举 我我我"
+  },
+  "星星眼": {
+   "mood": "happy",
+   "caption": "星星眼",
+   "keywords": "星星眼 期待 崇拜"
+  },
+  "星星眼·2": {
+   "mood": "happy",
+   "caption": "星星眼",
+   "keywords": "星星眼 期待 崇拜"
+  },
+  "星星眼（笑）": {
+   "mood": "happy",
+   "caption": "在笑，星星眼",
+   "keywords": "星星眼（笑） 笑 微笑 乐 星星眼 期待 崇拜"
+  },
+  "晃耳朵": {
+   "mood": "daily",
+   "caption": "晃耳朵",
+   "keywords": "晃耳朵 耳朵 耳"
+  },
+  "智慧": {
+   "mood": "daily",
+   "caption": "智慧",
+   "keywords": "智慧"
+  },
+  "来回张嘴（阿巴阿巴）": {
+   "mood": "confused",
+   "caption": "张嘴说不出话，张嘴",
+   "keywords": "来回张嘴（阿巴阿巴） 阿巴阿巴 说不出话 懵 张嘴 说话"
+  },
+  "棒球棒，梆梆梆": {
+   "mood": "daily",
+   "caption": "棒球棒，梆梆梆",
+   "keywords": "棒球棒，梆梆梆"
+  },
+  "歪头歪脑": {
+   "mood": "confused",
+   "caption": "歪头",
+   "keywords": "歪头歪脑 歪头 疑惑 不解"
+  },
+  "歪头（微笑）": {
+   "mood": "happy",
+   "caption": "在笑，歪头",
+   "keywords": "歪头（微笑） 笑 微笑 乐 歪头 疑惑 不解"
+  },
+  "死机了喵": {
+   "mood": "confused",
+   "caption": "大脑死机",
+   "keywords": "死机了喵 死机 宕机 大脑空白 懵"
+  },
+  "比耶": {
+   "mood": "happy",
+   "caption": "比耶",
+   "keywords": "比耶 剪刀手 耶"
+  },
+  "比耶·2": {
+   "mood": "happy",
+   "caption": "比耶",
+   "keywords": "比耶 剪刀手 耶"
+  },
+  "比耶·3": {
+   "mood": "happy",
+   "caption": "比耶",
+   "keywords": "比耶 剪刀手 耶"
+  },
+  "比耶·4": {
+   "mood": "happy",
+   "caption": "比耶",
+   "keywords": "比耶 剪刀手 耶"
+  },
+  "比耶·5": {
+   "mood": "happy",
+   "caption": "比耶",
+   "keywords": "比耶 剪刀手 耶"
+  },
+  "比耶（不屑）": {
+   "mood": "angry",
+   "caption": "比耶，不屑",
+   "keywords": "比耶（不屑） 比耶 剪刀手 耶 不屑 鄙视 看不起"
+  },
+  "比耶（开心）": {
+   "mood": "happy",
+   "caption": "开心，比耶",
+   "keywords": "比耶（开心） 开心 高兴 愉快 比耶 剪刀手 耶"
+  },
+  "水底看猫": {
+   "mood": "daily",
+   "caption": "水底看猫",
+   "keywords": "水底看猫 看 围着看"
+  },
+  "洗脚脚": {
+   "mood": "daily",
+   "caption": "洗脚",
+   "keywords": "洗脚脚 洗脚 脚"
+  },
+  "洗脚脚·2": {
+   "mood": "daily",
+   "caption": "洗脚",
+   "keywords": "洗脚脚 洗脚 脚"
+  },
+  "活着": {
+   "mood": "daily",
+   "caption": "活着",
+   "keywords": "活着"
+  },
+  "流水冲击大脑（问号）": {
+   "mood": "confused",
+   "caption": "一脸问号",
+   "keywords": "流水冲击大脑（问号） 问号 疑惑 不解"
+  },
+  "流汗": {
+   "mood": "confused",
+   "caption": "冒汗",
+   "keywords": "流汗 无语 尴尬"
+  },
+  "流汗·2": {
+   "mood": "confused",
+   "caption": "冒汗",
+   "keywords": "流汗 无语 尴尬"
+  },
+  "深度哈气": {
+   "mood": "angry",
+   "caption": "哈气",
+   "keywords": "深度哈气 哈气 凶 炸毛 警告"
+  },
+  "混乱猫": {
+   "mood": "daily",
+   "caption": "混乱猫",
+   "keywords": "混乱猫"
+  },
+  "炸毛": {
+   "mood": "daily",
+   "caption": "炸毛",
+   "keywords": "炸毛"
+  },
+  "点头": {
+   "mood": "daily",
+   "caption": "点头",
+   "keywords": "点头 同意 嗯嗯"
+  },
+  "点头（乖巧）": {
+   "mood": "daily",
+   "caption": "点头",
+   "keywords": "点头（乖巧） 点头 同意 嗯嗯"
+  },
+  "点赞": {
+   "mood": "happy",
+   "caption": "点赞",
+   "keywords": "点赞 赞 认同"
+  },
+  "爬笑": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "爬笑 笑 微笑 乐"
+  },
+  "猫猫": {
+   "mood": "daily",
+   "caption": "猫猫",
+   "keywords": "猫猫"
+  },
+  "猫猫·2": {
+   "mood": "daily",
+   "caption": "猫猫",
+   "keywords": "猫猫"
+  },
+  "猫猫·3": {
+   "mood": "daily",
+   "caption": "猫猫",
+   "keywords": "猫猫"
+  },
+  "猫猫·4": {
+   "mood": "daily",
+   "caption": "猫猫",
+   "keywords": "猫猫"
+  },
+  "猫猫·5": {
+   "mood": "daily",
+   "caption": "猫猫",
+   "keywords": "猫猫"
+  },
+  "猫猫出现啦": {
+   "mood": "daily",
+   "caption": "猫猫出现啦",
+   "keywords": "猫猫出现啦"
+  },
+  "猫猫吓唬人": {
+   "mood": "daily",
+   "caption": "猫猫吓唬人",
+   "keywords": "猫猫吓唬人"
+  },
+  "猫猫想要": {
+   "mood": "happy",
+   "caption": "想要",
+   "keywords": "猫猫想要 想要 求 期待"
+  },
+  "猫猫手中躺": {
+   "mood": "daily",
+   "caption": "躺着",
+   "keywords": "猫猫手中躺 躺 躺平 摆烂"
+  },
+  "猫猫抱大鱼": {
+   "mood": "daily",
+   "caption": "猫猫抱大鱼",
+   "keywords": "猫猫抱大鱼"
+  },
+  "猫猫抱尾巴": {
+   "mood": "daily",
+   "caption": "猫猫抱尾巴",
+   "keywords": "猫猫抱尾巴"
+  },
+  "猫猫挥剑": {
+   "mood": "daily",
+   "caption": "猫猫挥剑",
+   "keywords": "猫猫挥剑"
+  },
+  "猫猫摇": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·10": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·11": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·12": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·13": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·14": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·15": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·16": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·17": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·18": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·19": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·2": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·20": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·3": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·4": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·5": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·6": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·7": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·8": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇·9": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇 摇 摇摆 晃"
+  },
+  "猫猫摇手": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇手 摇 摇摆 晃"
+  },
+  "猫猫摇（咪）": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇（咪） 摇 摇摆 晃 咪 猫"
+  },
+  "猫猫摇（开心）": {
+   "mood": "happy",
+   "caption": "开心，摇来摇去",
+   "keywords": "猫猫摇（开心） 开心 高兴 愉快 摇 摇摆 晃"
+  },
+  "猫猫摇（抱手）": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "猫猫摇（抱手） 摇 摇摆 晃"
+  },
+  "猫猫摇（跳舞）": {
+   "mood": "happy",
+   "caption": "摇来摇去，跳起来",
+   "keywords": "猫猫摇（跳舞） 摇 摇摆 晃 跳 蹦 兴奋"
+  },
+  "猫猫比耶": {
+   "mood": "happy",
+   "caption": "比耶",
+   "keywords": "猫猫比耶 比耶 剪刀手 耶"
+  },
+  "猫猫爬地": {
+   "mood": "daily",
+   "caption": "猫猫爬地",
+   "keywords": "猫猫爬地"
+  },
+  "猫猫爱心": {
+   "mood": "happy",
+   "caption": "比心",
+   "keywords": "猫猫爱心 爱心 喜欢 比心"
+  },
+  "猫猫爱心·2": {
+   "mood": "happy",
+   "caption": "比心",
+   "keywords": "猫猫爱心 爱心 喜欢 比心"
+  },
+  "猫猫狗狗": {
+   "mood": "daily",
+   "caption": "猫猫狗狗",
+   "keywords": "猫猫狗狗"
+  },
+  "猫猫电话": {
+   "mood": "daily",
+   "caption": "猫猫电话",
+   "keywords": "猫猫电话"
+  },
+  "猫猫美图": {
+   "mood": "daily",
+   "caption": "好看的一张图",
+   "keywords": "猫猫美图 美图 好看 画面"
+  },
+  "猫猫装鬼": {
+   "mood": "daily",
+   "caption": "猫猫装鬼",
+   "keywords": "猫猫装鬼"
+  },
+  "猫猫转圈": {
+   "mood": "happy",
+   "caption": "转圈",
+   "keywords": "猫猫转圈 转圈 旋转"
+  },
+  "猫眼（哈气）": {
+   "mood": "angry",
+   "caption": "哈气",
+   "keywords": "猫眼（哈气） 哈气 凶 炸毛 警告"
+  },
+  "玩水": {
+   "mood": "daily",
+   "caption": "玩水",
+   "keywords": "玩水 水 湿"
+  },
+  "玩电脑": {
+   "mood": "daily",
+   "caption": "玩电脑",
+   "keywords": "玩电脑 电脑 上网"
+  },
+  "玩锤子": {
+   "mood": "daily",
+   "caption": "拿着锤子玩",
+   "keywords": "玩锤子 整活 敲"
+  },
+  "生气": {
+   "mood": "angry",
+   "caption": "生气",
+   "keywords": "生气 怒 不爽 火大"
+  },
+  "生气·2": {
+   "mood": "angry",
+   "caption": "生气",
+   "keywords": "生气 怒 不爽 火大"
+  },
+  "生气·3": {
+   "mood": "angry",
+   "caption": "生气",
+   "keywords": "生气 怒 不爽 火大"
+  },
+  "生气·4": {
+   "mood": "angry",
+   "caption": "生气",
+   "keywords": "生气 怒 不爽 火大"
+  },
+  "生气哼": {
+   "mood": "angry",
+   "caption": "生气，哼一声",
+   "keywords": "生气哼 生气 怒 不爽 火大 哼 不服"
+  },
+  "生气猫猫（可爱捏）": {
+   "mood": "angry",
+   "caption": "生气",
+   "keywords": "生气猫猫（可爱捏） 生气 怒 不爽 火大"
+  },
+  "疑惑": {
+   "mood": "confused",
+   "caption": "疑惑",
+   "keywords": "疑惑 问号 不解 懵"
+  },
+  "白眼，震惊": {
+   "mood": "confused",
+   "caption": "震惊",
+   "keywords": "白眼，震惊 震惊 吃惊 惊呆"
+  },
+  "盯": {
+   "mood": "daily",
+   "caption": "盯",
+   "keywords": "盯 看着"
+  },
+  "盯-看": {
+   "mood": "daily",
+   "caption": "盯-看",
+   "keywords": "盯-看 看 围着看 盯 看着"
+  },
+  "盯·2": {
+   "mood": "daily",
+   "caption": "盯",
+   "keywords": "盯 看着"
+  },
+  "看": {
+   "mood": "daily",
+   "caption": "看",
+   "keywords": "看 围着看"
+  },
+  "看 盯（好奇）": {
+   "mood": "confused",
+   "caption": "好奇",
+   "keywords": "看 盯（好奇） 好奇 疑问 看 围着看 盯 看着"
+  },
+  "看-盯": {
+   "mood": "daily",
+   "caption": "看-盯",
+   "keywords": "看-盯 看 围着看 盯 看着"
+  },
+  "看（呆-不屑-盯）": {
+   "mood": "angry",
+   "caption": "不屑，发呆",
+   "keywords": "看（呆-不屑-盯） 不屑 鄙视 看不起 呆 发愣 放空 看 围着看 盯 看着"
+  },
+  "看（生气）": {
+   "mood": "angry",
+   "caption": "生气",
+   "keywords": "看（生气） 生气 怒 不爽 火大 看 围着看"
+  },
+  "眯眼微笑": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "眯眼微笑 笑 微笑 乐"
+  },
+  "眯眼笑": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "眯眼笑 笑 微笑 乐"
+  },
+  "眯眼笑·2": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "眯眼笑 笑 微笑 乐"
+  },
+  "眯眼（星星）": {
+   "mood": "daily",
+   "caption": "眯眼（星星）",
+   "keywords": "眯眼（星星）"
+  },
+  "眼睛摘不下来（着急）": {
+   "mood": "daily",
+   "caption": "眼睛摘不下来（着急）",
+   "keywords": "眼睛摘不下来（着急）"
+  },
+  "眼睛猫猫（盯 看）": {
+   "mood": "daily",
+   "caption": "眼睛猫猫（盯 看）",
+   "keywords": "眼睛猫猫（盯 看） 看 围着看 盯 看着"
+  },
+  "眼镜猫猫": {
+   "mood": "daily",
+   "caption": "眼镜猫猫",
+   "keywords": "眼镜猫猫"
+  },
+  "睿智（啥猫）": {
+   "mood": "daily",
+   "caption": "睿智（啥猫）",
+   "keywords": "睿智（啥猫）"
+  },
+  "瞅你（叼烟-糖）": {
+   "mood": "daily",
+   "caption": "叼着东西",
+   "keywords": "瞅你（叼烟-糖） 叼 叼着 烟 瞅 瞥一眼"
+  },
+  "瞌睡（困Q）": {
+   "mood": "daily",
+   "caption": "困了，睡了",
+   "keywords": "瞌睡（困Q） 困 瞌睡 睡 晚安"
+  },
+  "禁止哈气": {
+   "mood": "angry",
+   "caption": "哈气",
+   "keywords": "禁止哈气 哈气 凶 炸毛 警告"
+  },
+  "笑": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "笑 微笑 乐"
+  },
+  "笑着拿刀": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "笑着拿刀 笑 微笑 乐"
+  },
+  "美图": {
+   "mood": "daily",
+   "caption": "好看的一张图",
+   "keywords": "美图 好看 画面"
+  },
+  "美图·2": {
+   "mood": "daily",
+   "caption": "好看的一张图",
+   "keywords": "美图 好看 画面"
+  },
+  "美图·3": {
+   "mood": "daily",
+   "caption": "好看的一张图",
+   "keywords": "美图 好看 画面"
+  },
+  "美图·4": {
+   "mood": "daily",
+   "caption": "好看的一张图",
+   "keywords": "美图 好看 画面"
+  },
+  "美图·5": {
+   "mood": "daily",
+   "caption": "好看的一张图",
+   "keywords": "美图 好看 画面"
+  },
+  "美图·6": {
+   "mood": "daily",
+   "caption": "好看的一张图",
+   "keywords": "美图 好看 画面"
+  },
+  "美图·7": {
+   "mood": "daily",
+   "caption": "好看的一张图",
+   "keywords": "美图 好看 画面"
+  },
+  "美图·8": {
+   "mood": "daily",
+   "caption": "好看的一张图",
+   "keywords": "美图 好看 画面"
+  },
+  "美图·9": {
+   "mood": "daily",
+   "caption": "好看的一张图",
+   "keywords": "美图 好看 画面"
+  },
+  "背景图": {
+   "mood": "daily",
+   "caption": "背景图",
+   "keywords": "背景图"
+  },
+  "脸红": {
+   "mood": "shy",
+   "caption": "脸红",
+   "keywords": "脸红 害羞 羞涩"
+  },
+  "脸红（看 盯）": {
+   "mood": "shy",
+   "caption": "脸红",
+   "keywords": "脸红（看 盯） 脸红 害羞 羞涩 看 围着看 盯 看着"
+  },
+  "舒展身体": {
+   "mood": "daily",
+   "caption": "舒展身体",
+   "keywords": "舒展身体"
+  },
+  "舔": {
+   "mood": "daily",
+   "caption": "舔",
+   "keywords": "舔"
+  },
+  "色狼来了": {
+   "mood": "daily",
+   "caption": "色狼来了",
+   "keywords": "色狼来了"
+  },
+  "茄子（拍照原版）": {
+   "mood": "happy",
+   "caption": "拍照喊茄子，拍照",
+   "keywords": "茄子（拍照原版） 拍照 笑 茄子 相机 咔嚓"
+  },
+  "螃蟹走过（比耶）": {
+   "mood": "happy",
+   "caption": "比耶",
+   "keywords": "螃蟹走过（比耶） 比耶 剪刀手 耶"
+  },
+  "被拽脸": {
+   "mood": "daily",
+   "caption": "被拽脸",
+   "keywords": "被拽脸"
+  },
+  "被砸（Q）": {
+   "mood": "daily",
+   "caption": "被砸（Q）",
+   "keywords": "被砸（Q）"
+  },
+  "要抱抱（想要）": {
+   "mood": "shy",
+   "caption": "想要，要抱抱",
+   "keywords": "要抱抱（想要） 想要 求 期待 抱抱 撒娇 求抱"
+  },
+  "诧异（大小眼）": {
+   "mood": "confused",
+   "caption": "诧异",
+   "keywords": "诧异（大小眼） 诧异 吃惊 迷惑"
+  },
+  "说你是猪咪": {
+   "mood": "daily",
+   "caption": "说你是猪咪",
+   "keywords": "说你是猪咪 咪 猫"
+  },
+  "诶嘿（单眼笑）": {
+   "mood": "happy",
+   "caption": "在笑，单眼眨眼",
+   "keywords": "诶嘿（单眼笑） 笑 微笑 乐 单眼 眨眼"
+  },
+  "贱兮兮的笑": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "贱兮兮的笑 笑 微笑 乐"
+  },
+  "贴脸 微笑": {
+   "mood": "happy",
+   "caption": "在笑，贴到镜头前",
+   "keywords": "贴脸 微笑 笑 微笑 乐 贴脸 凑近 怼镜头"
+  },
+  "贴脸看": {
+   "mood": "daily",
+   "caption": "贴到镜头前",
+   "keywords": "贴脸看 贴脸 凑近 怼镜头 看 围着看"
+  },
+  "超快速戳戳": {
+   "mood": "daily",
+   "caption": "伸手戳",
+   "keywords": "超快速戳戳 戳 点 碰"
+  },
+  "超快速舔": {
+   "mood": "daily",
+   "caption": "超快速舔",
+   "keywords": "超快速舔"
+  },
+  "超级棒（星星眼-点赞）": {
+   "mood": "happy",
+   "caption": "星星眼，竖拇指夸，点赞",
+   "keywords": "超级棒（星星眼-点赞） 星星眼 期待 崇拜 棒 点赞 赞 夸奖 认同"
+  },
+  "超长猫猫": {
+   "mood": "daily",
+   "caption": "超长猫猫",
+   "keywords": "超长猫猫"
+  },
+  "蹦蹦跳跳": {
+   "mood": "happy",
+   "caption": "蹦蹦跳跳，跳起来",
+   "keywords": "蹦蹦跳跳 蹦 跳 兴奋"
+  },
+  "蹦蹦跳跳开心": {
+   "mood": "happy",
+   "caption": "开心，蹦蹦跳跳，跳起来",
+   "keywords": "蹦蹦跳跳开心 开心 高兴 愉快 蹦 跳 兴奋"
+  },
+  "蹦蹦蹦吃": {
+   "mood": "happy",
+   "caption": "蹦蹦跳跳，在吃",
+   "keywords": "蹦蹦蹦吃 蹦 跳 兴奋 吃 吃瓜 干饭"
+  },
+  "躺": {
+   "mood": "daily",
+   "caption": "躺着",
+   "keywords": "躺 躺平 摆烂"
+  },
+  "转圈圈": {
+   "mood": "happy",
+   "caption": "转圈",
+   "keywords": "转圈圈 转圈 旋转"
+  },
+  "转大西瓜": {
+   "mood": "daily",
+   "caption": "转大西瓜",
+   "keywords": "转大西瓜"
+  },
+  "转头": {
+   "mood": "daily",
+   "caption": "转头",
+   "keywords": "转头 回头"
+  },
+  "转身": {
+   "mood": "daily",
+   "caption": "转身",
+   "keywords": "转身"
+  },
+  "这个月朋友费": {
+   "mood": "daily",
+   "caption": "这个月朋友费",
+   "keywords": "这个月朋友费"
+  },
+  "透镜": {
+   "mood": "daily",
+   "caption": "透镜",
+   "keywords": "透镜"
+  },
+  "透镜猫猫": {
+   "mood": "daily",
+   "caption": "透镜猫猫",
+   "keywords": "透镜猫猫"
+  },
+  "递情书": {
+   "mood": "shy",
+   "caption": "递情书",
+   "keywords": "递情书 情书 喜欢 表白"
+  },
+  "邪恶小茂密": {
+   "mood": "daily",
+   "caption": "邪恶小茂密",
+   "keywords": "邪恶小茂密"
+  },
+  "邪魅一笑": {
+   "mood": "happy",
+   "caption": "在笑，邪魅一笑",
+   "keywords": "邪魅一笑 笑 微笑 乐 邪魅 得意"
+  },
+  "酒瓶子": {
+   "mood": "daily",
+   "caption": "酒",
+   "keywords": "酒瓶子 酒 喝 醉"
+  },
+  "问号": {
+   "mood": "confused",
+   "caption": "一脸问号",
+   "keywords": "问号 疑惑 不解"
+  },
+  "阴暗快速摇摆": {
+   "mood": "happy",
+   "caption": "摇来摇去",
+   "keywords": "阴暗快速摇摆 摇 摇摆 晃"
+  },
+  "阴笑": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "阴笑 笑 微笑 乐"
+  },
+  "阴笑（线条）": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "阴笑（线条） 笑 微笑 乐"
+  },
+  "阴脸笑": {
+   "mood": "happy",
+   "caption": "在笑",
+   "keywords": "阴脸笑 笑 微笑 乐"
+  },
+  "零食": {
+   "mood": "daily",
+   "caption": "零食",
+   "keywords": "零食"
+  },
+  "震惊": {
+   "mood": "confused",
+   "caption": "震惊",
+   "keywords": "震惊 吃惊 惊呆"
+  },
+  "震惊·2": {
+   "mood": "confused",
+   "caption": "震惊",
+   "keywords": "震惊 吃惊 惊呆"
+  },
+  "震惊·3": {
+   "mood": "confused",
+   "caption": "震惊",
+   "keywords": "震惊 吃惊 惊呆"
+  },
+  "震惊抱头": {
+   "mood": "confused",
+   "caption": "震惊",
+   "keywords": "震惊抱头 震惊 吃惊 惊呆"
+  },
+  "震惊（后跳-害怕）": {
+   "mood": "confused",
+   "caption": "跳起来，震惊，害怕",
+   "keywords": "震惊（后跳-害怕） 跳 蹦 兴奋 震惊 吃惊 惊呆 害怕 慌 惊"
+  },
+  "震惊（啊？）": {
+   "mood": "confused",
+   "caption": "震惊",
+   "keywords": "震惊（啊？） 震惊 吃惊 惊呆"
+  },
+  "震惊（盯-看）": {
+   "mood": "confused",
+   "caption": "震惊",
+   "keywords": "震惊（盯-看） 震惊 吃惊 惊呆 看 围着看 盯 看着"
+  },
+  "震惊（诧异）": {
+   "mood": "confused",
+   "caption": "震惊，诧异",
+   "keywords": "震惊（诧异） 震惊 吃惊 惊呆 诧异 迷惑"
+  },
+  "静音": {
+   "mood": "daily",
+   "caption": "静音",
+   "keywords": "静音 安静 闭嘴"
+  },
+  "靠近": {
+   "mood": "daily",
+   "caption": "凑近",
+   "keywords": "靠近 凑近 贴"
+  },
+  "靠近哈气": {
+   "mood": "angry",
+   "caption": "哈气，凑近",
+   "keywords": "靠近哈气 哈气 凶 炸毛 警告 靠近 凑近 贴"
+  },
+  "靠近（星星眼）": {
+   "mood": "happy",
+   "caption": "星星眼，凑近",
+   "keywords": "靠近（星星眼） 星星眼 期待 崇拜 靠近 凑近 贴"
+  },
+  "音Ayachi美图": {
+   "mood": "daily",
+   "caption": "好看的一张图",
+   "keywords": "音Ayachi美图 美图 好看 画面"
+  },
+  "骑车": {
+   "mood": "daily",
+   "caption": "骑车",
+   "keywords": "骑车 单车 出门"
+  },
+  "魔法棒": {
+   "mood": "daily",
+   "caption": "挥魔法棒",
+   "keywords": "魔法棒 魔法"
+  },
+  "鱼缸猫": {
+   "mood": "daily",
+   "caption": "鱼缸猫",
+   "keywords": "鱼缸猫"
+  }
+ }
+}
