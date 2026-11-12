@@ -12,7 +12,7 @@ tests/
 │   ├── api/           # API 客户端 + 错误层级 + Sugar (A-01 ~ A-02, AE-01 ~ AE-07, SG-01 ~ SG-06, FL-01 ~ FL-06)
 │   ├── core/          # 核心分发与注册 + 谓词 (D-01 ~ D-09, K-01 ~ K-21, H-01 ~ H-11, R-01 ~ R-09, PR-01 ~ PR-06)
 │   ├── service/       # 服务管理 + RBAC + 调度 (SM-01 ~ SM-08, SC-01 ~ SC-12, TS-01 ~ TS-06)
-│   ├── plugin/        # 插件 Mixin + 导入去重 + Loader + FakeAi 缓存/消息引用 + 经济与钱包打劫 + 命令帮助匹配 (M-01 ~ M-41, ID-01 ~ ID-02, LD-01 ~ LD-08, VC-01 ~ VC-06, FA-REF-01 ~ FA-REF-02, GE-01 ~ GE-03, RB-01 ~ RB-04, PC-01 ~ PC-03)
+│   ├── plugin/        # 插件 Mixin + 导入去重 + Loader + FakeAi 缓存/消息引用 + 经济与钱包打劫 + 命令帮助匹配 (M-01 ~ M-41, ID-01 ~ ID-02, LD-01 ~ LD-08, VC-01 ~ VC-06, FA-REF-01 ~ FA-REF-02, GE-01 ~ GE-03, RB-01 ~ RB-12, PC-01 ~ PC-03, CU-01 ~ CU-10, DU-01 ~ DU-09, CM-01)
 │   ├── adapter/       # 适配器解析 + 注册表 + 真实数据 + 事件日志格式 (P-01 ~ P-07, RF-01 ~ RF-08, AR-01 ~ AR-05, SL-01 ~ SL-04, GM-01 ~ GM-05, BL-01 ~ BL-25, GH-01 ~ GH-11, LK-01 ~ LK-09, LKP-01 ~ LKP-10, ELS-01 ~ ELS-17)
 │   ├── config/        # 配置迁移 + 安全 + 分层 + 事件日志格式 (CF-01 ~ CF-05, CS-01 ~ CS-05, CE-01 ~ CE-05, BQ-01 ~ BQ-11, AI-03 ~ AI-31, ELF-01 ~ ELF-06)
 │   ├── cli/           # CLI 冒烟 (CX-01 ~ CX-22)
@@ -89,8 +89,12 @@ python tests/e2e/napcat/run.py
 | PR | Predicate 谓词 DSL | PR-01 ~ PR-06 |
 | TS | TimeTaskParser 调度解析 | TS-01 ~ TS-06 |
 | LD | PluginLoader 生命周期 | LD-01 ~ LD-08 |
-| RB | 钱包打劫与失败赔偿 | RB-01 ~ RB-04 |
+| RB | 钱包打劫与失败赔偿 | RB-01 ~ RB-12 |
 | GE | GroupEconomy 钱包充值与扣减 | GE-01 ~ GE-03 |
+| CU | CaseOpening/cs2 概率 / 磨损 / 汰换 / 存储 | CU-01 ~ CU-14 |
+| DU | CaseOpening/dota 递增概率 / 期望 / 存储 | DU-01 ~ DU-09 |
+| LN | 开箱贷：额度 / 还款 / 重生留痕 | LN-01 ~ LN-06 |
+| CM | 开箱插件清单与依赖 | CM-01 |
 | PC | 插件命令帮助匹配 | PC-01 ~ PC-03 |
 | MCF | McFish 钓鱼规则 | MCF-01 ~ MCF-38 |
 | VC | FakeAi 图片识别缓存 | VC-01 ~ VC-06 |
