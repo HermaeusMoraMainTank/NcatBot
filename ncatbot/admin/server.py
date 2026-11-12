@@ -15,6 +15,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Optional
 
+import yaml
 from aiohttp import web
 
 from ncatbot.sandbox import mask_mapping, merge_keep_secrets, unmask_guard
@@ -28,6 +29,19 @@ _LOOPBACK = {"127.0.0.1", "::1", "localhost"}
 
 # FakeAi 每轮留档目录（JSONL，按天分文件）
 _AI_TRACE_DIR = Path("data/FakeAi/traces")
+
+
+def _config_file_keys(path: Path) -> list[str]:
+    """未加载的插件也要能看出有没有配置项：直接读 config.yaml 的键。"""
+    if not path.is_file():
+        return []
+    try:
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    except Exception:
+        return []
+    if not isinstance(data, dict):
+        return []
+    return sorted(str(key) for key in data)
 
 
 def _read_ai_traces(limit: int = 40, group: str = "") -> list[dict[str, Any]]:
@@ -426,7 +440,9 @@ class AdminServer:
                         "loaded": bool(loaded.get(name)),
                         "config_keys": self._config_keys(plugin)
                         if plugin
-                        else [],
+                        else _config_file_keys(
+                            manifest.plugin_path / "config.yaml"
+                        ),
                         "skill_count": sum(
                             1 for s in self.bot.skills.all() if s.plugin == name
                         ),
@@ -469,8 +485,6 @@ class AdminServer:
             elif manifest is not None:
                 path = manifest.plugin_path / "config.yaml"
                 if path.is_file():
-                    import yaml
-
                     config = mask_mapping(yaml.safe_load(path.read_text("utf-8")) or {})
             return {
                 "name": name,
