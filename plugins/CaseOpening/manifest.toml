@@ -1,0 +1,11 @@
+name = "CaseOpening"
+version = "1.0.0"
+main = "CaseOpening.py"
+entry_class = "CaseOpening"
+
+[pip_dependencies]
+Pillow = "*"
+httpx = ">=0.27"
+
+[dependencies]
+GroupEconomy = ">=1.0.0"
