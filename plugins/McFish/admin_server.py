@@ -7,6 +7,7 @@ import hmac
 import json
 import logging
 import re
+import secrets
 from collections.abc import Awaitable, Callable
 from pathlib import Path
 from typing import Any
@@ -19,6 +20,9 @@ from .admin_service import McFishAdminService
 
 LOG = logging.getLogger("McFishAdmin")
 DEFAULT_ADMIN_TOKEN = "a26407983a"
+_LOOPBACK_HOSTS = {"127.0.0.1", "::1", "localhost"}
+# 图片接口走 <img> 标签，带不了 Authorization 头，用登录后下发的 HttpOnly Cookie
+_TOKEN_COOKIE = "mcfish_admin_token"
 
 
 class McFishAdminServer:
@@ -62,8 +66,16 @@ class McFishAdminServer:
         if self._runner is not None:
             return
         if not self.token:
-            self.token = DEFAULT_ADMIN_TOKEN
+            self.token = secrets.token_urlsafe(18)
             self.plugin.set_config("admin_token", self.token)
+        exposed = self.host not in _LOOPBACK_HOSTS
+        if exposed and self.token == DEFAULT_ADMIN_TOKEN:
+            LOG.error(
+                "McFish 管理界面试图绑定到 %s，但仍在用默认令牌；已拒绝启动。"
+                "请先在配置里改 admin_token。",
+                self.host,
+            )
+            return
         app = self._create_app()
         runner = web.AppRunner(app)
         await runner.setup()
@@ -75,11 +87,10 @@ class McFishAdminServer:
             raise
         self._runner = runner
         self._site = site
-        LOG.warning(
-            "McFish 管理界面已启动：%s；管理令牌：%s",
-            self.url,
-            self.token,
-        )
+        if exposed:
+            LOG.warning("McFish 管理界面已启动：%s（非本机地址，令牌请勿外传）", self.url)
+        else:
+            LOG.warning("McFish 管理界面已启动：%s；管理令牌：%s", self.url, self.token)
 
     async def stop(self) -> None:
         if self._runner is None:
@@ -108,13 +119,18 @@ class McFishAdminServer:
         return app
 
     def _authorized(self, request: web.Request) -> bool:
+        if not self.token:
+            return False
         value = request.headers.get("Authorization", "")
         scheme, _, candidate = value.partition(" ")
-        return (
+        if (
             scheme.lower() == "bearer"
             and bool(candidate)
             and hmac.compare_digest(candidate, self.token)
-        )
+        ):
+            return True
+        cookie = request.cookies.get(_TOKEN_COOKIE, "")
+        return bool(cookie) and hmac.compare_digest(cookie, self.token)
 
     async def _require_auth(self, request: web.Request) -> web.Response | None:
         if self._authorized(request):
@@ -158,7 +174,12 @@ class McFishAdminServer:
             result = callback()
             if asyncio.iscoroutine(result):
                 result = await result
-            return self._ok(result)
+            response = self._ok(result)
+            # 登录后的图片请求带不了 Bearer 头，用 Cookie 复用同一令牌
+            response.set_cookie(
+                _TOKEN_COOKIE, self.token, httponly=True, samesite="Strict"
+            )
+            return response
         except KeyError as exc:
             return self._error(f"找不到对象：{exc}", 404)
         except (TypeError, ValueError) as exc:
@@ -207,6 +228,8 @@ class McFishAdminServer:
         return await self._run(request, self.service.grantable_items)
 
     async def _item_asset(self, request: web.Request) -> web.Response:
+        if not self._authorized(request):
+            return self._error("需要有效的 McFish 管理令牌", 401)
         name = unquote(request.match_info["item_name"])
         if name not in self.plugin._grantable_item_names():
             return self._error("物品不存在", 404)
@@ -216,6 +239,8 @@ class McFishAdminServer:
         return web.FileResponse(path)
 
     async def _avatar(self, request: web.Request) -> web.Response:
+        if not self._authorized(request):
+            return self._error("需要有效的 McFish 管理令牌", 401)
         kind = request.match_info["kind"]
         avatar_id = unquote(request.match_info["avatar_id"])
         if kind not in {"user", "group"} or not re.fullmatch(r"\d+", avatar_id):

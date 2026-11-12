@@ -289,16 +289,17 @@ async def test_admin_http_requires_token_and_exposes_group_api(tmp_path: Path):
 
 
 @pytest.mark.asyncio
-async def test_admin_http_uses_default_token_when_config_is_empty(tmp_path: Path):
+async def test_admin_http_generates_token_when_config_is_empty(tmp_path: Path):
     plugin = FakeMcFish(tmp_path / "mcfish.db")
     server = McFishAdminServer(plugin, host="127.0.0.1", port=0, token="")
     await server.start()
     try:
-        assert server.token == DEFAULT_ADMIN_TOKEN
+        assert server.token
+        assert server.token != DEFAULT_ADMIN_TOKEN
         async with aiohttp.ClientSession() as client:
             response = await client.get(
                 f"{server.url}/api/mcfish/session",
-                headers={"Authorization": f"Bearer {DEFAULT_ADMIN_TOKEN}"},
+                headers={"Authorization": f"Bearer {server.token}"},
             )
             assert response.status == 200
     finally:
@@ -318,13 +319,22 @@ async def test_admin_avatar_routes_serve_user_and_group_images(tmp_path: Path, m
     server = McFishAdminServer(plugin, host="127.0.0.1", port=0, token="secret")
     await server.start()
     try:
+        headers = {"Authorization": "Bearer secret"}
         async with aiohttp.ClientSession() as client:
-            user = await client.get(f"{server.url}/mcfish-avatar/user/200")
-            group = await client.get(f"{server.url}/mcfish-avatar/group/100")
-            invalid = await client.get(f"{server.url}/mcfish-avatar/user/not-a-user")
+            user = await client.get(
+                f"{server.url}/mcfish-avatar/user/200", headers=headers
+            )
+            group = await client.get(
+                f"{server.url}/mcfish-avatar/group/100", headers=headers
+            )
+            invalid = await client.get(
+                f"{server.url}/mcfish-avatar/user/not-a-user", headers=headers
+            )
+            anonymous = await client.get(f"{server.url}/mcfish-avatar/user/200")
             assert user.status == 200
             assert group.status == 200
             assert invalid.status == 404
+            assert anonymous.status == 401
     finally:
         await server.stop()
         plugin.close()
