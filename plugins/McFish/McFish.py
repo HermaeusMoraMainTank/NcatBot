@@ -89,7 +89,9 @@ from .mcfish_content import (
     FOOD_RESTORE,
     ITEM_PRICES,
     KEY_NAMES,
+    KEY_RECIPES,
     MATERIAL_NAMES,
+    ZONE_BOX_TIER,
     ZONE_FOODS,
     ZONE_MATERIALS,
     ZONE_VALUABLES,
@@ -126,6 +128,7 @@ from .mcfish_equipment import (
     worn_sets,
 )
 from .mcfish_help import revision_page
+from . import mcfish_market as market
 from .mcfish_power import ROD_POWER, fishing_power, power_breakdown, power_summary
 from .mcfish_resident_kings import (
     RESIDENT_KING_DAILY_LIMIT,
@@ -614,7 +617,7 @@ MCFISH_COMMAND_HELP_GROUPS = (
         ("钓鱼帮助 鱼点", "打开鱼点、鱼王与钓鱼力的完整说明。"),
     )),
     ("商店与交易", (176, 119, 64), (
-        ("钓鱼商店 / 钓鱼看板", "查看当日上架、折扣、库存与背包可售物品。"),
+        ("钓鱼商店 / 钓鱼看板", "查看商店库存、供需价格与背包可售物品。"),
         ("购买 铜竿", "购买鱼竿；受等级、库存和每日鱼竿交易10次限制。"),
         ("购买 绿色海藻 3", "购买普通物品；每日最多购买30件。"),
         ("出售 岩石凶鲨 5", "出售物品并显示税后价格；鱼竿每日最多出售10次。"),
@@ -622,9 +625,10 @@ MCFISH_COMMAND_HELP_GROUPS = (
         ("消除宝藏诅咒 3", "用等量净化书消除宝藏诅咒。"),
     )),
     ("食物与开箱", (229, 112, 118), (
-        ("吃海藻 绿色海藻 3", "食用任意食物；数量省略时吃1个，每天最多回复15次。"),
-        ("吃食物 绿色海藻 3", "与“吃海藻”同义，更容易记。"),
+        ("吃海藻 绿色海藻 3", "食用任意食物；省略数量时吃1个，基础每日15次。"),
+        ("吃食物 绿色海藻 3", "与“吃海藻”同义。"),
         ("开箱 上锁的铜制箱子", "消耗1把同档钥匙；箱名与钥匙档位必须一致。"),
+        ("合成 铜钥匙", "用材料+金币合成钥匙；六档手续费 60–1100 金币。"),
     )),
     ("鱼竿", (239, 145, 76), (
         ("装备 猩红竿", "装备背包中的鱼竿。"),
@@ -709,8 +713,9 @@ MCFISH_HELP = """一款钓鱼模拟器
 - 分解装备：发送“分解装备 装备名”可分解未装备的合成装备，返还约一半已投入材料，手续费100金币；掉落装备没有合成材料，不参与分解。
 - 达到对应等级后，商店常驻出售铜竿/锡竿/铁竿/猩红竿/幻光竿/星河竿/灿阳竿，价格分别为600/1600/4000/9000/16000/24000/36000金币；商店购买鱼竿不能作为合成材料，掉落、任务奖励、碎片兑换和合成鱼竿仍可合成。
 - 可出售：鱼、鱼王、鱼竿、贵重品、食物、垃圾、宝藏道具、消耗品；材料、钥匙、箱子、神谕卡片、装备、鱼王鳞片、钓鱼碎片不可出售。
-- 食物与回复：食物来自垃圾段的“食物”子类；绿色/黄色海藻回复1次，灰色/红色/苍白海藻回复2次，蓝色/水晶/深蓝色海藻回复3次。发送“吃海藻 绿色海藻 3”或“吃食物 绿色海藻 3”食用，数量省略时吃1个；每天最多回复15次，只能补回当天已经用掉的次数，并同步减少当前鱼点已用次数。装备和天赋的食物效果会提高单次回复量。
-- 开箱：发送“开箱 上锁的铜制箱子”并消耗1把同档钥匙；箱名必须完整，钥匙为铜钥匙 / 铁钥匙 / 猩红金属钥匙 / 幻光金属钥匙 / 星河金属钥匙 / 灿阳金属钥匙。箱子与钥匙档位不一致时不会消耗。
+- 食物与回复：食物来自垃圾段的“食物”子类；绿色/黄色海藻回复1次，灰色/红色/苍白海藻回复2次，蓝色/水晶/深蓝色海藻回复3次。发送“吃海藻 绿色海藻 3”或“吃食物 绿色海藻 3”食用，数量省略时吃1个；每天最多回复15次，只能补回当天已经用掉的次数，并同步减少当前鱼点已用次数。装备和天赋的食物效果同时提高单次回复量和每日回复上限，加成后不足1次的小数部分会累计到下一次食用，不会丢失。
+- 开箱：发送“开箱 上锁的铜制箱子”并消耗1把同档钥匙；箱名必须完整，钥匙为铜钥匙 / 铁钥匙 / 猩红金属钥匙 / 幻光金属钥匙 / 星河金属钥匙 / 灿阳金属钥匙。箱子与钥匙档位不一致时不会消耗。钥匙与箱子除贵重品位里10%的替换外，还各有独立判定：每竿箱子1.00%、钥匙0.50%，受“钥匙与箱子概率”加成。
+- 钥匙合成：发送“合成 铜钥匙”等在工坊用材料+金币合成，铜60 / 铁150 / 猩红金属300 / 幻光金属500 / 星河金属800 / 灿阳金属1100金币；材料依次为铜矿石2 / 铁矿石2+废弃零件2 / 猩红金属矿石2+金矿石2 / 幻光金属矿石2+冰晶1 / 星河金属矿石2+星尘1 / 灿阳金属矿石2+星尘1。钥匙不上架商店，只能掉落或合成。
 - 每日和每周任务从简单/中等/复杂任务池按等级档位组合生成；发送“钓鱼任务”查看编号和奖励，发送“领取钓鱼任务 编号”领取奖励，任务跨日、跨周自动刷新。三叉戟改由工坊交付，不再作为任务奖励。
 - 宝藏诅咒不能交易，可用净化书消除；鱼竿超过30支不能钓鱼，超过50支不能购买。"""
 
@@ -723,11 +728,12 @@ MCFISH_SPECIAL_MECHANICS = (
     "鱼数超过100条：区间变为宝藏2%、鱼竿8%、鱼35%、垃圾45%，只改变概率、不改变数量。",
     "净化书：每完成1竿累计1点祝福，满75点自动获得1本净化书，超出部分计入下一轮。",
     "交易诅咒：买卖鱼竿每满10次获得1个宝藏诅咒；买入价+10%、卖出价-10%；可用净化书1:1消除。",
-    "商店折扣每天重新生成（约50%–199%），库存跨天延续；木竿固定180金币；出售按收购价80%结算，可用唱片翻倍。",
+    "商店价格随供需变化：每件物品各自记录卖出量，卖得越多、越集中，收购价越低（最低约15%，稀有的贵鱼跌得更快）；停售后会随时间回到基准价附近；库存跨天延续；木竿固定180金币；出售按收购价80%结算，可用唱片翻倍。",
     "高级鱼竿按等级常驻出售：铜竿600、锡竿1600、铁竿4000、猩红竿9000、幻光竿16000、星河竿24000、灿阳竿36000金币；商店购买杆不能参与合成。",
     "半价福利：每买满20次非鱼竿物品获得3次半价，单次购买最多抵3件，鱼竿不参与。",
     "修复：消耗1根同名鱼竿和金币，维修度+1；耐久增加材料耐久的80%（鱼竿≤10支）或100%。",
     "附魔：诱钓、海之眷顾约50%成功，最高3级；修复时材料附魔有50%概率继承。",
+    "钥匙与箱子：除贵重品位里10%的替换外，每竿开始时另有独立判定，箱子1.00%、钥匙0.50%，命中即替代本次其它掉落；受“钥匙与箱子概率”加成，钥匙可用材料在工坊合成（合成 铜钥匙），不上架商店。",
     "合成：3根同等级鱼竿或碎片兑换均需金币手续费；鱼竿合成成功率90%，失败仍只扣一次手续费。",
 )
 
@@ -757,6 +763,7 @@ class McFish(NcatBotPlugin):
         self._db = sqlite3.connect(str(Path(self.workspace) / "mcfish.db"), check_same_thread=False)
         self._db.execute("CREATE TABLE IF NOT EXISTS players (user_id TEXT PRIMARY KEY, state TEXT NOT NULL, updated_at REAL NOT NULL)")
         self._db.execute("CREATE TABLE IF NOT EXISTS shop (day TEXT PRIMARY KEY, discounts TEXT NOT NULL, inventory TEXT NOT NULL, custom_prices TEXT NOT NULL DEFAULT '{}')")
+        self._db.execute("CREATE TABLE IF NOT EXISTS market (item TEXT PRIMARY KEY, pressure REAL NOT NULL, updated REAL NOT NULL)")
         shop_columns = {str(row[1]) for row in self._db.execute("PRAGMA table_info(shop)").fetchall()}
         if "custom_prices" not in shop_columns:
             self._db.execute("ALTER TABLE shop ADD COLUMN custom_prices TEXT NOT NULL DEFAULT '{}'")
@@ -954,6 +961,7 @@ class McFish(NcatBotPlugin):
                 )
         state.setdefault("card_pity", {})
         state.setdefault("food_today", 0)
+        state.setdefault("food_carry", 0.0)
         state.setdefault("resident_king_today", {})
         state.setdefault("zone_fish_today", {})
         state.setdefault("item_zones", {})
@@ -999,6 +1007,7 @@ class McFish(NcatBotPlugin):
         if state["fish_day"] != today:
             state["fish_day"], state["fish_today"] = today, 0
             state["food_today"] = 0
+            state["food_carry"] = 0.0
             state["resident_king_today"] = {}
             state["zone_fish_today"] = {}
         # 鱼点由玩家自选，跨天只更新“活跃鱼点”记录，不再覆盖玩家选择。
@@ -1567,7 +1576,7 @@ class McFish(NcatBotPlugin):
                     "食用命令：吃海藻/吃食物 食物名 数量；省略数量时吃1个。",
                     "回复量：绿色/黄色海藻1次，灰色/红色/苍白海藻2次，蓝色/水晶/深蓝色海藻3次；装备与天赋可提高。",
                     "食物也可以直接出售；回复量按食用数量累计。",
-                    "每天最多回复15次，只能补回当天已经用掉的次数，并同步减少当前鱼点已用次数。",
+                    "每天最多回复15次，只能补回当天已经用掉的次数，并同步减少当前鱼点已用次数；食物加成同时提高单次量与上限，小数部分累计到下一次。",
                     "开箱必须使用完整箱名，例如“开箱 上锁的铜制箱子”，并消耗同档钥匙（铜钥匙 / 铁钥匙 / 猩红金属钥匙 / 幻光金属钥匙 / 星河金属钥匙 / 灿阳金属钥匙）。",
                 ],
                 "accent": (229, 112, 118),
@@ -1604,13 +1613,13 @@ class McFish(NcatBotPlugin):
                 "kind": "bullets",
                 "title": "掉落与概率",
                 "rows": [
-                    "基础区间：宝藏1% / 鱼竿4% / 普通鱼25% / 垃圾30% / 空竿40%。",
-                    "鱼总数超过100条时：宝藏2% / 鱼竿8% / 普通鱼35% / 垃圾45%，只改变概率不改变数量。",
+                    "基础区间：宝藏1% / 鱼竿4% / 普通鱼25% / 垃圾30% / 空竿40%；鱼总数超过100条时变为宝藏2% / 鱼竿8% / 普通鱼35% / 垃圾45%，只改概率。",
                     "鱼竿段内占比：木55% / 铜18% / 锡10% / 铁7% / 猩红5% / 幻光3% / 星河1% / 灿阳1%。",
                     "当前鱼竿最多只能钓到下一等级；越级区间转为空竿，背包中有海豚时这部分也并入垃圾。掉落鱼竿随机生成耐久、维修和附魔。",
                     "海之眷顾每级把6%空竿转为宝藏1%、鱼竿2%、鱼3%；诱钓按等级缩短等待。",
                     "隐藏鱼（同名鱼种在另一鱼点出现）：灰色沙丘曳尾鱼（深海）、魂灵面纱（遗迹水域）、岩石凶鲨（风暴海域）；需对应鱼点和隐秘诱饵，4.5%触发。",
-                    "垃圾段内部按鱼点分为垃圾/材料/食物/贵重；贵重10%为钥匙箱。",
+                    "垃圾段内部按鱼点分为垃圾/材料/食物/贵重；材料占比 22%–26%，贵重品中 10% 替换为钥匙或箱子。",
+                    "钥匙与箱子另有每竿独立判定：箱子 1.00%、钥匙 0.50%，受“钥匙与箱子概率”加成；钥匙可用材料在工坊合成（合成 铜钥匙）。",
                 ],
                 "accent": (49, 132, 190),
             },
@@ -1624,6 +1633,7 @@ class McFish(NcatBotPlugin):
                     "鱼点门槛按钓鱼力：河湾0 / 深海20 / 遗迹50 / 风暴80 / 熔岩110 / 极地135 / 荧光160 / 星陨190 / 时之220；每个鱼点2–7条普通鱼，按顺序+0/+0/+20/+45/+60/+75/+90。",
                     "单鱼点每日次数：河湾60 / 深海55 / 遗迹50 / 风暴45 / 熔岩40 / 极地40 / 荧光35 / 星陨35 / 时之30；与全局次数同时生效。",
                     "出售税按鱼点递增：河湾20% / 深海22% / 遗迹25% / 风暴28% / 熔岩32% / 极地34% / 荧光37% / 星陨40% / 时之45%；鱼竿、宝藏与非鱼点物品按20%。",
+                    "收购价随供需变化：每条鱼各自记录卖出量，卖得越多单价越低（最低约15%，贵鱼跌得更快），停售后每天回升，约一周回到基准价附近。",
                     "常驻与前置鱼王的黄金磁石售价封顶 ×3/×5/×8，后置鱼王为 ×10/×30/×100。",
                     "鱼王只在对应鱼点的窗口内出现；窗口期间需要身处该鱼点。",
                     "鱼王窗口每周重新生成，位于09:00–21:00的非整点时段；前置和后置窗口可能重合。",
@@ -2591,6 +2601,102 @@ class McFish(NcatBotPlugin):
                 result[name] = price
         return result
 
+    # ---------- 商店供需 ----------
+    def _market_kind(self, name: str) -> str:
+        if name in KING_INFO:
+            return "king"
+        if name in FISH:
+            return "fish"
+        item_type = str(getattr(self, "_types", {}).get(name, ""))
+        if item_type in ("valuable", "food", "waste"):
+            return item_type
+        return "default"
+
+    def _market_enabled(self, name: str) -> bool:
+        """参与供需定价的物品：可出售的鱼、鱼王、贵重品、食物、垃圾、宝藏。
+
+        隐藏鱼、鱼竿、常驻商品和固定价商品沿用基准价，避免影响已经定好的
+        奖励价值与鱼竿价格。
+        """
+        if name in HIDDEN_FISH or name in ("垃圾", "宝藏诅咒"):
+            return False
+        if name in POLES or name in SHOP_EQUIPMENT_PRICES or name in SHOP_ROD_PRICES:
+            return False
+        if name in FISH or name in KING_INFO or name in ITEMS:
+            return True
+        return self._market_kind(name) in ("valuable", "food", "waste")
+
+    def _ensure_market_table(self) -> None:
+        if getattr(self, "_market_ready", False):
+            return
+        self._db.execute(
+            "CREATE TABLE IF NOT EXISTS market (item TEXT PRIMARY KEY, pressure REAL NOT NULL, updated REAL NOT NULL)"
+        )
+        self._db.commit()
+        self._market_ready = True
+
+    def _market_pressure(self, name: str) -> float:
+        kind = self._market_kind(name)
+        if not hasattr(self, "_db"):
+            return market.rest_pressure(kind)
+        self._ensure_market_table()
+        row = self._db.execute(
+            "SELECT pressure, updated FROM market WHERE item = ?", (name,)
+        ).fetchone()
+        if not row:
+            return market.rest_pressure(kind)
+        days = max(0.0, (time.time() - float(row[1])) / 86400.0)
+        return market.converge(float(row[0]), kind, days)
+
+    def _market_base_price(self, name: str) -> int:
+        prices = getattr(
+            self,
+            "_prices",
+            dict(FISH) | {pole: price for pole, (_, price) in POLES.items()} | ITEMS,
+        )
+        return int(prices.get(name, ITEMS.get(name, 0)))
+
+    def _market_factor(self, name: str) -> float:
+        return market.factor(
+            self._market_pressure(name),
+            self._market_kind(name),
+            self._market_base_price(name),
+        )
+
+    def _market_apply(self, name: str, number: int) -> None:
+        """记录一次卖出对供需的影响；买入不改变 pressure，避免买卖套利。"""
+        if number <= 0 or not self._market_enabled(name) or not hasattr(self, "_db"):
+            return
+        pressure = self._market_pressure(name) + number
+        self._ensure_market_table()
+        self._db.execute(
+            "INSERT OR REPLACE INTO market(item, pressure, updated) VALUES (?, ?, ?)",
+            (name, pressure, time.time()),
+        )
+
+    def _market_sale_price(self, name: str, number: int = 1) -> int:
+        """一次卖出 ``number`` 件的均价：成交量越大，单价越低。"""
+        custom_prices = getattr(self, "_shop_custom_prices", {})
+        if name in custom_prices:
+            return int(custom_prices[name])
+        original = self._market_base_price(name)
+        factor = market.average_factor(
+            self._market_pressure(name),
+            self._market_kind(name),
+            number,
+            original,
+        )
+        return int(original * factor)
+
+    def _market_discounts(self, prices: dict[str, int]) -> dict[str, int]:
+        """把供需系数折算成商店面板与 _shop_price 使用的百分数。"""
+        discounts: dict[str, int] = {}
+        for name in prices:
+            if not self._market_enabled(name):
+                continue
+            discounts[name] = max(1, int(round(self._market_factor(name) * 100)))
+        return discounts
+
     def _shop_data(self) -> tuple[dict[str, int], dict[str, int]]:
         """返回当天价格倍率和跨天延续的库存。"""
         today = date.today().isoformat()
@@ -2603,11 +2709,7 @@ class McFish(NcatBotPlugin):
         prices.update(SHOP_ROD_PRICES)
         if not hasattr(self, "_db"):
             self._shop_custom_prices = {}
-            discounts = {
-                name: random.randint(50, 199)
-                for name in prices
-                if name not in ("垃圾", "宝藏诅咒") and name not in HIDDEN_FISH
-            }
+            discounts = self._market_discounts(prices)
             discounts.update({"木竿": 100, **{name: 100 for name in SHOP_EQUIPMENT_PRICES}, **{name: 100 for name in SHOP_ROD_PRICES}})
             fish = random.choice(list(FISH))
             inventory = {"初始木竿": [{"durable": 30, "maintenance": 0, "induce": 0, "favor": 0}], fish: max(1, 100 - discounts.get(fish, 100))}
@@ -2631,8 +2733,9 @@ class McFish(NcatBotPlugin):
             self._db.commit()
             has_custom_prices = row is None
         if row:
-            discounts = self._rename_shop_mapping(json.loads(row[0]))
             inventory = self._rename_shop_mapping(json.loads(row[1]))
+            # 价格由供需实时计算，不再沿用当天写入的历史折扣（卖出会立刻改变价格）。
+            discounts = self._market_discounts(prices)
             try:
                 custom_prices = json.loads(row[2] or "{}") if has_custom_prices else {}
             except (TypeError, ValueError, json.JSONDecodeError):
@@ -2660,8 +2763,8 @@ class McFish(NcatBotPlugin):
             discounts.update({name: 100 for name in SHOP_EQUIPMENT_PRICES})
             discounts.update({name: 100 for name in SHOP_ROD_PRICES})
             self._db.execute(
-                "UPDATE shop SET inventory = ? WHERE day = ?",
-                (json.dumps(inventory, ensure_ascii=False), today),
+                "UPDATE shop SET inventory = ?, discounts = ? WHERE day = ?",
+                (json.dumps(inventory, ensure_ascii=False), json.dumps(discounts, ensure_ascii=False), today),
             )
             self._db.commit()
             return discounts, inventory
@@ -2691,13 +2794,7 @@ class McFish(NcatBotPlugin):
         if "初始木竿" in previous_inventory and isinstance(previous_inventory["初始木竿"], int):
             previous_inventory["初始木竿"] = self._shop_poles(previous_inventory["初始木竿"], "木竿")
         previous_inventory = self._normalize_shop_inventory(previous_inventory)
-        discounts = {}
-        for name in prices:
-            if name in ("垃圾", "宝藏诅咒") or name in HIDDEN_FISH:
-                continue
-            count = previous_inventory.get(name, 0)
-            count = len(count) if isinstance(count, list) else int(count or 0)
-            discounts[name] = random.randint(90, 109) if count > 150 else random.randint(50, 199)
+        discounts = self._market_discounts(prices)
         discounts["木竿"] = 100
         discounts.update({name: 100 for name in SHOP_EQUIPMENT_PRICES})
         discounts.update({name: 100 for name in SHOP_ROD_PRICES})
@@ -2706,9 +2803,8 @@ class McFish(NcatBotPlugin):
             previous_custom_prices, inventory
         )
         fish = random.choice(list(FISH))
-        inventory[fish] = int(inventory.get(fish, 0)) + 100 - discounts.get(fish, 100)
-        if inventory[fish] < 1:
-            inventory[fish] = 100
+        # 商店每天随机补一条鱼的库存，与当天的供需价格无关。
+        inventory[fish] = min(255, int(inventory.get(fish, 0)) + random.randint(20, 60))
         wood = self._shop_poles(inventory.get("初始木竿", []), "木竿")
         wood.append({"durable": 30, "maintenance": 0, "induce": 0, "favor": 0})
         inventory["初始木竿"] = wood if len(wood) <= 5 else wood[-1:]
@@ -2776,7 +2872,7 @@ class McFish(NcatBotPlugin):
         return prices.get(name, ITEMS.get(name, 0)) * discounts.get(name, 100) // 100
 
     def _shop_price_details(self, name: str, discounts: dict[str, int]) -> tuple[int, int, int]:
-        """返回 (现价, 原价, 涨跌幅)；固定价和自定义价不参与每日折扣。"""
+        """返回 (现价, 原价, 涨跌幅)；固定价和自定义价不参与供需定价。"""
         custom_prices = getattr(self, "_shop_custom_prices", {})
         if name in custom_prices:
             price = int(custom_prices[name])
@@ -3250,6 +3346,24 @@ class McFish(NcatBotPlugin):
             )
         return boundaries
 
+    # 每竿独立的钥匙/箱子判定：不占用垃圾或贵重品位，受「钥匙与箱子概率」加成。
+    BOX_DROP_CHANCE = 0.010
+    KEY_DROP_CHANCE = 0.005
+
+    def _independent_box_key_drop(
+        self, effects: dict[str, float], zone: str
+    ) -> tuple[str, int] | None:
+        bonus = max(0.0, float(effects.get("box", 0.0)))
+        box_chance = self.BOX_DROP_CHANCE * (1.0 + bonus)
+        key_chance = self.KEY_DROP_CHANCE * (1.0 + bonus)
+        roll = random.random()
+        tier = ZONE_BOX_TIER.get(zone, "铜")
+        if roll < box_chance:
+            return BOX_NAMES[tier], 1
+        if roll < box_chance + key_chance:
+            return KEY_NAMES[tier], 1
+        return None
+
     def _original_drop(
         self,
         state: dict,
@@ -3273,6 +3387,10 @@ class McFish(NcatBotPlugin):
             return 5 if axolotl and dropped not in POLES and dropped != AXOLOTL else 1
         boundaries = boundaries or self._zone_boundaries(state)
         effects = self._gear_effects(state)
+        current_zone = str(state.get("fishing_zone", daily_fishing_zone()))
+        fixed_drop = self._independent_box_key_drop(effects, current_zone)
+        if fixed_drop:
+            return fixed_drop
         roll = random.randrange(100)
         zone = None
         # 原插件使用累计区间，剩余 60% 为“赛博空气”。
@@ -3287,7 +3405,6 @@ class McFish(NcatBotPlugin):
         if zone is None:
             return None, 1
         if zone == "waste":
-            current_zone = str(state.get("fishing_zone", daily_fishing_zone()))
             sub = roll_waste_sub(
                 current_zone,
                 random.randrange(100),
@@ -3864,6 +3981,10 @@ class McFish(NcatBotPlugin):
             valuable_bonus=float(gear_effects.get("valuable", 0.0)),
         )
         magic_bait = int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0
+        box_bonus = max(0.0, float(gear_effects.get("box", 0.0)))
+        box_chance = self.BOX_DROP_CHANCE * (1.0 + box_bonus)
+        key_chance = self.KEY_DROP_CHANCE * (1.0 + box_bonus)
+        valuable_box_chance = min(1.0, 0.10 + float(gear_effects.get("box", 0.0))) * categories[3] * waste[3] / 10000
         rod_values, _ = self._rod_probability_map(rod_name, raw_categories[1])
         treasure_values = self._probability_item_map("treasure", categories[0])
         waste_values = self._probability_item_map("waste", categories[3])
@@ -3880,6 +4001,7 @@ class McFish(NcatBotPlugin):
             ("body", f"饰品槽位：{len(state.get('accessories', []))}/{state.get('accessory_slots', 2)}    饰品：{'、'.join(f'{name}{self._enchant_label(self._accessory_level(state, name))}' for name in state.get('accessories', [])) or '无'}    鱼饵：{'、'.join(name for name, count in state.get('active_consumables', {}).items() if int(count) > 0) or '无'}"),
             ("body", f"大类：宝藏 {self._percent_text(categories[0])} / 鱼竿 {self._percent_text(categories[1])} / 普通鱼 {self._percent_text(categories[2])} / 垃圾 {self._percent_text(categories[3])} / 空竿 {self._percent_text(air)}"),
             ("body", f"垃圾内部：垃圾 {waste[0]}% / 材料 {waste[1]}% / 食物 {waste[2]}% / 贵重 {waste[3]}%"),
+            ("body", f"钥匙与箱子：每竿箱子 {box_chance * 100:.2f}% / 钥匙 {key_chance * 100:.2f}%（独立判定，另有贵重品位替换 {valuable_box_chance * 100:.2f}%）"),
             ("heading", "天赋加成"),
         ]
         talent_levels = (state.get("talents") or {}).get("levels") or {}
@@ -4069,6 +4191,10 @@ class McFish(NcatBotPlugin):
             valuable_bonus=float(gear_effects.get("valuable", 0.0)),
         )
         magic_bait = int(state.get("active_consumables", {}).get("魔法鱼饵", 0)) > 0
+        box_bonus = max(0.0, float(gear_effects.get("box", 0.0)))
+        box_chance = self.BOX_DROP_CHANCE * (1.0 + box_bonus)
+        key_chance = self.KEY_DROP_CHANCE * (1.0 + box_bonus)
+        valuable_box_chance = min(1.0, 0.10 + float(gear_effects.get("box", 0.0))) * categories[3] * waste[3] / 10000
         rod_values, blocked_raw = self._rod_probability_map(rod_name, raw_categories[1])
         treasure_values = self._probability_item_map("treasure", categories[0])
         waste_values = self._probability_item_map("waste", categories[3])
@@ -4195,6 +4321,17 @@ class McFish(NcatBotPlugin):
             "aligns": ["l", "r"],
             "icons": True,
             "note": "概率 = 垃圾大类 × 目录权重；材料/贵重品加成只改变垃圾内部比例。",
+        }, {
+            "title": "钥匙与箱子",
+            "headers": ["来源", "每竿概率"],
+            "rows": [
+                ["箱子（" + BOX_NAMES[ZONE_BOX_TIER.get(zone, "铜")] + "）", self._probability_value(box_chance * 100)],
+                ["钥匙（" + KEY_NAMES[ZONE_BOX_TIER.get(zone, "铜")] + "）", self._probability_value(key_chance * 100)],
+                ["贵重品位替换", f"{valuable_box_chance * 100:.2f}%"],
+            ],
+            "weights": [2.6, 1.2],
+            "aligns": ["l", "r"],
+            "note": "钥匙与箱子在每竿开始时独立判定，命中即替代本次其它掉落；贵重品位替换按 10% 额外叠加；钥匙与箱子概率加成已计入。",
         }]
 
         hidden_names = [name for name, item in HIDDEN_FISH.items() if item["zone"] == zone]
@@ -6241,8 +6378,12 @@ class McFish(NcatBotPlugin):
                 continue
             if number <= 0 or not sellable(name):
                 continue
+            unit_price, original, change = self._shop_price_details(name, discounts)
+            if self._market_enabled(name) and name not in getattr(self, "_shop_custom_prices", {}):
+                unit_price = self._market_sale_price(name, number)
+                change = int(round((unit_price / original - 1) * 100)) if original else 0
             player_groups.setdefault(type_label(name), []).append(
-                (name, number, self._shop_price(name, discounts), int(discounts.get(name, 100)) - 100)
+                (name, number, unit_price, change)
             )
         for rows in player_groups.values():
             rows.sort(key=lambda row: row[0])
@@ -6273,7 +6414,7 @@ class McFish(NcatBotPlugin):
         draw.rectangle((0, header_height - 20, width, header_height), fill=(33, 68, 82, 255))
         draw.text((margin, 34), "钓鱼商店", fill=(250, 252, 252, 255), font=self._font(62, bold=True))
         draw.text((margin, 116), "今日上架 · 你的可售物品", fill=(190, 222, 225, 255), font=self._font(25))
-        draw.text((width - margin, 116), "价格随每日折扣变化", fill=(220, 234, 235, 255), font=self._font(21), anchor="ra")
+        draw.text((width - margin, 116), "价格随供需变化 · 卖出越多越便宜", fill=(220, 234, 235, 255), font=self._font(21), anchor="ra")
 
         section_y = header_height + 24
         self._card(draw, (margin, section_y, width - margin, section_y + rod_height))
@@ -6385,7 +6526,7 @@ class McFish(NcatBotPlugin):
                 cursor += max(1, (len(rows) + 1) // 2) * 80
         else:
             draw.text((margin + 30, player_y + 98), "背包没有可出售物品", fill=(92, 112, 117, 255), font=self._font(25))
-        draw.text((margin, height - 28), "材料、装备、卡片不可出售，因此不在列表中显示；当前收购价已含当日折扣，实际出售另计鱼点税、黄金磁石与装备加成。", fill=(92, 112, 117, 255), font=self._font(18))
+        draw.text((margin, height - 28), "材料、装备、卡片不可出售，因此不在列表中显示；显示价就是整堆出售的均价，实际到手另计鱼点税、黄金磁石与装备加成。", fill=(92, 112, 117, 255), font=self._font(18))
         output = Path(self.workspace) / "images" / f"store_{uid}.png"
         output.parent.mkdir(parents=True, exist_ok=True)
         image.save(output, "PNG")
@@ -7177,8 +7318,11 @@ class McFish(NcatBotPlugin):
             if not wastes:
                 await event.reply(text="你的背包不存在该物品", at_sender=False)
                 return
-            discounts, _ = self._shop_data()
-            gross = sum(prices.get(name, 10) * discounts.get(name, 100) // 100 * int(state["pack"].get(name, 0)) for name in wastes)
+            quantities = {name: int(state["pack"].get(name, 0)) for name in wastes}
+            gross = sum(
+                self._market_sale_price(name, quantities[name]) * quantities[name]
+                for name in wastes
+            )
             price = gross * 8 // 10
             found = "\n".join(
                 f"[{index}]{name}  数量: {int(state['pack'][name])}"
@@ -7201,6 +7345,7 @@ class McFish(NcatBotPlugin):
             price = price * (100 - 10 * curse) // 100
             for waste in wastes:
                 self._remove(state, waste, int(state["pack"].get(waste, 0)))
+                self._market_apply(waste, quantities[waste])
             self._economy_change(uid, price, "mcfish_waste_sale")
             self._save(uid, state)
             await event.reply(text=f"出售成功,你赚到了{price}{curse_text}", at_sender=False)
@@ -7259,7 +7404,11 @@ class McFish(NcatBotPlugin):
                         gross += int(unit_price * self._sale_tax_factor(name, state))
                         sold_poles.append((name, pole, unit_price))
             else:
-                unit_price = self._shop_price(name, discounts)
+                unit_price = (
+                    self._market_sale_price(name, number)
+                    if self._market_enabled(name)
+                    else self._shop_price(name, discounts)
+                )
                 if name in FISH:
                     unit_price = fish_sale_price(
                         unit_price,
@@ -7281,7 +7430,7 @@ class McFish(NcatBotPlugin):
                         king_gross = 0
                         for raw_price in captured_prices[:captured_count]:
                             if isinstance(raw_price, dict):
-                                # 捕获快照：已含磁石、当天折扣与鱼点税，不再按当前状态重算。
+                                # 捕获快照：已含磁石、捕获时的市场价与鱼点税，不再按当前状态重算。
                                 king_gross += int(raw_price.get("price", raw_price.get("base", 0)))
                             else:
                                 king_gross += int(
@@ -7339,6 +7488,7 @@ class McFish(NcatBotPlugin):
         gross = gross * (100 - 10 * curse) // 100
         for name, number in items:
             self._remove(state, name, number, selected_indices.get(name))
+            self._market_apply(name, number)
             if name in KING_INFO:
                 prices_by_name = state.get("king_sale_prices", {}).get(name, [])
                 if isinstance(prices_by_name, list):
@@ -7916,6 +8066,36 @@ class McFish(NcatBotPlugin):
         missing = max(0, required - owned)
         return f"{name}：已有{owned}/{required}{unit}，还差{missing}{unit}"
 
+    async def _craft_key(self, event, state: dict, name: str) -> None:
+        gold, items = KEY_RECIPES[name]
+        short = [
+            (item, int(state.get("pack", {}).get(item, 0)), count)
+            for item, count in items.items()
+            if int(state.get("pack", {}).get(item, 0)) < count
+        ]
+        if short:
+            status = "\n".join(
+                self._craft_material_status(item, owned, count, "个") for item, owned, count in short
+            )
+            await event.reply(text=f"合成{name}材料不足：\n{status}")
+            return
+        fee = self._discounted_fee(state, gold)
+        if getattr(self, "_economy", None) and int(
+            self._economy.store.account(str(event.sender.user_id))["balance"]
+        ) < fee:
+            await event.reply(text=f"合成{name}还需要支付{fee}金币手续费")
+            return
+        if not self._charge_fee(str(event.sender.user_id), fee, "mcfish_key_craft"):
+            await event.reply(text="金币不足，无法支付合成手续费")
+            return
+        self._advance_tasks(state, spend=fee)
+        for item, count in items.items():
+            self._remove(state, item, count)
+        self._add(state, name)
+        self._save(str(event.sender.user_id), state)
+        used = "、".join(f"{item}×{count}" for item, count in items.items())
+        await event.reply(text=f"成功合成{name}（消耗{used}，手续费{fee}金币）")
+
     async def _craft(self, event, state: dict, name: str) -> None:
         self._ensure_accessory_state(state)
         has_level_state = "fish_level" in state or "fish_xp" in state
@@ -7924,6 +8104,9 @@ class McFish(NcatBotPlugin):
             name = POLE_ALIASES[name]
         if has_level_state and name in POLES and player_level < rod_unlock_level(name):
             await event.reply(text=f"你的钓鱼等级为{player_level}，{name}需要等级{rod_unlock_level(name)}才能合成")
+            return
+        if name in KEY_RECIPES:
+            await self._craft_key(event, state, name)
             return
         if name in EQUIPMENT:
             required = EQUIPMENT[name]["fragments"]
@@ -8161,10 +8344,8 @@ class McFish(NcatBotPlugin):
         if number <= 0:
             await event.reply(text="吃的数量至少为 1")
             return
-        restore = FOOD_RESTORE.get(name)
-        if restore:
-            restore = max(1, int(restore * (1.0 + self._gear_effects(state).get("food", 0.0))))
-        if not restore:
+        base = FOOD_RESTORE.get(name)
+        if not base:
             await event.reply(text=f"未知食物：{name}")
             return
         owned = int(state.get("pack", {}).get(name, 0))
@@ -8172,13 +8353,29 @@ class McFish(NcatBotPlugin):
             await event.reply(text=f"{name}：数量 0")
             return
         number = min(number, owned)
-        remaining = max(0, 15 - int(state.get("food_today", 0)))
+        bonus = float(self._gear_effects(state).get("food", 0.0))
+        remaining = max(0, int(15 * (1.0 + bonus)) - int(state.get("food_today", 0)))
         used_today = int(state.get("fish_today", 0))
-        gain = min(restore * number, remaining, used_today)
-        if gain <= 0:
+        room = min(remaining, used_today)
+        if room <= 0:
             await event.reply(text=f"今日已用 {used_today}/{self._daily_limit(state)}")
             return
-        used = max(1, (gain + restore - 1) // restore)
+        # 加成后单次回复量通常不是整数：小数部分保存到 food_carry，
+        # 下次食用继续累计，避免 int() 截断让低档食物完全吃不到加成。
+        per = base * (1.0 + bonus)
+        carry = float(state.get("food_carry", 0.0) or 0.0)
+        gain = used = 0
+        while used < number and gain < room:
+            total = per + carry
+            step = max(1, int(total + 1e-9))
+            carry = max(0.0, total - step)
+            used += 1
+            granted = min(step, room - gain)
+            gain += granted
+            if granted < step:
+                carry = 0.0
+                break
+        state["food_carry"] = round(carry, 4)
         self._remove(state, name, used)
         state["fish_today"] = max(0, used_today - gain)
         zone_key = str(state.get("fishing_zone", ""))
@@ -8188,8 +8385,18 @@ class McFish(NcatBotPlugin):
             zone_today[zone_key] = max(0, zone_used - min(gain, zone_used))
         state["food_today"] = int(state.get("food_today", 0)) + gain
         self._save(str(event.sender.user_id), state)
+        detail_parts = []
+        if bonus > 0:
+            detail_parts.append(f"{used} 个 × {per:.2f} 次")
+            if carry > 0:
+                detail_parts.append(f"余 {carry:.2f} 次记入下次")
+        detail = f"（{'，'.join(detail_parts)}）" if detail_parts else ""
         await event.reply(
-            text=f"{name} ×{used}：恢复 {gain} 次，今日已用 {state['fish_today']}/{self._daily_limit(state)}"
+            text=(
+                f"{name} ×{used}：恢复 {gain} 次{detail}，"
+                f"今日已用 {state['fish_today']}/{self._daily_limit(state)}，"
+                f"食物回复 {state['food_today']}/{int(15 * (1.0 + bonus))}"
+            )
         )
 
     def _talent_text(self, state: dict, refunded: int = 0) -> str:

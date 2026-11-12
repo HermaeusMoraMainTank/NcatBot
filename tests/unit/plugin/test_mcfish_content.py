@@ -107,6 +107,8 @@ def test_original_drop_splits_waste_into_material(monkeypatch):
     module = importlib.import_module("McFish.McFish")
     plugin = McFish.__new__(McFish)
     plugin._load_original_data()
+
+    plugin._independent_box_key_drop = lambda _effects, _zone: None
     # 第一次 roll 落入 waste，第二次 roll 落入材料的 18% 区间
     rolls = iter((0, 80))
     monkeypatch.setattr(module.random, "randrange", lambda _limit: next(rolls))
@@ -126,7 +128,8 @@ def test_original_drop_can_yield_a_key(monkeypatch):
     module = importlib.import_module("McFish.McFish")
     plugin = McFish.__new__(McFish)
     plugin._load_original_data()
-    # waste 子类落到“贵重”，再用 0.0 命中 10% 钥匙/箱子与钥匙分支
+    # 贵重品位替换：0.0 命中 10% 钥匙/箱子与钥匙分支；独立判定单独关掉。
+    plugin._independent_box_key_drop = lambda _effects, _zone: None
     rolls = iter((0, 99))
     monkeypatch.setattr(module.random, "randrange", lambda _limit: next(rolls))
     monkeypatch.setattr(module.random, "random", lambda: 0.0)
@@ -209,6 +212,67 @@ def test_eat_food_respects_the_daily_restore_cap():
     assert state["pack"]["绿色海藻"] == 4
 
 
+def test_food_talent_rank_one_still_adds_value_to_one_restore_food():
+    plugin = McFish.__new__(McFish)
+    plugin._save = lambda _uid, _state: None
+    state = {
+        "pack": {"绿色海藻": 4},
+        "fish_today": 10,
+        "fish_level": 50,
+        "food_today": 0,
+        "talents": {"levels": {"cooking": 1}},
+    }
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+
+    asyncio.run(plugin._eat_food(event, state, "绿色海藻 4"))
+
+    # 1 × 1.25 × 4 = 5 次：小数累计后第 4 个食物回复 2 次。
+    assert state["pack"]["绿色海藻"] == 0
+    assert state["food_today"] == 5
+    assert state["fish_today"] == 5
+
+
+def test_food_talent_fraction_carries_between_meals():
+    plugin = McFish.__new__(McFish)
+    plugin._save = lambda _uid, _state: None
+    state = {
+        "pack": {"绿色海藻": 4},
+        "fish_today": 12,
+        "fish_level": 50,
+        "food_today": 0,
+        "talents": {"levels": {"cooking": 1}},
+    }
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+
+    asyncio.run(plugin._eat_food(event, state, "绿色海藻 2"))
+    assert state["food_today"] == 2
+    assert state["food_carry"] == 0.5
+
+    asyncio.run(plugin._eat_food(event, state, "绿色海藻 2"))
+    assert state["food_today"] == 5
+    assert state["food_carry"] == 0.0
+
+
+def test_food_talent_raises_the_daily_restore_cap():
+    plugin = McFish.__new__(McFish)
+    plugin._save = lambda _uid, _state: None
+    state = {
+        "pack": {"蓝色海藻": 5},
+        "fish_today": 40,
+        "fish_level": 60,
+        "food_today": 15,
+        "talents": {"levels": {"cooking": 3}},
+    }
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+
+    asyncio.run(plugin._eat_food(event, state, "蓝色海藻 5"))
+
+    # 上限 15 × 1.75 = 26：还能补 11 次，3 × 1.75 = 5.25 次/个。
+    assert state["food_today"] == 26
+    assert state["fish_today"] == 29
+    assert state["pack"]["蓝色海藻"] == 2
+
+
 def test_card_text_shows_collection_and_pity():
     plugin = McFish.__new__(McFish)
     text = plugin._card_text({"cards": {"克己": 1}, "card_pity": {"deep": 249}})
@@ -219,9 +283,10 @@ def test_card_text_shows_collection_and_pity():
 
 
 def test_adjusted_waste_split_applies_gear_bonuses_from_junk():
+    base = C.waste_split("bay")
     junk, material, food, valuable = C.adjusted_waste_split("bay", 0.5, 0.5)
-    assert material == round(18 * 1.5)
-    assert valuable == round(2 * 1.5)
+    assert material == round(base[1] * 1.5)
+    assert valuable == round(base[3] * 1.5)
     assert junk == 100 - material - food - valuable
     assert C.roll_waste_sub("bay", 70, material_bonus=0.5) == "material"
 
@@ -261,3 +326,89 @@ def test_state_migrates_old_card_names_to_wiki_cards():
     assert state["cards"]["克己"] == 1
     assert state["cards"]["灵光"] == 1
     assert "潮信" not in state["cards"]
+
+def test_independent_box_and_key_roll_uses_the_zone_tier(monkeypatch):
+    import importlib
+
+    module = importlib.import_module("McFish.McFish")
+    plugin = McFish.__new__(McFish)
+    rolls = iter([0.0, 0.012, 0.5])
+    monkeypatch.setattr(module.random, "random", lambda: next(rolls))
+
+    assert plugin._independent_box_key_drop({}, "ruin") == ("上锁的铁制箱子", 1)
+    assert plugin._independent_box_key_drop({}, "ruin") == ("铁钥匙", 1)
+    assert plugin._independent_box_key_drop({}, "ruin") is None
+
+
+def test_independent_box_roll_scales_with_the_box_bonus(monkeypatch):
+    import importlib
+
+    module = importlib.import_module("McFish.McFish")
+    plugin = McFish.__new__(McFish)
+    rolls = iter([0.011, 0.011])
+    monkeypatch.setattr(module.random, "random", lambda: next(rolls))
+
+    # 满级寻宝直觉 +24%：箱子 1.24% / 钥匙 0.62%，0.011 命中箱子；
+    # 没有加成时 0.011 落在钥匙区间。
+    assert plugin._independent_box_key_drop({"box": 0.24}, "bay") == ("上锁的铜制箱子", 1)
+    assert plugin._independent_box_key_drop({}, "bay") == ("铜钥匙", 1)
+
+
+def test_key_recipes_cover_every_key_tier():
+    from McFish.mcfish_content import KEY_NAMES, KEY_RECIPES
+
+    assert set(KEY_RECIPES) == set(KEY_NAMES.values())
+    for key, (gold, items) in KEY_RECIPES.items():
+        assert gold > 0
+        assert items
+        for material, count in items.items():
+            assert material in C.MATERIAL_NAMES
+            assert count >= 1
+
+
+def test_craft_key_consumes_materials_and_fee():
+    import asyncio
+
+    plugin = McFish.__new__(McFish)
+    plugin._save = lambda *_args: None
+    plugin._discounted_fee = lambda _state, fee: fee
+    plugin._charge_fee = lambda *_args: True
+    plugin._advance_tasks = lambda _state, spend=0: None
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {"pack": {"铜矿石": 3}}
+
+    asyncio.run(plugin._craft_key(event, state, "铜钥匙"))
+
+    assert state["pack"]["铜矿石"] == 1
+    assert state["pack"]["铜钥匙"] == 1
+    assert "成功合成铜钥匙" in event.reply.await_args.kwargs["text"]
+
+
+def test_craft_key_reports_missing_materials():
+    import asyncio
+
+    plugin = McFish.__new__(McFish)
+    plugin._save = lambda *_args: None
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {"pack": {"铜矿石": 1}}
+
+    asyncio.run(plugin._craft_key(event, state, "铜钥匙"))
+
+    message = event.reply.await_args.kwargs["text"]
+    assert "合成铜钥匙材料不足" in message
+    assert "铜矿石：已有1/2个，还差1个" in message
+    assert int(state["pack"].get("铜钥匙", 0)) == 0
+
+
+def test_craft_command_dispatches_key_recipes():
+    import asyncio
+
+    plugin = McFish.__new__(McFish)
+    plugin._ensure_accessory_state = lambda _state: None
+    plugin._craft_key = AsyncMock()
+    event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
+    state = {"pack": {}}
+
+    asyncio.run(plugin._craft(event, state, "灿阳金属钥匙"))
+
+    plugin._craft_key.assert_awaited_once()
