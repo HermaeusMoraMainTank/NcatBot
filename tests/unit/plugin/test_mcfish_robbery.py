@@ -1124,6 +1124,138 @@ def test_robbery_loot_cap_bypass_user_keeps_full_amount(monkeypatch):
     ]
 
 
+def test_robbery_loot_cap_bypasses_second_special_user(monkeypatch):
+    """RB-10: 635773721 与 273421673 一样不受身家限制。"""
+    import asyncio
+    import importlib
+
+    robbery_module = importlib.import_module("Robbery.Robbery")
+    monkeypatch.setattr(robbery_module.random, "random", lambda: 0.9)
+    monkeypatch.setattr(robbery_module.random, "randint", lambda _low, high: high)
+    transfers = []
+
+    class Store:
+        def account(self, user_id):
+            return {"balance": 1000 if user_id == "635773721" else 10_000_000}
+
+        def change_balance(self, *args, **kwargs):
+            transfers.append((args, kwargs))
+            return {"ok": True}
+
+    plugin = Robbery.__new__(Robbery)
+    plugin._used_today = lambda *_args: (False, False)
+    plugin._record = lambda *_args: None
+    plugin._economy_plugin = lambda: SimpleNamespace(store=Store())
+    plugin.get_config = lambda key, default=None: {
+        "victim_min_balance": 1000,
+        "max_loot_balance_ratio": 1.0,
+        "guaranteed_failure_users": [],
+    }.get(key, default)
+    event = SimpleNamespace(
+        raw_message="打劫",
+        message=[SimpleNamespace(user_id="victim")],
+        sender=SimpleNamespace(user_id="635773721"),
+        reply=AsyncMock(),
+    )
+
+    asyncio.run(plugin.handle_message(event))
+
+    text = event.reply.await_args.kwargs["text"]
+    assert "打劫成功" in text
+    assert "（受身家限制）" not in text
+    assert transfers == [
+        (("victim", -67_500), {"reason": "robbery_loss", "related_user_id": "635773721"}),
+        (("635773721", 270_000), {"reason": "robbery_reward", "related_user_id": "victim"}),
+    ]
+
+
+def test_robbery_special_users_have_normal_odds_against_each_other(monkeypatch):
+    """RB-11: 保护名单内账号互相打劫时按正常概率结算。"""
+    import asyncio
+    import importlib
+
+    robbery_module = importlib.import_module("Robbery.Robbery")
+    monkeypatch.setattr(robbery_module.random, "random", lambda: 0.9)
+    monkeypatch.setattr(robbery_module.random, "randint", lambda _low, high: high)
+    transfers = []
+
+    class Store:
+        def account(self, _user_id):
+            return {"balance": 500_000}
+
+        def change_balance(self, *args, **kwargs):
+            transfers.append((args, kwargs))
+            return {"ok": True}
+
+    plugin = Robbery.__new__(Robbery)
+    plugin._used_today = lambda *_args: (False, False)
+    plugin._record = lambda *_args: None
+    plugin._economy_plugin = lambda: SimpleNamespace(store=Store())
+    plugin.get_config = lambda key, default=None: {
+        "victim_min_balance": 1000,
+        "guaranteed_failure_users": ["273421673", "635773721"],
+    }.get(key, default)
+    event = SimpleNamespace(
+        raw_message="打劫",
+        message=[SimpleNamespace(user_id="635773721")],
+        sender=SimpleNamespace(user_id="273421673"),
+        reply=AsyncMock(),
+    )
+
+    asyncio.run(plugin.handle_message(event))
+
+    text = event.reply.await_args.kwargs["text"]
+    assert "打劫成功" in text
+    assert transfers == [
+        (("635773721", -4_375), {"reason": "robbery_loss", "related_user_id": "273421673"}),
+        (("273421673", 17_500), {"reason": "robbery_reward", "related_user_id": "635773721"}),
+    ]
+
+
+def test_robbery_exempt_user_can_be_robbed_normally(monkeypatch):
+    """RB-12: 豁免名单可临时解除受保护账号的被抢保护。"""
+    import asyncio
+    import importlib
+
+    robbery_module = importlib.import_module("Robbery.Robbery")
+    monkeypatch.setattr(robbery_module.random, "random", lambda: 0.9)
+    monkeypatch.setattr(robbery_module.random, "randint", lambda _low, high: high)
+    transfers = []
+
+    class Store:
+        def account(self, _user_id):
+            return {"balance": 500_000}
+
+        def change_balance(self, *args, **kwargs):
+            transfers.append((args, kwargs))
+            return {"ok": True}
+
+    plugin = Robbery.__new__(Robbery)
+    plugin._used_today = lambda *_args: (False, False)
+    plugin._record = lambda *_args: None
+    plugin._economy_plugin = lambda: SimpleNamespace(store=Store())
+    plugin.get_config = lambda key, default=None: {
+        "victim_min_balance": 1000,
+        "guaranteed_failure_users": ["273421673", "635773721"],
+        "guaranteed_failure_exempt_users": ["635773721"],
+    }.get(key, default)
+    event = SimpleNamespace(
+        raw_message="打劫",
+        message=[SimpleNamespace(user_id="635773721")],
+        sender=SimpleNamespace(user_id="robber"),
+        reply=AsyncMock(),
+    )
+
+    asyncio.run(plugin.handle_message(event))
+
+    text = event.reply.await_args.kwargs["text"]
+    assert "打劫成功" in text
+    assert transfers == [
+        (("635773721", -4_375), {"reason": "robbery_loss", "related_user_id": "robber"}),
+        (("robber", 17_500), {"reason": "robbery_reward", "related_user_id": "635773721"}),
+    ]
+
+
 def test_robbery_test_profile_uses_configured_robber_failure_rate(monkeypatch):
     """RB-06: 测试账号发起抢劫时使用后台配置的失败率。"""
     import asyncio
@@ -1312,6 +1444,8 @@ def test_mcfish_dolphin_never_returns_an_empty_cast(tmp_path: Path, monkeypatch)
     plugin = McFish.__new__(McFish)
     plugin.workspace = tmp_path
     plugin._load_original_data()
+
+    plugin._independent_box_key_drop = lambda _effects, _zone: None
     monkeypatch.setattr(mcfish_module, "rod_drop_allowed", lambda *_args, **_kwargs: False)
     rolls = iter([1, 0, 0])
     monkeypatch.setattr(mcfish_module.random, "randrange", lambda _stop: next(rolls))
@@ -1337,6 +1471,8 @@ def test_mcfish_blocked_pole_still_becomes_air_without_dolphin(tmp_path: Path, m
     plugin = McFish.__new__(McFish)
     plugin.workspace = tmp_path
     plugin._load_original_data()
+
+    plugin._independent_box_key_drop = lambda _effects, _zone: None
     monkeypatch.setattr(mcfish_module, "rod_drop_allowed", lambda *_args, **_kwargs: False)
     rolls = iter([1, 0])
     monkeypatch.setattr(mcfish_module.random, "randrange", lambda _stop: next(rolls))
@@ -1442,8 +1578,8 @@ def test_mcfish_help_groups_commands_into_feature_tables():
         rows for title, _accent, rows in MCFISH_COMMAND_HELP_GROUPS
         if title == "食物与开箱"
     ))
-    assert "吃海藻 绿色海藻 3" in food_rows
-    assert "吃食物 绿色海藻 3" in food_rows
+    assert any("吃海藻 绿色海藻 3" in label for label in food_rows)
+    assert any("吃食物 绿色海藻 3" in label for label in food_rows)
     assert "开箱 上锁的铜制箱子" in food_rows
 
 
@@ -1694,6 +1830,8 @@ def test_mcfish_original_drop_uses_original_probability_intervals(monkeypatch):
 
     plugin = McFish.__new__(McFish)
     plugin._load_original_data()
+
+    plugin._independent_box_key_drop = lambda _effects, _zone: None
     state = {"pack": {}, "equip": None}
     rolls = iter((0, 0))
     module = importlib.import_module("McFish.McFish")
@@ -1708,6 +1846,8 @@ def test_mcfish_rod_drop_keeps_original_weights_with_next_tier_limit(monkeypatch
 
     plugin = McFish.__new__(McFish)
     plugin._load_original_data()
+
+    plugin._independent_box_key_drop = lambda _effects, _zone: None
     module = importlib.import_module("McFish.McFish")
     boundaries = (0, 0, 4, 4, 4)
 
@@ -2355,6 +2495,7 @@ def test_mcfish_waste_sale_matches_full_original_listing_order():
     plugin._wastes = ["腐肉", "碗", "海草", "帽子", "绊线钩", "木棍", "骨头", "皮革", "鞋子", "瓶子"]
     plugin._prices = {name: 10 for name in plugin._wastes}
     plugin._shop_data = lambda: ({name: 100 for name in plugin._wastes}, {})
+    plugin._market_sale_price = lambda _name, _number=1: 10
     plugin._choose = AsyncMock(return_value=SimpleNamespace(key="cancel"))
     state = {"pack": {
         "腐肉": 19, "碗": 20, "海草": 15, "帽子": 16, "绊线钩": 17,
@@ -2810,6 +2951,8 @@ def test_mcfish_sells_legacy_fish_king_without_captured_length_record():
     plugin.get_config = lambda key, default=None: 0.8 if key == "sell_tax" else default
     plugin._shop_data = lambda: ({"风暴海龙": 125}, {})
     plugin._accessory_effect = lambda _state, name, key, default: 100.0 if (name, key) == ("黄金磁石", "king_price") else default
+
+    plugin._market_sale_price = lambda _name, _number=1: 2000
     event = SimpleNamespace(
         sender=SimpleNamespace(user_id="100"),
         reply=AsyncMock(),
@@ -3123,6 +3266,8 @@ def test_mcfish_drop_quantity_is_five_only_while_equipped_with_axolotl(monkeypat
     mcfish_module = importlib.import_module("McFish.McFish")
     monkeypatch.setattr(mcfish_module.random, "randrange", lambda _stop: 0)
     plugin = McFish.__new__(McFish)
+
+    plugin._independent_box_key_drop = lambda _effects, _zone: None
     plugin._catalog = {"分类": [
         {"类型": "fish", "概率[0-100)": 50},
         {"类型": "treasure", "概率[0-100)": 50},
@@ -3158,7 +3303,7 @@ def test_mcfish_help_documents_every_special_mechanic():
         "超过100条",
         "满75点自动获得1本净化书",
         "每满10次获得1个宝藏诅咒",
-        "约50%–199%",
+        "收购价越低",
         "半价福利",
     ):
         assert keyword in text
@@ -4203,7 +4348,7 @@ def test_mcfish_equip_command_accepts_gear_ring():
 
 
 def test_mcfish_probability_panel_shows_talent_material_bonus(tmp_path: Path):
-    from McFish.mcfish_content import adjusted_waste_split
+    from McFish.mcfish_content import adjusted_waste_split, waste_split
 
     plugin = McFish.__new__(McFish)
     plugin.workspace = tmp_path
@@ -4222,13 +4367,14 @@ def test_mcfish_probability_panel_shows_talent_material_bonus(tmp_path: Path):
     summary, tables = plugin._probability_current_tables("100", state)
     waste_line = next(value for label, value, *_rest in summary if label == "垃圾内部")
     expected = adjusted_waste_split("bay", material_bonus=0.18)
+    base_material = waste_split("bay")[1]
     assert f"材料 {expected[1]}%" in waste_line
 
     talent_table = next(section for section in tables if section["title"] == "天赋加成")
     assert ["材料专家", "3/3", "材料产出概率 +18%"] in talent_table["rows"]
 
     source_table = next(section for section in tables if section["title"] == "概率来源")
-    assert ["垃圾·材料", f"{expected[1]}%（基础18% + 材料专家3级 +18%）"] in source_table["rows"]
+    assert ["垃圾·材料", f"{expected[1]}%（基础{base_material}% + 材料专家3级 +18%）"] in source_table["rows"]
 
     detail = plugin._probability_detail_text(state)
     assert "材料专家 3/3：材料产出概率 +18%" in detail

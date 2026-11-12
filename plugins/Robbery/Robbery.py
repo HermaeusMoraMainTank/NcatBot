@@ -9,6 +9,21 @@ from pathlib import Path
 from ncatbot.core import registrar
 from ncatbot.plugin import NcatBotPlugin
 
+DEFAULT_BASE_STOLEN_TIERS = [
+    {"min_balance": 1_000_000, "base": 20000},
+    {"min_balance": 100_000, "base": 5000},
+    {"min_balance": 10_000, "base": 1000},
+    {"min_balance": 0, "base": 500},
+]
+
+ROBBERY_HELP = (
+    "打劫说明：\n"
+    "- 打劫 @对方 或 打劫 对方QQ\n"
+    "- 双方钱包都要有 1000 金币以上；每天发起和被打劫各限一次。\n"
+    "- 成功按对方余额档位拿钱，失败要赔给对方一部分。\n"
+    "- 发「打劫帮助」随时看这条。"
+)
+
 
 class Robbery(NcatBotPlugin):
     name = "Robbery"
@@ -21,7 +36,14 @@ class Robbery(NcatBotPlugin):
             "success_rate": 0.4,
             "victim_min_balance": 1000,
             "daily_limit": True,
+            "stolen_balance_ratio": 0.025,
+            "base_stolen_tiers": DEFAULT_BASE_STOLEN_TIERS,
+            "max_stolen": 10000,
+            "max_stolen_ratio": 0.10,
+            "max_loot_balance_ratio": 1.0,
+            "loot_cap_bypass_users": ["273421673", "635773721"],
             "guaranteed_failure_users": ["273421673", "635773721"],
+            "guaranteed_failure_exempt_users": [],
             # Backend-only test profile. These fields are never included in user replies.
             "test_user_profiles": {
                 "10123121": {
@@ -90,9 +112,40 @@ class Robbery(NcatBotPlugin):
         return cls._rate(profile.get(key, default), default)
 
     @staticmethod
-    def _robbery_amount(victim_balance: int, balance_ratio: float = 0.05) -> int:
-        ratio_limit = int(max(0, int(victim_balance)) * max(0.0, balance_ratio))
-        return min(random.randint(0, ratio_limit) + 500, 10000)
+    def _ratio(value: object, default: float) -> float:
+        try:
+            return max(0.0, float(value))
+        except (TypeError, ValueError):
+            return default
+
+    @staticmethod
+    def _base_stolen_amount(victim_balance: int, tiers: object) -> int:
+        balance = max(0, int(victim_balance))
+        parsed: list[tuple[int, int]] = []
+        for tier in tiers if isinstance(tiers, list) else []:
+            if not isinstance(tier, dict):
+                continue
+            try:
+                parsed.append((int(tier.get("min_balance", 0)), int(tier.get("base", 0))))
+            except (TypeError, ValueError):
+                continue
+        for minimum, base in sorted(parsed, reverse=True):
+            if balance >= minimum:
+                return max(0, base)
+        return 0
+
+    @staticmethod
+    def _robbery_amount(
+        victim_balance: int,
+        balance_ratio: float = 0.025,
+        base_amount: int = 500,
+        max_stolen: int = 10000,
+        max_stolen_ratio: float = 0.10,
+    ) -> int:
+        balance = max(0, int(victim_balance))
+        ratio_limit = int(balance * max(0.0, balance_ratio))
+        ceiling = max(max(0, int(max_stolen)), int(balance * max(0.0, max_stolen_ratio)))
+        return min(random.randint(0, ratio_limit) + max(0, int(base_amount)), ceiling)
 
     @staticmethod
     def _loss_amount(stolen: int, loss_ratio: float | None = None) -> int:
@@ -104,6 +157,9 @@ class Robbery(NcatBotPlugin):
     async def handle_message(self, event) -> None:
         text = (event.raw_message or "").strip()
         if not text.startswith("打劫"):
+            return
+        if text in ("打劫帮助", "打劫 帮助"):
+            await event.reply(text=ROBBERY_HELP, at_sender=False)
             return
         victim_id = self._at_user(event)
         if victim_id is None:
@@ -139,19 +195,51 @@ class Robbery(NcatBotPlugin):
             return
         victim_profile = self._test_profile(victim_id)
         robber_profile = self._test_profile(robber_id)
+        base_ratio = self._rate(self.get_config("stolen_balance_ratio", 0.025), 0.025)
+        base_amount = self._base_stolen_amount(
+            victim_balance,
+            self.get_config("base_stolen_tiers", DEFAULT_BASE_STOLEN_TIERS),
+        )
         stolen = self._robbery_amount(
             victim_balance,
-            self._profile_rate(victim_profile, "stolen_balance_ratio", 0.05),
+            self._profile_rate(victim_profile, "stolen_balance_ratio", base_ratio),
+            base_amount,
+            self.get_config("max_stolen", 10000),
+            self._rate(self.get_config("max_stolen_ratio", 0.10), 0.10),
         )
-        guaranteed_failure = self.get_config(
+        loot_cap_users = {
+            str(value)
+            for value in (
+                self.get_config("loot_cap_bypass_users", ["273421673", "635773721"]) or []
+            )
+        }
+        loot_cap_ratio = self._ratio(self.get_config("max_loot_balance_ratio", 1.0), 1.0)
+        capped = False
+        if robber_id not in loot_cap_users and loot_cap_ratio > 0:
+            loot_cap = int(robber_balance * loot_cap_ratio)
+            if stolen > loot_cap:
+                stolen = loot_cap
+                capped = True
+        protected = self.get_config(
             "guaranteed_failure_users", ["273421673", "635773721"]
         ) or []
+        protected_users = {str(value) for value in protected}
+        exempt_users = {
+            str(value)
+            for value in (self.get_config("guaranteed_failure_exempt_users", []) or [])
+        }
         base_success_rate = self._rate(self.get_config("success_rate", 0.4), 0.4)
         success_rate = self._profile_rate(victim_profile, "victim_success_rate", base_success_rate)
         failure_rate = self._profile_rate(
             robber_profile, "robbery_failure_rate", 1.0 - success_rate
         )
-        if victim_id in {str(value) for value in guaranteed_failure} or random.random() < failure_rate:
+        # 保护名单内的账号互相打劫时按正常概率结算；豁免名单临时解除受害者保护。
+        forced_failure = (
+            victim_id in protected_users
+            and victim_id not in exempt_users
+            and robber_id not in protected_users
+        )
+        if forced_failure or random.random() < failure_rate:
             compensation = min(random.randint(1, max(1, stolen // 2)), robber_balance)
             economy.transfer_balance(robber_id, victim_id, compensation, reason="robbery_failure")
             await event.reply(text=f"打劫失败，赔偿对方 {compensation} 金币")
@@ -165,4 +253,7 @@ class Robbery(NcatBotPlugin):
         economy.change_balance(victim_id, -loss, reason="robbery_loss", related_user_id=robber_id)
         economy.change_balance(robber_id, stolen, reason="robbery_reward", related_user_id=victim_id)
         self._record(victim_id, robber_id)
-        await event.reply(text=f"打劫成功，获得 {stolen} 金币；对方实际损失 {loss} 金币")
+        suffix = "（受身家限制）" if capped else ""
+        await event.reply(
+            text=f"打劫成功，获得 {stolen} 金币；对方实际损失 {loss} 金币{suffix}"
+        )
