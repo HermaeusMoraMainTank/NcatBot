@@ -354,156 +354,137 @@ UPGRADES = {
 }
 
 # 任务无需接取。任务池按难度和钓鱼等级分档，周期开始时抽取并保存任务快照。
-# 低档任务仍可能出现在高等级玩家的任务板上，但不领取就不会产生消耗。
-TASK_STATE_VERSION = 5
-PERMANENT_TASK_STATE_VERSION = 1
+# 低档简单任务仍会出现在高等级玩家的任务板上，但不领取就不会产生消耗。
+TASK_STATE_VERSION = 6
 TASK_DIFFICULTY_LABELS = {"simple": "简单", "medium": "中等", "complex": "复杂"}
 TASK_LEVEL_TIERS = (
     {"id": "1-5", "label": "1-5级", "min": 1, "max": 5},
-    {"id": "6-10", "label": "5-10级", "min": 6, "max": 10},
-    {"id": "11-20", "label": "10-20级", "min": 11, "max": 20},
-    {"id": "21-30", "label": "20-30级", "min": 21, "max": 30},
-    {"id": "31+", "label": "30级+", "min": 31, "max": 9999},
+    {"id": "6-10", "label": "6-10级", "min": 6, "max": 10},
+    {"id": "11-20", "label": "11-20级", "min": 11, "max": 20},
+    {"id": "21-35", "label": "21-35级", "min": 21, "max": 35},
+    {"id": "36-50", "label": "36-50级", "min": 36, "max": 50},
+    {"id": "51-70", "label": "51-70级", "min": 51, "max": 70},
+    {"id": "71-100", "label": "71-100级", "min": 71, "max": 9999},
 )
 
-# 每个池条目同时提供每日/每周版本，实际任务由 _task_definitions 组合抽取。
-TASK_POOL = (
-    {
-        "id": "starter_cod_supply", "type": "delivery", "difficulty": "simple", "level_tier": "1-5", "label": "河湾基础补给",
-        "requirements": {"daily": {"鳕鱼": 6}, "weekly": {"鳕鱼": 18}},
-        "rewards": {"daily": {"xp": 20, "items": {"鳕鱼": 10}}, "weekly": {"xp": 70, "items": {"鳕鱼": 30}}},
-    },
-    {
-        "id": "starter_salmon_order", "type": "delivery", "difficulty": "simple", "level_tier": "1-5", "label": "河湾鲜鱼单",
-        "requirements": {"daily": {"鲑鱼": 4}, "weekly": {"鲑鱼": 12}},
-        "rewards": {"daily": {"xp": 25, "gold": 35}, "weekly": {"xp": 80, "gold": 120}},
-    },
-    {
-        "id": "starter_mixed_order", "type": "delivery", "difficulty": "medium", "level_tier": "1-5", "label": "小型混合订单",
-        "requirements": {"daily": {"鳕鱼": 10, "鲑鱼": 4}, "weekly": {"鳕鱼": 30, "鲑鱼": 12}},
-        "rewards": {"daily": {"xp": 45, "fragments": 4}, "weekly": {"xp": 140, "fragments": 12}},
-    },
-    {
-        "id": "starter_purification", "type": "delivery", "difficulty": "complex", "level_tier": "1-5", "label": "初级净化供奉",
-        "requirements": {"daily": {"鳕鱼": 20, "鲑鱼": 8}, "weekly": {"鳕鱼": 50, "鲑鱼": 20}},
-        "rewards": {"daily": {"xp": 80, "items": {"魔法鱼饵": 1, "木竿": 1}}, "weekly": {"xp": 220, "items": {"魔法鱼饵": 2}}},
-    },
-    {
-        "id": "apprentice_cod_order", "type": "delivery", "difficulty": "simple", "level_tier": "6-10", "label": "熟练渔户鳕鱼单",
-        "requirements": {"daily": {"鳕鱼": 12}, "weekly": {"鳕鱼": 36}},
-        "rewards": {"daily": {"xp": 60, "gold": 70}, "weekly": {"xp": 180, "gold": 240}},
-    },
-    {
-        "id": "apprentice_mixed_order", "type": "delivery", "difficulty": "medium", "level_tier": "6-10", "label": "熟练渔户混合单",
-        "requirements": {"daily": {"鲑鱼": 15, "热带鱼": 5}, "weekly": {"鲑鱼": 45, "热带鱼": 15}},
-        "rewards": {"daily": {"xp": 120, "fragments": 8}, "weekly": {"xp": 320, "fragments": 22}},
-    },
-    {
-        "id": "apprentice_purification", "type": "delivery", "difficulty": "complex", "level_tier": "6-10", "label": "进阶净化供奉",
-        "requirements": {"daily": {"鳕鱼": 30, "鲑鱼": 15}, "weekly": {"鳕鱼": 75, "鲑鱼": 35}},
-        "rewards": {"daily": {"xp": 180, "items": {"隐秘诱饵": 1, "铜竿": 1}}, "weekly": {"xp": 480, "items": {"隐秘诱饵": 2}}},
-    },
-    {
-        "id": "expert_salmon_order", "type": "delivery", "difficulty": "simple", "level_tier": "11-20", "label": "专家鲑鱼订单",
-        "requirements": {"daily": {"鲑鱼": 15}, "weekly": {"鲑鱼": 45}},
-        "rewards": {"daily": {"xp": 120, "gold": 150}, "weekly": {"xp": 360, "gold": 500}},
-    },
-    {
-        "id": "expert_mixed_order", "type": "delivery", "difficulty": "medium", "level_tier": "11-20", "label": "专家混合订单",
-        "requirements": {"daily": {"鳕鱼": 25, "鲑鱼": 10}, "weekly": {"鳕鱼": 75, "鲑鱼": 30}},
-        "rewards": {"daily": {"xp": 220, "fragments": 14, "gold": 100}, "weekly": {"xp": 650, "fragments": 35, "gold": 320}},
-    },
-    {
-        "id": "expert_purification", "type": "delivery", "difficulty": "complex", "level_tier": "11-20", "label": "净化仪式",
-        "requirements": {"daily": {"鳕鱼": 40, "鲑鱼": 20}, "weekly": {"鳕鱼": 100, "鲑鱼": 50}},
-        "rewards": {"daily": {"xp": 350, "items": {"净化书": 1, "锡竿": 1}}, "weekly": {"xp": 1000, "items": {"净化书": 2}}},
-    },
-    {
-        "id": "master_cod_order", "type": "delivery", "difficulty": "simple", "level_tier": "21-30", "label": "大师鳕鱼订单",
-        "requirements": {"daily": {"鳕鱼": 25}, "weekly": {"鳕鱼": 75}},
-        "rewards": {"daily": {"xp": 200, "gold": 280}, "weekly": {"xp": 600, "gold": 900}},
-    },
-    {
-        "id": "master_mixed_order", "type": "delivery", "difficulty": "medium", "level_tier": "21-30", "label": "大师混合订单",
-        "requirements": {"daily": {"鲑鱼": 35, "热带鱼": 15}, "weekly": {"鲑鱼": 105, "热带鱼": 45}},
-        "rewards": {"daily": {"xp": 380, "fragments": 25, "items": {"万能鱼饵": 1}}, "weekly": {"xp": 1100, "fragments": 65, "items": {"万能鱼饵": 2}}},
-    },
-    {
-        "id": "master_purification", "type": "delivery", "difficulty": "complex", "level_tier": "21-30", "label": "大师净化仪式",
-        "requirements": {"daily": {"鳕鱼": 70, "鲑鱼": 35}, "weekly": {"鳕鱼": 200, "鲑鱼": 100}},
-        "rewards": {"daily": {"xp": 650, "items": {"净化书": 1, "隐秘诱饵": 1, "铁竿": 1}}, "weekly": {"xp": 1900, "items": {"净化书": 3}}},
-    },
-    {
-        "id": "legend_cod_order", "type": "delivery", "difficulty": "simple", "level_tier": "31+", "label": "传说鳕鱼订单",
-        "requirements": {"daily": {"鳕鱼": 35}, "weekly": {"鳕鱼": 105}},
-        "rewards": {"daily": {"xp": 320, "gold": 450}, "weekly": {"xp": 950, "gold": 1400}},
-    },
-    {
-        "id": "legend_mixed_order", "type": "delivery", "difficulty": "medium", "level_tier": "31+", "label": "传说混合订单",
-        "requirements": {"daily": {"鳕鱼": 50, "鲑鱼": 25}, "weekly": {"鳕鱼": 150, "鲑鱼": 75}},
-        "rewards": {"daily": {"xp": 600, "fragments": 45, "items": {"万能鱼饵": 1}}, "weekly": {"xp": 1800, "fragments": 110, "items": {"万能鱼饵": 3}}},
-    },
-    {
-        "id": "legend_purification", "type": "delivery", "difficulty": "complex", "level_tier": "31+", "label": "传说净化仪式",
-        "requirements": {"daily": {"鳕鱼": 100, "鲑鱼": 50}, "weekly": {"鳕鱼": 300, "鲑鱼": 150}},
-        "rewards": {"daily": {"xp": 1200, "items": {"净化书": 2, "猩红竿": 1}}, "weekly": {"xp": 3600, "items": {"净化书": 5}}},
-    },
-    {
-        "id": "maintenance", "type": "spend", "difficulty": "medium", "level_tier": "1-5", "label": "渔具维护",
-        "requirements": {"weekly": {"金币": 300}},
-        "rewards": {"weekly": {"xp": 50, "fragments": 3}},
-    },
-    {
-        "id": "maintenance_apprentice", "type": "spend", "difficulty": "medium", "level_tier": "6-10", "label": "熟练渔具维护",
-        "requirements": {"weekly": {"金币": 700}},
-        "rewards": {"weekly": {"xp": 140, "fragments": 8, "items": {"魔法鱼饵": 1}}},
-    },
-    {
-        "id": "maintenance_expert", "type": "spend", "difficulty": "medium", "level_tier": "11-20", "label": "专家渔具维护",
-        "requirements": {"weekly": {"金币": 1200}},
-        "rewards": {"weekly": {"xp": 260, "fragments": 16, "items": {"隐秘诱饵": 1}}},
-    },
-    {
-        "id": "maintenance_master", "type": "spend", "difficulty": "medium", "level_tier": "21-30", "label": "大师渔具维护",
-        "requirements": {"weekly": {"金币": 1800}},
-        "rewards": {"weekly": {"xp": 450, "fragments": 25, "items": {"万能鱼饵": 1}}},
-    },
-    {
-        "id": "maintenance_legend", "type": "spend", "difficulty": "medium", "level_tier": "31+", "label": "传说渔具维护",
-        "requirements": {"weekly": {"金币": 2600}},
-        "rewards": {"weekly": {"xp": 700, "fragments": 40, "items": {"万能鱼饵": 2}}},
-    },
+# 每档任务骨架：档位 / 鱼点 / 名称 / 日常抛竿 / 交付鱼 / 日常交付量 / 复杂目标鱼 / 日常复杂量 / 中等经验 / 复杂经验。
+# 数量按「单鱼点日限 × 0.4–0.5」与「该鱼种日产量 × 0.5」折算，保证当天能完成。
+_TASK_TIER_ROWS = (
+    ("1-5", "bay", "河湾", 20, "岩石凶鲨", 8, "吸血鳗", 6, 40, 90),
+    ("6-10", "deep", "深海", 22, "追踪鱼", 10, "银色飞镖", 8, 60, 120),
+    ("11-20", "ruin", "遗迹水域", 20, "刃鳍鱼", 10, "粉色的宫殿鱼", 8, 80, 160),
+    ("21-35", "magma", "熔岩深渊", 16, None, 0, "暗色噬岩鱼", 5, 110, 220),
+    ("36-50", "glow", "荧光洞窟", 14, None, 0, "蓝晶棱角鱼", 4, 140, 280),
+    ("51-70", "astral", "星陨深渊", 14, None, 0, "灰色沙丘曳尾鱼", 4, 180, 360),
+    ("71-100", "chrono", "时之洄流", 12, None, 0, "陆地三叶虫", 3, 240, 480),
 )
-PERMANENT_TASK = {
-    "id": "permanent_all_fish_kings",
-    "pool_id": "permanent_all_fish_kings",
-    "type": "collection",
-    "difficulty": "milestone",
-    "difficulty_label": "里程碑",
-    "level_tier": "永久",
-    "level_tier_label": "永久",
-    "label": "鱼王全收集",
-    # 任务 60 级解锁；鱼竿本身的使用门槛保留 35，兼容已经持有三叉戟的老玩家。
-    "level_required": 60,
-    "requirements": {name: 1 for name in FISH_KINGS},
-    "reward": {"items": {"三叉戟": 1}},
-}
-def _rename_task_fish(pool) -> None:
-    """把任务池里的旧鱼名改写为 wiki 鱼名。"""
-    for task in pool:
-        requirements = task.get("requirements") or {}
-        for period in ("daily", "weekly"):
-            values = requirements.get(period)
-            if isinstance(values, dict):
-                requirements[period] = {FISH_RENAMES.get(name, name): count for name, count in values.items()}
-        reward = (task.get("reward") or {}).get("items")
-        if isinstance(reward, dict):
-            task["reward"]["items"] = {FISH_RENAMES.get(name, name): count for name, count in reward.items()}
+
+# 复杂任务的额外道具奖励，按档位给钥匙/箱子/鱼饵，不再奖励鱼竿和金币。
+_TASK_TIER_REWARD_ITEMS = (
+    {"魔法鱼饵": 1},
+    {"隐秘诱饵": 1},
+    {"铁钥匙": 1},
+    {"上锁的猩红金属箱子": 1},
+    {"幻光金属钥匙": 1},
+    {"星河金属钥匙": 1},
+    {"灿阳金属钥匙": 1},
+)
+
+# 系统线复杂任务：(类型, 后缀, 标签, 需求键, 日常量)
+_TASK_SYSTEM_STEPS = (
+    ("talent", "talent", "天赋入门", "天赋点", 1),
+    ("box", "box", "开箱检查", "开箱", 1),
+    ("card", "card", "神谕线索", "神谕卡片", 1),
+    ("king", "king", "鱼王追踪", "鱼王", 1),
+    ("card", "card", "神谕收集", "神谕卡片", 3),
+    ("gear", "gear", "装备打磨", "装备等级", 20),
+    ("king", "king", "鱼王巡礼", "鱼王", 2),
+)
 
 
-_rename_task_fish(TASK_POOL)
+def _task_entry(entry_id: str, task_type: str, difficulty: str, tier: str, label: str,
+                daily_req: dict, weekly_req: dict, daily_reward: dict, weekly_reward: dict,
+                *, zone: str | None = None) -> dict:
+    entry = {
+        "id": entry_id,
+        "type": task_type,
+        "difficulty": difficulty,
+        "level_tier": tier,
+        "label": label,
+        "requirements": {"daily": daily_req, "weekly": weekly_req},
+        "rewards": {"daily": daily_reward, "weekly": weekly_reward},
+    }
+    if zone:
+        entry["zone"] = zone
+    return entry
 
-TASK_KIND_LABELS = {"daily": "每日任务", "weekly": "每周任务", "permanent": "常驻任务"}
+
+def _build_task_pool() -> tuple[dict, ...]:
+    """展开任务池：每档至少一条中等、一条复杂，避免抽取时回退到别的档位。"""
+    pool = [
+        _task_entry("simple_casts", "casts", "simple", "1-5", "日常抛竿",
+                    {"次数": 15}, {"次数": 50},
+                    {"xp": 20, "fragments": 2}, {"xp": 60, "fragments": 6}),
+        _task_entry("simple_bay_supply", "delivery", "simple", "1-5", "河湾基础补给",
+                    {"岩石凶鲨": 6}, {"岩石凶鲨": 18},
+                    {"xp": 25, "fragments": 2}, {"xp": 80, "fragments": 6}),
+        _task_entry("simple_bay_trip", "zone", "simple", "1-5", "河湾巡场",
+                    {"次数": 10}, {"次数": 35},
+                    {"xp": 20, "fragments": 2}, {"xp": 60, "fragments": 6}, zone="bay"),
+    ]
+    for index, row in enumerate(_TASK_TIER_ROWS):
+        (tier, zone, zone_label, casts, fish, fish_count,
+         complex_fish, complex_count, medium_xp, complex_xp) = row
+        medium_frag = 3 + index
+        complex_frag = 7 + 2 * index
+        item = dict(_TASK_TIER_REWARD_ITEMS[index])
+        pool.append(_task_entry(
+            f"zone_{tier}", "zone", "medium", tier, f"{zone_label}巡场",
+            {"次数": casts}, {"次数": round(casts * 3.5)},
+            {"xp": medium_xp, "fragments": medium_frag},
+            {"xp": medium_xp * 3, "fragments": medium_frag * 3},
+            zone=zone,
+        ))
+        if fish:
+            pool.append(_task_entry(
+                f"deliver_{tier}", "delivery", "medium", tier, f"{zone_label}鲜鱼单",
+                {fish: fish_count}, {fish: fish_count * 3},
+                {"xp": medium_xp + 20, "fragments": medium_frag + 2},
+                {"xp": medium_xp * 3 + 60, "fragments": medium_frag * 3 + 6},
+            ))
+        if index >= 1:
+            pool.append(_task_entry(
+                f"box_{tier}", "box", "medium", tier, "开箱检查",
+                {"开箱": 1}, {"开箱": 3},
+                {"xp": medium_xp, "fragments": medium_frag + 2},
+                {"xp": medium_xp * 3, "fragments": medium_frag * 3},
+            ))
+        pool.append(_task_entry(
+            f"spend_{tier}", "spend", "medium", tier, "渔具维护",
+            {"金币": 300 * (index + 1)}, {"金币": 900 * (index + 1)},
+            {"xp": medium_xp, "fragments": medium_frag},
+            {"xp": medium_xp * 2, "fragments": medium_frag * 2},
+        ))
+        pool.append(_task_entry(
+            f"catch_{tier}", "catch", "complex", tier, f"{complex_fish}观察",
+            {complex_fish: complex_count}, {complex_fish: complex_count * 3},
+            {"xp": complex_xp, "fragments": complex_frag, "items": item},
+            {"xp": complex_xp * 3, "fragments": complex_frag * 3,
+             "items": {name: number * 2 for name, number in item.items()}},
+        ))
+        system_type, system_key, system_label, need_key, need_count = _TASK_SYSTEM_STEPS[index]
+        pool.append(_task_entry(
+            f"{system_key}_{tier}", system_type, "complex", tier, system_label,
+            {need_key: need_count}, {need_key: need_count * 3},
+            {"xp": complex_xp - 10, "fragments": complex_frag - 2},
+            {"xp": (complex_xp - 10) * 3, "fragments": (complex_frag - 2) * 3},
+        ))
+    return tuple(pool)
+
+
+TASK_POOL = _build_task_pool()
+
+TASK_KIND_LABELS = {"daily": "每日任务", "weekly": "每周任务"}
 
 # 2026-09-10 数据修复：移植时把“背包里鱼的总数超过 100 只会改变概率区间”误写成“一次获得 5 个”，
 # 下面两位玩家因此多领了物品和经验。清单来自服务器日志里的逐竿上钩记录（09-09 完整日志 + 09-10
@@ -663,11 +644,11 @@ MCFISH_COMMAND_HELP_GROUPS = (
         ("领取 三叉戟 / 领取 神谕卡组", "领取已完成的工坊奖励。"),
     )),
     ("任务、天赋与卡牌", (49, 132, 190), (
-        ("钓鱼任务", "查看每日/每周任务、编号与奖励。"),
+        ("钓鱼任务", "任务板图片：每日 3 条 / 每周 4 条，含进度与奖励。"),
         ("领取钓鱼任务 2", "领取对应编号的任务奖励。"),
         ("钓鱼天赋", "查看树状天赋、可用点数与前置状态。"),
         ("学习 钓感", "学习或升级天赋节点；必须先点满前置。"),
-        ("重置钓鱼天赋", "固定花费 2 万金币重置，已用点数全部退回。"),
+        ("重置钓鱼天赋", "固定 2 万金币重置，点数全部退回。"),
         ("钓鱼卡牌 / 卡牌", "查看九个鱼点的神谕卡收集进度。"),
     )),
     ("帮助与管理员", (126, 126, 134), (
@@ -685,7 +666,7 @@ MCFISH_HELP = """一款钓鱼模拟器
 ----------指令----------
 """ + "\n".join(f"- {row}" for row in MCFISH_COMMAND_ROWS) + """
 
-规则V6.4:
+规则V6.5:
 - 每竿独立结算并按隐藏上钩时间发送结果；同一玩家已有任务时不能重复开始，其他玩家不受影响。
 - 普通鱼直接结算；鱼王有咬钩和上钩两个阶段，鱼王窗口只在对应鱼点和时间内生效。
 - 钓鱼力 = 等级 + 鱼竿 + 装备 + 首饰 + 饰品 + 天赋 + 临时加成；鱼点由玩家自选，跨天不会重置。
@@ -716,7 +697,7 @@ MCFISH_HELP = """一款钓鱼模拟器
 - 食物与回复：食物来自垃圾段的“食物”子类；绿色/黄色海藻回复1次，灰色/红色/苍白海藻回复2次，蓝色/水晶/深蓝色海藻回复3次。发送“吃海藻 绿色海藻 3”或“吃食物 绿色海藻 3”食用，数量省略时吃1个；每天最多回复15次，只能补回当天已经用掉的次数，并同步减少当前鱼点已用次数。装备和天赋的食物效果同时提高单次回复量和每日回复上限，加成后不足1次的小数部分会累计到下一次食用，不会丢失。
 - 开箱：发送“开箱 上锁的铜制箱子”并消耗1把同档钥匙；箱名必须完整，钥匙为铜钥匙 / 铁钥匙 / 猩红金属钥匙 / 幻光金属钥匙 / 星河金属钥匙 / 灿阳金属钥匙。箱子与钥匙档位不一致时不会消耗。钥匙与箱子除贵重品位里10%的替换外，还各有独立判定：每竿箱子1.00%、钥匙0.50%，受“钥匙与箱子概率”加成。
 - 钥匙合成：发送“合成 铜钥匙”等在工坊用材料+金币合成，铜60 / 铁150 / 猩红金属300 / 幻光金属500 / 星河金属800 / 灿阳金属1100金币；材料依次为铜矿石2 / 铁矿石2+废弃零件2 / 猩红金属矿石2+金矿石2 / 幻光金属矿石2+冰晶1 / 星河金属矿石2+星尘1 / 灿阳金属矿石2+星尘1。钥匙不上架商店，只能掉落或合成。
-- 每日和每周任务从简单/中等/复杂任务池按等级档位组合生成；发送“钓鱼任务”查看编号和奖励，发送“领取钓鱼任务 编号”领取奖励，任务跨日、跨周自动刷新。三叉戟改由工坊交付，不再作为任务奖励。
+- 每日和每周任务按 1-5 / 6-10 / 11-20 / 21-35 / 36-50 / 51-70 / 71-100 分档生成，每日 3 条、每周 4 条；发送“钓鱼任务”查看任务板图片，发送“领取钓鱼任务 编号”领取。任务类型包括抛竿、鱼点巡场、指定鱼种、开箱、消费金币、出售所得、鱼王，以及从存档派生的卡牌/装备等级/天赋点。交付鱼获只在 1-20 级出现，数量按单鱼点日限与该鱼种日产量折算，保证当天可以完成。奖励只有经验、钓鱼碎片和钥匙/箱子/鱼饵等道具，不给金币。三叉戟改由工坊交付，不再作为任务奖励。
 - 宝藏诅咒不能交易，可用净化书消除；鱼竿超过30支不能钓鱼，超过50支不能购买。"""
 
 
@@ -734,6 +715,7 @@ MCFISH_SPECIAL_MECHANICS = (
     "修复：消耗1根同名鱼竿和金币，维修度+1；耐久增加材料耐久的80%（鱼竿≤10支）或100%。",
     "附魔：诱钓、海之眷顾约50%成功，最高3级；修复时材料附魔有50%概率继承。",
     "钥匙与箱子：除贵重品位里10%的替换外，每竿开始时另有独立判定，箱子1.00%、钥匙0.50%，命中即替代本次其它掉落；受“钥匙与箱子概率”加成，钥匙可用材料在工坊合成（合成 铜钥匙），不上架商店。",
+    "任务板：按 1-5 / 6-10 / 11-20 / 21-35 / 36-50 / 51-70 / 71-100 七档生成，每日 3 条 + 每周 4 条；类型含抛竿、鱼点巡场、指定鱼种、开箱、消费、出售所得、鱼王与卡牌/装备/天赋；交付鱼获只在 1-20 级出现；奖励只有经验、碎片与道具，不给金币。",
     "合成：3根同等级鱼竿或碎片兑换均需金币手续费；鱼竿合成成功率90%，失败仍只扣一次手续费。",
 )
 
@@ -1145,7 +1127,7 @@ class McFish(NcatBotPlugin):
         for user_id, raw_state in self._db.execute("SELECT user_id, state FROM players").fetchall():
             state = json.loads(raw_state)
             permanent = state.get("fishing_permanent_tasks") or {}
-            claimed = PERMANENT_TASK["id"] in (permanent.get("claimed") or [])
+            claimed = "permanent_all_fish_kings" in (permanent.get("claimed") or [])
             pack = state.get("pack") or {}
             equip = state.get("equip") or {}
             has_trident = bool(pack.get("三叉戟")) or equip.get("name") == "三叉戟"
@@ -1583,12 +1565,12 @@ class McFish(NcatBotPlugin):
             },
             {
                 "kind": "bullets",
-                "title": "任务与金币循环",
+                "title": "任务与资源循环",
                 "rows": [
-                    "任务池分简单/中等/复杂，并按1-5、5-10、10-20、20-30、30+级分档；高等级任务目标更大，奖励会增加经验、金币、碎片、消耗品或鱼竿。",
-                    "每日/每周任务从任务池排列组合生成；任务板可能保留1-5级低档任务，不想领取不会产生任何消耗。",
+                    "任务板按1-5/6-10/11-20/21-35/36-50/51-70/71-100七档生成，每日3条、每周4条；发送“钓鱼任务”查看任务板图片。",
+                    "类型：抛竿、指定鱼点巡场、指定鱼种、开箱、消费金币、出售所得、鱼王，以及从存档派生的卡牌/装备等级/天赋点；交付鱼获只在1-20级出现。",
+                    "目标数量按单鱼点日限与该鱼种日产量折算，保证当天可完成；奖励只有经验、碎片和钥匙/箱子/鱼饵，不给金币。",
                     "达到60级并捕获全部8条限时鱼王后，工坊交付鱼王鳞片8个、时砂5个和7万金币可领取三叉戟。",
-                    "修复鱼竿和合成会按等级收取金币手续费，消费任务只统计成功扣款。",
                 ],
                 "accent": (176, 119, 64),
             },
@@ -1657,7 +1639,7 @@ class McFish(NcatBotPlugin):
             "装备": ("装备与工坊", "饰品与消耗品", "碎片与装备"),
             "鱼竿": ("鱼竿", "鱼竿与升级"),
             "掉落": ("食物与开箱", "商店与交易", "食物与回复", "掉落与概率"),
-            "任务": ("任务、天赋与卡牌", "任务与金币循环"),
+            "任务": ("任务、天赋与卡牌", "任务与资源循环"),
             "机制": ("核心循环", "等级与经验", "特殊机制"),
             "全部": tuple(section["title"] for section in all_sections),
         }
@@ -1750,7 +1732,7 @@ class McFish(NcatBotPlugin):
         )
         draw.text(
             (width - margin, 128),
-            f"{len(POLES)} 种鱼竿  ·  {len(SETS)} 套装备  ·  {len(EQUIPMENT)} 件饰品/消耗品  ·  规则 V6.4",
+            f"{len(POLES)} 种鱼竿  ·  {len(SETS)} 套装备  ·  {len(EQUIPMENT)} 件饰品/消耗品  ·  规则 V6.5",
             font=small_font,
             fill=(220, 234, 235, 255),
             anchor="ra",
@@ -2044,7 +2026,7 @@ class McFish(NcatBotPlugin):
 
     @staticmethod
     def _materialize_task(pool_task: dict, kind: str) -> dict:
-        return {
+        materialized = {
             "id": f"{kind}_{pool_task['id']}",
             "pool_id": pool_task["id"],
             "type": pool_task["type"],
@@ -2058,6 +2040,9 @@ class McFish(NcatBotPlugin):
             "requirements": copy.deepcopy(pool_task["requirements"][kind]),
             "reward": copy.deepcopy(pool_task["rewards"][kind]),
         }
+        if pool_task.get("zone"):
+            materialized["zone"] = pool_task["zone"]
+        return materialized
 
     def _task_definitions(self, kind: str, period: str, state: dict) -> list[dict]:
         """Compose a period board from the task pool and freeze it in player state."""
@@ -2143,39 +2128,9 @@ class McFish(NcatBotPlugin):
             for task in tasks
         }
 
-    @staticmethod
-    def _refresh_permanent_task_progress(state: dict, bucket: dict) -> None:
-        progress = bucket.setdefault("progress", {})
-        task = bucket["tasks"][0]
-        task_progress = progress.setdefault(task["id"], {})
-        king_stats = state.get("king_stats", {})
-        for name in task.get("requirements", {}):
-            task_progress[name] = min(1, int(king_stats.get(name, {}).get("caught", 0)))
-
-    def _ensure_permanent_task_state(self, state: dict) -> None:
-        key = "fishing_permanent_tasks"
-        bucket = state.get(key)
-        if (
-            not isinstance(bucket, dict)
-            or bucket.get("version") != PERMANENT_TASK_STATE_VERSION
-            or bucket.get("period") != "永久"
-            or not isinstance(bucket.get("tasks"), list)
-            or len(bucket["tasks"]) != 1
-        ):
-            task = copy.deepcopy(PERMANENT_TASK)
-            bucket = {
-                "version": PERMANENT_TASK_STATE_VERSION,
-                "period": "永久",
-                "tasks": [task],
-                "progress": self._task_progress_template([task]),
-                "claimed": [],
-            }
-            state[key] = bucket
-        bucket.setdefault("claimed", [])
-        self._refresh_permanent_task_progress(state, bucket)
-
     def _ensure_task_state(self, state: dict, today: date | None = None) -> None:
-        self._ensure_permanent_task_state(state)
+        # 旧版本的“鱼王全收集 → 三叉戟”常驻任务已移除，三叉戟改由工坊交付。
+        state.pop("fishing_permanent_tasks", None)
         for kind in ("daily", "weekly"):
             period = self._task_period(kind, today)
             key = f"fishing_{kind}_tasks"
@@ -2259,10 +2214,19 @@ class McFish(NcatBotPlugin):
         catches: dict[str, int] | None = None,
         spend: int = 0,
         king: int = 0,
+        zone: str | None = None,
+        boxes: int = 0,
+        sell: int = 0,
     ) -> None:
         self._ensure_task_state(state)
         catches = catches or {}
-        changes = {"casts": max(0, int(casts)), "spend": max(0, int(spend)), "king": max(0, int(king))}
+        changes = {
+            "casts": max(0, int(casts)),
+            "spend": max(0, int(spend)),
+            "king": max(0, int(king)),
+            "boxes": max(0, int(boxes)),
+            "sell": max(0, int(sell)),
+        }
         for kind in ("daily", "weekly"):
             bucket = state[f"fishing_{kind}_tasks"]
             for task in bucket["tasks"]:
@@ -2273,10 +2237,16 @@ class McFish(NcatBotPlugin):
                 for name, target in task.get("requirements", {}).items():
                     if task_type == "casts" and name == "次数":
                         amount = changes["casts"]
+                    elif task_type == "zone" and name == "次数":
+                        amount = changes["casts"] if task.get("zone") == zone else 0
                     elif task_type == "spend" and name == "金币":
                         amount = changes["spend"]
                     elif task_type == "king" and name == "鱼王":
                         amount = changes["king"]
+                    elif task_type == "box" and name == "开箱":
+                        amount = changes["boxes"]
+                    elif task_type == "sell" and name == "出售金币":
+                        amount = changes["sell"]
                     else:
                         amount = max(0, int(catches.get(name, 0))) if task_type == "catch" else 0
                     if amount:
@@ -2287,8 +2257,6 @@ class McFish(NcatBotPlugin):
         parts = []
         if int(reward.get("xp", 0)):
             parts.append(f"经验+{int(reward['xp'])}")
-        if int(reward.get("gold", 0)):
-            parts.append(f"{int(reward['gold'])}金币")
         if int(reward.get("fragments", 0)):
             parts.append(f"{int(reward['fragments'])}个钓鱼碎片")
         for name, number in reward.get("items", {}).items():
@@ -2308,18 +2276,37 @@ class McFish(NcatBotPlugin):
         return board
 
     @staticmethod
-    def _task_display_progress(state: dict, task: dict, progress: dict) -> dict:
+    def _task_derived_progress(state: dict, task: dict) -> dict[str, int]:
+        """直接从存档派生的任务进度：卡牌、装备等级、天赋点。"""
+        task_type = task.get("type")
+        if task_type == "card":
+            return {"神谕卡片": len(state.get("cards") or {})}
+        if task_type == "gear":
+            total = 0
+            for group in ("equipment", "jewelry"):
+                for piece in (state.get(group) or {}).values():
+                    if isinstance(piece, dict):
+                        total += int(piece.get("level", 0) or 0)
+            return {"装备等级": total}
+        if task_type == "talent":
+            levels = (state.get("talents") or {}).get("levels") or {}
+            return {"天赋点": sum(max(0, int(value)) for value in levels.values())}
+        return {}
+
+    @classmethod
+    def _task_effective_progress(cls, state: dict, task: dict, progress: dict) -> dict[str, int]:
+        merged = {name: int(value) for name, value in (progress or {}).items()}
+        merged.update(cls._task_derived_progress(state, task))
+        return merged
+
+    @classmethod
+    def _task_display_progress(cls, state: dict, task: dict, progress: dict) -> dict:
         """Show current fish in the backpack without treating it as submitted."""
+        effective = cls._task_effective_progress(state, task, progress)
         display = {
-            name: min(int(target), int(progress.get(name, 0)))
+            name: min(int(target), int(effective.get(name, 0)))
             for name, target in task.get("requirements", {}).items()
         }
-        if task.get("type") == "collection":
-            king_stats = state.get("king_stats", {})
-            return {
-                name: min(1, int(king_stats.get(name, {}).get("caught", 0)))
-                for name in task.get("requirements", {})
-            }
         if task.get("type") != "delivery":
             return display
         pack = state.get("pack", {})
@@ -2328,9 +2315,35 @@ class McFish(NcatBotPlugin):
         return display
 
     @staticmethod
+    def _task_requirement_text(task: dict, display: dict) -> str:
+        zone_label = fishing_zone_label(str(task.get("zone", ""))) if task.get("zone") else ""
+        parts = []
+        for name, target in task.get("requirements", {}).items():
+            value = int(display.get(name, 0))
+            if task.get("type") == "zone" and name == "次数":
+                parts.append(f"在{zone_label}抛竿 {value}/{int(target)}")
+            elif name == "次数":
+                parts.append(f"钓鱼次数 {value}/{int(target)}")
+            elif name == "金币":
+                parts.append(f"消费金币 {value}/{int(target)}")
+            elif name == "鱼王":
+                parts.append(f"鱼王 {value}/{int(target)}")
+            elif name == "开箱":
+                parts.append(f"开箱 {value}/{int(target)}")
+            elif name == "出售金币":
+                parts.append(f"出售所得 {value}/{int(target)} 金币")
+            elif name == "神谕卡片":
+                parts.append(f"神谕卡片 {value}/{int(target)}")
+            elif name == "装备等级":
+                parts.append(f"装备等级合计 {value}/{int(target)}")
+            elif name == "天赋点":
+                parts.append(f"天赋点 {value}/{int(target)}")
+            else:
+                parts.append(f"{name} {value}/{int(target)}")
+        return "、".join(parts)
+
+    @staticmethod
     def _task_period_text(kind: str, period: str) -> str:
-        if kind == "permanent":
-            return "永久"
         start = date.fromisoformat(period)
         end = start if kind == "daily" else start + timedelta(days=6)
         return f"{start:%m月%d日}" if kind == "daily" else f"{start:%m月%d日}-{end:%m月%d日}"
@@ -2348,31 +2361,7 @@ class McFish(NcatBotPlugin):
             if task["id"] in bucket["claimed"]:
                 status = "已领取"
             else:
-                if task.get("type") == "collection":
-                    collected = sum(
-                        int(display_progress.get(name, 0))
-                        for name in task.get("requirements", {})
-                    )
-                    total = len(task.get("requirements", {}))
-                    missing = [
-                        name for name, target in task.get("requirements", {}).items()
-                        if int(display_progress.get(name, 0)) < int(target)
-                    ]
-                    status = f"已获得鱼王 {collected}/{total}（只检查获得记录，不上交鱼王）"
-                    if missing:
-                        status += "；还缺 " + "、".join(missing)
-                else:
-                    requirement_text = "、".join(
-                        (
-                            f"钓鱼次数 {display_progress.get(name, 0)}/{int(target)}"
-                            if name == "次数" else
-                            f"消费金币 {display_progress.get(name, 0)}/{int(target)}"
-                            if name == "金币" else
-                            f"{name} {display_progress.get(name, 0)}/{int(target)}"
-                        )
-                        for name, target in task.get("requirements", {}).items()
-                    )
-                    status = requirement_text
+                status = self._task_requirement_text(task, display_progress)
             tier_text = f"[{task.get('difficulty_label', TASK_DIFFICULTY_LABELS['simple'])}·{task.get('level_tier_label', task.get('level_tier', '未分档'))}]"
             lines.append(
                 f"{task_index}. {tier_text}{task['label']}：{status} · 奖励 {self._task_reward_text(task['reward'])}"
@@ -2382,16 +2371,8 @@ class McFish(NcatBotPlugin):
     async def _show_tasks(self, event, state: dict) -> None:
         self._ensure_task_state(state)
         self._save(str(event.sender.user_id), state)
-        daily_count = len(state["fishing_daily_tasks"]["tasks"])
-        level = int(state.get("fish_level", 1))
-        lines = [
-            f"钓鱼任务（当前等级 {level}）",
-            "操作：领取钓鱼任务 编号（每日/每周任务会检查并提交鱼获）",
-            *self._task_lines(state, "daily", 1),
-            "",
-            *self._task_lines(state, "weekly", daily_count + 1),
-        ]
-        await event.reply(text="\n".join(lines))
+        output = await asyncio.to_thread(self._render_task_image, str(event.sender.user_id), state)
+        await self._send_original_message(event, MessageArray([Image(file=str(output))]))
 
     async def _claim_tasks(self, event, state: dict, task_index: int | None = None) -> None:
         uid = str(event.sender.user_id)
@@ -2402,7 +2383,6 @@ class McFish(NcatBotPlugin):
             return
         claimed: list[str] = []
         total_xp = 0
-        total_gold = 0
         total_fragments = 0
         total_items: dict[str, int] = {}
         failed_delivery: list[str] = []
@@ -2423,13 +2403,9 @@ class McFish(NcatBotPlugin):
                         f"任务{index}缺少：" + "、".join(f"{name}×{number}" for name, number in missing.items())
                     )
                     continue
-            elif not self._task_complete(task, progress):
+            elif not self._task_complete(task, self._task_effective_progress(state, task, progress)):
                 continue
             reward = task["reward"]
-            gold = int(reward.get("gold", 0))
-            reason = f"mcfish_task_{kind}_{bucket['period']}_{task['id']}"
-            if gold and not self._economy_change(uid, gold, reason):
-                continue
             if task.get("type") == "delivery":
                 for name, target in task.get("requirements", {}).items():
                     self._remove(state, name, int(target))
@@ -2446,27 +2422,12 @@ class McFish(NcatBotPlugin):
                 if number:
                     if name in POLES:
                         for _ in range(number):
-                            if kind == "permanent" and name == "三叉戟":
-                                self._add(
-                                    state,
-                                    name,
-                                    pole=True,
-                                    pole_data={
-                                        "durable": POLES[name][0],
-                                        "maintenance": 0,
-                                        "induce": 0,
-                                        "favor": 0,
-                                        "unbreakable": True,
-                                    },
-                                )
-                            else:
-                                self._add(state, name, pole=True)
+                            self._add(state, name, pole=True)
                     else:
                         self._add(state, name, number)
                     total_items[name] = total_items.get(name, 0) + number
             bucket["claimed"].append(task["id"])
             claimed.append(task["label"])
-            total_gold += gold
             total_fragments += fragments
         self._save(uid, state)
         if not claimed:
@@ -2479,8 +2440,6 @@ class McFish(NcatBotPlugin):
         reward_text = []
         if total_xp:
             reward_text.append(f"经验+{total_xp}")
-        if total_gold:
-            reward_text.append(f"金币+{total_gold}")
         if total_fragments:
             reward_text.append(f"钓鱼碎片+{total_fragments}")
         reward_text.extend(f"{name}×{number}" for name, number in total_items.items())
@@ -6163,9 +6122,11 @@ class McFish(NcatBotPlugin):
         draw.text((margin, 34), "钓鱼装备", fill=(250, 252, 252, 255), font=self._font(60, bold=True))
         draw.text((margin, 112), "六个装备位 · 套装进度 · 戒指占两个独立格", fill=(190, 222, 225, 255), font=self._font(24))
 
+        tile_width = (card_width - 48 - 12) // 2
+
         def draw_slot(slot: str, group: str, x: int, y: int) -> None:
             item = (equipment if group == "equipment" else jewelry).get(slot)
-            self._card(draw, (x, y, x + card_width // 2 - 10, y + tile_height), fill=(250, 252, 252, 255), radius=14)
+            self._card(draw, (x, y, x + tile_width, y + tile_height), fill=(250, 252, 252, 255), radius=14)
             label = SLOT_LABELS.get(slot, slot)
             draw.text((x + 16, y + 10), label, fill=(92, 112, 117, 255), font=self._font(19))
             if not item:
@@ -6175,7 +6136,10 @@ class McFish(NcatBotPlugin):
             if icon:
                 image.alpha_composite(icon, (x + 12, y + 44))
             text_x = x + 68 if icon else x + 16
-            draw.text((text_x, y + 40), str(item.get("name", "")), fill=(40, 61, 68, 255), font=self._font(22, bold=True))
+            name_font = self._font(22, bold=True)
+            name_lines = self._wrap_text(str(item.get("name", "")), name_font, tile_width - (text_x - x) - 14)
+            name_text = name_lines[0] + ("…" if len(name_lines) > 1 else "")
+            draw.text((text_x, y + 40), name_text, fill=(40, 61, 68, 255), font=name_font)
             draw.text(
                 (text_x, y + 70),
                 f"{int(item.get('level', 1))}级 · FP {fp_for_level(int(item.get('level', 1)))}",
@@ -6186,7 +6150,6 @@ class McFish(NcatBotPlugin):
         left_y = header_height + 26
         self._card(draw, (margin, left_y, margin + card_width, left_y + left_height))
         draw.text((margin + 26, left_y + 20), "装备位", fill=(40, 61, 68, 255), font=self._font(30, bold=True))
-        tile_width = card_width // 2 - 10
         for index, (slot, group) in enumerate(slots):
             col, row = index % 2, index // 2
             draw_slot(
@@ -6206,6 +6169,121 @@ class McFish(NcatBotPlugin):
             line_y += 34
 
         output = Path(self.workspace) / "images" / f"gear_{uid}.png"
+        output.parent.mkdir(parents=True, exist_ok=True)
+        image.save(output, "PNG")
+        return output
+
+    def _render_task_image(self, uid: str, state: dict) -> Path:
+        """每日/每周任务板：进度、奖励与领取状态。"""
+        self._ensure_task_state(state)
+        width = 1400
+        margin = 44
+        header_height = 158
+        row_height = 104
+        row_gap = 12
+        section_pad = 66
+        sections = []
+        for kind in ("daily", "weekly"):
+            bucket = state[f"fishing_{kind}_tasks"]
+            rows = []
+            for task in bucket["tasks"]:
+                progress = bucket["progress"].setdefault(task["id"], {})
+                display = self._task_display_progress(state, task, progress)
+                effective = self._task_effective_progress(state, task, progress)
+                targets = task.get("requirements", {})
+                total = sum(int(value) for value in targets.values()) or 1
+                done = sum(
+                    min(int(effective.get(name, 0)), int(target))
+                    for name, target in targets.items()
+                )
+                claimed = task["id"] in bucket["claimed"]
+                if claimed:
+                    status = "已领取"
+                elif self._task_complete(task, effective):
+                    status = "可领取"
+                else:
+                    status = "进行中"
+                rows.append((task, display, done / total, status))
+            sections.append((kind, bucket, rows))
+
+        height = header_height + 24
+        for _kind, _bucket, rows in sections:
+            height += section_pad + len(rows) * (row_height + row_gap) + 16
+        height += 46
+        image = PILImage.new("RGBA", (width, height), (244, 248, 249, 255))
+        draw = ImageDraw.Draw(image)
+        draw.rounded_rectangle((0, 0, width, header_height), radius=26, fill=(33, 68, 82, 255))
+        draw.rectangle((0, header_height - 20, width, header_height), fill=(33, 68, 82, 255))
+        draw.text((margin, 32), "钓鱼任务", fill=(250, 252, 252, 255), font=self._font(60, bold=True))
+        level = int(state.get("fish_level", 1))
+        draw.text(
+            (margin, 112),
+            f"当前等级 {level} · 每日 3 条 / 每周 4 条 · 跨日跨周自动刷新",
+            fill=(190, 222, 225, 255),
+            font=self._font(23),
+        )
+        draw.text(
+            (width - margin, 116),
+            "领取钓鱼任务 编号",
+            fill=(220, 234, 235, 255),
+            font=self._font(21),
+            anchor="ra",
+        )
+
+        y = header_height + 24
+        for kind, bucket, rows in sections:
+            self._card(draw, (margin, y, width - margin, y + section_pad + len(rows) * (row_height + row_gap) + 16))
+            draw.text(
+                (margin + 26, y + 18),
+                f"{TASK_KIND_LABELS[kind]}（{self._task_period_text(kind, bucket['period'])}）",
+                fill=(40, 61, 68, 255),
+                font=self._font(27, bold=True),
+            )
+            cursor = y + section_pad
+            base_index = 1 if kind == "daily" else len(state["fishing_daily_tasks"]["tasks"]) + 1
+            for offset, (task, display, ratio, status) in enumerate(rows):
+                index = base_index + offset
+                self._card(draw, (margin + 18, cursor, width - margin - 18, cursor + row_height), fill=(249, 250, 247, 255), radius=14)
+                tag = f"[{task.get('difficulty_label', '简单')}·{task.get('level_tier_label', task.get('level_tier', ''))}]"
+                draw.text((margin + 40, cursor + 12), f"{index}. {tag}{task['label']}", fill=(40, 61, 68, 255), font=self._font(22, bold=True))
+                progress_text = self._task_requirement_text(task, display)
+                draw.text((margin + 40, cursor + 44), progress_text, fill=(38, 144, 158, 255), font=self._font(18))
+                draw.text(
+                    (margin + 40, cursor + 70),
+                    f"奖励 {self._task_reward_text(task['reward'])}",
+                    fill=(112, 96, 54, 255),
+                    font=self._font(17),
+                )
+                bar_x = width - margin - 330
+                bar_w = 200
+                bar_y = cursor + 56
+                draw.rounded_rectangle((bar_x, bar_y, bar_x + bar_w, bar_y + 12), radius=6, fill=(224, 232, 234, 255))
+                if ratio > 0:
+                    draw.rounded_rectangle(
+                        (bar_x, bar_y, bar_x + max(6, int(bar_w * min(1.0, ratio))), bar_y + 12),
+                        radius=6,
+                        fill=(38, 144, 158, 255) if ratio < 1 else (86, 168, 106, 255),
+                    )
+                status_color = (86, 168, 106, 255) if status == "可领取" else (150, 166, 170, 255) if status == "已领取" else (92, 112, 117, 255)
+                draw.text((width - margin - 40, cursor + 30), status, fill=status_color, font=self._font(21, bold=True), anchor="ra")
+                draw.text(
+                    (width - margin - 40, cursor + 58),
+                    f"{int(ratio * 100)}%",
+                    fill=(92, 112, 117, 255),
+                    font=self._font(16),
+                    anchor="ra",
+                )
+                cursor += row_height + row_gap
+            y += section_pad + len(rows) * (row_height + row_gap) + 16
+
+        draw.text(
+            (margin, height - 30),
+            "每日任务按当天 0 点刷新，每周任务按周一刷新；奖励只有经验、碎片与道具，不给金币。",
+            fill=(92, 112, 117, 255),
+            font=self._font(17),
+        )
+
+        output = Path(self.workspace) / "images" / f"tasks_{uid}.png"
         output.parent.mkdir(parents=True, exist_ok=True)
         image.save(output, "PNG")
         return output
@@ -6714,7 +6792,7 @@ class McFish(NcatBotPlugin):
                 state["equip"] = equip
             # 海豚等动态背包效果必须按本竿最新存档计算，不能沿用批次开始时的边界。
             drop_boundaries = self._zone_boundaries(state)
-            self._advance_tasks(state, casts=1)
+            self._advance_tasks(state, casts=1, zone=zone_now)
             # 卡牌独立于普通掉落：每竿判定一次，按鱼点单独累计保底。
             card_pity = state.setdefault("card_pity", {})
             card_name = roll_card(zone_now, int(card_pity.get(zone_now, 0)))
@@ -7347,6 +7425,7 @@ class McFish(NcatBotPlugin):
                 self._remove(state, waste, int(state["pack"].get(waste, 0)))
                 self._market_apply(waste, quantities[waste])
             self._economy_change(uid, price, "mcfish_waste_sale")
+            self._advance_tasks(state, sell=price)
             self._save(uid, state)
             await event.reply(text=f"出售成功,你赚到了{price}{curse_text}", at_sender=False)
             return
@@ -7518,6 +7597,7 @@ class McFish(NcatBotPlugin):
         if pole_sales and state["trade_count"] % 10 == 0:
             self._add(state, "宝藏诅咒")
         self._economy_change(uid, price, "mcfish_sale")
+        self._advance_tasks(state, sell=price)
         self._save(uid, state)
         if len(items) == 1:
             name, number = items[0]
@@ -7953,6 +8033,7 @@ class McFish(NcatBotPlugin):
         if not self._charge_fee(str(event.sender.user_id), fee, "mcfish_gear_dismantle"):
             await event.reply(text=f"金币不足（需要 {fee}）")
             return
+        self._advance_tasks(state, spend=fee)
 
         if selected["source"] == "bag":
             state.setdefault("gear_bag", []).pop(selected["index"])
@@ -8331,6 +8412,7 @@ class McFish(NcatBotPlugin):
             state.setdefault("cards", {})[item] = 1
         else:
             self._add(state, item, quantity)
+        self._advance_tasks(state, boxes=1)
         self._save(str(event.sender.user_id), state)
         await event.reply(text=f"{box_name}：{item} ×{quantity}")
 
@@ -8433,6 +8515,7 @@ class McFish(NcatBotPlugin):
         if not self._charge_fee(str(event.sender.user_id), cost, "mcfish_talent_reset"):
             await event.reply(text=f"重置钓鱼天赋：金币不足（需要 {cost}）")
             return
+        self._advance_tasks(state, spend=cost)
         reset_talents(state)
         self._save(str(event.sender.user_id), state)
         await event.reply(text=f"已重置钓鱼天赋（花费 {cost} 金币）")
@@ -8512,6 +8595,8 @@ class McFish(NcatBotPlugin):
         if gold and not self._charge_fee(str(event.sender.user_id), gold, "mcfish_workshop"):
             await event.reply(text=f"{recipe['name']}：金币不足（需要 {gold}）")
             return
+        if gold:
+            self._advance_tasks(state, spend=int(gold))
         if recipe.get("cards"):
             state["cards"] = {}
             state.setdefault("gear_bag", []).append(
@@ -8606,6 +8691,7 @@ class McFish(NcatBotPlugin):
         if not self._charge_fee(str(event.sender.user_id), int(recipe["gold"]), "mcfish_gear"):
             await event.reply(text=f"{name}：金币不足（需要 {recipe['gold']}）")
             return
+        self._advance_tasks(state, spend=int(recipe["gold"]))
         for item, need in recipe["items"].items():
             self._remove(state, item, int(need))
         state.setdefault("gear_bag", [])
@@ -8678,6 +8764,7 @@ class McFish(NcatBotPlugin):
         if not self._charge_fee(str(event.sender.user_id), int(gold), "mcfish_gear_upgrade"):
             await event.reply(text=f"{name}：金币不足（需要 {gold}）")
             return
+        self._advance_tasks(state, spend=int(gold))
         for material, need in items.items():
             self._remove(state, material, int(need))
         item["level"] = target

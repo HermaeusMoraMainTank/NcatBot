@@ -139,26 +139,57 @@ async def test_mcfish_item_grant_adds_full_durability_rods_and_rejects_unknown_i
 
 
 def test_mcfish_tasks_advance_both_periods_and_cap_at_target():
-    """MCF-23: 具体捕获/行为任务同时推进，交付任务不被钓鱼自动完成。"""
+    """MCF-23: 计数类任务同时推进两期，并在目标处封顶；交付任务不被自动完成。"""
     plugin = McFish.__new__(McFish)
     state = {"pack": {}}
+    plugin._ensure_task_state(state)
+    zone = state["fishing_daily_tasks"]["tasks"][0].get("zone") or "bay"
 
     plugin._advance_tasks(
         state,
         casts=999,
-        catches={"刃鳍鱼": 999, "追踪鱼": 999, "粉色的宫殿鱼": 999, "蔚蓝色羽毛鱼": 999},
-        spend=9999,
-        king=2,
+        catches={name: 999 for name in ("岩石凶鲨", "吸血鳗", "追踪鱼", "刃鳍鱼")},
+        spend=99999,
+        king=9,
+        zone=zone,
+        boxes=999,
+        sell=99999,
     )
 
+    counter_types = {"casts", "zone", "catch", "spend", "king", "box", "sell"}
     for kind in ("daily", "weekly"):
         bucket = state[f"fishing_{kind}_tasks"]
         for task in bucket["tasks"]:
             progress = bucket["progress"][task["id"]]
             if task["type"] == "delivery":
                 assert not plugin._task_complete(task, progress)
-            else:
-                assert plugin._task_complete(task, progress)
+            elif task["type"] in counter_types:
+                for name, target in task["requirements"].items():
+                    if task["type"] == "zone" and task.get("zone") != zone:
+                        continue
+                    assert int(progress[name]) == int(target)
+
+def test_mcfish_derived_tasks_read_cards_equipment_and_talents():
+    """卡牌 / 装备等级 / 天赋点任务直接从存档派生，不需要新计数器。"""
+    plugin = McFish.__new__(McFish)
+    state = {
+        "pack": {},
+        "fish_level": 80,
+        "cards": {f"卡{i}": 1 for i in range(5)},
+        "equipment": {"head": {"name": "x", "level": 20}, "body": {"name": "y", "level": 20}},
+        "talents": {"levels": {"keen": 3, "steady": 2}},
+    }
+    plugin._ensure_task_state(state)
+
+    for kind in ("daily", "weekly"):
+        bucket = state[f"fishing_{kind}_tasks"]
+        for task in bucket["tasks"]:
+            if task["type"] not in ("card", "gear", "talent"):
+                continue
+            effective = plugin._task_effective_progress(state, task, bucket["progress"][task["id"]])
+            target = next(iter(task["requirements"].values()))
+            assert max(effective.values()) <= max(int(target), 5)
+            assert plugin._task_complete(task, effective) is (int(target) <= max(effective.values()))
 
 
 def test_mcfish_task_board_uses_level_tiers_and_mixed_rewards():
@@ -178,7 +209,7 @@ def test_mcfish_task_board_uses_level_tiers_and_mixed_rewards():
     assert [task["level_tier"] for task in weekly["tasks"]] == ["1-5", "11-20", "11-20", "11-20"]
     assert weekly["tasks"][-1]["type"] == "spend"
     assert "金币" in weekly["tasks"][-1]["requirements"]
-    assert any("净化" in task["label"] for task in weekly["tasks"])
+    assert all("xp" in task["reward"] for task in weekly["tasks"])
     assert len({task["pool_id"] for task in weekly["tasks"]}) == len(weekly["tasks"])
     assert len({
         (task["type"], tuple(sorted(task["requirements"].items())))
@@ -203,8 +234,8 @@ def test_mcfish_repairs_duplicate_tasks_without_losing_matching_claims():
     repaired = state["fishing_weekly_tasks"]
     assert len({task["pool_id"] for task in repaired["tasks"]}) == 4
     assert repaired["tasks"][-1]["type"] == "spend"
-    assert repaired["claimed"] == ["weekly_maintenance_expert"]
-    assert repaired["progress"]["weekly_maintenance_expert"] == {"金币": 1200}
+    assert repaired["claimed"] == ["weekly_spend_11-20"]
+    assert repaired["progress"]["weekly_spend_11-20"] == {"金币": 1200}
 
 
 def test_mcfish_repairs_tasks_with_different_pool_ids_but_same_content():
@@ -228,15 +259,18 @@ def test_mcfish_repairs_tasks_with_different_pool_ids_but_same_content():
 
 
 def test_mcfish_task_board_uses_expected_level_boundaries():
-    """MCF-30: 任务板在5/10/20/30之后切换到下一等级档位。"""
+    """MCF-30: 任务板按 1-5 / 6-10 / 11-20 / 21-35 / 36-50 / 51-70 / 71-100 分档。"""
     plugin = McFish.__new__(McFish)
-    for level, expected_tier in ((1, "1-5"), (6, "6-10"), (11, "11-20"), (21, "21-30"), (31, "31+")):
+    expectations = (
+        (1, "1-5"), (6, "6-10"), (11, "11-20"), (21, "21-35"),
+        (36, "36-50"), (51, "51-70"), (71, "71-100"), (100, "71-100"),
+    )
+    for level, expected_tier in expectations:
         state = {"pack": {}, "fish_level": level}
         plugin._ensure_task_state(state, date(2026, 9, 16))
         daily_tasks = state["fishing_daily_tasks"]["tasks"]
         assert daily_tasks[1]["level_tier"] == expected_tier
         assert daily_tasks[2]["level_tier"] == expected_tier
-
 
 def test_mcfish_task_display_reads_fish_from_backpack_without_submitting():
     """MCF-31: 任务展示使用背包鱼获作为可见进度，但不会修改任务或背包。"""
@@ -262,21 +296,28 @@ def test_mcfish_task_display_reads_fish_from_backpack_without_submitting():
     assert state["fishing_daily_tasks"] == before
 
 
-def test_mcfish_task_board_has_one_top_claim_instruction():
-    """MCF-32: 任务板顶部只显示一次统一领取指令，不在每项重复提示。"""
+def test_mcfish_task_board_has_one_top_claim_instruction(tmp_path):
+    """MCF-32: 任务板是图片，顶部只出现一次领取指令，且不出现旧的提交提示。"""
     import asyncio
 
+    from PIL import Image as PILImage
+
     plugin = McFish.__new__(McFish)
+    plugin.workspace = tmp_path
     plugin._save = lambda *_args: None
+    plugin._send_original_message = AsyncMock()
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
     state = {"pack": {}, "fish_level": 15}
 
     asyncio.run(plugin._show_tasks(event, state))
 
-    text = event.reply.await_args.kwargs["text"]
-    assert text.count("领取钓鱼任务 编号") == 1
+    plugin._send_original_message.assert_awaited_once()
+    output = plugin.workspace / "images" / "tasks_100.png"
+    assert output.exists()
+    with PILImage.open(output) as image:
+        assert image.size[0] == 1400
+    text = "\n".join(plugin._task_lines(state, "daily") + plugin._task_lines(state, "weekly", 4))
     assert "提交钓鱼任务" not in text
-
 
 def test_workshop_claims_the_trident_after_delivery():
     """P6: 三叉戟改为工坊交付，不再走常驻任务。"""
@@ -359,6 +400,95 @@ def test_mcfish_reward_trident_can_be_repaired_with_gold_at_zero_durability():
     assert "支付" in event.reply.await_args.kwargs["text"]
 
 
+def test_mcfish_task_pool_has_no_gold_rewards_and_delivery_only_for_low_tiers():
+    """任务奖励不含金币；交付类任务只出现在 1-20 级。"""
+    from McFish.McFish import TASK_POOL
+
+    for task in TASK_POOL:
+        for kind in ("daily", "weekly"):
+            reward = task["rewards"][kind]
+            assert "gold" not in reward
+            assert int(reward.get("xp", 0)) > 0
+        if task["type"] == "delivery":
+            assert task["level_tier"] in ("1-5", "6-10", "11-20")
+
+
+def test_mcfish_task_pool_counts_fit_zone_limits():
+    """数量规则：计数类不超过单鱼点日限的 60%，交付类不超过该鱼种日产量的一半。"""
+    from McFish.McFish import TASK_POOL
+    from McFish.mcfish_rules import (
+        FISHING_ZONE_DAILY_CAPS, FISH_ZONE_WEIGHTS, fish_zone_weights,
+        fishing_zone_required_power,
+    )
+
+    for task in TASK_POOL:
+        daily = task["requirements"]["daily"]
+        if task["type"] == "zone":
+            cap = FISHING_ZONE_DAILY_CAPS[task["zone"]]
+            assert daily["次数"] <= int(cap * 0.6) + 1
+        if task["type"] == "delivery":
+            fish, count = next(iter(daily.items()))
+            zone = next(z for z, names in FISH_ZONE_WEIGHTS.items() if fish in names)
+            cap = FISHING_ZONE_DAILY_CAPS[zone]
+            weights = fish_zone_weights(zone, "铁竿", power=fishing_zone_required_power(zone) + 20)
+            production = cap * weights.get(fish, 0) / sum(weights.values())
+            assert count <= production * 0.5 + 2, (fish, count, production)
+
+
+def test_mcfish_zone_task_only_advances_in_its_own_zone():
+    plugin = McFish.__new__(McFish)
+    state = {"pack": {}, "fish_level": 60}
+    plugin._ensure_task_state(state)
+    bucket = state["fishing_weekly_tasks"]
+    zone_task = next(
+        (task for task in bucket["tasks"] if task["type"] == "zone"), None
+    )
+    if zone_task is None:
+        pool = next(t for t in __import__("McFish.McFish", fromlist=["TASK_POOL"]).TASK_POOL
+                    if t["type"] == "zone" and t["level_tier"] == "51-70")
+        zone_task = plugin._materialize_task(pool, "weekly")
+        bucket["tasks"].append(zone_task)
+        bucket["progress"][zone_task["id"]] = {"次数": 0}
+
+    other = "bay" if zone_task["zone"] != "bay" else "deep"
+    plugin._advance_tasks(state, casts=5, zone=other)
+    assert bucket["progress"][zone_task["id"]]["次数"] == 0
+
+    plugin._advance_tasks(state, casts=3, zone=zone_task["zone"])
+    assert bucket["progress"][zone_task["id"]]["次数"] == 3
+
+
+def test_mcfish_box_and_sell_counters_advance_tasks():
+    plugin = McFish.__new__(McFish)
+    state = {"pack": {}, "fish_level": 80}
+    plugin._ensure_task_state(state)
+    bucket = state["fishing_daily_tasks"]
+    box_task = next((task for task in bucket["tasks"] if task["type"] == "box"), None)
+    sell_task = next((task for task in bucket["tasks"] if task["type"] == "sell"), None)
+    if box_task is None or sell_task is None:
+        return
+
+    plugin._advance_tasks(state, boxes=1, sell=500)
+    assert bucket["progress"][box_task["id"]]["开箱"] == 1
+    assert bucket["progress"][sell_task["id"]]["出售金币"] == 500
+
+
+def test_mcfish_task_image_renders(tmp_path):
+    from PIL import Image as PILImage
+
+    plugin = McFish.__new__(McFish)
+    plugin.workspace = tmp_path
+    state = {"pack": {"岩石凶鲨": 8}, "fish_level": 15}
+    plugin._ensure_task_state(state)
+
+    output = plugin._render_task_image("100", state)
+
+    assert output.exists()
+    with PILImage.open(output) as image:
+        assert image.size[0] == 1400
+        assert image.size[1] > 600
+
+
 def test_mcfish_task_period_text_shows_start_and_end_without_year():
     """MCF-33: 任务周期只显示月日，周任务显示起止日期。"""
     plugin = McFish.__new__(McFish)
@@ -389,7 +519,7 @@ def test_mcfish_tasks_reset_at_daily_and_weekly_boundaries():
     assert state["fishing_daily_tasks"]["claimed"] == []
     assert state["fishing_weekly_tasks"]["period"] == "2026-09-14"
     assert state["fishing_weekly_tasks"]["claimed"] == []
-    assert state["fishing_daily_tasks"]["version"] == first_version == 5
+    assert state["fishing_daily_tasks"]["version"] == first_version == 6
 
 
 def test_mcfish_fee_scale_is_bounded_and_grows_with_rod_value():
@@ -425,7 +555,7 @@ def test_mcfish_equipment_craft_fees_are_scaled_for_the_current_economy():
 
 
 def test_mcfish_completed_tasks_are_claimed_once_with_mixed_rewards():
-    """MCF-26: 完成任务可一次领取混合奖励，重复领取不会再次发放。"""
+    """MCF-29: 已完成任务只领取一次，奖励不含金币。"""
     import asyncio
 
     class Store:
@@ -443,24 +573,24 @@ def test_mcfish_completed_tasks_are_claimed_once_with_mixed_rewards():
     plugin._economy = SimpleNamespace(store=Store())
     plugin._save = lambda *_args: None
     event = SimpleNamespace(sender=SimpleNamespace(user_id="100"), reply=AsyncMock())
-    state = {"pack": {}}
-    plugin._advance_tasks(
-        state,
-        casts=999,
-        catches={"刃鳍鱼": 999, "追踪鱼": 999, "粉色的宫殿鱼": 999, "蔚蓝色羽毛鱼": 999},
-        spend=9999,
-        king=1,
-    )
-    expected = {"xp": 0, "gold": 0, "fragments": 0, "items": {}}
+    state = {
+        "pack": {},
+        "fish_level": 80,
+        "cards": {f"卡{i}": 1 for i in range(5)},
+        "equipment": {"head": {"name": "x", "level": 20}, "body": {"name": "y", "level": 20}},
+        "talents": {"levels": {"keen": 3, "steady": 2}},
+    }
+    plugin._ensure_task_state(state)
+    expected = {"xp": 0, "fragments": 0, "items": {}}
     delivery_fish = {}
     for kind in ("daily", "weekly"):
         bucket = state[f"fishing_{kind}_tasks"]
         for task in bucket["tasks"]:
             if task["type"] == "delivery":
-                bucket["progress"][task["id"]] = dict(task["requirements"])
                 for name, number in task["requirements"].items():
                     delivery_fish[name] = delivery_fish.get(name, 0) + int(number)
-            for reward_key in ("xp", "gold", "fragments"):
+            bucket["progress"][task["id"]] = dict(task["requirements"])
+            for reward_key in ("xp", "fragments"):
                 expected[reward_key] += int(task["reward"].get(reward_key, 0))
             for name, number in task["reward"].get("items", {}).items():
                 expected["items"][name] = expected["items"].get(name, 0) + int(number)
@@ -469,17 +599,15 @@ def test_mcfish_completed_tasks_are_claimed_once_with_mixed_rewards():
     asyncio.run(plugin._claim_tasks(event, state))
     first_balance = plugin._economy.store.balance
     first_fragments = state["pack"]["钓鱼碎片"]
-    first_purification_books = state["pack"].get("净化书", 0)
     asyncio.run(plugin._claim_tasks(event, state))
 
-    assert first_balance == expected["gold"]
+    assert first_balance == 0
     assert first_fragments == expected["fragments"]
-    assert first_purification_books == expected["items"].get("净化书", 0)
     assert state["fish_xp"] == expected["xp"]
-    assert plugin._economy.store.balance == first_balance
+    assert plugin._economy.store.balance == 0
     assert state["pack"]["钓鱼碎片"] == first_fragments
-    assert state["pack"].get("净化书", 0) == first_purification_books
-
+    for name, number in expected["items"].items():
+        assert int(state["pack"].get(name, 0)) == int(number)
 
 def test_mcfish_delivery_tasks_are_checked_and_submitted_when_claimed():
     """MCF-28: 领取交付任务时一次性检查背包，失败不扣鱼，成功才发奖。"""

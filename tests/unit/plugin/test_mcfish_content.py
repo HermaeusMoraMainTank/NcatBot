@@ -412,3 +412,11 @@ def test_craft_command_dispatches_key_recipes():
     asyncio.run(plugin._craft(event, state, "灿阳金属钥匙"))
 
     plugin._craft_key.assert_awaited_once()
+
+
+def test_fiber_drops_in_the_three_soft_material_zones():
+    """纤维是布制套装的本位材料，除河湾外也在深海/极地的海绵池出现。"""
+    for zone in ("bay", "deep", "frost"):
+        names = [row[0] for row in C.ZONE_MATERIALS[zone]]
+        assert "纤维" in names, zone
+    assert "纤维" not in [row[0] for row in C.ZONE_MATERIALS["chrono"]]
